@@ -42,7 +42,7 @@ Optional:
 <a id="nestedatt--gateway_platform--greengrass"></a>
 ### Nested Schema for `gateway_platform.greengrass`
 
-Required:
+Optional:
 
 - `group_arn` (String) The ARN of the Greengrass group.
 
@@ -50,7 +50,7 @@ Required:
 <a id="nestedatt--gateway_platform--greengrass_v2"></a>
 ### Nested Schema for `gateway_platform.greengrass_v2`
 
-Required:
+Optional:
 
 - `core_device_thing_name` (String) The name of the CoreDevice in GreenGrass V2.
 
@@ -58,7 +58,7 @@ Required:
 <a id="nestedatt--gateway_platform--siemens_ie"></a>
 ### Nested Schema for `gateway_platform.siemens_ie`
 
-Required:
+Optional:
 
 - `iot_core_thing_name` (String) The name of the IoT Core Thing.
 
@@ -67,19 +67,16 @@ Required:
 <a id="nestedatt--gateway_capability_summaries"></a>
 ### Nested Schema for `gateway_capability_summaries`
 
-Required:
-
-- `capability_namespace` (String) The namespace of the capability configuration.
-
 Optional:
 
 - `capability_configuration` (String) The JSON document that defines the gateway capability's configuration.
+- `capability_namespace` (String) The namespace of the capability configuration.
 
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

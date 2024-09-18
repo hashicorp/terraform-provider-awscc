@@ -50,7 +50,7 @@ Optional:
 <a id="nestedatt--access_endpoints"></a>
 ### Nested Schema for `access_endpoints`
 
-Required:
+Optional:
 
 - `endpoint_type` (String)
 - `vpce_id` (String)
@@ -59,7 +59,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

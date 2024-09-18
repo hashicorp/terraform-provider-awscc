@@ -74,14 +74,14 @@ Optional:
 <a id="nestedatt--data_sources--kubernetes"></a>
 ### Nested Schema for `data_sources.kubernetes`
 
-Required:
+Optional:
 
 - `audit_logs` (Attributes) (see [below for nested schema](#nestedatt--data_sources--kubernetes--audit_logs))
 
 <a id="nestedatt--data_sources--kubernetes--audit_logs"></a>
 ### Nested Schema for `data_sources.kubernetes.audit_logs`
 
-Required:
+Optional:
 
 - `enable` (Boolean)
 
@@ -106,7 +106,7 @@ Optional:
 <a id="nestedatt--data_sources--s3_logs"></a>
 ### Nested Schema for `data_sources.s3_logs`
 
-Required:
+Optional:
 
 - `enable` (Boolean)
 
@@ -115,14 +115,11 @@ Required:
 <a id="nestedatt--features"></a>
 ### Nested Schema for `features`
 
-Required:
-
-- `name` (String)
-- `status` (String)
-
 Optional:
 
 - `additional_configuration` (Attributes List) (see [below for nested schema](#nestedatt--features--additional_configuration))
+- `name` (String)
+- `status` (String)
 
 <a id="nestedatt--features--additional_configuration"></a>
 ### Nested Schema for `features.additional_configuration`
@@ -137,7 +134,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

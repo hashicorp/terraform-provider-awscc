@@ -34,7 +34,7 @@ Optional:
 <a id="nestedatt--monitoring_subscription--realtime_metrics_subscription_config"></a>
 ### Nested Schema for `monitoring_subscription.realtime_metrics_subscription_config`
 
-Required:
+Optional:
 
 - `realtime_metrics_subscription_status` (String)
 

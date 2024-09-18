@@ -38,7 +38,7 @@ Only some AWS services support being configured as a delivery source. These serv
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode

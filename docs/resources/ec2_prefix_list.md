@@ -74,24 +74,18 @@ resource "awscc_ec2_prefix_list" "example_ipv6_prefix_list" {
 <a id="nestedatt--entries"></a>
 ### Nested Schema for `entries`
 
-Required:
-
-- `cidr` (String)
-
 Optional:
 
+- `cidr` (String)
 - `description` (String)
 
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
-
-- `key` (String)
-
 Optional:
 
+- `key` (String)
 - `value` (String)
 
 ## Import

@@ -83,7 +83,7 @@ Optional:
 <a id="nestedatt--replicas--contributor_insights_specification"></a>
 ### Nested Schema for `replicas.contributor_insights_specification`
 
-Required:
+Optional:
 
 - `enabled` (Boolean)
 
@@ -91,20 +91,17 @@ Required:
 <a id="nestedatt--replicas--global_secondary_indexes"></a>
 ### Nested Schema for `replicas.global_secondary_indexes`
 
-Required:
-
-- `index_name` (String)
-
 Optional:
 
 - `contributor_insights_specification` (Attributes) (see [below for nested schema](#nestedatt--replicas--global_secondary_indexes--contributor_insights_specification))
+- `index_name` (String)
 - `read_on_demand_throughput_settings` (Attributes) (see [below for nested schema](#nestedatt--replicas--global_secondary_indexes--read_on_demand_throughput_settings))
 - `read_provisioned_throughput_settings` (Attributes) (see [below for nested schema](#nestedatt--replicas--global_secondary_indexes--read_provisioned_throughput_settings))
 
 <a id="nestedatt--replicas--global_secondary_indexes--contributor_insights_specification"></a>
 ### Nested Schema for `replicas.global_secondary_indexes.contributor_insights_specification`
 
-Required:
+Optional:
 
 - `enabled` (Boolean)
 
@@ -128,28 +125,22 @@ Optional:
 <a id="nestedatt--replicas--global_secondary_indexes--read_provisioned_throughput_settings--read_capacity_auto_scaling_settings"></a>
 ### Nested Schema for `replicas.global_secondary_indexes.read_provisioned_throughput_settings.read_capacity_auto_scaling_settings`
 
-Required:
+Optional:
 
 - `max_capacity` (Number)
 - `min_capacity` (Number)
-- `target_tracking_scaling_policy_configuration` (Attributes) (see [below for nested schema](#nestedatt--replicas--global_secondary_indexes--read_provisioned_throughput_settings--read_capacity_auto_scaling_settings--target_tracking_scaling_policy_configuration))
-
-Optional:
-
 - `seed_capacity` (Number)
+- `target_tracking_scaling_policy_configuration` (Attributes) (see [below for nested schema](#nestedatt--replicas--global_secondary_indexes--read_provisioned_throughput_settings--read_capacity_auto_scaling_settings--target_tracking_scaling_policy_configuration))
 
 <a id="nestedatt--replicas--global_secondary_indexes--read_provisioned_throughput_settings--read_capacity_auto_scaling_settings--target_tracking_scaling_policy_configuration"></a>
 ### Nested Schema for `replicas.global_secondary_indexes.read_provisioned_throughput_settings.read_capacity_auto_scaling_settings.target_tracking_scaling_policy_configuration`
-
-Required:
-
-- `target_value` (Number)
 
 Optional:
 
 - `disable_scale_in` (Boolean)
 - `scale_in_cooldown` (Number)
 - `scale_out_cooldown` (Number)
+- `target_value` (Number)
 
 
 
@@ -158,13 +149,10 @@ Optional:
 <a id="nestedatt--replicas--kinesis_stream_specification"></a>
 ### Nested Schema for `replicas.kinesis_stream_specification`
 
-Required:
-
-- `stream_arn` (String)
-
 Optional:
 
 - `approximate_creation_date_time_precision` (String)
+- `stream_arn` (String)
 
 
 <a id="nestedatt--replicas--point_in_time_recovery_specification"></a>
@@ -194,28 +182,22 @@ Optional:
 <a id="nestedatt--replicas--read_provisioned_throughput_settings--read_capacity_auto_scaling_settings"></a>
 ### Nested Schema for `replicas.read_provisioned_throughput_settings.read_capacity_auto_scaling_settings`
 
-Required:
+Optional:
 
 - `max_capacity` (Number)
 - `min_capacity` (Number)
-- `target_tracking_scaling_policy_configuration` (Attributes) (see [below for nested schema](#nestedatt--replicas--read_provisioned_throughput_settings--read_capacity_auto_scaling_settings--target_tracking_scaling_policy_configuration))
-
-Optional:
-
 - `seed_capacity` (Number)
+- `target_tracking_scaling_policy_configuration` (Attributes) (see [below for nested schema](#nestedatt--replicas--read_provisioned_throughput_settings--read_capacity_auto_scaling_settings--target_tracking_scaling_policy_configuration))
 
 <a id="nestedatt--replicas--read_provisioned_throughput_settings--read_capacity_auto_scaling_settings--target_tracking_scaling_policy_configuration"></a>
 ### Nested Schema for `replicas.read_provisioned_throughput_settings.read_capacity_auto_scaling_settings.target_tracking_scaling_policy_configuration`
-
-Required:
-
-- `target_value` (Number)
 
 Optional:
 
 - `disable_scale_in` (Boolean)
 - `scale_in_cooldown` (Number)
 - `scale_out_cooldown` (Number)
+- `target_value` (Number)
 
 
 
@@ -223,14 +205,14 @@ Optional:
 <a id="nestedatt--replicas--replica_stream_specification"></a>
 ### Nested Schema for `replicas.replica_stream_specification`
 
-Required:
+Optional:
 
 - `resource_policy` (Attributes) (see [below for nested schema](#nestedatt--replicas--replica_stream_specification--resource_policy))
 
 <a id="nestedatt--replicas--replica_stream_specification--resource_policy"></a>
 ### Nested Schema for `replicas.replica_stream_specification.resource_policy`
 
-Required:
+Optional:
 
 - `policy_document` (String)
 
@@ -239,7 +221,7 @@ Required:
 <a id="nestedatt--replicas--resource_policy"></a>
 ### Nested Schema for `replicas.resource_policy`
 
-Required:
+Optional:
 
 - `policy_document` (String)
 
@@ -247,7 +229,7 @@ Required:
 <a id="nestedatt--replicas--sse_specification"></a>
 ### Nested Schema for `replicas.sse_specification`
 
-Required:
+Optional:
 
 - `kms_master_key_id` (String)
 
@@ -255,7 +237,7 @@ Required:
 <a id="nestedatt--replicas--tags"></a>
 ### Nested Schema for `replicas.tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)
@@ -265,21 +247,18 @@ Required:
 <a id="nestedatt--global_secondary_indexes"></a>
 ### Nested Schema for `global_secondary_indexes`
 
-Required:
+Optional:
 
 - `index_name` (String)
 - `key_schema` (Attributes List) (see [below for nested schema](#nestedatt--global_secondary_indexes--key_schema))
 - `projection` (Attributes) (see [below for nested schema](#nestedatt--global_secondary_indexes--projection))
-
-Optional:
-
 - `write_on_demand_throughput_settings` (Attributes) (see [below for nested schema](#nestedatt--global_secondary_indexes--write_on_demand_throughput_settings))
 - `write_provisioned_throughput_settings` (Attributes) (see [below for nested schema](#nestedatt--global_secondary_indexes--write_provisioned_throughput_settings))
 
 <a id="nestedatt--global_secondary_indexes--key_schema"></a>
 ### Nested Schema for `global_secondary_indexes.key_schema`
 
-Required:
+Optional:
 
 - `attribute_name` (String)
 - `key_type` (String)
@@ -312,28 +291,22 @@ Optional:
 <a id="nestedatt--global_secondary_indexes--write_provisioned_throughput_settings--write_capacity_auto_scaling_settings"></a>
 ### Nested Schema for `global_secondary_indexes.write_provisioned_throughput_settings.write_capacity_auto_scaling_settings`
 
-Required:
+Optional:
 
 - `max_capacity` (Number)
 - `min_capacity` (Number)
-- `target_tracking_scaling_policy_configuration` (Attributes) (see [below for nested schema](#nestedatt--global_secondary_indexes--write_provisioned_throughput_settings--write_capacity_auto_scaling_settings--target_tracking_scaling_policy_configuration))
-
-Optional:
-
 - `seed_capacity` (Number)
+- `target_tracking_scaling_policy_configuration` (Attributes) (see [below for nested schema](#nestedatt--global_secondary_indexes--write_provisioned_throughput_settings--write_capacity_auto_scaling_settings--target_tracking_scaling_policy_configuration))
 
 <a id="nestedatt--global_secondary_indexes--write_provisioned_throughput_settings--write_capacity_auto_scaling_settings--target_tracking_scaling_policy_configuration"></a>
 ### Nested Schema for `global_secondary_indexes.write_provisioned_throughput_settings.write_capacity_auto_scaling_settings.target_tracking_scaling_policy_configuration`
-
-Required:
-
-- `target_value` (Number)
 
 Optional:
 
 - `disable_scale_in` (Boolean)
 - `scale_in_cooldown` (Number)
 - `scale_out_cooldown` (Number)
+- `target_value` (Number)
 
 
 
@@ -342,7 +315,7 @@ Optional:
 <a id="nestedatt--local_secondary_indexes"></a>
 ### Nested Schema for `local_secondary_indexes`
 
-Required:
+Optional:
 
 - `index_name` (String)
 - `key_schema` (Attributes List) (see [below for nested schema](#nestedatt--local_secondary_indexes--key_schema))
@@ -351,7 +324,7 @@ Required:
 <a id="nestedatt--local_secondary_indexes--key_schema"></a>
 ### Nested Schema for `local_secondary_indexes.key_schema`
 
-Required:
+Optional:
 
 - `attribute_name` (String)
 - `key_type` (String)
@@ -370,19 +343,16 @@ Optional:
 <a id="nestedatt--sse_specification"></a>
 ### Nested Schema for `sse_specification`
 
-Required:
-
-- `sse_enabled` (Boolean)
-
 Optional:
 
+- `sse_enabled` (Boolean)
 - `sse_type` (String)
 
 
 <a id="nestedatt--stream_specification"></a>
 ### Nested Schema for `stream_specification`
 
-Required:
+Optional:
 
 - `stream_view_type` (String)
 
@@ -390,13 +360,10 @@ Required:
 <a id="nestedatt--time_to_live_specification"></a>
 ### Nested Schema for `time_to_live_specification`
 
-Required:
-
-- `enabled` (Boolean)
-
 Optional:
 
 - `attribute_name` (String)
+- `enabled` (Boolean)
 
 
 <a id="nestedatt--write_on_demand_throughput_settings"></a>
@@ -417,28 +384,22 @@ Optional:
 <a id="nestedatt--write_provisioned_throughput_settings--write_capacity_auto_scaling_settings"></a>
 ### Nested Schema for `write_provisioned_throughput_settings.write_capacity_auto_scaling_settings`
 
-Required:
+Optional:
 
 - `max_capacity` (Number)
 - `min_capacity` (Number)
-- `target_tracking_scaling_policy_configuration` (Attributes) (see [below for nested schema](#nestedatt--write_provisioned_throughput_settings--write_capacity_auto_scaling_settings--target_tracking_scaling_policy_configuration))
-
-Optional:
-
 - `seed_capacity` (Number)
+- `target_tracking_scaling_policy_configuration` (Attributes) (see [below for nested schema](#nestedatt--write_provisioned_throughput_settings--write_capacity_auto_scaling_settings--target_tracking_scaling_policy_configuration))
 
 <a id="nestedatt--write_provisioned_throughput_settings--write_capacity_auto_scaling_settings--target_tracking_scaling_policy_configuration"></a>
 ### Nested Schema for `write_provisioned_throughput_settings.write_capacity_auto_scaling_settings.target_tracking_scaling_policy_configuration`
-
-Required:
-
-- `target_value` (Number)
 
 Optional:
 
 - `disable_scale_in` (Boolean)
 - `scale_in_cooldown` (Number)
 - `scale_out_cooldown` (Number)
+- `target_value` (Number)
 
 ## Import
 

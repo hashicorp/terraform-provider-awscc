@@ -46,19 +46,16 @@ Optional:
 <a id="nestedatt--action_params--add_things_to_thing_group_params"></a>
 ### Nested Schema for `action_params.add_things_to_thing_group_params`
 
-Required:
-
-- `thing_group_names` (Set of String) The list of groups to which you want to add the things that triggered the mitigation action.
-
 Optional:
 
 - `override_dynamic_groups` (Boolean) Specifies if this mitigation action can move the things that triggered the mitigation action out of one or more dynamic thing groups.
+- `thing_group_names` (Set of String) The list of groups to which you want to add the things that triggered the mitigation action.
 
 
 <a id="nestedatt--action_params--enable_io_t_logging_params"></a>
 ### Nested Schema for `action_params.enable_io_t_logging_params`
 
-Required:
+Optional:
 
 - `log_level` (String) Specifies which types of information are logged.
 - `role_arn_for_logging` (String) The ARN of the IAM role used for logging.
@@ -67,7 +64,7 @@ Required:
 <a id="nestedatt--action_params--publish_finding_to_sns_params"></a>
 ### Nested Schema for `action_params.publish_finding_to_sns_params`
 
-Required:
+Optional:
 
 - `topic_arn` (String) The ARN of the topic to which you want to publish the findings.
 
@@ -75,7 +72,7 @@ Required:
 <a id="nestedatt--action_params--replace_default_policy_version_params"></a>
 ### Nested Schema for `action_params.replace_default_policy_version_params`
 
-Required:
+Optional:
 
 - `template_name` (String)
 
@@ -83,7 +80,7 @@ Required:
 <a id="nestedatt--action_params--update_ca_certificate_params"></a>
 ### Nested Schema for `action_params.update_ca_certificate_params`
 
-Required:
+Optional:
 
 - `action` (String)
 
@@ -91,7 +88,7 @@ Required:
 <a id="nestedatt--action_params--update_device_certificate_params"></a>
 ### Nested Schema for `action_params.update_device_certificate_params`
 
-Required:
+Optional:
 
 - `action` (String)
 
@@ -100,7 +97,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The tag's key.
 - `value` (String) The tag's value.

@@ -41,19 +41,16 @@ Optional:
 <a id="nestedatt--configuration--cognito_user_pool_configuration"></a>
 ### Nested Schema for `configuration.cognito_user_pool_configuration`
 
-Required:
-
-- `user_pool_arn` (String)
-
 Optional:
 
 - `client_ids` (List of String)
 - `group_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--cognito_user_pool_configuration--group_configuration))
+- `user_pool_arn` (String)
 
 <a id="nestedatt--configuration--cognito_user_pool_configuration--group_configuration"></a>
 ### Nested Schema for `configuration.cognito_user_pool_configuration.group_configuration`
 
-Required:
+Optional:
 
 - `group_entity_type` (String)
 
@@ -62,15 +59,21 @@ Required:
 <a id="nestedatt--configuration--open_id_connect_configuration"></a>
 ### Nested Schema for `configuration.open_id_connect_configuration`
 
-Required:
-
-- `issuer` (String)
-- `token_selection` (Attributes) (see [below for nested schema](#nestedatt--configuration--open_id_connect_configuration--token_selection))
-
 Optional:
 
 - `entity_id_prefix` (String)
 - `group_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--open_id_connect_configuration--group_configuration))
+- `issuer` (String)
+- `token_selection` (Attributes) (see [below for nested schema](#nestedatt--configuration--open_id_connect_configuration--token_selection))
+
+<a id="nestedatt--configuration--open_id_connect_configuration--group_configuration"></a>
+### Nested Schema for `configuration.open_id_connect_configuration.group_configuration`
+
+Optional:
+
+- `group_claim` (String)
+- `group_entity_type` (String)
+
 
 <a id="nestedatt--configuration--open_id_connect_configuration--token_selection"></a>
 ### Nested Schema for `configuration.open_id_connect_configuration.token_selection`
@@ -97,15 +100,6 @@ Optional:
 - `client_ids` (List of String)
 - `principal_id_claim` (String)
 
-
-
-<a id="nestedatt--configuration--open_id_connect_configuration--group_configuration"></a>
-### Nested Schema for `configuration.open_id_connect_configuration.group_configuration`
-
-Required:
-
-- `group_claim` (String)
-- `group_entity_type` (String)
 
 
 

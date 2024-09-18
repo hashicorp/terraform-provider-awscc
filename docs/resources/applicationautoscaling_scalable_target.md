@@ -157,8 +157,10 @@ resource "awscc_cassandra_table" "example" {
 <a id="nestedatt--scheduled_actions"></a>
 ### Nested Schema for `scheduled_actions`
 
-Required:
+Optional:
 
+- `end_time` (String) The date and time that the action is scheduled to end, in UTC.
+- `scalable_target_action` (Attributes) The new minimum and maximum capacity. You can set both values or just one. At the scheduled time, if the current capacity is below the minimum capacity, Application Auto Scaling scales out to the minimum capacity. If the current capacity is above the maximum capacity, Application Auto Scaling scales in to the maximum capacity. (see [below for nested schema](#nestedatt--scheduled_actions--scalable_target_action))
 - `schedule` (String) The schedule for this action. The following formats are supported:
   +  At expressions - "``at(yyyy-mm-ddThh:mm:ss)``"
   +  Rate expressions - "``rate(value unit)``"
@@ -169,11 +171,6 @@ Required:
  The cron format consists of six fields separated by white spaces: [Minutes] [Hours] [Day_of_Month] [Month] [Day_of_Week] [Year].
  For rate expressions, *value* is a positive integer and *unit* is ``minute`` | ``minutes`` | ``hour`` | ``hours`` | ``day`` | ``days``.
 - `scheduled_action_name` (String) The name of the scheduled action. This name must be unique among all other scheduled actions on the specified scalable target.
-
-Optional:
-
-- `end_time` (String) The date and time that the action is scheduled to end, in UTC.
-- `scalable_target_action` (Attributes) The new minimum and maximum capacity. You can set both values or just one. At the scheduled time, if the current capacity is below the minimum capacity, Application Auto Scaling scales out to the minimum capacity. If the current capacity is above the maximum capacity, Application Auto Scaling scales in to the maximum capacity. (see [below for nested schema](#nestedatt--scheduled_actions--scalable_target_action))
 - `start_time` (String) The date and time that the action is scheduled to begin, in UTC.
 - `timezone` (String) The time zone used when referring to the date and time of a scheduled action, when the scheduled action uses an at or cron expression.
 

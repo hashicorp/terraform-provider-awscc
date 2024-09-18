@@ -43,7 +43,7 @@ Represents a runtime environment that can run migrated mainframe applications.
 <a id="nestedatt--high_availability_config"></a>
 ### Nested Schema for `high_availability_config`
 
-Required:
+Optional:
 
 - `desired_capacity` (Number)
 
@@ -59,7 +59,7 @@ Optional:
 <a id="nestedatt--storage_configurations--efs"></a>
 ### Nested Schema for `storage_configurations.efs`
 
-Required:
+Optional:
 
 - `file_system_id` (String) The file system identifier.
 - `mount_point` (String) The mount point for the file system.
@@ -68,7 +68,7 @@ Required:
 <a id="nestedatt--storage_configurations--fsx"></a>
 ### Nested Schema for `storage_configurations.fsx`
 
-Required:
+Optional:
 
 - `file_system_id` (String) The file system identifier.
 - `mount_point` (String) The mount point for the file system.

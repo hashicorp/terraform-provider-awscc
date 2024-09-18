@@ -77,14 +77,11 @@ Optional:
 <a id="nestedatt--firewall_policy--stateful_rule_group_references"></a>
 ### Nested Schema for `firewall_policy.stateful_rule_group_references`
 
-Required:
-
-- `resource_arn` (String) A resource ARN.
-
 Optional:
 
 - `override` (Attributes) (see [below for nested schema](#nestedatt--firewall_policy--stateful_rule_group_references--override))
 - `priority` (Number)
+- `resource_arn` (String) A resource ARN.
 
 <a id="nestedatt--firewall_policy--stateful_rule_group_references--override"></a>
 ### Nested Schema for `firewall_policy.stateful_rule_group_references.override`
@@ -98,7 +95,7 @@ Optional:
 <a id="nestedatt--firewall_policy--stateless_custom_actions"></a>
 ### Nested Schema for `firewall_policy.stateless_custom_actions`
 
-Required:
+Optional:
 
 - `action_definition` (Attributes) (see [below for nested schema](#nestedatt--firewall_policy--stateless_custom_actions--action_definition))
 - `action_name` (String)
@@ -113,14 +110,14 @@ Optional:
 <a id="nestedatt--firewall_policy--stateless_custom_actions--action_definition--publish_metric_action"></a>
 ### Nested Schema for `firewall_policy.stateless_custom_actions.action_definition.publish_metric_action`
 
-Required:
+Optional:
 
 - `dimensions` (Attributes List) (see [below for nested schema](#nestedatt--firewall_policy--stateless_custom_actions--action_definition--publish_metric_action--dimensions))
 
 <a id="nestedatt--firewall_policy--stateless_custom_actions--action_definition--publish_metric_action--dimensions"></a>
 ### Nested Schema for `firewall_policy.stateless_custom_actions.action_definition.publish_metric_action.dimensions`
 
-Required:
+Optional:
 
 - `value` (String)
 
@@ -131,7 +128,7 @@ Required:
 <a id="nestedatt--firewall_policy--stateless_rule_group_references"></a>
 ### Nested Schema for `firewall_policy.stateless_rule_group_references`
 
-Required:
+Optional:
 
 - `priority` (Number)
 - `resource_arn` (String) A resource ARN.
@@ -141,7 +138,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

@@ -46,7 +46,7 @@ Optional:
 <a id="nestedatt--default_action--fixed_response"></a>
 ### Nested Schema for `default_action.fixed_response`
 
-Required:
+Optional:
 
 - `status_code` (Number)
 
@@ -54,19 +54,16 @@ Required:
 <a id="nestedatt--default_action--forward"></a>
 ### Nested Schema for `default_action.forward`
 
-Required:
+Optional:
 
 - `target_groups` (Attributes List) (see [below for nested schema](#nestedatt--default_action--forward--target_groups))
 
 <a id="nestedatt--default_action--forward--target_groups"></a>
 ### Nested Schema for `default_action.forward.target_groups`
 
-Required:
-
-- `target_group_identifier` (String)
-
 Optional:
 
+- `target_group_identifier` (String)
 - `weight` (Number)
 
 
@@ -75,7 +72,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

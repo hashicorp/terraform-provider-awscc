@@ -103,18 +103,15 @@ Optional:
 <a id="nestedatt--api_passthrough--extensions--certificate_policies"></a>
 ### Nested Schema for `api_passthrough.extensions.certificate_policies`
 
-Required:
-
-- `cert_policy_id` (String) Specifies the object identifier (OID) of the certificate policy under which the certificate was issued. For more information, see NIST's definition of [Object Identifier (OID)](https://docs.aws.amazon.com/https://csrc.nist.gov/glossary/term/Object_Identifier).
-
 Optional:
 
+- `cert_policy_id` (String) Specifies the object identifier (OID) of the certificate policy under which the certificate was issued. For more information, see NIST's definition of [Object Identifier (OID)](https://docs.aws.amazon.com/https://csrc.nist.gov/glossary/term/Object_Identifier).
 - `policy_qualifiers` (Attributes List) Modifies the given ``CertPolicyId`` with a qualifier. AWS Private CA supports the certification practice statement (CPS) qualifier. (see [below for nested schema](#nestedatt--api_passthrough--extensions--certificate_policies--policy_qualifiers))
 
 <a id="nestedatt--api_passthrough--extensions--certificate_policies--policy_qualifiers"></a>
 ### Nested Schema for `api_passthrough.extensions.certificate_policies.policy_qualifiers`
 
-Required:
+Optional:
 
 - `policy_qualifier_id` (String) Identifies the qualifier modifying a ``CertPolicyId``.
 - `qualifier` (Attributes) Defines the qualifier type. AWS Private CA supports the use of a URI for a CPS qualifier in this field. (see [below for nested schema](#nestedatt--api_passthrough--extensions--certificate_policies--policy_qualifiers--qualifier))
@@ -122,7 +119,7 @@ Required:
 <a id="nestedatt--api_passthrough--extensions--certificate_policies--policy_qualifiers--qualifier"></a>
 ### Nested Schema for `api_passthrough.extensions.certificate_policies.policy_qualifiers.qualifier`
 
-Required:
+Optional:
 
 - `cps_uri` (String) Contains a pointer to a certification practice statement (CPS) published by the CA.
 
@@ -132,14 +129,11 @@ Required:
 <a id="nestedatt--api_passthrough--extensions--custom_extensions"></a>
 ### Nested Schema for `api_passthrough.extensions.custom_extensions`
 
-Required:
-
-- `object_identifier` (String) Specifies the object identifier (OID) of the X.509 extension. For more information, see the [Global OID reference database.](https://docs.aws.amazon.com/https://oidref.com/2.5.29)
-- `value` (String) Specifies the base64-encoded value of the X.509 extension.
-
 Optional:
 
 - `critical` (Boolean) Specifies the critical flag of the X.509 extension.
+- `object_identifier` (String) Specifies the object identifier (OID) of the X.509 extension. For more information, see the [Global OID reference database.](https://docs.aws.amazon.com/https://oidref.com/2.5.29)
+- `value` (String) Specifies the base64-encoded value of the X.509 extension.
 
 
 <a id="nestedatt--api_passthrough--extensions--extended_key_usage"></a>
@@ -207,7 +201,7 @@ Optional:
 <a id="nestedatt--api_passthrough--extensions--subject_alternative_names--directory_name--custom_attributes"></a>
 ### Nested Schema for `api_passthrough.extensions.subject_alternative_names.directory_name.custom_attributes`
 
-Required:
+Optional:
 
 - `object_identifier` (String) Specifies the object identifier (OID) of the attribute type of the relative distinguished name (RDN).
 - `value` (String) Specifies the attribute value of relative distinguished name (RDN).
@@ -217,7 +211,7 @@ Required:
 <a id="nestedatt--api_passthrough--extensions--subject_alternative_names--edi_party_name"></a>
 ### Nested Schema for `api_passthrough.extensions.subject_alternative_names.edi_party_name`
 
-Required:
+Optional:
 
 - `name_assigner` (String) Specifies the name assigner.
 - `party_name` (String) Specifies the party name.
@@ -226,7 +220,7 @@ Required:
 <a id="nestedatt--api_passthrough--extensions--subject_alternative_names--other_name"></a>
 ### Nested Schema for `api_passthrough.extensions.subject_alternative_names.other_name`
 
-Required:
+Optional:
 
 - `type_id` (String) Specifies an OID.
 - `value` (String) Specifies an OID value.
@@ -260,7 +254,7 @@ Optional:
 <a id="nestedatt--api_passthrough--subject--custom_attributes"></a>
 ### Nested Schema for `api_passthrough.subject.custom_attributes`
 
-Required:
+Optional:
 
 - `object_identifier` (String) Specifies the object identifier (OID) of the attribute type of the relative distinguished name (RDN).
 - `value` (String) Specifies the attribute value of relative distinguished name (RDN).
@@ -271,7 +265,7 @@ Required:
 <a id="nestedatt--validity_not_before"></a>
 ### Nested Schema for `validity_not_before`
 
-Required:
+Optional:
 
 - `type` (String) Specifies whether the ``Value`` parameter represents days, months, or years.
 - `value` (Number) A long integer interpreted according to the value of ``Type``, below.

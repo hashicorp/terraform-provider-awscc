@@ -42,14 +42,14 @@ Optional:
 <a id="nestedatt--role_mappings--rules_configuration"></a>
 ### Nested Schema for `role_mappings.rules_configuration`
 
-Required:
+Optional:
 
 - `rules` (Attributes List) (see [below for nested schema](#nestedatt--role_mappings--rules_configuration--rules))
 
 <a id="nestedatt--role_mappings--rules_configuration--rules"></a>
 ### Nested Schema for `role_mappings.rules_configuration.rules`
 
-Required:
+Optional:
 
 - `claim` (String)
 - `match_type` (String)

@@ -48,38 +48,29 @@ Resource schema for AWS::DataBrew::Job.
 <a id="nestedatt--data_catalog_outputs"></a>
 ### Nested Schema for `data_catalog_outputs`
 
-Required:
-
-- `database_name` (String)
-- `table_name` (String)
-
 Optional:
 
 - `catalog_id` (String)
+- `database_name` (String)
 - `database_options` (Attributes) (see [below for nested schema](#nestedatt--data_catalog_outputs--database_options))
 - `overwrite` (Boolean)
 - `s3_options` (Attributes) (see [below for nested schema](#nestedatt--data_catalog_outputs--s3_options))
+- `table_name` (String)
 
 <a id="nestedatt--data_catalog_outputs--database_options"></a>
 ### Nested Schema for `data_catalog_outputs.database_options`
 
-Required:
-
-- `table_name` (String)
-
 Optional:
 
+- `table_name` (String)
 - `temp_directory` (Attributes) S3 Output location (see [below for nested schema](#nestedatt--data_catalog_outputs--database_options--temp_directory))
 
 <a id="nestedatt--data_catalog_outputs--database_options--temp_directory"></a>
 ### Nested Schema for `data_catalog_outputs.database_options.temp_directory`
 
-Required:
-
-- `bucket` (String)
-
 Optional:
 
+- `bucket` (String)
 - `bucket_owner` (String)
 - `key` (String)
 
@@ -88,19 +79,16 @@ Optional:
 <a id="nestedatt--data_catalog_outputs--s3_options"></a>
 ### Nested Schema for `data_catalog_outputs.s3_options`
 
-Required:
+Optional:
 
 - `location` (Attributes) S3 Output location (see [below for nested schema](#nestedatt--data_catalog_outputs--s3_options--location))
 
 <a id="nestedatt--data_catalog_outputs--s3_options--location"></a>
 ### Nested Schema for `data_catalog_outputs.s3_options.location`
 
-Required:
-
-- `bucket` (String)
-
 Optional:
 
+- `bucket` (String)
 - `bucket_owner` (String)
 - `key` (String)
 
@@ -110,35 +98,26 @@ Optional:
 <a id="nestedatt--database_outputs"></a>
 ### Nested Schema for `database_outputs`
 
-Required:
-
-- `database_options` (Attributes) (see [below for nested schema](#nestedatt--database_outputs--database_options))
-- `glue_connection_name` (String) Glue connection name
-
 Optional:
 
+- `database_options` (Attributes) (see [below for nested schema](#nestedatt--database_outputs--database_options))
 - `database_output_mode` (String) Database table name
+- `glue_connection_name` (String) Glue connection name
 
 <a id="nestedatt--database_outputs--database_options"></a>
 ### Nested Schema for `database_outputs.database_options`
 
-Required:
-
-- `table_name` (String)
-
 Optional:
 
+- `table_name` (String)
 - `temp_directory` (Attributes) S3 Output location (see [below for nested schema](#nestedatt--database_outputs--database_options--temp_directory))
 
 <a id="nestedatt--database_outputs--database_options--temp_directory"></a>
 ### Nested Schema for `database_outputs.database_options.temp_directory`
 
-Required:
-
-- `bucket` (String)
-
 Optional:
 
+- `bucket` (String)
 - `bucket_owner` (String)
 - `key` (String)
 
@@ -157,12 +136,9 @@ Optional:
 <a id="nestedatt--output_location"></a>
 ### Nested Schema for `output_location`
 
-Required:
-
-- `bucket` (String)
-
 Optional:
 
+- `bucket` (String)
 - `bucket_owner` (String)
 - `key` (String)
 
@@ -170,31 +146,15 @@ Optional:
 <a id="nestedatt--outputs"></a>
 ### Nested Schema for `outputs`
 
-Required:
-
-- `location` (Attributes) S3 Output location (see [below for nested schema](#nestedatt--outputs--location))
-
 Optional:
 
 - `compression_format` (String)
 - `format` (String)
 - `format_options` (Attributes) Format options for job Output (see [below for nested schema](#nestedatt--outputs--format_options))
+- `location` (Attributes) S3 Output location (see [below for nested schema](#nestedatt--outputs--location))
 - `max_output_files` (Number)
 - `overwrite` (Boolean)
 - `partition_columns` (List of String)
-
-<a id="nestedatt--outputs--location"></a>
-### Nested Schema for `outputs.location`
-
-Required:
-
-- `bucket` (String)
-
-Optional:
-
-- `bucket_owner` (String)
-- `key` (String)
-
 
 <a id="nestedatt--outputs--format_options"></a>
 ### Nested Schema for `outputs.format_options`
@@ -212,6 +172,16 @@ Optional:
 
 
 
+<a id="nestedatt--outputs--location"></a>
+### Nested Schema for `outputs.location`
+
+Optional:
+
+- `bucket` (String)
+- `bucket_owner` (String)
+- `key` (String)
+
+
 
 <a id="nestedatt--profile_configuration"></a>
 ### Nested Schema for `profile_configuration`
@@ -226,13 +196,19 @@ Optional:
 <a id="nestedatt--profile_configuration--column_statistics_configurations"></a>
 ### Nested Schema for `profile_configuration.column_statistics_configurations`
 
-Required:
-
-- `statistics` (Attributes) (see [below for nested schema](#nestedatt--profile_configuration--column_statistics_configurations--statistics))
-
 Optional:
 
 - `selectors` (Attributes List) (see [below for nested schema](#nestedatt--profile_configuration--column_statistics_configurations--selectors))
+- `statistics` (Attributes) (see [below for nested schema](#nestedatt--profile_configuration--column_statistics_configurations--statistics))
+
+<a id="nestedatt--profile_configuration--column_statistics_configurations--selectors"></a>
+### Nested Schema for `profile_configuration.column_statistics_configurations.selectors`
+
+Optional:
+
+- `name` (String)
+- `regex` (String)
+
 
 <a id="nestedatt--profile_configuration--column_statistics_configurations--statistics"></a>
 ### Nested Schema for `profile_configuration.column_statistics_configurations.statistics`
@@ -245,20 +221,11 @@ Optional:
 <a id="nestedatt--profile_configuration--column_statistics_configurations--statistics--overrides"></a>
 ### Nested Schema for `profile_configuration.column_statistics_configurations.statistics.overrides`
 
-Required:
+Optional:
 
 - `parameters` (Map of String)
 - `statistic` (String)
 
-
-
-<a id="nestedatt--profile_configuration--column_statistics_configurations--selectors"></a>
-### Nested Schema for `profile_configuration.column_statistics_configurations.selectors`
-
-Optional:
-
-- `name` (String)
-- `regex` (String)
 
 
 
@@ -273,7 +240,7 @@ Optional:
 <a id="nestedatt--profile_configuration--dataset_statistics_configuration--overrides"></a>
 ### Nested Schema for `profile_configuration.dataset_statistics_configuration.overrides`
 
-Required:
+Optional:
 
 - `parameters` (Map of String)
 - `statistic` (String)
@@ -283,18 +250,15 @@ Required:
 <a id="nestedatt--profile_configuration--entity_detector_configuration"></a>
 ### Nested Schema for `profile_configuration.entity_detector_configuration`
 
-Required:
-
-- `entity_types` (List of String)
-
 Optional:
 
 - `allowed_statistics` (Attributes) (see [below for nested schema](#nestedatt--profile_configuration--entity_detector_configuration--allowed_statistics))
+- `entity_types` (List of String)
 
 <a id="nestedatt--profile_configuration--entity_detector_configuration--allowed_statistics"></a>
 ### Nested Schema for `profile_configuration.entity_detector_configuration.allowed_statistics`
 
-Required:
+Optional:
 
 - `statistics` (List of String)
 
@@ -313,19 +277,16 @@ Optional:
 <a id="nestedatt--recipe"></a>
 ### Nested Schema for `recipe`
 
-Required:
-
-- `name` (String) Recipe name
-
 Optional:
 
+- `name` (String) Recipe name
 - `version` (String) Recipe version
 
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)
@@ -334,12 +295,9 @@ Required:
 <a id="nestedatt--validation_configurations"></a>
 ### Nested Schema for `validation_configurations`
 
-Required:
-
-- `ruleset_arn` (String) Arn of the Ruleset
-
 Optional:
 
+- `ruleset_arn` (String) Arn of the Ruleset
 - `validation_mode` (String)
 
 ## Import

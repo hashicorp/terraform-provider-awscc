@@ -89,7 +89,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)
@@ -98,7 +98,7 @@ Required:
 <a id="nestedatt--time_shift_configuration"></a>
 ### Nested Schema for `time_shift_configuration`
 
-Required:
+Optional:
 
 - `max_time_delay_seconds` (Number) <p>The maximum time delay for time-shifted viewing. The minimum allowed maximum time delay is 0 seconds, and the maximum allowed maximum time delay is 21600 seconds (6 hours).</p>
 

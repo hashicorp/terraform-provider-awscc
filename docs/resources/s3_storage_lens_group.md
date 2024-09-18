@@ -107,7 +107,7 @@ Optional:
 <a id="nestedatt--filter--and--match_any_tag"></a>
 ### Nested Schema for `filter.and.match_any_tag`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)
@@ -135,7 +135,7 @@ Optional:
 <a id="nestedatt--filter--match_any_tag"></a>
 ### Nested Schema for `filter.match_any_tag`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)
@@ -173,7 +173,7 @@ Optional:
 <a id="nestedatt--filter--or--match_any_tag"></a>
 ### Nested Schema for `filter.or.match_any_tag`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)
@@ -202,7 +202,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

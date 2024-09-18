@@ -38,25 +38,19 @@ IdNamespace defined in AWS Entity Resolution service
 <a id="nestedatt--id_mapping_workflow_properties"></a>
 ### Nested Schema for `id_mapping_workflow_properties`
 
-Required:
-
-- `id_mapping_type` (String)
-
 Optional:
 
+- `id_mapping_type` (String)
 - `provider_properties` (Attributes) (see [below for nested schema](#nestedatt--id_mapping_workflow_properties--provider_properties))
 - `rule_based_properties` (Attributes) (see [below for nested schema](#nestedatt--id_mapping_workflow_properties--rule_based_properties))
 
 <a id="nestedatt--id_mapping_workflow_properties--provider_properties"></a>
 ### Nested Schema for `id_mapping_workflow_properties.provider_properties`
 
-Required:
-
-- `provider_service_arn` (String)
-
 Optional:
 
 - `provider_configuration` (Map of String) Additional Provider configuration that would be required for the provider service. The Configuration must be in JSON string format.
+- `provider_service_arn` (String)
 
 
 <a id="nestedatt--id_mapping_workflow_properties--rule_based_properties"></a>
@@ -72,7 +66,7 @@ Optional:
 <a id="nestedatt--id_mapping_workflow_properties--rule_based_properties--rules"></a>
 ### Nested Schema for `id_mapping_workflow_properties.rule_based_properties.rules`
 
-Required:
+Optional:
 
 - `matching_keys` (List of String)
 - `rule_name` (String)
@@ -83,19 +77,16 @@ Required:
 <a id="nestedatt--input_source_config"></a>
 ### Nested Schema for `input_source_config`
 
-Required:
-
-- `input_source_arn` (String)
-
 Optional:
 
+- `input_source_arn` (String)
 - `schema_name` (String)
 
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

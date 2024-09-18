@@ -128,7 +128,7 @@ data "aws_caller_identity" "current" {}
 <a id="nestedatt--capacity_units"></a>
 ### Nested Schema for `capacity_units`
 
-Required:
+Optional:
 
 - `query_capacity_units` (Number)
 - `storage_capacity_units` (Number)
@@ -137,15 +137,12 @@ Required:
 <a id="nestedatt--document_metadata_configurations"></a>
 ### Nested Schema for `document_metadata_configurations`
 
-Required:
-
-- `name` (String)
-- `type` (String)
-
 Optional:
 
+- `name` (String)
 - `relevance` (Attributes) (see [below for nested schema](#nestedatt--document_metadata_configurations--relevance))
 - `search` (Attributes) (see [below for nested schema](#nestedatt--document_metadata_configurations--search))
+- `type` (String)
 
 <a id="nestedatt--document_metadata_configurations--relevance"></a>
 ### Nested Schema for `document_metadata_configurations.relevance`
@@ -191,7 +188,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) A string used to identify this tag
 - `value` (String) A string containing the value for the tag
@@ -208,7 +205,7 @@ Optional:
 <a id="nestedatt--user_token_configurations--json_token_type_configuration"></a>
 ### Nested Schema for `user_token_configurations.json_token_type_configuration`
 
-Required:
+Optional:
 
 - `group_attribute_field` (String)
 - `user_name_attribute_field` (String)
@@ -217,15 +214,12 @@ Required:
 <a id="nestedatt--user_token_configurations--jwt_token_type_configuration"></a>
 ### Nested Schema for `user_token_configurations.jwt_token_type_configuration`
 
-Required:
-
-- `key_location` (String)
-
 Optional:
 
 - `claim_regex` (String)
 - `group_attribute_field` (String)
 - `issuer` (String)
+- `key_location` (String)
 - `secret_manager_arn` (String) Role Arn
 - `url` (String)
 - `user_name_attribute_field` (String)

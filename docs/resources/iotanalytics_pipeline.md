@@ -48,33 +48,27 @@ Optional:
 <a id="nestedatt--pipeline_activities--add_attributes"></a>
 ### Nested Schema for `pipeline_activities.add_attributes`
 
-Required:
+Optional:
 
 - `attributes` (Map of String)
 - `name` (String)
-
-Optional:
-
 - `next` (String)
 
 
 <a id="nestedatt--pipeline_activities--channel"></a>
 ### Nested Schema for `pipeline_activities.channel`
 
-Required:
+Optional:
 
 - `channel_name` (String)
 - `name` (String)
-
-Optional:
-
 - `next` (String)
 
 
 <a id="nestedatt--pipeline_activities--datastore"></a>
 ### Nested Schema for `pipeline_activities.datastore`
 
-Required:
+Optional:
 
 - `datastore_name` (String)
 - `name` (String)
@@ -83,97 +77,76 @@ Required:
 <a id="nestedatt--pipeline_activities--device_registry_enrich"></a>
 ### Nested Schema for `pipeline_activities.device_registry_enrich`
 
-Required:
+Optional:
 
 - `attribute` (String)
 - `name` (String)
+- `next` (String)
 - `role_arn` (String)
 - `thing_name` (String)
-
-Optional:
-
-- `next` (String)
 
 
 <a id="nestedatt--pipeline_activities--device_shadow_enrich"></a>
 ### Nested Schema for `pipeline_activities.device_shadow_enrich`
 
-Required:
+Optional:
 
 - `attribute` (String)
 - `name` (String)
+- `next` (String)
 - `role_arn` (String)
 - `thing_name` (String)
-
-Optional:
-
-- `next` (String)
 
 
 <a id="nestedatt--pipeline_activities--filter"></a>
 ### Nested Schema for `pipeline_activities.filter`
 
-Required:
+Optional:
 
 - `filter` (String)
 - `name` (String)
-
-Optional:
-
 - `next` (String)
 
 
 <a id="nestedatt--pipeline_activities--lambda"></a>
 ### Nested Schema for `pipeline_activities.lambda`
 
-Required:
+Optional:
 
 - `batch_size` (Number)
 - `lambda_name` (String)
 - `name` (String)
-
-Optional:
-
 - `next` (String)
 
 
 <a id="nestedatt--pipeline_activities--math"></a>
 ### Nested Schema for `pipeline_activities.math`
 
-Required:
+Optional:
 
 - `attribute` (String)
 - `math` (String)
 - `name` (String)
-
-Optional:
-
 - `next` (String)
 
 
 <a id="nestedatt--pipeline_activities--remove_attributes"></a>
 ### Nested Schema for `pipeline_activities.remove_attributes`
 
-Required:
+Optional:
 
 - `attributes` (List of String)
 - `name` (String)
-
-Optional:
-
 - `next` (String)
 
 
 <a id="nestedatt--pipeline_activities--select_attributes"></a>
 ### Nested Schema for `pipeline_activities.select_attributes`
 
-Required:
+Optional:
 
 - `attributes` (List of String)
 - `name` (String)
-
-Optional:
-
 - `next` (String)
 
 
@@ -181,7 +154,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

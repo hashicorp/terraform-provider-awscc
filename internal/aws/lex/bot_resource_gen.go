@@ -17,6 +17,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
@@ -27,6 +28,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -107,20 +109,30 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 				// Property: S3Bucket
 				"s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "An Amazon S3 bucket in the same AWS Region as your function. The bucket can be in a different AWS account.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthBetween(3, 63),
 						stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"), ""),
+						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: S3ObjectKey
 				"s3_object_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The Amazon S3 key of the deployment package.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthBetween(1, 1024),
 						stringvalidator.RegexMatches(regexp.MustCompile("[\\.\\-\\!\\*\\_\\'\\(\\)a-zA-Z0-9][\\.\\-\\!\\*\\_\\'\\(\\)\\/a-zA-Z0-9]*$"), ""),
+						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: S3ObjectVersion
 				"s3_object_version": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -4266,10 +4278,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 										// Property: Phrase
 										"phrase": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "Phrase that should be recognized.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthBetween(1, 100),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: Weight
 										"weight": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -4285,10 +4302,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								Required: true,
+								Optional: true,
+								Computed: true,
 								Validators: []validator.Set{ /*START VALIDATORS*/
 									setvalidator.SizeAtMost(500),
+									fwvalidators.NotNullSet(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+									setplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "A custom vocabulary is a list of specific phrases that you want Amazon Lex V2 to recognize in the audio input.",
@@ -4331,7 +4353,14 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Enabled
 										"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Required: true,
+											Optional: true,
+											Computed: true,
+											Validators: []validator.Bool{ /*START VALIDATORS*/
+												fwvalidators.NotNullBool(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+												boolplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "Settings that determine the Lambda function that Amazon Lex uses for processing user responses.",
@@ -4346,7 +4375,14 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Enabled
 										"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Required: true,
+											Optional: true,
+											Computed: true,
+											Validators: []validator.Bool{ /*START VALIDATORS*/
+												fwvalidators.NotNullBool(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+												boolplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: FulfillmentUpdatesSpecification
 										"fulfillment_updates_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -4354,7 +4390,14 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 												// Property: Active
 												"active": schema.BoolAttribute{ /*START ATTRIBUTE*/
 													Description: "Determines whether fulfillment updates are sent to the user. When this field is true, updates are sent.",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.Bool{ /*START VALIDATORS*/
+														fwvalidators.NotNullBool(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+														boolplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: StartResponse
 												"start_response": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -4371,10 +4414,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 														// Property: DelayInSeconds
 														"delay_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
 															Description: "The delay between when the Lambda fulfillment function starts running and the start message is played. If the Lambda function returns before the delay is over, the start message isn't played.",
-															Required:    true,
+															Optional:    true,
+															Computed:    true,
 															Validators: []validator.Int64{ /*START VALIDATORS*/
 																int64validator.Between(1, 900),
+																fwvalidators.NotNullInt64(),
 															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																int64planmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 														// Property: MessageGroups
 														"message_groups": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -4389,10 +4437,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																					// Property: Value
 																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The string that is sent to your application.",
-																						Required:    true,
+																						Optional:    true,
+																						Computed:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 1000),
+																							fwvalidators.NotNullString(),
 																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A message in a custom format defined by the client application.",
@@ -4412,18 +4465,28 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								// Property: Text
 																								"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The text that appears on the button.",
-																									Required:    true,
+																									Optional:    true,
+																									Computed:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 50),
+																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
 																								}, /*END ATTRIBUTE*/
 																								// Property: Value
 																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The value returned to Amazon Lex when the user chooses this button.",
-																									Required:    true,
+																									Optional:    true,
+																									Computed:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 50),
+																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																						}, /*END NESTED OBJECT*/
@@ -4465,10 +4528,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																					// Property: Title
 																					"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The title to display on the response card.",
-																						Required:    true,
+																						Optional:    true,
+																						Computed:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 250),
+																							fwvalidators.NotNullString(),
 																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A message that defines a response card that the client application can show to the user.",
@@ -4484,10 +4552,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																					// Property: Value
 																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The message to send to the user.",
-																						Required:    true,
+																						Optional:    true,
+																						Computed:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 1000),
+																							fwvalidators.NotNullString(),
 																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A message in plain text format.",
@@ -4503,10 +4576,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																					// Property: Value
 																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The SSML text that defines the prompt.",
-																						Required:    true,
+																						Optional:    true,
+																						Computed:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 1000),
+																							fwvalidators.NotNullString(),
 																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A message in Speech Synthesis Markup Language (SSML).",
@@ -4518,7 +4596,14 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "The primary message that Amazon Lex should send to the user.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.Object{ /*START VALIDATORS*/
+																			fwvalidators.NotNullObject(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																			objectplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: Variations
 																	"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -4530,10 +4615,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The string that is sent to your application.",
-																							Required:    true,
+																							Optional:    true,
+																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 1000),
+																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message in a custom format defined by the client application.",
@@ -4553,18 +4643,28 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									// Property: Text
 																									"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The text that appears on the button.",
-																										Required:    true,
+																										Optional:    true,
+																										Computed:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 50),
+																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
 																									}, /*END ATTRIBUTE*/
 																									// Property: Value
 																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The value returned to Amazon Lex when the user chooses this button.",
-																										Required:    true,
+																										Optional:    true,
+																										Computed:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 50),
+																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																							}, /*END NESTED OBJECT*/
@@ -4606,10 +4706,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Title
 																						"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The title to display on the response card.",
-																							Required:    true,
+																							Optional:    true,
+																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 250),
+																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message that defines a response card that the client application can show to the user.",
@@ -4625,10 +4730,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The message to send to the user.",
-																							Required:    true,
+																							Optional:    true,
+																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 1000),
+																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message in plain text format.",
@@ -4644,10 +4754,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The SSML text that defines the prompt.",
-																							Required:    true,
+																							Optional:    true,
+																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 1000),
+																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message in Speech Synthesis Markup Language (SSML).",
@@ -4673,12 +4788,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																}, /*END SCHEMA*/
 															}, /*END NESTED OBJECT*/
 															Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-															Required:    true,
+															Optional:    true,
+															Computed:    true,
 															Validators: []validator.List{ /*START VALIDATORS*/
 																listvalidator.SizeBetween(1, 5),
+																fwvalidators.NotNullList(),
 															}, /*END VALIDATORS*/
 															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																generic.Multiset(),
+																listplanmodifier.UseStateForUnknown(),
 															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
@@ -4716,10 +4834,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 														// Property: FrequencyInSeconds
 														"frequency_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
 															Description: "The frequency that a message is sent to the user. When the period ends, Amazon Lex chooses a message from the message groups and plays it to the user. If the fulfillment Lambda returns before the first period ends, an update message is not played to the user.",
-															Required:    true,
+															Optional:    true,
+															Computed:    true,
 															Validators: []validator.Int64{ /*START VALIDATORS*/
 																int64validator.Between(1, 900),
+																fwvalidators.NotNullInt64(),
 															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																int64planmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 														// Property: MessageGroups
 														"message_groups": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -4734,10 +4857,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																					// Property: Value
 																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The string that is sent to your application.",
-																						Required:    true,
+																						Optional:    true,
+																						Computed:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 1000),
+																							fwvalidators.NotNullString(),
 																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A message in a custom format defined by the client application.",
@@ -4757,18 +4885,28 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								// Property: Text
 																								"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The text that appears on the button.",
-																									Required:    true,
+																									Optional:    true,
+																									Computed:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 50),
+																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
 																								}, /*END ATTRIBUTE*/
 																								// Property: Value
 																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The value returned to Amazon Lex when the user chooses this button.",
-																									Required:    true,
+																									Optional:    true,
+																									Computed:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 50),
+																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																						}, /*END NESTED OBJECT*/
@@ -4810,10 +4948,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																					// Property: Title
 																					"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The title to display on the response card.",
-																						Required:    true,
+																						Optional:    true,
+																						Computed:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 250),
+																							fwvalidators.NotNullString(),
 																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A message that defines a response card that the client application can show to the user.",
@@ -4829,10 +4972,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																					// Property: Value
 																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The message to send to the user.",
-																						Required:    true,
+																						Optional:    true,
+																						Computed:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 1000),
+																							fwvalidators.NotNullString(),
 																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A message in plain text format.",
@@ -4848,10 +4996,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																					// Property: Value
 																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The SSML text that defines the prompt.",
-																						Required:    true,
+																						Optional:    true,
+																						Computed:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 1000),
+																							fwvalidators.NotNullString(),
 																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A message in Speech Synthesis Markup Language (SSML).",
@@ -4863,7 +5016,14 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "The primary message that Amazon Lex should send to the user.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.Object{ /*START VALIDATORS*/
+																			fwvalidators.NotNullObject(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																			objectplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: Variations
 																	"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -4875,10 +5035,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The string that is sent to your application.",
-																							Required:    true,
+																							Optional:    true,
+																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 1000),
+																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message in a custom format defined by the client application.",
@@ -4898,18 +5063,28 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									// Property: Text
 																									"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The text that appears on the button.",
-																										Required:    true,
+																										Optional:    true,
+																										Computed:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 50),
+																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
 																									}, /*END ATTRIBUTE*/
 																									// Property: Value
 																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The value returned to Amazon Lex when the user chooses this button.",
-																										Required:    true,
+																										Optional:    true,
+																										Computed:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 50),
+																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																							}, /*END NESTED OBJECT*/
@@ -4951,10 +5126,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Title
 																						"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The title to display on the response card.",
-																							Required:    true,
+																							Optional:    true,
+																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 250),
+																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message that defines a response card that the client application can show to the user.",
@@ -4970,10 +5150,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The message to send to the user.",
-																							Required:    true,
+																							Optional:    true,
+																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 1000),
+																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message in plain text format.",
@@ -4989,10 +5174,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The SSML text that defines the prompt.",
-																							Required:    true,
+																							Optional:    true,
+																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 1000),
+																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message in Speech Synthesis Markup Language (SSML).",
@@ -5018,12 +5208,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																}, /*END SCHEMA*/
 															}, /*END NESTED OBJECT*/
 															Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-															Required:    true,
+															Optional:    true,
+															Computed:    true,
 															Validators: []validator.List{ /*START VALIDATORS*/
 																listvalidator.SizeBetween(1, 5),
+																fwvalidators.NotNullList(),
 															}, /*END VALIDATORS*/
 															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																generic.Multiset(),
+																listplanmodifier.UseStateForUnknown(),
 															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
@@ -5070,10 +5263,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																					// Property: Value
 																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The string that is sent to your application.",
-																						Required:    true,
+																						Optional:    true,
+																						Computed:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 1000),
+																							fwvalidators.NotNullString(),
 																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A message in a custom format defined by the client application.",
@@ -5093,18 +5291,28 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								// Property: Text
 																								"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The text that appears on the button.",
-																									Required:    true,
+																									Optional:    true,
+																									Computed:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 50),
+																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
 																								}, /*END ATTRIBUTE*/
 																								// Property: Value
 																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The value returned to Amazon Lex when the user chooses this button.",
-																									Required:    true,
+																									Optional:    true,
+																									Computed:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 50),
+																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																						}, /*END NESTED OBJECT*/
@@ -5146,10 +5354,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																					// Property: Title
 																					"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The title to display on the response card.",
-																						Required:    true,
+																						Optional:    true,
+																						Computed:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 250),
+																							fwvalidators.NotNullString(),
 																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A message that defines a response card that the client application can show to the user.",
@@ -5165,10 +5378,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																					// Property: Value
 																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The message to send to the user.",
-																						Required:    true,
+																						Optional:    true,
+																						Computed:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 1000),
+																							fwvalidators.NotNullString(),
 																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A message in plain text format.",
@@ -5184,10 +5402,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																					// Property: Value
 																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The SSML text that defines the prompt.",
-																						Required:    true,
+																						Optional:    true,
+																						Computed:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 1000),
+																							fwvalidators.NotNullString(),
 																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A message in Speech Synthesis Markup Language (SSML).",
@@ -5199,7 +5422,14 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "The primary message that Amazon Lex should send to the user.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.Object{ /*START VALIDATORS*/
+																			fwvalidators.NotNullObject(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																			objectplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: Variations
 																	"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -5211,10 +5441,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The string that is sent to your application.",
-																							Required:    true,
+																							Optional:    true,
+																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 1000),
+																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message in a custom format defined by the client application.",
@@ -5234,18 +5469,28 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									// Property: Text
 																									"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The text that appears on the button.",
-																										Required:    true,
+																										Optional:    true,
+																										Computed:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 50),
+																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
 																									}, /*END ATTRIBUTE*/
 																									// Property: Value
 																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The value returned to Amazon Lex when the user chooses this button.",
-																										Required:    true,
+																										Optional:    true,
+																										Computed:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 50),
+																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																							}, /*END NESTED OBJECT*/
@@ -5287,10 +5532,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Title
 																						"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The title to display on the response card.",
-																							Required:    true,
+																							Optional:    true,
+																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 250),
+																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message that defines a response card that the client application can show to the user.",
@@ -5306,10 +5556,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The message to send to the user.",
-																							Required:    true,
+																							Optional:    true,
+																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 1000),
+																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message in plain text format.",
@@ -5325,10 +5580,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The SSML text that defines the prompt.",
-																							Required:    true,
+																							Optional:    true,
+																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 1000),
+																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message in Speech Synthesis Markup Language (SSML).",
@@ -5354,12 +5614,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																}, /*END SCHEMA*/
 															}, /*END NESTED OBJECT*/
 															Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-															Required:    true,
+															Optional:    true,
+															Computed:    true,
 															Validators: []validator.List{ /*START VALIDATORS*/
 																listvalidator.SizeBetween(1, 5),
+																fwvalidators.NotNullList(),
 															}, /*END VALIDATORS*/
 															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																generic.Multiset(),
+																listplanmodifier.UseStateForUnknown(),
 															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
@@ -5395,10 +5658,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																					// Property: Value
 																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The string that is sent to your application.",
-																						Required:    true,
+																						Optional:    true,
+																						Computed:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 1000),
+																							fwvalidators.NotNullString(),
 																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A message in a custom format defined by the client application.",
@@ -5418,18 +5686,28 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								// Property: Text
 																								"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The text that appears on the button.",
-																									Required:    true,
+																									Optional:    true,
+																									Computed:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 50),
+																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
 																								}, /*END ATTRIBUTE*/
 																								// Property: Value
 																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The value returned to Amazon Lex when the user chooses this button.",
-																									Required:    true,
+																									Optional:    true,
+																									Computed:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 50),
+																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																						}, /*END NESTED OBJECT*/
@@ -5471,10 +5749,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																					// Property: Title
 																					"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The title to display on the response card.",
-																						Required:    true,
+																						Optional:    true,
+																						Computed:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 250),
+																							fwvalidators.NotNullString(),
 																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A message that defines a response card that the client application can show to the user.",
@@ -5490,10 +5773,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																					// Property: Value
 																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The message to send to the user.",
-																						Required:    true,
+																						Optional:    true,
+																						Computed:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 1000),
+																							fwvalidators.NotNullString(),
 																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A message in plain text format.",
@@ -5509,10 +5797,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																					// Property: Value
 																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The SSML text that defines the prompt.",
-																						Required:    true,
+																						Optional:    true,
+																						Computed:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 1000),
+																							fwvalidators.NotNullString(),
 																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A message in Speech Synthesis Markup Language (SSML).",
@@ -5524,7 +5817,14 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "The primary message that Amazon Lex should send to the user.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.Object{ /*START VALIDATORS*/
+																			fwvalidators.NotNullObject(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																			objectplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: Variations
 																	"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -5536,10 +5836,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The string that is sent to your application.",
-																							Required:    true,
+																							Optional:    true,
+																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 1000),
+																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message in a custom format defined by the client application.",
@@ -5559,18 +5864,28 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									// Property: Text
 																									"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The text that appears on the button.",
-																										Required:    true,
+																										Optional:    true,
+																										Computed:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 50),
+																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
 																									}, /*END ATTRIBUTE*/
 																									// Property: Value
 																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The value returned to Amazon Lex when the user chooses this button.",
-																										Required:    true,
+																										Optional:    true,
+																										Computed:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 50),
+																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																							}, /*END NESTED OBJECT*/
@@ -5612,10 +5927,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Title
 																						"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The title to display on the response card.",
-																							Required:    true,
+																							Optional:    true,
+																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 250),
+																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message that defines a response card that the client application can show to the user.",
@@ -5631,10 +5951,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The message to send to the user.",
-																							Required:    true,
+																							Optional:    true,
+																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 1000),
+																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message in plain text format.",
@@ -5650,10 +5975,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The SSML text that defines the prompt.",
-																							Required:    true,
+																							Optional:    true,
+																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 1000),
+																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message in Speech Synthesis Markup Language (SSML).",
@@ -5679,12 +6009,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																}, /*END SCHEMA*/
 															}, /*END NESTED OBJECT*/
 															Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-															Required:    true,
+															Optional:    true,
+															Computed:    true,
 															Validators: []validator.List{ /*START VALIDATORS*/
 																listvalidator.SizeBetween(1, 5),
+																fwvalidators.NotNullList(),
 															}, /*END VALIDATORS*/
 															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																generic.Multiset(),
+																listplanmodifier.UseStateForUnknown(),
 															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
@@ -5720,10 +6053,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																					// Property: Value
 																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The string that is sent to your application.",
-																						Required:    true,
+																						Optional:    true,
+																						Computed:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 1000),
+																							fwvalidators.NotNullString(),
 																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A message in a custom format defined by the client application.",
@@ -5743,18 +6081,28 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								// Property: Text
 																								"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The text that appears on the button.",
-																									Required:    true,
+																									Optional:    true,
+																									Computed:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 50),
+																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
 																								}, /*END ATTRIBUTE*/
 																								// Property: Value
 																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The value returned to Amazon Lex when the user chooses this button.",
-																									Required:    true,
+																									Optional:    true,
+																									Computed:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 50),
+																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																						}, /*END NESTED OBJECT*/
@@ -5796,10 +6144,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																					// Property: Title
 																					"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The title to display on the response card.",
-																						Required:    true,
+																						Optional:    true,
+																						Computed:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 250),
+																							fwvalidators.NotNullString(),
 																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A message that defines a response card that the client application can show to the user.",
@@ -5815,10 +6168,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																					// Property: Value
 																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The message to send to the user.",
-																						Required:    true,
+																						Optional:    true,
+																						Computed:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 1000),
+																							fwvalidators.NotNullString(),
 																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A message in plain text format.",
@@ -5834,10 +6192,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																					// Property: Value
 																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The SSML text that defines the prompt.",
-																						Required:    true,
+																						Optional:    true,
+																						Computed:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 1000),
+																							fwvalidators.NotNullString(),
 																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A message in Speech Synthesis Markup Language (SSML).",
@@ -5849,7 +6212,14 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "The primary message that Amazon Lex should send to the user.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.Object{ /*START VALIDATORS*/
+																			fwvalidators.NotNullObject(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																			objectplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: Variations
 																	"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -5861,10 +6231,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The string that is sent to your application.",
-																							Required:    true,
+																							Optional:    true,
+																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 1000),
+																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message in a custom format defined by the client application.",
@@ -5884,18 +6259,28 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									// Property: Text
 																									"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The text that appears on the button.",
-																										Required:    true,
+																										Optional:    true,
+																										Computed:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 50),
+																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
 																									}, /*END ATTRIBUTE*/
 																									// Property: Value
 																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The value returned to Amazon Lex when the user chooses this button.",
-																										Required:    true,
+																										Optional:    true,
+																										Computed:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 50),
+																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																							}, /*END NESTED OBJECT*/
@@ -5937,10 +6322,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Title
 																						"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The title to display on the response card.",
-																							Required:    true,
+																							Optional:    true,
+																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 250),
+																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message that defines a response card that the client application can show to the user.",
@@ -5956,10 +6346,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The message to send to the user.",
-																							Required:    true,
+																							Optional:    true,
+																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 1000),
+																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message in plain text format.",
@@ -5975,10 +6370,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The SSML text that defines the prompt.",
-																							Required:    true,
+																							Optional:    true,
+																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 1000),
+																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message in Speech Synthesis Markup Language (SSML).",
@@ -6004,12 +6404,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																}, /*END SCHEMA*/
 															}, /*END NESTED OBJECT*/
 															Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-															Required:    true,
+															Optional:    true,
+															Computed:    true,
 															Validators: []validator.List{ /*START VALIDATORS*/
 																listvalidator.SizeBetween(1, 5),
+																fwvalidators.NotNullList(),
 															}, /*END VALIDATORS*/
 															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																generic.Multiset(),
+																listplanmodifier.UseStateForUnknown(),
 															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
@@ -6043,11 +6446,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Name
 											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "The name of the context.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 100),
 													stringvalidator.RegexMatches(regexp.MustCompile("^([0-9a-zA-Z][_-]?)+$"), ""),
+													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
@@ -6090,10 +6498,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: Value
 																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The string that is sent to your application.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthBetween(1, 1000),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "A message in a custom format defined by the client application.",
@@ -6113,18 +6526,28 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Text
 																						"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The text that appears on the button.",
-																							Required:    true,
+																							Optional:    true,
+																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 50),
+																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The value returned to Amazon Lex when the user chooses this button.",
-																							Required:    true,
+																							Optional:    true,
+																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 50),
+																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																				}, /*END NESTED OBJECT*/
@@ -6166,10 +6589,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: Title
 																			"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The title to display on the response card.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthBetween(1, 250),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "A message that defines a response card that the client application can show to the user.",
@@ -6185,10 +6613,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: Value
 																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The message to send to the user.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthBetween(1, 1000),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "A message in plain text format.",
@@ -6204,10 +6637,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: Value
 																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The SSML text that defines the prompt.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthBetween(1, 1000),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "A message in Speech Synthesis Markup Language (SSML).",
@@ -6219,7 +6657,14 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "The primary message that Amazon Lex should send to the user.",
-																Required:    true,
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.Object{ /*START VALIDATORS*/
+																	fwvalidators.NotNullObject(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																	objectplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 															// Property: Variations
 															"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -6231,10 +6676,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																				// Property: Value
 																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																					Description: "The string that is sent to your application.",
-																					Required:    true,
+																					Optional:    true,
+																					Computed:    true,
 																					Validators: []validator.String{ /*START VALIDATORS*/
 																						stringvalidator.LengthBetween(1, 1000),
+																						fwvalidators.NotNullString(),
 																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																						stringplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																			Description: "A message in a custom format defined by the client application.",
@@ -6254,18 +6704,28 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																							// Property: Text
 																							"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																								Description: "The text that appears on the button.",
-																								Required:    true,
+																								Optional:    true,
+																								Computed:    true,
 																								Validators: []validator.String{ /*START VALIDATORS*/
 																									stringvalidator.LengthBetween(1, 50),
+																									fwvalidators.NotNullString(),
 																								}, /*END VALIDATORS*/
+																								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																									stringplanmodifier.UseStateForUnknown(),
+																								}, /*END PLAN MODIFIERS*/
 																							}, /*END ATTRIBUTE*/
 																							// Property: Value
 																							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																								Description: "The value returned to Amazon Lex when the user chooses this button.",
-																								Required:    true,
+																								Optional:    true,
+																								Computed:    true,
 																								Validators: []validator.String{ /*START VALIDATORS*/
 																									stringvalidator.LengthBetween(1, 50),
+																									fwvalidators.NotNullString(),
 																								}, /*END VALIDATORS*/
+																								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																									stringplanmodifier.UseStateForUnknown(),
+																								}, /*END PLAN MODIFIERS*/
 																							}, /*END ATTRIBUTE*/
 																						}, /*END SCHEMA*/
 																					}, /*END NESTED OBJECT*/
@@ -6307,10 +6767,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																				// Property: Title
 																				"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																					Description: "The title to display on the response card.",
-																					Required:    true,
+																					Optional:    true,
+																					Computed:    true,
 																					Validators: []validator.String{ /*START VALIDATORS*/
 																						stringvalidator.LengthBetween(1, 250),
+																						fwvalidators.NotNullString(),
 																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																						stringplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																			Description: "A message that defines a response card that the client application can show to the user.",
@@ -6326,10 +6791,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																				// Property: Value
 																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																					Description: "The message to send to the user.",
-																					Required:    true,
+																					Optional:    true,
+																					Computed:    true,
 																					Validators: []validator.String{ /*START VALIDATORS*/
 																						stringvalidator.LengthBetween(1, 1000),
+																						fwvalidators.NotNullString(),
 																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																						stringplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																			Description: "A message in plain text format.",
@@ -6345,10 +6815,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																				// Property: Value
 																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																					Description: "The SSML text that defines the prompt.",
-																					Required:    true,
+																					Optional:    true,
+																					Computed:    true,
 																					Validators: []validator.String{ /*START VALIDATORS*/
 																						stringvalidator.LengthBetween(1, 1000),
+																						fwvalidators.NotNullString(),
 																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																						stringplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																			Description: "A message in Speech Synthesis Markup Language (SSML).",
@@ -6374,17 +6849,27 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
 													Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
 													Validators: []validator.List{ /*START VALIDATORS*/
 														listvalidator.SizeBetween(1, 5),
+														fwvalidators.NotNullList(),
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 														generic.Multiset(),
+														listplanmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 											Description: "A list of message groups that Amazon Lex uses to respond the user input.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Object{ /*START VALIDATORS*/
+												fwvalidators.NotNullObject(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: IsActive
 										"is_active": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -6430,10 +6915,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: Value
 																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The string that is sent to your application.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthBetween(1, 1000),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "A message in a custom format defined by the client application.",
@@ -6453,18 +6943,28 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Text
 																						"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The text that appears on the button.",
-																							Required:    true,
+																							Optional:    true,
+																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 50),
+																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The value returned to Amazon Lex when the user chooses this button.",
-																							Required:    true,
+																							Optional:    true,
+																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 50),
+																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																				}, /*END NESTED OBJECT*/
@@ -6506,10 +7006,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: Title
 																			"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The title to display on the response card.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthBetween(1, 250),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "A message that defines a response card that the client application can show to the user.",
@@ -6525,10 +7030,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: Value
 																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The message to send to the user.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthBetween(1, 1000),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "A message in plain text format.",
@@ -6544,10 +7054,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: Value
 																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The SSML text that defines the prompt.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthBetween(1, 1000),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "A message in Speech Synthesis Markup Language (SSML).",
@@ -6559,7 +7074,14 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "The primary message that Amazon Lex should send to the user.",
-																Required:    true,
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.Object{ /*START VALIDATORS*/
+																	fwvalidators.NotNullObject(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																	objectplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 															// Property: Variations
 															"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -6571,10 +7093,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																				// Property: Value
 																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																					Description: "The string that is sent to your application.",
-																					Required:    true,
+																					Optional:    true,
+																					Computed:    true,
 																					Validators: []validator.String{ /*START VALIDATORS*/
 																						stringvalidator.LengthBetween(1, 1000),
+																						fwvalidators.NotNullString(),
 																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																						stringplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																			Description: "A message in a custom format defined by the client application.",
@@ -6594,18 +7121,28 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																							// Property: Text
 																							"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																								Description: "The text that appears on the button.",
-																								Required:    true,
+																								Optional:    true,
+																								Computed:    true,
 																								Validators: []validator.String{ /*START VALIDATORS*/
 																									stringvalidator.LengthBetween(1, 50),
+																									fwvalidators.NotNullString(),
 																								}, /*END VALIDATORS*/
+																								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																									stringplanmodifier.UseStateForUnknown(),
+																								}, /*END PLAN MODIFIERS*/
 																							}, /*END ATTRIBUTE*/
 																							// Property: Value
 																							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																								Description: "The value returned to Amazon Lex when the user chooses this button.",
-																								Required:    true,
+																								Optional:    true,
+																								Computed:    true,
 																								Validators: []validator.String{ /*START VALIDATORS*/
 																									stringvalidator.LengthBetween(1, 50),
+																									fwvalidators.NotNullString(),
 																								}, /*END VALIDATORS*/
+																								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																									stringplanmodifier.UseStateForUnknown(),
+																								}, /*END PLAN MODIFIERS*/
 																							}, /*END ATTRIBUTE*/
 																						}, /*END SCHEMA*/
 																					}, /*END NESTED OBJECT*/
@@ -6647,10 +7184,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																				// Property: Title
 																				"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																					Description: "The title to display on the response card.",
-																					Required:    true,
+																					Optional:    true,
+																					Computed:    true,
 																					Validators: []validator.String{ /*START VALIDATORS*/
 																						stringvalidator.LengthBetween(1, 250),
+																						fwvalidators.NotNullString(),
 																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																						stringplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																			Description: "A message that defines a response card that the client application can show to the user.",
@@ -6666,10 +7208,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																				// Property: Value
 																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																					Description: "The message to send to the user.",
-																					Required:    true,
+																					Optional:    true,
+																					Computed:    true,
 																					Validators: []validator.String{ /*START VALIDATORS*/
 																						stringvalidator.LengthBetween(1, 1000),
+																						fwvalidators.NotNullString(),
 																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																						stringplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																			Description: "A message in plain text format.",
@@ -6685,10 +7232,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																				// Property: Value
 																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																					Description: "The SSML text that defines the prompt.",
-																					Required:    true,
+																					Optional:    true,
+																					Computed:    true,
 																					Validators: []validator.String{ /*START VALIDATORS*/
 																						stringvalidator.LengthBetween(1, 1000),
+																						fwvalidators.NotNullString(),
 																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																						stringplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																			Description: "A message in Speech Synthesis Markup Language (SSML).",
@@ -6714,17 +7266,27 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
 													Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
 													Validators: []validator.List{ /*START VALIDATORS*/
 														listvalidator.SizeBetween(1, 5),
+														fwvalidators.NotNullList(),
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 														generic.Multiset(),
+														listplanmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 											Description: "A list of message groups that Amazon Lex uses to respond the user input.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Object{ /*START VALIDATORS*/
+												fwvalidators.NotNullObject(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: IsActive
 										"is_active": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -6749,10 +7311,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 												// Property: MaxRetries
 												"max_retries": schema.Int64Attribute{ /*START ATTRIBUTE*/
 													Description: "The maximum number of times the bot tries to elicit a resonse from the user using this prompt.",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
 													Validators: []validator.Int64{ /*START VALIDATORS*/
 														int64validator.Between(0, 5),
+														fwvalidators.NotNullInt64(),
 													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+														int64planmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: MessageGroupsList
 												"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -6767,10 +7334,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: Value
 																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The string that is sent to your application.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthBetween(1, 1000),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "A message in a custom format defined by the client application.",
@@ -6790,18 +7362,28 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Text
 																						"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The text that appears on the button.",
-																							Required:    true,
+																							Optional:    true,
+																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 50),
+																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The value returned to Amazon Lex when the user chooses this button.",
-																							Required:    true,
+																							Optional:    true,
+																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 50),
+																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																				}, /*END NESTED OBJECT*/
@@ -6843,10 +7425,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: Title
 																			"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The title to display on the response card.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthBetween(1, 250),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "A message that defines a response card that the client application can show to the user.",
@@ -6862,10 +7449,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: Value
 																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The message to send to the user.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthBetween(1, 1000),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "A message in plain text format.",
@@ -6881,10 +7473,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: Value
 																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The SSML text that defines the prompt.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthBetween(1, 1000),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "A message in Speech Synthesis Markup Language (SSML).",
@@ -6896,7 +7493,14 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "The primary message that Amazon Lex should send to the user.",
-																Required:    true,
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.Object{ /*START VALIDATORS*/
+																	fwvalidators.NotNullObject(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																	objectplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 															// Property: Variations
 															"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -6908,10 +7512,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																				// Property: Value
 																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																					Description: "The string that is sent to your application.",
-																					Required:    true,
+																					Optional:    true,
+																					Computed:    true,
 																					Validators: []validator.String{ /*START VALIDATORS*/
 																						stringvalidator.LengthBetween(1, 1000),
+																						fwvalidators.NotNullString(),
 																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																						stringplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																			Description: "A message in a custom format defined by the client application.",
@@ -6931,18 +7540,28 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																							// Property: Text
 																							"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																								Description: "The text that appears on the button.",
-																								Required:    true,
+																								Optional:    true,
+																								Computed:    true,
 																								Validators: []validator.String{ /*START VALIDATORS*/
 																									stringvalidator.LengthBetween(1, 50),
+																									fwvalidators.NotNullString(),
 																								}, /*END VALIDATORS*/
+																								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																									stringplanmodifier.UseStateForUnknown(),
+																								}, /*END PLAN MODIFIERS*/
 																							}, /*END ATTRIBUTE*/
 																							// Property: Value
 																							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																								Description: "The value returned to Amazon Lex when the user chooses this button.",
-																								Required:    true,
+																								Optional:    true,
+																								Computed:    true,
 																								Validators: []validator.String{ /*START VALIDATORS*/
 																									stringvalidator.LengthBetween(1, 50),
+																									fwvalidators.NotNullString(),
 																								}, /*END VALIDATORS*/
+																								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																									stringplanmodifier.UseStateForUnknown(),
+																								}, /*END PLAN MODIFIERS*/
 																							}, /*END ATTRIBUTE*/
 																						}, /*END SCHEMA*/
 																					}, /*END NESTED OBJECT*/
@@ -6984,10 +7603,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																				// Property: Title
 																				"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																					Description: "The title to display on the response card.",
-																					Required:    true,
+																					Optional:    true,
+																					Computed:    true,
 																					Validators: []validator.String{ /*START VALIDATORS*/
 																						stringvalidator.LengthBetween(1, 250),
+																						fwvalidators.NotNullString(),
 																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																						stringplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																			Description: "A message that defines a response card that the client application can show to the user.",
@@ -7003,10 +7627,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																				// Property: Value
 																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																					Description: "The message to send to the user.",
-																					Required:    true,
+																					Optional:    true,
+																					Computed:    true,
 																					Validators: []validator.String{ /*START VALIDATORS*/
 																						stringvalidator.LengthBetween(1, 1000),
+																						fwvalidators.NotNullString(),
 																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																						stringplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																			Description: "A message in plain text format.",
@@ -7022,10 +7651,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																				// Property: Value
 																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																					Description: "The SSML text that defines the prompt.",
-																					Required:    true,
+																					Optional:    true,
+																					Computed:    true,
 																					Validators: []validator.String{ /*START VALIDATORS*/
 																						stringvalidator.LengthBetween(1, 1000),
+																						fwvalidators.NotNullString(),
 																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																						stringplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																			Description: "A message in Speech Synthesis Markup Language (SSML).",
@@ -7051,12 +7685,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
 													Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
 													Validators: []validator.List{ /*START VALIDATORS*/
 														listvalidator.SizeBetween(1, 5),
+														fwvalidators.NotNullList(),
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 														generic.Multiset(),
+														listplanmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: MessageSelectionStrategy
@@ -7094,12 +7731,26 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: AllowAudioInput
 																	"allow_audio_input": schema.BoolAttribute{ /*START ATTRIBUTE*/
 																		Description: "Indicates whether audio input is allowed.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.Bool{ /*START VALIDATORS*/
+																			fwvalidators.NotNullBool(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+																			boolplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: AllowDTMFInput
 																	"allow_dtmf_input": schema.BoolAttribute{ /*START ATTRIBUTE*/
 																		Description: "Indicates whether DTMF input is allowed.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.Bool{ /*START VALIDATORS*/
+																			fwvalidators.NotNullBool(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+																			boolplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "Specifies the allowed input types.",
@@ -7118,18 +7769,28 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: EndTimeoutMs
 																			"end_timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
 																				Description: "Time for which a bot waits after the customer stops speaking to assume the utterance is finished.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.Int64{ /*START VALIDATORS*/
 																					int64validator.AtLeast(1),
+																					fwvalidators.NotNullInt64(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																					int64planmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																			// Property: MaxLengthMs
 																			"max_length_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
 																				Description: "Time for how long Amazon Lex waits before speech input is truncated and the speech is returned to application.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.Int64{ /*START VALIDATORS*/
 																					int64validator.AtLeast(1),
+																					fwvalidators.NotNullInt64(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																					int64planmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "Specifies the audio input specifications.",
@@ -7145,34 +7806,54 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: DeletionCharacter
 																			"deletion_character": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The DTMF character that clears the accumulated DTMF digits and immediately ends the input.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.RegexMatches(regexp.MustCompile("^[A-D0-9#*]{1}$"), ""),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																			// Property: EndCharacter
 																			"end_character": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The DTMF character that immediately ends input. If the user does not press this character, the input ends after the end timeout.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.RegexMatches(regexp.MustCompile("^[A-D0-9#*]{1}$"), ""),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																			// Property: EndTimeoutMs
 																			"end_timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
 																				Description: "How long the bot should wait after the last DTMF character input before assuming that the input has concluded.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.Int64{ /*START VALIDATORS*/
 																					int64validator.AtLeast(1),
+																					fwvalidators.NotNullInt64(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																					int64planmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																			// Property: MaxLength
 																			"max_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
 																				Description: "The maximum number of DTMF digits allowed in an utterance.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.Int64{ /*START VALIDATORS*/
 																					int64validator.Between(1, 1024),
+																					fwvalidators.NotNullInt64(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																					int64planmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "Specifies the settings on DTMF input.",
@@ -7185,10 +7866,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: StartTimeoutMs
 																	"start_timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
 																		Description: "Time for which a bot waits before assuming that the customer isn't going to speak or press a key. This timeout is shared between Audio and DTMF inputs.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.Int64{ /*START VALIDATORS*/
 																			int64validator.AtLeast(1),
+																			fwvalidators.NotNullInt64(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																			int64planmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "Specifies the audio and DTMF input specification.",
@@ -7204,10 +7890,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: StartTimeoutMs
 																	"start_timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
 																		Description: "Time for which a bot waits before re-prompting a customer for text input.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.Int64{ /*START VALIDATORS*/
 																			int64validator.AtLeast(1),
+																			fwvalidators.NotNullInt64(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																			int64planmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "Specifies the text input specifications.",
@@ -7228,7 +7919,14 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 											Description: "Prompts the user to confirm the intent.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Object{ /*START VALIDATORS*/
+												fwvalidators.NotNullObject(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "Prompts that Amazon Lex sends to the user to confirm the completion of an intent.",
@@ -7244,11 +7942,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 										// Property: KendraIndex
 										"kendra_index": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "The Amazon Resource Name (ARN) of the Amazon Kendra index that you want the AMAZON.KendraSearchIntent intent to search.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthBetween(32, 2048),
 												stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-zA-Z-]*:kendra:[a-z]+-[a-z]+-[0-9]:[0-9]{12}:index/[a-zA-Z0-9][a-zA-Z0-9_-]*$"), ""),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: QueryFilterString
 										"query_filter_string": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -7282,11 +7985,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 								// Property: Name
 								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "Unique name for a resource.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 100),
 										stringvalidator.RegexMatches(regexp.MustCompile("^([0-9a-zA-Z][_-]?)+$"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: OutputContexts
 								"output_contexts": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -7295,27 +8003,42 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Name
 											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "Unique name for a resource.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 100),
 													stringvalidator.RegexMatches(regexp.MustCompile("^([0-9a-zA-Z][_-]?)+$"), ""),
+													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: TimeToLiveInSeconds
 											"time_to_live_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
 												Description: "The amount of time, in seconds, that the output context should remain active.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
 												Validators: []validator.Int64{ /*START VALIDATORS*/
 													int64validator.Between(5, 86400),
+													fwvalidators.NotNullInt64(),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+													int64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: TurnsToLive
 											"turns_to_live": schema.Int64Attribute{ /*START ATTRIBUTE*/
 												Description: "The number of conversation turns that the output context should remain active.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
 												Validators: []validator.Int64{ /*START VALIDATORS*/
 													int64validator.Between(1, 20),
+													fwvalidators.NotNullInt64(),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+													int64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
@@ -7346,7 +8069,14 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Utterance
 											"utterance": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "The sample utterance that Amazon Lex uses to build its machine-learning model to recognize intents/slots.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
@@ -7365,19 +8095,29 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Priority
 											"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
 												Description: "The priority that a slot should be elicited.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
 												Validators: []validator.Int64{ /*START VALIDATORS*/
 													int64validator.Between(0, 100),
+													fwvalidators.NotNullInt64(),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+													int64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: SlotName
 											"slot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "The name of the slot.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 100),
 													stringvalidator.RegexMatches(regexp.MustCompile("^([0-9a-zA-Z][_-]?)+$"), ""),
+													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
@@ -7427,11 +8167,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Name
 											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "Unique name for a resource.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 100),
 													stringvalidator.RegexMatches(regexp.MustCompile("^([0-9a-zA-Z][_-]?)+$"), ""),
+													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: ObfuscationSetting
 											"obfuscation_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -7439,13 +8184,18 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 													// Property: ObfuscationSettingType
 													"obfuscation_setting_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 														Description: "Value that determines whether Amazon Lex obscures slot values in conversation logs. The default is to obscure the values.",
-														Required:    true,
+														Optional:    true,
+														Computed:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
 															stringvalidator.OneOf(
 																"None",
 																"DefaultObfuscation",
 															),
+															fwvalidators.NotNullString(),
 														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
 												Description: "Determines whether Amazon Lex obscures slot values in conversation logs.",
@@ -7458,7 +8208,14 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 											// Property: SlotTypeName
 											"slot_type_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "The slot type name that is used in the slot. Allows for custom and built-in slot type names",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: ValueElicitationSetting
 											"value_elicitation_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -7473,20 +8230,28 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																		// Property: DefaultValue
 																		"default_value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																			Description: "The default value to use when a user doesn't provide a value for a slot.",
-																			Required:    true,
+																			Optional:    true,
+																			Computed:    true,
 																			Validators: []validator.String{ /*START VALIDATORS*/
 																				stringvalidator.LengthBetween(1, 202),
+																				fwvalidators.NotNullString(),
 																			}, /*END VALIDATORS*/
+																			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																				stringplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
 																		}, /*END ATTRIBUTE*/
 																	}, /*END SCHEMA*/
 																}, /*END NESTED OBJECT*/
 																Description: "A list of slot default values",
-																Required:    true,
+																Optional:    true,
+																Computed:    true,
 																Validators: []validator.List{ /*START VALIDATORS*/
 																	listvalidator.SizeAtMost(10),
+																	fwvalidators.NotNullList(),
 																}, /*END VALIDATORS*/
 																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																	generic.Multiset(),
+																	listplanmodifier.UseStateForUnknown(),
 																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
@@ -7512,10 +8277,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 															// Property: MaxRetries
 															"max_retries": schema.Int64Attribute{ /*START ATTRIBUTE*/
 																Description: "The maximum number of times the bot tries to elicit a resonse from the user using this prompt.",
-																Required:    true,
+																Optional:    true,
+																Computed:    true,
 																Validators: []validator.Int64{ /*START VALIDATORS*/
 																	int64validator.Between(0, 5),
+																	fwvalidators.NotNullInt64(),
 																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																	int64planmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 															// Property: MessageGroupsList
 															"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -7530,10 +8300,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The string that is sent to your application.",
-																							Required:    true,
+																							Optional:    true,
+																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 1000),
+																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message in a custom format defined by the client application.",
@@ -7553,18 +8328,28 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									// Property: Text
 																									"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The text that appears on the button.",
-																										Required:    true,
+																										Optional:    true,
+																										Computed:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 50),
+																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
 																									}, /*END ATTRIBUTE*/
 																									// Property: Value
 																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The value returned to Amazon Lex when the user chooses this button.",
-																										Required:    true,
+																										Optional:    true,
+																										Computed:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 50),
+																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																							}, /*END NESTED OBJECT*/
@@ -7606,10 +8391,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Title
 																						"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The title to display on the response card.",
-																							Required:    true,
+																							Optional:    true,
+																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 250),
+																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message that defines a response card that the client application can show to the user.",
@@ -7625,10 +8415,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The message to send to the user.",
-																							Required:    true,
+																							Optional:    true,
+																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 1000),
+																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message in plain text format.",
@@ -7644,10 +8439,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The SSML text that defines the prompt.",
-																							Required:    true,
+																							Optional:    true,
+																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 1000),
+																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message in Speech Synthesis Markup Language (SSML).",
@@ -7659,7 +8459,14 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																			Description: "The primary message that Amazon Lex should send to the user.",
-																			Required:    true,
+																			Optional:    true,
+																			Computed:    true,
+																			Validators: []validator.Object{ /*START VALIDATORS*/
+																				fwvalidators.NotNullObject(),
+																			}, /*END VALIDATORS*/
+																			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																				objectplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
 																		}, /*END ATTRIBUTE*/
 																		// Property: Variations
 																		"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -7671,10 +8478,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																							// Property: Value
 																							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																								Description: "The string that is sent to your application.",
-																								Required:    true,
+																								Optional:    true,
+																								Computed:    true,
 																								Validators: []validator.String{ /*START VALIDATORS*/
 																									stringvalidator.LengthBetween(1, 1000),
+																									fwvalidators.NotNullString(),
 																								}, /*END VALIDATORS*/
+																								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																									stringplanmodifier.UseStateForUnknown(),
+																								}, /*END PLAN MODIFIERS*/
 																							}, /*END ATTRIBUTE*/
 																						}, /*END SCHEMA*/
 																						Description: "A message in a custom format defined by the client application.",
@@ -7694,18 +8506,28 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																										// Property: Text
 																										"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																											Description: "The text that appears on the button.",
-																											Required:    true,
+																											Optional:    true,
+																											Computed:    true,
 																											Validators: []validator.String{ /*START VALIDATORS*/
 																												stringvalidator.LengthBetween(1, 50),
+																												fwvalidators.NotNullString(),
 																											}, /*END VALIDATORS*/
+																											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																												stringplanmodifier.UseStateForUnknown(),
+																											}, /*END PLAN MODIFIERS*/
 																										}, /*END ATTRIBUTE*/
 																										// Property: Value
 																										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																											Description: "The value returned to Amazon Lex when the user chooses this button.",
-																											Required:    true,
+																											Optional:    true,
+																											Computed:    true,
 																											Validators: []validator.String{ /*START VALIDATORS*/
 																												stringvalidator.LengthBetween(1, 50),
+																												fwvalidators.NotNullString(),
 																											}, /*END VALIDATORS*/
+																											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																												stringplanmodifier.UseStateForUnknown(),
+																											}, /*END PLAN MODIFIERS*/
 																										}, /*END ATTRIBUTE*/
 																									}, /*END SCHEMA*/
 																								}, /*END NESTED OBJECT*/
@@ -7747,10 +8569,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																							// Property: Title
 																							"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																								Description: "The title to display on the response card.",
-																								Required:    true,
+																								Optional:    true,
+																								Computed:    true,
 																								Validators: []validator.String{ /*START VALIDATORS*/
 																									stringvalidator.LengthBetween(1, 250),
+																									fwvalidators.NotNullString(),
 																								}, /*END VALIDATORS*/
+																								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																									stringplanmodifier.UseStateForUnknown(),
+																								}, /*END PLAN MODIFIERS*/
 																							}, /*END ATTRIBUTE*/
 																						}, /*END SCHEMA*/
 																						Description: "A message that defines a response card that the client application can show to the user.",
@@ -7766,10 +8593,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																							// Property: Value
 																							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																								Description: "The message to send to the user.",
-																								Required:    true,
+																								Optional:    true,
+																								Computed:    true,
 																								Validators: []validator.String{ /*START VALIDATORS*/
 																									stringvalidator.LengthBetween(1, 1000),
+																									fwvalidators.NotNullString(),
 																								}, /*END VALIDATORS*/
+																								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																									stringplanmodifier.UseStateForUnknown(),
+																								}, /*END PLAN MODIFIERS*/
 																							}, /*END ATTRIBUTE*/
 																						}, /*END SCHEMA*/
 																						Description: "A message in plain text format.",
@@ -7785,10 +8617,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																							// Property: Value
 																							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																								Description: "The SSML text that defines the prompt.",
-																								Required:    true,
+																								Optional:    true,
+																								Computed:    true,
 																								Validators: []validator.String{ /*START VALIDATORS*/
 																									stringvalidator.LengthBetween(1, 1000),
+																									fwvalidators.NotNullString(),
 																								}, /*END VALIDATORS*/
+																								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																									stringplanmodifier.UseStateForUnknown(),
+																								}, /*END PLAN MODIFIERS*/
 																							}, /*END ATTRIBUTE*/
 																						}, /*END SCHEMA*/
 																						Description: "A message in Speech Synthesis Markup Language (SSML).",
@@ -7814,12 +8651,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																	}, /*END SCHEMA*/
 																}, /*END NESTED OBJECT*/
 																Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-																Required:    true,
+																Optional:    true,
+																Computed:    true,
 																Validators: []validator.List{ /*START VALIDATORS*/
 																	listvalidator.SizeBetween(1, 5),
+																	fwvalidators.NotNullList(),
 																}, /*END VALIDATORS*/
 																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																	generic.Multiset(),
+																	listplanmodifier.UseStateForUnknown(),
 																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 															// Property: MessageSelectionStrategy
@@ -7857,12 +8697,26 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																				// Property: AllowAudioInput
 																				"allow_audio_input": schema.BoolAttribute{ /*START ATTRIBUTE*/
 																					Description: "Indicates whether audio input is allowed.",
-																					Required:    true,
+																					Optional:    true,
+																					Computed:    true,
+																					Validators: []validator.Bool{ /*START VALIDATORS*/
+																						fwvalidators.NotNullBool(),
+																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+																						boolplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
 																				}, /*END ATTRIBUTE*/
 																				// Property: AllowDTMFInput
 																				"allow_dtmf_input": schema.BoolAttribute{ /*START ATTRIBUTE*/
 																					Description: "Indicates whether DTMF input is allowed.",
-																					Required:    true,
+																					Optional:    true,
+																					Computed:    true,
+																					Validators: []validator.Bool{ /*START VALIDATORS*/
+																						fwvalidators.NotNullBool(),
+																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+																						boolplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																			Description: "Specifies the allowed input types.",
@@ -7881,18 +8735,28 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: EndTimeoutMs
 																						"end_timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
 																							Description: "Time for which a bot waits after the customer stops speaking to assume the utterance is finished.",
-																							Required:    true,
+																							Optional:    true,
+																							Computed:    true,
 																							Validators: []validator.Int64{ /*START VALIDATORS*/
 																								int64validator.AtLeast(1),
+																								fwvalidators.NotNullInt64(),
 																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																								int64planmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
 																						// Property: MaxLengthMs
 																						"max_length_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
 																							Description: "Time for how long Amazon Lex waits before speech input is truncated and the speech is returned to application.",
-																							Required:    true,
+																							Optional:    true,
+																							Computed:    true,
 																							Validators: []validator.Int64{ /*START VALIDATORS*/
 																								int64validator.AtLeast(1),
+																								fwvalidators.NotNullInt64(),
 																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																								int64planmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "Specifies the audio input specifications.",
@@ -7908,34 +8772,54 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: DeletionCharacter
 																						"deletion_character": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The DTMF character that clears the accumulated DTMF digits and immediately ends the input.",
-																							Required:    true,
+																							Optional:    true,
+																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.RegexMatches(regexp.MustCompile("^[A-D0-9#*]{1}$"), ""),
+																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
 																						// Property: EndCharacter
 																						"end_character": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The DTMF character that immediately ends input. If the user does not press this character, the input ends after the end timeout.",
-																							Required:    true,
+																							Optional:    true,
+																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.RegexMatches(regexp.MustCompile("^[A-D0-9#*]{1}$"), ""),
+																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
 																						// Property: EndTimeoutMs
 																						"end_timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
 																							Description: "How long the bot should wait after the last DTMF character input before assuming that the input has concluded.",
-																							Required:    true,
+																							Optional:    true,
+																							Computed:    true,
 																							Validators: []validator.Int64{ /*START VALIDATORS*/
 																								int64validator.AtLeast(1),
+																								fwvalidators.NotNullInt64(),
 																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																								int64planmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
 																						// Property: MaxLength
 																						"max_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
 																							Description: "The maximum number of DTMF digits allowed in an utterance.",
-																							Required:    true,
+																							Optional:    true,
+																							Computed:    true,
 																							Validators: []validator.Int64{ /*START VALIDATORS*/
 																								int64validator.Between(1, 1024),
+																								fwvalidators.NotNullInt64(),
 																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																								int64planmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "Specifies the settings on DTMF input.",
@@ -7948,10 +8832,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																				// Property: StartTimeoutMs
 																				"start_timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
 																					Description: "Time for which a bot waits before assuming that the customer isn't going to speak or press a key. This timeout is shared between Audio and DTMF inputs.",
-																					Required:    true,
+																					Optional:    true,
+																					Computed:    true,
 																					Validators: []validator.Int64{ /*START VALIDATORS*/
 																						int64validator.AtLeast(1),
+																						fwvalidators.NotNullInt64(),
 																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																						int64planmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																			Description: "Specifies the audio and DTMF input specification.",
@@ -7967,10 +8856,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																				// Property: StartTimeoutMs
 																				"start_timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
 																					Description: "Time for which a bot waits before re-prompting a customer for text input.",
-																					Required:    true,
+																					Optional:    true,
+																					Computed:    true,
 																					Validators: []validator.Int64{ /*START VALIDATORS*/
 																						int64validator.AtLeast(1),
+																						fwvalidators.NotNullInt64(),
 																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																						int64planmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																			Description: "Specifies the text input specifications.",
@@ -8004,7 +8898,14 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																// Property: Utterance
 																"utterance": schema.StringAttribute{ /*START ATTRIBUTE*/
 																	Description: "The sample utterance that Amazon Lex uses to build its machine-learning model to recognize intents/slots.",
-																	Required:    true,
+																	Optional:    true,
+																	Computed:    true,
+																	Validators: []validator.String{ /*START VALIDATORS*/
+																		fwvalidators.NotNullString(),
+																	}, /*END VALIDATORS*/
+																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																		stringplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
 																}, /*END ATTRIBUTE*/
 															}, /*END SCHEMA*/
 														}, /*END NESTED OBJECT*/
@@ -8019,13 +8920,18 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 													// Property: SlotConstraint
 													"slot_constraint": schema.StringAttribute{ /*START ATTRIBUTE*/
 														Description: "Specifies whether the slot is required or optional.",
-														Required:    true,
+														Optional:    true,
+														Computed:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
 															stringvalidator.OneOf(
 																"Required",
 																"Optional",
 															),
+															fwvalidators.NotNullString(),
 														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 													// Property: WaitAndContinueSpecification
 													"wait_and_continue_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -8055,10 +8961,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								// Property: Value
 																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The string that is sent to your application.",
-																									Required:    true,
+																									Optional:    true,
+																									Computed:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 1000),
+																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																							Description: "A message in a custom format defined by the client application.",
@@ -8078,18 +8989,28 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																											// Property: Text
 																											"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																												Description: "The text that appears on the button.",
-																												Required:    true,
+																												Optional:    true,
+																												Computed:    true,
 																												Validators: []validator.String{ /*START VALIDATORS*/
 																													stringvalidator.LengthBetween(1, 50),
+																													fwvalidators.NotNullString(),
 																												}, /*END VALIDATORS*/
+																												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																													stringplanmodifier.UseStateForUnknown(),
+																												}, /*END PLAN MODIFIERS*/
 																											}, /*END ATTRIBUTE*/
 																											// Property: Value
 																											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																												Description: "The value returned to Amazon Lex when the user chooses this button.",
-																												Required:    true,
+																												Optional:    true,
+																												Computed:    true,
 																												Validators: []validator.String{ /*START VALIDATORS*/
 																													stringvalidator.LengthBetween(1, 50),
+																													fwvalidators.NotNullString(),
 																												}, /*END VALIDATORS*/
+																												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																													stringplanmodifier.UseStateForUnknown(),
+																												}, /*END PLAN MODIFIERS*/
 																											}, /*END ATTRIBUTE*/
 																										}, /*END SCHEMA*/
 																									}, /*END NESTED OBJECT*/
@@ -8131,10 +9052,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								// Property: Title
 																								"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The title to display on the response card.",
-																									Required:    true,
+																									Optional:    true,
+																									Computed:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 250),
+																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																							Description: "A message that defines a response card that the client application can show to the user.",
@@ -8150,10 +9076,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								// Property: Value
 																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The message to send to the user.",
-																									Required:    true,
+																									Optional:    true,
+																									Computed:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 1000),
+																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																							Description: "A message in plain text format.",
@@ -8169,10 +9100,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								// Property: Value
 																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The SSML text that defines the prompt.",
-																									Required:    true,
+																									Optional:    true,
+																									Computed:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 1000),
+																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																							Description: "A message in Speech Synthesis Markup Language (SSML).",
@@ -8184,7 +9120,14 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "The primary message that Amazon Lex should send to the user.",
-																					Required:    true,
+																					Optional:    true,
+																					Computed:    true,
+																					Validators: []validator.Object{ /*START VALIDATORS*/
+																						fwvalidators.NotNullObject(),
+																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																						objectplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
 																				}, /*END ATTRIBUTE*/
 																				// Property: Variations
 																				"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -8196,10 +9139,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									// Property: Value
 																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The string that is sent to your application.",
-																										Required:    true,
+																										Optional:    true,
+																										Computed:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 1000),
+																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																								Description: "A message in a custom format defined by the client application.",
@@ -8219,18 +9167,28 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																												// Property: Text
 																												"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																													Description: "The text that appears on the button.",
-																													Required:    true,
+																													Optional:    true,
+																													Computed:    true,
 																													Validators: []validator.String{ /*START VALIDATORS*/
 																														stringvalidator.LengthBetween(1, 50),
+																														fwvalidators.NotNullString(),
 																													}, /*END VALIDATORS*/
+																													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																														stringplanmodifier.UseStateForUnknown(),
+																													}, /*END PLAN MODIFIERS*/
 																												}, /*END ATTRIBUTE*/
 																												// Property: Value
 																												"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																													Description: "The value returned to Amazon Lex when the user chooses this button.",
-																													Required:    true,
+																													Optional:    true,
+																													Computed:    true,
 																													Validators: []validator.String{ /*START VALIDATORS*/
 																														stringvalidator.LengthBetween(1, 50),
+																														fwvalidators.NotNullString(),
 																													}, /*END VALIDATORS*/
+																													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																														stringplanmodifier.UseStateForUnknown(),
+																													}, /*END PLAN MODIFIERS*/
 																												}, /*END ATTRIBUTE*/
 																											}, /*END SCHEMA*/
 																										}, /*END NESTED OBJECT*/
@@ -8272,10 +9230,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									// Property: Title
 																									"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The title to display on the response card.",
-																										Required:    true,
+																										Optional:    true,
+																										Computed:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 250),
+																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																								Description: "A message that defines a response card that the client application can show to the user.",
@@ -8291,10 +9254,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									// Property: Value
 																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The message to send to the user.",
-																										Required:    true,
+																										Optional:    true,
+																										Computed:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 1000),
+																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																								Description: "A message in plain text format.",
@@ -8310,10 +9278,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									// Property: Value
 																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The SSML text that defines the prompt.",
-																										Required:    true,
+																										Optional:    true,
+																										Computed:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 1000),
+																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																								Description: "A message in Speech Synthesis Markup Language (SSML).",
@@ -8339,17 +9312,27 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																			}, /*END SCHEMA*/
 																		}, /*END NESTED OBJECT*/
 																		Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.List{ /*START VALIDATORS*/
 																			listvalidator.SizeBetween(1, 5),
+																			fwvalidators.NotNullList(),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																			generic.Multiset(),
+																			listplanmodifier.UseStateForUnknown(),
 																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "The response that Amazon Lex sends to indicate that the bot is ready to continue the conversation.",
-																Required:    true,
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.Object{ /*START VALIDATORS*/
+																	fwvalidators.NotNullObject(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																	objectplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 															// Property: IsActive
 															"is_active": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -8375,10 +9358,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: FrequencyInSeconds
 																	"frequency_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
 																		Description: "How often a message should be sent to the user in seconds.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.Int64{ /*START VALIDATORS*/
 																			int64validator.Between(1, 300),
+																			fwvalidators.NotNullInt64(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																			int64planmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: MessageGroupsList
 																	"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -8393,10 +9381,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								// Property: Value
 																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The string that is sent to your application.",
-																									Required:    true,
+																									Optional:    true,
+																									Computed:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 1000),
+																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																							Description: "A message in a custom format defined by the client application.",
@@ -8416,18 +9409,28 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																											// Property: Text
 																											"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																												Description: "The text that appears on the button.",
-																												Required:    true,
+																												Optional:    true,
+																												Computed:    true,
 																												Validators: []validator.String{ /*START VALIDATORS*/
 																													stringvalidator.LengthBetween(1, 50),
+																													fwvalidators.NotNullString(),
 																												}, /*END VALIDATORS*/
+																												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																													stringplanmodifier.UseStateForUnknown(),
+																												}, /*END PLAN MODIFIERS*/
 																											}, /*END ATTRIBUTE*/
 																											// Property: Value
 																											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																												Description: "The value returned to Amazon Lex when the user chooses this button.",
-																												Required:    true,
+																												Optional:    true,
+																												Computed:    true,
 																												Validators: []validator.String{ /*START VALIDATORS*/
 																													stringvalidator.LengthBetween(1, 50),
+																													fwvalidators.NotNullString(),
 																												}, /*END VALIDATORS*/
+																												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																													stringplanmodifier.UseStateForUnknown(),
+																												}, /*END PLAN MODIFIERS*/
 																											}, /*END ATTRIBUTE*/
 																										}, /*END SCHEMA*/
 																									}, /*END NESTED OBJECT*/
@@ -8469,10 +9472,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								// Property: Title
 																								"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The title to display on the response card.",
-																									Required:    true,
+																									Optional:    true,
+																									Computed:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 250),
+																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																							Description: "A message that defines a response card that the client application can show to the user.",
@@ -8488,10 +9496,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								// Property: Value
 																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The message to send to the user.",
-																									Required:    true,
+																									Optional:    true,
+																									Computed:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 1000),
+																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																							Description: "A message in plain text format.",
@@ -8507,10 +9520,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								// Property: Value
 																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The SSML text that defines the prompt.",
-																									Required:    true,
+																									Optional:    true,
+																									Computed:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 1000),
+																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																							Description: "A message in Speech Synthesis Markup Language (SSML).",
@@ -8522,7 +9540,14 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "The primary message that Amazon Lex should send to the user.",
-																					Required:    true,
+																					Optional:    true,
+																					Computed:    true,
+																					Validators: []validator.Object{ /*START VALIDATORS*/
+																						fwvalidators.NotNullObject(),
+																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																						objectplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
 																				}, /*END ATTRIBUTE*/
 																				// Property: Variations
 																				"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -8534,10 +9559,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									// Property: Value
 																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The string that is sent to your application.",
-																										Required:    true,
+																										Optional:    true,
+																										Computed:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 1000),
+																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																								Description: "A message in a custom format defined by the client application.",
@@ -8557,18 +9587,28 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																												// Property: Text
 																												"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																													Description: "The text that appears on the button.",
-																													Required:    true,
+																													Optional:    true,
+																													Computed:    true,
 																													Validators: []validator.String{ /*START VALIDATORS*/
 																														stringvalidator.LengthBetween(1, 50),
+																														fwvalidators.NotNullString(),
 																													}, /*END VALIDATORS*/
+																													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																														stringplanmodifier.UseStateForUnknown(),
+																													}, /*END PLAN MODIFIERS*/
 																												}, /*END ATTRIBUTE*/
 																												// Property: Value
 																												"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																													Description: "The value returned to Amazon Lex when the user chooses this button.",
-																													Required:    true,
+																													Optional:    true,
+																													Computed:    true,
 																													Validators: []validator.String{ /*START VALIDATORS*/
 																														stringvalidator.LengthBetween(1, 50),
+																														fwvalidators.NotNullString(),
 																													}, /*END VALIDATORS*/
+																													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																														stringplanmodifier.UseStateForUnknown(),
+																													}, /*END PLAN MODIFIERS*/
 																												}, /*END ATTRIBUTE*/
 																											}, /*END SCHEMA*/
 																										}, /*END NESTED OBJECT*/
@@ -8610,10 +9650,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									// Property: Title
 																									"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The title to display on the response card.",
-																										Required:    true,
+																										Optional:    true,
+																										Computed:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 250),
+																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																								Description: "A message that defines a response card that the client application can show to the user.",
@@ -8629,10 +9674,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									// Property: Value
 																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The message to send to the user.",
-																										Required:    true,
+																										Optional:    true,
+																										Computed:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 1000),
+																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																								Description: "A message in plain text format.",
@@ -8648,10 +9698,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									// Property: Value
 																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The SSML text that defines the prompt.",
-																										Required:    true,
+																										Optional:    true,
+																										Computed:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 1000),
+																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																								Description: "A message in Speech Synthesis Markup Language (SSML).",
@@ -8677,21 +9732,29 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																			}, /*END SCHEMA*/
 																		}, /*END NESTED OBJECT*/
 																		Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.List{ /*START VALIDATORS*/
 																			listvalidator.SizeBetween(1, 5),
+																			fwvalidators.NotNullList(),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																			generic.Multiset(),
+																			listplanmodifier.UseStateForUnknown(),
 																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: TimeoutInSeconds
 																	"timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
 																		Description: "If Amazon Lex waits longer than this length of time in seconds for a response, it will stop sending messages.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.Int64{ /*START VALIDATORS*/
 																			int64validator.Between(1, 900),
+																			fwvalidators.NotNullInt64(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																			int64planmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "The response that Amazon Lex sends periodically to the user to indicate that the bot is still waiting for input from the user.",
@@ -8726,10 +9789,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								// Property: Value
 																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The string that is sent to your application.",
-																									Required:    true,
+																									Optional:    true,
+																									Computed:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 1000),
+																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																							Description: "A message in a custom format defined by the client application.",
@@ -8749,18 +9817,28 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																											// Property: Text
 																											"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																												Description: "The text that appears on the button.",
-																												Required:    true,
+																												Optional:    true,
+																												Computed:    true,
 																												Validators: []validator.String{ /*START VALIDATORS*/
 																													stringvalidator.LengthBetween(1, 50),
+																													fwvalidators.NotNullString(),
 																												}, /*END VALIDATORS*/
+																												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																													stringplanmodifier.UseStateForUnknown(),
+																												}, /*END PLAN MODIFIERS*/
 																											}, /*END ATTRIBUTE*/
 																											// Property: Value
 																											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																												Description: "The value returned to Amazon Lex when the user chooses this button.",
-																												Required:    true,
+																												Optional:    true,
+																												Computed:    true,
 																												Validators: []validator.String{ /*START VALIDATORS*/
 																													stringvalidator.LengthBetween(1, 50),
+																													fwvalidators.NotNullString(),
 																												}, /*END VALIDATORS*/
+																												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																													stringplanmodifier.UseStateForUnknown(),
+																												}, /*END PLAN MODIFIERS*/
 																											}, /*END ATTRIBUTE*/
 																										}, /*END SCHEMA*/
 																									}, /*END NESTED OBJECT*/
@@ -8802,10 +9880,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								// Property: Title
 																								"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The title to display on the response card.",
-																									Required:    true,
+																									Optional:    true,
+																									Computed:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 250),
+																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																							Description: "A message that defines a response card that the client application can show to the user.",
@@ -8821,10 +9904,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								// Property: Value
 																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The message to send to the user.",
-																									Required:    true,
+																									Optional:    true,
+																									Computed:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 1000),
+																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																							Description: "A message in plain text format.",
@@ -8840,10 +9928,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								// Property: Value
 																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The SSML text that defines the prompt.",
-																									Required:    true,
+																									Optional:    true,
+																									Computed:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 1000),
+																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																							Description: "A message in Speech Synthesis Markup Language (SSML).",
@@ -8855,7 +9948,14 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "The primary message that Amazon Lex should send to the user.",
-																					Required:    true,
+																					Optional:    true,
+																					Computed:    true,
+																					Validators: []validator.Object{ /*START VALIDATORS*/
+																						fwvalidators.NotNullObject(),
+																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																						objectplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
 																				}, /*END ATTRIBUTE*/
 																				// Property: Variations
 																				"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -8867,10 +9967,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									// Property: Value
 																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The string that is sent to your application.",
-																										Required:    true,
+																										Optional:    true,
+																										Computed:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 1000),
+																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																								Description: "A message in a custom format defined by the client application.",
@@ -8890,18 +9995,28 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																												// Property: Text
 																												"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																													Description: "The text that appears on the button.",
-																													Required:    true,
+																													Optional:    true,
+																													Computed:    true,
 																													Validators: []validator.String{ /*START VALIDATORS*/
 																														stringvalidator.LengthBetween(1, 50),
+																														fwvalidators.NotNullString(),
 																													}, /*END VALIDATORS*/
+																													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																														stringplanmodifier.UseStateForUnknown(),
+																													}, /*END PLAN MODIFIERS*/
 																												}, /*END ATTRIBUTE*/
 																												// Property: Value
 																												"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																													Description: "The value returned to Amazon Lex when the user chooses this button.",
-																													Required:    true,
+																													Optional:    true,
+																													Computed:    true,
 																													Validators: []validator.String{ /*START VALIDATORS*/
 																														stringvalidator.LengthBetween(1, 50),
+																														fwvalidators.NotNullString(),
 																													}, /*END VALIDATORS*/
+																													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																														stringplanmodifier.UseStateForUnknown(),
+																													}, /*END PLAN MODIFIERS*/
 																												}, /*END ATTRIBUTE*/
 																											}, /*END SCHEMA*/
 																										}, /*END NESTED OBJECT*/
@@ -8943,10 +10058,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									// Property: Title
 																									"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The title to display on the response card.",
-																										Required:    true,
+																										Optional:    true,
+																										Computed:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 250),
+																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																								Description: "A message that defines a response card that the client application can show to the user.",
@@ -8962,10 +10082,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									// Property: Value
 																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The message to send to the user.",
-																										Required:    true,
+																										Optional:    true,
+																										Computed:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 1000),
+																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																								Description: "A message in plain text format.",
@@ -8981,10 +10106,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									// Property: Value
 																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The SSML text that defines the prompt.",
-																										Required:    true,
+																										Optional:    true,
+																										Computed:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 1000),
+																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																								Description: "A message in Speech Synthesis Markup Language (SSML).",
@@ -9010,17 +10140,27 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																			}, /*END SCHEMA*/
 																		}, /*END NESTED OBJECT*/
 																		Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.List{ /*START VALIDATORS*/
 																			listvalidator.SizeBetween(1, 5),
+																			fwvalidators.NotNullList(),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																			generic.Multiset(),
+																			listplanmodifier.UseStateForUnknown(),
 																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "The response that Amazon Lex sends to indicate that the bot is waiting for the conversation to continue.",
-																Required:    true,
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.Object{ /*START VALIDATORS*/
+																	fwvalidators.NotNullObject(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																	objectplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 														Description: "Specifies the prompts that Amazon Lex uses while a bot is waiting for customer input.",
@@ -9032,7 +10172,14 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
 												Description: "Settings that you can use for eliciting a slot value.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Object{ /*START VALIDATORS*/
+													fwvalidators.NotNullObject(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
@@ -9061,15 +10208,27 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 					// Property: LocaleId
 					"locale_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The identifier of the language and locale that the bot will be used in.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: NluConfidenceThreshold
 					"nlu_confidence_threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
 						Description: "The specified confidence threshold for inserting the AMAZON.FallbackIntent and AMAZON.KendraSearchIntent intents.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.Float64{ /*START VALIDATORS*/
 							float64validator.Between(0.000000, 1.000000),
+							fwvalidators.NotNullFloat64(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+							float64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: SlotTypes
 					"slot_types": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
@@ -9112,20 +10271,30 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 														// Property: S3BucketName
 														"s3_bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Description: "The name of the S3 bucket that contains the grammar source.",
-															Required:    true,
+															Optional:    true,
+															Computed:    true,
 															Validators: []validator.String{ /*START VALIDATORS*/
 																stringvalidator.LengthBetween(3, 63),
 																stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"), ""),
+																fwvalidators.NotNullString(),
 															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 														// Property: S3ObjectKey
 														"s3_object_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Description: "The path to the grammar in the S3 bucket.",
-															Required:    true,
+															Optional:    true,
+															Computed:    true,
 															Validators: []validator.String{ /*START VALIDATORS*/
 																stringvalidator.LengthBetween(1, 1024),
 																stringvalidator.RegexMatches(regexp.MustCompile("[\\.\\-\\!\\*\\_\\'\\(\\)a-zA-Z0-9][\\.\\-\\!\\*\\_\\'\\(\\)\\/a-zA-Z0-9]*$"), ""),
+																fwvalidators.NotNullString(),
 															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 													Description: "Describes the Amazon S3 bucket name and location for the grammar that is the source for the slot type.",
@@ -9154,11 +10323,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 								// Property: Name
 								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "Unique name for a resource.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 100),
 										stringvalidator.RegexMatches(regexp.MustCompile("^([0-9a-zA-Z][_-]?)+$"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: ParentSlotTypeSignature
 								"parent_slot_type_signature": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -9179,14 +10353,26 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 													// Property: Value
 													"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 														Description: "The value that can be used for a slot type.",
-														Required:    true,
+														Optional:    true,
+														Computed:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
 															stringvalidator.LengthBetween(1, 140),
+															fwvalidators.NotNullString(),
 														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
 												Description: "Defines one of the values for a slot type.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Object{ /*START VALIDATORS*/
+													fwvalidators.NotNullObject(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: Synonyms
 											"synonyms": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -9195,10 +10381,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 														// Property: Value
 														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Description: "The value that can be used for a slot type.",
-															Required:    true,
+															Optional:    true,
+															Computed:    true,
 															Validators: []validator.String{ /*START VALIDATORS*/
 																stringvalidator.LengthBetween(1, 140),
+																fwvalidators.NotNullString(),
 															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 												}, /*END NESTED OBJECT*/
@@ -9260,10 +10451,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 												// Property: Pattern
 												"pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "Regex pattern",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(1, 300),
+														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 											Description: "A regular expression used to validate the value of a slot.",
@@ -9275,13 +10471,18 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END ATTRIBUTE*/
 										// Property: ResolutionStrategy
 										"resolution_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Required: true,
+											Optional: true,
+											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.OneOf(
 													"ORIGINAL_VALUE",
 													"TOP_RESOLUTION",
 												),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "Contains settings used by Amazon Lex to select a slot value.",
@@ -9324,7 +10525,14 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 							// Property: VoiceId
 							"voice_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the user.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "Settings for using an Amazon Polly voice to communicate with a user.",
@@ -9383,18 +10591,28 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -9767,22 +10985,39 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 													// Property: CodeHookInterfaceVersion
 													"code_hook_interface_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 														Description: "The version of the request-response that you want Amazon Lex to use to invoke your Lambda function.",
-														Required:    true,
+														Optional:    true,
+														Computed:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
 															stringvalidator.LengthBetween(1, 5),
+															fwvalidators.NotNullString(),
 														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 													// Property: LambdaArn
 													"lambda_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 														Description: "The Amazon Resource Name (ARN) of the Lambda function.",
-														Required:    true,
+														Optional:    true,
+														Computed:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
 															stringvalidator.LengthBetween(20, 2048),
+															fwvalidators.NotNullString(),
 														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
 												Description: "Contains information about code hooks that Amazon Lex calls during a conversation.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Object{ /*START VALIDATORS*/
+													fwvalidators.NotNullObject(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "Contains information about code hooks that Amazon Lex calls during a conversation.",
@@ -9795,19 +11030,38 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 									// Property: Enabled
 									"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 										Description: "Whether the Lambda code hook is enabled",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Bool{ /*START VALIDATORS*/
+											fwvalidators.NotNullBool(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+											boolplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Description: "You can use this parameter to specify a specific Lambda function to run different functions in different locales.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.Object{ /*START VALIDATORS*/
+									fwvalidators.NotNullObject(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: LocaleId
 							"locale_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "A string used to identify the locale",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthBetween(1, 128),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -9850,32 +11104,63 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 													// Property: LogPrefix
 													"log_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
 														Description: "The Amazon S3 key of the deployment package.",
-														Required:    true,
+														Optional:    true,
+														Computed:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
 															stringvalidator.LengthBetween(0, 1024),
+															fwvalidators.NotNullString(),
 														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 													// Property: S3BucketArn
 													"s3_bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 														Description: "The Amazon Resource Name (ARN) of an Amazon S3 bucket where audio log files are stored.",
-														Required:    true,
+														Optional:    true,
+														Computed:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
 															stringvalidator.LengthBetween(1, 2048),
 															stringvalidator.RegexMatches(regexp.MustCompile("^arn:[\\w\\-]+:s3:::[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"), ""),
+															fwvalidators.NotNullString(),
 														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
 												Description: "Specifies an Amazon S3 bucket for logging audio conversations",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Object{ /*START VALIDATORS*/
+													fwvalidators.NotNullObject(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "The location of audio log files collected when conversation logging is enabled for a bot.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Object{ /*START VALIDATORS*/
+											fwvalidators.NotNullObject(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: Enabled
 									"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 										Description: "",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Bool{ /*START VALIDATORS*/
+											fwvalidators.NotNullBool(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+											boolplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
@@ -9902,30 +11187,61 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 													// Property: CloudWatchLogGroupArn
 													"cloudwatch_log_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 														Description: "A string used to identify the groupArn for the Cloudwatch Log Group",
-														Required:    true,
+														Optional:    true,
+														Computed:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
 															stringvalidator.LengthBetween(1, 2048),
+															fwvalidators.NotNullString(),
 														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 													// Property: LogPrefix
 													"log_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
 														Description: "A string containing the value for the Log Prefix",
-														Required:    true,
+														Optional:    true,
+														Computed:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
 															stringvalidator.LengthBetween(0, 1024),
+															fwvalidators.NotNullString(),
 														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
-												Required: true,
+												Optional: true,
+												Computed: true,
+												Validators: []validator.Object{ /*START VALIDATORS*/
+													fwvalidators.NotNullObject(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "Defines the Amazon CloudWatch Logs destination log group for conversation text logs.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Object{ /*START VALIDATORS*/
+											fwvalidators.NotNullObject(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: Enabled
 									"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 										Description: "",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Bool{ /*START VALIDATORS*/
+											fwvalidators.NotNullBool(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+											boolplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
@@ -9965,7 +11281,14 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 						// Property: DetectSentiment
 						"detect_sentiment": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Description: "Enable to call Amazon Comprehend for Sentiment natively within Lex",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Bool{ /*START VALIDATORS*/
+								fwvalidators.NotNullBool(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Determines whether Amazon Lex will use Amazon Comprehend to detect the sentiment of user utterances.",
@@ -10022,18 +11345,28 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

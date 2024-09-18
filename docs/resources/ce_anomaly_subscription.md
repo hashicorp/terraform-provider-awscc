@@ -50,7 +50,7 @@ Optional:
 <a id="nestedatt--resource_tags"></a>
 ### Nested Schema for `resource_tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name for the tag.
 - `value` (String) The value for the tag.

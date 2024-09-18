@@ -41,23 +41,16 @@ The AWS::AutoScaling::ScalingPolicy resource specifies an Amazon EC2 Auto Scalin
 <a id="nestedatt--predictive_scaling_configuration"></a>
 ### Nested Schema for `predictive_scaling_configuration`
 
-Required:
-
-- `metric_specifications` (Attributes Set) (see [below for nested schema](#nestedatt--predictive_scaling_configuration--metric_specifications))
-
 Optional:
 
 - `max_capacity_breach_behavior` (String)
 - `max_capacity_buffer` (Number)
+- `metric_specifications` (Attributes Set) (see [below for nested schema](#nestedatt--predictive_scaling_configuration--metric_specifications))
 - `mode` (String)
 - `scheduling_buffer_time` (Number)
 
 <a id="nestedatt--predictive_scaling_configuration--metric_specifications"></a>
 ### Nested Schema for `predictive_scaling_configuration.metric_specifications`
-
-Required:
-
-- `target_value` (Number)
 
 Optional:
 
@@ -67,24 +60,22 @@ Optional:
 - `predefined_load_metric_specification` (Attributes) (see [below for nested schema](#nestedatt--predictive_scaling_configuration--metric_specifications--predefined_load_metric_specification))
 - `predefined_metric_pair_specification` (Attributes) (see [below for nested schema](#nestedatt--predictive_scaling_configuration--metric_specifications--predefined_metric_pair_specification))
 - `predefined_scaling_metric_specification` (Attributes) (see [below for nested schema](#nestedatt--predictive_scaling_configuration--metric_specifications--predefined_scaling_metric_specification))
+- `target_value` (Number)
 
 <a id="nestedatt--predictive_scaling_configuration--metric_specifications--customized_capacity_metric_specification"></a>
 ### Nested Schema for `predictive_scaling_configuration.metric_specifications.customized_capacity_metric_specification`
 
-Required:
+Optional:
 
 - `metric_data_queries` (Attributes Set) (see [below for nested schema](#nestedatt--predictive_scaling_configuration--metric_specifications--customized_capacity_metric_specification--metric_data_queries))
 
 <a id="nestedatt--predictive_scaling_configuration--metric_specifications--customized_capacity_metric_specification--metric_data_queries"></a>
 ### Nested Schema for `predictive_scaling_configuration.metric_specifications.customized_capacity_metric_specification.metric_data_queries`
 
-Required:
-
-- `id` (String)
-
 Optional:
 
 - `expression` (String)
+- `id` (String)
 - `label` (String)
 - `metric_stat` (Attributes) (see [below for nested schema](#nestedatt--predictive_scaling_configuration--metric_specifications--customized_capacity_metric_specification--metric_data_queries--metric_stat))
 - `return_data` (Boolean)
@@ -92,31 +83,25 @@ Optional:
 <a id="nestedatt--predictive_scaling_configuration--metric_specifications--customized_capacity_metric_specification--metric_data_queries--metric_stat"></a>
 ### Nested Schema for `predictive_scaling_configuration.metric_specifications.customized_capacity_metric_specification.metric_data_queries.metric_stat`
 
-Required:
+Optional:
 
 - `metric` (Attributes) (see [below for nested schema](#nestedatt--predictive_scaling_configuration--metric_specifications--customized_capacity_metric_specification--metric_data_queries--metric_stat--metric))
 - `stat` (String)
-
-Optional:
-
 - `unit` (String)
 
 <a id="nestedatt--predictive_scaling_configuration--metric_specifications--customized_capacity_metric_specification--metric_data_queries--metric_stat--metric"></a>
 ### Nested Schema for `predictive_scaling_configuration.metric_specifications.customized_capacity_metric_specification.metric_data_queries.metric_stat.metric`
 
-Required:
-
-- `metric_name` (String)
-- `namespace` (String)
-
 Optional:
 
 - `dimensions` (Attributes Set) (see [below for nested schema](#nestedatt--predictive_scaling_configuration--metric_specifications--customized_capacity_metric_specification--metric_data_queries--metric_stat--metric--dimensions))
+- `metric_name` (String)
+- `namespace` (String)
 
 <a id="nestedatt--predictive_scaling_configuration--metric_specifications--customized_capacity_metric_specification--metric_data_queries--metric_stat--metric--dimensions"></a>
 ### Nested Schema for `predictive_scaling_configuration.metric_specifications.customized_capacity_metric_specification.metric_data_queries.metric_stat.metric.dimensions`
 
-Required:
+Optional:
 
 - `name` (String)
 - `value` (String)
@@ -129,20 +114,17 @@ Required:
 <a id="nestedatt--predictive_scaling_configuration--metric_specifications--customized_load_metric_specification"></a>
 ### Nested Schema for `predictive_scaling_configuration.metric_specifications.customized_load_metric_specification`
 
-Required:
+Optional:
 
 - `metric_data_queries` (Attributes Set) (see [below for nested schema](#nestedatt--predictive_scaling_configuration--metric_specifications--customized_load_metric_specification--metric_data_queries))
 
 <a id="nestedatt--predictive_scaling_configuration--metric_specifications--customized_load_metric_specification--metric_data_queries"></a>
 ### Nested Schema for `predictive_scaling_configuration.metric_specifications.customized_load_metric_specification.metric_data_queries`
 
-Required:
-
-- `id` (String)
-
 Optional:
 
 - `expression` (String)
+- `id` (String)
 - `label` (String)
 - `metric_stat` (Attributes) (see [below for nested schema](#nestedatt--predictive_scaling_configuration--metric_specifications--customized_load_metric_specification--metric_data_queries--metric_stat))
 - `return_data` (Boolean)
@@ -150,31 +132,25 @@ Optional:
 <a id="nestedatt--predictive_scaling_configuration--metric_specifications--customized_load_metric_specification--metric_data_queries--metric_stat"></a>
 ### Nested Schema for `predictive_scaling_configuration.metric_specifications.customized_load_metric_specification.metric_data_queries.metric_stat`
 
-Required:
+Optional:
 
 - `metric` (Attributes) (see [below for nested schema](#nestedatt--predictive_scaling_configuration--metric_specifications--customized_load_metric_specification--metric_data_queries--metric_stat--metric))
 - `stat` (String)
-
-Optional:
-
 - `unit` (String)
 
 <a id="nestedatt--predictive_scaling_configuration--metric_specifications--customized_load_metric_specification--metric_data_queries--metric_stat--metric"></a>
 ### Nested Schema for `predictive_scaling_configuration.metric_specifications.customized_load_metric_specification.metric_data_queries.metric_stat.metric`
 
-Required:
-
-- `metric_name` (String)
-- `namespace` (String)
-
 Optional:
 
 - `dimensions` (Attributes Set) (see [below for nested schema](#nestedatt--predictive_scaling_configuration--metric_specifications--customized_load_metric_specification--metric_data_queries--metric_stat--metric--dimensions))
+- `metric_name` (String)
+- `namespace` (String)
 
 <a id="nestedatt--predictive_scaling_configuration--metric_specifications--customized_load_metric_specification--metric_data_queries--metric_stat--metric--dimensions"></a>
 ### Nested Schema for `predictive_scaling_configuration.metric_specifications.customized_load_metric_specification.metric_data_queries.metric_stat.metric.dimensions`
 
-Required:
+Optional:
 
 - `name` (String)
 - `value` (String)
@@ -187,20 +163,17 @@ Required:
 <a id="nestedatt--predictive_scaling_configuration--metric_specifications--customized_scaling_metric_specification"></a>
 ### Nested Schema for `predictive_scaling_configuration.metric_specifications.customized_scaling_metric_specification`
 
-Required:
+Optional:
 
 - `metric_data_queries` (Attributes Set) (see [below for nested schema](#nestedatt--predictive_scaling_configuration--metric_specifications--customized_scaling_metric_specification--metric_data_queries))
 
 <a id="nestedatt--predictive_scaling_configuration--metric_specifications--customized_scaling_metric_specification--metric_data_queries"></a>
 ### Nested Schema for `predictive_scaling_configuration.metric_specifications.customized_scaling_metric_specification.metric_data_queries`
 
-Required:
-
-- `id` (String)
-
 Optional:
 
 - `expression` (String)
+- `id` (String)
 - `label` (String)
 - `metric_stat` (Attributes) (see [below for nested schema](#nestedatt--predictive_scaling_configuration--metric_specifications--customized_scaling_metric_specification--metric_data_queries--metric_stat))
 - `return_data` (Boolean)
@@ -208,31 +181,25 @@ Optional:
 <a id="nestedatt--predictive_scaling_configuration--metric_specifications--customized_scaling_metric_specification--metric_data_queries--metric_stat"></a>
 ### Nested Schema for `predictive_scaling_configuration.metric_specifications.customized_scaling_metric_specification.metric_data_queries.metric_stat`
 
-Required:
+Optional:
 
 - `metric` (Attributes) (see [below for nested schema](#nestedatt--predictive_scaling_configuration--metric_specifications--customized_scaling_metric_specification--metric_data_queries--metric_stat--metric))
 - `stat` (String)
-
-Optional:
-
 - `unit` (String)
 
 <a id="nestedatt--predictive_scaling_configuration--metric_specifications--customized_scaling_metric_specification--metric_data_queries--metric_stat--metric"></a>
 ### Nested Schema for `predictive_scaling_configuration.metric_specifications.customized_scaling_metric_specification.metric_data_queries.metric_stat.metric`
 
-Required:
-
-- `metric_name` (String)
-- `namespace` (String)
-
 Optional:
 
 - `dimensions` (Attributes Set) (see [below for nested schema](#nestedatt--predictive_scaling_configuration--metric_specifications--customized_scaling_metric_specification--metric_data_queries--metric_stat--metric--dimensions))
+- `metric_name` (String)
+- `namespace` (String)
 
 <a id="nestedatt--predictive_scaling_configuration--metric_specifications--customized_scaling_metric_specification--metric_data_queries--metric_stat--metric--dimensions"></a>
 ### Nested Schema for `predictive_scaling_configuration.metric_specifications.customized_scaling_metric_specification.metric_data_queries.metric_stat.metric.dimensions`
 
-Required:
+Optional:
 
 - `name` (String)
 - `value` (String)
@@ -245,36 +212,27 @@ Required:
 <a id="nestedatt--predictive_scaling_configuration--metric_specifications--predefined_load_metric_specification"></a>
 ### Nested Schema for `predictive_scaling_configuration.metric_specifications.predefined_load_metric_specification`
 
-Required:
-
-- `predefined_metric_type` (String)
-
 Optional:
 
+- `predefined_metric_type` (String)
 - `resource_label` (String)
 
 
 <a id="nestedatt--predictive_scaling_configuration--metric_specifications--predefined_metric_pair_specification"></a>
 ### Nested Schema for `predictive_scaling_configuration.metric_specifications.predefined_metric_pair_specification`
 
-Required:
-
-- `predefined_metric_type` (String)
-
 Optional:
 
+- `predefined_metric_type` (String)
 - `resource_label` (String)
 
 
 <a id="nestedatt--predictive_scaling_configuration--metric_specifications--predefined_scaling_metric_specification"></a>
 ### Nested Schema for `predictive_scaling_configuration.metric_specifications.predefined_scaling_metric_specification`
 
-Required:
-
-- `predefined_metric_type` (String)
-
 Optional:
 
+- `predefined_metric_type` (String)
 - `resource_label` (String)
 
 
@@ -283,28 +241,22 @@ Optional:
 <a id="nestedatt--step_adjustments"></a>
 ### Nested Schema for `step_adjustments`
 
-Required:
-
-- `scaling_adjustment` (Number)
-
 Optional:
 
 - `metric_interval_lower_bound` (Number)
 - `metric_interval_upper_bound` (Number)
+- `scaling_adjustment` (Number)
 
 
 <a id="nestedatt--target_tracking_configuration"></a>
 ### Nested Schema for `target_tracking_configuration`
-
-Required:
-
-- `target_value` (Number)
 
 Optional:
 
 - `customized_metric_specification` (Attributes) (see [below for nested schema](#nestedatt--target_tracking_configuration--customized_metric_specification))
 - `disable_scale_in` (Boolean)
 - `predefined_metric_specification` (Attributes) (see [below for nested schema](#nestedatt--target_tracking_configuration--predefined_metric_specification))
+- `target_value` (Number)
 
 <a id="nestedatt--target_tracking_configuration--customized_metric_specification"></a>
 ### Nested Schema for `target_tracking_configuration.customized_metric_specification`
@@ -321,7 +273,7 @@ Optional:
 <a id="nestedatt--target_tracking_configuration--customized_metric_specification--dimensions"></a>
 ### Nested Schema for `target_tracking_configuration.customized_metric_specification.dimensions`
 
-Required:
+Optional:
 
 - `name` (String)
 - `value` (String)
@@ -330,13 +282,10 @@ Required:
 <a id="nestedatt--target_tracking_configuration--customized_metric_specification--metrics"></a>
 ### Nested Schema for `target_tracking_configuration.customized_metric_specification.metrics`
 
-Required:
-
-- `id` (String)
-
 Optional:
 
 - `expression` (String)
+- `id` (String)
 - `label` (String)
 - `metric_stat` (Attributes) (see [below for nested schema](#nestedatt--target_tracking_configuration--customized_metric_specification--metrics--metric_stat))
 - `return_data` (Boolean)
@@ -344,31 +293,25 @@ Optional:
 <a id="nestedatt--target_tracking_configuration--customized_metric_specification--metrics--metric_stat"></a>
 ### Nested Schema for `target_tracking_configuration.customized_metric_specification.metrics.metric_stat`
 
-Required:
+Optional:
 
 - `metric` (Attributes) (see [below for nested schema](#nestedatt--target_tracking_configuration--customized_metric_specification--metrics--metric_stat--metric))
 - `stat` (String)
-
-Optional:
-
 - `unit` (String)
 
 <a id="nestedatt--target_tracking_configuration--customized_metric_specification--metrics--metric_stat--metric"></a>
 ### Nested Schema for `target_tracking_configuration.customized_metric_specification.metrics.metric_stat.metric`
 
-Required:
-
-- `metric_name` (String)
-- `namespace` (String)
-
 Optional:
 
 - `dimensions` (Attributes Set) (see [below for nested schema](#nestedatt--target_tracking_configuration--customized_metric_specification--metrics--metric_stat--metric--dimensions))
+- `metric_name` (String)
+- `namespace` (String)
 
 <a id="nestedatt--target_tracking_configuration--customized_metric_specification--metrics--metric_stat--metric--dimensions"></a>
 ### Nested Schema for `target_tracking_configuration.customized_metric_specification.metrics.metric_stat.metric.dimensions`
 
-Required:
+Optional:
 
 - `name` (String)
 - `value` (String)
@@ -381,12 +324,9 @@ Required:
 <a id="nestedatt--target_tracking_configuration--predefined_metric_specification"></a>
 ### Nested Schema for `target_tracking_configuration.predefined_metric_specification`
 
-Required:
-
-- `predefined_metric_type` (String)
-
 Optional:
 
+- `predefined_metric_type` (String)
 - `resource_label` (String)
 
 ## Import

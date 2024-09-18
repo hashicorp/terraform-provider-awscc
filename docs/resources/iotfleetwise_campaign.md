@@ -57,13 +57,10 @@ Optional:
 <a id="nestedatt--collection_scheme--condition_based_collection_scheme"></a>
 ### Nested Schema for `collection_scheme.condition_based_collection_scheme`
 
-Required:
-
-- `expression` (String)
-
 Optional:
 
 - `condition_language_version` (Number)
+- `expression` (String)
 - `minimum_trigger_interval_ms` (Number)
 - `trigger_mode` (String)
 
@@ -71,7 +68,7 @@ Optional:
 <a id="nestedatt--collection_scheme--time_based_collection_scheme"></a>
 ### Nested Schema for `collection_scheme.time_based_collection_scheme`
 
-Required:
+Optional:
 
 - `period_ms` (Number)
 
@@ -89,7 +86,7 @@ Optional:
 <a id="nestedatt--data_destination_configs--mqtt_topic_config"></a>
 ### Nested Schema for `data_destination_configs.mqtt_topic_config`
 
-Required:
+Optional:
 
 - `execution_role_arn` (String)
 - `mqtt_topic_arn` (String)
@@ -98,12 +95,9 @@ Required:
 <a id="nestedatt--data_destination_configs--s3_config"></a>
 ### Nested Schema for `data_destination_configs.s3_config`
 
-Required:
-
-- `bucket_arn` (String)
-
 Optional:
 
+- `bucket_arn` (String)
 - `data_format` (String)
 - `prefix` (String)
 - `storage_compression_format` (String)
@@ -112,7 +106,7 @@ Optional:
 <a id="nestedatt--data_destination_configs--timestream_config"></a>
 ### Nested Schema for `data_destination_configs.timestream_config`
 
-Required:
+Optional:
 
 - `execution_role_arn` (String)
 - `timestream_table_arn` (String)
@@ -122,20 +116,17 @@ Required:
 <a id="nestedatt--signals_to_collect"></a>
 ### Nested Schema for `signals_to_collect`
 
-Required:
-
-- `name` (String)
-
 Optional:
 
 - `max_sample_count` (Number)
 - `minimum_sampling_interval_ms` (Number)
+- `name` (String)
 
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

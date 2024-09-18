@@ -73,13 +73,10 @@ resource "awscc_omics_sequence_store" "example" {
 <a id="nestedatt--sse_config"></a>
 ### Nested Schema for `sse_config`
 
-Required:
-
-- `type` (String)
-
 Optional:
 
 - `key_arn` (String) An encryption key ARN.
+- `type` (String)
 
 ## Import
 

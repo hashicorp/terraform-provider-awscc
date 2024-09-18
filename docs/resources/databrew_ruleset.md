@@ -57,7 +57,7 @@ Optional:
 <a id="nestedatt--rules--substitution_map"></a>
 ### Nested Schema for `rules.substitution_map`
 
-Required:
+Optional:
 
 - `value` (String) Value or column name
 - `value_reference` (String) Variable name
@@ -66,21 +66,18 @@ Required:
 <a id="nestedatt--rules--threshold"></a>
 ### Nested Schema for `rules.threshold`
 
-Required:
-
-- `value` (Number) Threshold value for a rule
-
 Optional:
 
 - `type` (String) Threshold type for a rule
 - `unit` (String) Threshold unit for a rule
+- `value` (Number) Threshold value for a rule
 
 
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

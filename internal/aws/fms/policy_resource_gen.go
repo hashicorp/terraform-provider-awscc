@@ -15,6 +15,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -23,6 +24,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -338,10 +340,15 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -785,7 +792,14 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 													// Property: Egress
 													"egress": schema.BoolAttribute{ /*START ATTRIBUTE*/
 														Description: "Whether the entry is an egress entry.",
-														Required:    true,
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.Bool{ /*START VALIDATORS*/
+															fwvalidators.NotNullBool(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+															boolplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 													// Property: IcmpTypeCode
 													"icmp_type_code": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -793,18 +807,28 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 															// Property: Code
 															"code": schema.Int64Attribute{ /*START ATTRIBUTE*/
 																Description: "Code.",
-																Required:    true,
+																Optional:    true,
+																Computed:    true,
 																Validators: []validator.Int64{ /*START VALIDATORS*/
 																	int64validator.Between(0, 255),
+																	fwvalidators.NotNullInt64(),
 																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																	int64planmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 															// Property: Type
 															"type": schema.Int64Attribute{ /*START ATTRIBUTE*/
 																Description: "Type.",
-																Required:    true,
+																Optional:    true,
+																Computed:    true,
 																Validators: []validator.Int64{ /*START VALIDATORS*/
 																	int64validator.Between(0, 255),
+																	fwvalidators.NotNullInt64(),
 																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																	int64planmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 														Description: "ICMP type and code.",
@@ -832,18 +856,28 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 															// Property: From
 															"from": schema.Int64Attribute{ /*START ATTRIBUTE*/
 																Description: "From Port.",
-																Required:    true,
+																Optional:    true,
+																Computed:    true,
 																Validators: []validator.Int64{ /*START VALIDATORS*/
 																	int64validator.Between(0, 65535),
+																	fwvalidators.NotNullInt64(),
 																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																	int64planmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 															// Property: To
 															"to": schema.Int64Attribute{ /*START ATTRIBUTE*/
 																Description: "To Port.",
-																Required:    true,
+																Optional:    true,
+																Computed:    true,
 																Validators: []validator.Int64{ /*START VALIDATORS*/
 																	int64validator.Between(0, 65535),
+																	fwvalidators.NotNullInt64(),
 																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																	int64planmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 														Description: "Port range.",
@@ -856,21 +890,31 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 													// Property: Protocol
 													"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
 														Description: "Protocol.",
-														Required:    true,
+														Optional:    true,
+														Computed:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
 															stringvalidator.RegexMatches(regexp.MustCompile("^(tcp|udp|icmp|([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]))$"), ""),
+															fwvalidators.NotNullString(),
 														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 													// Property: RuleAction
 													"rule_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 														Description: "Rule Action.",
-														Required:    true,
+														Optional:    true,
+														Computed:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
 															stringvalidator.OneOf(
 																"allow",
 																"deny",
 															),
+															fwvalidators.NotNullString(),
 														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
 											}, /*END NESTED OBJECT*/
@@ -883,11 +927,25 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END ATTRIBUTE*/
 										// Property: ForceRemediateForFirstEntries
 										"force_remediate_for_first_entries": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Required: true,
+											Optional: true,
+											Computed: true,
+											Validators: []validator.Bool{ /*START VALIDATORS*/
+												fwvalidators.NotNullBool(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+												boolplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: ForceRemediateForLastEntries
 										"force_remediate_for_last_entries": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Required: true,
+											Optional: true,
+											Computed: true,
+											Validators: []validator.Bool{ /*START VALIDATORS*/
+												fwvalidators.NotNullBool(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+												boolplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: LastEntries
 										"last_entries": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -908,7 +966,14 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 													// Property: Egress
 													"egress": schema.BoolAttribute{ /*START ATTRIBUTE*/
 														Description: "Whether the entry is an egress entry.",
-														Required:    true,
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.Bool{ /*START VALIDATORS*/
+															fwvalidators.NotNullBool(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+															boolplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 													// Property: IcmpTypeCode
 													"icmp_type_code": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -916,18 +981,28 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 															// Property: Code
 															"code": schema.Int64Attribute{ /*START ATTRIBUTE*/
 																Description: "Code.",
-																Required:    true,
+																Optional:    true,
+																Computed:    true,
 																Validators: []validator.Int64{ /*START VALIDATORS*/
 																	int64validator.Between(0, 255),
+																	fwvalidators.NotNullInt64(),
 																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																	int64planmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 															// Property: Type
 															"type": schema.Int64Attribute{ /*START ATTRIBUTE*/
 																Description: "Type.",
-																Required:    true,
+																Optional:    true,
+																Computed:    true,
 																Validators: []validator.Int64{ /*START VALIDATORS*/
 																	int64validator.Between(0, 255),
+																	fwvalidators.NotNullInt64(),
 																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																	int64planmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 														Description: "ICMP type and code.",
@@ -955,18 +1030,28 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 															// Property: From
 															"from": schema.Int64Attribute{ /*START ATTRIBUTE*/
 																Description: "From Port.",
-																Required:    true,
+																Optional:    true,
+																Computed:    true,
 																Validators: []validator.Int64{ /*START VALIDATORS*/
 																	int64validator.Between(0, 65535),
+																	fwvalidators.NotNullInt64(),
 																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																	int64planmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 															// Property: To
 															"to": schema.Int64Attribute{ /*START ATTRIBUTE*/
 																Description: "To Port.",
-																Required:    true,
+																Optional:    true,
+																Computed:    true,
 																Validators: []validator.Int64{ /*START VALIDATORS*/
 																	int64validator.Between(0, 65535),
+																	fwvalidators.NotNullInt64(),
 																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																	int64planmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 														Description: "Port range.",
@@ -979,21 +1064,31 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 													// Property: Protocol
 													"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
 														Description: "Protocol.",
-														Required:    true,
+														Optional:    true,
+														Computed:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
 															stringvalidator.RegexMatches(regexp.MustCompile("^(tcp|udp|icmp|([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]))$"), ""),
+															fwvalidators.NotNullString(),
 														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 													// Property: RuleAction
 													"rule_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 														Description: "Rule Action.",
-														Required:    true,
+														Optional:    true,
+														Computed:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
 															stringvalidator.OneOf(
 																"allow",
 																"deny",
 															),
+															fwvalidators.NotNullString(),
 														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
 											}, /*END NESTED OBJECT*/
@@ -1006,7 +1101,14 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "Network ACL entry set.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Object{ /*START VALIDATORS*/
+										fwvalidators.NotNullObject(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "Network ACL common policy.",
@@ -1022,13 +1124,18 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 								// Property: FirewallDeploymentModel
 								"firewall_deployment_model": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "Firewall deployment mode.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.OneOf(
 											"DISTRIBUTED",
 											"CENTRALIZED",
 										),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "Network firewall policy.",
@@ -1044,13 +1151,18 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 								// Property: FirewallDeploymentModel
 								"firewall_deployment_model": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "Firewall deployment mode.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.OneOf(
 											"DISTRIBUTED",
 											"CENTRALIZED",
 										),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "Third party firewall policy.",
@@ -1126,19 +1238,29 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
 							stringvalidator.RegexMatches(regexp.MustCompile("^([^\\s]*)$"), ""),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthAtMost(256),
 							stringvalidator.RegexMatches(regexp.MustCompile("^([^\\s]*)$"), ""),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

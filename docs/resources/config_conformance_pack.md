@@ -35,7 +35,7 @@ A conformance pack is a collection of AWS Config rules and remediation actions t
 <a id="nestedatt--conformance_pack_input_parameters"></a>
 ### Nested Schema for `conformance_pack_input_parameters`
 
-Required:
+Optional:
 
 - `parameter_name` (String) Key part of key-value pair with value being parameter value
 - `parameter_value` (String) Value part of key-value pair with key being parameter Name

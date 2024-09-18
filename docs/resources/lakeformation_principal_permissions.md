@@ -57,7 +57,7 @@ Optional:
 <a id="nestedatt--resource--data_cells_filter"></a>
 ### Nested Schema for `resource.data_cells_filter`
 
-Required:
+Optional:
 
 - `database_name` (String) A database in the GLUDC.
 - `name` (String) The name given by the user to the data filter cell.
@@ -68,7 +68,7 @@ Required:
 <a id="nestedatt--resource--data_location"></a>
 ### Nested Schema for `resource.data_location`
 
-Required:
+Optional:
 
 - `catalog_id` (String) The identifier for the GLUDC where the location is registered with LFlong.
 - `resource_arn` (String) The Amazon Resource Name (ARN) that uniquely identifies the data location resource.
@@ -77,7 +77,7 @@ Required:
 <a id="nestedatt--resource--database"></a>
 ### Nested Schema for `resource.database`
 
-Required:
+Optional:
 
 - `catalog_id` (String) The identifier for the Data Catalog. By default, it is the account ID of the caller.
 - `name` (String) The name of the database resource. Unique to the Data Catalog.
@@ -86,7 +86,7 @@ Required:
 <a id="nestedatt--resource--lf_tag"></a>
 ### Nested Schema for `resource.lf_tag`
 
-Required:
+Optional:
 
 - `catalog_id` (String) The identifier for the GLUDC where the location is registered with GLUDC.
 - `tag_key` (String) The key-name for the LF-tag.
@@ -96,7 +96,7 @@ Required:
 <a id="nestedatt--resource--lf_tag_policy"></a>
 ### Nested Schema for `resource.lf_tag_policy`
 
-Required:
+Optional:
 
 - `catalog_id` (String) The identifier for the GLUDC. The GLUDC is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your LFlong environment.
 - `expression` (Attributes List) A list of LF-tag conditions that apply to the resource's LF-tag policy. (see [below for nested schema](#nestedatt--resource--lf_tag_policy--expression))
@@ -115,13 +115,10 @@ Optional:
 <a id="nestedatt--resource--table"></a>
 ### Nested Schema for `resource.table`
 
-Required:
+Optional:
 
 - `catalog_id` (String) The identifier for the Data Catalog. By default, it is the account ID of the caller.
 - `database_name` (String) The name of the database for the table. Unique to a Data Catalog. A database is a set of associated table definitions organized into a logical group. You can Grant and Revoke database privileges to a principal.
-
-Optional:
-
 - `name` (String) The name of the table.
 - `table_wildcard` (String) A wildcard object representing every table under a database.
  At least one of ``TableResource$Name`` or ``TableResource$TableWildcard`` is required.
@@ -130,16 +127,13 @@ Optional:
 <a id="nestedatt--resource--table_with_columns"></a>
 ### Nested Schema for `resource.table_with_columns`
 
-Required:
-
-- `catalog_id` (String) The identifier for the GLUDC where the location is registered with LFlong.
-- `database_name` (String) The name of the database for the table with columns resource. Unique to the Data Catalog. A database is a set of associated table definitions organized into a logical group. You can Grant and Revoke database privileges to a principal.
-- `name` (String) The name of the table resource. A table is a metadata definition that represents your data. You can Grant and Revoke table privileges to a principal.
-
 Optional:
 
+- `catalog_id` (String) The identifier for the GLUDC where the location is registered with LFlong.
 - `column_names` (List of String) The list of column names for the table. At least one of ``ColumnNames`` or ``ColumnWildcard`` is required.
 - `column_wildcard` (Attributes) A wildcard specified by a ``ColumnWildcard`` object. At least one of ``ColumnNames`` or ``ColumnWildcard`` is required. (see [below for nested schema](#nestedatt--resource--table_with_columns--column_wildcard))
+- `database_name` (String) The name of the database for the table with columns resource. Unique to the Data Catalog. A database is a set of associated table definitions organized into a logical group. You can Grant and Revoke database privileges to a principal.
+- `name` (String) The name of the table resource. A table is a metadata definition that represents your data. You can Grant and Revoke table privileges to a principal.
 
 <a id="nestedatt--resource--table_with_columns--column_wildcard"></a>
 ### Nested Schema for `resource.table_with_columns.column_wildcard`

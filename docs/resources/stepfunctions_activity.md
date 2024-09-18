@@ -43,20 +43,17 @@ resource "awscc_stepfunctions_activity" "sfn_activity" {
 <a id="nestedatt--encryption_configuration"></a>
 ### Nested Schema for `encryption_configuration`
 
-Required:
-
-- `type` (String)
-
 Optional:
 
 - `kms_data_key_reuse_period_seconds` (Number)
 - `kms_key_id` (String)
+- `type` (String)
 
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

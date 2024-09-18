@@ -31,7 +31,7 @@ Definition of AWS::Scheduler::ScheduleGroup Resource Type
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) Key for the tag
 - `value` (String) Value for the tag

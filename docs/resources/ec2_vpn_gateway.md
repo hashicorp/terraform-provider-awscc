@@ -70,7 +70,7 @@ resource "awscc_ec2_vpn_gateway" "example_vpn_gateway" {
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The tag key.
 - `value` (String) The tag value.

@@ -50,7 +50,7 @@ resource "awscc_resourceexplorer2_index" "example" {
 <a id="nestedatt--filters"></a>
 ### Nested Schema for `filters`
 
-Required:
+Optional:
 
 - `filter_string` (String)
 
@@ -58,7 +58,7 @@ Required:
 <a id="nestedatt--included_properties"></a>
 ### Nested Schema for `included_properties`
 
-Required:
+Optional:
 
 - `name` (String)
 

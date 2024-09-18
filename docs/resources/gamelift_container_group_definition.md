@@ -59,7 +59,7 @@ Optional:
 <a id="nestedatt--container_definitions--depends_on"></a>
 ### Nested Schema for `container_definitions.depends_on`
 
-Required:
+Optional:
 
 - `condition` (String) The type of dependency.
 - `container_name` (String) A descriptive label for the container definition. The container being defined depends on this container's condition.
@@ -68,7 +68,7 @@ Required:
 <a id="nestedatt--container_definitions--environment"></a>
 ### Nested Schema for `container_definitions.environment`
 
-Required:
+Optional:
 
 - `name` (String) The environment variable name.
 - `value` (String) The environment variable value.
@@ -77,12 +77,9 @@ Required:
 <a id="nestedatt--container_definitions--health_check"></a>
 ### Nested Schema for `container_definitions.health_check`
 
-Required:
-
-- `command` (List of String) A string array representing the command that the container runs to determine if it is healthy.
-
 Optional:
 
+- `command` (List of String) A string array representing the command that the container runs to determine if it is healthy.
 - `interval` (Number) How often (in seconds) the health is checked.
 - `retries` (Number) How many times the process manager will retry the command after a timeout. (The first run of the command does not count as a retry.)
 - `start_period` (Number) The optional grace period (in seconds) to give a container time to boostrap before teh health check is declared failed.
@@ -101,14 +98,14 @@ Optional:
 <a id="nestedatt--container_definitions--port_configuration"></a>
 ### Nested Schema for `container_definitions.port_configuration`
 
-Required:
+Optional:
 
 - `container_port_ranges` (Attributes Set) Specifies one or more ranges of ports on a container. (see [below for nested schema](#nestedatt--container_definitions--port_configuration--container_port_ranges))
 
 <a id="nestedatt--container_definitions--port_configuration--container_port_ranges"></a>
 ### Nested Schema for `container_definitions.port_configuration.container_port_ranges`
 
-Required:
+Optional:
 
 - `from_port` (Number) A starting value for the range of allowed port numbers.
 - `protocol` (String) Defines the protocol of these ports.
@@ -120,7 +117,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length.

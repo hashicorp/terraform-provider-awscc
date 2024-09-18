@@ -40,7 +40,7 @@ Definition of AWS::MediaLive::EventBridgeRuleTemplate Resource Type
 <a id="nestedatt--event_targets"></a>
 ### Nested Schema for `event_targets`
 
-Required:
+Optional:
 
 - `arn` (String) Target ARNs must be either an SNS topic or CloudWatch log group.
 

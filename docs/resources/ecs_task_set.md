@@ -57,14 +57,11 @@ Optional:
 <a id="nestedatt--network_configuration--aws_vpc_configuration"></a>
 ### Nested Schema for `network_configuration.aws_vpc_configuration`
 
-Required:
-
-- `subnets` (List of String) The subnets associated with the task or service. There is a limit of 16 subnets that can be specified per AwsVpcConfiguration.
-
 Optional:
 
 - `assign_public_ip` (String) Whether the task's elastic network interface receives a public IP address. The default value is DISABLED.
 - `security_groups` (List of String) The security groups associated with the task or service. If you do not specify a security group, the default security group for the VPC is used. There is a limit of 5 security groups that can be specified per AwsVpcConfiguration.
+- `subnets` (List of String) The subnets associated with the task or service. There is a limit of 16 subnets that can be specified per AwsVpcConfiguration.
 
 
 

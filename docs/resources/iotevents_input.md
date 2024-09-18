@@ -72,7 +72,7 @@ _Syntax_: `<field-name>.<field-name>...`
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) Key of the Tag.
 - `value` (String) Value of the Tag.

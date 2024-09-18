@@ -47,7 +47,7 @@ Optional:
 <a id="nestedatt--recurrence--monthly_settings"></a>
 ### Nested Schema for `recurrence.monthly_settings`
 
-Required:
+Optional:
 
 - `day_of_month` (Number) The day of the month when monthly recurring on-call rotations begin.
 - `hand_off_time` (String) Details about when an on-call rotation shift begins or ends. Time of the day in format HH:MM
@@ -56,7 +56,7 @@ Required:
 <a id="nestedatt--recurrence--shift_coverages"></a>
 ### Nested Schema for `recurrence.shift_coverages`
 
-Required:
+Optional:
 
 - `coverage_times` (Attributes List) Information about when an on-call shift begins and ends. (see [below for nested schema](#nestedatt--recurrence--shift_coverages--coverage_times))
 - `day_of_week` (String) The day of the week when weekly recurring on-call shift rotations begin.
@@ -64,7 +64,7 @@ Required:
 <a id="nestedatt--recurrence--shift_coverages--coverage_times"></a>
 ### Nested Schema for `recurrence.shift_coverages.coverage_times`
 
-Required:
+Optional:
 
 - `end_time` (String) Details about when an on-call rotation shift begins or ends. Time of the day in format HH:MM
 - `start_time` (String) Details about when an on-call rotation shift begins or ends. Time of the day in format HH:MM
@@ -74,7 +74,7 @@ Required:
 <a id="nestedatt--recurrence--weekly_settings"></a>
 ### Nested Schema for `recurrence.weekly_settings`
 
-Required:
+Optional:
 
 - `day_of_week` (String) The day of the week when weekly recurring on-call shift rotations begin.
 - `hand_off_time` (String) Details about when an on-call rotation shift begins or ends. Time of the day in format HH:MM
@@ -84,7 +84,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag
 - `value` (String) The value for the tag.

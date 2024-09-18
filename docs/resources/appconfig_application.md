@@ -43,7 +43,7 @@ resource "awscc_appconfig_application" "example" {
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key-value string map. The valid character set is [a-zA-Z1-9 +-=._:/-]. The tag key can be up to 128 characters and must not start with aws:.
 - `value` (String) The tag value can be up to 256 characters.

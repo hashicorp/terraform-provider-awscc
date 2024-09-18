@@ -42,23 +42,17 @@ Definition of AWS::WorkSpacesWeb::UserSettings Resource Type
 <a id="nestedatt--cookie_synchronization_configuration"></a>
 ### Nested Schema for `cookie_synchronization_configuration`
 
-Required:
-
-- `allowlist` (Attributes List) (see [below for nested schema](#nestedatt--cookie_synchronization_configuration--allowlist))
-
 Optional:
 
+- `allowlist` (Attributes List) (see [below for nested schema](#nestedatt--cookie_synchronization_configuration--allowlist))
 - `blocklist` (Attributes List) (see [below for nested schema](#nestedatt--cookie_synchronization_configuration--blocklist))
 
 <a id="nestedatt--cookie_synchronization_configuration--allowlist"></a>
 ### Nested Schema for `cookie_synchronization_configuration.allowlist`
 
-Required:
-
-- `domain` (String)
-
 Optional:
 
+- `domain` (String)
 - `name` (String)
 - `path` (String)
 
@@ -66,12 +60,9 @@ Optional:
 <a id="nestedatt--cookie_synchronization_configuration--blocklist"></a>
 ### Nested Schema for `cookie_synchronization_configuration.blocklist`
 
-Required:
-
-- `domain` (String)
-
 Optional:
 
+- `domain` (String)
 - `name` (String)
 - `path` (String)
 
@@ -80,7 +71,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

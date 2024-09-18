@@ -72,12 +72,9 @@ Resource Type definition for AWS::EC2::Instance
 <a id="nestedatt--block_device_mappings"></a>
 ### Nested Schema for `block_device_mappings`
 
-Required:
-
-- `device_name` (String) The device name (for example, /dev/sdh or xvdh).
-
 Optional:
 
+- `device_name` (String) The device name (for example, /dev/sdh or xvdh).
 - `ebs` (Attributes) Parameters used to automatically set up EBS volumes when the instance is launched. (see [below for nested schema](#nestedatt--block_device_mappings--ebs))
 - `no_device` (String)
 - `virtual_name` (String)
@@ -117,7 +114,7 @@ Optional:
 <a id="nestedatt--elastic_gpu_specifications"></a>
 ### Nested Schema for `elastic_gpu_specifications`
 
-Required:
+Optional:
 
 - `type` (String) The type of Elastic Graphics accelerator.
 
@@ -125,13 +122,10 @@ Required:
 <a id="nestedatt--elastic_inference_accelerators"></a>
 ### Nested Schema for `elastic_inference_accelerators`
 
-Required:
-
-- `type` (String) The type of elastic inference accelerator.
-
 Optional:
 
 - `count` (Number) The number of elastic inference accelerators to attach to the instance.
+- `type` (String) The type of elastic inference accelerator.
 
 
 <a id="nestedatt--enclave_options"></a>
@@ -153,7 +147,7 @@ Optional:
 <a id="nestedatt--ipv_6_addresses"></a>
 ### Nested Schema for `ipv_6_addresses`
 
-Required:
+Optional:
 
 - `ipv_6_address` (String) The IPv6 address.
 
@@ -171,7 +165,7 @@ Optional:
 <a id="nestedatt--license_specifications"></a>
 ### Nested Schema for `license_specifications`
 
-Required:
+Optional:
 
 - `license_configuration_arn` (String) The Amazon Resource Name (ARN) of the license configuration.
 
@@ -179,16 +173,13 @@ Required:
 <a id="nestedatt--network_interfaces"></a>
 ### Nested Schema for `network_interfaces`
 
-Required:
-
-- `device_index` (String) The position of the network interface in the attachment order. A primary network interface has a device index of 0.
-
 Optional:
 
 - `associate_carrier_ip_address` (Boolean) Not currently supported by AWS CloudFormation.
 - `associate_public_ip_address` (Boolean) Indicates whether to assign a public IPv4 address to an instance you launch in a VPC.
 - `delete_on_termination` (Boolean) If set to true, the interface is deleted when the instance is terminated.
 - `description` (String) The description of the network interface.
+- `device_index` (String) The position of the network interface in the attachment order. A primary network interface has a device index of 0.
 - `group_set` (List of String) The IDs of the security groups for the network interface.
 - `ipv_6_address_count` (Number) A number of IPv6 addresses to assign to the network interface.
 - `ipv_6_addresses` (Attributes List) The IPv6 addresses associated with the network interface. (see [below for nested schema](#nestedatt--network_interfaces--ipv_6_addresses))
@@ -201,7 +192,7 @@ Optional:
 <a id="nestedatt--network_interfaces--ipv_6_addresses"></a>
 ### Nested Schema for `network_interfaces.ipv_6_addresses`
 
-Required:
+Optional:
 
 - `ipv_6_address` (String) The IPv6 address.
 
@@ -209,7 +200,7 @@ Required:
 <a id="nestedatt--network_interfaces--private_ip_addresses"></a>
 ### Nested Schema for `network_interfaces.private_ip_addresses`
 
-Required:
+Optional:
 
 - `primary` (Boolean) Indicates whether the private IPv4 address is the primary private IPv4 address. Only one IPv4 address can be designated as primary.
 - `private_ip_address` (String) The private IPv4 addresses.
@@ -229,18 +220,15 @@ Optional:
 <a id="nestedatt--ssm_associations"></a>
 ### Nested Schema for `ssm_associations`
 
-Required:
-
-- `document_name` (String) The name of an SSM document to associate with the instance.
-
 Optional:
 
 - `association_parameters` (Attributes List) The input parameter values to use with the associated SSM document. (see [below for nested schema](#nestedatt--ssm_associations--association_parameters))
+- `document_name` (String) The name of an SSM document to associate with the instance.
 
 <a id="nestedatt--ssm_associations--association_parameters"></a>
 ### Nested Schema for `ssm_associations.association_parameters`
 
-Required:
+Optional:
 
 - `key` (String) The name of an input parameter that is in the associated SSM document.
 - `value` (List of String) The value of an input parameter.
@@ -250,7 +238,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)
@@ -259,7 +247,7 @@ Required:
 <a id="nestedatt--volumes"></a>
 ### Nested Schema for `volumes`
 
-Required:
+Optional:
 
 - `device` (String) The device name (for example, /dev/sdh or xvdh).
 - `volume_id` (String) The ID of the EBS volume. The volume and instance must be within the same Availability Zone.

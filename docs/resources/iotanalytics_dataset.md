@@ -49,20 +49,17 @@ Optional:
 <a id="nestedatt--actions--container_action"></a>
 ### Nested Schema for `actions.container_action`
 
-Required:
+Optional:
 
 - `execution_role_arn` (String)
 - `image` (String)
 - `resource_configuration` (Attributes) (see [below for nested schema](#nestedatt--actions--container_action--resource_configuration))
-
-Optional:
-
 - `variables` (Attributes List) (see [below for nested schema](#nestedatt--actions--container_action--variables))
 
 <a id="nestedatt--actions--container_action--resource_configuration"></a>
 ### Nested Schema for `actions.container_action.resource_configuration`
 
-Required:
+Optional:
 
 - `compute_type` (String)
 - `volume_size_in_gb` (Number)
@@ -71,21 +68,18 @@ Required:
 <a id="nestedatt--actions--container_action--variables"></a>
 ### Nested Schema for `actions.container_action.variables`
 
-Required:
-
-- `variable_name` (String)
-
 Optional:
 
 - `dataset_content_version_value` (Attributes) (see [below for nested schema](#nestedatt--actions--container_action--variables--dataset_content_version_value))
 - `double_value` (Number)
 - `output_file_uri_value` (Attributes) (see [below for nested schema](#nestedatt--actions--container_action--variables--output_file_uri_value))
 - `string_value` (String)
+- `variable_name` (String)
 
 <a id="nestedatt--actions--container_action--variables--dataset_content_version_value"></a>
 ### Nested Schema for `actions.container_action.variables.dataset_content_version_value`
 
-Required:
+Optional:
 
 - `dataset_name` (String)
 
@@ -93,7 +87,7 @@ Required:
 <a id="nestedatt--actions--container_action--variables--output_file_uri_value"></a>
 ### Nested Schema for `actions.container_action.variables.output_file_uri_value`
 
-Required:
+Optional:
 
 - `file_name` (String)
 
@@ -103,13 +97,10 @@ Required:
 <a id="nestedatt--actions--query_action"></a>
 ### Nested Schema for `actions.query_action`
 
-Required:
-
-- `sql_query` (String)
-
 Optional:
 
 - `filters` (Attributes List) (see [below for nested schema](#nestedatt--actions--query_action--filters))
+- `sql_query` (String)
 
 <a id="nestedatt--actions--query_action--filters"></a>
 ### Nested Schema for `actions.query_action.filters`
@@ -121,7 +112,7 @@ Optional:
 <a id="nestedatt--actions--query_action--filters--delta_time"></a>
 ### Nested Schema for `actions.query_action.filters.delta_time`
 
-Required:
+Optional:
 
 - `offset_seconds` (Number)
 - `time_expression` (String)
@@ -133,12 +124,9 @@ Required:
 <a id="nestedatt--content_delivery_rules"></a>
 ### Nested Schema for `content_delivery_rules`
 
-Required:
-
-- `destination` (Attributes) (see [below for nested schema](#nestedatt--content_delivery_rules--destination))
-
 Optional:
 
+- `destination` (Attributes) (see [below for nested schema](#nestedatt--content_delivery_rules--destination))
 - `entry_name` (String)
 
 <a id="nestedatt--content_delivery_rules--destination"></a>
@@ -152,7 +140,7 @@ Optional:
 <a id="nestedatt--content_delivery_rules--destination--iot_events_destination_configuration"></a>
 ### Nested Schema for `content_delivery_rules.destination.iot_events_destination_configuration`
 
-Required:
+Optional:
 
 - `input_name` (String)
 - `role_arn` (String)
@@ -161,20 +149,17 @@ Required:
 <a id="nestedatt--content_delivery_rules--destination--s3_destination_configuration"></a>
 ### Nested Schema for `content_delivery_rules.destination.s3_destination_configuration`
 
-Required:
-
-- `bucket` (String)
-- `key` (String)
-- `role_arn` (String)
-
 Optional:
 
+- `bucket` (String)
 - `glue_configuration` (Attributes) (see [below for nested schema](#nestedatt--content_delivery_rules--destination--s3_destination_configuration--glue_configuration))
+- `key` (String)
+- `role_arn` (String)
 
 <a id="nestedatt--content_delivery_rules--destination--s3_destination_configuration--glue_configuration"></a>
 ### Nested Schema for `content_delivery_rules.destination.s3_destination_configuration.glue_configuration`
 
-Required:
+Optional:
 
 - `database_name` (String)
 - `table_name` (String)
@@ -186,12 +171,9 @@ Required:
 <a id="nestedatt--late_data_rules"></a>
 ### Nested Schema for `late_data_rules`
 
-Required:
-
-- `rule_configuration` (Attributes) (see [below for nested schema](#nestedatt--late_data_rules--rule_configuration))
-
 Optional:
 
+- `rule_configuration` (Attributes) (see [below for nested schema](#nestedatt--late_data_rules--rule_configuration))
 - `rule_name` (String)
 
 <a id="nestedatt--late_data_rules--rule_configuration"></a>
@@ -204,7 +186,7 @@ Optional:
 <a id="nestedatt--late_data_rules--rule_configuration--delta_time_session_window_configuration"></a>
 ### Nested Schema for `late_data_rules.rule_configuration.delta_time_session_window_configuration`
 
-Required:
+Optional:
 
 - `timeout_in_minutes` (Number)
 
@@ -223,7 +205,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)
@@ -240,7 +222,7 @@ Optional:
 <a id="nestedatt--triggers--schedule"></a>
 ### Nested Schema for `triggers.schedule`
 
-Required:
+Optional:
 
 - `schedule_expression` (String)
 
@@ -248,7 +230,7 @@ Required:
 <a id="nestedatt--triggers--triggering_dataset"></a>
 ### Nested Schema for `triggers.triggering_dataset`
 
-Required:
+Optional:
 
 - `dataset_name` (String)
 

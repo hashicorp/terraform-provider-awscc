@@ -50,7 +50,7 @@ Optional:
 <a id="nestedatt--plan--targets--channel_target_info"></a>
 ### Nested Schema for `plan.targets.channel_target_info`
 
-Required:
+Optional:
 
 - `channel_id` (String) The Amazon Resource Name (ARN) of the contact channel.
 - `retry_interval_in_minutes` (Number) The number of minutes to wait to retry sending engagement in the case the engagement initially fails.
@@ -59,7 +59,7 @@ Required:
 <a id="nestedatt--plan--targets--contact_target_info"></a>
 ### Nested Schema for `plan.targets.contact_target_info`
 
-Required:
+Optional:
 
 - `contact_id` (String) The Amazon Resource Name (ARN) of the contact.
 - `is_essential` (Boolean) A Boolean value determining if the contact's acknowledgement stops the progress of stages in the plan.

@@ -47,7 +47,7 @@ Optional:
 <a id="nestedatt--sources"></a>
 ### Nested Schema for `sources`
 
-Required:
+Optional:
 
 - `architecture` (String) The architecture of robot application.
 - `s3_bucket` (String) The Arn of the S3Bucket that stores the robot application source.

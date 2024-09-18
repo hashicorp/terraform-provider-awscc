@@ -53,7 +53,7 @@ Optional:
 <a id="nestedatt--policy_statements--conditions--boolean_expression"></a>
 ### Nested Schema for `policy_statements.conditions.boolean_expression`
 
-Required:
+Optional:
 
 - `evaluate` (Attributes) (see [below for nested schema](#nestedatt--policy_statements--conditions--boolean_expression--evaluate))
 - `operator` (String)
@@ -68,7 +68,7 @@ Optional:
 <a id="nestedatt--policy_statements--conditions--boolean_expression--evaluate--analysis"></a>
 ### Nested Schema for `policy_statements.conditions.boolean_expression.evaluate.analysis`
 
-Required:
+Optional:
 
 - `analyzer` (String)
 - `result_field` (String)
@@ -79,7 +79,7 @@ Required:
 <a id="nestedatt--policy_statements--conditions--ip_expression"></a>
 ### Nested Schema for `policy_statements.conditions.ip_expression`
 
-Required:
+Optional:
 
 - `evaluate` (Attributes) (see [below for nested schema](#nestedatt--policy_statements--conditions--ip_expression--evaluate))
 - `operator` (String)
@@ -97,7 +97,7 @@ Optional:
 <a id="nestedatt--policy_statements--conditions--string_expression"></a>
 ### Nested Schema for `policy_statements.conditions.string_expression`
 
-Required:
+Optional:
 
 - `evaluate` (Attributes) (see [below for nested schema](#nestedatt--policy_statements--conditions--string_expression--evaluate))
 - `operator` (String)
@@ -115,7 +115,7 @@ Optional:
 <a id="nestedatt--policy_statements--conditions--tls_expression"></a>
 ### Nested Schema for `policy_statements.conditions.tls_expression`
 
-Required:
+Optional:
 
 - `evaluate` (Attributes) (see [below for nested schema](#nestedatt--policy_statements--conditions--tls_expression--evaluate))
 - `operator` (String)
@@ -135,7 +135,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

@@ -26,6 +26,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -730,7 +731,14 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "IdP Metadata used to configure SAML authentication in Grafana.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Object{ /*START VALIDATORS*/
+						fwvalidators.NotNullObject(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: LoginValidityDuration
 				"login_validity_duration": schema.Float64Attribute{ /*START ATTRIBUTE*/
@@ -916,25 +924,35 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 				"security_group_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
 					Description: "The list of Amazon EC2 security group IDs attached to the Amazon VPC for your Grafana workspace to connect.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.Set{ /*START VALIDATORS*/
 						setvalidator.SizeBetween(1, 5),
 						setvalidator.ValueStringsAre(
 							stringvalidator.LengthBetween(1, 255),
 						),
+						fwvalidators.NotNullSet(),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						setplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: SubnetIds
 				"subnet_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
 					Description: "The list of Amazon EC2 subnet IDs created in the Amazon VPC for your Grafana workspace to connect.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.Set{ /*START VALIDATORS*/
 						setvalidator.SizeBetween(2, 6),
 						setvalidator.ValueStringsAre(
 							stringvalidator.LengthBetween(1, 255),
 						),
+						fwvalidators.NotNullSet(),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						setplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to.",

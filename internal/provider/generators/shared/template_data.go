@@ -92,6 +92,9 @@ func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, 
 	if codeFeatures.HasValidator {
 		templateData.ImportFrameworkValidator = true
 	}
+	if codeFeatures.UsesInternalValidatorsPackage {
+		templateData.ImportInternalValidators = true
+	}
 
 	if resType == DataSourceType {
 		templateData.SchemaDescription = fmt.Sprintf("Data Source schema for %s", cfTypeName)
@@ -155,6 +158,7 @@ type TemplateData struct {
 	ImportFrameworkTimeTypes      bool
 	ImportFrameworkValidator      bool
 	ImportInternalDefaults        bool
+	ImportInternalValidators      bool
 	ImportRegexp                  bool
 	PackageName                   string
 	PrimaryIdentifier             []string

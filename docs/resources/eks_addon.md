@@ -38,7 +38,7 @@ Resource Schema for AWS::EKS::Addon
 <a id="nestedatt--pod_identity_associations"></a>
 ### Nested Schema for `pod_identity_associations`
 
-Required:
+Optional:
 
 - `role_arn` (String) The IAM role ARN that the pod identity association is created for.
 - `service_account` (String) The Kubernetes service account that the pod identity association is created for.
@@ -47,7 +47,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

@@ -33,7 +33,7 @@ Definition of AWS::Deadline::StorageProfile Resource Type
 <a id="nestedatt--file_system_locations"></a>
 ### Nested Schema for `file_system_locations`
 
-Required:
+Optional:
 
 - `name` (String)
 - `path` (String)

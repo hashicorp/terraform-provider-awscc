@@ -57,23 +57,20 @@ resource "awscc_xray_sampling_rule" "example" {
 <a id="nestedatt--sampling_rule"></a>
 ### Nested Schema for `sampling_rule`
 
-Required:
+Optional:
 
+- `attributes` (Map of String) Matches attributes derived from the request.
 - `fixed_rate` (Number) The percentage of matching requests to instrument, after the reservoir is exhausted.
 - `host` (String) Matches the hostname from a request URL.
 - `http_method` (String) Matches the HTTP method from a request URL.
 - `priority` (Number) The priority of the sampling rule.
 - `reservoir_size` (Number) A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.
 - `resource_arn` (String) Matches the ARN of the AWS resource on which the service runs.
+- `rule_arn` (String) The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.
+- `rule_name` (String) The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.
 - `service_name` (String) Matches the name that the service uses to identify itself in segments.
 - `service_type` (String) Matches the origin that the service uses to identify its type in segments.
 - `url_path` (String) Matches the path from a request URL.
-
-Optional:
-
-- `attributes` (Map of String) Matches attributes derived from the request.
-- `rule_arn` (String) The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.
-- `rule_name` (String) The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.
 - `version` (Number) The version of the sampling rule format (1)
 
 
@@ -89,23 +86,20 @@ Optional:
 <a id="nestedatt--sampling_rule_record--sampling_rule"></a>
 ### Nested Schema for `sampling_rule_record.sampling_rule`
 
-Required:
+Optional:
 
+- `attributes` (Map of String) Matches attributes derived from the request.
 - `fixed_rate` (Number) The percentage of matching requests to instrument, after the reservoir is exhausted.
 - `host` (String) Matches the hostname from a request URL.
 - `http_method` (String) Matches the HTTP method from a request URL.
 - `priority` (Number) The priority of the sampling rule.
 - `reservoir_size` (Number) A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.
 - `resource_arn` (String) Matches the ARN of the AWS resource on which the service runs.
+- `rule_arn` (String) The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.
+- `rule_name` (String) The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.
 - `service_name` (String) Matches the name that the service uses to identify itself in segments.
 - `service_type` (String) Matches the origin that the service uses to identify its type in segments.
 - `url_path` (String) Matches the path from a request URL.
-
-Optional:
-
-- `attributes` (Map of String) Matches attributes derived from the request.
-- `rule_arn` (String) The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.
-- `rule_name` (String) The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.
 - `version` (Number) The version of the sampling rule format (1)
 
 
@@ -132,7 +126,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag.
 - `value` (String) The value for the tag.

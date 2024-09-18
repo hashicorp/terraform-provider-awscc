@@ -45,7 +45,7 @@ Required:
 <a id="nestedatt--job_state_time_limit_actions"></a>
 ### Nested Schema for `job_state_time_limit_actions`
 
-Required:
+Optional:
 
 - `action` (String)
 - `max_time_seconds` (Number)

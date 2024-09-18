@@ -185,14 +185,14 @@ Optional:
 <a id="nestedatt--orchestrator"></a>
 ### Nested Schema for `orchestrator`
 
-Required:
+Optional:
 
 - `eks` (Attributes) Specifies parameter(s) related to EKS as orchestrator, e.g. the EKS cluster nodes will attach to, (see [below for nested schema](#nestedatt--orchestrator--eks))
 
 <a id="nestedatt--orchestrator--eks"></a>
 ### Nested Schema for `orchestrator.eks`
 
-Required:
+Optional:
 
 - `cluster_arn` (String) The ARN of the EKS cluster, such as arn:aws:eks:us-west-2:123456789012:cluster/my-eks-cluster
 
@@ -201,7 +201,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
@@ -210,7 +210,7 @@ Required:
 <a id="nestedatt--vpc_config"></a>
 ### Nested Schema for `vpc_config`
 
-Required:
+Optional:
 
 - `security_group_ids` (List of String) The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security groups for the VPC that is specified in the Subnets field.
 - `subnets` (List of String) The ID of the subnets in the VPC to which you want to connect your training job or model.

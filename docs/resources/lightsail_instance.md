@@ -151,12 +151,9 @@ resource "awscc_lightsail_instance" "example" {
 <a id="nestedatt--add_ons"></a>
 ### Nested Schema for `add_ons`
 
-Required:
-
-- `add_on_type` (String) The add-on type
-
 Optional:
 
+- `add_on_type` (String) The add-on type
 - `auto_snapshot_add_on_request` (Attributes) An object that represents additional parameters when enabling or modifying the automatic snapshot add-on (see [below for nested schema](#nestedatt--add_ons--auto_snapshot_add_on_request))
 - `status` (String) Status of the Addon
 
@@ -184,17 +181,14 @@ Read-Only:
 <a id="nestedatt--hardware--disks"></a>
 ### Nested Schema for `hardware.disks`
 
-Required:
-
-- `disk_name` (String) The names to use for your new Lightsail disk.
-- `path` (String) Path of the disk attached to the instance.
-
 Optional:
 
 - `attached_to` (String) Instance attached to the disk.
 - `attachment_state` (String) Attachment state of the disk.
+- `disk_name` (String) The names to use for your new Lightsail disk.
 - `iops` (Number) IOPS of disk.
 - `is_system_disk` (Boolean) Is the Attached disk is the system disk of the Instance.
+- `path` (String) Path of the disk attached to the instance.
 - `size_in_gb` (String) Size of the disk attached to the Instance.
 
 
@@ -211,13 +205,18 @@ Read-Only:
 <a id="nestedatt--networking"></a>
 ### Nested Schema for `networking`
 
-Required:
-
-- `ports` (Attributes Set) Ports to the Instance. (see [below for nested schema](#nestedatt--networking--ports))
-
 Optional:
 
 - `monthly_transfer` (Attributes) Monthly Transfer of the Instance. (see [below for nested schema](#nestedatt--networking--monthly_transfer))
+- `ports` (Attributes Set) Ports to the Instance. (see [below for nested schema](#nestedatt--networking--ports))
+
+<a id="nestedatt--networking--monthly_transfer"></a>
+### Nested Schema for `networking.monthly_transfer`
+
+Read-Only:
+
+- `gb_per_month_allocated` (String) GbPerMonthAllocated of the Instance.
+
 
 <a id="nestedatt--networking--ports"></a>
 ### Nested Schema for `networking.ports`
@@ -236,14 +235,6 @@ Optional:
 - `to_port` (Number) To Port of the Instance.
 
 
-<a id="nestedatt--networking--monthly_transfer"></a>
-### Nested Schema for `networking.monthly_transfer`
-
-Read-Only:
-
-- `gb_per_month_allocated` (String) GbPerMonthAllocated of the Instance.
-
-
 
 <a id="nestedatt--state"></a>
 ### Nested Schema for `state`
@@ -257,12 +248,9 @@ Read-Only:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
-
-- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-
 Optional:
 
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import

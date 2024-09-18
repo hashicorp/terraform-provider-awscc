@@ -46,7 +46,7 @@ resource "awscc_sagemaker_user_profile" "example" {
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)
@@ -104,13 +104,10 @@ Optional:
 <a id="nestedatt--user_settings--code_editor_app_settings--custom_images"></a>
 ### Nested Schema for `user_settings.code_editor_app_settings.custom_images`
 
-Required:
+Optional:
 
 - `app_image_config_name` (String) The Name of the AppImageConfig.
 - `image_name` (String) The name of the CustomImage. Must be unique to your account.
-
-Optional:
-
 - `image_version_number` (Number) The version number of the CustomImage.
 
 
@@ -136,12 +133,9 @@ Optional:
 <a id="nestedatt--user_settings--custom_file_system_configs--efs_file_system_config"></a>
 ### Nested Schema for `user_settings.custom_file_system_configs.efs_file_system_config`
 
-Required:
-
-- `file_system_id` (String)
-
 Optional:
 
+- `file_system_id` (String)
 - `file_system_path` (String)
 
 
@@ -149,7 +143,7 @@ Optional:
 <a id="nestedatt--user_settings--custom_posix_user_config"></a>
 ### Nested Schema for `user_settings.custom_posix_user_config`
 
-Required:
+Optional:
 
 - `gid` (Number)
 - `uid` (Number)
@@ -188,7 +182,7 @@ Optional:
 <a id="nestedatt--user_settings--jupyter_lab_app_settings--code_repositories"></a>
 ### Nested Schema for `user_settings.jupyter_lab_app_settings.code_repositories`
 
-Required:
+Optional:
 
 - `repository_url` (String) A CodeRepository (valid URL) to be used within Jupyter's Git extension.
 
@@ -196,13 +190,10 @@ Required:
 <a id="nestedatt--user_settings--jupyter_lab_app_settings--custom_images"></a>
 ### Nested Schema for `user_settings.jupyter_lab_app_settings.custom_images`
 
-Required:
+Optional:
 
 - `app_image_config_name` (String) The Name of the AppImageConfig.
 - `image_name` (String) The name of the CustomImage. Must be unique to your account.
-
-Optional:
-
 - `image_version_number` (Number) The version number of the CustomImage.
 
 
@@ -250,13 +241,10 @@ Optional:
 <a id="nestedatt--user_settings--kernel_gateway_app_settings--custom_images"></a>
 ### Nested Schema for `user_settings.kernel_gateway_app_settings.custom_images`
 
-Required:
+Optional:
 
 - `app_image_config_name` (String) The Name of the AppImageConfig.
 - `image_name` (String) The name of the CustomImage. Must be unique to your account.
-
-Optional:
-
 - `image_version_number` (Number) The version number of the CustomImage.
 
 
@@ -301,7 +289,7 @@ Optional:
 <a id="nestedatt--user_settings--space_storage_settings--default_ebs_storage_settings"></a>
 ### Nested Schema for `user_settings.space_storage_settings.default_ebs_storage_settings`
 
-Required:
+Optional:
 
 - `default_ebs_volume_size_in_gb` (Number) Default size of the Amazon EBS volume in Gb
 - `maximum_ebs_volume_size_in_gb` (Number) Maximum size of the Amazon EBS volume in Gb. Must be greater than or equal to the DefaultEbsVolumeSizeInGb.

@@ -170,7 +170,7 @@ Optional:
 <a id="nestedatt--deployment_configuration--alarms"></a>
 ### Nested Schema for `deployment_configuration.alarms`
 
-Required:
+Optional:
 
 - `alarm_names` (List of String) One or more CloudWatch alarm names. Use a "," to separate the alarms.
 - `enable` (Boolean) Determines whether to use the CloudWatch alarm option in the service deployment process.
@@ -180,7 +180,7 @@ Required:
 <a id="nestedatt--deployment_configuration--deployment_circuit_breaker"></a>
 ### Nested Schema for `deployment_configuration.deployment_circuit_breaker`
 
-Required:
+Optional:
 
 - `enable` (Boolean) Determines whether to use the deployment circuit breaker logic for the service.
 - `rollback` (Boolean) Determines whether to configure Amazon ECS to roll back the service if a service deployment fails. If rollback is on, when a service deployment fails, the service is rolled back to the last deployment that completed successfully.
@@ -237,36 +237,27 @@ Optional:
 <a id="nestedatt--placement_constraints"></a>
 ### Nested Schema for `placement_constraints`
 
-Required:
-
-- `type` (String) The type of constraint. Use ``distinctInstance`` to ensure that each task in a particular group is running on a different container instance. Use ``memberOf`` to restrict the selection to a group of valid candidates.
-
 Optional:
 
 - `expression` (String) A cluster query language expression to apply to the constraint. The expression can have a maximum length of 2000 characters. You can't specify an expression if the constraint type is ``distinctInstance``. For more information, see [Cluster query language](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html) in the *Amazon Elastic Container Service Developer Guide*.
+- `type` (String) The type of constraint. Use ``distinctInstance`` to ensure that each task in a particular group is running on a different container instance. Use ``memberOf`` to restrict the selection to a group of valid candidates.
 
 
 <a id="nestedatt--placement_strategies"></a>
 ### Nested Schema for `placement_strategies`
 
-Required:
-
-- `type` (String) The type of placement strategy. The ``random`` placement strategy randomly places tasks on available candidates. The ``spread`` placement strategy spreads placement across available candidates evenly based on the ``field`` parameter. The ``binpack`` strategy places tasks on available candidates that have the least available amount of the resource that's specified with the ``field`` parameter. For example, if you binpack on memory, a task is placed on the instance with the least amount of remaining memory but still enough to run the task.
-
 Optional:
 
 - `field` (String) The field to apply the placement strategy against. For the ``spread`` placement strategy, valid values are ``instanceId`` (or ``host``, which has the same effect), or any platform or custom attribute that's applied to a container instance, such as ``attribute:ecs.availability-zone``. For the ``binpack`` placement strategy, valid values are ``cpu`` and ``memory``. For the ``random`` placement strategy, this field is not used.
+- `type` (String) The type of placement strategy. The ``random`` placement strategy randomly places tasks on available candidates. The ``spread`` placement strategy spreads placement across available candidates evenly based on the ``field`` parameter. The ``binpack`` strategy places tasks on available candidates that have the least available amount of the resource that's specified with the ``field`` parameter. For example, if you binpack on memory, a task is placed on the instance with the least amount of remaining memory but still enough to run the task.
 
 
 <a id="nestedatt--service_connect_configuration"></a>
 ### Nested Schema for `service_connect_configuration`
 
-Required:
-
-- `enabled` (Boolean) Specifies whether to use Service Connect with this service.
-
 Optional:
 
+- `enabled` (Boolean) Specifies whether to use Service Connect with this service.
 - `log_configuration` (Attributes) The log configuration for the container. This parameter maps to ``LogConfig`` in the docker container create command and the ``--log-driver`` option to docker run.
  By default, containers use the same logging driver that the Docker daemon uses. However, the container might use a different logging driver than the Docker daemon by specifying a log driver configuration in the container definition.
  Understand the following when specifying a log configuration for your containers.
@@ -298,7 +289,7 @@ Optional:
 <a id="nestedatt--service_connect_configuration--log_configuration--secret_options"></a>
 ### Nested Schema for `service_connect_configuration.log_configuration.secret_options`
 
-Required:
+Optional:
 
 - `name` (String) The name of the secret.
 - `value_from` (String) The secret to expose to the container. The supported values are either the full ARN of the ASMlong secret or the full ARN of the parameter in the SSM Parameter Store.
@@ -309,10 +300,6 @@ Required:
 
 <a id="nestedatt--service_connect_configuration--services"></a>
 ### Nested Schema for `service_connect_configuration.services`
-
-Required:
-
-- `port_name` (String) The ``portName`` must match the name of one of the ``portMappings`` from all the containers in the task definition of this Amazon ECS service.
 
 Optional:
 
@@ -325,22 +312,20 @@ Optional:
 - `ingress_port_override` (Number) The port number for the Service Connect proxy to listen on.
  Use the value of this field to bypass the proxy for traffic on the port number specified in the named ``portMapping`` in the task definition of this application, and then use it in your VPC security groups to allow traffic into the proxy for this Amazon ECS service.
  In ``awsvpc`` mode and Fargate, the default value is the container port number. The container port number is in the ``portMapping`` in the task definition. In bridge mode, the default value is the ephemeral port of the Service Connect proxy.
+- `port_name` (String) The ``portName`` must match the name of one of the ``portMappings`` from all the containers in the task definition of this Amazon ECS service.
 - `timeout` (Attributes) A reference to an object that represents the configured timeouts for Service Connect. (see [below for nested schema](#nestedatt--service_connect_configuration--services--timeout))
 - `tls` (Attributes) A reference to an object that represents a Transport Layer Security (TLS) configuration. (see [below for nested schema](#nestedatt--service_connect_configuration--services--tls))
 
 <a id="nestedatt--service_connect_configuration--services--client_aliases"></a>
 ### Nested Schema for `service_connect_configuration.services.client_aliases`
 
-Required:
-
-- `port` (Number) The listening port number for the Service Connect proxy. This port is available inside of all of the tasks within the same namespace.
- To avoid changing your applications in client Amazon ECS services, set this to the same port that the client application uses by default. For more information, see [Service Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html) in the *Amazon Elastic Container Service Developer Guide*.
-
 Optional:
 
 - `dns_name` (String) The ``dnsName`` is the name that you use in the applications of client tasks to connect to this service. The name must be a valid DNS name but doesn't need to be fully-qualified. The name can include up to 127 characters. The name can include lowercase letters, numbers, underscores (_), hyphens (-), and periods (.). The name can't start with a hyphen.
  If this parameter isn't specified, the default value of ``discoveryName.namespace`` is used. If the ``discoveryName`` isn't specified, the port mapping name from the task definition is used in ``portName.namespace``.
  To avoid changing your applications in client Amazon ECS services, set this to the same name that the client application uses by default. For example, a few common names are ``database``, ``db``, or the lowercase name of a database, such as ``mysql`` or ``redis``. For more information, see [Service Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html) in the *Amazon Elastic Container Service Developer Guide*.
+- `port` (Number) The listening port number for the Service Connect proxy. This port is available inside of all of the tasks within the same namespace.
+ To avoid changing your applications in client Amazon ECS services, set this to the same port that the client application uses by default. For more information, see [Service Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html) in the *Amazon Elastic Container Service Developer Guide*.
 
 
 <a id="nestedatt--service_connect_configuration--services--timeout"></a>
@@ -357,12 +342,9 @@ Optional:
 <a id="nestedatt--service_connect_configuration--services--tls"></a>
 ### Nested Schema for `service_connect_configuration.services.tls`
 
-Required:
-
-- `issuer_certificate_authority` (Attributes) The signer certificate authority. (see [below for nested schema](#nestedatt--service_connect_configuration--services--tls--issuer_certificate_authority))
-
 Optional:
 
+- `issuer_certificate_authority` (Attributes) The signer certificate authority. (see [below for nested schema](#nestedatt--service_connect_configuration--services--tls--issuer_certificate_authority))
 - `kms_key` (String) The AWS Key Management Service key.
 - `role_arn` (String) The Amazon Resource Name (ARN) of the IAM role that's associated with the Service Connect TLS.
 
@@ -400,20 +382,13 @@ Optional:
 <a id="nestedatt--volume_configurations"></a>
 ### Nested Schema for `volume_configurations`
 
-Required:
-
-- `name` (String) The name of the volume. This value must match the volume name from the ``Volume`` object in the task definition.
-
 Optional:
 
 - `managed_ebs_volume` (Attributes) The configuration for the Amazon EBS volume that Amazon ECS creates and manages on your behalf. These settings are used to create each Amazon EBS volume, with one volume created for each task in the service. The Amazon EBS volumes are visible in your account in the Amazon EC2 console once they are created. (see [below for nested schema](#nestedatt--volume_configurations--managed_ebs_volume))
+- `name` (String) The name of the volume. This value must match the volume name from the ``Volume`` object in the task definition.
 
 <a id="nestedatt--volume_configurations--managed_ebs_volume"></a>
 ### Nested Schema for `volume_configurations.managed_ebs_volume`
-
-Required:
-
-- `role_arn` (String) The ARN of the IAM role to associate with this volume. This is the Amazon ECS infrastructure IAM role that is used to manage your AWS infrastructure. We recommend using the Amazon ECS-managed ``AmazonECSInfrastructureRolePolicyForVolumes`` IAM policy with this role. For more information, see [Amazon ECS infrastructure IAM role](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/infrastructure_IAM_role.html) in the *Amazon ECS Developer Guide*.
 
 Optional:
 
@@ -430,6 +405,7 @@ Optional:
  This parameter maps 1:1 with the ``Iops`` parameter of the [CreateVolume API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in the *Amazon EC2 API Reference*.
 - `kms_key_id` (String) The Amazon Resource Name (ARN) identifier of the AWS Key Management Service key to use for Amazon EBS encryption. When encryption is turned on and no AWS Key Management Service key is specified, the default AWS managed key for Amazon EBS volumes is used. This parameter maps 1:1 with the ``KmsKeyId`` parameter of the [CreateVolume API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in the *Amazon EC2 API Reference*.
    AWS authenticates the AWS Key Management Service key asynchronously. Therefore, if you specify an ID, alias, or ARN that is invalid, the action can appear to complete, but eventually fails.
+- `role_arn` (String) The ARN of the IAM role to associate with this volume. This is the Amazon ECS infrastructure IAM role that is used to manage your AWS infrastructure. We recommend using the Amazon ECS-managed ``AmazonECSInfrastructureRolePolicyForVolumes`` IAM policy with this role. For more information, see [Amazon ECS infrastructure IAM role](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/infrastructure_IAM_role.html) in the *Amazon ECS Developer Guide*.
 - `size_in_gi_b` (Number) The size of the volume in GiB. You must specify either a volume size or a snapshot ID. If you specify a snapshot ID, the snapshot size is used for the volume size by default. You can optionally specify a volume size greater than or equal to the snapshot size. This parameter maps 1:1 with the ``Size`` parameter of the [CreateVolume API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in the *Amazon EC2 API Reference*.
  The following are the supported volume size values for each volume type.
   +   ``gp2`` and ``gp3``: 1-16,384
@@ -452,13 +428,10 @@ Optional:
 <a id="nestedatt--volume_configurations--managed_ebs_volume--tag_specifications"></a>
 ### Nested Schema for `volume_configurations.managed_ebs_volume.tag_specifications`
 
-Required:
-
-- `resource_type` (String) The type of volume resource.
-
 Optional:
 
 - `propagate_tags` (String) Determines whether to propagate the tags from the task definition to  the Amazon EBS volume. Tags can only propagate to a ``SERVICE`` specified in  ``ServiceVolumeConfiguration``. If no value is specified, the tags aren't  propagated.
+- `resource_type` (String) The type of volume resource.
 - `tags` (Attributes List) The tags applied to this Amazon EBS volume. ``AmazonECSCreated`` and ``AmazonECSManaged`` are reserved tags that can't be used. (see [below for nested schema](#nestedatt--volume_configurations--managed_ebs_volume--tag_specifications--tags))
 
 <a id="nestedatt--volume_configurations--managed_ebs_volume--tag_specifications--tags"></a>

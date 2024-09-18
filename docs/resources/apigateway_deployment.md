@@ -142,7 +142,7 @@ Optional:
 <a id="nestedatt--stage_description--tags"></a>
 ### Nested Schema for `stage_description.tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag
 - `value` (String) The value for the tag

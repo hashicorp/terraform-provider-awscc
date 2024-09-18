@@ -35,7 +35,7 @@ AWS Route53 Recovery Control Control Panel resource schema .
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

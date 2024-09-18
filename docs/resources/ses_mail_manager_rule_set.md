@@ -60,7 +60,7 @@ Optional:
 <a id="nestedatt--rules--actions--add_header"></a>
 ### Nested Schema for `rules.actions.add_header`
 
-Required:
+Optional:
 
 - `header_name` (String)
 - `header_value` (String)
@@ -69,39 +69,30 @@ Required:
 <a id="nestedatt--rules--actions--archive"></a>
 ### Nested Schema for `rules.actions.archive`
 
-Required:
-
-- `target_archive` (String)
-
 Optional:
 
 - `action_failure_policy` (String)
+- `target_archive` (String)
 
 
 <a id="nestedatt--rules--actions--deliver_to_mailbox"></a>
 ### Nested Schema for `rules.actions.deliver_to_mailbox`
 
-Required:
-
-- `mailbox_arn` (String)
-- `role_arn` (String)
-
 Optional:
 
 - `action_failure_policy` (String)
+- `mailbox_arn` (String)
+- `role_arn` (String)
 
 
 <a id="nestedatt--rules--actions--relay"></a>
 ### Nested Schema for `rules.actions.relay`
 
-Required:
-
-- `relay` (String)
-
 Optional:
 
 - `action_failure_policy` (String)
 - `mail_from` (String)
+- `relay` (String)
 
 
 <a id="nestedatt--rules--actions--replace_recipient"></a>
@@ -115,26 +106,20 @@ Optional:
 <a id="nestedatt--rules--actions--send"></a>
 ### Nested Schema for `rules.actions.send`
 
-Required:
-
-- `role_arn` (String)
-
 Optional:
 
 - `action_failure_policy` (String)
+- `role_arn` (String)
 
 
 <a id="nestedatt--rules--actions--write_to_s3"></a>
 ### Nested Schema for `rules.actions.write_to_s3`
 
-Required:
-
-- `role_arn` (String)
-- `s3_bucket` (String)
-
 Optional:
 
 - `action_failure_policy` (String)
+- `role_arn` (String)
+- `s3_bucket` (String)
 - `s3_prefix` (String)
 - `s3_sse_kms_key_id` (String)
 
@@ -155,7 +140,7 @@ Optional:
 <a id="nestedatt--rules--conditions--boolean_expression"></a>
 ### Nested Schema for `rules.conditions.boolean_expression`
 
-Required:
+Optional:
 
 - `evaluate` (Attributes) (see [below for nested schema](#nestedatt--rules--conditions--boolean_expression--evaluate))
 - `operator` (String)
@@ -172,7 +157,7 @@ Optional:
 <a id="nestedatt--rules--conditions--dmarc_expression"></a>
 ### Nested Schema for `rules.conditions.dmarc_expression`
 
-Required:
+Optional:
 
 - `operator` (String)
 - `values` (List of String)
@@ -181,7 +166,7 @@ Required:
 <a id="nestedatt--rules--conditions--ip_expression"></a>
 ### Nested Schema for `rules.conditions.ip_expression`
 
-Required:
+Optional:
 
 - `evaluate` (Attributes) (see [below for nested schema](#nestedatt--rules--conditions--ip_expression--evaluate))
 - `operator` (String)
@@ -199,7 +184,7 @@ Optional:
 <a id="nestedatt--rules--conditions--number_expression"></a>
 ### Nested Schema for `rules.conditions.number_expression`
 
-Required:
+Optional:
 
 - `evaluate` (Attributes) (see [below for nested schema](#nestedatt--rules--conditions--number_expression--evaluate))
 - `operator` (String)
@@ -217,7 +202,7 @@ Optional:
 <a id="nestedatt--rules--conditions--string_expression"></a>
 ### Nested Schema for `rules.conditions.string_expression`
 
-Required:
+Optional:
 
 - `evaluate` (Attributes) (see [below for nested schema](#nestedatt--rules--conditions--string_expression--evaluate))
 - `operator` (String)
@@ -235,7 +220,7 @@ Optional:
 <a id="nestedatt--rules--conditions--verdict_expression"></a>
 ### Nested Schema for `rules.conditions.verdict_expression`
 
-Required:
+Optional:
 
 - `evaluate` (Attributes) (see [below for nested schema](#nestedatt--rules--conditions--verdict_expression--evaluate))
 - `operator` (String)
@@ -252,7 +237,7 @@ Optional:
 <a id="nestedatt--rules--conditions--verdict_expression--evaluate--analysis"></a>
 ### Nested Schema for `rules.conditions.verdict_expression.evaluate.analysis`
 
-Required:
+Optional:
 
 - `analyzer` (String)
 - `result_field` (String)
@@ -276,7 +261,7 @@ Optional:
 <a id="nestedatt--rules--unless--boolean_expression"></a>
 ### Nested Schema for `rules.unless.boolean_expression`
 
-Required:
+Optional:
 
 - `evaluate` (Attributes) (see [below for nested schema](#nestedatt--rules--unless--boolean_expression--evaluate))
 - `operator` (String)
@@ -293,7 +278,7 @@ Optional:
 <a id="nestedatt--rules--unless--dmarc_expression"></a>
 ### Nested Schema for `rules.unless.dmarc_expression`
 
-Required:
+Optional:
 
 - `operator` (String)
 - `values` (List of String)
@@ -302,7 +287,7 @@ Required:
 <a id="nestedatt--rules--unless--ip_expression"></a>
 ### Nested Schema for `rules.unless.ip_expression`
 
-Required:
+Optional:
 
 - `evaluate` (Attributes) (see [below for nested schema](#nestedatt--rules--unless--ip_expression--evaluate))
 - `operator` (String)
@@ -320,7 +305,7 @@ Optional:
 <a id="nestedatt--rules--unless--number_expression"></a>
 ### Nested Schema for `rules.unless.number_expression`
 
-Required:
+Optional:
 
 - `evaluate` (Attributes) (see [below for nested schema](#nestedatt--rules--unless--number_expression--evaluate))
 - `operator` (String)
@@ -338,7 +323,7 @@ Optional:
 <a id="nestedatt--rules--unless--string_expression"></a>
 ### Nested Schema for `rules.unless.string_expression`
 
-Required:
+Optional:
 
 - `evaluate` (Attributes) (see [below for nested schema](#nestedatt--rules--unless--string_expression--evaluate))
 - `operator` (String)
@@ -356,7 +341,7 @@ Optional:
 <a id="nestedatt--rules--unless--verdict_expression"></a>
 ### Nested Schema for `rules.unless.verdict_expression`
 
-Required:
+Optional:
 
 - `evaluate` (Attributes) (see [below for nested schema](#nestedatt--rules--unless--verdict_expression--evaluate))
 - `operator` (String)
@@ -373,7 +358,7 @@ Optional:
 <a id="nestedatt--rules--unless--verdict_expression--evaluate--analysis"></a>
 ### Nested Schema for `rules.unless.verdict_expression.evaluate.analysis`
 
-Required:
+Optional:
 
 - `analyzer` (String)
 - `result_field` (String)
@@ -386,7 +371,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

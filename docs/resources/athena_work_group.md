@@ -72,7 +72,7 @@ variable "kms_key_arn" {
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)
@@ -96,7 +96,7 @@ Optional:
 <a id="nestedatt--work_group_configuration--customer_content_encryption_configuration"></a>
 ### Nested Schema for `work_group_configuration.customer_content_encryption_configuration`
 
-Required:
+Optional:
 
 - `kms_key` (String) For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID.
 
@@ -126,7 +126,7 @@ Optional:
 <a id="nestedatt--work_group_configuration--result_configuration--acl_configuration"></a>
 ### Nested Schema for `work_group_configuration.result_configuration.acl_configuration`
 
-Required:
+Optional:
 
 - `s3_acl_option` (String) The Amazon S3 canned ACL that Athena should specify when storing query results. Currently the only supported canned ACL is BUCKET_OWNER_FULL_CONTROL
 
@@ -134,12 +134,9 @@ Required:
 <a id="nestedatt--work_group_configuration--result_configuration--encryption_configuration"></a>
 ### Nested Schema for `work_group_configuration.result_configuration.encryption_configuration`
 
-Required:
-
-- `encryption_option` (String) Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (SSE-S3), server-side encryption with KMS-managed keys (SSE-KMS), or client-side encryption with KMS-managed keys (CSE-KMS) is used.
-
 Optional:
 
+- `encryption_option` (String) Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (SSE-S3), server-side encryption with KMS-managed keys (SSE-KMS), or client-side encryption with KMS-managed keys (CSE-KMS) is used.
 - `kms_key` (String) For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID.
 
 
@@ -165,7 +162,7 @@ Optional:
 <a id="nestedatt--work_group_configuration_updates--customer_content_encryption_configuration"></a>
 ### Nested Schema for `work_group_configuration_updates.customer_content_encryption_configuration`
 
-Required:
+Optional:
 
 - `kms_key` (String) For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID.
 
@@ -199,7 +196,7 @@ Optional:
 <a id="nestedatt--work_group_configuration_updates--result_configuration_updates--acl_configuration"></a>
 ### Nested Schema for `work_group_configuration_updates.result_configuration_updates.acl_configuration`
 
-Required:
+Optional:
 
 - `s3_acl_option` (String) The Amazon S3 canned ACL that Athena should specify when storing query results. Currently the only supported canned ACL is BUCKET_OWNER_FULL_CONTROL
 
@@ -207,12 +204,9 @@ Required:
 <a id="nestedatt--work_group_configuration_updates--result_configuration_updates--encryption_configuration"></a>
 ### Nested Schema for `work_group_configuration_updates.result_configuration_updates.encryption_configuration`
 
-Required:
-
-- `encryption_option` (String) Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (SSE-S3), server-side encryption with KMS-managed keys (SSE-KMS), or client-side encryption with KMS-managed keys (CSE-KMS) is used.
-
 Optional:
 
+- `encryption_option` (String) Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (SSE-S3), server-side encryption with KMS-managed keys (SSE-KMS), or client-side encryption with KMS-managed keys (CSE-KMS) is used.
 - `kms_key` (String) For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID.
 
 ## Import

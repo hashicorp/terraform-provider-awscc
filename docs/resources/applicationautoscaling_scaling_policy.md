@@ -98,25 +98,18 @@ Optional:
 <a id="nestedatt--step_scaling_policy_configuration--step_adjustments"></a>
 ### Nested Schema for `step_scaling_policy_configuration.step_adjustments`
 
-Required:
-
-- `scaling_adjustment` (Number) The amount by which to scale. The adjustment is based on the value that you specified in the ``AdjustmentType`` property (either an absolute number or a percentage). A positive value adds to the current capacity and a negative number subtracts from the current capacity.
-
 Optional:
 
 - `metric_interval_lower_bound` (Number) The lower bound for the difference between the alarm threshold and the CloudWatch metric. If the metric value is above the breach threshold, the lower bound is inclusive (the metric must be greater than or equal to the threshold plus the lower bound). Otherwise, it is exclusive (the metric must be greater than the threshold plus the lower bound). A null value indicates negative infinity.
  You must specify at least one upper or lower bound.
 - `metric_interval_upper_bound` (Number) The upper bound for the difference between the alarm threshold and the CloudWatch metric. If the metric value is above the breach threshold, the upper bound is exclusive (the metric must be less than the threshold plus the upper bound). Otherwise, it is inclusive (the metric must be less than or equal to the threshold plus the upper bound). A null value indicates positive infinity.
  You must specify at least one upper or lower bound.
+- `scaling_adjustment` (Number) The amount by which to scale. The adjustment is based on the value that you specified in the ``AdjustmentType`` property (either an absolute number or a percentage). A positive value adds to the current capacity and a negative number subtracts from the current capacity.
 
 
 
 <a id="nestedatt--target_tracking_scaling_policy_configuration"></a>
 ### Nested Schema for `target_tracking_scaling_policy_configuration`
-
-Required:
-
-- `target_value` (Number) The target value for the metric. Although this property accepts numbers of type Double, it won't accept values that are either too small or too large. Values must be in the range of -2^360 to 2^360. The value must be a valid number based on the choice of metric. For example, if the metric is CPU utilization, then the target value is a percent value that represents how much of the CPU can be used before scaling out.
 
 Optional:
 
@@ -125,6 +118,7 @@ Optional:
 - `predefined_metric_specification` (Attributes) A predefined metric. You can specify either a predefined metric or a customized metric. (see [below for nested schema](#nestedatt--target_tracking_scaling_policy_configuration--predefined_metric_specification))
 - `scale_in_cooldown` (Number) The amount of time, in seconds, after a scale-in activity completes before another scale-in activity can start. For more information and for default values, see [Define cooldown periods](https://docs.aws.amazon.com/autoscaling/application/userguide/target-tracking-scaling-policy-overview.html#target-tracking-cooldown) in the *Application Auto Scaling User Guide*.
 - `scale_out_cooldown` (Number) The amount of time, in seconds, to wait for a previous scale-out activity to take effect. For more information and for default values, see [Define cooldown periods](https://docs.aws.amazon.com/autoscaling/application/userguide/target-tracking-scaling-policy-overview.html#target-tracking-cooldown) in the *Application Auto Scaling User Guide*.
+- `target_value` (Number) The target value for the metric. Although this property accepts numbers of type Double, it won't accept values that are either too small or too large. Values must be in the range of -2^360 to 2^360. The value must be a valid number based on the choice of metric. For example, if the metric is CPU utilization, then the target value is a percent value that represents how much of the CPU can be used before scaling out.
 
 <a id="nestedatt--target_tracking_scaling_policy_configuration--customized_metric_specification"></a>
 ### Nested Schema for `target_tracking_scaling_policy_configuration.customized_metric_specification`
@@ -142,7 +136,7 @@ Optional:
 <a id="nestedatt--target_tracking_scaling_policy_configuration--customized_metric_specification--dimensions"></a>
 ### Nested Schema for `target_tracking_scaling_policy_configuration.customized_metric_specification.dimensions`
 
-Required:
+Optional:
 
 - `name` (String) The name of the dimension.
 - `value` (String) The value of the dimension.
@@ -199,12 +193,9 @@ Optional:
 <a id="nestedatt--target_tracking_scaling_policy_configuration--predefined_metric_specification"></a>
 ### Nested Schema for `target_tracking_scaling_policy_configuration.predefined_metric_specification`
 
-Required:
-
-- `predefined_metric_type` (String) The metric type. The ``ALBRequestCountPerTarget`` metric type applies only to Spot fleet requests and ECS services.
-
 Optional:
 
+- `predefined_metric_type` (String) The metric type. The ``ALBRequestCountPerTarget`` metric type applies only to Spot fleet requests and ECS services.
 - `resource_label` (String) Identifies the resource associated with the metric type. You can't specify a resource label unless the metric type is ``ALBRequestCountPerTarget`` and there is a target group attached to the Spot Fleet or ECS service.
  You create the resource label by appending the final portion of the load balancer ARN and the final portion of the target group ARN into a single value, separated by a forward slash (/). The format of the resource label is:
   ``app/my-alb/778d41231b141a0f/targetgroup/my-alb-target-group/943f017f100becff``.

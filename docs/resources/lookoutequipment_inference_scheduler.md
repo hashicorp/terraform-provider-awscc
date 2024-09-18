@@ -96,7 +96,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key for the specified tag.
 - `value` (String) The value for the specified tag.

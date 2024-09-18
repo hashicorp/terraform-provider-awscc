@@ -61,14 +61,14 @@ variable "athena_workgroup_name" {
 <a id="nestedatt--capacity_assignment_configuration"></a>
 ### Nested Schema for `capacity_assignment_configuration`
 
-Required:
+Optional:
 
 - `capacity_assignments` (Attributes List) List of capacity assignments (see [below for nested schema](#nestedatt--capacity_assignment_configuration--capacity_assignments))
 
 <a id="nestedatt--capacity_assignment_configuration--capacity_assignments"></a>
 ### Nested Schema for `capacity_assignment_configuration.capacity_assignments`
 
-Required:
+Optional:
 
 - `workgroup_names` (List of String)
 
@@ -77,7 +77,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

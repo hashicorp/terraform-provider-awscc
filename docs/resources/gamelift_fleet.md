@@ -146,7 +146,7 @@ Note: It is not currently possible to use the !Ref command to reference a script
 <a id="nestedatt--anywhere_configuration"></a>
 ### Nested Schema for `anywhere_configuration`
 
-Required:
+Optional:
 
 - `cost` (String) Cost of compute can be specified on Anywhere Fleets to prioritize placement across Queue destinations based on Cost.
 
@@ -154,7 +154,7 @@ Required:
 <a id="nestedatt--certificate_configuration"></a>
 ### Nested Schema for `certificate_configuration`
 
-Required:
+Optional:
 
 - `certificate_type` (String)
 
@@ -162,19 +162,16 @@ Required:
 <a id="nestedatt--container_groups_configuration"></a>
 ### Nested Schema for `container_groups_configuration`
 
-Required:
+Optional:
 
 - `connection_port_range` (Attributes) Defines the range of ports on the instance that allow inbound traffic to connect with containers in a fleet. (see [below for nested schema](#nestedatt--container_groups_configuration--connection_port_range))
 - `container_group_definition_names` (List of String) The names of the container group definitions that will be created in an instance. You must specify exactly one REPLICA container group. You have the option to also specify one DAEMON container group.
-
-Optional:
-
 - `container_groups_per_instance` (Attributes) The number of container groups per instance. (see [below for nested schema](#nestedatt--container_groups_configuration--container_groups_per_instance))
 
 <a id="nestedatt--container_groups_configuration--connection_port_range"></a>
 ### Nested Schema for `container_groups_configuration.connection_port_range`
 
-Required:
+Optional:
 
 - `from_port` (Number) A starting value for a range of allowed port numbers.
 - `to_port` (Number) An ending value for a range of allowed port numbers. Port numbers are end-inclusive. This value must be higher than FromPort.
@@ -196,7 +193,7 @@ Read-Only:
 <a id="nestedatt--ec2_inbound_permissions"></a>
 ### Nested Schema for `ec2_inbound_permissions`
 
-Required:
+Optional:
 
 - `from_port` (Number) A starting value for a range of allowed port numbers.
 - `ip_range` (String) A range of allowed IP addresses. This value must be expressed in CIDR notation. Example: "000.000.000.000/[subnet mask]" or optionally the shortened version "0.0.0.0/[subnet mask]".
@@ -207,18 +204,15 @@ Required:
 <a id="nestedatt--locations"></a>
 ### Nested Schema for `locations`
 
-Required:
-
-- `location` (String)
-
 Optional:
 
+- `location` (String)
 - `location_capacity` (Attributes) Current resource capacity settings in a specified fleet or location. The location value might refer to a fleet's remote location or its home Region. (see [below for nested schema](#nestedatt--locations--location_capacity))
 
 <a id="nestedatt--locations--location_capacity"></a>
 ### Nested Schema for `locations.location_capacity`
 
-Required:
+Optional:
 
 - `desired_ec2_instances` (Number) The number of EC2 instances you want to maintain in the specified fleet location. This value must fall between the minimum and maximum size limits.
 - `max_size` (Number) The maximum value that is allowed for the fleet's instance count for a location. When creating a new fleet, GameLift automatically sets this value to "1". Once the fleet is active, you can change this value.
@@ -247,7 +241,7 @@ Optional:
 <a id="nestedatt--runtime_configuration--server_processes"></a>
 ### Nested Schema for `runtime_configuration.server_processes`
 
-Required:
+Optional:
 
 - `concurrent_executions` (Number) The number of server processes that use this configuration to run concurrently on an instance.
 - `launch_path` (String) The location of the server executable in a custom game build or the name of the Realtime script file that contains the Init() function. Game builds and Realtime scripts are installed on instances at the root:
@@ -255,9 +249,6 @@ Required:
 Windows (for custom game builds only): C:\game. Example: "C:\game\MyGame\server.exe"
 
 Linux: /local/game. Examples: "/local/game/MyGame/server.exe" or "/local/game/MyRealtimeScript.js"
-
-Optional:
-
 - `parameters` (String) An optional list of parameters to pass to the server executable or Realtime script on launch.
 
 
@@ -265,16 +256,13 @@ Optional:
 <a id="nestedatt--scaling_policies"></a>
 ### Nested Schema for `scaling_policies`
 
-Required:
-
-- `metric_name` (String) Name of the Amazon GameLift-defined metric that is used to trigger a scaling adjustment.
-- `name` (String) A descriptive label that is associated with a fleet's scaling policy. Policy names do not need to be unique.
-
 Optional:
 
 - `comparison_operator` (String) Comparison operator to use when measuring a metric against the threshold value.
 - `evaluation_periods` (Number) Length of time (in minutes) the metric must be at or beyond the threshold before a scaling event is triggered.
 - `location` (String)
+- `metric_name` (String) Name of the Amazon GameLift-defined metric that is used to trigger a scaling adjustment.
+- `name` (String) A descriptive label that is associated with a fleet's scaling policy. Policy names do not need to be unique.
 - `policy_type` (String) The type of scaling policy to create. For a target-based policy, set the parameter MetricName to 'PercentAvailableGameSessions' and specify a TargetConfiguration. For a rule-based policy set the following parameters: MetricName, ComparisonOperator, Threshold, EvaluationPeriods, ScalingAdjustmentType, and ScalingAdjustment.
 - `scaling_adjustment` (Number) Amount of adjustment to make, based on the scaling adjustment type.
 - `scaling_adjustment_type` (String) The type of adjustment to make to a fleet's instance count.
@@ -286,7 +274,7 @@ Optional:
 <a id="nestedatt--scaling_policies--target_configuration"></a>
 ### Nested Schema for `scaling_policies.target_configuration`
 
-Required:
+Optional:
 
 - `target_value` (Number) Desired value to use with a target-based scaling policy. The value must be relevant for whatever metric the scaling policy is using. For example, in a policy using the metric PercentAvailableGameSessions, the target value should be the preferred size of the fleet's buffer (the percent of capacity that should be idle and ready for new game sessions).
 

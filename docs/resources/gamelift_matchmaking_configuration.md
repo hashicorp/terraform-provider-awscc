@@ -122,7 +122,7 @@ resource "awscc_gamelift_matchmaking_configuration" "example" {
 <a id="nestedatt--game_properties"></a>
 ### Nested Schema for `game_properties`
 
-Required:
+Optional:
 
 - `key` (String) The game property identifier.
 - `value` (String) The game property value.
@@ -131,7 +131,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length.

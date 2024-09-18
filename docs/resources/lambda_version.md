@@ -36,7 +36,7 @@ Resource Type definition for AWS::Lambda::Version
 <a id="nestedatt--provisioned_concurrency_config"></a>
 ### Nested Schema for `provisioned_concurrency_config`
 
-Required:
+Optional:
 
 - `provisioned_concurrent_executions` (Number) The amount of provisioned concurrency to allocate for the version.
 
@@ -44,13 +44,10 @@ Required:
 <a id="nestedatt--runtime_policy"></a>
 ### Nested Schema for `runtime_policy`
 
-Required:
-
-- `update_runtime_on` (String) The runtime update mode.
-
 Optional:
 
 - `runtime_version_arn` (String) The ARN of the runtime the function is configured to use. If the runtime update mode is manual, the ARN is returned, otherwise null is returned.
+- `update_runtime_on` (String) The runtime update mode.
 
 ## Import
 

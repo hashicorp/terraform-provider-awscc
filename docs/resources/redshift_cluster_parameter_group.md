@@ -33,7 +33,7 @@ Resource Type definition for AWS::Redshift::ClusterParameterGroup
 <a id="nestedatt--parameters"></a>
 ### Nested Schema for `parameters`
 
-Required:
+Optional:
 
 - `parameter_name` (String) The name of the parameter.
 - `parameter_value` (String) The value of the parameter. If `ParameterName` is `wlm_json_configuration`, then the maximum size of `ParameterValue` is 8000 characters.
@@ -42,7 +42,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

@@ -42,7 +42,7 @@ Optional:
 <a id="nestedatt--mobile_device_management--intune"></a>
 ### Nested Schema for `mobile_device_management.intune`
 
-Required:
+Optional:
 
 - `azure_application_id` (String)
 - `domain` (String)

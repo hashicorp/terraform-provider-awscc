@@ -40,7 +40,7 @@ Definition of the AWS::QuickSight::VPCConnection Resource Type.
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) <p>Tag key.</p>
 - `value` (String) <p>Tag value.</p>

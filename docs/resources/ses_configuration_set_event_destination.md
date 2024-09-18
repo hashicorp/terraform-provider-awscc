@@ -51,7 +51,7 @@ Optional:
 <a id="nestedatt--event_destination--cloudwatch_destination--dimension_configurations"></a>
 ### Nested Schema for `event_destination.cloudwatch_destination.dimension_configurations`
 
-Required:
+Optional:
 
 - `default_dimension_value` (String) The default value of the dimension that is published to Amazon CloudWatch if you do not provide the value of the dimension when you send an email.
 - `dimension_name` (String) The name of an Amazon CloudWatch dimension associated with an email sending metric.
@@ -62,7 +62,7 @@ Required:
 <a id="nestedatt--event_destination--event_bridge_destination"></a>
 ### Nested Schema for `event_destination.event_bridge_destination`
 
-Required:
+Optional:
 
 - `event_bus_arn` (String)
 
@@ -70,7 +70,7 @@ Required:
 <a id="nestedatt--event_destination--kinesis_firehose_destination"></a>
 ### Nested Schema for `event_destination.kinesis_firehose_destination`
 
-Required:
+Optional:
 
 - `delivery_stream_arn` (String) The ARN of the Amazon Kinesis Firehose stream that email sending events should be published to.
 - `iam_role_arn` (String) The ARN of the IAM role under which Amazon SES publishes email sending events to the Amazon Kinesis Firehose stream.
@@ -79,7 +79,7 @@ Required:
 <a id="nestedatt--event_destination--sns_destination"></a>
 ### Nested Schema for `event_destination.sns_destination`
 
-Required:
+Optional:
 
 - `topic_arn` (String)
 

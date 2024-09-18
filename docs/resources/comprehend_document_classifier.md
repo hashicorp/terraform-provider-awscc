@@ -55,25 +55,19 @@ Optional:
 <a id="nestedatt--input_data_config--augmented_manifests"></a>
 ### Nested Schema for `input_data_config.augmented_manifests`
 
-Required:
+Optional:
 
 - `attribute_names` (Set of String)
 - `s3_uri` (String)
-
-Optional:
-
 - `split` (String)
 
 
 <a id="nestedatt--input_data_config--document_reader_config"></a>
 ### Nested Schema for `input_data_config.document_reader_config`
 
-Required:
-
-- `document_read_action` (String)
-
 Optional:
 
+- `document_read_action` (String)
 - `document_read_mode` (String)
 - `feature_types` (Set of String)
 
@@ -81,12 +75,9 @@ Optional:
 <a id="nestedatt--input_data_config--documents"></a>
 ### Nested Schema for `input_data_config.documents`
 
-Required:
-
-- `s3_uri` (String)
-
 Optional:
 
+- `s3_uri` (String)
 - `test_s3_uri` (String)
 
 
@@ -103,7 +94,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)
@@ -112,7 +103,7 @@ Required:
 <a id="nestedatt--vpc_config"></a>
 ### Nested Schema for `vpc_config`
 
-Required:
+Optional:
 
 - `security_group_ids` (Set of String)
 - `subnets` (Set of String)

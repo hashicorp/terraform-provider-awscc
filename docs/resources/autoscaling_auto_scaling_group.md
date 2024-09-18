@@ -227,35 +227,29 @@ Optional:
 <a id="nestedatt--launch_template"></a>
 ### Nested Schema for `launch_template`
 
-Required:
-
-- `version` (String) The version number of the launch template.
- Specifying ``$Latest`` or ``$Default`` for the template version number is not supported. However, you can specify ``LatestVersionNumber`` or ``DefaultVersionNumber`` using the ``Fn::GetAtt`` intrinsic function. For more information, see [Fn::GetAtt](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-getatt.html).
-  For an example of using the ``Fn::GetAtt`` function, see the [Examples](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-autoscaling-autoscalinggroup.html#aws-resource-autoscaling-autoscalinggroup--examples) section of the ``AWS::AutoScaling::AutoScalingGroup`` resource.
-
 Optional:
 
 - `launch_template_id` (String) The ID of the launch template.
  You must specify the ``LaunchTemplateID`` or the ``LaunchTemplateName``, but not both.
 - `launch_template_name` (String) The name of the launch template.
  You must specify the ``LaunchTemplateName`` or the ``LaunchTemplateID``, but not both.
+- `version` (String) The version number of the launch template.
+ Specifying ``$Latest`` or ``$Default`` for the template version number is not supported. However, you can specify ``LatestVersionNumber`` or ``DefaultVersionNumber`` using the ``Fn::GetAtt`` intrinsic function. For more information, see [Fn::GetAtt](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-getatt.html).
+  For an example of using the ``Fn::GetAtt`` function, see the [Examples](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-autoscaling-autoscalinggroup.html#aws-resource-autoscaling-autoscalinggroup--examples) section of the ``AWS::AutoScaling::AutoScalingGroup`` resource.
 
 
 <a id="nestedatt--lifecycle_hook_specification_list"></a>
 ### Nested Schema for `lifecycle_hook_specification_list`
-
-Required:
-
-- `lifecycle_hook_name` (String) The name of the lifecycle hook.
-- `lifecycle_transition` (String) The lifecycle transition. For Auto Scaling groups, there are two major lifecycle transitions.
-  +  To create a lifecycle hook for scale-out events, specify ``autoscaling:EC2_INSTANCE_LAUNCHING``.
-  +  To create a lifecycle hook for scale-in events, specify ``autoscaling:EC2_INSTANCE_TERMINATING``.
 
 Optional:
 
 - `default_result` (String) The action the Auto Scaling group takes when the lifecycle hook timeout elapses or if an unexpected failure occurs. The default value is ``ABANDON``.
  Valid values: ``CONTINUE`` | ``ABANDON``
 - `heartbeat_timeout` (Number) The maximum time, in seconds, that can elapse before the lifecycle hook times out. The range is from ``30`` to ``7200`` seconds. The default value is ``3600`` seconds (1 hour).
+- `lifecycle_hook_name` (String) The name of the lifecycle hook.
+- `lifecycle_transition` (String) The lifecycle transition. For Auto Scaling groups, there are two major lifecycle transitions.
+  +  To create a lifecycle hook for scale-out events, specify ``autoscaling:EC2_INSTANCE_LAUNCHING``.
+  +  To create a lifecycle hook for scale-in events, specify ``autoscaling:EC2_INSTANCE_TERMINATING``.
 - `notification_metadata` (String) Additional information that you want to include any time Amazon EC2 Auto Scaling sends a message to the notification target.
 - `notification_target_arn` (String) The Amazon Resource Name (ARN) of the notification target that Amazon EC2 Auto Scaling sends notifications to when an instance is in a wait state for the lifecycle hook. You can specify an Amazon SNS topic or an Amazon SQS queue.
 - `role_arn` (String) The ARN of the IAM role that allows the Auto Scaling group to publish to the specified notification target. For information about creating this role, see [Prepare to add a lifecycle hook to your Auto Scaling group](https://docs.aws.amazon.com/autoscaling/ec2/userguide/prepare-for-lifecycle-notifications.html) in the *Amazon EC2 Auto Scaling User Guide*.
@@ -265,12 +259,9 @@ Optional:
 <a id="nestedatt--metrics_collection"></a>
 ### Nested Schema for `metrics_collection`
 
-Required:
-
-- `granularity` (String) The frequency at which Amazon EC2 Auto Scaling sends aggregated data to CloudWatch. The only valid value is ``1Minute``.
-
 Optional:
 
+- `granularity` (String) The frequency at which Amazon EC2 Auto Scaling sends aggregated data to CloudWatch. The only valid value is ``1Minute``.
 - `metrics` (List of String) Identifies the metrics to enable.
  You can specify one or more of the following metrics:
   +   ``GroupMinSize`` 
@@ -301,33 +292,46 @@ Optional:
 <a id="nestedatt--mixed_instances_policy"></a>
 ### Nested Schema for `mixed_instances_policy`
 
-Required:
-
-- `launch_template` (Attributes) One or more launch templates and the instance types (overrides) that are used to launch EC2 instances to fulfill On-Demand and Spot capacities. (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template))
-
 Optional:
 
 - `instances_distribution` (Attributes) The instances distribution. (see [below for nested schema](#nestedatt--mixed_instances_policy--instances_distribution))
+- `launch_template` (Attributes) One or more launch templates and the instance types (overrides) that are used to launch EC2 instances to fulfill On-Demand and Spot capacities. (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template))
+
+<a id="nestedatt--mixed_instances_policy--instances_distribution"></a>
+### Nested Schema for `mixed_instances_policy.instances_distribution`
+
+Optional:
+
+- `on_demand_allocation_strategy` (String) The allocation strategy to apply to your On-Demand Instances when they are launched. Possible instance types are determined by the launch template overrides that you specify.
+ The following lists the valid values:
+  + lowest-price Uses price to determine which instance types are the highest priority, launching the lowest priced instance types within an Availability Zone first. This is the default value for Auto Scaling groups that specify InstanceRequirements. + prioritized You set the order of instance types for the launch template overrides from highest to lowest priority (from first to last in the list). Amazon EC2 Auto Scaling launches your highest priority instance types first. If all your On-Demand capacity cannot be fulfilled using your highest priority instance type, then Amazon EC2 Auto Scaling launches the remaining capacity using the second priority instance type, and so on. This is the default value for Auto Scaling groups that don't specify InstanceRequirements and cannot be used for groups that do.
+- `on_demand_base_capacity` (Number) The minimum amount of the Auto Scaling group's capacity that must be fulfilled by On-Demand Instances. This base portion is launched first as your group scales.
+ This number has the same unit of measurement as the group's desired capacity. If you change the default unit of measurement (number of instances) by specifying weighted capacity values in your launch template overrides list, or by changing the default desired capacity type setting of the group, you must specify this number using the same unit of measurement.
+ Default: 0
+  An update to this setting means a gradual replacement of instances to adjust the current On-Demand Instance levels. When replacing instances, Amazon EC2 Auto Scaling launches new instances before terminating the previous ones.
+- `on_demand_percentage_above_base_capacity` (Number) Controls the percentages of On-Demand Instances and Spot Instances for your additional capacity beyond ``OnDemandBaseCapacity``. Expressed as a number (for example, 20 specifies 20% On-Demand Instances, 80% Spot Instances). If set to 100, only On-Demand Instances are used.
+ Default: 100
+  An update to this setting means a gradual replacement of instances to adjust the current On-Demand and Spot Instance levels for your additional capacity higher than the base capacity. When replacing instances, Amazon EC2 Auto Scaling launches new instances before terminating the previous ones.
+- `spot_allocation_strategy` (String) The allocation strategy to apply to your Spot Instances when they are launched. Possible instance types are determined by the launch template overrides that you specify.
+ The following lists the valid values:
+  + capacity-optimized Requests Spot Instances using pools that are optimally chosen based on the available Spot capacity. This strategy has the lowest risk of interruption. To give certain instance types a higher chance of launching first, use capacity-optimized-prioritized. + capacity-optimized-prioritized You set the order of instance types for the launch template overrides from highest to lowest priority (from first to last in the list). Amazon EC2 Auto Scaling honors the instance type priorities on a best effort basis but optimizes for capacity first. Note that if the On-Demand allocation strategy is set to prioritized, the same priority is applied when fulfilling On-Demand capacity. This is not a valid value for Auto Scaling groups that specify InstanceRequirements. + lowest-price Requests Spot Instances using the lowest priced pools within an Availability Zone, across the number of Spot pools that you specify for the SpotInstancePools property. To ensure that your desired capacity is met, you might receive Spot Instances from several pools. This is the default value, but it might lead to high interruption rates because this strategy only considers instance price and not available capacity. + price-capacity-optimized (recommended) The price and capacity optimized allocation strategy looks at both price and capacity to select the Spot Instance pools that are the least likely to be interrupted and have the lowest possible price.
+- `spot_instance_pools` (Number) The number of Spot Instance pools across which to allocate your Spot Instances. The Spot pools are determined from the different instance types in the overrides. Valid only when the ``SpotAllocationStrategy`` is ``lowest-price``. Value must be in the range of 1–20.
+ Default: 2
+- `spot_max_price` (String) The maximum price per unit hour that you are willing to pay for a Spot Instance. If your maximum price is lower than the Spot price for the instance types that you selected, your Spot Instances are not launched. We do not recommend specifying a maximum price because it can lead to increased interruptions. When Spot Instances launch, you pay the current Spot price. To remove a maximum price that you previously set, include the property but specify an empty string ("") for the value.
+  If you specify a maximum price, your instances will be interrupted more frequently than if you do not specify one.
+  Valid Range: Minimum value of 0.001
+
 
 <a id="nestedatt--mixed_instances_policy--launch_template"></a>
 ### Nested Schema for `mixed_instances_policy.launch_template`
 
-Required:
-
-- `launch_template_specification` (Attributes) The launch template. (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--launch_template_specification))
-
 Optional:
 
+- `launch_template_specification` (Attributes) The launch template. (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--launch_template_specification))
 - `overrides` (Attributes List) Any properties that you specify override the same properties in the launch template. (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides))
 
 <a id="nestedatt--mixed_instances_policy--launch_template--launch_template_specification"></a>
 ### Nested Schema for `mixed_instances_policy.launch_template.launch_template_specification`
-
-Required:
-
-- `version` (String) The version number of the launch template.
- Specifying ``$Latest`` or ``$Default`` for the template version number is not supported. However, you can specify ``LatestVersionNumber`` or ``DefaultVersionNumber`` using the ``Fn::GetAtt`` intrinsic function. For more information, see [Fn::GetAtt](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-getatt.html).
-  For an example of using the ``Fn::GetAtt`` function, see the [Examples](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-autoscaling-autoscalinggroup.html#aws-resource-autoscaling-autoscalinggroup--examples) section of the ``AWS::AutoScaling::AutoScalingGroup`` resource.
 
 Optional:
 
@@ -335,6 +339,9 @@ Optional:
  You must specify the ``LaunchTemplateID`` or the ``LaunchTemplateName``, but not both.
 - `launch_template_name` (String) The name of the launch template.
  You must specify the ``LaunchTemplateName`` or the ``LaunchTemplateID``, but not both.
+- `version` (String) The version number of the launch template.
+ Specifying ``$Latest`` or ``$Default`` for the template version number is not supported. However, you can specify ``LatestVersionNumber`` or ``DefaultVersionNumber`` using the ``Fn::GetAtt`` intrinsic function. For more information, see [Fn::GetAtt](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-getatt.html).
+  For an example of using the ``Fn::GetAtt`` function, see the [Examples](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-autoscaling-autoscalinggroup.html#aws-resource-autoscaling-autoscalinggroup--examples) section of the ``AWS::AutoScaling::AutoScalingGroup`` resource.
 
 
 <a id="nestedatt--mixed_instances_policy--launch_template--overrides"></a>
@@ -355,11 +362,6 @@ Optional:
 
 <a id="nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements"></a>
 ### Nested Schema for `mixed_instances_policy.launch_template.overrides.instance_requirements`
-
-Required:
-
-- `memory_mi_b` (Attributes) The minimum and maximum instance memory size for an instance type, in MiB. (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--memory_mi_b))
-- `v_cpu_count` (Attributes) The minimum and maximum number of vCPUs for an instance type. (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--v_cpu_count))
 
 Optional:
 
@@ -431,6 +433,7 @@ Optional:
   Only one of ``SpotMaxPricePercentageOverLowestPrice`` or ``MaxSpotPriceAsPercentageOfOptimalOnDemandPrice`` can be specified. If you don't specify either, Amazon EC2 Auto Scaling will automatically apply optimal price protection to consistently select from a wide range of instance types. To indicate no price protection threshold for Spot Instances, meaning you want to consider all instance types that match your attributes, include one of these parameters and specify a high value, such as ``999999``.
 - `memory_gi_b_per_v_cpu` (Attributes) The minimum and maximum amount of memory per vCPU for an instance type, in GiB.
  Default: No minimum or maximum limits (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--memory_gi_b_per_v_cpu))
+- `memory_mi_b` (Attributes) The minimum and maximum instance memory size for an instance type, in MiB. (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--memory_mi_b))
 - `network_bandwidth_gbps` (Attributes) The minimum and maximum amount of network bandwidth, in gigabits per second (Gbps).
  Default: No minimum or maximum limits (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--network_bandwidth_gbps))
 - `network_interface_count` (Attributes) The minimum and maximum number of network interfaces for an instance type.
@@ -448,24 +451,7 @@ Optional:
   Only one of ``SpotMaxPricePercentageOverLowestPrice`` or ``MaxSpotPriceAsPercentageOfOptimalOnDemandPrice`` can be specified. If you don't specify either, Amazon EC2 Auto Scaling will automatically apply optimal price protection to consistently select from a wide range of instance types. To indicate no price protection threshold for Spot Instances, meaning you want to consider all instance types that match your attributes, include one of these parameters and specify a high value, such as ``999999``.
 - `total_local_storage_gb` (Attributes) The minimum and maximum total local storage size for an instance type, in GB.
  Default: No minimum or maximum limits (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--total_local_storage_gb))
-
-<a id="nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--memory_mi_b"></a>
-### Nested Schema for `mixed_instances_policy.launch_template.overrides.instance_requirements.memory_mi_b`
-
-Optional:
-
-- `max` (Number) The memory maximum in MiB.
-- `min` (Number) The memory minimum in MiB.
-
-
-<a id="nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--v_cpu_count"></a>
-### Nested Schema for `mixed_instances_policy.launch_template.overrides.instance_requirements.v_cpu_count`
-
-Optional:
-
-- `max` (Number) The maximum number of vCPUs.
-- `min` (Number) The minimum number of vCPUs.
-
+- `v_cpu_count` (Attributes) The minimum and maximum number of vCPUs for an instance type. (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--v_cpu_count))
 
 <a id="nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--accelerator_count"></a>
 ### Nested Schema for `mixed_instances_policy.launch_template.overrides.instance_requirements.accelerator_count`
@@ -503,6 +489,15 @@ Optional:
 - `min` (Number) The memory minimum in GiB.
 
 
+<a id="nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--memory_mi_b"></a>
+### Nested Schema for `mixed_instances_policy.launch_template.overrides.instance_requirements.memory_mi_b`
+
+Optional:
+
+- `max` (Number) The memory maximum in MiB.
+- `min` (Number) The memory minimum in MiB.
+
+
 <a id="nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--network_bandwidth_gbps"></a>
 ### Nested Schema for `mixed_instances_policy.launch_template.overrides.instance_requirements.network_bandwidth_gbps`
 
@@ -530,15 +525,18 @@ Optional:
 - `min` (Number) The storage minimum in GB.
 
 
+<a id="nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--v_cpu_count"></a>
+### Nested Schema for `mixed_instances_policy.launch_template.overrides.instance_requirements.v_cpu_count`
+
+Optional:
+
+- `max` (Number) The maximum number of vCPUs.
+- `min` (Number) The minimum number of vCPUs.
+
+
 
 <a id="nestedatt--mixed_instances_policy--launch_template--overrides--launch_template_specification"></a>
 ### Nested Schema for `mixed_instances_policy.launch_template.overrides.launch_template_specification`
-
-Required:
-
-- `version` (String) The version number of the launch template.
- Specifying ``$Latest`` or ``$Default`` for the template version number is not supported. However, you can specify ``LatestVersionNumber`` or ``DefaultVersionNumber`` using the ``Fn::GetAtt`` intrinsic function. For more information, see [Fn::GetAtt](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-getatt.html).
-  For an example of using the ``Fn::GetAtt`` function, see the [Examples](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-autoscaling-autoscalinggroup.html#aws-resource-autoscaling-autoscalinggroup--examples) section of the ``AWS::AutoScaling::AutoScalingGroup`` resource.
 
 Optional:
 
@@ -546,43 +544,17 @@ Optional:
  You must specify the ``LaunchTemplateID`` or the ``LaunchTemplateName``, but not both.
 - `launch_template_name` (String) The name of the launch template.
  You must specify the ``LaunchTemplateName`` or the ``LaunchTemplateID``, but not both.
+- `version` (String) The version number of the launch template.
+ Specifying ``$Latest`` or ``$Default`` for the template version number is not supported. However, you can specify ``LatestVersionNumber`` or ``DefaultVersionNumber`` using the ``Fn::GetAtt`` intrinsic function. For more information, see [Fn::GetAtt](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-getatt.html).
+  For an example of using the ``Fn::GetAtt`` function, see the [Examples](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-autoscaling-autoscalinggroup.html#aws-resource-autoscaling-autoscalinggroup--examples) section of the ``AWS::AutoScaling::AutoScalingGroup`` resource.
 
 
-
-
-<a id="nestedatt--mixed_instances_policy--instances_distribution"></a>
-### Nested Schema for `mixed_instances_policy.instances_distribution`
-
-Optional:
-
-- `on_demand_allocation_strategy` (String) The allocation strategy to apply to your On-Demand Instances when they are launched. Possible instance types are determined by the launch template overrides that you specify.
- The following lists the valid values:
-  + lowest-price Uses price to determine which instance types are the highest priority, launching the lowest priced instance types within an Availability Zone first. This is the default value for Auto Scaling groups that specify InstanceRequirements. + prioritized You set the order of instance types for the launch template overrides from highest to lowest priority (from first to last in the list). Amazon EC2 Auto Scaling launches your highest priority instance types first. If all your On-Demand capacity cannot be fulfilled using your highest priority instance type, then Amazon EC2 Auto Scaling launches the remaining capacity using the second priority instance type, and so on. This is the default value for Auto Scaling groups that don't specify InstanceRequirements and cannot be used for groups that do.
-- `on_demand_base_capacity` (Number) The minimum amount of the Auto Scaling group's capacity that must be fulfilled by On-Demand Instances. This base portion is launched first as your group scales.
- This number has the same unit of measurement as the group's desired capacity. If you change the default unit of measurement (number of instances) by specifying weighted capacity values in your launch template overrides list, or by changing the default desired capacity type setting of the group, you must specify this number using the same unit of measurement.
- Default: 0
-  An update to this setting means a gradual replacement of instances to adjust the current On-Demand Instance levels. When replacing instances, Amazon EC2 Auto Scaling launches new instances before terminating the previous ones.
-- `on_demand_percentage_above_base_capacity` (Number) Controls the percentages of On-Demand Instances and Spot Instances for your additional capacity beyond ``OnDemandBaseCapacity``. Expressed as a number (for example, 20 specifies 20% On-Demand Instances, 80% Spot Instances). If set to 100, only On-Demand Instances are used.
- Default: 100
-  An update to this setting means a gradual replacement of instances to adjust the current On-Demand and Spot Instance levels for your additional capacity higher than the base capacity. When replacing instances, Amazon EC2 Auto Scaling launches new instances before terminating the previous ones.
-- `spot_allocation_strategy` (String) The allocation strategy to apply to your Spot Instances when they are launched. Possible instance types are determined by the launch template overrides that you specify.
- The following lists the valid values:
-  + capacity-optimized Requests Spot Instances using pools that are optimally chosen based on the available Spot capacity. This strategy has the lowest risk of interruption. To give certain instance types a higher chance of launching first, use capacity-optimized-prioritized. + capacity-optimized-prioritized You set the order of instance types for the launch template overrides from highest to lowest priority (from first to last in the list). Amazon EC2 Auto Scaling honors the instance type priorities on a best effort basis but optimizes for capacity first. Note that if the On-Demand allocation strategy is set to prioritized, the same priority is applied when fulfilling On-Demand capacity. This is not a valid value for Auto Scaling groups that specify InstanceRequirements. + lowest-price Requests Spot Instances using the lowest priced pools within an Availability Zone, across the number of Spot pools that you specify for the SpotInstancePools property. To ensure that your desired capacity is met, you might receive Spot Instances from several pools. This is the default value, but it might lead to high interruption rates because this strategy only considers instance price and not available capacity. + price-capacity-optimized (recommended) The price and capacity optimized allocation strategy looks at both price and capacity to select the Spot Instance pools that are the least likely to be interrupted and have the lowest possible price.
-- `spot_instance_pools` (Number) The number of Spot Instance pools across which to allocate your Spot Instances. The Spot pools are determined from the different instance types in the overrides. Valid only when the ``SpotAllocationStrategy`` is ``lowest-price``. Value must be in the range of 1–20.
- Default: 2
-- `spot_max_price` (String) The maximum price per unit hour that you are willing to pay for a Spot Instance. If your maximum price is lower than the Spot price for the instance types that you selected, your Spot Instances are not launched. We do not recommend specifying a maximum price because it can lead to increased interruptions. When Spot Instances launch, you pay the current Spot price. To remove a maximum price that you previously set, include the property but specify an empty string ("") for the value.
-  If you specify a maximum price, your instances will be interrupted more frequently than if you do not specify one.
-  Valid Range: Minimum value of 0.001
 
 
 
 <a id="nestedatt--notification_configuration"></a>
 ### Nested Schema for `notification_configuration`
 
-Required:
-
-- `topic_arn` (String) The Amazon Resource Name (ARN) of the Amazon SNS topic.
-
 Optional:
 
 - `notification_types` (List of String) A list of event types that send a notification. Event types can include any of the following types. 
@@ -592,15 +564,12 @@ Optional:
   +   ``autoscaling:EC2_INSTANCE_TERMINATE`` 
   +   ``autoscaling:EC2_INSTANCE_TERMINATE_ERROR`` 
   +   ``autoscaling:TEST_NOTIFICATION``
+- `topic_arn` (String) The Amazon Resource Name (ARN) of the Amazon SNS topic.
 
 
 <a id="nestedatt--notification_configurations"></a>
 ### Nested Schema for `notification_configurations`
 
-Required:
-
-- `topic_arn` (String) The Amazon Resource Name (ARN) of the Amazon SNS topic.
-
 Optional:
 
 - `notification_types` (List of String) A list of event types that send a notification. Event types can include any of the following types. 
@@ -610,12 +579,13 @@ Optional:
   +   ``autoscaling:EC2_INSTANCE_TERMINATE`` 
   +   ``autoscaling:EC2_INSTANCE_TERMINATE_ERROR`` 
   +   ``autoscaling:TEST_NOTIFICATION``
+- `topic_arn` (String) The Amazon Resource Name (ARN) of the Amazon SNS topic.
 
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The tag key.
 - `propagate_at_launch` (Boolean) Set to ``true`` if you want CloudFormation to copy the tag to EC2 instances that are launched as part of the Auto Scaling group. Set to ``false`` if you want the tag attached only to the Auto Scaling group and not copied to any instances launched as part of the Auto Scaling group.

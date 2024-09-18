@@ -73,14 +73,14 @@ Optional:
 <a id="nestedatt--schedule--daily"></a>
 ### Nested Schema for `schedule.daily`
 
-Required:
+Optional:
 
 - `start_time` (Attributes) (see [below for nested schema](#nestedatt--schedule--daily--start_time))
 
 <a id="nestedatt--schedule--daily--start_time"></a>
 ### Nested Schema for `schedule.daily.start_time`
 
-Required:
+Optional:
 
 - `time_of_day` (String)
 - `time_zone` (String)
@@ -90,7 +90,7 @@ Required:
 <a id="nestedatt--schedule--monthly"></a>
 ### Nested Schema for `schedule.monthly`
 
-Required:
+Optional:
 
 - `day` (String)
 - `start_time` (Attributes) (see [below for nested schema](#nestedatt--schedule--monthly--start_time))
@@ -98,7 +98,7 @@ Required:
 <a id="nestedatt--schedule--monthly--start_time"></a>
 ### Nested Schema for `schedule.monthly.start_time`
 
-Required:
+Optional:
 
 - `time_of_day` (String)
 - `time_zone` (String)
@@ -108,7 +108,7 @@ Required:
 <a id="nestedatt--schedule--weekly"></a>
 ### Nested Schema for `schedule.weekly`
 
-Required:
+Optional:
 
 - `days` (List of String)
 - `start_time` (Attributes) (see [below for nested schema](#nestedatt--schedule--weekly--start_time))
@@ -116,7 +116,7 @@ Required:
 <a id="nestedatt--schedule--weekly--start_time"></a>
 ### Nested Schema for `schedule.weekly.start_time`
 
-Required:
+Optional:
 
 - `time_of_day` (String)
 - `time_zone` (String)

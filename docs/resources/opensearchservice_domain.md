@@ -101,7 +101,7 @@ Optional:
 <a id="nestedatt--advanced_security_options--saml_options--idp"></a>
 ### Nested Schema for `advanced_security_options.saml_options.idp`
 
-Required:
+Optional:
 
 - `entity_id` (String)
 - `metadata_content` (String)
@@ -223,7 +223,7 @@ Optional:
 <a id="nestedatt--off_peak_window_options--off_peak_window--window_start_time"></a>
 ### Nested Schema for `off_peak_window_options.off_peak_window.window_start_time`
 
-Required:
+Optional:
 
 - `hours` (Number)
 - `minutes` (Number)
@@ -250,7 +250,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The value of the tag.
 - `value` (String) The key of the tag.

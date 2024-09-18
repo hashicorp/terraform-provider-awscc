@@ -61,7 +61,7 @@ Optional:
 <a id="nestedatt--rendering_engine"></a>
 ### Nested Schema for `rendering_engine`
 
-Required:
+Optional:
 
 - `name` (String) The name of the rendering engine.
 - `version` (String) The version of the rendering engine.
@@ -70,7 +70,7 @@ Required:
 <a id="nestedatt--sources"></a>
 ### Nested Schema for `sources`
 
-Required:
+Optional:
 
 - `architecture` (String) The target processor architecture for the application.
 - `s3_bucket` (String) The Amazon S3 bucket name.

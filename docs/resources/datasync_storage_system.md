@@ -50,7 +50,7 @@ Optional:
 <a id="nestedatt--server_credentials"></a>
 ### Nested Schema for `server_credentials`
 
-Required:
+Optional:
 
 - `password` (String) The password for your storage system's management interface
 - `username` (String) The username for your storage system's management interface.
@@ -59,7 +59,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key for an AWS resource tag.
 - `value` (String) The value for an AWS resource tag.

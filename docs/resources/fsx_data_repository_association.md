@@ -53,7 +53,7 @@ Optional:
 <a id="nestedatt--s3--auto_export_policy"></a>
 ### Nested Schema for `s3.auto_export_policy`
 
-Required:
+Optional:
 
 - `events` (Set of String) The ``AutoExportPolicy`` can have the following event values:
   +   ``NEW`` - New files and directories are automatically exported to the data repository as they are added to the file system.
@@ -66,7 +66,7 @@ Required:
 <a id="nestedatt--s3--auto_import_policy"></a>
 ### Nested Schema for `s3.auto_import_policy`
 
-Required:
+Optional:
 
 - `events` (Set of String) The ``AutoImportPolicy`` can have the following event values:
   +   ``NEW`` - Amazon FSx automatically imports metadata of files added to the linked S3 bucket that do not currently exist in the FSx file system.
@@ -80,7 +80,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) A value that specifies the ``TagKey``, the name of the tag. Tag keys must be unique for the resource to which they are attached.
 - `value` (String) A value that specifies the ``TagValue``, the value assigned to the corresponding tag key. Tag values can be null and don't have to be unique in a tag set. For example, you can have a key-value pair in a tag set of ``finances : April`` and also of ``payroll : April``.

@@ -103,19 +103,16 @@ Optional:
 <a id="nestedatt--replica_regions"></a>
 ### Nested Schema for `replica_regions`
 
-Required:
-
-- `region` (String) A string that represents a ``Region``, for example "us-east-1".
-
 Optional:
 
 - `kms_key_id` (String) The ARN, key ID, or alias of the KMS key to encrypt the secret. If you don't include this field, Secrets Manager uses ``aws/secretsmanager``.
+- `region` (String) A string that represents a ``Region``, for example "us-east-1".
 
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key identifier, or name, of the tag.
 - `value` (String) The string value associated with the key of the tag.

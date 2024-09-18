@@ -67,20 +67,17 @@ Optional:
 <a id="nestedatt--portal_options--sign_in_options"></a>
 ### Nested Schema for `portal_options.sign_in_options`
 
-Required:
-
-- `origin` (String) This determines how IAM Identity Center navigates the user to the target application
-
 Optional:
 
 - `application_url` (String) The URL that accepts authentication requests for an application, this is a required parameter if the Origin parameter is APPLICATION
+- `origin` (String) This determines how IAM Identity Center navigates the user to the target application
 
 
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

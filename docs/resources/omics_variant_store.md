@@ -48,13 +48,10 @@ Required:
 <a id="nestedatt--sse_config"></a>
 ### Nested Schema for `sse_config`
 
-Required:
-
-- `type` (String)
-
 Optional:
 
 - `key_arn` (String)
+- `type` (String)
 
 ## Import
 

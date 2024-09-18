@@ -60,7 +60,7 @@ Optional:
 <a id="nestedatt--ipv_4_prefixes"></a>
 ### Nested Schema for `ipv_4_prefixes`
 
-Required:
+Optional:
 
 - `ipv_4_prefix` (String)
 
@@ -68,7 +68,7 @@ Required:
 <a id="nestedatt--ipv_6_addresses"></a>
 ### Nested Schema for `ipv_6_addresses`
 
-Required:
+Optional:
 
 - `ipv_6_address` (String)
 
@@ -76,7 +76,7 @@ Required:
 <a id="nestedatt--ipv_6_prefixes"></a>
 ### Nested Schema for `ipv_6_prefixes`
 
-Required:
+Optional:
 
 - `ipv_6_prefix` (String)
 
@@ -84,7 +84,7 @@ Required:
 <a id="nestedatt--private_ip_addresses"></a>
 ### Nested Schema for `private_ip_addresses`
 
-Required:
+Optional:
 
 - `primary` (Boolean)
 - `private_ip_address` (String)
@@ -93,7 +93,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

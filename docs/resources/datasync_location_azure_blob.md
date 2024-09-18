@@ -38,7 +38,7 @@ Resource schema for AWS::DataSync::LocationAzureBlob.
 <a id="nestedatt--azure_blob_sas_configuration"></a>
 ### Nested Schema for `azure_blob_sas_configuration`
 
-Required:
+Optional:
 
 - `azure_blob_sas_token` (String) Specifies the shared access signature (SAS) token, which indicates the permissions DataSync needs to access your Azure Blob Storage container.
 
@@ -46,7 +46,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key for an AWS resource tag.
 - `value` (String) The value for an AWS resource tag.

@@ -60,12 +60,9 @@ Optional:
 <a id="nestedatt--steps--action--compare_action"></a>
 ### Nested Schema for `steps.action.compare_action`
 
-Required:
-
-- `input` (Attributes) (see [below for nested schema](#nestedatt--steps--action--compare_action--input))
-
 Optional:
 
+- `input` (Attributes) (see [below for nested schema](#nestedatt--steps--action--compare_action--input))
 - `output` (Attributes) (see [below for nested schema](#nestedatt--steps--action--compare_action--output))
 
 <a id="nestedatt--steps--action--compare_action--input"></a>
@@ -78,7 +75,7 @@ Optional:
 <a id="nestedatt--steps--action--compare_action--input--file"></a>
 ### Nested Schema for `steps.action.compare_action.input.file`
 
-Required:
+Optional:
 
 - `file_metadata` (Attributes) (see [below for nested schema](#nestedatt--steps--action--compare_action--input--file--file_metadata))
 - `source_location` (String)
@@ -95,7 +92,7 @@ Optional:
 <a id="nestedatt--steps--action--compare_action--input--file--file_metadata--data_sets"></a>
 ### Nested Schema for `steps.action.compare_action.input.file.file_metadata.data_sets`
 
-Required:
+Optional:
 
 - `ccsid` (String)
 - `format` (String)
@@ -107,7 +104,7 @@ Required:
 <a id="nestedatt--steps--action--compare_action--input--file--file_metadata--database_cdc"></a>
 ### Nested Schema for `steps.action.compare_action.input.file.file_metadata.database_cdc`
 
-Required:
+Optional:
 
 - `source_metadata` (Attributes) (see [below for nested schema](#nestedatt--steps--action--compare_action--input--file--file_metadata--database_cdc--source_metadata))
 - `target_metadata` (Attributes) (see [below for nested schema](#nestedatt--steps--action--compare_action--input--file--file_metadata--database_cdc--target_metadata))
@@ -115,7 +112,7 @@ Required:
 <a id="nestedatt--steps--action--compare_action--input--file--file_metadata--database_cdc--source_metadata"></a>
 ### Nested Schema for `steps.action.compare_action.input.file.file_metadata.database_cdc.source_metadata`
 
-Required:
+Optional:
 
 - `capture_tool` (String)
 - `type` (String)
@@ -124,7 +121,7 @@ Required:
 <a id="nestedatt--steps--action--compare_action--input--file--file_metadata--database_cdc--target_metadata"></a>
 ### Nested Schema for `steps.action.compare_action.input.file.file_metadata.database_cdc.target_metadata`
 
-Required:
+Optional:
 
 - `capture_tool` (String)
 - `type` (String)
@@ -154,14 +151,11 @@ Optional:
 <a id="nestedatt--steps--action--mainframe_action"></a>
 ### Nested Schema for `steps.action.mainframe_action`
 
-Required:
-
-- `action_type` (Attributes) (see [below for nested schema](#nestedatt--steps--action--mainframe_action--action_type))
-- `resource` (String)
-
 Optional:
 
+- `action_type` (Attributes) (see [below for nested schema](#nestedatt--steps--action--mainframe_action--action_type))
 - `properties` (Attributes) (see [below for nested schema](#nestedatt--steps--action--mainframe_action--properties))
+- `resource` (String)
 
 <a id="nestedatt--steps--action--mainframe_action--action_type"></a>
 ### Nested Schema for `steps.action.mainframe_action.action_type`
@@ -174,12 +168,9 @@ Optional:
 <a id="nestedatt--steps--action--mainframe_action--action_type--batch"></a>
 ### Nested Schema for `steps.action.mainframe_action.action_type.batch`
 
-Required:
-
-- `batch_job_name` (String)
-
 Optional:
 
+- `batch_job_name` (String)
 - `batch_job_parameters` (Map of String)
 - `export_data_set_names` (List of String)
 
@@ -187,18 +178,15 @@ Optional:
 <a id="nestedatt--steps--action--mainframe_action--action_type--tn_3270"></a>
 ### Nested Schema for `steps.action.mainframe_action.action_type.tn_3270`
 
-Required:
-
-- `script` (Attributes) (see [below for nested schema](#nestedatt--steps--action--mainframe_action--action_type--tn_3270--script))
-
 Optional:
 
 - `export_data_set_names` (List of String)
+- `script` (Attributes) (see [below for nested schema](#nestedatt--steps--action--mainframe_action--action_type--tn_3270--script))
 
 <a id="nestedatt--steps--action--mainframe_action--action_type--tn_3270--script"></a>
 ### Nested Schema for `steps.action.mainframe_action.action_type.tn_3270.script`
 
-Required:
+Optional:
 
 - `script_location` (String)
 - `type` (String)
@@ -227,26 +215,20 @@ Optional:
 <a id="nestedatt--steps--action--resource_action--cloudformation_action"></a>
 ### Nested Schema for `steps.action.resource_action.cloudformation_action`
 
-Required:
-
-- `resource` (String)
-
 Optional:
 
 - `action_type` (String)
+- `resource` (String)
 
 
 <a id="nestedatt--steps--action--resource_action--m2_managed_application_action"></a>
 ### Nested Schema for `steps.action.resource_action.m2_managed_application_action`
 
-Required:
-
-- `action_type` (String)
-- `resource` (String)
-
 Optional:
 
+- `action_type` (String)
 - `properties` (Attributes) (see [below for nested schema](#nestedatt--steps--action--resource_action--m2_managed_application_action--properties))
+- `resource` (String)
 
 <a id="nestedatt--steps--action--resource_action--m2_managed_application_action--properties"></a>
 ### Nested Schema for `steps.action.resource_action.m2_managed_application_action.properties`
@@ -261,7 +243,7 @@ Optional:
 <a id="nestedatt--steps--action--resource_action--m2_non_managed_application_action"></a>
 ### Nested Schema for `steps.action.resource_action.m2_non_managed_application_action`
 
-Required:
+Optional:
 
 - `action_type` (String)
 - `resource` (String)

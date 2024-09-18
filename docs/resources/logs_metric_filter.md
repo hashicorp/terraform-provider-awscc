@@ -85,7 +85,7 @@ Optional:
 <a id="nestedatt--metric_transformations--dimensions"></a>
 ### Nested Schema for `metric_transformations.dimensions`
 
-Required:
+Optional:
 
 - `key` (String) The name for the CW metric dimension that the metric filter creates.
  Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:).

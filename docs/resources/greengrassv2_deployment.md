@@ -110,14 +110,14 @@ Optional:
 <a id="nestedatt--iot_job_configuration--abort_config"></a>
 ### Nested Schema for `iot_job_configuration.abort_config`
 
-Required:
+Optional:
 
 - `criteria_list` (Attributes List) (see [below for nested schema](#nestedatt--iot_job_configuration--abort_config--criteria_list))
 
 <a id="nestedatt--iot_job_configuration--abort_config--criteria_list"></a>
 ### Nested Schema for `iot_job_configuration.abort_config.criteria_list`
 
-Required:
+Optional:
 
 - `action` (String)
 - `failure_type` (String)
@@ -137,7 +137,7 @@ Optional:
 <a id="nestedatt--iot_job_configuration--job_executions_rollout_config--exponential_rate"></a>
 ### Nested Schema for `iot_job_configuration.job_executions_rollout_config.exponential_rate`
 
-Required:
+Optional:
 
 - `base_rate_per_minute` (Number)
 - `increment_factor` (Number)

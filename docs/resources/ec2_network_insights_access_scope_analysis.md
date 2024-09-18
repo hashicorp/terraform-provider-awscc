@@ -48,12 +48,9 @@ resource "awscc_ec2_network_insights_access_scope_analysis" "example" {
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
-
-- `key` (String)
-
 Optional:
 
+- `key` (String)
 - `value` (String)
 
 ## Import

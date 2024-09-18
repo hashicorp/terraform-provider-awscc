@@ -209,13 +209,10 @@ Optional:
 <a id="nestedatt--default_user_settings--code_editor_app_settings--custom_images"></a>
 ### Nested Schema for `default_user_settings.code_editor_app_settings.custom_images`
 
-Required:
+Optional:
 
 - `app_image_config_name` (String) The Name of the AppImageConfig.
 - `image_name` (String) The name of the CustomImage. Must be unique to your account.
-
-Optional:
-
 - `image_version_number` (Number) The version number of the CustomImage.
 
 
@@ -241,12 +238,9 @@ Optional:
 <a id="nestedatt--default_user_settings--custom_file_system_configs--efs_file_system_config"></a>
 ### Nested Schema for `default_user_settings.custom_file_system_configs.efs_file_system_config`
 
-Required:
-
-- `file_system_id` (String)
-
 Optional:
 
+- `file_system_id` (String)
 - `file_system_path` (String)
 
 
@@ -254,7 +248,7 @@ Optional:
 <a id="nestedatt--default_user_settings--custom_posix_user_config"></a>
 ### Nested Schema for `default_user_settings.custom_posix_user_config`
 
-Required:
+Optional:
 
 - `gid` (Number)
 - `uid` (Number)
@@ -293,7 +287,7 @@ Optional:
 <a id="nestedatt--default_user_settings--jupyter_lab_app_settings--code_repositories"></a>
 ### Nested Schema for `default_user_settings.jupyter_lab_app_settings.code_repositories`
 
-Required:
+Optional:
 
 - `repository_url` (String) A CodeRepository (valid URL) to be used within Jupyter's Git extension.
 
@@ -301,13 +295,10 @@ Required:
 <a id="nestedatt--default_user_settings--jupyter_lab_app_settings--custom_images"></a>
 ### Nested Schema for `default_user_settings.jupyter_lab_app_settings.custom_images`
 
-Required:
+Optional:
 
 - `app_image_config_name` (String) The Name of the AppImageConfig.
 - `image_name` (String) The name of the CustomImage. Must be unique to your account.
-
-Optional:
-
 - `image_version_number` (Number) The version number of the CustomImage.
 
 
@@ -355,13 +346,10 @@ Optional:
 <a id="nestedatt--default_user_settings--kernel_gateway_app_settings--custom_images"></a>
 ### Nested Schema for `default_user_settings.kernel_gateway_app_settings.custom_images`
 
-Required:
+Optional:
 
 - `app_image_config_name` (String) The Name of the AppImageConfig.
 - `image_name` (String) The name of the CustomImage. Must be unique to your account.
-
-Optional:
-
 - `image_version_number` (Number) The version number of the CustomImage.
 
 
@@ -388,13 +376,10 @@ Optional:
 <a id="nestedatt--default_user_settings--r_session_app_settings--custom_images"></a>
 ### Nested Schema for `default_user_settings.r_session_app_settings.custom_images`
 
-Required:
+Optional:
 
 - `app_image_config_name` (String) The Name of the AppImageConfig.
 - `image_name` (String) The name of the CustomImage. Must be unique to your account.
-
-Optional:
-
 - `image_version_number` (Number) The version number of the CustomImage.
 
 
@@ -439,7 +424,7 @@ Optional:
 <a id="nestedatt--default_user_settings--space_storage_settings--default_ebs_storage_settings"></a>
 ### Nested Schema for `default_user_settings.space_storage_settings.default_ebs_storage_settings`
 
-Required:
+Optional:
 
 - `default_ebs_volume_size_in_gb` (Number) Default size of the Amazon EBS volume in Gb
 - `maximum_ebs_volume_size_in_gb` (Number) Maximum size of the Amazon EBS volume in Gb. Must be greater than or equal to the DefaultEbsVolumeSizeInGb.
@@ -459,14 +444,11 @@ Optional:
 <a id="nestedatt--default_space_settings"></a>
 ### Nested Schema for `default_space_settings`
 
-Required:
-
-- `execution_role` (String) The execution role for the space.
-
 Optional:
 
 - `custom_file_system_configs` (Attributes List) (see [below for nested schema](#nestedatt--default_space_settings--custom_file_system_configs))
 - `custom_posix_user_config` (Attributes) The Jupyter lab's custom posix user configurations. (see [below for nested schema](#nestedatt--default_space_settings--custom_posix_user_config))
+- `execution_role` (String) The execution role for the space.
 - `jupyter_lab_app_settings` (Attributes) The Jupyter lab's app settings. (see [below for nested schema](#nestedatt--default_space_settings--jupyter_lab_app_settings))
 - `jupyter_server_app_settings` (Attributes) The Jupyter server's app settings. (see [below for nested schema](#nestedatt--default_space_settings--jupyter_server_app_settings))
 - `kernel_gateway_app_settings` (Attributes) The kernel gateway app settings. (see [below for nested schema](#nestedatt--default_space_settings--kernel_gateway_app_settings))
@@ -483,12 +465,9 @@ Optional:
 <a id="nestedatt--default_space_settings--custom_file_system_configs--efs_file_system_config"></a>
 ### Nested Schema for `default_space_settings.custom_file_system_configs.efs_file_system_config`
 
-Required:
-
-- `file_system_id` (String)
-
 Optional:
 
+- `file_system_id` (String)
 - `file_system_path` (String)
 
 
@@ -496,7 +475,7 @@ Optional:
 <a id="nestedatt--default_space_settings--custom_posix_user_config"></a>
 ### Nested Schema for `default_space_settings.custom_posix_user_config`
 
-Required:
+Optional:
 
 - `gid` (Number)
 - `uid` (Number)
@@ -535,7 +514,7 @@ Optional:
 <a id="nestedatt--default_space_settings--jupyter_lab_app_settings--code_repositories"></a>
 ### Nested Schema for `default_space_settings.jupyter_lab_app_settings.code_repositories`
 
-Required:
+Optional:
 
 - `repository_url` (String) A CodeRepository (valid URL) to be used within Jupyter's Git extension.
 
@@ -543,13 +522,10 @@ Required:
 <a id="nestedatt--default_space_settings--jupyter_lab_app_settings--custom_images"></a>
 ### Nested Schema for `default_space_settings.jupyter_lab_app_settings.custom_images`
 
-Required:
+Optional:
 
 - `app_image_config_name` (String) The Name of the AppImageConfig.
 - `image_name` (String) The name of the CustomImage. Must be unique to your account.
-
-Optional:
-
 - `image_version_number` (Number) The version number of the CustomImage.
 
 
@@ -597,13 +573,10 @@ Optional:
 <a id="nestedatt--default_space_settings--kernel_gateway_app_settings--custom_images"></a>
 ### Nested Schema for `default_space_settings.kernel_gateway_app_settings.custom_images`
 
-Required:
+Optional:
 
 - `app_image_config_name` (String) The Name of the AppImageConfig.
 - `image_name` (String) The name of the CustomImage. Must be unique to your account.
-
-Optional:
-
 - `image_version_number` (Number) The version number of the CustomImage.
 
 
@@ -629,7 +602,7 @@ Optional:
 <a id="nestedatt--default_space_settings--space_storage_settings--default_ebs_storage_settings"></a>
 ### Nested Schema for `default_space_settings.space_storage_settings.default_ebs_storage_settings`
 
-Required:
+Optional:
 
 - `default_ebs_volume_size_in_gb` (Number) Default size of the Amazon EBS volume in Gb
 - `maximum_ebs_volume_size_in_gb` (Number) Maximum size of the Amazon EBS volume in Gb. Must be greater than or equal to the DefaultEbsVolumeSizeInGb.
@@ -658,13 +631,10 @@ Optional:
 <a id="nestedatt--domain_settings--r_studio_server_pro_domain_settings"></a>
 ### Nested Schema for `domain_settings.r_studio_server_pro_domain_settings`
 
-Required:
-
-- `domain_execution_role_arn` (String) The ARN of the execution role for the RStudioServerPro Domain-level app.
-
 Optional:
 
 - `default_resource_spec` (Attributes) (see [below for nested schema](#nestedatt--domain_settings--r_studio_server_pro_domain_settings--default_resource_spec))
+- `domain_execution_role_arn` (String) The ARN of the execution role for the RStudioServerPro Domain-level app.
 - `r_studio_connect_url` (String) A URL pointing to an RStudio Connect server.
 - `r_studio_package_manager_url` (String) A URL pointing to an RStudio Package Manager server.
 
@@ -684,7 +654,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

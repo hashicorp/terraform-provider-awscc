@@ -40,12 +40,6 @@ Resource Type definition for AWS::Batch::ComputeEnvironment
 <a id="nestedatt--compute_resources"></a>
 ### Nested Schema for `compute_resources`
 
-Required:
-
-- `maxv_cpus` (Number)
-- `subnets` (List of String)
-- `type` (String)
-
 Optional:
 
 - `allocation_strategy` (String)
@@ -57,24 +51,24 @@ Optional:
 - `instance_role` (String)
 - `instance_types` (List of String)
 - `launch_template` (Attributes) (see [below for nested schema](#nestedatt--compute_resources--launch_template))
+- `maxv_cpus` (Number)
 - `minv_cpus` (Number)
 - `placement_group` (String)
 - `security_group_ids` (List of String)
 - `spot_iam_fleet_role` (String)
+- `subnets` (List of String)
 - `tags` (Map of String) A key-value pair to associate with a resource.
+- `type` (String)
 - `update_to_latest_image_version` (Boolean)
 
 <a id="nestedatt--compute_resources--ec_2_configuration"></a>
 ### Nested Schema for `compute_resources.ec_2_configuration`
 
-Required:
-
-- `image_type` (String)
-
 Optional:
 
 - `image_id_override` (String)
 - `image_kubernetes_version` (String)
+- `image_type` (String)
 
 
 <a id="nestedatt--compute_resources--launch_template"></a>

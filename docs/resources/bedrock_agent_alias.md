@@ -81,7 +81,7 @@ variable "bedrock_agent_version" {
 <a id="nestedatt--routing_configuration"></a>
 ### Nested Schema for `routing_configuration`
 
-Required:
+Optional:
 
 - `agent_version` (String) Agent Version.
 

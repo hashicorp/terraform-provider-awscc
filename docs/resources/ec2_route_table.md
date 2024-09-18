@@ -111,7 +111,7 @@ resource "aws_route_table" "public_route_table" {
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The tag key.
 - `value` (String) The tag value.

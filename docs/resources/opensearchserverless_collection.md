@@ -71,7 +71,7 @@ Contains between 3 and 32 characters
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key in the key-value pair
 - `value` (String) The value in the key-value pair

@@ -38,7 +38,7 @@ A resource schema for a Variable in Amazon Fraud Detector.
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

@@ -39,7 +39,7 @@ Definition of AWS::B2BI::Partnership Resource Type
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

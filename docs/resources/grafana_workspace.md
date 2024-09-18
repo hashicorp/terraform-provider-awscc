@@ -156,25 +156,13 @@ Optional:
 <a id="nestedatt--saml_configuration"></a>
 ### Nested Schema for `saml_configuration`
 
-Required:
-
-- `idp_metadata` (Attributes) IdP Metadata used to configure SAML authentication in Grafana. (see [below for nested schema](#nestedatt--saml_configuration--idp_metadata))
-
 Optional:
 
 - `allowed_organizations` (List of String) List of SAML organizations allowed to access Grafana.
 - `assertion_attributes` (Attributes) Maps Grafana friendly names to the IdPs SAML attributes. (see [below for nested schema](#nestedatt--saml_configuration--assertion_attributes))
+- `idp_metadata` (Attributes) IdP Metadata used to configure SAML authentication in Grafana. (see [below for nested schema](#nestedatt--saml_configuration--idp_metadata))
 - `login_validity_duration` (Number) The maximum lifetime an authenticated user can be logged in (in minutes) before being required to re-authenticate.
 - `role_values` (Attributes) Maps SAML roles to the Grafana Editor and Admin roles. (see [below for nested schema](#nestedatt--saml_configuration--role_values))
-
-<a id="nestedatt--saml_configuration--idp_metadata"></a>
-### Nested Schema for `saml_configuration.idp_metadata`
-
-Optional:
-
-- `url` (String) URL that vends the IdPs metadata.
-- `xml` (String) XML blob of the IdPs metadata.
-
 
 <a id="nestedatt--saml_configuration--assertion_attributes"></a>
 ### Nested Schema for `saml_configuration.assertion_attributes`
@@ -187,6 +175,15 @@ Optional:
 - `name` (String) Name of the attribute within the SAML assert to use as the users name in Grafana.
 - `org` (String) Name of the attribute within the SAML assert to use as the users organizations in Grafana.
 - `role` (String) Name of the attribute within the SAML assert to use as the users roles in Grafana.
+
+
+<a id="nestedatt--saml_configuration--idp_metadata"></a>
+### Nested Schema for `saml_configuration.idp_metadata`
+
+Optional:
+
+- `url` (String) URL that vends the IdPs metadata.
+- `xml` (String) XML blob of the IdPs metadata.
 
 
 <a id="nestedatt--saml_configuration--role_values"></a>
@@ -202,7 +199,7 @@ Optional:
 <a id="nestedatt--vpc_configuration"></a>
 ### Nested Schema for `vpc_configuration`
 
-Required:
+Optional:
 
 - `security_group_ids` (Set of String) The list of Amazon EC2 security group IDs attached to the Amazon VPC for your Grafana workspace to connect.
 - `subnet_ids` (Set of String) The list of Amazon EC2 subnet IDs created in the Amazon VPC for your Grafana workspace to connect.

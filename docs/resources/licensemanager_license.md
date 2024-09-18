@@ -50,7 +50,7 @@ Optional:
 <a id="nestedatt--consumption_configuration--borrow_configuration"></a>
 ### Nested Schema for `consumption_configuration.borrow_configuration`
 
-Required:
+Optional:
 
 - `allow_early_check_in` (Boolean)
 - `max_time_to_live_in_minutes` (Number)
@@ -59,7 +59,7 @@ Required:
 <a id="nestedatt--consumption_configuration--provisional_configuration"></a>
 ### Nested Schema for `consumption_configuration.provisional_configuration`
 
-Required:
+Optional:
 
 - `max_time_to_live_in_minutes` (Number)
 
@@ -105,7 +105,7 @@ Required:
 <a id="nestedatt--license_metadata"></a>
 ### Nested Schema for `license_metadata`
 
-Required:
+Optional:
 
 - `name` (String)
 - `value` (String)

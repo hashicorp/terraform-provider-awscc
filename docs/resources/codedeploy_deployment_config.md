@@ -30,7 +30,7 @@ Resource Type definition for AWS::CodeDeploy::DeploymentConfig
 <a id="nestedatt--minimum_healthy_hosts"></a>
 ### Nested Schema for `minimum_healthy_hosts`
 
-Required:
+Optional:
 
 - `type` (String)
 - `value` (Number)
@@ -39,19 +39,16 @@ Required:
 <a id="nestedatt--traffic_routing_config"></a>
 ### Nested Schema for `traffic_routing_config`
 
-Required:
-
-- `type` (String)
-
 Optional:
 
 - `time_based_canary` (Attributes) (see [below for nested schema](#nestedatt--traffic_routing_config--time_based_canary))
 - `time_based_linear` (Attributes) (see [below for nested schema](#nestedatt--traffic_routing_config--time_based_linear))
+- `type` (String)
 
 <a id="nestedatt--traffic_routing_config--time_based_canary"></a>
 ### Nested Schema for `traffic_routing_config.time_based_canary`
 
-Required:
+Optional:
 
 - `canary_interval` (Number)
 - `canary_percentage` (Number)
@@ -60,7 +57,7 @@ Required:
 <a id="nestedatt--traffic_routing_config--time_based_linear"></a>
 ### Nested Schema for `traffic_routing_config.time_based_linear`
 
-Required:
+Optional:
 
 - `linear_interval` (Number)
 - `linear_percentage` (Number)
@@ -79,7 +76,7 @@ Optional:
 <a id="nestedatt--zonal_config--minimum_healthy_hosts_per_zone"></a>
 ### Nested Schema for `zonal_config.minimum_healthy_hosts_per_zone`
 
-Required:
+Optional:
 
 - `type` (String)
 - `value` (Number)

@@ -104,7 +104,7 @@ resource "awscc_ec2_volume" "example" {
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The tag key.
 - `value` (String) The tag value.

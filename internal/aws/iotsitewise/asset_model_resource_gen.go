@@ -20,6 +20,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -443,7 +444,8 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 								// Property: DataType
 								"data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The data type of the asset model property.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.OneOf(
 											"STRING",
@@ -452,7 +454,11 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 											"BOOLEAN",
 											"STRUCT",
 										),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: DataTypeSpec
 								"data_type_spec": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -509,7 +515,14 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 								// Property: Name
 								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The name of the asset model property.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Type
 								"type": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -538,7 +551,14 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 												// Property: Expression
 												"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														fwvalidators.NotNullString(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: Variables
 												"variables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -547,7 +567,14 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 															// Property: Name
 															"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																Description: "The friendly name of the variable to be used in the expression.",
-																Required:    true,
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.String{ /*START VALIDATORS*/
+																	fwvalidators.NotNullString(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 															// Property: Value
 															"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -633,7 +660,14 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 																				// Property: Name
 																				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																					Description: "The name of the property",
-																					Required:    true,
+																					Optional:    true,
+																					Computed:    true,
+																					Validators: []validator.String{ /*START VALIDATORS*/
+																						fwvalidators.NotNullString(),
+																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																						stringplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																		}, /*END NESTED OBJECT*/
@@ -646,14 +680,26 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "The variable that identifies an asset property from which to use values.",
-																Required:    true,
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.Object{ /*START VALIDATORS*/
+																	fwvalidators.NotNullObject(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																	objectplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
 													Description: "The list of variables used in the expression.",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.List{ /*START VALIDATORS*/
+														fwvalidators.NotNullList(),
+													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 														generic.Multiset(),
+														listplanmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: Window
@@ -665,7 +711,14 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 																// Property: Interval
 																"interval": schema.StringAttribute{ /*START ATTRIBUTE*/
 																	Description: "The time interval for the tumbling window.",
-																	Required:    true,
+																	Optional:    true,
+																	Computed:    true,
+																	Validators: []validator.String{ /*START VALIDATORS*/
+																		fwvalidators.NotNullString(),
+																	}, /*END VALIDATORS*/
+																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																		stringplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
 																}, /*END ATTRIBUTE*/
 																// Property: Offset
 																"offset": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -686,7 +739,14 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 													Description: "The window (time interval) over which AWS IoT SiteWise computes the metric's aggregation expression",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.Object{ /*START VALIDATORS*/
+														fwvalidators.NotNullObject(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+														objectplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 											Optional: true,
@@ -701,7 +761,14 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 												// Property: Expression
 												"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														fwvalidators.NotNullString(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: Variables
 												"variables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -710,7 +777,14 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 															// Property: Name
 															"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																Description: "The friendly name of the variable to be used in the expression.",
-																Required:    true,
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.String{ /*START VALIDATORS*/
+																	fwvalidators.NotNullString(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 															// Property: Value
 															"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -796,7 +870,14 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 																				// Property: Name
 																				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																					Description: "The name of the property",
-																					Required:    true,
+																					Optional:    true,
+																					Computed:    true,
+																					Validators: []validator.String{ /*START VALIDATORS*/
+																						fwvalidators.NotNullString(),
+																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																						stringplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																		}, /*END NESTED OBJECT*/
@@ -809,14 +890,26 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "The variable that identifies an asset property from which to use values.",
-																Required:    true,
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.Object{ /*START VALIDATORS*/
+																	fwvalidators.NotNullObject(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																	objectplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
 													Description: "The list of variables used in the expression.",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.List{ /*START VALIDATORS*/
+														fwvalidators.NotNullList(),
+													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 														generic.Multiset(),
+														listplanmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
@@ -828,7 +921,8 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END ATTRIBUTE*/
 										// Property: TypeName
 										"type_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Required: true,
+											Optional: true,
+											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.OneOf(
 													"Measurement",
@@ -836,11 +930,22 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 													"Transform",
 													"Metric",
 												),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "The property type",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Object{ /*START VALIDATORS*/
+										fwvalidators.NotNullObject(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Unit
 								"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -899,7 +1004,14 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Name
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "A unique, friendly name for the asset composite model.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: ParentAssetModelCompositeModelExternalId
 					"parent_asset_model_composite_model_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -927,7 +1039,14 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Type
 					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The type of the composite model. For alarm composite models, this type is AWS/ALARM",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -1030,7 +1149,14 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 					// Property: ChildAssetModelId
 					"child_asset_model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The ID of the asset model. All assets in this hierarchy must be instances of the child AssetModelId asset model.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: ExternalId
 					"external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1073,7 +1199,14 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Name
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The name of the asset model hierarchy.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -1438,7 +1571,8 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 					// Property: DataType
 					"data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The data type of the asset model property.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.OneOf(
 								"STRING",
@@ -1447,7 +1581,11 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 								"BOOLEAN",
 								"STRUCT",
 							),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: DataTypeSpec
 					"data_type_spec": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1504,7 +1642,14 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Name
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The name of the asset model property.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Type
 					"type": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1533,7 +1678,14 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 									// Property: Expression
 									"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: Variables
 									"variables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1542,7 +1694,14 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 												// Property: Name
 												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The friendly name of the variable to be used in the expression.",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														fwvalidators.NotNullString(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: Value
 												"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1628,7 +1787,14 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: Name
 																	"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The name of the property",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			fwvalidators.NotNullString(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 															}, /*END NESTED OBJECT*/
@@ -1641,14 +1807,26 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 													Description: "The variable that identifies an asset property from which to use values.",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.Object{ /*START VALIDATORS*/
+														fwvalidators.NotNullObject(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+														objectplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
 										Description: "The list of variables used in the expression.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.List{ /*START VALIDATORS*/
+											fwvalidators.NotNullList(),
+										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											generic.Multiset(),
+											listplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: Window
@@ -1660,7 +1838,14 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 													// Property: Interval
 													"interval": schema.StringAttribute{ /*START ATTRIBUTE*/
 														Description: "The time interval for the tumbling window.",
-														Required:    true,
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															fwvalidators.NotNullString(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 													// Property: Offset
 													"offset": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1681,7 +1866,14 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "The window (time interval) over which AWS IoT SiteWise computes the metric's aggregation expression",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Object{ /*START VALIDATORS*/
+											fwvalidators.NotNullObject(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Optional: true,
@@ -1696,7 +1888,14 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 									// Property: Expression
 									"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: Variables
 									"variables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1705,7 +1904,14 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 												// Property: Name
 												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The friendly name of the variable to be used in the expression.",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														fwvalidators.NotNullString(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: Value
 												"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1791,7 +1997,14 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: Name
 																	"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The name of the property",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			fwvalidators.NotNullString(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 															}, /*END NESTED OBJECT*/
@@ -1804,14 +2017,26 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 													Description: "The variable that identifies an asset property from which to use values.",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.Object{ /*START VALIDATORS*/
+														fwvalidators.NotNullObject(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+														objectplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
 										Description: "The list of variables used in the expression.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.List{ /*START VALIDATORS*/
+											fwvalidators.NotNullList(),
+										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											generic.Multiset(),
+											listplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
@@ -1823,7 +2048,8 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: TypeName
 							"type_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Required: true,
+								Optional: true,
+								Computed: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"Measurement",
@@ -1831,11 +2057,22 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 										"Transform",
 										"Metric",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "The property type",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.Object{ /*START VALIDATORS*/
+							fwvalidators.NotNullObject(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Unit
 					"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1901,11 +2138,25 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

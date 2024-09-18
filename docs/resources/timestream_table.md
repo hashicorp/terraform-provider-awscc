@@ -48,12 +48,9 @@ resource "awscc_timestream_table" "this" {
 <a id="nestedatt--magnetic_store_write_properties"></a>
 ### Nested Schema for `magnetic_store_write_properties`
 
-Required:
-
-- `enable_magnetic_store_writes` (Boolean) Boolean flag indicating whether magnetic store writes are enabled.
-
 Optional:
 
+- `enable_magnetic_store_writes` (Boolean) Boolean flag indicating whether magnetic store writes are enabled.
 - `magnetic_store_rejected_data_location` (Attributes) Location to store information about records that were asynchronously rejected during magnetic store writes. (see [below for nested schema](#nestedatt--magnetic_store_write_properties--magnetic_store_rejected_data_location))
 
 <a id="nestedatt--magnetic_store_write_properties--magnetic_store_rejected_data_location"></a>
@@ -66,13 +63,10 @@ Optional:
 <a id="nestedatt--magnetic_store_write_properties--magnetic_store_rejected_data_location--s3_configuration"></a>
 ### Nested Schema for `magnetic_store_write_properties.magnetic_store_rejected_data_location.s3_configuration`
 
-Required:
+Optional:
 
 - `bucket_name` (String) The bucket name used to store the data.
 - `encryption_option` (String) Either SSE_KMS or SSE_S3.
-
-Optional:
-
 - `kms_key_id` (String) Must be provided if SSE_KMS is specified as the encryption option
 - `object_key_prefix` (String) String used to prefix all data in the bucket.
 
@@ -98,14 +92,11 @@ Optional:
 <a id="nestedatt--schema--composite_partition_key"></a>
 ### Nested Schema for `schema.composite_partition_key`
 
-Required:
-
-- `type` (String) The type of the partition key. Options are DIMENSION (dimension key) and MEASURE (measure key).
-
 Optional:
 
 - `enforcement_in_record` (String) The level of enforcement for the specification of a dimension key in ingested records. Options are REQUIRED (dimension key must be specified) and OPTIONAL (dimension key does not have to be specified).
 - `name` (String) The name of the attribute used for a dimension key.
+- `type` (String) The type of the partition key. Options are DIMENSION (dimension key) and MEASURE (measure key).
 
 
 

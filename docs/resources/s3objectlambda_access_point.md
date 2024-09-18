@@ -63,12 +63,9 @@ Optional:
 <a id="nestedatt--object_lambda_configuration--transformation_configurations--content_transformation--aws_lambda"></a>
 ### Nested Schema for `object_lambda_configuration.transformation_configurations.content_transformation.aws_lambda`
 
-Required:
-
-- `function_arn` (String)
-
 Optional:
 
+- `function_arn` (String)
 - `function_payload` (String)
 
 

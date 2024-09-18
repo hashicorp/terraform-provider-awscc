@@ -85,16 +85,13 @@ Optional:
 <a id="nestedatt--steps--decrypt_step_details"></a>
 ### Nested Schema for `steps.decrypt_step_details`
 
-Required:
-
-- `destination_file_location` (Attributes) Specifies the location for the file being decrypted. Only applicable for the Decrypt type of workflow steps. (see [below for nested schema](#nestedatt--steps--decrypt_step_details--destination_file_location))
-- `type` (String) Specifies which encryption method to use.
-
 Optional:
 
+- `destination_file_location` (Attributes) Specifies the location for the file being decrypted. Only applicable for the Decrypt type of workflow steps. (see [below for nested schema](#nestedatt--steps--decrypt_step_details--destination_file_location))
 - `name` (String) The name of the step, used as an identifier.
 - `overwrite_existing` (String) A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE.
 - `source_file_location` (String) Specifies which file to use as input to the workflow step.
+- `type` (String) Specifies which encryption method to use.
 
 <a id="nestedatt--steps--decrypt_step_details--destination_file_location"></a>
 ### Nested Schema for `steps.decrypt_step_details.destination_file_location`
@@ -145,7 +142,7 @@ Optional:
 <a id="nestedatt--steps--tag_step_details--tags"></a>
 ### Nested Schema for `steps.tag_step_details.tags`
 
-Required:
+Optional:
 
 - `key` (String) The name assigned to the tag that you create.
 - `value` (String) The value that corresponds to the key.
@@ -207,16 +204,13 @@ Optional:
 <a id="nestedatt--on_exception_steps--decrypt_step_details"></a>
 ### Nested Schema for `on_exception_steps.decrypt_step_details`
 
-Required:
-
-- `destination_file_location` (Attributes) Specifies the location for the file being decrypted. Only applicable for the Decrypt type of workflow steps. (see [below for nested schema](#nestedatt--on_exception_steps--decrypt_step_details--destination_file_location))
-- `type` (String) Specifies which encryption method to use.
-
 Optional:
 
+- `destination_file_location` (Attributes) Specifies the location for the file being decrypted. Only applicable for the Decrypt type of workflow steps. (see [below for nested schema](#nestedatt--on_exception_steps--decrypt_step_details--destination_file_location))
 - `name` (String) The name of the step, used as an identifier.
 - `overwrite_existing` (String) A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE.
 - `source_file_location` (String) Specifies which file to use as input to the workflow step.
+- `type` (String) Specifies which encryption method to use.
 
 <a id="nestedatt--on_exception_steps--decrypt_step_details--destination_file_location"></a>
 ### Nested Schema for `on_exception_steps.decrypt_step_details.destination_file_location`
@@ -267,7 +261,7 @@ Optional:
 <a id="nestedatt--on_exception_steps--tag_step_details--tags"></a>
 ### Nested Schema for `on_exception_steps.tag_step_details.tags`
 
-Required:
+Optional:
 
 - `key` (String) The name assigned to the tag that you create.
 - `value` (String) The value that corresponds to the key.
@@ -278,7 +272,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The name assigned to the tag that you create.
 - `value` (String) Contains one or more values that you assigned to the key name you create.

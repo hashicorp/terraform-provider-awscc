@@ -50,25 +50,19 @@ Optional:
 <a id="nestedatt--post_setup_script_details"></a>
 ### Nested Schema for `post_setup_script_details`
 
-Required:
+Optional:
 
+- `executable_parameters` (String)
 - `executable_path` (String)
 - `script_s3_location` (Attributes) (see [below for nested schema](#nestedatt--post_setup_script_details--script_s3_location))
 - `timeout_in_seconds` (Number)
 
-Optional:
-
-- `executable_parameters` (String)
-
 <a id="nestedatt--post_setup_script_details--script_s3_location"></a>
 ### Nested Schema for `post_setup_script_details.script_s3_location`
 
-Required:
-
-- `s3_bucket` (String)
-
 Optional:
 
+- `s3_bucket` (String)
 - `s3_key` (String)
 
 
@@ -76,25 +70,19 @@ Optional:
 <a id="nestedatt--setup_script_details"></a>
 ### Nested Schema for `setup_script_details`
 
-Required:
+Optional:
 
+- `executable_parameters` (String)
 - `executable_path` (String)
 - `script_s3_location` (Attributes) (see [below for nested schema](#nestedatt--setup_script_details--script_s3_location))
 - `timeout_in_seconds` (Number)
 
-Optional:
-
-- `executable_parameters` (String)
-
 <a id="nestedatt--setup_script_details--script_s3_location"></a>
 ### Nested Schema for `setup_script_details.script_s3_location`
 
-Required:
-
-- `s3_bucket` (String)
-
 Optional:
 
+- `s3_bucket` (String)
 - `s3_key` (String)
 
 

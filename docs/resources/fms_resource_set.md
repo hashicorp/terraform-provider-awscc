@@ -34,7 +34,7 @@ Creates an AWS Firewall Manager resource set.
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

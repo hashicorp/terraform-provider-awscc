@@ -253,7 +253,7 @@ Optional:
 <a id="nestedatt--ephemeral_storage"></a>
 ### Nested Schema for `ephemeral_storage`
 
-Required:
+Optional:
 
 - `size` (Number) The size of the function's ``/tmp`` directory.
 
@@ -261,7 +261,7 @@ Required:
 <a id="nestedatt--file_system_configs"></a>
 ### Nested Schema for `file_system_configs`
 
-Required:
+Optional:
 
 - `arn` (String) The Amazon Resource Name (ARN) of the Amazon EFS access point that provides access to the file system.
 - `local_mount_path` (String) The path where the function can access the file system, starting with ``/mnt/``.
@@ -291,8 +291,10 @@ Optional:
 <a id="nestedatt--runtime_management_config"></a>
 ### Nested Schema for `runtime_management_config`
 
-Required:
+Optional:
 
+- `runtime_version_arn` (String) The ARN of the runtime version you want the function to use.
+  This is only required if you're using the *Manual* runtime update mode.
 - `update_runtime_on` (String) Specify the runtime update mode.
   +   *Auto (default)* - Automatically update to the most recent and secure runtime version using a [Two-phase runtime version rollout](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html#runtime-management-two-phase). This is the best choice for most customers to ensure they always benefit from runtime updates.
   +   *FunctionUpdate* - LAM updates the runtime of you function to the most recent and secure runtime version when you update your function. This approach synchronizes runtime updates with function deployments, giving you control over when runtime updates are applied and allowing you to detect and mitigate rare runtime update incompatibilities early. When using this setting, you need to regularly update your functions to keep their runtime up-to-date.
@@ -300,16 +302,11 @@ Required:
   
   *Valid Values*: ``Auto`` | ``FunctionUpdate`` | ``Manual``
 
-Optional:
-
-- `runtime_version_arn` (String) The ARN of the runtime version you want the function to use.
-  This is only required if you're using the *Manual* runtime update mode.
-
 
 <a id="nestedatt--snap_start"></a>
 ### Nested Schema for `snap_start`
 
-Required:
+Optional:
 
 - `apply_on` (String) Set ``ApplyOn`` to ``PublishedVersions`` to create a snapshot of the initialized execution environment when you publish a function version.
 
@@ -317,12 +314,9 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
-
-- `key` (String)
-
 Optional:
 
+- `key` (String)
 - `value` (String)
 
 

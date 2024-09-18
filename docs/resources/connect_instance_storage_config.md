@@ -36,7 +36,7 @@ Resource Type definition for AWS::Connect::InstanceStorageConfig
 <a id="nestedatt--kinesis_firehose_config"></a>
 ### Nested Schema for `kinesis_firehose_config`
 
-Required:
+Optional:
 
 - `firehose_arn` (String) An ARN is a unique AWS resource identifier.
 
@@ -44,7 +44,7 @@ Required:
 <a id="nestedatt--kinesis_stream_config"></a>
 ### Nested Schema for `kinesis_stream_config`
 
-Required:
+Optional:
 
 - `stream_arn` (String) An ARN is a unique AWS resource identifier.
 
@@ -52,7 +52,7 @@ Required:
 <a id="nestedatt--kinesis_video_stream_config"></a>
 ### Nested Schema for `kinesis_video_stream_config`
 
-Required:
+Optional:
 
 - `encryption_config` (Attributes) (see [below for nested schema](#nestedatt--kinesis_video_stream_config--encryption_config))
 - `prefix` (String) Prefixes are used to infer logical hierarchy
@@ -61,7 +61,7 @@ Required:
 <a id="nestedatt--kinesis_video_stream_config--encryption_config"></a>
 ### Nested Schema for `kinesis_video_stream_config.encryption_config`
 
-Required:
+Optional:
 
 - `encryption_type` (String) Specifies default encryption using AWS KMS-Managed Keys
 - `key_id` (String) Specifies the encryption key id
@@ -71,19 +71,16 @@ Required:
 <a id="nestedatt--s3_config"></a>
 ### Nested Schema for `s3_config`
 
-Required:
+Optional:
 
 - `bucket_name` (String) A name for the S3 Bucket
 - `bucket_prefix` (String) Prefixes are used to infer logical hierarchy
-
-Optional:
-
 - `encryption_config` (Attributes) (see [below for nested schema](#nestedatt--s3_config--encryption_config))
 
 <a id="nestedatt--s3_config--encryption_config"></a>
 ### Nested Schema for `s3_config.encryption_config`
 
-Required:
+Optional:
 
 - `encryption_type` (String) Specifies default encryption using AWS KMS-Managed Keys
 - `key_id` (String) Specifies the encryption key id

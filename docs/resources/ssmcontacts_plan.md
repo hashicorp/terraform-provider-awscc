@@ -29,12 +29,9 @@ Engagement Plan for a SSM Incident Manager Contact.
 <a id="nestedatt--stages"></a>
 ### Nested Schema for `stages`
 
-Required:
-
-- `duration_in_minutes` (Number) The time to wait until beginning the next stage.
-
 Optional:
 
+- `duration_in_minutes` (Number) The time to wait until beginning the next stage.
 - `targets` (Attributes List) The contacts or contact methods that the escalation plan or engagement plan is engaging. (see [below for nested schema](#nestedatt--stages--targets))
 
 <a id="nestedatt--stages--targets"></a>
@@ -48,7 +45,7 @@ Optional:
 <a id="nestedatt--stages--targets--channel_target_info"></a>
 ### Nested Schema for `stages.targets.channel_target_info`
 
-Required:
+Optional:
 
 - `channel_id` (String) The Amazon Resource Name (ARN) of the contact channel.
 - `retry_interval_in_minutes` (Number) The number of minutes to wait to retry sending engagement in the case the engagement initially fails.
@@ -57,7 +54,7 @@ Required:
 <a id="nestedatt--stages--targets--contact_target_info"></a>
 ### Nested Schema for `stages.targets.contact_target_info`
 
-Required:
+Optional:
 
 - `contact_id` (String) The Amazon Resource Name (ARN) of the contact.
 - `is_essential` (Boolean) A Boolean value determining if the contact's acknowledgement stops the progress of stages in the plan.

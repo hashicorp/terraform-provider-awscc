@@ -129,7 +129,7 @@ resource "awscc_wafv2_logging_configuration" "awscc_waf_logging_redacted_fields"
 <a id="nestedatt--logging_filter"></a>
 ### Nested Schema for `logging_filter`
 
-Required:
+Optional:
 
 - `default_behavior` (String) Default handling for logs that don't match any of the specified filtering conditions.
 - `filters` (Attributes List) The filters that you want to apply to the logs. (see [below for nested schema](#nestedatt--logging_filter--filters))
@@ -137,7 +137,7 @@ Required:
 <a id="nestedatt--logging_filter--filters"></a>
 ### Nested Schema for `logging_filter.filters`
 
-Required:
+Optional:
 
 - `behavior` (String) How to handle logs that satisfy the filter's conditions and requirement.
 - `conditions` (Attributes List) Match conditions for the filter. (see [below for nested schema](#nestedatt--logging_filter--filters--conditions))
@@ -154,7 +154,7 @@ Optional:
 <a id="nestedatt--logging_filter--filters--conditions--action_condition"></a>
 ### Nested Schema for `logging_filter.filters.conditions.action_condition`
 
-Required:
+Optional:
 
 - `action` (String) Logic to apply to the filtering conditions. You can specify that, in order to satisfy the filter, a log must match all conditions or must match at least one condition.
 
@@ -162,7 +162,7 @@ Required:
 <a id="nestedatt--logging_filter--filters--conditions--label_name_condition"></a>
 ### Nested Schema for `logging_filter.filters.conditions.label_name_condition`
 
-Required:
+Optional:
 
 - `label_name` (String) The label name that a log record must contain in order to meet the condition. This must be a fully qualified label name. Fully qualified labels have a prefix, optional namespaces, and label name. The prefix identifies the rule group or web ACL context of the rule that added the label.
 
@@ -183,7 +183,7 @@ Optional:
 <a id="nestedatt--redacted_fields--single_header"></a>
 ### Nested Schema for `redacted_fields.single_header`
 
-Required:
+Optional:
 
 - `name` (String) The name of the query header to inspect.
 

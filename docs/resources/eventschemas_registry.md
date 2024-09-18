@@ -29,7 +29,7 @@ Resource Type definition for AWS::EventSchemas::Registry
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

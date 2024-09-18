@@ -90,7 +90,7 @@ Optional:
 <a id="nestedatt--quick_connect_config--phone_config"></a>
 ### Nested Schema for `quick_connect_config.phone_config`
 
-Required:
+Optional:
 
 - `phone_number` (String) The phone number in E.164 format.
 
@@ -98,7 +98,7 @@ Required:
 <a id="nestedatt--quick_connect_config--queue_config"></a>
 ### Nested Schema for `quick_connect_config.queue_config`
 
-Required:
+Optional:
 
 - `contact_flow_arn` (String) The identifier of the contact flow.
 - `queue_arn` (String) The identifier for the queue.
@@ -107,7 +107,7 @@ Required:
 <a id="nestedatt--quick_connect_config--user_config"></a>
 ### Nested Schema for `quick_connect_config.user_config`
 
-Required:
+Optional:
 
 - `contact_flow_arn` (String) The identifier of the contact flow.
 - `user_arn` (String) The identifier of the user.
@@ -117,7 +117,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

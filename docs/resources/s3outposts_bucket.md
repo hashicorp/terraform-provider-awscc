@@ -65,7 +65,7 @@ resource "awscc_s3outposts_bucket" "example" {
 <a id="nestedatt--lifecycle_configuration"></a>
 ### Nested Schema for `lifecycle_configuration`
 
-Required:
+Optional:
 
 - `rules` (Attributes Set) A list of lifecycle rules for individual objects in an Amazon S3Outposts bucket. (see [below for nested schema](#nestedatt--lifecycle_configuration--rules))
 
@@ -84,7 +84,7 @@ Optional:
 <a id="nestedatt--lifecycle_configuration--rules--abort_incomplete_multipart_upload"></a>
 ### Nested Schema for `lifecycle_configuration.rules.abort_incomplete_multipart_upload`
 
-Required:
+Optional:
 
 - `days_after_initiation` (Number) Specifies the number of days after which Amazon S3Outposts aborts an incomplete multipart upload.
 
@@ -109,7 +109,7 @@ Optional:
 <a id="nestedatt--lifecycle_configuration--rules--filter--and_operator--tags"></a>
 ### Nested Schema for `lifecycle_configuration.rules.filter.and_operator.tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)
@@ -119,7 +119,7 @@ Required:
 <a id="nestedatt--lifecycle_configuration--rules--filter--tag"></a>
 ### Nested Schema for `lifecycle_configuration.rules.filter.tag`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)
@@ -131,7 +131,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

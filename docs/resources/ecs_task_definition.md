@@ -105,16 +105,6 @@ Registers a new task definition from the supplied ``family`` and ``containerDefi
 <a id="nestedatt--container_definitions"></a>
 ### Nested Schema for `container_definitions`
 
-Required:
-
-- `image` (String) The image used to start a container. This string is passed directly to the Docker daemon. By default, images in the Docker Hub registry are available. Other repositories are specified with either ``repository-url/image:tag`` or ``repository-url/image@digest``. Up to 255 letters (uppercase and lowercase), numbers, hyphens, underscores, colons, periods, forward slashes, and number signs are allowed. This parameter maps to ``Image`` in the docker container create command and the ``IMAGE`` parameter of docker run.
-  +  When a new task starts, the Amazon ECS container agent pulls the latest version of the specified image and tag for the container to use. However, subsequent updates to a repository image aren't propagated to already running tasks.
-  +  Images in Amazon ECR repositories can be specified by either using the full ``registry/repository:tag`` or ``registry/repository@digest``. For example, ``012345678910.dkr.ecr.<region-name>.amazonaws.com/<repository-name>:latest`` or ``012345678910.dkr.ecr.<region-name>.amazonaws.com/<repository-name>@sha256:94afd1f2e64d908bc90dbca0035a5b567EXAMPLE``. 
-  +  Images in official repositories on Docker Hub use a single name (for example, ``ubuntu`` or ``mongo``).
-  +  Images in other repositories on Docker Hub are qualified with an organization name (for example, ``amazon/amazon-ecs-agent``).
-  +  Images in other online repositories are qualified further by a domain name (for example, ``quay.io/assemblyline/ubuntu``).
-- `name` (String) The name of a container. If you're linking multiple containers together in a task definition, the ``name`` of one container can be entered in the ``links`` of another container to connect the containers. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed. This parameter maps to ``name`` in tthe docker container create command and the ``--name`` option to docker run.
-
 Optional:
 
 - `command` (List of String) The command that's passed to the container. This parameter maps to ``Cmd`` in the docker container create command and the ``COMMAND`` parameter to docker run. If there are multiple arguments, each argument is a separated string in the array.
@@ -168,6 +158,12 @@ Optional:
 - `health_check` (Attributes) The container health check command and associated configuration parameters for the container. This parameter maps to ``HealthCheck`` in the docker container create command and the ``HEALTHCHECK`` parameter of docker run. (see [below for nested schema](#nestedatt--container_definitions--health_check))
 - `hostname` (String) The hostname to use for your container. This parameter maps to ``Hostname`` in thethe docker container create command and the ``--hostname`` option to docker run.
   The ``hostname`` parameter is not supported if you're using the ``awsvpc`` network mode.
+- `image` (String) The image used to start a container. This string is passed directly to the Docker daemon. By default, images in the Docker Hub registry are available. Other repositories are specified with either ``repository-url/image:tag`` or ``repository-url/image@digest``. Up to 255 letters (uppercase and lowercase), numbers, hyphens, underscores, colons, periods, forward slashes, and number signs are allowed. This parameter maps to ``Image`` in the docker container create command and the ``IMAGE`` parameter of docker run.
+  +  When a new task starts, the Amazon ECS container agent pulls the latest version of the specified image and tag for the container to use. However, subsequent updates to a repository image aren't propagated to already running tasks.
+  +  Images in Amazon ECR repositories can be specified by either using the full ``registry/repository:tag`` or ``registry/repository@digest``. For example, ``012345678910.dkr.ecr.<region-name>.amazonaws.com/<repository-name>:latest`` or ``012345678910.dkr.ecr.<region-name>.amazonaws.com/<repository-name>@sha256:94afd1f2e64d908bc90dbca0035a5b567EXAMPLE``. 
+  +  Images in official repositories on Docker Hub use a single name (for example, ``ubuntu`` or ``mongo``).
+  +  Images in other repositories on Docker Hub are qualified with an organization name (for example, ``amazon/amazon-ecs-agent``).
+  +  Images in other online repositories are qualified further by a domain name (for example, ``quay.io/assemblyline/ubuntu``).
 - `interactive` (Boolean) When this parameter is ``true``, you can deploy containerized applications that require ``stdin`` or a ``tty`` to be allocated. This parameter maps to ``OpenStdin`` in the docker container create command and the ``--interactive`` option to docker run.
 - `links` (Set of String) The ``links`` parameter allows containers to communicate with each other without the need for port mappings. This parameter is only supported if the network mode of a task definition is ``bridge``. The ``name:internalName`` construct is analogous to ``name:alias`` in Docker links. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed.. This parameter maps to ``Links`` in the docker container create command and the ``--link`` option to docker run.
   This parameter is not supported for Windows containers.
@@ -192,6 +188,7 @@ Optional:
 - `mount_points` (Attributes List) The mount points for data volumes in your container.
  This parameter maps to ``Volumes`` in the docker container create command and the ``--volume`` option to docker run.
  Windows containers can mount whole directories on the same drive as ``$env:ProgramData``. Windows containers can't mount directories on a different drive, and mount point can't be across drives. (see [below for nested schema](#nestedatt--container_definitions--mount_points))
+- `name` (String) The name of a container. If you're linking multiple containers together in a task definition, the ``name`` of one container can be entered in the ``links`` of another container to connect the containers. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed. This parameter maps to ``name`` in tthe docker container create command and the ``--name`` option to docker run.
 - `port_mappings` (Attributes Set) The list of port mappings for the container. Port mappings allow containers to access ports on the host container instance to send or receive traffic.
  For task definitions that use the ``awsvpc`` network mode, you should only specify the ``containerPort``. The ``hostPort`` can be left blank or it must be the same value as the ``containerPort``.
  Port mappings on Windows use the ``NetNAT`` gateway address rather than ``localhost``. There is no loopback for port mappings on Windows, so you cannot access a container's mapped port from the host itself. 
@@ -357,22 +354,19 @@ Optional:
 <a id="nestedatt--container_definitions--linux_parameters--tmpfs"></a>
 ### Nested Schema for `container_definitions.linux_parameters.tmpfs`
 
-Required:
-
-- `size` (Number) The maximum size (in MiB) of the tmpfs volume.
-
 Optional:
 
 - `container_path` (String) The absolute file path where the tmpfs volume is to be mounted.
 - `mount_options` (List of String) The list of tmpfs volume mount options.
  Valid values: ``"defaults" | "ro" | "rw" | "suid" | "nosuid" | "dev" | "nodev" | "exec" | "noexec" | "sync" | "async" | "dirsync" | "remount" | "mand" | "nomand" | "atime" | "noatime" | "diratime" | "nodiratime" | "bind" | "rbind" | "unbindable" | "runbindable" | "private" | "rprivate" | "shared" | "rshared" | "slave" | "rslave" | "relatime" | "norelatime" | "strictatime" | "nostrictatime" | "mode" | "uid" | "gid" | "nr_inodes" | "nr_blocks" | "mpol"``
+- `size` (Number) The maximum size (in MiB) of the tmpfs volume.
 
 
 
 <a id="nestedatt--container_definitions--log_configuration"></a>
 ### Nested Schema for `container_definitions.log_configuration`
 
-Required:
+Optional:
 
 - `log_driver` (String) The log driver to use for the container.
  For tasks on FARGATElong, the supported log drivers are ``awslogs``, ``splunk``, and ``awsfirelens``.
@@ -380,16 +374,13 @@ Required:
  For more information about using the ``awslogs`` log driver, see [Send Amazon ECS logs to CloudWatch](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html) in the *Amazon Elastic Container Service Developer Guide*.
  For more information about using the ``awsfirelens`` log driver, see [Send Amazon ECS logs to an service or Partner](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html).
   If you have a custom driver that isn't listed, you can fork the Amazon ECS container agent project that's [available on GitHub](https://docs.aws.amazon.com/https://github.com/aws/amazon-ecs-agent) and customize it to work with that driver. We encourage you to submit pull requests for changes that you would like to have included. However, we don't currently provide support for running modified copies of this software.
-
-Optional:
-
 - `options` (Map of String) The configuration options to send to the log driver. This parameter requires version 1.19 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log in to your container instance and run the following command: ``sudo docker version --format '{{.Server.APIVersion}}'``
 - `secret_options` (Attributes List) The secrets to pass to the log configuration. For more information, see [Specifying sensitive data](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html) in the *Amazon Elastic Container Service Developer Guide*. (see [below for nested schema](#nestedatt--container_definitions--log_configuration--secret_options))
 
 <a id="nestedatt--container_definitions--log_configuration--secret_options"></a>
 ### Nested Schema for `container_definitions.log_configuration.secret_options`
 
-Required:
+Optional:
 
 - `name` (String) The name of the secret.
 - `value_from` (String) The secret to expose to the container. The supported values are either the full ARN of the ASMlong secret or the full ARN of the parameter in the SSM Parameter Store.
@@ -466,7 +457,7 @@ Optional:
 <a id="nestedatt--container_definitions--resource_requirements"></a>
 ### Nested Schema for `container_definitions.resource_requirements`
 
-Required:
+Optional:
 
 - `type` (String) The type of resource to assign to a container.
 - `value` (String) The value for the specified resource type.
@@ -487,7 +478,7 @@ Optional:
 <a id="nestedatt--container_definitions--secrets"></a>
 ### Nested Schema for `container_definitions.secrets`
 
-Required:
+Optional:
 
 - `name` (String) The name of the secret.
 - `value_from` (String) The secret to expose to the container. The supported values are either the full ARN of the ASMlong secret or the full ARN of the parameter in the SSM Parameter Store.
@@ -510,7 +501,7 @@ Optional:
 <a id="nestedatt--container_definitions--ulimits"></a>
 ### Nested Schema for `container_definitions.ulimits`
 
-Required:
+Optional:
 
 - `hard_limit` (Number) The hard limit for the ``ulimit`` type.
 - `name` (String) The ``type`` of the ``ulimit``.
@@ -547,24 +538,18 @@ Optional:
 <a id="nestedatt--placement_constraints"></a>
 ### Nested Schema for `placement_constraints`
 
-Required:
-
-- `type` (String) The type of constraint. The ``MemberOf`` constraint restricts selection to be from a group of valid candidates.
-
 Optional:
 
 - `expression` (String) A cluster query language expression to apply to the constraint. For more information, see [Cluster query language](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html) in the *Amazon Elastic Container Service Developer Guide*.
+- `type` (String) The type of constraint. The ``MemberOf`` constraint restricts selection to be from a group of valid candidates.
 
 
 <a id="nestedatt--proxy_configuration"></a>
 ### Nested Schema for `proxy_configuration`
 
-Required:
-
-- `container_name` (String) The name of the container that will serve as the App Mesh proxy.
-
 Optional:
 
+- `container_name` (String) The name of the container that will serve as the App Mesh proxy.
 - `proxy_configuration_properties` (Attributes Set) The set of network configuration parameters to provide the Container Network Interface (CNI) plugin, specified as key-value pairs.
   +   ``IgnoredUID`` - (Required) The user ID (UID) of the proxy container as defined by the ``user`` parameter in a container definition. This is used to ensure the proxy ignores its own traffic. If ``IgnoredGID`` is specified, this field can be empty.
   +   ``IgnoredGID`` - (Required) The group ID (GID) of the proxy container as defined by the ``user`` parameter in a container definition. This is used to ensure the proxy ignores its own traffic. If ``IgnoredUID`` is specified, this field can be empty.
@@ -639,13 +624,10 @@ Optional:
 <a id="nestedatt--volumes--efs_volume_configuration"></a>
 ### Nested Schema for `volumes.efs_volume_configuration`
 
-Required:
-
-- `filesystem_id` (String) The Amazon EFS file system ID to use.
-
 Optional:
 
 - `authorization_config` (Attributes) The authorization configuration details for the Amazon EFS file system. (see [below for nested schema](#nestedatt--volumes--efs_volume_configuration--authorization_config))
+- `filesystem_id` (String) The Amazon EFS file system ID to use.
 - `root_directory` (String) The directory within the Amazon EFS file system to mount as the root directory inside the host. If this parameter is omitted, the root of the Amazon EFS volume will be used. Specifying ``/`` will have the same effect as omitting this parameter.
   If an EFS access point is specified in the ``authorizationConfig``, the root directory parameter must either be omitted or set to ``/`` which will enforce the path set on the EFS access point.
 - `transit_encryption` (String) Determines whether to use encryption for Amazon EFS data in transit between the Amazon ECS host and the Amazon EFS server. Transit encryption must be turned on if Amazon EFS IAM authorization is used. If this parameter is omitted, the default value of ``DISABLED`` is used. For more information, see [Encrypting data in transit](https://docs.aws.amazon.com/efs/latest/ug/encryption-in-transit.html) in the *Amazon Elastic File System User Guide*.
@@ -664,19 +646,16 @@ Optional:
 <a id="nestedatt--volumes--fsx_windows_file_server_volume_configuration"></a>
 ### Nested Schema for `volumes.fsx_windows_file_server_volume_configuration`
 
-Required:
-
-- `file_system_id` (String) The Amazon FSx for Windows File Server file system ID to use.
-- `root_directory` (String) The directory within the Amazon FSx for Windows File Server file system to mount as the root directory inside the host.
-
 Optional:
 
 - `authorization_config` (Attributes) The authorization configuration details for the Amazon FSx for Windows File Server file system. (see [below for nested schema](#nestedatt--volumes--fsx_windows_file_server_volume_configuration--authorization_config))
+- `file_system_id` (String) The Amazon FSx for Windows File Server file system ID to use.
+- `root_directory` (String) The directory within the Amazon FSx for Windows File Server file system to mount as the root directory inside the host.
 
 <a id="nestedatt--volumes--fsx_windows_file_server_volume_configuration--authorization_config"></a>
 ### Nested Schema for `volumes.fsx_windows_file_server_volume_configuration.authorization_config`
 
-Required:
+Optional:
 
 - `credentials_parameter` (String) The authorization credential option to use. The authorization credential options can be provided using either the Amazon Resource Name (ARN) of an ASMlong secret or SSM Parameter Store parameter. The ARN refers to the stored credentials.
 - `domain` (String) A fully qualified domain name hosted by an [](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_microsoft_ad.html) Managed Microsoft AD (Active Directory) or self-hosted AD on Amazon EC2.

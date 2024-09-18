@@ -49,7 +49,7 @@ Optional:
 <a id="nestedatt--media_concurrencies--cross_channel_behavior"></a>
 ### Nested Schema for `media_concurrencies.cross_channel_behavior`
 
-Required:
+Optional:
 
 - `behavior_type` (String) Specifies the other channels that can be routed to an agent handling their current channel.
 
@@ -58,7 +58,7 @@ Required:
 <a id="nestedatt--queue_configs"></a>
 ### Nested Schema for `queue_configs`
 
-Required:
+Optional:
 
 - `delay` (Number) The delay, in seconds, a contact should wait in the queue before they are routed to an available agent.
 - `priority` (Number) The order in which contacts are to be handled for the queue.
@@ -67,7 +67,7 @@ Required:
 <a id="nestedatt--queue_configs--queue_reference"></a>
 ### Nested Schema for `queue_configs.queue_reference`
 
-Required:
+Optional:
 
 - `channel` (String) The channels that agents can handle in the Contact Control Panel (CCP).
 - `queue_arn` (String) The Amazon Resource Name (ARN) for the queue.
@@ -77,7 +77,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

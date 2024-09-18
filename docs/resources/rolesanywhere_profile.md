@@ -40,7 +40,7 @@ Definition of AWS::RolesAnywhere::Profile Resource Type
 <a id="nestedatt--attribute_mappings"></a>
 ### Nested Schema for `attribute_mappings`
 
-Required:
+Optional:
 
 - `certificate_field` (String)
 - `mapping_rules` (Attributes List) (see [below for nested schema](#nestedatt--attribute_mappings--mapping_rules))
@@ -48,7 +48,7 @@ Required:
 <a id="nestedatt--attribute_mappings--mapping_rules"></a>
 ### Nested Schema for `attribute_mappings.mapping_rules`
 
-Required:
+Optional:
 
 - `specifier` (String)
 
@@ -57,7 +57,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

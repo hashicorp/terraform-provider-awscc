@@ -37,7 +37,7 @@ Resource Type definition for AWS::SageMaker::Space
 <a id="nestedatt--ownership_settings"></a>
 ### Nested Schema for `ownership_settings`
 
-Required:
+Optional:
 
 - `owner_user_profile_name` (String)
 
@@ -101,7 +101,7 @@ Optional:
 <a id="nestedatt--space_settings--custom_file_systems--efs_file_system"></a>
 ### Nested Schema for `space_settings.custom_file_systems.efs_file_system`
 
-Required:
+Optional:
 
 - `file_system_id` (String)
 
@@ -135,7 +135,7 @@ Optional:
 <a id="nestedatt--space_settings--jupyter_lab_app_settings--code_repositories"></a>
 ### Nested Schema for `space_settings.jupyter_lab_app_settings.code_repositories`
 
-Required:
+Optional:
 
 - `repository_url` (String) A CodeRepository (valid URL) to be used within Jupyter's Git extension.
 
@@ -184,13 +184,10 @@ Optional:
 <a id="nestedatt--space_settings--kernel_gateway_app_settings--custom_images"></a>
 ### Nested Schema for `space_settings.kernel_gateway_app_settings.custom_images`
 
-Required:
+Optional:
 
 - `app_image_config_name` (String) The Name of the AppImageConfig.
 - `image_name` (String) The name of the CustomImage. Must be unique to your account.
-
-Optional:
-
 - `image_version_number` (Number) The version number of the CustomImage.
 
 
@@ -216,7 +213,7 @@ Optional:
 <a id="nestedatt--space_settings--space_storage_settings--ebs_storage_settings"></a>
 ### Nested Schema for `space_settings.space_storage_settings.ebs_storage_settings`
 
-Required:
+Optional:
 
 - `ebs_volume_size_in_gb` (Number) Size of the Amazon EBS volume in Gb
 
@@ -226,7 +223,7 @@ Required:
 <a id="nestedatt--space_sharing_settings"></a>
 ### Nested Schema for `space_sharing_settings`
 
-Required:
+Optional:
 
 - `sharing_type` (String)
 
@@ -234,7 +231,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

@@ -31,7 +31,7 @@ Resource Type definition for AWS::EC2::TransitGatewayRouteTable
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key of the associated tag key-value pair
 - `value` (String) The value of the associated tag key-value pair

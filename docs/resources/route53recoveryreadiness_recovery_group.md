@@ -29,7 +29,7 @@ AWS Route53 Recovery Readiness Recovery Group Schema and API specifications.
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

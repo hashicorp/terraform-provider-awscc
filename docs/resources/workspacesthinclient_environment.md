@@ -48,7 +48,7 @@ Resource type definition for AWS::WorkSpacesThinClient::Environment.
 <a id="nestedatt--device_creation_tags"></a>
 ### Nested Schema for `device_creation_tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
@@ -56,10 +56,6 @@ Required:
 
 <a id="nestedatt--maintenance_window"></a>
 ### Nested Schema for `maintenance_window`
-
-Required:
-
-- `type` (String) The type of maintenance window.
 
 Optional:
 
@@ -69,12 +65,13 @@ Optional:
 - `end_time_minute` (Number) The minute end time of maintenance window.
 - `start_time_hour` (Number) The hour start time of maintenance window.
 - `start_time_minute` (Number) The minute start time of maintenance window.
+- `type` (String) The type of maintenance window.
 
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

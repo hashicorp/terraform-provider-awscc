@@ -93,13 +93,10 @@ Optional:
 <a id="nestedatt--stream_configuration--session_storage"></a>
 ### Nested Schema for `stream_configuration.session_storage`
 
-Required:
+Optional:
 
 - `mode` (List of String) <p>Allows artists to upload files to their workstations. The only valid option is
                 <code>UPLOAD</code>.</p>
-
-Optional:
-
 - `root` (Attributes) <p>The upload storage root location (folder) on streaming workstations where files are
             uploaded.</p> (see [below for nested schema](#nestedatt--stream_configuration--session_storage--root))
 

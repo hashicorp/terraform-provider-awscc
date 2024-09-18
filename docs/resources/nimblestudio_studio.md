@@ -38,13 +38,10 @@ Represents a studio that contains other Nimble Studio resources
 <a id="nestedatt--studio_encryption_configuration"></a>
 ### Nested Schema for `studio_encryption_configuration`
 
-Required:
-
-- `key_type` (String) <p>The type of KMS key that is used to encrypt studio data.</p>
-
 Optional:
 
 - `key_arn` (String) <p>The ARN for a KMS key that is used to encrypt studio data.</p>
+- `key_type` (String) <p>The type of KMS key that is used to encrypt studio data.</p>
 
 ## Import
 
