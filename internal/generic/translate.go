@@ -228,6 +228,17 @@ func (t toTerraform) valueFromRaw(ctx context.Context, schema typeAtTerraformPat
 		if len(v) == 0 {
 			return tftypes.NewValue(typ, nil), nil
 		}
+
+		if typ.Is(tftypes.String) {
+			// Value is JSON string.
+			val, err := json.Marshal(v)
+
+			if err != nil {
+				return tftypes.Value{}, err
+			}
+			return tftypes.NewValue(typ, string(val)), nil
+		}
+
 		var vals []tftypes.Value
 		for idx, v := range v {
 			if typ.Is(tftypes.Set{}) {
