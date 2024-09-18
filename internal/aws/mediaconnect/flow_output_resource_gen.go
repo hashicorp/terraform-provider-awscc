@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
@@ -21,6 +22,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -157,12 +159,26 @@ func flowOutputResource(ctx context.Context) (resource.Resource, error) {
 				// Property: RoleArn
 				"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: SecretArn
 				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: " The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The type of key used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
@@ -300,12 +316,26 @@ func flowOutputResource(ctx context.Context) (resource.Resource, error) {
 								// Property: DestinationIp
 								"destination_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The IP address where contents of the media stream will be sent.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: DestinationPort
 								"destination_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
 									Description: "The port to use when the content of the media stream is distributed to the output.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Int64{ /*START VALIDATORS*/
+										fwvalidators.NotNullInt64(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Interface
 								"interface": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -313,11 +343,25 @@ func flowOutputResource(ctx context.Context) (resource.Resource, error) {
 										// Property: Name
 										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "The name of the VPC interface that you want to use for the media stream associated with the output.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "The VPC interface that is used for the media stream associated with the output.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Object{ /*START VALIDATORS*/
+										fwvalidators.NotNullObject(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
@@ -331,7 +375,8 @@ func flowOutputResource(ctx context.Context) (resource.Resource, error) {
 					// Property: EncodingName
 					"encoding_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The format that will be used to encode the data. For ancillary data streams, set the encoding name to smpte291. For audio streams, set the encoding name to pcm. For video streams on sources or outputs that use the CDI protocol, set the encoding name to raw. For video streams on sources or outputs that use the ST 2110 JPEG XS protocol, set the encoding name to jxsv.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.OneOf(
 								"jxsv",
@@ -339,7 +384,11 @@ func flowOutputResource(ctx context.Context) (resource.Resource, error) {
 								"smpte291",
 								"pcm",
 							),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: EncodingParameters
 					"encoding_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -347,7 +396,14 @@ func flowOutputResource(ctx context.Context) (resource.Resource, error) {
 							// Property: CompressionFactor
 							"compression_factor": schema.Float64Attribute{ /*START ATTRIBUTE*/
 								Description: "A value that is used to calculate compression for an output. The bitrate of the output is calculated as follows: Output bitrate = (1 / compressionFactor) * (source bitrate) This property only applies to outputs that use the ST 2110 JPEG XS protocol, with a flow source that uses the CDI protocol. Valid values are in the range of 3.0 to 10.0, inclusive.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.Float64{ /*START VALIDATORS*/
+									fwvalidators.NotNullFloat64(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+									float64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: EncoderProfile
 							"encoder_profile": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -375,7 +431,14 @@ func flowOutputResource(ctx context.Context) (resource.Resource, error) {
 					// Property: MediaStreamName
 					"media_stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "A name that helps you distinguish one media stream from another.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

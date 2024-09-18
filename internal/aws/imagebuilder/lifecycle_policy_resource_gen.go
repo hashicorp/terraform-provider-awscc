@@ -22,6 +22,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -340,7 +341,8 @@ func lifecyclePolicyResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Unit
 											"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "The value's time unit.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.OneOf(
 														"DAYS",
@@ -348,12 +350,23 @@ func lifecyclePolicyResource(ctx context.Context) (resource.Resource, error) {
 														"MONTHS",
 														"YEARS",
 													),
+													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: Value
 											"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
 												Description: "The last launched value.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Int64{ /*START VALIDATORS*/
+													fwvalidators.NotNullInt64(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+													int64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "Use to apply lifecycle policy actions on AMIs launched before a certain time.",
@@ -533,12 +546,26 @@ func lifecyclePolicyResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Name
 							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The recipe name.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: SemanticVersion
 							"semantic_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The recipe version.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/

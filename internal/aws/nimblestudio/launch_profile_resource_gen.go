@@ -25,6 +25,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -445,7 +446,8 @@ func launchProfileResource(ctx context.Context) (resource.Resource, error) {
 						"mode": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
 							Description: "<p>Allows artists to upload files to their workstations. The only valid option is\n                <code>UPLOAD</code>.</p>",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeAtLeast(1),
 								listvalidator.ValueStringsAre(
@@ -453,7 +455,11 @@ func launchProfileResource(ctx context.Context) (resource.Resource, error) {
 										"UPLOAD",
 									),
 								),
+								fwvalidators.NotNullList(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Root
 						"root": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/

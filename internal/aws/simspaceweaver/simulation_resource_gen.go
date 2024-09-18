@@ -18,6 +18,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -128,19 +129,29 @@ func simulationResource(ctx context.Context) (resource.Resource, error) {
 				// Property: BucketName
 				"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The Schema S3 bucket name.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthBetween(3, 63),
 						stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_\\-]{3,63}$"), ""),
+						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: ObjectKey
 				"object_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "This is the schema S3 object key, which includes the full path of \"folders\" from the bucket root to the schema.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthBetween(3, 255),
+						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Optional: true,
@@ -181,19 +192,29 @@ func simulationResource(ctx context.Context) (resource.Resource, error) {
 				// Property: BucketName
 				"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The Schema S3 bucket name.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthBetween(3, 63),
 						stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_\\-]{3,63}$"), ""),
+						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: ObjectKey
 				"object_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "This is the schema S3 object key, which includes the full path of \"folders\" from the bucket root to the schema.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthBetween(3, 255),
+						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Optional: true,

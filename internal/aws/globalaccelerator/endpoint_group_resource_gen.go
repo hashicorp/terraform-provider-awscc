@@ -26,6 +26,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -98,7 +99,14 @@ func endpointGroupResource(ctx context.Context) (resource.Resource, error) {
 					// Property: EndpointId
 					"endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Id of the endpoint. For Network/Application Load Balancer this value is the ARN.  For EIP, this value is the allocation ID.  For EC2 instances, this is the EC2 instance ID",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Weight
 					"weight": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -284,18 +292,28 @@ func endpointGroupResource(ctx context.Context) (resource.Resource, error) {
 					// Property: EndpointPort
 					"endpoint_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
 						Description: "A network port number",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.Int64{ /*START VALIDATORS*/
 							int64validator.Between(0, 65535),
+							fwvalidators.NotNullInt64(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+							int64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: ListenerPort
 					"listener_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
 						Description: "A network port number",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.Int64{ /*START VALIDATORS*/
 							int64validator.Between(0, 65535),
+							fwvalidators.NotNullInt64(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+							int64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

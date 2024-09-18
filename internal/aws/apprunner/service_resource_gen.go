@@ -22,6 +22,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -79,11 +80,16 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 				// Property: KmsKey
 				"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The KMS Key",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthBetween(0, 256),
 						stringvalidator.RegexMatches(regexp.MustCompile("arn:aws(-[\\w]+)*:kms:[a-z\\-]+-[0-9]{1}:[0-9]{12}:key\\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"), ""),
+						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Encryption configuration (KMS key)",
@@ -362,13 +368,18 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 						// Property: EgressType
 						"egress_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "Network egress type.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"DEFAULT",
 									"VPC",
 								),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: VpcConnectorArn
 						"vpc_connector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -396,7 +407,14 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 						// Property: IsPubliclyAccessible
 						"is_publicly_accessible": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Description: "It's set to true if the Apprunner service is publicly accessible. It's set to false otherwise.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Bool{ /*START VALIDATORS*/
+								fwvalidators.NotNullBool(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Network ingress configuration",
@@ -470,7 +488,14 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 				// Property: ObservabilityEnabled
 				"observability_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "Observability enabled",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Bool{ /*START VALIDATORS*/
+						fwvalidators.NotNullBool(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Service observability configuration",
@@ -867,7 +892,8 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 										// Property: Runtime
 										"runtime": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "Runtime",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.OneOf(
 													"PYTHON_3",
@@ -883,7 +909,11 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 													"PYTHON_311",
 													"NODEJS_18",
 												),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: RuntimeEnvironmentSecrets
 										"runtime_environment_secrets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -962,13 +992,18 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 								// Property: ConfigurationSource
 								"configuration_source": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "Configuration Source",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.OneOf(
 											"REPOSITORY",
 											"API",
 										),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "Code Configuration",
@@ -981,7 +1016,14 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 						// Property: RepositoryUrl
 						"repository_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "Repository Url",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: SourceCodeVersion
 						"source_code_version": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -989,21 +1031,40 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 								// Property: Type
 								"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "Source Code Version Type",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.OneOf(
 											"BRANCH",
 										),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Value
 								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "Source Code Version Value",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "Source Code Version",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: SourceDirectory
 						"source_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1118,22 +1179,32 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 						// Property: ImageIdentifier
 						"image_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "Image Identifier",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 1024),
 								stringvalidator.RegexMatches(regexp.MustCompile("([0-9]{12}.dkr.ecr.[a-z\\-]+-[0-9]{1}.amazonaws.com\\/.*)|(^public\\.ecr\\.aws\\/.+\\/.+)"), ""),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: ImageRepositoryType
 						"image_repository_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "Image Repository Type",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"ECR",
 									"ECR_PUBLIC",
 								),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Image Repository",

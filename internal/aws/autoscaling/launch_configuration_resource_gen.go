@@ -22,6 +22,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -120,7 +121,14 @@ func launchConfigurationResource(ctx context.Context) (resource.Resource, error)
 					// Property: DeviceName
 					"device_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The device name exposed to the EC2 instance (for example, /dev/sdh or xvdh). ",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Ebs
 					"ebs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/

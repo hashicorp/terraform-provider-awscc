@@ -18,8 +18,10 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -251,7 +253,14 @@ func scalingPolicyResource(ctx context.Context) (resource.Resource, error) {
 							// Property: ScalingAdjustment
 							"scaling_adjustment": schema.Int64Attribute{ /*START ATTRIBUTE*/
 								Description: "The amount by which to scale. The adjustment is based on the value that you specified in the ``AdjustmentType`` property (either an absolute number or a percentage). A positive value adds to the current capacity and a negative number subtracts from the current capacity.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.Int64{ /*START VALIDATORS*/
+									fwvalidators.NotNullInt64(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -457,12 +466,26 @@ func scalingPolicyResource(ctx context.Context) (resource.Resource, error) {
 									// Property: Name
 									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "The name of the dimension.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: Value
 									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "The value of the dimension.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
@@ -673,7 +696,14 @@ func scalingPolicyResource(ctx context.Context) (resource.Resource, error) {
 						// Property: PredefinedMetricType
 						"predefined_metric_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The metric type. The ``ALBRequestCountPerTarget`` metric type applies only to Spot fleet requests and ECS services.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: ResourceLabel
 						"resource_label": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -714,7 +744,14 @@ func scalingPolicyResource(ctx context.Context) (resource.Resource, error) {
 				// Property: TargetValue
 				"target_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
 					Description: "The target value for the metric. Although this property accepts numbers of type Double, it won't accept values that are either too small or too large. Values must be in the range of -2^360 to 2^360. The value must be a valid number based on the choice of metric. For example, if the metric is CPU utilization, then the target value is a percent value that represents how much of the CPU can be used before scaling out.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Float64{ /*START VALIDATORS*/
+						fwvalidators.NotNullFloat64(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+						float64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "A target tracking scaling policy.",

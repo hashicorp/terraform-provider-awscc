@@ -18,6 +18,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -100,11 +101,16 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 						// Property: LambdaArn
 						"lambda_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "Lambda ARN of the connector being registered.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthAtMost(512),
 								stringvalidator.RegexMatches(regexp.MustCompile("arn:*:.*:.*:[0-9]+:.*"), ""),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Contains information about the configuration of the lambda which is being registered as the connector.",

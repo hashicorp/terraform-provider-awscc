@@ -28,6 +28,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -207,29 +208,44 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 								// Property: Duration
 								"duration": schema.Int64Attribute{ /*START ATTRIBUTE*/
 									Description: "Specifies the duration of each calendar interval. For example, if `Duration` is 1 and `DurationUnit` is `MONTH`, each interval is one month, aligned with the calendar.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.Int64{ /*START VALIDATORS*/
 										int64validator.AtLeast(1),
+										fwvalidators.NotNullInt64(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: DurationUnit
 								"duration_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "Specifies the calendar interval unit.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.OneOf(
 											"DAY",
 											"MONTH",
 										),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: StartTime
 								"start_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
 									Description: "Epoch time in seconds you want the first interval to start. Be sure to choose a time that configures the intervals the way that you want. For example, if you want weekly intervals starting on Mondays at 6 a.m., be sure to specify a start time that is a Monday at 6 a.m.\nAs soon as one calendar interval ends, another automatically begins.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.Int64{ /*START VALIDATORS*/
 										int64validator.AtLeast(946684800),
+										fwvalidators.NotNullInt64(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "If the interval for this service level objective is a calendar interval, this structure contains the interval specifications.",
@@ -245,21 +261,31 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 								// Property: Duration
 								"duration": schema.Int64Attribute{ /*START ATTRIBUTE*/
 									Description: "Specifies the duration of each calendar interval. For example, if `Duration` is 1 and `DurationUnit` is `MONTH`, each interval is one month, aligned with the calendar.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.Int64{ /*START VALIDATORS*/
 										int64validator.AtLeast(1),
+										fwvalidators.NotNullInt64(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: DurationUnit
 								"duration_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "Specifies the calendar interval unit.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.OneOf(
 											"DAY",
 											"MONTH",
 										),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "If the interval is a calendar interval, this structure contains the interval specifications.",
@@ -764,7 +790,14 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 											// Property: Id
 											"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "A short name used to tie this object to the results in the response.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: MetricStat
 											"metric_stat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -779,12 +812,26 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 																		// Property: Name
 																		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																			Description: "The name of the dimension. Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:). ASCII control characters are not supported as part of dimension names.",
-																			Required:    true,
+																			Optional:    true,
+																			Computed:    true,
+																			Validators: []validator.String{ /*START VALIDATORS*/
+																				fwvalidators.NotNullString(),
+																			}, /*END VALIDATORS*/
+																			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																				stringplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
 																		}, /*END ATTRIBUTE*/
 																		// Property: Value
 																		"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																			Description: "The value of the dimension. Dimension values must contain only ASCII characters and must include at least one non-whitespace character. ASCII control characters are not supported as part of dimension values",
-																			Required:    true,
+																			Optional:    true,
+																			Computed:    true,
+																			Validators: []validator.String{ /*START VALIDATORS*/
+																				fwvalidators.NotNullString(),
+																			}, /*END VALIDATORS*/
+																			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																				stringplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
 																		}, /*END ATTRIBUTE*/
 																	}, /*END SCHEMA*/
 																}, /*END NESTED OBJECT*/
@@ -816,17 +863,38 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 														Description: "This structure defines the metric used for a service level indicator, including the metric name, namespace, and dimensions.",
-														Required:    true,
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.Object{ /*START VALIDATORS*/
+															fwvalidators.NotNullObject(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+															objectplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 													// Property: Period
 													"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
 														Description: "The granularity, in seconds, to be used for the metric.",
-														Required:    true,
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.Int64{ /*START VALIDATORS*/
+															fwvalidators.NotNullInt64(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+															int64planmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 													// Property: Stat
 													"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
 														Description: "The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic.",
-														Required:    true,
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															fwvalidators.NotNullString(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 													// Property: Unit
 													"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -888,7 +956,14 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 											// Property: Id
 											"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "A short name used to tie this object to the results in the response.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: MetricStat
 											"metric_stat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -903,12 +978,26 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 																		// Property: Name
 																		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																			Description: "The name of the dimension. Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:). ASCII control characters are not supported as part of dimension names.",
-																			Required:    true,
+																			Optional:    true,
+																			Computed:    true,
+																			Validators: []validator.String{ /*START VALIDATORS*/
+																				fwvalidators.NotNullString(),
+																			}, /*END VALIDATORS*/
+																			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																				stringplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
 																		}, /*END ATTRIBUTE*/
 																		// Property: Value
 																		"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																			Description: "The value of the dimension. Dimension values must contain only ASCII characters and must include at least one non-whitespace character. ASCII control characters are not supported as part of dimension values",
-																			Required:    true,
+																			Optional:    true,
+																			Computed:    true,
+																			Validators: []validator.String{ /*START VALIDATORS*/
+																				fwvalidators.NotNullString(),
+																			}, /*END VALIDATORS*/
+																			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																				stringplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
 																		}, /*END ATTRIBUTE*/
 																	}, /*END SCHEMA*/
 																}, /*END NESTED OBJECT*/
@@ -940,17 +1029,38 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 														Description: "This structure defines the metric used for a service level indicator, including the metric name, namespace, and dimensions.",
-														Required:    true,
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.Object{ /*START VALIDATORS*/
+															fwvalidators.NotNullObject(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+															objectplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 													// Property: Period
 													"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
 														Description: "The granularity, in seconds, to be used for the metric.",
-														Required:    true,
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.Int64{ /*START VALIDATORS*/
+															fwvalidators.NotNullInt64(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+															int64planmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 													// Property: Stat
 													"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
 														Description: "The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic.",
-														Required:    true,
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															fwvalidators.NotNullString(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 													// Property: Unit
 													"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1032,7 +1142,14 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 									// Property: Id
 									"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "A short name used to tie this object to the results in the response.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: MetricStat
 									"metric_stat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1047,12 +1164,26 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 																// Property: Name
 																"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																	Description: "The name of the dimension. Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:). ASCII control characters are not supported as part of dimension names.",
-																	Required:    true,
+																	Optional:    true,
+																	Computed:    true,
+																	Validators: []validator.String{ /*START VALIDATORS*/
+																		fwvalidators.NotNullString(),
+																	}, /*END VALIDATORS*/
+																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																		stringplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
 																}, /*END ATTRIBUTE*/
 																// Property: Value
 																"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																	Description: "The value of the dimension. Dimension values must contain only ASCII characters and must include at least one non-whitespace character. ASCII control characters are not supported as part of dimension values",
-																	Required:    true,
+																	Optional:    true,
+																	Computed:    true,
+																	Validators: []validator.String{ /*START VALIDATORS*/
+																		fwvalidators.NotNullString(),
+																	}, /*END VALIDATORS*/
+																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																		stringplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
 																}, /*END ATTRIBUTE*/
 															}, /*END SCHEMA*/
 														}, /*END NESTED OBJECT*/
@@ -1084,17 +1215,38 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
 												Description: "This structure defines the metric used for a service level indicator, including the metric name, namespace, and dimensions.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Object{ /*START VALIDATORS*/
+													fwvalidators.NotNullObject(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: Period
 											"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
 												Description: "The granularity, in seconds, to be used for the metric.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Int64{ /*START VALIDATORS*/
+													fwvalidators.NotNullInt64(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+													int64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: Stat
 											"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: Unit
 											"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1133,7 +1285,14 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "This structure contains the information about the metric that is used for a request-based SLO.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Object{ /*START VALIDATORS*/
+						fwvalidators.NotNullObject(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "This structure contains information about the performance metric that a request-based SLO monitors.",
@@ -1315,7 +1474,8 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 				// Property: ComparisonOperator
 				"comparison_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The arithmetic operation used when comparing the specified metric to the threshold.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"GreaterThanOrEqualTo",
@@ -1323,12 +1483,23 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 							"LessThan",
 							"GreaterThan",
 						),
+						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: MetricThreshold
 				"metric_threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
 					Description: "The value that the SLI metric is compared to.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Float64{ /*START VALIDATORS*/
+						fwvalidators.NotNullFloat64(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+						float64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: SliMetric
 				"sli_metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1369,7 +1540,14 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 									// Property: Id
 									"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "A short name used to tie this object to the results in the response.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: MetricStat
 									"metric_stat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1384,12 +1562,26 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 																// Property: Name
 																"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																	Description: "The name of the dimension. Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:). ASCII control characters are not supported as part of dimension names.",
-																	Required:    true,
+																	Optional:    true,
+																	Computed:    true,
+																	Validators: []validator.String{ /*START VALIDATORS*/
+																		fwvalidators.NotNullString(),
+																	}, /*END VALIDATORS*/
+																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																		stringplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
 																}, /*END ATTRIBUTE*/
 																// Property: Value
 																"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																	Description: "The value of the dimension. Dimension values must contain only ASCII characters and must include at least one non-whitespace character. ASCII control characters are not supported as part of dimension values",
-																	Required:    true,
+																	Optional:    true,
+																	Computed:    true,
+																	Validators: []validator.String{ /*START VALIDATORS*/
+																		fwvalidators.NotNullString(),
+																	}, /*END VALIDATORS*/
+																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																		stringplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
 																}, /*END ATTRIBUTE*/
 															}, /*END SCHEMA*/
 														}, /*END NESTED OBJECT*/
@@ -1421,17 +1613,38 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
 												Description: "This structure defines the metric used for a service level indicator, including the metric name, namespace, and dimensions.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Object{ /*START VALIDATORS*/
+													fwvalidators.NotNullObject(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: Period
 											"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
 												Description: "The granularity, in seconds, to be used for the metric.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Int64{ /*START VALIDATORS*/
+													fwvalidators.NotNullInt64(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+													int64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: Stat
 											"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: Unit
 											"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1521,7 +1734,14 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "A structure that contains information about the metric that the SLO monitors.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Object{ /*START VALIDATORS*/
+						fwvalidators.NotNullObject(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "This structure contains information about the performance metric that an SLO monitors.",
@@ -1571,18 +1791,28 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "A string that you can use to assign a value. The combination of tag keys and values can help you organize and categorize your resources.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The value for the specified tag key.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

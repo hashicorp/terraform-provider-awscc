@@ -15,6 +15,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
@@ -24,6 +25,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -172,7 +174,14 @@ func monitoringScheduleResource(ctx context.Context) (resource.Resource, error) 
 				// Property: CreationTime
 				"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The time at which the monitoring job was created.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: EndpointName
 				"endpoint_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -202,12 +211,20 @@ func monitoringScheduleResource(ctx context.Context) (resource.Resource, error) 
 				// Property: LastModifiedTime
 				"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "A timestamp that indicates the last time the monitoring job was modified.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: MonitoringExecutionStatus
 				"monitoring_execution_status": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The status of the monitoring job.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"Pending",
@@ -218,16 +235,25 @@ func monitoringScheduleResource(ctx context.Context) (resource.Resource, error) 
 							"Stopping",
 							"Stopped",
 						),
+						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: MonitoringScheduleName
 				"monitoring_schedule_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The name of the monitoring schedule.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthAtMost(63),
 						stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"), ""),
+						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: ProcessingJobArn
 				"processing_job_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -245,7 +271,14 @@ func monitoringScheduleResource(ctx context.Context) (resource.Resource, error) 
 				// Property: ScheduledTime
 				"scheduled_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The time the monitoring job was scheduled.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Describes metadata on the last execution to run, if there was one.",
@@ -865,11 +898,16 @@ func monitoringScheduleResource(ctx context.Context) (resource.Resource, error) 
 								// Property: ImageUri
 								"image_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The container image to be run by the monitoring job.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(255),
 										stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: PostAnalyticsProcessorSourceUri
 								"post_analytics_processor_source_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -899,7 +937,14 @@ func monitoringScheduleResource(ctx context.Context) (resource.Resource, error) 
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "Container image configuration object for the monitoring job.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: MonitoringInputs
 						"monitoring_inputs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -911,11 +956,16 @@ func monitoringScheduleResource(ctx context.Context) (resource.Resource, error) 
 											// Property: DataCapturedDestinationS3Uri
 											"data_captured_destination_s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "A URI that identifies the Amazon S3 storage location where Batch Transform Job captures data.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthAtMost(512),
 													stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
+													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: DatasetFormat
 											"dataset_format": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -971,7 +1021,14 @@ func monitoringScheduleResource(ctx context.Context) (resource.Resource, error) 
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
 												Description: "The dataset format of the data to monitor",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Object{ /*START VALIDATORS*/
+													fwvalidators.NotNullObject(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: ExcludeFeaturesAttribute
 											"exclude_features_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -988,11 +1045,16 @@ func monitoringScheduleResource(ctx context.Context) (resource.Resource, error) 
 											// Property: LocalPath
 											"local_path": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "Path to the filesystem where the endpoint data is available to the container.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthAtMost(256),
 													stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: S3DataDistributionType
 											"s3_data_distribution_type": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1038,11 +1100,16 @@ func monitoringScheduleResource(ctx context.Context) (resource.Resource, error) 
 											// Property: EndpointName
 											"endpoint_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "The name of the endpoint used to run the monitoring job.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthAtMost(63),
 													stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*"), ""),
+													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: ExcludeFeaturesAttribute
 											"exclude_features_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1059,11 +1126,16 @@ func monitoringScheduleResource(ctx context.Context) (resource.Resource, error) 
 											// Property: LocalPath
 											"local_path": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "Path to the filesystem where the endpoint data is available to the container.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthAtMost(256),
 													stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: S3DataDistributionType
 											"s3_data_distribution_type": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1106,10 +1178,15 @@ func monitoringScheduleResource(ctx context.Context) (resource.Resource, error) 
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
 							Description: "The array of inputs for the monitoring job.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(1, 1),
+								fwvalidators.NotNullList(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: MonitoringOutputConfig
 						"monitoring_output_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1137,11 +1214,16 @@ func monitoringScheduleResource(ctx context.Context) (resource.Resource, error) 
 													// Property: LocalPath
 													"local_path": schema.StringAttribute{ /*START ATTRIBUTE*/
 														Description: "The local path to the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job. LocalPath is an absolute path for the output data.",
-														Required:    true,
+														Optional:    true,
+														Computed:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
 															stringvalidator.LengthAtMost(256),
 															stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+															fwvalidators.NotNullString(),
 														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 													// Property: S3UploadMode
 													"s3_upload_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1161,24 +1243,50 @@ func monitoringScheduleResource(ctx context.Context) (resource.Resource, error) 
 													// Property: S3Uri
 													"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
 														Description: "A URI that identifies the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job.",
-														Required:    true,
+														Optional:    true,
+														Computed:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
 															stringvalidator.LengthAtMost(512),
 															stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
+															fwvalidators.NotNullString(),
 														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
 												Description: "Information about where and how to store the results of a monitoring job.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Object{ /*START VALIDATORS*/
+													fwvalidators.NotNullObject(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
 									Description: "Monitoring outputs for monitoring jobs. This is where the output of the periodic monitoring jobs is uploaded.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										fwvalidators.NotNullList(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "The output configuration for monitoring jobs.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: MonitoringResources
 						"monitoring_resources": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1189,15 +1297,27 @@ func monitoringScheduleResource(ctx context.Context) (resource.Resource, error) 
 										// Property: InstanceCount
 										"instance_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
 											Description: "The number of ML compute instances to use in the model monitoring job. For distributed processing jobs, specify a value greater than 1. The default value is 1.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.Int64{ /*START VALIDATORS*/
 												int64validator.Between(1, 100),
+												fwvalidators.NotNullInt64(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: InstanceType
 										"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "The ML compute instance type for the processing job.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: VolumeKmsKeyId
 										"volume_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1211,18 +1331,37 @@ func monitoringScheduleResource(ctx context.Context) (resource.Resource, error) 
 										// Property: VolumeSizeInGB
 										"volume_size_in_gb": schema.Int64Attribute{ /*START ATTRIBUTE*/
 											Description: "The size of the ML storage volume, in gigabytes, that you want to provision. You must specify sufficient ML storage for your scenario.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.Int64{ /*START VALIDATORS*/
 												int64validator.Between(1, 16384),
+												fwvalidators.NotNullInt64(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "Configuration for the cluster used to run model monitoring jobs.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Object{ /*START VALIDATORS*/
+										fwvalidators.NotNullObject(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "Identifies the resources to deploy for a monitoring job.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: NetworkConfig
 						"network_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1252,27 +1391,37 @@ func monitoringScheduleResource(ctx context.Context) (resource.Resource, error) 
 										"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 											ElementType: types.StringType,
 											Description: "The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security groups for the VPC that is specified in the Subnets field.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.List{ /*START VALIDATORS*/
 												listvalidator.SizeBetween(1, 5),
 												listvalidator.ValueStringsAre(
 													stringvalidator.LengthAtMost(32),
 													stringvalidator.RegexMatches(regexp.MustCompile("[-0-9a-zA-Z]+"), ""),
 												),
+												fwvalidators.NotNullList(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: Subnets
 										"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
 											ElementType: types.StringType,
 											Description: "The ID of the subnets in the VPC to which you want to connect to your monitoring jobs.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.List{ /*START VALIDATORS*/
 												listvalidator.SizeBetween(1, 16),
 												listvalidator.ValueStringsAre(
 													stringvalidator.LengthAtMost(32),
 													stringvalidator.RegexMatches(regexp.MustCompile("[-0-9a-zA-Z]+"), ""),
 												),
+												fwvalidators.NotNullList(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "Specifies a VPC that your training jobs and hosted models have access to. Control access to and from your training and model containers by configuring the VPC.",
@@ -1293,11 +1442,16 @@ func monitoringScheduleResource(ctx context.Context) (resource.Resource, error) 
 						// Property: RoleArn
 						"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(20, 2048),
 								stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: StoppingCondition
 						"stopping_condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1305,10 +1459,15 @@ func monitoringScheduleResource(ctx context.Context) (resource.Resource, error) 
 								// Property: MaxRuntimeInSeconds
 								"max_runtime_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
 									Description: "The maximum runtime allowed in seconds.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.Int64{ /*START VALIDATORS*/
 										int64validator.Between(1, 86400),
+										fwvalidators.NotNullInt64(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "Specifies a time limit for how long the monitoring job is allowed to run.",
@@ -1388,10 +1547,15 @@ func monitoringScheduleResource(ctx context.Context) (resource.Resource, error) 
 						// Property: ScheduleExpression
 						"schedule_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "A cron expression or 'NOW' that describes details about the monitoring schedule.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 256),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Configuration details about the monitoring schedule.",
@@ -1491,20 +1655,30 @@ func monitoringScheduleResource(ctx context.Context) (resource.Resource, error) 
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
 							stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthAtMost(256),
 							stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

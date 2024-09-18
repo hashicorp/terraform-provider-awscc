@@ -17,8 +17,10 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -190,7 +192,14 @@ func triggerResource(ctx context.Context) (resource.Resource, error) {
 				// Property: BatchSize
 				"batch_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
 					Description: "Number of events that must be received from Amazon EventBridge before EventBridge event trigger fires.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						fwvalidators.NotNullInt64(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: BatchWindow
 				"batch_window": schema.Int64Attribute{ /*START ATTRIBUTE*/

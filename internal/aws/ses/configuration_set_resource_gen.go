@@ -22,6 +22,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -296,10 +297,15 @@ func configurationSetResource(ctx context.Context) (resource.Resource, error) {
 						// Property: EngagementMetrics
 						"engagement_metrics": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "Whether emails sent with this configuration set have engagement tracking enabled.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("ENABLED|DISABLED"), ""),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Preferences regarding the Dashboard feature.",
@@ -315,10 +321,15 @@ func configurationSetResource(ctx context.Context) (resource.Resource, error) {
 						// Property: OptimizedSharedDelivery
 						"optimized_shared_delivery": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "Whether emails sent with this configuration set have optimized delivery algorithm enabled.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("ENABLED|DISABLED"), ""),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Preferences regarding the Guardian feature.",

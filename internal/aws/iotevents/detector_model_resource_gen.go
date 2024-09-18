@@ -23,6 +23,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -2236,10 +2237,15 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 																	// Property: TimerName
 																	"timer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Required: true,
+																		Optional: true,
+																		Computed: true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
 																			stringvalidator.LengthBetween(1, 128),
+																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "Information needed to clear the timer.",
@@ -2255,7 +2261,14 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: HashKeyField
 																	"hash_key_field": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The name of the hash key (also called the partition key).",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			fwvalidators.NotNullString(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: HashKeyType
 																	"hash_key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -2269,7 +2282,14 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: HashKeyValue
 																	"hash_key_value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The value of the hash key (also called the partition key).",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			fwvalidators.NotNullString(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: Operation
 																	"operation": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -2286,15 +2306,27 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: ContentExpression
 																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthAtLeast(1),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																			// Property: Type
 																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The value of the payload type can be either `STRING` or `JSON`.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
@@ -2343,7 +2375,14 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: TableName
 																	"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The name of the DynamoDB table.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			fwvalidators.NotNullString(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify. For more information, see [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in *AWS IoT Events Developer Guide*.",
@@ -2362,15 +2401,27 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: ContentExpression
 																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthAtLeast(1),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																			// Property: Type
 																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The value of the payload type can be either `STRING` or `JSON`.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
@@ -2383,7 +2434,14 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: TableName
 																	"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The name of the DynamoDB table.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			fwvalidators.NotNullString(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "Defines an action to write to the Amazon DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify.\n\nYou can use expressions for parameters that are strings. For more information, see [Expressions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html) in the *AWS IoT Events Developer Guide*.",
@@ -2399,7 +2457,14 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: DeliveryStreamName
 																	"delivery_stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The name of the Kinesis Data Firehose delivery stream where the data is written.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			fwvalidators.NotNullString(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: Payload
 																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -2407,15 +2472,27 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: ContentExpression
 																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthAtLeast(1),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																			// Property: Type
 																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The value of the payload type can be either `STRING` or `JSON`.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
@@ -2451,11 +2528,16 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: InputName
 																	"input_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The name of the AWS IoT Events input where the data is sent.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
 																			stringvalidator.LengthBetween(1, 128),
 																			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]*$"), ""),
+																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: Payload
 																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -2463,15 +2545,27 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: ContentExpression
 																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthAtLeast(1),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																			// Property: Type
 																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The value of the payload type can be either `STRING` or `JSON`.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
@@ -2555,7 +2649,14 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																					// Property: TimeInSeconds
 																					"time_in_seconds": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The nanosecond offset converted from `timeInSeconds`. The valid range is between `0-999999999`. You can also specify an expression.",
-																						Required:    true,
+																						Optional:    true,
+																						Computed:    true,
+																						Validators: []validator.String{ /*START VALIDATORS*/
+																							fwvalidators.NotNullString(),
+																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A structure that contains timestamp information. For more information, see [TimeInNanos](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_TimeInNanos.html) in the *AWS IoT SiteWise API Reference*.",
@@ -2606,11 +2707,25 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A structure that contains an asset property value. For more information, see [Variant](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html) in the *AWS IoT SiteWise API Reference*.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.Object{ /*START VALIDATORS*/
+																					fwvalidators.NotNullObject(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																					objectplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "A structure that contains value information. For more information, see [AssetPropertyValue](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetPropertyValue.html) in the *AWS IoT SiteWise API Reference*.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.Object{ /*START VALIDATORS*/
+																			fwvalidators.NotNullObject(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																			objectplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "Sends information about the detector model instance and the event that triggered the action to a specified asset property in AWS IoT SiteWise.",
@@ -2626,10 +2741,15 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: MqttTopic
 																	"mqtt_topic": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The MQTT topic of the message. You can use a string expression that includes variables (`$variable.<variable-name>`) and input values (`$input.<input-name>.<path-to-datum>`) as the topic string.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
 																			stringvalidator.LengthBetween(1, 128),
+																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: Payload
 																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -2637,15 +2757,27 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: ContentExpression
 																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthAtLeast(1),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																			// Property: Type
 																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The value of the payload type can be either `STRING` or `JSON`.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
@@ -2669,10 +2801,15 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: FunctionArn
 																	"function_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The ARN of the Lambda function that is executed.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
 																			stringvalidator.LengthBetween(1, 2048),
+																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: Payload
 																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -2680,15 +2817,27 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: ContentExpression
 																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthAtLeast(1),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																			// Property: Type
 																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The value of the payload type can be either `STRING` or `JSON`.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
@@ -2711,10 +2860,15 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: TimerName
 																	"timer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The name of the timer to reset.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
 																			stringvalidator.LengthBetween(1, 128),
+																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "Information required to reset the timer. The timer is reset to the previously evaluated result of the duration. The duration expression isn't reevaluated when you reset the timer.",
@@ -2754,10 +2908,15 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: TimerName
 																	"timer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The name of the timer.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
 																			stringvalidator.LengthBetween(1, 128),
+																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "Information needed to set the timer.",
@@ -2773,19 +2932,29 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: Value
 																	"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The new value of the variable.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
 																			stringvalidator.LengthBetween(1, 1024),
+																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: VariableName
 																	"variable_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The name of the variable.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
 																			stringvalidator.LengthBetween(1, 128),
 																			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]*$"), ""),
+																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "Information about the variable and its new value.",
@@ -2804,15 +2973,27 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: ContentExpression
 																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthAtLeast(1),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																			// Property: Type
 																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The value of the payload type can be either `STRING` or `JSON`.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
@@ -2825,10 +3006,15 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: TargetArn
 																	"target_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The ARN of the Amazon SNS target where the message is sent.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
 																			stringvalidator.LengthBetween(1, 2048),
+																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "Information required to publish the Amazon SNS message.",
@@ -2847,15 +3033,27 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: ContentExpression
 																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthAtLeast(1),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																			// Property: Type
 																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The value of the payload type can be either `STRING` or `JSON`.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
@@ -2868,7 +3066,14 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: QueueUrl
 																	"queue_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The URL of the SQS queue where the data is written.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			fwvalidators.NotNullString(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: UseBase64
 																	"use_base_64": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -2911,10 +3116,15 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 												// Property: EventName
 												"event_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The name of the event.",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthAtMost(128),
+														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
@@ -2950,10 +3160,15 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 																	// Property: TimerName
 																	"timer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Required: true,
+																		Optional: true,
+																		Computed: true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
 																			stringvalidator.LengthBetween(1, 128),
+																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "Information needed to clear the timer.",
@@ -2969,7 +3184,14 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: HashKeyField
 																	"hash_key_field": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The name of the hash key (also called the partition key).",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			fwvalidators.NotNullString(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: HashKeyType
 																	"hash_key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -2983,7 +3205,14 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: HashKeyValue
 																	"hash_key_value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The value of the hash key (also called the partition key).",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			fwvalidators.NotNullString(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: Operation
 																	"operation": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -3000,15 +3229,27 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: ContentExpression
 																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthAtLeast(1),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																			// Property: Type
 																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The value of the payload type can be either `STRING` or `JSON`.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
@@ -3057,7 +3298,14 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: TableName
 																	"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The name of the DynamoDB table.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			fwvalidators.NotNullString(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify. For more information, see [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in *AWS IoT Events Developer Guide*.",
@@ -3076,15 +3324,27 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: ContentExpression
 																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthAtLeast(1),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																			// Property: Type
 																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The value of the payload type can be either `STRING` or `JSON`.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
@@ -3097,7 +3357,14 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: TableName
 																	"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The name of the DynamoDB table.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			fwvalidators.NotNullString(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "Defines an action to write to the Amazon DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify.\n\nYou can use expressions for parameters that are strings. For more information, see [Expressions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html) in the *AWS IoT Events Developer Guide*.",
@@ -3113,7 +3380,14 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: DeliveryStreamName
 																	"delivery_stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The name of the Kinesis Data Firehose delivery stream where the data is written.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			fwvalidators.NotNullString(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: Payload
 																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -3121,15 +3395,27 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: ContentExpression
 																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthAtLeast(1),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																			// Property: Type
 																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The value of the payload type can be either `STRING` or `JSON`.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
@@ -3165,11 +3451,16 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: InputName
 																	"input_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The name of the AWS IoT Events input where the data is sent.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
 																			stringvalidator.LengthBetween(1, 128),
 																			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]*$"), ""),
+																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: Payload
 																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -3177,15 +3468,27 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: ContentExpression
 																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthAtLeast(1),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																			// Property: Type
 																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The value of the payload type can be either `STRING` or `JSON`.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
@@ -3269,7 +3572,14 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																					// Property: TimeInSeconds
 																					"time_in_seconds": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The nanosecond offset converted from `timeInSeconds`. The valid range is between `0-999999999`. You can also specify an expression.",
-																						Required:    true,
+																						Optional:    true,
+																						Computed:    true,
+																						Validators: []validator.String{ /*START VALIDATORS*/
+																							fwvalidators.NotNullString(),
+																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A structure that contains timestamp information. For more information, see [TimeInNanos](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_TimeInNanos.html) in the *AWS IoT SiteWise API Reference*.",
@@ -3320,11 +3630,25 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A structure that contains an asset property value. For more information, see [Variant](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html) in the *AWS IoT SiteWise API Reference*.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.Object{ /*START VALIDATORS*/
+																					fwvalidators.NotNullObject(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																					objectplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "A structure that contains value information. For more information, see [AssetPropertyValue](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetPropertyValue.html) in the *AWS IoT SiteWise API Reference*.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.Object{ /*START VALIDATORS*/
+																			fwvalidators.NotNullObject(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																			objectplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "Sends information about the detector model instance and the event that triggered the action to a specified asset property in AWS IoT SiteWise.",
@@ -3340,10 +3664,15 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: MqttTopic
 																	"mqtt_topic": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The MQTT topic of the message. You can use a string expression that includes variables (`$variable.<variable-name>`) and input values (`$input.<input-name>.<path-to-datum>`) as the topic string.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
 																			stringvalidator.LengthBetween(1, 128),
+																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: Payload
 																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -3351,15 +3680,27 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: ContentExpression
 																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthAtLeast(1),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																			// Property: Type
 																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The value of the payload type can be either `STRING` or `JSON`.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
@@ -3383,10 +3724,15 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: FunctionArn
 																	"function_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The ARN of the Lambda function that is executed.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
 																			stringvalidator.LengthBetween(1, 2048),
+																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: Payload
 																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -3394,15 +3740,27 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: ContentExpression
 																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthAtLeast(1),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																			// Property: Type
 																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The value of the payload type can be either `STRING` or `JSON`.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
@@ -3425,10 +3783,15 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: TimerName
 																	"timer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The name of the timer to reset.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
 																			stringvalidator.LengthBetween(1, 128),
+																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "Information required to reset the timer. The timer is reset to the previously evaluated result of the duration. The duration expression isn't reevaluated when you reset the timer.",
@@ -3468,10 +3831,15 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: TimerName
 																	"timer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The name of the timer.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
 																			stringvalidator.LengthBetween(1, 128),
+																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "Information needed to set the timer.",
@@ -3487,19 +3855,29 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: Value
 																	"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The new value of the variable.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
 																			stringvalidator.LengthBetween(1, 1024),
+																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: VariableName
 																	"variable_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The name of the variable.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
 																			stringvalidator.LengthBetween(1, 128),
 																			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]*$"), ""),
+																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "Information about the variable and its new value.",
@@ -3518,15 +3896,27 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: ContentExpression
 																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthAtLeast(1),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																			// Property: Type
 																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The value of the payload type can be either `STRING` or `JSON`.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
@@ -3539,10 +3929,15 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: TargetArn
 																	"target_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The ARN of the Amazon SNS target where the message is sent.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
 																			stringvalidator.LengthBetween(1, 2048),
+																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "Information required to publish the Amazon SNS message.",
@@ -3561,15 +3956,27 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: ContentExpression
 																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthAtLeast(1),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																			// Property: Type
 																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The value of the payload type can be either `STRING` or `JSON`.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
@@ -3582,7 +3989,14 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: QueueUrl
 																	"queue_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The URL of the SQS queue where the data is written.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			fwvalidators.NotNullString(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: UseBase64
 																	"use_base_64": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -3625,10 +4039,15 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 												// Property: EventName
 												"event_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The name of the event.",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthAtMost(128),
+														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
@@ -3664,10 +4083,15 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 																	// Property: TimerName
 																	"timer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Required: true,
+																		Optional: true,
+																		Computed: true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
 																			stringvalidator.LengthBetween(1, 128),
+																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "Information needed to clear the timer.",
@@ -3683,7 +4107,14 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: HashKeyField
 																	"hash_key_field": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The name of the hash key (also called the partition key).",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			fwvalidators.NotNullString(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: HashKeyType
 																	"hash_key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -3697,7 +4128,14 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: HashKeyValue
 																	"hash_key_value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The value of the hash key (also called the partition key).",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			fwvalidators.NotNullString(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: Operation
 																	"operation": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -3714,15 +4152,27 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: ContentExpression
 																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthAtLeast(1),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																			// Property: Type
 																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The value of the payload type can be either `STRING` or `JSON`.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
@@ -3771,7 +4221,14 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: TableName
 																	"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The name of the DynamoDB table.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			fwvalidators.NotNullString(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify. For more information, see [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in *AWS IoT Events Developer Guide*.",
@@ -3790,15 +4247,27 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: ContentExpression
 																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthAtLeast(1),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																			// Property: Type
 																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The value of the payload type can be either `STRING` or `JSON`.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
@@ -3811,7 +4280,14 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: TableName
 																	"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The name of the DynamoDB table.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			fwvalidators.NotNullString(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "Defines an action to write to the Amazon DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify.\n\nYou can use expressions for parameters that are strings. For more information, see [Expressions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html) in the *AWS IoT Events Developer Guide*.",
@@ -3827,7 +4303,14 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: DeliveryStreamName
 																	"delivery_stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The name of the Kinesis Data Firehose delivery stream where the data is written.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			fwvalidators.NotNullString(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: Payload
 																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -3835,15 +4318,27 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: ContentExpression
 																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthAtLeast(1),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																			// Property: Type
 																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The value of the payload type can be either `STRING` or `JSON`.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
@@ -3879,11 +4374,16 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: InputName
 																	"input_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The name of the AWS IoT Events input where the data is sent.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
 																			stringvalidator.LengthBetween(1, 128),
 																			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]*$"), ""),
+																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: Payload
 																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -3891,15 +4391,27 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: ContentExpression
 																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthAtLeast(1),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																			// Property: Type
 																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The value of the payload type can be either `STRING` or `JSON`.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
@@ -3983,7 +4495,14 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																					// Property: TimeInSeconds
 																					"time_in_seconds": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The nanosecond offset converted from `timeInSeconds`. The valid range is between `0-999999999`. You can also specify an expression.",
-																						Required:    true,
+																						Optional:    true,
+																						Computed:    true,
+																						Validators: []validator.String{ /*START VALIDATORS*/
+																							fwvalidators.NotNullString(),
+																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A structure that contains timestamp information. For more information, see [TimeInNanos](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_TimeInNanos.html) in the *AWS IoT SiteWise API Reference*.",
@@ -4034,11 +4553,25 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A structure that contains an asset property value. For more information, see [Variant](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html) in the *AWS IoT SiteWise API Reference*.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.Object{ /*START VALIDATORS*/
+																					fwvalidators.NotNullObject(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																					objectplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "A structure that contains value information. For more information, see [AssetPropertyValue](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetPropertyValue.html) in the *AWS IoT SiteWise API Reference*.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.Object{ /*START VALIDATORS*/
+																			fwvalidators.NotNullObject(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																			objectplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "Sends information about the detector model instance and the event that triggered the action to a specified asset property in AWS IoT SiteWise.",
@@ -4054,10 +4587,15 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: MqttTopic
 																	"mqtt_topic": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The MQTT topic of the message. You can use a string expression that includes variables (`$variable.<variable-name>`) and input values (`$input.<input-name>.<path-to-datum>`) as the topic string.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
 																			stringvalidator.LengthBetween(1, 128),
+																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: Payload
 																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -4065,15 +4603,27 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: ContentExpression
 																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthAtLeast(1),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																			// Property: Type
 																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The value of the payload type can be either `STRING` or `JSON`.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
@@ -4097,10 +4647,15 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: FunctionArn
 																	"function_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The ARN of the Lambda function that is executed.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
 																			stringvalidator.LengthBetween(1, 2048),
+																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: Payload
 																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -4108,15 +4663,27 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: ContentExpression
 																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthAtLeast(1),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																			// Property: Type
 																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The value of the payload type can be either `STRING` or `JSON`.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
@@ -4139,10 +4706,15 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: TimerName
 																	"timer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The name of the timer to reset.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
 																			stringvalidator.LengthBetween(1, 128),
+																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "Information required to reset the timer. The timer is reset to the previously evaluated result of the duration. The duration expression isn't reevaluated when you reset the timer.",
@@ -4182,10 +4754,15 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: TimerName
 																	"timer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The name of the timer.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
 																			stringvalidator.LengthBetween(1, 128),
+																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "Information needed to set the timer.",
@@ -4201,19 +4778,29 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: Value
 																	"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The new value of the variable.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
 																			stringvalidator.LengthBetween(1, 1024),
+																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: VariableName
 																	"variable_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The name of the variable.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
 																			stringvalidator.LengthBetween(1, 128),
 																			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]*$"), ""),
+																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "Information about the variable and its new value.",
@@ -4232,15 +4819,27 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: ContentExpression
 																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthAtLeast(1),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																			// Property: Type
 																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The value of the payload type can be either `STRING` or `JSON`.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
@@ -4253,10 +4852,15 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: TargetArn
 																	"target_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The ARN of the Amazon SNS target where the message is sent.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
 																			stringvalidator.LengthBetween(1, 2048),
+																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "Information required to publish the Amazon SNS message.",
@@ -4275,15 +4879,27 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: ContentExpression
 																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthAtLeast(1),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																			// Property: Type
 																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The value of the payload type can be either `STRING` or `JSON`.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
@@ -4296,7 +4912,14 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: QueueUrl
 																	"queue_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The URL of the SQS queue where the data is written.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			fwvalidators.NotNullString(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: UseBase64
 																	"use_base_64": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -4339,10 +4962,15 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 												// Property: EventName
 												"event_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The name of the event.",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthAtMost(128),
+														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
@@ -4367,10 +4995,15 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 																	// Property: TimerName
 																	"timer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Required: true,
+																		Optional: true,
+																		Computed: true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
 																			stringvalidator.LengthBetween(1, 128),
+																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "Information needed to clear the timer.",
@@ -4386,7 +5019,14 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: HashKeyField
 																	"hash_key_field": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The name of the hash key (also called the partition key).",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			fwvalidators.NotNullString(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: HashKeyType
 																	"hash_key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -4400,7 +5040,14 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: HashKeyValue
 																	"hash_key_value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The value of the hash key (also called the partition key).",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			fwvalidators.NotNullString(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: Operation
 																	"operation": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -4417,15 +5064,27 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: ContentExpression
 																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthAtLeast(1),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																			// Property: Type
 																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The value of the payload type can be either `STRING` or `JSON`.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
@@ -4474,7 +5133,14 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: TableName
 																	"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The name of the DynamoDB table.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			fwvalidators.NotNullString(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify. For more information, see [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in *AWS IoT Events Developer Guide*.",
@@ -4493,15 +5159,27 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: ContentExpression
 																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthAtLeast(1),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																			// Property: Type
 																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The value of the payload type can be either `STRING` or `JSON`.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
@@ -4514,7 +5192,14 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: TableName
 																	"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The name of the DynamoDB table.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			fwvalidators.NotNullString(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "Defines an action to write to the Amazon DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify.\n\nYou can use expressions for parameters that are strings. For more information, see [Expressions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html) in the *AWS IoT Events Developer Guide*.",
@@ -4530,7 +5215,14 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: DeliveryStreamName
 																	"delivery_stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The name of the Kinesis Data Firehose delivery stream where the data is written.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			fwvalidators.NotNullString(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: Payload
 																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -4538,15 +5230,27 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: ContentExpression
 																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthAtLeast(1),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																			// Property: Type
 																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The value of the payload type can be either `STRING` or `JSON`.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
@@ -4582,11 +5286,16 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: InputName
 																	"input_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The name of the AWS IoT Events input where the data is sent.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
 																			stringvalidator.LengthBetween(1, 128),
 																			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]*$"), ""),
+																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: Payload
 																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -4594,15 +5303,27 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: ContentExpression
 																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthAtLeast(1),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																			// Property: Type
 																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The value of the payload type can be either `STRING` or `JSON`.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
@@ -4686,7 +5407,14 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																					// Property: TimeInSeconds
 																					"time_in_seconds": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The nanosecond offset converted from `timeInSeconds`. The valid range is between `0-999999999`. You can also specify an expression.",
-																						Required:    true,
+																						Optional:    true,
+																						Computed:    true,
+																						Validators: []validator.String{ /*START VALIDATORS*/
+																							fwvalidators.NotNullString(),
+																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A structure that contains timestamp information. For more information, see [TimeInNanos](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_TimeInNanos.html) in the *AWS IoT SiteWise API Reference*.",
@@ -4737,11 +5465,25 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A structure that contains an asset property value. For more information, see [Variant](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html) in the *AWS IoT SiteWise API Reference*.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.Object{ /*START VALIDATORS*/
+																					fwvalidators.NotNullObject(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																					objectplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "A structure that contains value information. For more information, see [AssetPropertyValue](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetPropertyValue.html) in the *AWS IoT SiteWise API Reference*.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.Object{ /*START VALIDATORS*/
+																			fwvalidators.NotNullObject(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																			objectplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "Sends information about the detector model instance and the event that triggered the action to a specified asset property in AWS IoT SiteWise.",
@@ -4757,10 +5499,15 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: MqttTopic
 																	"mqtt_topic": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The MQTT topic of the message. You can use a string expression that includes variables (`$variable.<variable-name>`) and input values (`$input.<input-name>.<path-to-datum>`) as the topic string.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
 																			stringvalidator.LengthBetween(1, 128),
+																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: Payload
 																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -4768,15 +5515,27 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: ContentExpression
 																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthAtLeast(1),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																			// Property: Type
 																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The value of the payload type can be either `STRING` or `JSON`.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
@@ -4800,10 +5559,15 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: FunctionArn
 																	"function_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The ARN of the Lambda function that is executed.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
 																			stringvalidator.LengthBetween(1, 2048),
+																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: Payload
 																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -4811,15 +5575,27 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: ContentExpression
 																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthAtLeast(1),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																			// Property: Type
 																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The value of the payload type can be either `STRING` or `JSON`.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
@@ -4842,10 +5618,15 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: TimerName
 																	"timer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The name of the timer to reset.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
 																			stringvalidator.LengthBetween(1, 128),
+																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "Information required to reset the timer. The timer is reset to the previously evaluated result of the duration. The duration expression isn't reevaluated when you reset the timer.",
@@ -4885,10 +5666,15 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: TimerName
 																	"timer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The name of the timer.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
 																			stringvalidator.LengthBetween(1, 128),
+																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "Information needed to set the timer.",
@@ -4904,19 +5690,29 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: Value
 																	"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The new value of the variable.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
 																			stringvalidator.LengthBetween(1, 1024),
+																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: VariableName
 																	"variable_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The name of the variable.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
 																			stringvalidator.LengthBetween(1, 128),
 																			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]*$"), ""),
+																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "Information about the variable and its new value.",
@@ -4935,15 +5731,27 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: ContentExpression
 																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthAtLeast(1),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																			// Property: Type
 																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The value of the payload type can be either `STRING` or `JSON`.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
@@ -4956,10 +5764,15 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: TargetArn
 																	"target_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The ARN of the Amazon SNS target where the message is sent.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
 																			stringvalidator.LengthBetween(1, 2048),
+																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "Information required to publish the Amazon SNS message.",
@@ -4978,15 +5791,27 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: ContentExpression
 																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthAtLeast(1),
+																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																			// Property: Type
 																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The value of the payload type can be either `STRING` or `JSON`.",
-																				Required:    true,
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "Information needed to configure the payload.\n\nBy default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`.",
@@ -4999,7 +5824,14 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: QueueUrl
 																	"queue_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The URL of the SQS queue where the data is written.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			fwvalidators.NotNullString(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: UseBase64
 																	"use_base_64": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -5030,26 +5862,41 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 												// Property: Condition
 												"condition": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "A Boolean expression that when `TRUE` causes the `actions` to be performed and the `nextState` to be entered.",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthAtMost(512),
+														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: EventName
 												"event_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The name of the event.",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(1, 128),
+														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: NextState
 												"next_state": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The next state to enter.",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(1, 128),
+														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
@@ -5231,12 +6078,26 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Key of the Tag.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Value of the Tag.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

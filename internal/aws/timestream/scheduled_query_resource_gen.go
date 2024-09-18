@@ -20,6 +20,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -486,18 +487,28 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -714,7 +725,14 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 						// Property: DatabaseName
 						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "Name of Timestream database to which the query result will be written.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: DimensionMappings
 						"dimension_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -723,24 +741,41 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 									// Property: DimensionValueType
 									"dimension_value_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "Type for the dimension.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"VARCHAR",
 											),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: Name
 									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "Column name from query result.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
 							Description: "This is to allow mapping column(s) from the query result to the dimension in the destination table.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								fwvalidators.NotNullList(),
+							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								generic.Multiset(),
+								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: MeasureNameColumn
@@ -768,7 +803,8 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 									// Property: MeasureValueType
 									"measure_value_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "Type of the value that is to be read from SourceColumn. If the mapping is for MULTI, use MeasureValueType.MULTI.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"BIGINT",
@@ -777,7 +813,11 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 												"VARCHAR",
 												"MULTI",
 											),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: MultiMeasureAttributeMappings
 									"multi_measure_attribute_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -786,7 +826,8 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 												// Property: MeasureValueType
 												"measure_value_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "Value type of the measure value column to be read from the query result.",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.OneOf(
 															"BIGINT",
@@ -795,12 +836,23 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 															"VARCHAR",
 															"TIMESTAMP",
 														),
+														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: SourceColumn
 												"source_column": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "Source measure value column in the query result where the attribute value is to be read.",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														fwvalidators.NotNullString(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: TargetMultiMeasureAttributeName
 												"target_multi_measure_attribute_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -865,7 +917,8 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 											// Property: MeasureValueType
 											"measure_value_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "Value type of the measure value column to be read from the query result.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.OneOf(
 														"BIGINT",
@@ -874,12 +927,23 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 														"VARCHAR",
 														"TIMESTAMP",
 													),
+													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: SourceColumn
 											"source_column": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "Source measure value column in the query result where the attribute value is to be read.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: TargetMultiMeasureAttributeName
 											"target_multi_measure_attribute_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -893,12 +957,15 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
 									Description: "Required. Attribute mappings to be used for mapping query results to ingest data for multi-measure attributes.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.List{ /*START VALIDATORS*/
 										listvalidator.SizeAtLeast(1),
+										fwvalidators.NotNullList(),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 										generic.Multiset(),
+										listplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: TargetMultiMeasureName
@@ -921,16 +988,37 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 						// Property: TableName
 						"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "Name of Timestream table that the query result will be written to. The table should be within the same database that is provided in Timestream configuration.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: TimeColumn
 						"time_column": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "Column from query result that should be used as the time column in destination table. Column type for this should be TIMESTAMP.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Configuration needed to write data into the Timestream database and table.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Object{ /*START VALIDATORS*/
+						fwvalidators.NotNullObject(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Configuration of target store where scheduled query results are written to.",

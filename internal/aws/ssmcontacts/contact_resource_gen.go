@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
@@ -21,6 +22,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -216,12 +218,26 @@ func contactResource(ctx context.Context) (resource.Resource, error) {
 										// Property: ChannelId
 										"channel_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "The Amazon Resource Name (ARN) of the contact channel.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: RetryIntervalInMinutes
 										"retry_interval_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
 											Description: "The number of minutes to wait to retry sending engagement in the case the engagement initially fails.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Int64{ /*START VALIDATORS*/
+												fwvalidators.NotNullInt64(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "Information about the contact channel that SSM Incident Manager uses to engage the contact.",
@@ -237,12 +253,26 @@ func contactResource(ctx context.Context) (resource.Resource, error) {
 										// Property: ContactId
 										"contact_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "The Amazon Resource Name (ARN) of the contact.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: IsEssential
 										"is_essential": schema.BoolAttribute{ /*START ATTRIBUTE*/
 											Description: "A Boolean value determining if the contact's acknowledgement stops the progress of stages in the plan.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Bool{ /*START VALIDATORS*/
+												fwvalidators.NotNullBool(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+												boolplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "The contact that SSM Incident Manager is engaging during an incident.",
