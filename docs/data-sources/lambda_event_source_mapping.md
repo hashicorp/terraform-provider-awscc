@@ -42,6 +42,7 @@ Data Source schema for AWS::Lambda::EventSourceMapping
   +   *Amazon Managed Streaming for Apache Kafka* ? The ARN of the cluster or the ARN of the VPC connection (for [cross-account event source mappings](https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#msk-multi-vpc)).
   +   *Amazon MQ* ? The ARN of the broker.
   +   *Amazon DocumentDB* ? The ARN of the DocumentDB change stream.
+- `event_source_mapping_arn` (String)
 - `event_source_mapping_id` (String)
 - `filter_criteria` (Attributes) An object that defines the filter criteria that determine whether Lambda should process an event. For more information, see [Lambda event filtering](https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html). (see [below for nested schema](#nestedatt--filter_criteria))
 - `function_name` (String) The name or ARN of the Lambda function.
@@ -52,9 +53,9 @@ Data Source schema for AWS::Lambda::EventSourceMapping
   +   *Partial ARN* ? ``123456789012:function:MyFunction``.
   
  The length constraint applies only to the full ARN. If you specify only the function name, it's limited to 64 characters in length.
-- `function_response_types` (List of String) (Streams and SQS) A list of current response type enums applied to the event source mapping.
+- `function_response_types` (List of String) (Kinesis, DynamoDB Streams, and SQS) A list of current response type enums applied to the event source mapping.
  Valid Values: ``ReportBatchItemFailures``
-- `kms_key_arn` (String)
+- `kms_key_arn` (String) The ARN of the KMSlong (KMS) customer managed key that Lambda uses to encrypt your function's [filter criteria](https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html#filtering-basics).
 - `maximum_batching_window_in_seconds` (Number) The maximum amount of time, in seconds, that Lambda spends gathering records before invoking the function.
   *Default (, , event sources)*: 0
   *Default (, Kafka, , event sources)*: 500 ms
@@ -73,6 +74,7 @@ Data Source schema for AWS::Lambda::EventSourceMapping
   +   *TRIM_HORIZON* - Process all available records.
   +   *AT_TIMESTAMP* - Specify a time from which to start reading records.
 - `starting_position_timestamp` (Number) With ``StartingPosition`` set to ``AT_TIMESTAMP``, the time from which to start reading, in Unix time seconds. ``StartingPositionTimestamp`` cannot be in the future.
+- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 - `topics` (List of String) The name of the Kafka topic.
 - `tumbling_window_in_seconds` (Number) (Kinesis and DynamoDB Streams only) The duration in seconds of a processing window for DynamoDB and Kinesis Streams event sources. A value of 0 seconds indicates no tumbling window.
 
@@ -177,3 +179,12 @@ Read-Only:
   +   ``CLIENT_CERTIFICATE_TLS_AUTH`` ? (Amazon MSK, self-managed Apache Kafka) The Secrets Manager ARN of your secret key containing the certificate chain (X.509 PEM), private key (PKCS#8 PEM), and private key password (optional) used for mutual TLS authentication of your MSK/Apache Kafka brokers.
   +   ``SERVER_ROOT_CA_CERTIFICATE`` ? (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key containing the root CA certificate (X.509 PEM) used for TLS encryption of your Apache Kafka brokers.
 - `uri` (String) The value for your chosen configuration in ``Type``. For example: ``"URI": "arn:aws:secretsmanager:us-east-1:01234567890:secret:MyBrokerSecretName"``.
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
