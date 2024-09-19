@@ -4,6 +4,15 @@ BUG FIXES:
 
 * Prevent resource drift when default value is not set on a `required` attribute during refresh ([#2022](https://github.com/hashicorp/terraform-provider-awscc/pull/2022))
 
+FEATURES:
+
+* **New Data Source:** `awscc_connect_agent_status`
+* **New Data Source:** `awscc_connect_user_hierarchy_structure`
+* **New Data Source:** `awscc_datazone_environment_actions`
+* **New Resource:** `awscc_connect_agent_status`
+* **New Resource:** `awscc_connect_user_hierarchy_structure`
+* **New Resource:** `awscc_datazone_environment_actions`
+
 ## 1.14.0 (September 12, 2024)
 
 FEATURES:

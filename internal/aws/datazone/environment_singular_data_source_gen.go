@@ -108,6 +108,30 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The identifier of the Amazon DataZone domain in which the environment would be created.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: EnvironmentAccountIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AWS account in which the Amazon DataZone environment is created.",
+		//	  "pattern": "^\\d{12}$",
+		//	  "type": "string"
+		//	}
+		"environment_account_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS account in which the Amazon DataZone environment is created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: EnvironmentAccountRegion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AWS region in which the Amazon DataZone environment is created.",
+		//	  "pattern": "^[a-z]{2}-[a-z]{4,10}-\\d$",
+		//	  "type": "string"
+		//	}
+		"environment_account_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS region in which the Amazon DataZone environment is created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnvironmentBlueprintId
 		// CloudFormation resource type schema:
 		//
@@ -125,7 +149,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The ID of the environment profile with which the Amazon DataZone environment was created.",
-		//	  "pattern": "^[a-zA-Z0-9_-]{1,36}$",
+		//	  "pattern": "^[a-zA-Z0-9_-]{0,36}$",
 		//	  "type": "string"
 		//	}
 		"environment_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -137,11 +161,22 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The ID of the environment profile with which the Amazon DataZone environment would be created.",
-		//	  "pattern": "^[a-zA-Z0-9_-]{1,36}$",
+		//	  "pattern": "^[a-zA-Z0-9_-]{0,36}$",
 		//	  "type": "string"
 		//	}
 		"environment_profile_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the environment profile with which the Amazon DataZone environment would be created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: EnvironmentRoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Environment role arn for custom aws environment permissions",
+		//	  "type": "string"
+		//	}
+		"environment_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Environment role arn for custom aws environment permissions",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: GlossaryTerms
@@ -328,10 +363,13 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description":                    "Description",
 		"domain_id":                      "DomainId",
 		"domain_identifier":              "DomainIdentifier",
+		"environment_account_identifier": "EnvironmentAccountIdentifier",
+		"environment_account_region":     "EnvironmentAccountRegion",
 		"environment_blueprint_id":       "EnvironmentBlueprintId",
 		"environment_id":                 "Id",
 		"environment_profile_id":         "EnvironmentProfileId",
 		"environment_profile_identifier": "EnvironmentProfileIdentifier",
+		"environment_role_arn":           "EnvironmentRoleArn",
 		"glossary_terms":                 "GlossaryTerms",
 		"name":                           "Name",
 		"project_id":                     "ProjectId",

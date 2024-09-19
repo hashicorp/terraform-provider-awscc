@@ -9,6 +9,7 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -271,18 +272,51 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "Name of the canary.",
-		//	  "pattern": "^[0-9a-z_\\-]{1,21}$",
+		//	  "pattern": "^[0-9a-z_\\-]{1,255}$",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Name of the canary.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-z_\\-]{1,21}$"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-z_\\-]{1,255}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ResourcesToReplicateTags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "List of resources which canary tags should be replicated to.",
+		//	  "items": {
+		//	    "description": "Specifies which resources canary tags should be replicated to.",
+		//	    "enum": [
+		//	      "lambda-function"
+		//	    ],
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"resources_to_replicate_tags": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "List of resources which canary tags should be replicated to.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.UniqueValues(),
+				listvalidator.ValueStringsAre(
+					stringvalidator.OneOf(
+						"lambda-function",
+					),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// ResourcesToReplicateTags is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: RunConfig
 		// CloudFormation resource type schema:
@@ -737,6 +771,7 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		"kms_key_arn":                                "KmsKeyArn",
 		"memory_in_mb":                               "MemoryInMB",
 		"name":                                       "Name",
+		"resources_to_replicate_tags":                "ResourcesToReplicateTags",
 		"run_config":                                 "RunConfig",
 		"runtime_version":                            "RuntimeVersion",
 		"s3_bucket":                                  "S3Bucket",
@@ -767,6 +802,7 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/Code/Script",
 		"/properties/DeleteLambdaResourcesOnCanaryDeletion",
 		"/properties/StartCanaryAfterCreation",
+		"/properties/ResourcesToReplicateTags",
 		"/properties/RunConfig/EnvironmentVariables",
 		"/properties/VisualReference",
 	})

@@ -193,6 +193,20 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 			Description: "The Amazon Resource Name (ARN) of the event source.\n  +   *Amazon Kinesis* ? The ARN of the data stream or a stream consumer.\n  +   *Amazon DynamoDB Streams* ? The ARN of the stream.\n  +   *Amazon Simple Queue Service* ? The ARN of the queue.\n  +   *Amazon Managed Streaming for Apache Kafka* ? The ARN of the cluster or the ARN of the VPC connection (for [cross-account event source mappings](https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#msk-multi-vpc)).\n  +   *Amazon MQ* ? The ARN of the broker.\n  +   *Amazon DocumentDB* ? The ARN of the DocumentDB change stream.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: EventSourceMappingArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "maxLength": 120,
+		//	  "minLength": 85,
+		//	  "pattern": "arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:event-source-mapping:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}",
+		//	  "type": "string"
+		//	}
+		"event_source_mapping_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FilterCriteria
 		// CloudFormation resource type schema:
 		//
@@ -262,7 +276,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "(Streams and SQS) A list of current response type enums applied to the event source mapping.\n Valid Values: ``ReportBatchItemFailures``",
+		//	  "description": "(Kinesis, DynamoDB Streams, and SQS) A list of current response type enums applied to the event source mapping.\n Valid Values: ``ReportBatchItemFailures``",
 		//	  "items": {
 		//	    "enum": [
 		//	      "ReportBatchItemFailures"
@@ -276,7 +290,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	}
 		"function_response_types": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "(Streams and SQS) A list of current response type enums applied to the event source mapping.\n Valid Values: ``ReportBatchItemFailures``",
+			Description: "(Kinesis, DynamoDB Streams, and SQS) A list of current response type enums applied to the event source mapping.\n Valid Values: ``ReportBatchItemFailures``",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Id
@@ -297,14 +311,14 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The ARN of the KMSlong (KMS) customer managed key that Lambda uses to encrypt your function's [filter criteria](https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html#filtering-basics).",
 		//	  "maxLength": 2048,
 		//	  "minLength": 12,
 		//	  "pattern": "(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()",
 		//	  "type": "string"
 		//	}
 		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "The ARN of the KMSlong (KMS) customer managed key that Lambda uses to encrypt your function's [filter criteria](https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html#filtering-basics).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MaximumBatchingWindowInSeconds
@@ -566,6 +580,55 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 			Description: "With ``StartingPosition`` set to ``AT_TIMESTAMP``, the time from which to start reading, in Unix time seconds. ``StartingPositionTimestamp`` cannot be in the future.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Topics
 		// CloudFormation resource type schema:
 		//
@@ -629,6 +692,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		"enabled":                                "Enabled",
 		"endpoints":                              "Endpoints",
 		"event_source_arn":                       "EventSourceArn",
+		"event_source_mapping_arn":               "EventSourceMappingArn",
 		"event_source_mapping_id":                "Id",
 		"filter_criteria":                        "FilterCriteria",
 		"filters":                                "Filters",
@@ -636,6 +700,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		"function_name":                          "FunctionName",
 		"function_response_types":                "FunctionResponseTypes",
 		"kafka_bootstrap_servers":                "KafkaBootstrapServers",
+		"key":                                    "Key",
 		"kms_key_arn":                            "KmsKeyArn",
 		"maximum_batching_window_in_seconds":     "MaximumBatchingWindowInSeconds",
 		"maximum_concurrency":                    "MaximumConcurrency",
@@ -651,10 +716,12 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		"source_access_configurations":           "SourceAccessConfigurations",
 		"starting_position":                      "StartingPosition",
 		"starting_position_timestamp":            "StartingPositionTimestamp",
+		"tags":                                   "Tags",
 		"topics":                                 "Topics",
 		"tumbling_window_in_seconds":             "TumblingWindowInSeconds",
 		"type":                                   "Type",
 		"uri":                                    "URI",
+		"value":                                  "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

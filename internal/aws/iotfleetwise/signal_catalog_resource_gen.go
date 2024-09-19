@@ -425,7 +425,7 @@ func signalCatalogResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "type": "object"
 		//	  },
-		//	  "maxItems": 500,
+		//	  "maxItems": 5000,
 		//	  "minItems": 1,
 		//	  "type": "array",
 		//	  "uniqueItems": true
@@ -821,7 +821,7 @@ func signalCatalogResource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			Validators: []validator.Set{ /*START VALIDATORS*/
-				setvalidator.SizeBetween(1, 500),
+				setvalidator.SizeBetween(1, 5000),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
