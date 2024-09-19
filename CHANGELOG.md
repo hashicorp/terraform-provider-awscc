@@ -1,4 +1,9 @@
 ## 1.15.0 (Unreleased)
+
+BUG FIXES:
+
+* Prevent resource drift when default value is not set on a `required` attribute during refresh ([#2022](https://github.com/hashicorp/terraform-provider-awscc/pull/2022))
+
 ## 1.14.0 (September 12, 2024)
 
 FEATURES:
