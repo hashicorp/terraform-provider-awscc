@@ -1,5 +1,9 @@
 ## 1.15.0 (Unreleased)
 
+FEATURES:
+
+* provider: Adds support for IAM role chaining. The provider attribute `assume_role` now accepts multiple elements.
+
 BUG FIXES:
 
 * Prevent resource drift when default value is not set on a `required` attribute during refresh ([#2022](https://github.com/hashicorp/terraform-provider-awscc/pull/2022))
