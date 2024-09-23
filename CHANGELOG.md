@@ -1,4 +1,8 @@
 ## 1.16.0 (Unreleased)
+
+* **New Data Source:** `awscc_events_connection`
+* **New Resource:** `awscc_events_connection`
+
 ## 1.15.0 (September 19, 2024)
 
 BUG FIXES:

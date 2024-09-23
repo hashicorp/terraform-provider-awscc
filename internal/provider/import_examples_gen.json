@@ -2105,6 +2105,11 @@
         "path": "./examples/resources/awscc_events_archive/import.sh"
     },
     {
+        "resource": "awscc_events_connection",
+        "identifier": ["Name"],
+        "path": "./examples/resources/awscc_events_connection/import.sh"
+    },
+    {
         "resource": "awscc_events_endpoint",
         "identifier": ["Name"],
         "path": "./examples/resources/awscc_events_endpoint/import.sh"
