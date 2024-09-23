@@ -9,6 +9,7 @@ package main
 import (
 	"bytes"
 	_ "embed"
+	"encoding/json"
 	"flag"
 	"fmt"
 	"os"
@@ -49,10 +50,11 @@ func main() {
 
 	schemaFilename := args[0]
 	acctestsFilename := args[1]
+	metadataFilename := args[2]
 
 	g := NewGenerator()
 
-	if err := g.Generate(destinationPackage, schemaFilename, acctestsFilename); err != nil {
+	if err := g.Generate(destinationPackage, schemaFilename, acctestsFilename, metadataFilename); err != nil {
 		g.Fatalf("error generating Terraform %s data source: %s", *tfDataSourceType, err)
 	}
 }
@@ -72,7 +74,7 @@ func NewGenerator() *Generator {
 }
 
 // Generate generates the plural data source type's factory into the specified file.
-func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename string) error {
+func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename, metadataFilename string) error {
 	g.Infof("generating Terraform data source code for %[1]q into %[2]q and %[3]q", g.tfDataSourceType, schemaFilename, acctestsFilename)
 
 	org, svc, res, err := naming.ParseCloudFormationTypeName(g.cfType)
@@ -120,6 +122,30 @@ func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename strin
 	}
 
 	if err := d.WriteTemplate("acctest", acceptanceTestsTemplateBody, templateData); err != nil {
+		return err
+	}
+
+	if err := d.Write(); err != nil {
+		return err
+	}
+
+	d = g.NewGoFileDestination(metadataFilename)
+
+	if err := d.CreateDirectories(); err != nil {
+		return err
+	}
+
+	metadata := make(map[string]string)
+	metadata["cloudformationName"] = g.cfType
+	metadata["service"] = svc
+
+	jsonData, err := json.Marshal(metadata)
+
+	if err != nil {
+		return err
+	}
+
+	if err := d.WriteBytes(jsonData); err != nil {
 		return err
 	}
 
