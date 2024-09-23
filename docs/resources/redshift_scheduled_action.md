@@ -47,7 +47,7 @@ Optional:
 <a id="nestedatt--target_action--pause_cluster"></a>
 ### Nested Schema for `target_action.pause_cluster`
 
-Required:
+Optional:
 
 - `cluster_identifier` (String)
 
@@ -55,13 +55,10 @@ Required:
 <a id="nestedatt--target_action--resize_cluster"></a>
 ### Nested Schema for `target_action.resize_cluster`
 
-Required:
-
-- `cluster_identifier` (String)
-
 Optional:
 
 - `classic` (Boolean)
+- `cluster_identifier` (String)
 - `cluster_type` (String)
 - `node_type` (String)
 - `number_of_nodes` (Number)
@@ -70,7 +67,7 @@ Optional:
 <a id="nestedatt--target_action--resume_cluster"></a>
 ### Nested Schema for `target_action.resume_cluster`
 
-Required:
+Optional:
 
 - `cluster_identifier` (String)
 

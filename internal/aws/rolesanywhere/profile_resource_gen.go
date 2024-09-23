@@ -22,6 +22,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -89,14 +90,19 @@ func profileResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: CertificateField
 					"certificate_field": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.OneOf(
 								"x509Subject",
 								"x509Issuer",
 								"x509SAN",
 							),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: MappingRules
 					"mapping_rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -104,11 +110,25 @@ func profileResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Specifier
 								"specifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Required: true,
+						Optional: true,
+						Computed: true,
+						Validators: []validator.List{ /*START VALIDATORS*/
+							fwvalidators.NotNullList(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -279,17 +299,27 @@ func profileResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

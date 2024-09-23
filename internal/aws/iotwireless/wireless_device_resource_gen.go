@@ -22,6 +22,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -246,7 +247,10 @@ func wirelessDeviceResource(ctx context.Context) (resource.Resource, error) {
 		//	              "Type": {
 		//	                "description": "Application type, which can be specified to obtain real-time position information of your LoRaWAN device.",
 		//	                "enum": [
-		//	                  "SemtechGeolocation"
+		//	                  "SemtechGeolocation",
+		//	                  "SemtechGNSS",
+		//	                  "SemtechGNSSNG",
+		//	                  "SemtechWiFi"
 		//	                ],
 		//	                "type": "string"
 		//	              }
@@ -314,30 +318,52 @@ func wirelessDeviceResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: DevAddr
 						"dev_addr": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("[a-fA-F0-9]{8}"), ""),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: SessionKeys
 						"session_keys": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: AppSKey
 								"app_s_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.RegexMatches(regexp.MustCompile("[a-fA-F0-9]{32}"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: NwkSKey
 								"nwk_s_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.RegexMatches(regexp.MustCompile("[a-fA-F0-9]{32}"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Required: true,
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
@@ -351,44 +377,76 @@ func wirelessDeviceResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: DevAddr
 						"dev_addr": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("[a-fA-F0-9]{8}"), ""),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: SessionKeys
 						"session_keys": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: AppSKey
 								"app_s_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.RegexMatches(regexp.MustCompile("[a-fA-F0-9]{32}"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: FNwkSIntKey
 								"f_nwk_s_int_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.RegexMatches(regexp.MustCompile("[a-fA-F0-9]{32}"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: NwkSEncKey
 								"nwk_s_enc_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.RegexMatches(regexp.MustCompile("[a-fA-F0-9]{32}"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: SNwkSIntKey
 								"s_nwk_s_int_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.RegexMatches(regexp.MustCompile("[a-fA-F0-9]{32}"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Required: true,
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
@@ -459,6 +517,9 @@ func wirelessDeviceResource(ctx context.Context) (resource.Resource, error) {
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"SemtechGeolocation",
+												"SemtechGNSS",
+												"SemtechGNSSNG",
+												"SemtechWiFi",
 											),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -486,17 +547,27 @@ func wirelessDeviceResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: AppEui
 						"app_eui": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("[a-fA-F0-9]{16}"), ""),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: AppKey
 						"app_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("[a-fA-F0-9]{32}"), ""),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
@@ -510,24 +581,39 @@ func wirelessDeviceResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: AppKey
 						"app_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("[a-fA-F0-9]{32}"), ""),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: JoinEui
 						"join_eui": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("[a-fA-F0-9]{16}"), ""),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: NwkKey
 						"nwk_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("[a-fA-F0-9]{32}"), ""),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,

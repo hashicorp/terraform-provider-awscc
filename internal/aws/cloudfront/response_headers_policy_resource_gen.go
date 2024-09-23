@@ -16,13 +16,16 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -365,7 +368,14 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: AccessControlAllowCredentials
 						"access_control_allow_credentials": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Bool{ /*START VALIDATORS*/
+								fwvalidators.NotNullBool(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: AccessControlAllowHeaders
 						"access_control_allow_headers": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -373,13 +383,25 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 								// Property: Items
 								"items": schema.ListAttribute{ /*START ATTRIBUTE*/
 									ElementType: types.StringType,
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										fwvalidators.NotNullList(),
+									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 										generic.Multiset(),
+										listplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Required: true,
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: AccessControlAllowMethods
 						"access_control_allow_methods": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -387,13 +409,25 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 								// Property: Items
 								"items": schema.ListAttribute{ /*START ATTRIBUTE*/
 									ElementType: types.StringType,
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										fwvalidators.NotNullList(),
+									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 										generic.Multiset(),
+										listplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Required: true,
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: AccessControlAllowOrigins
 						"access_control_allow_origins": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -401,13 +435,25 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 								// Property: Items
 								"items": schema.ListAttribute{ /*START ATTRIBUTE*/
 									ElementType: types.StringType,
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										fwvalidators.NotNullList(),
+									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 										generic.Multiset(),
+										listplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Required: true,
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: AccessControlExposeHeaders
 						"access_control_expose_headers": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -415,9 +461,14 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 								// Property: Items
 								"items": schema.ListAttribute{ /*START ATTRIBUTE*/
 									ElementType: types.StringType,
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										fwvalidators.NotNullList(),
+									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 										generic.Multiset(),
+										listplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -437,7 +488,14 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 						}, /*END ATTRIBUTE*/
 						// Property: OriginOverride
 						"origin_override": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Bool{ /*START VALIDATORS*/
+								fwvalidators.NotNullBool(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
@@ -455,21 +513,47 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Header
 									"header": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Required: true,
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: Override
 									"override": schema.BoolAttribute{ /*START ATTRIBUTE*/
-										Required: true,
+										Optional: true,
+										Computed: true,
+										Validators: []validator.Bool{ /*START VALIDATORS*/
+											fwvalidators.NotNullBool(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+											boolplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: Value
 									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Required: true,
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							Required: true,
+							Optional: true,
+							Computed: true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								fwvalidators.NotNullList(),
+							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								generic.Multiset(),
+								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -492,11 +576,25 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Header
 									"header": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Required: true,
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							Required: true,
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Set{ /*START VALIDATORS*/
+								fwvalidators.NotNullSet(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+								setplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
@@ -513,11 +611,25 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: ContentSecurityPolicy
 								"content_security_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Override
 								"override": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Bool{ /*START VALIDATORS*/
+										fwvalidators.NotNullBool(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
@@ -531,7 +643,14 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Override
 								"override": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Bool{ /*START VALIDATORS*/
+										fwvalidators.NotNullBool(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
@@ -545,14 +664,26 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: FrameOption
 								"frame_option": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.RegexMatches(regexp.MustCompile("^(DENY|SAMEORIGIN)$"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Override
 								"override": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Bool{ /*START VALIDATORS*/
+										fwvalidators.NotNullBool(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
@@ -566,14 +697,26 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Override
 								"override": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Bool{ /*START VALIDATORS*/
+										fwvalidators.NotNullBool(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: ReferrerPolicy
 								"referrer_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.RegexMatches(regexp.MustCompile("^(no-referrer|no-referrer-when-downgrade|origin|origin-when-cross-origin|same-origin|strict-origin|strict-origin-when-cross-origin|unsafe-url)$"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
@@ -587,7 +730,14 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: AccessControlMaxAgeSec
 								"access_control_max_age_sec": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Int64{ /*START VALIDATORS*/
+										fwvalidators.NotNullInt64(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: IncludeSubdomains
 								"include_subdomains": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -599,7 +749,14 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 								}, /*END ATTRIBUTE*/
 								// Property: Override
 								"override": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Bool{ /*START VALIDATORS*/
+										fwvalidators.NotNullBool(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Preload
 								"preload": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -629,11 +786,25 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 								}, /*END ATTRIBUTE*/
 								// Property: Override
 								"override": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Bool{ /*START VALIDATORS*/
+										fwvalidators.NotNullBool(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Protection
 								"protection": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Bool{ /*START VALIDATORS*/
+										fwvalidators.NotNullBool(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: ReportUri
 								"report_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -662,7 +833,14 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Enabled
 						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Bool{ /*START VALIDATORS*/
+								fwvalidators.NotNullBool(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: SamplingRate
 						"sampling_rate": schema.Float64Attribute{ /*START ATTRIBUTE*/

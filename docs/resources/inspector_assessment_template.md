@@ -34,7 +34,7 @@ Resource Type definition for AWS::Inspector::AssessmentTemplate
 <a id="nestedatt--user_attributes_for_findings"></a>
 ### Nested Schema for `user_attributes_for_findings`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

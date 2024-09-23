@@ -49,7 +49,7 @@ Optional:
 <a id="nestedatt--resource--database"></a>
 ### Nested Schema for `resource.database`
 
-Required:
+Optional:
 
 - `catalog_id` (String)
 - `name` (String)
@@ -58,13 +58,10 @@ Required:
 <a id="nestedatt--resource--table"></a>
 ### Nested Schema for `resource.table`
 
-Required:
+Optional:
 
 - `catalog_id` (String)
 - `database_name` (String)
-
-Optional:
-
 - `name` (String)
 - `table_wildcard` (String)
 
@@ -72,7 +69,7 @@ Optional:
 <a id="nestedatt--resource--table_with_columns"></a>
 ### Nested Schema for `resource.table_with_columns`
 
-Required:
+Optional:
 
 - `catalog_id` (String)
 - `column_names` (List of String)

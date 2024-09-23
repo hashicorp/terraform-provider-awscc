@@ -18,91 +18,22 @@ Resource Type definition for AWS::ApplicationSignals::ServiceLevelObjective
 ### Required
 
 - `name` (String) The name of this SLO.
-- `sli` (Attributes) This structure contains information about the performance metric that an SLO monitors. (see [below for nested schema](#nestedatt--sli))
 
 ### Optional
 
 - `description` (String) An optional description for this SLO. Default is 'No description'
 - `goal` (Attributes) A structure that contains the attributes that determine the goal of the SLO. This includes the time period for evaluation and the attainment threshold. (see [below for nested schema](#nestedatt--goal))
+- `request_based_sli` (Attributes) This structure contains information about the performance metric that a request-based SLO monitors. (see [below for nested schema](#nestedatt--request_based_sli))
+- `sli` (Attributes) This structure contains information about the performance metric that an SLO monitors. (see [below for nested schema](#nestedatt--sli))
 - `tags` (Attributes Set) The list of tag keys and values associated with the resource you specified (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `arn` (String) The ARN of this SLO.
 - `created_time` (Number) Epoch time in seconds of the time that this SLO was created
+- `evaluation_type` (String) Displays whether this is a period-based SLO or a request-based SLO.
 - `id` (String) Uniquely identifies the resource.
 - `last_updated_time` (Number) Epoch time in seconds of the time that this SLO was most recently updated
-
-<a id="nestedatt--sli"></a>
-### Nested Schema for `sli`
-
-Required:
-
-- `comparison_operator` (String) The arithmetic operation used when comparing the specified metric to the threshold.
-- `metric_threshold` (Number) The value that the SLI metric is compared to.
-- `sli_metric` (Attributes) A structure that contains information about the metric that the SLO monitors. (see [below for nested schema](#nestedatt--sli--sli_metric))
-
-<a id="nestedatt--sli--sli_metric"></a>
-### Nested Schema for `sli.sli_metric`
-
-Optional:
-
-- `key_attributes` (Map of String) This is a string-to-string map that contains information about the type of object that this SLO is related to.
-- `metric_data_queries` (Attributes List) If this SLO monitors a CloudWatch metric or the result of a CloudWatch metric math expression, this structure includes the information about that metric or expression. (see [below for nested schema](#nestedatt--sli--sli_metric--metric_data_queries))
-- `metric_type` (String) If the SLO monitors either the LATENCY or AVAILABILITY metric that Application Signals collects, this field displays which of those metrics is used.
-- `operation_name` (String) If the SLO monitors a specific operation of the service, this field displays that operation name.
-- `period_seconds` (Number) The number of seconds to use as the period for SLO evaluation. Your application's performance is compared to the SLI during each period. For each period, the application is determined to have either achieved or not achieved the necessary performance.
-- `statistic` (String) The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic
-
-<a id="nestedatt--sli--sli_metric--metric_data_queries"></a>
-### Nested Schema for `sli.sli_metric.metric_data_queries`
-
-Required:
-
-- `id` (String) A short name used to tie this object to the results in the response.
-
-Optional:
-
-- `account_id` (String) The ID of the account where the metrics are located, if this is a cross-account alarm.
-- `expression` (String) The math expression to be performed on the returned data.
-- `metric_stat` (Attributes) A metric to be used directly for the SLO, or to be used in the math expression that will be used for the SLO. Within one MetricDataQuery, you must specify either Expression or MetricStat but not both. (see [below for nested schema](#nestedatt--sli--sli_metric--metric_data_queries--metric_stat))
-- `return_data` (Boolean) This option indicates whether to return the timestamps and raw data values of this metric.
-
-<a id="nestedatt--sli--sli_metric--metric_data_queries--metric_stat"></a>
-### Nested Schema for `sli.sli_metric.metric_data_queries.metric_stat`
-
-Required:
-
-- `metric` (Attributes) This structure defines the metric used for a service level indicator, including the metric name, namespace, and dimensions. (see [below for nested schema](#nestedatt--sli--sli_metric--metric_data_queries--metric_stat--metric))
-- `period` (Number) The granularity, in seconds, to be used for the metric.
-- `stat` (String) The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic.
-
-Optional:
-
-- `unit` (String) If you omit Unit then all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.
-
-<a id="nestedatt--sli--sli_metric--metric_data_queries--metric_stat--metric"></a>
-### Nested Schema for `sli.sli_metric.metric_data_queries.metric_stat.metric`
-
-Optional:
-
-- `dimensions` (Attributes List) An array of one or more dimensions to use to define the metric that you want to use. (see [below for nested schema](#nestedatt--sli--sli_metric--metric_data_queries--metric_stat--metric--dimensions))
-- `metric_name` (String) The name of the metric to use.
-- `namespace` (String) The namespace of the metric.
-
-<a id="nestedatt--sli--sli_metric--metric_data_queries--metric_stat--metric--dimensions"></a>
-### Nested Schema for `sli.sli_metric.metric_data_queries.metric_stat.metric.dimensions`
-
-Required:
-
-- `name` (String) The name of the dimension. Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:). ASCII control characters are not supported as part of dimension names.
-- `value` (String) The value of the dimension. Dimension values must contain only ASCII characters and must include at least one non-whitespace character. ASCII control characters are not supported as part of dimension values
-
-
-
-
-
-
 
 <a id="nestedatt--goal"></a>
 ### Nested Schema for `goal`
@@ -126,7 +57,7 @@ Optional:
 <a id="nestedatt--goal--interval--calendar_interval"></a>
 ### Nested Schema for `goal.interval.calendar_interval`
 
-Required:
+Optional:
 
 - `duration` (Number) Specifies the duration of each calendar interval. For example, if `Duration` is 1 and `DurationUnit` is `MONTH`, each interval is one month, aligned with the calendar.
 - `duration_unit` (String) Specifies the calendar interval unit.
@@ -137,7 +68,7 @@ As soon as one calendar interval ends, another automatically begins.
 <a id="nestedatt--goal--interval--rolling_interval"></a>
 ### Nested Schema for `goal.interval.rolling_interval`
 
-Required:
+Optional:
 
 - `duration` (Number) Specifies the duration of each calendar interval. For example, if `Duration` is 1 and `DurationUnit` is `MONTH`, each interval is one month, aligned with the calendar.
 - `duration_unit` (String) Specifies the calendar interval unit.
@@ -145,10 +76,232 @@ Required:
 
 
 
+<a id="nestedatt--request_based_sli"></a>
+### Nested Schema for `request_based_sli`
+
+Optional:
+
+- `comparison_operator` (String) The arithmetic operation used when comparing the specified metric to the threshold.
+- `metric_threshold` (Number) The value that the SLI metric is compared to.
+- `request_based_sli_metric` (Attributes) This structure contains the information about the metric that is used for a request-based SLO. (see [below for nested schema](#nestedatt--request_based_sli--request_based_sli_metric))
+
+<a id="nestedatt--request_based_sli--request_based_sli_metric"></a>
+### Nested Schema for `request_based_sli.request_based_sli_metric`
+
+Optional:
+
+- `key_attributes` (Map of String) This is a string-to-string map that contains information about the type of object that this SLO is related to.
+- `metric_type` (String) If the SLO monitors either the LATENCY or AVAILABILITY metric that Application Signals collects, this field displays which of those metrics is used.
+- `monitored_request_count_metric` (Attributes) This structure defines the metric that is used as the "good request" or "bad request" value for a request-based SLO. This value observed for the metric defined in `TotalRequestCountMetric` is divided by the number found for `MonitoredRequestCountMetric` to determine the percentage of successful requests that this SLO tracks. (see [below for nested schema](#nestedatt--request_based_sli--request_based_sli_metric--monitored_request_count_metric))
+- `operation_name` (String) If the SLO monitors a specific operation of the service, this field displays that operation name.
+- `total_request_count_metric` (Attributes List) This structure defines the metric that is used as the "total requests" number for a request-based SLO. The number observed for this metric is divided by the number of "good requests" or "bad requests" that is observed for the metric defined in `MonitoredRequestCountMetric`. (see [below for nested schema](#nestedatt--request_based_sli--request_based_sli_metric--total_request_count_metric))
+
+<a id="nestedatt--request_based_sli--request_based_sli_metric--monitored_request_count_metric"></a>
+### Nested Schema for `request_based_sli.request_based_sli_metric.monitored_request_count_metric`
+
+Optional:
+
+- `bad_count_metric` (Attributes List) If you want to count "bad requests" to determine the percentage of successful requests for this request-based SLO, specify the metric to use as "bad requests" in this structure. (see [below for nested schema](#nestedatt--request_based_sli--request_based_sli_metric--monitored_request_count_metric--bad_count_metric))
+- `good_count_metric` (Attributes List) If you want to count "good requests" to determine the percentage of successful requests for this request-based SLO, specify the metric to use as "good requests" in this structure. (see [below for nested schema](#nestedatt--request_based_sli--request_based_sli_metric--monitored_request_count_metric--good_count_metric))
+
+<a id="nestedatt--request_based_sli--request_based_sli_metric--monitored_request_count_metric--bad_count_metric"></a>
+### Nested Schema for `request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric`
+
+Optional:
+
+- `account_id` (String) The ID of the account where the metrics are located, if this is a cross-account alarm.
+- `expression` (String) The math expression to be performed on the returned data.
+- `id` (String) A short name used to tie this object to the results in the response.
+- `metric_stat` (Attributes) A metric to be used directly for the SLO, or to be used in the math expression that will be used for the SLO. Within one MetricDataQuery, you must specify either Expression or MetricStat but not both. (see [below for nested schema](#nestedatt--request_based_sli--request_based_sli_metric--monitored_request_count_metric--bad_count_metric--metric_stat))
+- `return_data` (Boolean) This option indicates whether to return the timestamps and raw data values of this metric.
+
+<a id="nestedatt--request_based_sli--request_based_sli_metric--monitored_request_count_metric--bad_count_metric--metric_stat"></a>
+### Nested Schema for `request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric.metric_stat`
+
+Optional:
+
+- `metric` (Attributes) This structure defines the metric used for a service level indicator, including the metric name, namespace, and dimensions. (see [below for nested schema](#nestedatt--request_based_sli--request_based_sli_metric--monitored_request_count_metric--bad_count_metric--metric_stat--metric))
+- `period` (Number) The granularity, in seconds, to be used for the metric.
+- `stat` (String) The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic.
+- `unit` (String) If you omit Unit then all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.
+
+<a id="nestedatt--request_based_sli--request_based_sli_metric--monitored_request_count_metric--bad_count_metric--metric_stat--metric"></a>
+### Nested Schema for `request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric.metric_stat.metric`
+
+Optional:
+
+- `dimensions` (Attributes List) An array of one or more dimensions to use to define the metric that you want to use. (see [below for nested schema](#nestedatt--request_based_sli--request_based_sli_metric--monitored_request_count_metric--bad_count_metric--metric_stat--metric--dimensions))
+- `metric_name` (String) The name of the metric to use.
+- `namespace` (String) The namespace of the metric.
+
+<a id="nestedatt--request_based_sli--request_based_sli_metric--monitored_request_count_metric--bad_count_metric--metric_stat--metric--dimensions"></a>
+### Nested Schema for `request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric.metric_stat.metric.dimensions`
+
+Optional:
+
+- `name` (String) The name of the dimension. Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:). ASCII control characters are not supported as part of dimension names.
+- `value` (String) The value of the dimension. Dimension values must contain only ASCII characters and must include at least one non-whitespace character. ASCII control characters are not supported as part of dimension values
+
+
+
+
+
+<a id="nestedatt--request_based_sli--request_based_sli_metric--monitored_request_count_metric--good_count_metric"></a>
+### Nested Schema for `request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric`
+
+Optional:
+
+- `account_id` (String) The ID of the account where the metrics are located, if this is a cross-account alarm.
+- `expression` (String) The math expression to be performed on the returned data.
+- `id` (String) A short name used to tie this object to the results in the response.
+- `metric_stat` (Attributes) A metric to be used directly for the SLO, or to be used in the math expression that will be used for the SLO. Within one MetricDataQuery, you must specify either Expression or MetricStat but not both. (see [below for nested schema](#nestedatt--request_based_sli--request_based_sli_metric--monitored_request_count_metric--good_count_metric--metric_stat))
+- `return_data` (Boolean) This option indicates whether to return the timestamps and raw data values of this metric.
+
+<a id="nestedatt--request_based_sli--request_based_sli_metric--monitored_request_count_metric--good_count_metric--metric_stat"></a>
+### Nested Schema for `request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric.metric_stat`
+
+Optional:
+
+- `metric` (Attributes) This structure defines the metric used for a service level indicator, including the metric name, namespace, and dimensions. (see [below for nested schema](#nestedatt--request_based_sli--request_based_sli_metric--monitored_request_count_metric--good_count_metric--metric_stat--metric))
+- `period` (Number) The granularity, in seconds, to be used for the metric.
+- `stat` (String) The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic.
+- `unit` (String) If you omit Unit then all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.
+
+<a id="nestedatt--request_based_sli--request_based_sli_metric--monitored_request_count_metric--good_count_metric--metric_stat--metric"></a>
+### Nested Schema for `request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric.metric_stat.metric`
+
+Optional:
+
+- `dimensions` (Attributes List) An array of one or more dimensions to use to define the metric that you want to use. (see [below for nested schema](#nestedatt--request_based_sli--request_based_sli_metric--monitored_request_count_metric--good_count_metric--metric_stat--metric--dimensions))
+- `metric_name` (String) The name of the metric to use.
+- `namespace` (String) The namespace of the metric.
+
+<a id="nestedatt--request_based_sli--request_based_sli_metric--monitored_request_count_metric--good_count_metric--metric_stat--metric--dimensions"></a>
+### Nested Schema for `request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric.metric_stat.metric.dimensions`
+
+Optional:
+
+- `name` (String) The name of the dimension. Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:). ASCII control characters are not supported as part of dimension names.
+- `value` (String) The value of the dimension. Dimension values must contain only ASCII characters and must include at least one non-whitespace character. ASCII control characters are not supported as part of dimension values
+
+
+
+
+
+
+<a id="nestedatt--request_based_sli--request_based_sli_metric--total_request_count_metric"></a>
+### Nested Schema for `request_based_sli.request_based_sli_metric.total_request_count_metric`
+
+Optional:
+
+- `account_id` (String) The ID of the account where the metrics are located, if this is a cross-account alarm.
+- `expression` (String) The math expression to be performed on the returned data.
+- `id` (String) A short name used to tie this object to the results in the response.
+- `metric_stat` (Attributes) A metric to be used directly for the SLO, or to be used in the math expression that will be used for the SLO. Within one MetricDataQuery, you must specify either Expression or MetricStat but not both. (see [below for nested schema](#nestedatt--request_based_sli--request_based_sli_metric--total_request_count_metric--metric_stat))
+- `return_data` (Boolean) This option indicates whether to return the timestamps and raw data values of this metric.
+
+<a id="nestedatt--request_based_sli--request_based_sli_metric--total_request_count_metric--metric_stat"></a>
+### Nested Schema for `request_based_sli.request_based_sli_metric.total_request_count_metric.metric_stat`
+
+Optional:
+
+- `metric` (Attributes) This structure defines the metric used for a service level indicator, including the metric name, namespace, and dimensions. (see [below for nested schema](#nestedatt--request_based_sli--request_based_sli_metric--total_request_count_metric--metric_stat--metric))
+- `period` (Number) The granularity, in seconds, to be used for the metric.
+- `stat` (String) The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic.
+- `unit` (String) If you omit Unit then all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.
+
+<a id="nestedatt--request_based_sli--request_based_sli_metric--total_request_count_metric--metric_stat--metric"></a>
+### Nested Schema for `request_based_sli.request_based_sli_metric.total_request_count_metric.metric_stat.metric`
+
+Optional:
+
+- `dimensions` (Attributes List) An array of one or more dimensions to use to define the metric that you want to use. (see [below for nested schema](#nestedatt--request_based_sli--request_based_sli_metric--total_request_count_metric--metric_stat--metric--dimensions))
+- `metric_name` (String) The name of the metric to use.
+- `namespace` (String) The namespace of the metric.
+
+<a id="nestedatt--request_based_sli--request_based_sli_metric--total_request_count_metric--metric_stat--metric--dimensions"></a>
+### Nested Schema for `request_based_sli.request_based_sli_metric.total_request_count_metric.metric_stat.metric.dimensions`
+
+Optional:
+
+- `name` (String) The name of the dimension. Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:). ASCII control characters are not supported as part of dimension names.
+- `value` (String) The value of the dimension. Dimension values must contain only ASCII characters and must include at least one non-whitespace character. ASCII control characters are not supported as part of dimension values
+
+
+
+
+
+
+
+<a id="nestedatt--sli"></a>
+### Nested Schema for `sli`
+
+Optional:
+
+- `comparison_operator` (String) The arithmetic operation used when comparing the specified metric to the threshold.
+- `metric_threshold` (Number) The value that the SLI metric is compared to.
+- `sli_metric` (Attributes) A structure that contains information about the metric that the SLO monitors. (see [below for nested schema](#nestedatt--sli--sli_metric))
+
+<a id="nestedatt--sli--sli_metric"></a>
+### Nested Schema for `sli.sli_metric`
+
+Optional:
+
+- `key_attributes` (Map of String) This is a string-to-string map that contains information about the type of object that this SLO is related to.
+- `metric_data_queries` (Attributes List) If this SLO monitors a CloudWatch metric or the result of a CloudWatch metric math expression, this structure includes the information about that metric or expression. (see [below for nested schema](#nestedatt--sli--sli_metric--metric_data_queries))
+- `metric_type` (String) If the SLO monitors either the LATENCY or AVAILABILITY metric that Application Signals collects, this field displays which of those metrics is used.
+- `operation_name` (String) If the SLO monitors a specific operation of the service, this field displays that operation name.
+- `period_seconds` (Number) The number of seconds to use as the period for SLO evaluation. Your application's performance is compared to the SLI during each period. For each period, the application is determined to have either achieved or not achieved the necessary performance.
+- `statistic` (String) The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic
+
+<a id="nestedatt--sli--sli_metric--metric_data_queries"></a>
+### Nested Schema for `sli.sli_metric.metric_data_queries`
+
+Optional:
+
+- `account_id` (String) The ID of the account where the metrics are located, if this is a cross-account alarm.
+- `expression` (String) The math expression to be performed on the returned data.
+- `id` (String) A short name used to tie this object to the results in the response.
+- `metric_stat` (Attributes) A metric to be used directly for the SLO, or to be used in the math expression that will be used for the SLO. Within one MetricDataQuery, you must specify either Expression or MetricStat but not both. (see [below for nested schema](#nestedatt--sli--sli_metric--metric_data_queries--metric_stat))
+- `return_data` (Boolean) This option indicates whether to return the timestamps and raw data values of this metric.
+
+<a id="nestedatt--sli--sli_metric--metric_data_queries--metric_stat"></a>
+### Nested Schema for `sli.sli_metric.metric_data_queries.metric_stat`
+
+Optional:
+
+- `metric` (Attributes) This structure defines the metric used for a service level indicator, including the metric name, namespace, and dimensions. (see [below for nested schema](#nestedatt--sli--sli_metric--metric_data_queries--metric_stat--metric))
+- `period` (Number) The granularity, in seconds, to be used for the metric.
+- `stat` (String) The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic.
+- `unit` (String) If you omit Unit then all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.
+
+<a id="nestedatt--sli--sli_metric--metric_data_queries--metric_stat--metric"></a>
+### Nested Schema for `sli.sli_metric.metric_data_queries.metric_stat.metric`
+
+Optional:
+
+- `dimensions` (Attributes List) An array of one or more dimensions to use to define the metric that you want to use. (see [below for nested schema](#nestedatt--sli--sli_metric--metric_data_queries--metric_stat--metric--dimensions))
+- `metric_name` (String) The name of the metric to use.
+- `namespace` (String) The namespace of the metric.
+
+<a id="nestedatt--sli--sli_metric--metric_data_queries--metric_stat--metric--dimensions"></a>
+### Nested Schema for `sli.sli_metric.metric_data_queries.metric_stat.metric.dimensions`
+
+Optional:
+
+- `name` (String) The name of the dimension. Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:). ASCII control characters are not supported as part of dimension names.
+- `value` (String) The value of the dimension. Dimension values must contain only ASCII characters and must include at least one non-whitespace character. ASCII control characters are not supported as part of dimension values
+
+
+
+
+
+
+
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) A string that you can use to assign a value. The combination of tag keys and values can help you organize and categorize your resources.
 - `value` (String) The value for the specified tag key.

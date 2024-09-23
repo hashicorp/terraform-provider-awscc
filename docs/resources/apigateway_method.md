@@ -149,11 +149,6 @@ resource "awscc_apigateway_method" "terraform_apigateway_method" {
 <a id="nestedatt--integration"></a>
 ### Nested Schema for `integration`
 
-Required:
-
-- `type` (String) Specifies an API method integration type. The valid value is one of the following:
- For the HTTP and HTTP proxy integrations, each integration can specify a protocol (``http/https``), port and path. Standard 80 and 443 ports are supported as well as custom ports above 1024. An HTTP or HTTP proxy integration with a ``connectionType`` of ``VPC_LINK`` is referred to as a private integration and uses a VpcLink to connect API Gateway to a network load balancer of a VPC.
-
 Optional:
 
 - `cache_key_parameters` (List of String) A list of request parameters whose values API Gateway caches. To be valid values for ``cacheKeyParameters``, these parameters must also be specified for Method ``requestParameters``.
@@ -169,15 +164,13 @@ Optional:
 - `request_parameters` (Map of String) A key-value map specifying request parameters that are passed from the method request to the back end. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the back end. The method request parameter value must match the pattern of ``method.request.{location}.{name}``, where ``location`` is ``querystring``, ``path``, or ``header`` and ``name`` must be a valid and unique method request parameter name.
 - `request_templates` (Map of String) Represents a map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client. The content type value is the key in this map, and the template (as a String) is the value.
 - `timeout_in_millis` (Number) Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds.
+- `type` (String) Specifies an API method integration type. The valid value is one of the following:
+ For the HTTP and HTTP proxy integrations, each integration can specify a protocol (``http/https``), port and path. Standard 80 and 443 ports are supported as well as custom ports above 1024. An HTTP or HTTP proxy integration with a ``connectionType`` of ``VPC_LINK`` is referred to as a private integration and uses a VpcLink to connect API Gateway to a network load balancer of a VPC.
 - `uri` (String) Specifies Uniform Resource Identifier (URI) of the integration endpoint.
  For ``HTTP`` or ``HTTP_PROXY`` integrations, the URI must be a fully formed, encoded HTTP(S) URL according to the RFC-3986 specification for standard integrations. If ``connectionType`` is ``VPC_LINK`` specify the Network Load Balancer DNS name. For ``AWS`` or ``AWS_PROXY`` integrations, the URI is of the form ``arn:aws:apigateway:{region}:{subdomain.service|service}:path|action/{service_api}``. Here, {Region} is the API Gateway region (e.g., us-east-1); {service} is the name of the integrated AWS service (e.g., s3); and {subdomain} is a designated subdomain supported by certain AWS service for fast host-name lookup. action can be used for an AWS service action-based API, using an Action={name}&{p1}={v1}&p2={v2}... query string. The ensuing {service_api} refers to a supported action {name} plus any required input parameters. Alternatively, path can be used for an AWS service path-based API. The ensuing service_api refers to the path to an AWS service resource, including the region of the integrated AWS service, if applicable. For example, for integration with the S3 API of GetObject, the uri can be either ``arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket={bucket}&Key={key}`` or ``arn:aws:apigateway:us-west-2:s3:path/{bucket}/{key}``
 
 <a id="nestedatt--integration--integration_responses"></a>
 ### Nested Schema for `integration.integration_responses`
-
-Required:
-
-- `status_code` (String) Specifies the status code that is used to map the integration response to an existing MethodResponse.
 
 Optional:
 
@@ -186,20 +179,18 @@ Optional:
 - `response_parameters` (Map of String) A key-value map specifying response parameters that are passed to the method response from the back end. The key is a method response header parameter name and the mapped value is an integration response header value, a static value enclosed within a pair of single quotes, or a JSON expression from the integration response body. The mapping key must match the pattern of ``method.response.header.{name}``, where ``name`` is a valid and unique header name. The mapped non-static value must match the pattern of ``integration.response.header.{name}`` or ``integration.response.body.{JSON-expression}``, where ``name`` is a valid and unique response header name and ``JSON-expression`` is a valid JSON expression without the ``$`` prefix.
 - `response_templates` (Map of String) Specifies the templates used to transform the integration response body. Response templates are represented as a key/value map, with a content-type as the key and a template as the value.
 - `selection_pattern` (String) Specifies the regular expression (regex) pattern used to choose an integration response based on the response from the back end. For example, if the success response returns nothing and the error response returns some string, you could use the ``.+`` regex to match error response. However, make sure that the error response does not contain any newline (``\n``) character in such cases. If the back end is an LAMlong function, the LAMlong function error header is matched. For all other HTTP and AWS back ends, the HTTP status code is matched.
+- `status_code` (String) Specifies the status code that is used to map the integration response to an existing MethodResponse.
 
 
 
 <a id="nestedatt--method_responses"></a>
 ### Nested Schema for `method_responses`
 
-Required:
-
-- `status_code` (String) The method response's status code.
-
 Optional:
 
 - `response_models` (Map of String) Specifies the Model resources used for the response's content-type. Response models are represented as a key/value map, with a content-type as the key and a Model name as the value.
 - `response_parameters` (Map of Boolean) A key-value map specifying required or optional response parameters that API Gateway can send back to the caller. A key defines a method response header and the value specifies whether the associated method response header is required or not. The expression of the key must match the pattern ``method.response.header.{name}``, where ``name`` is a valid and unique header name. API Gateway passes certain integration response data to the method response headers specified here according to the mapping you prescribe in the API's IntegrationResponse. The integration response data that can be mapped include an integration response header expressed in ``integration.response.header.{name}``, a static value enclosed within a pair of single quotes (e.g., ``'application/json'``), or a JSON expression from the back-end response payload in the form of ``integration.response.body.{JSON-expression}``, where ``JSON-expression`` is a valid JSON expression without the ``$`` prefix.)
+- `status_code` (String) The method response's status code.
 
 ## Import
 

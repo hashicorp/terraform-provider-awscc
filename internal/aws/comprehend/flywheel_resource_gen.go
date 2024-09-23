@@ -21,6 +21,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -200,26 +201,36 @@ func flywheelResource(ctx context.Context) (resource.Resource, error) {
 						// Property: SecurityGroupIds
 						"security_group_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.Set{ /*START VALIDATORS*/
 								setvalidator.SizeBetween(1, 5),
 								setvalidator.ValueStringsAre(
 									stringvalidator.LengthBetween(1, 32),
 									stringvalidator.RegexMatches(regexp.MustCompile("[-0-9a-zA-Z]+"), ""),
 								),
+								fwvalidators.NotNullSet(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+								setplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Subnets
 						"subnets": schema.SetAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.Set{ /*START VALIDATORS*/
 								setvalidator.SizeBetween(1, 16),
 								setvalidator.ValueStringsAre(
 									stringvalidator.LengthBetween(1, 32),
 									stringvalidator.RegexMatches(regexp.MustCompile("[-0-9a-zA-Z]+"), ""),
 								),
+								fwvalidators.NotNullSet(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+								setplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
@@ -311,17 +322,27 @@ func flywheelResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -430,13 +451,18 @@ func flywheelResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: Mode
 						"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"MULTI_CLASS",
 									"MULTI_LABEL",
 								),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
@@ -454,10 +480,15 @@ func flywheelResource(ctx context.Context) (resource.Resource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Type
 									"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Required: true,
+										Optional: true,
+										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(1, 64),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
@@ -479,7 +510,8 @@ func flywheelResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: LanguageCode
 				"language_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Optional: true,
+					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"en",
@@ -489,7 +521,11 @@ func flywheelResource(ctx context.Context) (resource.Resource, error) {
 							"de",
 							"pt",
 						),
+						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Optional: true,

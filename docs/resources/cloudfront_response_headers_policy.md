@@ -119,23 +119,20 @@ Optional:
 <a id="nestedatt--response_headers_policy_config--cors_config"></a>
 ### Nested Schema for `response_headers_policy_config.cors_config`
 
-Required:
+Optional:
 
 - `access_control_allow_credentials` (Boolean)
 - `access_control_allow_headers` (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--cors_config--access_control_allow_headers))
 - `access_control_allow_methods` (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--cors_config--access_control_allow_methods))
 - `access_control_allow_origins` (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--cors_config--access_control_allow_origins))
-- `origin_override` (Boolean)
-
-Optional:
-
 - `access_control_expose_headers` (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--cors_config--access_control_expose_headers))
 - `access_control_max_age_sec` (Number)
+- `origin_override` (Boolean)
 
 <a id="nestedatt--response_headers_policy_config--cors_config--access_control_allow_headers"></a>
 ### Nested Schema for `response_headers_policy_config.cors_config.access_control_allow_headers`
 
-Required:
+Optional:
 
 - `items` (List of String)
 
@@ -143,7 +140,7 @@ Required:
 <a id="nestedatt--response_headers_policy_config--cors_config--access_control_allow_methods"></a>
 ### Nested Schema for `response_headers_policy_config.cors_config.access_control_allow_methods`
 
-Required:
+Optional:
 
 - `items` (List of String)
 
@@ -151,7 +148,7 @@ Required:
 <a id="nestedatt--response_headers_policy_config--cors_config--access_control_allow_origins"></a>
 ### Nested Schema for `response_headers_policy_config.cors_config.access_control_allow_origins`
 
-Required:
+Optional:
 
 - `items` (List of String)
 
@@ -159,7 +156,7 @@ Required:
 <a id="nestedatt--response_headers_policy_config--cors_config--access_control_expose_headers"></a>
 ### Nested Schema for `response_headers_policy_config.cors_config.access_control_expose_headers`
 
-Required:
+Optional:
 
 - `items` (List of String)
 
@@ -168,14 +165,14 @@ Required:
 <a id="nestedatt--response_headers_policy_config--custom_headers_config"></a>
 ### Nested Schema for `response_headers_policy_config.custom_headers_config`
 
-Required:
+Optional:
 
 - `items` (Attributes List) (see [below for nested schema](#nestedatt--response_headers_policy_config--custom_headers_config--items))
 
 <a id="nestedatt--response_headers_policy_config--custom_headers_config--items"></a>
 ### Nested Schema for `response_headers_policy_config.custom_headers_config.items`
 
-Required:
+Optional:
 
 - `header` (String)
 - `override` (Boolean)
@@ -186,14 +183,14 @@ Required:
 <a id="nestedatt--response_headers_policy_config--remove_headers_config"></a>
 ### Nested Schema for `response_headers_policy_config.remove_headers_config`
 
-Required:
+Optional:
 
 - `items` (Attributes Set) (see [below for nested schema](#nestedatt--response_headers_policy_config--remove_headers_config--items))
 
 <a id="nestedatt--response_headers_policy_config--remove_headers_config--items"></a>
 ### Nested Schema for `response_headers_policy_config.remove_headers_config.items`
 
-Required:
+Optional:
 
 - `header` (String)
 
@@ -214,7 +211,7 @@ Optional:
 <a id="nestedatt--response_headers_policy_config--security_headers_config--content_security_policy"></a>
 ### Nested Schema for `response_headers_policy_config.security_headers_config.content_security_policy`
 
-Required:
+Optional:
 
 - `content_security_policy` (String)
 - `override` (Boolean)
@@ -223,7 +220,7 @@ Required:
 <a id="nestedatt--response_headers_policy_config--security_headers_config--content_type_options"></a>
 ### Nested Schema for `response_headers_policy_config.security_headers_config.content_type_options`
 
-Required:
+Optional:
 
 - `override` (Boolean)
 
@@ -231,7 +228,7 @@ Required:
 <a id="nestedatt--response_headers_policy_config--security_headers_config--frame_options"></a>
 ### Nested Schema for `response_headers_policy_config.security_headers_config.frame_options`
 
-Required:
+Optional:
 
 - `frame_option` (String)
 - `override` (Boolean)
@@ -240,7 +237,7 @@ Required:
 <a id="nestedatt--response_headers_policy_config--security_headers_config--referrer_policy"></a>
 ### Nested Schema for `response_headers_policy_config.security_headers_config.referrer_policy`
 
-Required:
+Optional:
 
 - `override` (Boolean)
 - `referrer_policy` (String)
@@ -249,28 +246,22 @@ Required:
 <a id="nestedatt--response_headers_policy_config--security_headers_config--strict_transport_security"></a>
 ### Nested Schema for `response_headers_policy_config.security_headers_config.strict_transport_security`
 
-Required:
-
-- `access_control_max_age_sec` (Number)
-- `override` (Boolean)
-
 Optional:
 
+- `access_control_max_age_sec` (Number)
 - `include_subdomains` (Boolean)
+- `override` (Boolean)
 - `preload` (Boolean)
 
 
 <a id="nestedatt--response_headers_policy_config--security_headers_config--xss_protection"></a>
 ### Nested Schema for `response_headers_policy_config.security_headers_config.xss_protection`
 
-Required:
-
-- `override` (Boolean)
-- `protection` (Boolean)
-
 Optional:
 
 - `mode_block` (Boolean)
+- `override` (Boolean)
+- `protection` (Boolean)
 - `report_uri` (String)
 
 
@@ -278,12 +269,9 @@ Optional:
 <a id="nestedatt--response_headers_policy_config--server_timing_headers_config"></a>
 ### Nested Schema for `response_headers_policy_config.server_timing_headers_config`
 
-Required:
-
-- `enabled` (Boolean)
-
 Optional:
 
+- `enabled` (Boolean)
 - `sampling_rate` (Number)
 
 ## Import

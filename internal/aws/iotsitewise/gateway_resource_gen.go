@@ -18,6 +18,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -70,7 +71,14 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 					// Property: CapabilityNamespace
 					"capability_namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The namespace of the capability configuration.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -186,7 +194,14 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 						// Property: GroupArn
 						"group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The ARN of the Greengrass group.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "A gateway that runs on AWS IoT Greengrass V1.",
@@ -202,7 +217,14 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 						// Property: CoreDeviceThingName
 						"core_device_thing_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The name of the CoreDevice in GreenGrass V2.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "A gateway that runs on AWS IoT Greengrass V2.",
@@ -218,7 +240,14 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 						// Property: IotCoreThingName
 						"iot_core_thing_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The name of the IoT Core Thing.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "A gateway that runs on Siemens Industrial Edge.",
@@ -266,11 +295,25 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

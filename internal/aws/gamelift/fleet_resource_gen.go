@@ -24,6 +24,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -58,11 +59,16 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 				// Property: Cost
 				"cost": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Cost of compute can be specified on Anywhere Fleets to prioritize placement across Queue destinations based on Cost.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthBetween(1, 11),
 						stringvalidator.RegexMatches(regexp.MustCompile("^\\d{1,5}(?:\\.\\d{1,5})?$"), ""),
+						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Configuration for Anywhere fleet.",
@@ -143,13 +149,18 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: CertificateType
 				"certificate_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Optional: true,
+					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"DISABLED",
 							"GENERATED",
 						),
+						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Indicates whether to generate a TLS/SSL certificate for the new fleet. TLS certificates are used for encrypting traffic between game clients and game servers running on GameLift. If this parameter is not set, certificate generation is disabled. This fleet setting cannot be changed once the fleet is created.",
@@ -265,37 +276,57 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 						// Property: FromPort
 						"from_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Description: "A starting value for a range of allowed port numbers.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
 								int64validator.Between(1, 60000),
+								fwvalidators.NotNullInt64(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: ToPort
 						"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Description: "An ending value for a range of allowed port numbers. Port numbers are end-inclusive. This value must be higher than FromPort.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
 								int64validator.Between(1, 60000),
+								fwvalidators.NotNullInt64(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Defines the range of ports on the instance that allow inbound traffic to connect with containers in a fleet.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Object{ /*START VALIDATORS*/
+						fwvalidators.NotNullObject(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: ContainerGroupDefinitionNames
 				"container_group_definition_names": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
 					Description: "The names of the container group definitions that will be created in an instance. You must specify exactly one REPLICA container group. You have the option to also specify one DAEMON container group.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(1, 2),
 						listvalidator.ValueStringsAre(
 							stringvalidator.LengthBetween(1, 128),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-]+$"), ""),
 						),
+						fwvalidators.NotNullList(),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: ContainerGroupsPerInstance
@@ -430,37 +461,57 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 					// Property: FromPort
 					"from_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
 						Description: "A starting value for a range of allowed port numbers.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.Int64{ /*START VALIDATORS*/
 							int64validator.Between(1, 60000),
+							fwvalidators.NotNullInt64(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+							int64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: IpRange
 					"ip_range": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "A range of allowed IP addresses. This value must be expressed in CIDR notation. Example: \"000.000.000.000/[subnet mask]\" or optionally the shortened version \"0.0.0.0/[subnet mask]\".",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.RegexMatches(regexp.MustCompile("(^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(/([0-9]|[1-2][0-9]|3[0-2]))$)"), ""),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Protocol
 					"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The network communication protocol used by the fleet.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.OneOf(
 								"TCP",
 								"UDP",
 							),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: ToPort
 					"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
 						Description: "An ending value for a range of allowed port numbers. Port numbers are end-inclusive. This value must be higher than FromPort.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.Int64{ /*START VALIDATORS*/
 							int64validator.Between(1, 60000),
+							fwvalidators.NotNullInt64(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+							int64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -639,11 +690,16 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Location
 					"location": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 64),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9\\-]+"), ""),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: LocationCapacity
 					"location_capacity": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -651,26 +707,41 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 							// Property: DesiredEC2Instances
 							"desired_ec2_instances": schema.Int64Attribute{ /*START ATTRIBUTE*/
 								Description: "The number of EC2 instances you want to maintain in the specified fleet location. This value must fall between the minimum and maximum size limits.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.Int64{ /*START VALIDATORS*/
 									int64validator.AtLeast(0),
+									fwvalidators.NotNullInt64(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: MaxSize
 							"max_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
 								Description: "The maximum value that is allowed for the fleet's instance count for a location. When creating a new fleet, GameLift automatically sets this value to \"1\". Once the fleet is active, you can change this value.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.Int64{ /*START VALIDATORS*/
 									int64validator.AtLeast(0),
+									fwvalidators.NotNullInt64(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: MinSize
 							"min_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
 								Description: "The minimum value allowed for the fleet's instance count for a location. When creating a new fleet, GameLift automatically sets this value to \"0\". After the fleet is active, you can change this value.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.Int64{ /*START VALIDATORS*/
 									int64validator.AtLeast(0),
+									fwvalidators.NotNullInt64(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "Current resource capacity settings in a specified fleet or location. The location value might refer to a fleet's remote location or its home Region.",
@@ -1008,19 +1079,29 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 							// Property: ConcurrentExecutions
 							"concurrent_executions": schema.Int64Attribute{ /*START ATTRIBUTE*/
 								Description: "The number of server processes that use this configuration to run concurrently on an instance.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.Int64{ /*START VALIDATORS*/
 									int64validator.AtLeast(1),
+									fwvalidators.NotNullInt64(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: LaunchPath
 							"launch_path": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The location of the server executable in a custom game build or the name of the Realtime script file that contains the Init() function. Game builds and Realtime scripts are installed on instances at the root:\n\nWindows (for custom game builds only): C:\\game. Example: \"C:\\game\\MyGame\\server.exe\"\n\nLinux: /local/game. Examples: \"/local/game/MyGame/server.exe\" or \"/local/game/MyRealtimeScript.js\"",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthBetween(1, 1024),
 									stringvalidator.RegexMatches(regexp.MustCompile("^([Cc]:\\\\game\\S+|/local/game/\\S+)"), ""),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Parameters
 							"parameters": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1226,7 +1307,8 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 					// Property: MetricName
 					"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Name of the Amazon GameLift-defined metric that is used to trigger a scaling adjustment.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.OneOf(
 								"ActivatingGameSessions",
@@ -1242,15 +1324,24 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 								"WaitTime",
 								"ConcurrentActivatableGameSessions",
 							),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Name
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "A descriptive label that is associated with a fleet's scaling policy. Policy names do not need to be unique.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 1024),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: PolicyType
 					"policy_type": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1318,7 +1409,14 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 							// Property: TargetValue
 							"target_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
 								Description: "Desired value to use with a target-based scaling policy. The value must be relevant for whatever metric the scaling policy is using. For example, in a policy using the metric PercentAvailableGameSessions, the target value should be the preferred size of the fleet's buffer (the percent of capacity that should be idle and ready for new game sessions).",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.Float64{ /*START VALIDATORS*/
+									fwvalidators.NotNullFloat64(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+									float64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "An object that contains settings for a target-based scaling policy.",

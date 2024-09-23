@@ -47,12 +47,9 @@ The AWS::AutoScaling::LaunchConfiguration resource specifies the launch configur
 <a id="nestedatt--block_device_mappings"></a>
 ### Nested Schema for `block_device_mappings`
 
-Required:
-
-- `device_name` (String) The device name exposed to the EC2 instance (for example, /dev/sdh or xvdh).
-
 Optional:
 
+- `device_name` (String) The device name exposed to the EC2 instance (for example, /dev/sdh or xvdh).
 - `ebs` (Attributes) Parameters used to automatically set up EBS volumes when an instance is launched. (see [below for nested schema](#nestedatt--block_device_mappings--ebs))
 - `no_device` (Boolean) Setting this value to true suppresses the specified device included in the block device mapping of the AMI.
 - `virtual_name` (String) The name of the virtual device.

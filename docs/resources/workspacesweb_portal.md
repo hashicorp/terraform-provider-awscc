@@ -46,7 +46,7 @@ Definition of AWS::WorkSpacesWeb::Portal Resource Type
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

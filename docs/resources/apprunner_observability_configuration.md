@@ -40,7 +40,7 @@ Optional:
 <a id="nestedatt--trace_configuration"></a>
 ### Nested Schema for `trace_configuration`
 
-Required:
+Optional:
 
 - `vendor` (String) The implementation provider chosen for tracing App Runner services.
 

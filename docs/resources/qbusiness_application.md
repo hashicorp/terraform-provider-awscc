@@ -67,7 +67,7 @@ data "aws_ssoadmin_instances" "example" {}
 <a id="nestedatt--attachments_configuration"></a>
 ### Nested Schema for `attachments_configuration`
 
-Required:
+Optional:
 
 - `attachments_control_mode` (String)
 
@@ -75,12 +75,9 @@ Required:
 <a id="nestedatt--auto_subscription_configuration"></a>
 ### Nested Schema for `auto_subscription_configuration`
 
-Required:
-
-- `auto_subscribe` (String)
-
 Optional:
 
+- `auto_subscribe` (String)
 - `default_subscription_type` (String)
 
 
@@ -95,7 +92,7 @@ Optional:
 <a id="nestedatt--personalization_configuration"></a>
 ### Nested Schema for `personalization_configuration`
 
-Required:
+Optional:
 
 - `personalization_control_mode` (String)
 
@@ -103,7 +100,7 @@ Required:
 <a id="nestedatt--q_apps_configuration"></a>
 ### Nested Schema for `q_apps_configuration`
 
-Required:
+Optional:
 
 - `q_apps_control_mode` (String)
 
@@ -111,7 +108,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

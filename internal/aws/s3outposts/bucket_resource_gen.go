@@ -22,6 +22,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -255,10 +256,15 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 									// Property: DaysAfterInitiation
 									"days_after_initiation": schema.Int64Attribute{ /*START ATTRIBUTE*/
 										Description: "Specifies the number of days after which Amazon S3Outposts aborts an incomplete multipart upload.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.Int64{ /*START VALIDATORS*/
 											int64validator.AtLeast(0),
+											fwvalidators.NotNullInt64(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Description: "Specifies a lifecycle rule that stops incomplete multipart uploads to an Amazon S3Outposts bucket.",
@@ -313,19 +319,29 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 														// Property: Key
 														"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Required: true,
+															Optional: true,
+															Computed: true,
 															Validators: []validator.String{ /*START VALIDATORS*/
 																stringvalidator.LengthBetween(1, 1024),
 																stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$"), ""),
+																fwvalidators.NotNullString(),
 															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 														// Property: Value
 														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Required: true,
+															Optional: true,
+															Computed: true,
 															Validators: []validator.String{ /*START VALIDATORS*/
 																stringvalidator.LengthBetween(1, 1024),
 																stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$"), ""),
+																fwvalidators.NotNullString(),
 															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 												}, /*END NESTED OBJECT*/
@@ -361,19 +377,29 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 											// Property: Key
 											"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Required: true,
+												Optional: true,
+												Computed: true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 1024),
 													stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$"), ""),
+													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: Value
 											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Required: true,
+												Optional: true,
+												Computed: true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 1024),
 													stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$"), ""),
+													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "Specifies a tag used to identify a subset of objects for an Amazon S3Outposts bucket.",
@@ -420,7 +446,14 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "A list of lifecycle rules for individual objects in an Amazon S3Outposts bucket.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Set{ /*START VALIDATORS*/
+						fwvalidators.NotNullSet(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						setplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Rules that define how Amazon S3Outposts manages objects during their lifetime.",
@@ -484,18 +517,28 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 1024),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 1024),
 							stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$"), ""),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

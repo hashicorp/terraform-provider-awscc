@@ -22,6 +22,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -158,17 +159,27 @@ func workGroupResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -330,7 +341,14 @@ func workGroupResource(ctx context.Context) (resource.Resource, error) {
 						// Property: KmsKey
 						"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID. ",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Indicates the KMS key for encrypting notebook content.",
@@ -413,12 +431,17 @@ func workGroupResource(ctx context.Context) (resource.Resource, error) {
 								// Property: S3AclOption
 								"s3_acl_option": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The Amazon S3 canned ACL that Athena should specify when storing query results. Currently the only supported canned ACL is BUCKET_OWNER_FULL_CONTROL",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.OneOf(
 											"BUCKET_OWNER_FULL_CONTROL",
 										),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "Indicates that an Amazon S3 canned ACL should be set to control ownership of stored query results",
@@ -434,14 +457,19 @@ func workGroupResource(ctx context.Context) (resource.Resource, error) {
 								// Property: EncryptionOption
 								"encryption_option": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (SSE-S3), server-side encryption with KMS-managed keys (SSE-KMS), or client-side encryption with KMS-managed keys (CSE-KMS) is used.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.OneOf(
 											"SSE_S3",
 											"SSE_KMS",
 											"CSE_KMS",
 										),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: KmsKey
 								"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -662,7 +690,14 @@ func workGroupResource(ctx context.Context) (resource.Resource, error) {
 						// Property: KmsKey
 						"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID. ",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Indicates the KMS key for encrypting notebook content.",
@@ -762,12 +797,17 @@ func workGroupResource(ctx context.Context) (resource.Resource, error) {
 								// Property: S3AclOption
 								"s3_acl_option": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The Amazon S3 canned ACL that Athena should specify when storing query results. Currently the only supported canned ACL is BUCKET_OWNER_FULL_CONTROL",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.OneOf(
 											"BUCKET_OWNER_FULL_CONTROL",
 										),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "Indicates that an Amazon S3 canned ACL should be set to control ownership of stored query results",
@@ -783,14 +823,19 @@ func workGroupResource(ctx context.Context) (resource.Resource, error) {
 								// Property: EncryptionOption
 								"encryption_option": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (SSE-S3), server-side encryption with KMS-managed keys (SSE-KMS), or client-side encryption with KMS-managed keys (CSE-KMS) is used.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.OneOf(
 											"SSE_S3",
 											"SSE_KMS",
 											"CSE_KMS",
 										),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: KmsKey
 								"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/

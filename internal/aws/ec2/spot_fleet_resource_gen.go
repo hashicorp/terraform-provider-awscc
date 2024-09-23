@@ -25,6 +25,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -1260,7 +1261,14 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: DeviceName
 										"device_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Required: true,
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: Ebs
 										"ebs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1387,7 +1395,14 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: ImageId
 							"image_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Required: true,
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: InstanceRequirements
 							"instance_requirements": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1962,7 +1977,14 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 													// Property: Ipv6Address
 													"ipv_6_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Required: true,
+														Optional: true,
+														Computed: true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															fwvalidators.NotNullString(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
 											}, /*END NESTED OBJECT*/
@@ -1997,7 +2019,14 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 													}, /*END ATTRIBUTE*/
 													// Property: PrivateIpAddress
 													"private_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Required: true,
+														Optional: true,
+														Computed: true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															fwvalidators.NotNullString(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
 											}, /*END NESTED OBJECT*/
@@ -2092,7 +2121,14 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: GroupId
 										"group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Required: true,
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
@@ -2190,11 +2226,25 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 													// Property: Key
 													"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Required: true,
+														Optional: true,
+														Computed: true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															fwvalidators.NotNullString(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 													// Property: Value
 													"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Required: true,
+														Optional: true,
+														Computed: true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															fwvalidators.NotNullString(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
 											}, /*END NESTED OBJECT*/
@@ -2272,7 +2322,14 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 									// Property: Version
 									"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Required: true,
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Optional: true,
@@ -2836,14 +2893,26 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 											// Property: Name
 											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Required: true,
+												Optional: true,
+												Computed: true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
-									Required: true,
+									Optional: true,
+									Computed: true,
 									Validators: []validator.List{ /*START VALIDATORS*/
 										listvalidator.UniqueValues(),
+										fwvalidators.NotNullList(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
@@ -2861,14 +2930,26 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 											// Property: Arn
 											"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Required: true,
+												Optional: true,
+												Computed: true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
-									Required: true,
+									Optional: true,
+									Computed: true,
 									Validators: []validator.List{ /*START VALIDATORS*/
 										listvalidator.UniqueValues(),
+										fwvalidators.NotNullList(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
@@ -3051,11 +3132,25 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Key
 										"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Required: true,
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: Value
 										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Required: true,
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/

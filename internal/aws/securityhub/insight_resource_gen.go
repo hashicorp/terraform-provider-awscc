@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
@@ -20,6 +21,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -3481,7 +3483,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -3489,15 +3492,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -3519,7 +3531,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -3527,15 +3540,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -3557,7 +3579,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -3565,15 +3588,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -3595,7 +3627,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -3603,15 +3636,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -3633,7 +3675,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -3641,15 +3684,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -3671,7 +3723,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -3679,15 +3732,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -3709,7 +3771,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -3717,15 +3780,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -3747,7 +3819,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -3755,15 +3828,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -3832,17 +3914,29 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 									// Property: Unit
 									"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "A date range unit for the date filter.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"DAYS",
 											),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: Value
 									"value": schema.Float64Attribute{ /*START ATTRIBUTE*/
 										Description: "A date range value for the date filter.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Float64{ /*START VALIDATORS*/
+											fwvalidators.NotNullFloat64(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+											float64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Description: "A date range for the date filter.",
@@ -3934,7 +4028,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -3942,15 +4037,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -4060,7 +4164,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -4068,15 +4173,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -4098,7 +4212,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -4106,15 +4221,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -4136,7 +4260,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -4144,15 +4269,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -4174,7 +4308,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -4182,15 +4317,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -4212,7 +4356,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -4220,15 +4365,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -4253,17 +4407,29 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 									// Property: Unit
 									"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "A date range unit for the date filter.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"DAYS",
 											),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: Value
 									"value": schema.Float64Attribute{ /*START ATTRIBUTE*/
 										Description: "A date range value for the date filter.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Float64{ /*START VALIDATORS*/
+											fwvalidators.NotNullFloat64(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+											float64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Description: "A date range for the date filter.",
@@ -4311,7 +4477,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -4319,15 +4486,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -4349,7 +4525,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -4357,15 +4534,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -4387,10 +4573,15 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "A value for the keyword.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -4415,17 +4606,29 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 									// Property: Unit
 									"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "A date range unit for the date filter.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"DAYS",
 											),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: Value
 									"value": schema.Float64Attribute{ /*START ATTRIBUTE*/
 										Description: "A date range value for the date filter.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Float64{ /*START VALIDATORS*/
+											fwvalidators.NotNullFloat64(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+											float64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Description: "A date range for the date filter.",
@@ -4473,7 +4676,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -4481,15 +4685,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -4511,7 +4724,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -4519,15 +4733,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -4549,7 +4772,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -4557,15 +4781,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -4587,7 +4820,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -4595,15 +4829,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -4625,7 +4868,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -4633,15 +4877,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -4663,10 +4916,15 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Cidr
 							"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "A finding's CIDR value.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -4688,10 +4946,15 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Cidr
 							"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "A finding's CIDR value.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -4757,7 +5020,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -4765,15 +5029,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -4795,7 +5068,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -4803,15 +5077,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -4833,7 +5116,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -4841,15 +5125,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -4871,10 +5164,15 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Cidr
 							"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "A finding's CIDR value.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -4896,10 +5194,15 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Cidr
 							"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "A finding's CIDR value.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -4921,7 +5224,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -4929,15 +5233,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -5003,7 +5316,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -5011,15 +5325,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -5044,17 +5367,29 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 									// Property: Unit
 									"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "A date range unit for the date filter.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"DAYS",
 											),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: Value
 									"value": schema.Float64Attribute{ /*START ATTRIBUTE*/
 										Description: "A date range value for the date filter.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Float64{ /*START VALIDATORS*/
+											fwvalidators.NotNullFloat64(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+											float64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Description: "A date range for the date filter.",
@@ -5102,7 +5437,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -5110,15 +5446,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -5143,17 +5488,29 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 									// Property: Unit
 									"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "A date range unit for the date filter.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"DAYS",
 											),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: Value
 									"value": schema.Float64Attribute{ /*START ATTRIBUTE*/
 										Description: "A date range value for the date filter.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Float64{ /*START VALIDATORS*/
+											fwvalidators.NotNullFloat64(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+											float64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Description: "A date range for the date filter.",
@@ -5201,7 +5558,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -5209,15 +5567,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -5283,7 +5650,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -5291,15 +5659,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -5368,17 +5745,29 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 									// Property: Unit
 									"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "A date range unit for the date filter.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"DAYS",
 											),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: Value
 									"value": schema.Float64Attribute{ /*START ATTRIBUTE*/
 										Description: "A date range value for the date filter.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Float64{ /*START VALIDATORS*/
+											fwvalidators.NotNullFloat64(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+											float64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Description: "A date range for the date filter.",
@@ -5426,7 +5815,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -5434,15 +5824,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -5464,29 +5863,44 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to the key value when filtering Security Hub findings with a map filter.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
 										"NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Key
 							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -5508,7 +5922,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -5516,15 +5931,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -5546,7 +5970,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -5554,15 +5979,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -5584,7 +6018,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -5592,15 +6027,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -5622,7 +6066,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -5630,15 +6075,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -5660,7 +6114,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -5668,15 +6123,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -5698,7 +6162,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -5706,15 +6171,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -5736,7 +6210,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -5744,15 +6219,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -5774,7 +6258,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -5782,15 +6267,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -5812,7 +6306,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -5820,15 +6315,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -5850,7 +6354,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -5858,15 +6363,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -5888,10 +6402,15 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Cidr
 							"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "A finding's CIDR value.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -5913,10 +6432,15 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Cidr
 							"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "A finding's CIDR value.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -5938,7 +6462,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -5946,15 +6471,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -5979,17 +6513,29 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 									// Property: Unit
 									"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "A date range unit for the date filter.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"DAYS",
 											),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: Value
 									"value": schema.Float64Attribute{ /*START ATTRIBUTE*/
 										Description: "A date range value for the date filter.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Float64{ /*START VALIDATORS*/
+											fwvalidators.NotNullFloat64(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+											float64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Description: "A date range for the date filter.",
@@ -6037,7 +6583,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -6045,15 +6592,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -6075,7 +6631,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -6083,15 +6640,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -6113,7 +6679,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -6121,15 +6688,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -6154,17 +6730,29 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 									// Property: Unit
 									"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "A date range unit for the date filter.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"DAYS",
 											),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: Value
 									"value": schema.Float64Attribute{ /*START ATTRIBUTE*/
 										Description: "A date range value for the date filter.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Float64{ /*START VALIDATORS*/
+											fwvalidators.NotNullFloat64(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+											float64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Description: "A date range for the date filter.",
@@ -6212,7 +6800,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -6220,15 +6809,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -6250,7 +6848,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -6258,15 +6857,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -6288,7 +6896,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -6296,15 +6905,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -6326,7 +6944,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -6334,15 +6953,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -6364,7 +6992,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -6372,15 +7001,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -6402,7 +7040,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -6410,15 +7049,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -6440,7 +7088,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -6448,15 +7097,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -6478,7 +7136,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -6486,15 +7145,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -6519,17 +7187,29 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 									// Property: Unit
 									"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "A date range unit for the date filter.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"DAYS",
 											),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: Value
 									"value": schema.Float64Attribute{ /*START ATTRIBUTE*/
 										Description: "A date range value for the date filter.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Float64{ /*START VALIDATORS*/
+											fwvalidators.NotNullFloat64(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+											float64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Description: "A date range for the date filter.",
@@ -6577,7 +7257,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -6585,15 +7266,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -6615,29 +7305,44 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to the key value when filtering Security Hub findings with a map filter.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
 										"NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Key
 							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -6659,7 +7364,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -6667,15 +7373,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -6697,7 +7412,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -6705,15 +7421,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -6735,7 +7460,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -6743,15 +7469,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -6773,29 +7508,44 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to the key value when filtering Security Hub findings with a map filter.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
 										"NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Key
 							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -6817,7 +7567,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -6825,15 +7576,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -6855,7 +7615,14 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Value
 							"value": schema.BoolAttribute{ /*START ATTRIBUTE*/
 								Description: "The value of the boolean.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.Bool{ /*START VALIDATORS*/
+									fwvalidators.NotNullBool(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+									boolplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -6877,7 +7644,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -6885,15 +7653,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -7003,7 +7780,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -7011,15 +7789,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -7041,7 +7828,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -7049,15 +7837,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -7082,17 +7879,29 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 									// Property: Unit
 									"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "A date range unit for the date filter.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"DAYS",
 											),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: Value
 									"value": schema.Float64Attribute{ /*START ATTRIBUTE*/
 										Description: "A date range value for the date filter.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Float64{ /*START VALIDATORS*/
+											fwvalidators.NotNullFloat64(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+											float64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Description: "A date range for the date filter.",
@@ -7140,7 +7949,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -7148,15 +7958,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -7178,7 +7997,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -7186,15 +8006,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -7216,7 +8045,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -7224,15 +8054,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -7254,7 +8093,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -7262,15 +8102,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -7292,7 +8141,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -7300,15 +8150,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -7330,7 +8189,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -7338,15 +8198,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -7371,17 +8240,29 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 									// Property: Unit
 									"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "A date range unit for the date filter.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"DAYS",
 											),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: Value
 									"value": schema.Float64Attribute{ /*START ATTRIBUTE*/
 										Description: "A date range value for the date filter.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Float64{ /*START VALIDATORS*/
+											fwvalidators.NotNullFloat64(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+											float64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Description: "A date range for the date filter.",
@@ -7429,29 +8310,44 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to the key value when filtering Security Hub findings with a map filter.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
 										"NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Key
 							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -7473,7 +8369,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -7481,15 +8378,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -7511,7 +8417,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -7519,15 +8426,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -7549,7 +8465,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -7557,15 +8474,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -7587,7 +8513,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -7595,15 +8522,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -7625,7 +8561,8 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Comparison
 							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"EQUALS",
@@ -7633,15 +8570,24 @@ func insightResource(ctx context.Context) (resource.Resource, error) {
 										"NOT_EQUALS",
 										"PREFIX_NOT_EQUALS",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Non-empty string definition.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtLeast(1),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/

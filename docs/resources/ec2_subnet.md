@@ -73,7 +73,7 @@ resource "awscc_ec2_subnet" "main" {
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
-- `ipv_6_cidr_blocks` (List of String) The IPv6 network ranges for the subnet, in CIDR notation.
+- `ipv_6_cidr_blocks` (List of String)
 - `network_acl_association_id` (String)
 - `subnet_id` (String)
 
@@ -90,7 +90,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The tag key.
 - `value` (String) The tag value.

@@ -27,13 +27,10 @@ Resource Type definition for AWS::SES::Template
 <a id="nestedatt--template"></a>
 ### Nested Schema for `template`
 
-Required:
-
-- `subject_part` (String) The subject line of the email.
-
 Optional:
 
 - `html_part` (String) The HTML body of the email.
+- `subject_part` (String) The subject line of the email.
 - `template_name` (String) The name of the template.
 - `text_part` (String) The email body that is visible to recipients whose email clients do not display HTML content.
 

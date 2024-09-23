@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
@@ -20,6 +21,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -364,19 +366,41 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: DatabaseName
 						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Port
 						"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								fwvalidators.NotNullInt64(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: ServerName
 						"server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: SslMode
 						"ssl_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"none",
@@ -384,7 +408,11 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 									"verify-ca",
 									"verify-full",
 								),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "MicrosoftSqlServerSettings property identifier.",
@@ -407,15 +435,30 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: Port
 						"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								fwvalidators.NotNullInt64(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: ServerName
 						"server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: SslMode
 						"ssl_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"none",
@@ -423,7 +466,11 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 									"verify-ca",
 									"verify-full",
 								),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "MySqlSettings property identifier.",
@@ -454,11 +501,25 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: DatabaseName
 						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Port
 						"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								fwvalidators.NotNullInt64(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: SecretsManagerOracleAsmAccessRoleArn
 						"secrets_manager_oracle_asm_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -494,11 +555,19 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: ServerName
 						"server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: SslMode
 						"ssl_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"none",
@@ -506,7 +575,11 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 									"verify-ca",
 									"verify-full",
 								),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "OracleSettings property identifier.",
@@ -529,19 +602,41 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: DatabaseName
 						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Port
 						"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								fwvalidators.NotNullInt64(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: ServerName
 						"server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: SslMode
 						"ssl_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"none",
@@ -549,7 +644,11 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 									"verify-ca",
 									"verify-full",
 								),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "PostgreSqlSettings property identifier.",
@@ -605,18 +704,28 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

@@ -32,7 +32,7 @@ Resource schema for AWS::Route53::CidrCollection.
 <a id="nestedatt--locations"></a>
 ### Nested Schema for `locations`
 
-Required:
+Optional:
 
 - `cidr_list` (Set of String) A list of CIDR blocks.
 - `location_name` (String) The name of the location that is associated with the CIDR collection.

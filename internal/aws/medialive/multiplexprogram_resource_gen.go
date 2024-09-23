@@ -21,6 +21,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -170,10 +171,15 @@ func multiplexprogramResource(ctx context.Context) (resource.Resource, error) {
 				// Property: ProgramNumber
 				"program_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
 					Description: "Unique program number.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.Int64{ /*START VALIDATORS*/
 						int64validator.Between(0, 65535),
+						fwvalidators.NotNullInt64(),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: ServiceDescriptor
 				"service_descriptor": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -181,18 +187,28 @@ func multiplexprogramResource(ctx context.Context) (resource.Resource, error) {
 						// Property: ProviderName
 						"provider_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "Name of the provider.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 256),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: ServiceName
 						"service_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "Name of the service.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 256),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Transport stream service descriptor configuration for the Multiplex program.",

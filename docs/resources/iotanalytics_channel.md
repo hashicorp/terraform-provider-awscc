@@ -38,14 +38,11 @@ Optional:
 <a id="nestedatt--channel_storage--customer_managed_s3"></a>
 ### Nested Schema for `channel_storage.customer_managed_s3`
 
-Required:
-
-- `bucket` (String)
-- `role_arn` (String)
-
 Optional:
 
+- `bucket` (String)
 - `key_prefix` (String)
+- `role_arn` (String)
 
 
 
@@ -61,7 +58,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

@@ -48,14 +48,14 @@ Optional:
 <a id="nestedatt--constraints--invisible_fields"></a>
 ### Nested Schema for `constraints.invisible_fields`
 
-Required:
+Optional:
 
 - `id` (Attributes) the identifier (name) for the task template field (see [below for nested schema](#nestedatt--constraints--invisible_fields--id))
 
 <a id="nestedatt--constraints--invisible_fields--id"></a>
 ### Nested Schema for `constraints.invisible_fields.id`
 
-Required:
+Optional:
 
 - `name` (String) The name of the task template field
 
@@ -64,14 +64,14 @@ Required:
 <a id="nestedatt--constraints--read_only_fields"></a>
 ### Nested Schema for `constraints.read_only_fields`
 
-Required:
+Optional:
 
 - `id` (Attributes) the identifier (name) for the task template field (see [below for nested schema](#nestedatt--constraints--read_only_fields--id))
 
 <a id="nestedatt--constraints--read_only_fields--id"></a>
 ### Nested Schema for `constraints.read_only_fields.id`
 
-Required:
+Optional:
 
 - `name` (String) The name of the task template field
 
@@ -80,14 +80,14 @@ Required:
 <a id="nestedatt--constraints--required_fields"></a>
 ### Nested Schema for `constraints.required_fields`
 
-Required:
+Optional:
 
 - `id` (Attributes) the identifier (name) for the task template field (see [below for nested schema](#nestedatt--constraints--required_fields--id))
 
 <a id="nestedatt--constraints--required_fields--id"></a>
 ### Nested Schema for `constraints.required_fields.id`
 
-Required:
+Optional:
 
 - `name` (String) The name of the task template field
 
@@ -97,7 +97,7 @@ Required:
 <a id="nestedatt--defaults"></a>
 ### Nested Schema for `defaults`
 
-Required:
+Optional:
 
 - `default_value` (String) the default value for the task template's field
 - `id` (Attributes) the identifier (name) for the task template field (see [below for nested schema](#nestedatt--defaults--id))
@@ -105,7 +105,7 @@ Required:
 <a id="nestedatt--defaults--id"></a>
 ### Nested Schema for `defaults.id`
 
-Required:
+Optional:
 
 - `name` (String) The name of the task template field
 
@@ -114,20 +114,17 @@ Required:
 <a id="nestedatt--fields"></a>
 ### Nested Schema for `fields`
 
-Required:
-
-- `id` (Attributes) the identifier (name) for the task template field (see [below for nested schema](#nestedatt--fields--id))
-- `type` (String) The type of the task template's field
-
 Optional:
 
 - `description` (String) The description of the task template's field
+- `id` (Attributes) the identifier (name) for the task template field (see [below for nested schema](#nestedatt--fields--id))
 - `single_select_options` (List of String) list of field options to be used with single select
+- `type` (String) The type of the task template's field
 
 <a id="nestedatt--fields--id"></a>
 ### Nested Schema for `fields.id`
 
-Required:
+Optional:
 
 - `name` (String) The name of the task template field
 
@@ -136,7 +133,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. . You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

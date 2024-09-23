@@ -51,24 +51,18 @@ Optional:
 <a id="nestedatt--dialer_config--predictive_dialer_config"></a>
 ### Nested Schema for `dialer_config.predictive_dialer_config`
 
-Required:
-
-- `bandwidth_allocation` (Number) The bandwidth allocation of a queue resource.
-
 Optional:
 
+- `bandwidth_allocation` (Number) The bandwidth allocation of a queue resource.
 - `dialing_capacity` (Number) Allocates dialing capacity for this campaign between multiple active campaigns.
 
 
 <a id="nestedatt--dialer_config--progressive_dialer_config"></a>
 ### Nested Schema for `dialer_config.progressive_dialer_config`
 
-Required:
-
-- `bandwidth_allocation` (Number) The bandwidth allocation of a queue resource.
-
 Optional:
 
+- `bandwidth_allocation` (Number) The bandwidth allocation of a queue resource.
 - `dialing_capacity` (Number) Allocates dialing capacity for this campaign between multiple active campaigns.
 
 
@@ -89,20 +83,17 @@ Optional:
 <a id="nestedatt--outbound_call_config--answer_machine_detection_config"></a>
 ### Nested Schema for `outbound_call_config.answer_machine_detection_config`
 
-Required:
-
-- `enable_answer_machine_detection` (Boolean) Flag to decided whether outbound calls should have answering machine detection enabled or not
-
 Optional:
 
 - `await_answer_machine_prompt` (Boolean) Enables detection of prompts (e.g., beep after after a voicemail greeting)
+- `enable_answer_machine_detection` (Boolean) Flag to decided whether outbound calls should have answering machine detection enabled or not
 
 
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that's 1 to 256 characters in length.

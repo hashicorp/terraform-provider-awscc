@@ -74,13 +74,10 @@ Required:
 <a id="nestedatt--data_storage_config"></a>
 ### Nested Schema for `data_storage_config`
 
-Required:
-
-- `destination` (String) The Amazon S3 bucket where the inference request and response data is stored.
-
 Optional:
 
 - `content_type` (Attributes) Configuration specifying how to treat different headers. If no headers are specified SageMaker will by default base64 encode when capturing the data. (see [below for nested schema](#nestedatt--data_storage_config--content_type))
+- `destination` (String) The Amazon S3 bucket where the inference request and response data is stored.
 - `kms_key` (String) The AWS Key Management Service key that Amazon SageMaker uses to encrypt captured data at rest using Amazon S3 server-side encryption.
 
 <a id="nestedatt--data_storage_config--content_type"></a>
@@ -105,7 +102,7 @@ Optional:
 <a id="nestedatt--shadow_mode_config"></a>
 ### Nested Schema for `shadow_mode_config`
 
-Required:
+Optional:
 
 - `shadow_model_variants` (Attributes List) List of shadow variant configurations. (see [below for nested schema](#nestedatt--shadow_mode_config--shadow_model_variants))
 - `source_model_variant_name` (String) The name of the production variant, which takes all the inference requests.
@@ -113,7 +110,7 @@ Required:
 <a id="nestedatt--shadow_mode_config--shadow_model_variants"></a>
 ### Nested Schema for `shadow_mode_config.shadow_model_variants`
 
-Required:
+Optional:
 
 - `sampling_percentage` (Number) The percentage of inference requests that Amazon SageMaker replicates from the production variant to the shadow variant.
 - `shadow_model_variant_name` (String) The name of the shadow variant.
@@ -123,7 +120,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

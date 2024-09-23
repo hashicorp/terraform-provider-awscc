@@ -170,7 +170,7 @@ Optional:
 <a id="nestedatt--permissions"></a>
 ### Nested Schema for `permissions`
 
-Required:
+Optional:
 
 - `actions` (List of String) <p>The IAM action to grant or revoke permissions on.</p>
 - `principal` (String) <p>The Amazon Resource Name (ARN) of the principal. This can be one of the
@@ -193,7 +193,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) <p>Tag key.</p>
 - `value` (String) <p>Tag value.</p>

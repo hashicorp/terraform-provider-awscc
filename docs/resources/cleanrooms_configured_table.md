@@ -54,7 +54,7 @@ Required:
 <a id="nestedatt--analysis_rules"></a>
 ### Nested Schema for `analysis_rules`
 
-Required:
+Optional:
 
 - `policy` (Attributes) (see [below for nested schema](#nestedatt--analysis_rules--policy))
 - `type` (String)
@@ -62,7 +62,7 @@ Required:
 <a id="nestedatt--analysis_rules--policy"></a>
 ### Nested Schema for `analysis_rules.policy`
 
-Required:
+Optional:
 
 - `v1` (Attributes) (see [below for nested schema](#nestedatt--analysis_rules--policy--v1))
 
@@ -78,24 +78,21 @@ Optional:
 <a id="nestedatt--analysis_rules--policy--v1--aggregation"></a>
 ### Nested Schema for `analysis_rules.policy.v1.aggregation`
 
-Required:
-
-- `aggregate_columns` (Attributes List) (see [below for nested schema](#nestedatt--analysis_rules--policy--v1--aggregation--aggregate_columns))
-- `dimension_columns` (List of String)
-- `join_columns` (List of String)
-- `output_constraints` (Attributes List) (see [below for nested schema](#nestedatt--analysis_rules--policy--v1--aggregation--output_constraints))
-- `scalar_functions` (List of String)
-
 Optional:
 
 - `additional_analyses` (String)
+- `aggregate_columns` (Attributes List) (see [below for nested schema](#nestedatt--analysis_rules--policy--v1--aggregation--aggregate_columns))
 - `allowed_join_operators` (List of String)
+- `dimension_columns` (List of String)
+- `join_columns` (List of String)
 - `join_required` (String)
+- `output_constraints` (Attributes List) (see [below for nested schema](#nestedatt--analysis_rules--policy--v1--aggregation--output_constraints))
+- `scalar_functions` (List of String)
 
 <a id="nestedatt--analysis_rules--policy--v1--aggregation--aggregate_columns"></a>
 ### Nested Schema for `analysis_rules.policy.v1.aggregation.aggregate_columns`
 
-Required:
+Optional:
 
 - `column_names` (List of String)
 - `function` (String)
@@ -104,7 +101,7 @@ Required:
 <a id="nestedatt--analysis_rules--policy--v1--aggregation--output_constraints"></a>
 ### Nested Schema for `analysis_rules.policy.v1.aggregation.output_constraints`
 
-Required:
+Optional:
 
 - `column_name` (String)
 - `minimum` (Number)
@@ -115,13 +112,10 @@ Required:
 <a id="nestedatt--analysis_rules--policy--v1--custom"></a>
 ### Nested Schema for `analysis_rules.policy.v1.custom`
 
-Required:
-
-- `allowed_analyses` (List of String)
-
 Optional:
 
 - `additional_analyses` (String)
+- `allowed_analyses` (List of String)
 - `allowed_analysis_providers` (List of String)
 - `differential_privacy` (Attributes) (see [below for nested schema](#nestedatt--analysis_rules--policy--v1--custom--differential_privacy))
 - `disallowed_output_columns` (List of String)
@@ -129,14 +123,14 @@ Optional:
 <a id="nestedatt--analysis_rules--policy--v1--custom--differential_privacy"></a>
 ### Nested Schema for `analysis_rules.policy.v1.custom.differential_privacy`
 
-Required:
+Optional:
 
 - `columns` (Attributes List) (see [below for nested schema](#nestedatt--analysis_rules--policy--v1--custom--differential_privacy--columns))
 
 <a id="nestedatt--analysis_rules--policy--v1--custom--differential_privacy--columns"></a>
 ### Nested Schema for `analysis_rules.policy.v1.custom.differential_privacy.columns`
 
-Required:
+Optional:
 
 - `name` (String)
 
@@ -146,15 +140,12 @@ Required:
 <a id="nestedatt--analysis_rules--policy--v1--list"></a>
 ### Nested Schema for `analysis_rules.policy.v1.list`
 
-Required:
-
-- `join_columns` (List of String)
-- `list_columns` (List of String)
-
 Optional:
 
 - `additional_analyses` (String)
 - `allowed_join_operators` (List of String)
+- `join_columns` (List of String)
+- `list_columns` (List of String)
 
 
 
@@ -163,7 +154,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

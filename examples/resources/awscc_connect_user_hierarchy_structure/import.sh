@@ -1,0 +1,1 @@
+$ terraform import awscc_connect_user_hierarchy_structure.example "user_hierarchy_structure_arn"

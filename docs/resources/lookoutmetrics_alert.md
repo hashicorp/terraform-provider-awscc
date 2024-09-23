@@ -42,7 +42,7 @@ Optional:
 <a id="nestedatt--action--lambda_configuration"></a>
 ### Nested Schema for `action.lambda_configuration`
 
-Required:
+Optional:
 
 - `lambda_arn` (String) ARN of a Lambda to send alert notifications to.
 - `role_arn` (String) ARN of an IAM role that LookoutMetrics should assume to access the Lambda function.
@@ -51,7 +51,7 @@ Required:
 <a id="nestedatt--action--sns_configuration"></a>
 ### Nested Schema for `action.sns_configuration`
 
-Required:
+Optional:
 
 - `role_arn` (String) ARN of an IAM role that LookoutMetrics should assume to access the SNS topic.
 - `sns_topic_arn` (String) ARN of an SNS topic to send alert notifications to.

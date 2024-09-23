@@ -22,6 +22,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -298,19 +299,29 @@ func appResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Name
 							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Required: true,
+								Optional: true,
+								Computed: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtMost(255),
 									stringvalidator.RegexMatches(regexp.MustCompile("(?s).*"), ""),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Required: true,
+								Optional: true,
+								Computed: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtMost(5500),
 									stringvalidator.RegexMatches(regexp.MustCompile("(?s).*"), ""),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -451,6 +462,45 @@ func appResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: CacheConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Type": {
+		//	      "enum": [
+		//	        "AMPLIFY_MANAGED",
+		//	        "AMPLIFY_MANAGED_NO_COOKIES"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"cache_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"AMPLIFY_MANAGED",
+							"AMPLIFY_MANAGED_NO_COOKIES",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CustomHeaders
 		// CloudFormation resource type schema:
 		//
@@ -529,11 +579,16 @@ func appResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Source
 					"source": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 2048),
 							stringvalidator.RegexMatches(regexp.MustCompile("(?s).+"), ""),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Status
 					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -549,11 +604,16 @@ func appResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Target
 					"target": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 2048),
 							stringvalidator.RegexMatches(regexp.MustCompile("(?s).+"), ""),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -641,19 +701,29 @@ func appResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Name
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthAtMost(255),
 							stringvalidator.RegexMatches(regexp.MustCompile("(?s).*"), ""),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthAtMost(5500),
 							stringvalidator.RegexMatches(regexp.MustCompile("(?s).*"), ""),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -795,17 +865,27 @@ func appResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -845,6 +925,7 @@ func appResource(ctx context.Context) (resource.Resource, error) {
 		"auto_branch_creation_patterns": "AutoBranchCreationPatterns",
 		"basic_auth_config":             "BasicAuthConfig",
 		"build_spec":                    "BuildSpec",
+		"cache_config":                  "CacheConfig",
 		"condition":                     "Condition",
 		"custom_headers":                "CustomHeaders",
 		"custom_rules":                  "CustomRules",
@@ -871,6 +952,7 @@ func appResource(ctx context.Context) (resource.Resource, error) {
 		"status":                        "Status",
 		"tags":                          "Tags",
 		"target":                        "Target",
+		"type":                          "Type",
 		"username":                      "Username",
 		"value":                         "Value",
 	})

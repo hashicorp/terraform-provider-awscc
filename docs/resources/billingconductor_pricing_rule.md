@@ -155,7 +155,7 @@ resource "awscc_billingconductor_pricing_rule" "example_sku" {
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)
@@ -171,7 +171,7 @@ Optional:
 <a id="nestedatt--tiering--free_tier"></a>
 ### Nested Schema for `tiering.free_tier`
 
-Required:
+Optional:
 
 - `activated` (Boolean)
 

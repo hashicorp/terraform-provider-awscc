@@ -37,7 +37,7 @@ Resource Type definition for AWS::SageMaker::Space
 <a id="nestedatt--ownership_settings"></a>
 ### Nested Schema for `ownership_settings`
 
-Required:
+Optional:
 
 - `owner_user_profile_name` (String)
 
@@ -60,7 +60,24 @@ Optional:
 
 Optional:
 
+- `app_lifecycle_management` (Attributes) (see [below for nested schema](#nestedatt--space_settings--code_editor_app_settings--app_lifecycle_management))
 - `default_resource_spec` (Attributes) (see [below for nested schema](#nestedatt--space_settings--code_editor_app_settings--default_resource_spec))
+
+<a id="nestedatt--space_settings--code_editor_app_settings--app_lifecycle_management"></a>
+### Nested Schema for `space_settings.code_editor_app_settings.app_lifecycle_management`
+
+Optional:
+
+- `idle_settings` (Attributes) (see [below for nested schema](#nestedatt--space_settings--code_editor_app_settings--app_lifecycle_management--idle_settings))
+
+<a id="nestedatt--space_settings--code_editor_app_settings--app_lifecycle_management--idle_settings"></a>
+### Nested Schema for `space_settings.code_editor_app_settings.app_lifecycle_management.idle_settings`
+
+Optional:
+
+- `idle_timeout_in_minutes` (Number) The space idle timeout value set in minutes
+
+
 
 <a id="nestedatt--space_settings--code_editor_app_settings--default_resource_spec"></a>
 ### Nested Schema for `space_settings.code_editor_app_settings.default_resource_spec`
@@ -84,7 +101,7 @@ Optional:
 <a id="nestedatt--space_settings--custom_file_systems--efs_file_system"></a>
 ### Nested Schema for `space_settings.custom_file_systems.efs_file_system`
 
-Required:
+Optional:
 
 - `file_system_id` (String)
 
@@ -95,13 +112,30 @@ Required:
 
 Optional:
 
+- `app_lifecycle_management` (Attributes) (see [below for nested schema](#nestedatt--space_settings--jupyter_lab_app_settings--app_lifecycle_management))
 - `code_repositories` (Attributes List) A list of CodeRepositories available for use with JupyterLab apps. (see [below for nested schema](#nestedatt--space_settings--jupyter_lab_app_settings--code_repositories))
 - `default_resource_spec` (Attributes) (see [below for nested schema](#nestedatt--space_settings--jupyter_lab_app_settings--default_resource_spec))
+
+<a id="nestedatt--space_settings--jupyter_lab_app_settings--app_lifecycle_management"></a>
+### Nested Schema for `space_settings.jupyter_lab_app_settings.app_lifecycle_management`
+
+Optional:
+
+- `idle_settings` (Attributes) (see [below for nested schema](#nestedatt--space_settings--jupyter_lab_app_settings--app_lifecycle_management--idle_settings))
+
+<a id="nestedatt--space_settings--jupyter_lab_app_settings--app_lifecycle_management--idle_settings"></a>
+### Nested Schema for `space_settings.jupyter_lab_app_settings.app_lifecycle_management.idle_settings`
+
+Optional:
+
+- `idle_timeout_in_minutes` (Number) The space idle timeout value set in minutes
+
+
 
 <a id="nestedatt--space_settings--jupyter_lab_app_settings--code_repositories"></a>
 ### Nested Schema for `space_settings.jupyter_lab_app_settings.code_repositories`
 
-Required:
+Optional:
 
 - `repository_url` (String) A CodeRepository (valid URL) to be used within Jupyter's Git extension.
 
@@ -150,13 +184,10 @@ Optional:
 <a id="nestedatt--space_settings--kernel_gateway_app_settings--custom_images"></a>
 ### Nested Schema for `space_settings.kernel_gateway_app_settings.custom_images`
 
-Required:
+Optional:
 
 - `app_image_config_name` (String) The Name of the AppImageConfig.
 - `image_name` (String) The name of the CustomImage. Must be unique to your account.
-
-Optional:
-
 - `image_version_number` (Number) The version number of the CustomImage.
 
 
@@ -182,7 +213,7 @@ Optional:
 <a id="nestedatt--space_settings--space_storage_settings--ebs_storage_settings"></a>
 ### Nested Schema for `space_settings.space_storage_settings.ebs_storage_settings`
 
-Required:
+Optional:
 
 - `ebs_volume_size_in_gb` (Number) Size of the Amazon EBS volume in Gb
 
@@ -192,7 +223,7 @@ Required:
 <a id="nestedatt--space_sharing_settings"></a>
 ### Nested Schema for `space_sharing_settings`
 
-Required:
+Optional:
 
 - `sharing_type` (String)
 
@@ -200,7 +231,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

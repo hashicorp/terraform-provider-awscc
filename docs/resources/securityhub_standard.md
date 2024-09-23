@@ -141,13 +141,10 @@ resource "awscc_securityhub_standard" "nist" {
 <a id="nestedatt--disabled_standards_controls"></a>
 ### Nested Schema for `disabled_standards_controls`
 
-Required:
-
-- `standards_control_arn` (String) The Amazon Resource Name (ARN) of the control.
-
 Optional:
 
 - `reason` (String) A user-defined reason for changing a control's enablement status in a specified standard. If you are disabling a control, then this property is required.
+- `standards_control_arn` (String) The Amazon Resource Name (ARN) of the control.
 
 ## Import
 

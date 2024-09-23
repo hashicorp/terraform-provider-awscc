@@ -21,6 +21,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -94,7 +95,7 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The maintenance settings you want to use for the flow. ",
+		//	  "description": "The maintenance settings you want to use for the flow.",
 		//	  "properties": {
 		//	    "MaintenanceDay": {
 		//	      "description": "A day of a week when the maintenance will happen. Use Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.",
@@ -125,7 +126,8 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 				// Property: MaintenanceDay
 				"maintenance_day": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "A day of a week when the maintenance will happen. Use Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"Monday",
@@ -136,15 +138,26 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 							"Saturday",
 							"Sunday",
 						),
+						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: MaintenanceStartHour
 				"maintenance_start_hour": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes must be 00. Example: 13:00. The default value is 02:00.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The maintenance settings you want to use for the flow. ",
+			Description: "The maintenance settings you want to use for the flow.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -451,24 +464,43 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 					// Property: MediaStreamId
 					"media_stream_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
 						Description: "A unique identifier for the media stream.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.Int64{ /*START VALIDATORS*/
+							fwvalidators.NotNullInt64(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+							int64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: MediaStreamName
 					"media_stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "A name that helps you distinguish one media stream from another.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: MediaStreamType
 					"media_stream_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The type of media stream.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.OneOf(
 								"video",
 								"audio",
 								"ancillary-data",
 							),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: VideoFormat
 					"video_format": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -829,7 +861,14 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 						// Property: RoleArn
 						"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: SecretArn
 						"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -881,7 +920,14 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 						// Property: BridgeArn
 						"bridge_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The ARN of the bridge feeding this flow.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: VpcInterfaceAttachment
 						"vpc_interface_attachment": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -962,7 +1008,8 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 							// Property: EncodingName
 							"encoding_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The format that was used to encode the data. For ancillary data streams, set the encoding name to smpte291. For audio streams, set the encoding name to pcm. For video, 2110 streams, set the encoding name to raw. For video, JPEG XS streams, set the encoding name to jxsv.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"jxsv",
@@ -970,7 +1017,11 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 										"smpte291",
 										"pcm",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: InputConfigurations
 							"input_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -979,7 +1030,14 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 										// Property: InputPort
 										"input_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
 											Description: "The port that the flow listens on for an incoming media stream.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Int64{ /*START VALIDATORS*/
+												fwvalidators.NotNullInt64(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: Interface
 										"interface": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -987,11 +1045,25 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 												// Property: Name
 												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The name of the VPC interface that you want to use for the media stream associated with the output.",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														fwvalidators.NotNullString(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 											Description: "The VPC interface where the media stream comes in from.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Object{ /*START VALIDATORS*/
+												fwvalidators.NotNullObject(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
@@ -1005,7 +1077,14 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 							// Property: MediaStreamName
 							"media_stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "A name that helps you distinguish one media stream from another.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -1215,7 +1294,14 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 						// Property: PrimarySource
 						"primary_source": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The name of the source you choose as the primary source for this flow.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The priority you want to assign to a source. You can have a primary stream and a backup stream or two equally prioritized streams.",
@@ -1241,6 +1327,53 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The source failover config of the flow.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SourceMonitoringConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The source monitoring config of the flow.",
+		//	  "properties": {
+		//	    "ThumbnailState": {
+		//	      "description": "The state of thumbnail monitoring.",
+		//	      "enum": [
+		//	        "ENABLED",
+		//	        "DISABLED"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "ThumbnailState"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"source_monitoring_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ThumbnailState
+				"thumbnail_state": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The state of thumbnail monitoring.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"ENABLED",
+							"DISABLED",
+						),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The source monitoring config of the flow.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1307,7 +1440,14 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Name
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Immutable and has to be a unique against other VpcInterfaces in this Flow.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: NetworkInterfaceIds
 					"network_interface_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -1337,18 +1477,39 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 					// Property: RoleArn
 					"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Role Arn MediaConnect can assume to create ENIs in customer's account.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: SecurityGroupIds
 					"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
 						Description: "Security Group IDs to be used on ENI.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.List{ /*START VALIDATORS*/
+							fwvalidators.NotNullList(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: SubnetId
 					"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Subnet must be in the AZ of the Flow",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -1443,11 +1604,13 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 		"source_ingest_port":                 "SourceIngestPort",
 		"source_listener_address":            "SourceListenerAddress",
 		"source_listener_port":               "SourceListenerPort",
+		"source_monitoring_config":           "SourceMonitoringConfig",
 		"source_priority":                    "SourcePriority",
 		"state":                              "State",
 		"stream_id":                          "StreamId",
 		"subnet_id":                          "SubnetId",
 		"tcs":                                "Tcs",
+		"thumbnail_state":                    "ThumbnailState",
 		"url":                                "Url",
 		"video_format":                       "VideoFormat",
 		"vpc_interface_attachment":           "VpcInterfaceAttachment",

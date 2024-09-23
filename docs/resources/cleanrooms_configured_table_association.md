@@ -37,7 +37,7 @@ Represents a table that can be queried within a collaboration
 <a id="nestedatt--configured_table_association_analysis_rules"></a>
 ### Nested Schema for `configured_table_association_analysis_rules`
 
-Required:
+Optional:
 
 - `policy` (Attributes) (see [below for nested schema](#nestedatt--configured_table_association_analysis_rules--policy))
 - `type` (String)
@@ -45,7 +45,7 @@ Required:
 <a id="nestedatt--configured_table_association_analysis_rules--policy"></a>
 ### Nested Schema for `configured_table_association_analysis_rules.policy`
 
-Required:
+Optional:
 
 - `v1` (Attributes) (see [below for nested schema](#nestedatt--configured_table_association_analysis_rules--policy--v1))
 
@@ -91,7 +91,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

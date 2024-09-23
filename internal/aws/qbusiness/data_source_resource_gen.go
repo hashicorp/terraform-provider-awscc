@@ -24,6 +24,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -443,15 +444,21 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Key
 									"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Required: true,
+										Optional: true,
+										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(1, 200),
 											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_][a-zA-Z0-9_-]*$"), ""),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: Operator
 									"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Required: true,
+										Optional: true,
+										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"GREATER_THAN",
@@ -466,7 +473,11 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 												"NOT_EXISTS",
 												"BEGINS_WITH",
 											),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: Value
 									"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -558,11 +569,16 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 									// Property: Key
 									"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Required: true,
+										Optional: true,
+										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(1, 200),
 											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_][a-zA-Z0-9_-]*$"), ""),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: Value
 									"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -643,15 +659,21 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Key
 								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 200),
 										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_][a-zA-Z0-9_-]*$"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Operator
 								"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.OneOf(
 											"GREATER_THAN",
@@ -666,7 +688,11 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 											"NOT_EXISTS",
 											"BEGINS_WITH",
 										),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Value
 								"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -777,15 +803,21 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Key
 								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 200),
 										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_][a-zA-Z0-9_-]*$"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Operator
 								"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.OneOf(
 											"GREATER_THAN",
@@ -800,7 +832,11 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 											"NOT_EXISTS",
 											"BEGINS_WITH",
 										),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Value
 								"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1021,17 +1057,27 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -1113,30 +1159,36 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 				// Property: SecurityGroupIds
 				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(1, 10),
 						listvalidator.ValueStringsAre(
 							stringvalidator.LengthBetween(1, 200),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[-0-9a-zA-Z]+$"), ""),
 						),
+						fwvalidators.NotNullList(),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: SubnetIds
 				"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.ValueStringsAre(
 							stringvalidator.LengthBetween(1, 200),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[-0-9a-zA-Z]+$"), ""),
 						),
+						fwvalidators.NotNullList(),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/

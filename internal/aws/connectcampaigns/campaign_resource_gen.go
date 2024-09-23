@@ -23,6 +23,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -186,10 +187,15 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 						// Property: BandwidthAllocation
 						"bandwidth_allocation": schema.Float64Attribute{ /*START ATTRIBUTE*/
 							Description: "The bandwidth allocation of a queue resource.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.Float64{ /*START VALIDATORS*/
 								float64validator.Between(0.000000, 1.000000),
+								fwvalidators.NotNullFloat64(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+								float64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: DialingCapacity
 						"dialing_capacity": schema.Float64Attribute{ /*START ATTRIBUTE*/
@@ -217,10 +223,15 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 						// Property: BandwidthAllocation
 						"bandwidth_allocation": schema.Float64Attribute{ /*START ATTRIBUTE*/
 							Description: "The bandwidth allocation of a queue resource.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.Float64{ /*START VALIDATORS*/
 								float64validator.Between(0.000000, 1.000000),
+								fwvalidators.NotNullFloat64(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+								float64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: DialingCapacity
 						"dialing_capacity": schema.Float64Attribute{ /*START ATTRIBUTE*/
@@ -327,7 +338,14 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 						// Property: EnableAnswerMachineDetection
 						"enable_answer_machine_detection": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Description: "Flag to decided whether outbound calls should have answering machine detection enabled or not",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Bool{ /*START VALIDATORS*/
+								fwvalidators.NotNullBool(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The configuration used for answering machine detection during outbound calls",
@@ -415,18 +433,28 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The value for the tag. You can specify a value that's 1 to 256 characters in length.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 256),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

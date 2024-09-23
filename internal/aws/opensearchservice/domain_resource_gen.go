@@ -25,6 +25,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -293,14 +294,26 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: EntityId
 								"entity_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: MetadataContent
 								"metadata_content": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 1048576),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
@@ -1049,17 +1062,27 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Hours
 								"hours": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
 									Validators: []validator.Int64{ /*START VALIDATORS*/
 										int64validator.Between(0, 23),
+										fwvalidators.NotNullInt64(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Minutes
 								"minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
 									Validators: []validator.Int64{ /*START VALIDATORS*/
 										int64validator.Between(0, 59),
+										fwvalidators.NotNullInt64(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
@@ -1262,18 +1285,28 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The value of the tag.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 128),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The key of the tag.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

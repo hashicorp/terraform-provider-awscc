@@ -50,7 +50,7 @@ resource "awscc_iam_group" "example" {
 <a id="nestedatt--policies"></a>
 ### Nested Schema for `policies`
 
-Required:
+Optional:
 
 - `policy_document` (String) The policy document.
 - `policy_name` (String) The friendly name (not ARN) identifying the policy.

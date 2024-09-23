@@ -19,6 +19,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -119,10 +120,15 @@ func subscriberNotificationResource(ctx context.Context) (resource.Resource, err
 						// Property: Endpoint
 						"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The subscription endpoint in Security Lake.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("^https?://.+$"), ""),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 							// Endpoint is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: HttpMethod
@@ -144,10 +150,15 @@ func subscriberNotificationResource(ctx context.Context) (resource.Resource, err
 						// Property: TargetRoleArn
 						"target_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The Amazon Resource Name (ARN) of the EventBridge API destinations IAM role that you created.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("^arn:.*$"), ""),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 							// TargetRoleArn is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/

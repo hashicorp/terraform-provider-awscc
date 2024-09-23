@@ -57,7 +57,7 @@ resource "awscc_ec2_transit_gateway" "example_transit_gateway" {
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

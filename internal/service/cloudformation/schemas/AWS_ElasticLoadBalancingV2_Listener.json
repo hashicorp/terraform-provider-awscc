@@ -24,21 +24,24 @@
   "handlers": {
     "read": {
       "permissions": [
-        "elasticloadbalancing:DescribeListeners"
+        "elasticloadbalancing:DescribeListeners",
+        "elasticloadbalancing:DescribeListenerAttributes"
       ]
     },
     "create": {
       "permissions": [
         "elasticloadbalancing:CreateListener",
         "elasticloadbalancing:DescribeListeners",
-        "cognito-idp:DescribeUserPoolClient"
+        "cognito-idp:DescribeUserPoolClient",
+        "elasticloadbalancing:ModifyListenerAttributes"
       ]
     },
     "update": {
       "permissions": [
         "elasticloadbalancing:ModifyListener",
         "elasticloadbalancing:DescribeListeners",
-        "cognito-idp:DescribeUserPoolClient"
+        "cognito-idp:DescribeUserPoolClient",
+        "elasticloadbalancing:ModifyListenerAttributes"
       ]
     },
     "list": {
@@ -310,6 +313,19 @@
         }
       }
     },
+    "ListenerAttribute": {
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Value": {
+          "type": "string"
+        },
+        "Key": {
+          "type": "string"
+        }
+      }
+    },
     "ForwardConfig": {
       "description": "Information for creating an action that distributes requests among one or more target groups. For Network Load Balancers, you can specify a single target group. Specify only when ``Type`` is ``forward``. If you specify both ``ForwardConfig`` and ``TargetGroupArn``, you can specify only one target group using ``ForwardConfig`` and it must be the same target group specified in ``TargetGroupArn``.",
       "additionalProperties": false,
@@ -430,6 +446,16 @@
     "MutualAuthentication": {
       "description": "The mutual authentication configuration information.",
       "$ref": "#/definitions/MutualAuthentication"
+    },
+    "ListenerAttributes": {
+      "arrayType": "AttributeList",
+      "uniqueItems": true,
+      "description": "",
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ListenerAttribute"
+      }
     },
     "AlpnPolicy": {
       "description": "[TLS listener] The name of the Application-Layer Protocol Negotiation (ALPN) policy.",

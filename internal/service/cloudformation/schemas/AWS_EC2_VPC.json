@@ -1,5 +1,9 @@
 {
   "tagging": {
+    "permissions": [
+      "ec2:DeleteTags",
+      "ec2:CreateTags"
+    ],
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,

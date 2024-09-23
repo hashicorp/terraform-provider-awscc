@@ -14,6 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -22,6 +23,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -1209,14 +1211,19 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 					// Property: ComponentConfigurationMode
 					"component_configuration_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The component monitoring configuration mode.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.OneOf(
 								"DEFAULT",
 								"DEFAULT_WITH_OVERWRITE",
 								"CUSTOM",
 							),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: ComponentName
 					"component_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1244,7 +1251,14 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 												// Property: AlarmMetricName
 												"alarm_metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The name of the metric to be monitored for the component.",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														fwvalidators.NotNullString(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
@@ -1262,10 +1276,15 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 												// Property: AlarmName
 												"alarm_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The name of the CloudWatch alarm to be monitored for the component.",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(1, 255),
+														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: Severity
 												"severity": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1318,22 +1337,50 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 											// Property: AgreeToInstallHANADBClient
 											"agree_to_install_hanadb_client": schema.BoolAttribute{ /*START ATTRIBUTE*/
 												Description: "A flag which indicates agreeing to install SAP HANA DB client.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Bool{ /*START VALIDATORS*/
+													fwvalidators.NotNullBool(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+													boolplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: HANAPort
 											"hana_port": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "The HANA DB port.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: HANASID
 											"hanasid": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "HANA DB SID.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: HANASecretName
 											"hana_secret_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "The secret name which manages the HANA DB credentials e.g. {\n  \"username\": \"<>\",\n  \"password\": \"<>\"\n}.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: PrometheusPort
 											"prometheus_port": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1439,10 +1486,15 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 												// Property: LogType
 												"log_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The log type decides the log patterns against which Application Insights analyzes the log.",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.RegexMatches(regexp.MustCompile("^[A-Z][[A-Z]_]*$"), ""),
+														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: PatternSet
 												"pattern_set": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1473,13 +1525,18 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 											"instance_numbers": schema.ListAttribute{ /*START ATTRIBUTE*/
 												ElementType: types.StringType,
 												Description: "SAP instance numbers for ASCS, ERS, and App Servers.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
 												Validators: []validator.List{ /*START VALIDATORS*/
 													listvalidator.ValueStringsAre(
 														stringvalidator.LengthBetween(1, 2),
 														stringvalidator.RegexMatches(regexp.MustCompile("\\b([0-9]|[0-9][0-9])\\b"), ""),
 													),
+													fwvalidators.NotNullList(),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													listplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: PrometheusPort
 											"prometheus_port": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1493,7 +1550,14 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 											// Property: SAPSID
 											"sapsid": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "SAP NetWeaver SID.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "The NetWeaver Prometheus Exporter settings.",
@@ -1514,21 +1578,40 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 															// Property: AlarmMetricName
 															"alarm_metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																Description: "The name of the metric to be monitored for the component.",
-																Required:    true,
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.String{ /*START VALIDATORS*/
+																	fwvalidators.NotNullString(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
 													Description: "A list of metrics to monitor for the component.",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.List{ /*START VALIDATORS*/
+														fwvalidators.NotNullList(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+														listplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: ProcessName
 												"process_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The name of the process to be monitored for the component.",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(1, 256),
 														stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_,-]+$"), ""),
+														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
@@ -1545,12 +1628,26 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 											// Property: PrometheusPort
 											"prometheus_port": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "Prometheus exporter port.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: SQLSecretName
 											"sql_secret_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "Secret name which managers SQL exporter connection. e.g. {\"data_source_name\": \"sqlserver://<USERNAME>:<PASSWORD>@localhost:1433\"}",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "The SQL Prometheus Exporter settings.",
@@ -1568,7 +1665,8 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 												"event_levels": schema.ListAttribute{ /*START ATTRIBUTE*/
 													ElementType: types.StringType,
 													Description: "The levels of event to log. ",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
 													Validators: []validator.List{ /*START VALIDATORS*/
 														listvalidator.SizeAtLeast(1),
 														listvalidator.ValueStringsAre(
@@ -1580,25 +1678,39 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 																"VERBOSE",
 															),
 														),
+														fwvalidators.NotNullList(),
 													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+														listplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: EventName
 												"event_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The type of Windows Events to log.",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(1, 260),
 														stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_ \\\\/-]+$"), ""),
+														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: LogGroupName
 												"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The CloudWatch log group name to be associated to the monitored log.",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(1, 512),
 														stringvalidator.RegexMatches(regexp.MustCompile("[\\.\\-_/#A-Za-z0-9]+"), ""),
+														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: PatternSet
 												"pattern_set": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1644,7 +1756,14 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 															// Property: AlarmMetricName
 															"alarm_metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																Description: "The name of the metric to be monitored for the component.",
-																Required:    true,
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.String{ /*START VALIDATORS*/
+																	fwvalidators.NotNullString(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
@@ -1704,10 +1823,15 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 															// Property: LogType
 															"log_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 																Description: "The log type decides the log patterns against which Application Insights analyzes the log.",
-																Required:    true,
+																Optional:    true,
+																Computed:    true,
 																Validators: []validator.String{ /*START VALIDATORS*/
 																	stringvalidator.RegexMatches(regexp.MustCompile("^[A-Z][[A-Z]_]*$"), ""),
+																	fwvalidators.NotNullString(),
 																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 															// Property: PatternSet
 															"pattern_set": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1742,21 +1866,40 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 																		// Property: AlarmMetricName
 																		"alarm_metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																			Description: "The name of the metric to be monitored for the component.",
-																			Required:    true,
+																			Optional:    true,
+																			Computed:    true,
+																			Validators: []validator.String{ /*START VALIDATORS*/
+																				fwvalidators.NotNullString(),
+																			}, /*END VALIDATORS*/
+																			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																				stringplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
 																		}, /*END ATTRIBUTE*/
 																	}, /*END SCHEMA*/
 																}, /*END NESTED OBJECT*/
 																Description: "A list of metrics to monitor for the component.",
-																Required:    true,
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.List{ /*START VALIDATORS*/
+																	fwvalidators.NotNullList(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																	listplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 															// Property: ProcessName
 															"process_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																Description: "The name of the process to be monitored for the component.",
-																Required:    true,
+																Optional:    true,
+																Computed:    true,
 																Validators: []validator.String{ /*START VALIDATORS*/
 																	stringvalidator.LengthBetween(1, 256),
 																	stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_,-]+$"), ""),
+																	fwvalidators.NotNullString(),
 																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
@@ -1775,7 +1918,8 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 															"event_levels": schema.ListAttribute{ /*START ATTRIBUTE*/
 																ElementType: types.StringType,
 																Description: "The levels of event to log. ",
-																Required:    true,
+																Optional:    true,
+																Computed:    true,
 																Validators: []validator.List{ /*START VALIDATORS*/
 																	listvalidator.SizeAtLeast(1),
 																	listvalidator.ValueStringsAre(
@@ -1787,25 +1931,39 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 																			"VERBOSE",
 																		),
 																	),
+																	fwvalidators.NotNullList(),
 																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																	listplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 															// Property: EventName
 															"event_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																Description: "The type of Windows Events to log.",
-																Required:    true,
+																Optional:    true,
+																Computed:    true,
 																Validators: []validator.String{ /*START VALIDATORS*/
 																	stringvalidator.LengthBetween(1, 260),
 																	stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_ \\\\/-]+$"), ""),
+																	fwvalidators.NotNullString(),
 																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 															// Property: LogGroupName
 															"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																Description: "The CloudWatch log group name to be associated to the monitored log.",
-																Required:    true,
+																Optional:    true,
+																Computed:    true,
 																Validators: []validator.String{ /*START VALIDATORS*/
 																	stringvalidator.LengthBetween(1, 512),
 																	stringvalidator.RegexMatches(regexp.MustCompile("[\\.\\-_/#A-Za-z0-9]+"), ""),
+																	fwvalidators.NotNullString(),
 																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 															// Property: PatternSet
 															"pattern_set": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1831,18 +1989,30 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 											Description: "The configuration settings of sub components.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Object{ /*START VALIDATORS*/
+												fwvalidators.NotNullObject(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: SubComponentType
 										"sub_component_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "The sub component type.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.OneOf(
 													"AWS::EC2::Instance",
 													"AWS::EC2::Volume",
 												),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
@@ -1877,7 +2047,14 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 												// Property: AlarmMetricName
 												"alarm_metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The name of the metric to be monitored for the component.",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														fwvalidators.NotNullString(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
@@ -1895,10 +2072,15 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 												// Property: AlarmName
 												"alarm_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The name of the CloudWatch alarm to be monitored for the component.",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(1, 255),
+														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: Severity
 												"severity": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1951,22 +2133,50 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 											// Property: AgreeToInstallHANADBClient
 											"agree_to_install_hanadb_client": schema.BoolAttribute{ /*START ATTRIBUTE*/
 												Description: "A flag which indicates agreeing to install SAP HANA DB client.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Bool{ /*START VALIDATORS*/
+													fwvalidators.NotNullBool(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+													boolplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: HANAPort
 											"hana_port": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "The HANA DB port.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: HANASID
 											"hanasid": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "HANA DB SID.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: HANASecretName
 											"hana_secret_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "The secret name which manages the HANA DB credentials e.g. {\n  \"username\": \"<>\",\n  \"password\": \"<>\"\n}.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: PrometheusPort
 											"prometheus_port": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -2072,10 +2282,15 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 												// Property: LogType
 												"log_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The log type decides the log patterns against which Application Insights analyzes the log.",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.RegexMatches(regexp.MustCompile("^[A-Z][[A-Z]_]*$"), ""),
+														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: PatternSet
 												"pattern_set": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -2106,13 +2321,18 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 											"instance_numbers": schema.ListAttribute{ /*START ATTRIBUTE*/
 												ElementType: types.StringType,
 												Description: "SAP instance numbers for ASCS, ERS, and App Servers.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
 												Validators: []validator.List{ /*START VALIDATORS*/
 													listvalidator.ValueStringsAre(
 														stringvalidator.LengthBetween(1, 2),
 														stringvalidator.RegexMatches(regexp.MustCompile("\\b([0-9]|[0-9][0-9])\\b"), ""),
 													),
+													fwvalidators.NotNullList(),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													listplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: PrometheusPort
 											"prometheus_port": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -2126,7 +2346,14 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 											// Property: SAPSID
 											"sapsid": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "SAP NetWeaver SID.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "The NetWeaver Prometheus Exporter settings.",
@@ -2147,21 +2374,40 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 															// Property: AlarmMetricName
 															"alarm_metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																Description: "The name of the metric to be monitored for the component.",
-																Required:    true,
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.String{ /*START VALIDATORS*/
+																	fwvalidators.NotNullString(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
 													Description: "A list of metrics to monitor for the component.",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.List{ /*START VALIDATORS*/
+														fwvalidators.NotNullList(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+														listplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: ProcessName
 												"process_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The name of the process to be monitored for the component.",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(1, 256),
 														stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_,-]+$"), ""),
+														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
@@ -2178,12 +2424,26 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 											// Property: PrometheusPort
 											"prometheus_port": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "Prometheus exporter port.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: SQLSecretName
 											"sql_secret_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "Secret name which managers SQL exporter connection. e.g. {\"data_source_name\": \"sqlserver://<USERNAME>:<PASSWORD>@localhost:1433\"}",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "The SQL Prometheus Exporter settings.",
@@ -2201,7 +2461,8 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 												"event_levels": schema.ListAttribute{ /*START ATTRIBUTE*/
 													ElementType: types.StringType,
 													Description: "The levels of event to log. ",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
 													Validators: []validator.List{ /*START VALIDATORS*/
 														listvalidator.SizeAtLeast(1),
 														listvalidator.ValueStringsAre(
@@ -2213,25 +2474,39 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 																"VERBOSE",
 															),
 														),
+														fwvalidators.NotNullList(),
 													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+														listplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: EventName
 												"event_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The type of Windows Events to log.",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(1, 260),
 														stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_ \\\\/-]+$"), ""),
+														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: LogGroupName
 												"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The CloudWatch log group name to be associated to the monitored log.",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(1, 512),
 														stringvalidator.RegexMatches(regexp.MustCompile("[\\.\\-_/#A-Za-z0-9]+"), ""),
+														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: PatternSet
 												"pattern_set": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -2277,7 +2552,14 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 															// Property: AlarmMetricName
 															"alarm_metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																Description: "The name of the metric to be monitored for the component.",
-																Required:    true,
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.String{ /*START VALIDATORS*/
+																	fwvalidators.NotNullString(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
@@ -2337,10 +2619,15 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 															// Property: LogType
 															"log_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 																Description: "The log type decides the log patterns against which Application Insights analyzes the log.",
-																Required:    true,
+																Optional:    true,
+																Computed:    true,
 																Validators: []validator.String{ /*START VALIDATORS*/
 																	stringvalidator.RegexMatches(regexp.MustCompile("^[A-Z][[A-Z]_]*$"), ""),
+																	fwvalidators.NotNullString(),
 																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 															// Property: PatternSet
 															"pattern_set": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -2375,21 +2662,40 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 																		// Property: AlarmMetricName
 																		"alarm_metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																			Description: "The name of the metric to be monitored for the component.",
-																			Required:    true,
+																			Optional:    true,
+																			Computed:    true,
+																			Validators: []validator.String{ /*START VALIDATORS*/
+																				fwvalidators.NotNullString(),
+																			}, /*END VALIDATORS*/
+																			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																				stringplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
 																		}, /*END ATTRIBUTE*/
 																	}, /*END SCHEMA*/
 																}, /*END NESTED OBJECT*/
 																Description: "A list of metrics to monitor for the component.",
-																Required:    true,
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.List{ /*START VALIDATORS*/
+																	fwvalidators.NotNullList(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																	listplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 															// Property: ProcessName
 															"process_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																Description: "The name of the process to be monitored for the component.",
-																Required:    true,
+																Optional:    true,
+																Computed:    true,
 																Validators: []validator.String{ /*START VALIDATORS*/
 																	stringvalidator.LengthBetween(1, 256),
 																	stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_,-]+$"), ""),
+																	fwvalidators.NotNullString(),
 																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
@@ -2408,7 +2714,8 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 															"event_levels": schema.ListAttribute{ /*START ATTRIBUTE*/
 																ElementType: types.StringType,
 																Description: "The levels of event to log. ",
-																Required:    true,
+																Optional:    true,
+																Computed:    true,
 																Validators: []validator.List{ /*START VALIDATORS*/
 																	listvalidator.SizeAtLeast(1),
 																	listvalidator.ValueStringsAre(
@@ -2420,25 +2727,39 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 																			"VERBOSE",
 																		),
 																	),
+																	fwvalidators.NotNullList(),
 																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																	listplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 															// Property: EventName
 															"event_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																Description: "The type of Windows Events to log.",
-																Required:    true,
+																Optional:    true,
+																Computed:    true,
 																Validators: []validator.String{ /*START VALIDATORS*/
 																	stringvalidator.LengthBetween(1, 260),
 																	stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_ \\\\/-]+$"), ""),
+																	fwvalidators.NotNullString(),
 																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 															// Property: LogGroupName
 															"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																Description: "The CloudWatch log group name to be associated to the monitored log.",
-																Required:    true,
+																Optional:    true,
+																Computed:    true,
 																Validators: []validator.String{ /*START VALIDATORS*/
 																	stringvalidator.LengthBetween(1, 512),
 																	stringvalidator.RegexMatches(regexp.MustCompile("[\\.\\-_/#A-Za-z0-9]+"), ""),
+																	fwvalidators.NotNullString(),
 																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 															// Property: PatternSet
 															"pattern_set": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -2464,18 +2785,30 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 											Description: "The configuration settings of sub components.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Object{ /*START VALIDATORS*/
+												fwvalidators.NotNullObject(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: SubComponentType
 										"sub_component_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "The sub component type.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.OneOf(
 													"AWS::EC2::Instance",
 													"AWS::EC2::Volume",
 												),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
@@ -2500,10 +2833,15 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Tier
 					"tier": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The tier of the application component.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.RegexMatches(regexp.MustCompile("^[A-Z][[A-Z]_]*$"), ""),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -2563,24 +2901,34 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 					// Property: ComponentName
 					"component_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The name of the component.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[\\d\\w\\-_.+]*$"), ""),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: ResourceList
 					"resource_list": schema.ListAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
 						Description: "The list of resource ARNs that belong to the component.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.List{ /*START VALIDATORS*/
 							listvalidator.SizeAtLeast(1),
 							listvalidator.ValueStringsAre(
 								stringvalidator.LengthBetween(20, 300),
 								stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:[\\w\\d-]+:([\\w\\d-]*)?:[\\w\\d_-]*([:/].+)*$"), ""),
 							),
+							fwvalidators.NotNullList(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -2692,41 +3040,68 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 								// Property: Pattern
 								"pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The log pattern.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 50),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: PatternName
 								"pattern_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The name of the log pattern.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 50),
 										stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9.-_]*"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Rank
 								"rank": schema.Int64Attribute{ /*START ATTRIBUTE*/
 									Description: "Rank of the log pattern.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Int64{ /*START VALIDATORS*/
+										fwvalidators.NotNullInt64(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
 						Description: "The log patterns of a set.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.List{ /*START VALIDATORS*/
 							listvalidator.SizeAtLeast(1),
+							fwvalidators.NotNullList(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: PatternSetName
 					"pattern_set_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The name of the log pattern set.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 30),
 							stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9.-_]*"), ""),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -2838,18 +3213,28 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

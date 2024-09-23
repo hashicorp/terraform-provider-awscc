@@ -21,6 +21,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -173,11 +174,25 @@ func frameworkResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: ParameterName
 								"parameter_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: ParameterValue
 								"parameter_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/

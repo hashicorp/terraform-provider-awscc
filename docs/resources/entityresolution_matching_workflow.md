@@ -87,19 +87,16 @@ Optional:
 <a id="nestedatt--resolution_techniques--provider_properties"></a>
 ### Nested Schema for `resolution_techniques.provider_properties`
 
-Required:
-
-- `provider_service_arn` (String) Arn of the Provider service being used.
-
 Optional:
 
 - `intermediate_source_configuration` (Attributes) (see [below for nested schema](#nestedatt--resolution_techniques--provider_properties--intermediate_source_configuration))
 - `provider_configuration` (Map of String) Additional Provider configuration that would be required for the provider service. The Configuration must be in JSON string format
+- `provider_service_arn` (String) Arn of the Provider service being used.
 
 <a id="nestedatt--resolution_techniques--provider_properties--intermediate_source_configuration"></a>
 ### Nested Schema for `resolution_techniques.provider_properties.intermediate_source_configuration`
 
-Required:
+Optional:
 
 - `intermediate_s3_path` (String) The s3 path that would be used to stage the intermediate data being generated during workflow execution.
 
@@ -108,19 +105,16 @@ Required:
 <a id="nestedatt--resolution_techniques--rule_based_properties"></a>
 ### Nested Schema for `resolution_techniques.rule_based_properties`
 
-Required:
-
-- `attribute_matching_model` (String)
-- `rules` (Attributes List) (see [below for nested schema](#nestedatt--resolution_techniques--rule_based_properties--rules))
-
 Optional:
 
+- `attribute_matching_model` (String)
 - `match_purpose` (String)
+- `rules` (Attributes List) (see [below for nested schema](#nestedatt--resolution_techniques--rule_based_properties--rules))
 
 <a id="nestedatt--resolution_techniques--rule_based_properties--rules"></a>
 ### Nested Schema for `resolution_techniques.rule_based_properties.rules`
 
-Required:
+Optional:
 
 - `matching_keys` (List of String)
 - `rule_name` (String)
@@ -131,7 +125,7 @@ Required:
 <a id="nestedatt--incremental_run_config"></a>
 ### Nested Schema for `incremental_run_config`
 
-Required:
+Optional:
 
 - `incremental_run_type` (String)
 
@@ -139,7 +133,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

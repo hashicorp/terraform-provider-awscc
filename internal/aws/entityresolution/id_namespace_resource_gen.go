@@ -24,6 +24,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -190,13 +191,18 @@ func idNamespaceResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: IdMappingType
 					"id_mapping_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.OneOf(
 								"PROVIDER",
 								"RULE_BASED",
 							),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: ProviderProperties
 					"provider_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -214,11 +220,16 @@ func idNamespaceResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: ProviderServiceArn
 							"provider_service_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Required: true,
+								Optional: true,
+								Computed: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthBetween(20, 255),
 									stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-us-gov|aws-cn):(entityresolution):([a-z]{2}-[a-z]{1,10}-[0-9])::providerservice/([a-zA-Z0-9_-]{1,255})/([a-zA-Z0-9_-]{1,255})$"), ""),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Optional: true,
@@ -287,25 +298,33 @@ func idNamespaceResource(ctx context.Context) (resource.Resource, error) {
 										// Property: MatchingKeys
 										"matching_keys": schema.ListAttribute{ /*START ATTRIBUTE*/
 											ElementType: types.StringType,
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.List{ /*START VALIDATORS*/
 												listvalidator.SizeBetween(1, 25),
 												listvalidator.ValueStringsAre(
 													stringvalidator.LengthBetween(0, 255),
 													stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z_0-9- \\t]*$"), ""),
 												),
+												fwvalidators.NotNullList(),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 												generic.Multiset(),
+												listplanmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: RuleName
 										"rule_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Required: true,
+											Optional: true,
+											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthBetween(0, 255),
 												stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z_0-9- \\t]*$"), ""),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
@@ -405,10 +424,15 @@ func idNamespaceResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: InputSourceARN
 					"input_source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-us-gov|aws-cn):entityresolution:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(idnamespace/[a-zA-Z_0-9-]{1,255})$|^arn:(aws|aws-us-gov|aws-cn):glue:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(table/[a-zA-Z_0-9-]{1,255}/[a-zA-Z_0-9-]{1,255})$"), ""),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: SchemaName
 					"schema_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -493,18 +517,28 @@ func idNamespaceResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

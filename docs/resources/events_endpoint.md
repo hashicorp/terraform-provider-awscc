@@ -80,7 +80,7 @@ Required:
 <a id="nestedatt--replication_config"></a>
 ### Nested Schema for `replication_config`
 
-Required:
+Optional:
 
 - `state` (String)
 

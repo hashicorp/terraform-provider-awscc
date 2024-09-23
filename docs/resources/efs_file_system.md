@@ -112,7 +112,7 @@ resource "awscc_efs_file_system" "this" {
 <a id="nestedatt--backup_policy"></a>
 ### Nested Schema for `backup_policy`
 
-Required:
+Optional:
 
 - `status` (String) Set the backup policy status for the file system.
   +   *ENABLED* - Turns automatic backups on for the file system. 
@@ -135,7 +135,7 @@ Optional:
 <a id="nestedatt--file_system_tags"></a>
 ### Nested Schema for `file_system_tags`
 
-Required:
+Optional:
 
 - `key` (String) The tag key (String). The key can't start with ``aws:``.
 - `value` (String) The value of the tag key.

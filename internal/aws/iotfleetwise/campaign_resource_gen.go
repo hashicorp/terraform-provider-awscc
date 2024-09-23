@@ -31,6 +31,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -116,7 +117,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		//	      "additionalProperties": false,
 		//	      "properties": {
 		//	        "PeriodMs": {
-		//	          "maximum": 60000,
+		//	          "maximum": 86400000,
 		//	          "minimum": 10000,
 		//	          "type": "number"
 		//	        }
@@ -147,10 +148,15 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: Expression
 						"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 2048),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: MinimumTriggerIntervalMs
 						"minimum_trigger_interval_ms": schema.Float64Attribute{ /*START ATTRIBUTE*/
@@ -189,10 +195,15 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: PeriodMs
 						"period_ms": schema.Float64Attribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
 							Validators: []validator.Float64{ /*START VALIDATORS*/
-								float64validator.Between(10000.000000, 60000.000000),
+								float64validator.Between(10000.000000, 86400000.000000),
+								fwvalidators.NotNullFloat64(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+								float64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
@@ -348,18 +359,28 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: ExecutionRoleArn
 							"execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Required: true,
+								Optional: true,
+								Computed: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthBetween(20, 2048),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: MqttTopicArn
 							"mqtt_topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Required: true,
+								Optional: true,
+								Computed: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthBetween(20, 2048),
 									stringvalidator.RegexMatches(regexp.MustCompile("^arn:.*"), ""),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Optional: true,
@@ -373,11 +394,16 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: BucketArn
 							"bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Required: true,
+								Optional: true,
+								Computed: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthBetween(16, 100),
 									stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z0-9-]*):s3:::.+$"), ""),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: DataFormat
 							"data_format": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -431,18 +457,28 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: ExecutionRoleArn
 							"execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Required: true,
+								Optional: true,
+								Computed: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthBetween(20, 2048),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: TimestreamTableArn
 							"timestream_table_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Required: true,
+								Optional: true,
+								Computed: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthBetween(20, 2048),
 									stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z0-9-]*):timestream:[a-zA-Z0-9-]+:[0-9]{12}:database\\/[a-zA-Z0-9_.-]+\\/table\\/[a-zA-Z0-9_.-]+$"), ""),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Optional: true,
@@ -704,11 +740,16 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Name
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 150),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[\\w|*|-]+(\\.[\\w|*|-]+)*$"), ""),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -716,6 +757,214 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeBetween(0, 1000),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SignalsToFetch
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Actions": {
+		//	        "items": {
+		//	          "maxLength": 2048,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "maxItems": 5,
+		//	        "minItems": 1,
+		//	        "type": "array"
+		//	      },
+		//	      "ConditionLanguageVersion": {
+		//	        "maximum": 1,
+		//	        "minimum": 1,
+		//	        "type": "number"
+		//	      },
+		//	      "FullyQualifiedName": {
+		//	        "maxLength": 150,
+		//	        "minLength": 1,
+		//	        "pattern": "^[a-zA-Z0-9_.]+$",
+		//	        "type": "string"
+		//	      },
+		//	      "SignalFetchConfig": {
+		//	        "properties": {
+		//	          "ConditionBased": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "ConditionExpression": {
+		//	                "maxLength": 2048,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "TriggerMode": {
+		//	                "enum": [
+		//	                  "ALWAYS",
+		//	                  "RISING_EDGE"
+		//	                ],
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "ConditionExpression",
+		//	              "TriggerMode"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "TimeBased": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "ExecutionFrequencyMs": {
+		//	                "minimum": 1,
+		//	                "type": "number"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "ExecutionFrequencyMs"
+		//	            ],
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Actions",
+		//	      "FullyQualifiedName",
+		//	      "SignalFetchConfig"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 10,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"signals_to_fetch": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Actions
+					"actions": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.List{ /*START VALIDATORS*/
+							listvalidator.SizeBetween(1, 5),
+							listvalidator.ValueStringsAre(
+								stringvalidator.LengthBetween(1, 2048),
+							),
+							fwvalidators.NotNullList(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: ConditionLanguageVersion
+					"condition_language_version": schema.Float64Attribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.Float64{ /*START VALIDATORS*/
+							float64validator.Between(1.000000, 1.000000),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+							float64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: FullyQualifiedName
+					"fully_qualified_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 150),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_.]+$"), ""),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: SignalFetchConfig
+					"signal_fetch_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ConditionBased
+							"condition_based": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ConditionExpression
+									"condition_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 2048),
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: TriggerMode
+									"trigger_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"ALWAYS",
+												"RISING_EDGE",
+											),
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: TimeBased
+							"time_based": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ExecutionFrequencyMs
+									"execution_frequency_ms": schema.Float64Attribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.Float64{ /*START VALIDATORS*/
+											float64validator.AtLeast(1.000000),
+											fwvalidators.NotNullFloat64(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+											float64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.Object{ /*START VALIDATORS*/
+							fwvalidators.NotNullObject(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(0, 10),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
@@ -819,17 +1068,27 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -877,11 +1136,14 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"action":                            "Action",
+		"actions":                           "Actions",
 		"arn":                               "Arn",
 		"bucket_arn":                        "BucketArn",
 		"collection_scheme":                 "CollectionScheme",
 		"compression":                       "Compression",
+		"condition_based":                   "ConditionBased",
 		"condition_based_collection_scheme": "ConditionBasedCollectionScheme",
+		"condition_expression":              "ConditionExpression",
 		"condition_language_version":        "ConditionLanguageVersion",
 		"creation_time":                     "CreationTime",
 		"data_destination_configs":          "DataDestinationConfigs",
@@ -889,9 +1151,11 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		"data_format":                       "DataFormat",
 		"description":                       "Description",
 		"diagnostics_mode":                  "DiagnosticsMode",
+		"execution_frequency_ms":            "ExecutionFrequencyMs",
 		"execution_role_arn":                "ExecutionRoleArn",
 		"expiry_time":                       "ExpiryTime",
 		"expression":                        "Expression",
+		"fully_qualified_name":              "FullyQualifiedName",
 		"key":                               "Key",
 		"last_modification_time":            "LastModificationTime",
 		"max_sample_count":                  "MaxSampleCount",
@@ -906,13 +1170,16 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		"priority":                          "Priority",
 		"s3_config":                         "S3Config",
 		"signal_catalog_arn":                "SignalCatalogArn",
+		"signal_fetch_config":               "SignalFetchConfig",
 		"signals_to_collect":                "SignalsToCollect",
+		"signals_to_fetch":                  "SignalsToFetch",
 		"spooling_mode":                     "SpoolingMode",
 		"start_time":                        "StartTime",
 		"status":                            "Status",
 		"storage_compression_format":        "StorageCompressionFormat",
 		"tags":                              "Tags",
 		"target_arn":                        "TargetArn",
+		"time_based":                        "TimeBased",
 		"time_based_collection_scheme":      "TimeBasedCollectionScheme",
 		"timestream_config":                 "TimestreamConfig",
 		"timestream_table_arn":              "TimestreamTableArn",

@@ -216,7 +216,10 @@ func wirelessDeviceDataSource(ctx context.Context) (datasource.DataSource, error
 		//	              "Type": {
 		//	                "description": "Application type, which can be specified to obtain real-time position information of your LoRaWAN device.",
 		//	                "enum": [
-		//	                  "SemtechGeolocation"
+		//	                  "SemtechGeolocation",
+		//	                  "SemtechGNSS",
+		//	                  "SemtechGNSSNG",
+		//	                  "SemtechWiFi"
 		//	                ],
 		//	                "type": "string"
 		//	              }

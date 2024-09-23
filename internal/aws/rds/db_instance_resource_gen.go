@@ -16,7 +16,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
@@ -26,6 +25,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -103,12 +103,26 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 					// Property: FeatureName
 					"feature_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The name of the feature associated with the AWS Identity and Access Management (IAM) role. IAM roles that are associated with a DB instance grant permission for the DB instance to access other AWS services on your behalf. For the list of supported feature names, see the ``SupportedFeatureNames`` description in [DBEngineVersion](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DBEngineVersion.html) in the *Amazon RDS API Reference*.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: RoleArn
 					"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The Amazon Resource Name (ARN) of the IAM role that is associated with the DB instance.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -184,7 +198,6 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "default": 1,
 		//	  "description": "The number of days for which automated backups are retained. Setting this parameter to a positive number enables backups. Setting this parameter to 0 disables automated backups.\n  *Amazon Aurora* \n Not applicable. The retention period for automated backups is managed by the DB cluster.\n Default: 1\n Constraints:\n  +  Must be a value from 0 to 35\n  +  Can't be set to 0 if the DB instance is a source to read replicas",
 		//	  "minimum": 0,
 		//	  "type": "integer"
@@ -193,7 +206,6 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The number of days for which automated backups are retained. Setting this parameter to a positive number enables backups. Setting this parameter to 0 disables automated backups.\n  *Amazon Aurora* \n Not applicable. The retention period for automated backups is managed by the DB cluster.\n Default: 1\n Constraints:\n  +  Must be a value from 0 to 35\n  +  Can't be set to 0 if the DB instance is a source to read replicas",
 			Optional:    true,
 			Computed:    true,
-			Default:     int64default.StaticInt64(1),
 			Validators: []validator.Int64{ /*START VALIDATORS*/
 				int64validator.AtLeast(0),
 			}, /*END VALIDATORS*/
@@ -976,7 +988,6 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "default": 0,
 		//	  "description": "The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance. To disable collection of Enhanced Monitoring metrics, specify ``0``.\n If ``MonitoringRoleArn`` is specified, then you must set ``MonitoringInterval`` to a value other than ``0``.\n This setting doesn't apply to RDS Custom DB instances.\n Valid Values: ``0 | 1 | 5 | 10 | 15 | 30 | 60`` \n Default: ``0``",
 		//	  "type": "integer"
 		//	}
@@ -984,7 +995,6 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance. To disable collection of Enhanced Monitoring metrics, specify ``0``.\n If ``MonitoringRoleArn`` is specified, then you must set ``MonitoringInterval`` to a value other than ``0``.\n This setting doesn't apply to RDS Custom DB instances.\n Valid Values: ``0 | 1 | 5 | 10 | 15 | 30 | 60`` \n Default: ``0``",
 			Optional:    true,
 			Computed:    true,
-			Default:     int64default.StaticInt64(0),
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -1212,7 +1222,6 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "default": 1,
 		//	  "description": "The order of priority in which an Aurora Replica is promoted to the primary instance after a failure of the existing primary instance. For more information, see [Fault Tolerance for an Aurora DB Cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.AuroraHighAvailability.html#Aurora.Managing.FaultTolerance) in the *Amazon Aurora User Guide*.\n This setting doesn't apply to RDS Custom DB instances.\n Default: ``1`` \n Valid Values: ``0 - 15``",
 		//	  "minimum": 0,
 		//	  "type": "integer"
@@ -1221,7 +1230,6 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The order of priority in which an Aurora Replica is promoted to the primary instance after a failure of the existing primary instance. For more information, see [Fault Tolerance for an Aurora DB Cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.AuroraHighAvailability.html#Aurora.Managing.FaultTolerance) in the *Amazon Aurora User Guide*.\n This setting doesn't apply to RDS Custom DB instances.\n Default: ``1`` \n Valid Values: ``0 - 15``",
 			Optional:    true,
 			Computed:    true,
-			Default:     int64default.StaticInt64(1),
 			Validators: []validator.Int64{ /*START VALIDATORS*/
 				int64validator.AtLeast(0),
 			}, /*END VALIDATORS*/
@@ -1440,10 +1448,15 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-@]*)$\").",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/

@@ -47,19 +47,16 @@ Required:
 <a id="nestedatt--application_settings"></a>
 ### Nested Schema for `application_settings`
 
-Required:
-
-- `status` (String)
-
 Optional:
 
 - `settings_group` (String)
+- `status` (String)
 
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

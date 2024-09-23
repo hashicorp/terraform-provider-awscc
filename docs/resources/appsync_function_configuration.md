@@ -44,7 +44,7 @@ An example resource schema demonstrating some basic constructs and validation ru
 <a id="nestedatt--runtime"></a>
 ### Nested Schema for `runtime`
 
-Required:
+Optional:
 
 - `name` (String) The name of the runtime to use. Currently, the only allowed value is APPSYNC_JS.
 - `runtime_version` (String) The version of the runtime to use. Currently, the only allowed version is 1.0.0.
@@ -53,12 +53,9 @@ Required:
 <a id="nestedatt--sync_config"></a>
 ### Nested Schema for `sync_config`
 
-Required:
-
-- `conflict_detection` (String) The Conflict Detection strategy to use.
-
 Optional:
 
+- `conflict_detection` (String) The Conflict Detection strategy to use.
 - `conflict_handler` (String) The Conflict Resolution strategy to perform in the event of a conflict.
 - `lambda_conflict_handler_config` (Attributes) The LambdaConflictHandlerConfig when configuring LAMBDA as the Conflict Handler. (see [below for nested schema](#nestedatt--sync_config--lambda_conflict_handler_config))
 

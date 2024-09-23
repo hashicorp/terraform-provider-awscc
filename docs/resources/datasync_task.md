@@ -61,14 +61,11 @@ Optional:
 <a id="nestedatt--manifest_config"></a>
 ### Nested Schema for `manifest_config`
 
-Required:
-
-- `source` (Attributes) Specifies the manifest that you want DataSync to use and where it's hosted. (see [below for nested schema](#nestedatt--manifest_config--source))
-
 Optional:
 
 - `action` (String) Specifies what DataSync uses the manifest for.
 - `format` (String) Specifies the file format of your manifest.
+- `source` (Attributes) Specifies the manifest that you want DataSync to use and where it's hosted. (see [below for nested schema](#nestedatt--manifest_config--source))
 
 <a id="nestedatt--manifest_config--source"></a>
 ### Nested Schema for `manifest_config.source`
@@ -124,7 +121,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key for an AWS resource tag.
 - `value` (String) The value for an AWS resource tag.
@@ -133,14 +130,11 @@ Required:
 <a id="nestedatt--task_report_config"></a>
 ### Nested Schema for `task_report_config`
 
-Required:
-
-- `destination` (Attributes) Specifies where DataSync uploads your task report. (see [below for nested schema](#nestedatt--task_report_config--destination))
-- `output_type` (String) Specifies the type of task report that you want.
-
 Optional:
 
+- `destination` (Attributes) Specifies where DataSync uploads your task report. (see [below for nested schema](#nestedatt--task_report_config--destination))
 - `object_version_ids` (String) Specifies whether your task report includes the new version of each object transferred into an S3 bucket, this only applies if you enable versioning on your bucket.
+- `output_type` (String) Specifies the type of task report that you want.
 - `overrides` (Attributes) Customizes the reporting level for aspects of your task report. For example, your report might generally only include errors, but you could specify that you want a list of successes and errors just for the files that Datasync attempted to delete in your destination location. (see [below for nested schema](#nestedatt--task_report_config--overrides))
 - `report_level` (String) Specifies whether you want your task report to include only what went wrong with your transfer or a list of what succeeded and didn't.
 

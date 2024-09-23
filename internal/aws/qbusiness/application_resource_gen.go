@@ -22,6 +22,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -85,13 +86,18 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: AttachmentsControlMode
 				"attachments_control_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Optional: true,
+					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"ENABLED",
 							"DISABLED",
 						),
+						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Optional: true,
@@ -130,13 +136,18 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: AutoSubscribe
 				"auto_subscribe": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Optional: true,
+					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"ENABLED",
 							"DISABLED",
 						),
+						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: DefaultSubscriptionType
 				"default_subscription_type": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -379,13 +390,18 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: PersonalizationControlMode
 				"personalization_control_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Optional: true,
+					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"ENABLED",
 							"DISABLED",
 						),
+						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Optional: true,
@@ -417,13 +433,18 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: QAppsControlMode
 				"q_apps_control_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Optional: true,
+					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"ENABLED",
 							"DISABLED",
 						),
+						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Optional: true,
@@ -504,17 +525,27 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

@@ -144,6 +144,48 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END PLAN MODIFIERS*/
 			// DomainIdentifier is a write-only property.
 		}, /*END ATTRIBUTE*/
+		// Property: EnvironmentAccountIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AWS account in which the Amazon DataZone environment is created.",
+		//	  "pattern": "^\\d{12}$",
+		//	  "type": "string"
+		//	}
+		"environment_account_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS account in which the Amazon DataZone environment is created.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^\\d{12}$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// EnvironmentAccountIdentifier is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: EnvironmentAccountRegion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AWS region in which the Amazon DataZone environment is created.",
+		//	  "pattern": "^[a-z]{2}-[a-z]{4,10}-\\d$",
+		//	  "type": "string"
+		//	}
+		"environment_account_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS region in which the Amazon DataZone environment is created.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-z]{2}-[a-z]{4,10}-\\d$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// EnvironmentAccountRegion is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: EnvironmentBlueprintId
 		// CloudFormation resource type schema:
 		//
@@ -164,7 +206,7 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The ID of the environment profile with which the Amazon DataZone environment was created.",
-		//	  "pattern": "^[a-zA-Z0-9_-]{1,36}$",
+		//	  "pattern": "^[a-zA-Z0-9_-]{0,36}$",
 		//	  "type": "string"
 		//	}
 		"environment_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -179,19 +221,37 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The ID of the environment profile with which the Amazon DataZone environment would be created.",
-		//	  "pattern": "^[a-zA-Z0-9_-]{1,36}$",
+		//	  "pattern": "^[a-zA-Z0-9_-]{0,36}$",
 		//	  "type": "string"
 		//	}
 		"environment_profile_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the environment profile with which the Amazon DataZone environment would be created.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]{1,36}$"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]{0,36}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// EnvironmentProfileIdentifier is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: EnvironmentRoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Environment role arn for custom aws environment permissions",
+		//	  "type": "string"
+		//	}
+		"environment_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Environment role arn for custom aws environment permissions",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// EnvironmentRoleArn is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: GlossaryTerms
 		// CloudFormation resource type schema:
@@ -433,10 +493,13 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		"description":                    "Description",
 		"domain_id":                      "DomainId",
 		"domain_identifier":              "DomainIdentifier",
+		"environment_account_identifier": "EnvironmentAccountIdentifier",
+		"environment_account_region":     "EnvironmentAccountRegion",
 		"environment_blueprint_id":       "EnvironmentBlueprintId",
 		"environment_id":                 "Id",
 		"environment_profile_id":         "EnvironmentProfileId",
 		"environment_profile_identifier": "EnvironmentProfileIdentifier",
+		"environment_role_arn":           "EnvironmentRoleArn",
 		"glossary_terms":                 "GlossaryTerms",
 		"name":                           "Name",
 		"project_id":                     "ProjectId",
@@ -452,6 +515,9 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/EnvironmentProfileIdentifier",
 		"/properties/ProjectIdentifier",
 		"/properties/DomainIdentifier",
+		"/properties/EnvironmentAccountIdentifier",
+		"/properties/EnvironmentAccountRegion",
+		"/properties/EnvironmentRoleArn",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

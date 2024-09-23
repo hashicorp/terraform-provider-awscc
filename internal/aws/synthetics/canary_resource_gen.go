@@ -9,6 +9,7 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -23,6 +24,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -270,18 +272,51 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "Name of the canary.",
-		//	  "pattern": "^[0-9a-z_\\-]{1,21}$",
+		//	  "pattern": "^[0-9a-z_\\-]{1,255}$",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Name of the canary.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-z_\\-]{1,21}$"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-z_\\-]{1,255}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ResourcesToReplicateTags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "List of resources which canary tags should be replicated to.",
+		//	  "items": {
+		//	    "description": "Specifies which resources canary tags should be replicated to.",
+		//	    "enum": [
+		//	      "lambda-function"
+		//	    ],
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"resources_to_replicate_tags": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "List of resources which canary tags should be replicated to.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.UniqueValues(),
+				listvalidator.ValueStringsAre(
+					stringvalidator.OneOf(
+						"lambda-function",
+					),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// ResourcesToReplicateTags is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: RunConfig
 		// CloudFormation resource type schema:
@@ -493,18 +528,28 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -548,12 +593,26 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 				// Property: SecurityGroupIds
 				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						fwvalidators.NotNullList(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: SubnetIds
 				"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						fwvalidators.NotNullList(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: VpcId
 				"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -617,7 +676,14 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 				// Property: BaseCanaryRunId
 				"base_canary_run_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Canary run id to be used as base reference for visual testing",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: BaseScreenshots
 				"base_screenshots": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -636,7 +702,14 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 							// Property: ScreenshotName
 							"screenshot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Name of the screenshot to be used as base reference for visual testing",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -698,6 +771,7 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		"kms_key_arn":                                "KmsKeyArn",
 		"memory_in_mb":                               "MemoryInMB",
 		"name":                                       "Name",
+		"resources_to_replicate_tags":                "ResourcesToReplicateTags",
 		"run_config":                                 "RunConfig",
 		"runtime_version":                            "RuntimeVersion",
 		"s3_bucket":                                  "S3Bucket",
@@ -728,6 +802,7 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/Code/Script",
 		"/properties/DeleteLambdaResourcesOnCanaryDeletion",
 		"/properties/StartCanaryAfterCreation",
+		"/properties/ResourcesToReplicateTags",
 		"/properties/RunConfig/EnvironmentVariables",
 		"/properties/VisualReference",
 	})

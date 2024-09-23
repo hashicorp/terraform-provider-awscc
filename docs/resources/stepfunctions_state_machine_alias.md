@@ -30,22 +30,19 @@ Resource schema for StateMachineAlias
 <a id="nestedatt--deployment_preference"></a>
 ### Nested Schema for `deployment_preference`
 
-Required:
-
-- `state_machine_version_arn` (String)
-- `type` (String) The type of deployment to perform.
-
 Optional:
 
 - `alarms` (Set of String) A list of CloudWatch alarm names that will be monitored during the deployment. The deployment will fail and rollback if any alarms go into ALARM state.
 - `interval` (Number) The time in minutes between each traffic shifting increment.
 - `percentage` (Number) The percentage of traffic to shift to the new version in each increment.
+- `state_machine_version_arn` (String)
+- `type` (String) The type of deployment to perform.
 
 
 <a id="nestedatt--routing_configuration"></a>
 ### Nested Schema for `routing_configuration`
 
-Required:
+Optional:
 
 - `state_machine_version_arn` (String) The Amazon Resource Name (ARN) that identifies one or two state machine versions defined in the routing configuration.
 - `weight` (Number) The percentage of traffic you want to route to the state machine version. The sum of the weights in the routing configuration must be equal to 100.

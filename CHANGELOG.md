@@ -1,4 +1,61 @@
-## 1.14.0 (Unreleased)
+## 1.16.0 (Unreleased)
+## 1.15.0 (September 19, 2024)
+
+BUG FIXES:
+
+* Prevent resource drift when default value is not set on a `required` attribute during refresh ([#2022](https://github.com/hashicorp/terraform-provider-awscc/pull/2022))
+
+FEATURES:
+
+* **New Data Source:** `awscc_connect_agent_status`
+* **New Data Source:** `awscc_connect_user_hierarchy_structure`
+* **New Data Source:** `awscc_datazone_environment_actions`
+* **New Resource:** `awscc_connect_agent_status`
+* **New Resource:** `awscc_connect_user_hierarchy_structure`
+* **New Resource:** `awscc_datazone_environment_actions`
+
+## 1.14.0 (September 12, 2024)
+
+FEATURES:
+
+* **New Data Source:** `awscc_medialive_channel_placement_group`
+* **New Data Source:** `awscc_medialive_cloudwatch_alarm_template`
+* **New Data Source:** `awscc_medialive_cloudwatch_alarm_template_group`
+* **New Data Source:** `awscc_medialive_cloudwatch_alarm_template_groups`
+* **New Data Source:** `awscc_medialive_cloudwatch_alarm_templates`
+* **New Data Source:** `awscc_medialive_cluster`
+* **New Data Source:** `awscc_medialive_clusters`
+* **New Data Source:** `awscc_medialive_event_bridge_rule_template`
+* **New Data Source:** `awscc_medialive_event_bridge_rule_template_group`
+* **New Data Source:** `awscc_medialive_event_bridge_rule_template_groups`
+* **New Data Source:** `awscc_medialive_event_bridge_rule_templates`
+* **New Data Source:** `awscc_medialive_network`
+* **New Data Source:** `awscc_medialive_networks`
+* **New Data Source:** `awscc_medialive_sdi_source`
+* **New Data Source:** `awscc_medialive_sdi_sources`
+* **New Data Source:** `awscc_medialive_signal_map`
+* **New Data Source:** `awscc_medialive_signal_maps`
+* **New Data Source:** `awscc_pcaconnectorscep_challenge`
+* **New Data Source:** `awscc_pcaconnectorscep_connector`
+* **New Data Source:** `awscc_pcaconnectorscep_connectors`
+* **New Data Source:** `awscc_sagemaker_cluster`
+* **New Data Source:** `awscc_sagemaker_clusters`
+* **New Data Source:** `awscc_sns_subscription`
+* **New Data Source:** `awscc_sns_subscriptions`
+* **New Resource:** `awscc_medialive_channel_placement_group`
+* **New Resource:** `awscc_medialive_cloudwatch_alarm_template`
+* **New Resource:** `awscc_medialive_cloudwatch_alarm_template_group`
+* **New Resource:** `awscc_medialive_cluster`
+* **New Resource:** `awscc_medialive_event_bridge_rule_template`
+* **New Resource:** `awscc_medialive_event_bridge_rule_template_group`
+* **New Resource:** `awscc_medialive_network`
+* **New Resource:** `awscc_medialive_sdi_source`
+* **New Resource:** `awscc_medialive_signal_map`
+* **New Resource:** `awscc_pcaconnectorscep_challenge`
+* **New Resource:** `awscc_pcaconnectorscep_connector`
+* **New Resource:** `awscc_sagemaker_cluster`
+* **New Resource:** `awscc_sns_subscription`
+
 ## 1.13.0 (September  5, 2024)
 
 FEATURES:

@@ -96,7 +96,7 @@ Optional:
 <a id="nestedatt--broker_node_group_info--connectivity_info--vpc_connectivity--client_authentication--sasl--iam"></a>
 ### Nested Schema for `broker_node_group_info.connectivity_info.vpc_connectivity.client_authentication.sasl.iam`
 
-Required:
+Optional:
 
 - `enabled` (Boolean)
 
@@ -104,7 +104,7 @@ Required:
 <a id="nestedatt--broker_node_group_info--connectivity_info--vpc_connectivity--client_authentication--sasl--scram"></a>
 ### Nested Schema for `broker_node_group_info.connectivity_info.vpc_connectivity.client_authentication.sasl.scram`
 
-Required:
+Optional:
 
 - `enabled` (Boolean)
 
@@ -113,7 +113,7 @@ Required:
 <a id="nestedatt--broker_node_group_info--connectivity_info--vpc_connectivity--client_authentication--tls"></a>
 ### Nested Schema for `broker_node_group_info.connectivity_info.vpc_connectivity.client_authentication.tls`
 
-Required:
+Optional:
 
 - `enabled` (Boolean)
 
@@ -168,7 +168,7 @@ Optional:
 <a id="nestedatt--client_authentication--sasl--iam"></a>
 ### Nested Schema for `client_authentication.sasl.iam`
 
-Required:
+Optional:
 
 - `enabled` (Boolean)
 
@@ -176,7 +176,7 @@ Required:
 <a id="nestedatt--client_authentication--sasl--scram"></a>
 ### Nested Schema for `client_authentication.sasl.scram`
 
-Required:
+Optional:
 
 - `enabled` (Boolean)
 
@@ -194,7 +194,7 @@ Optional:
 <a id="nestedatt--client_authentication--unauthenticated"></a>
 ### Nested Schema for `client_authentication.unauthenticated`
 
-Required:
+Optional:
 
 - `enabled` (Boolean)
 
@@ -203,7 +203,7 @@ Required:
 <a id="nestedatt--configuration_info"></a>
 ### Nested Schema for `configuration_info`
 
-Required:
+Optional:
 
 - `arn` (String)
 - `revision` (Number)
@@ -220,7 +220,7 @@ Optional:
 <a id="nestedatt--encryption_info--encryption_at_rest"></a>
 ### Nested Schema for `encryption_info.encryption_at_rest`
 
-Required:
+Optional:
 
 - `data_volume_kms_key_id` (String)
 
@@ -238,7 +238,7 @@ Optional:
 <a id="nestedatt--logging_info"></a>
 ### Nested Schema for `logging_info`
 
-Required:
+Optional:
 
 - `broker_logs` (Attributes) (see [below for nested schema](#nestedatt--logging_info--broker_logs))
 
@@ -254,37 +254,28 @@ Optional:
 <a id="nestedatt--logging_info--broker_logs--cloudwatch_logs"></a>
 ### Nested Schema for `logging_info.broker_logs.cloudwatch_logs`
 
-Required:
-
-- `enabled` (Boolean)
-
 Optional:
 
+- `enabled` (Boolean)
 - `log_group` (String)
 
 
 <a id="nestedatt--logging_info--broker_logs--firehose"></a>
 ### Nested Schema for `logging_info.broker_logs.firehose`
 
-Required:
-
-- `enabled` (Boolean)
-
 Optional:
 
 - `delivery_stream` (String)
+- `enabled` (Boolean)
 
 
 <a id="nestedatt--logging_info--broker_logs--s3"></a>
 ### Nested Schema for `logging_info.broker_logs.s3`
 
-Required:
-
-- `enabled` (Boolean)
-
 Optional:
 
 - `bucket` (String)
+- `enabled` (Boolean)
 - `prefix` (String)
 
 
@@ -293,7 +284,7 @@ Optional:
 <a id="nestedatt--open_monitoring"></a>
 ### Nested Schema for `open_monitoring`
 
-Required:
+Optional:
 
 - `prometheus` (Attributes) (see [below for nested schema](#nestedatt--open_monitoring--prometheus))
 
@@ -308,7 +299,7 @@ Optional:
 <a id="nestedatt--open_monitoring--prometheus--jmx_exporter"></a>
 ### Nested Schema for `open_monitoring.prometheus.jmx_exporter`
 
-Required:
+Optional:
 
 - `enabled_in_broker` (Boolean)
 
@@ -316,7 +307,7 @@ Required:
 <a id="nestedatt--open_monitoring--prometheus--node_exporter"></a>
 ### Nested Schema for `open_monitoring.prometheus.node_exporter`
 
-Required:
+Optional:
 
 - `enabled_in_broker` (Boolean)
 

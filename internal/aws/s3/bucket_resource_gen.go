@@ -21,12 +21,14 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -63,13 +65,18 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 				// Property: AccelerationStatus
 				"acceleration_status": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Specifies the transfer acceleration status of the bucket.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"Enabled",
 							"Suspended",
 						),
+						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Configures the transfer acceleration state for an Amazon S3 bucket. For more information, see [Amazon S3 Transfer Acceleration](https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html) in the *Amazon S3 User Guide*.",
@@ -230,7 +237,14 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Id
 					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The ID that identifies the analytics configuration.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Prefix
 					"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -262,19 +276,31 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 											// Property: BucketArn
 											"bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "The Amazon Resource Name (ARN) of the bucket to which data is exported.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: Format
 											"format": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "Specifies the file format used when exporting data to Amazon S3.\n  *Allowed values*: ``CSV`` | ``ORC`` | ``Parquet``",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.OneOf(
 														"CSV",
 														"ORC",
 														"Parquet",
 													),
+													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: Prefix
 											"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -287,12 +313,26 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "The place to store the data for an analysis.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Object{ /*START VALIDATORS*/
+											fwvalidators.NotNullObject(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: OutputSchemaVersion
 									"output_schema_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "The version of the output schema to use when exporting data. Must be ``V_1``.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Description: "Specifies how data related to the storage class analysis for an Amazon S3 bucket should be exported.",
@@ -304,7 +344,14 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "Contains data related to access patterns to be collected and made available to analyze the tradeoffs between different storage classes.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.Object{ /*START VALIDATORS*/
+							fwvalidators.NotNullObject(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: TagFilters
 					"tag_filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -313,12 +360,26 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 								// Property: Key
 								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The tag key.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Value
 								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The tag value.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
@@ -441,14 +502,19 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 									// Property: SSEAlgorithm
 									"sse_algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "Server-side encryption algorithm to use for the default encryption.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"aws:kms",
 												"AES256",
 												"aws:kms:dsse",
 											),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Description: "Specifies the default server-side encryption to apply to new objects in the bucket. If a PUT Object request doesn't specify any server-side encryption, this default encryption will be applied.",
@@ -461,10 +527,15 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "Specifies the default server-side-encryption configuration.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.UniqueValues(),
+						fwvalidators.NotNullList(),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Specifies default encryption for a bucket using server-side encryption with Amazon S3-managed keys (SSE-S3), AWS KMS-managed keys (SSE-KMS), or dual-layer server-side encryption with KMS-managed keys (DSSE-KMS). For information about the Amazon S3 default encryption feature, see [Amazon S3 Default Encryption for S3 Buckets](https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html) in the *Amazon S3 User Guide*.",
@@ -596,7 +667,8 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 							"allowed_methods": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
 								Description: "An HTTP method that you allow the origin to run.\n  *Allowed values*: ``GET`` | ``PUT`` | ``HEAD`` | ``POST`` | ``DELETE``",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.UniqueValues(),
 									listvalidator.ValueStringsAre(
@@ -608,16 +680,25 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 											"DELETE",
 										),
 									),
+									fwvalidators.NotNullList(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: AllowedOrigins
 							"allowed_origins": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
 								Description: "One or more origins you want customers to be able to access the bucket from.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.UniqueValues(),
+									fwvalidators.NotNullList(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: ExposedHeaders
 							"exposed_headers": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -659,10 +740,15 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "A set of origins and methods (cross-origin access that you want to allow). You can add up to 100 rules to the configuration.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.UniqueValues(),
+						fwvalidators.NotNullList(),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Describes the cross-origin access configuration for objects in an Amazon S3 bucket. For more information, see [Enabling Cross-Origin Resource Sharing](https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html) in the *Amazon S3 User Guide*.",
@@ -803,7 +889,14 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Id
 					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The ID used to identify the S3 Intelligent-Tiering configuration.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Prefix
 					"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -817,13 +910,18 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Status
 					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Specifies the status of the configuration.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.OneOf(
 								"Disabled",
 								"Enabled",
 							),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: TagFilters
 					"tag_filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -832,12 +930,26 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 								// Property: Key
 								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The tag key.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Value
 								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The tag value.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
@@ -858,26 +970,43 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 								// Property: AccessTier
 								"access_tier": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "S3 Intelligent-Tiering access tier. See [Storage class for automatically optimizing frequently and infrequently accessed objects](https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html#sc-dynamic-data-access) for a list of access tiers in the S3 Intelligent-Tiering storage class.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.OneOf(
 											"ARCHIVE_ACCESS",
 											"DEEP_ARCHIVE_ACCESS",
 										),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Days
 								"days": schema.Int64Attribute{ /*START ATTRIBUTE*/
 									Description: "The number of consecutive days of no access after which an object will be eligible to be transitioned to the corresponding tier. The minimum number of days specified for Archive Access tier must be at least 90 days and Deep Archive Access tier must be at least 180 days. The maximum can be up to 2 years (730 days).",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Int64{ /*START VALIDATORS*/
+										fwvalidators.NotNullInt64(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
 						Description: "Specifies a list of S3 Intelligent-Tiering storage class tiers in the configuration. At least one tier must be defined in the list. At most, you can specify two tiers in the list, one for each available AccessTier: ``ARCHIVE_ACCESS`` and ``DEEP_ARCHIVE_ACCESS``.\n  You only need Intelligent Tiering Configuration enabled on a bucket if you want to automatically move objects stored in the Intelligent-Tiering storage class to Archive Access or Deep Archive Access tiers.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.List{ /*START VALIDATORS*/
 							listvalidator.UniqueValues(),
+							fwvalidators.NotNullList(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -1018,19 +1147,31 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 							// Property: BucketArn
 							"bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The Amazon Resource Name (ARN) of the bucket to which data is exported.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Format
 							"format": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Specifies the file format used when exporting data to Amazon S3.\n  *Allowed values*: ``CSV`` | ``ORC`` | ``Parquet``",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"CSV",
 										"ORC",
 										"Parquet",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Prefix
 							"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1043,28 +1184,54 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "Contains information about where to publish the inventory results.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.Object{ /*START VALIDATORS*/
+							fwvalidators.NotNullObject(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Enabled
 					"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 						Description: "Specifies whether the inventory is enabled or disabled. If set to ``True``, an inventory list is generated. If set to ``False``, no inventory list is generated.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.Bool{ /*START VALIDATORS*/
+							fwvalidators.NotNullBool(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+							boolplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Id
 					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The ID used to identify the inventory configuration.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: IncludedObjectVersions
 					"included_object_versions": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Object versions to include in the inventory list. If set to ``All``, the list includes all the object versions, which adds the version-related fields ``VersionId``, ``IsLatest``, and ``DeleteMarker`` to the list. If set to ``Current``, the list does not contain these version-related fields.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.OneOf(
 								"All",
 								"Current",
 							),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: OptionalFields
 					"optional_fields": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -1110,13 +1277,18 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 					// Property: ScheduleFrequency
 					"schedule_frequency": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Specifies the schedule for generating inventory results.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.OneOf(
 								"Daily",
 								"Weekly",
 							),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -1415,10 +1587,15 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 									// Property: DaysAfterInitiation
 									"days_after_initiation": schema.Int64Attribute{ /*START ATTRIBUTE*/
 										Description: "Specifies the number of days after which Amazon S3 stops an incomplete multipart upload.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.Int64{ /*START VALIDATORS*/
 											int64validator.AtLeast(0),
+											fwvalidators.NotNullInt64(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Description: "Specifies a lifecycle rule that stops incomplete multipart uploads to an Amazon S3 bucket.",
@@ -1485,7 +1662,14 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 									// Property: NoncurrentDays
 									"noncurrent_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
 										Description: "Specifies the number of days an object is noncurrent before S3 can perform the associated action. For information about the noncurrent days calculations, see [How Amazon S3 Calculates When an Object Became Noncurrent](https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations) in the *Amazon S3 User Guide*.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Int64{ /*START VALIDATORS*/
+											fwvalidators.NotNullInt64(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Description: "Specifies when noncurrent object versions expire. Upon expiration, S3 permanently deletes the noncurrent object versions. You set this lifecycle configuration action on a bucket that has versioning enabled (or suspended) to request that S3 delete noncurrent object versions at a specific period in the object's lifetime.",
@@ -1519,7 +1703,8 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 									// Property: StorageClass
 									"storage_class": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "The class of storage used to store the object.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"DEEP_ARCHIVE",
@@ -1530,12 +1715,23 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 												"ONEZONE_IA",
 												"STANDARD_IA",
 											),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: TransitionInDays
 									"transition_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
 										Description: "Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see [How Amazon S3 Calculates How Long an Object Has Been Noncurrent](https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations) in the *Amazon S3 User Guide*.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Int64{ /*START VALIDATORS*/
+											fwvalidators.NotNullInt64(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Description: "(Deprecated.) For buckets with versioning enabled (or suspended), specifies when non-current objects transition to a specified storage class. If you specify a transition and expiration time, the expiration time must be later than the transition time. If you specify this property, don't specify the ``NoncurrentVersionTransitions`` property.",
@@ -1561,7 +1757,8 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 										// Property: StorageClass
 										"storage_class": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "The class of storage used to store the object.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.OneOf(
 													"DEEP_ARCHIVE",
@@ -1572,12 +1769,23 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 													"ONEZONE_IA",
 													"STANDARD_IA",
 												),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: TransitionInDays
 										"transition_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
 											Description: "Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see [How Amazon S3 Calculates How Long an Object Has Been Noncurrent](https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations) in the *Amazon S3 User Guide*.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Int64{ /*START VALIDATORS*/
+												fwvalidators.NotNullInt64(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
@@ -1629,13 +1837,18 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Status
 							"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "If ``Enabled``, the rule is currently being applied. If ``Disabled``, the rule is not currently being applied.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"Enabled",
 										"Disabled",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: TagFilters
 							"tag_filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1644,12 +1857,26 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 										// Property: Key
 										"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "The tag key.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: Value
 										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "The tag value.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
@@ -1669,7 +1896,8 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 									// Property: StorageClass
 									"storage_class": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "The storage class to which you want the object to transition.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"DEEP_ARCHIVE",
@@ -1680,7 +1908,11 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 												"ONEZONE_IA",
 												"STANDARD_IA",
 											),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: TransitionDate
 									"transition_date": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1718,7 +1950,8 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 										// Property: StorageClass
 										"storage_class": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "The storage class to which you want the object to transition.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.OneOf(
 													"DEEP_ARCHIVE",
@@ -1729,7 +1962,11 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 													"ONEZONE_IA",
 													"STANDARD_IA",
 												),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: TransitionDate
 										"transition_date": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1767,10 +2004,15 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "A lifecycle rule for individual objects in an Amazon S3 bucket.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.UniqueValues(),
+						fwvalidators.NotNullList(),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Specifies the lifecycle configuration for objects in an Amazon S3 bucket. For more information, see [Object Lifecycle Management](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html) in the *Amazon S3 User Guide*.",
@@ -1970,7 +2212,14 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Id
 					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The ID used to identify the metrics configuration. This can be any value you choose that helps you identify your metrics configuration.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Prefix
 					"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1988,12 +2237,26 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 								// Property: Key
 								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The tag key.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Value
 								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The tag value.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
@@ -2287,7 +2550,14 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Event
 							"event": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The Amazon S3 bucket event for which to invoke the LAMlong function. For more information, see [Supported Event Types](https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the *Amazon S3 User Guide*.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Filter
 							"filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -2302,24 +2572,50 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 														// Property: Name
 														"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Description: "The object key name prefix or suffix identifying one or more objects to which the filtering rule applies. The maximum length is 1,024 characters. Overlapping prefixes and suffixes are not supported. For more information, see [Configuring Event Notifications](https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the *Amazon S3 User Guide*.",
-															Required:    true,
+															Optional:    true,
+															Computed:    true,
 															Validators: []validator.String{ /*START VALIDATORS*/
 																stringvalidator.LengthAtMost(1024),
+																fwvalidators.NotNullString(),
 															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 														// Property: Value
 														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Description: "The value that the filter searches for in object key names.",
-															Required:    true,
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																fwvalidators.NotNullString(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 												}, /*END NESTED OBJECT*/
 												Description: "A list of containers for the key-value pair that defines the criteria for the filter rule.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Set{ /*START VALIDATORS*/
+													fwvalidators.NotNullSet(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+													setplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "A container for object key name prefix and suffix filtering rules.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Object{ /*START VALIDATORS*/
+											fwvalidators.NotNullObject(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Description: "The filtering rules that determine which objects invoke the AWS Lambda function. For example, you can create a filter so that only image files with a ``.jpg`` extension invoke the function when they are added to the Amazon S3 bucket.",
@@ -2332,7 +2628,14 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Function
 							"function": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The Amazon Resource Name (ARN) of the LAMlong function that Amazon S3 invokes when the specified event type occurs.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -2353,7 +2656,14 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Event
 							"event": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The Amazon S3 bucket event about which you want to publish messages to Amazon SQS. For more information, see [Supported Event Types](https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the *Amazon S3 User Guide*.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Filter
 							"filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -2368,24 +2678,50 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 														// Property: Name
 														"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Description: "The object key name prefix or suffix identifying one or more objects to which the filtering rule applies. The maximum length is 1,024 characters. Overlapping prefixes and suffixes are not supported. For more information, see [Configuring Event Notifications](https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the *Amazon S3 User Guide*.",
-															Required:    true,
+															Optional:    true,
+															Computed:    true,
 															Validators: []validator.String{ /*START VALIDATORS*/
 																stringvalidator.LengthAtMost(1024),
+																fwvalidators.NotNullString(),
 															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 														// Property: Value
 														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Description: "The value that the filter searches for in object key names.",
-															Required:    true,
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																fwvalidators.NotNullString(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 												}, /*END NESTED OBJECT*/
 												Description: "A list of containers for the key-value pair that defines the criteria for the filter rule.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Set{ /*START VALIDATORS*/
+													fwvalidators.NotNullSet(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+													setplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "A container for object key name prefix and suffix filtering rules.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Object{ /*START VALIDATORS*/
+											fwvalidators.NotNullObject(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Description: "The filtering rules that determine which objects trigger notifications. For example, you can create a filter so that Amazon S3 sends notifications only when image files with a ``.jpg`` extension are added to the bucket. For more information, see [Configuring event notifications using object key name filtering](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/notification-how-to-filtering.html) in the *Amazon S3 User Guide*.",
@@ -2398,7 +2734,14 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Queue
 							"queue": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The Amazon Resource Name (ARN) of the Amazon SQS queue to which Amazon S3 publishes a message when it detects events of the specified type. FIFO queues are not allowed when enabling an SQS queue as the event notification destination.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -2419,7 +2762,14 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Event
 							"event": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The Amazon S3 bucket event about which to send notifications. For more information, see [Supported Event Types](https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the *Amazon S3 User Guide*.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Filter
 							"filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -2434,24 +2784,50 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 														// Property: Name
 														"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Description: "The object key name prefix or suffix identifying one or more objects to which the filtering rule applies. The maximum length is 1,024 characters. Overlapping prefixes and suffixes are not supported. For more information, see [Configuring Event Notifications](https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the *Amazon S3 User Guide*.",
-															Required:    true,
+															Optional:    true,
+															Computed:    true,
 															Validators: []validator.String{ /*START VALIDATORS*/
 																stringvalidator.LengthAtMost(1024),
+																fwvalidators.NotNullString(),
 															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 														// Property: Value
 														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Description: "The value that the filter searches for in object key names.",
-															Required:    true,
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																fwvalidators.NotNullString(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 												}, /*END NESTED OBJECT*/
 												Description: "A list of containers for the key-value pair that defines the criteria for the filter rule.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Set{ /*START VALIDATORS*/
+													fwvalidators.NotNullSet(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+													setplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "A container for object key name prefix and suffix filtering rules.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Object{ /*START VALIDATORS*/
+											fwvalidators.NotNullObject(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Description: "The filtering rules that determine for which objects to send notifications. For example, you can create a filter so that Amazon S3 sends notifications only when image files with a ``.jpg`` extension are added to the bucket.",
@@ -2464,7 +2840,14 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Topic
 							"topic": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The Amazon Resource Name (ARN) of the Amazon SNS topic to which Amazon S3 publishes a message when it detects events of the specified type.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -2679,10 +3062,15 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "Specifies the container element for Object Ownership rules.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.UniqueValues(),
+						fwvalidators.NotNullList(),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Configuration that defines how Amazon S3 handles Object Ownership rules.",
@@ -3092,7 +3480,14 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 				// Property: Role
 				"role": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The Amazon Resource Name (ARN) of the IAMlong (IAM) role that Amazon S3 assumes when replicating objects. For more information, see [How to Set Up Replication](https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-how-setup.html) in the *Amazon S3 User Guide*.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Rules
 				"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -3133,7 +3528,14 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Owner
 											"owner": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "Specifies the replica ownership. For default and valid values, see [PUT bucket replication](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html) in the *Amazon S3 API Reference*.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "Specify this only in a cross-account scenario (where source and destination bucket owners are not the same), and you want to change replica ownership to the AWS-account that owns the destination bucket. If this is not specified in the replication configuration, the replicas are owned by same AWS-account that owns the source object.",
@@ -3155,7 +3557,14 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 									// Property: Bucket
 									"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "The Amazon Resource Name (ARN) of the bucket where you want Amazon S3 to store the results.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: EncryptionConfiguration
 									"encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -3163,7 +3572,14 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 											// Property: ReplicaKmsKeyID
 											"replica_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "Specifies the ID (Key ARN or Alias ARN) of the customer managed AWS KMS key stored in AWS Key Management Service (KMS) for the destination bucket. Amazon S3 uses this key to encrypt replica objects. Amazon S3 only supports symmetric encryption KMS keys. For more information, see [Asymmetric keys in KMS](https://docs.aws.amazon.com//kms/latest/developerguide/symmetric-asymmetric.html) in the *Key Management Service Developer Guide*.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "Specifies encryption-related information.",
@@ -3182,7 +3598,14 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 													// Property: Minutes
 													"minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
 														Description: "Contains an integer specifying time in minutes. \n  Valid value: 15",
-														Required:    true,
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.Int64{ /*START VALIDATORS*/
+															fwvalidators.NotNullInt64(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+															int64planmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
 												Description: "A container specifying the time threshold for emitting the ``s3:Replication:OperationMissedThreshold`` event.",
@@ -3195,13 +3618,18 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Status
 											"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "Specifies whether the replication metrics are enabled.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.OneOf(
 														"Disabled",
 														"Enabled",
 													),
+													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "A container specifying replication metrics-related settings enabling replication metrics and events.",
@@ -3217,13 +3645,18 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Status
 											"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "Specifies whether the replication time is enabled.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.OneOf(
 														"Disabled",
 														"Enabled",
 													),
+													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: Time
 											"time": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -3231,11 +3664,25 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 													// Property: Minutes
 													"minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
 														Description: "Contains an integer specifying time in minutes. \n  Valid value: 15",
-														Required:    true,
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.Int64{ /*START VALIDATORS*/
+															fwvalidators.NotNullInt64(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+															int64planmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
 												Description: "A container specifying the time by which replication should be complete for all objects and operations on objects.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Object{ /*START VALIDATORS*/
+													fwvalidators.NotNullObject(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "A container specifying S3 Replication Time Control (S3 RTC), including whether S3 RTC is enabled and the time when all objects and operations on objects must be replicated. Must be specified together with a ``Metrics`` block.",
@@ -3268,7 +3715,14 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Description: "A container for information about the replication destination and its configurations including enabling the S3 Replication Time Control (S3 RTC).",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.Object{ /*START VALIDATORS*/
+									fwvalidators.NotNullObject(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Filter
 							"filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -3292,12 +3746,26 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 														// Property: Key
 														"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Description: "The tag key.",
-															Required:    true,
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																fwvalidators.NotNullString(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 														// Property: Value
 														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Description: "The tag value.",
-															Required:    true,
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																fwvalidators.NotNullString(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 												}, /*END NESTED OBJECT*/
@@ -3334,12 +3802,26 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Key
 											"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "The tag key.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: Value
 											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "The tag value.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "A container for specifying a tag key and value. \n The rule applies only to objects that have the tag in their tag set.",
@@ -3399,13 +3881,18 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Status
 											"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "Specifies whether Amazon S3 replicates modifications on replicas.\n  *Allowed values*: ``Enabled`` | ``Disabled``",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.OneOf(
 														"Enabled",
 														"Disabled",
 													),
+													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "A filter that you can specify for selection for modifications on replicas.",
@@ -3421,13 +3908,18 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Status
 											"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "Specifies whether Amazon S3 replicates objects created with server-side encryption using an AWS KMS key stored in AWS Key Management Service.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.OneOf(
 														"Disabled",
 														"Enabled",
 													),
+													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "A container for filter information for the selection of Amazon S3 objects encrypted with AWS KMS.",
@@ -3448,21 +3940,31 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Status
 							"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Specifies whether the rule is enabled.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"Disabled",
 										"Enabled",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "A container for one or more replication rules. A replication configuration must have at least one rule and can contain a maximum of 1,000 rules.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.UniqueValues(),
+						fwvalidators.NotNullList(),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Configuration for replicating objects in an S3 bucket. To enable replication, you must also enable versioning by using the ``VersioningConfiguration`` property.\n Amazon S3 can store replicated objects in a single destination bucket or multiple destination buckets. The destination bucket or buckets must already exist.",
@@ -3508,18 +4010,28 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Name of the object key.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Value of the tag.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthAtMost(256),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -3706,7 +4218,14 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 						// Property: HostName
 						"host_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "Name of the host where requests are redirected.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Protocol
 						"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -3791,7 +4310,14 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Description: "Container for redirect information. You can redirect requests to another host, to another page, or with another protocol. In the event of an error, you can specify a different error code to return.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.Object{ /*START VALIDATORS*/
+									fwvalidators.NotNullObject(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: RoutingRuleCondition
 							"routing_rule_condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/

@@ -34,7 +34,7 @@ Create and manage partner account
 <a id="nestedatt--sidewalk"></a>
 ### Nested Schema for `sidewalk`
 
-Required:
+Optional:
 
 - `app_server_private_key` (String)
 

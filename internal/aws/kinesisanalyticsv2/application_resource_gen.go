@@ -26,6 +26,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -737,19 +738,29 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 										// Property: BucketARN
 										"bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "The Amazon Resource Name (ARN) for the S3 bucket containing the application code.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthBetween(1, 2048),
 												stringvalidator.RegexMatches(regexp.MustCompile("^arn:.*$"), ""),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: FileKey
 										"file_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "The file key for the object containing the application code.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthBetween(1, 1024),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: ObjectVersion
 										"object_version": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -795,18 +806,30 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "The location and type of the application code.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: CodeContentType
 						"code_content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "Specifies whether the code content is in text or zip format.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"PLAINTEXT",
 									"ZIPFILE",
 								),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The code location and type parameters for a Flink-based Kinesis Data Analytics application.",
@@ -822,7 +845,14 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 						// Property: SnapshotsEnabled
 						"snapshots_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Description: "Describes whether snapshots are enabled for a Flink-based Kinesis Data Analytics application.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Bool{ /*START VALIDATORS*/
+								fwvalidators.NotNullBool(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Describes whether snapshots are enabled for a Flink-based Kinesis Data Analytics application.",
@@ -838,7 +868,14 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 						// Property: RollbackEnabled
 						"rollback_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Description: "Describes whether system initiated rollbacks are enabled for a Flink-based Kinesis Data Analytics application.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Bool{ /*START VALIDATORS*/
+								fwvalidators.NotNullBool(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Describes whether system initiated rollbacks are enabled for a Flink-based Kinesis Data Analytics application.",
@@ -931,13 +968,18 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 								// Property: ConfigurationType
 								"configuration_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "Describes whether the application uses Kinesis Data Analytics' default checkpointing behavior. You must set this property to `CUSTOM` in order to set the `CheckpointingEnabled`, `CheckpointInterval`, or `MinPauseBetweenCheckpoints` parameters.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.OneOf(
 											"DEFAULT",
 											"CUSTOM",
 										),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: MinPauseBetweenCheckpoints
 								"min_pause_between_checkpoints": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -965,13 +1007,18 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 								// Property: ConfigurationType
 								"configuration_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "Describes whether to use the default CloudWatch logging configuration for an application. You must set this property to CUSTOM in order to set the LogLevel or MetricsLevel parameters.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.OneOf(
 											"DEFAULT",
 											"CUSTOM",
 										),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: LogLevel
 								"log_level": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1030,13 +1077,18 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 								// Property: ConfigurationType
 								"configuration_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "Describes whether the application uses the default parallelism for the Kinesis Data Analytics service. You must set this property to `CUSTOM` in order to change your application's `AutoScalingEnabled`, `Parallelism`, or `ParallelismPerKPU` properties.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.OneOf(
 											"CUSTOM",
 											"DEFAULT",
 										),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Parallelism
 								"parallelism": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -1117,11 +1169,16 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 													// Property: ResourceARN
 													"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 														Description: "The ARN of the Amazon Lambda function that operates on records in the stream.",
-														Required:    true,
+														Optional:    true,
+														Computed:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
 															stringvalidator.LengthBetween(1, 2048),
 															stringvalidator.RegexMatches(regexp.MustCompile("^arn:.*$"), ""),
+															fwvalidators.NotNullString(),
 														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
 												Description: "The InputLambdaProcessor that is used to preprocess the records in the stream before being processed by your application code.",
@@ -1161,29 +1218,42 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 														// Property: Name
 														"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Description: "The name of the column that is created in the in-application input stream or reference table.",
-															Required:    true,
+															Optional:    true,
+															Computed:    true,
 															Validators: []validator.String{ /*START VALIDATORS*/
 																stringvalidator.LengthBetween(1, 256),
 																stringvalidator.RegexMatches(regexp.MustCompile("^[^-\\s<>&]*$"), ""),
+																fwvalidators.NotNullString(),
 															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 														// Property: SqlType
 														"sql_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Description: "The type of column created in the in-application input stream or reference table.",
-															Required:    true,
+															Optional:    true,
+															Computed:    true,
 															Validators: []validator.String{ /*START VALIDATORS*/
 																stringvalidator.LengthBetween(1, 100),
+																fwvalidators.NotNullString(),
 															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 												}, /*END NESTED OBJECT*/
 												Description: "A list of `RecordColumn` objects.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
 												Validators: []validator.List{ /*START VALIDATORS*/
 													listvalidator.SizeAtMost(1000),
+													fwvalidators.NotNullList(),
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 													generic.Multiset(),
+													listplanmodifier.UseStateForUnknown(),
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: RecordEncoding
@@ -1212,18 +1282,28 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: RecordColumnDelimiter
 																	"record_column_delimiter": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The column delimiter. For example, in a CSV format, a comma (\",\") is the typical column delimiter.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
 																			stringvalidator.LengthBetween(1, 1024),
+																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: RecordRowDelimiter
 																	"record_row_delimiter": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The row delimiter. For example, in a CSV format, '\\n' is the typical row delimiter.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
 																			stringvalidator.LengthBetween(1, 1024),
+																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "Provides additional mapping information when the record format uses delimiters (for example, CSV).",
@@ -1239,10 +1319,15 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: RecordRowPath
 																	"record_row_path": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Description: "The path to the top-level parent that contains the records.",
-																		Required:    true,
+																		Optional:    true,
+																		Computed:    true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
 																			stringvalidator.LengthBetween(1, 65535),
+																			fwvalidators.NotNullString(),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "Provides additional mapping information when JSON is the record format on the streaming source.",
@@ -1263,21 +1348,40 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 													// Property: RecordFormatType
 													"record_format_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 														Description: "The type of record format.",
-														Required:    true,
+														Optional:    true,
+														Computed:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
 															stringvalidator.OneOf(
 																"CSV",
 																"JSON",
 															),
+															fwvalidators.NotNullString(),
 														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
 												Description: "Specifies the format of the records on the streaming source.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Object{ /*START VALIDATORS*/
+													fwvalidators.NotNullObject(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "Describes the format of the data in the streaming source, and how each data element maps to corresponding columns in the in-application stream that is being created.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Object{ /*START VALIDATORS*/
+											fwvalidators.NotNullObject(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: KinesisFirehoseInput
 									"kinesis_firehose_input": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1285,11 +1389,16 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 											// Property: ResourceARN
 											"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "The Amazon Resource Name (ARN) of the delivery stream.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 2048),
 													stringvalidator.RegexMatches(regexp.MustCompile("^arn:.*$"), ""),
+													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "If the streaming source is an Amazon Kinesis Data Firehose delivery stream, identifies the delivery stream's ARN.",
@@ -1305,11 +1414,16 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 											// Property: ResourceARN
 											"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "The ARN of the input Kinesis data stream to read.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 2048),
 													stringvalidator.RegexMatches(regexp.MustCompile("^arn:.*$"), ""),
+													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "If the streaming source is an Amazon Kinesis data stream, identifies the stream's Amazon Resource Name (ARN).",
@@ -1322,11 +1436,16 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 									// Property: NamePrefix
 									"name_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "The name prefix to use when creating an in-application stream. Suppose that you specify a prefix `\"MyInApplicationStream\"`. Kinesis Data Analytics then creates one or more (as per the InputParallelism count you specified) in-application streams with the names `\"MyInApplicationStream_001\"`, `\"MyInApplicationStream_002\"`, and so on.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(1, 32),
 											stringvalidator.RegexMatches(regexp.MustCompile("^[^-\\s<>&]*$"), ""),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
@@ -1357,24 +1476,30 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 							"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
 								Description: "The array of SecurityGroup IDs used by the VPC configuration.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.SizeBetween(1, 5),
+									fwvalidators.NotNullList(),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 									generic.Multiset(),
+									listplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: SubnetIds
 							"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
 								Description: "The array of Subnet IDs used by the VPC configuration.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.SizeBetween(1, 16),
+									fwvalidators.NotNullList(),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 									generic.Multiset(),
+									listplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -1435,13 +1560,18 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 									// Property: ArtifactType
 									"artifact_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "Set this to either `UDF` or `DEPENDENCY_JAR`. `UDF` stands for user-defined functions. This type of artifact must be in an S3 bucket. A `DEPENDENCY_JAR` can be in either Maven or an S3 bucket.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"DEPENDENCY_JAR",
 												"UDF",
 											),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: MavenReference
 									"maven_reference": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1449,29 +1579,44 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 											// Property: ArtifactId
 											"artifact_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "The artifact ID of the Maven reference.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 256),
 													stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_.-]+$"), ""),
+													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: GroupId
 											"group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "The group ID of the Maven reference.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 256),
 													stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_.-]+$"), ""),
+													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: Version
 											"version": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "The version of the Maven reference.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 256),
 													stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_.-]+$"), ""),
+													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "The parameters required to fully specify a Maven reference.",
@@ -1487,19 +1632,29 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 											// Property: BucketARN
 											"bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "The Amazon Resource Name (ARN) for the S3 bucket containing the application code.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 2048),
 													stringvalidator.RegexMatches(regexp.MustCompile("^arn:.*$"), ""),
+													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: FileKey
 											"file_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "The file key for the object containing the application code.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 1024),
+													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: ObjectVersion
 											"object_version": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1556,15 +1711,27 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 										// Property: BucketARN
 										"bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "The Amazon Resource Name (ARN) of the S3 bucket.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthBetween(1, 2048),
 												stringvalidator.RegexMatches(regexp.MustCompile("^arn:.*$"), ""),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "The description of an Amazon S3 object that contains the Amazon Data Analytics application, including the Amazon Resource Name (ARN) of the S3 bucket, the name of the Amazon S3 object that contains the data, and the version number of the Amazon S3 object that contains the data.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Object{ /*START VALIDATORS*/
+										fwvalidators.NotNullObject(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "The information required to deploy a Kinesis Data Analytics Studio notebook as an application with durable state.",
@@ -1663,10 +1830,15 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 				// Property: ApplicationMaintenanceWindowStartTime
 				"application_maintenance_window_start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The start time for the maintenance window.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.RegexMatches(regexp.MustCompile("^([01][0-9]|2[0-3]):[0-5][0-9]$"), ""),
+						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Used to configure start of maintenance window.",
@@ -1780,14 +1952,19 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 						// Property: ApplicationRestoreType
 						"application_restore_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "Specifies how the application should be restored.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"SKIP_RESTORE_FROM_SNAPSHOT",
 									"RESTORE_FROM_LATEST_SNAPSHOT",
 									"RESTORE_FROM_CUSTOM_SNAPSHOT",
 								),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: SnapshotName
 						"snapshot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1908,18 +2085,28 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The key name of the tag. You can specify a value that's 1 to 128 Unicode characters in length and can't be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The value for the tag. You can specify a value that's 0 to 256 characters in length.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

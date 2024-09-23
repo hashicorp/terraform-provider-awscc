@@ -22,6 +22,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -216,7 +217,8 @@ func packagingConfigurationResource(ctx context.Context) (resource.Resource, err
 										// Property: PresetSpeke20Audio
 										"preset_speke_20_audio": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "A collection of audio encryption presets.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.OneOf(
 													"PRESET-AUDIO-1",
@@ -225,12 +227,17 @@ func packagingConfigurationResource(ctx context.Context) (resource.Resource, err
 													"SHARED",
 													"UNENCRYPTED",
 												),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: PresetSpeke20Video
 										"preset_speke_20_video": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "A collection of video encryption presets.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.OneOf(
 													"PRESET-VIDEO-1",
@@ -244,7 +251,11 @@ func packagingConfigurationResource(ctx context.Context) (resource.Resource, err
 													"SHARED",
 													"UNENCRYPTED",
 												),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0.",
@@ -257,22 +268,50 @@ func packagingConfigurationResource(ctx context.Context) (resource.Resource, err
 								// Property: RoleArn
 								"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: SystemIds
 								"system_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 									ElementType: types.StringType,
 									Description: "The system IDs to include in key requests.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										fwvalidators.NotNullList(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Url
 								"url": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The URL of the external key provider service.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "A CMAF encryption configuration.",
@@ -386,7 +425,14 @@ func packagingConfigurationResource(ctx context.Context) (resource.Resource, err
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "A list of HLS manifest configurations.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						fwvalidators.NotNullList(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: IncludeEncoderConfigurationInSegments
 				"include_encoder_configuration_in_segments": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -717,7 +763,14 @@ func packagingConfigurationResource(ctx context.Context) (resource.Resource, err
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "A list of DASH manifest configurations.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						fwvalidators.NotNullList(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Encryption
 				"encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -731,7 +784,8 @@ func packagingConfigurationResource(ctx context.Context) (resource.Resource, err
 										// Property: PresetSpeke20Audio
 										"preset_speke_20_audio": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "A collection of audio encryption presets.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.OneOf(
 													"PRESET-AUDIO-1",
@@ -740,12 +794,17 @@ func packagingConfigurationResource(ctx context.Context) (resource.Resource, err
 													"SHARED",
 													"UNENCRYPTED",
 												),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: PresetSpeke20Video
 										"preset_speke_20_video": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "A collection of video encryption presets.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.OneOf(
 													"PRESET-VIDEO-1",
@@ -759,7 +818,11 @@ func packagingConfigurationResource(ctx context.Context) (resource.Resource, err
 													"SHARED",
 													"UNENCRYPTED",
 												),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0.",
@@ -772,22 +835,50 @@ func packagingConfigurationResource(ctx context.Context) (resource.Resource, err
 								// Property: RoleArn
 								"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: SystemIds
 								"system_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 									ElementType: types.StringType,
 									Description: "The system IDs to include in key requests.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										fwvalidators.NotNullList(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Url
 								"url": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The URL of the external key provider service.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.",
@@ -1075,7 +1166,8 @@ func packagingConfigurationResource(ctx context.Context) (resource.Resource, err
 										// Property: PresetSpeke20Audio
 										"preset_speke_20_audio": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "A collection of audio encryption presets.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.OneOf(
 													"PRESET-AUDIO-1",
@@ -1084,12 +1176,17 @@ func packagingConfigurationResource(ctx context.Context) (resource.Resource, err
 													"SHARED",
 													"UNENCRYPTED",
 												),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: PresetSpeke20Video
 										"preset_speke_20_video": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "A collection of video encryption presets.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.OneOf(
 													"PRESET-VIDEO-1",
@@ -1103,7 +1200,11 @@ func packagingConfigurationResource(ctx context.Context) (resource.Resource, err
 													"SHARED",
 													"UNENCRYPTED",
 												),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0.",
@@ -1116,22 +1217,50 @@ func packagingConfigurationResource(ctx context.Context) (resource.Resource, err
 								// Property: RoleArn
 								"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: SystemIds
 								"system_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 									ElementType: types.StringType,
 									Description: "The system IDs to include in key requests.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										fwvalidators.NotNullList(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Url
 								"url": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The URL of the external key provider service.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "An HTTP Live Streaming (HLS) encryption configuration.",
@@ -1245,7 +1374,14 @@ func packagingConfigurationResource(ctx context.Context) (resource.Resource, err
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "A list of HLS manifest configurations.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						fwvalidators.NotNullList(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: IncludeDvbSubtitles
 				"include_dvb_subtitles": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -1441,7 +1577,8 @@ func packagingConfigurationResource(ctx context.Context) (resource.Resource, err
 										// Property: PresetSpeke20Audio
 										"preset_speke_20_audio": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "A collection of audio encryption presets.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.OneOf(
 													"PRESET-AUDIO-1",
@@ -1450,12 +1587,17 @@ func packagingConfigurationResource(ctx context.Context) (resource.Resource, err
 													"SHARED",
 													"UNENCRYPTED",
 												),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: PresetSpeke20Video
 										"preset_speke_20_video": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "A collection of video encryption presets.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.OneOf(
 													"PRESET-VIDEO-1",
@@ -1469,7 +1611,11 @@ func packagingConfigurationResource(ctx context.Context) (resource.Resource, err
 													"SHARED",
 													"UNENCRYPTED",
 												),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0.",
@@ -1482,22 +1628,50 @@ func packagingConfigurationResource(ctx context.Context) (resource.Resource, err
 								// Property: RoleArn
 								"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: SystemIds
 								"system_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 									ElementType: types.StringType,
 									Description: "The system IDs to include in key requests.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										fwvalidators.NotNullList(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Url
 								"url": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The URL of the external key provider service.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "A CMAF encryption configuration.",
@@ -1568,7 +1742,14 @@ func packagingConfigurationResource(ctx context.Context) (resource.Resource, err
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "A list of MSS manifest configurations.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						fwvalidators.NotNullList(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: SegmentDurationSeconds
 				"segment_duration_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -1627,11 +1808,25 @@ func packagingConfigurationResource(ctx context.Context) (resource.Resource, err
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

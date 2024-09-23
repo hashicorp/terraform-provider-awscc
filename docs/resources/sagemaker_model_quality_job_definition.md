@@ -100,16 +100,13 @@ Required:
 <a id="nestedatt--model_quality_job_input--batch_transform_input"></a>
 ### Nested Schema for `model_quality_job_input.batch_transform_input`
 
-Required:
+Optional:
 
 - `data_captured_destination_s3_uri` (String) A URI that identifies the Amazon S3 storage location where Batch Transform Job captures data.
 - `dataset_format` (Attributes) The dataset format of the data to monitor (see [below for nested schema](#nestedatt--model_quality_job_input--batch_transform_input--dataset_format))
-- `local_path` (String) Path to the filesystem where the endpoint data is available to the container.
-
-Optional:
-
 - `end_time_offset` (String) Monitoring end time offset, e.g. PT0H
 - `inference_attribute` (String) Index or JSONpath to locate predicted label(s)
+- `local_path` (String) Path to the filesystem where the endpoint data is available to the container.
 - `probability_attribute` (String) Index or JSONpath to locate probabilities
 - `probability_threshold_attribute` (Number)
 - `s3_data_distribution_type` (String) Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defauts to FullyReplicated
@@ -146,15 +143,12 @@ Optional:
 <a id="nestedatt--model_quality_job_input--endpoint_input"></a>
 ### Nested Schema for `model_quality_job_input.endpoint_input`
 
-Required:
-
-- `endpoint_name` (String) The name of the endpoint used to run the monitoring job.
-- `local_path` (String) Path to the filesystem where the endpoint data is available to the container.
-
 Optional:
 
 - `end_time_offset` (String) Monitoring end time offset, e.g. PT0H
+- `endpoint_name` (String) The name of the endpoint used to run the monitoring job.
 - `inference_attribute` (String) Index or JSONpath to locate predicted label(s)
+- `local_path` (String) Path to the filesystem where the endpoint data is available to the container.
 - `probability_attribute` (String) Index or JSONpath to locate probabilities
 - `probability_threshold_attribute` (Number)
 - `s3_data_distribution_type` (String) Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defauts to FullyReplicated
@@ -225,7 +219,7 @@ Optional:
 <a id="nestedatt--network_config--vpc_config"></a>
 ### Nested Schema for `network_config.vpc_config`
 
-Required:
+Optional:
 
 - `security_group_ids` (List of String) The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security groups for the VPC that is specified in the Subnets field.
 - `subnets` (List of String) The ID of the subnets in the VPC to which you want to connect to your monitoring jobs.
@@ -235,7 +229,7 @@ Required:
 <a id="nestedatt--stopping_condition"></a>
 ### Nested Schema for `stopping_condition`
 
-Required:
+Optional:
 
 - `max_runtime_in_seconds` (Number) The maximum runtime allowed in seconds.
 
@@ -243,7 +237,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

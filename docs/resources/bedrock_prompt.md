@@ -76,16 +76,13 @@ resource "awscc_bedrock_prompt" "example" {
 <a id="nestedatt--variants"></a>
 ### Nested Schema for `variants`
 
-Required:
-
-- `name` (String) Name for a variant.
-- `template_type` (String) Prompt template type
-
 Optional:
 
 - `inference_configuration` (Attributes) Model inference configuration (see [below for nested schema](#nestedatt--variants--inference_configuration))
 - `model_id` (String) ARN or name of a Bedrock model.
+- `name` (String) Name for a variant.
 - `template_configuration` (Attributes) Prompt template configuration (see [below for nested schema](#nestedatt--variants--template_configuration))
+- `template_type` (String) Prompt template type
 
 <a id="nestedatt--variants--inference_configuration"></a>
 ### Nested Schema for `variants.inference_configuration`
@@ -134,13 +131,10 @@ Optional:
 <a id="nestedatt--variants--template_configuration--text--text_s3_location"></a>
 ### Nested Schema for `variants.template_configuration.text.text_s3_location`
 
-Required:
+Optional:
 
 - `bucket` (String) A bucket in S3
 - `key` (String) A object key in S3
-
-Optional:
-
 - `version` (String) The version of the the S3 object to use
 
 ## Import

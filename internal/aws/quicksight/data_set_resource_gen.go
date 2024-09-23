@@ -27,6 +27,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -130,13 +131,18 @@ func dataSetResource(ctx context.Context) (resource.Resource, error) {
 							"columns": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
 								Description: "<p>Columns in this hierarchy.</p>",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.SizeBetween(1, 16),
 									listvalidator.ValueStringsAre(
 										stringvalidator.LengthBetween(1, 128),
 									),
+									fwvalidators.NotNullList(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: CountryCode
 							"country_code": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -154,10 +160,15 @@ func dataSetResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Name
 							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "<p>A display name for the hierarchy.</p>",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthBetween(1, 64),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "<p>Geospatial column group that denotes a hierarchy.</p>",
@@ -802,10 +813,15 @@ func dataSetResource(ctx context.Context) (resource.Resource, error) {
 										// Property: ColumnName
 										"column_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "<p>Column name.</p>",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthBetween(1, 128),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: Format
 										"format": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -821,7 +837,8 @@ func dataSetResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END ATTRIBUTE*/
 										// Property: NewColumnType
 										"new_column_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Required: true,
+											Optional: true,
+											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.OneOf(
 													"STRING",
@@ -829,7 +846,11 @@ func dataSetResource(ctx context.Context) (resource.Resource, error) {
 													"DECIMAL",
 													"DATETIME",
 												),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "<p>A transform operation that casts a column to a different type.</p>",
@@ -849,34 +870,54 @@ func dataSetResource(ctx context.Context) (resource.Resource, error) {
 													// Property: ColumnId
 													"column_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 														Description: "<p>A unique ID to identify a calculated column. During a dataset update, if the column ID\n            of a calculated column matches that of an existing calculated column, Amazon QuickSight\n            preserves the existing calculated column.</p>",
-														Required:    true,
+														Optional:    true,
+														Computed:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
 															stringvalidator.LengthBetween(1, 64),
+															fwvalidators.NotNullString(),
 														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 													// Property: ColumnName
 													"column_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 														Description: "<p>Column name.</p>",
-														Required:    true,
+														Optional:    true,
+														Computed:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
 															stringvalidator.LengthBetween(1, 128),
+															fwvalidators.NotNullString(),
 														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 													// Property: Expression
 													"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 														Description: "<p>An expression that defines the calculated column.</p>",
-														Required:    true,
+														Optional:    true,
+														Computed:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
 															stringvalidator.LengthBetween(1, 4096),
+															fwvalidators.NotNullString(),
 														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
 											}, /*END NESTED OBJECT*/
 											Description: "<p>Calculated columns to create.</p>",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.List{ /*START VALIDATORS*/
 												listvalidator.SizeBetween(1, 128),
+												fwvalidators.NotNullList(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "<p>A transform operation that creates calculated columns. Columns created in one such\n            operation form a lexical closure.</p>",
@@ -892,10 +933,15 @@ func dataSetResource(ctx context.Context) (resource.Resource, error) {
 										// Property: ConditionExpression
 										"condition_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "<p>An expression that must evaluate to a Boolean value. Rows for which the expression\n            evaluates to true are kept in the dataset.</p>",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthBetween(1, 4096),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "<p>A transform operation that filters rows based on a condition.</p>",
@@ -912,10 +958,15 @@ func dataSetResource(ctx context.Context) (resource.Resource, error) {
 										"projected_columns": schema.ListAttribute{ /*START ATTRIBUTE*/
 											ElementType: types.StringType,
 											Description: "<p>Projected columns.</p>",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.List{ /*START VALIDATORS*/
 												listvalidator.SizeBetween(1, 2000),
+												fwvalidators.NotNullList(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "<p>A transform operation that projects columns. Operations that come after a projection\n            can only refer to projected columns.</p>",
@@ -931,18 +982,28 @@ func dataSetResource(ctx context.Context) (resource.Resource, error) {
 										// Property: ColumnName
 										"column_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "<p>The name of the column to be renamed.</p>",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthBetween(1, 128),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: NewColumnName
 										"new_column_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "<p>The new name for the column.</p>",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthBetween(1, 128),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "<p>A transform operation that renames a column.</p>",
@@ -958,10 +1019,15 @@ func dataSetResource(ctx context.Context) (resource.Resource, error) {
 										// Property: ColumnName
 										"column_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "<p>The column that this operation acts on.</p>",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthBetween(1, 128),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: Tags
 										"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1013,10 +1079,15 @@ func dataSetResource(ctx context.Context) (resource.Resource, error) {
 												}, /*END SCHEMA*/
 											}, /*END NESTED OBJECT*/
 											Description: "<p>The dataset column tag, currently only used for geospatial type tagging. .</p>\n        <note>\n            <p>This is not tags for the AWS tagging feature. .</p>\n        </note>",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.List{ /*START VALIDATORS*/
 												listvalidator.SizeBetween(1, 16),
+												fwvalidators.NotNullList(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "<p>A transform operation that tags a column with additional information.</p>",
@@ -1074,19 +1145,29 @@ func dataSetResource(ctx context.Context) (resource.Resource, error) {
 									// Property: LeftOperand
 									"left_operand": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "<p>Left operand.</p>",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(1, 64),
 											stringvalidator.RegexMatches(regexp.MustCompile("[0-9a-zA-Z-]*"), ""),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: OnClause
 									"on_clause": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "<p>On Clause.</p>",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(1, 512),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: RightJoinKeyProperties
 									"right_join_key_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1109,15 +1190,21 @@ func dataSetResource(ctx context.Context) (resource.Resource, error) {
 									// Property: RightOperand
 									"right_operand": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "<p>Right operand.</p>",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(1, 64),
 											stringvalidator.RegexMatches(regexp.MustCompile("[0-9a-zA-Z-]*"), ""),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: Type
 									"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Required: true,
+										Optional: true,
+										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"INNER",
@@ -1125,7 +1212,11 @@ func dataSetResource(ctx context.Context) (resource.Resource, error) {
 												"LEFT",
 												"RIGHT",
 											),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Description: "<p>Join instruction.</p>",
@@ -1284,18 +1375,28 @@ func dataSetResource(ctx context.Context) (resource.Resource, error) {
 					"actions": schema.ListAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
 						Description: "<p>The IAM action to grant or revoke permissions on.</p>",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.List{ /*START VALIDATORS*/
 							listvalidator.SizeBetween(1, 16),
+							fwvalidators.NotNullList(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Principal
 					"principal": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "<p>The Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:</p>\n        <ul>\n            <li>\n                <p>The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)</p>\n            </li>\n            <li>\n                <p>The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>\n            </li>\n            <li>\n                <p>The ARN of an AWS account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across AWS accounts.\n                    (This is less common.) </p>\n            </li>\n         </ul>",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 256),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -1553,14 +1654,20 @@ func dataSetResource(ctx context.Context) (resource.Resource, error) {
 										// Property: Name
 										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "<p>The name of this column in the underlying data source.</p>",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthBetween(1, 128),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: Type
 										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Required: true,
+											Optional: true,
+											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.OneOf(
 													"STRING",
@@ -1571,36 +1678,62 @@ func dataSetResource(ctx context.Context) (resource.Resource, error) {
 													"BOOLEAN",
 													"JSON",
 												),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
 								Description: "<p>The column schema from the SQL query result set.</p>",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.SizeBetween(1, 2048),
+									fwvalidators.NotNullList(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: DataSourceArn
 							"data_source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "<p>The Amazon Resource Name (ARN) of the data source.</p>",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Name
 							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "<p>A display name for the SQL query result.</p>",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthBetween(1, 128),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: SqlQuery
 							"sql_query": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "<p>The SQL query.</p>",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthBetween(1, 65536),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "<p>A physical table type built from the results of the custom SQL query.</p>",
@@ -1628,7 +1761,14 @@ func dataSetResource(ctx context.Context) (resource.Resource, error) {
 							// Property: DataSourceArn
 							"data_source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "<p>The Amazon Resource Name (ARN) for the data source.</p>",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: InputColumns
 							"input_columns": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1637,14 +1777,20 @@ func dataSetResource(ctx context.Context) (resource.Resource, error) {
 										// Property: Name
 										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "<p>The name of this column in the underlying data source.</p>",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthBetween(1, 128),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: Type
 										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Required: true,
+											Optional: true,
+											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.OneOf(
 													"STRING",
@@ -1655,23 +1801,37 @@ func dataSetResource(ctx context.Context) (resource.Resource, error) {
 													"BOOLEAN",
 													"JSON",
 												),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
 								Description: "<p>The column schema of the table.</p>",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.SizeBetween(1, 2048),
+									fwvalidators.NotNullList(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Name
 							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "<p>The name of the relational table.</p>",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthBetween(1, 64),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Schema
 							"schema": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1699,7 +1859,14 @@ func dataSetResource(ctx context.Context) (resource.Resource, error) {
 							// Property: DataSourceArn
 							"data_source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "<p>The amazon Resource Name (ARN) for the data source.</p>",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: InputColumns
 							"input_columns": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1708,14 +1875,20 @@ func dataSetResource(ctx context.Context) (resource.Resource, error) {
 										// Property: Name
 										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "<p>The name of this column in the underlying data source.</p>",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthBetween(1, 128),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: Type
 										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Required: true,
+											Optional: true,
+											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.OneOf(
 													"STRING",
@@ -1726,15 +1899,24 @@ func dataSetResource(ctx context.Context) (resource.Resource, error) {
 													"BOOLEAN",
 													"JSON",
 												),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
 								Description: "<p>A physical table type for as S3 data source.</p>",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.SizeBetween(1, 2048),
+									fwvalidators.NotNullList(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: UploadSettings
 							"upload_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1871,7 +2053,14 @@ func dataSetResource(ctx context.Context) (resource.Resource, error) {
 				// Property: Arn
 				"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "<p>The Amazon Resource Name (ARN) of the permission dataset.</p>",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: FormatVersion
 				"format_version": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1902,13 +2091,18 @@ func dataSetResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: PermissionPolicy
 				"permission_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Optional: true,
+					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"GRANT_ACCESS",
 							"DENY_ACCESS",
 						),
+						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "<p>The row-level security configuration for the dataset.</p>",
@@ -1955,18 +2149,28 @@ func dataSetResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "<p>Tag key.</p>",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "<p>Tag value.</p>",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 256),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

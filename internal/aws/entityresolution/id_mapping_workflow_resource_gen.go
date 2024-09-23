@@ -24,6 +24,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -211,7 +212,14 @@ func idMappingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 								// Property: IntermediateS3Path
 								"intermediate_s3_path": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The s3 path that would be used to stage the intermediate data being generated during workflow execution.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
@@ -234,10 +242,15 @@ func idMappingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 						// Property: ProviderServiceArn
 						"provider_service_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "Arn of the Provider Service being used.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-us-gov|aws-cn):(entityresolution):([a-z]{2}-[a-z]{1,10}-[0-9])::providerservice/([a-zA-Z0-9_-]{1,255})/([a-zA-Z0-9_-]{1,255})$"), ""),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
@@ -251,23 +264,33 @@ func idMappingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: AttributeMatchingModel
 						"attribute_matching_model": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"ONE_TO_ONE",
 									"MANY_TO_MANY",
 								),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: RecordMatchingModel
 						"record_matching_model": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"ONE_SOURCE_TO_ONE_TARGET",
 									"MANY_SOURCE_TO_ONE_TARGET",
 								),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: RuleDefinitionType
 						"rule_definition_type": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -290,25 +313,33 @@ func idMappingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 									// Property: MatchingKeys
 									"matching_keys": schema.ListAttribute{ /*START ATTRIBUTE*/
 										ElementType: types.StringType,
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.List{ /*START VALIDATORS*/
 											listvalidator.SizeBetween(1, 15),
 											listvalidator.ValueStringsAre(
 												stringvalidator.LengthBetween(0, 255),
 												stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z_0-9- \\t]*$"), ""),
 											),
+											fwvalidators.NotNullList(),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											generic.Multiset(),
+											listplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: RuleName
 									"rule_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Required: true,
+										Optional: true,
+										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(0, 255),
 											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z_0-9- \\t]*$"), ""),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
@@ -458,10 +489,15 @@ func idMappingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 					// Property: OutputS3Path
 					"output_s3_path": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The S3 path to which Entity Resolution will write the output table",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.RegexMatches(regexp.MustCompile("^s3://([^/]+)/?(.*?([^/]+)/?)$"), ""),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -527,18 +563,28 @@ func idMappingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

@@ -22,6 +22,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -205,13 +206,18 @@ func mitigationActionResource(ctx context.Context) (resource.Resource, error) {
 						"thing_group_names": schema.SetAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
 							Description: "The list of groups to which you want to add the things that triggered the mitigation action.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.Set{ /*START VALIDATORS*/
 								setvalidator.SizeBetween(1, 10),
 								setvalidator.ValueStringsAre(
 									stringvalidator.LengthBetween(1, 128),
 								),
+								fwvalidators.NotNullSet(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+								setplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Parameters to define a mitigation action that moves devices associated with a certificate to one or more specified thing groups, typically for quarantine.",
@@ -227,7 +233,8 @@ func mitigationActionResource(ctx context.Context) (resource.Resource, error) {
 						// Property: LogLevel
 						"log_level": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: " Specifies which types of information are logged.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"DEBUG",
@@ -236,15 +243,24 @@ func mitigationActionResource(ctx context.Context) (resource.Resource, error) {
 									"WARN",
 									"UNSET_VALUE",
 								),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: RoleArnForLogging
 						"role_arn_for_logging": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: " The ARN of the IAM role used for logging.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(20, 2048),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Parameters to define a mitigation action that enables AWS IoT logging at a specified level of detail.",
@@ -260,10 +276,15 @@ func mitigationActionResource(ctx context.Context) (resource.Resource, error) {
 						// Property: TopicArn
 						"topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The ARN of the topic to which you want to publish the findings.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(20, 2048),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Parameters, to define a mitigation action that publishes findings to Amazon SNS. You can implement your own custom actions in response to the Amazon SNS messages.",
@@ -278,13 +299,18 @@ func mitigationActionResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: TemplateName
 						"template_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"BLANK_POLICY",
 									"UNSET_VALUE",
 								),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Parameters to define a mitigation action that adds a blank policy to restrict permissions.",
@@ -299,13 +325,18 @@ func mitigationActionResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Action
 						"action": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"DEACTIVATE",
 									"UNSET_VALUE",
 								),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Parameters to define a mitigation action that changes the state of the CA certificate to inactive.",
@@ -320,13 +351,18 @@ func mitigationActionResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Action
 						"action": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"DEACTIVATE",
 									"UNSET_VALUE",
 								),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Parameters to define a mitigation action that changes the state of the device certificate to inactive.",
@@ -412,18 +448,28 @@ func mitigationActionResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The tag's key.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The tag's value.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 256),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

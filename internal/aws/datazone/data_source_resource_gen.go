@@ -23,6 +23,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -96,10 +97,15 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 					// Property: FormName
 					"form_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The name of the metadata form.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: TypeIdentifier
 					"type_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -384,10 +390,15 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 									// Property: DatabaseName
 									"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "The database name specified in the relational filter configuration for the data source.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(1, 128),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: FilterExpressions
 									"filter_expressions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -395,21 +406,31 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 												// Property: Expression
 												"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Required: true,
+													Optional: true,
+													Computed: true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(1, 2048),
+														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: Type
 												"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The search filter expression type.",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.OneOf(
 															"INCLUDE",
 															"EXCLUDE",
 														),
+														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
@@ -436,9 +457,14 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
 							Description: "The relational filter configurations included in the configuration details of the AWS Glue data source.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								fwvalidators.NotNullList(),
+							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								generic.Multiset(),
+								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -469,15 +495,27 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 								// Property: SecretManagerArn
 								"secret_manager_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The ARN of a secret manager for an Amazon Redshift cluster.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[^:]*:secretsmanager:[a-z]{2}-?(iso|gov)?-{1}[a-z]*-{1}[0-9]:\\d{12}:secret:.*$"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "The details of the credentials required to access an Amazon Redshift cluster.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: RedshiftStorage
 						"redshift_storage": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -488,11 +526,16 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 										// Property: ClusterName
 										"cluster_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "The name of an Amazon Redshift cluster.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthBetween(1, 63),
 												stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-z].[a-z0-9\\-]*$"), ""),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "The name of an Amazon Redshift cluster.",
@@ -508,11 +551,16 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 										// Property: WorkgroupName
 										"workgroup_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "The name of the Amazon Redshift Serverless workgroup.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthBetween(3, 64),
 												stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9-]+$"), ""),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "The details of the Amazon Redshift Serverless workgroup storage.",
@@ -524,7 +572,14 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "The details of the Amazon Redshift storage as part of the configuration of an Amazon Redshift data source run.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: RelationalFilterConfigurations
 						"relational_filter_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -533,10 +588,15 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 									// Property: DatabaseName
 									"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "The database name specified in the relational filter configuration for the data source.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(1, 128),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: FilterExpressions
 									"filter_expressions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -544,21 +604,31 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 												// Property: Expression
 												"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Required: true,
+													Optional: true,
+													Computed: true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(1, 2048),
+														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: Type
 												"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The search filter expression type.",
-													Required:    true,
+													Optional:    true,
+													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.OneOf(
 															"INCLUDE",
 															"EXCLUDE",
 														),
+														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
@@ -585,9 +655,14 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
 							Description: "The relational filter configurations included in the configuration details of the Amazon Redshift data source.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								fwvalidators.NotNullList(),
+							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								generic.Multiset(),
+								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/

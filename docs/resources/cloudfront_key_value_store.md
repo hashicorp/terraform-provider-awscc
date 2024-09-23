@@ -57,7 +57,7 @@ resource "awscc_cloudfront_key_value_store" "example" {
 <a id="nestedatt--import_source"></a>
 ### Nested Schema for `import_source`
 
-Required:
+Optional:
 
 - `source_arn` (String)
 - `source_type` (String)

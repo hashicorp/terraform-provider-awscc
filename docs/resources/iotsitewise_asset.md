@@ -37,12 +37,9 @@ Resource schema for AWS::IoTSiteWise::Asset
 <a id="nestedatt--asset_hierarchies"></a>
 ### Nested Schema for `asset_hierarchies`
 
-Required:
-
-- `child_asset_id` (String) The ID of the child asset to be associated.
-
 Optional:
 
+- `child_asset_id` (String) The ID of the child asset to be associated.
 - `external_id` (String) String-friendly customer provided external ID
 - `id` (String) Customer provided actual UUID for property
 - `logical_id` (String) The LogicalID of a hierarchy in the parent asset's model.
@@ -64,7 +61,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

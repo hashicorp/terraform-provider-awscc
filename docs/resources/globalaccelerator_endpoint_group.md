@@ -79,21 +79,18 @@ resource "awscc_globalaccelerator_endpoint_group" "example" {
 <a id="nestedatt--endpoint_configurations"></a>
 ### Nested Schema for `endpoint_configurations`
 
-Required:
-
-- `endpoint_id` (String) Id of the endpoint. For Network/Application Load Balancer this value is the ARN.  For EIP, this value is the allocation ID.  For EC2 instances, this is the EC2 instance ID
-
 Optional:
 
 - `attachment_arn` (String) Attachment ARN that provides access control to the cross account endpoint. Not required for resources hosted in the same account as the endpoint group.
 - `client_ip_preservation_enabled` (Boolean) true if client ip should be preserved
+- `endpoint_id` (String) Id of the endpoint. For Network/Application Load Balancer this value is the ARN.  For EIP, this value is the allocation ID.  For EC2 instances, this is the EC2 instance ID
 - `weight` (Number) The weight for the endpoint.
 
 
 <a id="nestedatt--port_overrides"></a>
 ### Nested Schema for `port_overrides`
 
-Required:
+Optional:
 
 - `endpoint_port` (Number) A network port number
 - `listener_port` (Number) A network port number

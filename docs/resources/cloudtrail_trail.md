@@ -302,25 +302,19 @@ data "aws_region" "current" {}
 <a id="nestedatt--advanced_event_selectors"></a>
 ### Nested Schema for `advanced_event_selectors`
 
-Required:
-
-- `field_selectors` (Attributes Set) Contains all selector statements in an advanced event selector. (see [below for nested schema](#nestedatt--advanced_event_selectors--field_selectors))
-
 Optional:
 
+- `field_selectors` (Attributes Set) Contains all selector statements in an advanced event selector. (see [below for nested schema](#nestedatt--advanced_event_selectors--field_selectors))
 - `name` (String) An optional, descriptive name for an advanced event selector, such as "Log data events for only two S3 buckets".
 
 <a id="nestedatt--advanced_event_selectors--field_selectors"></a>
 ### Nested Schema for `advanced_event_selectors.field_selectors`
 
-Required:
-
-- `field` (String) A field in an event record on which to filter events to be logged. Supported fields include readOnly, eventCategory, eventSource (for management events), eventName, resources.type, and resources.ARN.
-
 Optional:
 
 - `ends_with` (Set of String) An operator that includes events that match the last few characters of the event record field specified as the value of Field.
 - `equals` (Set of String) An operator that includes events that match the exact value of the event record field specified as the value of Field. This is the only valid operator that you can use with the readOnly, eventCategory, and resources.type fields.
+- `field` (String) A field in an event record on which to filter events to be logged. Supported fields include readOnly, eventCategory, eventSource (for management events), eventName, resources.type, and resources.ARN.
 - `not_ends_with` (Set of String) An operator that excludes events that match the last few characters of the event record field specified as the value of Field.
 - `not_equals` (Set of String) An operator that excludes events that match the exact value of the event record field specified as the value of Field.
 - `not_starts_with` (Set of String) An operator that excludes events that match the first few characters of the event record field specified as the value of Field.
@@ -341,12 +335,9 @@ Optional:
 <a id="nestedatt--event_selectors--data_resources"></a>
 ### Nested Schema for `event_selectors.data_resources`
 
-Required:
-
-- `type` (String) The resource type in which you want to log data events. You can specify AWS::S3::Object or AWS::Lambda::Function resources.
-
 Optional:
 
+- `type` (String) The resource type in which you want to log data events. You can specify AWS::S3::Object or AWS::Lambda::Function resources.
 - `values` (Set of String) An array of Amazon Resource Name (ARN) strings or partial ARN strings for the specified objects.
 
 
@@ -362,7 +353,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

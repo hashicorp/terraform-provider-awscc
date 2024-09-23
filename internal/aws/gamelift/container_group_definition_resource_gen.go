@@ -26,6 +26,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -355,7 +356,8 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 								// Property: Condition
 								"condition": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The type of dependency.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.OneOf(
 											"START",
@@ -363,16 +365,25 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 											"SUCCESS",
 											"HEALTHY",
 										),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: ContainerName
 								"container_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "A descriptive label for the container definition. The container being defined depends on this container's condition.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 128),
 										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-]+$"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
@@ -410,20 +421,30 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 								// Property: Name
 								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The environment variable name.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 255),
 										stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Value
 								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The environment variable value.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 255),
 										stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
@@ -453,14 +474,19 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 							"command": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
 								Description: "A string array representing the command that the container runs to determine if it is healthy.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.SizeBetween(1, 20),
 									listvalidator.ValueStringsAre(
 										stringvalidator.LengthBetween(1, 255),
 										stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 									),
+									fwvalidators.NotNullList(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Interval
 							"interval": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -572,37 +598,57 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 										// Property: FromPort
 										"from_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
 											Description: "A starting value for the range of allowed port numbers.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.Int64{ /*START VALIDATORS*/
 												int64validator.Between(1, 60000),
+												fwvalidators.NotNullInt64(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: Protocol
 										"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "Defines the protocol of these ports.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.OneOf(
 													"TCP",
 													"UDP",
 												),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: ToPort
 										"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
 											Description: "An ending value for the range of allowed port numbers. Port numbers are end-inclusive. This value must be equal to or greater than FromPort.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.Int64{ /*START VALIDATORS*/
 												int64validator.Between(1, 60000),
+												fwvalidators.NotNullInt64(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
 								Description: "Specifies one or more ranges of ports on a container.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.Set{ /*START VALIDATORS*/
 									setvalidator.SizeBetween(1, 100),
+									fwvalidators.NotNullSet(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+									setplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "Defines the ports on the container.",
@@ -790,20 +836,30 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
 							stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
 							stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

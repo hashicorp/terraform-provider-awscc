@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
@@ -22,6 +23,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -314,10 +316,15 @@ func experimentTemplateResource(ctx context.Context) (resource.Resource, error) 
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: LogGroupArn
 						"log_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(20, 2048),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
@@ -328,20 +335,30 @@ func experimentTemplateResource(ctx context.Context) (resource.Resource, error) 
 				}, /*END ATTRIBUTE*/
 				// Property: LogSchemaVersion
 				"log_schema_version": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Optional: true,
+					Computed: true,
 					Validators: []validator.Int64{ /*START VALIDATORS*/
 						int64validator.AtLeast(1),
+						fwvalidators.NotNullInt64(),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: S3Configuration
 				"s3_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: BucketName
 						"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(3, 63),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Prefix
 						"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -553,21 +570,31 @@ func experimentTemplateResource(ctx context.Context) (resource.Resource, error) 
 								// Property: Path
 								"path": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The attribute path for the filter.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Values
 								"values": schema.ListAttribute{ /*START ATTRIBUTE*/
 									ElementType: types.StringType,
 									Description: "The attribute values for the filter.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.List{ /*START VALIDATORS*/
 										listvalidator.ValueStringsAre(
 											stringvalidator.LengthAtMost(128),
 										),
+										fwvalidators.NotNullList(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/

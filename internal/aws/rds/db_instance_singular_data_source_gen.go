@@ -139,7 +139,6 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "default": 1,
 		//	  "description": "The number of days for which automated backups are retained. Setting this parameter to a positive number enables backups. Setting this parameter to 0 disables automated backups.\n  *Amazon Aurora* \n Not applicable. The retention period for automated backups is managed by the DB cluster.\n Default: 1\n Constraints:\n  +  Must be a value from 0 to 35\n  +  Can't be set to 0 if the DB instance is a source to read replicas",
 		//	  "minimum": 0,
 		//	  "type": "integer"
@@ -713,7 +712,6 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "default": 0,
 		//	  "description": "The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance. To disable collection of Enhanced Monitoring metrics, specify ``0``.\n If ``MonitoringRoleArn`` is specified, then you must set ``MonitoringInterval`` to a value other than ``0``.\n This setting doesn't apply to RDS Custom DB instances.\n Valid Values: ``0 | 1 | 5 | 10 | 15 | 30 | 60`` \n Default: ``0``",
 		//	  "type": "integer"
 		//	}
@@ -880,7 +878,6 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "default": 1,
 		//	  "description": "The order of priority in which an Aurora Replica is promoted to the primary instance after a failure of the existing primary instance. For more information, see [Fault Tolerance for an Aurora DB Cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.AuroraHighAvailability.html#Aurora.Managing.FaultTolerance) in the *Amazon Aurora User Guide*.\n This setting doesn't apply to RDS Custom DB instances.\n Default: ``1`` \n Valid Values: ``0 - 15``",
 		//	  "minimum": 0,
 		//	  "type": "integer"

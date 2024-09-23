@@ -29,7 +29,7 @@ The AWS::S3::AccessGrantsInstance resource is an Amazon S3 resource type that ho
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

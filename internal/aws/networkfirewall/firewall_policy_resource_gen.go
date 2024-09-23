@@ -25,6 +25,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -398,11 +399,16 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 							// Property: ResourceArn
 							"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "A resource ARN.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthBetween(1, 256),
 									stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws.*)$"), ""),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -428,15 +434,27 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 														// Property: Value
 														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Required: true,
+															Optional: true,
+															Computed: true,
 															Validators: []validator.String{ /*START VALIDATORS*/
 																stringvalidator.LengthBetween(1, 128),
 																stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-_ ]+$"), ""),
+																fwvalidators.NotNullString(),
 															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 												}, /*END NESTED OBJECT*/
-												Required: true,
+												Optional: true,
+												Computed: true,
+												Validators: []validator.List{ /*START VALIDATORS*/
+													fwvalidators.NotNullList(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													listplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Optional: true,
@@ -446,15 +464,27 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Required: true,
+								Optional: true,
+								Computed: true,
+								Validators: []validator.Object{ /*START VALIDATORS*/
+									fwvalidators.NotNullObject(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: ActionName
 							"action_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Required: true,
+								Optional: true,
+								Computed: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthBetween(1, 128),
 									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]+$"), ""),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -480,19 +510,29 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Priority
 							"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Required: true,
+								Optional: true,
+								Computed: true,
 								Validators: []validator.Int64{ /*START VALIDATORS*/
 									int64validator.Between(1, 65535),
+									fwvalidators.NotNullInt64(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: ResourceArn
 							"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "A resource ARN.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthBetween(1, 256),
 									stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws.*)$"), ""),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -604,19 +644,29 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
 							stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 255),
 							stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

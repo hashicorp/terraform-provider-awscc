@@ -47,19 +47,16 @@ Optional:
 <a id="nestedatt--id_mapping_techniques--provider_properties"></a>
 ### Nested Schema for `id_mapping_techniques.provider_properties`
 
-Required:
-
-- `provider_service_arn` (String) Arn of the Provider Service being used.
-
 Optional:
 
 - `intermediate_source_configuration` (Attributes) (see [below for nested schema](#nestedatt--id_mapping_techniques--provider_properties--intermediate_source_configuration))
 - `provider_configuration` (Map of String) Additional Provider configuration that would be required for the provider service. The Configuration must be in JSON string format
+- `provider_service_arn` (String) Arn of the Provider Service being used.
 
 <a id="nestedatt--id_mapping_techniques--provider_properties--intermediate_source_configuration"></a>
 ### Nested Schema for `id_mapping_techniques.provider_properties.intermediate_source_configuration`
 
-Required:
+Optional:
 
 - `intermediate_s3_path` (String) The s3 path that would be used to stage the intermediate data being generated during workflow execution.
 
@@ -68,20 +65,17 @@ Required:
 <a id="nestedatt--id_mapping_techniques--rule_based_properties"></a>
 ### Nested Schema for `id_mapping_techniques.rule_based_properties`
 
-Required:
+Optional:
 
 - `attribute_matching_model` (String)
 - `record_matching_model` (String)
-
-Optional:
-
 - `rule_definition_type` (String)
 - `rules` (Attributes List) (see [below for nested schema](#nestedatt--id_mapping_techniques--rule_based_properties--rules))
 
 <a id="nestedatt--id_mapping_techniques--rule_based_properties--rules"></a>
 ### Nested Schema for `id_mapping_techniques.rule_based_properties.rules`
 
-Required:
+Optional:
 
 - `matching_keys` (List of String)
 - `rule_name` (String)
@@ -105,19 +99,16 @@ Optional:
 <a id="nestedatt--output_source_config"></a>
 ### Nested Schema for `output_source_config`
 
-Required:
-
-- `output_s3_path` (String) The S3 path to which Entity Resolution will write the output table
-
 Optional:
 
 - `kms_arn` (String)
+- `output_s3_path` (String) The S3 path to which Entity Resolution will write the output table
 
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

@@ -45,34 +45,28 @@ Resource schema for AWS::MediaConnect::FlowOutput
 <a id="nestedatt--encryption"></a>
 ### Nested Schema for `encryption`
 
-Required:
-
-- `role_arn` (String) The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).
-- `secret_arn` (String) The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.
-
 Optional:
 
 - `algorithm` (String) The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).
 - `key_type` (String) The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).
+- `role_arn` (String) The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).
+- `secret_arn` (String) The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.
 
 
 <a id="nestedatt--media_stream_output_configurations"></a>
 ### Nested Schema for `media_stream_output_configurations`
 
-Required:
-
-- `encoding_name` (String) The format that will be used to encode the data. For ancillary data streams, set the encoding name to smpte291. For audio streams, set the encoding name to pcm. For video streams on sources or outputs that use the CDI protocol, set the encoding name to raw. For video streams on sources or outputs that use the ST 2110 JPEG XS protocol, set the encoding name to jxsv.
-- `media_stream_name` (String) A name that helps you distinguish one media stream from another.
-
 Optional:
 
 - `destination_configurations` (Attributes List) The media streams that you want to associate with the output. (see [below for nested schema](#nestedatt--media_stream_output_configurations--destination_configurations))
+- `encoding_name` (String) The format that will be used to encode the data. For ancillary data streams, set the encoding name to smpte291. For audio streams, set the encoding name to pcm. For video streams on sources or outputs that use the CDI protocol, set the encoding name to raw. For video streams on sources or outputs that use the ST 2110 JPEG XS protocol, set the encoding name to jxsv.
 - `encoding_parameters` (Attributes) A collection of parameters that determine how MediaConnect will convert the content. These fields only apply to outputs on flows that have a CDI source. (see [below for nested schema](#nestedatt--media_stream_output_configurations--encoding_parameters))
+- `media_stream_name` (String) A name that helps you distinguish one media stream from another.
 
 <a id="nestedatt--media_stream_output_configurations--destination_configurations"></a>
 ### Nested Schema for `media_stream_output_configurations.destination_configurations`
 
-Required:
+Optional:
 
 - `destination_ip` (String) The IP address where contents of the media stream will be sent.
 - `destination_port` (Number) The port to use when the content of the media stream is distributed to the output.
@@ -81,7 +75,7 @@ Required:
 <a id="nestedatt--media_stream_output_configurations--destination_configurations--interface"></a>
 ### Nested Schema for `media_stream_output_configurations.destination_configurations.interface`
 
-Required:
+Optional:
 
 - `name` (String) The name of the VPC interface that you want to use for the media stream associated with the output.
 
@@ -90,12 +84,9 @@ Required:
 <a id="nestedatt--media_stream_output_configurations--encoding_parameters"></a>
 ### Nested Schema for `media_stream_output_configurations.encoding_parameters`
 
-Required:
-
-- `compression_factor` (Number) A value that is used to calculate compression for an output. The bitrate of the output is calculated as follows: Output bitrate = (1 / compressionFactor) * (source bitrate) This property only applies to outputs that use the ST 2110 JPEG XS protocol, with a flow source that uses the CDI protocol. Valid values are in the range of 3.0 to 10.0, inclusive.
-
 Optional:
 
+- `compression_factor` (Number) A value that is used to calculate compression for an output. The bitrate of the output is calculated as follows: Output bitrate = (1 / compressionFactor) * (source bitrate) This property only applies to outputs that use the ST 2110 JPEG XS protocol, with a flow source that uses the CDI protocol. Valid values are in the range of 3.0 to 10.0, inclusive.
 - `encoder_profile` (String) A setting on the encoder that drives compression settings. This property only applies to video media streams associated with outputs that use the ST 2110 JPEG XS protocol, with a flow source that uses the CDI protocol.
 
 

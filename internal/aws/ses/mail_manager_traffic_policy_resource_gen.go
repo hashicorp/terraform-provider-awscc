@@ -23,6 +23,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -281,18 +282,28 @@ func mailManagerTrafficPolicyResource(ctx context.Context) (resource.Resource, e
 													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 														// Property: Analyzer
 														"analyzer": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Required: true,
+															Optional: true,
+															Computed: true,
 															Validators: []validator.String{ /*START VALIDATORS*/
 																stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9:_/+=,@.#-]+$"), ""),
+																fwvalidators.NotNullString(),
 															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 														// Property: ResultField
 														"result_field": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Required: true,
+															Optional: true,
+															Computed: true,
 															Validators: []validator.String{ /*START VALIDATORS*/
 																stringvalidator.LengthBetween(1, 256),
 																stringvalidator.RegexMatches(regexp.MustCompile("^[\\sa-zA-Z0-9_]+$"), ""),
+																fwvalidators.NotNullString(),
 															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 													Optional: true,
@@ -302,17 +313,29 @@ func mailManagerTrafficPolicyResource(ctx context.Context) (resource.Resource, e
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
-											Required: true,
+											Optional: true,
+											Computed: true,
+											Validators: []validator.Object{ /*START VALIDATORS*/
+												fwvalidators.NotNullObject(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: Operator
 										"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Required: true,
+											Optional: true,
+											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.OneOf(
 													"IS_TRUE",
 													"IS_FALSE",
 												),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Optional: true,
@@ -341,27 +364,44 @@ func mailManagerTrafficPolicyResource(ctx context.Context) (resource.Resource, e
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
-											Required: true,
+											Optional: true,
+											Computed: true,
+											Validators: []validator.Object{ /*START VALIDATORS*/
+												fwvalidators.NotNullObject(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: Operator
 										"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Required: true,
+											Optional: true,
+											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.OneOf(
 													"CIDR_MATCHES",
 													"NOT_CIDR_MATCHES",
 												),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: Values
 										"values": schema.ListAttribute{ /*START ATTRIBUTE*/
 											ElementType: types.StringType,
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.List{ /*START VALIDATORS*/
 												listvalidator.ValueStringsAre(
 													stringvalidator.RegexMatches(regexp.MustCompile("^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/([0-9]|[12][0-9]|3[0-2])$"), ""),
 												),
+												fwvalidators.NotNullList(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Optional: true,
@@ -390,11 +430,19 @@ func mailManagerTrafficPolicyResource(ctx context.Context) (resource.Resource, e
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
-											Required: true,
+											Optional: true,
+											Computed: true,
+											Validators: []validator.Object{ /*START VALIDATORS*/
+												fwvalidators.NotNullObject(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: Operator
 										"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Required: true,
+											Optional: true,
+											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.OneOf(
 													"EQUALS",
@@ -403,12 +451,23 @@ func mailManagerTrafficPolicyResource(ctx context.Context) (resource.Resource, e
 													"ENDS_WITH",
 													"CONTAINS",
 												),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: Values
 										"values": schema.ListAttribute{ /*START ATTRIBUTE*/
 											ElementType: types.StringType,
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												fwvalidators.NotNullList(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Optional: true,
@@ -437,27 +496,44 @@ func mailManagerTrafficPolicyResource(ctx context.Context) (resource.Resource, e
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
-											Required: true,
+											Optional: true,
+											Computed: true,
+											Validators: []validator.Object{ /*START VALIDATORS*/
+												fwvalidators.NotNullObject(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: Operator
 										"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Required: true,
+											Optional: true,
+											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.OneOf(
 													"MINIMUM_TLS_VERSION",
 													"IS",
 												),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: Value
 										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Required: true,
+											Optional: true,
+											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.OneOf(
 													"TLS1_2",
 													"TLS1_3",
 												),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Optional: true,
@@ -512,19 +588,29 @@ func mailManagerTrafficPolicyResource(ctx context.Context) (resource.Resource, e
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9/_\\+=\\.:@\\-]+$"), ""),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9/_\\+=\\.:@\\-]*$"), ""),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

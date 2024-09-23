@@ -252,7 +252,7 @@ resource "awscc_s3_bucket" "example" {
 <a id="nestedatt--destination_options"></a>
 ### Nested Schema for `destination_options`
 
-Required:
+Optional:
 
 - `file_format` (String)
 - `hive_compatible_partitions` (Boolean)
@@ -262,7 +262,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

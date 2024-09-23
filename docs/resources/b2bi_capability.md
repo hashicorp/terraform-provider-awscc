@@ -44,7 +44,7 @@ Optional:
 <a id="nestedatt--configuration--edi"></a>
 ### Nested Schema for `configuration.edi`
 
-Required:
+Optional:
 
 - `input_location` (Attributes) (see [below for nested schema](#nestedatt--configuration--edi--input_location))
 - `output_location` (Attributes) (see [below for nested schema](#nestedatt--configuration--edi--output_location))
@@ -100,7 +100,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

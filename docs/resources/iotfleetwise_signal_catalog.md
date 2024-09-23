@@ -55,16 +55,13 @@ Optional:
 <a id="nestedatt--nodes--actuator"></a>
 ### Nested Schema for `nodes.actuator`
 
-Required:
-
-- `data_type` (String)
-- `fully_qualified_name` (String)
-
 Optional:
 
 - `allowed_values` (List of String)
 - `assigned_value` (String)
+- `data_type` (String)
 - `description` (String)
+- `fully_qualified_name` (String)
 - `max` (Number)
 - `min` (Number)
 - `unit` (String)
@@ -73,17 +70,14 @@ Optional:
 <a id="nestedatt--nodes--attribute"></a>
 ### Nested Schema for `nodes.attribute`
 
-Required:
-
-- `data_type` (String)
-- `fully_qualified_name` (String)
-
 Optional:
 
 - `allowed_values` (List of String)
 - `assigned_value` (String)
+- `data_type` (String)
 - `default_value` (String)
 - `description` (String)
+- `fully_qualified_name` (String)
 - `max` (Number)
 - `min` (Number)
 - `unit` (String)
@@ -92,27 +86,21 @@ Optional:
 <a id="nestedatt--nodes--branch"></a>
 ### Nested Schema for `nodes.branch`
 
-Required:
-
-- `fully_qualified_name` (String)
-
 Optional:
 
 - `description` (String)
+- `fully_qualified_name` (String)
 
 
 <a id="nestedatt--nodes--sensor"></a>
 ### Nested Schema for `nodes.sensor`
 
-Required:
-
-- `data_type` (String)
-- `fully_qualified_name` (String)
-
 Optional:
 
 - `allowed_values` (List of String)
+- `data_type` (String)
 - `description` (String)
+- `fully_qualified_name` (String)
 - `max` (Number)
 - `min` (Number)
 - `unit` (String)
@@ -122,7 +110,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

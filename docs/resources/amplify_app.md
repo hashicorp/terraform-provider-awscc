@@ -176,6 +176,7 @@ resource "awscc_amplify_app" "example" {
 - `auto_branch_creation_config` (Attributes) (see [below for nested schema](#nestedatt--auto_branch_creation_config))
 - `basic_auth_config` (Attributes) (see [below for nested schema](#nestedatt--basic_auth_config))
 - `build_spec` (String)
+- `cache_config` (Attributes) (see [below for nested schema](#nestedatt--cache_config))
 - `custom_headers` (String)
 - `custom_rules` (Attributes List) (see [below for nested schema](#nestedatt--custom_rules))
 - `description` (String)
@@ -225,7 +226,7 @@ Optional:
 <a id="nestedatt--auto_branch_creation_config--environment_variables"></a>
 ### Nested Schema for `auto_branch_creation_config.environment_variables`
 
-Required:
+Optional:
 
 - `name` (String)
 - `value` (String)
@@ -242,24 +243,29 @@ Optional:
 - `username` (String)
 
 
+<a id="nestedatt--cache_config"></a>
+### Nested Schema for `cache_config`
+
+Optional:
+
+- `type` (String)
+
+
 <a id="nestedatt--custom_rules"></a>
 ### Nested Schema for `custom_rules`
-
-Required:
-
-- `source` (String)
-- `target` (String)
 
 Optional:
 
 - `condition` (String)
+- `source` (String)
 - `status` (String)
+- `target` (String)
 
 
 <a id="nestedatt--environment_variables"></a>
 ### Nested Schema for `environment_variables`
 
-Required:
+Optional:
 
 - `name` (String)
 - `value` (String)
@@ -268,7 +274,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

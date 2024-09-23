@@ -183,7 +183,7 @@ Optional:
 <a id="nestedatt--storage_lens_configuration--account_level--bucket_level--prefix_level"></a>
 ### Nested Schema for `storage_lens_configuration.account_level.bucket_level.prefix_level`
 
-Required:
+Optional:
 
 - `storage_metrics` (Attributes) (see [below for nested schema](#nestedatt--storage_lens_configuration--account_level--bucket_level--prefix_level--storage_metrics))
 
@@ -261,7 +261,7 @@ Optional:
 <a id="nestedatt--storage_lens_configuration--aws_org"></a>
 ### Nested Schema for `storage_lens_configuration.aws_org`
 
-Required:
+Optional:
 
 - `arn` (String) The Amazon Resource Name (ARN) of the specified resource.
 
@@ -277,7 +277,7 @@ Optional:
 <a id="nestedatt--storage_lens_configuration--data_export--cloudwatch_metrics"></a>
 ### Nested Schema for `storage_lens_configuration.data_export.cloudwatch_metrics`
 
-Required:
+Optional:
 
 - `is_enabled` (Boolean) Specifies whether CloudWatch metrics are enabled or disabled.
 
@@ -285,16 +285,13 @@ Required:
 <a id="nestedatt--storage_lens_configuration--data_export--s3_bucket_destination"></a>
 ### Nested Schema for `storage_lens_configuration.data_export.s3_bucket_destination`
 
-Required:
+Optional:
 
 - `account_id` (String) The AWS account ID that owns the destination S3 bucket.
 - `arn` (String) The ARN of the bucket to which Amazon S3 Storage Lens exports will be placed.
+- `encryption` (Attributes) Configures the server-side encryption for Amazon S3 Storage Lens report files with either S3-managed keys (SSE-S3) or KMS-managed keys (SSE-KMS). (see [below for nested schema](#nestedatt--storage_lens_configuration--data_export--s3_bucket_destination--encryption))
 - `format` (String) Specifies the file format to use when exporting Amazon S3 Storage Lens metrics export.
 - `output_schema_version` (String) The version of the output schema to use when exporting Amazon S3 Storage Lens metrics.
-
-Optional:
-
-- `encryption` (Attributes) Configures the server-side encryption for Amazon S3 Storage Lens report files with either S3-managed keys (SSE-S3) or KMS-managed keys (SSE-KMS). (see [below for nested schema](#nestedatt--storage_lens_configuration--data_export--s3_bucket_destination--encryption))
 - `prefix` (String) The prefix to use for Amazon S3 Storage Lens export.
 
 <a id="nestedatt--storage_lens_configuration--data_export--s3_bucket_destination--encryption"></a>
@@ -308,7 +305,7 @@ Optional:
 <a id="nestedatt--storage_lens_configuration--data_export--s3_bucket_destination--encryption--ssekms"></a>
 ### Nested Schema for `storage_lens_configuration.data_export.s3_bucket_destination.encryption.ssekms`
 
-Required:
+Optional:
 
 - `key_id` (String) The ARN of the KMS key to use for encryption.
 
@@ -338,7 +335,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

@@ -92,7 +92,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
@@ -101,30 +101,27 @@ Required:
 <a id="nestedatt--target_configuration"></a>
 ### Nested Schema for `target_configuration`
 
-Required:
+Optional:
 
 - `timestream_configuration` (Attributes) Configuration needed to write data into the Timestream database and table. (see [below for nested schema](#nestedatt--target_configuration--timestream_configuration))
 
 <a id="nestedatt--target_configuration--timestream_configuration"></a>
 ### Nested Schema for `target_configuration.timestream_configuration`
 
-Required:
+Optional:
 
 - `database_name` (String) Name of Timestream database to which the query result will be written.
 - `dimension_mappings` (Attributes List) This is to allow mapping column(s) from the query result to the dimension in the destination table. (see [below for nested schema](#nestedatt--target_configuration--timestream_configuration--dimension_mappings))
-- `table_name` (String) Name of Timestream table that the query result will be written to. The table should be within the same database that is provided in Timestream configuration.
-- `time_column` (String) Column from query result that should be used as the time column in destination table. Column type for this should be TIMESTAMP.
-
-Optional:
-
 - `measure_name_column` (String) Name of the measure name column from the query result.
 - `mixed_measure_mappings` (Attributes List) Specifies how to map measures to multi-measure records. (see [below for nested schema](#nestedatt--target_configuration--timestream_configuration--mixed_measure_mappings))
 - `multi_measure_mappings` (Attributes) Only one of MixedMeasureMappings or MultiMeasureMappings is to be provided. MultiMeasureMappings can be used to ingest data as multi measures in the derived table. (see [below for nested schema](#nestedatt--target_configuration--timestream_configuration--multi_measure_mappings))
+- `table_name` (String) Name of Timestream table that the query result will be written to. The table should be within the same database that is provided in Timestream configuration.
+- `time_column` (String) Column from query result that should be used as the time column in destination table. Column type for this should be TIMESTAMP.
 
 <a id="nestedatt--target_configuration--timestream_configuration--dimension_mappings"></a>
 ### Nested Schema for `target_configuration.timestream_configuration.dimension_mappings`
 
-Required:
+Optional:
 
 - `dimension_value_type` (String) Type for the dimension.
 - `name` (String) Column name from query result.
@@ -133,13 +130,10 @@ Required:
 <a id="nestedatt--target_configuration--timestream_configuration--mixed_measure_mappings"></a>
 ### Nested Schema for `target_configuration.timestream_configuration.mixed_measure_mappings`
 
-Required:
-
-- `measure_value_type` (String) Type of the value that is to be read from SourceColumn. If the mapping is for MULTI, use MeasureValueType.MULTI.
-
 Optional:
 
 - `measure_name` (String) Refers to the value of the measure name in a result row. This field is required if MeasureNameColumn is provided.
+- `measure_value_type` (String) Type of the value that is to be read from SourceColumn. If the mapping is for MULTI, use MeasureValueType.MULTI.
 - `multi_measure_attribute_mappings` (Attributes List) Required. Attribute mappings to be used for mapping query results to ingest data for multi-measure attributes. (see [below for nested schema](#nestedatt--target_configuration--timestream_configuration--mixed_measure_mappings--multi_measure_attribute_mappings))
 - `source_column` (String) This field refers to the source column from which the measure value is to be read for result materialization.
 - `target_measure_name` (String) Target measure name to be used. If not provided, the target measure name by default would be MeasureName if provided, or SourceColumn otherwise.
@@ -147,13 +141,10 @@ Optional:
 <a id="nestedatt--target_configuration--timestream_configuration--mixed_measure_mappings--multi_measure_attribute_mappings"></a>
 ### Nested Schema for `target_configuration.timestream_configuration.mixed_measure_mappings.multi_measure_attribute_mappings`
 
-Required:
+Optional:
 
 - `measure_value_type` (String) Value type of the measure value column to be read from the query result.
 - `source_column` (String) Source measure value column in the query result where the attribute value is to be read.
-
-Optional:
-
 - `target_multi_measure_attribute_name` (String) Custom name to be used for attribute name in derived table. If not provided, source column name would be used.
 
 
@@ -161,24 +152,18 @@ Optional:
 <a id="nestedatt--target_configuration--timestream_configuration--multi_measure_mappings"></a>
 ### Nested Schema for `target_configuration.timestream_configuration.multi_measure_mappings`
 
-Required:
-
-- `multi_measure_attribute_mappings` (Attributes List) Required. Attribute mappings to be used for mapping query results to ingest data for multi-measure attributes. (see [below for nested schema](#nestedatt--target_configuration--timestream_configuration--multi_measure_mappings--multi_measure_attribute_mappings))
-
 Optional:
 
+- `multi_measure_attribute_mappings` (Attributes List) Required. Attribute mappings to be used for mapping query results to ingest data for multi-measure attributes. (see [below for nested schema](#nestedatt--target_configuration--timestream_configuration--multi_measure_mappings--multi_measure_attribute_mappings))
 - `target_multi_measure_name` (String) Name of the target multi-measure in the derived table. Required if MeasureNameColumn is not provided. If MeasureNameColumn is provided then the value from that column will be used as the multi-measure name.
 
 <a id="nestedatt--target_configuration--timestream_configuration--multi_measure_mappings--multi_measure_attribute_mappings"></a>
 ### Nested Schema for `target_configuration.timestream_configuration.multi_measure_mappings.multi_measure_attribute_mappings`
 
-Required:
+Optional:
 
 - `measure_value_type` (String) Value type of the measure value column to be read from the query result.
 - `source_column` (String) Source measure value column in the query result where the attribute value is to be read.
-
-Optional:
-
 - `target_multi_measure_attribute_name` (String) Custom name to be used for attribute name in derived table. If not provided, source column name would be used.
 
 ## Import

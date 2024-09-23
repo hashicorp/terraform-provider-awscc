@@ -21,6 +21,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -99,18 +100,22 @@ func analysisTemplateResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Name
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 100),
 							stringvalidator.RegexMatches(regexp.MustCompile("[0-9a-zA-Z_]+"), ""),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.RequiresReplace(),
+							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Type
 					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.OneOf(
 								"SMALLINT",
@@ -129,9 +134,11 @@ func analysisTemplateResource(ctx context.Context) (resource.Resource, error) {
 								"TIMETZ",
 								"VARBYTE",
 							),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.RequiresReplace(),
+							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -398,17 +405,27 @@ func analysisTemplateResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 256),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

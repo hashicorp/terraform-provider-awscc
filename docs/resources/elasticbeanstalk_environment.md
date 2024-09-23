@@ -64,13 +64,10 @@ resource "awscc_elasticbeanstalk_environment" "example-env" {
 <a id="nestedatt--option_settings"></a>
 ### Nested Schema for `option_settings`
 
-Required:
+Optional:
 
 - `namespace` (String) A unique namespace that identifies the option's associated AWS resource.
 - `option_name` (String) The name of the configuration option.
-
-Optional:
-
 - `resource_name` (String) A unique resource name for the option setting. Use it for a time–based scaling configuration option.
 - `value` (String) The current value for the configuration option.
 
@@ -78,7 +75,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag.
 - `value` (String) The value for the tag.

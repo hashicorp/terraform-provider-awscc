@@ -14,8 +14,10 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -255,12 +257,26 @@ func functionConfigurationResource(ctx context.Context) (resource.Resource, erro
 				// Property: Name
 				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The name of the runtime to use. Currently, the only allowed value is APPSYNC_JS.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: RuntimeVersion
 				"runtime_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The version of the runtime to use. Currently, the only allowed version is 1.0.0.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Describes a runtime used by an AWS AppSync pipeline resolver or AWS AppSync function. Specifies the name and version of the runtime to use. Note that if a runtime is specified, code must also be specified.",
@@ -307,7 +323,14 @@ func functionConfigurationResource(ctx context.Context) (resource.Resource, erro
 				// Property: ConflictDetection
 				"conflict_detection": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The Conflict Detection strategy to use.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: ConflictHandler
 				"conflict_handler": schema.StringAttribute{ /*START ATTRIBUTE*/

@@ -43,7 +43,7 @@ Optional:
 <a id="nestedatt--destination--amp_configuration"></a>
 ### Nested Schema for `destination.amp_configuration`
 
-Required:
+Optional:
 
 - `workspace_arn` (String) ARN of an Amazon Managed Prometheus workspace
 
@@ -67,21 +67,18 @@ Optional:
 <a id="nestedatt--source--eks_configuration"></a>
 ### Nested Schema for `source.eks_configuration`
 
-Required:
-
-- `cluster_arn` (String) ARN of an EKS cluster
-- `subnet_ids` (List of String) List of subnet IDs
-
 Optional:
 
+- `cluster_arn` (String) ARN of an EKS cluster
 - `security_group_ids` (List of String) List of security group IDs
+- `subnet_ids` (List of String) List of subnet IDs
 
 
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

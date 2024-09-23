@@ -64,7 +64,7 @@ resource "awscc_lambda_alias" "example" {
 <a id="nestedatt--provisioned_concurrency_config"></a>
 ### Nested Schema for `provisioned_concurrency_config`
 
-Required:
+Optional:
 
 - `provisioned_concurrent_executions` (Number) The amount of provisioned concurrency to allocate for the alias.
 
@@ -79,7 +79,7 @@ Optional:
 <a id="nestedatt--routing_config--additional_version_weights"></a>
 ### Nested Schema for `routing_config.additional_version_weights`
 
-Required:
+Optional:
 
 - `function_version` (String) The qualifier of the second version.
 - `function_weight` (Number) The percentage of traffic that the alias routes to the second version.

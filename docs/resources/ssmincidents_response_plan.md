@@ -52,7 +52,7 @@ Optional:
 <a id="nestedatt--incident_template--incident_tags"></a>
 ### Nested Schema for `incident_template.incident_tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)
@@ -77,22 +77,19 @@ Optional:
 <a id="nestedatt--actions--ssm_automation"></a>
 ### Nested Schema for `actions.ssm_automation`
 
-Required:
-
-- `document_name` (String) The document name to use when starting the SSM automation document.
-- `role_arn` (String) The role ARN to use when starting the SSM automation document.
-
 Optional:
 
+- `document_name` (String) The document name to use when starting the SSM automation document.
 - `document_version` (String) The version of the document to use when starting the SSM automation document.
 - `dynamic_parameters` (Attributes Set) The parameters with dynamic values to set when starting the SSM automation document. (see [below for nested schema](#nestedatt--actions--ssm_automation--dynamic_parameters))
 - `parameters` (Attributes Set) The parameters to set when starting the SSM automation document. (see [below for nested schema](#nestedatt--actions--ssm_automation--parameters))
+- `role_arn` (String) The role ARN to use when starting the SSM automation document.
 - `target_account` (String) The account type to use when starting the SSM automation document.
 
 <a id="nestedatt--actions--ssm_automation--dynamic_parameters"></a>
 ### Nested Schema for `actions.ssm_automation.dynamic_parameters`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (Attributes) Value of the dynamic parameter to set when starting the SSM automation document. (see [below for nested schema](#nestedatt--actions--ssm_automation--dynamic_parameters--value))
@@ -109,7 +106,7 @@ Optional:
 <a id="nestedatt--actions--ssm_automation--parameters"></a>
 ### Nested Schema for `actions.ssm_automation.parameters`
 
-Required:
+Optional:
 
 - `key` (String)
 - `values` (List of String)
@@ -135,7 +132,7 @@ Optional:
 <a id="nestedatt--integrations--pager_duty_configuration"></a>
 ### Nested Schema for `integrations.pager_duty_configuration`
 
-Required:
+Optional:
 
 - `name` (String) The name of the pagerDuty configuration.
 - `pager_duty_incident_configuration` (Attributes) The pagerDuty incident configuration. (see [below for nested schema](#nestedatt--integrations--pager_duty_configuration--pager_duty_incident_configuration))
@@ -144,7 +141,7 @@ Required:
 <a id="nestedatt--integrations--pager_duty_configuration--pager_duty_incident_configuration"></a>
 ### Nested Schema for `integrations.pager_duty_configuration.pager_duty_incident_configuration`
 
-Required:
+Optional:
 
 - `service_id` (String) The pagerDuty serviceId.
 
@@ -154,7 +151,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

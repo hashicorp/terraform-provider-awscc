@@ -316,14 +316,11 @@ Optional:
 <a id="nestedatt--outpost_config"></a>
 ### Nested Schema for `outpost_config`
 
-Required:
-
-- `control_plane_instance_type` (String) Specify the Instance type of the machines that should be used to create your cluster.
-- `outpost_arns` (List of String) Specify one or more Arn(s) of Outpost(s) on which you would like to create your cluster.
-
 Optional:
 
+- `control_plane_instance_type` (String) Specify the Instance type of the machines that should be used to create your cluster.
 - `control_plane_placement` (Attributes) Specify the placement group of the control plane machines for your cluster. (see [below for nested schema](#nestedatt--outpost_config--control_plane_placement))
+- `outpost_arns` (List of String) Specify one or more Arn(s) of Outpost(s) on which you would like to create your cluster.
 
 <a id="nestedatt--outpost_config--control_plane_placement"></a>
 ### Nested Schema for `outpost_config.control_plane_placement`
@@ -337,7 +334,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

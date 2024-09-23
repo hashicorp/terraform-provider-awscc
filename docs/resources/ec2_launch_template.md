@@ -725,7 +725,7 @@ Optional:
 <a id="nestedatt--launch_template_data--tag_specifications--tags"></a>
 ### Nested Schema for `launch_template_data.tag_specifications.tags`
 
-Required:
+Optional:
 
 - `key` (String) The tag key.
 - `value` (String) The tag value.
@@ -744,7 +744,7 @@ Optional:
 <a id="nestedatt--tag_specifications--tags"></a>
 ### Nested Schema for `tag_specifications.tags`
 
-Required:
+Optional:
 
 - `key` (String) The tag key.
 - `value` (String) The tag value.

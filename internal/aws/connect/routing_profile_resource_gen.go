@@ -15,6 +15,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -23,6 +24,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -185,13 +187,18 @@ func routingProfileResource(ctx context.Context) (resource.Resource, error) {
 							// Property: BehaviorType
 							"behavior_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Specifies the other channels that can be routed to an agent handling their current channel.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"ROUTE_CURRENT_CHANNEL_ONLY",
 										"ROUTE_ANY_CHANNEL",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "Defines the cross-channel routing behavior that allows an agent working on a contact in one channel to be offered a contact from a different channel.",
@@ -289,18 +296,28 @@ func routingProfileResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Delay
 					"delay": schema.Int64Attribute{ /*START ATTRIBUTE*/
 						Description: "The delay, in seconds, a contact should wait in the queue before they are routed to an available agent.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.Int64{ /*START VALIDATORS*/
 							int64validator.Between(0, 9999),
+							fwvalidators.NotNullInt64(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+							int64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Priority
 					"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
 						Description: "The order in which contacts are to be handled for the queue.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.Int64{ /*START VALIDATORS*/
 							int64validator.Between(1, 99),
+							fwvalidators.NotNullInt64(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+							int64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: QueueReference
 					"queue_reference": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -308,26 +325,43 @@ func routingProfileResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Channel
 							"channel": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The channels that agents can handle in the Contact Control Panel (CCP).",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"VOICE",
 										"CHAT",
 										"TASK",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: QueueArn
 							"queue_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The Amazon Resource Name (ARN) for the queue.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/queue/[-a-zA-Z0-9]*$"), ""),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "Contains the channel and queue identifier for a routing profile.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.Object{ /*START VALIDATORS*/
+							fwvalidators.NotNullObject(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -396,18 +430,28 @@ func routingProfileResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthAtMost(256),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

@@ -61,6 +61,21 @@ func serviceLevelObjectiveDataSource(ctx context.Context) (datasource.DataSource
 			Description: "An optional description for this SLO. Default is 'No description'",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: EvaluationType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Displays whether this is a period-based SLO or a request-based SLO.",
+		//	  "enum": [
+		//	    "PeriodBased",
+		//	    "RequestBased"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"evaluation_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Displays whether this is a period-based SLO or a request-based SLO.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Goal
 		// CloudFormation resource type schema:
 		//
@@ -224,6 +239,666 @@ func serviceLevelObjectiveDataSource(ctx context.Context) (datasource.DataSource
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of this SLO.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: RequestBasedSli
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "This structure contains information about the performance metric that a request-based SLO monitors.",
+		//	  "properties": {
+		//	    "ComparisonOperator": {
+		//	      "description": "The arithmetic operation used when comparing the specified metric to the threshold.",
+		//	      "enum": [
+		//	        "GreaterThanOrEqualTo",
+		//	        "LessThanOrEqualTo",
+		//	        "LessThan",
+		//	        "GreaterThan"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "MetricThreshold": {
+		//	      "description": "The value that the SLI metric is compared to.",
+		//	      "type": "number"
+		//	    },
+		//	    "RequestBasedSliMetric": {
+		//	      "additionalProperties": false,
+		//	      "description": "This structure contains the information about the metric that is used for a request-based SLO.",
+		//	      "properties": {
+		//	        "KeyAttributes": {
+		//	          "additionalProperties": false,
+		//	          "description": "This is a string-to-string map that contains information about the type of object that this SLO is related to.",
+		//	          "patternProperties": {
+		//	            "": {
+		//	              "type": "string"
+		//	            }
+		//	          }
+		//	        },
+		//	        "MetricType": {
+		//	          "description": "If the SLO monitors either the LATENCY or AVAILABILITY metric that Application Signals collects, this field displays which of those metrics is used.",
+		//	          "enum": [
+		//	            "LATENCY",
+		//	            "AVAILABILITY"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "MonitoredRequestCountMetric": {
+		//	          "additionalProperties": false,
+		//	          "description": "This structure defines the metric that is used as the \"good request\" or \"bad request\" value for a request-based SLO. This value observed for the metric defined in `TotalRequestCountMetric` is divided by the number found for `MonitoredRequestCountMetric` to determine the percentage of successful requests that this SLO tracks.",
+		//	          "properties": {
+		//	            "BadCountMetric": {
+		//	              "description": "If you want to count \"bad requests\" to determine the percentage of successful requests for this request-based SLO, specify the metric to use as \"bad requests\" in this structure.",
+		//	              "insertionOrder": true,
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "description": "Use this structure to define a metric or metric math expression that you want to use as for a service level objective.\nEach `MetricDataQuery` in the `MetricDataQueries` array specifies either a metric to retrieve, or a metric math expression to be performed on retrieved metrics. A single `MetricDataQueries` array can include as many as 20 `MetricDataQuery` structures in the array. The 20 structures can include as many as 10 structures that contain a `MetricStat` parameter to retrieve a metric, and as many as 10 structures that contain the `Expression` parameter to perform a math expression. Of those Expression structures, exactly one must have true as the value for `ReturnData`. The result of this expression used for the SLO.",
+		//	                "properties": {
+		//	                  "AccountId": {
+		//	                    "description": "The ID of the account where the metrics are located, if this is a cross-account alarm.",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Expression": {
+		//	                    "description": "The math expression to be performed on the returned data.",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Id": {
+		//	                    "description": "A short name used to tie this object to the results in the response.",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "MetricStat": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "A metric to be used directly for the SLO, or to be used in the math expression that will be used for the SLO. Within one MetricDataQuery, you must specify either Expression or MetricStat but not both.",
+		//	                    "properties": {
+		//	                      "Metric": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "This structure defines the metric used for a service level indicator, including the metric name, namespace, and dimensions.",
+		//	                        "properties": {
+		//	                          "Dimensions": {
+		//	                            "description": "An array of one or more dimensions to use to define the metric that you want to use.",
+		//	                            "insertionOrder": false,
+		//	                            "items": {
+		//	                              "additionalProperties": false,
+		//	                              "description": "A dimension is a name/value pair that is part of the identity of a metric. Because dimensions are part of the unique identifier for a metric, whenever you add a unique name/value pair to one of your metrics, you are creating a new variation of that metric. For example, many Amazon EC2 metrics publish `InstanceId` as a dimension name, and the actual instance ID as the value for that dimension. You can assign up to 30 dimensions to a metric.",
+		//	                              "properties": {
+		//	                                "Name": {
+		//	                                  "description": "The name of the dimension. Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:). ASCII control characters are not supported as part of dimension names.",
+		//	                                  "type": "string"
+		//	                                },
+		//	                                "Value": {
+		//	                                  "description": "The value of the dimension. Dimension values must contain only ASCII characters and must include at least one non-whitespace character. ASCII control characters are not supported as part of dimension values",
+		//	                                  "type": "string"
+		//	                                }
+		//	                              },
+		//	                              "required": [
+		//	                                "Value",
+		//	                                "Name"
+		//	                              ],
+		//	                              "type": "object"
+		//	                            },
+		//	                            "type": "array",
+		//	                            "uniqueItems": false
+		//	                          },
+		//	                          "MetricName": {
+		//	                            "description": "The name of the metric to use.",
+		//	                            "type": "string"
+		//	                          },
+		//	                          "Namespace": {
+		//	                            "description": "The namespace of the metric.",
+		//	                            "type": "string"
+		//	                          }
+		//	                        },
+		//	                        "type": "object"
+		//	                      },
+		//	                      "Period": {
+		//	                        "description": "The granularity, in seconds, to be used for the metric.",
+		//	                        "type": "integer"
+		//	                      },
+		//	                      "Stat": {
+		//	                        "description": "The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic.",
+		//	                        "type": "string"
+		//	                      },
+		//	                      "Unit": {
+		//	                        "description": "If you omit Unit then all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.",
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "Stat",
+		//	                      "Period",
+		//	                      "Metric"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  },
+		//	                  "ReturnData": {
+		//	                    "description": "This option indicates whether to return the timestamps and raw data values of this metric.",
+		//	                    "type": "boolean"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Id"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": false
+		//	            },
+		//	            "GoodCountMetric": {
+		//	              "description": "If you want to count \"good requests\" to determine the percentage of successful requests for this request-based SLO, specify the metric to use as \"good requests\" in this structure.",
+		//	              "insertionOrder": true,
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "description": "Use this structure to define a metric or metric math expression that you want to use as for a service level objective.\nEach `MetricDataQuery` in the `MetricDataQueries` array specifies either a metric to retrieve, or a metric math expression to be performed on retrieved metrics. A single `MetricDataQueries` array can include as many as 20 `MetricDataQuery` structures in the array. The 20 structures can include as many as 10 structures that contain a `MetricStat` parameter to retrieve a metric, and as many as 10 structures that contain the `Expression` parameter to perform a math expression. Of those Expression structures, exactly one must have true as the value for `ReturnData`. The result of this expression used for the SLO.",
+		//	                "properties": {
+		//	                  "AccountId": {
+		//	                    "description": "The ID of the account where the metrics are located, if this is a cross-account alarm.",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Expression": {
+		//	                    "description": "The math expression to be performed on the returned data.",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Id": {
+		//	                    "description": "A short name used to tie this object to the results in the response.",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "MetricStat": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "A metric to be used directly for the SLO, or to be used in the math expression that will be used for the SLO. Within one MetricDataQuery, you must specify either Expression or MetricStat but not both.",
+		//	                    "properties": {
+		//	                      "Metric": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "This structure defines the metric used for a service level indicator, including the metric name, namespace, and dimensions.",
+		//	                        "properties": {
+		//	                          "Dimensions": {
+		//	                            "description": "An array of one or more dimensions to use to define the metric that you want to use.",
+		//	                            "insertionOrder": false,
+		//	                            "items": {
+		//	                              "additionalProperties": false,
+		//	                              "description": "A dimension is a name/value pair that is part of the identity of a metric. Because dimensions are part of the unique identifier for a metric, whenever you add a unique name/value pair to one of your metrics, you are creating a new variation of that metric. For example, many Amazon EC2 metrics publish `InstanceId` as a dimension name, and the actual instance ID as the value for that dimension. You can assign up to 30 dimensions to a metric.",
+		//	                              "properties": {
+		//	                                "Name": {
+		//	                                  "description": "The name of the dimension. Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:). ASCII control characters are not supported as part of dimension names.",
+		//	                                  "type": "string"
+		//	                                },
+		//	                                "Value": {
+		//	                                  "description": "The value of the dimension. Dimension values must contain only ASCII characters and must include at least one non-whitespace character. ASCII control characters are not supported as part of dimension values",
+		//	                                  "type": "string"
+		//	                                }
+		//	                              },
+		//	                              "required": [
+		//	                                "Value",
+		//	                                "Name"
+		//	                              ],
+		//	                              "type": "object"
+		//	                            },
+		//	                            "type": "array",
+		//	                            "uniqueItems": false
+		//	                          },
+		//	                          "MetricName": {
+		//	                            "description": "The name of the metric to use.",
+		//	                            "type": "string"
+		//	                          },
+		//	                          "Namespace": {
+		//	                            "description": "The namespace of the metric.",
+		//	                            "type": "string"
+		//	                          }
+		//	                        },
+		//	                        "type": "object"
+		//	                      },
+		//	                      "Period": {
+		//	                        "description": "The granularity, in seconds, to be used for the metric.",
+		//	                        "type": "integer"
+		//	                      },
+		//	                      "Stat": {
+		//	                        "description": "The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic.",
+		//	                        "type": "string"
+		//	                      },
+		//	                      "Unit": {
+		//	                        "description": "If you omit Unit then all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.",
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "Stat",
+		//	                      "Period",
+		//	                      "Metric"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  },
+		//	                  "ReturnData": {
+		//	                    "description": "This option indicates whether to return the timestamps and raw data values of this metric.",
+		//	                    "type": "boolean"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Id"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": false
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "OperationName": {
+		//	          "description": "If the SLO monitors a specific operation of the service, this field displays that operation name.",
+		//	          "maxLength": 255,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "TotalRequestCountMetric": {
+		//	          "description": "This structure defines the metric that is used as the \"total requests\" number for a request-based SLO. The number observed for this metric is divided by the number of \"good requests\" or \"bad requests\" that is observed for the metric defined in `MonitoredRequestCountMetric`.",
+		//	          "insertionOrder": true,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "description": "Use this structure to define a metric or metric math expression that you want to use as for a service level objective.\nEach `MetricDataQuery` in the `MetricDataQueries` array specifies either a metric to retrieve, or a metric math expression to be performed on retrieved metrics. A single `MetricDataQueries` array can include as many as 20 `MetricDataQuery` structures in the array. The 20 structures can include as many as 10 structures that contain a `MetricStat` parameter to retrieve a metric, and as many as 10 structures that contain the `Expression` parameter to perform a math expression. Of those Expression structures, exactly one must have true as the value for `ReturnData`. The result of this expression used for the SLO.",
+		//	            "properties": {
+		//	              "AccountId": {
+		//	                "description": "The ID of the account where the metrics are located, if this is a cross-account alarm.",
+		//	                "type": "string"
+		//	              },
+		//	              "Expression": {
+		//	                "description": "The math expression to be performed on the returned data.",
+		//	                "type": "string"
+		//	              },
+		//	              "Id": {
+		//	                "description": "A short name used to tie this object to the results in the response.",
+		//	                "type": "string"
+		//	              },
+		//	              "MetricStat": {
+		//	                "additionalProperties": false,
+		//	                "description": "A metric to be used directly for the SLO, or to be used in the math expression that will be used for the SLO. Within one MetricDataQuery, you must specify either Expression or MetricStat but not both.",
+		//	                "properties": {
+		//	                  "Metric": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "This structure defines the metric used for a service level indicator, including the metric name, namespace, and dimensions.",
+		//	                    "properties": {
+		//	                      "Dimensions": {
+		//	                        "description": "An array of one or more dimensions to use to define the metric that you want to use.",
+		//	                        "insertionOrder": false,
+		//	                        "items": {
+		//	                          "additionalProperties": false,
+		//	                          "description": "A dimension is a name/value pair that is part of the identity of a metric. Because dimensions are part of the unique identifier for a metric, whenever you add a unique name/value pair to one of your metrics, you are creating a new variation of that metric. For example, many Amazon EC2 metrics publish `InstanceId` as a dimension name, and the actual instance ID as the value for that dimension. You can assign up to 30 dimensions to a metric.",
+		//	                          "properties": {
+		//	                            "Name": {
+		//	                              "description": "The name of the dimension. Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:). ASCII control characters are not supported as part of dimension names.",
+		//	                              "type": "string"
+		//	                            },
+		//	                            "Value": {
+		//	                              "description": "The value of the dimension. Dimension values must contain only ASCII characters and must include at least one non-whitespace character. ASCII control characters are not supported as part of dimension values",
+		//	                              "type": "string"
+		//	                            }
+		//	                          },
+		//	                          "required": [
+		//	                            "Value",
+		//	                            "Name"
+		//	                          ],
+		//	                          "type": "object"
+		//	                        },
+		//	                        "type": "array",
+		//	                        "uniqueItems": false
+		//	                      },
+		//	                      "MetricName": {
+		//	                        "description": "The name of the metric to use.",
+		//	                        "type": "string"
+		//	                      },
+		//	                      "Namespace": {
+		//	                        "description": "The namespace of the metric.",
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  },
+		//	                  "Period": {
+		//	                    "description": "The granularity, in seconds, to be used for the metric.",
+		//	                    "type": "integer"
+		//	                  },
+		//	                  "Stat": {
+		//	                    "description": "The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic.",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Unit": {
+		//	                    "description": "If you omit Unit then all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Stat",
+		//	                  "Period",
+		//	                  "Metric"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "ReturnData": {
+		//	                "description": "This option indicates whether to return the timestamps and raw data values of this metric.",
+		//	                "type": "boolean"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Id"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "RequestBasedSliMetric"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"request_based_sli": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ComparisonOperator
+				"comparison_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The arithmetic operation used when comparing the specified metric to the threshold.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MetricThreshold
+				"metric_threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "The value that the SLI metric is compared to.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RequestBasedSliMetric
+				"request_based_sli_metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: KeyAttributes
+						"key_attributes":    // Pattern: ""
+						schema.MapAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "This is a string-to-string map that contains information about the type of object that this SLO is related to.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MetricType
+						"metric_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "If the SLO monitors either the LATENCY or AVAILABILITY metric that Application Signals collects, this field displays which of those metrics is used.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MonitoredRequestCountMetric
+						"monitored_request_count_metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: BadCountMetric
+								"bad_count_metric": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: AccountId
+											"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The ID of the account where the metrics are located, if this is a cross-account alarm.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Expression
+											"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The math expression to be performed on the returned data.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Id
+											"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "A short name used to tie this object to the results in the response.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: MetricStat
+											"metric_stat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Metric
+													"metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: Dimensions
+															"dimensions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: Name
+																		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Description: "The name of the dimension. Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:). ASCII control characters are not supported as part of dimension names.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: Value
+																		"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Description: "The value of the dimension. Dimension values must contain only ASCII characters and must include at least one non-whitespace character. ASCII control characters are not supported as part of dimension values",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Description: "An array of one or more dimensions to use to define the metric that you want to use.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: MetricName
+															"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "The name of the metric to use.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: Namespace
+															"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "The namespace of the metric.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "This structure defines the metric used for a service level indicator, including the metric name, namespace, and dimensions.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Period
+													"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+														Description: "The granularity, in seconds, to be used for the metric.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Stat
+													"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Unit
+													"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "If you omit Unit then all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "A metric to be used directly for the SLO, or to be used in the math expression that will be used for the SLO. Within one MetricDataQuery, you must specify either Expression or MetricStat but not both.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: ReturnData
+											"return_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Description: "This option indicates whether to return the timestamps and raw data values of this metric.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "If you want to count \"bad requests\" to determine the percentage of successful requests for this request-based SLO, specify the metric to use as \"bad requests\" in this structure.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: GoodCountMetric
+								"good_count_metric": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: AccountId
+											"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The ID of the account where the metrics are located, if this is a cross-account alarm.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Expression
+											"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The math expression to be performed on the returned data.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Id
+											"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "A short name used to tie this object to the results in the response.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: MetricStat
+											"metric_stat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Metric
+													"metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: Dimensions
+															"dimensions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: Name
+																		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Description: "The name of the dimension. Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:). ASCII control characters are not supported as part of dimension names.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: Value
+																		"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Description: "The value of the dimension. Dimension values must contain only ASCII characters and must include at least one non-whitespace character. ASCII control characters are not supported as part of dimension values",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Description: "An array of one or more dimensions to use to define the metric that you want to use.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: MetricName
+															"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "The name of the metric to use.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: Namespace
+															"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "The namespace of the metric.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "This structure defines the metric used for a service level indicator, including the metric name, namespace, and dimensions.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Period
+													"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+														Description: "The granularity, in seconds, to be used for the metric.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Stat
+													"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Unit
+													"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "If you omit Unit then all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "A metric to be used directly for the SLO, or to be used in the math expression that will be used for the SLO. Within one MetricDataQuery, you must specify either Expression or MetricStat but not both.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: ReturnData
+											"return_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Description: "This option indicates whether to return the timestamps and raw data values of this metric.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "If you want to count \"good requests\" to determine the percentage of successful requests for this request-based SLO, specify the metric to use as \"good requests\" in this structure.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "This structure defines the metric that is used as the \"good request\" or \"bad request\" value for a request-based SLO. This value observed for the metric defined in `TotalRequestCountMetric` is divided by the number found for `MonitoredRequestCountMetric` to determine the percentage of successful requests that this SLO tracks.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: OperationName
+						"operation_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "If the SLO monitors a specific operation of the service, this field displays that operation name.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: TotalRequestCountMetric
+						"total_request_count_metric": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AccountId
+									"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The ID of the account where the metrics are located, if this is a cross-account alarm.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Expression
+									"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The math expression to be performed on the returned data.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Id
+									"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "A short name used to tie this object to the results in the response.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: MetricStat
+									"metric_stat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Metric
+											"metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Dimensions
+													"dimensions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+														NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Name
+																"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "The name of the dimension. Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:). ASCII control characters are not supported as part of dimension names.",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+																// Property: Value
+																"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "The value of the dimension. Dimension values must contain only ASCII characters and must include at least one non-whitespace character. ASCII control characters are not supported as part of dimension values",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+														}, /*END NESTED OBJECT*/
+														Description: "An array of one or more dimensions to use to define the metric that you want to use.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: MetricName
+													"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The name of the metric to use.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Namespace
+													"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The namespace of the metric.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "This structure defines the metric used for a service level indicator, including the metric name, namespace, and dimensions.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Period
+											"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Description: "The granularity, in seconds, to be used for the metric.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Stat
+											"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Unit
+											"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "If you omit Unit then all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "A metric to be used directly for the SLO, or to be used in the math expression that will be used for the SLO. Within one MetricDataQuery, you must specify either Expression or MetricStat but not both.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: ReturnData
+									"return_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "This option indicates whether to return the timestamps and raw data values of this metric.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "This structure defines the metric that is used as the \"total requests\" number for a request-based SLO. The number observed for this metric is divided by the number of \"good requests\" or \"bad requests\" that is observed for the metric defined in `MonitoredRequestCountMetric`.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "This structure contains the information about the metric that is used for a request-based SLO.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "This structure contains information about the performance metric that a request-based SLO monitors.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Sli
@@ -599,45 +1274,52 @@ func serviceLevelObjectiveDataSource(ctx context.Context) (datasource.DataSource
 	opts = opts.WithCloudFormationTypeName("AWS::ApplicationSignals::ServiceLevelObjective").WithTerraformTypeName("awscc_applicationsignals_service_level_objective")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"account_id":          "AccountId",
-		"arn":                 "Arn",
-		"attainment_goal":     "AttainmentGoal",
-		"calendar_interval":   "CalendarInterval",
-		"comparison_operator": "ComparisonOperator",
-		"created_time":        "CreatedTime",
-		"description":         "Description",
-		"dimensions":          "Dimensions",
-		"duration":            "Duration",
-		"duration_unit":       "DurationUnit",
-		"expression":          "Expression",
-		"goal":                "Goal",
-		"id":                  "Id",
-		"interval":            "Interval",
-		"key":                 "Key",
-		"key_attributes":      "KeyAttributes",
-		"last_updated_time":   "LastUpdatedTime",
-		"metric":              "Metric",
-		"metric_data_queries": "MetricDataQueries",
-		"metric_name":         "MetricName",
-		"metric_stat":         "MetricStat",
-		"metric_threshold":    "MetricThreshold",
-		"metric_type":         "MetricType",
-		"name":                "Name",
-		"namespace":           "Namespace",
-		"operation_name":      "OperationName",
-		"period":              "Period",
-		"period_seconds":      "PeriodSeconds",
-		"return_data":         "ReturnData",
-		"rolling_interval":    "RollingInterval",
-		"sli":                 "Sli",
-		"sli_metric":          "SliMetric",
-		"start_time":          "StartTime",
-		"stat":                "Stat",
-		"statistic":           "Statistic",
-		"tags":                "Tags",
-		"unit":                "Unit",
-		"value":               "Value",
-		"warning_threshold":   "WarningThreshold",
+		"account_id":                     "AccountId",
+		"arn":                            "Arn",
+		"attainment_goal":                "AttainmentGoal",
+		"bad_count_metric":               "BadCountMetric",
+		"calendar_interval":              "CalendarInterval",
+		"comparison_operator":            "ComparisonOperator",
+		"created_time":                   "CreatedTime",
+		"description":                    "Description",
+		"dimensions":                     "Dimensions",
+		"duration":                       "Duration",
+		"duration_unit":                  "DurationUnit",
+		"evaluation_type":                "EvaluationType",
+		"expression":                     "Expression",
+		"goal":                           "Goal",
+		"good_count_metric":              "GoodCountMetric",
+		"id":                             "Id",
+		"interval":                       "Interval",
+		"key":                            "Key",
+		"key_attributes":                 "KeyAttributes",
+		"last_updated_time":              "LastUpdatedTime",
+		"metric":                         "Metric",
+		"metric_data_queries":            "MetricDataQueries",
+		"metric_name":                    "MetricName",
+		"metric_stat":                    "MetricStat",
+		"metric_threshold":               "MetricThreshold",
+		"metric_type":                    "MetricType",
+		"monitored_request_count_metric": "MonitoredRequestCountMetric",
+		"name":                           "Name",
+		"namespace":                      "Namespace",
+		"operation_name":                 "OperationName",
+		"period":                         "Period",
+		"period_seconds":                 "PeriodSeconds",
+		"request_based_sli":              "RequestBasedSli",
+		"request_based_sli_metric":       "RequestBasedSliMetric",
+		"return_data":                    "ReturnData",
+		"rolling_interval":               "RollingInterval",
+		"sli":                            "Sli",
+		"sli_metric":                     "SliMetric",
+		"start_time":                     "StartTime",
+		"stat":                           "Stat",
+		"statistic":                      "Statistic",
+		"tags":                           "Tags",
+		"total_request_count_metric":     "TotalRequestCountMetric",
+		"unit":                           "Unit",
+		"value":                          "Value",
+		"warning_threshold":              "WarningThreshold",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

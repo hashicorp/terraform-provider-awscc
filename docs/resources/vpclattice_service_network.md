@@ -32,7 +32,7 @@ A service network is a logical boundary for a collection of services. You can as
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

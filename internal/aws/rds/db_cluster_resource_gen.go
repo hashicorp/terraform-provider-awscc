@@ -23,12 +23,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -95,7 +95,14 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 					// Property: RoleArn
 					"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The Amazon Resource Name (ARN) of the IAM role that is associated with the DB cluster.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -259,7 +266,6 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "default": "default.aurora5.6",
 		//	  "description": "The name of the DB cluster parameter group to associate with this DB cluster.\n  If you apply a parameter group to an existing DB cluster, then its DB instances might need to reboot. This can result in an outage while the DB instances are rebooting.\n If you apply a change to parameter group associated with a stopped DB cluster, then the update stack waits until the DB cluster is started.\n  To list all of the available DB cluster parameter group names, use the following command:\n  ``aws rds describe-db-cluster-parameter-groups --query \"DBClusterParameterGroups[].DBClusterParameterGroupName\" --output text`` \n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
 		//	  "type": "string"
 		//	}
@@ -267,7 +273,6 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the DB cluster parameter group to associate with this DB cluster.\n  If you apply a parameter group to an existing DB cluster, then its DB instances might need to reboot. This can result in an outage while the DB instances are rebooting.\n If you apply a change to parameter group associated with a stopped DB cluster, then the update stack waits until the DB cluster is started.\n  To list all of the available DB cluster parameter group names, use the following command:\n  ``aws rds describe-db-cluster-parameter-groups --query \"DBClusterParameterGroups[].DBClusterParameterGroupName\" --output text`` \n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
 			Optional:    true,
 			Computed:    true,
-			Default:     stringdefault.StaticString("default.aurora5.6"),
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -730,7 +735,6 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "default": 0,
 		//	  "description": "The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB cluster. To turn off collecting Enhanced Monitoring metrics, specify ``0``.\n If ``MonitoringRoleArn`` is specified, also set ``MonitoringInterval`` to a value other than ``0``.\n Valid for Cluster Type: Multi-AZ DB clusters only\n Valid Values: ``0 | 1 | 5 | 10 | 15 | 30 | 60`` \n Default: ``0``",
 		//	  "type": "integer"
 		//	}
@@ -738,7 +742,6 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB cluster. To turn off collecting Enhanced Monitoring metrics, specify ``0``.\n If ``MonitoringRoleArn`` is specified, also set ``MonitoringInterval`` to a value other than ``0``.\n Valid for Cluster Type: Multi-AZ DB clusters only\n Valid Values: ``0 | 1 | 5 | 10 | 15 | 30 | 60`` \n Default: ``0``",
 			Optional:    true,
 			Computed:    true,
-			Default:     int64default.StaticInt64(0),
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -947,7 +950,6 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "default": "full-copy",
 		//	  "description": "The type of restore to be performed. You can specify one of the following values:\n  +   ``full-copy`` - The new DB cluster is restored as a full copy of the source DB cluster.\n  +   ``copy-on-write`` - The new DB cluster is restored as a clone of the source DB cluster.\n  \n If you don't specify a ``RestoreType`` value, then the new DB cluster is restored as a full copy of the source DB cluster.\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
 		//	  "type": "string"
 		//	}
@@ -955,7 +957,6 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The type of restore to be performed. You can specify one of the following values:\n  +   ``full-copy`` - The new DB cluster is restored as a full copy of the source DB cluster.\n  +   ``copy-on-write`` - The new DB cluster is restored as a clone of the source DB cluster.\n  \n If you don't specify a ``RestoreType`` value, then the new DB cluster is restored as a full copy of the source DB cluster.\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
 			Optional:    true,
 			Computed:    true,
-			Default:     stringdefault.StaticString("full-copy"),
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
@@ -1240,10 +1241,15 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-@]*)$\").",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/

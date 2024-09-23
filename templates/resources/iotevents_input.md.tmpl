@@ -1,0 +1,25 @@
+---
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
+description: |-
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Name}} ({{.Type}})
+
+{{ .Description | trimspace }}
+
+## Basic Example
+
+{{ tffile (printf "examples/resources/%s/iotevents_input.tf" .Name)}}
+
+{{ .SchemaMarkdown | trimspace }}
+{{- if .HasImport }}
+
+## Import
+
+Import is supported using the following syntax:
+
+{{ codefile "shell" .ImportFile }}
+
+{{- end }}

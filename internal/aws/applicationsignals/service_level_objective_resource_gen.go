@@ -28,6 +28,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -86,6 +87,24 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 1024),
 			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EvaluationType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Displays whether this is a period-based SLO or a request-based SLO.",
+		//	  "enum": [
+		//	    "PeriodBased",
+		//	    "RequestBased"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"evaluation_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Displays whether this is a period-based SLO or a request-based SLO.",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -189,29 +208,44 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 								// Property: Duration
 								"duration": schema.Int64Attribute{ /*START ATTRIBUTE*/
 									Description: "Specifies the duration of each calendar interval. For example, if `Duration` is 1 and `DurationUnit` is `MONTH`, each interval is one month, aligned with the calendar.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.Int64{ /*START VALIDATORS*/
 										int64validator.AtLeast(1),
+										fwvalidators.NotNullInt64(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: DurationUnit
 								"duration_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "Specifies the calendar interval unit.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.OneOf(
 											"DAY",
 											"MONTH",
 										),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: StartTime
 								"start_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
 									Description: "Epoch time in seconds you want the first interval to start. Be sure to choose a time that configures the intervals the way that you want. For example, if you want weekly intervals starting on Mondays at 6 a.m., be sure to specify a start time that is a Monday at 6 a.m.\nAs soon as one calendar interval ends, another automatically begins.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.Int64{ /*START VALIDATORS*/
 										int64validator.AtLeast(946684800),
+										fwvalidators.NotNullInt64(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "If the interval for this service level objective is a calendar interval, this structure contains the interval specifications.",
@@ -227,21 +261,31 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 								// Property: Duration
 								"duration": schema.Int64Attribute{ /*START ATTRIBUTE*/
 									Description: "Specifies the duration of each calendar interval. For example, if `Duration` is 1 and `DurationUnit` is `MONTH`, each interval is one month, aligned with the calendar.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.Int64{ /*START VALIDATORS*/
 										int64validator.AtLeast(1),
+										fwvalidators.NotNullInt64(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: DurationUnit
 								"duration_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "Specifies the calendar interval unit.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.OneOf(
 											"DAY",
 											"MONTH",
 										),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "If the interval is a calendar interval, this structure contains the interval specifications.",
@@ -307,6 +351,955 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RequestBasedSli
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "This structure contains information about the performance metric that a request-based SLO monitors.",
+		//	  "properties": {
+		//	    "ComparisonOperator": {
+		//	      "description": "The arithmetic operation used when comparing the specified metric to the threshold.",
+		//	      "enum": [
+		//	        "GreaterThanOrEqualTo",
+		//	        "LessThanOrEqualTo",
+		//	        "LessThan",
+		//	        "GreaterThan"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "MetricThreshold": {
+		//	      "description": "The value that the SLI metric is compared to.",
+		//	      "type": "number"
+		//	    },
+		//	    "RequestBasedSliMetric": {
+		//	      "additionalProperties": false,
+		//	      "description": "This structure contains the information about the metric that is used for a request-based SLO.",
+		//	      "properties": {
+		//	        "KeyAttributes": {
+		//	          "additionalProperties": false,
+		//	          "description": "This is a string-to-string map that contains information about the type of object that this SLO is related to.",
+		//	          "patternProperties": {
+		//	            "": {
+		//	              "type": "string"
+		//	            }
+		//	          }
+		//	        },
+		//	        "MetricType": {
+		//	          "description": "If the SLO monitors either the LATENCY or AVAILABILITY metric that Application Signals collects, this field displays which of those metrics is used.",
+		//	          "enum": [
+		//	            "LATENCY",
+		//	            "AVAILABILITY"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "MonitoredRequestCountMetric": {
+		//	          "additionalProperties": false,
+		//	          "description": "This structure defines the metric that is used as the \"good request\" or \"bad request\" value for a request-based SLO. This value observed for the metric defined in `TotalRequestCountMetric` is divided by the number found for `MonitoredRequestCountMetric` to determine the percentage of successful requests that this SLO tracks.",
+		//	          "properties": {
+		//	            "BadCountMetric": {
+		//	              "description": "If you want to count \"bad requests\" to determine the percentage of successful requests for this request-based SLO, specify the metric to use as \"bad requests\" in this structure.",
+		//	              "insertionOrder": true,
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "description": "Use this structure to define a metric or metric math expression that you want to use as for a service level objective.\nEach `MetricDataQuery` in the `MetricDataQueries` array specifies either a metric to retrieve, or a metric math expression to be performed on retrieved metrics. A single `MetricDataQueries` array can include as many as 20 `MetricDataQuery` structures in the array. The 20 structures can include as many as 10 structures that contain a `MetricStat` parameter to retrieve a metric, and as many as 10 structures that contain the `Expression` parameter to perform a math expression. Of those Expression structures, exactly one must have true as the value for `ReturnData`. The result of this expression used for the SLO.",
+		//	                "properties": {
+		//	                  "AccountId": {
+		//	                    "description": "The ID of the account where the metrics are located, if this is a cross-account alarm.",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Expression": {
+		//	                    "description": "The math expression to be performed on the returned data.",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Id": {
+		//	                    "description": "A short name used to tie this object to the results in the response.",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "MetricStat": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "A metric to be used directly for the SLO, or to be used in the math expression that will be used for the SLO. Within one MetricDataQuery, you must specify either Expression or MetricStat but not both.",
+		//	                    "properties": {
+		//	                      "Metric": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "This structure defines the metric used for a service level indicator, including the metric name, namespace, and dimensions.",
+		//	                        "properties": {
+		//	                          "Dimensions": {
+		//	                            "description": "An array of one or more dimensions to use to define the metric that you want to use.",
+		//	                            "insertionOrder": false,
+		//	                            "items": {
+		//	                              "additionalProperties": false,
+		//	                              "description": "A dimension is a name/value pair that is part of the identity of a metric. Because dimensions are part of the unique identifier for a metric, whenever you add a unique name/value pair to one of your metrics, you are creating a new variation of that metric. For example, many Amazon EC2 metrics publish `InstanceId` as a dimension name, and the actual instance ID as the value for that dimension. You can assign up to 30 dimensions to a metric.",
+		//	                              "properties": {
+		//	                                "Name": {
+		//	                                  "description": "The name of the dimension. Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:). ASCII control characters are not supported as part of dimension names.",
+		//	                                  "type": "string"
+		//	                                },
+		//	                                "Value": {
+		//	                                  "description": "The value of the dimension. Dimension values must contain only ASCII characters and must include at least one non-whitespace character. ASCII control characters are not supported as part of dimension values",
+		//	                                  "type": "string"
+		//	                                }
+		//	                              },
+		//	                              "required": [
+		//	                                "Value",
+		//	                                "Name"
+		//	                              ],
+		//	                              "type": "object"
+		//	                            },
+		//	                            "type": "array",
+		//	                            "uniqueItems": false
+		//	                          },
+		//	                          "MetricName": {
+		//	                            "description": "The name of the metric to use.",
+		//	                            "type": "string"
+		//	                          },
+		//	                          "Namespace": {
+		//	                            "description": "The namespace of the metric.",
+		//	                            "type": "string"
+		//	                          }
+		//	                        },
+		//	                        "type": "object"
+		//	                      },
+		//	                      "Period": {
+		//	                        "description": "The granularity, in seconds, to be used for the metric.",
+		//	                        "type": "integer"
+		//	                      },
+		//	                      "Stat": {
+		//	                        "description": "The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic.",
+		//	                        "type": "string"
+		//	                      },
+		//	                      "Unit": {
+		//	                        "description": "If you omit Unit then all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.",
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "Stat",
+		//	                      "Period",
+		//	                      "Metric"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  },
+		//	                  "ReturnData": {
+		//	                    "description": "This option indicates whether to return the timestamps and raw data values of this metric.",
+		//	                    "type": "boolean"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Id"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": false
+		//	            },
+		//	            "GoodCountMetric": {
+		//	              "description": "If you want to count \"good requests\" to determine the percentage of successful requests for this request-based SLO, specify the metric to use as \"good requests\" in this structure.",
+		//	              "insertionOrder": true,
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "description": "Use this structure to define a metric or metric math expression that you want to use as for a service level objective.\nEach `MetricDataQuery` in the `MetricDataQueries` array specifies either a metric to retrieve, or a metric math expression to be performed on retrieved metrics. A single `MetricDataQueries` array can include as many as 20 `MetricDataQuery` structures in the array. The 20 structures can include as many as 10 structures that contain a `MetricStat` parameter to retrieve a metric, and as many as 10 structures that contain the `Expression` parameter to perform a math expression. Of those Expression structures, exactly one must have true as the value for `ReturnData`. The result of this expression used for the SLO.",
+		//	                "properties": {
+		//	                  "AccountId": {
+		//	                    "description": "The ID of the account where the metrics are located, if this is a cross-account alarm.",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Expression": {
+		//	                    "description": "The math expression to be performed on the returned data.",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Id": {
+		//	                    "description": "A short name used to tie this object to the results in the response.",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "MetricStat": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "A metric to be used directly for the SLO, or to be used in the math expression that will be used for the SLO. Within one MetricDataQuery, you must specify either Expression or MetricStat but not both.",
+		//	                    "properties": {
+		//	                      "Metric": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "This structure defines the metric used for a service level indicator, including the metric name, namespace, and dimensions.",
+		//	                        "properties": {
+		//	                          "Dimensions": {
+		//	                            "description": "An array of one or more dimensions to use to define the metric that you want to use.",
+		//	                            "insertionOrder": false,
+		//	                            "items": {
+		//	                              "additionalProperties": false,
+		//	                              "description": "A dimension is a name/value pair that is part of the identity of a metric. Because dimensions are part of the unique identifier for a metric, whenever you add a unique name/value pair to one of your metrics, you are creating a new variation of that metric. For example, many Amazon EC2 metrics publish `InstanceId` as a dimension name, and the actual instance ID as the value for that dimension. You can assign up to 30 dimensions to a metric.",
+		//	                              "properties": {
+		//	                                "Name": {
+		//	                                  "description": "The name of the dimension. Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:). ASCII control characters are not supported as part of dimension names.",
+		//	                                  "type": "string"
+		//	                                },
+		//	                                "Value": {
+		//	                                  "description": "The value of the dimension. Dimension values must contain only ASCII characters and must include at least one non-whitespace character. ASCII control characters are not supported as part of dimension values",
+		//	                                  "type": "string"
+		//	                                }
+		//	                              },
+		//	                              "required": [
+		//	                                "Value",
+		//	                                "Name"
+		//	                              ],
+		//	                              "type": "object"
+		//	                            },
+		//	                            "type": "array",
+		//	                            "uniqueItems": false
+		//	                          },
+		//	                          "MetricName": {
+		//	                            "description": "The name of the metric to use.",
+		//	                            "type": "string"
+		//	                          },
+		//	                          "Namespace": {
+		//	                            "description": "The namespace of the metric.",
+		//	                            "type": "string"
+		//	                          }
+		//	                        },
+		//	                        "type": "object"
+		//	                      },
+		//	                      "Period": {
+		//	                        "description": "The granularity, in seconds, to be used for the metric.",
+		//	                        "type": "integer"
+		//	                      },
+		//	                      "Stat": {
+		//	                        "description": "The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic.",
+		//	                        "type": "string"
+		//	                      },
+		//	                      "Unit": {
+		//	                        "description": "If you omit Unit then all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.",
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "Stat",
+		//	                      "Period",
+		//	                      "Metric"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  },
+		//	                  "ReturnData": {
+		//	                    "description": "This option indicates whether to return the timestamps and raw data values of this metric.",
+		//	                    "type": "boolean"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Id"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": false
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "OperationName": {
+		//	          "description": "If the SLO monitors a specific operation of the service, this field displays that operation name.",
+		//	          "maxLength": 255,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "TotalRequestCountMetric": {
+		//	          "description": "This structure defines the metric that is used as the \"total requests\" number for a request-based SLO. The number observed for this metric is divided by the number of \"good requests\" or \"bad requests\" that is observed for the metric defined in `MonitoredRequestCountMetric`.",
+		//	          "insertionOrder": true,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "description": "Use this structure to define a metric or metric math expression that you want to use as for a service level objective.\nEach `MetricDataQuery` in the `MetricDataQueries` array specifies either a metric to retrieve, or a metric math expression to be performed on retrieved metrics. A single `MetricDataQueries` array can include as many as 20 `MetricDataQuery` structures in the array. The 20 structures can include as many as 10 structures that contain a `MetricStat` parameter to retrieve a metric, and as many as 10 structures that contain the `Expression` parameter to perform a math expression. Of those Expression structures, exactly one must have true as the value for `ReturnData`. The result of this expression used for the SLO.",
+		//	            "properties": {
+		//	              "AccountId": {
+		//	                "description": "The ID of the account where the metrics are located, if this is a cross-account alarm.",
+		//	                "type": "string"
+		//	              },
+		//	              "Expression": {
+		//	                "description": "The math expression to be performed on the returned data.",
+		//	                "type": "string"
+		//	              },
+		//	              "Id": {
+		//	                "description": "A short name used to tie this object to the results in the response.",
+		//	                "type": "string"
+		//	              },
+		//	              "MetricStat": {
+		//	                "additionalProperties": false,
+		//	                "description": "A metric to be used directly for the SLO, or to be used in the math expression that will be used for the SLO. Within one MetricDataQuery, you must specify either Expression or MetricStat but not both.",
+		//	                "properties": {
+		//	                  "Metric": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "This structure defines the metric used for a service level indicator, including the metric name, namespace, and dimensions.",
+		//	                    "properties": {
+		//	                      "Dimensions": {
+		//	                        "description": "An array of one or more dimensions to use to define the metric that you want to use.",
+		//	                        "insertionOrder": false,
+		//	                        "items": {
+		//	                          "additionalProperties": false,
+		//	                          "description": "A dimension is a name/value pair that is part of the identity of a metric. Because dimensions are part of the unique identifier for a metric, whenever you add a unique name/value pair to one of your metrics, you are creating a new variation of that metric. For example, many Amazon EC2 metrics publish `InstanceId` as a dimension name, and the actual instance ID as the value for that dimension. You can assign up to 30 dimensions to a metric.",
+		//	                          "properties": {
+		//	                            "Name": {
+		//	                              "description": "The name of the dimension. Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:). ASCII control characters are not supported as part of dimension names.",
+		//	                              "type": "string"
+		//	                            },
+		//	                            "Value": {
+		//	                              "description": "The value of the dimension. Dimension values must contain only ASCII characters and must include at least one non-whitespace character. ASCII control characters are not supported as part of dimension values",
+		//	                              "type": "string"
+		//	                            }
+		//	                          },
+		//	                          "required": [
+		//	                            "Value",
+		//	                            "Name"
+		//	                          ],
+		//	                          "type": "object"
+		//	                        },
+		//	                        "type": "array",
+		//	                        "uniqueItems": false
+		//	                      },
+		//	                      "MetricName": {
+		//	                        "description": "The name of the metric to use.",
+		//	                        "type": "string"
+		//	                      },
+		//	                      "Namespace": {
+		//	                        "description": "The namespace of the metric.",
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  },
+		//	                  "Period": {
+		//	                    "description": "The granularity, in seconds, to be used for the metric.",
+		//	                    "type": "integer"
+		//	                  },
+		//	                  "Stat": {
+		//	                    "description": "The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic.",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Unit": {
+		//	                    "description": "If you omit Unit then all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Stat",
+		//	                  "Period",
+		//	                  "Metric"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "ReturnData": {
+		//	                "description": "This option indicates whether to return the timestamps and raw data values of this metric.",
+		//	                "type": "boolean"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Id"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "RequestBasedSliMetric"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"request_based_sli": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ComparisonOperator
+				"comparison_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The arithmetic operation used when comparing the specified metric to the threshold.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"GreaterThanOrEqualTo",
+							"LessThanOrEqualTo",
+							"LessThan",
+							"GreaterThan",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MetricThreshold
+				"metric_threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "The value that the SLI metric is compared to.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+						float64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: RequestBasedSliMetric
+				"request_based_sli_metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: KeyAttributes
+						"key_attributes":    // Pattern: ""
+						schema.MapAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "This is a string-to-string map that contains information about the type of object that this SLO is related to.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+								mapplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MetricType
+						"metric_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "If the SLO monitors either the LATENCY or AVAILABILITY metric that Application Signals collects, this field displays which of those metrics is used.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"LATENCY",
+									"AVAILABILITY",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MonitoredRequestCountMetric
+						"monitored_request_count_metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: BadCountMetric
+								"bad_count_metric": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: AccountId
+											"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The ID of the account where the metrics are located, if this is a cross-account alarm.",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Expression
+											"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The math expression to be performed on the returned data.",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Id
+											"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "A short name used to tie this object to the results in the response.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: MetricStat
+											"metric_stat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Metric
+													"metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: Dimensions
+															"dimensions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: Name
+																		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Description: "The name of the dimension. Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:). ASCII control characters are not supported as part of dimension names.",
+																			Optional:    true,
+																			Computed:    true,
+																			Validators: []validator.String{ /*START VALIDATORS*/
+																				fwvalidators.NotNullString(),
+																			}, /*END VALIDATORS*/
+																			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																				stringplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
+																		}, /*END ATTRIBUTE*/
+																		// Property: Value
+																		"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Description: "The value of the dimension. Dimension values must contain only ASCII characters and must include at least one non-whitespace character. ASCII control characters are not supported as part of dimension values",
+																			Optional:    true,
+																			Computed:    true,
+																			Validators: []validator.String{ /*START VALIDATORS*/
+																				fwvalidators.NotNullString(),
+																			}, /*END VALIDATORS*/
+																			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																				stringplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Description: "An array of one or more dimensions to use to define the metric that you want to use.",
+																Optional:    true,
+																Computed:    true,
+																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																	generic.Multiset(),
+																	listplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: MetricName
+															"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "The name of the metric to use.",
+																Optional:    true,
+																Computed:    true,
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: Namespace
+															"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "The namespace of the metric.",
+																Optional:    true,
+																Computed:    true,
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "This structure defines the metric used for a service level indicator, including the metric name, namespace, and dimensions.",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.Object{ /*START VALIDATORS*/
+															fwvalidators.NotNullObject(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+															objectplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: Period
+													"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+														Description: "The granularity, in seconds, to be used for the metric.",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.Int64{ /*START VALIDATORS*/
+															fwvalidators.NotNullInt64(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+															int64planmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: Stat
+													"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic.",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															fwvalidators.NotNullString(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: Unit
+													"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "If you omit Unit then all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "A metric to be used directly for the SLO, or to be used in the math expression that will be used for the SLO. Within one MetricDataQuery, you must specify either Expression or MetricStat but not both.",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: ReturnData
+											"return_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Description: "This option indicates whether to return the timestamps and raw data values of this metric.",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+													boolplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "If you want to count \"bad requests\" to determine the percentage of successful requests for this request-based SLO, specify the metric to use as \"bad requests\" in this structure.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: GoodCountMetric
+								"good_count_metric": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: AccountId
+											"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The ID of the account where the metrics are located, if this is a cross-account alarm.",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Expression
+											"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The math expression to be performed on the returned data.",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Id
+											"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "A short name used to tie this object to the results in the response.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: MetricStat
+											"metric_stat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Metric
+													"metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: Dimensions
+															"dimensions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: Name
+																		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Description: "The name of the dimension. Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:). ASCII control characters are not supported as part of dimension names.",
+																			Optional:    true,
+																			Computed:    true,
+																			Validators: []validator.String{ /*START VALIDATORS*/
+																				fwvalidators.NotNullString(),
+																			}, /*END VALIDATORS*/
+																			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																				stringplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
+																		}, /*END ATTRIBUTE*/
+																		// Property: Value
+																		"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Description: "The value of the dimension. Dimension values must contain only ASCII characters and must include at least one non-whitespace character. ASCII control characters are not supported as part of dimension values",
+																			Optional:    true,
+																			Computed:    true,
+																			Validators: []validator.String{ /*START VALIDATORS*/
+																				fwvalidators.NotNullString(),
+																			}, /*END VALIDATORS*/
+																			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																				stringplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Description: "An array of one or more dimensions to use to define the metric that you want to use.",
+																Optional:    true,
+																Computed:    true,
+																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																	generic.Multiset(),
+																	listplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: MetricName
+															"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "The name of the metric to use.",
+																Optional:    true,
+																Computed:    true,
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: Namespace
+															"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "The namespace of the metric.",
+																Optional:    true,
+																Computed:    true,
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "This structure defines the metric used for a service level indicator, including the metric name, namespace, and dimensions.",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.Object{ /*START VALIDATORS*/
+															fwvalidators.NotNullObject(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+															objectplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: Period
+													"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+														Description: "The granularity, in seconds, to be used for the metric.",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.Int64{ /*START VALIDATORS*/
+															fwvalidators.NotNullInt64(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+															int64planmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: Stat
+													"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic.",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															fwvalidators.NotNullString(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: Unit
+													"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "If you omit Unit then all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "A metric to be used directly for the SLO, or to be used in the math expression that will be used for the SLO. Within one MetricDataQuery, you must specify either Expression or MetricStat but not both.",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: ReturnData
+											"return_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Description: "This option indicates whether to return the timestamps and raw data values of this metric.",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+													boolplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "If you want to count \"good requests\" to determine the percentage of successful requests for this request-based SLO, specify the metric to use as \"good requests\" in this structure.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "This structure defines the metric that is used as the \"good request\" or \"bad request\" value for a request-based SLO. This value observed for the metric defined in `TotalRequestCountMetric` is divided by the number found for `MonitoredRequestCountMetric` to determine the percentage of successful requests that this SLO tracks.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: OperationName
+						"operation_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "If the SLO monitors a specific operation of the service, this field displays that operation name.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 255),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: TotalRequestCountMetric
+						"total_request_count_metric": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AccountId
+									"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The ID of the account where the metrics are located, if this is a cross-account alarm.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Expression
+									"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The math expression to be performed on the returned data.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Id
+									"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "A short name used to tie this object to the results in the response.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: MetricStat
+									"metric_stat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Metric
+											"metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Dimensions
+													"dimensions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+														NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Name
+																"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "The name of the dimension. Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:). ASCII control characters are not supported as part of dimension names.",
+																	Optional:    true,
+																	Computed:    true,
+																	Validators: []validator.String{ /*START VALIDATORS*/
+																		fwvalidators.NotNullString(),
+																	}, /*END VALIDATORS*/
+																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																		stringplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
+																}, /*END ATTRIBUTE*/
+																// Property: Value
+																"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "The value of the dimension. Dimension values must contain only ASCII characters and must include at least one non-whitespace character. ASCII control characters are not supported as part of dimension values",
+																	Optional:    true,
+																	Computed:    true,
+																	Validators: []validator.String{ /*START VALIDATORS*/
+																		fwvalidators.NotNullString(),
+																	}, /*END VALIDATORS*/
+																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																		stringplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+														}, /*END NESTED OBJECT*/
+														Description: "An array of one or more dimensions to use to define the metric that you want to use.",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+															generic.Multiset(),
+															listplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: MetricName
+													"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The name of the metric to use.",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: Namespace
+													"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The namespace of the metric.",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "This structure defines the metric used for a service level indicator, including the metric name, namespace, and dimensions.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Object{ /*START VALIDATORS*/
+													fwvalidators.NotNullObject(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Period
+											"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Description: "The granularity, in seconds, to be used for the metric.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Int64{ /*START VALIDATORS*/
+													fwvalidators.NotNullInt64(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+													int64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Stat
+											"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Unit
+											"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "If you omit Unit then all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "A metric to be used directly for the SLO, or to be used in the math expression that will be used for the SLO. Within one MetricDataQuery, you must specify either Expression or MetricStat but not both.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: ReturnData
+									"return_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "This option indicates whether to return the timestamps and raw data values of this metric.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+											boolplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "This structure defines the metric that is used as the \"total requests\" number for a request-based SLO. The number observed for this metric is divided by the number of \"good requests\" or \"bad requests\" that is observed for the metric defined in `MonitoredRequestCountMetric`.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "This structure contains the information about the metric that is used for a request-based SLO.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Object{ /*START VALIDATORS*/
+						fwvalidators.NotNullObject(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "This structure contains information about the performance metric that a request-based SLO monitors.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Sli
@@ -481,7 +1474,8 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 				// Property: ComparisonOperator
 				"comparison_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The arithmetic operation used when comparing the specified metric to the threshold.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"GreaterThanOrEqualTo",
@@ -489,12 +1483,23 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 							"LessThan",
 							"GreaterThan",
 						),
+						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: MetricThreshold
 				"metric_threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
 					Description: "The value that the SLI metric is compared to.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Float64{ /*START VALIDATORS*/
+						fwvalidators.NotNullFloat64(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+						float64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: SliMetric
 				"sli_metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -535,7 +1540,14 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 									// Property: Id
 									"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "A short name used to tie this object to the results in the response.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: MetricStat
 									"metric_stat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -550,12 +1562,26 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 																// Property: Name
 																"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																	Description: "The name of the dimension. Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:). ASCII control characters are not supported as part of dimension names.",
-																	Required:    true,
+																	Optional:    true,
+																	Computed:    true,
+																	Validators: []validator.String{ /*START VALIDATORS*/
+																		fwvalidators.NotNullString(),
+																	}, /*END VALIDATORS*/
+																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																		stringplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
 																}, /*END ATTRIBUTE*/
 																// Property: Value
 																"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																	Description: "The value of the dimension. Dimension values must contain only ASCII characters and must include at least one non-whitespace character. ASCII control characters are not supported as part of dimension values",
-																	Required:    true,
+																	Optional:    true,
+																	Computed:    true,
+																	Validators: []validator.String{ /*START VALIDATORS*/
+																		fwvalidators.NotNullString(),
+																	}, /*END VALIDATORS*/
+																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																		stringplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
 																}, /*END ATTRIBUTE*/
 															}, /*END SCHEMA*/
 														}, /*END NESTED OBJECT*/
@@ -587,17 +1613,38 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
 												Description: "This structure defines the metric used for a service level indicator, including the metric name, namespace, and dimensions.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Object{ /*START VALIDATORS*/
+													fwvalidators.NotNullObject(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: Period
 											"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
 												Description: "The granularity, in seconds, to be used for the metric.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Int64{ /*START VALIDATORS*/
+													fwvalidators.NotNullInt64(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+													int64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: Stat
 											"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: Unit
 											"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -687,11 +1734,22 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "A structure that contains information about the metric that the SLO monitors.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Object{ /*START VALIDATORS*/
+						fwvalidators.NotNullObject(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "This structure contains information about the performance metric that an SLO monitors.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
@@ -733,18 +1791,28 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "A string that you can use to assign a value. The combination of tag keys and values can help you organize and categorize your resources.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The value for the specified tag key.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -780,45 +1848,52 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 	opts = opts.WithCloudFormationTypeName("AWS::ApplicationSignals::ServiceLevelObjective").WithTerraformTypeName("awscc_applicationsignals_service_level_objective")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"account_id":          "AccountId",
-		"arn":                 "Arn",
-		"attainment_goal":     "AttainmentGoal",
-		"calendar_interval":   "CalendarInterval",
-		"comparison_operator": "ComparisonOperator",
-		"created_time":        "CreatedTime",
-		"description":         "Description",
-		"dimensions":          "Dimensions",
-		"duration":            "Duration",
-		"duration_unit":       "DurationUnit",
-		"expression":          "Expression",
-		"goal":                "Goal",
-		"id":                  "Id",
-		"interval":            "Interval",
-		"key":                 "Key",
-		"key_attributes":      "KeyAttributes",
-		"last_updated_time":   "LastUpdatedTime",
-		"metric":              "Metric",
-		"metric_data_queries": "MetricDataQueries",
-		"metric_name":         "MetricName",
-		"metric_stat":         "MetricStat",
-		"metric_threshold":    "MetricThreshold",
-		"metric_type":         "MetricType",
-		"name":                "Name",
-		"namespace":           "Namespace",
-		"operation_name":      "OperationName",
-		"period":              "Period",
-		"period_seconds":      "PeriodSeconds",
-		"return_data":         "ReturnData",
-		"rolling_interval":    "RollingInterval",
-		"sli":                 "Sli",
-		"sli_metric":          "SliMetric",
-		"start_time":          "StartTime",
-		"stat":                "Stat",
-		"statistic":           "Statistic",
-		"tags":                "Tags",
-		"unit":                "Unit",
-		"value":               "Value",
-		"warning_threshold":   "WarningThreshold",
+		"account_id":                     "AccountId",
+		"arn":                            "Arn",
+		"attainment_goal":                "AttainmentGoal",
+		"bad_count_metric":               "BadCountMetric",
+		"calendar_interval":              "CalendarInterval",
+		"comparison_operator":            "ComparisonOperator",
+		"created_time":                   "CreatedTime",
+		"description":                    "Description",
+		"dimensions":                     "Dimensions",
+		"duration":                       "Duration",
+		"duration_unit":                  "DurationUnit",
+		"evaluation_type":                "EvaluationType",
+		"expression":                     "Expression",
+		"goal":                           "Goal",
+		"good_count_metric":              "GoodCountMetric",
+		"id":                             "Id",
+		"interval":                       "Interval",
+		"key":                            "Key",
+		"key_attributes":                 "KeyAttributes",
+		"last_updated_time":              "LastUpdatedTime",
+		"metric":                         "Metric",
+		"metric_data_queries":            "MetricDataQueries",
+		"metric_name":                    "MetricName",
+		"metric_stat":                    "MetricStat",
+		"metric_threshold":               "MetricThreshold",
+		"metric_type":                    "MetricType",
+		"monitored_request_count_metric": "MonitoredRequestCountMetric",
+		"name":                           "Name",
+		"namespace":                      "Namespace",
+		"operation_name":                 "OperationName",
+		"period":                         "Period",
+		"period_seconds":                 "PeriodSeconds",
+		"request_based_sli":              "RequestBasedSli",
+		"request_based_sli_metric":       "RequestBasedSliMetric",
+		"return_data":                    "ReturnData",
+		"rolling_interval":               "RollingInterval",
+		"sli":                            "Sli",
+		"sli_metric":                     "SliMetric",
+		"start_time":                     "StartTime",
+		"stat":                           "Stat",
+		"statistic":                      "Statistic",
+		"tags":                           "Tags",
+		"total_request_count_metric":     "TotalRequestCountMetric",
+		"unit":                           "Unit",
+		"value":                          "Value",
+		"warning_threshold":              "WarningThreshold",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

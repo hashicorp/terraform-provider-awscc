@@ -23,6 +23,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -245,7 +246,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 														// Property: Enabled
 														"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-															Required: true,
+															Optional: true,
+															Computed: true,
+															Validators: []validator.Bool{ /*START VALIDATORS*/
+																fwvalidators.NotNullBool(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+																boolplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 													Optional: true,
@@ -259,7 +267,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 														// Property: Enabled
 														"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-															Required: true,
+															Optional: true,
+															Computed: true,
+															Validators: []validator.Bool{ /*START VALIDATORS*/
+																fwvalidators.NotNullBool(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+																boolplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 													Optional: true,
@@ -280,7 +295,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 												// Property: Enabled
 												"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Required: true,
+													Optional: true,
+													Computed: true,
+													Validators: []validator.Bool{ /*START VALIDATORS*/
+														fwvalidators.NotNullBool(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+														boolplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 											Optional: true,
@@ -466,7 +488,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Enabled
 								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Bool{ /*START VALIDATORS*/
+										fwvalidators.NotNullBool(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
@@ -480,7 +509,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Enabled
 								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Bool{ /*START VALIDATORS*/
+										fwvalidators.NotNullBool(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
@@ -529,7 +565,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Enabled
 						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Bool{ /*START VALIDATORS*/
+								fwvalidators.NotNullBool(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
@@ -585,11 +628,25 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Arn
 				"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Revision
 				"revision": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						fwvalidators.NotNullInt64(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Optional: true,
@@ -658,7 +715,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: DataVolumeKMSKeyId
 						"data_volume_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
@@ -829,7 +893,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Enabled
 								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Bool{ /*START VALIDATORS*/
+										fwvalidators.NotNullBool(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: LogGroup
 								"log_group": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -859,7 +930,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: Enabled
 								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Bool{ /*START VALIDATORS*/
+										fwvalidators.NotNullBool(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
@@ -881,7 +959,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: Enabled
 								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Bool{ /*START VALIDATORS*/
+										fwvalidators.NotNullBool(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Prefix
 								"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -899,7 +984,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Required: true,
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Object{ /*START VALIDATORS*/
+						fwvalidators.NotNullObject(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Optional: true,
@@ -969,7 +1061,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: EnabledInBroker
 								"enabled_in_broker": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Bool{ /*START VALIDATORS*/
+										fwvalidators.NotNullBool(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
@@ -983,7 +1082,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: EnabledInBroker
 								"enabled_in_broker": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Bool{ /*START VALIDATORS*/
+										fwvalidators.NotNullBool(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
@@ -993,7 +1099,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Required: true,
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Object{ /*START VALIDATORS*/
+						fwvalidators.NotNullObject(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Optional: true,

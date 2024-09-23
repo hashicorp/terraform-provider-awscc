@@ -1005,6 +1005,11 @@
         "path": "./examples/resources/awscc_config_stored_query/import.sh"
     },
     {
+        "resource": "awscc_connect_agent_status",
+        "identifier": ["AgentStatusArn"],
+        "path": "./examples/resources/awscc_connect_agent_status/import.sh"
+    },
+    {
         "resource": "awscc_connect_approved_origin",
         "identifier": ["InstanceId","Origin"],
         "path": "./examples/resources/awscc_connect_approved_origin/import.sh"
@@ -1098,6 +1103,11 @@
         "resource": "awscc_connect_user_hierarchy_group",
         "identifier": ["UserHierarchyGroupArn"],
         "path": "./examples/resources/awscc_connect_user_hierarchy_group/import.sh"
+    },
+    {
+        "resource": "awscc_connect_user_hierarchy_structure",
+        "identifier": ["UserHierarchyStructureArn"],
+        "path": "./examples/resources/awscc_connect_user_hierarchy_structure/import.sh"
     },
     {
         "resource": "awscc_connect_view",
@@ -1278,6 +1288,11 @@
         "resource": "awscc_datazone_environment",
         "identifier": ["DomainId","Id"],
         "path": "./examples/resources/awscc_datazone_environment/import.sh"
+    },
+    {
+        "resource": "awscc_datazone_environment_actions",
+        "identifier": ["DomainId","EnvironmentId","Id"],
+        "path": "./examples/resources/awscc_datazone_environment_actions/import.sh"
     },
     {
         "resource": "awscc_datazone_environment_blueprint_configuration",
@@ -3370,6 +3385,36 @@
         "path": "./examples/resources/awscc_mediaconnect_gateway/import.sh"
     },
     {
+        "resource": "awscc_medialive_channel_placement_group",
+        "identifier": ["Id","ClusterId"],
+        "path": "./examples/resources/awscc_medialive_channel_placement_group/import.sh"
+    },
+    {
+        "resource": "awscc_medialive_cloudwatch_alarm_template",
+        "identifier": ["Identifier"],
+        "path": "./examples/resources/awscc_medialive_cloudwatch_alarm_template/import.sh"
+    },
+    {
+        "resource": "awscc_medialive_cloudwatch_alarm_template_group",
+        "identifier": ["Identifier"],
+        "path": "./examples/resources/awscc_medialive_cloudwatch_alarm_template_group/import.sh"
+    },
+    {
+        "resource": "awscc_medialive_cluster",
+        "identifier": ["Id"],
+        "path": "./examples/resources/awscc_medialive_cluster/import.sh"
+    },
+    {
+        "resource": "awscc_medialive_event_bridge_rule_template",
+        "identifier": ["Identifier"],
+        "path": "./examples/resources/awscc_medialive_event_bridge_rule_template/import.sh"
+    },
+    {
+        "resource": "awscc_medialive_event_bridge_rule_template_group",
+        "identifier": ["Identifier"],
+        "path": "./examples/resources/awscc_medialive_event_bridge_rule_template_group/import.sh"
+    },
+    {
         "resource": "awscc_medialive_multiplex",
         "identifier": ["Id"],
         "path": "./examples/resources/awscc_medialive_multiplex/import.sh"
@@ -3378,6 +3423,21 @@
         "resource": "awscc_medialive_multiplexprogram",
         "identifier": ["ProgramName","MultiplexId"],
         "path": "./examples/resources/awscc_medialive_multiplexprogram/import.sh"
+    },
+    {
+        "resource": "awscc_medialive_network",
+        "identifier": ["Id"],
+        "path": "./examples/resources/awscc_medialive_network/import.sh"
+    },
+    {
+        "resource": "awscc_medialive_sdi_source",
+        "identifier": ["Id"],
+        "path": "./examples/resources/awscc_medialive_sdi_source/import.sh"
+    },
+    {
+        "resource": "awscc_medialive_signal_map",
+        "identifier": ["Identifier"],
+        "path": "./examples/resources/awscc_medialive_signal_map/import.sh"
     },
     {
         "resource": "awscc_mediapackage_asset",
@@ -3738,6 +3798,16 @@
         "resource": "awscc_pcaconnectorad_template_group_access_control_entry",
         "identifier": ["GroupSecurityIdentifier","TemplateArn"],
         "path": "./examples/resources/awscc_pcaconnectorad_template_group_access_control_entry/import.sh"
+    },
+    {
+        "resource": "awscc_pcaconnectorscep_challenge",
+        "identifier": ["ChallengeArn"],
+        "path": "./examples/resources/awscc_pcaconnectorscep_challenge/import.sh"
+    },
+    {
+        "resource": "awscc_pcaconnectorscep_connector",
+        "identifier": ["ConnectorArn"],
+        "path": "./examples/resources/awscc_pcaconnectorscep_connector/import.sh"
     },
     {
         "resource": "awscc_panorama_application_instance",
@@ -4405,6 +4475,11 @@
         "path": "./examples/resources/awscc_ses_vdm_attributes/import.sh"
     },
     {
+        "resource": "awscc_sns_subscription",
+        "identifier": ["Arn"],
+        "path": "./examples/resources/awscc_sns_subscription/import.sh"
+    },
+    {
         "resource": "awscc_sns_topic",
         "identifier": ["TopicArn"],
         "path": "./examples/resources/awscc_sns_topic/import.sh"
@@ -4530,9 +4605,19 @@
         "path": "./examples/resources/awscc_sagemaker_app_image_config/import.sh"
     },
     {
+        "resource": "awscc_sagemaker_cluster",
+        "identifier": ["ClusterArn"],
+        "path": "./examples/resources/awscc_sagemaker_cluster/import.sh"
+    },
+    {
         "resource": "awscc_sagemaker_data_quality_job_definition",
         "identifier": ["JobDefinitionArn"],
         "path": "./examples/resources/awscc_sagemaker_data_quality_job_definition/import.sh"
+    },
+    {
+        "resource": "awscc_sagemaker_cluster",
+        "identifier": ["ClusterArn"],
+        "path": "./examples/resources/awscc_sagemaker_cluster/import.sh"
     },
     {
         "resource": "awscc_sagemaker_device",

@@ -40,7 +40,7 @@ Optional:
 <a id="nestedatt--regions--region_configuration"></a>
 ### Nested Schema for `regions.region_configuration`
 
-Required:
+Optional:
 
 - `sse_kms_key_id` (String) The ARN of the ReplicationSet.
 
@@ -49,7 +49,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

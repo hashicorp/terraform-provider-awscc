@@ -10,12 +10,16 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -116,7 +120,14 @@ func aliasResource(ctx context.Context) (resource.Resource, error) {
 				// Property: ProvisionedConcurrentExecutions
 				"provisioned_concurrent_executions": schema.Int64Attribute{ /*START ATTRIBUTE*/
 					Description: "The amount of provisioned concurrency to allocate for the alias.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						fwvalidators.NotNullInt64(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Specifies a provisioned concurrency configuration for a function's alias.",
@@ -170,12 +181,26 @@ func aliasResource(ctx context.Context) (resource.Resource, error) {
 							// Property: FunctionVersion
 							"function_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The qualifier of the second version.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: FunctionWeight
 							"function_weight": schema.Float64Attribute{ /*START ATTRIBUTE*/
 								Description: "The percentage of traffic that the alias routes to the second version.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.Float64{ /*START VALIDATORS*/
+									fwvalidators.NotNullFloat64(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+									float64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/

@@ -294,6 +294,31 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"build_spec": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: CacheConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Type": {
+		//	      "enum": [
+		//	        "AMPLIFY_MANAGED",
+		//	        "AMPLIFY_MANAGED_NO_COOKIES"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"cache_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CustomHeaders
 		// CloudFormation resource type schema:
 		//
@@ -571,6 +596,7 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"auto_branch_creation_patterns": "AutoBranchCreationPatterns",
 		"basic_auth_config":             "BasicAuthConfig",
 		"build_spec":                    "BuildSpec",
+		"cache_config":                  "CacheConfig",
 		"condition":                     "Condition",
 		"custom_headers":                "CustomHeaders",
 		"custom_rules":                  "CustomRules",
@@ -597,6 +623,7 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"status":                        "Status",
 		"tags":                          "Tags",
 		"target":                        "Target",
+		"type":                          "Type",
 		"username":                      "Username",
 		"value":                         "Value",
 	})

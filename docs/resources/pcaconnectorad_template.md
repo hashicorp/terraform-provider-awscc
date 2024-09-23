@@ -43,7 +43,7 @@ Optional:
 <a id="nestedatt--definition--template_v2"></a>
 ### Nested Schema for `definition.template_v2`
 
-Required:
+Optional:
 
 - `certificate_validity` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v2--certificate_validity))
 - `enrollment_flags` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v2--enrollment_flags))
@@ -52,15 +52,12 @@ Required:
 - `private_key_attributes` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v2--private_key_attributes))
 - `private_key_flags` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v2--private_key_flags))
 - `subject_name_flags` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v2--subject_name_flags))
-
-Optional:
-
 - `superseded_templates` (List of String)
 
 <a id="nestedatt--definition--template_v2--certificate_validity"></a>
 ### Nested Schema for `definition.template_v2.certificate_validity`
 
-Required:
+Optional:
 
 - `renewal_period` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v2--certificate_validity--renewal_period))
 - `validity_period` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v2--certificate_validity--validity_period))
@@ -68,7 +65,7 @@ Required:
 <a id="nestedatt--definition--template_v2--certificate_validity--renewal_period"></a>
 ### Nested Schema for `definition.template_v2.certificate_validity.renewal_period`
 
-Required:
+Optional:
 
 - `period` (Number)
 - `period_type` (String)
@@ -77,7 +74,7 @@ Required:
 <a id="nestedatt--definition--template_v2--certificate_validity--validity_period"></a>
 ### Nested Schema for `definition.template_v2.certificate_validity.validity_period`
 
-Required:
+Optional:
 
 - `period` (Number)
 - `period_type` (String)
@@ -99,24 +96,36 @@ Optional:
 <a id="nestedatt--definition--template_v2--extensions"></a>
 ### Nested Schema for `definition.template_v2.extensions`
 
-Required:
-
-- `key_usage` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v2--extensions--key_usage))
-
 Optional:
 
 - `application_policies` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v2--extensions--application_policies))
+- `key_usage` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v2--extensions--key_usage))
 
-<a id="nestedatt--definition--template_v2--extensions--key_usage"></a>
-### Nested Schema for `definition.template_v2.extensions.key_usage`
-
-Required:
-
-- `usage_flags` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v2--extensions--key_usage--usage_flags))
+<a id="nestedatt--definition--template_v2--extensions--application_policies"></a>
+### Nested Schema for `definition.template_v2.extensions.application_policies`
 
 Optional:
 
 - `critical` (Boolean)
+- `policies` (Attributes List) (see [below for nested schema](#nestedatt--definition--template_v2--extensions--application_policies--policies))
+
+<a id="nestedatt--definition--template_v2--extensions--application_policies--policies"></a>
+### Nested Schema for `definition.template_v2.extensions.application_policies.policies`
+
+Optional:
+
+- `policy_object_identifier` (String)
+- `policy_type` (String)
+
+
+
+<a id="nestedatt--definition--template_v2--extensions--key_usage"></a>
+### Nested Schema for `definition.template_v2.extensions.key_usage`
+
+Optional:
+
+- `critical` (Boolean)
+- `usage_flags` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v2--extensions--key_usage--usage_flags))
 
 <a id="nestedatt--definition--template_v2--extensions--key_usage--usage_flags"></a>
 ### Nested Schema for `definition.template_v2.extensions.key_usage.usage_flags`
@@ -128,27 +137,6 @@ Optional:
 - `key_agreement` (Boolean)
 - `key_encipherment` (Boolean)
 - `non_repudiation` (Boolean)
-
-
-
-<a id="nestedatt--definition--template_v2--extensions--application_policies"></a>
-### Nested Schema for `definition.template_v2.extensions.application_policies`
-
-Required:
-
-- `policies` (Attributes List) (see [below for nested schema](#nestedatt--definition--template_v2--extensions--application_policies--policies))
-
-Optional:
-
-- `critical` (Boolean)
-
-<a id="nestedatt--definition--template_v2--extensions--application_policies--policies"></a>
-### Nested Schema for `definition.template_v2.extensions.application_policies.policies`
-
-Optional:
-
-- `policy_object_identifier` (String)
-- `policy_type` (String)
 
 
 
@@ -165,25 +153,19 @@ Optional:
 <a id="nestedatt--definition--template_v2--private_key_attributes"></a>
 ### Nested Schema for `definition.template_v2.private_key_attributes`
 
-Required:
-
-- `key_spec` (String)
-- `minimal_key_length` (Number)
-
 Optional:
 
 - `crypto_providers` (List of String)
+- `key_spec` (String)
+- `minimal_key_length` (Number)
 
 
 <a id="nestedatt--definition--template_v2--private_key_flags"></a>
 ### Nested Schema for `definition.template_v2.private_key_flags`
 
-Required:
-
-- `client_version` (String)
-
 Optional:
 
+- `client_version` (String)
 - `exportable_key` (Boolean)
 - `strong_key_protection_required` (Boolean)
 
@@ -209,7 +191,7 @@ Optional:
 <a id="nestedatt--definition--template_v3"></a>
 ### Nested Schema for `definition.template_v3`
 
-Required:
+Optional:
 
 - `certificate_validity` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v3--certificate_validity))
 - `enrollment_flags` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v3--enrollment_flags))
@@ -219,15 +201,12 @@ Required:
 - `private_key_attributes` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v3--private_key_attributes))
 - `private_key_flags` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v3--private_key_flags))
 - `subject_name_flags` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v3--subject_name_flags))
-
-Optional:
-
 - `superseded_templates` (List of String)
 
 <a id="nestedatt--definition--template_v3--certificate_validity"></a>
 ### Nested Schema for `definition.template_v3.certificate_validity`
 
-Required:
+Optional:
 
 - `renewal_period` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v3--certificate_validity--renewal_period))
 - `validity_period` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v3--certificate_validity--validity_period))
@@ -235,7 +214,7 @@ Required:
 <a id="nestedatt--definition--template_v3--certificate_validity--renewal_period"></a>
 ### Nested Schema for `definition.template_v3.certificate_validity.renewal_period`
 
-Required:
+Optional:
 
 - `period` (Number)
 - `period_type` (String)
@@ -244,7 +223,7 @@ Required:
 <a id="nestedatt--definition--template_v3--certificate_validity--validity_period"></a>
 ### Nested Schema for `definition.template_v3.certificate_validity.validity_period`
 
-Required:
+Optional:
 
 - `period` (Number)
 - `period_type` (String)
@@ -266,24 +245,36 @@ Optional:
 <a id="nestedatt--definition--template_v3--extensions"></a>
 ### Nested Schema for `definition.template_v3.extensions`
 
-Required:
-
-- `key_usage` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v3--extensions--key_usage))
-
 Optional:
 
 - `application_policies` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v3--extensions--application_policies))
+- `key_usage` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v3--extensions--key_usage))
 
-<a id="nestedatt--definition--template_v3--extensions--key_usage"></a>
-### Nested Schema for `definition.template_v3.extensions.key_usage`
-
-Required:
-
-- `usage_flags` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v3--extensions--key_usage--usage_flags))
+<a id="nestedatt--definition--template_v3--extensions--application_policies"></a>
+### Nested Schema for `definition.template_v3.extensions.application_policies`
 
 Optional:
 
 - `critical` (Boolean)
+- `policies` (Attributes List) (see [below for nested schema](#nestedatt--definition--template_v3--extensions--application_policies--policies))
+
+<a id="nestedatt--definition--template_v3--extensions--application_policies--policies"></a>
+### Nested Schema for `definition.template_v3.extensions.application_policies.policies`
+
+Optional:
+
+- `policy_object_identifier` (String)
+- `policy_type` (String)
+
+
+
+<a id="nestedatt--definition--template_v3--extensions--key_usage"></a>
+### Nested Schema for `definition.template_v3.extensions.key_usage`
+
+Optional:
+
+- `critical` (Boolean)
+- `usage_flags` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v3--extensions--key_usage--usage_flags))
 
 <a id="nestedatt--definition--template_v3--extensions--key_usage--usage_flags"></a>
 ### Nested Schema for `definition.template_v3.extensions.key_usage.usage_flags`
@@ -295,27 +286,6 @@ Optional:
 - `key_agreement` (Boolean)
 - `key_encipherment` (Boolean)
 - `non_repudiation` (Boolean)
-
-
-
-<a id="nestedatt--definition--template_v3--extensions--application_policies"></a>
-### Nested Schema for `definition.template_v3.extensions.application_policies`
-
-Required:
-
-- `policies` (Attributes List) (see [below for nested schema](#nestedatt--definition--template_v3--extensions--application_policies--policies))
-
-Optional:
-
-- `critical` (Boolean)
-
-<a id="nestedatt--definition--template_v3--extensions--application_policies--policies"></a>
-### Nested Schema for `definition.template_v3.extensions.application_policies.policies`
-
-Optional:
-
-- `policy_object_identifier` (String)
-- `policy_type` (String)
 
 
 
@@ -332,16 +302,13 @@ Optional:
 <a id="nestedatt--definition--template_v3--private_key_attributes"></a>
 ### Nested Schema for `definition.template_v3.private_key_attributes`
 
-Required:
+Optional:
 
 - `algorithm` (String)
+- `crypto_providers` (List of String)
 - `key_spec` (String)
 - `key_usage_property` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v3--private_key_attributes--key_usage_property))
 - `minimal_key_length` (Number)
-
-Optional:
-
-- `crypto_providers` (List of String)
 
 <a id="nestedatt--definition--template_v3--private_key_attributes--key_usage_property"></a>
 ### Nested Schema for `definition.template_v3.private_key_attributes.key_usage_property`
@@ -366,12 +333,9 @@ Optional:
 <a id="nestedatt--definition--template_v3--private_key_flags"></a>
 ### Nested Schema for `definition.template_v3.private_key_flags`
 
-Required:
-
-- `client_version` (String)
-
 Optional:
 
+- `client_version` (String)
 - `exportable_key` (Boolean)
 - `require_alternate_signature_algorithm` (Boolean)
 - `strong_key_protection_required` (Boolean)
@@ -398,25 +362,22 @@ Optional:
 <a id="nestedatt--definition--template_v4"></a>
 ### Nested Schema for `definition.template_v4`
 
-Required:
+Optional:
 
 - `certificate_validity` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v4--certificate_validity))
 - `enrollment_flags` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v4--enrollment_flags))
 - `extensions` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v4--extensions))
 - `general_flags` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v4--general_flags))
+- `hash_algorithm` (String)
 - `private_key_attributes` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v4--private_key_attributes))
 - `private_key_flags` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v4--private_key_flags))
 - `subject_name_flags` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v4--subject_name_flags))
-
-Optional:
-
-- `hash_algorithm` (String)
 - `superseded_templates` (List of String)
 
 <a id="nestedatt--definition--template_v4--certificate_validity"></a>
 ### Nested Schema for `definition.template_v4.certificate_validity`
 
-Required:
+Optional:
 
 - `renewal_period` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v4--certificate_validity--renewal_period))
 - `validity_period` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v4--certificate_validity--validity_period))
@@ -424,7 +385,7 @@ Required:
 <a id="nestedatt--definition--template_v4--certificate_validity--renewal_period"></a>
 ### Nested Schema for `definition.template_v4.certificate_validity.renewal_period`
 
-Required:
+Optional:
 
 - `period` (Number)
 - `period_type` (String)
@@ -433,7 +394,7 @@ Required:
 <a id="nestedatt--definition--template_v4--certificate_validity--validity_period"></a>
 ### Nested Schema for `definition.template_v4.certificate_validity.validity_period`
 
-Required:
+Optional:
 
 - `period` (Number)
 - `period_type` (String)
@@ -455,24 +416,36 @@ Optional:
 <a id="nestedatt--definition--template_v4--extensions"></a>
 ### Nested Schema for `definition.template_v4.extensions`
 
-Required:
-
-- `key_usage` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v4--extensions--key_usage))
-
 Optional:
 
 - `application_policies` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v4--extensions--application_policies))
+- `key_usage` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v4--extensions--key_usage))
 
-<a id="nestedatt--definition--template_v4--extensions--key_usage"></a>
-### Nested Schema for `definition.template_v4.extensions.key_usage`
-
-Required:
-
-- `usage_flags` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v4--extensions--key_usage--usage_flags))
+<a id="nestedatt--definition--template_v4--extensions--application_policies"></a>
+### Nested Schema for `definition.template_v4.extensions.application_policies`
 
 Optional:
 
 - `critical` (Boolean)
+- `policies` (Attributes List) (see [below for nested schema](#nestedatt--definition--template_v4--extensions--application_policies--policies))
+
+<a id="nestedatt--definition--template_v4--extensions--application_policies--policies"></a>
+### Nested Schema for `definition.template_v4.extensions.application_policies.policies`
+
+Optional:
+
+- `policy_object_identifier` (String)
+- `policy_type` (String)
+
+
+
+<a id="nestedatt--definition--template_v4--extensions--key_usage"></a>
+### Nested Schema for `definition.template_v4.extensions.key_usage`
+
+Optional:
+
+- `critical` (Boolean)
+- `usage_flags` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v4--extensions--key_usage--usage_flags))
 
 <a id="nestedatt--definition--template_v4--extensions--key_usage--usage_flags"></a>
 ### Nested Schema for `definition.template_v4.extensions.key_usage.usage_flags`
@@ -484,27 +457,6 @@ Optional:
 - `key_agreement` (Boolean)
 - `key_encipherment` (Boolean)
 - `non_repudiation` (Boolean)
-
-
-
-<a id="nestedatt--definition--template_v4--extensions--application_policies"></a>
-### Nested Schema for `definition.template_v4.extensions.application_policies`
-
-Required:
-
-- `policies` (Attributes List) (see [below for nested schema](#nestedatt--definition--template_v4--extensions--application_policies--policies))
-
-Optional:
-
-- `critical` (Boolean)
-
-<a id="nestedatt--definition--template_v4--extensions--application_policies--policies"></a>
-### Nested Schema for `definition.template_v4.extensions.application_policies.policies`
-
-Optional:
-
-- `policy_object_identifier` (String)
-- `policy_type` (String)
 
 
 
@@ -521,16 +473,13 @@ Optional:
 <a id="nestedatt--definition--template_v4--private_key_attributes"></a>
 ### Nested Schema for `definition.template_v4.private_key_attributes`
 
-Required:
-
-- `key_spec` (String)
-- `minimal_key_length` (Number)
-
 Optional:
 
 - `algorithm` (String)
 - `crypto_providers` (List of String)
+- `key_spec` (String)
 - `key_usage_property` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v4--private_key_attributes--key_usage_property))
+- `minimal_key_length` (Number)
 
 <a id="nestedatt--definition--template_v4--private_key_attributes--key_usage_property"></a>
 ### Nested Schema for `definition.template_v4.private_key_attributes.key_usage_property`
@@ -555,12 +504,9 @@ Optional:
 <a id="nestedatt--definition--template_v4--private_key_flags"></a>
 ### Nested Schema for `definition.template_v4.private_key_flags`
 
-Required:
-
-- `client_version` (String)
-
 Optional:
 
+- `client_version` (String)
 - `exportable_key` (Boolean)
 - `require_alternate_signature_algorithm` (Boolean)
 - `require_same_key_renewal` (Boolean)

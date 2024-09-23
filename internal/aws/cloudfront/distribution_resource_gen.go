@@ -21,10 +21,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/defaults"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -1051,7 +1053,14 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Forward
 											"forward": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "This field is deprecated. We recommend that you use a cache policy or an origin request policy instead of this field.\n If you want to include cookies in the cache key, use a cache policy. For more information, see [Creating cache policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy) in the *Amazon CloudFront Developer Guide*.\n If you want to send cookies to the origin but not include them in the cache key, use origin request policy. For more information, see [Creating origin request policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy) in the *Amazon CloudFront Developer Guide*.\n Specifies which cookies to forward to the origin for this cache behavior: all, none, or the list of cookies specified in the ``WhitelistedNames`` complex type.\n Amazon S3 doesn't process cookies. When the cache behavior is forwarding requests to an Amazon S3 origin, specify none for the ``Forward`` element.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: WhitelistedNames
 											"whitelisted_names": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -1087,7 +1096,14 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									// Property: QueryString
 									"query_string": schema.BoolAttribute{ /*START ATTRIBUTE*/
 										Description: "This field is deprecated. We recommend that you use a cache policy or an origin request policy instead of this field.\n If you want to include query strings in the cache key, use a cache policy. For more information, see [Creating cache policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy) in the *Amazon CloudFront Developer Guide*.\n If you want to send query strings to the origin but not include them in the cache key, use an origin request policy. For more information, see [Creating origin request policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy) in the *Amazon CloudFront Developer Guide*.\n Indicates whether you want CloudFront to forward query strings to the origin that is associated with this cache behavior and cache based on the query string parameters. CloudFront behavior depends on the value of ``QueryString`` and on the values that you specify for ``QueryStringCacheKeys``, if any:\n If you specify true for ``QueryString`` and you don't specify any values for ``QueryStringCacheKeys``, CloudFront forwards all query string parameters to the origin and caches based on all query string parameters. Depending on how many query string parameters and values you have, this can adversely affect performance because CloudFront must forward more requests to the origin.\n If you specify true for ``QueryString`` and you specify one or more values for ``QueryStringCacheKeys``, CloudFront forwards all query string parameters to the origin, but it only caches based on the query string parameters that you specify.\n If you specify false for ``QueryString``, CloudFront doesn't forward any query string parameters to the origin, and doesn't cache based on query string parameters.\n For more information, see [Configuring CloudFront to Cache Based on Query String Parameters](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/QueryStringParameters.html) in the *Amazon CloudFront Developer Guide*.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Bool{ /*START VALIDATORS*/
+											fwvalidators.NotNullBool(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+											boolplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: QueryStringCacheKeys
 									"query_string_cache_keys": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -1210,7 +1226,14 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							// Property: PathPattern
 							"path_pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The pattern (for example, ``images/*.jpg``) that specifies which requests to apply the behavior to. When CloudFront receives a viewer request, the requested path is compared with path patterns in the order in which cache behaviors are listed in the distribution.\n  You can optionally include a slash (``/``) at the beginning of the path pattern. For example, ``/images/*.jpg``. CloudFront behavior is the same with or without the leading ``/``.\n  The path pattern for the default cache behavior is ``*`` and cannot be changed. If the request for an object does not match the path pattern for any cache behaviors, CloudFront applies the behavior in the default cache behavior.\n For more information, see [Path Pattern](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesPathPattern) in the *Amazon CloudFront Developer Guide*.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: RealtimeLogConfigArn
 							"realtime_log_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1243,7 +1266,14 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							// Property: TargetOriginId
 							"target_origin_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The value of ``ID`` for the origin that you want CloudFront to route requests to when they match this cache behavior.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: TrustedKeyGroups
 							"trusted_key_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -1268,7 +1298,14 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							// Property: ViewerProtocolPolicy
 							"viewer_protocol_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The protocol that viewers can use to access the files in the origin specified by ``TargetOriginId`` when a request matches the path pattern in ``PathPattern``. You can specify the following options:\n  +   ``allow-all``: Viewers can use HTTP or HTTPS.\n  +   ``redirect-to-https``: If a viewer submits an HTTP request, CloudFront returns an HTTP status code of 301 (Moved Permanently) to the viewer along with the HTTPS URL. The viewer then resubmits the request using the new URL.\n  +   ``https-only``: If a viewer sends an HTTP request, CloudFront returns an HTTP status code of 403 (Forbidden).\n  \n For more information about requiring the HTTPS protocol, see [Requiring HTTPS Between Viewers and CloudFront](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-viewers-to-cloudfront.html) in the *Amazon CloudFront Developer Guide*.\n  The only way to guarantee that viewers retrieve an object that was fetched from the origin using HTTPS is never to use any other protocol to fetch the object. If you have recently changed from HTTP to HTTPS, we recommend that you clear your objects' cache because cached objects are protocol agnostic. That means that an edge location will return an object from the cache regardless of whether the current request protocol matches the protocol used previously. For more information, see [Managing Cache Expiration](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html) in the *Amazon CloudFront Developer Guide*.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -1315,7 +1352,14 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							// Property: ErrorCode
 							"error_code": schema.Int64Attribute{ /*START ATTRIBUTE*/
 								Description: "The HTTP status code for which you want to specify a custom error page and/or a caching duration.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.Int64{ /*START VALIDATORS*/
+									fwvalidators.NotNullInt64(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: ResponseCode
 							"response_code": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -1350,7 +1394,14 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 						// Property: DNSName
 						"dns_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: HTTPPort
 						"http_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -1375,13 +1426,27 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 						// Property: OriginProtocolPolicy
 						"origin_protocol_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: OriginSSLProtocols
 						"origin_ssl_protocols": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
 							Description: "",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								fwvalidators.NotNullList(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "",
@@ -1471,7 +1536,14 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 										// Property: Forward
 										"forward": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "This field is deprecated. We recommend that you use a cache policy or an origin request policy instead of this field.\n If you want to include cookies in the cache key, use a cache policy. For more information, see [Creating cache policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy) in the *Amazon CloudFront Developer Guide*.\n If you want to send cookies to the origin but not include them in the cache key, use origin request policy. For more information, see [Creating origin request policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy) in the *Amazon CloudFront Developer Guide*.\n Specifies which cookies to forward to the origin for this cache behavior: all, none, or the list of cookies specified in the ``WhitelistedNames`` complex type.\n Amazon S3 doesn't process cookies. When the cache behavior is forwarding requests to an Amazon S3 origin, specify none for the ``Forward`` element.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: WhitelistedNames
 										"whitelisted_names": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -1507,7 +1579,14 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 								// Property: QueryString
 								"query_string": schema.BoolAttribute{ /*START ATTRIBUTE*/
 									Description: "This field is deprecated. We recommend that you use a cache policy or an origin request policy instead of this field.\n If you want to include query strings in the cache key, use a cache policy. For more information, see [Creating cache policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy) in the *Amazon CloudFront Developer Guide*.\n If you want to send query strings to the origin but not include them in the cache key, use an origin request policy. For more information, see [Creating origin request policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy) in the *Amazon CloudFront Developer Guide*.\n Indicates whether you want CloudFront to forward query strings to the origin that is associated with this cache behavior and cache based on the query string parameters. CloudFront behavior depends on the value of ``QueryString`` and on the values that you specify for ``QueryStringCacheKeys``, if any:\n If you specify true for ``QueryString`` and you don't specify any values for ``QueryStringCacheKeys``, CloudFront forwards all query string parameters to the origin and caches based on all query string parameters. Depending on how many query string parameters and values you have, this can adversely affect performance because CloudFront must forward more requests to the origin.\n If you specify true for ``QueryString`` and you specify one or more values for ``QueryStringCacheKeys``, CloudFront forwards all query string parameters to the origin, but it only caches based on the query string parameters that you specify.\n If you specify false for ``QueryString``, CloudFront doesn't forward any query string parameters to the origin, and doesn't cache based on query string parameters.\n For more information, see [Configuring CloudFront to Cache Based on Query String Parameters](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/QueryStringParameters.html) in the *Amazon CloudFront Developer Guide*.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Bool{ /*START VALIDATORS*/
+										fwvalidators.NotNullBool(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: QueryStringCacheKeys
 								"query_string_cache_keys": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -1732,7 +1811,14 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 						// Property: Bucket
 						"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The Amazon S3 bucket to store the access logs in, for example, ``myawslogbucket.s3.amazonaws.com``.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: IncludeCookies
 						"include_cookies": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -1779,25 +1865,60 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 													"items": schema.ListAttribute{ /*START ATTRIBUTE*/
 														ElementType: types.Int64Type,
 														Description: "The items (status codes) for an origin group.",
-														Required:    true,
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.List{ /*START VALIDATORS*/
+															fwvalidators.NotNullList(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+															listplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 													// Property: Quantity
 													"quantity": schema.Int64Attribute{ /*START ATTRIBUTE*/
 														Description: "The number of status codes.",
-														Required:    true,
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.Int64{ /*START VALIDATORS*/
+															fwvalidators.NotNullInt64(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+															int64planmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
 												Description: "The status codes that, when returned from the primary origin, will trigger CloudFront to failover to the second origin.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Object{ /*START VALIDATORS*/
+													fwvalidators.NotNullObject(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "A complex type that contains information about the failover criteria for an origin group.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Object{ /*START VALIDATORS*/
+											fwvalidators.NotNullObject(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: Id
 									"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "The origin group's ID.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: Members
 									"members": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1809,21 +1930,49 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 														// Property: OriginId
 														"origin_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Description: "The ID for an origin in an origin group.",
-															Required:    true,
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																fwvalidators.NotNullString(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 												}, /*END NESTED OBJECT*/
 												Description: "Items (origins) in an origin group.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.List{ /*START VALIDATORS*/
+													fwvalidators.NotNullList(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													listplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: Quantity
 											"quantity": schema.Int64Attribute{ /*START ATTRIBUTE*/
 												Description: "The number of origins in an origin group.",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Int64{ /*START VALIDATORS*/
+													fwvalidators.NotNullInt64(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+													int64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "A complex type that contains information about the origins in an origin group.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Object{ /*START VALIDATORS*/
+											fwvalidators.NotNullObject(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
@@ -1837,7 +1986,14 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 						// Property: Quantity
 						"quantity": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Description: "The number of origin groups.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								fwvalidators.NotNullInt64(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "A complex type that contains information about origin groups for this distribution.",
@@ -1905,7 +2061,14 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									// Property: OriginProtocolPolicy
 									"origin_protocol_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "Specifies the protocol (HTTP or HTTPS) that CloudFront uses to connect to the origin. Valid values are:\n  +   ``http-only`` ? CloudFront always uses HTTP to connect to the origin.\n  +   ``match-viewer`` ? CloudFront connects to the origin using the same protocol that the viewer used to connect to CloudFront.\n  +   ``https-only`` ? CloudFront always uses HTTPS to connect to the origin.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: OriginReadTimeout
 									"origin_read_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -1942,12 +2105,26 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							// Property: DomainName
 							"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The domain name for the origin.\n For more information, see [Origin Domain Name](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesDomainName) in the *Amazon CloudFront Developer Guide*.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Id
 							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "A unique identifier for the origin. This value must be unique within the distribution.\n Use this value to specify the ``TargetOriginId`` in a ``CacheBehavior`` or ``DefaultCacheBehavior``.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: OriginAccessControlId
 							"origin_access_control_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1965,12 +2142,26 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 										// Property: HeaderName
 										"header_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "The name of a header that you want CloudFront to send to your origin. For more information, see [Adding Custom Headers to Origin Requests](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/forward-custom-headers.html) in the *Amazon CloudFront Developer Guide*.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: HeaderValue
 										"header_value": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "The value for the header that you specified in the ``HeaderName`` field.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
@@ -2080,11 +2271,25 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 								// Property: RestrictionType
 								"restriction_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The method that you want to use to restrict distribution of your content by country:\n  +   ``none``: No geo restriction is enabled, meaning access to content is not restricted by client geo location.\n  +   ``blacklist``: The ``Location`` elements specify the countries in which you don't want CloudFront to distribute your content.\n  +   ``whitelist``: The ``Location`` elements specify the countries in which you want CloudFront to distribute your content.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "A complex type that controls the countries in which your content is distributed. CF determines the location of your users using ``MaxMind`` GeoIP databases. To disable geo restriction, remove the [Restrictions](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-distribution-distributionconfig.html#cfn-cloudfront-distribution-distributionconfig-restrictions) property from your stack template.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "A complex type that identifies ways in which you want to restrict distribution of your content.",
@@ -2105,7 +2310,14 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 						// Property: DNSName
 						"dns_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: OriginAccessIdentity
 						"origin_access_identity": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -2268,12 +2480,26 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "A string that contains ``Tag`` key.\n The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "A string that contains an optional ``Tag`` value.\n The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

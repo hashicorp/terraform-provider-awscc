@@ -10,12 +10,15 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -154,14 +157,28 @@ func appBlockResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: ExecutablePath
 				"executable_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: ScriptS3Location
 				"script_s3_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: S3Bucket
 						"s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: S3Key
 						"s3_key": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -172,11 +189,25 @@ func appBlockResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Required: true,
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Object{ /*START VALIDATORS*/
+						fwvalidators.NotNullObject(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: TimeoutInSeconds
 				"timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						fwvalidators.NotNullInt64(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Optional: true,
@@ -236,14 +267,28 @@ func appBlockResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: ExecutablePath
 				"executable_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: ScriptS3Location
 				"script_s3_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: S3Bucket
 						"s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: S3Key
 						"s3_key": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -254,11 +299,25 @@ func appBlockResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Required: true,
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Object{ /*START VALIDATORS*/
+						fwvalidators.NotNullObject(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: TimeoutInSeconds
 				"timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						fwvalidators.NotNullInt64(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Optional: true,

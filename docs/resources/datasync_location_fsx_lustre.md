@@ -34,7 +34,7 @@ Resource schema for AWS::DataSync::LocationFSxLustre.
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key for an AWS resource tag.
 - `value` (String) The value for an AWS resource tag.

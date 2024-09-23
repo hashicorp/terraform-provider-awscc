@@ -121,7 +121,6 @@ func instanceProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The property describes a network type for the instance profile.",
 		//	  "enum": [
 		//	    "IPV4",
-		//	    "IPV6",
 		//	    "DUAL"
 		//	  ],
 		//	  "type": "string"

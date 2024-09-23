@@ -92,7 +92,7 @@ Optional:
 <a id="nestedatt--code_editor_app_image_config--container_config--container_environment_variables"></a>
 ### Nested Schema for `code_editor_app_image_config.container_config.container_environment_variables`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)
@@ -119,7 +119,7 @@ Optional:
 <a id="nestedatt--jupyter_lab_app_image_config--container_config--container_environment_variables"></a>
 ### Nested Schema for `jupyter_lab_app_image_config.container_config.container_environment_variables`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)
@@ -130,25 +130,10 @@ Required:
 <a id="nestedatt--kernel_gateway_image_config"></a>
 ### Nested Schema for `kernel_gateway_image_config`
 
-Required:
-
-- `kernel_specs` (Attributes List) The specification of the Jupyter kernels in the image. (see [below for nested schema](#nestedatt--kernel_gateway_image_config--kernel_specs))
-
 Optional:
 
 - `file_system_config` (Attributes) The Amazon Elastic File System (EFS) storage configuration for a SageMaker image. (see [below for nested schema](#nestedatt--kernel_gateway_image_config--file_system_config))
-
-<a id="nestedatt--kernel_gateway_image_config--kernel_specs"></a>
-### Nested Schema for `kernel_gateway_image_config.kernel_specs`
-
-Required:
-
-- `name` (String) The name of the kernel.
-
-Optional:
-
-- `display_name` (String) The display name of the kernel.
-
+- `kernel_specs` (Attributes List) The specification of the Jupyter kernels in the image. (see [below for nested schema](#nestedatt--kernel_gateway_image_config--kernel_specs))
 
 <a id="nestedatt--kernel_gateway_image_config--file_system_config"></a>
 ### Nested Schema for `kernel_gateway_image_config.file_system_config`
@@ -160,11 +145,20 @@ Optional:
 - `mount_path` (String) The path within the image to mount the user's EFS home directory. The directory should be empty. If not specified, defaults to /home/sagemaker-user.
 
 
+<a id="nestedatt--kernel_gateway_image_config--kernel_specs"></a>
+### Nested Schema for `kernel_gateway_image_config.kernel_specs`
+
+Optional:
+
+- `display_name` (String) The display name of the kernel.
+- `name` (String) The name of the kernel.
+
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

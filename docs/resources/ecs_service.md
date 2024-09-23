@@ -3,15 +3,15 @@ page_title: "awscc_ecs_service Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
   The AWS::ECS::Service resource creates an Amazon Elastic Container Service (Amazon ECS) service that runs and maintains the requested number of tasks and associated load balancers.
-  The stack update fails if you change any properties that require replacement and at least one Amazon ECS Service Connect ServiceConnectService is configured. This is because AWS CloudFormation creates the replacement service first, but each ServiceConnectService must have a name that is unique in the namespace.
+  The stack update fails if you change any properties that require replacement and at least one ECS Service Connect ServiceConnectConfiguration property the is configured. This is because AWS CloudFormation creates the replacement service first, but each ServiceConnectService must have a name that is unique in the namespace.
   Starting April 15, 2023, AWS; will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, ECS, or EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service.
 ---
 
 # awscc_ecs_service (Resource)
 
 The ``AWS::ECS::Service`` resource creates an Amazon Elastic Container Service (Amazon ECS) service that runs and maintains the requested number of tasks and associated load balancers.
-  The stack update fails if you change any properties that require replacement and at least one Amazon ECS Service Connect ``ServiceConnectService`` is configured. This is because AWS CloudFormation creates the replacement service first, but each ``ServiceConnectService`` must have a name that is unique in the namespace.
-  Starting April 15, 2023, AWS; will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, ECS, or EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service.
+  The stack update fails if you change any properties that require replacement and at least one ECS Service Connect ``ServiceConnectConfiguration`` property the is configured. This is because AWS CloudFormation creates the replacement service first, but each ``ServiceConnectService`` must have a name that is unique in the namespace.
+   Starting April 15, 2023, AWS; will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, ECS, or EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service.
 
 ## Example Usage
 
@@ -91,6 +91,7 @@ resource "awscc_ecs_service" "nginx" {
 - `placement_strategies` (Attributes List) The placement strategy objects to use for tasks in your service. You can specify a maximum of 5 strategy rules for each service. (see [below for nested schema](#nestedatt--placement_strategies))
 - `platform_version` (String) The platform version that your tasks in the service are running on. A platform version is specified only for tasks using the Fargate launch type. If one isn't specified, the ``LATEST`` platform version is used. For more information, see [platform versions](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html) in the *Amazon Elastic Container Service Developer Guide*.
 - `propagate_tags` (String) Specifies whether to propagate the tags from the task definition to the task. If no value is specified, the tags aren't propagated. Tags can only be propagated to the task during task creation. To add tags to a task after task creation, use the [TagResource](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TagResource.html) API action.
+ You must set this to a value other than ``NONE`` when you use Cost Explorer. For more information, see [Amazon ECS usage reports](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/usage-reports.html) in the *Amazon Elastic Container Service Developer Guide*.
  The default is ``NONE``.
 - `role` (String) The name or full Amazon Resource Name (ARN) of the IAM role that allows Amazon ECS to make calls to your load balancer on your behalf. This parameter is only permitted if you are using a load balancer with your service and your task definition doesn't use the ``awsvpc`` network mode. If you specify the ``role`` parameter, you must also specify a load balancer object with the ``loadBalancers`` parameter.
   If your account has already created the Amazon ECS service-linked role, that role is used for your service unless you specify a role here. The service-linked role is required if your task definition uses the ``awsvpc`` network mode or if the service is configured to use service discovery, an external deployment controller, multiple target groups, or Elastic Inference accelerators in which case you don't specify a role here. For more information, see [Using service-linked roles for Amazon ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html) in the *Amazon Elastic Container Service Developer Guide*.
@@ -147,7 +148,9 @@ Optional:
 - `deployment_circuit_breaker` (Attributes) The deployment circuit breaker can only be used for services using the rolling update (``ECS``) deployment type.
   The *deployment circuit breaker* determines whether a service deployment will fail if the service can't reach a steady state. If you use the deployment circuit breaker, a service deployment will transition to a failed state and stop launching new tasks. If you use the rollback option, when a service deployment fails, the service is rolled back to the last deployment that completed successfully. For more information, see [Rolling update](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html) in the *Amazon Elastic Container Service Developer Guide* (see [below for nested schema](#nestedatt--deployment_configuration--deployment_circuit_breaker))
 - `maximum_percent` (Number) If a service is using the rolling update (``ECS``) deployment type, the ``maximumPercent`` parameter represents an upper limit on the number of your service's tasks that are allowed in the ``RUNNING`` or ``PENDING`` state during a deployment, as a percentage of the ``desiredCount`` (rounded down to the nearest integer). This parameter enables you to define the deployment batch size. For example, if your service is using the ``REPLICA`` service scheduler and has a ``desiredCount`` of four tasks and a ``maximumPercent`` value of 200%, the scheduler may start four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available). The default ``maximumPercent`` value for a service using the ``REPLICA`` service scheduler is 200%.
- If a service is using either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types and tasks that use the EC2 launch type, the *maximum percent* value is set to the default value and is used to define the upper limit on the number of the tasks in the service that remain in the ``RUNNING`` state while the container instances are in the ``DRAINING`` state. If the tasks in the service use the Fargate launch type, the maximum percent value is not used, although it is returned when describing your service.
+ If a service is using either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types, and tasks in the service use the EC2 launch type, the *maximum percent* value is set to the default value. The *maximum percent* value is used to define the upper limit on the number of the tasks in the service that remain in the ``RUNNING`` state while the container instances are in the ``DRAINING`` state.
+  You can't specify a custom ``maximumPercent`` value for a service that uses either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types and has tasks that use the EC2 launch type.
+  If the tasks in the service use the Fargate launch type, the maximum percent value is not used, although it is returned when describing your service.
 - `minimum_healthy_percent` (Number) If a service is using the rolling update (``ECS``) deployment type, the ``minimumHealthyPercent`` represents a lower limit on the number of your service's tasks that must remain in the ``RUNNING`` state during a deployment, as a percentage of the ``desiredCount`` (rounded up to the nearest integer). This parameter enables you to deploy without using additional cluster capacity. For example, if your service has a ``desiredCount`` of four tasks and a ``minimumHealthyPercent`` of 50%, the service scheduler may stop two existing tasks to free up cluster capacity before starting two new tasks. 
  For services that *do not* use a load balancer, the following should be noted:
   +  A service is considered healthy if all essential containers within the tasks in the service pass their health checks.
@@ -158,12 +161,16 @@ Optional:
   +  If a task has no essential containers with a health check defined, the service scheduler will wait for the load balancer target group health check to return a healthy status before counting the task towards the minimum healthy percent total.
   +  If a task has an essential container with a health check defined, the service scheduler will wait for both the task to reach a healthy status and the load balancer target group health check to return a healthy status before counting the task towards the minimum healthy percent total.
   
- If a service is using either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types and is running tasks that use the EC2 launch type, the *minimum healthy percent* value is set to the default value and is used to define the lower limit on the number of the tasks in the service that remain in the ``RUNNING`` state while the container instances are in the ``DRAINING`` state. If a service is using either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types and is running tasks that use the Fargate launch type, the minimum healthy percent value is not used, although it is returned when describing your service.
+ The default value for a replica service for ``minimumHealthyPercent`` is 100%. The default ``minimumHealthyPercent`` value for a service using the ``DAEMON`` service schedule is 0% for the CLI, the AWS SDKs, and the APIs and 50% for the AWS Management Console.
+ The minimum number of healthy tasks during a deployment is the ``desiredCount`` multiplied by the ``minimumHealthyPercent``/100, rounded up to the nearest integer value.
+ If a service is using either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types and is running tasks that use the EC2 launch type, the *minimum healthy percent* value is set to the default value. The *minimum healthy percent* value is used to define the lower limit on the number of the tasks in the service that remain in the ``RUNNING`` state while the container instances are in the ``DRAINING`` state.
+  You can't specify a custom ``minimumHealthyPercent`` value for a service that uses either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types and has tasks that use the EC2 launch type.
+  If a service is using either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types and is running tasks that use the Fargate launch type, the minimum healthy percent value is not used, although it is returned when describing your service.
 
 <a id="nestedatt--deployment_configuration--alarms"></a>
 ### Nested Schema for `deployment_configuration.alarms`
 
-Required:
+Optional:
 
 - `alarm_names` (List of String) One or more CloudWatch alarm names. Use a "," to separate the alarms.
 - `enable` (Boolean) Determines whether to use the CloudWatch alarm option in the service deployment process.
@@ -173,7 +180,7 @@ Required:
 <a id="nestedatt--deployment_configuration--deployment_circuit_breaker"></a>
 ### Nested Schema for `deployment_configuration.deployment_circuit_breaker`
 
-Required:
+Optional:
 
 - `enable` (Boolean) Determines whether to use the deployment circuit breaker logic for the service.
 - `rollback` (Boolean) Determines whether to configure Amazon ECS to roll back the service if a service deployment fails. If rollback is on, when a service deployment fails, the service is rolled back to the last deployment that completed successfully.
@@ -220,9 +227,9 @@ Optional:
 Optional:
 
 - `assign_public_ip` (String) Whether the task's elastic network interface receives a public IP address. The default value is ``DISABLED``.
-- `security_groups` (List of String) The IDs of the security groups associated with the task or service. If you don't specify a security group, the default security group for the VPC is used. There's a limit of 5 security groups that can be specified per ``AwsVpcConfiguration``.
+- `security_groups` (List of String) The IDs of the security groups associated with the task or service. If you don't specify a security group, the default security group for the VPC is used. There's a limit of 5 security groups that can be specified per ``awsvpcConfiguration``.
   All specified security groups must be from the same VPC.
-- `subnets` (List of String) The IDs of the subnets associated with the task or service. There's a limit of 16 subnets that can be specified per ``AwsVpcConfiguration``.
+- `subnets` (List of String) The IDs of the subnets associated with the task or service. There's a limit of 16 subnets that can be specified per ``awsvpcConfiguration``.
   All specified subnets must be from the same VPC.
 
 
@@ -230,42 +237,33 @@ Optional:
 <a id="nestedatt--placement_constraints"></a>
 ### Nested Schema for `placement_constraints`
 
-Required:
-
-- `type` (String) The type of constraint. Use ``distinctInstance`` to ensure that each task in a particular group is running on a different container instance. Use ``memberOf`` to restrict the selection to a group of valid candidates.
-
 Optional:
 
 - `expression` (String) A cluster query language expression to apply to the constraint. The expression can have a maximum length of 2000 characters. You can't specify an expression if the constraint type is ``distinctInstance``. For more information, see [Cluster query language](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html) in the *Amazon Elastic Container Service Developer Guide*.
+- `type` (String) The type of constraint. Use ``distinctInstance`` to ensure that each task in a particular group is running on a different container instance. Use ``memberOf`` to restrict the selection to a group of valid candidates.
 
 
 <a id="nestedatt--placement_strategies"></a>
 ### Nested Schema for `placement_strategies`
 
-Required:
-
-- `type` (String) The type of placement strategy. The ``random`` placement strategy randomly places tasks on available candidates. The ``spread`` placement strategy spreads placement across available candidates evenly based on the ``field`` parameter. The ``binpack`` strategy places tasks on available candidates that have the least available amount of the resource that's specified with the ``field`` parameter. For example, if you binpack on memory, a task is placed on the instance with the least amount of remaining memory but still enough to run the task.
-
 Optional:
 
-- `field` (String) The field to apply the placement strategy against. For the ``spread`` placement strategy, valid values are ``instanceId`` (or ``host``, which has the same effect), or any platform or custom attribute that is applied to a container instance, such as ``attribute:ecs.availability-zone``. For the ``binpack`` placement strategy, valid values are ``CPU`` and ``MEMORY``. For the ``random`` placement strategy, this field is not used.
+- `field` (String) The field to apply the placement strategy against. For the ``spread`` placement strategy, valid values are ``instanceId`` (or ``host``, which has the same effect), or any platform or custom attribute that's applied to a container instance, such as ``attribute:ecs.availability-zone``. For the ``binpack`` placement strategy, valid values are ``cpu`` and ``memory``. For the ``random`` placement strategy, this field is not used.
+- `type` (String) The type of placement strategy. The ``random`` placement strategy randomly places tasks on available candidates. The ``spread`` placement strategy spreads placement across available candidates evenly based on the ``field`` parameter. The ``binpack`` strategy places tasks on available candidates that have the least available amount of the resource that's specified with the ``field`` parameter. For example, if you binpack on memory, a task is placed on the instance with the least amount of remaining memory but still enough to run the task.
 
 
 <a id="nestedatt--service_connect_configuration"></a>
 ### Nested Schema for `service_connect_configuration`
 
-Required:
-
-- `enabled` (Boolean) Specifies whether to use Service Connect with this service.
-
 Optional:
 
-- `log_configuration` (Attributes) The log configuration for the container. This parameter maps to ``LogConfig`` in the [Create a container](https://docs.aws.amazon.com/https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of the [Docker Remote API](https://docs.aws.amazon.com/https://docs.docker.com/engine/api/v1.35/) and the ``--log-driver`` option to [docker run](https://docs.aws.amazon.com/https://docs.docker.com/engine/reference/commandline/run/).
- By default, containers use the same logging driver that the Docker daemon uses. However, the container might use a different logging driver than the Docker daemon by specifying a log driver configuration in the container definition. For more information about the options for different supported log drivers, see [Configure logging drivers](https://docs.aws.amazon.com/https://docs.docker.com/engine/admin/logging/overview/) in the Docker documentation.
+- `enabled` (Boolean) Specifies whether to use Service Connect with this service.
+- `log_configuration` (Attributes) The log configuration for the container. This parameter maps to ``LogConfig`` in the docker container create command and the ``--log-driver`` option to docker run.
+ By default, containers use the same logging driver that the Docker daemon uses. However, the container might use a different logging driver than the Docker daemon by specifying a log driver configuration in the container definition.
  Understand the following when specifying a log configuration for your containers.
   +  Amazon ECS currently supports a subset of the logging drivers available to the Docker daemon. Additional log drivers may be available in future releases of the Amazon ECS container agent.
  For tasks on FARGATElong, the supported log drivers are ``awslogs``, ``splunk``, and ``awsfirelens``.
- For tasks hosted on Amazon EC2 instances, the supported log drivers are ``awslogs``, ``fluentd``, ``gelf``, ``json-file``, ``journald``, ``logentries``,``syslog``, ``splunk``, and ``awsfirelens``.
+ For tasks hosted on Amazon EC2 instances, the supported log drivers are ``awslogs``, ``fluentd``, ``gelf``, ``json-file``, ``journald``,``syslog``, ``splunk``, and ``awsfirelens``.
   +  This parameter requires version 1.18 of the Docker Remote API or greater on your container instance.
   +  For tasks that are hosted on Amazon EC2 instances, the Amazon ECS container agent must register the available logging drivers with the ``ECS_AVAILABLE_LOGGING_DRIVERS`` environment variable before containers placed on that instance can use these log configuration options. For more information, see [Amazon ECS container agent configuration](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html) in the *Amazon Elastic Container Service Developer Guide*.
   +  For tasks that are on FARGATElong, because you don't have access to the underlying infrastructure your tasks are hosted on, any additional software needed must be installed outside of the task. For example, the Fluentd output aggregators or a remote host running Logstash to send Gelf logs to. (see [below for nested schema](#nestedatt--service_connect_configuration--log_configuration))
@@ -281,9 +279,9 @@ Optional:
 
 - `log_driver` (String) The log driver to use for the container.
  For tasks on FARGATElong, the supported log drivers are ``awslogs``, ``splunk``, and ``awsfirelens``.
- For tasks hosted on Amazon EC2 instances, the supported log drivers are ``awslogs``, ``fluentd``, ``gelf``, ``json-file``, ``journald``, ``logentries``,``syslog``, ``splunk``, and ``awsfirelens``.
- For more information about using the ``awslogs`` log driver, see [Using the awslogs log driver](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html) in the *Amazon Elastic Container Service Developer Guide*.
- For more information about using the ``awsfirelens`` log driver, see [Custom log routing](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html) in the *Amazon Elastic Container Service Developer Guide*.
+ For tasks hosted on Amazon EC2 instances, the supported log drivers are ``awslogs``, ``fluentd``, ``gelf``, ``json-file``, ``journald``, ``syslog``, ``splunk``, and ``awsfirelens``.
+ For more information about using the ``awslogs`` log driver, see [Send Amazon ECS logs to CloudWatch](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html) in the *Amazon Elastic Container Service Developer Guide*.
+ For more information about using the ``awsfirelens`` log driver, see [Send Amazon ECS logs to an service or Partner](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html).
   If you have a custom driver that isn't listed, you can fork the Amazon ECS container agent project that's [available on GitHub](https://docs.aws.amazon.com/https://github.com/aws/amazon-ecs-agent) and customize it to work with that driver. We encourage you to submit pull requests for changes that you would like to have included. However, we don't currently provide support for running modified copies of this software.
 - `options` (Map of String) The configuration options to send to the log driver. This parameter requires version 1.19 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log in to your container instance and run the following command: ``sudo docker version --format '{{.Server.APIVersion}}'``
 - `secret_options` (Attributes List) The secrets to pass to the log configuration. For more information, see [Specifying sensitive data](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html) in the *Amazon Elastic Container Service Developer Guide*. (see [below for nested schema](#nestedatt--service_connect_configuration--log_configuration--secret_options))
@@ -291,7 +289,7 @@ Optional:
 <a id="nestedatt--service_connect_configuration--log_configuration--secret_options"></a>
 ### Nested Schema for `service_connect_configuration.log_configuration.secret_options`
 
-Required:
+Optional:
 
 - `name` (String) The name of the secret.
 - `value_from` (String) The secret to expose to the container. The supported values are either the full ARN of the ASMlong secret or the full ARN of the parameter in the SSM Parameter Store.
@@ -302,10 +300,6 @@ Required:
 
 <a id="nestedatt--service_connect_configuration--services"></a>
 ### Nested Schema for `service_connect_configuration.services`
-
-Required:
-
-- `port_name` (String) The ``portName`` must match the name of one of the ``portMappings`` from all the containers in the task definition of this Amazon ECS service.
 
 Optional:
 
@@ -318,22 +312,20 @@ Optional:
 - `ingress_port_override` (Number) The port number for the Service Connect proxy to listen on.
  Use the value of this field to bypass the proxy for traffic on the port number specified in the named ``portMapping`` in the task definition of this application, and then use it in your VPC security groups to allow traffic into the proxy for this Amazon ECS service.
  In ``awsvpc`` mode and Fargate, the default value is the container port number. The container port number is in the ``portMapping`` in the task definition. In bridge mode, the default value is the ephemeral port of the Service Connect proxy.
+- `port_name` (String) The ``portName`` must match the name of one of the ``portMappings`` from all the containers in the task definition of this Amazon ECS service.
 - `timeout` (Attributes) A reference to an object that represents the configured timeouts for Service Connect. (see [below for nested schema](#nestedatt--service_connect_configuration--services--timeout))
 - `tls` (Attributes) A reference to an object that represents a Transport Layer Security (TLS) configuration. (see [below for nested schema](#nestedatt--service_connect_configuration--services--tls))
 
 <a id="nestedatt--service_connect_configuration--services--client_aliases"></a>
 ### Nested Schema for `service_connect_configuration.services.client_aliases`
 
-Required:
-
-- `port` (Number) The listening port number for the Service Connect proxy. This port is available inside of all of the tasks within the same namespace.
- To avoid changing your applications in client Amazon ECS services, set this to the same port that the client application uses by default. For more information, see [Service Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html) in the *Amazon Elastic Container Service Developer Guide*.
-
 Optional:
 
 - `dns_name` (String) The ``dnsName`` is the name that you use in the applications of client tasks to connect to this service. The name must be a valid DNS name but doesn't need to be fully-qualified. The name can include up to 127 characters. The name can include lowercase letters, numbers, underscores (_), hyphens (-), and periods (.). The name can't start with a hyphen.
  If this parameter isn't specified, the default value of ``discoveryName.namespace`` is used. If the ``discoveryName`` isn't specified, the port mapping name from the task definition is used in ``portName.namespace``.
  To avoid changing your applications in client Amazon ECS services, set this to the same name that the client application uses by default. For example, a few common names are ``database``, ``db``, or the lowercase name of a database, such as ``mysql`` or ``redis``. For more information, see [Service Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html) in the *Amazon Elastic Container Service Developer Guide*.
+- `port` (Number) The listening port number for the Service Connect proxy. This port is available inside of all of the tasks within the same namespace.
+ To avoid changing your applications in client Amazon ECS services, set this to the same port that the client application uses by default. For more information, see [Service Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html) in the *Amazon Elastic Container Service Developer Guide*.
 
 
 <a id="nestedatt--service_connect_configuration--services--timeout"></a>
@@ -350,12 +342,9 @@ Optional:
 <a id="nestedatt--service_connect_configuration--services--tls"></a>
 ### Nested Schema for `service_connect_configuration.services.tls`
 
-Required:
-
-- `issuer_certificate_authority` (Attributes) The signer certificate authority. (see [below for nested schema](#nestedatt--service_connect_configuration--services--tls--issuer_certificate_authority))
-
 Optional:
 
+- `issuer_certificate_authority` (Attributes) The signer certificate authority. (see [below for nested schema](#nestedatt--service_connect_configuration--services--tls--issuer_certificate_authority))
 - `kms_key` (String) The AWS Key Management Service key.
 - `role_arn` (String) The Amazon Resource Name (ARN) of the IAM role that's associated with the Service Connect TLS.
 
@@ -393,26 +382,19 @@ Optional:
 <a id="nestedatt--volume_configurations"></a>
 ### Nested Schema for `volume_configurations`
 
-Required:
-
-- `name` (String) The name of the volume. This value must match the volume name from the ``Volume`` object in the task definition.
-
 Optional:
 
 - `managed_ebs_volume` (Attributes) The configuration for the Amazon EBS volume that Amazon ECS creates and manages on your behalf. These settings are used to create each Amazon EBS volume, with one volume created for each task in the service. The Amazon EBS volumes are visible in your account in the Amazon EC2 console once they are created. (see [below for nested schema](#nestedatt--volume_configurations--managed_ebs_volume))
+- `name` (String) The name of the volume. This value must match the volume name from the ``Volume`` object in the task definition.
 
 <a id="nestedatt--volume_configurations--managed_ebs_volume"></a>
 ### Nested Schema for `volume_configurations.managed_ebs_volume`
-
-Required:
-
-- `role_arn` (String) The ARN of the IAM role to associate with this volume. This is the Amazon ECS infrastructure IAM role that is used to manage your AWS infrastructure. We recommend using the Amazon ECS-managed ``AmazonECSInfrastructureRolePolicyForVolumes`` IAM policy with this role. For more information, see [Amazon ECS infrastructure IAM role](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/infrastructure_IAM_role.html) in the *Amazon ECS Developer Guide*.
 
 Optional:
 
 - `encrypted` (Boolean) Indicates whether the volume should be encrypted. If no value is specified, encryption is turned on by default. This parameter maps 1:1 with the ``Encrypted`` parameter of the [CreateVolume API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in the *Amazon EC2 API Reference*.
 - `filesystem_type` (String) The Linux filesystem type for the volume. For volumes created from a snapshot, you must specify the same filesystem type that the volume was using when the snapshot was created. If there is a filesystem type mismatch, the task will fail to start.
- The available filesystem types are? ``ext3``, ``ext4``, and ``xfs``. If no value is specified, the ``xfs`` filesystem type is used by default.
+ The available filesystem types are  ``ext3``, ``ext4``, and ``xfs``. If no value is specified, the ``xfs`` filesystem type is used by default.
 - `iops` (Number) The number of I/O operations per second (IOPS). For ``gp3``, ``io1``, and ``io2`` volumes, this represents the number of IOPS that are provisioned for the volume. For ``gp2`` volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting.
  The following are the supported values for each volume type.
   +   ``gp3``: 3,000 - 16,000 IOPS
@@ -423,6 +405,7 @@ Optional:
  This parameter maps 1:1 with the ``Iops`` parameter of the [CreateVolume API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in the *Amazon EC2 API Reference*.
 - `kms_key_id` (String) The Amazon Resource Name (ARN) identifier of the AWS Key Management Service key to use for Amazon EBS encryption. When encryption is turned on and no AWS Key Management Service key is specified, the default AWS managed key for Amazon EBS volumes is used. This parameter maps 1:1 with the ``KmsKeyId`` parameter of the [CreateVolume API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in the *Amazon EC2 API Reference*.
    AWS authenticates the AWS Key Management Service key asynchronously. Therefore, if you specify an ID, alias, or ARN that is invalid, the action can appear to complete, but eventually fails.
+- `role_arn` (String) The ARN of the IAM role to associate with this volume. This is the Amazon ECS infrastructure IAM role that is used to manage your AWS infrastructure. We recommend using the Amazon ECS-managed ``AmazonECSInfrastructureRolePolicyForVolumes`` IAM policy with this role. For more information, see [Amazon ECS infrastructure IAM role](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/infrastructure_IAM_role.html) in the *Amazon ECS Developer Guide*.
 - `size_in_gi_b` (Number) The size of the volume in GiB. You must specify either a volume size or a snapshot ID. If you specify a snapshot ID, the snapshot size is used for the volume size by default. You can optionally specify a volume size greater than or equal to the snapshot size. This parameter maps 1:1 with the ``Size`` parameter of the [CreateVolume API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in the *Amazon EC2 API Reference*.
  The following are the supported volume size values for each volume type.
   +   ``gp2`` and ``gp3``: 1-16,384
@@ -445,13 +428,10 @@ Optional:
 <a id="nestedatt--volume_configurations--managed_ebs_volume--tag_specifications"></a>
 ### Nested Schema for `volume_configurations.managed_ebs_volume.tag_specifications`
 
-Required:
-
-- `resource_type` (String) The type of volume resource.
-
 Optional:
 
-- `propagate_tags` (String) Determines whether to propagate the tags from the task definition to ?the Amazon EBS volume. Tags can only propagate to a ``SERVICE`` specified in ?``ServiceVolumeConfiguration``. If no value is specified, the tags aren't ?propagated.
+- `propagate_tags` (String) Determines whether to propagate the tags from the task definition to  the Amazon EBS volume. Tags can only propagate to a ``SERVICE`` specified in  ``ServiceVolumeConfiguration``. If no value is specified, the tags aren't  propagated.
+- `resource_type` (String) The type of volume resource.
 - `tags` (Attributes List) The tags applied to this Amazon EBS volume. ``AmazonECSCreated`` and ``AmazonECSManaged`` are reserved tags that can't be used. (see [below for nested schema](#nestedatt--volume_configurations--managed_ebs_volume--tag_specifications--tags))
 
 <a id="nestedatt--volume_configurations--managed_ebs_volume--tag_specifications--tags"></a>

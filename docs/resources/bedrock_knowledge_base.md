@@ -143,23 +143,20 @@ Optional:
 <a id="nestedatt--storage_configuration--mongo_db_atlas_configuration"></a>
 ### Nested Schema for `storage_configuration.mongo_db_atlas_configuration`
 
-Required:
+Optional:
 
 - `collection_name` (String) Name of the collection within MongoDB Atlas.
 - `credentials_secret_arn` (String) The ARN of the secret that you created in AWS Secrets Manager that is linked to your Amazon Mongo database.
 - `database_name` (String) Name of the database within MongoDB Atlas.
 - `endpoint` (String) MongoDB Atlas endpoint.
+- `endpoint_service_name` (String) MongoDB Atlas endpoint service name.
 - `field_mapping` (Attributes) Contains the names of the fields to which to map information about the vector store. (see [below for nested schema](#nestedatt--storage_configuration--mongo_db_atlas_configuration--field_mapping))
 - `vector_index_name` (String) Name of a MongoDB Atlas index.
-
-Optional:
-
-- `endpoint_service_name` (String) MongoDB Atlas endpoint service name.
 
 <a id="nestedatt--storage_configuration--mongo_db_atlas_configuration--field_mapping"></a>
 ### Nested Schema for `storage_configuration.mongo_db_atlas_configuration.field_mapping`
 
-Required:
+Optional:
 
 - `metadata_field` (String) The name of the field in which Amazon Bedrock stores metadata about the vector store.
 - `text_field` (String) The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
@@ -170,7 +167,7 @@ Required:
 <a id="nestedatt--storage_configuration--opensearch_serverless_configuration"></a>
 ### Nested Schema for `storage_configuration.opensearch_serverless_configuration`
 
-Required:
+Optional:
 
 - `collection_arn` (String) The ARN of the OpenSearch Service vector store.
 - `field_mapping` (Attributes) A mapping of Bedrock Knowledge Base fields to OpenSearch Serverless field names (see [below for nested schema](#nestedatt--storage_configuration--opensearch_serverless_configuration--field_mapping))
@@ -179,7 +176,7 @@ Required:
 <a id="nestedatt--storage_configuration--opensearch_serverless_configuration--field_mapping"></a>
 ### Nested Schema for `storage_configuration.opensearch_serverless_configuration.field_mapping`
 
-Required:
+Optional:
 
 - `metadata_field` (String) The name of the field in which Amazon Bedrock stores metadata about the vector store.
 - `text_field` (String) The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
@@ -190,20 +187,17 @@ Required:
 <a id="nestedatt--storage_configuration--pinecone_configuration"></a>
 ### Nested Schema for `storage_configuration.pinecone_configuration`
 
-Required:
+Optional:
 
 - `connection_string` (String) The endpoint URL for your index management page.
 - `credentials_secret_arn` (String) The ARN of the secret that you created in AWS Secrets Manager that is linked to your Pinecone API key.
 - `field_mapping` (Attributes) Contains the names of the fields to which to map information about the vector store. (see [below for nested schema](#nestedatt--storage_configuration--pinecone_configuration--field_mapping))
-
-Optional:
-
 - `namespace` (String) The namespace to be used to write new data to your database.
 
 <a id="nestedatt--storage_configuration--pinecone_configuration--field_mapping"></a>
 ### Nested Schema for `storage_configuration.pinecone_configuration.field_mapping`
 
-Required:
+Optional:
 
 - `metadata_field` (String) The name of the field in which Amazon Bedrock stores metadata about the vector store.
 - `text_field` (String) The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
@@ -213,7 +207,7 @@ Required:
 <a id="nestedatt--storage_configuration--rds_configuration"></a>
 ### Nested Schema for `storage_configuration.rds_configuration`
 
-Required:
+Optional:
 
 - `credentials_secret_arn` (String) The ARN of the secret that you created in AWS Secrets Manager that is linked to your Amazon RDS database.
 - `database_name` (String) The name of your Amazon RDS database.
@@ -224,7 +218,7 @@ Required:
 <a id="nestedatt--storage_configuration--rds_configuration--field_mapping"></a>
 ### Nested Schema for `storage_configuration.rds_configuration.field_mapping`
 
-Required:
+Optional:
 
 - `metadata_field` (String) The name of the field in which Amazon Bedrock stores metadata about the vector store.
 - `primary_key_field` (String) The name of the field in which Amazon Bedrock stores the ID for each entry.

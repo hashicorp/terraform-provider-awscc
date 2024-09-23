@@ -31,7 +31,7 @@ Resource Type definition for SSO InstanceAccessControlAttributeConfiguration
 <a id="nestedatt--access_control_attributes"></a>
 ### Nested Schema for `access_control_attributes`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (Attributes) (see [below for nested schema](#nestedatt--access_control_attributes--value))
@@ -39,7 +39,7 @@ Required:
 <a id="nestedatt--access_control_attributes--value"></a>
 ### Nested Schema for `access_control_attributes.value`
 
-Required:
+Optional:
 
 - `source` (List of String)
 
@@ -48,14 +48,14 @@ Required:
 <a id="nestedatt--instance_access_control_attribute_configuration"></a>
 ### Nested Schema for `instance_access_control_attribute_configuration`
 
-Required:
+Optional:
 
 - `access_control_attributes` (Attributes List) (see [below for nested schema](#nestedatt--instance_access_control_attribute_configuration--access_control_attributes))
 
 <a id="nestedatt--instance_access_control_attribute_configuration--access_control_attributes"></a>
 ### Nested Schema for `instance_access_control_attribute_configuration.access_control_attributes`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (Attributes) (see [below for nested schema](#nestedatt--instance_access_control_attribute_configuration--access_control_attributes--value))
@@ -63,7 +63,7 @@ Required:
 <a id="nestedatt--instance_access_control_attribute_configuration--access_control_attributes--value"></a>
 ### Nested Schema for `instance_access_control_attribute_configuration.access_control_attributes.value`
 
-Required:
+Optional:
 
 - `source` (List of String)
 

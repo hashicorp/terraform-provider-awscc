@@ -182,7 +182,7 @@ resource "aws_cloudwatch_metric_alarm" "status_gte_1" {
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) A unique identifier for the tag. The combination of tag keys and values can help you organize and categorize your resources.
 - `value` (String) The value for the specified tag key.

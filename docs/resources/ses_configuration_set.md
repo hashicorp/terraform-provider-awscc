@@ -81,7 +81,7 @@ Optional:
 <a id="nestedatt--vdm_options--dashboard_options"></a>
 ### Nested Schema for `vdm_options.dashboard_options`
 
-Required:
+Optional:
 
 - `engagement_metrics` (String) Whether emails sent with this configuration set have engagement tracking enabled.
 
@@ -89,7 +89,7 @@ Required:
 <a id="nestedatt--vdm_options--guardian_options"></a>
 ### Nested Schema for `vdm_options.guardian_options`
 
-Required:
+Optional:
 
 - `optimized_shared_delivery` (String) Whether emails sent with this configuration set have optimized delivery algorithm enabled.
 

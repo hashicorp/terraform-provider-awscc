@@ -30,7 +30,7 @@ Resource Type definition for AWS::IVS::PlaybackKeyPair
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

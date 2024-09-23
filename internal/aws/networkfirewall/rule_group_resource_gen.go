@@ -25,6 +25,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -712,18 +713,24 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: GeneratedRulesType
 								"generated_rules_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.OneOf(
 											"ALLOWLIST",
 											"DENYLIST",
 										),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: TargetTypes
 								"target_types": schema.ListAttribute{ /*START ATTRIBUTE*/
 									ElementType: types.StringType,
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.List{ /*START VALIDATORS*/
 										listvalidator.ValueStringsAre(
 											stringvalidator.OneOf(
@@ -731,12 +738,23 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 												"HTTP_HOST",
 											),
 										),
+										fwvalidators.NotNullList(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Targets
 								"targets": schema.ListAttribute{ /*START ATTRIBUTE*/
 									ElementType: types.StringType,
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										fwvalidators.NotNullList(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
@@ -762,7 +780,8 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Action
 									"action": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Required: true,
+										Optional: true,
+										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"PASS",
@@ -770,40 +789,60 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 												"ALERT",
 												"REJECT",
 											),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: Header
 									"header": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 											// Property: Destination
 											"destination": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Required: true,
+												Optional: true,
+												Computed: true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 1024),
 													stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
+													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: DestinationPort
 											"destination_port": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Required: true,
+												Optional: true,
+												Computed: true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 1024),
 													stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
+													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: Direction
 											"direction": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Required: true,
+												Optional: true,
+												Computed: true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.OneOf(
 														"FORWARD",
 														"ANY",
 													),
+													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: Protocol
 											"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Required: true,
+												Optional: true,
+												Computed: true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.OneOf(
 														"IP",
@@ -826,26 +865,47 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 														"NTP",
 														"DHCP",
 													),
+													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: Source
 											"source": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Required: true,
+												Optional: true,
+												Computed: true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 1024),
 													stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
+													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: SourcePort
 											"source_port": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Required: true,
+												Optional: true,
+												Computed: true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 1024),
 													stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
+													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
-										Required: true,
+										Optional: true,
+										Computed: true,
+										Validators: []validator.Object{ /*START VALIDATORS*/
+											fwvalidators.NotNullObject(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: RuleOptions
 									"rule_options": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -853,11 +913,16 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 												// Property: Keyword
 												"keyword": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Required: true,
+													Optional: true,
+													Computed: true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(1, 128),
 														stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
+														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: Settings
 												"settings": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -876,7 +941,14 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
-										Required: true,
+										Optional: true,
+										Computed: true,
+										Validators: []validator.List{ /*START VALIDATORS*/
+											fwvalidators.NotNullList(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
@@ -905,15 +977,27 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 																		// Property: Value
 																		"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																			Required: true,
+																			Optional: true,
+																			Computed: true,
 																			Validators: []validator.String{ /*START VALIDATORS*/
 																				stringvalidator.LengthBetween(1, 128),
 																				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-_ ]+$"), ""),
+																				fwvalidators.NotNullString(),
 																			}, /*END VALIDATORS*/
+																			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																				stringplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
 																		}, /*END ATTRIBUTE*/
 																	}, /*END SCHEMA*/
 																}, /*END NESTED OBJECT*/
-																Required: true,
+																Optional: true,
+																Computed: true,
+																Validators: []validator.List{ /*START VALIDATORS*/
+																	fwvalidators.NotNullList(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																	listplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 														Optional: true,
@@ -923,15 +1007,27 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
-												Required: true,
+												Optional: true,
+												Computed: true,
+												Validators: []validator.Object{ /*START VALIDATORS*/
+													fwvalidators.NotNullObject(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: ActionName
 											"action_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Required: true,
+												Optional: true,
+												Computed: true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 128),
 													stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]+$"), ""),
+													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
@@ -947,10 +1043,15 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 											// Property: Priority
 											"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
-												Required: true,
+												Optional: true,
+												Computed: true,
 												Validators: []validator.Int64{ /*START VALIDATORS*/
 													int64validator.Between(1, 65535),
+													fwvalidators.NotNullInt64(),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+													int64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: RuleDefinition
 											"rule_definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -958,7 +1059,14 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 													// Property: Actions
 													"actions": schema.ListAttribute{ /*START ATTRIBUTE*/
 														ElementType: types.StringType,
-														Required:    true,
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.List{ /*START VALIDATORS*/
+															fwvalidators.NotNullList(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+															listplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 													// Property: MatchAttributes
 													"match_attributes": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -969,17 +1077,27 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 																		// Property: FromPort
 																		"from_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-																			Required: true,
+																			Optional: true,
+																			Computed: true,
 																			Validators: []validator.Int64{ /*START VALIDATORS*/
 																				int64validator.Between(0, 65535),
+																				fwvalidators.NotNullInt64(),
 																			}, /*END VALIDATORS*/
+																			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																				int64planmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
 																		}, /*END ATTRIBUTE*/
 																		// Property: ToPort
 																		"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-																			Required: true,
+																			Optional: true,
+																			Computed: true,
 																			Validators: []validator.Int64{ /*START VALIDATORS*/
 																				int64validator.Between(0, 65535),
+																				fwvalidators.NotNullInt64(),
 																			}, /*END VALIDATORS*/
+																			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																				int64planmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
 																		}, /*END ATTRIBUTE*/
 																	}, /*END SCHEMA*/
 																}, /*END NESTED OBJECT*/
@@ -995,11 +1113,16 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 																		// Property: AddressDefinition
 																		"address_definition": schema.StringAttribute{ /*START ATTRIBUTE*/
-																			Required: true,
+																			Optional: true,
+																			Computed: true,
 																			Validators: []validator.String{ /*START VALIDATORS*/
 																				stringvalidator.LengthBetween(1, 255),
 																				stringvalidator.RegexMatches(regexp.MustCompile("^([a-fA-F\\d:\\.]+/\\d{1,3})$"), ""),
+																				fwvalidators.NotNullString(),
 																			}, /*END VALIDATORS*/
+																			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																				stringplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
 																		}, /*END ATTRIBUTE*/
 																	}, /*END SCHEMA*/
 																}, /*END NESTED OBJECT*/
@@ -1029,17 +1152,27 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 																		// Property: FromPort
 																		"from_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-																			Required: true,
+																			Optional: true,
+																			Computed: true,
 																			Validators: []validator.Int64{ /*START VALIDATORS*/
 																				int64validator.Between(0, 65535),
+																				fwvalidators.NotNullInt64(),
 																			}, /*END VALIDATORS*/
+																			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																				int64planmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
 																		}, /*END ATTRIBUTE*/
 																		// Property: ToPort
 																		"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-																			Required: true,
+																			Optional: true,
+																			Computed: true,
 																			Validators: []validator.Int64{ /*START VALIDATORS*/
 																				int64validator.Between(0, 65535),
+																				fwvalidators.NotNullInt64(),
 																			}, /*END VALIDATORS*/
+																			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																				int64planmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
 																		}, /*END ATTRIBUTE*/
 																	}, /*END SCHEMA*/
 																}, /*END NESTED OBJECT*/
@@ -1055,11 +1188,16 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 																		// Property: AddressDefinition
 																		"address_definition": schema.StringAttribute{ /*START ATTRIBUTE*/
-																			Required: true,
+																			Optional: true,
+																			Computed: true,
 																			Validators: []validator.String{ /*START VALIDATORS*/
 																				stringvalidator.LengthBetween(1, 255),
 																				stringvalidator.RegexMatches(regexp.MustCompile("^([a-fA-F\\d:\\.]+/\\d{1,3})$"), ""),
+																				fwvalidators.NotNullString(),
 																			}, /*END VALIDATORS*/
+																			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																				stringplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
 																		}, /*END ATTRIBUTE*/
 																	}, /*END SCHEMA*/
 																}, /*END NESTED OBJECT*/
@@ -1076,7 +1214,8 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 																		// Property: Flags
 																		"flags": schema.ListAttribute{ /*START ATTRIBUTE*/
 																			ElementType: types.StringType,
-																			Required:    true,
+																			Optional:    true,
+																			Computed:    true,
 																			Validators: []validator.List{ /*START VALIDATORS*/
 																				listvalidator.ValueStringsAre(
 																					stringvalidator.OneOf(
@@ -1090,7 +1229,11 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 																						"CWR",
 																					),
 																				),
+																				fwvalidators.NotNullList(),
 																			}, /*END VALIDATORS*/
+																			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																				listplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
 																		}, /*END ATTRIBUTE*/
 																		// Property: Masks
 																		"masks": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -1124,14 +1267,35 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
-														Required: true,
+														Optional: true,
+														Computed: true,
+														Validators: []validator.Object{ /*START VALIDATORS*/
+															fwvalidators.NotNullObject(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+															objectplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
-												Required: true,
+												Optional: true,
+												Computed: true,
+												Validators: []validator.Object{ /*START VALIDATORS*/
+													fwvalidators.NotNullObject(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
-									Required: true,
+									Optional: true,
+									Computed: true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										fwvalidators.NotNullList(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
@@ -1141,7 +1305,14 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Required: true,
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Object{ /*START VALIDATORS*/
+						fwvalidators.NotNullObject(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: StatefulRuleOptions
 				"stateful_rule_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1260,19 +1431,29 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
 							stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 255),
 							stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

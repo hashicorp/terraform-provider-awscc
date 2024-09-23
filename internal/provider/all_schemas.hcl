@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1041 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1057 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -984,6 +984,11 @@ resource_schema "aws_config_stored_query" {
   cloudformation_type_name = "AWS::Config::StoredQuery"
 }
 
+resource_schema "aws_connect_agent_status" {
+  cloudformation_type_name               = "AWS::Connect::AgentStatus"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_connect_approved_origin" {
   cloudformation_type_name = "AWS::Connect::ApprovedOrigin"
 }
@@ -1091,6 +1096,11 @@ resource_schema "aws_connect_user" {
 
 resource_schema "aws_connect_user_hierarchy_group" {
   cloudformation_type_name               = "AWS::Connect::UserHierarchyGroup"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_connect_user_hierarchy_structure" {
+  cloudformation_type_name               = "AWS::Connect::UserHierarchyStructure"
   suppress_plural_data_source_generation = true
 }
 
@@ -1284,6 +1294,11 @@ resource_schema "aws_datazone_domain" {
 
 resource_schema "aws_datazone_environment" {
   cloudformation_type_name               = "AWS::DataZone::Environment"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_datazone_environment_actions" {
+  cloudformation_type_name               = "AWS::DataZone::EnvironmentActions"
   suppress_plural_data_source_generation = true
 }
 
@@ -3101,6 +3116,31 @@ resource_schema "aws_mediaconnect_gateway" {
   cloudformation_type_name = "AWS::MediaConnect::Gateway"
 }
 
+resource_schema "aws_medialive_channel_placement_group" {
+  cloudformation_type_name               = "AWS::MediaLive::ChannelPlacementGroup"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_medialive_cloudwatch_alarm_template" {
+  cloudformation_type_name = "AWS::MediaLive::CloudWatchAlarmTemplate"
+}
+
+resource_schema "aws_medialive_cloudwatch_alarm_template_group" {
+  cloudformation_type_name = "AWS::MediaLive::CloudWatchAlarmTemplateGroup"
+}
+
+resource_schema "aws_medialive_cluster" {
+  cloudformation_type_name = "AWS::MediaLive::Cluster"
+}
+
+resource_schema "aws_medialive_event_bridge_rule_template" {
+  cloudformation_type_name = "AWS::MediaLive::EventBridgeRuleTemplate"
+}
+
+resource_schema "aws_medialive_event_bridge_rule_template_group" {
+  cloudformation_type_name = "AWS::MediaLive::EventBridgeRuleTemplateGroup"
+}
+
 resource_schema "aws_medialive_multiplex" {
   cloudformation_type_name = "AWS::MediaLive::Multiplex"
 }
@@ -3108,6 +3148,18 @@ resource_schema "aws_medialive_multiplex" {
 resource_schema "aws_medialive_multiplexprogram" {
   cloudformation_type_name               = "AWS::MediaLive::Multiplexprogram"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_medialive_network" {
+  cloudformation_type_name = "AWS::MediaLive::Network"
+}
+
+resource_schema "aws_medialive_sdi_source" {
+  cloudformation_type_name = "AWS::MediaLive::SdiSource"
+}
+
+resource_schema "aws_medialive_signal_map" {
+  cloudformation_type_name = "AWS::MediaLive::SignalMap"
 }
 
 resource_schema "aws_mediapackage_asset" {
@@ -3442,6 +3494,15 @@ resource_schema "aws_pcaconnectorad_template" {
 resource_schema "aws_pcaconnectorad_template_group_access_control_entry" {
   cloudformation_type_name               = "AWS::PCAConnectorAD::TemplateGroupAccessControlEntry"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_pcaconnectorscep_challenge" {
+  cloudformation_type_name               = "AWS::PCAConnectorSCEP::Challenge"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_pcaconnectorscep_connector" {
+  cloudformation_type_name = "AWS::PCAConnectorSCEP::Connector"
 }
 
 resource_schema "aws_panorama_application_instance" {
@@ -4029,6 +4090,10 @@ resource_schema "aws_ses_vdm_attributes" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_sns_subscription" {
+  cloudformation_type_name = "AWS::SNS::Subscription"
+}
+
 resource_schema "aws_sns_topic" {
   cloudformation_type_name = "AWS::SNS::Topic"
 }
@@ -4133,8 +4198,16 @@ resource_schema "aws_sagemaker_app_image_config" {
   cloudformation_type_name = "AWS::SageMaker::AppImageConfig"
 }
 
+resource_schema "aws_sagemaker_cluster" {
+  cloudformation_type_name = "AWS::SageMaker::Cluster"
+}
+
 resource_schema "aws_sagemaker_data_quality_job_definition" {
   cloudformation_type_name = "AWS::SageMaker::DataQualityJobDefinition"
+}
+
+resource_schema "aws_sagemaker_cluster" {
+  cloudformation_type_name = "AWS::SageMaker::Cluster"
 }
 
 resource_schema "aws_sagemaker_device" {

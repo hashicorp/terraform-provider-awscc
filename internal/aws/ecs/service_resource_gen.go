@@ -23,6 +23,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -168,11 +169,11 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "MaximumPercent": {
-		//	      "description": "If a service is using the rolling update (``ECS``) deployment type, the ``maximumPercent`` parameter represents an upper limit on the number of your service's tasks that are allowed in the ``RUNNING`` or ``PENDING`` state during a deployment, as a percentage of the ``desiredCount`` (rounded down to the nearest integer). This parameter enables you to define the deployment batch size. For example, if your service is using the ``REPLICA`` service scheduler and has a ``desiredCount`` of four tasks and a ``maximumPercent`` value of 200%, the scheduler may start four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available). The default ``maximumPercent`` value for a service using the ``REPLICA`` service scheduler is 200%.\n If a service is using either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types and tasks that use the EC2 launch type, the *maximum percent* value is set to the default value and is used to define the upper limit on the number of the tasks in the service that remain in the ``RUNNING`` state while the container instances are in the ``DRAINING`` state. If the tasks in the service use the Fargate launch type, the maximum percent value is not used, although it is returned when describing your service.",
+		//	      "description": "If a service is using the rolling update (``ECS``) deployment type, the ``maximumPercent`` parameter represents an upper limit on the number of your service's tasks that are allowed in the ``RUNNING`` or ``PENDING`` state during a deployment, as a percentage of the ``desiredCount`` (rounded down to the nearest integer). This parameter enables you to define the deployment batch size. For example, if your service is using the ``REPLICA`` service scheduler and has a ``desiredCount`` of four tasks and a ``maximumPercent`` value of 200%, the scheduler may start four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available). The default ``maximumPercent`` value for a service using the ``REPLICA`` service scheduler is 200%.\n If a service is using either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types, and tasks in the service use the EC2 launch type, the *maximum percent* value is set to the default value. The *maximum percent* value is used to define the upper limit on the number of the tasks in the service that remain in the ``RUNNING`` state while the container instances are in the ``DRAINING`` state.\n  You can't specify a custom ``maximumPercent`` value for a service that uses either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types and has tasks that use the EC2 launch type.\n  If the tasks in the service use the Fargate launch type, the maximum percent value is not used, although it is returned when describing your service.",
 		//	      "type": "integer"
 		//	    },
 		//	    "MinimumHealthyPercent": {
-		//	      "description": "If a service is using the rolling update (``ECS``) deployment type, the ``minimumHealthyPercent`` represents a lower limit on the number of your service's tasks that must remain in the ``RUNNING`` state during a deployment, as a percentage of the ``desiredCount`` (rounded up to the nearest integer). This parameter enables you to deploy without using additional cluster capacity. For example, if your service has a ``desiredCount`` of four tasks and a ``minimumHealthyPercent`` of 50%, the service scheduler may stop two existing tasks to free up cluster capacity before starting two new tasks. \n For services that *do not* use a load balancer, the following should be noted:\n  +  A service is considered healthy if all essential containers within the tasks in the service pass their health checks.\n  +  If a task has no essential containers with a health check defined, the service scheduler will wait for 40 seconds after a task reaches a ``RUNNING`` state before the task is counted towards the minimum healthy percent total.\n  +  If a task has one or more essential containers with a health check defined, the service scheduler will wait for the task to reach a healthy status before counting it towards the minimum healthy percent total. A task is considered healthy when all essential containers within the task have passed their health checks. The amount of time the service scheduler can wait for is determined by the container health check settings. \n  \n For services that *do* use a load balancer, the following should be noted:\n  +  If a task has no essential containers with a health check defined, the service scheduler will wait for the load balancer target group health check to return a healthy status before counting the task towards the minimum healthy percent total.\n  +  If a task has an essential container with a health check defined, the service scheduler will wait for both the task to reach a healthy status and the load balancer target group health check to return a healthy status before counting the task towards the minimum healthy percent total.\n  \n If a service is using either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types and is running tasks that use the EC2 launch type, the *minimum healthy percent* value is set to the default value and is used to define the lower limit on the number of the tasks in the service that remain in the ``RUNNING`` state while the container instances are in the ``DRAINING`` state. If a service is using either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types and is running tasks that use the Fargate launch type, the minimum healthy percent value is not used, although it is returned when describing your service.",
+		//	      "description": "If a service is using the rolling update (``ECS``) deployment type, the ``minimumHealthyPercent`` represents a lower limit on the number of your service's tasks that must remain in the ``RUNNING`` state during a deployment, as a percentage of the ``desiredCount`` (rounded up to the nearest integer). This parameter enables you to deploy without using additional cluster capacity. For example, if your service has a ``desiredCount`` of four tasks and a ``minimumHealthyPercent`` of 50%, the service scheduler may stop two existing tasks to free up cluster capacity before starting two new tasks. \n For services that *do not* use a load balancer, the following should be noted:\n  +  A service is considered healthy if all essential containers within the tasks in the service pass their health checks.\n  +  If a task has no essential containers with a health check defined, the service scheduler will wait for 40 seconds after a task reaches a ``RUNNING`` state before the task is counted towards the minimum healthy percent total.\n  +  If a task has one or more essential containers with a health check defined, the service scheduler will wait for the task to reach a healthy status before counting it towards the minimum healthy percent total. A task is considered healthy when all essential containers within the task have passed their health checks. The amount of time the service scheduler can wait for is determined by the container health check settings. \n  \n For services that *do* use a load balancer, the following should be noted:\n  +  If a task has no essential containers with a health check defined, the service scheduler will wait for the load balancer target group health check to return a healthy status before counting the task towards the minimum healthy percent total.\n  +  If a task has an essential container with a health check defined, the service scheduler will wait for both the task to reach a healthy status and the load balancer target group health check to return a healthy status before counting the task towards the minimum healthy percent total.\n  \n The default value for a replica service for ``minimumHealthyPercent`` is 100%. The default ``minimumHealthyPercent`` value for a service using the ``DAEMON`` service schedule is 0% for the CLI, the AWS SDKs, and the APIs and 50% for the AWS Management Console.\n The minimum number of healthy tasks during a deployment is the ``desiredCount`` multiplied by the ``minimumHealthyPercent``/100, rounded up to the nearest integer value.\n If a service is using either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types and is running tasks that use the EC2 launch type, the *minimum healthy percent* value is set to the default value. The *minimum healthy percent* value is used to define the lower limit on the number of the tasks in the service that remain in the ``RUNNING`` state while the container instances are in the ``DRAINING`` state.\n  You can't specify a custom ``minimumHealthyPercent`` value for a service that uses either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types and has tasks that use the EC2 launch type.\n  If a service is using either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types and is running tasks that use the Fargate launch type, the minimum healthy percent value is not used, although it is returned when describing your service.",
 		//	      "type": "integer"
 		//	    }
 		//	  },
@@ -187,17 +188,38 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 						"alarm_names": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
 							Description: "One or more CloudWatch alarm names. Use a \",\" to separate the alarms.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								fwvalidators.NotNullList(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Enable
 						"enable": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Description: "Determines whether to use the CloudWatch alarm option in the service deployment process.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Bool{ /*START VALIDATORS*/
+								fwvalidators.NotNullBool(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Rollback
 						"rollback": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Description: "Determines whether to configure Amazon ECS to roll back the service if a service deployment fails. If rollback is used, when a service deployment fails, the service is rolled back to the last deployment that completed successfully.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Bool{ /*START VALIDATORS*/
+								fwvalidators.NotNullBool(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Information about the CloudWatch alarms.",
@@ -213,12 +235,26 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 						// Property: Enable
 						"enable": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Description: "Determines whether to use the deployment circuit breaker logic for the service.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Bool{ /*START VALIDATORS*/
+								fwvalidators.NotNullBool(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Rollback
 						"rollback": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Description: "Determines whether to configure Amazon ECS to roll back the service if a service deployment fails. If rollback is on, when a service deployment fails, the service is rolled back to the last deployment that completed successfully.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Bool{ /*START VALIDATORS*/
+								fwvalidators.NotNullBool(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The deployment circuit breaker can only be used for services using the rolling update (``ECS``) deployment type.\n  The *deployment circuit breaker* determines whether a service deployment will fail if the service can't reach a steady state. If you use the deployment circuit breaker, a service deployment will transition to a failed state and stop launching new tasks. If you use the rollback option, when a service deployment fails, the service is rolled back to the last deployment that completed successfully. For more information, see [Rolling update](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html) in the *Amazon Elastic Container Service Developer Guide*",
@@ -230,7 +266,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: MaximumPercent
 				"maximum_percent": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "If a service is using the rolling update (``ECS``) deployment type, the ``maximumPercent`` parameter represents an upper limit on the number of your service's tasks that are allowed in the ``RUNNING`` or ``PENDING`` state during a deployment, as a percentage of the ``desiredCount`` (rounded down to the nearest integer). This parameter enables you to define the deployment batch size. For example, if your service is using the ``REPLICA`` service scheduler and has a ``desiredCount`` of four tasks and a ``maximumPercent`` value of 200%, the scheduler may start four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available). The default ``maximumPercent`` value for a service using the ``REPLICA`` service scheduler is 200%.\n If a service is using either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types and tasks that use the EC2 launch type, the *maximum percent* value is set to the default value and is used to define the upper limit on the number of the tasks in the service that remain in the ``RUNNING`` state while the container instances are in the ``DRAINING`` state. If the tasks in the service use the Fargate launch type, the maximum percent value is not used, although it is returned when describing your service.",
+					Description: "If a service is using the rolling update (``ECS``) deployment type, the ``maximumPercent`` parameter represents an upper limit on the number of your service's tasks that are allowed in the ``RUNNING`` or ``PENDING`` state during a deployment, as a percentage of the ``desiredCount`` (rounded down to the nearest integer). This parameter enables you to define the deployment batch size. For example, if your service is using the ``REPLICA`` service scheduler and has a ``desiredCount`` of four tasks and a ``maximumPercent`` value of 200%, the scheduler may start four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available). The default ``maximumPercent`` value for a service using the ``REPLICA`` service scheduler is 200%.\n If a service is using either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types, and tasks in the service use the EC2 launch type, the *maximum percent* value is set to the default value. The *maximum percent* value is used to define the upper limit on the number of the tasks in the service that remain in the ``RUNNING`` state while the container instances are in the ``DRAINING`` state.\n  You can't specify a custom ``maximumPercent`` value for a service that uses either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types and has tasks that use the EC2 launch type.\n  If the tasks in the service use the Fargate launch type, the maximum percent value is not used, although it is returned when describing your service.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -239,7 +275,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: MinimumHealthyPercent
 				"minimum_healthy_percent": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "If a service is using the rolling update (``ECS``) deployment type, the ``minimumHealthyPercent`` represents a lower limit on the number of your service's tasks that must remain in the ``RUNNING`` state during a deployment, as a percentage of the ``desiredCount`` (rounded up to the nearest integer). This parameter enables you to deploy without using additional cluster capacity. For example, if your service has a ``desiredCount`` of four tasks and a ``minimumHealthyPercent`` of 50%, the service scheduler may stop two existing tasks to free up cluster capacity before starting two new tasks. \n For services that *do not* use a load balancer, the following should be noted:\n  +  A service is considered healthy if all essential containers within the tasks in the service pass their health checks.\n  +  If a task has no essential containers with a health check defined, the service scheduler will wait for 40 seconds after a task reaches a ``RUNNING`` state before the task is counted towards the minimum healthy percent total.\n  +  If a task has one or more essential containers with a health check defined, the service scheduler will wait for the task to reach a healthy status before counting it towards the minimum healthy percent total. A task is considered healthy when all essential containers within the task have passed their health checks. The amount of time the service scheduler can wait for is determined by the container health check settings. \n  \n For services that *do* use a load balancer, the following should be noted:\n  +  If a task has no essential containers with a health check defined, the service scheduler will wait for the load balancer target group health check to return a healthy status before counting the task towards the minimum healthy percent total.\n  +  If a task has an essential container with a health check defined, the service scheduler will wait for both the task to reach a healthy status and the load balancer target group health check to return a healthy status before counting the task towards the minimum healthy percent total.\n  \n If a service is using either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types and is running tasks that use the EC2 launch type, the *minimum healthy percent* value is set to the default value and is used to define the lower limit on the number of the tasks in the service that remain in the ``RUNNING`` state while the container instances are in the ``DRAINING`` state. If a service is using either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types and is running tasks that use the Fargate launch type, the minimum healthy percent value is not used, although it is returned when describing your service.",
+					Description: "If a service is using the rolling update (``ECS``) deployment type, the ``minimumHealthyPercent`` represents a lower limit on the number of your service's tasks that must remain in the ``RUNNING`` state during a deployment, as a percentage of the ``desiredCount`` (rounded up to the nearest integer). This parameter enables you to deploy without using additional cluster capacity. For example, if your service has a ``desiredCount`` of four tasks and a ``minimumHealthyPercent`` of 50%, the service scheduler may stop two existing tasks to free up cluster capacity before starting two new tasks. \n For services that *do not* use a load balancer, the following should be noted:\n  +  A service is considered healthy if all essential containers within the tasks in the service pass their health checks.\n  +  If a task has no essential containers with a health check defined, the service scheduler will wait for 40 seconds after a task reaches a ``RUNNING`` state before the task is counted towards the minimum healthy percent total.\n  +  If a task has one or more essential containers with a health check defined, the service scheduler will wait for the task to reach a healthy status before counting it towards the minimum healthy percent total. A task is considered healthy when all essential containers within the task have passed their health checks. The amount of time the service scheduler can wait for is determined by the container health check settings. \n  \n For services that *do* use a load balancer, the following should be noted:\n  +  If a task has no essential containers with a health check defined, the service scheduler will wait for the load balancer target group health check to return a healthy status before counting the task towards the minimum healthy percent total.\n  +  If a task has an essential container with a health check defined, the service scheduler will wait for both the task to reach a healthy status and the load balancer target group health check to return a healthy status before counting the task towards the minimum healthy percent total.\n  \n The default value for a replica service for ``minimumHealthyPercent`` is 100%. The default ``minimumHealthyPercent`` value for a service using the ``DAEMON`` service schedule is 0% for the CLI, the AWS SDKs, and the APIs and 50% for the AWS Management Console.\n The minimum number of healthy tasks during a deployment is the ``desiredCount`` multiplied by the ``minimumHealthyPercent``/100, rounded up to the nearest integer value.\n If a service is using either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types and is running tasks that use the EC2 launch type, the *minimum healthy percent* value is set to the default value. The *minimum healthy percent* value is used to define the lower limit on the number of the tasks in the service that remain in the ``RUNNING`` state while the container instances are in the ``DRAINING`` state.\n  You can't specify a custom ``minimumHealthyPercent`` value for a service that uses either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types and has tasks that use the EC2 launch type.\n  If a service is using either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types and is running tasks that use the Fargate launch type, the minimum healthy percent value is not used, although it is returned when describing your service.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -500,14 +536,14 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "string"
 		//	        },
 		//	        "SecurityGroups": {
-		//	          "description": "The IDs of the security groups associated with the task or service. If you don't specify a security group, the default security group for the VPC is used. There's a limit of 5 security groups that can be specified per ``AwsVpcConfiguration``.\n  All specified security groups must be from the same VPC.",
+		//	          "description": "The IDs of the security groups associated with the task or service. If you don't specify a security group, the default security group for the VPC is used. There's a limit of 5 security groups that can be specified per ``awsvpcConfiguration``.\n  All specified security groups must be from the same VPC.",
 		//	          "items": {
 		//	            "type": "string"
 		//	          },
 		//	          "type": "array"
 		//	        },
 		//	        "Subnets": {
-		//	          "description": "The IDs of the subnets associated with the task or service. There's a limit of 16 subnets that can be specified per ``AwsVpcConfiguration``.\n  All specified subnets must be from the same VPC.",
+		//	          "description": "The IDs of the subnets associated with the task or service. There's a limit of 16 subnets that can be specified per ``awsvpcConfiguration``.\n  All specified subnets must be from the same VPC.",
 		//	          "items": {
 		//	            "type": "string"
 		//	          },
@@ -542,7 +578,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 						// Property: SecurityGroups
 						"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
-							Description: "The IDs of the security groups associated with the task or service. If you don't specify a security group, the default security group for the VPC is used. There's a limit of 5 security groups that can be specified per ``AwsVpcConfiguration``.\n  All specified security groups must be from the same VPC.",
+							Description: "The IDs of the security groups associated with the task or service. If you don't specify a security group, the default security group for the VPC is used. There's a limit of 5 security groups that can be specified per ``awsvpcConfiguration``.\n  All specified security groups must be from the same VPC.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -552,7 +588,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 						// Property: Subnets
 						"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
-							Description: "The IDs of the subnets associated with the task or service. There's a limit of 16 subnets that can be specified per ``AwsVpcConfiguration``.\n  All specified subnets must be from the same VPC.",
+							Description: "The IDs of the subnets associated with the task or service. There's a limit of 16 subnets that can be specified per ``awsvpcConfiguration``.\n  All specified subnets must be from the same VPC.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -582,7 +618,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "An array of placement constraint objects to use for tasks in your service. You can specify a maximum of 10 constraints for each task. This limit includes constraints in the task definition and those specified at runtime.",
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "The ``PlacementConstraint`` property specifies an object representing a constraint on task placement in the task definition. For more information, see [Task Placement Constraints](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html) in the *Amazon Elastic Container Service Developer Guide*.",
+		//	    "description": "An object representing a constraint on task placement. For more information, see [Task placement constraints](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html) in the *Amazon Elastic Container Service Developer Guide*.\n  If you're using the Fargate launch type, task placement constraints aren't supported.",
 		//	    "properties": {
 		//	      "Expression": {
 		//	        "description": "A cluster query language expression to apply to the constraint. The expression can have a maximum length of 2000 characters. You can't specify an expression if the constraint type is ``distinctInstance``. For more information, see [Cluster query language](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html) in the *Amazon Elastic Container Service Developer Guide*.",
@@ -619,13 +655,18 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Type
 					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The type of constraint. Use ``distinctInstance`` to ensure that each task in a particular group is running on a different container instance. Use ``memberOf`` to restrict the selection to a group of valid candidates.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.OneOf(
 								"distinctInstance",
 								"memberOf",
 							),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -643,10 +684,10 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The placement strategy objects to use for tasks in your service. You can specify a maximum of 5 strategy rules for each service.",
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "The ``PlacementStrategy`` property specifies the task placement strategy for a task or service. For more information, see [Task Placement Strategies](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-strategies.html) in the *Amazon Elastic Container Service Developer Guide*.",
+		//	    "description": "The task placement strategy for a task or service. For more information, see [Task placement strategies](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-strategies.html) in the *Amazon Elastic Container Service Developer Guide*.",
 		//	    "properties": {
 		//	      "Field": {
-		//	        "description": "The field to apply the placement strategy against. For the ``spread`` placement strategy, valid values are ``instanceId`` (or ``host``, which has the same effect), or any platform or custom attribute that is applied to a container instance, such as ``attribute:ecs.availability-zone``. For the ``binpack`` placement strategy, valid values are ``CPU`` and ``MEMORY``. For the ``random`` placement strategy, this field is not used.",
+		//	        "description": "The field to apply the placement strategy against. For the ``spread`` placement strategy, valid values are ``instanceId`` (or ``host``, which has the same effect), or any platform or custom attribute that's applied to a container instance, such as ``attribute:ecs.availability-zone``. For the ``binpack`` placement strategy, valid values are ``cpu`` and ``memory``. For the ``random`` placement strategy, this field is not used.",
 		//	        "type": "string"
 		//	      },
 		//	      "Type": {
@@ -671,7 +712,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Field
 					"field": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The field to apply the placement strategy against. For the ``spread`` placement strategy, valid values are ``instanceId`` (or ``host``, which has the same effect), or any platform or custom attribute that is applied to a container instance, such as ``attribute:ecs.availability-zone``. For the ``binpack`` placement strategy, valid values are ``CPU`` and ``MEMORY``. For the ``random`` placement strategy, this field is not used.",
+						Description: "The field to apply the placement strategy against. For the ``spread`` placement strategy, valid values are ``instanceId`` (or ``host``, which has the same effect), or any platform or custom attribute that's applied to a container instance, such as ``attribute:ecs.availability-zone``. For the ``binpack`` placement strategy, valid values are ``cpu`` and ``memory``. For the ``random`` placement strategy, this field is not used.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -681,14 +722,19 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Type
 					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The type of placement strategy. The ``random`` placement strategy randomly places tasks on available candidates. The ``spread`` placement strategy spreads placement across available candidates evenly based on the ``field`` parameter. The ``binpack`` strategy places tasks on available candidates that have the least available amount of the resource that's specified with the ``field`` parameter. For example, if you binpack on memory, a task is placed on the instance with the least amount of remaining memory but still enough to run the task.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.OneOf(
 								"binpack",
 								"random",
 								"spread",
 							),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -720,7 +766,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Specifies whether to propagate the tags from the task definition to the task. If no value is specified, the tags aren't propagated. Tags can only be propagated to the task during task creation. To add tags to a task after task creation, use the [TagResource](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TagResource.html) API action.\n The default is ``NONE``.",
+		//	  "description": "Specifies whether to propagate the tags from the task definition to the task. If no value is specified, the tags aren't propagated. Tags can only be propagated to the task during task creation. To add tags to a task after task creation, use the [TagResource](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TagResource.html) API action.\n You must set this to a value other than ``NONE`` when you use Cost Explorer. For more information, see [Amazon ECS usage reports](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/usage-reports.html) in the *Amazon Elastic Container Service Developer Guide*.\n The default is ``NONE``.",
 		//	  "enum": [
 		//	    "SERVICE",
 		//	    "TASK_DEFINITION"
@@ -728,7 +774,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"propagate_tags": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether to propagate the tags from the task definition to the task. If no value is specified, the tags aren't propagated. Tags can only be propagated to the task during task creation. To add tags to a task after task creation, use the [TagResource](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TagResource.html) API action.\n The default is ``NONE``.",
+			Description: "Specifies whether to propagate the tags from the task definition to the task. If no value is specified, the tags aren't propagated. Tags can only be propagated to the task during task creation. To add tags to a task after task creation, use the [TagResource](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TagResource.html) API action.\n You must set this to a value other than ``NONE`` when you use Cost Explorer. For more information, see [Amazon ECS usage reports](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/usage-reports.html) in the *Amazon Elastic Container Service Developer Guide*.\n The default is ``NONE``.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -810,10 +856,10 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "LogConfiguration": {
 		//	      "additionalProperties": false,
-		//	      "description": "The log configuration for the container. This parameter maps to ``LogConfig`` in the [Create a container](https://docs.aws.amazon.com/https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of the [Docker Remote API](https://docs.aws.amazon.com/https://docs.docker.com/engine/api/v1.35/) and the ``--log-driver`` option to [docker run](https://docs.aws.amazon.com/https://docs.docker.com/engine/reference/commandline/run/).\n By default, containers use the same logging driver that the Docker daemon uses. However, the container might use a different logging driver than the Docker daemon by specifying a log driver configuration in the container definition. For more information about the options for different supported log drivers, see [Configure logging drivers](https://docs.aws.amazon.com/https://docs.docker.com/engine/admin/logging/overview/) in the Docker documentation.\n Understand the following when specifying a log configuration for your containers.\n  +  Amazon ECS currently supports a subset of the logging drivers available to the Docker daemon. Additional log drivers may be available in future releases of the Amazon ECS container agent.\n For tasks on FARGATElong, the supported log drivers are ``awslogs``, ``splunk``, and ``awsfirelens``.\n For tasks hosted on Amazon EC2 instances, the supported log drivers are ``awslogs``, ``fluentd``, ``gelf``, ``json-file``, ``journald``, ``logentries``,``syslog``, ``splunk``, and ``awsfirelens``.\n  +  This parameter requires version 1.18 of the Docker Remote API or greater on your container instance.\n  +  For tasks that are hosted on Amazon EC2 instances, the Amazon ECS container agent must register the available logging drivers with the ``ECS_AVAILABLE_LOGGING_DRIVERS`` environment variable before containers placed on that instance can use these log configuration options. For more information, see [Amazon ECS container agent configuration](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html) in the *Amazon Elastic Container Service Developer Guide*.\n  +  For tasks that are on FARGATElong, because you don't have access to the underlying infrastructure your tasks are hosted on, any additional software needed must be installed outside of the task. For example, the Fluentd output aggregators or a remote host running Logstash to send Gelf logs to.",
+		//	      "description": "The log configuration for the container. This parameter maps to ``LogConfig`` in the docker container create command and the ``--log-driver`` option to docker run.\n By default, containers use the same logging driver that the Docker daemon uses. However, the container might use a different logging driver than the Docker daemon by specifying a log driver configuration in the container definition.\n Understand the following when specifying a log configuration for your containers.\n  +  Amazon ECS currently supports a subset of the logging drivers available to the Docker daemon. Additional log drivers may be available in future releases of the Amazon ECS container agent.\n For tasks on FARGATElong, the supported log drivers are ``awslogs``, ``splunk``, and ``awsfirelens``.\n For tasks hosted on Amazon EC2 instances, the supported log drivers are ``awslogs``, ``fluentd``, ``gelf``, ``json-file``, ``journald``,``syslog``, ``splunk``, and ``awsfirelens``.\n  +  This parameter requires version 1.18 of the Docker Remote API or greater on your container instance.\n  +  For tasks that are hosted on Amazon EC2 instances, the Amazon ECS container agent must register the available logging drivers with the ``ECS_AVAILABLE_LOGGING_DRIVERS`` environment variable before containers placed on that instance can use these log configuration options. For more information, see [Amazon ECS container agent configuration](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html) in the *Amazon Elastic Container Service Developer Guide*.\n  +  For tasks that are on FARGATElong, because you don't have access to the underlying infrastructure your tasks are hosted on, any additional software needed must be installed outside of the task. For example, the Fluentd output aggregators or a remote host running Logstash to send Gelf logs to.",
 		//	      "properties": {
 		//	        "LogDriver": {
-		//	          "description": "The log driver to use for the container.\n For tasks on FARGATElong, the supported log drivers are ``awslogs``, ``splunk``, and ``awsfirelens``.\n For tasks hosted on Amazon EC2 instances, the supported log drivers are ``awslogs``, ``fluentd``, ``gelf``, ``json-file``, ``journald``, ``logentries``,``syslog``, ``splunk``, and ``awsfirelens``.\n For more information about using the ``awslogs`` log driver, see [Using the awslogs log driver](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html) in the *Amazon Elastic Container Service Developer Guide*.\n For more information about using the ``awsfirelens`` log driver, see [Custom log routing](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html) in the *Amazon Elastic Container Service Developer Guide*.\n  If you have a custom driver that isn't listed, you can fork the Amazon ECS container agent project that's [available on GitHub](https://docs.aws.amazon.com/https://github.com/aws/amazon-ecs-agent) and customize it to work with that driver. We encourage you to submit pull requests for changes that you would like to have included. However, we don't currently provide support for running modified copies of this software.",
+		//	          "description": "The log driver to use for the container.\n For tasks on FARGATElong, the supported log drivers are ``awslogs``, ``splunk``, and ``awsfirelens``.\n For tasks hosted on Amazon EC2 instances, the supported log drivers are ``awslogs``, ``fluentd``, ``gelf``, ``json-file``, ``journald``, ``syslog``, ``splunk``, and ``awsfirelens``.\n For more information about using the ``awslogs`` log driver, see [Send Amazon ECS logs to CloudWatch](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html) in the *Amazon Elastic Container Service Developer Guide*.\n For more information about using the ``awsfirelens`` log driver, see [Send Amazon ECS logs to an service or Partner](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html).\n  If you have a custom driver that isn't listed, you can fork the Amazon ECS container agent project that's [available on GitHub](https://docs.aws.amazon.com/https://github.com/aws/amazon-ecs-agent) and customize it to work with that driver. We encourage you to submit pull requests for changes that you would like to have included. However, we don't currently provide support for running modified copies of this software.",
 		//	          "type": "string"
 		//	        },
 		//	        "Options": {
@@ -960,14 +1006,21 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 				// Property: Enabled
 				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "Specifies whether to use Service Connect with this service.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Bool{ /*START VALIDATORS*/
+						fwvalidators.NotNullBool(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: LogConfiguration
 				"log_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: LogDriver
 						"log_driver": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The log driver to use for the container.\n For tasks on FARGATElong, the supported log drivers are ``awslogs``, ``splunk``, and ``awsfirelens``.\n For tasks hosted on Amazon EC2 instances, the supported log drivers are ``awslogs``, ``fluentd``, ``gelf``, ``json-file``, ``journald``, ``logentries``,``syslog``, ``splunk``, and ``awsfirelens``.\n For more information about using the ``awslogs`` log driver, see [Using the awslogs log driver](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html) in the *Amazon Elastic Container Service Developer Guide*.\n For more information about using the ``awsfirelens`` log driver, see [Custom log routing](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html) in the *Amazon Elastic Container Service Developer Guide*.\n  If you have a custom driver that isn't listed, you can fork the Amazon ECS container agent project that's [available on GitHub](https://docs.aws.amazon.com/https://github.com/aws/amazon-ecs-agent) and customize it to work with that driver. We encourage you to submit pull requests for changes that you would like to have included. However, we don't currently provide support for running modified copies of this software.",
+							Description: "The log driver to use for the container.\n For tasks on FARGATElong, the supported log drivers are ``awslogs``, ``splunk``, and ``awsfirelens``.\n For tasks hosted on Amazon EC2 instances, the supported log drivers are ``awslogs``, ``fluentd``, ``gelf``, ``json-file``, ``journald``, ``syslog``, ``splunk``, and ``awsfirelens``.\n For more information about using the ``awslogs`` log driver, see [Send Amazon ECS logs to CloudWatch](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html) in the *Amazon Elastic Container Service Developer Guide*.\n For more information about using the ``awsfirelens`` log driver, see [Send Amazon ECS logs to an service or Partner](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html).\n  If you have a custom driver that isn't listed, you can fork the Amazon ECS container agent project that's [available on GitHub](https://docs.aws.amazon.com/https://github.com/aws/amazon-ecs-agent) and customize it to work with that driver. We encourage you to submit pull requests for changes that you would like to have included. However, we don't currently provide support for running modified copies of this software.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -992,12 +1045,26 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 									// Property: Name
 									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "The name of the secret.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: ValueFrom
 									"value_from": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "The secret to expose to the container. The supported values are either the full ARN of the ASMlong secret or the full ARN of the parameter in the SSM Parameter Store.\n For information about the require IAMlong permissions, see [Required IAM permissions for Amazon ECS secrets](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-secrets.html#secrets-iam) (for Secrets Manager) or [Required IAM permissions for Amazon ECS secrets](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-parameters.html) (for Systems Manager Parameter store) in the *Amazon Elastic Container Service Developer Guide*.\n  If the SSM Parameter Store parameter exists in the same Region as the task you're launching, then you can use either the full ARN or name of the parameter. If the parameter exists in a different Region, then the full ARN must be specified.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
@@ -1010,7 +1077,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "The log configuration for the container. This parameter maps to ``LogConfig`` in the [Create a container](https://docs.aws.amazon.com/https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of the [Docker Remote API](https://docs.aws.amazon.com/https://docs.docker.com/engine/api/v1.35/) and the ``--log-driver`` option to [docker run](https://docs.aws.amazon.com/https://docs.docker.com/engine/reference/commandline/run/).\n By default, containers use the same logging driver that the Docker daemon uses. However, the container might use a different logging driver than the Docker daemon by specifying a log driver configuration in the container definition. For more information about the options for different supported log drivers, see [Configure logging drivers](https://docs.aws.amazon.com/https://docs.docker.com/engine/admin/logging/overview/) in the Docker documentation.\n Understand the following when specifying a log configuration for your containers.\n  +  Amazon ECS currently supports a subset of the logging drivers available to the Docker daemon. Additional log drivers may be available in future releases of the Amazon ECS container agent.\n For tasks on FARGATElong, the supported log drivers are ``awslogs``, ``splunk``, and ``awsfirelens``.\n For tasks hosted on Amazon EC2 instances, the supported log drivers are ``awslogs``, ``fluentd``, ``gelf``, ``json-file``, ``journald``, ``logentries``,``syslog``, ``splunk``, and ``awsfirelens``.\n  +  This parameter requires version 1.18 of the Docker Remote API or greater on your container instance.\n  +  For tasks that are hosted on Amazon EC2 instances, the Amazon ECS container agent must register the available logging drivers with the ``ECS_AVAILABLE_LOGGING_DRIVERS`` environment variable before containers placed on that instance can use these log configuration options. For more information, see [Amazon ECS container agent configuration](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html) in the *Amazon Elastic Container Service Developer Guide*.\n  +  For tasks that are on FARGATElong, because you don't have access to the underlying infrastructure your tasks are hosted on, any additional software needed must be installed outside of the task. For example, the Fluentd output aggregators or a remote host running Logstash to send Gelf logs to.",
+					Description: "The log configuration for the container. This parameter maps to ``LogConfig`` in the docker container create command and the ``--log-driver`` option to docker run.\n By default, containers use the same logging driver that the Docker daemon uses. However, the container might use a different logging driver than the Docker daemon by specifying a log driver configuration in the container definition.\n Understand the following when specifying a log configuration for your containers.\n  +  Amazon ECS currently supports a subset of the logging drivers available to the Docker daemon. Additional log drivers may be available in future releases of the Amazon ECS container agent.\n For tasks on FARGATElong, the supported log drivers are ``awslogs``, ``splunk``, and ``awsfirelens``.\n For tasks hosted on Amazon EC2 instances, the supported log drivers are ``awslogs``, ``fluentd``, ``gelf``, ``json-file``, ``journald``,``syslog``, ``splunk``, and ``awsfirelens``.\n  +  This parameter requires version 1.18 of the Docker Remote API or greater on your container instance.\n  +  For tasks that are hosted on Amazon EC2 instances, the Amazon ECS container agent must register the available logging drivers with the ``ECS_AVAILABLE_LOGGING_DRIVERS`` environment variable before containers placed on that instance can use these log configuration options. For more information, see [Amazon ECS container agent configuration](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html) in the *Amazon Elastic Container Service Developer Guide*.\n  +  For tasks that are on FARGATElong, because you don't have access to the underlying infrastructure your tasks are hosted on, any additional software needed must be installed outside of the task. For example, the Fluentd output aggregators or a remote host running Logstash to send Gelf logs to.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1046,7 +1113,14 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 										// Property: Port
 										"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
 											Description: "The listening port number for the Service Connect proxy. This port is available inside of all of the tasks within the same namespace.\n To avoid changing your applications in client Amazon ECS services, set this to the same port that the client application uses by default. For more information, see [Service Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html) in the *Amazon Elastic Container Service Developer Guide*.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Int64{ /*START VALIDATORS*/
+												fwvalidators.NotNullInt64(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
@@ -1078,7 +1152,14 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 							// Property: PortName
 							"port_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The ``portName`` must match the name of one of the ``portMappings`` from all the containers in the task definition of this Amazon ECS service.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Timeout
 							"timeout": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1126,7 +1207,14 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "The signer certificate authority.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Object{ /*START VALIDATORS*/
+											fwvalidators.NotNullObject(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: KmsKey
 									"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1195,7 +1283,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The details of the service discovery registry to associate with this service. For more information, see [Service discovery](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html).\n  Each service may be associated with one service registry. Multiple service registries for each service isn't supported.",
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "The ``ServiceRegistry`` property specifies details of the service registry. For more information, see [Service Discovery](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html) in the *Amazon Elastic Container Service Developer Guide*.",
+		//	    "description": "The details for the service registry.\n Each service may be associated with one service registry. Multiple service registries for each service are not supported.\n When you add, update, or remove the service registries configuration, Amazon ECS starts a new deployment. New tasks are registered and deregistered to the updated service registry configuration.",
 		//	    "properties": {
 		//	      "ContainerName": {
 		//	        "description": "The container name value to be used for your service discovery service. It's already specified in the task definition. If the task definition that your service task specifies uses the ``bridge`` or ``host`` network mode, you must specify a ``containerName`` and ``containerPort`` combination from the task definition. If the task definition that your service task specifies uses the ``awsvpc`` network mode and a type SRV DNS record is used, you must specify either a ``containerName`` and ``containerPort`` combination or a ``port`` value. However, you can't specify both.",
@@ -1339,9 +1427,11 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "description": "The configuration for a volume specified in the task definition as a volume that is configured at launch time. Currently, the only supported volume type is an Amazon EBS volume.",
 		//	  "items": {
+		//	    "additionalProperties": false,
 		//	    "description": "The configuration for a volume specified in the task definition as a volume that is configured at launch time. Currently, the only supported volume type is an Amazon EBS volume.",
 		//	    "properties": {
 		//	      "ManagedEBSVolume": {
+		//	        "additionalProperties": false,
 		//	        "description": "The configuration for the Amazon EBS volume that Amazon ECS creates and manages on your behalf. These settings are used to create each Amazon EBS volume, with one volume created for each task in the service. The Amazon EBS volumes are visible in your account in the Amazon EC2 console once they are created.",
 		//	        "properties": {
 		//	          "Encrypted": {
@@ -1349,7 +1439,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "boolean"
 		//	          },
 		//	          "FilesystemType": {
-		//	            "description": "The Linux filesystem type for the volume. For volumes created from a snapshot, you must specify the same filesystem type that the volume was using when the snapshot was created. If there is a filesystem type mismatch, the task will fail to start.\n The available filesystem types are? ``ext3``, ``ext4``, and ``xfs``. If no value is specified, the ``xfs`` filesystem type is used by default.",
+		//	            "description": "The Linux filesystem type for the volume. For volumes created from a snapshot, you must specify the same filesystem type that the volume was using when the snapshot was created. If there is a filesystem type mismatch, the task will fail to start.\n The available filesystem types are\u2028 ``ext3``, ``ext4``, and ``xfs``. If no value is specified, the ``xfs`` filesystem type is used by default.",
 		//	            "type": "string"
 		//	          },
 		//	          "Iops": {
@@ -1375,10 +1465,11 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	          "TagSpecifications": {
 		//	            "description": "The tags to apply to the volume. Amazon ECS applies service-managed tags by default. This parameter maps 1:1 with the ``TagSpecifications.N`` parameter of the [CreateVolume API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in the *Amazon EC2 API Reference*.",
 		//	            "items": {
+		//	              "additionalProperties": false,
 		//	              "description": "The tag specifications of an Amazon EBS volume.",
 		//	              "properties": {
 		//	                "PropagateTags": {
-		//	                  "description": "Determines whether to propagate the tags from the task definition to ?the Amazon EBS volume. Tags can only propagate to a ``SERVICE`` specified in ?``ServiceVolumeConfiguration``. If no value is specified, the tags aren't ?propagated.",
+		//	                  "description": "Determines whether to propagate the tags from the task definition to \u2028the Amazon EBS volume. Tags can only propagate to a ``SERVICE`` specified in \u2028``ServiceVolumeConfiguration``. If no value is specified, the tags aren't \u2028propagated.",
 		//	                  "enum": [
 		//	                    "SERVICE",
 		//	                    "TASK_DEFINITION"
@@ -1459,7 +1550,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: FilesystemType
 							"filesystem_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The Linux filesystem type for the volume. For volumes created from a snapshot, you must specify the same filesystem type that the volume was using when the snapshot was created. If there is a filesystem type mismatch, the task will fail to start.\n The available filesystem types are? ``ext3``, ``ext4``, and ``xfs``. If no value is specified, the ``xfs`` filesystem type is used by default.",
+								Description: "The Linux filesystem type for the volume. For volumes created from a snapshot, you must specify the same filesystem type that the volume was using when the snapshot was created. If there is a filesystem type mismatch, the task will fail to start.\n The available filesystem types are\u2028 ``ext3``, ``ext4``, and ``xfs``. If no value is specified, the ``xfs`` filesystem type is used by default.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1487,7 +1578,14 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 							// Property: RoleArn
 							"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The ARN of the IAM role to associate with this volume. This is the Amazon ECS infrastructure IAM role that is used to manage your AWS infrastructure. We recommend using the Amazon ECS-managed ``AmazonECSInfrastructureRolePolicyForVolumes`` IAM policy with this role. For more information, see [Amazon ECS infrastructure IAM role](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/infrastructure_IAM_role.html) in the *Amazon ECS Developer Guide*.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: SizeInGiB
 							"size_in_gi_b": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -1513,7 +1611,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: PropagateTags
 										"propagate_tags": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "Determines whether to propagate the tags from the task definition to ?the Amazon EBS volume. Tags can only propagate to a ``SERVICE`` specified in ?``ServiceVolumeConfiguration``. If no value is specified, the tags aren't ?propagated.",
+											Description: "Determines whether to propagate the tags from the task definition to \u2028the Amazon EBS volume. Tags can only propagate to a ``SERVICE`` specified in \u2028``ServiceVolumeConfiguration``. If no value is specified, the tags aren't \u2028propagated.",
 											Optional:    true,
 											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
@@ -1529,7 +1627,14 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 										// Property: ResourceType
 										"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "The type of volume resource.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: Tags
 										"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1600,7 +1705,14 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Name
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The name of the volume. This value must match the volume name from the ``Volume`` object in the task definition.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -1624,7 +1736,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "The ``AWS::ECS::Service`` resource creates an Amazon Elastic Container Service (Amazon ECS) service that runs and maintains the requested number of tasks and associated load balancers.\n  The stack update fails if you change any properties that require replacement and at least one Amazon ECS Service Connect ``ServiceConnectService`` is configured. This is because AWS CloudFormation creates the replacement service first, but each ``ServiceConnectService`` must have a name that is unique in the namespace.\n  Starting April 15, 2023, AWS; will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, ECS, or EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service.",
+		Description: "The ``AWS::ECS::Service`` resource creates an Amazon Elastic Container Service (Amazon ECS) service that runs and maintains the requested number of tasks and associated load balancers.\n  The stack update fails if you change any properties that require replacement and at least one ECS Service Connect ``ServiceConnectConfiguration`` property the is configured. This is because AWS CloudFormation creates the replacement service first, but each ``ServiceConnectService`` must have a name that is unique in the namespace.\n   Starting April 15, 2023, AWS; will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, ECS, or EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service.",
 		Version:     1,
 		Attributes:  attributes,
 	}

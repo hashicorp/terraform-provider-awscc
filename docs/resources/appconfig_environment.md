@@ -47,19 +47,16 @@ resource "awscc_appconfig_environment" "example" {
 <a id="nestedatt--monitors"></a>
 ### Nested Schema for `monitors`
 
-Required:
-
-- `alarm_arn` (String) Amazon Resource Name (ARN) of the Amazon CloudWatch alarm.
-
 Optional:
 
+- `alarm_arn` (String) Amazon Resource Name (ARN) of the Amazon CloudWatch alarm.
 - `alarm_role_arn` (String) ARN of an AWS Identity and Access Management (IAM) role for AWS AppConfig to monitor AlarmArn.
 
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key-value string map. The valid character set is [a-zA-Z1-9+-=._:/]. The tag key can be up to 128 characters and must not start with aws:.
 - `value` (String) The tag value can be up to 256 characters.

@@ -97,7 +97,7 @@ Optional:
 <a id="nestedatt--topic_rule_payload--actions--cloudwatch_alarm"></a>
 ### Nested Schema for `topic_rule_payload.actions.cloudwatch_alarm`
 
-Required:
+Optional:
 
 - `alarm_name` (String)
 - `role_arn` (String)
@@ -108,30 +108,24 @@ Required:
 <a id="nestedatt--topic_rule_payload--actions--cloudwatch_logs"></a>
 ### Nested Schema for `topic_rule_payload.actions.cloudwatch_logs`
 
-Required:
-
-- `log_group_name` (String)
-- `role_arn` (String)
-
 Optional:
 
 - `batch_mode` (Boolean)
+- `log_group_name` (String)
+- `role_arn` (String)
 
 
 <a id="nestedatt--topic_rule_payload--actions--cloudwatch_metric"></a>
 ### Nested Schema for `topic_rule_payload.actions.cloudwatch_metric`
 
-Required:
+Optional:
 
 - `metric_name` (String)
 - `metric_namespace` (String)
+- `metric_timestamp` (String)
 - `metric_unit` (String)
 - `metric_value` (String)
 - `role_arn` (String)
-
-Optional:
-
-- `metric_timestamp` (String)
 
 
 <a id="nestedatt--topic_rule_payload--actions--dynamo_d_bv_2"></a>
@@ -145,7 +139,7 @@ Optional:
 <a id="nestedatt--topic_rule_payload--actions--dynamo_d_bv_2--put_item"></a>
 ### Nested Schema for `topic_rule_payload.actions.dynamo_d_bv_2.put_item`
 
-Required:
+Optional:
 
 - `table_name` (String)
 
@@ -154,26 +148,23 @@ Required:
 <a id="nestedatt--topic_rule_payload--actions--dynamo_db"></a>
 ### Nested Schema for `topic_rule_payload.actions.dynamo_db`
 
-Required:
-
-- `hash_key_field` (String)
-- `hash_key_value` (String)
-- `role_arn` (String)
-- `table_name` (String)
-
 Optional:
 
+- `hash_key_field` (String)
 - `hash_key_type` (String)
+- `hash_key_value` (String)
 - `payload_field` (String)
 - `range_key_field` (String)
 - `range_key_type` (String)
 - `range_key_value` (String)
+- `role_arn` (String)
+- `table_name` (String)
 
 
 <a id="nestedatt--topic_rule_payload--actions--elasticsearch"></a>
 ### Nested Schema for `topic_rule_payload.actions.elasticsearch`
 
-Required:
+Optional:
 
 - `endpoint` (String)
 - `id` (String)
@@ -185,29 +176,23 @@ Required:
 <a id="nestedatt--topic_rule_payload--actions--firehose"></a>
 ### Nested Schema for `topic_rule_payload.actions.firehose`
 
-Required:
-
-- `delivery_stream_name` (String)
-- `role_arn` (String)
-
 Optional:
 
 - `batch_mode` (Boolean)
+- `delivery_stream_name` (String)
+- `role_arn` (String)
 - `separator` (String)
 
 
 <a id="nestedatt--topic_rule_payload--actions--http"></a>
 ### Nested Schema for `topic_rule_payload.actions.http`
 
-Required:
-
-- `url` (String)
-
 Optional:
 
 - `auth` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--http--auth))
 - `confirmation_url` (String)
 - `headers` (Attributes List) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--http--headers))
+- `url` (String)
 
 <a id="nestedatt--topic_rule_payload--actions--http--auth"></a>
 ### Nested Schema for `topic_rule_payload.actions.http.auth`
@@ -219,7 +204,7 @@ Optional:
 <a id="nestedatt--topic_rule_payload--actions--http--auth--sigv_4"></a>
 ### Nested Schema for `topic_rule_payload.actions.http.auth.sigv_4`
 
-Required:
+Optional:
 
 - `role_arn` (String)
 - `service_name` (String)
@@ -230,7 +215,7 @@ Required:
 <a id="nestedatt--topic_rule_payload--actions--http--headers"></a>
 ### Nested Schema for `topic_rule_payload.actions.http.headers`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)
@@ -240,34 +225,28 @@ Required:
 <a id="nestedatt--topic_rule_payload--actions--iot_analytics"></a>
 ### Nested Schema for `topic_rule_payload.actions.iot_analytics`
 
-Required:
-
-- `channel_name` (String)
-- `role_arn` (String)
-
 Optional:
 
 - `batch_mode` (Boolean)
+- `channel_name` (String)
+- `role_arn` (String)
 
 
 <a id="nestedatt--topic_rule_payload--actions--iot_events"></a>
 ### Nested Schema for `topic_rule_payload.actions.iot_events`
 
-Required:
-
-- `input_name` (String)
-- `role_arn` (String)
-
 Optional:
 
 - `batch_mode` (Boolean)
+- `input_name` (String)
 - `message_id` (String)
+- `role_arn` (String)
 
 
 <a id="nestedatt--topic_rule_payload--actions--iot_site_wise"></a>
 ### Nested Schema for `topic_rule_payload.actions.iot_site_wise`
 
-Required:
+Optional:
 
 - `put_asset_property_value_entries` (Attributes List) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--iot_site_wise--put_asset_property_value_entries))
 - `role_arn` (String)
@@ -275,39 +254,30 @@ Required:
 <a id="nestedatt--topic_rule_payload--actions--iot_site_wise--put_asset_property_value_entries"></a>
 ### Nested Schema for `topic_rule_payload.actions.iot_site_wise.put_asset_property_value_entries`
 
-Required:
-
-- `property_values` (Attributes List) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--iot_site_wise--put_asset_property_value_entries--property_values))
-
 Optional:
 
 - `asset_id` (String)
 - `entry_id` (String)
 - `property_alias` (String)
 - `property_id` (String)
+- `property_values` (Attributes List) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--iot_site_wise--put_asset_property_value_entries--property_values))
 
 <a id="nestedatt--topic_rule_payload--actions--iot_site_wise--put_asset_property_value_entries--property_values"></a>
 ### Nested Schema for `topic_rule_payload.actions.iot_site_wise.put_asset_property_value_entries.property_values`
 
-Required:
-
-- `timestamp` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--iot_site_wise--put_asset_property_value_entries--property_values--timestamp))
-- `value` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--iot_site_wise--put_asset_property_value_entries--property_values--value))
-
 Optional:
 
 - `quality` (String)
+- `timestamp` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--iot_site_wise--put_asset_property_value_entries--property_values--timestamp))
+- `value` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--iot_site_wise--put_asset_property_value_entries--property_values--value))
 
 <a id="nestedatt--topic_rule_payload--actions--iot_site_wise--put_asset_property_value_entries--property_values--timestamp"></a>
 ### Nested Schema for `topic_rule_payload.actions.iot_site_wise.put_asset_property_value_entries.property_values.timestamp`
 
-Required:
-
-- `time_in_seconds` (String)
-
 Optional:
 
 - `offset_in_nanos` (String)
+- `time_in_seconds` (String)
 
 
 <a id="nestedatt--topic_rule_payload--actions--iot_site_wise--put_asset_property_value_entries--property_values--value"></a>
@@ -327,22 +297,19 @@ Optional:
 <a id="nestedatt--topic_rule_payload--actions--kafka"></a>
 ### Nested Schema for `topic_rule_payload.actions.kafka`
 
-Required:
+Optional:
 
 - `client_properties` (Map of String)
 - `destination_arn` (String)
-- `topic` (String)
-
-Optional:
-
 - `headers` (Attributes List) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--kafka--headers))
 - `key` (String)
 - `partition` (String)
+- `topic` (String)
 
 <a id="nestedatt--topic_rule_payload--actions--kafka--headers"></a>
 ### Nested Schema for `topic_rule_payload.actions.kafka.headers`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)
@@ -352,14 +319,11 @@ Required:
 <a id="nestedatt--topic_rule_payload--actions--kinesis"></a>
 ### Nested Schema for `topic_rule_payload.actions.kinesis`
 
-Required:
-
-- `role_arn` (String)
-- `stream_name` (String)
-
 Optional:
 
 - `partition_key` (String)
+- `role_arn` (String)
+- `stream_name` (String)
 
 
 <a id="nestedatt--topic_rule_payload--actions--lambda"></a>
@@ -373,35 +337,29 @@ Optional:
 <a id="nestedatt--topic_rule_payload--actions--location"></a>
 ### Nested Schema for `topic_rule_payload.actions.location`
 
-Required:
+Optional:
 
 - `device_id` (String)
 - `latitude` (String)
 - `longitude` (String)
 - `role_arn` (String)
-- `tracker_name` (String)
-
-Optional:
-
 - `timestamp` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--location--timestamp))
+- `tracker_name` (String)
 
 <a id="nestedatt--topic_rule_payload--actions--location--timestamp"></a>
 ### Nested Schema for `topic_rule_payload.actions.location.timestamp`
 
-Required:
-
-- `value` (String)
-
 Optional:
 
 - `unit` (String)
+- `value` (String)
 
 
 
 <a id="nestedatt--topic_rule_payload--actions--open_search"></a>
 ### Nested Schema for `topic_rule_payload.actions.open_search`
 
-Required:
+Optional:
 
 - `endpoint` (String)
 - `id` (String)
@@ -413,15 +371,12 @@ Required:
 <a id="nestedatt--topic_rule_payload--actions--republish"></a>
 ### Nested Schema for `topic_rule_payload.actions.republish`
 
-Required:
-
-- `role_arn` (String)
-- `topic` (String)
-
 Optional:
 
 - `headers` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--republish--headers))
 - `qos` (Number)
+- `role_arn` (String)
+- `topic` (String)
 
 <a id="nestedatt--topic_rule_payload--actions--republish--headers"></a>
 ### Nested Schema for `topic_rule_payload.actions.republish.headers`
@@ -438,7 +393,7 @@ Optional:
 <a id="nestedatt--topic_rule_payload--actions--republish--headers--user_properties"></a>
 ### Nested Schema for `topic_rule_payload.actions.republish.headers.user_properties`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)
@@ -449,74 +404,59 @@ Required:
 <a id="nestedatt--topic_rule_payload--actions--s3"></a>
 ### Nested Schema for `topic_rule_payload.actions.s3`
 
-Required:
-
-- `bucket_name` (String)
-- `key` (String)
-- `role_arn` (String)
-
 Optional:
 
+- `bucket_name` (String)
 - `canned_acl` (String)
+- `key` (String)
+- `role_arn` (String)
 
 
 <a id="nestedatt--topic_rule_payload--actions--sns"></a>
 ### Nested Schema for `topic_rule_payload.actions.sns`
 
-Required:
-
-- `role_arn` (String)
-- `target_arn` (String)
-
 Optional:
 
 - `message_format` (String)
+- `role_arn` (String)
+- `target_arn` (String)
 
 
 <a id="nestedatt--topic_rule_payload--actions--sqs"></a>
 ### Nested Schema for `topic_rule_payload.actions.sqs`
 
-Required:
+Optional:
 
 - `queue_url` (String)
 - `role_arn` (String)
-
-Optional:
-
 - `use_base_64` (Boolean)
 
 
 <a id="nestedatt--topic_rule_payload--actions--step_functions"></a>
 ### Nested Schema for `topic_rule_payload.actions.step_functions`
 
-Required:
-
-- `role_arn` (String)
-- `state_machine_name` (String)
-
 Optional:
 
 - `execution_name_prefix` (String)
+- `role_arn` (String)
+- `state_machine_name` (String)
 
 
 <a id="nestedatt--topic_rule_payload--actions--timestream"></a>
 ### Nested Schema for `topic_rule_payload.actions.timestream`
 
-Required:
+Optional:
 
 - `database_name` (String)
 - `dimensions` (Attributes List) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--timestream--dimensions))
 - `role_arn` (String)
 - `table_name` (String)
-
-Optional:
-
 - `timestamp` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--timestream--timestamp))
 
 <a id="nestedatt--topic_rule_payload--actions--timestream--dimensions"></a>
 ### Nested Schema for `topic_rule_payload.actions.timestream.dimensions`
 
-Required:
+Optional:
 
 - `name` (String)
 - `value` (String)
@@ -525,7 +465,7 @@ Required:
 <a id="nestedatt--topic_rule_payload--actions--timestream--timestamp"></a>
 ### Nested Schema for `topic_rule_payload.actions.timestream.timestamp`
 
-Required:
+Optional:
 
 - `unit` (String)
 - `value` (String)
@@ -564,7 +504,7 @@ Optional:
 <a id="nestedatt--topic_rule_payload--error_action--cloudwatch_alarm"></a>
 ### Nested Schema for `topic_rule_payload.error_action.cloudwatch_alarm`
 
-Required:
+Optional:
 
 - `alarm_name` (String)
 - `role_arn` (String)
@@ -575,30 +515,24 @@ Required:
 <a id="nestedatt--topic_rule_payload--error_action--cloudwatch_logs"></a>
 ### Nested Schema for `topic_rule_payload.error_action.cloudwatch_logs`
 
-Required:
-
-- `log_group_name` (String)
-- `role_arn` (String)
-
 Optional:
 
 - `batch_mode` (Boolean)
+- `log_group_name` (String)
+- `role_arn` (String)
 
 
 <a id="nestedatt--topic_rule_payload--error_action--cloudwatch_metric"></a>
 ### Nested Schema for `topic_rule_payload.error_action.cloudwatch_metric`
 
-Required:
+Optional:
 
 - `metric_name` (String)
 - `metric_namespace` (String)
+- `metric_timestamp` (String)
 - `metric_unit` (String)
 - `metric_value` (String)
 - `role_arn` (String)
-
-Optional:
-
-- `metric_timestamp` (String)
 
 
 <a id="nestedatt--topic_rule_payload--error_action--dynamo_d_bv_2"></a>
@@ -612,7 +546,7 @@ Optional:
 <a id="nestedatt--topic_rule_payload--error_action--dynamo_d_bv_2--put_item"></a>
 ### Nested Schema for `topic_rule_payload.error_action.dynamo_d_bv_2.put_item`
 
-Required:
+Optional:
 
 - `table_name` (String)
 
@@ -621,26 +555,23 @@ Required:
 <a id="nestedatt--topic_rule_payload--error_action--dynamo_db"></a>
 ### Nested Schema for `topic_rule_payload.error_action.dynamo_db`
 
-Required:
-
-- `hash_key_field` (String)
-- `hash_key_value` (String)
-- `role_arn` (String)
-- `table_name` (String)
-
 Optional:
 
+- `hash_key_field` (String)
 - `hash_key_type` (String)
+- `hash_key_value` (String)
 - `payload_field` (String)
 - `range_key_field` (String)
 - `range_key_type` (String)
 - `range_key_value` (String)
+- `role_arn` (String)
+- `table_name` (String)
 
 
 <a id="nestedatt--topic_rule_payload--error_action--elasticsearch"></a>
 ### Nested Schema for `topic_rule_payload.error_action.elasticsearch`
 
-Required:
+Optional:
 
 - `endpoint` (String)
 - `id` (String)
@@ -652,29 +583,23 @@ Required:
 <a id="nestedatt--topic_rule_payload--error_action--firehose"></a>
 ### Nested Schema for `topic_rule_payload.error_action.firehose`
 
-Required:
-
-- `delivery_stream_name` (String)
-- `role_arn` (String)
-
 Optional:
 
 - `batch_mode` (Boolean)
+- `delivery_stream_name` (String)
+- `role_arn` (String)
 - `separator` (String)
 
 
 <a id="nestedatt--topic_rule_payload--error_action--http"></a>
 ### Nested Schema for `topic_rule_payload.error_action.http`
 
-Required:
-
-- `url` (String)
-
 Optional:
 
 - `auth` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--http--auth))
 - `confirmation_url` (String)
 - `headers` (Attributes List) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--http--headers))
+- `url` (String)
 
 <a id="nestedatt--topic_rule_payload--error_action--http--auth"></a>
 ### Nested Schema for `topic_rule_payload.error_action.http.auth`
@@ -686,7 +611,7 @@ Optional:
 <a id="nestedatt--topic_rule_payload--error_action--http--auth--sigv_4"></a>
 ### Nested Schema for `topic_rule_payload.error_action.http.auth.sigv_4`
 
-Required:
+Optional:
 
 - `role_arn` (String)
 - `service_name` (String)
@@ -697,7 +622,7 @@ Required:
 <a id="nestedatt--topic_rule_payload--error_action--http--headers"></a>
 ### Nested Schema for `topic_rule_payload.error_action.http.headers`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)
@@ -707,34 +632,28 @@ Required:
 <a id="nestedatt--topic_rule_payload--error_action--iot_analytics"></a>
 ### Nested Schema for `topic_rule_payload.error_action.iot_analytics`
 
-Required:
-
-- `channel_name` (String)
-- `role_arn` (String)
-
 Optional:
 
 - `batch_mode` (Boolean)
+- `channel_name` (String)
+- `role_arn` (String)
 
 
 <a id="nestedatt--topic_rule_payload--error_action--iot_events"></a>
 ### Nested Schema for `topic_rule_payload.error_action.iot_events`
 
-Required:
-
-- `input_name` (String)
-- `role_arn` (String)
-
 Optional:
 
 - `batch_mode` (Boolean)
+- `input_name` (String)
 - `message_id` (String)
+- `role_arn` (String)
 
 
 <a id="nestedatt--topic_rule_payload--error_action--iot_site_wise"></a>
 ### Nested Schema for `topic_rule_payload.error_action.iot_site_wise`
 
-Required:
+Optional:
 
 - `put_asset_property_value_entries` (Attributes List) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--iot_site_wise--put_asset_property_value_entries))
 - `role_arn` (String)
@@ -742,39 +661,30 @@ Required:
 <a id="nestedatt--topic_rule_payload--error_action--iot_site_wise--put_asset_property_value_entries"></a>
 ### Nested Schema for `topic_rule_payload.error_action.iot_site_wise.put_asset_property_value_entries`
 
-Required:
-
-- `property_values` (Attributes List) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--iot_site_wise--put_asset_property_value_entries--property_values))
-
 Optional:
 
 - `asset_id` (String)
 - `entry_id` (String)
 - `property_alias` (String)
 - `property_id` (String)
+- `property_values` (Attributes List) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--iot_site_wise--put_asset_property_value_entries--property_values))
 
 <a id="nestedatt--topic_rule_payload--error_action--iot_site_wise--put_asset_property_value_entries--property_values"></a>
 ### Nested Schema for `topic_rule_payload.error_action.iot_site_wise.put_asset_property_value_entries.property_values`
 
-Required:
-
-- `timestamp` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--iot_site_wise--put_asset_property_value_entries--property_values--timestamp))
-- `value` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--iot_site_wise--put_asset_property_value_entries--property_values--value))
-
 Optional:
 
 - `quality` (String)
+- `timestamp` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--iot_site_wise--put_asset_property_value_entries--property_values--timestamp))
+- `value` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--iot_site_wise--put_asset_property_value_entries--property_values--value))
 
 <a id="nestedatt--topic_rule_payload--error_action--iot_site_wise--put_asset_property_value_entries--property_values--timestamp"></a>
 ### Nested Schema for `topic_rule_payload.error_action.iot_site_wise.put_asset_property_value_entries.property_values.timestamp`
 
-Required:
-
-- `time_in_seconds` (String)
-
 Optional:
 
 - `offset_in_nanos` (String)
+- `time_in_seconds` (String)
 
 
 <a id="nestedatt--topic_rule_payload--error_action--iot_site_wise--put_asset_property_value_entries--property_values--value"></a>
@@ -794,22 +704,19 @@ Optional:
 <a id="nestedatt--topic_rule_payload--error_action--kafka"></a>
 ### Nested Schema for `topic_rule_payload.error_action.kafka`
 
-Required:
+Optional:
 
 - `client_properties` (Map of String)
 - `destination_arn` (String)
-- `topic` (String)
-
-Optional:
-
 - `headers` (Attributes List) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--kafka--headers))
 - `key` (String)
 - `partition` (String)
+- `topic` (String)
 
 <a id="nestedatt--topic_rule_payload--error_action--kafka--headers"></a>
 ### Nested Schema for `topic_rule_payload.error_action.kafka.headers`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)
@@ -819,14 +726,11 @@ Required:
 <a id="nestedatt--topic_rule_payload--error_action--kinesis"></a>
 ### Nested Schema for `topic_rule_payload.error_action.kinesis`
 
-Required:
-
-- `role_arn` (String)
-- `stream_name` (String)
-
 Optional:
 
 - `partition_key` (String)
+- `role_arn` (String)
+- `stream_name` (String)
 
 
 <a id="nestedatt--topic_rule_payload--error_action--lambda"></a>
@@ -840,35 +744,29 @@ Optional:
 <a id="nestedatt--topic_rule_payload--error_action--location"></a>
 ### Nested Schema for `topic_rule_payload.error_action.location`
 
-Required:
+Optional:
 
 - `device_id` (String)
 - `latitude` (String)
 - `longitude` (String)
 - `role_arn` (String)
-- `tracker_name` (String)
-
-Optional:
-
 - `timestamp` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--location--timestamp))
+- `tracker_name` (String)
 
 <a id="nestedatt--topic_rule_payload--error_action--location--timestamp"></a>
 ### Nested Schema for `topic_rule_payload.error_action.location.timestamp`
 
-Required:
-
-- `value` (String)
-
 Optional:
 
 - `unit` (String)
+- `value` (String)
 
 
 
 <a id="nestedatt--topic_rule_payload--error_action--open_search"></a>
 ### Nested Schema for `topic_rule_payload.error_action.open_search`
 
-Required:
+Optional:
 
 - `endpoint` (String)
 - `id` (String)
@@ -880,15 +778,12 @@ Required:
 <a id="nestedatt--topic_rule_payload--error_action--republish"></a>
 ### Nested Schema for `topic_rule_payload.error_action.republish`
 
-Required:
-
-- `role_arn` (String)
-- `topic` (String)
-
 Optional:
 
 - `headers` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--republish--headers))
 - `qos` (Number)
+- `role_arn` (String)
+- `topic` (String)
 
 <a id="nestedatt--topic_rule_payload--error_action--republish--headers"></a>
 ### Nested Schema for `topic_rule_payload.error_action.republish.headers`
@@ -905,7 +800,7 @@ Optional:
 <a id="nestedatt--topic_rule_payload--error_action--republish--headers--user_properties"></a>
 ### Nested Schema for `topic_rule_payload.error_action.republish.headers.user_properties`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)
@@ -916,74 +811,59 @@ Required:
 <a id="nestedatt--topic_rule_payload--error_action--s3"></a>
 ### Nested Schema for `topic_rule_payload.error_action.s3`
 
-Required:
-
-- `bucket_name` (String)
-- `key` (String)
-- `role_arn` (String)
-
 Optional:
 
+- `bucket_name` (String)
 - `canned_acl` (String)
+- `key` (String)
+- `role_arn` (String)
 
 
 <a id="nestedatt--topic_rule_payload--error_action--sns"></a>
 ### Nested Schema for `topic_rule_payload.error_action.sns`
 
-Required:
-
-- `role_arn` (String)
-- `target_arn` (String)
-
 Optional:
 
 - `message_format` (String)
+- `role_arn` (String)
+- `target_arn` (String)
 
 
 <a id="nestedatt--topic_rule_payload--error_action--sqs"></a>
 ### Nested Schema for `topic_rule_payload.error_action.sqs`
 
-Required:
+Optional:
 
 - `queue_url` (String)
 - `role_arn` (String)
-
-Optional:
-
 - `use_base_64` (Boolean)
 
 
 <a id="nestedatt--topic_rule_payload--error_action--step_functions"></a>
 ### Nested Schema for `topic_rule_payload.error_action.step_functions`
 
-Required:
-
-- `role_arn` (String)
-- `state_machine_name` (String)
-
 Optional:
 
 - `execution_name_prefix` (String)
+- `role_arn` (String)
+- `state_machine_name` (String)
 
 
 <a id="nestedatt--topic_rule_payload--error_action--timestream"></a>
 ### Nested Schema for `topic_rule_payload.error_action.timestream`
 
-Required:
+Optional:
 
 - `database_name` (String)
 - `dimensions` (Attributes List) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--timestream--dimensions))
 - `role_arn` (String)
 - `table_name` (String)
-
-Optional:
-
 - `timestamp` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--timestream--timestamp))
 
 <a id="nestedatt--topic_rule_payload--error_action--timestream--dimensions"></a>
 ### Nested Schema for `topic_rule_payload.error_action.timestream.dimensions`
 
-Required:
+Optional:
 
 - `name` (String)
 - `value` (String)
@@ -992,7 +872,7 @@ Required:
 <a id="nestedatt--topic_rule_payload--error_action--timestream--timestamp"></a>
 ### Nested Schema for `topic_rule_payload.error_action.timestream.timestamp`
 
-Required:
+Optional:
 
 - `unit` (String)
 - `value` (String)
@@ -1004,7 +884,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

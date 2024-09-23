@@ -116,13 +116,10 @@ variable "lambda_arn" {
 <a id="nestedatt--action_groups"></a>
 ### Nested Schema for `action_groups`
 
-Required:
-
-- `action_group_name` (String) Name of the action group
-
 Optional:
 
 - `action_group_executor` (Attributes) Type of Executors for an Action Group (see [below for nested schema](#nestedatt--action_groups--action_group_executor))
+- `action_group_name` (String) Name of the action group
 - `action_group_state` (String) State of the action group
 - `api_schema` (Attributes) Contains information about the API Schema for the Action Group (see [below for nested schema](#nestedatt--action_groups--api_schema))
 - `description` (String) Description of action group
@@ -160,20 +157,17 @@ Optional:
 <a id="nestedatt--action_groups--function_schema"></a>
 ### Nested Schema for `action_groups.function_schema`
 
-Required:
+Optional:
 
 - `functions` (Attributes List) List of Function definitions (see [below for nested schema](#nestedatt--action_groups--function_schema--functions))
 
 <a id="nestedatt--action_groups--function_schema--functions"></a>
 ### Nested Schema for `action_groups.function_schema.functions`
 
-Required:
-
-- `name` (String) Name for a resource.
-
 Optional:
 
 - `description` (String) Description of function
+- `name` (String) Name for a resource.
 - `parameters` (Attributes Map) A map of parameter name and detail (see [below for nested schema](#nestedatt--action_groups--function_schema--functions--parameters))
 
 <a id="nestedatt--action_groups--function_schema--functions--parameters"></a>
@@ -201,26 +195,20 @@ Optional:
 <a id="nestedatt--knowledge_bases"></a>
 ### Nested Schema for `knowledge_bases`
 
-Required:
+Optional:
 
 - `description` (String) Description of the Resource.
 - `knowledge_base_id` (String) Identifier for a resource.
-
-Optional:
-
 - `knowledge_base_state` (String) State of the knowledge base; whether it is enabled or disabled
 
 
 <a id="nestedatt--prompt_override_configuration"></a>
 ### Nested Schema for `prompt_override_configuration`
 
-Required:
-
-- `prompt_configurations` (Attributes List) List of BasePromptConfiguration (see [below for nested schema](#nestedatt--prompt_override_configuration--prompt_configurations))
-
 Optional:
 
 - `override_lambda` (String) ARN of a Lambda.
+- `prompt_configurations` (Attributes List) List of BasePromptConfiguration (see [below for nested schema](#nestedatt--prompt_override_configuration--prompt_configurations))
 
 <a id="nestedatt--prompt_override_configuration--prompt_configurations"></a>
 ### Nested Schema for `prompt_override_configuration.prompt_configurations`

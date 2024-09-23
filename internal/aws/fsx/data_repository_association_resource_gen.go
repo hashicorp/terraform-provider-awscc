@@ -17,11 +17,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -202,7 +204,8 @@ func dataRepositoryAssociationResource(ctx context.Context) (resource.Resource, 
 						"events": schema.SetAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
 							Description: "The ``AutoExportPolicy`` can have the following event values:\n  +   ``NEW`` - New files and directories are automatically exported to the data repository as they are added to the file system.\n  +   ``CHANGED`` - Changes to files and directories on the file system are automatically exported to the data repository.\n  +   ``DELETED`` - Files and directories are automatically deleted on the data repository when they are deleted on the file system.\n  \n You can define any combination of event types for your ``AutoExportPolicy``.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.Set{ /*START VALIDATORS*/
 								setvalidator.SizeAtMost(3),
 								setvalidator.ValueStringsAre(
@@ -212,7 +215,11 @@ func dataRepositoryAssociationResource(ctx context.Context) (resource.Resource, 
 										"DELETED",
 									),
 								),
+								fwvalidators.NotNullSet(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+								setplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Describes a data repository association's automatic export policy. The ``AutoExportPolicy`` defines the types of updated objects on the file system that will be automatically exported to the data repository. As you create, modify, or delete files, Amazon FSx for Lustre automatically exports the defined changes asynchronously once your application finishes modifying the file.\n The ``AutoExportPolicy`` is only supported on Amazon FSx for Lustre file systems with a data repository association.",
@@ -229,7 +236,8 @@ func dataRepositoryAssociationResource(ctx context.Context) (resource.Resource, 
 						"events": schema.SetAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
 							Description: "The ``AutoImportPolicy`` can have the following event values:\n  +   ``NEW`` - Amazon FSx automatically imports metadata of files added to the linked S3 bucket that do not currently exist in the FSx file system.\n  +   ``CHANGED`` - Amazon FSx automatically updates file metadata and invalidates existing file content on the file system as files change in the data repository.\n  +   ``DELETED`` - Amazon FSx automatically deletes files on the file system as corresponding files are deleted in the data repository.\n  \n You can define any combination of event types for your ``AutoImportPolicy``.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.Set{ /*START VALIDATORS*/
 								setvalidator.SizeAtMost(3),
 								setvalidator.ValueStringsAre(
@@ -239,7 +247,11 @@ func dataRepositoryAssociationResource(ctx context.Context) (resource.Resource, 
 										"DELETED",
 									),
 								),
+								fwvalidators.NotNullSet(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+								setplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Describes the data repository association's automatic import policy. The AutoImportPolicy defines how Amazon FSx keeps your file metadata and directory listings up to date by importing changes to your Amazon FSx for Lustre file system as you modify objects in a linked S3 bucket.\n The ``AutoImportPolicy`` is only supported on Amazon FSx for Lustre file systems with a data repository association.",
@@ -295,18 +307,28 @@ func dataRepositoryAssociationResource(ctx context.Context) (resource.Resource, 
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "A value that specifies the ``TagKey``, the name of the tag. Tag keys must be unique for the resource to which they are attached.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "A value that specifies the ``TagValue``, the value assigned to the corresponding tag key. Tag values can be null and don't have to be unique in a tag set. For example, you can have a key-value pair in a tag set of ``finances : April`` and also of ``payroll : April``.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

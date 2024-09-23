@@ -54,7 +54,7 @@ Optional:
 <a id="nestedatt--lo_ra_wan--abp_v10_x"></a>
 ### Nested Schema for `lo_ra_wan.abp_v10_x`
 
-Required:
+Optional:
 
 - `dev_addr` (String)
 - `session_keys` (Attributes) (see [below for nested schema](#nestedatt--lo_ra_wan--abp_v10_x--session_keys))
@@ -62,7 +62,7 @@ Required:
 <a id="nestedatt--lo_ra_wan--abp_v10_x--session_keys"></a>
 ### Nested Schema for `lo_ra_wan.abp_v10_x.session_keys`
 
-Required:
+Optional:
 
 - `app_s_key` (String)
 - `nwk_s_key` (String)
@@ -72,7 +72,7 @@ Required:
 <a id="nestedatt--lo_ra_wan--abp_v11"></a>
 ### Nested Schema for `lo_ra_wan.abp_v11`
 
-Required:
+Optional:
 
 - `dev_addr` (String)
 - `session_keys` (Attributes) (see [below for nested schema](#nestedatt--lo_ra_wan--abp_v11--session_keys))
@@ -80,7 +80,7 @@ Required:
 <a id="nestedatt--lo_ra_wan--abp_v11--session_keys"></a>
 ### Nested Schema for `lo_ra_wan.abp_v11.session_keys`
 
-Required:
+Optional:
 
 - `app_s_key` (String)
 - `f_nwk_s_int_key` (String)
@@ -110,7 +110,7 @@ Optional:
 <a id="nestedatt--lo_ra_wan--otaa_v10_x"></a>
 ### Nested Schema for `lo_ra_wan.otaa_v10_x`
 
-Required:
+Optional:
 
 - `app_eui` (String)
 - `app_key` (String)
@@ -119,7 +119,7 @@ Required:
 <a id="nestedatt--lo_ra_wan--otaa_v11"></a>
 ### Nested Schema for `lo_ra_wan.otaa_v11`
 
-Required:
+Optional:
 
 - `app_key` (String)
 - `join_eui` (String)

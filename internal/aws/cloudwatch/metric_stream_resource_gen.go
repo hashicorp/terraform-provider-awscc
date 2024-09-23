@@ -20,6 +20,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -121,10 +122,15 @@ func metricStreamResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Namespace
 					"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Only metrics with Namespace matching this value will be streamed.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 255),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -216,10 +222,15 @@ func metricStreamResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Namespace
 					"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Only metrics with Namespace matching this value will be streamed.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 255),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -409,11 +420,16 @@ func metricStreamResource(ctx context.Context) (resource.Resource, error) {
 					"additional_statistics": schema.ListAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
 						Description: "The additional statistics to stream for the metrics listed in IncludeMetrics.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.List{ /*START VALIDATORS*/
 							listvalidator.SizeAtMost(20),
 							listvalidator.UniqueValues(),
+							fwvalidators.NotNullList(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: IncludeMetrics
 					"include_metrics": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -422,27 +438,42 @@ func metricStreamResource(ctx context.Context) (resource.Resource, error) {
 								// Property: MetricName
 								"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The name of the metric.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 255),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Namespace
 								"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The namespace of the metric.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 255),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
 						Description: "An array that defines the metrics that are to have additional statistics streamed.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.List{ /*START VALIDATORS*/
 							listvalidator.SizeAtMost(100),
 							listvalidator.UniqueValues(),
+							fwvalidators.NotNullList(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -495,18 +526,28 @@ func metricStreamResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "A unique identifier for the tag.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "String which you can use to describe or define the tag.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

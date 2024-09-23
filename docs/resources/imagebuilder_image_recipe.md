@@ -46,7 +46,7 @@ Optional:
 <a id="nestedatt--components--parameters"></a>
 ### Nested Schema for `components.parameters`
 
-Required:
+Optional:
 
 - `name` (String) The name of the component parameter to set.
 - `value` (List of String) Sets the value for the named component parameter.

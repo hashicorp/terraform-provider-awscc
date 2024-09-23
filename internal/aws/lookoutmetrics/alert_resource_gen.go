@@ -20,6 +20,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -94,20 +95,30 @@ func alertResource(ctx context.Context) (resource.Resource, error) {
 						// Property: LambdaArn
 						"lambda_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "ARN of a Lambda to send alert notifications to.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthAtMost(256),
 								stringvalidator.RegexMatches(regexp.MustCompile("arn:([a-z\\d-]+):.*:.*:.*:.+"), ""),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: RoleArn
 						"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "ARN of an IAM role that LookoutMetrics should assume to access the Lambda function.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthAtMost(256),
 								stringvalidator.RegexMatches(regexp.MustCompile("arn:([a-z\\d-]+):.*:.*:.*:.+"), ""),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Configuration options for a Lambda alert action.",
@@ -123,20 +134,30 @@ func alertResource(ctx context.Context) (resource.Resource, error) {
 						// Property: RoleArn
 						"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "ARN of an IAM role that LookoutMetrics should assume to access the SNS topic.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthAtMost(256),
 								stringvalidator.RegexMatches(regexp.MustCompile("arn:([a-z\\d-]+):.*:.*:.*:.+"), ""),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: SnsTopicArn
 						"sns_topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "ARN of an SNS topic to send alert notifications to.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthAtMost(256),
 								stringvalidator.RegexMatches(regexp.MustCompile("arn:([a-z\\d-]+):.*:.*:.*:.+"), ""),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Configuration options for an SNS alert action.",

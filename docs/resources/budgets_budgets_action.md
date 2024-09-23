@@ -56,13 +56,10 @@ Optional:
 <a id="nestedatt--definition--iam_action_definition"></a>
 ### Nested Schema for `definition.iam_action_definition`
 
-Required:
-
-- `policy_arn` (String)
-
 Optional:
 
 - `groups` (List of String)
+- `policy_arn` (String)
 - `roles` (List of String)
 - `users` (List of String)
 
@@ -70,7 +67,7 @@ Optional:
 <a id="nestedatt--definition--scp_action_definition"></a>
 ### Nested Schema for `definition.scp_action_definition`
 
-Required:
+Optional:
 
 - `policy_id` (String)
 - `target_ids` (List of String)
@@ -79,7 +76,7 @@ Required:
 <a id="nestedatt--definition--ssm_action_definition"></a>
 ### Nested Schema for `definition.ssm_action_definition`
 
-Required:
+Optional:
 
 - `instance_ids` (List of String)
 - `region` (String)
@@ -99,7 +96,7 @@ Required:
 <a id="nestedatt--resource_tags"></a>
 ### Nested Schema for `resource_tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

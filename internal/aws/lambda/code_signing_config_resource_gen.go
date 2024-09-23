@@ -15,12 +15,14 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -173,6 +175,73 @@ func codeSigningConfigResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A list of tags to apply to CodeSigningConfig resource",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(0, 256),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of tags to apply to CodeSigningConfig resource",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -200,8 +269,11 @@ func codeSigningConfigResource(ctx context.Context) (resource.Resource, error) {
 		"code_signing_config_id":           "CodeSigningConfigId",
 		"code_signing_policies":            "CodeSigningPolicies",
 		"description":                      "Description",
+		"key":                              "Key",
 		"signing_profile_version_arns":     "SigningProfileVersionArns",
+		"tags":                             "Tags",
 		"untrusted_artifact_on_deployment": "UntrustedArtifactOnDeployment",
+		"value":                            "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

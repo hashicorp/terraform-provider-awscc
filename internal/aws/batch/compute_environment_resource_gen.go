@@ -20,9 +20,11 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -230,7 +232,14 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 							}, /*END ATTRIBUTE*/
 							// Property: ImageType
 							"image_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Required: true,
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -311,7 +320,14 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 				}, /*END ATTRIBUTE*/
 				// Property: MaxvCpus
 				"maxv_cpus": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						fwvalidators.NotNullInt64(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: MinvCpus
 				"minv_cpus": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -351,9 +367,14 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 				// Property: Subnets
 				"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						fwvalidators.NotNullList(),
+					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Tags
@@ -369,7 +390,14 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 				}, /*END ATTRIBUTE*/
 				// Property: Type
 				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: UpdateToLatestImageVersion
 				"update_to_latest_image_version": schema.BoolAttribute{ /*START ATTRIBUTE*/

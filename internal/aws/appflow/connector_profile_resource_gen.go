@@ -25,6 +25,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -1131,19 +1132,29 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 								// Property: ApiKey
 								"api_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: SecretKey
 								"secret_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
@@ -1160,11 +1171,16 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: ApiKey
 										"api_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Required: true,
+											Optional: true,
+											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthAtMost(256),
 												stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: ApiSecretKey
 										"api_secret_key": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1187,7 +1203,8 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: AuthenticationType
 								"authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.OneOf(
 											"OAUTH2",
@@ -1195,26 +1212,40 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 											"BASIC",
 											"CUSTOM",
 										),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Basic
 								"basic": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Password
 										"password": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Required: true,
+											Optional: true,
+											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthAtMost(512),
 												stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: Username
 										"username": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Required: true,
+											Optional: true,
+											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthAtMost(512),
 												stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Optional: true,
@@ -1239,11 +1270,16 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END ATTRIBUTE*/
 										// Property: CustomAuthenticationType
 										"custom_authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Required: true,
+											Optional: true,
+											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthAtMost(256),
 												stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Optional: true,
@@ -1351,20 +1387,30 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 								// Property: ApiKey
 								"api_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: ApplicationKey
 								"application_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "Application keys, in conjunction with your API key, give you full access to Datadog?s programmatic API. Application keys are associated with the user account that created them. The application key is used to log all requests made to the API.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(512),
 										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
@@ -1379,11 +1425,16 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 								// Property: ApiToken
 								"api_token": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The API tokens used by Dynatrace API to authenticate various API calls.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
@@ -1411,20 +1462,30 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 								// Property: ClientId
 								"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The identi?er for the desired client.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(512),
 										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: ClientSecret
 								"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The client secret used by the oauth client to authenticate to the authorization server.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(512),
 										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: ConnectorOAuthRequest
 								"connector_o_auth_request": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1481,38 +1542,58 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 								// Property: AccessKeyId
 								"access_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The Access Key portion of the credentials.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Datakey
 								"datakey": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The encryption keys used to encrypt data.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(512),
 										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: SecretAccessKey
 								"secret_access_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The secret key used to sign requests.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(512),
 										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: UserId
 								"user_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The identi?er for the user.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(512),
 										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
@@ -1540,20 +1621,30 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 								// Property: ClientId
 								"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The identi?er for the desired client.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(512),
 										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: ClientSecret
 								"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The client secret used by the oauth client to authenticate to the authorization server.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(512),
 										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: ConnectorOAuthRequest
 								"connector_o_auth_request": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1713,19 +1804,29 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Password
 										"password": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Required: true,
+											Optional: true,
+											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthAtMost(512),
 												stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: Username
 										"username": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Required: true,
+											Optional: true,
+											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthAtMost(512),
 												stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Optional: true,
@@ -1911,20 +2012,30 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 								// Property: Password
 								"password": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The password that corresponds to the username.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(512),
 										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Username
 								"username": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The name of the user.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(512),
 										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
@@ -1939,11 +2050,16 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 								// Property: ApiKey
 								"api_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
@@ -1971,20 +2087,30 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 								// Property: ClientId
 								"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The identi?er for the desired client.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(512),
 										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: ClientSecret
 								"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The client secret used by the oauth client to authenticate to the authorization server.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(512),
 										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: ConnectorOAuthRequest
 								"connector_o_auth_request": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -2028,20 +2154,30 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 								// Property: Password
 								"password": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The password that corresponds to the username.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(512),
 										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Username
 								"username": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The name of the user.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(512),
 										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
@@ -2056,11 +2192,16 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 								// Property: ApiSecretKey
 								"api_secret_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The Secret Access Key portion of the credentials.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
@@ -2075,20 +2216,30 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 								// Property: Password
 								"password": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The password that corresponds to the username.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(512),
 										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Username
 								"username": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The name of the user.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(512),
 										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
@@ -2116,20 +2267,30 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 								// Property: ClientId
 								"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The identi?er for the desired client.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(512),
 										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: ClientSecret
 								"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The client secret used by the oauth client to authenticate to the authorization server.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(512),
 										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: ConnectorOAuthRequest
 								"connector_o_auth_request": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -2252,11 +2413,16 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 								// Property: InstanceUrl
 								"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The location of the Datadog resource",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
@@ -2271,11 +2437,16 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 								// Property: InstanceUrl
 								"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The location of the Dynatrace resource",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
@@ -2290,11 +2461,16 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 								// Property: InstanceUrl
 								"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The location of the InforNexus resource",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
@@ -2309,11 +2485,16 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 								// Property: InstanceUrl
 								"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The location of the Marketo resource",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
@@ -2328,11 +2509,16 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 								// Property: BusinessUnitId
 								"business_unit_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The Business unit id of Salesforce Pardot instance to be connected",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(18),
 										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: InstanceUrl
 								"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -2369,11 +2555,16 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 								// Property: BucketName
 								"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The name of the Amazon S3 bucket associated with Redshift.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(3, 63),
 										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: BucketPrefix
 								"bucket_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -2451,11 +2642,16 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 								// Property: RoleArn
 								"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The Amazon Resource Name (ARN) of the IAM role.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(512),
 										stringvalidator.RegexMatches(regexp.MustCompile("arn:aws:iam:.*:[0-9]+:.*"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: WorkgroupName
 								"workgroup_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -2646,11 +2842,16 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 								// Property: InstanceUrl
 								"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The location of the ServiceNow resource",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
@@ -2665,11 +2866,16 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 								// Property: InstanceUrl
 								"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The location of the Slack resource",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
@@ -2697,11 +2903,16 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 								// Property: BucketName
 								"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The name of the Amazon S3 bucket associated with Snow?ake.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(3, 63),
 										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: BucketPrefix
 								"bucket_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -2744,20 +2955,30 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 								// Property: Stage
 								"stage": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The name of the Amazon S3 stage that was created while setting up an Amazon S3 stage in the\nSnow?ake account. This is written in the following format: < Database>< Schema><Stage Name>.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(16),
 										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Warehouse
 								"warehouse": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The name of the Snow?ake warehouse.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(512),
 										stringvalidator.RegexMatches(regexp.MustCompile("[\\s\\w/!@#+=.-]*"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
@@ -2772,11 +2993,16 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 								// Property: InstanceUrl
 								"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The location of the Veeva resource",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
@@ -2791,11 +3017,16 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 								// Property: InstanceUrl
 								"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The location of the Zendesk resource",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,

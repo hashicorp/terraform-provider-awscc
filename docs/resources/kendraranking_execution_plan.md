@@ -34,7 +34,7 @@ A KendraRanking Rescore execution plan
 <a id="nestedatt--capacity_units"></a>
 ### Nested Schema for `capacity_units`
 
-Required:
+Optional:
 
 - `rescore_capacity_units` (Number)
 
@@ -42,7 +42,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) A string used to identify this tag
 - `value` (String) A string containing the value for the tag

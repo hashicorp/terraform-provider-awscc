@@ -104,7 +104,7 @@ Optional:
 <a id="nestedatt--policy_details--exclusion_rules--amis--last_launched"></a>
 ### Nested Schema for `policy_details.exclusion_rules.amis.last_launched`
 
-Required:
+Optional:
 
 - `unit` (String) The value's time unit.
 - `value` (Number) The last launched value.
@@ -124,7 +124,7 @@ Optional:
 <a id="nestedatt--resource_selection--recipes"></a>
 ### Nested Schema for `resource_selection.recipes`
 
-Required:
+Optional:
 
 - `name` (String) The recipe name.
 - `semantic_version` (String) The recipe version.

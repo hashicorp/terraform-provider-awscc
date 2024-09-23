@@ -14,8 +14,10 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -128,25 +130,51 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 								// Property: Key
 								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The field identifier.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: StringValue
 								"string_value": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The field value, expressed as a String.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
 						Description: "The attributes of the parameter object.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.List{ /*START VALIDATORS*/
+							fwvalidators.NotNullList(),
+						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 							generic.Multiset(),
+							listplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Id
 					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The ID of the parameter object.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -191,12 +219,26 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Id
 					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The ID of the parameter value.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: StringValue
 					"string_value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The field value, expressed as a String.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -285,7 +327,14 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 								// Property: Key
 								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "Specifies the name of a field for a particular object. To view valid values for a particular field, see Pipeline Object Reference in the AWS Data Pipeline Developer Guide.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: RefValue
 								"ref_value": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -308,20 +357,39 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
 						Description: "Key-value pairs that define the properties of the object.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.List{ /*START VALIDATORS*/
+							fwvalidators.NotNullList(),
+						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 							generic.Multiset(),
+							listplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Id
 					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The ID of the object.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Name
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The name of the object.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -366,12 +434,26 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The key name of a tag.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The value to associate with the key name.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

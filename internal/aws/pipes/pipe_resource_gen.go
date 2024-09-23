@@ -28,6 +28,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -267,6 +268,24 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: KmsKeyIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 2048,
+		//	  "minLength": 0,
+		//	  "type": "string"
+		//	}
+		"kms_key_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(0, 2048),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: LastModifiedTime
@@ -1010,7 +1029,14 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Required: true,
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: MaximumBatchingWindowInSeconds
 						"maximum_batching_window_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -1025,13 +1051,16 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: QueueName
 						"queue_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 1000),
 								stringvalidator.RegexMatches(regexp.MustCompile("^[\\s\\S]*$"), ""),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.RequiresReplace(),
+								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -1136,15 +1165,18 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: StartingPosition
 						"starting_position": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"TRIM_HORIZON",
 									"LATEST",
 								),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.RequiresReplace(),
+								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -1285,16 +1317,19 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: StartingPosition
 						"starting_position": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"TRIM_HORIZON",
 									"LATEST",
 									"AT_TIMESTAMP",
 								),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.RequiresReplace(),
+								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: StartingPositionTimestamp
@@ -1405,13 +1440,16 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: TopicName
 						"topic_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 249),
 								stringvalidator.RegexMatches(regexp.MustCompile("^[^.]([a-zA-Z0-9\\-_.]+)$"), ""),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.RequiresReplace(),
+								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -1452,7 +1490,14 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Required: true,
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: MaximumBatchingWindowInSeconds
 						"maximum_batching_window_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -1467,13 +1512,16 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: QueueName
 						"queue_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 1000),
 								stringvalidator.RegexMatches(regexp.MustCompile("^[\\s\\S]*$"), ""),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.RequiresReplace(),
+								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: VirtualHost
@@ -1643,13 +1691,16 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: TopicName
 						"topic_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 249),
 								stringvalidator.RegexMatches(regexp.MustCompile("^[^.]([a-zA-Z0-9\\-_.]+)$"), ""),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.RequiresReplace(),
+								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Vpc
@@ -2753,18 +2804,30 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 											// Property: Type
 											"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Required: true,
+												Optional: true,
+												Computed: true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.OneOf(
 														"GPU",
 														"MEMORY",
 														"VCPU",
 													),
+													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: Value
 											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Required: true,
+												Optional: true,
+												Computed: true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
@@ -2820,11 +2883,25 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: JobDefinition
 						"job_definition": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: JobName
 						"job_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Parameters
 						"parameters":        // Pattern: ""
@@ -2919,10 +2996,15 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 									// Property: CapacityProvider
 									"capacity_provider": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Required: true,
+										Optional: true,
+										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(1, 255),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: Weight
 									"weight": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -3027,14 +3109,19 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 										// Property: Subnets
 										"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
 											ElementType: types.StringType,
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.List{ /*START VALIDATORS*/
 												listvalidator.SizeBetween(0, 16),
 												listvalidator.ValueStringsAre(
 													stringvalidator.LengthBetween(1, 1024),
 													stringvalidator.RegexMatches(regexp.MustCompile("^subnet-[0-9a-z]*|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
 												),
+												fwvalidators.NotNullList(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Optional: true,
@@ -3108,16 +3195,28 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 														// Property: Type
 														"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Required: true,
+															Optional: true,
+															Computed: true,
 															Validators: []validator.String{ /*START VALIDATORS*/
 																stringvalidator.OneOf(
 																	"s3",
 																),
+																fwvalidators.NotNullString(),
 															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 														// Property: Value
 														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Required: true,
+															Optional: true,
+															Computed: true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																fwvalidators.NotNullString(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 												}, /*END NESTED OBJECT*/
@@ -3157,17 +3256,29 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 														// Property: Type
 														"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Required: true,
+															Optional: true,
+															Computed: true,
 															Validators: []validator.String{ /*START VALIDATORS*/
 																stringvalidator.OneOf(
 																	"GPU",
 																	"InferenceAccelerator",
 																),
+																fwvalidators.NotNullString(),
 															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 														// Property: Value
 														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Required: true,
+															Optional: true,
+															Computed: true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																fwvalidators.NotNullString(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 												}, /*END NESTED OBJECT*/
@@ -3401,17 +3512,27 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Key
 									"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Required: true,
+										Optional: true,
+										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(1, 128),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: Value
 									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Required: true,
+										Optional: true,
+										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(0, 256),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
@@ -3434,11 +3555,16 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: TaskDefinitionArn
 						"task_definition_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 1600),
 								stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
@@ -3574,10 +3700,15 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: PartitionKey
 						"partition_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(0, 256),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
@@ -3616,10 +3747,15 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 						// Property: Database
 						"database": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "Redshift Database",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 64),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: DbUser
 						"db_user": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -3650,13 +3786,18 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 						"sqls": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
 							Description: "A list of SQLs.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(1, 40),
 								listvalidator.ValueStringsAre(
 									stringvalidator.LengthBetween(1, 100000),
 								),
+								fwvalidators.NotNullList(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: StatementName
 						"statement_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -3695,18 +3836,28 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Name
 									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Required: true,
+										Optional: true,
+										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(1, 256),
 											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: Value
 									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Required: true,
+										Optional: true,
+										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(0, 1024),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
@@ -3791,33 +3942,53 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: DimensionName
 									"dimension_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Required: true,
+										Optional: true,
+										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(1, 256),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: DimensionValue
 									"dimension_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Required: true,
+										Optional: true,
+										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(1, 2048),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: DimensionValueType
 									"dimension_value_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Required: true,
+										Optional: true,
+										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"VARCHAR",
 											),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							Required: true,
+							Optional: true,
+							Computed: true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(1, 128),
+								fwvalidators.NotNullList(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: EpochTimeUnit
 						"epoch_time_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -3845,14 +4016,20 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 												// Property: MeasureValue
 												"measure_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Required: true,
+													Optional: true,
+													Computed: true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(1, 2048),
+														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: MeasureValueType
 												"measure_value_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Required: true,
+													Optional: true,
+													Computed: true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.OneOf(
 															"DOUBLE",
@@ -3861,28 +4038,47 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 															"BOOLEAN",
 															"TIMESTAMP",
 														),
+														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: MultiMeasureAttributeName
 												"multi_measure_attribute_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Required: true,
+													Optional: true,
+													Computed: true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(1, 256),
+														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
-										Required: true,
+										Optional: true,
+										Computed: true,
 										Validators: []validator.List{ /*START VALIDATORS*/
 											listvalidator.SizeBetween(1, 256),
+											fwvalidators.NotNullList(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: MultiMeasureName
 									"multi_measure_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Required: true,
+										Optional: true,
+										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(1, 256),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
@@ -3901,21 +4097,32 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: MeasureName
 									"measure_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Required: true,
+										Optional: true,
+										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(1, 1024),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: MeasureValue
 									"measure_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Required: true,
+										Optional: true,
+										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(1, 2048),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: MeasureValueType
 									"measure_value_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Required: true,
+										Optional: true,
+										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"DOUBLE",
@@ -3924,7 +4131,11 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 												"BOOLEAN",
 												"TIMESTAMP",
 											),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
@@ -3953,10 +4164,15 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: TimeValue
 						"time_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 256),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: TimestampFormat
 						"timestamp_format": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -3971,10 +4187,15 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: VersionValue
 						"version_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 256),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
@@ -4083,6 +4304,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		"job_name":                               "JobName",
 		"key":                                    "Key",
 		"kinesis_stream_parameters":              "KinesisStreamParameters",
+		"kms_key_identifier":                     "KmsKeyIdentifier",
 		"lambda_function_parameters":             "LambdaFunctionParameters",
 		"last_modified_time":                     "LastModifiedTime",
 		"launch_type":                            "LaunchType",

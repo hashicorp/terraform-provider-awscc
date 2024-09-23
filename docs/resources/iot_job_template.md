@@ -42,14 +42,14 @@ Job templates enable you to preconfigure jobs so that you can deploy them to mul
 <a id="nestedatt--abort_config"></a>
 ### Nested Schema for `abort_config`
 
-Required:
+Optional:
 
 - `criteria_list` (Attributes List) (see [below for nested schema](#nestedatt--abort_config--criteria_list))
 
 <a id="nestedatt--abort_config--criteria_list"></a>
 ### Nested Schema for `abort_config.criteria_list`
 
-Required:
+Optional:
 
 - `action` (String) The type of job action to take to initiate the job abort.
 - `failure_type` (String) The type of job execution failures that can initiate a job abort.
@@ -86,7 +86,7 @@ Optional:
 <a id="nestedatt--job_executions_rollout_config--exponential_rollout_rate"></a>
 ### Nested Schema for `job_executions_rollout_config.exponential_rollout_rate`
 
-Required:
+Optional:
 
 - `base_rate_per_minute` (Number) The minimum number of things that will be notified of a pending job, per minute at the start of job rollout. This parameter allows you to define the initial rate of rollout.
 - `increment_factor` (Number) The exponential factor to increase the rate of rollout for a job.
@@ -115,19 +115,16 @@ Optional:
 <a id="nestedatt--presigned_url_config"></a>
 ### Nested Schema for `presigned_url_config`
 
-Required:
-
-- `role_arn` (String) The ARN of an IAM role that grants grants permission to download files from the S3 bucket where the job data/updates are stored. The role must also grant permission for IoT to download the files.
-
 Optional:
 
 - `expires_in_sec` (Number) How number (in seconds) pre-signed URLs are valid.
+- `role_arn` (String) The ARN of an IAM role that grants grants permission to download files from the S3 bucket where the job data/updates are stored. The role must also grant permission for IoT to download the files.
 
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The tag's key.
 - `value` (String) The tag's value.
@@ -136,7 +133,7 @@ Required:
 <a id="nestedatt--timeout_config"></a>
 ### Nested Schema for `timeout_config`
 
-Required:
+Optional:
 
 - `in_progress_timeout_in_minutes` (Number) Specifies the amount of time, in minutes, this device has to finish execution of this job.
 

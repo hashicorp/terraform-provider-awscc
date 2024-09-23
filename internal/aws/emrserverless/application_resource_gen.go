@@ -26,6 +26,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -294,11 +295,16 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Worker type for an analytics framework.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 50),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z]+[-_]*[a-zA-Z]+$"), ""),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -309,11 +315,16 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 									// Property: Cpu
 									"cpu": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "Per worker CPU resource. vCPU is the only supported unit and specifying vCPU is optional.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(1, 15),
 											stringvalidator.RegexMatches(regexp.MustCompile("^[1-9][0-9]*(\\s)?(vCPU|vcpu|VCPU)?$"), ""),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: Disk
 									"disk": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -331,25 +342,49 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 									// Property: Memory
 									"memory": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "Per worker memory resource. GB is the only supported unit and specifying GB is optional.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(1, 15),
 											stringvalidator.RegexMatches(regexp.MustCompile("^[1-9][0-9]*(\\s)?(GB|gb|gB|Gb)?$"), ""),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Required: true,
+								Optional: true,
+								Computed: true,
+								Validators: []validator.Object{ /*START VALIDATORS*/
+									fwvalidators.NotNullObject(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: WorkerCount
 							"worker_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
 								Description: "Initial count of workers to be initialized when an Application is started. This count will be continued to be maintained until the Application is stopped",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.Int64{ /*START VALIDATORS*/
 									int64validator.Between(1, 1000000),
+									fwvalidators.NotNullInt64(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Required: true,
+						Optional: true,
+						Computed: true,
+						Validators: []validator.Object{ /*START VALIDATORS*/
+							fwvalidators.NotNullObject(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -400,11 +435,16 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 				// Property: Cpu
 				"cpu": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Per worker CPU resource. vCPU is the only supported unit and specifying vCPU is optional.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthBetween(1, 15),
 						stringvalidator.RegexMatches(regexp.MustCompile("^[1-9][0-9]*(\\s)?(vCPU|vcpu|VCPU)?$"), ""),
+						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Disk
 				"disk": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -422,11 +462,16 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 				// Property: Memory
 				"memory": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Per worker memory resource. GB is the only supported unit and specifying GB is optional.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthBetween(1, 15),
 						stringvalidator.RegexMatches(regexp.MustCompile("^[1-9][0-9]*(\\s)?(GB|gb|gB|Gb)?$"), ""),
+						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Maximum allowed cumulative resources for an Application. No new resources will be created once the limit is hit.",
@@ -601,20 +646,30 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The value for the tag. You can specify a value that is 1 to 128 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9 /_.:=+@-]+$"), ""),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9 /_.:=+@-]*$"), ""),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

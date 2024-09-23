@@ -26,6 +26,7 @@ Resource schema for AWS::MediaConnect::Flow
 - `maintenance` (Attributes) The maintenance settings you want to use for the flow. (see [below for nested schema](#nestedatt--maintenance))
 - `media_streams` (Attributes List) The media streams associated with the flow. You can associate any of these media streams with sources and outputs on the flow. (see [below for nested schema](#nestedatt--media_streams))
 - `source_failover_config` (Attributes) The source failover config of the flow. (see [below for nested schema](#nestedatt--source_failover_config))
+- `source_monitoring_config` (Attributes) The source monitoring config of the flow. (see [below for nested schema](#nestedatt--source_monitoring_config))
 - `vpc_interfaces` (Attributes List) The VPC interfaces that you added to this flow. (see [below for nested schema](#nestedatt--vpc_interfaces))
 
 ### Read-Only
@@ -69,10 +70,6 @@ Read-Only:
 <a id="nestedatt--source--decryption"></a>
 ### Nested Schema for `source.decryption`
 
-Required:
-
-- `role_arn` (String) The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).
-
 Optional:
 
 - `algorithm` (String) The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).
@@ -81,6 +78,7 @@ Optional:
 - `key_type` (String) The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).
 - `region` (String) The AWS Region that the API Gateway proxy endpoint was created in. This parameter is required for SPEKE encryption and is not valid for static key encryption.
 - `resource_id` (String) An identifier for the content. The service sends this value to the key server to identify the current endpoint. The resource ID is also known as the content ID. This parameter is required for SPEKE encryption and is not valid for static key encryption.
+- `role_arn` (String) The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).
 - `secret_arn` (String) The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.
 - `url` (String) The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.
 
@@ -88,12 +86,9 @@ Optional:
 <a id="nestedatt--source--gateway_bridge_source"></a>
 ### Nested Schema for `source.gateway_bridge_source`
 
-Required:
-
-- `bridge_arn` (String) The ARN of the bridge feeding this flow.
-
 Optional:
 
+- `bridge_arn` (String) The ARN of the bridge feeding this flow.
 - `vpc_interface_attachment` (Attributes) The name of the VPC interface attachment to use for this bridge source. (see [below for nested schema](#nestedatt--source--gateway_bridge_source--vpc_interface_attachment))
 
 <a id="nestedatt--source--gateway_bridge_source--vpc_interface_attachment"></a>
@@ -108,19 +103,16 @@ Optional:
 <a id="nestedatt--source--media_stream_source_configurations"></a>
 ### Nested Schema for `source.media_stream_source_configurations`
 
-Required:
-
-- `encoding_name` (String) The format that was used to encode the data. For ancillary data streams, set the encoding name to smpte291. For audio streams, set the encoding name to pcm. For video, 2110 streams, set the encoding name to raw. For video, JPEG XS streams, set the encoding name to jxsv.
-- `media_stream_name` (String) A name that helps you distinguish one media stream from another.
-
 Optional:
 
+- `encoding_name` (String) The format that was used to encode the data. For ancillary data streams, set the encoding name to smpte291. For audio streams, set the encoding name to pcm. For video, 2110 streams, set the encoding name to raw. For video, JPEG XS streams, set the encoding name to jxsv.
 - `input_configurations` (Attributes List) The media streams that you want to associate with the source. (see [below for nested schema](#nestedatt--source--media_stream_source_configurations--input_configurations))
+- `media_stream_name` (String) A name that helps you distinguish one media stream from another.
 
 <a id="nestedatt--source--media_stream_source_configurations--input_configurations"></a>
 ### Nested Schema for `source.media_stream_source_configurations.input_configurations`
 
-Required:
+Optional:
 
 - `input_port` (Number) The port that the flow listens on for an incoming media stream.
 - `interface` (Attributes) The VPC interface where the media stream comes in from. (see [below for nested schema](#nestedatt--source--media_stream_source_configurations--input_configurations--interface))
@@ -128,7 +120,7 @@ Required:
 <a id="nestedatt--source--media_stream_source_configurations--input_configurations--interface"></a>
 ### Nested Schema for `source.media_stream_source_configurations.input_configurations.interface`
 
-Required:
+Optional:
 
 - `name` (String) The name of the VPC interface that you want to use for the media stream associated with the output.
 
@@ -139,7 +131,7 @@ Required:
 <a id="nestedatt--maintenance"></a>
 ### Nested Schema for `maintenance`
 
-Required:
+Optional:
 
 - `maintenance_day` (String) A day of a week when the maintenance will happen. Use Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.
 - `maintenance_start_hour` (String) UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes must be 00. Example: 13:00. The default value is 02:00.
@@ -148,18 +140,15 @@ Required:
 <a id="nestedatt--media_streams"></a>
 ### Nested Schema for `media_streams`
 
-Required:
-
-- `media_stream_id` (Number) A unique identifier for the media stream.
-- `media_stream_name` (String) A name that helps you distinguish one media stream from another.
-- `media_stream_type` (String) The type of media stream.
-
 Optional:
 
 - `attributes` (Attributes) Attributes that are related to the media stream. (see [below for nested schema](#nestedatt--media_streams--attributes))
 - `clock_rate` (Number) The sample rate for the stream. This value in measured in kHz.
 - `description` (String) A description that can help you quickly identify what your media stream is used for.
 - `fmt` (Number) The format type number (sometimes referred to as RTP payload type) of the media stream. MediaConnect assigns this value to the media stream. For ST 2110 JPEG XS outputs, you need to provide this value to the receiver.
+- `media_stream_id` (Number) A unique identifier for the media stream.
+- `media_stream_name` (String) A name that helps you distinguish one media stream from another.
+- `media_stream_type` (String) The type of media stream.
 - `video_format` (String) The resolution of the video.
 
 <a id="nestedatt--media_streams--attributes"></a>
@@ -199,26 +188,31 @@ Optional:
 <a id="nestedatt--source_failover_config--source_priority"></a>
 ### Nested Schema for `source_failover_config.source_priority`
 
-Required:
+Optional:
 
 - `primary_source` (String) The name of the source you choose as the primary source for this flow.
 
 
 
-<a id="nestedatt--vpc_interfaces"></a>
-### Nested Schema for `vpc_interfaces`
-
-Required:
-
-- `name` (String) Immutable and has to be a unique against other VpcInterfaces in this Flow.
-- `role_arn` (String) Role Arn MediaConnect can assume to create ENIs in customer's account.
-- `security_group_ids` (List of String) Security Group IDs to be used on ENI.
-- `subnet_id` (String) Subnet must be in the AZ of the Flow
+<a id="nestedatt--source_monitoring_config"></a>
+### Nested Schema for `source_monitoring_config`
 
 Optional:
 
+- `thumbnail_state` (String) The state of thumbnail monitoring.
+
+
+<a id="nestedatt--vpc_interfaces"></a>
+### Nested Schema for `vpc_interfaces`
+
+Optional:
+
+- `name` (String) Immutable and has to be a unique against other VpcInterfaces in this Flow.
 - `network_interface_ids` (List of String) IDs of the network interfaces created in customer's account by MediaConnect.
 - `network_interface_type` (String) The type of network adapter that you want MediaConnect to use on this interface. If you don't set this value, it defaults to ENA.
+- `role_arn` (String) Role Arn MediaConnect can assume to create ENIs in customer's account.
+- `security_group_ids` (List of String) Security Group IDs to be used on ENI.
+- `subnet_id` (String) Subnet must be in the AZ of the Flow
 
 ## Import
 

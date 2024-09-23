@@ -1746,6 +1746,11 @@
     "EnrichmentParameters": {
       "$ref": "#/definitions/PipeEnrichmentParameters"
     },
+    "KmsKeyIdentifier": {
+      "type": "string",
+      "maxLength": 2048,
+      "minLength": 0
+    },
     "LastModifiedTime": {
       "type": "string",
       "format": "date-time"
@@ -1902,11 +1907,15 @@
       "permissions": [
         "pipes:DeletePipe",
         "pipes:DescribePipe",
+        "pipes:UntagResource",
         "logs:CreateLogDelivery",
         "logs:UpdateLogDelivery",
         "logs:DeleteLogDelivery",
         "logs:GetLogDelivery",
-        "logs:ListLogDeliveries"
+        "logs:ListLogDeliveries",
+        "kms:DescribeKey",
+        "kms:Decrypt",
+        "kms:GenerateDataKey"
       ]
     },
     "list": {

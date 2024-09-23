@@ -21,6 +21,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -80,11 +81,16 @@ func instanceAccessControlAttributeConfigurationResource(ctx context.Context) (r
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
 							stringvalidator.RegexMatches(regexp.MustCompile("[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]+"), ""),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -92,17 +98,29 @@ func instanceAccessControlAttributeConfigurationResource(ctx context.Context) (r
 							// Property: Source
 							"source": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.SizeAtMost(1),
 									listvalidator.ValueStringsAre(
 										stringvalidator.LengthBetween(0, 256),
 										stringvalidator.RegexMatches(regexp.MustCompile("[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@\\[\\]\\{\\}\\$\\\\\"]*"), ""),
 									),
+									fwvalidators.NotNullList(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Required: true,
+						Optional: true,
+						Computed: true,
+						Validators: []validator.Object{ /*START VALIDATORS*/
+							fwvalidators.NotNullObject(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -178,11 +196,16 @@ func instanceAccessControlAttributeConfigurationResource(ctx context.Context) (r
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Key
 							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Required: true,
+								Optional: true,
+								Computed: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthBetween(1, 128),
 									stringvalidator.RegexMatches(regexp.MustCompile("[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]+"), ""),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -190,26 +213,41 @@ func instanceAccessControlAttributeConfigurationResource(ctx context.Context) (r
 									// Property: Source
 									"source": schema.ListAttribute{ /*START ATTRIBUTE*/
 										ElementType: types.StringType,
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.List{ /*START VALIDATORS*/
 											listvalidator.SizeAtMost(1),
 											listvalidator.ValueStringsAre(
 												stringvalidator.LengthBetween(0, 256),
 												stringvalidator.RegexMatches(regexp.MustCompile("[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@\\[\\]\\{\\}\\$\\\\\"]*"), ""),
 											),
+											fwvalidators.NotNullList(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Required: true,
+								Optional: true,
+								Computed: true,
+								Validators: []validator.Object{ /*START VALIDATORS*/
+									fwvalidators.NotNullObject(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Required: true,
+					Optional: true,
+					Computed: true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeAtMost(50),
+						fwvalidators.NotNullList(),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/

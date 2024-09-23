@@ -20,14 +20,15 @@ import (
 
 // Features of the emitted code.
 type Features struct {
-	HasRequiredRootProperty     bool // At least one root property is required.
-	HasUpdatableProperty        bool // At least one property can be updated.
-	HasValidator                bool // At least one validator.
-	UsesFrameworkTypes          bool // Uses a type from the terraform-plugin-framework/types package.
-	UsesFrameworkJSONTypes      bool // Uses a type from the terraform-plugin-framework-jsontypes/jsontypes package.
-	UsesFrameworkTimeTypes      bool // Uses a type from the terraform-plugin-framework-timetypes/timetypes package.
-	UsesInternalDefaultsPackage bool // Uses a function from the internal/defaults package.
-	UsesRegexpInValidation      bool // Uses a type from the Go standard regexp package for attribute validation.
+	HasRequiredRootProperty       bool // At least one root property is required.
+	HasUpdatableProperty          bool // At least one property can be updated.
+	HasValidator                  bool // At least one validator.
+	UsesFrameworkTypes            bool // Uses a type from the terraform-plugin-framework/types package.
+	UsesFrameworkJSONTypes        bool // Uses a type from the terraform-plugin-framework-jsontypes/jsontypes package.
+	UsesFrameworkTimeTypes        bool // Uses a type from the terraform-plugin-framework-timetypes/timetypes package.
+	UsesInternalDefaultsPackage   bool // Uses a function from the internal/defaults package.
+	UsesInternalValidatorsPackage bool // Uses a function from the internal/validators package.
+	UsesRegexpInValidation        bool // Uses a type from the Go standard regexp package for attribute validation.
 
 	FrameworkDefaultsPackages     []string // Package names for any terraform-plugin-framework/resource/schema default values. May contain duplicates.
 	FrameworkPlanModifierPackages []string // Package names for any terraform-plugin-framework plan modifiers. May contain duplicates.
@@ -47,6 +48,7 @@ func (f Features) LogicalOr(features Features) Features {
 	result.HasUpdatableProperty = f.HasUpdatableProperty || features.HasUpdatableProperty
 	result.HasValidator = f.HasValidator || features.HasValidator
 	result.UsesInternalDefaultsPackage = f.UsesInternalDefaultsPackage || features.UsesInternalDefaultsPackage
+	result.UsesInternalValidatorsPackage = f.UsesInternalValidatorsPackage || features.UsesInternalValidatorsPackage
 	result.UsesFrameworkTypes = f.UsesFrameworkTypes || features.UsesFrameworkTypes
 	result.UsesFrameworkJSONTypes = f.UsesFrameworkJSONTypes || features.UsesFrameworkJSONTypes
 	result.UsesFrameworkTimeTypes = f.UsesFrameworkTimeTypes || features.UsesFrameworkTimeTypes
@@ -74,9 +76,10 @@ type Emitter struct {
 }
 
 type parent struct {
-	computedOnly bool
-	path         []string
-	reqd         interface {
+	computedAndOptional bool
+	computedOnly        bool
+	path                []string
+	reqd                interface {
 		IsRequired(name string) bool
 	}
 }
@@ -111,7 +114,7 @@ func (e Emitter) EmitRootPropertiesSchema(tfType string, attributeNameMap map[st
 
 // emitAttribute generates the Terraform Plugin SDK code for a CloudFormation property's Attributes
 // and emits the generated code to the emitter's Writer. Code features are returned.
-func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string, path []string, name string, property *cfschema.Property, required, parentComputedOnly bool) (Features, error) {
+func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string, path []string, name string, property *cfschema.Property, required, parentComputedOnly, parentComputedAndOptional bool) (Features, error) {
 	var features Features
 	var validators []string
 	var planModifiers []string
@@ -162,7 +165,16 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 		computed = true
 	}
 
+	var setNotNullValidator bool
+	if required && parentComputedAndOptional {
+		required = false
+		optional = true
+		computed = true
+		setNotNullValidator = true
+	}
+
 	computedOnly := computed && !optional
+	computedAndOptional := computed && optional
 
 	switch propertyType := property.Type.String(); propertyType {
 	//
@@ -279,9 +291,10 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 					tfType,
 					attributeNameMap,
 					parent{
-						computedOnly: computedOnly,
-						path:         path,
-						reqd:         property.Items,
+						computedAndOptional: computedAndOptional,
+						computedOnly:        computedOnly,
+						path:                path,
+						reqd:                property.Items,
 					},
 					property.Items.Properties)
 
@@ -395,9 +408,10 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 					tfType,
 					attributeNameMap,
 					parent{
-						computedOnly: computedOnly,
-						path:         path,
-						reqd:         property.Items,
+						computedAndOptional: computedAndOptional,
+						computedOnly:        computedOnly,
+						path:                path,
+						reqd:                property.Items,
 					},
 					property.Items.Properties)
 
@@ -602,9 +616,10 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 					tfType,
 					attributeNameMap,
 					parent{
-						computedOnly: computedOnly,
-						path:         path,
-						reqd:         property.Items,
+						computedAndOptional: computedAndOptional,
+						computedOnly:        computedOnly,
+						path:                path,
+						reqd:                property.Items,
 					},
 					patternProperty.Properties)
 
@@ -664,9 +679,10 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 			tfType,
 			attributeNameMap,
 			parent{
-				computedOnly: computedOnly,
-				path:         path,
-				reqd:         property,
+				computedAndOptional: computedAndOptional,
+				computedOnly:        computedOnly,
+				path:                path,
+				reqd:                property,
 			},
 			property.Properties)
 
@@ -715,6 +731,11 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 		if planModifier != "" {
 			planModifiers = append(planModifiers, planModifier)
 		}
+	}
+
+	if setNotNullValidator {
+		features.UsesInternalValidatorsPackage = true
+		validators = append(validators, fmt.Sprintf("fwvalidators.NotNull%s()", fwValidatorType))
 	}
 
 	// Don't emit validators for Computed-only attributes.
@@ -838,6 +859,7 @@ func (e Emitter) emitSchema(tfType string, attributeNameMap map[string]string, p
 			properties[name],
 			parent.reqd.IsRequired(name),
 			parent.computedOnly,
+			parent.computedAndOptional,
 		)
 
 		if err != nil {

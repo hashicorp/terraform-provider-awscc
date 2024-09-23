@@ -22,6 +22,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -110,10 +111,15 @@ func scraperResource(ctx context.Context) (resource.Resource, error) {
 						// Property: WorkspaceArn
 						"workspace_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "ARN of an Amazon Managed Prometheus workspace",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[-a-z]*:aps:[-a-z0-9]+:[0-9]{12}:workspace/.+$"), ""),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Configuration for Amazon Managed Prometheus metrics destination",
@@ -264,10 +270,15 @@ func scraperResource(ctx context.Context) (resource.Resource, error) {
 						// Property: ClusterArn
 						"cluster_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "ARN of an EKS cluster",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[-a-z]*:eks:[-a-z0-9]+:[0-9]{12}:cluster/.+$"), ""),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: SecurityGroupIds
 						"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -289,14 +300,17 @@ func scraperResource(ctx context.Context) (resource.Resource, error) {
 						"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
 							Description: "List of subnet IDs",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.ValueStringsAre(
 									stringvalidator.RegexMatches(regexp.MustCompile("^subnet-[0-9a-z]+$"), ""),
 								),
+								fwvalidators.NotNullList(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								generic.Multiset(),
+								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -352,18 +366,28 @@ func scraperResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

@@ -57,7 +57,24 @@ Read-Only:
 
 Read-Only:
 
+- `app_lifecycle_management` (Attributes) (see [below for nested schema](#nestedatt--space_settings--code_editor_app_settings--app_lifecycle_management))
 - `default_resource_spec` (Attributes) (see [below for nested schema](#nestedatt--space_settings--code_editor_app_settings--default_resource_spec))
+
+<a id="nestedatt--space_settings--code_editor_app_settings--app_lifecycle_management"></a>
+### Nested Schema for `space_settings.code_editor_app_settings.app_lifecycle_management`
+
+Read-Only:
+
+- `idle_settings` (Attributes) (see [below for nested schema](#nestedatt--space_settings--code_editor_app_settings--app_lifecycle_management--idle_settings))
+
+<a id="nestedatt--space_settings--code_editor_app_settings--app_lifecycle_management--idle_settings"></a>
+### Nested Schema for `space_settings.code_editor_app_settings.app_lifecycle_management.idle_settings`
+
+Read-Only:
+
+- `idle_timeout_in_minutes` (Number) The space idle timeout value set in minutes
+
+
 
 <a id="nestedatt--space_settings--code_editor_app_settings--default_resource_spec"></a>
 ### Nested Schema for `space_settings.code_editor_app_settings.default_resource_spec`
@@ -92,8 +109,25 @@ Read-Only:
 
 Read-Only:
 
+- `app_lifecycle_management` (Attributes) (see [below for nested schema](#nestedatt--space_settings--jupyter_lab_app_settings--app_lifecycle_management))
 - `code_repositories` (Attributes List) A list of CodeRepositories available for use with JupyterLab apps. (see [below for nested schema](#nestedatt--space_settings--jupyter_lab_app_settings--code_repositories))
 - `default_resource_spec` (Attributes) (see [below for nested schema](#nestedatt--space_settings--jupyter_lab_app_settings--default_resource_spec))
+
+<a id="nestedatt--space_settings--jupyter_lab_app_settings--app_lifecycle_management"></a>
+### Nested Schema for `space_settings.jupyter_lab_app_settings.app_lifecycle_management`
+
+Read-Only:
+
+- `idle_settings` (Attributes) (see [below for nested schema](#nestedatt--space_settings--jupyter_lab_app_settings--app_lifecycle_management--idle_settings))
+
+<a id="nestedatt--space_settings--jupyter_lab_app_settings--app_lifecycle_management--idle_settings"></a>
+### Nested Schema for `space_settings.jupyter_lab_app_settings.app_lifecycle_management.idle_settings`
+
+Read-Only:
+
+- `idle_timeout_in_minutes` (Number) The space idle timeout value set in minutes
+
+
 
 <a id="nestedatt--space_settings--jupyter_lab_app_settings--code_repositories"></a>
 ### Nested Schema for `space_settings.jupyter_lab_app_settings.code_repositories`

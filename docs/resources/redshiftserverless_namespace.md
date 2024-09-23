@@ -45,20 +45,17 @@ Definition of AWS::RedshiftServerless::Namespace Resource Type
 <a id="nestedatt--snapshot_copy_configurations"></a>
 ### Nested Schema for `snapshot_copy_configurations`
 
-Required:
-
-- `destination_region` (String)
-
 Optional:
 
 - `destination_kms_key_id` (String)
+- `destination_region` (String)
 - `snapshot_retention_period` (Number)
 
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

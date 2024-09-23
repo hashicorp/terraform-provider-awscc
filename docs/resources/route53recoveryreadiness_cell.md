@@ -30,7 +30,7 @@ The API Schema for AWS Route53 Recovery Readiness Cells.
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

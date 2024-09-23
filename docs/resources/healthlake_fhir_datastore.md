@@ -59,12 +59,9 @@ resource "awscc_healthlake_fhir_datastore" "example" {
 <a id="nestedatt--identity_provider_configuration"></a>
 ### Nested Schema for `identity_provider_configuration`
 
-Required:
-
-- `authorization_strategy` (String) Type of Authorization Strategy. The two types of supported Authorization strategies are SMART_ON_FHIR_V1 and AWS_AUTH.
-
 Optional:
 
+- `authorization_strategy` (String) Type of Authorization Strategy. The two types of supported Authorization strategies are SMART_ON_FHIR_V1 and AWS_AUTH.
 - `fine_grained_authorization_enabled` (Boolean) Flag to indicate if fine-grained authorization will be enabled for the datastore
 - `idp_lambda_arn` (String) The Amazon Resource Name (ARN) of the Lambda function that will be used to decode the access token created by the authorization server.
 - `metadata` (String) The JSON metadata elements for identity provider configuration.
@@ -73,7 +70,7 @@ Optional:
 <a id="nestedatt--preload_data_config"></a>
 ### Nested Schema for `preload_data_config`
 
-Required:
+Optional:
 
 - `preload_data_type` (String) The type of preloaded data. Only Synthea preloaded data is supported.
 
@@ -81,19 +78,16 @@ Required:
 <a id="nestedatt--sse_configuration"></a>
 ### Nested Schema for `sse_configuration`
 
-Required:
+Optional:
 
 - `kms_encryption_config` (Attributes) The customer-managed-key (CMK) used when creating a Data Store. If a customer owned key is not specified, an AWS owned key will be used for encryption. (see [below for nested schema](#nestedatt--sse_configuration--kms_encryption_config))
 
 <a id="nestedatt--sse_configuration--kms_encryption_config"></a>
 ### Nested Schema for `sse_configuration.kms_encryption_config`
 
-Required:
-
-- `cmk_type` (String) The type of customer-managed-key (CMK) used for encryption. The two types of supported CMKs are customer owned CMKs and AWS owned CMKs.
-
 Optional:
 
+- `cmk_type` (String) The type of customer-managed-key (CMK) used for encryption. The two types of supported CMKs are customer owned CMKs and AWS owned CMKs.
 - `kms_key_id` (String) The KMS encryption key id/alias used to encrypt the Data Store contents at rest.
 
 
@@ -101,7 +95,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key of the tag.
 - `value` (String) The value of the tag.

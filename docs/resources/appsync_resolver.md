@@ -53,15 +53,12 @@ The ``AWS::AppSync::Resolver`` resource defines the logical GraphQL resolver tha
 <a id="nestedatt--caching_config"></a>
 ### Nested Schema for `caching_config`
 
-Required:
-
-- `ttl` (Number) The TTL in seconds for a resolver that has caching activated.
- Valid values are 1?3,600 seconds.
-
 Optional:
 
 - `caching_keys` (List of String) The caching keys for a resolver that has caching activated.
  Valid values are entries from the ``$context.arguments``, ``$context.source``, and ``$context.identity`` maps.
+- `ttl` (Number) The TTL in seconds for a resolver that has caching activated.
+ Valid values are 1?3,600 seconds.
 
 
 <a id="nestedatt--pipeline_config"></a>
@@ -75,7 +72,7 @@ Optional:
 <a id="nestedatt--runtime"></a>
 ### Nested Schema for `runtime`
 
-Required:
+Optional:
 
 - `name` (String) The ``name`` of the runtime to use. Currently, the only allowed value is ``APPSYNC_JS``.
 - `runtime_version` (String) The ``version`` of the runtime to use. Currently, the only allowed version is ``1.0.0``.
@@ -84,14 +81,11 @@ Required:
 <a id="nestedatt--sync_config"></a>
 ### Nested Schema for `sync_config`
 
-Required:
+Optional:
 
 - `conflict_detection` (String) The Conflict Detection strategy to use.
   +   *VERSION*: Detect conflicts based on object versions for this resolver.
   +   *NONE*: Do not detect conflicts when invoking this resolver.
-
-Optional:
-
 - `conflict_handler` (String) The Conflict Resolution strategy to perform in the event of a conflict.
   +   *OPTIMISTIC_CONCURRENCY*: Resolve conflicts by rejecting mutations when versions don't match the latest version at the server.
   +   *AUTOMERGE*: Resolve conflicts with the Automerge conflict resolution strategy.

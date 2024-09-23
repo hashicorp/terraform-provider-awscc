@@ -72,12 +72,9 @@ resource "awscc_lightsail_disk" "example" {
 <a id="nestedatt--add_ons"></a>
 ### Nested Schema for `add_ons`
 
-Required:
-
-- `add_on_type` (String) The add-on type
-
 Optional:
 
+- `add_on_type` (String) The add-on type
 - `auto_snapshot_add_on_request` (Attributes) An object that represents additional parameters when enabling or modifying the automatic snapshot add-on (see [below for nested schema](#nestedatt--add_ons--auto_snapshot_add_on_request))
 - `status` (String) Status of the Addon
 
@@ -102,12 +99,9 @@ Read-Only:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
-
-- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-
 Optional:
 
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import

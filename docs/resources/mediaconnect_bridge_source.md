@@ -32,12 +32,9 @@ Resource schema for AWS::MediaConnect::BridgeSource
 <a id="nestedatt--flow_source"></a>
 ### Nested Schema for `flow_source`
 
-Required:
-
-- `flow_arn` (String) The ARN of the cloud flow used as a source of this bridge.
-
 Optional:
 
+- `flow_arn` (String) The ARN of the cloud flow used as a source of this bridge.
 - `flow_vpc_interface_attachment` (Attributes) The name of the VPC interface attachment to use for this source. (see [below for nested schema](#nestedatt--flow_source--flow_vpc_interface_attachment))
 
 <a id="nestedatt--flow_source--flow_vpc_interface_attachment"></a>
@@ -52,7 +49,7 @@ Optional:
 <a id="nestedatt--network_source"></a>
 ### Nested Schema for `network_source`
 
-Required:
+Optional:
 
 - `multicast_ip` (String) The network source multicast IP.
 - `network_name` (String) The network source's gateway network name.

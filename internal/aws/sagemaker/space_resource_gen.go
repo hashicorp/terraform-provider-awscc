@@ -23,6 +23,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -73,11 +74,16 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: OwnerUserProfileName
 				"owner_user_profile_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Optional: true,
+					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthAtMost(63),
 						stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"), ""),
+						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Optional: true,
@@ -163,6 +169,24 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "additionalProperties": false,
 		//	      "description": "The CodeEditor app settings.",
 		//	      "properties": {
+		//	        "AppLifecycleManagement": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "IdleSettings": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "IdleTimeoutInMinutes": {
+		//	                  "description": "The space idle timeout value set in minutes",
+		//	                  "maximum": 525600,
+		//	                  "minimum": 60,
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
 		//	        "DefaultResourceSpec": {
 		//	          "additionalProperties": false,
 		//	          "properties": {
@@ -290,6 +314,24 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "additionalProperties": false,
 		//	      "description": "The JupyterLab app settings.",
 		//	      "properties": {
+		//	        "AppLifecycleManagement": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "IdleSettings": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "IdleTimeoutInMinutes": {
+		//	                  "description": "The space idle timeout value set in minutes",
+		//	                  "maximum": 525600,
+		//	                  "minimum": 60,
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
 		//	        "CodeRepositories": {
 		//	          "description": "A list of CodeRepositories available for use with JupyterLab apps.",
 		//	          "items": {
@@ -720,6 +762,38 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 				// Property: CodeEditorAppSettings
 				"code_editor_app_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AppLifecycleManagement
+						"app_lifecycle_management": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IdleSettings
+								"idle_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: IdleTimeoutInMinutes
+										"idle_timeout_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The space idle timeout value set in minutes",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Int64{ /*START VALIDATORS*/
+												int64validator.Between(60, 525600),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: DefaultResourceSpec
 						"default_resource_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -862,11 +936,16 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: FileSystemId
 									"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Required: true,
+										Optional: true,
+										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(11, 21),
 											stringvalidator.RegexMatches(regexp.MustCompile("^(fs-[0-9a-f]{8,})$"), ""),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Optional: true,
@@ -890,6 +969,38 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 				// Property: JupyterLabAppSettings
 				"jupyter_lab_app_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AppLifecycleManagement
+						"app_lifecycle_management": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IdleSettings
+								"idle_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: IdleTimeoutInMinutes
+										"idle_timeout_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The space idle timeout value set in minutes",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Int64{ /*START VALIDATORS*/
+												int64validator.Between(60, 525600),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: CodeRepositories
 						"code_repositories": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -897,10 +1008,15 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 									// Property: RepositoryUrl
 									"repository_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "A CodeRepository (valid URL) to be used within Jupyter's Git extension.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthAtMost(256),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
@@ -1210,20 +1326,30 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 									// Property: AppImageConfigName
 									"app_image_config_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "The Name of the AppImageConfig.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthAtMost(63),
 											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"), ""),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: ImageName
 									"image_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "The name of the CustomImage. Must be unique to your account.",
-										Required:    true,
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthAtMost(63),
 											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]([-.]?[a-zA-Z0-9]){0,62}$"), ""),
+											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: ImageVersionNumber
 									"image_version_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -1409,10 +1535,15 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 								// Property: EbsVolumeSizeInGb
 								"ebs_volume_size_in_gb": schema.Int64Attribute{ /*START ATTRIBUTE*/
 									Description: "Size of the Amazon EBS volume in Gb",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.Int64{ /*START VALIDATORS*/
 										int64validator.Between(5, 16384),
+										fwvalidators.NotNullInt64(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "Properties related to the space's Amazon Elastic Block Store volume.",
@@ -1462,13 +1593,18 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: SharingType
 				"sharing_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Optional: true,
+					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"Private",
 							"Shared",
 						),
+						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Optional: true,
@@ -1513,17 +1649,27 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -1574,6 +1720,7 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"app_image_config_name":        "AppImageConfigName",
+		"app_lifecycle_management":     "AppLifecycleManagement",
 		"app_type":                     "AppType",
 		"code_editor_app_settings":     "CodeEditorAppSettings",
 		"code_repositories":            "CodeRepositories",
@@ -1585,6 +1732,8 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 		"ebs_volume_size_in_gb":        "EbsVolumeSizeInGb",
 		"efs_file_system":              "EFSFileSystem",
 		"file_system_id":               "FileSystemId",
+		"idle_settings":                "IdleSettings",
+		"idle_timeout_in_minutes":      "IdleTimeoutInMinutes",
 		"image_name":                   "ImageName",
 		"image_version_number":         "ImageVersionNumber",
 		"instance_type":                "InstanceType",

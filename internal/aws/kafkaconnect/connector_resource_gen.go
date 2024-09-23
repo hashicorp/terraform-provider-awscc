@@ -14,6 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
@@ -24,6 +25,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -152,12 +154,20 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 						// Property: MaxWorkerCount
 						"max_worker_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Description: "The maximum number of workers for a connector.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								fwvalidators.NotNullInt64(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: McuCount
 						"mcu_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Description: "Specifies how many MSK Connect Units (MCU) as the minimum scaling unit.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
 								int64validator.OneOf(
 									1,
@@ -165,12 +175,23 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 									4,
 									8,
 								),
+								fwvalidators.NotNullInt64(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: MinWorkerCount
 						"min_worker_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Description: "The minimum number of workers for a connector.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								fwvalidators.NotNullInt64(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: ScaleInPolicy
 						"scale_in_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -178,14 +199,26 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 								// Property: CpuUtilizationPercentage
 								"cpu_utilization_percentage": schema.Int64Attribute{ /*START ATTRIBUTE*/
 									Description: "Specifies the CPU utilization percentage threshold at which connector scale in should trigger.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.Int64{ /*START VALIDATORS*/
 										int64validator.Between(1, 100),
+										fwvalidators.NotNullInt64(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "Information about the scale in policy of the connector.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: ScaleOutPolicy
 						"scale_out_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -193,14 +226,26 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 								// Property: CpuUtilizationPercentage
 								"cpu_utilization_percentage": schema.Int64Attribute{ /*START ATTRIBUTE*/
 									Description: "Specifies the CPU utilization percentage threshold at which connector scale out should trigger.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.Int64{ /*START VALIDATORS*/
 										int64validator.Between(1, 100),
+										fwvalidators.NotNullInt64(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "Information about the scale out policy of the connector.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Details about auto scaling of a connector.",
@@ -233,7 +278,14 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 						// Property: WorkerCount
 						"worker_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Description: "Number of workers for a connector.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								fwvalidators.NotNullInt64(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Details about a fixed capacity allocated to a connector.",
@@ -609,7 +661,14 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 								// Property: Enabled
 								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 									Description: "Specifies whether the logs get sent to the specified CloudWatch Logs destination.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Bool{ /*START VALIDATORS*/
+										fwvalidators.NotNullBool(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: LogGroup
 								"log_group": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -643,7 +702,14 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 								// Property: Enabled
 								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 									Description: "Specifies whether the logs get sent to the specified Kinesis Data Firehose delivery stream.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Bool{ /*START VALIDATORS*/
+										fwvalidators.NotNullBool(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "Details about delivering logs to Amazon Kinesis Data Firehose.",
@@ -668,7 +734,14 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 								// Property: Enabled
 								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 									Description: "Specifies whether the logs get sent to the specified Amazon S3 destination.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Bool{ /*START VALIDATORS*/
+										fwvalidators.NotNullBool(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Prefix
 								"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -689,7 +762,14 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Specifies where worker logs are delivered.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Object{ /*START VALIDATORS*/
+						fwvalidators.NotNullObject(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Details of what logs are delivered and where they are delivered.",
@@ -830,17 +910,27 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthAtMost(256),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -881,18 +971,28 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 				// Property: Revision
 				"revision": schema.Int64Attribute{ /*START ATTRIBUTE*/
 					Description: "The revision of the worker configuration to use.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.Int64{ /*START VALIDATORS*/
 						int64validator.AtLeast(1),
+						fwvalidators.NotNullInt64(),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: WorkerConfigurationArn
 				"worker_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The Amazon Resource Name (ARN) of the worker configuration to use.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.RegexMatches(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn):kafkaconnect:.*"), ""),
+						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Specifies the worker configuration to use with the connector.",

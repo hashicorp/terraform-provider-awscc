@@ -162,12 +162,9 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
-
-- `key` (String)
-
 Optional:
 
+- `key` (String)
 - `value` (String)
 
 ## Import

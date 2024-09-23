@@ -16,6 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
@@ -26,6 +27,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -243,10 +245,15 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: IndexName
 					"index_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(3, 255),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: KeySchema
 					"key_schema": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -254,22 +261,39 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: AttributeName
 								"attribute_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 255),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: KeyType
 								"key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.List{ /*START VALIDATORS*/
 							listvalidator.SizeBetween(1, 2),
 							listvalidator.UniqueValues(),
+							fwvalidators.NotNullList(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Projection
 					"projection": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -295,7 +319,14 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Required: true,
+						Optional: true,
+						Computed: true,
+						Validators: []validator.Object{ /*START VALIDATORS*/
+							fwvalidators.NotNullObject(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: WriteOnDemandThroughputSettings
 					"write_on_demand_throughput_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -326,17 +357,27 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: MaxCapacity
 									"max_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Required: true,
+										Optional: true,
+										Computed: true,
 										Validators: []validator.Int64{ /*START VALIDATORS*/
 											int64validator.AtLeast(1),
+											fwvalidators.NotNullInt64(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: MinCapacity
 									"min_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Required: true,
+										Optional: true,
+										Computed: true,
 										Validators: []validator.Int64{ /*START VALIDATORS*/
 											int64validator.AtLeast(1),
+											fwvalidators.NotNullInt64(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: SeedCapacity
 									"seed_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -384,10 +425,24 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END ATTRIBUTE*/
 											// Property: TargetValue
 											"target_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
-												Required: true,
+												Optional: true,
+												Computed: true,
+												Validators: []validator.Float64{ /*START VALIDATORS*/
+													fwvalidators.NotNullFloat64(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+													float64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
-										Required: true,
+										Optional: true,
+										Computed: true,
+										Validators: []validator.Object{ /*START VALIDATORS*/
+											fwvalidators.NotNullObject(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Optional: true,
@@ -533,10 +588,15 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: IndexName
 					"index_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(3, 255),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: KeySchema
 					"key_schema": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -544,22 +604,39 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: AttributeName
 								"attribute_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 255),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: KeyType
 								"key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.List{ /*START VALIDATORS*/
 							listvalidator.SizeAtMost(2),
 							listvalidator.UniqueValues(),
+							fwvalidators.NotNullList(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Projection
 					"projection": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -585,7 +662,14 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Required: true,
+						Optional: true,
+						Computed: true,
+						Validators: []validator.Object{ /*START VALIDATORS*/
+							fwvalidators.NotNullObject(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -911,7 +995,14 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Enabled
 							"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Required: true,
+								Optional: true,
+								Computed: true,
+								Validators: []validator.Bool{ /*START VALIDATORS*/
+									fwvalidators.NotNullBool(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+									boolplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Optional: true,
@@ -937,7 +1028,14 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Enabled
 										"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Required: true,
+											Optional: true,
+											Computed: true,
+											Validators: []validator.Bool{ /*START VALIDATORS*/
+												fwvalidators.NotNullBool(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+												boolplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Optional: true,
@@ -948,10 +1046,15 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: IndexName
 								"index_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(3, 255),
+										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: ReadOnDemandThroughputSettings
 								"read_on_demand_throughput_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -982,17 +1085,27 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 												// Property: MaxCapacity
 												"max_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
-													Required: true,
+													Optional: true,
+													Computed: true,
 													Validators: []validator.Int64{ /*START VALIDATORS*/
 														int64validator.AtLeast(1),
+														fwvalidators.NotNullInt64(),
 													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+														int64planmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: MinCapacity
 												"min_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
-													Required: true,
+													Optional: true,
+													Computed: true,
 													Validators: []validator.Int64{ /*START VALIDATORS*/
 														int64validator.AtLeast(1),
+														fwvalidators.NotNullInt64(),
 													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+														int64planmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: SeedCapacity
 												"seed_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -1040,10 +1153,24 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 														}, /*END ATTRIBUTE*/
 														// Property: TargetValue
 														"target_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
-															Required: true,
+															Optional: true,
+															Computed: true,
+															Validators: []validator.Float64{ /*START VALIDATORS*/
+																fwvalidators.NotNullFloat64(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+																float64planmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
-													Required: true,
+													Optional: true,
+													Computed: true,
+													Validators: []validator.Object{ /*START VALIDATORS*/
+														fwvalidators.NotNullObject(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+														objectplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 											Optional: true,
@@ -1097,7 +1224,14 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: StreamArn
 							"stream_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Required: true,
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Optional: true,
@@ -1153,17 +1287,27 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: MaxCapacity
 									"max_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Required: true,
+										Optional: true,
+										Computed: true,
 										Validators: []validator.Int64{ /*START VALIDATORS*/
 											int64validator.AtLeast(1),
+											fwvalidators.NotNullInt64(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: MinCapacity
 									"min_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Required: true,
+										Optional: true,
+										Computed: true,
 										Validators: []validator.Int64{ /*START VALIDATORS*/
 											int64validator.AtLeast(1),
+											fwvalidators.NotNullInt64(),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: SeedCapacity
 									"seed_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -1211,10 +1355,24 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END ATTRIBUTE*/
 											// Property: TargetValue
 											"target_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
-												Required: true,
+												Optional: true,
+												Computed: true,
+												Validators: []validator.Float64{ /*START VALIDATORS*/
+													fwvalidators.NotNullFloat64(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+													float64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
-										Required: true,
+										Optional: true,
+										Computed: true,
+										Validators: []validator.Object{ /*START VALIDATORS*/
+											fwvalidators.NotNullObject(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Optional: true,
@@ -1254,10 +1412,24 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 									// Property: PolicyDocument
 									"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
 										CustomType: jsontypes.NormalizedType{},
-										Required:   true,
+										Optional:   true,
+										Computed:   true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Required: true,
+								Optional: true,
+								Computed: true,
+								Validators: []validator.Object{ /*START VALIDATORS*/
+									fwvalidators.NotNullObject(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Optional: true,
@@ -1272,7 +1444,14 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 							// Property: PolicyDocument
 							"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
 								CustomType: jsontypes.NormalizedType{},
-								Required:   true,
+								Optional:   true,
+								Computed:   true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Optional: true,
@@ -1286,7 +1465,14 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: KMSMasterKeyId
 							"kms_master_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Required: true,
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Optional: true,
@@ -1309,11 +1495,25 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Key
 								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Value
 								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
@@ -1352,7 +1552,14 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: SSEEnabled
 				"sse_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Bool{ /*START VALIDATORS*/
+						fwvalidators.NotNullBool(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: SSEType
 				"sse_type": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1400,7 +1607,14 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: StreamViewType
 				"stream_view_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Optional: true,
@@ -1465,7 +1679,14 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Enabled
 				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Bool{ /*START VALIDATORS*/
+						fwvalidators.NotNullBool(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Optional: true,
@@ -1570,17 +1791,27 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: MaxCapacity
 						"max_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
 								int64validator.AtLeast(1),
+								fwvalidators.NotNullInt64(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: MinCapacity
 						"min_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
 								int64validator.AtLeast(1),
+								fwvalidators.NotNullInt64(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: SeedCapacity
 						"seed_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -1629,10 +1860,24 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: TargetValue
 								"target_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Float64{ /*START VALIDATORS*/
+										fwvalidators.NotNullFloat64(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+										float64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Required: true,
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,

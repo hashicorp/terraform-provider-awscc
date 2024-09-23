@@ -28,6 +28,7 @@ Data Source schema for AWS::Pipes::Pipe
 - `desired_state` (String)
 - `enrichment` (String)
 - `enrichment_parameters` (Attributes) (see [below for nested schema](#nestedatt--enrichment_parameters))
+- `kms_key_identifier` (String)
 - `last_modified_time` (String)
 - `log_configuration` (Attributes) (see [below for nested schema](#nestedatt--log_configuration))
 - `name` (String)

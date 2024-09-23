@@ -22,6 +22,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -275,18 +276,28 @@ func rotationResource(ctx context.Context) (resource.Resource, error) {
 							// Property: DayOfMonth
 							"day_of_month": schema.Int64Attribute{ /*START ATTRIBUTE*/
 								Description: "The day of the month when monthly recurring on-call rotations begin.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.Int64{ /*START VALIDATORS*/
 									int64validator.Between(1, 31),
+									fwvalidators.NotNullInt64(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: HandOffTime
 							"hand_off_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Details about when an on-call rotation shift begins or ends. Time of the day in format HH:MM",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.RegexMatches(regexp.MustCompile("^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$"), ""),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -333,31 +344,47 @@ func rotationResource(ctx context.Context) (resource.Resource, error) {
 										// Property: EndTime
 										"end_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "Details about when an on-call rotation shift begins or ends. Time of the day in format HH:MM",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.RegexMatches(regexp.MustCompile("^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$"), ""),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: StartTime
 										"start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "Details about when an on-call rotation shift begins or ends. Time of the day in format HH:MM",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.RegexMatches(regexp.MustCompile("^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$"), ""),
+												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
 								Description: "Information about when an on-call shift begins and ends.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									fwvalidators.NotNullList(),
+								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 									generic.Multiset(),
+									listplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: DayOfWeek
 							"day_of_week": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The day of the week when weekly recurring on-call shift rotations begin. ",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"MON",
@@ -368,7 +395,11 @@ func rotationResource(ctx context.Context) (resource.Resource, error) {
 										"SAT",
 										"SUN",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -387,7 +418,8 @@ func rotationResource(ctx context.Context) (resource.Resource, error) {
 							// Property: DayOfWeek
 							"day_of_week": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The day of the week when weekly recurring on-call shift rotations begin. ",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"MON",
@@ -398,15 +430,24 @@ func rotationResource(ctx context.Context) (resource.Resource, error) {
 										"SAT",
 										"SUN",
 									),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: HandOffTime
 							"hand_off_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Details about when an on-call rotation shift begins or ends. Time of the day in format HH:MM",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.RegexMatches(regexp.MustCompile("^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$"), ""),
+									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -474,18 +515,28 @@ func rotationResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The key name of the tag",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The value for the tag.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
