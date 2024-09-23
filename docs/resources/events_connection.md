@@ -96,7 +96,7 @@ Optional:
 <a id="nestedatt--auth_parameters--api_key_auth_parameters"></a>
 ### Nested Schema for `auth_parameters.api_key_auth_parameters`
 
-Required:
+Optional:
 
 - `api_key_name` (String)
 - `api_key_value` (String)
@@ -105,7 +105,7 @@ Required:
 <a id="nestedatt--auth_parameters--basic_auth_parameters"></a>
 ### Nested Schema for `auth_parameters.basic_auth_parameters`
 
-Required:
+Optional:
 
 - `password` (String)
 - `username` (String)
@@ -123,60 +123,48 @@ Optional:
 <a id="nestedatt--auth_parameters--invocation_http_parameters--body_parameters"></a>
 ### Nested Schema for `auth_parameters.invocation_http_parameters.body_parameters`
 
-Required:
-
-- `key` (String)
-- `value` (String)
-
 Optional:
 
 - `is_value_secret` (Boolean)
+- `key` (String)
+- `value` (String)
 
 
 <a id="nestedatt--auth_parameters--invocation_http_parameters--header_parameters"></a>
 ### Nested Schema for `auth_parameters.invocation_http_parameters.header_parameters`
 
-Required:
-
-- `key` (String)
-- `value` (String)
-
 Optional:
 
 - `is_value_secret` (Boolean)
+- `key` (String)
+- `value` (String)
 
 
 <a id="nestedatt--auth_parameters--invocation_http_parameters--query_string_parameters"></a>
 ### Nested Schema for `auth_parameters.invocation_http_parameters.query_string_parameters`
 
-Required:
-
-- `key` (String)
-- `value` (String)
-
 Optional:
 
 - `is_value_secret` (Boolean)
+- `key` (String)
+- `value` (String)
 
 
 
 <a id="nestedatt--auth_parameters--o_auth_parameters"></a>
 ### Nested Schema for `auth_parameters.o_auth_parameters`
 
-Required:
+Optional:
 
 - `authorization_endpoint` (String)
 - `client_parameters` (Attributes) (see [below for nested schema](#nestedatt--auth_parameters--o_auth_parameters--client_parameters))
 - `http_method` (String)
-
-Optional:
-
 - `o_auth_http_parameters` (Attributes) (see [below for nested schema](#nestedatt--auth_parameters--o_auth_parameters--o_auth_http_parameters))
 
 <a id="nestedatt--auth_parameters--o_auth_parameters--client_parameters"></a>
 ### Nested Schema for `auth_parameters.o_auth_parameters.client_parameters`
 
-Required:
+Optional:
 
 - `client_id` (String)
 - `client_secret` (String)
@@ -194,40 +182,31 @@ Optional:
 <a id="nestedatt--auth_parameters--o_auth_parameters--o_auth_http_parameters--body_parameters"></a>
 ### Nested Schema for `auth_parameters.o_auth_parameters.o_auth_http_parameters.body_parameters`
 
-Required:
-
-- `key` (String)
-- `value` (String)
-
 Optional:
 
 - `is_value_secret` (Boolean)
+- `key` (String)
+- `value` (String)
 
 
 <a id="nestedatt--auth_parameters--o_auth_parameters--o_auth_http_parameters--header_parameters"></a>
 ### Nested Schema for `auth_parameters.o_auth_parameters.o_auth_http_parameters.header_parameters`
 
-Required:
-
-- `key` (String)
-- `value` (String)
-
 Optional:
 
 - `is_value_secret` (Boolean)
+- `key` (String)
+- `value` (String)
 
 
 <a id="nestedatt--auth_parameters--o_auth_parameters--o_auth_http_parameters--query_string_parameters"></a>
 ### Nested Schema for `auth_parameters.o_auth_parameters.o_auth_http_parameters.query_string_parameters`
 
-Required:
-
-- `key` (String)
-- `value` (String)
-
 Optional:
 
 - `is_value_secret` (Boolean)
+- `key` (String)
+- `value` (String)
 
 ## Import
 
