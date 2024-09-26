@@ -116,7 +116,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "InstanceCount": {
 		//	        "description": "The number of instances you specified to add to the instance group of a SageMaker HyperPod cluster.",
-		//	        "minimum": 1,
+		//	        "minimum": 0,
 		//	        "type": "integer"
 		//	      },
 		//	      "InstanceGroupName": {
