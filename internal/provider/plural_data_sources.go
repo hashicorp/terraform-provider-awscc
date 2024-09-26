@@ -8,6 +8,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_arczonalshift_autoshift_observer_notification_statuses -cftype AWS::ARCZonalShift::AutoshiftObserverNotificationStatus -package arczonalshift ../aws/arczonalshift/autoshift_observer_notification_status_plural_data_source_gen.go ../aws/arczonalshift/autoshift_observer_notification_status_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_arczonalshift_zonal_autoshift_configurations -cftype AWS::ARCZonalShift::ZonalAutoshiftConfiguration -package arczonalshift ../aws/arczonalshift/zonal_autoshift_configuration_plural_data_source_gen.go ../aws/arczonalshift/zonal_autoshift_configuration_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_accessanalyzer_analyzers -cftype AWS::AccessAnalyzer::Analyzer -package accessanalyzer ../aws/accessanalyzer/analyzer_plural_data_source_gen.go ../aws/accessanalyzer/analyzer_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_amazonmq_configurations -cftype AWS::AmazonMQ::Configuration -package amazonmq ../aws/amazonmq/configuration_plural_data_source_gen.go ../aws/amazonmq/configuration_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_amplify_apps -cftype AWS::Amplify::App -package amplify ../aws/amplify/app_plural_data_source_gen.go ../aws/amplify/app_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_amplify_domains -cftype AWS::Amplify::Domain -package amplify ../aws/amplify/domain_plural_data_source_gen.go ../aws/amplify/domain_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_apigateway_api_keys -cftype AWS::ApiGateway::ApiKey -package apigateway ../aws/apigateway/api_key_plural_data_source_gen.go ../aws/apigateway/api_key_plural_data_source_gen_test.go
@@ -798,6 +799,7 @@ package provider
 import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/accessanalyzer"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/acmpca"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/amazonmq"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/amplify"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/apigateway"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/apigatewayv2"

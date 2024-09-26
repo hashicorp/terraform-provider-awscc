@@ -12,6 +12,7 @@
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_arczonalshift_autoshift_observer_notification_status -cfschema ../service/cloudformation/schemas/AWS_ARCZonalShift_AutoshiftObserverNotificationStatus.json -package arczonalshift ../aws/arczonalshift/autoshift_observer_notification_status_singular_data_source_gen.go ../aws/arczonalshift/autoshift_observer_notification_status_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_arczonalshift_zonal_autoshift_configuration -cfschema ../service/cloudformation/schemas/AWS_ARCZonalShift_ZonalAutoshiftConfiguration.json -package arczonalshift ../aws/arczonalshift/zonal_autoshift_configuration_singular_data_source_gen.go ../aws/arczonalshift/zonal_autoshift_configuration_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_accessanalyzer_analyzer -cfschema ../service/cloudformation/schemas/AWS_AccessAnalyzer_Analyzer.json -package accessanalyzer ../aws/accessanalyzer/analyzer_singular_data_source_gen.go ../aws/accessanalyzer/analyzer_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source awscc_amazonmq_configuration -cfschema ../service/cloudformation/schemas/AWS_AmazonMQ_Configuration.json -package amazonmq ../aws/amazonmq/configuration_singular_data_source_gen.go ../aws/amazonmq/configuration_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_amplify_app -cfschema ../service/cloudformation/schemas/AWS_Amplify_App.json -package amplify ../aws/amplify/app_singular_data_source_gen.go ../aws/amplify/app_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_amplify_branch -cfschema ../service/cloudformation/schemas/AWS_Amplify_Branch.json -package amplify ../aws/amplify/branch_singular_data_source_gen.go ../aws/amplify/branch_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_amplify_domain -cfschema ../service/cloudformation/schemas/AWS_Amplify_Domain.json -package amplify ../aws/amplify/domain_singular_data_source_gen.go ../aws/amplify/domain_singular_data_source_gen_test.go
@@ -1037,6 +1038,7 @@ package provider
 import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/accessanalyzer"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/acmpca"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/amazonmq"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/amplify"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/apigateway"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/apigatewayv2"

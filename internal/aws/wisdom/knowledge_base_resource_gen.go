@@ -84,7 +84,8 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "enum": [
 		//	    "EXTERNAL",
-		//	    "CUSTOM"
+		//	    "CUSTOM",
+		//	    "MESSAGE_TEMPLATES"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -94,6 +95,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.OneOf(
 					"EXTERNAL",
 					"CUSTOM",
+					"MESSAGE_TEMPLATES",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

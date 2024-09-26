@@ -1,0 +1,1 @@
+$ terraform import awscc_amazonmq_configuration.example "id"

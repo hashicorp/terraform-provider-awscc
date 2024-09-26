@@ -4,8 +4,11 @@ FEATURES:
 
 * provider: Adds support for IAM role chaining. The provider attribute `assume_role` now accepts multiple elements.
 
-* **New Data Source:** `awscc_events_connection`
+* **New Data Source:** `awscc_amazonmq_configuration`
+* **New Data Source:** `awscc_amazonmq_configurations`
+* **New Resource:** `awscc_amazonmq_configuration`
 * **New Resource:** `awscc_events_connection`
+* **New Data Source:** `awscc_events_connection`
 
 ## 1.15.0 (September 19, 2024)
 

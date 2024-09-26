@@ -470,7 +470,7 @@ func containerGroupDefinitionDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The Amazon Resource Name (ARN) that is assigned to a Amazon GameLift container group resource and uniquely identifies it across all AWS Regions.",
 		//	  "maxLength": 512,
 		//	  "minLength": 1,
-		//	  "pattern": "^arn:.*:containergroupdefinition/containergroupdefinition-[a-zA-Z0-9-]+$",
+		//	  "pattern": "^arn:.*:containergroupdefinition/containergroupdefinition-[a-zA-Z0-9-]+$|^arn:.*:containergroupdefinition/[a-zA-Z0-9-\\:]+$",
 		//	  "type": "string"
 		//	}
 		"container_group_definition_arn": schema.StringAttribute{ /*START ATTRIBUTE*/

@@ -50,6 +50,11 @@
         "path": "./examples/resources/awscc_accessanalyzer_analyzer/import.sh"
     },
     {
+        "resource": "awscc_amazonmq_configuration",
+        "identifier": ["Id"],
+        "path": "./examples/resources/awscc_amazonmq_configuration/import.sh"
+    },
+    {
         "resource": "awscc_amplify_app",
         "identifier": ["Arn"],
         "path": "./examples/resources/awscc_amplify_app/import.sh"

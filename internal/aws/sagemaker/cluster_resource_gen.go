@@ -150,7 +150,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "InstanceCount": {
 		//	        "description": "The number of instances you specified to add to the instance group of a SageMaker HyperPod cluster.",
-		//	        "minimum": 1,
+		//	        "minimum": 0,
 		//	        "type": "integer"
 		//	      },
 		//	      "InstanceGroupName": {
@@ -274,7 +274,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 						Description: "The number of instances you specified to add to the instance group of a SageMaker HyperPod cluster.",
 						Required:    true,
 						Validators: []validator.Int64{ /*START VALIDATORS*/
-							int64validator.AtLeast(1),
+							int64validator.AtLeast(0),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
 					// Property: InstanceGroupName

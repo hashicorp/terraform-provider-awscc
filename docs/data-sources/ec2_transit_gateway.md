@@ -30,6 +30,7 @@ Data Source schema for AWS::EC2::TransitGateway
 - `dns_support` (String)
 - `multicast_support` (String)
 - `propagation_default_route_table_id` (String)
+- `security_group_referencing_support` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `transit_gateway_arn` (String)
 - `transit_gateway_cidr_blocks` (List of String)

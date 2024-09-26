@@ -114,6 +114,15 @@ func transitGatewayDataSource(ctx context.Context) (datasource.DataSource, error
 		"propagation_default_route_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: SecurityGroupReferencingSupport
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"security_group_referencing_support": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -210,6 +219,7 @@ func transitGatewayDataSource(ctx context.Context) (datasource.DataSource, error
 		"key":                                "Key",
 		"multicast_support":                  "MulticastSupport",
 		"propagation_default_route_table_id": "PropagationDefaultRouteTableId",
+		"security_group_referencing_support": "SecurityGroupReferencingSupport",
 		"tags":                               "Tags",
 		"transit_gateway_arn":                "TransitGatewayArn",
 		"transit_gateway_cidr_blocks":        "TransitGatewayCidrBlocks",

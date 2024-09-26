@@ -60,7 +60,8 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	{
 		//	  "enum": [
 		//	    "EXTERNAL",
-		//	    "CUSTOM"
+		//	    "CUSTOM",
+		//	    "MESSAGE_TEMPLATES"
 		//	  ],
 		//	  "type": "string"
 		//	}

@@ -214,6 +214,7 @@ Optional:
 Optional:
 
 - `attribute` (String)
+- `mime_header_attribute` (String)
 
 
 
@@ -335,6 +336,7 @@ Optional:
 Optional:
 
 - `attribute` (String)
+- `mime_header_attribute` (String)
 
 
 

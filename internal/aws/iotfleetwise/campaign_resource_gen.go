@@ -55,7 +55,8 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"action": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
+			Optional: true,
+			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"APPROVE",
@@ -64,6 +65,9 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 					"UPDATE",
 				),
 			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 			// Action is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Arn

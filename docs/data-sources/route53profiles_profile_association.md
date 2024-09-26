@@ -21,7 +21,7 @@ Data Source schema for AWS::Route53Profiles::ProfileAssociation
 
 ### Read-Only
 
-- `arn` (String) The Amazon Resource Name (ARN) of the  profile association.
+- `arn` (String) The Amazon Resource Name (ARN) of the profile association.
 - `name` (String) The name of an association between a  Profile and a VPC.
 - `profile_association_id` (String) Primary Identifier for  Profile Association
 - `profile_id` (String) The ID of the  profile that you associated with the resource that is specified by ResourceId.

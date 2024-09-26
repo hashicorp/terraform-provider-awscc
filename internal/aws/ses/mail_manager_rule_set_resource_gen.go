@@ -439,6 +439,10 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 		//	                        "CC"
 		//	                      ],
 		//	                      "type": "string"
+		//	                    },
+		//	                    "MimeHeaderAttribute": {
+		//	                      "pattern": "^X-[a-zA-Z0-9-]{1,256}$",
+		//	                      "type": "string"
 		//	                    }
 		//	                  },
 		//	                  "type": "object"
@@ -703,6 +707,10 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 		//	                        "TO",
 		//	                        "CC"
 		//	                      ],
+		//	                      "type": "string"
+		//	                    },
+		//	                    "MimeHeaderAttribute": {
+		//	                      "pattern": "^X-[a-zA-Z0-9-]{1,256}$",
 		//	                      "type": "string"
 		//	                    }
 		//	                  },
@@ -1413,6 +1421,17 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 														stringplanmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
+												// Property: MimeHeaderAttribute
+												"mime_header_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Optional: true,
+													Computed: true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.RegexMatches(regexp.MustCompile("^X-[a-zA-Z0-9-]{1,256}$"), ""),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 											Optional: true,
 											Computed: true,
@@ -1857,6 +1876,17 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 														stringplanmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
+												// Property: MimeHeaderAttribute
+												"mime_header_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Optional: true,
+													Computed: true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.RegexMatches(regexp.MustCompile("^X-[a-zA-Z0-9-]{1,256}$"), ""),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 											Optional: true,
 											Computed: true,
@@ -2145,6 +2175,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 		"key":                   "Key",
 		"mail_from":             "MailFrom",
 		"mailbox_arn":           "MailboxArn",
+		"mime_header_attribute": "MimeHeaderAttribute",
 		"name":                  "Name",
 		"number_expression":     "NumberExpression",
 		"operator":              "Operator",

@@ -103,11 +103,6 @@
       ]
     }
   },
-  "required": [
-    "VpcId",
-    "SubnetIds",
-    "TransitGatewayId"
-  ],
   "properties": {
     "Options": {
       "description": "The options for the transit gateway vpc attachment.",
@@ -120,6 +115,10 @@
         },
         "ApplianceModeSupport": {
           "description": "Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable",
+          "type": "string"
+        },
+        "SecurityGroupReferencingSupport": {
+          "description": "Indicates whether to enable Security Group referencing support for Vpc Attachment. Valid Values: enable | disable",
           "type": "string"
         },
         "DnsSupport": {
@@ -157,5 +156,10 @@
         "$ref": "#/definitions/Tag"
       }
     }
-  }
+  },
+  "required": [
+    "VpcId",
+    "SubnetIds",
+    "TransitGatewayId"
+  ]
 }

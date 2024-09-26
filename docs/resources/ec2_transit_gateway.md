@@ -44,6 +44,7 @@ resource "awscc_ec2_transit_gateway" "example_transit_gateway" {
 - `dns_support` (String)
 - `multicast_support` (String)
 - `propagation_default_route_table_id` (String)
+- `security_group_referencing_support` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `transit_gateway_cidr_blocks` (List of String)
 - `vpn_ecmp_support` (String)

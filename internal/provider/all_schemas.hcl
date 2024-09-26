@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1057 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1058 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -54,6 +54,10 @@ resource_schema "aws_arczonalshift_zonal_autoshift_configuration" {
 
 resource_schema "aws_accessanalyzer_analyzer" {
   cloudformation_type_name = "AWS::AccessAnalyzer::Analyzer"
+}
+
+resource_schema "aws_amazonmq_configuration" {
+  cloudformation_type_name = "AWS::AmazonMQ::Configuration"
 }
 
 resource_schema "aws_amplify_app" {
