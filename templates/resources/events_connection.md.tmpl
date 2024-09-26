@@ -1,0 +1,35 @@
+---
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
+description: |-
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Name}} ({{.Type}})
+
+{{ .Description | trimspace }}
+
+## Example Usage
+
+### Create a connection with ApiKey authorization parameters
+
+The following example creates a connection named pagerduty-connection using ApiKey authorization and stores a secret from Secrets Manager.
+
+{{ tffile (printf "examples/resources/%s/connection_with_api_key_authorizer.tf" .Name)}}
+
+### Create a connection with OAuth authorization parameters
+
+The following example creates a connection named auth0-connection using OAuth authorization and stores a secret from Secrets Manager.
+
+{{ tffile (printf "examples/resources/%s/connection_with_oauth_authorizer.tf" .Name)}}
+
+{{ .SchemaMarkdown | trimspace }}
+{{- if .HasImport }}
+
+## Import
+
+Import is supported using the following syntax:
+
+{{ codefile "shell" .ImportFile }}
+
+{{- end }}

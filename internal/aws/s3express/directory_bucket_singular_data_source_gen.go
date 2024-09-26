@@ -8,6 +8,7 @@ package s3express
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -32,6 +33,27 @@ func directoryBucketDataSource(ctx context.Context) (datasource.DataSource, erro
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Returns the Amazon Resource Name (ARN) of the specified bucket.",
 			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: AvailabilityZoneName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Returns the code for the Availability Zone where the directory bucket was created.",
+		//	  "examples": [
+		//	    "us-east-1f"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"availability_zone_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Returns the code for the Availability Zone where the directory bucket was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: BucketEncryption
+		// CloudFormation resource type schema:
+		// {}
+		"bucket_encryption": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType: jsontypes.NormalizedType{},
+			Computed:   true,
 		}, /*END ATTRIBUTE*/
 		// Property: BucketName
 		// CloudFormation resource type schema:
@@ -88,10 +110,12 @@ func directoryBucketDataSource(ctx context.Context) (datasource.DataSource, erro
 	opts = opts.WithCloudFormationTypeName("AWS::S3Express::DirectoryBucket").WithTerraformTypeName("awscc_s3express_directory_bucket")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":             "Arn",
-		"bucket_name":     "BucketName",
-		"data_redundancy": "DataRedundancy",
-		"location_name":   "LocationName",
+		"arn":                    "Arn",
+		"availability_zone_name": "AvailabilityZoneName",
+		"bucket_encryption":      "BucketEncryption",
+		"bucket_name":            "BucketName",
+		"data_redundancy":        "DataRedundancy",
+		"location_name":          "LocationName",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

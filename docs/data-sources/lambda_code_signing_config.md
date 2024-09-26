@@ -26,6 +26,7 @@ Data Source schema for AWS::Lambda::CodeSigningConfig
 - `code_signing_config_id` (String) A unique identifier for CodeSigningConfig resource
 - `code_signing_policies` (Attributes) Policies to control how to act if a signature is invalid (see [below for nested schema](#nestedatt--code_signing_policies))
 - `description` (String) A description of the CodeSigningConfig
+- `tags` (Attributes Set) A list of tags to apply to CodeSigningConfig resource (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--allowed_publishers"></a>
 ### Nested Schema for `allowed_publishers`
@@ -41,3 +42,12 @@ Read-Only:
 Read-Only:
 
 - `untrusted_artifact_on_deployment` (String) Indicates how Lambda operations involve updating the code artifact will operate. Default to Warn if not provided
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

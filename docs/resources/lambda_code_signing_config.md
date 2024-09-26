@@ -23,6 +23,7 @@ Resource Type definition for AWS::Lambda::CodeSigningConfig.
 
 - `code_signing_policies` (Attributes) Policies to control how to act if a signature is invalid (see [below for nested schema](#nestedatt--code_signing_policies))
 - `description` (String) A description of the CodeSigningConfig
+- `tags` (Attributes Set) A list of tags to apply to CodeSigningConfig resource (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -44,6 +45,15 @@ Required:
 Optional:
 
 - `untrusted_artifact_on_deployment` (String) Indicates how Lambda operations involve updating the code artifact will operate. Default to Warn if not provided
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import
 

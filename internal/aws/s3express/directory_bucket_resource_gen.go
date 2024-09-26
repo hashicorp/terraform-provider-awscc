@@ -9,6 +9,7 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -37,6 +38,34 @@ func directoryBucketResource(ctx context.Context) (resource.Resource, error) {
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Returns the Amazon Resource Name (ARN) of the specified bucket.",
 			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AvailabilityZoneName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Returns the code for the Availability Zone where the directory bucket was created.",
+		//	  "examples": [
+		//	    "us-east-1f"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"availability_zone_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Returns the code for the Availability Zone where the directory bucket was created.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: BucketEncryption
+		// CloudFormation resource type schema:
+		// {}
+		"bucket_encryption": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType: jsontypes.NormalizedType{},
+			Optional:   true,
+			Computed:   true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -121,15 +150,17 @@ func directoryBucketResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::S3Express::DirectoryBucket").WithTerraformTypeName("awscc_s3express_directory_bucket")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":             "Arn",
-		"bucket_name":     "BucketName",
-		"data_redundancy": "DataRedundancy",
-		"location_name":   "LocationName",
+		"arn":                    "Arn",
+		"availability_zone_name": "AvailabilityZoneName",
+		"bucket_encryption":      "BucketEncryption",
+		"bucket_name":            "BucketName",
+		"data_redundancy":        "DataRedundancy",
+		"location_name":          "LocationName",
 	})
 
-	opts = opts.IsImmutableType(true)
-
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+
+	opts = opts.WithUpdateTimeoutInMinutes(0)
 
 	v, err := generic.NewResource(ctx, opts...)
 

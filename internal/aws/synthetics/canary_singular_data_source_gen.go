@@ -206,11 +206,31 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "Name of the canary.",
-		//	  "pattern": "^[0-9a-z_\\-]{1,21}$",
+		//	  "pattern": "^[0-9a-z_\\-]{1,255}$",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Name of the canary.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ResourcesToReplicateTags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "List of resources which canary tags should be replicated to.",
+		//	  "items": {
+		//	    "description": "Specifies which resources canary tags should be replicated to.",
+		//	    "enum": [
+		//	      "lambda-function"
+		//	    ],
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"resources_to_replicate_tags": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "List of resources which canary tags should be replicated to.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RunConfig
@@ -555,6 +575,7 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"kms_key_arn":                                "KmsKeyArn",
 		"memory_in_mb":                               "MemoryInMB",
 		"name":                                       "Name",
+		"resources_to_replicate_tags":                "ResourcesToReplicateTags",
 		"run_config":                                 "RunConfig",
 		"runtime_version":                            "RuntimeVersion",
 		"s3_bucket":                                  "S3Bucket",

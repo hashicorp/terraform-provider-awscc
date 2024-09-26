@@ -171,7 +171,6 @@ func instanceProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The property describes a network type for the instance profile.",
 		//	  "enum": [
 		//	    "IPV4",
-		//	    "IPV6",
 		//	    "DUAL"
 		//	  ],
 		//	  "type": "string"
@@ -183,7 +182,6 @@ func instanceProfileResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"IPV4",
-					"IPV6",
 					"DUAL",
 				),
 			}, /*END VALIDATORS*/
