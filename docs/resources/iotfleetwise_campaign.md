@@ -17,7 +17,6 @@ Definition of AWS::IoTFleetWise::Campaign Resource Type
 
 ### Required
 
-- `action` (String)
 - `collection_scheme` (Attributes) (see [below for nested schema](#nestedatt--collection_scheme))
 - `name` (String)
 - `signal_catalog_arn` (String)
@@ -25,6 +24,7 @@ Definition of AWS::IoTFleetWise::Campaign Resource Type
 
 ### Optional
 
+- `action` (String)
 - `compression` (String)
 - `data_destination_configs` (Attributes List) (see [below for nested schema](#nestedatt--data_destination_configs))
 - `data_extra_dimensions` (List of String)

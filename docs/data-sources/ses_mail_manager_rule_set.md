@@ -208,6 +208,7 @@ Read-Only:
 Read-Only:
 
 - `attribute` (String)
+- `mime_header_attribute` (String)
 
 
 
@@ -329,6 +330,7 @@ Read-Only:
 Read-Only:
 
 - `attribute` (String)
+- `mime_header_attribute` (String)
 
 
 
