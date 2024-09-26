@@ -266,7 +266,7 @@ func (d *Downloader) Schemas() ([]*ResourceData, *DataSources, error) {
 				CloudFormationTypeSchemaFile:      cfResourceSchemaFilename,
 				GeneratedAccTestsFileName:         res + "_singular_data_source_gen_test",
 				GeneratedCodeFileName:             res + "_singular_data_source_gen",
-				GeneratedTemplateMetadataFileName: res + "_data_source_gen_metadata",
+				GeneratedTemplateMetadataFileName: res + "_gen",
 				GeneratedCodePackageName:          svc,
 				GeneratedCodePathSuffix:           fmt.Sprintf("%s/%s", org, svc),
 				TerraformResourceType:             tfResourceTypeName,
@@ -284,7 +284,7 @@ func (d *Downloader) Schemas() ([]*ResourceData, *DataSources, error) {
 				CloudFormationType:                cfResourceTypeName,
 				GeneratedAccTestsFileName:         res + "_plural_data_source_gen_test",
 				GeneratedCodeFileName:             res + "_plural_data_source_gen",
-				GeneratedTemplateMetadataFileName: trimmedName + "_data_source_gen_metadata",
+				GeneratedTemplateMetadataFileName: trimmedName + "_gen",
 				GeneratedCodePackageName:          svc,
 				GeneratedCodePathSuffix:           fmt.Sprintf("%s/%s", org, svc),
 				TerraformResourceType:             pluralTfResourceTypeName,
@@ -298,9 +298,9 @@ func (d *Downloader) Schemas() ([]*ResourceData, *DataSources, error) {
 
 		resources = append(resources, &ResourceData{
 			CloudFormationTypeSchemaFile:      cfResourceSchemaFilename,
-			GeneratedAccTestsFileName:         res + "_resource_gen_test",     // e.g. "log_group_resource_gen_test"
-			GeneratedCodeFileName:             res + "_resource_gen",          // e.g. "log_group_resource_gen"
-			GeneratedTemplateMetadataFileName: res + "_resource_gen_metadata", // e.g. "log_group_metadata_gen"
+			GeneratedAccTestsFileName:         res + "_resource_gen_test", // e.g. "log_group_resource_gen_test"
+			GeneratedCodeFileName:             res + "_resource_gen",      // e.g. "log_group_resource_gen"
+			GeneratedTemplateMetadataFileName: res + "_gen",
 			GeneratedCodePackageName:          svc,                            // e.g. "logs"
 			GeneratedCodePathSuffix:           fmt.Sprintf("%s/%s", org, svc), // e.g. "aws/logs"
 			TerraformResourceType:             tfResourceTypeName,
@@ -457,7 +457,7 @@ func (g *Generator) GenerateResources(packageName, filename, generatedCodeRootDi
 		ImportPathSuffixes:             importPathSuffixes,
 		PackageName:                    packageName,
 		Resources:                      resources,
-		TemplatesRoot:                  templatesRoot + "/resources",
+		MetadataPathRoot:               templatesRoot + "/resources/metadata",
 	}
 
 	d := g.NewGoFileDestination(filename)
@@ -502,7 +502,7 @@ func (g *Generator) GenerateDataSources(packageName, filename, generatedCodeRoot
 		ImportPathRoot:                 importPathRoot,
 		ImportPathSuffixes:             importPathSuffixes,
 		PackageName:                    packageName,
-		TemplatesRoot:                  templatesRoot + "/data-sources",
+		MetadataPathRoot:               templatesRoot + "/data-sources/metadata",
 	}
 
 	d := g.NewGoFileDestination(filename)
@@ -580,7 +580,7 @@ type TemplateData struct {
 	ImportPathSuffixes             []string
 	PackageName                    string
 	Resources                      []*ResourceData
-	TemplatesRoot                  string
+	MetadataPathRoot               string
 }
 
 type ImportTemplateData struct {
