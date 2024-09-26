@@ -234,7 +234,7 @@ credential_process = custom-process --username jdoe
 ### Optional
 
 - `access_key` (String) This is the AWS access key. It must be provided, but it can also be sourced from the `AWS_ACCESS_KEY_ID` environment variable, or via a shared credentials file if `profile` is specified.
-- `assume_role` (Attributes) An `assume_role` block (documented below). Only one `assume_role` block may be in the configuration. (see [below for nested schema](#nestedatt--assume_role))
+- `assume_role` (Attributes List) List of IAM Roles to assume. See the `assume_role` block (documented below). (see [below for nested schema](#nestedatt--assume_role))
 - `assume_role_with_web_identity` (Attributes) An `assume_role_with_web_identity` block (documented below). Only one `assume_role_with_web_identity` block may be in the configuration. (see [below for nested schema](#nestedatt--assume_role_with_web_identity))
 - `endpoints` (Attributes) An `endpoints` block (documented below). Only one `endpoints` block may be in the configuration. (see [below for nested schema](#nestedatt--endpoints))
 - `http_proxy` (String) URL of a proxy to use for HTTP requests when accessing the AWS API. Can also be set using the `HTTP_PROXY` or `http_proxy` environment variables.

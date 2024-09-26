@@ -24,6 +24,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/flex"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	"github.com/hashicorp/terraform-provider-awscc/internal/slices"
 	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
@@ -82,49 +83,51 @@ func (p *ccProvider) Schema(ctx context.Context, request provider.SchemaRequest,
 				Description: "This is the AWS access key. It must be provided, but it can also be sourced from the `AWS_ACCESS_KEY_ID` environment variable, or via a shared credentials file if `profile` is specified.",
 				Optional:    true,
 			},
-			"assume_role": schema.SingleNestedAttribute{
-				Attributes: map[string]schema.Attribute{
-					"duration": schema.StringAttribute{
-						CustomType:  cctypes.DurationType,
-						Description: "The duration, between 15 minutes and 12 hours, of the role session. Valid time units are ns, us (or µs), ms, s, h, or m.",
-						Optional:    true,
-					},
-					"external_id": schema.StringAttribute{
-						Description: "External identifier to use when assuming the role.",
-						Optional:    true,
-					},
-					"policy": schema.StringAttribute{
-						CustomType:  jsontypes.ExactType{},
-						Description: "IAM policy in JSON format to use as a session policy. The effective permissions for the session will be the intersection between this polcy and the role's policies.",
-						Optional:    true,
-					},
-					"policy_arns": schema.ListAttribute{
-						ElementType: cctypes.ARNType,
-						Description: "Amazon Resource Names (ARNs) of IAM Policies to use as managed session policies. The effective permissions for the session will be the intersection between these polcy and the role's policies.",
-						Optional:    true,
-					},
-					"role_arn": schema.StringAttribute{
-						CustomType:  cctypes.ARNType,
-						Description: "Amazon Resource Name (ARN) of the IAM Role to assume.",
-						Required:    true,
-					},
-					"session_name": schema.StringAttribute{
-						Description: "Session name to use when assuming the role.",
-						Optional:    true,
-					},
-					"tags": schema.MapAttribute{
-						ElementType: types.StringType,
-						Description: "Map of assume role session tags.",
-						Optional:    true,
-					},
-					"transitive_tag_keys": schema.SetAttribute{
-						ElementType: types.StringType,
-						Description: "Set of assume role session tag keys to pass to any subsequent sessions.",
-						Optional:    true,
+			"assume_role": schema.ListNestedAttribute{
+				NestedObject: schema.NestedAttributeObject{
+					Attributes: map[string]schema.Attribute{
+						"duration": schema.StringAttribute{
+							CustomType:  cctypes.DurationType,
+							Description: "The duration, between 15 minutes and 12 hours, of the role session. Valid time units are ns, us (or µs), ms, s, h, or m.",
+							Optional:    true,
+						},
+						"external_id": schema.StringAttribute{
+							Description: "External identifier to use when assuming the role.",
+							Optional:    true,
+						},
+						"policy": schema.StringAttribute{
+							CustomType:  jsontypes.ExactType{},
+							Description: "IAM policy in JSON format to use as a session policy. The effective permissions for the session will be the intersection between this polcy and the role's policies.",
+							Optional:    true,
+						},
+						"policy_arns": schema.ListAttribute{
+							ElementType: cctypes.ARNType,
+							Description: "Amazon Resource Names (ARNs) of IAM Policies to use as managed session policies. The effective permissions for the session will be the intersection between these polcy and the role's policies.",
+							Optional:    true,
+						},
+						"role_arn": schema.StringAttribute{
+							CustomType:  cctypes.ARNType,
+							Description: "Amazon Resource Name (ARN) of the IAM Role to assume.",
+							Required:    true,
+						},
+						"session_name": schema.StringAttribute{
+							Description: "Session name to use when assuming the role.",
+							Optional:    true,
+						},
+						"tags": schema.MapAttribute{
+							ElementType: types.StringType,
+							Description: "Map of assume role session tags.",
+							Optional:    true,
+						},
+						"transitive_tag_keys": schema.SetAttribute{
+							ElementType: types.StringType,
+							Description: "Set of assume role session tag keys to pass to any subsequent sessions.",
+							Optional:    true,
+						},
 					},
 				},
 				Optional:    true,
-				Description: "An `assume_role` block (documented below). Only one `assume_role` block may be in the configuration.",
+				Description: "List of IAM Roles to assume. See the `assume_role` block (documented below).",
 			},
 			"assume_role_with_web_identity": schema.SingleNestedAttribute{
 				Attributes: map[string]schema.Attribute{
@@ -273,9 +276,9 @@ func (p *ccProvider) Schema(ctx context.Context, request provider.SchemaRequest,
 	}
 }
 
-type config struct {
+type configModel struct {
 	AccessKey                 types.String                   `tfsdk:"access_key"`
-	AssumeRole                *assumeRoleData                `tfsdk:"assume_role"`
+	AssumeRole                types.List                     `tfsdk:"assume_role"`
 	AssumeRoleWithWebIdentity *assumeRoleWithWebIdentityData `tfsdk:"assume_role_with_web_identity"`
 	Endpoints                 *endpointData                  `tfsdk:"endpoints"`
 	HTTPProxy                 types.String                   `tfsdk:"http_proxy"`
@@ -303,7 +306,7 @@ type userAgentProduct struct {
 	ProductVersion types.String `tfsdk:"product_version"`
 }
 
-type assumeRoleData struct {
+type assumeRoleModel struct {
 	Duration          cctypes.Duration `tfsdk:"duration"`
 	ExternalID        types.String     `tfsdk:"external_id"`
 	Policy            jsontypes.Exact  `tfsdk:"policy"`
@@ -314,15 +317,8 @@ type assumeRoleData struct {
 	TransitiveTagKeys types.Set        `tfsdk:"transitive_tag_keys"`
 }
 
-type endpointData struct {
-	CloudControlAPI types.String `tfsdk:"cloudcontrolapi"`
-	IAM             types.String `tfsdk:"iam"`
-	SSO             types.String `tfsdk:"sso"`
-	STS             types.String `tfsdk:"sts"`
-}
-
-func (a assumeRoleData) Config() *awsbase.AssumeRole {
-	assumeRole := &awsbase.AssumeRole{
+func (a assumeRoleModel) Config() awsbase.AssumeRole {
+	assumeRole := awsbase.AssumeRole{
 		Duration:    a.Duration.ValueDuration(),
 		ExternalID:  a.ExternalID.ValueString(),
 		Policy:      a.Policy.ValueString(),
@@ -352,6 +348,13 @@ func (a assumeRoleData) Config() *awsbase.AssumeRole {
 	}
 
 	return assumeRole
+}
+
+type endpointData struct {
+	CloudControlAPI types.String `tfsdk:"cloudcontrolapi"`
+	IAM             types.String `tfsdk:"iam"`
+	SSO             types.String `tfsdk:"sso"`
+	STS             types.String `tfsdk:"sts"`
 }
 
 type assumeRoleWithWebIdentityData struct {
@@ -385,7 +388,7 @@ func (a assumeRoleWithWebIdentityData) Config() *awsbase.AssumeRoleWithWebIdenti
 }
 
 func (p *ccProvider) Configure(ctx context.Context, request provider.ConfigureRequest, response *provider.ConfigureResponse) {
-	var config config
+	var config configModel
 
 	response.Diagnostics.Append(request.Config.Get(ctx, &config)...)
 	if response.Diagnostics.HasError() {
@@ -457,7 +460,7 @@ func (p *ccProvider) DataSources(ctx context.Context) []func() datasource.DataSo
 	return dataSources
 }
 
-func newProviderData(ctx context.Context, c *config) (*providerData, diag.Diagnostics) {
+func newProviderData(ctx context.Context, c *configModel) (*providerData, diag.Diagnostics) {
 	var diags diag.Diagnostics
 
 	ctx, logger := baselogging.NewTfLogger(ctx)
@@ -504,9 +507,20 @@ func newProviderData(ctx context.Context, c *config) (*providerData, diag.Diagno
 		}
 		awsbaseConfig.SharedCredentialsFiles = cf
 	}
-	if c.AssumeRole != nil {
-		awsbaseConfig.AssumeRole = c.AssumeRole.Config()
+	// if c.AssumeRole != nil {
+	// 	awsbaseConfig.AssumeRole = c.AssumeRole.Config()
+	// }
+	if !c.AssumeRole.IsNull() {
+		var assumeRole []assumeRoleModel
+		diags.Append(c.AssumeRole.ElementsAs(ctx, &assumeRole, false)...)
+		if diags.HasError() {
+			return nil, diags
+		}
+		awsbaseConfig.AssumeRole = slices.ApplyToAll(assumeRole, func(m assumeRoleModel) awsbase.AssumeRole {
+			return m.Config()
+		})
 	}
+
 	if c.AssumeRoleWithWebIdentity != nil {
 		awsbaseConfig.AssumeRoleWithWebIdentity = c.AssumeRoleWithWebIdentity.Config()
 	}

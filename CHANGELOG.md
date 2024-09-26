@@ -1,5 +1,9 @@
 ## 1.16.0 (Unreleased)
 
+FEATURES:
+
+* provider: Adds support for IAM role chaining. The provider attribute `assume_role` now accepts multiple elements.
+
 * **New Data Source:** `awscc_events_connection`
 * **New Resource:** `awscc_events_connection`
 
