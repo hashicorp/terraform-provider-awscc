@@ -4,7 +4,7 @@
 
 BUG FIXES:
 
-* provider: Rolls back breaking change introduced in #2029. IAM role chaining is no longer supported.
+* provider: Rolls back breaking change introduced in #2029. IAM role chaining is no longer supported, but will be reintroduced in a future version. ([#2043](https://github.com/hashicorp/terraform-provider-awscc/pull/2043))
 
 ## 1.16.0 (September 26, 2024)
 
