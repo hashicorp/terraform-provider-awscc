@@ -182,11 +182,24 @@ Usage:
 
 ```terraform
 provider "awscc" {
-  assume_role = [{
+  assume_role = {
     role_arn     = "arn:aws:iam::ACCOUNT_ID:role/ROLE_NAME"
     session_name = "SESSION_NAME"
     external_id  = "EXTERNAL_ID"
-  }]
+  }
+}
+```
+
+To assume a role with role chaining, do the following:
+
+```terraform
+provider "awscc" {
+  assume_role {
+    role_arn = "arn:aws:iam::123456789012:role/INITIAL_ROLE_NAME"
+  }
+  assume_role {
+    role_arn = "arn:aws:iam::123456789012:role/FINAL_ROLE_NAME"
+  }
 }
 ```
 
