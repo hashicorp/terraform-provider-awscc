@@ -1,9 +1,16 @@
 ## 1.17.0 (Unreleased)
+
+## 1.16.1 (September 27, 2024)
+
+BUG FIXES:
+
+* provider: Rolls back breaking change introduced in #2029. IAM role chaining is no longer supported.
+
 ## 1.16.0 (September 26, 2024)
 
 FEATURES:
 
-* provider: Adds support for IAM role chaining. The provider attribute `assume_role` now accepts multiple elements.
+* provider: Adds support for IAM role chaining. The provider attribute `assume_role` now accepts multiple elements. ([#2029](https://github.com/hashicorp/terraform-provider-awscc/pull/2029))
 
 * **New Data Source:** `awscc_amazonmq_configuration`
 * **New Data Source:** `awscc_amazonmq_configurations`
