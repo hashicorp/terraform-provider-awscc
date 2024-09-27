@@ -1,4 +1,5 @@
 ## 1.17.0 (Unreleased)
+## 1.17.0 (September 27, 2024)
 
 ## 1.16.1 (September 27, 2024)
 
