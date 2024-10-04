@@ -1,0 +1,1 @@
+$ terraform import awscc_controltower_landing_zone.example "landing_zone_identifier"
