@@ -1135,6 +1135,11 @@
         "path": "./examples/resources/awscc_controltower_enabled_control/import.sh"
     },
     {
+        "resource": "awscc_controltower_landing_zone",
+        "identifier": ["LandingZoneIdentifier"],
+        "path": "./examples/resources/awscc_controltower_landing_zone/import.sh"
+    },
+    {
         "resource": "awscc_customerprofiles_calculated_attribute_definition",
         "identifier": ["DomainName","CalculatedAttributeName"],
         "path": "./examples/resources/awscc_customerprofiles_calculated_attribute_definition/import.sh"
