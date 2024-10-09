@@ -1,6 +1,6 @@
 resource awscc_controltower_landing_zone "this" {
   manifest = jsonencode({
-      "governedRegions": ["us-west-2","us-east-1"],
+      "governedRegions": toset(["us-west-2","us-east-1"]),
       "organizationStructure": {
           "security": {
               "name": "Core"
@@ -13,10 +13,10 @@ resource awscc_controltower_landing_zone "this" {
             "accountId": "YOUR_LOG_ARCHIVE_ACCOUNT_ID",
             "configurations": {
                 "loggingBucket": {
-                    "retentionDays": 60
+                    "retentionDays": "60"
                 },
                 "accessLoggingBucket": {
-                    "retentionDays": 60
+                    "retentionDays": "60"
                 },
             },
             "enabled": true
