@@ -394,9 +394,8 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 
 	err = waiter.Wait(ctx, &cloudcontrol.GetResourceRequestStatusInput{RequestToken: output.ProgressEvent.RequestToken}, r.createTimeout)
 
-	// If the resource failed to create, then Identifier may be a nil ptr
 	var id string
-	if progressEvent.Identifier != nil {
+	if progressEvent != nil {
 		id = aws.ToString(progressEvent.Identifier)
 	}
 
