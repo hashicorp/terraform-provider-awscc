@@ -1,5 +1,8 @@
 ## 1.17.0 (Unreleased)
-## 1.17.0 (September 27, 2024)
+
+BUG FIXES:
+
+* provider: Prevent crash when create waiter returns a nil progress event ([#2027](https://github.com/hashicorp/terraform-provider-awscc/pull/2027))
 
 ## 1.16.1 (September 27, 2024)
 
