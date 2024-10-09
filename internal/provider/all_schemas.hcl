@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1053 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1058 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -54,6 +54,10 @@ resource_schema "aws_arczonalshift_zonal_autoshift_configuration" {
 
 resource_schema "aws_accessanalyzer_analyzer" {
   cloudformation_type_name = "AWS::AccessAnalyzer::Analyzer"
+}
+
+resource_schema "aws_amazonmq_configuration" {
+  cloudformation_type_name = "AWS::AmazonMQ::Configuration"
 }
 
 resource_schema "aws_amplify_app" {
@@ -984,6 +988,11 @@ resource_schema "aws_config_stored_query" {
   cloudformation_type_name = "AWS::Config::StoredQuery"
 }
 
+resource_schema "aws_connect_agent_status" {
+  cloudformation_type_name               = "AWS::Connect::AgentStatus"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_connect_approved_origin" {
   cloudformation_type_name = "AWS::Connect::ApprovedOrigin"
 }
@@ -1091,6 +1100,11 @@ resource_schema "aws_connect_user" {
 
 resource_schema "aws_connect_user_hierarchy_group" {
   cloudformation_type_name               = "AWS::Connect::UserHierarchyGroup"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_connect_user_hierarchy_structure" {
+  cloudformation_type_name               = "AWS::Connect::UserHierarchyStructure"
   suppress_plural_data_source_generation = true
 }
 
@@ -1284,6 +1298,11 @@ resource_schema "aws_datazone_domain" {
 
 resource_schema "aws_datazone_environment" {
   cloudformation_type_name               = "AWS::DataZone::Environment"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_datazone_environment_actions" {
+  cloudformation_type_name               = "AWS::DataZone::EnvironmentActions"
   suppress_plural_data_source_generation = true
 }
 
@@ -2002,10 +2021,11 @@ resource_schema "aws_events_archive" {
 resource_schema "aws_events_connection" {
   cloudformation_type_name = "AWS::Events::Connection"
 
-  # Suppression Reason: error creating write-only attribute path (/definitions/BasicAuthParameters/Password): expected "properties" for the second property path segment, got: "definitions"
+  # Suppression Update: the latest schema refer `Password` with type string.
+  # Historical suppression Reason: error creating write-only attribute path (/definitions/BasicAuthParameters/Password): expected "properties" for the second property path segment, got: "definitions"
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1521
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
+  suppress_resource_generation             = false
+  suppress_singular_data_source_generation = false
 }
 
 resource_schema "aws_events_endpoint" {

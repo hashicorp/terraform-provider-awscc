@@ -17,7 +17,6 @@ Definition of AWS::IoTFleetWise::Campaign Resource Type
 
 ### Required
 
-- `action` (String)
 - `collection_scheme` (Attributes) (see [below for nested schema](#nestedatt--collection_scheme))
 - `name` (String)
 - `signal_catalog_arn` (String)
@@ -25,6 +24,7 @@ Definition of AWS::IoTFleetWise::Campaign Resource Type
 
 ### Optional
 
+- `action` (String)
 - `compression` (String)
 - `data_destination_configs` (Attributes List) (see [below for nested schema](#nestedatt--data_destination_configs))
 - `data_extra_dimensions` (List of String)
@@ -34,6 +34,7 @@ Definition of AWS::IoTFleetWise::Campaign Resource Type
 - `post_trigger_collection_duration` (Number)
 - `priority` (Number)
 - `signals_to_collect` (Attributes List) (see [below for nested schema](#nestedatt--signals_to_collect))
+- `signals_to_fetch` (Attributes List) (see [below for nested schema](#nestedatt--signals_to_fetch))
 - `spooling_mode` (String)
 - `start_time` (String)
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
@@ -121,6 +122,43 @@ Optional:
 - `max_sample_count` (Number)
 - `minimum_sampling_interval_ms` (Number)
 - `name` (String)
+
+
+<a id="nestedatt--signals_to_fetch"></a>
+### Nested Schema for `signals_to_fetch`
+
+Optional:
+
+- `actions` (List of String)
+- `condition_language_version` (Number)
+- `fully_qualified_name` (String)
+- `signal_fetch_config` (Attributes) (see [below for nested schema](#nestedatt--signals_to_fetch--signal_fetch_config))
+
+<a id="nestedatt--signals_to_fetch--signal_fetch_config"></a>
+### Nested Schema for `signals_to_fetch.signal_fetch_config`
+
+Optional:
+
+- `condition_based` (Attributes) (see [below for nested schema](#nestedatt--signals_to_fetch--signal_fetch_config--condition_based))
+- `time_based` (Attributes) (see [below for nested schema](#nestedatt--signals_to_fetch--signal_fetch_config--time_based))
+
+<a id="nestedatt--signals_to_fetch--signal_fetch_config--condition_based"></a>
+### Nested Schema for `signals_to_fetch.signal_fetch_config.condition_based`
+
+Optional:
+
+- `condition_expression` (String)
+- `trigger_mode` (String)
+
+
+<a id="nestedatt--signals_to_fetch--signal_fetch_config--time_based"></a>
+### Nested Schema for `signals_to_fetch.signal_fetch_config.time_based`
+
+Optional:
+
+- `execution_frequency_ms` (Number)
+
+
 
 
 <a id="nestedatt--tags"></a>

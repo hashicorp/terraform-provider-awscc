@@ -1,4 +1,39 @@
-## 1.15.0 (Unreleased)
+## 1.17.0 (Unreleased)
+## 1.17.0 (September 27, 2024)
+
+## 1.16.1 (September 27, 2024)
+
+BUG FIXES:
+
+* provider: Rolls back breaking change introduced in #2029. IAM role chaining is no longer supported, but will be reintroduced in a future version. ([#2043](https://github.com/hashicorp/terraform-provider-awscc/pull/2043))
+
+## 1.16.0 (September 26, 2024)
+
+FEATURES:
+
+* provider: Adds support for IAM role chaining. The provider attribute `assume_role` now accepts multiple elements. ([#2029](https://github.com/hashicorp/terraform-provider-awscc/pull/2029))
+
+* **New Data Source:** `awscc_amazonmq_configuration`
+* **New Data Source:** `awscc_amazonmq_configurations`
+* **New Resource:** `awscc_amazonmq_configuration`
+* **New Resource:** `awscc_events_connection`
+* **New Data Source:** `awscc_events_connection`
+
+## 1.15.0 (September 19, 2024)
+
+BUG FIXES:
+
+* Prevent resource drift when default value is not set on a `required` attribute during refresh ([#2022](https://github.com/hashicorp/terraform-provider-awscc/pull/2022))
+
+FEATURES:
+
+* **New Data Source:** `awscc_connect_agent_status`
+* **New Data Source:** `awscc_connect_user_hierarchy_structure`
+* **New Data Source:** `awscc_datazone_environment_actions`
+* **New Resource:** `awscc_connect_agent_status`
+* **New Resource:** `awscc_connect_user_hierarchy_structure`
+* **New Resource:** `awscc_datazone_environment_actions`
+
 ## 1.14.0 (September 12, 2024)
 
 FEATURES:

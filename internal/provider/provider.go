@@ -273,9 +273,9 @@ func (p *ccProvider) Schema(ctx context.Context, request provider.SchemaRequest,
 	}
 }
 
-type config struct {
+type configModel struct {
 	AccessKey                 types.String                   `tfsdk:"access_key"`
-	AssumeRole                *assumeRoleData                `tfsdk:"assume_role"`
+	AssumeRole                *assumeRoleModel               `tfsdk:"assume_role"`
 	AssumeRoleWithWebIdentity *assumeRoleWithWebIdentityData `tfsdk:"assume_role_with_web_identity"`
 	Endpoints                 *endpointData                  `tfsdk:"endpoints"`
 	HTTPProxy                 types.String                   `tfsdk:"http_proxy"`
@@ -303,7 +303,7 @@ type userAgentProduct struct {
 	ProductVersion types.String `tfsdk:"product_version"`
 }
 
-type assumeRoleData struct {
+type assumeRoleModel struct {
 	Duration          cctypes.Duration `tfsdk:"duration"`
 	ExternalID        types.String     `tfsdk:"external_id"`
 	Policy            jsontypes.Exact  `tfsdk:"policy"`
@@ -314,15 +314,8 @@ type assumeRoleData struct {
 	TransitiveTagKeys types.Set        `tfsdk:"transitive_tag_keys"`
 }
 
-type endpointData struct {
-	CloudControlAPI types.String `tfsdk:"cloudcontrolapi"`
-	IAM             types.String `tfsdk:"iam"`
-	SSO             types.String `tfsdk:"sso"`
-	STS             types.String `tfsdk:"sts"`
-}
-
-func (a assumeRoleData) Config() *awsbase.AssumeRole {
-	assumeRole := &awsbase.AssumeRole{
+func (a assumeRoleModel) Config() awsbase.AssumeRole {
+	assumeRole := awsbase.AssumeRole{
 		Duration:    a.Duration.ValueDuration(),
 		ExternalID:  a.ExternalID.ValueString(),
 		Policy:      a.Policy.ValueString(),
@@ -352,6 +345,13 @@ func (a assumeRoleData) Config() *awsbase.AssumeRole {
 	}
 
 	return assumeRole
+}
+
+type endpointData struct {
+	CloudControlAPI types.String `tfsdk:"cloudcontrolapi"`
+	IAM             types.String `tfsdk:"iam"`
+	SSO             types.String `tfsdk:"sso"`
+	STS             types.String `tfsdk:"sts"`
 }
 
 type assumeRoleWithWebIdentityData struct {
@@ -385,7 +385,7 @@ func (a assumeRoleWithWebIdentityData) Config() *awsbase.AssumeRoleWithWebIdenti
 }
 
 func (p *ccProvider) Configure(ctx context.Context, request provider.ConfigureRequest, response *provider.ConfigureResponse) {
-	var config config
+	var config configModel
 
 	response.Diagnostics.Append(request.Config.Get(ctx, &config)...)
 	if response.Diagnostics.HasError() {
@@ -457,7 +457,7 @@ func (p *ccProvider) DataSources(ctx context.Context) []func() datasource.DataSo
 	return dataSources
 }
 
-func newProviderData(ctx context.Context, c *config) (*providerData, diag.Diagnostics) {
+func newProviderData(ctx context.Context, c *configModel) (*providerData, diag.Diagnostics) {
 	var diags diag.Diagnostics
 
 	ctx, logger := baselogging.NewTfLogger(ctx)
@@ -505,8 +505,9 @@ func newProviderData(ctx context.Context, c *config) (*providerData, diag.Diagno
 		awsbaseConfig.SharedCredentialsFiles = cf
 	}
 	if c.AssumeRole != nil {
-		awsbaseConfig.AssumeRole = c.AssumeRole.Config()
+		awsbaseConfig.AssumeRole = []awsbase.AssumeRole{c.AssumeRole.Config()}
 	}
+
 	if c.AssumeRoleWithWebIdentity != nil {
 		awsbaseConfig.AssumeRoleWithWebIdentity = c.AssumeRoleWithWebIdentity.Config()
 	}

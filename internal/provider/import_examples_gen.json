@@ -50,6 +50,11 @@
         "path": "./examples/resources/awscc_accessanalyzer_analyzer/import.sh"
     },
     {
+        "resource": "awscc_amazonmq_configuration",
+        "identifier": ["Id"],
+        "path": "./examples/resources/awscc_amazonmq_configuration/import.sh"
+    },
+    {
         "resource": "awscc_amplify_app",
         "identifier": ["Arn"],
         "path": "./examples/resources/awscc_amplify_app/import.sh"
@@ -1005,6 +1010,11 @@
         "path": "./examples/resources/awscc_config_stored_query/import.sh"
     },
     {
+        "resource": "awscc_connect_agent_status",
+        "identifier": ["AgentStatusArn"],
+        "path": "./examples/resources/awscc_connect_agent_status/import.sh"
+    },
+    {
         "resource": "awscc_connect_approved_origin",
         "identifier": ["InstanceId","Origin"],
         "path": "./examples/resources/awscc_connect_approved_origin/import.sh"
@@ -1098,6 +1108,11 @@
         "resource": "awscc_connect_user_hierarchy_group",
         "identifier": ["UserHierarchyGroupArn"],
         "path": "./examples/resources/awscc_connect_user_hierarchy_group/import.sh"
+    },
+    {
+        "resource": "awscc_connect_user_hierarchy_structure",
+        "identifier": ["UserHierarchyStructureArn"],
+        "path": "./examples/resources/awscc_connect_user_hierarchy_structure/import.sh"
     },
     {
         "resource": "awscc_connect_view",
@@ -1278,6 +1293,11 @@
         "resource": "awscc_datazone_environment",
         "identifier": ["DomainId","Id"],
         "path": "./examples/resources/awscc_datazone_environment/import.sh"
+    },
+    {
+        "resource": "awscc_datazone_environment_actions",
+        "identifier": ["DomainId","EnvironmentId","Id"],
+        "path": "./examples/resources/awscc_datazone_environment_actions/import.sh"
     },
     {
         "resource": "awscc_datazone_environment_blueprint_configuration",
@@ -2088,6 +2108,11 @@
         "resource": "awscc_events_archive",
         "identifier": ["ArchiveName"],
         "path": "./examples/resources/awscc_events_archive/import.sh"
+    },
+    {
+        "resource": "awscc_events_connection",
+        "identifier": ["Name"],
+        "path": "./examples/resources/awscc_events_connection/import.sh"
     },
     {
         "resource": "awscc_events_endpoint",

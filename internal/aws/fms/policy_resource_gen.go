@@ -558,7 +558,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		//	                      },
 		//	                      "Protocol": {
 		//	                        "description": "Protocol.",
-		//	                        "pattern": "^(tcp|udp|icmp|([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]))$",
+		//	                        "pattern": "^(tcp|udp|icmp|-1|([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]))$",
 		//	                        "type": "string"
 		//	                      },
 		//	                      "RuleAction": {
@@ -654,7 +654,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		//	                      },
 		//	                      "Protocol": {
 		//	                        "description": "Protocol.",
-		//	                        "pattern": "^(tcp|udp|icmp|([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]))$",
+		//	                        "pattern": "^(tcp|udp|icmp|-1|([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]))$",
 		//	                        "type": "string"
 		//	                      },
 		//	                      "RuleAction": {
@@ -893,7 +893,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 														Optional:    true,
 														Computed:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
-															stringvalidator.RegexMatches(regexp.MustCompile("^(tcp|udp|icmp|([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]))$"), ""),
+															stringvalidator.RegexMatches(regexp.MustCompile("^(tcp|udp|icmp|-1|([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]))$"), ""),
 															fwvalidators.NotNullString(),
 														}, /*END VALIDATORS*/
 														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1067,7 +1067,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 														Optional:    true,
 														Computed:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
-															stringvalidator.RegexMatches(regexp.MustCompile("^(tcp|udp|icmp|([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]))$"), ""),
+															stringvalidator.RegexMatches(regexp.MustCompile("^(tcp|udp|icmp|-1|([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]))$"), ""),
 															fwvalidators.NotNullString(),
 														}, /*END VALIDATORS*/
 														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

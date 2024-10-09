@@ -193,9 +193,9 @@ func policyAssociationResource(ctx context.Context) (resource.Resource, error) {
 		"updated_at":                 "UpdatedAt",
 	})
 
-	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+	opts = opts.WithCreateTimeoutInMinutes(1440).WithDeleteTimeoutInMinutes(0)
 
-	opts = opts.WithUpdateTimeoutInMinutes(0)
+	opts = opts.WithUpdateTimeoutInMinutes(1440)
 
 	v, err := generic.NewResource(ctx, opts...)
 

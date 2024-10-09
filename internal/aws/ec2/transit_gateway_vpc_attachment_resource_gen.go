@@ -80,6 +80,10 @@ func transitGatewayVpcAttachmentResource(ctx context.Context) (resource.Resource
 		//	    "Ipv6Support": {
 		//	      "description": "Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable",
 		//	      "type": "string"
+		//	    },
+		//	    "SecurityGroupReferencingSupport": {
+		//	      "description": "Indicates whether to enable Security Group referencing support for Vpc Attachment. Valid values: enable | disable",
+		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -107,6 +111,15 @@ func transitGatewayVpcAttachmentResource(ctx context.Context) (resource.Resource
 				// Property: Ipv6Support
 				"ipv_6_support": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SecurityGroupReferencingSupport
+				"security_group_referencing_support": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether to enable Security Group referencing support for Vpc Attachment. Valid values: enable | disable",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -265,19 +278,20 @@ func transitGatewayVpcAttachmentResource(ctx context.Context) (resource.Resource
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayVpcAttachment").WithTerraformTypeName("awscc_ec2_transit_gateway_vpc_attachment")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"add_subnet_ids":                    "AddSubnetIds",
-		"appliance_mode_support":            "ApplianceModeSupport",
-		"dns_support":                       "DnsSupport",
-		"ipv_6_support":                     "Ipv6Support",
-		"key":                               "Key",
-		"options":                           "Options",
-		"remove_subnet_ids":                 "RemoveSubnetIds",
-		"subnet_ids":                        "SubnetIds",
-		"tags":                              "Tags",
-		"transit_gateway_id":                "TransitGatewayId",
-		"transit_gateway_vpc_attachment_id": "Id",
-		"value":                             "Value",
-		"vpc_id":                            "VpcId",
+		"add_subnet_ids":                     "AddSubnetIds",
+		"appliance_mode_support":             "ApplianceModeSupport",
+		"dns_support":                        "DnsSupport",
+		"ipv_6_support":                      "Ipv6Support",
+		"key":                                "Key",
+		"options":                            "Options",
+		"remove_subnet_ids":                  "RemoveSubnetIds",
+		"security_group_referencing_support": "SecurityGroupReferencingSupport",
+		"subnet_ids":                         "SubnetIds",
+		"tags":                               "Tags",
+		"transit_gateway_id":                 "TransitGatewayId",
+		"transit_gateway_vpc_attachment_id":  "Id",
+		"value":                              "Value",
+		"vpc_id":                             "VpcId",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

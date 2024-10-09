@@ -26,11 +26,11 @@ func profileAssociationDataSource(ctx context.Context) (datasource.DataSource, e
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The Amazon Resource Name (ARN) of the  profile association.",
+		//	  "description": "The Amazon Resource Name (ARN) of the profile association.",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the  profile association.",
+			Description: "The Amazon Resource Name (ARN) of the profile association.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Id

@@ -18,13 +18,16 @@ Definition of AWS::DataZone::Environment Resource Type
 ### Required
 
 - `domain_identifier` (String) The identifier of the Amazon DataZone domain in which the environment would be created.
-- `environment_profile_identifier` (String) The ID of the environment profile with which the Amazon DataZone environment would be created.
 - `name` (String) The name of the environment.
 - `project_identifier` (String) The ID of the Amazon DataZone project in which the environment would be created.
 
 ### Optional
 
 - `description` (String) The description of the Amazon DataZone environment.
+- `environment_account_identifier` (String) The AWS account in which the Amazon DataZone environment is created.
+- `environment_account_region` (String) The AWS region in which the Amazon DataZone environment is created.
+- `environment_profile_identifier` (String) The ID of the environment profile with which the Amazon DataZone environment would be created.
+- `environment_role_arn` (String) Environment role arn for custom aws environment permissions
 - `glossary_terms` (List of String) The glossary terms that can be used in the Amazon DataZone environment.
 - `user_parameters` (Attributes List) The user parameters of the Amazon DataZone environment. (see [below for nested schema](#nestedatt--user_parameters))
 

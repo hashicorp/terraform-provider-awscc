@@ -415,6 +415,10 @@ func mailManagerRuleSetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	                        "CC"
 		//	                      ],
 		//	                      "type": "string"
+		//	                    },
+		//	                    "MimeHeaderAttribute": {
+		//	                      "pattern": "^X-[a-zA-Z0-9-]{1,256}$",
+		//	                      "type": "string"
 		//	                    }
 		//	                  },
 		//	                  "type": "object"
@@ -679,6 +683,10 @@ func mailManagerRuleSetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	                        "TO",
 		//	                        "CC"
 		//	                      ],
+		//	                      "type": "string"
+		//	                    },
+		//	                    "MimeHeaderAttribute": {
+		//	                      "pattern": "^X-[a-zA-Z0-9-]{1,256}$",
 		//	                      "type": "string"
 		//	                    }
 		//	                  },
@@ -1022,6 +1030,10 @@ func mailManagerRuleSetDataSource(ctx context.Context) (datasource.DataSource, e
 												"attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Computed: true,
 												}, /*END ATTRIBUTE*/
+												// Property: MimeHeaderAttribute
+												"mime_header_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 											Computed: true,
 										}, /*END ATTRIBUTE*/
@@ -1182,6 +1194,10 @@ func mailManagerRuleSetDataSource(ctx context.Context) (datasource.DataSource, e
 												"attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Computed: true,
 												}, /*END ATTRIBUTE*/
+												// Property: MimeHeaderAttribute
+												"mime_header_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 											Computed: true,
 										}, /*END ATTRIBUTE*/
@@ -1325,6 +1341,7 @@ func mailManagerRuleSetDataSource(ctx context.Context) (datasource.DataSource, e
 		"key":                   "Key",
 		"mail_from":             "MailFrom",
 		"mailbox_arn":           "MailboxArn",
+		"mime_header_attribute": "MimeHeaderAttribute",
 		"name":                  "Name",
 		"number_expression":     "NumberExpression",
 		"operator":              "Operator",

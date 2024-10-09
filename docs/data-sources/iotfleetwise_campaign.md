@@ -37,6 +37,7 @@ Data Source schema for AWS::IoTFleetWise::Campaign
 - `priority` (Number)
 - `signal_catalog_arn` (String)
 - `signals_to_collect` (Attributes List) (see [below for nested schema](#nestedatt--signals_to_collect))
+- `signals_to_fetch` (Attributes List) (see [below for nested schema](#nestedatt--signals_to_fetch))
 - `spooling_mode` (String)
 - `start_time` (String)
 - `status` (String)
@@ -118,6 +119,43 @@ Read-Only:
 - `max_sample_count` (Number)
 - `minimum_sampling_interval_ms` (Number)
 - `name` (String)
+
+
+<a id="nestedatt--signals_to_fetch"></a>
+### Nested Schema for `signals_to_fetch`
+
+Read-Only:
+
+- `actions` (List of String)
+- `condition_language_version` (Number)
+- `fully_qualified_name` (String)
+- `signal_fetch_config` (Attributes) (see [below for nested schema](#nestedatt--signals_to_fetch--signal_fetch_config))
+
+<a id="nestedatt--signals_to_fetch--signal_fetch_config"></a>
+### Nested Schema for `signals_to_fetch.signal_fetch_config`
+
+Read-Only:
+
+- `condition_based` (Attributes) (see [below for nested schema](#nestedatt--signals_to_fetch--signal_fetch_config--condition_based))
+- `time_based` (Attributes) (see [below for nested schema](#nestedatt--signals_to_fetch--signal_fetch_config--time_based))
+
+<a id="nestedatt--signals_to_fetch--signal_fetch_config--condition_based"></a>
+### Nested Schema for `signals_to_fetch.signal_fetch_config.condition_based`
+
+Read-Only:
+
+- `condition_expression` (String)
+- `trigger_mode` (String)
+
+
+<a id="nestedatt--signals_to_fetch--signal_fetch_config--time_based"></a>
+### Nested Schema for `signals_to_fetch.signal_fetch_config.time_based`
+
+Read-Only:
+
+- `execution_frequency_ms` (Number)
+
+
 
 
 <a id="nestedatt--tags"></a>

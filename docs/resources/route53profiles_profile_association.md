@@ -23,7 +23,7 @@ Resource Type definition for AWS::Route53Profiles::ProfileAssociation
 
 ### Optional
 
-- `arn` (String) The Amazon Resource Name (ARN) of the  profile association.
+- `arn` (String) The Amazon Resource Name (ARN) of the profile association.
 - `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

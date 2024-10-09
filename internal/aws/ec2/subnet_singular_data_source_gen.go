@@ -126,7 +126,7 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The IPv6 network ranges for the subnet, in CIDR notation.",
+		//	  "description": "",
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
@@ -135,7 +135,7 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"ipv_6_cidr_blocks": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "The IPv6 network ranges for the subnet, in CIDR notation.",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Ipv6IpamPoolId

@@ -32,11 +32,11 @@ func profileAssociationResource(ctx context.Context) (resource.Resource, error) 
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The Amazon Resource Name (ARN) of the  profile association.",
+		//	  "description": "The Amazon Resource Name (ARN) of the profile association.",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the  profile association.",
+			Description: "The Amazon Resource Name (ARN) of the profile association.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -169,7 +169,6 @@ func profileAssociationResource(ctx context.Context) (resource.Resource, error) 
 				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
-			// Tags is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -205,7 +204,6 @@ func profileAssociationResource(ctx context.Context) (resource.Resource, error) 
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Arn",
-		"/properties/Tags",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

@@ -369,7 +369,7 @@ func signalCatalogDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	    },
 		//	    "type": "object"
 		//	  },
-		//	  "maxItems": 500,
+		//	  "maxItems": 5000,
 		//	  "minItems": 1,
 		//	  "type": "array",
 		//	  "uniqueItems": true
