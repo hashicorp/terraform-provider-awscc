@@ -135,10 +135,6 @@ func backupVaultResource(ctx context.Context) (resource.Resource, error) {
 				// Property: ChangeableForDays
 				"changeable_for_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
 					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-						int64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 					// ChangeableForDays is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: MaxRetentionDays

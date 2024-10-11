@@ -94,11 +94,17 @@ func applicationVersionResource(ctx context.Context) (resource.Resource, error) 
 				"s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The Amazon S3 bucket where the data is located.",
 					Required:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.RequiresReplace(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: S3Key
 				"s3_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The Amazon S3 key where the data is located.",
 					Required:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.RequiresReplace(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The Amazon S3 bucket and key that identify the location of the source bundle for this version. ",

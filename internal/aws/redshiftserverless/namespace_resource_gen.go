@@ -14,7 +14,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
@@ -63,13 +62,9 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 		"admin_user_password": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The password associated with the admin user for the namespace that is being created. Password must be at least 8 characters in length, should be any printable ASCII character. Must contain at least one lowercase letter, one uppercase letter and one decimal digit. You can't use adminUserPassword if manageAdminPassword is true.",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(8, 64),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// AdminUserPassword is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: AdminUsername
@@ -139,14 +134,10 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 		"final_snapshot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the namespace the source snapshot was created from. Please specify the name if needed before deleting namespace",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtMost(255),
 				stringvalidator.RegexMatches(regexp.MustCompile("[a-z][a-z0-9]*(-[a-z0-9]+)*"), ""),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// FinalSnapshotName is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: FinalSnapshotRetentionPeriod
@@ -159,10 +150,6 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 		"final_snapshot_retention_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The number of days to retain automated snapshot in the destination region after they are copied from the source region. If the value is -1, the manual snapshot is retained indefinitely. The value must be either -1 or an integer between 1 and 3,653.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// FinalSnapshotRetentionPeriod is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: IamRoles
@@ -256,10 +243,6 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 		"manage_admin_password": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "If true, Amazon Redshift uses AWS Secrets Manager to manage the namespace's admin credentials. You can't use adminUserPassword if manageAdminPassword is true. If manageAdminPassword is false or not set, Amazon Redshift uses adminUserPassword for the admin user account's password.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// ManageAdminPassword is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Namespace
@@ -453,10 +436,6 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 		"redshift_idc_application_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ARN for the Redshift application that integrates with IAM Identity Center.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// RedshiftIdcApplicationArn is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: SnapshotCopyConfigurations
@@ -573,7 +552,9 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
+						// Key is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -585,7 +566,9 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
+						// Value is a write-only property.
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

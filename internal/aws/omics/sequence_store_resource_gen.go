@@ -184,6 +184,7 @@ func sequenceStoreResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Type
@@ -198,6 +199,7 @@ func sequenceStoreResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -268,12 +270,12 @@ func sequenceStoreResource(ctx context.Context) (resource.Resource, error) {
 		"type":              "Type",
 	})
 
+	opts = opts.IsImmutableType(true)
+
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Tags",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
-
-	opts = opts.WithUpdateTimeoutInMinutes(0)
 
 	v, err := generic.NewResource(ctx, opts...)
 

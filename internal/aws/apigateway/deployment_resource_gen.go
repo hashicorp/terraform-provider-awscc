@@ -12,18 +12,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -71,7 +66,9 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 						float64planmodifier.UseStateForUnknown(),
+						float64planmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// PercentTraffic is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: StageVariableOverrides
 				"stage_variable_overrides": // Pattern: ""
@@ -82,7 +79,9 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
 						mapplanmodifier.UseStateForUnknown(),
+						mapplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// StageVariableOverrides is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: UseStageCache
 				"use_stage_cache": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -91,7 +90,9 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
+						boolplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// UseStageCache is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The input configuration for a canary deployment.",
@@ -349,72 +350,48 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 						"destination_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The Amazon Resource Name (ARN) of the CloudWatch Logs log group or Kinesis Data Firehose delivery stream to receive access logs. If you specify a Kinesis Data Firehose delivery stream, the stream name must begin with ``amazon-apigateway-``.",
 							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// DestinationArn is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: Format
 						"format": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "A single line format of the access logs of data, as specified by selected $context variables. The format must include at least ``$context.requestId``.",
 							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// Format is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Specifies settings for logging access in this stage.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// AccessLogSetting is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: CacheClusterEnabled
 				"cache_cluster_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "Specifies whether a cache cluster is enabled for the stage.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						boolplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// CacheClusterEnabled is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: CacheClusterSize
 				"cache_cluster_size": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The size of the stage's cache cluster. For more information, see [cacheClusterSize](https://docs.aws.amazon.com/apigateway/latest/api/API_CreateStage.html#apigw-CreateStage-request-cacheClusterSize) in the *API Gateway API Reference*.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// CacheClusterSize is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: CacheDataEncrypted
 				"cache_data_encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "Indicates whether the cached responses are encrypted.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						boolplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// CacheDataEncrypted is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: CacheTtlInSeconds
 				"cache_ttl_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
 					Description: "The time-to-live (TTL) period, in seconds, that specifies how long API Gateway caches responses.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-						int64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// CacheTtlInSeconds is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: CachingEnabled
 				"caching_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "Indicates whether responses are cached and returned for requests. You must enable a cache cluster on the stage to cache responses. For more information, see [Enable API Gateway Caching in a Stage to Enhance API Performance](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-caching.html) in the *API Gateway Developer Guide*.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						boolplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// CachingEnabled is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: CanarySetting
 				"canary_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -423,10 +400,7 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 						"percent_traffic": schema.Float64Attribute{ /*START ATTRIBUTE*/
 							Description: "The percent (0-100) of traffic diverted to a canary deployment.",
 							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-								float64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// PercentTraffic is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: StageVariableOverrides
 						"stage_variable_overrides": // Pattern: ""
@@ -434,72 +408,48 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 							ElementType: types.StringType,
 							Description: "Stage variables overridden for a canary release deployment, including new stage variables introduced in the canary. These stage variables are represented as a string-to-string map between stage variable names and their values.",
 							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-								mapplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// StageVariableOverrides is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: UseStageCache
 						"use_stage_cache": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Description: "A Boolean flag to indicate whether the canary deployment uses the stage cache or not.",
 							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								boolplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// UseStageCache is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Specifies settings for the canary deployment in this stage.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// CanarySetting is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: ClientCertificateId
 				"client_certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The identifier of the client certificate that API Gateway uses to call your integration endpoints in the stage.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// ClientCertificateId is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: DataTraceEnabled
 				"data_trace_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "Indicates whether data trace logging is enabled for methods in the stage. API Gateway pushes these logs to Amazon CloudWatch Logs.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						boolplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// DataTraceEnabled is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: Description
 				"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "A description of the purpose of the stage.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// Description is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: DocumentationVersion
 				"documentation_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The version identifier of the API documentation snapshot.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// DocumentationVersion is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: LoggingLevel
 				"logging_level": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The logging level for this method. For valid values, see the ``loggingLevel`` property of the [MethodSetting](https://docs.aws.amazon.com/apigateway/latest/api/API_MethodSetting.html) resource in the *Amazon API Gateway API Reference*.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// LoggingLevel is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: MethodSettings
 				"method_settings": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
@@ -509,109 +459,73 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 							"cache_data_encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
 								Description: "Specifies whether the cached responses are encrypted.",
 								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-									boolplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// CacheDataEncrypted is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: CacheTtlInSeconds
 							"cache_ttl_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
 								Description: "Specifies the time to live (TTL), in seconds, for cached responses. The higher the TTL, the longer the response will be cached.",
 								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-									int64planmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// CacheTtlInSeconds is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: CachingEnabled
 							"caching_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 								Description: "Specifies whether responses should be cached and returned for requests. A cache cluster must be enabled on the stage for responses to be cached.",
 								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-									boolplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// CachingEnabled is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: DataTraceEnabled
 							"data_trace_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 								Description: "Specifies whether data trace logging is enabled for this method, which affects the log entries pushed to Amazon CloudWatch Logs. This can be useful to troubleshoot APIs, but can result in logging sensitive data. We recommend that you don't enable this option for production APIs.",
 								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-									boolplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// DataTraceEnabled is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: HttpMethod
 							"http_method": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The HTTP method.",
 								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// HttpMethod is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: LoggingLevel
 							"logging_level": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Specifies the logging level for this method, which affects the log entries pushed to Amazon CloudWatch Logs. Valid values are ``OFF``, ``ERROR``, and ``INFO``. Choose ``ERROR`` to write only error-level entries to CloudWatch Logs, or choose ``INFO`` to include all ``ERROR`` events as well as extra informational events.",
 								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// LoggingLevel is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: MetricsEnabled
 							"metrics_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 								Description: "Specifies whether Amazon CloudWatch metrics are enabled for this method.",
 								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-									boolplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// MetricsEnabled is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: ResourcePath
 							"resource_path": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The resource path for this method. Forward slashes (``/``) are encoded as ``~1`` and the initial slash must include a forward slash. For example, the path value ``/resource/subresource`` must be encoded as ``/~1resource~1subresource``. To specify the root path, use only a slash (``/``).",
 								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// ResourcePath is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: ThrottlingBurstLimit
 							"throttling_burst_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
 								Description: "Specifies the throttling burst limit.",
 								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-									int64planmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// ThrottlingBurstLimit is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: ThrottlingRateLimit
 							"throttling_rate_limit": schema.Float64Attribute{ /*START ATTRIBUTE*/
 								Description: "Specifies the throttling rate limit.",
 								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-									float64planmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// ThrottlingRateLimit is a write-only property.
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "Configures settings for all of the stage's methods.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-						setplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// MethodSettings is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: MetricsEnabled
 				"metrics_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "Indicates whether Amazon CloudWatch metrics are enabled for methods in the stage.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						boolplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// MetricsEnabled is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: Tags
 				"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -620,63 +534,41 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Key
 							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The key name of the tag",
-								Optional:    true,
-								Computed:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									fwvalidators.NotNullString(),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								Required:    true,
+								// Key is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The value for the tag",
-								Optional:    true,
-								Computed:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									fwvalidators.NotNullString(),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								Required:    true,
+								// Value is a write-only property.
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "An array of arbitrary tags (key-value pairs) to associate with the stage.",
 					Optional:    true,
-					Computed:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						generic.Multiset(),
-						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
+					// Tags is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: ThrottlingBurstLimit
 				"throttling_burst_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
 					Description: "The target request burst rate limit. This allows more requests through for a period of time than the target rate limit. For more information, see [Manage API Request Throttling](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-request-throttling.html) in the *API Gateway Developer Guide*.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-						int64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// ThrottlingBurstLimit is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: ThrottlingRateLimit
 				"throttling_rate_limit": schema.Float64Attribute{ /*START ATTRIBUTE*/
 					Description: "The target request steady-state rate limit. For more information, see [Manage API Request Throttling](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-request-throttling.html) in the *API Gateway Developer Guide*.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-						float64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// ThrottlingRateLimit is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: TracingEnabled
 				"tracing_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "Specifies whether active tracing with X-ray is enabled for this stage.\n For more information, see [Trace API Gateway API Execution with X-Ray](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-xray.html) in the *API Gateway Developer Guide*.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						boolplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// TracingEnabled is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: Variables
 				"variables":         // Pattern: ""
@@ -684,18 +576,11 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 					ElementType: types.StringType,
 					Description: "A map that defines the stage variables. Variable names must consist of alphanumeric characters, and the values must match the following regular expression: ``[A-Za-z0-9-._~:/?#&=,]+``.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-						mapplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// Variables is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The description of the Stage resource for the Deployment resource to create. To specify a stage description, you must also provide a stage name.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// StageDescription is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: StageName
@@ -708,10 +593,6 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 		"stage_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the Stage resource for the Deployment resource to create.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// StageName is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

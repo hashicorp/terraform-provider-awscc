@@ -336,7 +336,6 @@ func vPCConnectionResource(ctx context.Context) (resource.Resource, error) {
 		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeBetween(2, 15),
 				listvalidator.ValueStringsAre(
@@ -346,7 +345,6 @@ func vPCConnectionResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 			// SubnetIds is a write-only property.
 		}, /*END ATTRIBUTE*/

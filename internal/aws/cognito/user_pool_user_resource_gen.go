@@ -127,6 +127,7 @@ func userPoolUserResource(ctx context.Context) (resource.Resource, error) {
 						Computed: true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
@@ -135,6 +136,7 @@ func userPoolUserResource(ctx context.Context) (resource.Resource, error) {
 						Computed: true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -199,7 +201,9 @@ func userPoolUserResource(ctx context.Context) (resource.Resource, error) {
 						Computed: true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
+						// Name is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -207,7 +211,9 @@ func userPoolUserResource(ctx context.Context) (resource.Resource, error) {
 						Computed: true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
+						// Value is a write-only property.
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -253,6 +259,8 @@ func userPoolUserResource(ctx context.Context) (resource.Resource, error) {
 		"value":                    "Value",
 	})
 
+	opts = opts.IsImmutableType(true)
+
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/DesiredDeliveryMediums",
 		"/properties/ForceAliasCreation",
@@ -261,8 +269,6 @@ func userPoolUserResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/MessageAction",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(2).WithDeleteTimeoutInMinutes(2)
-
-	opts = opts.WithUpdateTimeoutInMinutes(0)
 
 	v, err := generic.NewResource(ctx, opts...)
 

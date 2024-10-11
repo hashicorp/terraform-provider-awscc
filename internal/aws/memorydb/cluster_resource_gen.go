@@ -207,10 +207,6 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"final_snapshot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The user-supplied name of a final cluster snapshot. This is the unique name that identifies the snapshot. MemoryDB creates the snapshot, and then deletes the cluster immediately afterward.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// FinalSnapshotName is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyId

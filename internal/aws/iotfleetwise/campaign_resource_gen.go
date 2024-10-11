@@ -56,7 +56,6 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"action": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
-			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"APPROVE",
@@ -65,9 +64,6 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 					"UPDATE",
 				),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// Action is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Arn
@@ -148,6 +144,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 								int64planmodifier.UseStateForUnknown(),
+								int64planmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Expression
@@ -160,6 +157,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: MinimumTriggerIntervalMs
@@ -171,6 +169,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 								float64planmodifier.UseStateForUnknown(),
+								float64planmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: TriggerMode
@@ -185,6 +184,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -192,6 +192,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
+						objectplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: TimeBasedCollectionScheme
@@ -207,6 +208,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 								float64planmodifier.UseStateForUnknown(),
+								float64planmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -214,6 +216,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
+						objectplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/

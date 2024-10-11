@@ -14,7 +14,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -109,77 +108,56 @@ func stateMachineAliasResource(ctx context.Context) (resource.Resource, error) {
 					ElementType: types.StringType,
 					Description: "A list of CloudWatch alarm names that will be monitored during the deployment. The deployment will fail and rollback if any alarms go into ALARM state.",
 					Optional:    true,
-					Computed:    true,
 					Validators: []validator.Set{ /*START VALIDATORS*/
 						setvalidator.SizeBetween(1, 100),
 						setvalidator.ValueStringsAre(
 							stringvalidator.LengthBetween(1, 256),
 						),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-						setplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// Alarms is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: Interval
 				"interval": schema.Int64Attribute{ /*START ATTRIBUTE*/
 					Description: "The time in minutes between each traffic shifting increment.",
 					Optional:    true,
-					Computed:    true,
 					Validators: []validator.Int64{ /*START VALIDATORS*/
 						int64validator.Between(1, 2100),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-						int64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// Interval is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: Percentage
 				"percentage": schema.Int64Attribute{ /*START ATTRIBUTE*/
 					Description: "The percentage of traffic to shift to the new version in each increment.",
 					Optional:    true,
-					Computed:    true,
 					Validators: []validator.Int64{ /*START VALIDATORS*/
 						int64validator.Between(1, 99),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-						int64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// Percentage is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: StateMachineVersionArn
 				"state_machine_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
+					Required: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthBetween(1, 2048),
-						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// StateMachineVersionArn is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: Type
 				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The type of deployment to perform.",
-					Optional:    true,
-					Computed:    true,
+					Required:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"LINEAR",
 							"ALL_AT_ONCE",
 							"CANARY",
 						),
-						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// Type is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The settings to enable gradual state machine deployments.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// DeploymentPreference is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Description

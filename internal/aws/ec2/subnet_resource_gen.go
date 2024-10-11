@@ -119,10 +119,6 @@ func subnetResource(ctx context.Context) (resource.Resource, error) {
 		"enable_lni_at_device_index": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "Indicates the device position for local network interfaces in this subnet. For example, ``1`` indicates local network interfaces in this subnet are the secondary network interface (eth1).",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// EnableLniAtDeviceIndex is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Ipv4IpamPoolId

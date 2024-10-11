@@ -206,13 +206,9 @@ func wirelessDeviceImportTaskResource(ctx context.Context) (resource.Resource, e
 				// Property: DeviceCreationFile
 				"device_creation_file": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
-					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthAtMost(1024),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 					// DeviceCreationFile is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: DeviceCreationFileList
@@ -239,13 +235,9 @@ func wirelessDeviceImportTaskResource(ctx context.Context) (resource.Resource, e
 				// Property: SidewalkManufacturingSn
 				"sidewalk_manufacturing_sn": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
-					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthAtMost(64),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 					// SidewalkManufacturingSn is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/

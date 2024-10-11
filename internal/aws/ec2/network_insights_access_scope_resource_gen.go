@@ -272,7 +272,9 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// DestinationAddresses is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: DestinationPorts
 									"destination_ports": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -281,7 +283,9 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// DestinationPorts is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: DestinationPrefixLists
 									"destination_prefix_lists": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -290,7 +294,9 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// DestinationPrefixLists is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: Protocols
 									"protocols": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -307,7 +313,9 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// Protocols is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: SourceAddresses
 									"source_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -316,7 +324,9 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// SourceAddresses is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: SourcePorts
 									"source_ports": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -325,7 +335,9 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// SourcePorts is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: SourcePrefixLists
 									"source_prefix_lists": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -334,14 +346,18 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// SourcePrefixLists is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 									objectplanmodifier.UseStateForUnknown(),
+									objectplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
+								// PacketHeaderStatement is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: ResourceStatement
 							"resource_statement": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -353,7 +369,9 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// ResourceTypes is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: Resources
 									"resources": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -362,21 +380,27 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// Resources is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 									objectplanmodifier.UseStateForUnknown(),
+									objectplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
+								// ResourceStatement is a write-only property.
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
+							objectplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
+						// Destination is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: Source
 					"source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -391,7 +415,9 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// DestinationAddresses is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: DestinationPorts
 									"destination_ports": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -400,7 +426,9 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// DestinationPorts is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: DestinationPrefixLists
 									"destination_prefix_lists": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -409,7 +437,9 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// DestinationPrefixLists is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: Protocols
 									"protocols": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -426,7 +456,9 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// Protocols is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: SourceAddresses
 									"source_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -435,7 +467,9 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// SourceAddresses is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: SourcePorts
 									"source_ports": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -444,7 +478,9 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// SourcePorts is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: SourcePrefixLists
 									"source_prefix_lists": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -453,14 +489,18 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// SourcePrefixLists is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 									objectplanmodifier.UseStateForUnknown(),
+									objectplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
+								// PacketHeaderStatement is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: ResourceStatement
 							"resource_statement": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -472,7 +512,9 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// ResourceTypes is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: Resources
 									"resources": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -481,21 +523,27 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// Resources is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 									objectplanmodifier.UseStateForUnknown(),
+									objectplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
+								// ResourceStatement is a write-only property.
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
+							objectplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
+						// Source is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: ThroughResources
 					"through_resources": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -511,7 +559,9 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 											Computed:    true,
 											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 												listplanmodifier.UseStateForUnknown(),
+												listplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
+											// ResourceTypes is a write-only property.
 										}, /*END ATTRIBUTE*/
 										// Property: Resources
 										"resources": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -520,14 +570,18 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 											Computed:    true,
 											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 												listplanmodifier.UseStateForUnknown(),
+												listplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
+											// Resources is a write-only property.
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 										objectplanmodifier.UseStateForUnknown(),
+										objectplanmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
+									// ResourceStatement is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
@@ -535,7 +589,9 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 						Computed: true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 							listplanmodifier.UseStateForUnknown(),
+							listplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
+						// ThroughResources is a write-only property.
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -776,7 +832,9 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// DestinationAddresses is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: DestinationPorts
 									"destination_ports": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -785,7 +843,9 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// DestinationPorts is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: DestinationPrefixLists
 									"destination_prefix_lists": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -794,7 +854,9 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// DestinationPrefixLists is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: Protocols
 									"protocols": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -811,7 +873,9 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// Protocols is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: SourceAddresses
 									"source_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -820,7 +884,9 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// SourceAddresses is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: SourcePorts
 									"source_ports": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -829,7 +895,9 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// SourcePorts is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: SourcePrefixLists
 									"source_prefix_lists": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -838,14 +906,18 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// SourcePrefixLists is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 									objectplanmodifier.UseStateForUnknown(),
+									objectplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
+								// PacketHeaderStatement is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: ResourceStatement
 							"resource_statement": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -857,7 +929,9 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// ResourceTypes is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: Resources
 									"resources": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -866,21 +940,27 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// Resources is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 									objectplanmodifier.UseStateForUnknown(),
+									objectplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
+								// ResourceStatement is a write-only property.
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
+							objectplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
+						// Destination is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: Source
 					"source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -895,7 +975,9 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// DestinationAddresses is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: DestinationPorts
 									"destination_ports": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -904,7 +986,9 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// DestinationPorts is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: DestinationPrefixLists
 									"destination_prefix_lists": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -913,7 +997,9 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// DestinationPrefixLists is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: Protocols
 									"protocols": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -930,7 +1016,9 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// Protocols is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: SourceAddresses
 									"source_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -939,7 +1027,9 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// SourceAddresses is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: SourcePorts
 									"source_ports": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -948,7 +1038,9 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// SourcePorts is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: SourcePrefixLists
 									"source_prefix_lists": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -957,14 +1049,18 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// SourcePrefixLists is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 									objectplanmodifier.UseStateForUnknown(),
+									objectplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
+								// PacketHeaderStatement is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: ResourceStatement
 							"resource_statement": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -976,7 +1072,9 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// ResourceTypes is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: Resources
 									"resources": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -985,21 +1083,27 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// Resources is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 									objectplanmodifier.UseStateForUnknown(),
+									objectplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
+								// ResourceStatement is a write-only property.
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
+							objectplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
+						// Source is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: ThroughResources
 					"through_resources": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1015,7 +1119,9 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 											Computed:    true,
 											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 												listplanmodifier.UseStateForUnknown(),
+												listplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
+											// ResourceTypes is a write-only property.
 										}, /*END ATTRIBUTE*/
 										// Property: Resources
 										"resources": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -1024,14 +1130,18 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 											Computed:    true,
 											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 												listplanmodifier.UseStateForUnknown(),
+												listplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
+											// Resources is a write-only property.
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 										objectplanmodifier.UseStateForUnknown(),
+										objectplanmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
+									// ResourceStatement is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
@@ -1039,7 +1149,9 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 						Computed: true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 							listplanmodifier.UseStateForUnknown(),
+							listplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
+						// ThroughResources is a write-only property.
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

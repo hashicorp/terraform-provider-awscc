@@ -143,6 +143,7 @@ func capacityReservationFleetResource(ctx context.Context) (resource.Resource, e
 						Computed: true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: AvailabilityZoneId
@@ -151,6 +152,7 @@ func capacityReservationFleetResource(ctx context.Context) (resource.Resource, e
 						Computed: true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: EbsOptimized
@@ -159,6 +161,7 @@ func capacityReservationFleetResource(ctx context.Context) (resource.Resource, e
 						Computed: true,
 						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 							boolplanmodifier.UseStateForUnknown(),
+							boolplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: InstancePlatform
@@ -167,6 +170,7 @@ func capacityReservationFleetResource(ctx context.Context) (resource.Resource, e
 						Computed: true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: InstanceType
@@ -175,6 +179,7 @@ func capacityReservationFleetResource(ctx context.Context) (resource.Resource, e
 						Computed: true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Priority
@@ -186,6 +191,7 @@ func capacityReservationFleetResource(ctx context.Context) (resource.Resource, e
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 							int64planmodifier.UseStateForUnknown(),
+							int64planmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Weight
@@ -194,6 +200,7 @@ func capacityReservationFleetResource(ctx context.Context) (resource.Resource, e
 						Computed: true,
 						PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 							float64planmodifier.UseStateForUnknown(),
+							float64planmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -281,6 +288,7 @@ func capacityReservationFleetResource(ctx context.Context) (resource.Resource, e
 						Computed: true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Tags
@@ -296,6 +304,7 @@ func capacityReservationFleetResource(ctx context.Context) (resource.Resource, e
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
+										stringplanmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Value
@@ -307,6 +316,7 @@ func capacityReservationFleetResource(ctx context.Context) (resource.Resource, e
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
+										stringplanmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -316,6 +326,7 @@ func capacityReservationFleetResource(ctx context.Context) (resource.Resource, e
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 							generic.Multiset(),
 							listplanmodifier.UseStateForUnknown(),
+							listplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/

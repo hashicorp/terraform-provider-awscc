@@ -90,13 +90,9 @@ func notificationRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"event_type_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
-			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 2048),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// EventTypeId is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: EventTypeIds
@@ -206,13 +202,9 @@ func notificationRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"target_address": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
-			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 2048),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// TargetAddress is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Targets

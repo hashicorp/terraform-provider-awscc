@@ -17,7 +17,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
@@ -798,10 +797,6 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 								"zip_file_content": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The zip-format code for a Flink-based Kinesis Data Analytics application.",
 									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
 									// ZipFileContent is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -896,14 +891,11 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 									"property_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "Describes the key of an application execution property key-value pair.",
 										Optional:    true,
-										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(1, 50),
 											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_.-]+$"), ""),
 										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// PropertyGroupId is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: PropertyMap
 									"property_map":      // Pattern: ""
@@ -911,31 +903,23 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 										ElementType: types.StringType,
 										Description: "Describes the value of an application execution property key-value pair.",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-											mapplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// PropertyMap is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
 							Description: "Describes the execution property groups.",
 							Optional:    true,
-							Computed:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeAtMost(50),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								generic.Multiset(),
-								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
+							// PropertyGroups is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Describes execution properties for a Flink-based Kinesis Data Analytics application.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 					// EnvironmentProperties is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: FlinkApplicationConfiguration
@@ -1952,40 +1936,30 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 						// Property: ApplicationRestoreType
 						"application_restore_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "Specifies how the application should be restored.",
-							Optional:    true,
-							Computed:    true,
+							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"SKIP_RESTORE_FROM_SNAPSHOT",
 									"RESTORE_FROM_LATEST_SNAPSHOT",
 									"RESTORE_FROM_CUSTOM_SNAPSHOT",
 								),
-								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// ApplicationRestoreType is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: SnapshotName
 						"snapshot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The identifier of an existing snapshot of application state to use to restart an application. The application uses this value if RESTORE_FROM_CUSTOM_SNAPSHOT is specified for the ApplicationRestoreType.",
 							Optional:    true,
-							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 256),
 								stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_.-]+$"), ""),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// SnapshotName is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Describes the restore behavior of a restarting application.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// ApplicationRestoreConfiguration is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: FlinkRunConfiguration
 				"flink_run_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1994,26 +1968,16 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 						"allow_non_restored_state": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Description: "When restoring from a snapshot, specifies whether the runtime is allowed to skip a state that cannot be mapped to the new program. Defaults to false. If you update your application without specifying this parameter, AllowNonRestoredState will be set to false, even if it was previously set to true.",
 							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								boolplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// AllowNonRestoredState is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Describes the starting parameters for a Flink-based Kinesis Data Analytics application.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// FlinkRunConfiguration is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Specifies run configuration (start parameters) of a Kinesis Data Analytics application. Evaluated on update for RUNNING applications an only.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// RunConfiguration is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: RuntimeEnvironment

@@ -14,7 +14,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -297,52 +296,40 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 							ElementType: types.StringType,
 							Description: "<p>The hexadecimal codes for the colors.</p>",
 							Optional:    true,
-							Computed:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(0, 100),
 								listvalidator.ValueStringsAre(
 									stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
 								),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// Colors is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: EmptyFillColor
 						"empty_fill_color": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "<p>The hexadecimal code of a color that applies to charts where a lack of data is\n            highlighted.</p>",
 							Optional:    true,
-							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// EmptyFillColor is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: MinMaxGradient
 						"min_max_gradient": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
 							Description: "<p>The minimum and maximum hexadecimal codes that describe a color gradient. </p>",
 							Optional:    true,
-							Computed:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(0, 100),
 								listvalidator.ValueStringsAre(
 									stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
 								),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// MinMaxGradient is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "<p>The theme colors that are used for data colors in charts. The colors description is a\n            hexadecimal color code that consists of six alphanumerical characters, prefixed with\n                <code>#</code>, for example #37BFF5. </p>",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// DataColorPalette is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: Sheet
 				"sheet": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -357,26 +344,17 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 										"show": schema.BoolAttribute{ /*START ATTRIBUTE*/
 											Description: "<p>The option to enable display of borders for visuals.</p>",
 											Optional:    true,
-											Computed:    true,
-											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-												boolplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// Show is a write-only property.
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "<p>The display options for tile borders for visuals.</p>",
 									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// Border is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "<p>Display options related to tiles on a sheet.</p>",
 							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// Tile is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: TileLayout
 						"tile_layout": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -388,18 +366,12 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 										"show": schema.BoolAttribute{ /*START ATTRIBUTE*/
 											Description: "<p>This Boolean value controls whether to display a gutter space between sheet tiles.\n        </p>",
 											Optional:    true,
-											Computed:    true,
-											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-												boolplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// Show is a write-only property.
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "<p>The display options for gutter spacing between tiles on a sheet.</p>",
 									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// Gutter is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: Margin
 								"margin": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -408,34 +380,22 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 										"show": schema.BoolAttribute{ /*START ATTRIBUTE*/
 											Description: "<p>This Boolean value controls whether to display sheet margins.</p>",
 											Optional:    true,
-											Computed:    true,
-											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-												boolplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// Show is a write-only property.
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "<p>The display options for margins around the outside edge of sheets.</p>",
 									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// Margin is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "<p>The display options for the layout of tiles on a sheet.</p>",
 							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// TileLayout is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "<p>The theme display options for sheets. </p>",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// Sheet is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: Typography
 				"typography": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -447,28 +407,19 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 									// Property: FontFamily
 									"font_family": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Optional: true,
-										Computed: true,
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// FontFamily is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(0, 5),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// FontFamilies is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// Typography is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: UIColorPalette
 				"ui_color_palette": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -477,201 +428,150 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 						"accent": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "<p>This color is that applies to selected states and buttons.</p>",
 							Optional:    true,
-							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// Accent is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: AccentForeground
 						"accent_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            accent color.</p>",
 							Optional:    true,
-							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// AccentForeground is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: Danger
 						"danger": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "<p>The color that applies to error messages.</p>",
 							Optional:    true,
-							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// Danger is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: DangerForeground
 						"danger_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            error color.</p>",
 							Optional:    true,
-							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// DangerForeground is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: Dimension
 						"dimension": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "<p>The color that applies to the names of fields that are identified as\n            dimensions.</p>",
 							Optional:    true,
-							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// Dimension is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: DimensionForeground
 						"dimension_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            dimension color.</p>",
 							Optional:    true,
-							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// DimensionForeground is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: Measure
 						"measure": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "<p>The color that applies to the names of fields that are identified as measures.</p>",
 							Optional:    true,
-							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// Measure is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: MeasureForeground
 						"measure_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            measure color.</p>",
 							Optional:    true,
-							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// MeasureForeground is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: PrimaryBackground
 						"primary_background": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "<p>The background color that applies to visuals and other high emphasis UI.</p>",
 							Optional:    true,
-							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// PrimaryBackground is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: PrimaryForeground
 						"primary_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "<p>The color of text and other foreground elements that appear over the primary\n            background regions, such as grid lines, borders, table banding, icons, and so on.</p>",
 							Optional:    true,
-							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// PrimaryForeground is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: SecondaryBackground
 						"secondary_background": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "<p>The background color that applies to the sheet background and sheet controls.</p>",
 							Optional:    true,
-							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// SecondaryBackground is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: SecondaryForeground
 						"secondary_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "<p>The foreground color that applies to any sheet title, sheet control text, or UI that\n            appears over the secondary background.</p>",
 							Optional:    true,
-							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// SecondaryForeground is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: Success
 						"success": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "<p>The color that applies to success messages, for example the check mark for a\n            successful download.</p>",
 							Optional:    true,
-							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// Success is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: SuccessForeground
 						"success_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            success color.</p>",
 							Optional:    true,
-							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// SuccessForeground is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: Warning
 						"warning": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "<p>This color that applies to warning and informational messages.</p>",
 							Optional:    true,
-							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// Warning is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: WarningForeground
 						"warning_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            warning color.</p>",
 							Optional:    true,
-							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// WarningForeground is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "<p>The theme colors that apply to UI and to charts, excluding data colors. The colors\n            description is a hexadecimal color code that consists of six alphanumerical characters,\n            prefixed with <code>#</code>, for example #37BFF5. For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html\">Using Themes in Amazon QuickSight</a> in the <i>Amazon QuickSight User\n                Guide.</i>\n         </p>",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// UIColorPalette is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "<p>The theme configuration. This configuration contains all of the display properties for\n            a theme.</p>",
@@ -1438,13 +1338,9 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"version_description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
-			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 512),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// VersionDescription is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

@@ -65,10 +65,6 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		"allow_major_version_upgrade": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "A value that indicates whether major version upgrades are allowed. Changing this parameter doesn't result in an outage and the change is asynchronously applied as soon as possible.\n Constraints: Major version upgrades must be allowed when specifying a value for the ``EngineVersion`` parameter that is a different major version than the DB instance's current version.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// AllowMajorVersionUpgrade is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: AssociatedRoles
@@ -158,10 +154,6 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		"automatic_backup_replication_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The AWS KMS key identifier for encryption of the replicated automated backups. The KMS key ID is the Amazon Resource Name (ARN) for the KMS encryption key in the destination AWS-Region, for example, ``arn:aws:kms:us-east-1:123456789012:key/AKIAIOSFODNN7EXAMPLE``.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// AutomaticBackupReplicationKmsKeyId is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: AutomaticBackupReplicationRegion
@@ -284,10 +276,6 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		"certificate_rotation_restart": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Specifies whether the DB instance is restarted when you rotate your SSL/TLS certificate.\n By default, the DB instance is restarted when you rotate your SSL/TLS certificate. The certificate is not updated until the DB instance is restarted.\n  Set this parameter only if you are *not* using SSL/TLS to connect to the DB instance.\n  If you are using SSL/TLS to connect to the DB instance, follow the appropriate instructions for your DB engine to rotate your SSL/TLS certificate:\n  +  For more information about rotating your SSL/TLS certificate for RDS DB engines, see [Rotating Your SSL/TLS Certificate.](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL-certificate-rotation.html) in the *Amazon RDS User Guide.* \n  +  For more information about rotating your SSL/TLS certificate for Aurora DB engines, see [Rotating Your SSL/TLS Certificate](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL-certificate-rotation.html) in the *Amazon Aurora User Guide*.\n  \n This setting doesn't apply to RDS Custom DB instances.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// CertificateRotationRestart is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: CharacterSetName
@@ -484,10 +472,6 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		"db_snapshot_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name or Amazon Resource Name (ARN) of the DB snapshot that's used to restore the DB instance. If you're restoring from a shared manual DB snapshot, you must specify the ARN of the snapshot.\n By specifying this property, you can create a DB instance from the specified DB snapshot. If the ``DBSnapshotIdentifier`` property is an empty string or the ``AWS::RDS::DBInstance`` declaration has no ``DBSnapshotIdentifier`` property, AWS CloudFormation creates a new database. If the property contains a value (other than an empty string), AWS CloudFormation creates a database from the specified snapshot. If a snapshot with the specified name doesn't exist, AWS CloudFormation can't create the database and it rolls back the stack.\n Some DB instance properties aren't valid when you restore from a snapshot, such as the ``MasterUsername`` and ``MasterUserPassword`` properties. For information about the properties that you can specify, see the ``RestoreDBInstanceFromDBSnapshot`` action in the *Amazon RDS API Reference*.\n After you restore a DB instance with a ``DBSnapshotIdentifier`` property, you must specify the same ``DBSnapshotIdentifier`` property for any future updates to the DB instance. When you specify this property for an update, the DB instance is not restored from the DB snapshot again, and the data in the database is not changed. However, if you don't specify the ``DBSnapshotIdentifier`` property, an empty DB instance is created, and the original DB instance is deleted. If you specify a property that is different from the previous snapshot restore property, a new DB instance is restored from the specified ``DBSnapshotIdentifier`` property, and the original DB instance is deleted.\n If you specify the ``DBSnapshotIdentifier`` property to restore a DB instance (as opposed to specifying it for DB instance updates), then don't specify the following properties:\n  +   ``CharacterSetName`` \n  +   ``DBClusterIdentifier`` \n  +   ``DBName`` \n  +   ``DeleteAutomatedBackups`` \n  +   ``KmsKeyId`` \n  +   ``MasterUsername`` \n  +   ``MasterUserPassword`` \n  +   ``PerformanceInsightsKMSKeyId`` \n  +   ``PerformanceInsightsRetentionPeriod`` \n  +   ``PromotionTier`` \n  +   ``SourceDBInstanceIdentifier`` \n  +   ``SourceRegion`` \n  +   ``StorageEncrypted`` (for an encrypted snapshot)\n  +   ``Timezone`` \n  \n  *Amazon Aurora* \n Not applicable. Snapshot restore is managed by the DB cluster.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// DBSnapshotIdentifier is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: DBSubnetGroupName
@@ -559,10 +543,6 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		"delete_automated_backups": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "A value that indicates whether to remove automated backups immediately after the DB instance is deleted. This parameter isn't case-sensitive. The default is to remove automated backups immediately after the DB instance is deleted.\n  *Amazon Aurora* \n Not applicable. When you delete a DB cluster, all automated backups for that DB cluster are deleted and can't be recovered. Manual DB cluster snapshots of the DB cluster are not deleted.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// DeleteAutomatedBackups is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: DeletionProtection
@@ -895,10 +875,6 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		"master_user_password": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The password for the master user. The password can include any printable ASCII character except \"/\", \"\"\", or \"@\".\n  *Amazon Aurora* \n Not applicable. The password for the master user is managed by the DB cluster.\n  *RDS for Db2* \n Must contain from 8 to 255 characters.\n  *RDS for MariaDB* \n Constraints: Must contain from 8 to 41 characters.\n  *RDS for Microsoft SQL Server* \n Constraints: Must contain from 8 to 128 characters.\n  *RDS for MySQL* \n Constraints: Must contain from 8 to 41 characters.\n  *RDS for Oracle* \n Constraints: Must contain from 8 to 30 characters.\n  *RDS for PostgreSQL* \n Constraints: Must contain from 8 to 128 characters.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// MasterUserPassword is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: MasterUserSecret
@@ -1279,10 +1255,6 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 			CustomType:  timetypes.RFC3339Type{},
 			Description: "The date and time to restore from. This parameter applies to point-in-time recovery. For more information, see [Restoring a DB instance to a specified time](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIT.html) in the in the *Amazon RDS User Guide*.\n Constraints:\n  +  Must be a time in Universal Coordinated Time (UTC) format.\n  +  Must be before the latest restorable time for the DB instance.\n  +  Can't be specified if the ``UseLatestRestorableTime`` parameter is enabled.\n  \n Example: ``2009-09-07T23:45:00Z``",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// RestoreTime is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: SourceDBClusterIdentifier
@@ -1310,10 +1282,6 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		"source_db_instance_automated_backups_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the replicated automated backups from which to restore, for example, ``arn:aws:rds:us-east-1:123456789012:auto-backup:ab-L2IJCEXJP7XQ7HOJ4SIEXAMPLE``.\n This setting doesn't apply to RDS Custom.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// SourceDBInstanceAutomatedBackupsArn is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: SourceDBInstanceIdentifier
@@ -1326,10 +1294,6 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		"source_db_instance_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "If you want to create a read replica DB instance, specify the ID of the source DB instance. Each DB instance can have a limited number of read replicas. For more information, see [Working with Read Replicas](https://docs.aws.amazon.com/AmazonRDS/latest/DeveloperGuide/USER_ReadRepl.html) in the *Amazon RDS User Guide*.\n For information about constraints that apply to DB instance identifiers, see [Naming constraints in Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html#RDS_Limits.Constraints) in the *Amazon RDS User Guide*.\n The ``SourceDBInstanceIdentifier`` property determines whether a DB instance is a read replica. If you remove the ``SourceDBInstanceIdentifier`` property from your template and then update your stack, AWS CloudFormation promotes the read replica to a standalone DB instance.\n If you specify the ``UseLatestRestorableTime`` or ``RestoreTime`` properties in conjunction with the ``SourceDBInstanceIdentifier`` property, RDS restores the DB instance to the requested point in time, thereby creating a new DB instance.\n   +  If you specify a source DB instance that uses VPC security groups, we recommend that you specify the ``VPCSecurityGroups`` property. If you don't specify the property, the read replica inherits the value of the ``VPCSecurityGroups`` property from the source DB when you create the replica. However, if you update the stack, AWS CloudFormation reverts the replica's ``VPCSecurityGroups`` property to the default value because it's not defined in the stack's template. This change might cause unexpected issues.\n  +  Read replicas don't support deletion policies. AWS CloudFormation ignores any deletion policy that's associated with a read replica.\n  +  If you specify ``SourceDBInstanceIdentifier``, don't specify the ``DBSnapshotIdentifier`` property. You can't create a read replica from a snapshot.\n  +  Don't set the ``BackupRetentionPeriod``, ``DBName``, ``MasterUsername``, ``MasterUserPassword``, and ``PreferredBackupWindow`` properties. The database attributes are inherited from the source DB instance, and backups are disabled for read replicas.\n  +  If the source DB instance is in a different region than the read replica, specify the source region in ``SourceRegion``, and specify an ARN for a valid DB instance in ``SourceDBInstanceIdentifier``. For more information, see [Constructing a Amazon RDS Amazon Resource Name (ARN)](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#USER_Tagging.ARN) in the *Amazon RDS User Guide*.\n  +  For DB instances in Amazon Aurora clusters, don't specify this property. Amazon RDS automatically assigns writer and reader DB instances.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// SourceDBInstanceIdentifier is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: SourceDbiResourceId
@@ -1342,10 +1306,6 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		"source_dbi_resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The resource ID of the source DB instance from which to restore.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// SourceDbiResourceId is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: SourceRegion
@@ -1505,10 +1465,6 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		"tde_credential_password": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// TdeCredentialPassword is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Timezone
@@ -1537,10 +1493,6 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		"use_default_processor_features": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Specifies whether the DB instance class of the DB instance uses its default processor features.\n This setting doesn't apply to RDS Custom DB instances.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// UseDefaultProcessorFeatures is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: UseLatestRestorableTime
@@ -1553,10 +1505,6 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		"use_latest_restorable_time": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Specifies whether the DB instance is restored from the latest backup time. By default, the DB instance isn't restored from the latest backup time. This parameter applies to point-in-time recovery. For more information, see [Restoring a DB instance to a specified time](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIT.html) in the in the *Amazon RDS User Guide*.\n Constraints:\n  +  Can't be specified if the ``RestoreTime`` parameter is provided.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// UseLatestRestorableTime is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: VPCSecurityGroups

@@ -77,10 +77,6 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 		"stage_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of an existing stage to associate with the deployment.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// StageName is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

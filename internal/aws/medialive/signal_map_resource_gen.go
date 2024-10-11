@@ -63,15 +63,11 @@ func signalMapResource(ctx context.Context) (resource.Resource, error) {
 		"cloudwatch_alarm_template_group_identifiers": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.ValueStringsAre(
 					stringvalidator.RegexMatches(regexp.MustCompile("^[^\\s]+$"), ""),
 				),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// CloudWatchAlarmTemplateGroupIdentifiers is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: CloudWatchAlarmTemplateGroupIds
@@ -172,15 +168,11 @@ func signalMapResource(ctx context.Context) (resource.Resource, error) {
 		"event_bridge_rule_template_group_identifiers": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.ValueStringsAre(
 					stringvalidator.RegexMatches(regexp.MustCompile("^[^\\s]+$"), ""),
 				),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// EventBridgeRuleTemplateGroupIdentifiers is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: EventBridgeRuleTemplateGroupIds

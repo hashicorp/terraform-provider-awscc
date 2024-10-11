@@ -14,7 +14,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
@@ -108,10 +107,6 @@ func aPIKeyResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"force_delete": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// ForceDelete is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: ForceUpdate
@@ -122,10 +117,6 @@ func aPIKeyResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"force_update": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// ForceUpdate is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: KeyArn
@@ -169,10 +160,6 @@ func aPIKeyResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"no_expiry": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// NoExpiry is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Restrictions

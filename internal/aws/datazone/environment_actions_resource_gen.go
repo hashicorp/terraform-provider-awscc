@@ -154,14 +154,10 @@ func environmentActionsResource(ctx context.Context) (resource.Resource, error) 
 		"identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the Amazon DataZone environment action.",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 36),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]{1,36}$"), ""),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// Identifier is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Name

@@ -39,7 +39,6 @@ func serviceActionResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"accept_language": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
-			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"en",
@@ -47,9 +46,6 @@ func serviceActionResource(ctx context.Context) (resource.Resource, error) {
 					"zh",
 				),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// AcceptLanguage is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Definition

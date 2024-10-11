@@ -60,10 +60,6 @@ func certificateAuthorityActivationResource(ctx context.Context) (resource.Resou
 		"certificate_chain": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Certificate chain for the Certificate Authority certificate.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// CertificateChain is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: CompleteCertificateChain

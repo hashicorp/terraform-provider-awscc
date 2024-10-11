@@ -102,6 +102,9 @@ func eventIntegrationResource(ctx context.Context) (resource.Resource, error) {
 						stringvalidator.LengthBetween(1, 256),
 						stringvalidator.RegexMatches(regexp.MustCompile("^aws\\.partner\\/.*$"), ""),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.RequiresReplace(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The EventFilter (source) associated with the event integration.",

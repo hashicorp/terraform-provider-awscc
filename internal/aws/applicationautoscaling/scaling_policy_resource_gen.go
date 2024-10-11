@@ -709,10 +709,6 @@ func scalingPolicyResource(ctx context.Context) (resource.Resource, error) {
 						"resource_label": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "Identifies the resource associated with the metric type. You can't specify a resource label unless the metric type is ``ALBRequestCountPerTarget`` and there is a target group attached to the Spot Fleet or ECS service.\n You create the resource label by appending the final portion of the load balancer ARN and the final portion of the target group ARN into a single value, separated by a forward slash (/). The format of the resource label is:\n  ``app/my-alb/778d41231b141a0f/targetgroup/my-alb-target-group/943f017f100becff``.\n Where:\n  +  app/<load-balancer-name>/<load-balancer-id> is the final portion of the load balancer ARN\n  +  targetgroup/<target-group-name>/<target-group-id> is the final portion of the target group ARN.\n  \n To find the ARN for an Application Load Balancer, use the [DescribeLoadBalancers](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html) API operation. To find the ARN for the target group, use the [DescribeTargetGroups](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html) API operation.",
 							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
 							// ResourceLabel is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/

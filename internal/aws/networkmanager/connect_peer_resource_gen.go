@@ -52,7 +52,9 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 						float64planmodifier.UseStateForUnknown(),
+						float64planmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// PeerAsn is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Bgp options for connect peer.",

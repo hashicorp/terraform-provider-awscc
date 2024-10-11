@@ -117,6 +117,7 @@ func multiRegionAccessPointResource(ctx context.Context) (resource.Resource, err
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
+						boolplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: BlockPublicPolicy
@@ -126,6 +127,7 @@ func multiRegionAccessPointResource(ctx context.Context) (resource.Resource, err
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
+						boolplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: IgnorePublicAcls
@@ -135,6 +137,7 @@ func multiRegionAccessPointResource(ctx context.Context) (resource.Resource, err
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
+						boolplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: RestrictPublicBuckets
@@ -144,6 +147,7 @@ func multiRegionAccessPointResource(ctx context.Context) (resource.Resource, err
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
+						boolplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -200,6 +204,9 @@ func multiRegionAccessPointResource(ctx context.Context) (resource.Resource, err
 							stringvalidator.LengthBetween(3, 63),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9][a-z0-9//.//-]*[a-z0-9]$"), ""),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.RequiresReplace(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: BucketAccountId
 					"bucket_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -211,6 +218,7 @@ func multiRegionAccessPointResource(ctx context.Context) (resource.Resource, err
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -260,9 +268,9 @@ func multiRegionAccessPointResource(ctx context.Context) (resource.Resource, err
 		"restrict_public_buckets":           "RestrictPublicBuckets",
 	})
 
-	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+	opts = opts.IsImmutableType(true)
 
-	opts = opts.WithUpdateTimeoutInMinutes(0)
+	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	v, err := generic.NewResource(ctx, opts...)
 

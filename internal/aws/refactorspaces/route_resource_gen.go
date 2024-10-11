@@ -15,7 +15,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -90,25 +89,17 @@ func routeResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: ActivationState
 				"activation_state": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
+					Required: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"INACTIVE",
 							"ACTIVE",
 						),
-						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// ActivationState is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// DefaultRoute is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: EnvironmentIdentifier
@@ -322,18 +313,14 @@ func routeResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: ActivationState
 				"activation_state": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
+					Required: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"INACTIVE",
 							"ACTIVE",
 						),
-						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// ActivationState is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: AppendSourcePath
 				"append_source_path": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -343,6 +330,7 @@ func routeResource(ctx context.Context) (resource.Resource, error) {
 						boolplanmodifier.UseStateForUnknown(),
 						boolplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// AppendSourcePath is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: IncludeChildPaths
 				"include_child_paths": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -352,6 +340,7 @@ func routeResource(ctx context.Context) (resource.Resource, error) {
 						boolplanmodifier.UseStateForUnknown(),
 						boolplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// IncludeChildPaths is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: Methods
 				"methods": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -376,6 +365,7 @@ func routeResource(ctx context.Context) (resource.Resource, error) {
 						listplanmodifier.UseStateForUnknown(),
 						listplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// Methods is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: SourcePath
 				"source_path": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -389,13 +379,10 @@ func routeResource(ctx context.Context) (resource.Resource, error) {
 						stringplanmodifier.UseStateForUnknown(),
 						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// SourcePath is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// UriPathRoute is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

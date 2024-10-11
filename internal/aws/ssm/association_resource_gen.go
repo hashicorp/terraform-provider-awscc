@@ -529,13 +529,9 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"wait_for_success_timeout_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Optional: true,
-			Computed: true,
 			Validators: []validator.Int64{ /*START VALIDATORS*/
 				int64validator.Between(15, 172800),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// WaitForSuccessTimeoutSeconds is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

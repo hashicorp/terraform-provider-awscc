@@ -162,24 +162,18 @@ func dashboardResource(ctx context.Context) (resource.Resource, error) {
 						// Property: AvailabilityStatus
 						"availability_status": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"ENABLED",
 									"DISABLED",
 								),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// AvailabilityStatus is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "<p>Ad hoc (one-time) filtering option.</p>",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// AdHocFilteringOption is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: ExportToCSVOption
 				"export_to_csv_option": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -187,24 +181,18 @@ func dashboardResource(ctx context.Context) (resource.Resource, error) {
 						// Property: AvailabilityStatus
 						"availability_status": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"ENABLED",
 									"DISABLED",
 								),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// AvailabilityStatus is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "<p>Export to .csv option.</p>",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// ExportToCSVOption is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: SheetControlsOption
 				"sheet_controls_option": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -212,32 +200,22 @@ func dashboardResource(ctx context.Context) (resource.Resource, error) {
 						// Property: VisibilityState
 						"visibility_state": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"EXPANDED",
 									"COLLAPSED",
 								),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// VisibilityState is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "<p>Sheet controls option.</p>",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// SheetControlsOption is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "<p>Dashboard publish options.</p>",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// DashboardPublishOptions is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: LastPublishedTime
@@ -427,40 +405,27 @@ func dashboardResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Name
 							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "<p>A display name for the date-time parameter.</p>",
-								Optional:    true,
-								Computed:    true,
+								Required:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
-									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// Name is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: Values
 							"values": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
 								Description: "<p>The values for the date-time parameter.</p>",
-								Optional:    true,
-								Computed:    true,
-								Validators: []validator.List{ /*START VALIDATORS*/
-									fwvalidators.NotNullList(),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-									listplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								Required:    true,
+								// Values is a write-only property.
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "<p>Date-time parameters.</p>",
 					Optional:    true,
-					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(0, 100),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// DateTimeParameters is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: DecimalParameters
 				"decimal_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -469,40 +434,27 @@ func dashboardResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Name
 							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "<p>A display name for the decimal parameter.</p>",
-								Optional:    true,
-								Computed:    true,
+								Required:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
-									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// Name is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: Values
 							"values": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.Float64Type,
 								Description: "<p>The values for the decimal parameter.</p>",
-								Optional:    true,
-								Computed:    true,
-								Validators: []validator.List{ /*START VALIDATORS*/
-									fwvalidators.NotNullList(),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-									listplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								Required:    true,
+								// Values is a write-only property.
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "<p>Decimal parameters.</p>",
 					Optional:    true,
-					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(0, 100),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// DecimalParameters is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: IntegerParameters
 				"integer_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -511,40 +463,27 @@ func dashboardResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Name
 							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "<p>The name of the integer parameter.</p>",
-								Optional:    true,
-								Computed:    true,
+								Required:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
-									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// Name is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: Values
 							"values": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.Float64Type,
 								Description: "<p>The values for the integer parameter.</p>",
-								Optional:    true,
-								Computed:    true,
-								Validators: []validator.List{ /*START VALIDATORS*/
-									fwvalidators.NotNullList(),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-									listplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								Required:    true,
+								// Values is a write-only property.
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "<p>Integer parameters.</p>",
 					Optional:    true,
-					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(0, 100),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// IntegerParameters is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: StringParameters
 				"string_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -553,48 +492,31 @@ func dashboardResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Name
 							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "<p>A display name for a string parameter.</p>",
-								Optional:    true,
-								Computed:    true,
+								Required:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
-									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// Name is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: Values
 							"values": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
 								Description: "<p>The values of a string parameter.</p>",
-								Optional:    true,
-								Computed:    true,
-								Validators: []validator.List{ /*START VALIDATORS*/
-									fwvalidators.NotNullList(),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-									listplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								Required:    true,
+								// Values is a write-only property.
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "<p>String parameters.</p>",
 					Optional:    true,
-					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(0, 100),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// StringParameters is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "<p>A list of QuickSight parameters and the list's override values.</p>",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// Parameters is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Permissions
@@ -732,14 +654,8 @@ func dashboardResource(ctx context.Context) (resource.Resource, error) {
 						// Property: Arn
 						"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "<p>The Amazon Resource Name (ARN) of the resource.</p>",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								fwvalidators.NotNullString(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							Required:    true,
+							// Arn is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: DataSetReferences
 						"data_set_references": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -748,48 +664,31 @@ func dashboardResource(ctx context.Context) (resource.Resource, error) {
 									// Property: DataSetArn
 									"data_set_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "<p>Dataset Amazon Resource Name (ARN).</p>",
-										Optional:    true,
-										Computed:    true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											fwvalidators.NotNullString(),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										Required:    true,
+										// DataSetArn is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: DataSetPlaceholder
 									"data_set_placeholder": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "<p>Dataset placeholder.</p>",
-										Optional:    true,
-										Computed:    true,
+										Required:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
-											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// DataSetPlaceholder is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
 							Description: "<p>Dataset references.</p>",
-							Optional:    true,
-							Computed:    true,
+							Required:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeAtLeast(1),
-								fwvalidators.NotNullList(),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// DataSetReferences is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "<p>Dashboard source template.</p>",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// SourceTemplate is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "<p>Dashboard source entity.</p>",
@@ -879,10 +778,6 @@ func dashboardResource(ctx context.Context) (resource.Resource, error) {
 		"theme_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "<p>The Amazon Resource Name (ARN) of the theme that is being used for this dashboard. If\n            you add a value for this field, it overrides the value that is used in the source\n            entity. The theme ARN must exist in the same AWS account where you create the\n            dashboard.</p>",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// ThemeArn is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Version
@@ -1007,22 +902,26 @@ func dashboardResource(ctx context.Context) (resource.Resource, error) {
 				"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "<p>The Amazon Resource Name (ARN) of the resource.</p>",
 					Computed:    true,
+					// Arn is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: CreatedTime
 				"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "<p>The time that this dashboard version was created.</p>",
 					Computed:    true,
+					// CreatedTime is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: DataSetArns
 				"data_set_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
 					Description: "<p>The Amazon Resource Numbers (ARNs) for the datasets that are associated with this\n            version of the dashboard.</p>",
 					Computed:    true,
+					// DataSetArns is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: Description
 				"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "<p>Description.</p>",
 					Computed:    true,
+					// Description is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: Errors
 				"errors": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1032,15 +931,18 @@ func dashboardResource(ctx context.Context) (resource.Resource, error) {
 							"message": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "<p>Message.</p>",
 								Computed:    true,
+								// Message is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: Type
 							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Computed: true,
+								// Type is a write-only property.
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "<p>Errors associated with this dashboard version.</p>",
 					Computed:    true,
+					// Errors is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: Sheets
 				"sheets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1050,35 +952,42 @@ func dashboardResource(ctx context.Context) (resource.Resource, error) {
 							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "<p>The name of a sheet. This name is displayed on the sheet's tab in the QuickSight\n            console.</p>",
 								Computed:    true,
+								// Name is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: SheetId
 							"sheet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "<p>The unique identifier associated with a sheet.</p>",
 								Computed:    true,
+								// SheetId is a write-only property.
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "<p>A list of the associated sheets with the unique identifier and name of each sheet.</p>",
 					Computed:    true,
+					// Sheets is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: SourceEntityArn
 				"source_entity_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "<p>Source entity ARN.</p>",
 					Computed:    true,
+					// SourceEntityArn is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: Status
 				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
+					// Status is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: ThemeArn
 				"theme_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "<p>The ARN of the theme associated with a version of the dashboard.</p>",
 					Computed:    true,
+					// ThemeArn is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: VersionNumber
 				"version_number": schema.Float64Attribute{ /*START ATTRIBUTE*/
 					Description: "<p>Version number for this version of the dashboard.</p>",
 					Computed:    true,
+					// VersionNumber is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "<p>Dashboard version.</p>",
@@ -1100,13 +1009,9 @@ func dashboardResource(ctx context.Context) (resource.Resource, error) {
 		"version_description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "<p>A description for the first version of the dashboard being created.</p>",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 512),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// VersionDescription is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

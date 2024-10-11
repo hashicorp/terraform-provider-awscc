@@ -73,10 +73,6 @@ func natGatewayResource(ctx context.Context) (resource.Resource, error) {
 		"max_drain_duration_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The maximum amount of time to wait (in seconds) before forcibly releasing the IP addresses if connections are still in progress. Default value is 350 seconds.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// MaxDrainDurationSeconds is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: NatGatewayId

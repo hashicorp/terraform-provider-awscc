@@ -267,14 +267,8 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 						// Property: Arn
 						"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "<p>The Amazon Resource Name (ARN) of the resource.</p>",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								fwvalidators.NotNullString(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							Required:    true,
+							// Arn is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: DataSetReferences
 						"data_set_references": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -283,48 +277,31 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 									// Property: DataSetArn
 									"data_set_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "<p>Dataset Amazon Resource Name (ARN).</p>",
-										Optional:    true,
-										Computed:    true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											fwvalidators.NotNullString(),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										Required:    true,
+										// DataSetArn is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: DataSetPlaceholder
 									"data_set_placeholder": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "<p>Dataset placeholder.</p>",
-										Optional:    true,
-										Computed:    true,
+										Required:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
-											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// DataSetPlaceholder is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
 							Description: "<p>A structure containing information about the dataset references used as placeholders\n            in the template.</p>",
-							Optional:    true,
-							Computed:    true,
+							Required:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeAtLeast(1),
-								fwvalidators.NotNullList(),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// DataSetReferences is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "<p>The source analysis of the template.</p>",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// SourceAnalysis is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: SourceTemplate
 				"source_template": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -332,22 +309,13 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 						// Property: Arn
 						"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "<p>The Amazon Resource Name (ARN) of the resource.</p>",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								fwvalidators.NotNullString(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							Required:    true,
+							// Arn is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "<p>The source template of the template.</p>",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// SourceTemplate is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "<p>The source entity of the template.</p>",
@@ -632,6 +600,7 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 				"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "<p>The time that this template version was created.</p>",
 					Computed:    true,
+					// CreatedTime is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: DataSetConfigurations
 				"data_set_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -649,21 +618,25 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 													"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 														Description: "<p>The name of the column group's column schema.</p>",
 														Computed:    true,
+														// Name is a write-only property.
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
 											}, /*END NESTED OBJECT*/
 											Description: "<p>A structure containing the list of schemas for column group columns.</p>",
 											Computed:    true,
+											// ColumnGroupColumnSchemaList is a write-only property.
 										}, /*END ATTRIBUTE*/
 										// Property: Name
 										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "<p>The name of the column group schema.</p>",
 											Computed:    true,
+											// Name is a write-only property.
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
 								Description: "<p>A structure containing the list of column group schemas.</p>",
 								Computed:    true,
+								// ColumnGroupSchemaList is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: DataSetSchema
 							"data_set_schema": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -676,40 +649,48 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 												"data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "<p>The data type of the column schema.</p>",
 													Computed:    true,
+													// DataType is a write-only property.
 												}, /*END ATTRIBUTE*/
 												// Property: GeographicRole
 												"geographic_role": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "<p>The geographic role of the column schema.</p>",
 													Computed:    true,
+													// GeographicRole is a write-only property.
 												}, /*END ATTRIBUTE*/
 												// Property: Name
 												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "<p>The name of the column schema.</p>",
 													Computed:    true,
+													// Name is a write-only property.
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
 										Description: "<p>A structure containing the list of column schemas.</p>",
 										Computed:    true,
+										// ColumnSchemaList is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Description: "<p>Dataset schema.</p>",
 								Computed:    true,
+								// DataSetSchema is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: Placeholder
 							"placeholder": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "<p>Placeholder.</p>",
 								Computed:    true,
+								// Placeholder is a write-only property.
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "<p>Schema of the dataset identified by the placeholder. Any dashboard created from this\n            template should be bound to new datasets matching the same schema described through this\n            API operation.</p>",
 					Computed:    true,
+					// DataSetConfigurations is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: Description
 				"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "<p>The description of the template.</p>",
 					Computed:    true,
+					// Description is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: Errors
 				"errors": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -719,15 +700,18 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 							"message": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "<p>Description of the error type.</p>",
 								Computed:    true,
+								// Message is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: Type
 							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Computed: true,
+								// Type is a write-only property.
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "<p>Errors associated with this template version.</p>",
 					Computed:    true,
+					// Errors is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: Sheets
 				"sheets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -737,35 +721,42 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "<p>The name of a sheet. This name is displayed on the sheet's tab in the QuickSight\n            console.</p>",
 								Computed:    true,
+								// Name is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: SheetId
 							"sheet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "<p>The unique identifier associated with a sheet.</p>",
 								Computed:    true,
+								// SheetId is a write-only property.
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "<p>A list of the associated sheets with the unique identifier and name of each sheet.</p>",
 					Computed:    true,
+					// Sheets is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: SourceEntityArn
 				"source_entity_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "<p>The Amazon Resource Name (ARN) of an analysis or template that was used to create this\n            template.</p>",
 					Computed:    true,
+					// SourceEntityArn is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: Status
 				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
+					// Status is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: ThemeArn
 				"theme_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "<p>The ARN of the theme associated with this version of the template.</p>",
 					Computed:    true,
+					// ThemeArn is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: VersionNumber
 				"version_number": schema.Float64Attribute{ /*START ATTRIBUTE*/
 					Description: "<p>The version number of the template version.</p>",
 					Computed:    true,
+					// VersionNumber is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "<p>A version of a template.</p>",
@@ -787,13 +778,9 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 		"version_description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "<p>A description of the current template version being created. This API operation creates the\n\t\t\tfirst version of the template. Every time <code>UpdateTemplate</code> is called, a new\n\t\t\tversion is created. Each version of the template maintains a description of the version\n\t\t\tin the <code>VersionDescription</code> field.</p>",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 512),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// VersionDescription is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

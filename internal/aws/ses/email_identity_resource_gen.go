@@ -196,20 +196,12 @@ func emailIdentityResource(ctx context.Context) (resource.Resource, error) {
 				"domain_signing_private_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "[Bring Your Own DKIM] A private key that's used to generate a DKIM signature. The private key must use 1024 or 2048-bit RSA encryption, and must be encoded using base64 encoding.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 					// DomainSigningPrivateKey is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: DomainSigningSelector
 				"domain_signing_selector": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "[Bring Your Own DKIM] A string that's used to identify a public key in the DNS configuration for a domain.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 					// DomainSigningSelector is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: NextSigningKeyLength
