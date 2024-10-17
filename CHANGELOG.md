@@ -10,6 +10,30 @@ BUG FIXES:
 
 * provider: Rolls back breaking change introduced in #2029. IAM role chaining is no longer supported, but will be reintroduced in a future version. ([#2043](https://github.com/hashicorp/terraform-provider-awscc/pull/2043))
 
+FEATURES:
+
+* **New Data Source:** `awscc_appsync_data_source`
+* **New Data Source:** `awscc_glue_crawler`
+* **New Data Source:** `awscc_glue_crawlers`
+* **New Data Source:** `awscc_glue_job`
+* **New Data Source:** `awscc_glue_jobs`
+* **New Data Source:** `awscc_kinesis_resource_policy`
+* **New Data Source:** `awscc_quicksight_folder`
+* **New Data Source:** `awscc_quicksight_folders`
+* **New Data Source:** `awscc_secretsmanager_secret_target_attachment`
+* **New Data Source:** `awscc_secretsmanager_secret_target_attachments`
+* **New Data Source:** `awscc_transfer_server`
+* **New Data Source:** `awscc_transfer_servers`
+* **New Data Source:** `awscc_wisdom_ai_prompt`
+* **New Resource:** `awscc_appsync_data_source`
+* **New Resource:** `awscc_glue_crawler`
+* **New Resource:** `awscc_glue_job`
+* **New Resource:** `awscc_kinesis_resource_policy`
+* **New Resource:** `awscc_quicksight_folder`
+* **New Resource:** `awscc_secretsmanager_secret_target_attachment`
+* **New Resource:** `awscc_transfer_server`
+* **New Resource:** `awscc_wisdom_ai_prompt`
+
 ## 1.16.0 (September 26, 2024)
 
 FEATURES:
