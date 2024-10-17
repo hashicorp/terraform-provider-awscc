@@ -1,8 +1,13 @@
 {
   "tagging": {
+    "permissions": [
+      "ec2:DeleteTags",
+      "ec2:CreateTags"
+    ],
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
+    "tagProperty": "/properties/Tags",
     "cloudFormationSystemTags": true
   },
   "handlers": {
@@ -86,7 +91,7 @@
   "properties": {
     "SecondaryAllocationIds": {
       "uniqueItems": true,
-      "description": "Secondary EIP allocation IDs. For more information, see [Create a NAT gateway](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating) in the *Amazon VPC User Guide*.",
+      "description": "Secondary EIP allocation IDs. For more information, see [Create a NAT gateway](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html) in the *Amazon VPC User Guide*.",
       "insertionOrder": true,
       "type": "array",
       "items": {
