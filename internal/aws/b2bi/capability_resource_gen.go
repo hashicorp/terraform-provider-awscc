@@ -69,6 +69,13 @@ func capabilityResource(ctx context.Context) (resource.Resource, error) {
 		//	    "Edi": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
+		//	        "CapabilityDirection": {
+		//	          "enum": [
+		//	            "INBOUND",
+		//	            "OUTBOUND"
+		//	          ],
+		//	          "type": "string"
+		//	        },
 		//	        "InputLocation": {
 		//	          "additionalProperties": false,
 		//	          "properties": {
@@ -224,6 +231,20 @@ func capabilityResource(ctx context.Context) (resource.Resource, error) {
 				// Property: Edi
 				"edi": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CapabilityDirection
+						"capability_direction": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"INBOUND",
+									"OUTBOUND",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: InputLocation
 						"input_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -655,6 +676,7 @@ func capabilityResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"bucket_name":            "BucketName",
 		"capability_arn":         "CapabilityArn",
+		"capability_direction":   "CapabilityDirection",
 		"capability_id":          "CapabilityId",
 		"configuration":          "Configuration",
 		"created_at":             "CreatedAt",

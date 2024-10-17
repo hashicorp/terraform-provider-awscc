@@ -62,6 +62,7 @@ func dBSubnetGroupResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The EC2 Subnet IDs for the DB subnet group.",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
@@ -72,7 +73,9 @@ func dBSubnetGroupResource(ctx context.Context) (resource.Resource, error) {
 			ElementType: types.StringType,
 			Description: "The EC2 Subnet IDs for the DB subnet group.",
 			Required:    true,
-			// SubnetIds is a write-only property.
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
@@ -177,9 +180,6 @@ func dBSubnetGroupResource(ctx context.Context) (resource.Resource, error) {
 		"value":                       "Value",
 	})
 
-	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/SubnetIds",
-	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

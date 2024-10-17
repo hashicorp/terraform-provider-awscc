@@ -197,7 +197,6 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		//	        "description": "The key-value string map. The valid character set is [a-zA-Z1-9+-=._:/]. The tag key can be up to 128 characters and must not start with aws:.",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
-		//	        "pattern": "",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {

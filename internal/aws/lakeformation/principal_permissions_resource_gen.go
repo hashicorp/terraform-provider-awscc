@@ -71,8 +71,9 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 		//	      "CREATE_DATABASE",
 		//	      "CREATE_TABLE",
 		//	      "DATA_LOCATION_ACCESS",
-		//	      "CREATE_TAG",
-		//	      "ASSOCIATE"
+		//	      "CREATE_LF_TAG",
+		//	      "ASSOCIATE",
+		//	      "GRANT_WITH_LF_TAG_EXPRESSION"
 		//	    ],
 		//	    "type": "string"
 		//	  },
@@ -95,8 +96,9 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 						"CREATE_DATABASE",
 						"CREATE_TABLE",
 						"DATA_LOCATION_ACCESS",
-						"CREATE_TAG",
+						"CREATE_LF_TAG",
 						"ASSOCIATE",
+						"GRANT_WITH_LF_TAG_EXPRESSION",
 					),
 				),
 			}, /*END VALIDATORS*/
@@ -123,8 +125,9 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 		//	      "CREATE_DATABASE",
 		//	      "CREATE_TABLE",
 		//	      "DATA_LOCATION_ACCESS",
-		//	      "CREATE_TAG",
-		//	      "ASSOCIATE"
+		//	      "CREATE_LF_TAG",
+		//	      "ASSOCIATE",
+		//	      "GRANT_WITH_LF_TAG_EXPRESSION"
 		//	    ],
 		//	    "type": "string"
 		//	  },
@@ -147,8 +150,9 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 						"CREATE_DATABASE",
 						"CREATE_TABLE",
 						"DATA_LOCATION_ACCESS",
-						"CREATE_TAG",
+						"CREATE_LF_TAG",
 						"ASSOCIATE",
+						"GRANT_WITH_LF_TAG_EXPRESSION",
 					),
 				),
 			}, /*END VALIDATORS*/

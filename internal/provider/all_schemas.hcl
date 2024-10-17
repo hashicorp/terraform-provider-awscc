@@ -2233,7 +2233,7 @@ resource_schema "aws_glue_usage_profile" {
   cloudformation_type_name = "AWS::Glue::UsageProfile"
 
   # Suppression Reason: Configuration/JobConfiguration is of unsupported type: key-value map of ""
-  # https://github.com/hashicorp/terraform-provider-awscc/issues/1515
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/2070
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true

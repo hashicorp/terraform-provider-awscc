@@ -512,7 +512,8 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "Test",
 		//	                    "Deploy",
 		//	                    "Invoke",
-		//	                    "Approval"
+		//	                    "Approval",
+		//	                    "Compute"
 		//	                  ],
 		//	                  "type": "string"
 		//	                },
@@ -536,6 +537,14 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 		//	                "Provider"
 		//	              ],
 		//	              "type": "object"
+		//	            },
+		//	            "Commands": {
+		//	              "description": "The shell commands to run with your compute action in CodePipeline.",
+		//	              "items": {
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": false
 		//	            },
 		//	            "Configuration": {
 		//	              "description": "The action's configuration. These are key-value pairs that specify input values for an action.",
@@ -572,6 +581,14 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 		//	                "additionalProperties": false,
 		//	                "description": "Represents information about the output of an action.",
 		//	                "properties": {
+		//	                  "Files": {
+		//	                    "description": "The files that you want to associate with the output artifact that will be exported from the compute action.",
+		//	                    "items": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "type": "array",
+		//	                    "uniqueItems": true
+		//	                  },
 		//	                  "Name": {
 		//	                    "description": "The name of the output of an artifact, such as \"My App\".",
 		//	                    "type": "string"
@@ -581,6 +598,14 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "Name"
 		//	                ],
 		//	                "type": "object"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": true
+		//	            },
+		//	            "OutputVariables": {
+		//	              "description": "The list of variables that are to be exported from the compute action.",
+		//	              "items": {
+		//	                "type": "string"
 		//	              },
 		//	              "type": "array",
 		//	              "uniqueItems": true
@@ -954,6 +979,7 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 													"Deploy",
 													"Invoke",
 													"Approval",
+													"Compute",
 												),
 											}, /*END VALIDATORS*/
 										}, /*END ATTRIBUTE*/
@@ -975,6 +1001,16 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END SCHEMA*/
 									Description: "Represents information about an action type.",
 									Required:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Commands
+								"commands": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "The shell commands to run with your compute action in CodePipeline.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Configuration
 								"configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1031,6 +1067,19 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 								"output_artifacts": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Files
+											"files": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Description: "The files that you want to associate with the output artifact that will be exported from the compute action.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.List{ /*START VALIDATORS*/
+													listvalidator.UniqueValues(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													listplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
 											// Property: Name
 											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "The name of the output of an artifact, such as \"My App\".",
@@ -1047,6 +1096,19 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END NESTED OBJECT*/
 									Optional: true,
 									Computed: true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.UniqueValues(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: OutputVariables
+								"output_variables": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "The list of variables that are to be exported from the compute action.",
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.List{ /*START VALIDATORS*/
 										listvalidator.UniqueValues(),
 									}, /*END VALIDATORS*/
@@ -2312,6 +2374,7 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 		"blockers":                          "Blockers",
 		"branches":                          "Branches",
 		"category":                          "Category",
+		"commands":                          "Commands",
 		"conditions":                        "Conditions",
 		"configuration":                     "Configuration",
 		"default_value":                     "DefaultValue",
@@ -2322,6 +2385,7 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 		"excludes":                          "Excludes",
 		"execution_mode":                    "ExecutionMode",
 		"file_paths":                        "FilePaths",
+		"files":                             "Files",
 		"git_configuration":                 "GitConfiguration",
 		"id":                                "Id",
 		"includes":                          "Includes",
@@ -2333,6 +2397,7 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 		"on_failure":                        "OnFailure",
 		"on_success":                        "OnSuccess",
 		"output_artifacts":                  "OutputArtifacts",
+		"output_variables":                  "OutputVariables",
 		"owner":                             "Owner",
 		"pipeline_type":                     "PipelineType",
 		"provider":                          "Provider",

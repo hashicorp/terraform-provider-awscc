@@ -35,7 +35,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "description": " The arn of the connector. The arn is unique for each ConnectorRegistration in your AWS account.",
 		//	  "maxLength": 512,
-		//	  "pattern": "arn:*:appflow:.*:[0-9]+:.*",
+		//	  "pattern": "arn:.*:appflow:.*:[0-9]+:.*",
 		//	  "type": "string"
 		//	}
 		"connector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
