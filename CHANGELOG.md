@@ -4,12 +4,6 @@ BUG FIXES:
 
 * provider: Prevent crash when create waiter returns a nil progress event ([#2027](https://github.com/hashicorp/terraform-provider-awscc/pull/2027))
 
-## 1.16.1 (September 27, 2024)
-
-BUG FIXES:
-
-* provider: Rolls back breaking change introduced in #2029. IAM role chaining is no longer supported, but will be reintroduced in a future version. ([#2043](https://github.com/hashicorp/terraform-provider-awscc/pull/2043))
-
 FEATURES:
 
 * **New Data Source:** `awscc_appsync_data_source`
@@ -33,6 +27,12 @@ FEATURES:
 * **New Resource:** `awscc_secretsmanager_secret_target_attachment`
 * **New Resource:** `awscc_transfer_server`
 * **New Resource:** `awscc_wisdom_ai_prompt`
+
+## 1.16.1 (September 27, 2024)
+
+BUG FIXES:
+
+* provider: Rolls back breaking change introduced in #2029. IAM role chaining is no longer supported, but will be reintroduced in a future version. ([#2043](https://github.com/hashicorp/terraform-provider-awscc/pull/2043))
 
 ## 1.16.0 (September 26, 2024)
 
