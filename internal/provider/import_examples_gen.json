@@ -330,6 +330,11 @@
         "path": "./examples/resources/awscc_appstream_image_builder/import.sh"
     },
     {
+        "resource": "awscc_appsync_data_source",
+        "identifier": ["DataSourceArn"],
+        "path": "./examples/resources/awscc_appsync_data_source/import.sh"
+    },
+    {
         "resource": "awscc_appsync_domain_name",
         "identifier": ["DomainName"],
         "path": "./examples/resources/awscc_appsync_domain_name/import.sh"
@@ -2305,9 +2310,19 @@
         "path": "./examples/resources/awscc_globalaccelerator_listener/import.sh"
     },
     {
+        "resource": "awscc_glue_crawler",
+        "identifier": ["Name"],
+        "path": "./examples/resources/awscc_glue_crawler/import.sh"
+    },
+    {
         "resource": "awscc_glue_database",
         "identifier": ["DatabaseName"],
         "path": "./examples/resources/awscc_glue_database/import.sh"
+    },
+    {
+        "resource": "awscc_glue_job",
+        "identifier": ["Name"],
+        "path": "./examples/resources/awscc_glue_job/import.sh"
     },
     {
         "resource": "awscc_glue_registry",
@@ -2968,6 +2983,11 @@
         "resource": "awscc_kendraranking_execution_plan",
         "identifier": ["Id"],
         "path": "./examples/resources/awscc_kendraranking_execution_plan/import.sh"
+    },
+    {
+        "resource": "awscc_kinesis_resource_policy",
+        "identifier": ["ResourceArn"],
+        "path": "./examples/resources/awscc_kinesis_resource_policy/import.sh"
     },
     {
         "resource": "awscc_kinesis_stream",
@@ -3940,6 +3960,11 @@
         "path": "./examples/resources/awscc_quicksight_data_source/import.sh"
     },
     {
+        "resource": "awscc_quicksight_folder",
+        "identifier": ["AwsAccountId","FolderId"],
+        "path": "./examples/resources/awscc_quicksight_folder/import.sh"
+    },
+    {
         "resource": "awscc_quicksight_refresh_schedule",
         "identifier": ["AwsAccountId","DataSetId","Schedule/ScheduleId"],
         "path": "./examples/resources/awscc_quicksight_refresh_schedule/import.sh"
@@ -4740,6 +4765,11 @@
         "path": "./examples/resources/awscc_secretsmanager_secret/import.sh"
     },
     {
+        "resource": "awscc_secretsmanager_secret_target_attachment",
+        "identifier": ["Id"],
+        "path": "./examples/resources/awscc_secretsmanager_secret_target_attachment/import.sh"
+    },
+    {
         "resource": "awscc_securityhub_configuration_policy",
         "identifier": ["Arn"],
         "path": "./examples/resources/awscc_securityhub_configuration_policy/import.sh"
@@ -4965,6 +4995,11 @@
         "path": "./examples/resources/awscc_transfer_profile/import.sh"
     },
     {
+        "resource": "awscc_transfer_server",
+        "identifier": ["Arn"],
+        "path": "./examples/resources/awscc_transfer_server/import.sh"
+    },
+    {
         "resource": "awscc_transfer_workflow",
         "identifier": ["WorkflowId"],
         "path": "./examples/resources/awscc_transfer_workflow/import.sh"
@@ -5063,6 +5098,11 @@
         "resource": "awscc_wafv2_web_acl_association",
         "identifier": ["ResourceArn","WebACLArn"],
         "path": "./examples/resources/awscc_wafv2_web_acl_association/import.sh"
+    },
+    {
+        "resource": "awscc_wisdom_ai_prompt",
+        "identifier": ["AIPromptId","AssistantId"],
+        "path": "./examples/resources/awscc_wisdom_ai_prompt/import.sh"
     },
     {
         "resource": "awscc_wisdom_assistant",

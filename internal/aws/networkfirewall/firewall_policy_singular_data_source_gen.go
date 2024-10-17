@@ -80,6 +80,17 @@ func firewallPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	    "StatefulEngineOptions": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
+		//	        "FlowTimeouts": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "TcpIdleTimeoutSeconds": {
+		//	              "maximum": 600,
+		//	              "minimum": 60,
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
 		//	        "RuleOrder": {
 		//	          "enum": [
 		//	            "DEFAULT_ACTION_ORDER",
@@ -279,6 +290,16 @@ func firewallPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 				// Property: StatefulEngineOptions
 				"stateful_engine_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: FlowTimeouts
+						"flow_timeouts": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: TcpIdleTimeoutSeconds
+								"tcp_idle_timeout_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
 						// Property: RuleOrder
 						"rule_order": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
@@ -498,6 +519,7 @@ func firewallPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		"firewall_policy_arn":                "FirewallPolicyArn",
 		"firewall_policy_id":                 "FirewallPolicyId",
 		"firewall_policy_name":               "FirewallPolicyName",
+		"flow_timeouts":                      "FlowTimeouts",
 		"key":                                "Key",
 		"override":                           "Override",
 		"policy_variables":                   "PolicyVariables",
@@ -515,6 +537,7 @@ func firewallPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		"stateless_rule_group_references":    "StatelessRuleGroupReferences",
 		"stream_exception_policy":            "StreamExceptionPolicy",
 		"tags":                               "Tags",
+		"tcp_idle_timeout_seconds":           "TcpIdleTimeoutSeconds",
 		"tls_inspection_configuration_arn":   "TLSInspectionConfigurationArn",
 		"value":                              "Value",
 	})

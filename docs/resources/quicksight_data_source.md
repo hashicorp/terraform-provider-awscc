@@ -39,6 +39,7 @@ Definition of the AWS::QuickSight::DataSource Resource Type.
             This is a variant type structure. For this structure to be valid, only one of the
             attributes can be non-null.</p> (see [below for nested schema](#nestedatt--data_source_parameters))
 - `error_info` (Attributes) <p>Error information for the data source creation or update.</p> (see [below for nested schema](#nestedatt--error_info))
+- `folder_arns` (List of String)
 - `permissions` (Attributes List) (see [below for nested schema](#nestedatt--permissions))
 - `ssl_properties` (Attributes) <p>Secure Socket Layer (SSL) properties that apply when Amazon QuickSight connects to your
             underlying data source.</p> (see [below for nested schema](#nestedatt--ssl_properties))

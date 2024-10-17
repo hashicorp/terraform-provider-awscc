@@ -7,6 +7,7 @@ package b2bi
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
@@ -264,7 +265,11 @@ func transformerResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Required: true,
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: FileFormat
 		// CloudFormation resource type schema:
@@ -272,32 +277,367 @@ func transformerResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "enum": [
 		//	    "XML",
-		//	    "JSON"
+		//	    "JSON",
+		//	    "NOT_USED"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"file_format": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
+			Optional: true,
+			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"XML",
 					"JSON",
+					"NOT_USED",
 				),
 			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: InputConversion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "FormatOptions": {
+		//	      "properties": {
+		//	        "X12": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "TransactionSet": {
+		//	              "enum": [
+		//	                "X12_110",
+		//	                "X12_180",
+		//	                "X12_204",
+		//	                "X12_210",
+		//	                "X12_211",
+		//	                "X12_214",
+		//	                "X12_215",
+		//	                "X12_259",
+		//	                "X12_260",
+		//	                "X12_266",
+		//	                "X12_269",
+		//	                "X12_270",
+		//	                "X12_271",
+		//	                "X12_274",
+		//	                "X12_275",
+		//	                "X12_276",
+		//	                "X12_277",
+		//	                "X12_278",
+		//	                "X12_310",
+		//	                "X12_315",
+		//	                "X12_322",
+		//	                "X12_404",
+		//	                "X12_410",
+		//	                "X12_417",
+		//	                "X12_421",
+		//	                "X12_426",
+		//	                "X12_810",
+		//	                "X12_820",
+		//	                "X12_824",
+		//	                "X12_830",
+		//	                "X12_832",
+		//	                "X12_834",
+		//	                "X12_835",
+		//	                "X12_837",
+		//	                "X12_844",
+		//	                "X12_846",
+		//	                "X12_849",
+		//	                "X12_850",
+		//	                "X12_852",
+		//	                "X12_855",
+		//	                "X12_856",
+		//	                "X12_860",
+		//	                "X12_861",
+		//	                "X12_864",
+		//	                "X12_865",
+		//	                "X12_869",
+		//	                "X12_870",
+		//	                "X12_940",
+		//	                "X12_945",
+		//	                "X12_990",
+		//	                "X12_997",
+		//	                "X12_999",
+		//	                "X12_270_X279",
+		//	                "X12_271_X279",
+		//	                "X12_275_X210",
+		//	                "X12_275_X211",
+		//	                "X12_276_X212",
+		//	                "X12_277_X212",
+		//	                "X12_277_X214",
+		//	                "X12_277_X364",
+		//	                "X12_278_X217",
+		//	                "X12_820_X218",
+		//	                "X12_820_X306",
+		//	                "X12_824_X186",
+		//	                "X12_834_X220",
+		//	                "X12_834_X307",
+		//	                "X12_834_X318",
+		//	                "X12_835_X221",
+		//	                "X12_837_X222",
+		//	                "X12_837_X223",
+		//	                "X12_837_X224",
+		//	                "X12_837_X291",
+		//	                "X12_837_X292",
+		//	                "X12_837_X298",
+		//	                "X12_999_X231"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "Version": {
+		//	              "enum": [
+		//	                "VERSION_4010",
+		//	                "VERSION_4030",
+		//	                "VERSION_5010",
+		//	                "VERSION_5010_HIPAA"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "FromFormat": {
+		//	      "enum": [
+		//	        "X12"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "FromFormat"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"input_conversion": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FormatOptions
+				"format_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: X12
+						"x12": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: TransactionSet
+								"transaction_set": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"X12_110",
+											"X12_180",
+											"X12_204",
+											"X12_210",
+											"X12_211",
+											"X12_214",
+											"X12_215",
+											"X12_259",
+											"X12_260",
+											"X12_266",
+											"X12_269",
+											"X12_270",
+											"X12_271",
+											"X12_274",
+											"X12_275",
+											"X12_276",
+											"X12_277",
+											"X12_278",
+											"X12_310",
+											"X12_315",
+											"X12_322",
+											"X12_404",
+											"X12_410",
+											"X12_417",
+											"X12_421",
+											"X12_426",
+											"X12_810",
+											"X12_820",
+											"X12_824",
+											"X12_830",
+											"X12_832",
+											"X12_834",
+											"X12_835",
+											"X12_837",
+											"X12_844",
+											"X12_846",
+											"X12_849",
+											"X12_850",
+											"X12_852",
+											"X12_855",
+											"X12_856",
+											"X12_860",
+											"X12_861",
+											"X12_864",
+											"X12_865",
+											"X12_869",
+											"X12_870",
+											"X12_940",
+											"X12_945",
+											"X12_990",
+											"X12_997",
+											"X12_999",
+											"X12_270_X279",
+											"X12_271_X279",
+											"X12_275_X210",
+											"X12_275_X211",
+											"X12_276_X212",
+											"X12_277_X212",
+											"X12_277_X214",
+											"X12_277_X364",
+											"X12_278_X217",
+											"X12_820_X218",
+											"X12_820_X306",
+											"X12_824_X186",
+											"X12_834_X220",
+											"X12_834_X307",
+											"X12_834_X318",
+											"X12_835_X221",
+											"X12_837_X222",
+											"X12_837_X223",
+											"X12_837_X224",
+											"X12_837_X291",
+											"X12_837_X292",
+											"X12_837_X298",
+											"X12_999_X231",
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Version
+								"version": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"VERSION_4010",
+											"VERSION_4030",
+											"VERSION_5010",
+											"VERSION_5010_HIPAA",
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: FromFormat
+				"from_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"X12",
+						),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Mapping
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Template": {
+		//	      "maxLength": 350000,
+		//	      "minLength": 0,
+		//	      "type": "string"
+		//	    },
+		//	    "TemplateLanguage": {
+		//	      "enum": [
+		//	        "XSLT",
+		//	        "JSONATA"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "TemplateLanguage"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"mapping": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Template
+				"template": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(0, 350000),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: TemplateLanguage
+				"template_language": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"XSLT",
+							"JSONATA",
+						),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: MappingTemplate
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "This shape is deprecated: This is a legacy trait. Please use input-conversion or output-conversion.",
 		//	  "maxLength": 350000,
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"mapping_template": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
+			Description: "This shape is deprecated: This is a legacy trait. Please use input-conversion or output-conversion.",
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(0, 350000),
 			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ModifiedAt
 		// CloudFormation resource type schema:
@@ -319,30 +659,393 @@ func transformerResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "maxLength": 254,
 		//	  "minLength": 1,
+		//	  "pattern": "^[a-zA-Z0-9_-]{1,512}$",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 254),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]{1,512}$"), ""),
 			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: OutputConversion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "FormatOptions": {
+		//	      "properties": {
+		//	        "X12": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "TransactionSet": {
+		//	              "enum": [
+		//	                "X12_110",
+		//	                "X12_180",
+		//	                "X12_204",
+		//	                "X12_210",
+		//	                "X12_211",
+		//	                "X12_214",
+		//	                "X12_215",
+		//	                "X12_259",
+		//	                "X12_260",
+		//	                "X12_266",
+		//	                "X12_269",
+		//	                "X12_270",
+		//	                "X12_271",
+		//	                "X12_274",
+		//	                "X12_275",
+		//	                "X12_276",
+		//	                "X12_277",
+		//	                "X12_278",
+		//	                "X12_310",
+		//	                "X12_315",
+		//	                "X12_322",
+		//	                "X12_404",
+		//	                "X12_410",
+		//	                "X12_417",
+		//	                "X12_421",
+		//	                "X12_426",
+		//	                "X12_810",
+		//	                "X12_820",
+		//	                "X12_824",
+		//	                "X12_830",
+		//	                "X12_832",
+		//	                "X12_834",
+		//	                "X12_835",
+		//	                "X12_837",
+		//	                "X12_844",
+		//	                "X12_846",
+		//	                "X12_849",
+		//	                "X12_850",
+		//	                "X12_852",
+		//	                "X12_855",
+		//	                "X12_856",
+		//	                "X12_860",
+		//	                "X12_861",
+		//	                "X12_864",
+		//	                "X12_865",
+		//	                "X12_869",
+		//	                "X12_870",
+		//	                "X12_940",
+		//	                "X12_945",
+		//	                "X12_990",
+		//	                "X12_997",
+		//	                "X12_999",
+		//	                "X12_270_X279",
+		//	                "X12_271_X279",
+		//	                "X12_275_X210",
+		//	                "X12_275_X211",
+		//	                "X12_276_X212",
+		//	                "X12_277_X212",
+		//	                "X12_277_X214",
+		//	                "X12_277_X364",
+		//	                "X12_278_X217",
+		//	                "X12_820_X218",
+		//	                "X12_820_X306",
+		//	                "X12_824_X186",
+		//	                "X12_834_X220",
+		//	                "X12_834_X307",
+		//	                "X12_834_X318",
+		//	                "X12_835_X221",
+		//	                "X12_837_X222",
+		//	                "X12_837_X223",
+		//	                "X12_837_X224",
+		//	                "X12_837_X291",
+		//	                "X12_837_X292",
+		//	                "X12_837_X298",
+		//	                "X12_999_X231"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "Version": {
+		//	              "enum": [
+		//	                "VERSION_4010",
+		//	                "VERSION_4030",
+		//	                "VERSION_5010",
+		//	                "VERSION_5010_HIPAA"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "ToFormat": {
+		//	      "enum": [
+		//	        "X12"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "ToFormat"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"output_conversion": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FormatOptions
+				"format_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: X12
+						"x12": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: TransactionSet
+								"transaction_set": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"X12_110",
+											"X12_180",
+											"X12_204",
+											"X12_210",
+											"X12_211",
+											"X12_214",
+											"X12_215",
+											"X12_259",
+											"X12_260",
+											"X12_266",
+											"X12_269",
+											"X12_270",
+											"X12_271",
+											"X12_274",
+											"X12_275",
+											"X12_276",
+											"X12_277",
+											"X12_278",
+											"X12_310",
+											"X12_315",
+											"X12_322",
+											"X12_404",
+											"X12_410",
+											"X12_417",
+											"X12_421",
+											"X12_426",
+											"X12_810",
+											"X12_820",
+											"X12_824",
+											"X12_830",
+											"X12_832",
+											"X12_834",
+											"X12_835",
+											"X12_837",
+											"X12_844",
+											"X12_846",
+											"X12_849",
+											"X12_850",
+											"X12_852",
+											"X12_855",
+											"X12_856",
+											"X12_860",
+											"X12_861",
+											"X12_864",
+											"X12_865",
+											"X12_869",
+											"X12_870",
+											"X12_940",
+											"X12_945",
+											"X12_990",
+											"X12_997",
+											"X12_999",
+											"X12_270_X279",
+											"X12_271_X279",
+											"X12_275_X210",
+											"X12_275_X211",
+											"X12_276_X212",
+											"X12_277_X212",
+											"X12_277_X214",
+											"X12_277_X364",
+											"X12_278_X217",
+											"X12_820_X218",
+											"X12_820_X306",
+											"X12_824_X186",
+											"X12_834_X220",
+											"X12_834_X307",
+											"X12_834_X318",
+											"X12_835_X221",
+											"X12_837_X222",
+											"X12_837_X223",
+											"X12_837_X224",
+											"X12_837_X291",
+											"X12_837_X292",
+											"X12_837_X298",
+											"X12_999_X231",
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Version
+								"version": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"VERSION_4010",
+											"VERSION_4030",
+											"VERSION_5010",
+											"VERSION_5010_HIPAA",
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ToFormat
+				"to_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"X12",
+						),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: SampleDocument
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "This shape is deprecated: This is a legacy trait. Please use input-conversion or output-conversion.",
 		//	  "maxLength": 1024,
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"sample_document": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "This shape is deprecated: This is a legacy trait. Please use input-conversion or output-conversion.",
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(0, 1024),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SampleDocuments
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "BucketName": {
+		//	      "maxLength": 63,
+		//	      "minLength": 3,
+		//	      "type": "string"
+		//	    },
+		//	    "Keys": {
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Input": {
+		//	            "maxLength": 1024,
+		//	            "minLength": 0,
+		//	            "type": "string"
+		//	          },
+		//	          "Output": {
+		//	            "maxLength": 1024,
+		//	            "minLength": 0,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "BucketName",
+		//	    "Keys"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"sample_documents": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BucketName
+				"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(3, 63),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Keys
+				"keys": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Input
+							"input": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(0, 1024),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Output
+							"output": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(0, 1024),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						fwvalidators.NotNullList(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Status
@@ -481,22 +1184,36 @@ func transformerResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::B2BI::Transformer").WithTerraformTypeName("awscc_b2bi_transformer")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"created_at":       "CreatedAt",
-		"edi_type":         "EdiType",
-		"file_format":      "FileFormat",
-		"key":              "Key",
-		"mapping_template": "MappingTemplate",
-		"modified_at":      "ModifiedAt",
-		"name":             "Name",
-		"sample_document":  "SampleDocument",
-		"status":           "Status",
-		"tags":             "Tags",
-		"transaction_set":  "TransactionSet",
-		"transformer_arn":  "TransformerArn",
-		"transformer_id":   "TransformerId",
-		"value":            "Value",
-		"version":          "Version",
-		"x12_details":      "X12Details",
+		"bucket_name":       "BucketName",
+		"created_at":        "CreatedAt",
+		"edi_type":          "EdiType",
+		"file_format":       "FileFormat",
+		"format_options":    "FormatOptions",
+		"from_format":       "FromFormat",
+		"input":             "Input",
+		"input_conversion":  "InputConversion",
+		"key":               "Key",
+		"keys":              "Keys",
+		"mapping":           "Mapping",
+		"mapping_template":  "MappingTemplate",
+		"modified_at":       "ModifiedAt",
+		"name":              "Name",
+		"output":            "Output",
+		"output_conversion": "OutputConversion",
+		"sample_document":   "SampleDocument",
+		"sample_documents":  "SampleDocuments",
+		"status":            "Status",
+		"tags":              "Tags",
+		"template":          "Template",
+		"template_language": "TemplateLanguage",
+		"to_format":         "ToFormat",
+		"transaction_set":   "TransactionSet",
+		"transformer_arn":   "TransformerArn",
+		"transformer_id":    "TransformerId",
+		"value":             "Value",
+		"version":           "Version",
+		"x12":               "X12",
+		"x12_details":       "X12Details",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

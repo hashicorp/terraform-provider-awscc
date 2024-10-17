@@ -272,11 +272,11 @@ resource "awscc_rds_db_cluster" "example_db_cluster" {
  Valid for Cluster Type: Multi-AZ DB clusters only
  Default: The default behavior varies depending on whether ``DBSubnetGroupName`` is specified.
  If ``DBSubnetGroupName`` isn't specified, and ``PubliclyAccessible`` isn't specified, the following applies:
-  +  If the default VPC in the target Region doesn?t have an internet gateway attached to it, the DB cluster is private.
+  +  If the default VPC in the target Region doesn’t have an internet gateway attached to it, the DB cluster is private.
   +  If the default VPC in the target Region has an internet gateway attached to it, the DB cluster is public.
   
  If ``DBSubnetGroupName`` is specified, and ``PubliclyAccessible`` isn't specified, the following applies:
-  +  If the subnets are part of a VPC that doesn?t have an internet gateway attached to it, the DB cluster is private.
+  +  If the subnets are part of a VPC that doesn’t have an internet gateway attached to it, the DB cluster is private.
   +  If the subnets are part of a VPC that has an internet gateway attached to it, the DB cluster is public.
 - `read_endpoint` (Attributes) This data type represents the information you need to connect to an Amazon RDS DB instance. This data type is used as a response element in the following actions:
   +   ``CreateDBInstance`` 

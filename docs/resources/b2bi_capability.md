@@ -46,6 +46,7 @@ Optional:
 
 Optional:
 
+- `capability_direction` (String)
 - `input_location` (Attributes) (see [below for nested schema](#nestedatt--configuration--edi--input_location))
 - `output_location` (Attributes) (see [below for nested schema](#nestedatt--configuration--edi--output_location))
 - `transformer_id` (String)

@@ -77,6 +77,10 @@ func vPCEndpointServiceResource(ctx context.Context) (resource.Resource, error) 
 		//
 		//	{
 		//	  "items": {
+		//	    "relationshipRef": {
+		//	      "propertyPath": "/properties/LoadBalancerArn",
+		//	      "typeName": "AWS::ElasticLoadBalancingV2::LoadBalancer"
+		//	    },
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array",

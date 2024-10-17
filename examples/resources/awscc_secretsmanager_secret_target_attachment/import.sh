@@ -1,0 +1,1 @@
+$ terraform import awscc_secretsmanager_secret_target_attachment.example "id"

@@ -8,7 +8,6 @@ package s3express
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -50,10 +49,94 @@ func directoryBucketDataSource(ctx context.Context) (datasource.DataSource, erro
 		}, /*END ATTRIBUTE*/
 		// Property: BucketEncryption
 		// CloudFormation resource type schema:
-		// {}
-		"bucket_encryption": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: jsontypes.NormalizedType{},
-			Computed:   true,
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Specifies default encryption for a bucket using server-side encryption with Amazon S3 managed keys (SSE-S3) or AWS KMS keys (SSE-KMS).",
+		//	  "properties": {
+		//	    "ServerSideEncryptionConfiguration": {
+		//	      "description": "Specifies the default server-side-encryption configuration.",
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "Specifies the default server-side encryption configuration.",
+		//	        "properties": {
+		//	          "BucketKeyEnabled": {
+		//	            "description": "Specifies whether Amazon S3 should use an S3 Bucket Key with server-side encryption using KMS (SSE-KMS) for new objects in the bucket. Existing objects are not affected. Amazon S3 Express One Zone uses an S3 Bucket Key with SSE-KMS and S3 Bucket Key cannot be disabled. It's only allowed to set the BucketKeyEnabled element to true.",
+		//	            "type": "boolean"
+		//	          },
+		//	          "ServerSideEncryptionByDefault": {
+		//	            "additionalProperties": false,
+		//	            "description": "Specifies the default server-side encryption to apply to new objects in the bucket. If a PUT Object request doesn't specify any server-side encryption, this default encryption will be applied.",
+		//	            "properties": {
+		//	              "KMSMasterKeyID": {
+		//	                "anyOf": [
+		//	                  {},
+		//	                  {}
+		//	                ],
+		//	                "description": "AWS Key Management Service (KMS) customer managed key ID to use for the default encryption. This parameter is allowed only if SSEAlgorithm is set to aws:kms. You can specify this parameter with the key ID or the Amazon Resource Name (ARN) of the KMS key",
+		//	                "type": "string"
+		//	              },
+		//	              "SSEAlgorithm": {
+		//	                "enum": [
+		//	                  "aws:kms",
+		//	                  "AES256"
+		//	                ],
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "SSEAlgorithm"
+		//	            ],
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "ServerSideEncryptionConfiguration"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"bucket_encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ServerSideEncryptionConfiguration
+				"server_side_encryption_configuration": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: BucketKeyEnabled
+							"bucket_key_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies whether Amazon S3 should use an S3 Bucket Key with server-side encryption using KMS (SSE-KMS) for new objects in the bucket. Existing objects are not affected. Amazon S3 Express One Zone uses an S3 Bucket Key with SSE-KMS and S3 Bucket Key cannot be disabled. It's only allowed to set the BucketKeyEnabled element to true.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ServerSideEncryptionByDefault
+							"server_side_encryption_by_default": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: KMSMasterKeyID
+									"kms_master_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "AWS Key Management Service (KMS) customer managed key ID to use for the default encryption. This parameter is allowed only if SSEAlgorithm is set to aws:kms. You can specify this parameter with the key ID or the Amazon Resource Name (ARN) of the KMS key",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: SSEAlgorithm
+									"sse_algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Specifies the default server-side encryption to apply to new objects in the bucket. If a PUT Object request doesn't specify any server-side encryption, this default encryption will be applied.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Specifies the default server-side-encryption configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies default encryption for a bucket using server-side encryption with Amazon S3 managed keys (SSE-S3) or AWS KMS keys (SSE-KMS).",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BucketName
 		// CloudFormation resource type schema:
@@ -110,12 +193,17 @@ func directoryBucketDataSource(ctx context.Context) (datasource.DataSource, erro
 	opts = opts.WithCloudFormationTypeName("AWS::S3Express::DirectoryBucket").WithTerraformTypeName("awscc_s3express_directory_bucket")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                    "Arn",
-		"availability_zone_name": "AvailabilityZoneName",
-		"bucket_encryption":      "BucketEncryption",
-		"bucket_name":            "BucketName",
-		"data_redundancy":        "DataRedundancy",
-		"location_name":          "LocationName",
+		"arn":                                  "Arn",
+		"availability_zone_name":               "AvailabilityZoneName",
+		"bucket_encryption":                    "BucketEncryption",
+		"bucket_key_enabled":                   "BucketKeyEnabled",
+		"bucket_name":                          "BucketName",
+		"data_redundancy":                      "DataRedundancy",
+		"kms_master_key_id":                    "KMSMasterKeyID",
+		"location_name":                        "LocationName",
+		"server_side_encryption_by_default":    "ServerSideEncryptionByDefault",
+		"server_side_encryption_configuration": "ServerSideEncryptionConfiguration",
+		"sse_algorithm":                        "SSEAlgorithm",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

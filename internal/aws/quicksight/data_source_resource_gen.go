@@ -5338,6 +5338,29 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: FolderArns
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "maxItems": 10,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"folder_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(0, 10),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// FolderArns is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
@@ -5610,6 +5633,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	    "PRESTO",
 		//	    "REDSHIFT",
 		//	    "S3",
+		//	    "S3_TABLES",
 		//	    "SALESFORCE",
 		//	    "SERVICENOW",
 		//	    "SNOWFLAKE",
@@ -5659,6 +5683,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 					"PRESTO",
 					"REDSHIFT",
 					"S3",
+					"S3_TABLES",
 					"SALESFORCE",
 					"SERVICENOW",
 					"SNOWFLAKE",
@@ -5771,6 +5796,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"domain":                           "Domain",
 		"enable_identity_propagation":      "EnableIdentityPropagation",
 		"error_info":                       "ErrorInfo",
+		"folder_arns":                      "FolderArns",
 		"host":                             "Host",
 		"iam_parameters":                   "IAMParameters",
 		"identity_center_configuration":    "IdentityCenterConfiguration",
@@ -5817,6 +5843,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Credentials",
+		"/properties/FolderArns",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

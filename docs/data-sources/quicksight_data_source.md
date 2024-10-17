@@ -40,6 +40,7 @@ Data Source schema for AWS::QuickSight::DataSource
             This is a variant type structure. For this structure to be valid, only one of the
             attributes can be non-null.</p> (see [below for nested schema](#nestedatt--data_source_parameters))
 - `error_info` (Attributes) <p>Error information for the data source creation or update.</p> (see [below for nested schema](#nestedatt--error_info))
+- `folder_arns` (List of String)
 - `last_updated_time` (String) <p>The last time that this data source was updated.</p>
 - `name` (String)
 - `permissions` (Attributes List) (see [below for nested schema](#nestedatt--permissions))

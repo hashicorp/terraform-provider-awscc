@@ -8,10 +8,14 @@ package ec2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -62,11 +66,11 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The IPv4 CIDR on the customer gateway (on-premises) side of the VPN connection.\n Default: ``0.0.0.0/0``",
 		//	  "type": "string"
 		//	}
 		"local_ipv_4_network_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "The IPv4 CIDR on the customer gateway (on-premises) side of the VPN connection.\n Default: ``0.0.0.0/0``",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -78,11 +82,11 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The IPv6 CIDR on the customer gateway (on-premises) side of the VPN connection.\n Default: ``::/0``",
 		//	  "type": "string"
 		//	}
 		"local_ipv_6_network_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "The IPv6 CIDR on the customer gateway (on-premises) side of the VPN connection.\n Default: ``::/0``",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -94,11 +98,11 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The type of IPv4 address assigned to the outside interface of the customer gateway device.\n Valid values: ``PrivateIpv4`` | ``PublicIpv4`` \n Default: ``PublicIpv4``",
 		//	  "type": "string"
 		//	}
 		"outside_ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "The type of IPv4 address assigned to the outside interface of the customer gateway device.\n Valid values: ``PrivateIpv4`` | ``PublicIpv4`` \n Default: ``PublicIpv4``",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -110,11 +114,11 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The IPv4 CIDR on the AWS side of the VPN connection.\n Default: ``0.0.0.0/0``",
 		//	  "type": "string"
 		//	}
 		"remote_ipv_4_network_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "The IPv4 CIDR on the AWS side of the VPN connection.\n Default: ``0.0.0.0/0``",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -126,11 +130,11 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The IPv6 CIDR on the AWS side of the VPN connection.\n Default: ``::/0``",
 		//	  "type": "string"
 		//	}
 		"remote_ipv_6_network_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "The IPv6 CIDR on the AWS side of the VPN connection.\n Default: ``::/0``",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -239,11 +243,11 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The transit gateway attachment ID to use for the VPN tunnel.\n Required if ``OutsideIpAddressType`` is set to ``PrivateIpv4``.",
 		//	  "type": "string"
 		//	}
 		"transport_transit_gateway_attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "The transit gateway attachment ID to use for the VPN tunnel.\n Required if ``OutsideIpAddressType`` is set to ``PrivateIpv4``.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -255,11 +259,11 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "Indicate whether the VPN tunnels process IPv4 or IPv6 traffic.\n Default: ``ipv4``",
 		//	  "type": "string"
 		//	}
 		"tunnel_inside_ip_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "Indicate whether the VPN tunnels process IPv4 or IPv6 traffic.\n Default: ``ipv4``",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -321,12 +325,266 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 		//	    "additionalProperties": false,
 		//	    "description": "The tunnel options for a single VPN tunnel.",
 		//	    "properties": {
+		//	      "DPDTimeoutAction": {
+		//	        "description": "",
+		//	        "enum": [
+		//	          "clear",
+		//	          "none",
+		//	          "restart"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "DPDTimeoutSeconds": {
+		//	        "description": "",
+		//	        "minimum": 30,
+		//	        "type": "integer"
+		//	      },
+		//	      "EnableTunnelLifecycleControl": {
+		//	        "description": "",
+		//	        "type": "boolean"
+		//	      },
+		//	      "IKEVersions": {
+		//	        "description": "",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "description": "",
+		//	          "properties": {
+		//	            "Value": {
+		//	              "enum": [
+		//	                "ikev1",
+		//	                "ikev2"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "type": "array",
+		//	        "uniqueItems": false
+		//	      },
+		//	      "LogOptions": {
+		//	        "additionalProperties": false,
+		//	        "description": "",
+		//	        "properties": {
+		//	          "CloudwatchLogOptions": {
+		//	            "additionalProperties": false,
+		//	            "description": "",
+		//	            "properties": {
+		//	              "LogEnabled": {
+		//	                "type": "boolean"
+		//	              },
+		//	              "LogGroupArn": {
+		//	                "type": "string"
+		//	              },
+		//	              "LogOutputFormat": {
+		//	                "enum": [
+		//	                  "json",
+		//	                  "text"
+		//	                ],
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "Phase1DHGroupNumbers": {
+		//	        "description": "",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "description": "",
+		//	          "properties": {
+		//	            "Value": {
+		//	              "enum": [
+		//	                2,
+		//	                14,
+		//	                15,
+		//	                16,
+		//	                17,
+		//	                18,
+		//	                19,
+		//	                20,
+		//	                21,
+		//	                22,
+		//	                23,
+		//	                24
+		//	              ],
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "type": "array",
+		//	        "uniqueItems": false
+		//	      },
+		//	      "Phase1EncryptionAlgorithms": {
+		//	        "description": "",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "description": "",
+		//	          "properties": {
+		//	            "Value": {
+		//	              "enum": [
+		//	                "AES128",
+		//	                "AES256",
+		//	                "AES128-GCM-16",
+		//	                "AES256-GCM-16"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "type": "array",
+		//	        "uniqueItems": false
+		//	      },
+		//	      "Phase1IntegrityAlgorithms": {
+		//	        "description": "",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "description": "",
+		//	          "properties": {
+		//	            "Value": {
+		//	              "enum": [
+		//	                "SHA1",
+		//	                "SHA2-256",
+		//	                "SHA2-384",
+		//	                "SHA2-512"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "type": "array",
+		//	        "uniqueItems": false
+		//	      },
+		//	      "Phase1LifetimeSeconds": {
+		//	        "description": "",
+		//	        "maximum": 28800,
+		//	        "minimum": 900,
+		//	        "type": "integer"
+		//	      },
+		//	      "Phase2DHGroupNumbers": {
+		//	        "description": "",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "description": "",
+		//	          "properties": {
+		//	            "Value": {
+		//	              "enum": [
+		//	                2,
+		//	                14,
+		//	                15,
+		//	                16,
+		//	                17,
+		//	                18,
+		//	                19,
+		//	                20,
+		//	                21,
+		//	                22,
+		//	                23,
+		//	                24
+		//	              ],
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "type": "array",
+		//	        "uniqueItems": false
+		//	      },
+		//	      "Phase2EncryptionAlgorithms": {
+		//	        "description": "",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "description": "",
+		//	          "properties": {
+		//	            "Value": {
+		//	              "enum": [
+		//	                "AES128",
+		//	                "AES256",
+		//	                "AES128-GCM-16",
+		//	                "AES256-GCM-16"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "type": "array",
+		//	        "uniqueItems": false
+		//	      },
+		//	      "Phase2IntegrityAlgorithms": {
+		//	        "description": "",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "description": "",
+		//	          "properties": {
+		//	            "Value": {
+		//	              "enum": [
+		//	                "SHA1",
+		//	                "SHA2-256",
+		//	                "SHA2-384",
+		//	                "SHA2-512"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "type": "array",
+		//	        "uniqueItems": false
+		//	      },
+		//	      "Phase2LifetimeSeconds": {
+		//	        "description": "",
+		//	        "maximum": 3600,
+		//	        "minimum": 900,
+		//	        "type": "integer"
+		//	      },
 		//	      "PreSharedKey": {
 		//	        "description": "The pre-shared key (PSK) to establish initial authentication between the virtual private gateway and customer gateway.\n Constraints: Allowed characters are alphanumeric characters, periods (.), and underscores (_). Must be between 8 and 64 characters in length and cannot start with zero (0).",
 		//	        "type": "string"
 		//	      },
+		//	      "RekeyFuzzPercentage": {
+		//	        "description": "",
+		//	        "maximum": 100,
+		//	        "minimum": 0,
+		//	        "type": "integer"
+		//	      },
+		//	      "RekeyMarginTimeSeconds": {
+		//	        "description": "",
+		//	        "minimum": 60,
+		//	        "type": "integer"
+		//	      },
+		//	      "ReplayWindowSize": {
+		//	        "description": "",
+		//	        "maximum": 2048,
+		//	        "minimum": 64,
+		//	        "type": "integer"
+		//	      },
+		//	      "StartupAction": {
+		//	        "description": "",
+		//	        "enum": [
+		//	          "add",
+		//	          "start"
+		//	        ],
+		//	        "type": "string"
+		//	      },
 		//	      "TunnelInsideCidr": {
 		//	        "description": "The range of inside IP addresses for the tunnel. Any specified CIDR blocks must be unique across all VPN connections that use the same virtual private gateway. \n Constraints: A size /30 CIDR block from the ``169.254.0.0/16`` range. The following CIDR blocks are reserved and cannot be used:\n  +   ``169.254.0.0/30`` \n  +   ``169.254.1.0/30`` \n  +   ``169.254.2.0/30`` \n  +   ``169.254.3.0/30`` \n  +   ``169.254.4.0/30`` \n  +   ``169.254.5.0/30`` \n  +   ``169.254.169.252/30``",
+		//	        "type": "string"
+		//	      },
+		//	      "TunnelInsideIpv6Cidr": {
+		//	        "description": "",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -338,6 +596,343 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 		"vpn_tunnel_options_specifications": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: DPDTimeoutAction
+					"dpd_timeout_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"clear",
+								"none",
+								"restart",
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: DPDTimeoutSeconds
+					"dpd_timeout_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.Int64{ /*START VALIDATORS*/
+							int64validator.AtLeast(30),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+							int64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: EnableTunnelLifecycleControl
+					"enable_tunnel_lifecycle_control": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+							boolplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: IKEVersions
+					"ike_versions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Value
+								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"ikev1",
+											"ikev2",
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							generic.Multiset(),
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: LogOptions
+					"log_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CloudwatchLogOptions
+							"cloudwatch_log_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: LogEnabled
+									"log_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+											boolplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: LogGroupArn
+									"log_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: LogOutputFormat
+									"log_output_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"json",
+												"text",
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Phase1DHGroupNumbers
+					"phase_1_dh_group_numbers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Value
+								"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Int64{ /*START VALIDATORS*/
+										int64validator.OneOf(
+											2,
+											14,
+											15,
+											16,
+											17,
+											18,
+											19,
+											20,
+											21,
+											22,
+											23,
+											24,
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							generic.Multiset(),
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Phase1EncryptionAlgorithms
+					"phase_1_encryption_algorithms": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Value
+								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"AES128",
+											"AES256",
+											"AES128-GCM-16",
+											"AES256-GCM-16",
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							generic.Multiset(),
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Phase1IntegrityAlgorithms
+					"phase_1_integrity_algorithms": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Value
+								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"SHA1",
+											"SHA2-256",
+											"SHA2-384",
+											"SHA2-512",
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							generic.Multiset(),
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Phase1LifetimeSeconds
+					"phase_1_lifetime_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.Int64{ /*START VALIDATORS*/
+							int64validator.Between(900, 28800),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+							int64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Phase2DHGroupNumbers
+					"phase_2_dh_group_numbers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Value
+								"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Int64{ /*START VALIDATORS*/
+										int64validator.OneOf(
+											2,
+											14,
+											15,
+											16,
+											17,
+											18,
+											19,
+											20,
+											21,
+											22,
+											23,
+											24,
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							generic.Multiset(),
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Phase2EncryptionAlgorithms
+					"phase_2_encryption_algorithms": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Value
+								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"AES128",
+											"AES256",
+											"AES128-GCM-16",
+											"AES256-GCM-16",
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							generic.Multiset(),
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Phase2IntegrityAlgorithms
+					"phase_2_integrity_algorithms": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Value
+								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"SHA1",
+											"SHA2-256",
+											"SHA2-384",
+											"SHA2-512",
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							generic.Multiset(),
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Phase2LifetimeSeconds
+					"phase_2_lifetime_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.Int64{ /*START VALIDATORS*/
+							int64validator.Between(900, 3600),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+							int64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: PreSharedKey
 					"pre_shared_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The pre-shared key (PSK) to establish initial authentication between the virtual private gateway and customer gateway.\n Constraints: Allowed characters are alphanumeric characters, periods (.), and underscores (_). Must be between 8 and 64 characters in length and cannot start with zero (0).",
@@ -347,9 +942,69 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
+					// Property: RekeyFuzzPercentage
+					"rekey_fuzz_percentage": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.Int64{ /*START VALIDATORS*/
+							int64validator.Between(0, 100),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+							int64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: RekeyMarginTimeSeconds
+					"rekey_margin_time_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.Int64{ /*START VALIDATORS*/
+							int64validator.AtLeast(60),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+							int64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: ReplayWindowSize
+					"replay_window_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.Int64{ /*START VALIDATORS*/
+							int64validator.Between(64, 2048),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+							int64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: StartupAction
+					"startup_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"add",
+								"start",
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: TunnelInsideCidr
 					"tunnel_inside_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The range of inside IP addresses for the tunnel. Any specified CIDR blocks must be unique across all VPN connections that use the same virtual private gateway. \n Constraints: A size /30 CIDR block from the ``169.254.0.0/16`` range. The following CIDR blocks are reserved and cannot be used:\n  +   ``169.254.0.0/30`` \n  +   ``169.254.1.0/30`` \n  +   ``169.254.2.0/30`` \n  +   ``169.254.3.0/30`` \n  +   ``169.254.4.0/30`` \n  +   ``169.254.5.0/30`` \n  +   ``169.254.169.252/30``",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: TunnelInsideIpv6Cidr
+					"tunnel_inside_ipv_6_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -389,21 +1044,43 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::VPNConnection").WithTerraformTypeName("awscc_ec2_vpn_connection")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"cloudwatch_log_options":                  "CloudwatchLogOptions",
 		"customer_gateway_id":                     "CustomerGatewayId",
+		"dpd_timeout_action":                      "DPDTimeoutAction",
+		"dpd_timeout_seconds":                     "DPDTimeoutSeconds",
 		"enable_acceleration":                     "EnableAcceleration",
+		"enable_tunnel_lifecycle_control":         "EnableTunnelLifecycleControl",
+		"ike_versions":                            "IKEVersions",
 		"key":                                     "Key",
 		"local_ipv_4_network_cidr":                "LocalIpv4NetworkCidr",
 		"local_ipv_6_network_cidr":                "LocalIpv6NetworkCidr",
+		"log_enabled":                             "LogEnabled",
+		"log_group_arn":                           "LogGroupArn",
+		"log_options":                             "LogOptions",
+		"log_output_format":                       "LogOutputFormat",
 		"outside_ip_address_type":                 "OutsideIpAddressType",
+		"phase_1_dh_group_numbers":                "Phase1DHGroupNumbers",
+		"phase_1_encryption_algorithms":           "Phase1EncryptionAlgorithms",
+		"phase_1_integrity_algorithms":            "Phase1IntegrityAlgorithms",
+		"phase_1_lifetime_seconds":                "Phase1LifetimeSeconds",
+		"phase_2_dh_group_numbers":                "Phase2DHGroupNumbers",
+		"phase_2_encryption_algorithms":           "Phase2EncryptionAlgorithms",
+		"phase_2_integrity_algorithms":            "Phase2IntegrityAlgorithms",
+		"phase_2_lifetime_seconds":                "Phase2LifetimeSeconds",
 		"pre_shared_key":                          "PreSharedKey",
+		"rekey_fuzz_percentage":                   "RekeyFuzzPercentage",
+		"rekey_margin_time_seconds":               "RekeyMarginTimeSeconds",
 		"remote_ipv_4_network_cidr":               "RemoteIpv4NetworkCidr",
 		"remote_ipv_6_network_cidr":               "RemoteIpv6NetworkCidr",
+		"replay_window_size":                      "ReplayWindowSize",
+		"startup_action":                          "StartupAction",
 		"static_routes_only":                      "StaticRoutesOnly",
 		"tags":                                    "Tags",
 		"transit_gateway_id":                      "TransitGatewayId",
 		"transport_transit_gateway_attachment_id": "TransportTransitGatewayAttachmentId",
 		"tunnel_inside_cidr":                      "TunnelInsideCidr",
 		"tunnel_inside_ip_version":                "TunnelInsideIpVersion",
+		"tunnel_inside_ipv_6_cidr":                "TunnelInsideIpv6Cidr",
 		"type":                                    "Type",
 		"value":                                   "Value",
 		"vpn_connection_id":                       "VpnConnectionId",

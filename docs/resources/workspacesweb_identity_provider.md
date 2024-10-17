@@ -24,11 +24,20 @@ Definition of AWS::WorkSpacesWeb::IdentityProvider Resource Type
 ### Optional
 
 - `portal_arn` (String)
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
 - `identity_provider_arn` (String)
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String)
+- `value` (String)
 
 ## Import
 

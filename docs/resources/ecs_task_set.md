@@ -23,6 +23,7 @@ Create a task set in the specified cluster and service. This is used when a serv
 
 ### Optional
 
+- `capacity_provider_strategy` (Attributes List) (see [below for nested schema](#nestedatt--capacity_provider_strategy))
 - `external_id` (String) An optional non-unique tag that identifies this task set in external systems. If the task set is associated with a service discovery registry, the tasks in this task set will have the ECS_TASK_SET_EXTERNAL_ID AWS Cloud Map attribute set to the provided value.
 - `launch_type` (String) The launch type that new tasks in the task set will use. For more information, see https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html in the Amazon Elastic Container Service Developer Guide.
 - `load_balancers` (Attributes List) (see [below for nested schema](#nestedatt--load_balancers))
@@ -36,6 +37,16 @@ Create a task set in the specified cluster and service. This is used when a serv
 
 - `id` (String) Uniquely identifies the resource.
 - `task_set_id` (String) The ID of the task set.
+
+<a id="nestedatt--capacity_provider_strategy"></a>
+### Nested Schema for `capacity_provider_strategy`
+
+Optional:
+
+- `base` (Number)
+- `capacity_provider` (String)
+- `weight` (Number)
+
 
 <a id="nestedatt--load_balancers"></a>
 ### Nested Schema for `load_balancers`

@@ -42,26 +42,6 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
-		// Property: DelegationRecord
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "description": "The name server domain for queries to be delegated to if a query matches the delegation record.",
-		//	  "maxLength": 256,
-		//	  "minLength": 1,
-		//	  "type": "string"
-		//	}
-		"delegation_record": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name server domain for queries to be delegated to if a query matches the delegation record.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
 		// Property: DomainName
 		// CloudFormation resource type schema:
 		//
@@ -264,6 +244,12 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	          "DoH"
 		//	        ],
 		//	        "type": "string"
+		//	      },
+		//	      "ServerNameIndication": {
+		//	        "description": "The SNI of the target name servers for DoH/DoH-FIPS outbound endpoints",
+		//	        "maxLength": 255,
+		//	        "minLength": 0,
+		//	        "type": "string"
 		//	      }
 		//	    },
 		//	    "type": "object"
@@ -319,6 +305,18 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
+					// Property: ServerNameIndication
+					"server_name_indication": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The SNI of the target name servers for DoH/DoH-FIPS outbound endpoints",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(0, 255),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "An array that contains the IP addresses and ports that an outbound endpoint forwards DNS queries to. Typically, these are the IP addresses of DNS resolvers on your network. Specify IPv4 addresses. IPv6 is not supported.",
@@ -351,21 +349,21 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::ResolverRule").WithTerraformTypeName("awscc_route53resolver_resolver_rule")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                  "Arn",
-		"delegation_record":    "DelegationRecord",
-		"domain_name":          "DomainName",
-		"ip":                   "Ip",
-		"ipv_6":                "Ipv6",
-		"key":                  "Key",
-		"name":                 "Name",
-		"port":                 "Port",
-		"protocol":             "Protocol",
-		"resolver_endpoint_id": "ResolverEndpointId",
-		"resolver_rule_id":     "ResolverRuleId",
-		"rule_type":            "RuleType",
-		"tags":                 "Tags",
-		"target_ips":           "TargetIps",
-		"value":                "Value",
+		"arn":                    "Arn",
+		"domain_name":            "DomainName",
+		"ip":                     "Ip",
+		"ipv_6":                  "Ipv6",
+		"key":                    "Key",
+		"name":                   "Name",
+		"port":                   "Port",
+		"protocol":               "Protocol",
+		"resolver_endpoint_id":   "ResolverEndpointId",
+		"resolver_rule_id":       "ResolverRuleId",
+		"rule_type":              "RuleType",
+		"server_name_indication": "ServerNameIndication",
+		"tags":                   "Tags",
+		"target_ips":             "TargetIps",
+		"value":                  "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

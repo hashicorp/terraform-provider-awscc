@@ -23,6 +23,21 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::IoT::DomainConfiguration resource.
 func domainConfigurationDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ApplicationProtocol
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "SECURE_MQTT",
+		//	    "MQTT_WSS",
+		//	    "HTTPS",
+		//	    "DEFAULT"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"application_protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -30,6 +45,22 @@ func domainConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: AuthenticationType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "AWS_X509",
+		//	    "CUSTOM_AUTH",
+		//	    "AWS_SIGV4",
+		//	    "CUSTOM_AUTH_X509",
+		//	    "DEFAULT"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: AuthorizerConfig
@@ -58,6 +89,29 @@ func domainConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 				}, /*END ATTRIBUTE*/
 				// Property: DefaultAuthorizerName
 				"default_authorizer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: ClientCertificateConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "ClientCertificateCallbackArn": {
+		//	      "maxLength": 170,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"client_certificate_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ClientCertificateCallbackArn
+				"client_certificate_callback_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -304,8 +358,12 @@ func domainConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"allow_authorizer_override":        "AllowAuthorizerOverride",
+		"application_protocol":             "ApplicationProtocol",
 		"arn":                              "Arn",
+		"authentication_type":              "AuthenticationType",
 		"authorizer_config":                "AuthorizerConfig",
+		"client_certificate_callback_arn":  "ClientCertificateCallbackArn",
+		"client_certificate_config":        "ClientCertificateConfig",
 		"default_authorizer_name":          "DefaultAuthorizerName",
 		"domain_configuration_name":        "DomainConfigurationName",
 		"domain_configuration_status":      "DomainConfigurationStatus",

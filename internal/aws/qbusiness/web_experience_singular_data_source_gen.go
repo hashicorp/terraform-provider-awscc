@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -131,6 +132,25 @@ func webExperienceDataSource(ctx context.Context) (datasource.DataSource, error)
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: Origins
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "maxLength": 64,
+		//	    "minLength": 1,
+		//	    "pattern": "^(http:\\/\\/|https:\\/\\/)[a-zA-Z0-9-_.]+(?::[0-9]{1,5})?$",
+		//	    "type": "string"
+		//	  },
+		//	  "maxItems": 10,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"origins": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
@@ -311,6 +331,7 @@ func webExperienceDataSource(ctx context.Context) (datasource.DataSource, error)
 		"identity_provider_configuration": "IdentityProviderConfiguration",
 		"key":                             "Key",
 		"open_id_connect_configuration":   "OpenIDConnectConfiguration",
+		"origins":                         "Origins",
 		"role_arn":                        "RoleArn",
 		"saml_configuration":              "SamlConfiguration",
 		"sample_prompts_control_mode":     "SamplePromptsControlMode",

@@ -138,7 +138,6 @@ func configurationProfileDataSource(ctx context.Context) (datasource.DataSource,
 		//	        "description": "The key-value string map. The tag key can be up to 128 characters and must not start with aws:.",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
-		//	        "pattern": "",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {

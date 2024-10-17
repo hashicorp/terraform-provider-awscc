@@ -49,7 +49,6 @@ resource "awscc_route53resolver_resolver_rule" "example" {
 
 ### Optional
 
-- `delegation_record` (String) The name server domain for queries to be delegated to if a query matches the delegation record.
 - `domain_name` (String) DNS queries for this domain name are forwarded to the IP addresses that are specified in TargetIps
 - `name` (String) The name for the Resolver rule
 - `resolver_endpoint_id` (String) The ID of the endpoint that the rule is associated with.
@@ -80,6 +79,7 @@ Optional:
 - `ipv_6` (String) One IPv6 address that you want to forward DNS queries to. You can specify only IPv6 addresses.
 - `port` (String) The port at Ip that you want to forward DNS queries to.
 - `protocol` (String) The protocol that you want to use to forward DNS queries.
+- `server_name_indication` (String) The SNI of the target name servers for DoH/DoH-FIPS outbound endpoints
 
 ## Import
 

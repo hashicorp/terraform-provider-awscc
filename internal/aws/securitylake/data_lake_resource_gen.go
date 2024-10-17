@@ -226,7 +226,7 @@ func dataLakeResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "Replication enables automatic, asynchronous copying of objects across Amazon S3 buckets. Amazon S3 buckets that are configured for object replication can be owned by the same AWS account or by different accounts. You can replicate objects to a single destination bucket or to multiple destination buckets. The destination buckets can be in different AWS Regions or within the same Region as the source bucket.",
 		//	      "insertionOrder": false,
 		//	      "items": {
-		//	        "pattern": "^(af|ap|ca|eu|me|sa|us)-(central|north|(north(?:east|west))|south|south(?:east|west)|east|west)-\\d+$",
+		//	        "pattern": "^(us(-gov)?|af|ap|ca|eu|me|sa)-(central|north|(north(?:east|west))|south|south(?:east|west)|east|west)-\\d+$",
 		//	        "type": "string"
 		//	      },
 		//	      "type": "array",
@@ -250,7 +250,7 @@ func dataLakeResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					Validators: []validator.Set{ /*START VALIDATORS*/
 						setvalidator.ValueStringsAre(
-							stringvalidator.RegexMatches(regexp.MustCompile("^(af|ap|ca|eu|me|sa|us)-(central|north|(north(?:east|west))|south|south(?:east|west)|east|west)-\\d+$"), ""),
+							stringvalidator.RegexMatches(regexp.MustCompile("^(us(-gov)?|af|ap|ca|eu|me|sa)-(central|north|(north(?:east|west))|south|south(?:east|west)|east|west)-\\d+$"), ""),
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/

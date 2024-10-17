@@ -50,13 +50,13 @@ resource "awscc_glue_registry" "example" {
 - `compatibility` (String) Compatibility setting for the schema.
 - `data_format` (String) Data format name to use for the schema. Accepted values: 'AVRO', 'JSON', 'PROTOBUF'
 - `name` (String) Name of the schema.
-- `schema_definition` (String) Definition for the initial schema version in plain-text.
 
 ### Optional
 
 - `checkpoint_version` (Attributes) Specify checkpoint version for update. This is only required to update the Compatibility. (see [below for nested schema](#nestedatt--checkpoint_version))
 - `description` (String) A description of the schema. If description is not provided, there will not be any default value for this.
 - `registry` (Attributes) Identifier for the registry which the schema is part of. (see [below for nested schema](#nestedatt--registry))
+- `schema_definition` (String) Definition for the initial schema version in plain-text.
 - `tags` (Attributes List) List of tags to tag the schema (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
