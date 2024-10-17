@@ -82,10 +82,8 @@ func planResource(ctx context.Context) (resource.Resource, error) {
 			ElementType: types.StringType,
 			Description: "Rotation Ids to associate with Oncall Contact for engagement.",
 			Optional:    true,
-			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 			// RotationIds is a write-only property.
 		}, /*END ATTRIBUTE*/

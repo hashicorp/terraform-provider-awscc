@@ -184,14 +184,10 @@ func locationSMBResource(ctx context.Context) (resource.Resource, error) {
 		"password": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The password of the user who can mount the share and has the permissions to access files and folders in the SMB share.",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtMost(104),
 				stringvalidator.RegexMatches(regexp.MustCompile("^.{0,104}$"), ""),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// Password is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: ServerHostname
@@ -229,14 +225,10 @@ func locationSMBResource(ctx context.Context) (resource.Resource, error) {
 		"subdirectory": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The subdirectory in the SMB file system that is used to read data from the SMB source location or write data to the SMB destination",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtMost(4096),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$"), ""),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// Subdirectory is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Tags

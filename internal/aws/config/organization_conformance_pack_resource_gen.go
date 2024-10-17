@@ -196,13 +196,9 @@ func organizationConformancePackResource(ctx context.Context) (resource.Resource
 		"template_body": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A string containing full conformance pack template body.",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 51200),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// TemplateBody is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: TemplateS3Uri
@@ -218,14 +214,10 @@ func organizationConformancePackResource(ctx context.Context) (resource.Resource
 		"template_s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Location of file containing the template body.",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 1024),
 				stringvalidator.RegexMatches(regexp.MustCompile("s3://.*"), ""),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// TemplateS3Uri is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

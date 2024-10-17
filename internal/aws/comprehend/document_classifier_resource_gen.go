@@ -238,6 +238,7 @@ func documentClassifierResource(ctx context.Context) (resource.Resource, error) 
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 									setplanmodifier.UseStateForUnknown(),
+									setplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: S3Uri
@@ -251,6 +252,7 @@ func documentClassifierResource(ctx context.Context) (resource.Resource, error) 
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+									stringplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Split
@@ -265,6 +267,7 @@ func documentClassifierResource(ctx context.Context) (resource.Resource, error) 
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+									stringplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -273,6 +276,7 @@ func documentClassifierResource(ctx context.Context) (resource.Resource, error) 
 					Computed: true,
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 						setplanmodifier.UseStateForUnknown(),
+						setplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: DataFormat
@@ -287,6 +291,7 @@ func documentClassifierResource(ctx context.Context) (resource.Resource, error) 
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: DocumentReaderConfig
@@ -305,6 +310,7 @@ func documentClassifierResource(ctx context.Context) (resource.Resource, error) 
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: DocumentReadMode
@@ -319,6 +325,7 @@ func documentClassifierResource(ctx context.Context) (resource.Resource, error) 
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: FeatureTypes
@@ -337,6 +344,7 @@ func documentClassifierResource(ctx context.Context) (resource.Resource, error) 
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 								setplanmodifier.UseStateForUnknown(),
+								setplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -344,6 +352,7 @@ func documentClassifierResource(ctx context.Context) (resource.Resource, error) 
 					Computed: true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
+						objectplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: DocumentType
@@ -358,6 +367,7 @@ func documentClassifierResource(ctx context.Context) (resource.Resource, error) 
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Documents
@@ -374,6 +384,7 @@ func documentClassifierResource(ctx context.Context) (resource.Resource, error) 
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: TestS3Uri
@@ -386,6 +397,7 @@ func documentClassifierResource(ctx context.Context) (resource.Resource, error) 
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -393,6 +405,7 @@ func documentClassifierResource(ctx context.Context) (resource.Resource, error) 
 					Computed: true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
+						objectplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: LabelDelimiter
@@ -405,6 +418,7 @@ func documentClassifierResource(ctx context.Context) (resource.Resource, error) 
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: S3Uri
@@ -417,6 +431,7 @@ func documentClassifierResource(ctx context.Context) (resource.Resource, error) 
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: TestS3Uri
@@ -429,6 +444,7 @@ func documentClassifierResource(ctx context.Context) (resource.Resource, error) 
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -559,6 +575,7 @@ func documentClassifierResource(ctx context.Context) (resource.Resource, error) 
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: S3Uri
@@ -571,6 +588,7 @@ func documentClassifierResource(ctx context.Context) (resource.Resource, error) 
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -740,6 +758,7 @@ func documentClassifierResource(ctx context.Context) (resource.Resource, error) 
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 						setplanmodifier.UseStateForUnknown(),
+						setplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Subnets
@@ -757,6 +776,7 @@ func documentClassifierResource(ctx context.Context) (resource.Resource, error) 
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 						setplanmodifier.UseStateForUnknown(),
+						setplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/

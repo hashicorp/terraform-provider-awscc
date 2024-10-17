@@ -120,15 +120,18 @@ func botVersionResource(ctx context.Context) (resource.Resource, error) {
 									stringvalidator.LengthBetween(1, 5),
 									stringvalidator.RegexMatches(regexp.MustCompile("^(DRAFT|[0-9]+)$"), ""),
 								}, /*END VALIDATORS*/
+								// SourceBotVersion is a write-only property.
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "The version of a bot used for a bot locale.",
 						Required:    true,
+						// BotVersionLocaleDetails is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: LocaleId
 					"locale_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The identifier of the language and locale that the bot will be used in.",
 						Required:    true,
+						// LocaleId is a write-only property.
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

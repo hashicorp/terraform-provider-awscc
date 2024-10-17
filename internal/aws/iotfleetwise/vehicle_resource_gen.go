@@ -57,16 +57,12 @@ func vehicleResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"association_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
-			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"CreateIotThing",
 					"ValidateIotThingExists",
 				),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// AssociationBehavior is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Attributes

@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -47,10 +46,6 @@ func memberResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"disable_email_notification": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// DisableEmailNotification is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Email
@@ -84,10 +79,6 @@ func memberResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"message": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// Message is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Status

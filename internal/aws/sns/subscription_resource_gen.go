@@ -154,10 +154,6 @@ func subscriptionResource(ctx context.Context) (resource.Resource, error) {
 		"region": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "For cross-region subscriptions, the region in which the topic resides.If no region is specified, AWS CloudFormation uses the region of the caller as the default.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// Region is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: ReplayPolicy

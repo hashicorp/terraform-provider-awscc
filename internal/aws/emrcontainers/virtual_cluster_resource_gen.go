@@ -102,6 +102,9 @@ func virtualClusterResource(ctx context.Context) (resource.Resource, error) {
 						stringvalidator.LengthBetween(1, 100),
 						stringvalidator.RegexMatches(regexp.MustCompile("^[0-9A-Za-z][A-Za-z0-9\\-_]*"), ""),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.RequiresReplace(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Info
 				"info": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -116,17 +119,29 @@ func virtualClusterResource(ctx context.Context) (resource.Resource, error) {
 										stringvalidator.LengthBetween(1, 63),
 										stringvalidator.RegexMatches(regexp.MustCompile("[a-z0-9]([-a-z0-9]*[a-z0-9])?"), ""),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.RequiresReplace(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Required: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.RequiresReplace(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Required: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.RequiresReplace(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Type
 				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The type of the container provider",
 					Required:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.RequiresReplace(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Container provider of the virtual cluster.",

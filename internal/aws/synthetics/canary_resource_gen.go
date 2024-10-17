@@ -16,7 +16,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -167,37 +166,21 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 				// Property: S3Bucket
 				"s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 					// S3Bucket is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: S3Key
 				"s3_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 					// S3Key is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: S3ObjectVersion
 				"s3_object_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 					// S3ObjectVersion is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: Script
 				"script": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 					// Script is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: SourceLocationArn
@@ -221,10 +204,6 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		"delete_lambda_resources_on_canary_deletion": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Deletes associated lambda resources created by Synthetics if set to True. Default is False",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// DeleteLambdaResourcesOnCanaryDeletion is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: ExecutionRoleArn
@@ -304,7 +283,6 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 			ElementType: types.StringType,
 			Description: "List of resources which canary tags should be replicated to.",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.UniqueValues(),
 				listvalidator.ValueStringsAre(
@@ -313,9 +291,6 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 					),
 				),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// ResourcesToReplicateTags is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: RunConfig
@@ -367,10 +342,6 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 					ElementType: types.StringType,
 					Description: "Environment variable key-value pairs.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-						mapplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 					// EnvironmentVariables is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: MemoryInMB
@@ -457,10 +428,6 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		"start_canary_after_creation": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Runs canary if set to True. Default is False",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// StartCanaryAfterCreation is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: State
@@ -676,14 +643,8 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 				// Property: BaseCanaryRunId
 				"base_canary_run_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Canary run id to be used as base reference for visual testing",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						fwvalidators.NotNullString(),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					Required:    true,
+					// BaseCanaryRunId is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: BaseScreenshots
 				"base_screenshots": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -694,39 +655,23 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 								ElementType: types.StringType,
 								Description: "List of coordinates of rectangles to be ignored during visual testing",
 								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-									listplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// IgnoreCoordinates is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: ScreenshotName
 							"screenshot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Name of the screenshot to be used as base reference for visual testing",
-								Optional:    true,
-								Computed:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									fwvalidators.NotNullString(),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								Required:    true,
+								// ScreenshotName is a write-only property.
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "List of screenshots used as base reference for visual testing",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// BaseScreenshots is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Visual reference configuration for visual testing",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// VisualReference is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

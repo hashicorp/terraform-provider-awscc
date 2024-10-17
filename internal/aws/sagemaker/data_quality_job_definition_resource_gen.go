@@ -133,6 +133,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						listplanmodifier.UseStateForUnknown(),
+						listplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: ContainerEntrypoint
@@ -149,6 +150,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						listplanmodifier.UseStateForUnknown(),
+						listplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Environment
@@ -161,6 +163,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 					Computed:    true,
 					PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
 						mapplanmodifier.UseStateForUnknown(),
+						mapplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: ImageUri
@@ -171,6 +174,9 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 						stringvalidator.LengthAtMost(255),
 						stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.RequiresReplace(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: PostAnalyticsProcessorSourceUri
 				"post_analytics_processor_source_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -183,6 +189,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: RecordPreprocessorSourceUri
@@ -196,6 +203,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -261,6 +269,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: ConstraintsResource
@@ -277,6 +286,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -285,6 +295,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
+						objectplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: StatisticsResource
@@ -301,6 +312,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -309,6 +321,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
+						objectplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -466,6 +479,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: DatasetFormat
@@ -481,6 +495,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 											Computed:    true,
 											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 												boolplanmodifier.UseStateForUnknown(),
+												boolplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
@@ -489,6 +504,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 									Computed:    true,
 									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 										objectplanmodifier.UseStateForUnknown(),
+										objectplanmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Json
@@ -501,6 +517,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 											Computed:    true,
 											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 												boolplanmodifier.UseStateForUnknown(),
+												boolplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
@@ -509,6 +526,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 									Computed:    true,
 									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 										objectplanmodifier.UseStateForUnknown(),
+										objectplanmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Parquet
@@ -518,6 +536,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 									Computed:    true,
 									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 										boolplanmodifier.UseStateForUnknown(),
+										boolplanmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -529,6 +548,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 								objectplanmodifier.UseStateForUnknown(),
+								objectplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: ExcludeFeaturesAttribute
@@ -541,6 +561,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: LocalPath
@@ -555,6 +576,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: S3DataDistributionType
@@ -570,6 +592,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: S3InputMode
@@ -585,6 +608,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -593,6 +617,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
+						objectplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: EndpointInput
@@ -610,6 +635,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: ExcludeFeaturesAttribute
@@ -622,6 +648,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: LocalPath
@@ -636,6 +663,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: S3DataDistributionType
@@ -651,6 +679,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: S3InputMode
@@ -666,6 +695,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -674,6 +704,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
+						objectplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -762,6 +793,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: MonitoringOutputs
@@ -779,6 +811,9 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 											stringvalidator.LengthAtMost(256),
 											stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.RequiresReplace(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: S3UploadMode
 									"s3_upload_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -793,6 +828,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
+											stringplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: S3Uri
@@ -803,15 +839,24 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 											stringvalidator.LengthAtMost(512),
 											stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.RequiresReplace(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Description: "Information about where and how to store the results of a monitoring job.",
 								Required:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.RequiresReplace(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "Monitoring outputs for monitoring jobs. This is where the output of the periodic monitoring jobs is uploaded.",
 					Required:    true,
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.RequiresReplace(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The output configuration for monitoring jobs.",
@@ -940,11 +985,17 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 							Validators: []validator.Int64{ /*START VALIDATORS*/
 								int64validator.Between(1, 100),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.RequiresReplace(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: InstanceType
 						"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The ML compute instance type for the processing job.",
 							Required:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.RequiresReplace(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: VolumeKmsKeyId
 						"volume_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -953,6 +1004,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: VolumeSizeInGB
@@ -962,10 +1014,16 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 							Validators: []validator.Int64{ /*START VALIDATORS*/
 								int64validator.Between(1, 16384),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.RequiresReplace(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Configuration for the cluster used to run model monitoring jobs.",
 					Required:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.RequiresReplace(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Identifies the resources to deploy for a monitoring job.",
@@ -1034,6 +1092,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
+						boolplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: EnableNetworkIsolation
@@ -1043,6 +1102,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
+						boolplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: VpcConfig
@@ -1064,6 +1124,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								listplanmodifier.UseStateForUnknown(),
+								listplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Subnets
@@ -1082,6 +1143,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								listplanmodifier.UseStateForUnknown(),
+								listplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -1090,6 +1152,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
+						objectplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -1154,6 +1217,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
+						int64planmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -1212,7 +1276,9 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
+						// Key is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1226,7 +1292,9 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
+						// Value is a write-only property.
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -1319,6 +1387,8 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 		"vpc_config":                                "VpcConfig",
 	})
 
+	opts = opts.IsImmutableType(true)
+
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/EndpointName",
 		"/properties/Tags",
@@ -1326,8 +1396,6 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 		"/properties/Tags/*/Value",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
-
-	opts = opts.WithUpdateTimeoutInMinutes(0)
 
 	v, err := generic.NewResource(ctx, opts...)
 

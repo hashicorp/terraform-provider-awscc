@@ -600,7 +600,6 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 					ElementType: types.StringType,
 					Description: "A list of security groups associated with the VPC endpoint.",
 					Optional:    true,
-					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.ValueStringsAre(
 							stringvalidator.LengthBetween(11, 20),
@@ -609,26 +608,24 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						generic.Multiset(),
-						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
+					// SecurityGroupIds is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: SubnetIds
 				"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
 					Description: "A list of subnet IDs associated with the VPC endpoint.",
-					Optional:    true,
-					Computed:    true,
+					Required:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.ValueStringsAre(
 							stringvalidator.LengthBetween(15, 24),
 							stringvalidator.RegexMatches(regexp.MustCompile("subnet-\\w{8}(\\w{9})?"), ""),
 						),
-						fwvalidators.NotNullList(),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						generic.Multiset(),
-						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
+					// SubnetIds is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: VpcAttachmentOptions
 				"vpc_attachment_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -636,58 +633,38 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 						// Property: AttachToVpc
 						"attach_to_vpc": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Description: "Whether the pipeline should be attached to the provided VPC",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.Bool{ /*START VALIDATORS*/
-								fwvalidators.NotNullBool(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								boolplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							Required:    true,
+							// AttachToVpc is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: CidrBlock
 						"cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The CIDR block to be reserved for OpenSearch Ingestion to create elastic network interfaces (ENIs).",
-							Optional:    true,
-							Computed:    true,
+							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/(3[0-2]|[12]?[0-9])$"), ""),
-								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// CidrBlock is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Options for attaching a VPC to the pipeline.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// VpcAttachmentOptions is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: VpcEndpointManagement
 				"vpc_endpoint_management": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Defines whether you or Amazon OpenSearch Ingestion service create and manage the VPC endpoint configured for the pipeline.",
 					Optional:    true,
-					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"CUSTOMER",
 							"SERVICE",
 						),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// VpcEndpointManagement is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Container for the values required to configure VPC access for the pipeline. If you don't specify these values, OpenSearch Ingestion Service creates the pipeline with a public endpoint.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// VpcOptions is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

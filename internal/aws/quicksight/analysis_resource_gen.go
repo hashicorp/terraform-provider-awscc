@@ -14,7 +14,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -375,40 +374,27 @@ func analysisResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Name
 							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "<p>A display name for the date-time parameter.</p>",
-								Optional:    true,
-								Computed:    true,
+								Required:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
-									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// Name is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: Values
 							"values": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
 								Description: "<p>The values for the date-time parameter.</p>",
-								Optional:    true,
-								Computed:    true,
-								Validators: []validator.List{ /*START VALIDATORS*/
-									fwvalidators.NotNullList(),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-									listplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								Required:    true,
+								// Values is a write-only property.
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "<p>Date-time parameters.</p>",
 					Optional:    true,
-					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(0, 100),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// DateTimeParameters is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: DecimalParameters
 				"decimal_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -417,40 +403,27 @@ func analysisResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Name
 							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "<p>A display name for the decimal parameter.</p>",
-								Optional:    true,
-								Computed:    true,
+								Required:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
-									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// Name is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: Values
 							"values": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.Float64Type,
 								Description: "<p>The values for the decimal parameter.</p>",
-								Optional:    true,
-								Computed:    true,
-								Validators: []validator.List{ /*START VALIDATORS*/
-									fwvalidators.NotNullList(),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-									listplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								Required:    true,
+								// Values is a write-only property.
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "<p>Decimal parameters.</p>",
 					Optional:    true,
-					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(0, 100),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// DecimalParameters is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: IntegerParameters
 				"integer_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -459,40 +432,27 @@ func analysisResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Name
 							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "<p>The name of the integer parameter.</p>",
-								Optional:    true,
-								Computed:    true,
+								Required:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
-									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// Name is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: Values
 							"values": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.Float64Type,
 								Description: "<p>The values for the integer parameter.</p>",
-								Optional:    true,
-								Computed:    true,
-								Validators: []validator.List{ /*START VALIDATORS*/
-									fwvalidators.NotNullList(),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-									listplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								Required:    true,
+								// Values is a write-only property.
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "<p>Integer parameters.</p>",
 					Optional:    true,
-					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(0, 100),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// IntegerParameters is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: StringParameters
 				"string_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -501,48 +461,31 @@ func analysisResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Name
 							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "<p>A display name for a string parameter.</p>",
-								Optional:    true,
-								Computed:    true,
+								Required:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
-									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// Name is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: Values
 							"values": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
 								Description: "<p>The values of a string parameter.</p>",
-								Optional:    true,
-								Computed:    true,
-								Validators: []validator.List{ /*START VALIDATORS*/
-									fwvalidators.NotNullList(),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-									listplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								Required:    true,
+								// Values is a write-only property.
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "<p>String parameters.</p>",
 					Optional:    true,
-					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(0, 100),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// StringParameters is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "<p>A list of QuickSight parameters and the list's override values.</p>",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// Parameters is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Permissions
@@ -657,11 +600,13 @@ func analysisResource(ctx context.Context) (resource.Resource, error) {
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "<p>The name of a sheet. This name is displayed on the sheet's tab in the QuickSight\n            console.</p>",
 						Computed:    true,
+						// Name is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: SheetId
 					"sheet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "<p>The unique identifier associated with a sheet.</p>",
 						Computed:    true,
+						// SheetId is a write-only property.
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -730,14 +675,8 @@ func analysisResource(ctx context.Context) (resource.Resource, error) {
 						// Property: Arn
 						"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "<p>The Amazon Resource Name (ARN) of the source template of an analysis.</p>",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								fwvalidators.NotNullString(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							Required:    true,
+							// Arn is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: DataSetReferences
 						"data_set_references": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -746,48 +685,31 @@ func analysisResource(ctx context.Context) (resource.Resource, error) {
 									// Property: DataSetArn
 									"data_set_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "<p>Dataset Amazon Resource Name (ARN).</p>",
-										Optional:    true,
-										Computed:    true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											fwvalidators.NotNullString(),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										Required:    true,
+										// DataSetArn is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: DataSetPlaceholder
 									"data_set_placeholder": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "<p>Dataset placeholder.</p>",
-										Optional:    true,
-										Computed:    true,
+										Required:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
-											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// DataSetPlaceholder is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
 							Description: "<p>The dataset references of the source template of an analysis.</p>",
-							Optional:    true,
-							Computed:    true,
+							Required:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeAtLeast(1),
-								fwvalidators.NotNullList(),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// DataSetReferences is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "<p>The source template of an analysis.</p>",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// SourceTemplate is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "<p>The source entity of an analysis.</p>",

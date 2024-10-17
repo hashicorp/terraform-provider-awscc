@@ -56,10 +56,6 @@ func repositoryResource(ctx context.Context) (resource.Resource, error) {
 		"empty_on_delete": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "If true, deleting the repository force deletes the contents of the repository. If false, the repository must be empty before attempting to delete it.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// EmptyOnDelete is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: EncryptionConfiguration

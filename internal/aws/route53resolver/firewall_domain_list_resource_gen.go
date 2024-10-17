@@ -13,7 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -107,13 +106,9 @@ func firewallDomainListResource(ctx context.Context) (resource.Resource, error) 
 		"domain_file_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "S3 URL to import domains from.",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 1024),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// DomainFileUrl is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Domains
@@ -134,16 +129,12 @@ func firewallDomainListResource(ctx context.Context) (resource.Resource, error) 
 			ElementType: types.StringType,
 			Description: "An inline list of domains to use for this domain list.",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.UniqueValues(),
 				listvalidator.ValueStringsAre(
 					stringvalidator.LengthBetween(1, 255),
 				),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// Domains is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Id

@@ -935,10 +935,6 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"user_data": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A launch script you can create that configures a server with additional user data. For example, you might want to run apt-get -y update.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// UserData is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: UserName

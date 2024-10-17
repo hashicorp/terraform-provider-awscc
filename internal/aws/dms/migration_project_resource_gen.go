@@ -81,13 +81,9 @@ func migrationProjectResource(ctx context.Context) (resource.Resource, error) {
 		"instance_profile_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The property describes an instance profile identifier for the migration project. For create",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 255),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// InstanceProfileIdentifier is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceProfileName
@@ -158,13 +154,9 @@ func migrationProjectResource(ctx context.Context) (resource.Resource, error) {
 		"migration_project_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The property describes an identifier for the migration project. It is used for describing/deleting/modifying can be name/arn",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 255),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// MigrationProjectIdentifier is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: MigrationProjectName

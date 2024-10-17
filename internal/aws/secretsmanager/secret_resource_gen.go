@@ -10,10 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -101,99 +98,65 @@ func secretResource(ctx context.Context) (resource.Resource, error) {
 				"exclude_characters": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "A string of the characters that you don't want in the password.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// ExcludeCharacters is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: ExcludeLowercase
 				"exclude_lowercase": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "Specifies whether to exclude lowercase letters from the password. If you don't include this switch, the password can contain lowercase letters.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						boolplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// ExcludeLowercase is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: ExcludeNumbers
 				"exclude_numbers": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "Specifies whether to exclude numbers from the password. If you don't include this switch, the password can contain numbers.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						boolplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// ExcludeNumbers is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: ExcludePunctuation
 				"exclude_punctuation": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "Specifies whether to exclude the following punctuation characters from the password: ``! \" # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _ ` { | } ~``. If you don't include this switch, the password can contain punctuation.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						boolplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// ExcludePunctuation is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: ExcludeUppercase
 				"exclude_uppercase": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "Specifies whether to exclude uppercase letters from the password. If you don't include this switch, the password can contain uppercase letters.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						boolplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// ExcludeUppercase is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: GenerateStringKey
 				"generate_string_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The JSON key name for the key/value pair, where the value is the generated password. This pair is added to the JSON structure specified by the ``SecretStringTemplate`` parameter. If you specify this parameter, then you must also specify ``SecretStringTemplate``.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// GenerateStringKey is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: IncludeSpace
 				"include_space": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "Specifies whether to include the space character. If you include this switch, the password can contain space characters.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						boolplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// IncludeSpace is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: PasswordLength
 				"password_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
 					Description: "The length of the password. If you don't include this parameter, the default length is 32 characters.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-						int64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// PasswordLength is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: RequireEachIncludedType
 				"require_each_included_type": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "Specifies whether to include at least one upper and lowercase letter, one number, and one punctuation. If you don't include this switch, the password contains at least one of every character type.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						boolplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// RequireEachIncludedType is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: SecretStringTemplate
 				"secret_string_template": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "A template that the generated string must match. When you make a change to this property, a new secret version is created.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// SecretStringTemplate is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "A structure that specifies how to generate a password to encrypt and store in the secret. To include a specific string in the secret, use ``SecretString`` instead. If you omit both ``GenerateSecretString`` and ``SecretString``, you create an empty secret. When you make a change to this property, a new secret version is created.\n We recommend that you specify the maximum length and include every character type that the system you are generating a password for can support.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// GenerateSecretString is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Id
@@ -312,10 +275,6 @@ func secretResource(ctx context.Context) (resource.Resource, error) {
 		"secret_string": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The text to encrypt and store in the secret. We recommend you use a JSON structure of key/value pairs for your secret value. To generate a random password, use ``GenerateSecretString`` instead. If you omit both ``GenerateSecretString`` and ``SecretString``, you create an empty secret. When you make a change to this property, a new secret version is created.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// SecretString is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Tags

@@ -307,7 +307,9 @@ func componentVersionResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+									stringplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
+								// DependencyType is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: VersionRequirement
 							"version_requirement": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -315,7 +317,9 @@ func componentVersionResource(ctx context.Context) (resource.Resource, error) {
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+									stringplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
+								// VersionRequirement is a write-only property.
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -323,7 +327,9 @@ func componentVersionResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
 						mapplanmodifier.UseStateForUnknown(),
+						mapplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// ComponentDependencies is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: ComponentLambdaParameters
 				"component_lambda_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -336,7 +342,9 @@ func componentVersionResource(ctx context.Context) (resource.Resource, error) {
 							Computed:    true,
 							PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
 								mapplanmodifier.UseStateForUnknown(),
+								mapplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
+							// EnvironmentVariables is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: EventSources
 						"event_sources": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -348,7 +356,9 @@ func componentVersionResource(ctx context.Context) (resource.Resource, error) {
 										Computed: true,
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
+											stringplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// Topic is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: Type
 									"type": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -362,7 +372,9 @@ func componentVersionResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
+											stringplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// Type is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
@@ -371,7 +383,9 @@ func componentVersionResource(ctx context.Context) (resource.Resource, error) {
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								generic.Multiset(),
 								listplanmodifier.UseStateForUnknown(),
+								listplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
+							// EventSources is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: ExecArgs
 						"exec_args": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -380,7 +394,9 @@ func componentVersionResource(ctx context.Context) (resource.Resource, error) {
 							Computed:    true,
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								listplanmodifier.UseStateForUnknown(),
+								listplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
+							// ExecArgs is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: InputPayloadEncodingType
 						"input_payload_encoding_type": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -394,7 +410,9 @@ func componentVersionResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
+							// InputPayloadEncodingType is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: LinuxProcessParams
 						"linux_process_params": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -412,7 +430,9 @@ func componentVersionResource(ctx context.Context) (resource.Resource, error) {
 														Computed: true,
 														PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 															boolplanmodifier.UseStateForUnknown(),
+															boolplanmodifier.RequiresReplaceIfConfigured(),
 														}, /*END PLAN MODIFIERS*/
+														// AddGroupOwner is a write-only property.
 													}, /*END ATTRIBUTE*/
 													// Property: Path
 													"path": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -420,7 +440,9 @@ func componentVersionResource(ctx context.Context) (resource.Resource, error) {
 														Computed: true,
 														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 															stringplanmodifier.UseStateForUnknown(),
+															stringplanmodifier.RequiresReplaceIfConfigured(),
 														}, /*END PLAN MODIFIERS*/
+														// Path is a write-only property.
 													}, /*END ATTRIBUTE*/
 													// Property: Permission
 													"permission": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -434,7 +456,9 @@ func componentVersionResource(ctx context.Context) (resource.Resource, error) {
 														}, /*END VALIDATORS*/
 														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 															stringplanmodifier.UseStateForUnknown(),
+															stringplanmodifier.RequiresReplaceIfConfigured(),
 														}, /*END PLAN MODIFIERS*/
+														// Permission is a write-only property.
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
 											}, /*END NESTED OBJECT*/
@@ -443,7 +467,9 @@ func componentVersionResource(ctx context.Context) (resource.Resource, error) {
 											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 												generic.Multiset(),
 												listplanmodifier.UseStateForUnknown(),
+												listplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
+											// Devices is a write-only property.
 										}, /*END ATTRIBUTE*/
 										// Property: MemorySizeInKB
 										"memory_size_in_kb": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -451,7 +477,9 @@ func componentVersionResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 												int64planmodifier.UseStateForUnknown(),
+												int64planmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
+											// MemorySizeInKB is a write-only property.
 										}, /*END ATTRIBUTE*/
 										// Property: MountROSysfs
 										"mount_ro_sysfs": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -459,7 +487,9 @@ func componentVersionResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 												boolplanmodifier.UseStateForUnknown(),
+												boolplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
+											// MountROSysfs is a write-only property.
 										}, /*END ATTRIBUTE*/
 										// Property: Volumes
 										"volumes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -471,7 +501,9 @@ func componentVersionResource(ctx context.Context) (resource.Resource, error) {
 														Computed: true,
 														PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 															boolplanmodifier.UseStateForUnknown(),
+															boolplanmodifier.RequiresReplaceIfConfigured(),
 														}, /*END PLAN MODIFIERS*/
+														// AddGroupOwner is a write-only property.
 													}, /*END ATTRIBUTE*/
 													// Property: DestinationPath
 													"destination_path": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -479,7 +511,9 @@ func componentVersionResource(ctx context.Context) (resource.Resource, error) {
 														Computed: true,
 														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 															stringplanmodifier.UseStateForUnknown(),
+															stringplanmodifier.RequiresReplaceIfConfigured(),
 														}, /*END PLAN MODIFIERS*/
+														// DestinationPath is a write-only property.
 													}, /*END ATTRIBUTE*/
 													// Property: Permission
 													"permission": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -493,7 +527,9 @@ func componentVersionResource(ctx context.Context) (resource.Resource, error) {
 														}, /*END VALIDATORS*/
 														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 															stringplanmodifier.UseStateForUnknown(),
+															stringplanmodifier.RequiresReplaceIfConfigured(),
 														}, /*END PLAN MODIFIERS*/
+														// Permission is a write-only property.
 													}, /*END ATTRIBUTE*/
 													// Property: SourcePath
 													"source_path": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -501,7 +537,9 @@ func componentVersionResource(ctx context.Context) (resource.Resource, error) {
 														Computed: true,
 														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 															stringplanmodifier.UseStateForUnknown(),
+															stringplanmodifier.RequiresReplaceIfConfigured(),
 														}, /*END PLAN MODIFIERS*/
+														// SourcePath is a write-only property.
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
 											}, /*END NESTED OBJECT*/
@@ -510,14 +548,18 @@ func componentVersionResource(ctx context.Context) (resource.Resource, error) {
 											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 												generic.Multiset(),
 												listplanmodifier.UseStateForUnknown(),
+												listplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
+											// Volumes is a write-only property.
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 										objectplanmodifier.UseStateForUnknown(),
+										objectplanmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
+									// ContainerParams is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: IsolationMode
 								"isolation_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -531,14 +573,18 @@ func componentVersionResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
+										stringplanmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
+									// IsolationMode is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
 							Computed: true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 								objectplanmodifier.UseStateForUnknown(),
+								objectplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
+							// LinuxProcessParams is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: MaxIdleTimeInSeconds
 						"max_idle_time_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -546,7 +592,9 @@ func componentVersionResource(ctx context.Context) (resource.Resource, error) {
 							Computed: true,
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 								int64planmodifier.UseStateForUnknown(),
+								int64planmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
+							// MaxIdleTimeInSeconds is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: MaxInstancesCount
 						"max_instances_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -554,7 +602,9 @@ func componentVersionResource(ctx context.Context) (resource.Resource, error) {
 							Computed: true,
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 								int64planmodifier.UseStateForUnknown(),
+								int64planmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
+							// MaxInstancesCount is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: MaxQueueSize
 						"max_queue_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -562,7 +612,9 @@ func componentVersionResource(ctx context.Context) (resource.Resource, error) {
 							Computed: true,
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 								int64planmodifier.UseStateForUnknown(),
+								int64planmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
+							// MaxQueueSize is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: Pinned
 						"pinned": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -570,7 +622,9 @@ func componentVersionResource(ctx context.Context) (resource.Resource, error) {
 							Computed: true,
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 								boolplanmodifier.UseStateForUnknown(),
+								boolplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
+							// Pinned is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: StatusTimeoutInSeconds
 						"status_timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -578,7 +632,9 @@ func componentVersionResource(ctx context.Context) (resource.Resource, error) {
 							Computed: true,
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 								int64planmodifier.UseStateForUnknown(),
+								int64planmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
+							// StatusTimeoutInSeconds is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: TimeoutInSeconds
 						"timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -586,14 +642,18 @@ func componentVersionResource(ctx context.Context) (resource.Resource, error) {
 							Computed: true,
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 								int64planmodifier.UseStateForUnknown(),
+								int64planmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
+							// TimeoutInSeconds is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
 					Computed: true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
+						objectplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// ComponentLambdaParameters is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: ComponentName
 				"component_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -601,7 +661,9 @@ func componentVersionResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// ComponentName is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: ComponentPlatforms
 				"component_platforms": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -615,7 +677,9 @@ func componentVersionResource(ctx context.Context) (resource.Resource, error) {
 								Computed:    true,
 								PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
 									mapplanmodifier.UseStateForUnknown(),
+									mapplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
+								// Attributes is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: Name
 							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -623,7 +687,9 @@ func componentVersionResource(ctx context.Context) (resource.Resource, error) {
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+									stringplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
+								// Name is a write-only property.
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -632,7 +698,9 @@ func componentVersionResource(ctx context.Context) (resource.Resource, error) {
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						generic.Multiset(),
 						listplanmodifier.UseStateForUnknown(),
+						listplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// ComponentPlatforms is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: ComponentVersion
 				"component_version": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -640,7 +708,9 @@ func componentVersionResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// ComponentVersion is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: LambdaArn
 				"lambda_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -651,7 +721,9 @@ func componentVersionResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// LambdaArn is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Optional: true,

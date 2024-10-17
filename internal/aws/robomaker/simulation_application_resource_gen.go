@@ -12,16 +12,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -129,38 +126,26 @@ func simulationApplicationResource(ctx context.Context) (resource.Resource, erro
 				// Property: Name
 				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The name of the rendering engine.",
-					Optional:    true,
-					Computed:    true,
+					Required:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"OGRE",
 						),
-						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// Name is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: Version
 				"version": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The version of the rendering engine.",
-					Optional:    true,
-					Computed:    true,
+					Required:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.RegexMatches(regexp.MustCompile("1.x"), ""),
-						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// Version is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The rendering engine for the simulation application.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// RenderingEngine is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: RobotSoftwareSuite
@@ -213,7 +198,6 @@ func simulationApplicationResource(ctx context.Context) (resource.Resource, erro
 				"version": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The version of the robot software suite.",
 					Optional:    true,
-					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"Kinetic",
@@ -222,9 +206,6 @@ func simulationApplicationResource(ctx context.Context) (resource.Resource, erro
 							"Foxy",
 						),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 					// Version is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -284,7 +265,6 @@ func simulationApplicationResource(ctx context.Context) (resource.Resource, erro
 				"version": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The version of the simulation software suite.",
 					Optional:    true,
-					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"7",
@@ -296,9 +276,6 @@ func simulationApplicationResource(ctx context.Context) (resource.Resource, erro
 							"Foxy",
 						),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 					// Version is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -351,54 +328,40 @@ func simulationApplicationResource(ctx context.Context) (resource.Resource, erro
 					// Property: Architecture
 					"architecture": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The target processor architecture for the application.",
-						Optional:    true,
-						Computed:    true,
+						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.OneOf(
 								"X86_64",
 								"ARM64",
 								"ARMHF",
 							),
-							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// Architecture is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: S3Bucket
 					"s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The Amazon S3 bucket name.",
-						Optional:    true,
-						Computed:    true,
+						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.RegexMatches(regexp.MustCompile("[a-z0-9][a-z0-9.\\-]*[a-z0-9]"), ""),
-							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// S3Bucket is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: S3Key
 					"s3_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The s3 object key.",
-						Optional:    true,
-						Computed:    true,
+						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 1024),
-							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// S3Key is a write-only property.
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "The sources of the simulation application.",
 			Optional:    true,
-			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 			// Sources is a write-only property.
 		}, /*END ATTRIBUTE*/

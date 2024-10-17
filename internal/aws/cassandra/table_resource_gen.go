@@ -163,28 +163,23 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
+							// AutoScalingDisabled is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: MaximumUnits
 						"maximum_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
 								int64validator.AtLeast(1),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								int64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// MaximumUnits is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: MinimumUnits
 						"minimum_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
 								int64validator.AtLeast(1),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								int64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// MinimumUnits is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: ScalingPolicy
 						"scaling_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -200,6 +195,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 												boolplanmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
+											// DisableScaleIn is a write-only property.
 										}, /*END ATTRIBUTE*/
 										// Property: ScaleInCooldown
 										"scale_in_cooldown": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -209,6 +205,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 												int64planmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
+											// ScaleInCooldown is a write-only property.
 										}, /*END ATTRIBUTE*/
 										// Property: ScaleOutCooldown
 										"scale_out_cooldown": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -218,41 +215,27 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 												int64planmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
+											// ScaleOutCooldown is a write-only property.
 										}, /*END ATTRIBUTE*/
 										// Property: TargetValue
 										"target_value": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											Validators: []validator.Int64{ /*START VALIDATORS*/
-												fwvalidators.NotNullInt64(),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-												int64planmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											Required: true,
+											// TargetValue is a write-only property.
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "Represents configuration for target tracking scaling policy.",
 									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// TargetTrackingScalingPolicyConfiguration is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "Represents scaling policy.",
 							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// ScalingPolicy is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Represents configuration for auto scaling.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// ReadCapacityAutoScaling is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: WriteCapacityAutoScaling
 				"write_capacity_auto_scaling": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -265,28 +248,23 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
+							// AutoScalingDisabled is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: MaximumUnits
 						"maximum_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
 								int64validator.AtLeast(1),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								int64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// MaximumUnits is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: MinimumUnits
 						"minimum_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
 								int64validator.AtLeast(1),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								int64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// MinimumUnits is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: ScalingPolicy
 						"scaling_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -302,6 +280,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 												boolplanmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
+											// DisableScaleIn is a write-only property.
 										}, /*END ATTRIBUTE*/
 										// Property: ScaleInCooldown
 										"scale_in_cooldown": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -311,6 +290,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 												int64planmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
+											// ScaleInCooldown is a write-only property.
 										}, /*END ATTRIBUTE*/
 										// Property: ScaleOutCooldown
 										"scale_out_cooldown": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -320,49 +300,31 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 												int64planmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
+											// ScaleOutCooldown is a write-only property.
 										}, /*END ATTRIBUTE*/
 										// Property: TargetValue
 										"target_value": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											Validators: []validator.Int64{ /*START VALIDATORS*/
-												fwvalidators.NotNullInt64(),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-												int64planmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											Required: true,
+											// TargetValue is a write-only property.
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "Represents configuration for target tracking scaling policy.",
 									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// TargetTrackingScalingPolicyConfiguration is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "Represents scaling policy.",
 							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// ScalingPolicy is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Represents configuration for auto scaling.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// WriteCapacityAutoScaling is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Represents the read and write settings used for AutoScaling.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// AutoScalingSpecifications is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: BillingMode
@@ -540,6 +502,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+									stringplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: ColumnType
@@ -551,6 +514,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+									stringplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -561,6 +525,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
+							objectplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: OrderBy
@@ -576,6 +541,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -725,10 +691,16 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9_]{1,47}$"), ""),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.RequiresReplace(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: ColumnType
 					"column_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Required: true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.RequiresReplace(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -910,28 +882,23 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 									boolplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
+								// AutoScalingDisabled is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: MaximumUnits
 							"maximum_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
 								Optional: true,
-								Computed: true,
 								Validators: []validator.Int64{ /*START VALIDATORS*/
 									int64validator.AtLeast(1),
 								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-									int64planmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// MaximumUnits is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: MinimumUnits
 							"minimum_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
 								Optional: true,
-								Computed: true,
 								Validators: []validator.Int64{ /*START VALIDATORS*/
 									int64validator.AtLeast(1),
 								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-									int64planmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// MinimumUnits is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: ScalingPolicy
 							"scaling_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -947,6 +914,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 												PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 													boolplanmodifier.UseStateForUnknown(),
 												}, /*END PLAN MODIFIERS*/
+												// DisableScaleIn is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: ScaleInCooldown
 											"scale_in_cooldown": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -956,6 +924,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 													int64planmodifier.UseStateForUnknown(),
 												}, /*END PLAN MODIFIERS*/
+												// ScaleInCooldown is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: ScaleOutCooldown
 											"scale_out_cooldown": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -965,73 +934,48 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 													int64planmodifier.UseStateForUnknown(),
 												}, /*END PLAN MODIFIERS*/
+												// ScaleOutCooldown is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: TargetValue
 											"target_value": schema.Int64Attribute{ /*START ATTRIBUTE*/
-												Optional: true,
-												Computed: true,
-												Validators: []validator.Int64{ /*START VALIDATORS*/
-													fwvalidators.NotNullInt64(),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-													int64planmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												Required: true,
+												// TargetValue is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "Represents configuration for target tracking scaling policy.",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											objectplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// TargetTrackingScalingPolicyConfiguration is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Description: "Represents scaling policy.",
 								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-									objectplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// ScalingPolicy is a write-only property.
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "Represents configuration for auto scaling.",
 						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-							objectplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// ReadCapacityAutoScaling is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: ReadCapacityUnits
 					"read_capacity_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
 						Optional: true,
-						Computed: true,
-						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-							int64planmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// ReadCapacityUnits is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: Region
 					"region": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Required: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(2, 25),
-							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// Region is a write-only property.
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Optional: true,
-			Computed: true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeAtLeast(1),
 				listvalidator.UniqueValues(),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// ReplicaSpecifications is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: TableName

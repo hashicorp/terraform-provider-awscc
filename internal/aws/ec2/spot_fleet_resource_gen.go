@@ -1268,6 +1268,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
+												stringplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: Ebs
@@ -1279,6 +1280,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 														boolplanmodifier.UseStateForUnknown(),
+														boolplanmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: Encrypted
@@ -1287,6 +1289,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 														boolplanmodifier.UseStateForUnknown(),
+														boolplanmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: Iops
@@ -1295,6 +1298,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 														int64planmodifier.UseStateForUnknown(),
+														int64planmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: SnapshotId
@@ -1303,6 +1307,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 														stringplanmodifier.UseStateForUnknown(),
+														stringplanmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: VolumeSize
@@ -1311,6 +1316,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 														int64planmodifier.UseStateForUnknown(),
+														int64planmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: VolumeType
@@ -1330,6 +1336,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 														stringplanmodifier.UseStateForUnknown(),
+														stringplanmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
@@ -1337,6 +1344,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 												objectplanmodifier.UseStateForUnknown(),
+												objectplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: NoDevice
@@ -1345,6 +1353,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
+												stringplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: VirtualName
@@ -1353,6 +1362,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
+												stringplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
@@ -1364,6 +1374,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 									listplanmodifier.UseStateForUnknown(),
+									listplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: EbsOptimized
@@ -1373,6 +1384,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 								Default:  booldefault.StaticBool(false),
 								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 									boolplanmodifier.UseStateForUnknown(),
+									boolplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: IamInstanceProfile
@@ -1384,6 +1396,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 										Computed: true,
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
+											stringplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
@@ -1391,6 +1404,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 								Computed: true,
 								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 									objectplanmodifier.UseStateForUnknown(),
+									objectplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: ImageId
@@ -1402,6 +1416,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+									stringplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: InstanceRequirements
@@ -1416,6 +1431,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 												Computed: true,
 												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 													int64planmodifier.UseStateForUnknown(),
+													int64planmodifier.RequiresReplaceIfConfigured(),
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: Min
@@ -1424,6 +1440,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 												Computed: true,
 												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 													int64planmodifier.UseStateForUnknown(),
+													int64planmodifier.RequiresReplaceIfConfigured(),
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
@@ -1431,6 +1448,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 										Computed: true,
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 											objectplanmodifier.UseStateForUnknown(),
+											objectplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: AcceleratorManufacturers
@@ -1451,6 +1469,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: AcceleratorNames
@@ -1478,6 +1497,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: AcceleratorTotalMemoryMiB
@@ -1489,6 +1509,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 												Computed: true,
 												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 													int64planmodifier.UseStateForUnknown(),
+													int64planmodifier.RequiresReplaceIfConfigured(),
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: Min
@@ -1497,6 +1518,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 												Computed: true,
 												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 													int64planmodifier.UseStateForUnknown(),
+													int64planmodifier.RequiresReplaceIfConfigured(),
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
@@ -1504,6 +1526,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 										Computed: true,
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 											objectplanmodifier.UseStateForUnknown(),
+											objectplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: AcceleratorTypes
@@ -1522,6 +1545,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: AllowedInstanceTypes
@@ -1537,6 +1561,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: BareMetal
@@ -1552,6 +1577,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
+											stringplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: BaselineEbsBandwidthMbps
@@ -1563,6 +1589,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 												Computed: true,
 												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 													int64planmodifier.UseStateForUnknown(),
+													int64planmodifier.RequiresReplaceIfConfigured(),
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: Min
@@ -1571,6 +1598,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 												Computed: true,
 												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 													int64planmodifier.UseStateForUnknown(),
+													int64planmodifier.RequiresReplaceIfConfigured(),
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
@@ -1578,6 +1606,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 										Computed: true,
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 											objectplanmodifier.UseStateForUnknown(),
+											objectplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: BurstablePerformance
@@ -1593,6 +1622,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
+											stringplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: CpuManufacturers
@@ -1611,6 +1641,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: ExcludedInstanceTypes
@@ -1626,6 +1657,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: InstanceGenerations
@@ -1643,6 +1675,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: LocalStorage
@@ -1658,6 +1691,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
+											stringplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: LocalStorageTypes
@@ -1675,6 +1709,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+											listplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: MaxSpotPriceAsPercentageOfOptimalOnDemandPrice
@@ -1683,6 +1718,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 										Computed: true,
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 											int64planmodifier.UseStateForUnknown(),
+											int64planmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: MemoryGiBPerVCpu
@@ -1694,6 +1730,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 												Computed: true,
 												PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 													float64planmodifier.UseStateForUnknown(),
+													float64planmodifier.RequiresReplaceIfConfigured(),
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: Min
@@ -1702,6 +1739,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 												Computed: true,
 												PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 													float64planmodifier.UseStateForUnknown(),
+													float64planmodifier.RequiresReplaceIfConfigured(),
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
@@ -1709,6 +1747,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 										Computed: true,
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 											objectplanmodifier.UseStateForUnknown(),
+											objectplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: MemoryMiB
@@ -1720,6 +1759,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 												Computed: true,
 												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 													int64planmodifier.UseStateForUnknown(),
+													int64planmodifier.RequiresReplaceIfConfigured(),
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: Min
@@ -1728,6 +1768,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 												Computed: true,
 												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 													int64planmodifier.UseStateForUnknown(),
+													int64planmodifier.RequiresReplaceIfConfigured(),
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
@@ -1735,6 +1776,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 										Computed: true,
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 											objectplanmodifier.UseStateForUnknown(),
+											objectplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: NetworkBandwidthGbps
@@ -1746,6 +1788,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 												Computed: true,
 												PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 													float64planmodifier.UseStateForUnknown(),
+													float64planmodifier.RequiresReplaceIfConfigured(),
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: Min
@@ -1754,6 +1797,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 												Computed: true,
 												PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 													float64planmodifier.UseStateForUnknown(),
+													float64planmodifier.RequiresReplaceIfConfigured(),
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
@@ -1761,6 +1805,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 										Computed: true,
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 											objectplanmodifier.UseStateForUnknown(),
+											objectplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: NetworkInterfaceCount
@@ -1772,6 +1817,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 												Computed: true,
 												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 													int64planmodifier.UseStateForUnknown(),
+													int64planmodifier.RequiresReplaceIfConfigured(),
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: Min
@@ -1780,6 +1826,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 												Computed: true,
 												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 													int64planmodifier.UseStateForUnknown(),
+													int64planmodifier.RequiresReplaceIfConfigured(),
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
@@ -1787,6 +1834,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 										Computed: true,
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 											objectplanmodifier.UseStateForUnknown(),
+											objectplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: OnDemandMaxPricePercentageOverLowestPrice
@@ -1795,6 +1843,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 										Computed: true,
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 											int64planmodifier.UseStateForUnknown(),
+											int64planmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: RequireHibernateSupport
@@ -1803,6 +1852,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 										Computed: true,
 										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 											boolplanmodifier.UseStateForUnknown(),
+											boolplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: SpotMaxPricePercentageOverLowestPrice
@@ -1811,6 +1861,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 										Computed: true,
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 											int64planmodifier.UseStateForUnknown(),
+											int64planmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: TotalLocalStorageGB
@@ -1822,6 +1873,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 												Computed: true,
 												PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 													float64planmodifier.UseStateForUnknown(),
+													float64planmodifier.RequiresReplaceIfConfigured(),
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: Min
@@ -1830,6 +1882,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 												Computed: true,
 												PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 													float64planmodifier.UseStateForUnknown(),
+													float64planmodifier.RequiresReplaceIfConfigured(),
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
@@ -1837,6 +1890,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 										Computed: true,
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 											objectplanmodifier.UseStateForUnknown(),
+											objectplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: VCpuCount
@@ -1848,6 +1902,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 												Computed: true,
 												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 													int64planmodifier.UseStateForUnknown(),
+													int64planmodifier.RequiresReplaceIfConfigured(),
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: Min
@@ -1856,6 +1911,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 												Computed: true,
 												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 													int64planmodifier.UseStateForUnknown(),
+													int64planmodifier.RequiresReplaceIfConfigured(),
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
@@ -1863,6 +1919,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 										Computed: true,
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 											objectplanmodifier.UseStateForUnknown(),
+											objectplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
@@ -1870,6 +1927,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 								Computed: true,
 								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 									objectplanmodifier.UseStateForUnknown(),
+									objectplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: InstanceType
@@ -1878,6 +1936,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+									stringplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: KernelId
@@ -1886,6 +1945,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+									stringplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: KeyName
@@ -1894,6 +1954,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+									stringplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Monitoring
@@ -1906,6 +1967,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 										Default:  booldefault.StaticBool(false),
 										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 											boolplanmodifier.UseStateForUnknown(),
+											boolplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
@@ -1913,6 +1975,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 								Computed: true,
 								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 									objectplanmodifier.UseStateForUnknown(),
+									objectplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: NetworkInterfaces
@@ -1925,6 +1988,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 												boolplanmodifier.UseStateForUnknown(),
+												boolplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: DeleteOnTermination
@@ -1933,6 +1997,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 												boolplanmodifier.UseStateForUnknown(),
+												boolplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: Description
@@ -1941,6 +2006,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
+												stringplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: DeviceIndex
@@ -1949,6 +2015,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 												int64planmodifier.UseStateForUnknown(),
+												int64planmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: Groups
@@ -1961,6 +2028,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 												listplanmodifier.UseStateForUnknown(),
+												listplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: Ipv6AddressCount
@@ -1969,6 +2037,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 												int64planmodifier.UseStateForUnknown(),
+												int64planmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: Ipv6Addresses
@@ -1984,6 +2053,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 														}, /*END VALIDATORS*/
 														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 															stringplanmodifier.UseStateForUnknown(),
+															stringplanmodifier.RequiresReplaceIfConfigured(),
 														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
@@ -1995,6 +2065,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 												listplanmodifier.UseStateForUnknown(),
+												listplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: NetworkInterfaceId
@@ -2003,6 +2074,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
+												stringplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: PrivateIpAddresses
@@ -2015,6 +2087,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 														Computed: true,
 														PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 															boolplanmodifier.UseStateForUnknown(),
+															boolplanmodifier.RequiresReplaceIfConfigured(),
 														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 													// Property: PrivateIpAddress
@@ -2026,6 +2099,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 														}, /*END VALIDATORS*/
 														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 															stringplanmodifier.UseStateForUnknown(),
+															stringplanmodifier.RequiresReplaceIfConfigured(),
 														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
@@ -2037,6 +2111,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 												listplanmodifier.UseStateForUnknown(),
+												listplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: SecondaryPrivateIpAddressCount
@@ -2045,6 +2120,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 												int64planmodifier.UseStateForUnknown(),
+												int64planmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: SubnetId
@@ -2053,6 +2129,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
+												stringplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
@@ -2064,6 +2141,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 									listplanmodifier.UseStateForUnknown(),
+									listplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Placement
@@ -2075,6 +2153,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 										Computed: true,
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
+											stringplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: GroupName
@@ -2083,6 +2162,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 										Computed: true,
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
+											stringplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: Tenancy
@@ -2098,6 +2178,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
+											stringplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
@@ -2105,6 +2186,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 								Computed: true,
 								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 									objectplanmodifier.UseStateForUnknown(),
+									objectplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: RamdiskId
@@ -2113,6 +2195,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+									stringplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: SecurityGroups
@@ -2128,6 +2211,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
+												stringplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
@@ -2139,6 +2223,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 									listplanmodifier.UseStateForUnknown(),
+									listplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: SpotPrice
@@ -2147,6 +2232,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+									stringplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: SubnetId
@@ -2155,6 +2241,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+									stringplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: TagSpecifications
@@ -2218,6 +2305,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
+												stringplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: Tags
@@ -2233,6 +2321,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 														}, /*END VALIDATORS*/
 														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 															stringplanmodifier.UseStateForUnknown(),
+															stringplanmodifier.RequiresReplaceIfConfigured(),
 														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 													// Property: Value
@@ -2244,6 +2333,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 														}, /*END VALIDATORS*/
 														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 															stringplanmodifier.UseStateForUnknown(),
+															stringplanmodifier.RequiresReplaceIfConfigured(),
 														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
@@ -2252,6 +2342,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 												listplanmodifier.UseStateForUnknown(),
+												listplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
@@ -2263,6 +2354,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 									listplanmodifier.UseStateForUnknown(),
+									listplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: UserData
@@ -2271,6 +2363,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+									stringplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: WeightedCapacity
@@ -2279,6 +2372,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 								Computed: true,
 								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 									float64planmodifier.UseStateForUnknown(),
+									float64planmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -2306,6 +2400,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 										Computed: true,
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
+											stringplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: LaunchTemplateName
@@ -2318,6 +2413,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
+											stringplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: Version
@@ -2329,6 +2425,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
+											stringplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
@@ -2336,6 +2433,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 								Computed: true,
 								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 									objectplanmodifier.UseStateForUnknown(),
+									objectplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Overrides
@@ -2348,6 +2446,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
+												stringplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: InstanceRequirements
@@ -2362,6 +2461,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 															Computed: true,
 															PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 																int64planmodifier.UseStateForUnknown(),
+																int64planmodifier.RequiresReplaceIfConfigured(),
 															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 														// Property: Min
@@ -2370,6 +2470,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 															Computed: true,
 															PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 																int64planmodifier.UseStateForUnknown(),
+																int64planmodifier.RequiresReplaceIfConfigured(),
 															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
@@ -2377,6 +2478,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 														objectplanmodifier.UseStateForUnknown(),
+														objectplanmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: AcceleratorManufacturers
@@ -2397,6 +2499,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 														listplanmodifier.UseStateForUnknown(),
+														listplanmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: AcceleratorNames
@@ -2424,6 +2527,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 														listplanmodifier.UseStateForUnknown(),
+														listplanmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: AcceleratorTotalMemoryMiB
@@ -2435,6 +2539,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 															Computed: true,
 															PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 																int64planmodifier.UseStateForUnknown(),
+																int64planmodifier.RequiresReplaceIfConfigured(),
 															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 														// Property: Min
@@ -2443,6 +2548,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 															Computed: true,
 															PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 																int64planmodifier.UseStateForUnknown(),
+																int64planmodifier.RequiresReplaceIfConfigured(),
 															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
@@ -2450,6 +2556,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 														objectplanmodifier.UseStateForUnknown(),
+														objectplanmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: AcceleratorTypes
@@ -2468,6 +2575,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 														listplanmodifier.UseStateForUnknown(),
+														listplanmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: AllowedInstanceTypes
@@ -2483,6 +2591,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 														listplanmodifier.UseStateForUnknown(),
+														listplanmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: BareMetal
@@ -2498,6 +2607,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 														stringplanmodifier.UseStateForUnknown(),
+														stringplanmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: BaselineEbsBandwidthMbps
@@ -2509,6 +2619,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 															Computed: true,
 															PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 																int64planmodifier.UseStateForUnknown(),
+																int64planmodifier.RequiresReplaceIfConfigured(),
 															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 														// Property: Min
@@ -2517,6 +2628,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 															Computed: true,
 															PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 																int64planmodifier.UseStateForUnknown(),
+																int64planmodifier.RequiresReplaceIfConfigured(),
 															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
@@ -2524,6 +2636,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 														objectplanmodifier.UseStateForUnknown(),
+														objectplanmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: BurstablePerformance
@@ -2539,6 +2652,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 														stringplanmodifier.UseStateForUnknown(),
+														stringplanmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: CpuManufacturers
@@ -2557,6 +2671,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 														listplanmodifier.UseStateForUnknown(),
+														listplanmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: ExcludedInstanceTypes
@@ -2572,6 +2687,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 														listplanmodifier.UseStateForUnknown(),
+														listplanmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: InstanceGenerations
@@ -2589,6 +2705,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 														listplanmodifier.UseStateForUnknown(),
+														listplanmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: LocalStorage
@@ -2604,6 +2721,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 														stringplanmodifier.UseStateForUnknown(),
+														stringplanmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: LocalStorageTypes
@@ -2621,6 +2739,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 														listplanmodifier.UseStateForUnknown(),
+														listplanmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: MaxSpotPriceAsPercentageOfOptimalOnDemandPrice
@@ -2629,6 +2748,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 														int64planmodifier.UseStateForUnknown(),
+														int64planmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: MemoryGiBPerVCpu
@@ -2640,6 +2760,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 															Computed: true,
 															PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 																float64planmodifier.UseStateForUnknown(),
+																float64planmodifier.RequiresReplaceIfConfigured(),
 															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 														// Property: Min
@@ -2648,6 +2769,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 															Computed: true,
 															PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 																float64planmodifier.UseStateForUnknown(),
+																float64planmodifier.RequiresReplaceIfConfigured(),
 															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
@@ -2655,6 +2777,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 														objectplanmodifier.UseStateForUnknown(),
+														objectplanmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: MemoryMiB
@@ -2666,6 +2789,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 															Computed: true,
 															PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 																int64planmodifier.UseStateForUnknown(),
+																int64planmodifier.RequiresReplaceIfConfigured(),
 															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 														// Property: Min
@@ -2674,6 +2798,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 															Computed: true,
 															PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 																int64planmodifier.UseStateForUnknown(),
+																int64planmodifier.RequiresReplaceIfConfigured(),
 															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
@@ -2681,6 +2806,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 														objectplanmodifier.UseStateForUnknown(),
+														objectplanmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: NetworkBandwidthGbps
@@ -2692,6 +2818,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 															Computed: true,
 															PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 																float64planmodifier.UseStateForUnknown(),
+																float64planmodifier.RequiresReplaceIfConfigured(),
 															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 														// Property: Min
@@ -2700,6 +2827,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 															Computed: true,
 															PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 																float64planmodifier.UseStateForUnknown(),
+																float64planmodifier.RequiresReplaceIfConfigured(),
 															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
@@ -2707,6 +2835,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 														objectplanmodifier.UseStateForUnknown(),
+														objectplanmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: NetworkInterfaceCount
@@ -2718,6 +2847,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 															Computed: true,
 															PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 																int64planmodifier.UseStateForUnknown(),
+																int64planmodifier.RequiresReplaceIfConfigured(),
 															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 														// Property: Min
@@ -2726,6 +2856,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 															Computed: true,
 															PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 																int64planmodifier.UseStateForUnknown(),
+																int64planmodifier.RequiresReplaceIfConfigured(),
 															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
@@ -2733,6 +2864,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 														objectplanmodifier.UseStateForUnknown(),
+														objectplanmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: OnDemandMaxPricePercentageOverLowestPrice
@@ -2741,6 +2873,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 														int64planmodifier.UseStateForUnknown(),
+														int64planmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: RequireHibernateSupport
@@ -2749,6 +2882,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 														boolplanmodifier.UseStateForUnknown(),
+														boolplanmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: SpotMaxPricePercentageOverLowestPrice
@@ -2757,6 +2891,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 														int64planmodifier.UseStateForUnknown(),
+														int64planmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: TotalLocalStorageGB
@@ -2768,6 +2903,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 															Computed: true,
 															PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 																float64planmodifier.UseStateForUnknown(),
+																float64planmodifier.RequiresReplaceIfConfigured(),
 															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 														// Property: Min
@@ -2776,6 +2912,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 															Computed: true,
 															PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 																float64planmodifier.UseStateForUnknown(),
+																float64planmodifier.RequiresReplaceIfConfigured(),
 															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
@@ -2783,6 +2920,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 														objectplanmodifier.UseStateForUnknown(),
+														objectplanmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: VCpuCount
@@ -2794,6 +2932,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 															Computed: true,
 															PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 																int64planmodifier.UseStateForUnknown(),
+																int64planmodifier.RequiresReplaceIfConfigured(),
 															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 														// Property: Min
@@ -2802,6 +2941,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 															Computed: true,
 															PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 																int64planmodifier.UseStateForUnknown(),
+																int64planmodifier.RequiresReplaceIfConfigured(),
 															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
@@ -2809,6 +2949,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 														objectplanmodifier.UseStateForUnknown(),
+														objectplanmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
@@ -2816,6 +2957,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 												objectplanmodifier.UseStateForUnknown(),
+												objectplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: InstanceType
@@ -2824,6 +2966,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
+												stringplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: Priority
@@ -2832,6 +2975,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 												float64planmodifier.UseStateForUnknown(),
+												float64planmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: SpotPrice
@@ -2840,6 +2984,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
+												stringplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: SubnetId
@@ -2848,6 +2993,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
+												stringplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: WeightedCapacity
@@ -2856,6 +3002,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 												float64planmodifier.UseStateForUnknown(),
+												float64planmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
@@ -2867,6 +3014,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 									listplanmodifier.UseStateForUnknown(),
+									listplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -2900,6 +3048,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 													stringplanmodifier.UseStateForUnknown(),
+													stringplanmodifier.RequiresReplaceIfConfigured(),
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
@@ -2912,6 +3061,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 										listplanmodifier.UseStateForUnknown(),
+										listplanmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -2919,6 +3069,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 							Computed: true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 								objectplanmodifier.UseStateForUnknown(),
+								objectplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: TargetGroupsConfig
@@ -2937,6 +3088,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 													stringplanmodifier.UseStateForUnknown(),
+													stringplanmodifier.RequiresReplaceIfConfigured(),
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
@@ -2949,6 +3101,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 										listplanmodifier.UseStateForUnknown(),
+										listplanmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -2956,6 +3109,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 							Computed: true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 								objectplanmodifier.UseStateForUnknown(),
+								objectplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -3020,6 +3174,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
+										stringplanmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: TerminationDelay
@@ -3028,6 +3183,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 									Computed: true,
 									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 										int64planmodifier.UseStateForUnknown(),
+										int64planmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -3035,6 +3191,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 							Computed: true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 								objectplanmodifier.UseStateForUnknown(),
+								objectplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -3124,7 +3281,9 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+									stringplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
+								// ResourceType is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: Tags
 							"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -3139,7 +3298,9 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
+												stringplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
+											// Key is a write-only property.
 										}, /*END ATTRIBUTE*/
 										// Property: Value
 										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -3150,7 +3311,9 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
+												stringplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
+											// Value is a write-only property.
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
@@ -3158,7 +3321,9 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 								Computed: true,
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 									listplanmodifier.UseStateForUnknown(),
+									listplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
+								// Tags is a write-only property.
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/

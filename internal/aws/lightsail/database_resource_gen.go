@@ -124,13 +124,9 @@ func databaseResource(ctx context.Context) (resource.Resource, error) {
 		"master_user_password": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The password for the master user. The password can include any printable ASCII character except \"/\", \"\"\", or \"@\". It cannot contain spaces.",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 63),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// MasterUserPassword is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: MasterUsername
@@ -311,82 +307,54 @@ func databaseResource(ctx context.Context) (resource.Resource, error) {
 					"allowed_values": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Specifies the valid range of values for the parameter.",
 						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// AllowedValues is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: ApplyMethod
 					"apply_method": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Indicates when parameter updates are applied. Can be immediate or pending-reboot.",
 						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// ApplyMethod is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: ApplyType
 					"apply_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Specifies the engine-specific parameter type.",
 						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// ApplyType is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: DataType
 					"data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Specifies the valid data type for the parameter.",
 						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// DataType is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: Description
 					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Provides a description of the parameter.",
 						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// Description is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: IsModifiable
 					"is_modifiable": schema.BoolAttribute{ /*START ATTRIBUTE*/
 						Description: "A Boolean value indicating whether the parameter can be modified.",
 						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-							boolplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// IsModifiable is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: ParameterName
 					"parameter_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Specifies the name of the parameter.",
 						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// ParameterName is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: ParameterValue
 					"parameter_value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Specifies the value of the parameter.",
 						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// ParameterValue is a write-only property.
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "Update one or more parameters of the relational database.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// RelationalDatabaseParameters is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: RotateMasterUserPassword
@@ -399,10 +367,6 @@ func databaseResource(ctx context.Context) (resource.Resource, error) {
 		"rotate_master_user_password": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "When true, the master user password is changed to a new strong password generated by Lightsail. Use the get relational database master user password operation to get the new password.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// RotateMasterUserPassword is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Tags

@@ -115,7 +115,9 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+									stringplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
+								// Action is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: FailureType
 							"failure_type": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -133,7 +135,9 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+									stringplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
+								// FailureType is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: MinNumberOfExecutedThings
 							"min_number_of_executed_things": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -146,7 +150,9 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 									int64planmodifier.UseStateForUnknown(),
+									int64planmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
+								// MinNumberOfExecutedThings is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: ThresholdPercentage
 							"threshold_percentage": schema.Float64Attribute{ /*START ATTRIBUTE*/
@@ -159,7 +165,9 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 									float64planmodifier.UseStateForUnknown(),
+									float64planmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
+								// ThresholdPercentage is a write-only property.
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -172,7 +180,9 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						generic.Multiset(),
 						listplanmodifier.UseStateForUnknown(),
+						listplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// CriteriaList is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The criteria that determine when and how a job abort takes place.",
@@ -359,7 +369,9 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+									stringplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
+								// FailureType is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: NumberOfRetries
 							"number_of_retries": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -370,7 +382,9 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 									int64planmodifier.UseStateForUnknown(),
+									int64planmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
+								// NumberOfRetries is a write-only property.
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -382,7 +396,9 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						generic.Multiset(),
 						listplanmodifier.UseStateForUnknown(),
+						listplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// RetryCriteriaList is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Optional: true,
@@ -462,7 +478,9 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 								int64planmodifier.UseStateForUnknown(),
+								int64planmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
+							// BaseRatePerMinute is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: IncrementFactor
 						"increment_factor": schema.Float64Attribute{ /*START ATTRIBUTE*/
@@ -475,7 +493,9 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 								float64planmodifier.UseStateForUnknown(),
+								float64planmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
+							// IncrementFactor is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: RateIncreaseCriteria
 						"rate_increase_criteria": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -489,7 +509,9 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 										int64planmodifier.UseStateForUnknown(),
+										int64planmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
+									// NumberOfNotifiedThings is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: NumberOfSucceededThings
 								"number_of_succeeded_things": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -500,7 +522,9 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 										int64planmodifier.UseStateForUnknown(),
+										int64planmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
+									// NumberOfSucceededThings is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "The criteria to initiate the increase in rate of rollout for a job.",
@@ -511,7 +535,9 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 								objectplanmodifier.UseStateForUnknown(),
+								objectplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
+							// RateIncreaseCriteria is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The rate of increase for a job rollout. This parameter allows you to define an exponential rate for a job rollout.",
@@ -519,7 +545,9 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
+						objectplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// ExponentialRolloutRate is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: MaximumPerMinute
 				"maximum_per_minute": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -531,7 +559,9 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
+						int64planmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// MaximumPerMinute is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Allows you to create a staged rollout of a job.",
@@ -598,7 +628,9 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 							int64planmodifier.UseStateForUnknown(),
+							int64planmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
+						// DurationInMinutes is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: StartTime
 					"start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -609,7 +641,9 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
+						// StartTime is a write-only property.
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -659,7 +693,9 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
+						int64planmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// ExpiresInSec is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: RoleArn
 				"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -672,7 +708,9 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// RoleArn is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Configuration for pre-signed S3 URLs.",
@@ -731,7 +769,9 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
+						// Key is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -744,7 +784,9 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
+						// Value is a write-only property.
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -792,7 +834,9 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
+						int64planmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// InProgressTimeoutInMinutes is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Specifies the amount of time each device has to finish its execution of the job.",
@@ -863,6 +907,8 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 		"value":                          "Value",
 	})
 
+	opts = opts.IsImmutableType(true)
+
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/JobArn",
 		"/properties/Tags",
@@ -877,8 +923,6 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/MaintenanceWindows",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
-
-	opts = opts.WithUpdateTimeoutInMinutes(0)
 
 	v, err := generic.NewResource(ctx, opts...)
 

@@ -188,10 +188,6 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		"password": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The password for the user account. A password is required if you are using Amazon Connect for identity management. Otherwise, it is an error to include a password.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// Password is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: PhoneConfig

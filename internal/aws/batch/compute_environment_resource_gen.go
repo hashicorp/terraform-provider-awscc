@@ -459,6 +459,7 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 					Default:  stringdefault.StaticString("false"),
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: KubernetesNamespace
@@ -468,6 +469,7 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 					Default:  stringdefault.StaticString("false"),
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -596,6 +598,7 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
+					// JobExecutionTimeoutMinutes is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: TerminateJobsOnUpdate
 				"terminate_jobs_on_update": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -605,13 +608,10 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
+					// TerminateJobsOnUpdate is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// UpdatePolicy is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

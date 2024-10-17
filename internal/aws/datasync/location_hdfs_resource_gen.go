@@ -120,13 +120,9 @@ func locationHDFSResource(ctx context.Context) (resource.Resource, error) {
 		"kerberos_keytab": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Base64 string representation of the Keytab file.",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtMost(87384),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// KerberosKeytab is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: KerberosKrb5Conf
@@ -140,13 +136,9 @@ func locationHDFSResource(ctx context.Context) (resource.Resource, error) {
 		"kerberos_krb_5_conf": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The string representation of the Krb5Conf file, or the presigned URL to access the Krb5.conf file within an S3 bucket.",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtMost(174764),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// KerberosKrb5Conf is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: KerberosPrincipal
@@ -423,14 +415,10 @@ func locationHDFSResource(ctx context.Context) (resource.Resource, error) {
 		"subdirectory": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The subdirectory in HDFS that is used to read data from the HDFS source location or write data to the HDFS destination.",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtMost(4096),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$"), ""),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// Subdirectory is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Tags

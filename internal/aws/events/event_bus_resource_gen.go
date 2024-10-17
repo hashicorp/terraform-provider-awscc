@@ -98,10 +98,6 @@ func eventBusResource(ctx context.Context) (resource.Resource, error) {
 		"event_source_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "If you are creating a partner event bus, this specifies the partner event source that the new event bus will be matched with.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// EventSourceName is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyIdentifier

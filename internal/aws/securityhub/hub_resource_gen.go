@@ -89,10 +89,6 @@ func hubResource(ctx context.Context) (resource.Resource, error) {
 		"enable_default_standards": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Whether to enable the security standards that Security Hub has designated as automatically enabled.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// EnableDefaultStandards is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: SubscribedAt

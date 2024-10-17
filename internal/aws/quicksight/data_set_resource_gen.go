@@ -373,32 +373,22 @@ func dataSetResource(ctx context.Context) (resource.Resource, error) {
 					"columns": schema.ListAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
 						Optional:    true,
-						Computed:    true,
 						Validators: []validator.List{ /*START VALIDATORS*/
 							listvalidator.SizeBetween(0, 5000),
 						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-							listplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// Columns is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: Description
 					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Optional: true,
-						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 500),
 						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// Description is a write-only property.
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-				mapplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// FieldFolders is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: ImportMode
@@ -459,6 +449,7 @@ func dataSetResource(ctx context.Context) (resource.Resource, error) {
 					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 						float64planmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
+					// IngestionWaitTimeInHours is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: WaitForSpiceIngestion
 				"wait_for_spice_ingestion": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -469,14 +460,11 @@ func dataSetResource(ctx context.Context) (resource.Resource, error) {
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
+					// WaitForSpiceIngestion is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "<p>Wait policy to use when creating/updating dataset. Default is to wait for SPICE ingestion to finish with timeout of 36 hours.</p>",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// IngestionWaitPolicy is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedTime

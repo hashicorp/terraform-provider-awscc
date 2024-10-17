@@ -172,11 +172,17 @@ func customPluginResource(ctx context.Context) (resource.Resource, error) {
 						"bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The Amazon Resource Name (ARN) of an S3 bucket.",
 							Required:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.RequiresReplace(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: FileKey
 						"file_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The file key for an object in an S3 bucket.",
 							Required:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.RequiresReplace(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: ObjectVersion
 						"object_version": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -185,11 +191,15 @@ func customPluginResource(ctx context.Context) (resource.Resource, error) {
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The S3 bucket Amazon Resource Name (ARN), file key, and object version of the plugin file stored in Amazon S3.",
 					Required:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.RequiresReplace(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Information about the location of a custom plugin.",

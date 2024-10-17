@@ -38,10 +38,6 @@ func profileAssociationResource(ctx context.Context) (resource.Resource, error) 
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the profile association.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// Arn is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Id

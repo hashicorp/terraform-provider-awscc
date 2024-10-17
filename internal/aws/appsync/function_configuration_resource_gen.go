@@ -67,10 +67,6 @@ func functionConfigurationResource(ctx context.Context) (resource.Resource, erro
 		"code_s3_location": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon S3 endpoint (where the code is located??).",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// CodeS3Location is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: DataSourceName
@@ -193,10 +189,6 @@ func functionConfigurationResource(ctx context.Context) (resource.Resource, erro
 		"request_mapping_template_s3_location": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Describes a Sync configuration for a resolver. Contains information on which Conflict Detection, as well as Resolution strategy, should be performed when the resolver is invoked.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// RequestMappingTemplateS3Location is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: ResponseMappingTemplate
@@ -224,10 +216,6 @@ func functionConfigurationResource(ctx context.Context) (resource.Resource, erro
 		"response_mapping_template_s3_location": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The location of a response mapping template in an Amazon S3 bucket. Use this if you want to provision with a template file in Amazon S3 rather than embedding it in your CloudFormation template.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// ResponseMappingTemplateS3Location is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Runtime

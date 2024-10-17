@@ -43,13 +43,9 @@ func appResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"access_token": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
-			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 255),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// AccessToken is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: AppId
@@ -200,15 +196,12 @@ func appResource(ctx context.Context) (resource.Resource, error) {
 				"auto_branch_creation_patterns": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
 					Optional:    true,
-					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.ValueStringsAre(
 							stringvalidator.LengthBetween(1, 2048),
 						),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// AutoBranchCreationPatterns is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: BasicAuthConfig
 				"basic_auth_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -216,82 +209,55 @@ func appResource(ctx context.Context) (resource.Resource, error) {
 						// Property: EnableBasicAuth
 						"enable_basic_auth": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								boolplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// EnableBasicAuth is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: Password
 						"password": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 255),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// Password is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: Username
 						"username": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 255),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// Username is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// BasicAuthConfig is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: BuildSpec
 				"build_spec": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
-					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthBetween(1, 25000),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// BuildSpec is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: EnableAutoBranchCreation
 				"enable_auto_branch_creation": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						boolplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// EnableAutoBranchCreation is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: EnableAutoBuild
 				"enable_auto_build": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						boolplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// EnableAutoBuild is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: EnablePerformanceMode
 				"enable_performance_mode": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						boolplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// EnablePerformanceMode is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: EnablePullRequestPreview
 				"enable_pull_request_preview": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						boolplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// EnablePullRequestPreview is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: EnvironmentVariables
 				"environment_variables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -299,66 +265,48 @@ func appResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Name
 							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
-								Computed: true,
+								Required: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtMost(255),
 									stringvalidator.RegexMatches(regexp.MustCompile("(?s).*"), ""),
-									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// Name is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
-								Computed: true,
+								Required: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtMost(5500),
 									stringvalidator.RegexMatches(regexp.MustCompile("(?s).*"), ""),
-									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// Value is a write-only property.
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// EnvironmentVariables is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: Framework
 				"framework": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
-					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthAtMost(255),
 						stringvalidator.RegexMatches(regexp.MustCompile("(?s).*"), ""),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// Framework is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: PullRequestEnvironmentName
 				"pull_request_environment_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
-					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthAtMost(20),
 						stringvalidator.RegexMatches(regexp.MustCompile("(?s).*"), ""),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// PullRequestEnvironmentName is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: Stage
 				"stage": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
-					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"EXPERIMENTAL",
@@ -368,16 +316,10 @@ func appResource(ctx context.Context) (resource.Resource, error) {
 							"DEVELOPMENT",
 						),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// Stage is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// AutoBranchCreationConfig is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: BasicAuthConfig
@@ -407,39 +349,26 @@ func appResource(ctx context.Context) (resource.Resource, error) {
 				// Property: EnableBasicAuth
 				"enable_basic_auth": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						boolplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// EnableBasicAuth is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: Password
 				"password": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
-					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthBetween(1, 255),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// Password is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: Username
 				"username": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
-					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthBetween(1, 255),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// Username is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// BasicAuthConfig is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: BuildSpec
@@ -779,14 +708,10 @@ func appResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"oauth_token": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
-			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtMost(1000),
 				stringvalidator.RegexMatches(regexp.MustCompile("(?s).*"), ""),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// OauthToken is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Platform

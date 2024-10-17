@@ -12,7 +12,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -54,10 +53,6 @@ func typeActivationResource(ctx context.Context) (resource.Resource, error) {
 		"auto_update": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Whether to automatically update the extension in this account and region when a new minor version is published by the extension publisher. Major versions released by the publisher must be manually updated.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// AutoUpdate is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: ExecutionRoleArn
@@ -70,10 +65,6 @@ func typeActivationResource(ctx context.Context) (resource.Resource, error) {
 		"execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the IAM execution role to use to register the type. If your resource type calls AWS APIs in any of its handlers, you must create an IAM execution role that includes the necessary permissions to call those AWS APIs, and provision that execution role in your account. CloudFormation then assumes that execution role to provide your resource type with the appropriate credentials.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// ExecutionRoleArn is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: LoggingConfig
@@ -112,7 +103,9 @@ func typeActivationResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// LogGroupName is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: LogRoleArn
 				"log_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -124,7 +117,9 @@ func typeActivationResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// LogRoleArn is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Specifies logging configuration information for a type.",
@@ -148,13 +143,9 @@ func typeActivationResource(ctx context.Context) (resource.Resource, error) {
 		"major_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Major Version of the type you want to enable",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 100000),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// MajorVersion is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: PublicTypeArn
@@ -215,7 +206,6 @@ func typeActivationResource(ctx context.Context) (resource.Resource, error) {
 		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The kind of extension",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"RESOURCE",
@@ -223,9 +213,6 @@ func typeActivationResource(ctx context.Context) (resource.Resource, error) {
 					"HOOK",
 				),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// Type is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: TypeName
@@ -283,16 +270,12 @@ func typeActivationResource(ctx context.Context) (resource.Resource, error) {
 		"version_bump": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Manually updates a previously-enabled type to a new major or minor version, if available. You can also use this parameter to update the value of AutoUpdateEnabled",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"MAJOR",
 					"MINOR",
 				),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// VersionBump is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

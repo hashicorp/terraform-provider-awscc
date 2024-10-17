@@ -227,10 +227,6 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		"db_instance_parameter_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the DB parameter group to apply to all instances of the DB cluster. Used only in case of a major EngineVersion upgrade request.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// DBInstanceParameterGroupName is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: DBPort

@@ -326,6 +326,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 							listplanmodifier.UseStateForUnknown(),
+							listplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: ContainerName
@@ -336,6 +337,9 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 							stringvalidator.LengthBetween(1, 128),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-]+$"), ""),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.RequiresReplace(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Cpu
 					"cpu": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -347,6 +351,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 							int64planmodifier.UseStateForUnknown(),
+							int64planmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: DependsOn
@@ -369,6 +374,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
+										stringplanmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: ContainerName
@@ -383,6 +389,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
+										stringplanmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -396,6 +403,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 							listplanmodifier.UseStateForUnknown(),
+							listplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: EntryPoint
@@ -412,6 +420,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 							listplanmodifier.UseStateForUnknown(),
+							listplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Environment
@@ -430,6 +439,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
+										stringplanmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Value
@@ -444,6 +454,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
+										stringplanmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -456,6 +467,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 							setplanmodifier.UseStateForUnknown(),
+							setplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Essential
@@ -465,6 +477,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 						Computed:    true,
 						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 							boolplanmodifier.UseStateForUnknown(),
+							boolplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: HealthCheck
@@ -486,6 +499,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 									listplanmodifier.UseStateForUnknown(),
+									listplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Interval
@@ -498,6 +512,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 									int64planmodifier.UseStateForUnknown(),
+									int64planmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Retries
@@ -510,6 +525,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 									int64planmodifier.UseStateForUnknown(),
+									int64planmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: StartPeriod
@@ -522,6 +538,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 									int64planmodifier.UseStateForUnknown(),
+									int64planmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Timeout
@@ -534,6 +551,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 									int64planmodifier.UseStateForUnknown(),
+									int64planmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -542,6 +560,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
+							objectplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: ImageUri
@@ -552,6 +571,9 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 							stringvalidator.LengthBetween(1, 255),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-_\\.@\\/:]+$"), ""),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.RequiresReplace(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: MemoryLimits
 					"memory_limits": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -566,6 +588,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 									int64planmodifier.UseStateForUnknown(),
+									int64planmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: SoftLimit
@@ -578,6 +601,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 									int64planmodifier.UseStateForUnknown(),
+									int64planmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -586,6 +610,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
+							objectplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: PortConfiguration
@@ -606,6 +631,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 												int64planmodifier.UseStateForUnknown(),
+												int64planmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: Protocol
@@ -622,6 +648,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
+												stringplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: ToPort
@@ -635,6 +662,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 												int64planmodifier.UseStateForUnknown(),
+												int64planmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
@@ -648,6 +676,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 									setplanmodifier.UseStateForUnknown(),
+									setplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -656,6 +685,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
+							objectplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: ResolvedImageDigest
@@ -668,6 +698,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: WorkingDirectory
@@ -681,6 +712,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/

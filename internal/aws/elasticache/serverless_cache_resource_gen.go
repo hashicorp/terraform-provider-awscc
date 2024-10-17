@@ -291,10 +291,6 @@ func serverlessCacheResource(ctx context.Context) (resource.Resource, error) {
 		"final_snapshot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The final snapshot name which is taken before Serverless Cache is deleted.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// FinalSnapshotName is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: FullEngineVersion

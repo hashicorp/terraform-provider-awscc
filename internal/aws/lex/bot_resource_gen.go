@@ -17,10 +17,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
@@ -64,10 +60,6 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 		"auto_build_bot_locales": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Specifies whether to build the bot locales after bot creation completes.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// AutoBuildBotLocales is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: BotFileS3Location
@@ -109,50 +101,35 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 				// Property: S3Bucket
 				"s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "An Amazon S3 bucket in the same AWS Region as your function. The bucket can be in a different AWS account.",
-					Optional:    true,
-					Computed:    true,
+					Required:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthBetween(3, 63),
 						stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"), ""),
-						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// S3Bucket is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: S3ObjectKey
 				"s3_object_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The Amazon S3 key of the deployment package.",
-					Optional:    true,
-					Computed:    true,
+					Required:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthBetween(1, 1024),
 						stringvalidator.RegexMatches(regexp.MustCompile("[\\.\\-\\!\\*\\_\\'\\(\\)a-zA-Z0-9][\\.\\-\\!\\*\\_\\'\\(\\)\\/a-zA-Z0-9]*$"), ""),
-						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// S3ObjectKey is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: S3ObjectVersion
 				"s3_object_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "For versioned objects, the version of the deployment package object to use. If not specified, the current object version will be used.",
 					Optional:    true,
-					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthBetween(1, 1024),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// S3ObjectVersion is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "S3 location of bot definitions zip file, if it's not defined inline in CloudFormation.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// BotFileS3Location is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: BotLocales
@@ -4278,59 +4255,42 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 										// Property: Phrase
 										"phrase": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "Phrase that should be recognized.",
-											Optional:    true,
-											Computed:    true,
+											Required:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthBetween(1, 100),
-												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// Phrase is a write-only property.
 										}, /*END ATTRIBUTE*/
 										// Property: Weight
 										"weight": schema.Int64Attribute{ /*START ATTRIBUTE*/
 											Description: "The degree to which the phrase recognition is boosted.",
 											Optional:    true,
-											Computed:    true,
 											Validators: []validator.Int64{ /*START VALIDATORS*/
 												int64validator.Between(1, 3),
 											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-												int64planmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// Weight is a write-only property.
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								Optional: true,
-								Computed: true,
+								Required: true,
 								Validators: []validator.Set{ /*START VALIDATORS*/
 									setvalidator.SizeAtMost(500),
-									fwvalidators.NotNullSet(),
 								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-									setplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// CustomVocabularyItems is a write-only property.
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "A custom vocabulary is a list of specific phrases that you want Amazon Lex V2 to recognize in the audio input.",
 						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-							objectplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// CustomVocabulary is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: Description
 					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "A description of the resource",
 						Optional:    true,
-						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthAtMost(200),
 						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// Description is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: Intents
 					"intents": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
@@ -4340,49 +4300,31 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 								"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "A description of the resource",
 									Optional:    true,
-									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(200),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// Description is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: DialogCodeHook
 								"dialog_code_hook": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Enabled
 										"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											Validators: []validator.Bool{ /*START VALIDATORS*/
-												fwvalidators.NotNullBool(),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-												boolplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											Required: true,
+											// Enabled is a write-only property.
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "Settings that determine the Lambda function that Amazon Lex uses for processing user responses.",
 									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// DialogCodeHook is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: FulfillmentCodeHook
 								"fulfillment_code_hook": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Enabled
 										"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											Validators: []validator.Bool{ /*START VALIDATORS*/
-												fwvalidators.NotNullBool(),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-												boolplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											Required: true,
+											// Enabled is a write-only property.
 										}, /*END ATTRIBUTE*/
 										// Property: FulfillmentUpdatesSpecification
 										"fulfillment_updates_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -4390,14 +4332,8 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 												// Property: Active
 												"active": schema.BoolAttribute{ /*START ATTRIBUTE*/
 													Description: "Determines whether fulfillment updates are sent to the user. When this field is true, updates are sent.",
-													Optional:    true,
-													Computed:    true,
-													Validators: []validator.Bool{ /*START VALIDATORS*/
-														fwvalidators.NotNullBool(),
-													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-														boolplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													Required:    true,
+													// Active is a write-only property.
 												}, /*END ATTRIBUTE*/
 												// Property: StartResponse
 												"start_response": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -4406,23 +4342,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 														"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
 															Description: "Determines whether the user can interrupt the start message while it is playing.",
 															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-																boolplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
+															// AllowInterrupt is a write-only property.
 														}, /*END ATTRIBUTE*/
 														// Property: DelayInSeconds
 														"delay_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
 															Description: "The delay between when the Lambda fulfillment function starts running and the start message is played. If the Lambda function returns before the delay is over, the start message isn't played.",
-															Optional:    true,
-															Computed:    true,
+															Required:    true,
 															Validators: []validator.Int64{ /*START VALIDATORS*/
 																int64validator.Between(1, 900),
-																fwvalidators.NotNullInt64(),
 															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-																int64planmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
+															// DelayInSeconds is a write-only property.
 														}, /*END ATTRIBUTE*/
 														// Property: MessageGroups
 														"message_groups": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -4437,23 +4366,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																					// Property: Value
 																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The string that is sent to your application.",
-																						Optional:    true,
-																						Computed:    true,
+																						Required:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 1000),
-																							fwvalidators.NotNullString(),
 																						}, /*END VALIDATORS*/
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
+																						// Value is a write-only property.
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A message in a custom format defined by the client application.",
 																				Optional:    true,
-																				Computed:    true,
-																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																					objectplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// CustomPayload is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																			// Property: ImageResponseCard
 																			"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -4465,86 +4387,64 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								// Property: Text
 																								"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The text that appears on the button.",
-																									Optional:    true,
-																									Computed:    true,
+																									Required:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 50),
-																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
-																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																										stringplanmodifier.UseStateForUnknown(),
-																									}, /*END PLAN MODIFIERS*/
+																									// Text is a write-only property.
 																								}, /*END ATTRIBUTE*/
 																								// Property: Value
 																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The value returned to Amazon Lex when the user chooses this button.",
-																									Optional:    true,
-																									Computed:    true,
+																									Required:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 50),
-																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
-																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																										stringplanmodifier.UseStateForUnknown(),
-																									}, /*END PLAN MODIFIERS*/
+																									// Value is a write-only property.
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																						}, /*END NESTED OBJECT*/
 																						Description: "A list of buttons that should be displayed on the response card.",
 																						Optional:    true,
-																						Computed:    true,
 																						Validators: []validator.List{ /*START VALIDATORS*/
 																							listvalidator.SizeAtMost(5),
 																						}, /*END VALIDATORS*/
 																						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																							generic.Multiset(),
-																							listplanmodifier.UseStateForUnknown(),
 																						}, /*END PLAN MODIFIERS*/
+																						// Buttons is a write-only property.
 																					}, /*END ATTRIBUTE*/
 																					// Property: ImageUrl
 																					"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The URL of an image to display on the response card.",
 																						Optional:    true,
-																						Computed:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 250),
 																						}, /*END VALIDATORS*/
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
+																						// ImageUrl is a write-only property.
 																					}, /*END ATTRIBUTE*/
 																					// Property: Subtitle
 																					"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The subtitle to display on the response card.",
 																						Optional:    true,
-																						Computed:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 250),
 																						}, /*END VALIDATORS*/
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
+																						// Subtitle is a write-only property.
 																					}, /*END ATTRIBUTE*/
 																					// Property: Title
 																					"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The title to display on the response card.",
-																						Optional:    true,
-																						Computed:    true,
+																						Required:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 250),
-																							fwvalidators.NotNullString(),
 																						}, /*END VALIDATORS*/
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
+																						// Title is a write-only property.
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A message that defines a response card that the client application can show to the user.",
 																				Optional:    true,
-																				Computed:    true,
-																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																					objectplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// ImageResponseCard is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																			// Property: PlainTextMessage
 																			"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -4552,23 +4452,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																					// Property: Value
 																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The message to send to the user.",
-																						Optional:    true,
-																						Computed:    true,
+																						Required:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 1000),
-																							fwvalidators.NotNullString(),
 																						}, /*END VALIDATORS*/
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
+																						// Value is a write-only property.
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A message in plain text format.",
 																				Optional:    true,
-																				Computed:    true,
-																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																					objectplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// PlainTextMessage is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																			// Property: SSMLMessage
 																			"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -4576,34 +4469,21 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																					// Property: Value
 																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The SSML text that defines the prompt.",
-																						Optional:    true,
-																						Computed:    true,
+																						Required:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 1000),
-																							fwvalidators.NotNullString(),
 																						}, /*END VALIDATORS*/
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
+																						// Value is a write-only property.
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A message in Speech Synthesis Markup Language (SSML).",
 																				Optional:    true,
-																				Computed:    true,
-																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																					objectplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// SSMLMessage is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "The primary message that Amazon Lex should send to the user.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.Object{ /*START VALIDATORS*/
-																			fwvalidators.NotNullObject(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
+																		Required:    true,
+																		// Message is a write-only property.
 																	}, /*END ATTRIBUTE*/
 																	// Property: Variations
 																	"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -4615,23 +4495,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The string that is sent to your application.",
-																							Optional:    true,
-																							Computed:    true,
+																							Required:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 1000),
-																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// Value is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message in a custom format defined by the client application.",
 																					Optional:    true,
-																					Computed:    true,
-																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																						objectplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// CustomPayload is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																				// Property: ImageResponseCard
 																				"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -4643,86 +4516,64 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									// Property: Text
 																									"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The text that appears on the button.",
-																										Optional:    true,
-																										Computed:    true,
+																										Required:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 50),
-																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
-																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																											stringplanmodifier.UseStateForUnknown(),
-																										}, /*END PLAN MODIFIERS*/
+																										// Text is a write-only property.
 																									}, /*END ATTRIBUTE*/
 																									// Property: Value
 																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The value returned to Amazon Lex when the user chooses this button.",
-																										Optional:    true,
-																										Computed:    true,
+																										Required:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 50),
-																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
-																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																											stringplanmodifier.UseStateForUnknown(),
-																										}, /*END PLAN MODIFIERS*/
+																										// Value is a write-only property.
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																							}, /*END NESTED OBJECT*/
 																							Description: "A list of buttons that should be displayed on the response card.",
 																							Optional:    true,
-																							Computed:    true,
 																							Validators: []validator.List{ /*START VALIDATORS*/
 																								listvalidator.SizeAtMost(5),
 																							}, /*END VALIDATORS*/
 																							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																								generic.Multiset(),
-																								listplanmodifier.UseStateForUnknown(),
 																							}, /*END PLAN MODIFIERS*/
+																							// Buttons is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																						// Property: ImageUrl
 																						"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The URL of an image to display on the response card.",
 																							Optional:    true,
-																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 250),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// ImageUrl is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																						// Property: Subtitle
 																						"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The subtitle to display on the response card.",
 																							Optional:    true,
-																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 250),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// Subtitle is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																						// Property: Title
 																						"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The title to display on the response card.",
-																							Optional:    true,
-																							Computed:    true,
+																							Required:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 250),
-																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// Title is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message that defines a response card that the client application can show to the user.",
 																					Optional:    true,
-																					Computed:    true,
-																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																						objectplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// ImageResponseCard is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																				// Property: PlainTextMessage
 																				"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -4730,23 +4581,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The message to send to the user.",
-																							Optional:    true,
-																							Computed:    true,
+																							Required:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 1000),
-																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// Value is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message in plain text format.",
 																					Optional:    true,
-																					Computed:    true,
-																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																						objectplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// PlainTextMessage is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																				// Property: SSMLMessage
 																				"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -4754,70 +4598,54 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The SSML text that defines the prompt.",
-																							Optional:    true,
-																							Computed:    true,
+																							Required:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 1000),
-																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// Value is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message in Speech Synthesis Markup Language (SSML).",
 																					Optional:    true,
-																					Computed:    true,
-																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																						objectplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// SSMLMessage is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																		}, /*END NESTED OBJECT*/
 																		Description: "Message variations to send to the user.",
 																		Optional:    true,
-																		Computed:    true,
 																		Validators: []validator.List{ /*START VALIDATORS*/
 																			listvalidator.SizeAtMost(2),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																			generic.Multiset(),
-																			listplanmodifier.UseStateForUnknown(),
 																		}, /*END PLAN MODIFIERS*/
+																		// Variations is a write-only property.
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 															}, /*END NESTED OBJECT*/
 															Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-															Optional:    true,
-															Computed:    true,
+															Required:    true,
 															Validators: []validator.List{ /*START VALIDATORS*/
 																listvalidator.SizeBetween(1, 5),
-																fwvalidators.NotNullList(),
 															}, /*END VALIDATORS*/
 															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																generic.Multiset(),
-																listplanmodifier.UseStateForUnknown(),
 															}, /*END PLAN MODIFIERS*/
+															// MessageGroups is a write-only property.
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 													Description: "Provides settings for a message that is sent to the user when a fulfillment Lambda function starts running.",
 													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-														objectplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// StartResponse is a write-only property.
 												}, /*END ATTRIBUTE*/
 												// Property: TimeoutInSeconds
 												"timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
 													Description: "The length of time that the fulfillment Lambda function should run before it times out.",
 													Optional:    true,
-													Computed:    true,
 													Validators: []validator.Int64{ /*START VALIDATORS*/
 														int64validator.Between(1, 900),
 													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-														int64planmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// TimeoutInSeconds is a write-only property.
 												}, /*END ATTRIBUTE*/
 												// Property: UpdateResponse
 												"update_response": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -4826,23 +4654,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 														"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
 															Description: "Determines whether the user can interrupt an update message while it is playing.",
 															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-																boolplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
+															// AllowInterrupt is a write-only property.
 														}, /*END ATTRIBUTE*/
 														// Property: FrequencyInSeconds
 														"frequency_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
 															Description: "The frequency that a message is sent to the user. When the period ends, Amazon Lex chooses a message from the message groups and plays it to the user. If the fulfillment Lambda returns before the first period ends, an update message is not played to the user.",
-															Optional:    true,
-															Computed:    true,
+															Required:    true,
 															Validators: []validator.Int64{ /*START VALIDATORS*/
 																int64validator.Between(1, 900),
-																fwvalidators.NotNullInt64(),
 															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-																int64planmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
+															// FrequencyInSeconds is a write-only property.
 														}, /*END ATTRIBUTE*/
 														// Property: MessageGroups
 														"message_groups": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -4857,23 +4678,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																					// Property: Value
 																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The string that is sent to your application.",
-																						Optional:    true,
-																						Computed:    true,
+																						Required:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 1000),
-																							fwvalidators.NotNullString(),
 																						}, /*END VALIDATORS*/
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
+																						// Value is a write-only property.
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A message in a custom format defined by the client application.",
 																				Optional:    true,
-																				Computed:    true,
-																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																					objectplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// CustomPayload is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																			// Property: ImageResponseCard
 																			"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -4885,86 +4699,64 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								// Property: Text
 																								"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The text that appears on the button.",
-																									Optional:    true,
-																									Computed:    true,
+																									Required:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 50),
-																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
-																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																										stringplanmodifier.UseStateForUnknown(),
-																									}, /*END PLAN MODIFIERS*/
+																									// Text is a write-only property.
 																								}, /*END ATTRIBUTE*/
 																								// Property: Value
 																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The value returned to Amazon Lex when the user chooses this button.",
-																									Optional:    true,
-																									Computed:    true,
+																									Required:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 50),
-																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
-																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																										stringplanmodifier.UseStateForUnknown(),
-																									}, /*END PLAN MODIFIERS*/
+																									// Value is a write-only property.
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																						}, /*END NESTED OBJECT*/
 																						Description: "A list of buttons that should be displayed on the response card.",
 																						Optional:    true,
-																						Computed:    true,
 																						Validators: []validator.List{ /*START VALIDATORS*/
 																							listvalidator.SizeAtMost(5),
 																						}, /*END VALIDATORS*/
 																						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																							generic.Multiset(),
-																							listplanmodifier.UseStateForUnknown(),
 																						}, /*END PLAN MODIFIERS*/
+																						// Buttons is a write-only property.
 																					}, /*END ATTRIBUTE*/
 																					// Property: ImageUrl
 																					"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The URL of an image to display on the response card.",
 																						Optional:    true,
-																						Computed:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 250),
 																						}, /*END VALIDATORS*/
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
+																						// ImageUrl is a write-only property.
 																					}, /*END ATTRIBUTE*/
 																					// Property: Subtitle
 																					"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The subtitle to display on the response card.",
 																						Optional:    true,
-																						Computed:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 250),
 																						}, /*END VALIDATORS*/
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
+																						// Subtitle is a write-only property.
 																					}, /*END ATTRIBUTE*/
 																					// Property: Title
 																					"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The title to display on the response card.",
-																						Optional:    true,
-																						Computed:    true,
+																						Required:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 250),
-																							fwvalidators.NotNullString(),
 																						}, /*END VALIDATORS*/
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
+																						// Title is a write-only property.
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A message that defines a response card that the client application can show to the user.",
 																				Optional:    true,
-																				Computed:    true,
-																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																					objectplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// ImageResponseCard is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																			// Property: PlainTextMessage
 																			"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -4972,23 +4764,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																					// Property: Value
 																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The message to send to the user.",
-																						Optional:    true,
-																						Computed:    true,
+																						Required:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 1000),
-																							fwvalidators.NotNullString(),
 																						}, /*END VALIDATORS*/
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
+																						// Value is a write-only property.
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A message in plain text format.",
 																				Optional:    true,
-																				Computed:    true,
-																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																					objectplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// PlainTextMessage is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																			// Property: SSMLMessage
 																			"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -4996,34 +4781,21 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																					// Property: Value
 																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The SSML text that defines the prompt.",
-																						Optional:    true,
-																						Computed:    true,
+																						Required:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 1000),
-																							fwvalidators.NotNullString(),
 																						}, /*END VALIDATORS*/
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
+																						// Value is a write-only property.
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A message in Speech Synthesis Markup Language (SSML).",
 																				Optional:    true,
-																				Computed:    true,
-																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																					objectplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// SSMLMessage is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "The primary message that Amazon Lex should send to the user.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.Object{ /*START VALIDATORS*/
-																			fwvalidators.NotNullObject(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
+																		Required:    true,
+																		// Message is a write-only property.
 																	}, /*END ATTRIBUTE*/
 																	// Property: Variations
 																	"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -5035,23 +4807,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The string that is sent to your application.",
-																							Optional:    true,
-																							Computed:    true,
+																							Required:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 1000),
-																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// Value is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message in a custom format defined by the client application.",
 																					Optional:    true,
-																					Computed:    true,
-																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																						objectplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// CustomPayload is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																				// Property: ImageResponseCard
 																				"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -5063,86 +4828,64 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									// Property: Text
 																									"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The text that appears on the button.",
-																										Optional:    true,
-																										Computed:    true,
+																										Required:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 50),
-																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
-																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																											stringplanmodifier.UseStateForUnknown(),
-																										}, /*END PLAN MODIFIERS*/
+																										// Text is a write-only property.
 																									}, /*END ATTRIBUTE*/
 																									// Property: Value
 																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The value returned to Amazon Lex when the user chooses this button.",
-																										Optional:    true,
-																										Computed:    true,
+																										Required:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 50),
-																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
-																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																											stringplanmodifier.UseStateForUnknown(),
-																										}, /*END PLAN MODIFIERS*/
+																										// Value is a write-only property.
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																							}, /*END NESTED OBJECT*/
 																							Description: "A list of buttons that should be displayed on the response card.",
 																							Optional:    true,
-																							Computed:    true,
 																							Validators: []validator.List{ /*START VALIDATORS*/
 																								listvalidator.SizeAtMost(5),
 																							}, /*END VALIDATORS*/
 																							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																								generic.Multiset(),
-																								listplanmodifier.UseStateForUnknown(),
 																							}, /*END PLAN MODIFIERS*/
+																							// Buttons is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																						// Property: ImageUrl
 																						"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The URL of an image to display on the response card.",
 																							Optional:    true,
-																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 250),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// ImageUrl is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																						// Property: Subtitle
 																						"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The subtitle to display on the response card.",
 																							Optional:    true,
-																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 250),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// Subtitle is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																						// Property: Title
 																						"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The title to display on the response card.",
-																							Optional:    true,
-																							Computed:    true,
+																							Required:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 250),
-																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// Title is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message that defines a response card that the client application can show to the user.",
 																					Optional:    true,
-																					Computed:    true,
-																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																						objectplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// ImageResponseCard is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																				// Property: PlainTextMessage
 																				"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -5150,23 +4893,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The message to send to the user.",
-																							Optional:    true,
-																							Computed:    true,
+																							Required:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 1000),
-																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// Value is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message in plain text format.",
 																					Optional:    true,
-																					Computed:    true,
-																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																						objectplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// PlainTextMessage is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																				// Property: SSMLMessage
 																				"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -5174,66 +4910,50 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The SSML text that defines the prompt.",
-																							Optional:    true,
-																							Computed:    true,
+																							Required:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 1000),
-																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// Value is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message in Speech Synthesis Markup Language (SSML).",
 																					Optional:    true,
-																					Computed:    true,
-																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																						objectplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// SSMLMessage is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																		}, /*END NESTED OBJECT*/
 																		Description: "Message variations to send to the user.",
 																		Optional:    true,
-																		Computed:    true,
 																		Validators: []validator.List{ /*START VALIDATORS*/
 																			listvalidator.SizeAtMost(2),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																			generic.Multiset(),
-																			listplanmodifier.UseStateForUnknown(),
 																		}, /*END PLAN MODIFIERS*/
+																		// Variations is a write-only property.
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 															}, /*END NESTED OBJECT*/
 															Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-															Optional:    true,
-															Computed:    true,
+															Required:    true,
 															Validators: []validator.List{ /*START VALIDATORS*/
 																listvalidator.SizeBetween(1, 5),
-																fwvalidators.NotNullList(),
 															}, /*END VALIDATORS*/
 															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																generic.Multiset(),
-																listplanmodifier.UseStateForUnknown(),
 															}, /*END PLAN MODIFIERS*/
+															// MessageGroups is a write-only property.
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 													Description: "Provides settings for a message that is sent periodically to the user while a fulfillment Lambda function is running.",
 													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-														objectplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// UpdateResponse is a write-only property.
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 											Description: "Provides information for updating the user on the progress of fulfilling an intent.",
 											Optional:    true,
-											Computed:    true,
-											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-												objectplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// FulfillmentUpdatesSpecification is a write-only property.
 										}, /*END ATTRIBUTE*/
 										// Property: PostFulfillmentStatusSpecification
 										"post_fulfillment_status_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -5245,10 +4965,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 														"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
 															Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
 															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-																boolplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
+															// AllowInterrupt is a write-only property.
 														}, /*END ATTRIBUTE*/
 														// Property: MessageGroupsList
 														"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -5263,23 +4980,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																					// Property: Value
 																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The string that is sent to your application.",
-																						Optional:    true,
-																						Computed:    true,
+																						Required:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 1000),
-																							fwvalidators.NotNullString(),
 																						}, /*END VALIDATORS*/
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
+																						// Value is a write-only property.
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A message in a custom format defined by the client application.",
 																				Optional:    true,
-																				Computed:    true,
-																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																					objectplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// CustomPayload is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																			// Property: ImageResponseCard
 																			"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -5291,86 +5001,64 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								// Property: Text
 																								"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The text that appears on the button.",
-																									Optional:    true,
-																									Computed:    true,
+																									Required:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 50),
-																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
-																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																										stringplanmodifier.UseStateForUnknown(),
-																									}, /*END PLAN MODIFIERS*/
+																									// Text is a write-only property.
 																								}, /*END ATTRIBUTE*/
 																								// Property: Value
 																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The value returned to Amazon Lex when the user chooses this button.",
-																									Optional:    true,
-																									Computed:    true,
+																									Required:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 50),
-																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
-																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																										stringplanmodifier.UseStateForUnknown(),
-																									}, /*END PLAN MODIFIERS*/
+																									// Value is a write-only property.
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																						}, /*END NESTED OBJECT*/
 																						Description: "A list of buttons that should be displayed on the response card.",
 																						Optional:    true,
-																						Computed:    true,
 																						Validators: []validator.List{ /*START VALIDATORS*/
 																							listvalidator.SizeAtMost(5),
 																						}, /*END VALIDATORS*/
 																						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																							generic.Multiset(),
-																							listplanmodifier.UseStateForUnknown(),
 																						}, /*END PLAN MODIFIERS*/
+																						// Buttons is a write-only property.
 																					}, /*END ATTRIBUTE*/
 																					// Property: ImageUrl
 																					"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The URL of an image to display on the response card.",
 																						Optional:    true,
-																						Computed:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 250),
 																						}, /*END VALIDATORS*/
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
+																						// ImageUrl is a write-only property.
 																					}, /*END ATTRIBUTE*/
 																					// Property: Subtitle
 																					"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The subtitle to display on the response card.",
 																						Optional:    true,
-																						Computed:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 250),
 																						}, /*END VALIDATORS*/
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
+																						// Subtitle is a write-only property.
 																					}, /*END ATTRIBUTE*/
 																					// Property: Title
 																					"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The title to display on the response card.",
-																						Optional:    true,
-																						Computed:    true,
+																						Required:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 250),
-																							fwvalidators.NotNullString(),
 																						}, /*END VALIDATORS*/
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
+																						// Title is a write-only property.
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A message that defines a response card that the client application can show to the user.",
 																				Optional:    true,
-																				Computed:    true,
-																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																					objectplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// ImageResponseCard is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																			// Property: PlainTextMessage
 																			"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -5378,23 +5066,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																					// Property: Value
 																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The message to send to the user.",
-																						Optional:    true,
-																						Computed:    true,
+																						Required:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 1000),
-																							fwvalidators.NotNullString(),
 																						}, /*END VALIDATORS*/
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
+																						// Value is a write-only property.
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A message in plain text format.",
 																				Optional:    true,
-																				Computed:    true,
-																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																					objectplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// PlainTextMessage is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																			// Property: SSMLMessage
 																			"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -5402,34 +5083,21 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																					// Property: Value
 																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The SSML text that defines the prompt.",
-																						Optional:    true,
-																						Computed:    true,
+																						Required:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 1000),
-																							fwvalidators.NotNullString(),
 																						}, /*END VALIDATORS*/
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
+																						// Value is a write-only property.
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A message in Speech Synthesis Markup Language (SSML).",
 																				Optional:    true,
-																				Computed:    true,
-																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																					objectplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// SSMLMessage is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "The primary message that Amazon Lex should send to the user.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.Object{ /*START VALIDATORS*/
-																			fwvalidators.NotNullObject(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
+																		Required:    true,
+																		// Message is a write-only property.
 																	}, /*END ATTRIBUTE*/
 																	// Property: Variations
 																	"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -5441,23 +5109,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The string that is sent to your application.",
-																							Optional:    true,
-																							Computed:    true,
+																							Required:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 1000),
-																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// Value is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message in a custom format defined by the client application.",
 																					Optional:    true,
-																					Computed:    true,
-																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																						objectplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// CustomPayload is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																				// Property: ImageResponseCard
 																				"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -5469,86 +5130,64 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									// Property: Text
 																									"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The text that appears on the button.",
-																										Optional:    true,
-																										Computed:    true,
+																										Required:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 50),
-																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
-																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																											stringplanmodifier.UseStateForUnknown(),
-																										}, /*END PLAN MODIFIERS*/
+																										// Text is a write-only property.
 																									}, /*END ATTRIBUTE*/
 																									// Property: Value
 																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The value returned to Amazon Lex when the user chooses this button.",
-																										Optional:    true,
-																										Computed:    true,
+																										Required:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 50),
-																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
-																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																											stringplanmodifier.UseStateForUnknown(),
-																										}, /*END PLAN MODIFIERS*/
+																										// Value is a write-only property.
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																							}, /*END NESTED OBJECT*/
 																							Description: "A list of buttons that should be displayed on the response card.",
 																							Optional:    true,
-																							Computed:    true,
 																							Validators: []validator.List{ /*START VALIDATORS*/
 																								listvalidator.SizeAtMost(5),
 																							}, /*END VALIDATORS*/
 																							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																								generic.Multiset(),
-																								listplanmodifier.UseStateForUnknown(),
 																							}, /*END PLAN MODIFIERS*/
+																							// Buttons is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																						// Property: ImageUrl
 																						"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The URL of an image to display on the response card.",
 																							Optional:    true,
-																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 250),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// ImageUrl is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																						// Property: Subtitle
 																						"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The subtitle to display on the response card.",
 																							Optional:    true,
-																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 250),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// Subtitle is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																						// Property: Title
 																						"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The title to display on the response card.",
-																							Optional:    true,
-																							Computed:    true,
+																							Required:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 250),
-																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// Title is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message that defines a response card that the client application can show to the user.",
 																					Optional:    true,
-																					Computed:    true,
-																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																						objectplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// ImageResponseCard is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																				// Property: PlainTextMessage
 																				"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -5556,23 +5195,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The message to send to the user.",
-																							Optional:    true,
-																							Computed:    true,
+																							Required:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 1000),
-																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// Value is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message in plain text format.",
 																					Optional:    true,
-																					Computed:    true,
-																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																						objectplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// PlainTextMessage is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																				// Property: SSMLMessage
 																				"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -5580,58 +5212,45 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The SSML text that defines the prompt.",
-																							Optional:    true,
-																							Computed:    true,
+																							Required:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 1000),
-																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// Value is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message in Speech Synthesis Markup Language (SSML).",
 																					Optional:    true,
-																					Computed:    true,
-																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																						objectplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// SSMLMessage is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																		}, /*END NESTED OBJECT*/
 																		Description: "Message variations to send to the user.",
 																		Optional:    true,
-																		Computed:    true,
 																		Validators: []validator.List{ /*START VALIDATORS*/
 																			listvalidator.SizeAtMost(2),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																			generic.Multiset(),
-																			listplanmodifier.UseStateForUnknown(),
 																		}, /*END PLAN MODIFIERS*/
+																		// Variations is a write-only property.
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 															}, /*END NESTED OBJECT*/
 															Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-															Optional:    true,
-															Computed:    true,
+															Required:    true,
 															Validators: []validator.List{ /*START VALIDATORS*/
 																listvalidator.SizeBetween(1, 5),
-																fwvalidators.NotNullList(),
 															}, /*END VALIDATORS*/
 															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																generic.Multiset(),
-																listplanmodifier.UseStateForUnknown(),
 															}, /*END PLAN MODIFIERS*/
+															// MessageGroupsList is a write-only property.
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 													Description: "A list of message groups that Amazon Lex uses to respond the user input.",
 													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-														objectplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// FailureResponse is a write-only property.
 												}, /*END ATTRIBUTE*/
 												// Property: SuccessResponse
 												"success_response": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -5640,10 +5259,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 														"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
 															Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
 															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-																boolplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
+															// AllowInterrupt is a write-only property.
 														}, /*END ATTRIBUTE*/
 														// Property: MessageGroupsList
 														"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -5658,23 +5274,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																					// Property: Value
 																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The string that is sent to your application.",
-																						Optional:    true,
-																						Computed:    true,
+																						Required:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 1000),
-																							fwvalidators.NotNullString(),
 																						}, /*END VALIDATORS*/
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
+																						// Value is a write-only property.
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A message in a custom format defined by the client application.",
 																				Optional:    true,
-																				Computed:    true,
-																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																					objectplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// CustomPayload is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																			// Property: ImageResponseCard
 																			"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -5686,86 +5295,64 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								// Property: Text
 																								"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The text that appears on the button.",
-																									Optional:    true,
-																									Computed:    true,
+																									Required:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 50),
-																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
-																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																										stringplanmodifier.UseStateForUnknown(),
-																									}, /*END PLAN MODIFIERS*/
+																									// Text is a write-only property.
 																								}, /*END ATTRIBUTE*/
 																								// Property: Value
 																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The value returned to Amazon Lex when the user chooses this button.",
-																									Optional:    true,
-																									Computed:    true,
+																									Required:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 50),
-																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
-																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																										stringplanmodifier.UseStateForUnknown(),
-																									}, /*END PLAN MODIFIERS*/
+																									// Value is a write-only property.
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																						}, /*END NESTED OBJECT*/
 																						Description: "A list of buttons that should be displayed on the response card.",
 																						Optional:    true,
-																						Computed:    true,
 																						Validators: []validator.List{ /*START VALIDATORS*/
 																							listvalidator.SizeAtMost(5),
 																						}, /*END VALIDATORS*/
 																						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																							generic.Multiset(),
-																							listplanmodifier.UseStateForUnknown(),
 																						}, /*END PLAN MODIFIERS*/
+																						// Buttons is a write-only property.
 																					}, /*END ATTRIBUTE*/
 																					// Property: ImageUrl
 																					"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The URL of an image to display on the response card.",
 																						Optional:    true,
-																						Computed:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 250),
 																						}, /*END VALIDATORS*/
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
+																						// ImageUrl is a write-only property.
 																					}, /*END ATTRIBUTE*/
 																					// Property: Subtitle
 																					"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The subtitle to display on the response card.",
 																						Optional:    true,
-																						Computed:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 250),
 																						}, /*END VALIDATORS*/
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
+																						// Subtitle is a write-only property.
 																					}, /*END ATTRIBUTE*/
 																					// Property: Title
 																					"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The title to display on the response card.",
-																						Optional:    true,
-																						Computed:    true,
+																						Required:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 250),
-																							fwvalidators.NotNullString(),
 																						}, /*END VALIDATORS*/
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
+																						// Title is a write-only property.
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A message that defines a response card that the client application can show to the user.",
 																				Optional:    true,
-																				Computed:    true,
-																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																					objectplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// ImageResponseCard is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																			// Property: PlainTextMessage
 																			"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -5773,23 +5360,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																					// Property: Value
 																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The message to send to the user.",
-																						Optional:    true,
-																						Computed:    true,
+																						Required:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 1000),
-																							fwvalidators.NotNullString(),
 																						}, /*END VALIDATORS*/
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
+																						// Value is a write-only property.
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A message in plain text format.",
 																				Optional:    true,
-																				Computed:    true,
-																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																					objectplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// PlainTextMessage is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																			// Property: SSMLMessage
 																			"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -5797,34 +5377,21 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																					// Property: Value
 																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The SSML text that defines the prompt.",
-																						Optional:    true,
-																						Computed:    true,
+																						Required:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 1000),
-																							fwvalidators.NotNullString(),
 																						}, /*END VALIDATORS*/
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
+																						// Value is a write-only property.
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A message in Speech Synthesis Markup Language (SSML).",
 																				Optional:    true,
-																				Computed:    true,
-																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																					objectplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// SSMLMessage is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "The primary message that Amazon Lex should send to the user.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.Object{ /*START VALIDATORS*/
-																			fwvalidators.NotNullObject(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
+																		Required:    true,
+																		// Message is a write-only property.
 																	}, /*END ATTRIBUTE*/
 																	// Property: Variations
 																	"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -5836,23 +5403,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The string that is sent to your application.",
-																							Optional:    true,
-																							Computed:    true,
+																							Required:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 1000),
-																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// Value is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message in a custom format defined by the client application.",
 																					Optional:    true,
-																					Computed:    true,
-																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																						objectplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// CustomPayload is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																				// Property: ImageResponseCard
 																				"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -5864,86 +5424,64 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									// Property: Text
 																									"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The text that appears on the button.",
-																										Optional:    true,
-																										Computed:    true,
+																										Required:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 50),
-																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
-																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																											stringplanmodifier.UseStateForUnknown(),
-																										}, /*END PLAN MODIFIERS*/
+																										// Text is a write-only property.
 																									}, /*END ATTRIBUTE*/
 																									// Property: Value
 																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The value returned to Amazon Lex when the user chooses this button.",
-																										Optional:    true,
-																										Computed:    true,
+																										Required:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 50),
-																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
-																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																											stringplanmodifier.UseStateForUnknown(),
-																										}, /*END PLAN MODIFIERS*/
+																										// Value is a write-only property.
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																							}, /*END NESTED OBJECT*/
 																							Description: "A list of buttons that should be displayed on the response card.",
 																							Optional:    true,
-																							Computed:    true,
 																							Validators: []validator.List{ /*START VALIDATORS*/
 																								listvalidator.SizeAtMost(5),
 																							}, /*END VALIDATORS*/
 																							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																								generic.Multiset(),
-																								listplanmodifier.UseStateForUnknown(),
 																							}, /*END PLAN MODIFIERS*/
+																							// Buttons is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																						// Property: ImageUrl
 																						"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The URL of an image to display on the response card.",
 																							Optional:    true,
-																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 250),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// ImageUrl is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																						// Property: Subtitle
 																						"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The subtitle to display on the response card.",
 																							Optional:    true,
-																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 250),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// Subtitle is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																						// Property: Title
 																						"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The title to display on the response card.",
-																							Optional:    true,
-																							Computed:    true,
+																							Required:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 250),
-																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// Title is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message that defines a response card that the client application can show to the user.",
 																					Optional:    true,
-																					Computed:    true,
-																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																						objectplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// ImageResponseCard is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																				// Property: PlainTextMessage
 																				"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -5951,23 +5489,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The message to send to the user.",
-																							Optional:    true,
-																							Computed:    true,
+																							Required:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 1000),
-																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// Value is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message in plain text format.",
 																					Optional:    true,
-																					Computed:    true,
-																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																						objectplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// PlainTextMessage is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																				// Property: SSMLMessage
 																				"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -5975,58 +5506,45 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The SSML text that defines the prompt.",
-																							Optional:    true,
-																							Computed:    true,
+																							Required:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 1000),
-																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// Value is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message in Speech Synthesis Markup Language (SSML).",
 																					Optional:    true,
-																					Computed:    true,
-																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																						objectplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// SSMLMessage is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																		}, /*END NESTED OBJECT*/
 																		Description: "Message variations to send to the user.",
 																		Optional:    true,
-																		Computed:    true,
 																		Validators: []validator.List{ /*START VALIDATORS*/
 																			listvalidator.SizeAtMost(2),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																			generic.Multiset(),
-																			listplanmodifier.UseStateForUnknown(),
 																		}, /*END PLAN MODIFIERS*/
+																		// Variations is a write-only property.
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 															}, /*END NESTED OBJECT*/
 															Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-															Optional:    true,
-															Computed:    true,
+															Required:    true,
 															Validators: []validator.List{ /*START VALIDATORS*/
 																listvalidator.SizeBetween(1, 5),
-																fwvalidators.NotNullList(),
 															}, /*END VALIDATORS*/
 															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																generic.Multiset(),
-																listplanmodifier.UseStateForUnknown(),
 															}, /*END PLAN MODIFIERS*/
+															// MessageGroupsList is a write-only property.
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 													Description: "A list of message groups that Amazon Lex uses to respond the user input.",
 													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-														objectplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// SuccessResponse is a write-only property.
 												}, /*END ATTRIBUTE*/
 												// Property: TimeoutResponse
 												"timeout_response": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -6035,10 +5553,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 														"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
 															Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
 															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-																boolplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
+															// AllowInterrupt is a write-only property.
 														}, /*END ATTRIBUTE*/
 														// Property: MessageGroupsList
 														"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -6053,23 +5568,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																					// Property: Value
 																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The string that is sent to your application.",
-																						Optional:    true,
-																						Computed:    true,
+																						Required:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 1000),
-																							fwvalidators.NotNullString(),
 																						}, /*END VALIDATORS*/
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
+																						// Value is a write-only property.
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A message in a custom format defined by the client application.",
 																				Optional:    true,
-																				Computed:    true,
-																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																					objectplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// CustomPayload is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																			// Property: ImageResponseCard
 																			"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -6081,86 +5589,64 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								// Property: Text
 																								"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The text that appears on the button.",
-																									Optional:    true,
-																									Computed:    true,
+																									Required:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 50),
-																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
-																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																										stringplanmodifier.UseStateForUnknown(),
-																									}, /*END PLAN MODIFIERS*/
+																									// Text is a write-only property.
 																								}, /*END ATTRIBUTE*/
 																								// Property: Value
 																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The value returned to Amazon Lex when the user chooses this button.",
-																									Optional:    true,
-																									Computed:    true,
+																									Required:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 50),
-																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
-																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																										stringplanmodifier.UseStateForUnknown(),
-																									}, /*END PLAN MODIFIERS*/
+																									// Value is a write-only property.
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																						}, /*END NESTED OBJECT*/
 																						Description: "A list of buttons that should be displayed on the response card.",
 																						Optional:    true,
-																						Computed:    true,
 																						Validators: []validator.List{ /*START VALIDATORS*/
 																							listvalidator.SizeAtMost(5),
 																						}, /*END VALIDATORS*/
 																						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																							generic.Multiset(),
-																							listplanmodifier.UseStateForUnknown(),
 																						}, /*END PLAN MODIFIERS*/
+																						// Buttons is a write-only property.
 																					}, /*END ATTRIBUTE*/
 																					// Property: ImageUrl
 																					"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The URL of an image to display on the response card.",
 																						Optional:    true,
-																						Computed:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 250),
 																						}, /*END VALIDATORS*/
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
+																						// ImageUrl is a write-only property.
 																					}, /*END ATTRIBUTE*/
 																					// Property: Subtitle
 																					"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The subtitle to display on the response card.",
 																						Optional:    true,
-																						Computed:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 250),
 																						}, /*END VALIDATORS*/
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
+																						// Subtitle is a write-only property.
 																					}, /*END ATTRIBUTE*/
 																					// Property: Title
 																					"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The title to display on the response card.",
-																						Optional:    true,
-																						Computed:    true,
+																						Required:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 250),
-																							fwvalidators.NotNullString(),
 																						}, /*END VALIDATORS*/
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
+																						// Title is a write-only property.
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A message that defines a response card that the client application can show to the user.",
 																				Optional:    true,
-																				Computed:    true,
-																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																					objectplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// ImageResponseCard is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																			// Property: PlainTextMessage
 																			"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -6168,23 +5654,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																					// Property: Value
 																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The message to send to the user.",
-																						Optional:    true,
-																						Computed:    true,
+																						Required:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 1000),
-																							fwvalidators.NotNullString(),
 																						}, /*END VALIDATORS*/
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
+																						// Value is a write-only property.
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A message in plain text format.",
 																				Optional:    true,
-																				Computed:    true,
-																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																					objectplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// PlainTextMessage is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																			// Property: SSMLMessage
 																			"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -6192,34 +5671,21 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																					// Property: Value
 																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																						Description: "The SSML text that defines the prompt.",
-																						Optional:    true,
-																						Computed:    true,
+																						Required:    true,
 																						Validators: []validator.String{ /*START VALIDATORS*/
 																							stringvalidator.LengthBetween(1, 1000),
-																							fwvalidators.NotNullString(),
 																						}, /*END VALIDATORS*/
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
+																						// Value is a write-only property.
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																				Description: "A message in Speech Synthesis Markup Language (SSML).",
 																				Optional:    true,
-																				Computed:    true,
-																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																					objectplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// SSMLMessage is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "The primary message that Amazon Lex should send to the user.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.Object{ /*START VALIDATORS*/
-																			fwvalidators.NotNullObject(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
+																		Required:    true,
+																		// Message is a write-only property.
 																	}, /*END ATTRIBUTE*/
 																	// Property: Variations
 																	"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -6231,23 +5697,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The string that is sent to your application.",
-																							Optional:    true,
-																							Computed:    true,
+																							Required:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 1000),
-																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// Value is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message in a custom format defined by the client application.",
 																					Optional:    true,
-																					Computed:    true,
-																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																						objectplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// CustomPayload is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																				// Property: ImageResponseCard
 																				"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -6259,86 +5718,64 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									// Property: Text
 																									"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The text that appears on the button.",
-																										Optional:    true,
-																										Computed:    true,
+																										Required:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 50),
-																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
-																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																											stringplanmodifier.UseStateForUnknown(),
-																										}, /*END PLAN MODIFIERS*/
+																										// Text is a write-only property.
 																									}, /*END ATTRIBUTE*/
 																									// Property: Value
 																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The value returned to Amazon Lex when the user chooses this button.",
-																										Optional:    true,
-																										Computed:    true,
+																										Required:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 50),
-																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
-																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																											stringplanmodifier.UseStateForUnknown(),
-																										}, /*END PLAN MODIFIERS*/
+																										// Value is a write-only property.
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																							}, /*END NESTED OBJECT*/
 																							Description: "A list of buttons that should be displayed on the response card.",
 																							Optional:    true,
-																							Computed:    true,
 																							Validators: []validator.List{ /*START VALIDATORS*/
 																								listvalidator.SizeAtMost(5),
 																							}, /*END VALIDATORS*/
 																							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																								generic.Multiset(),
-																								listplanmodifier.UseStateForUnknown(),
 																							}, /*END PLAN MODIFIERS*/
+																							// Buttons is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																						// Property: ImageUrl
 																						"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The URL of an image to display on the response card.",
 																							Optional:    true,
-																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 250),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// ImageUrl is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																						// Property: Subtitle
 																						"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The subtitle to display on the response card.",
 																							Optional:    true,
-																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 250),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// Subtitle is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																						// Property: Title
 																						"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The title to display on the response card.",
-																							Optional:    true,
-																							Computed:    true,
+																							Required:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 250),
-																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// Title is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message that defines a response card that the client application can show to the user.",
 																					Optional:    true,
-																					Computed:    true,
-																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																						objectplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// ImageResponseCard is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																				// Property: PlainTextMessage
 																				"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -6346,23 +5783,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The message to send to the user.",
-																							Optional:    true,
-																							Computed:    true,
+																							Required:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 1000),
-																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// Value is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message in plain text format.",
 																					Optional:    true,
-																					Computed:    true,
-																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																						objectplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// PlainTextMessage is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																				// Property: SSMLMessage
 																				"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -6370,74 +5800,55 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The SSML text that defines the prompt.",
-																							Optional:    true,
-																							Computed:    true,
+																							Required:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 1000),
-																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// Value is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message in Speech Synthesis Markup Language (SSML).",
 																					Optional:    true,
-																					Computed:    true,
-																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																						objectplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// SSMLMessage is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																		}, /*END NESTED OBJECT*/
 																		Description: "Message variations to send to the user.",
 																		Optional:    true,
-																		Computed:    true,
 																		Validators: []validator.List{ /*START VALIDATORS*/
 																			listvalidator.SizeAtMost(2),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																			generic.Multiset(),
-																			listplanmodifier.UseStateForUnknown(),
 																		}, /*END PLAN MODIFIERS*/
+																		// Variations is a write-only property.
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 															}, /*END NESTED OBJECT*/
 															Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-															Optional:    true,
-															Computed:    true,
+															Required:    true,
 															Validators: []validator.List{ /*START VALIDATORS*/
 																listvalidator.SizeBetween(1, 5),
-																fwvalidators.NotNullList(),
 															}, /*END VALIDATORS*/
 															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																generic.Multiset(),
-																listplanmodifier.UseStateForUnknown(),
 															}, /*END PLAN MODIFIERS*/
+															// MessageGroupsList is a write-only property.
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 													Description: "A list of message groups that Amazon Lex uses to respond the user input.",
 													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-														objectplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// TimeoutResponse is a write-only property.
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 											Description: "Provides information for updating the user on the progress of fulfilling an intent.",
 											Optional:    true,
-											Computed:    true,
-											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-												objectplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// PostFulfillmentStatusSpecification is a write-only property.
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "Settings that determine if a Lambda function should be invoked to fulfill a specific intent.",
 									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// FulfillmentCodeHook is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: InputContexts
 								"input_contexts": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -6446,29 +5857,24 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Name
 											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "The name of the context.",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 100),
 													stringvalidator.RegexMatches(regexp.MustCompile("^([0-9a-zA-Z][_-]?)+$"), ""),
-													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Name is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
 									Description: "The list of input contexts specified for the intent.",
 									Optional:    true,
-									Computed:    true,
 									Validators: []validator.List{ /*START VALIDATORS*/
 										listvalidator.SizeAtMost(5),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 										generic.Multiset(),
-										listplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
+									// InputContexts is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: IntentClosingSetting
 								"intent_closing_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -6480,10 +5886,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 												"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
 													Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
 													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-														boolplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// AllowInterrupt is a write-only property.
 												}, /*END ATTRIBUTE*/
 												// Property: MessageGroupsList
 												"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -6498,23 +5901,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: Value
 																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The string that is sent to your application.",
-																				Optional:    true,
-																				Computed:    true,
+																				Required:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthBetween(1, 1000),
-																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// Value is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "A message in a custom format defined by the client application.",
 																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
+																		// CustomPayload is a write-only property.
 																	}, /*END ATTRIBUTE*/
 																	// Property: ImageResponseCard
 																	"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -6526,86 +5922,64 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Text
 																						"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The text that appears on the button.",
-																							Optional:    true,
-																							Computed:    true,
+																							Required:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 50),
-																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// Text is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The value returned to Amazon Lex when the user chooses this button.",
-																							Optional:    true,
-																							Computed:    true,
+																							Required:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 50),
-																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// Value is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																				}, /*END NESTED OBJECT*/
 																				Description: "A list of buttons that should be displayed on the response card.",
 																				Optional:    true,
-																				Computed:    true,
 																				Validators: []validator.List{ /*START VALIDATORS*/
 																					listvalidator.SizeAtMost(5),
 																				}, /*END VALIDATORS*/
 																				PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																					generic.Multiset(),
-																					listplanmodifier.UseStateForUnknown(),
 																				}, /*END PLAN MODIFIERS*/
+																				// Buttons is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																			// Property: ImageUrl
 																			"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The URL of an image to display on the response card.",
 																				Optional:    true,
-																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthBetween(1, 250),
 																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// ImageUrl is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																			// Property: Subtitle
 																			"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The subtitle to display on the response card.",
 																				Optional:    true,
-																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthBetween(1, 250),
 																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// Subtitle is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																			// Property: Title
 																			"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The title to display on the response card.",
-																				Optional:    true,
-																				Computed:    true,
+																				Required:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthBetween(1, 250),
-																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// Title is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "A message that defines a response card that the client application can show to the user.",
 																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
+																		// ImageResponseCard is a write-only property.
 																	}, /*END ATTRIBUTE*/
 																	// Property: PlainTextMessage
 																	"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -6613,23 +5987,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: Value
 																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The message to send to the user.",
-																				Optional:    true,
-																				Computed:    true,
+																				Required:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthBetween(1, 1000),
-																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// Value is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "A message in plain text format.",
 																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
+																		// PlainTextMessage is a write-only property.
 																	}, /*END ATTRIBUTE*/
 																	// Property: SSMLMessage
 																	"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -6637,34 +6004,21 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: Value
 																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The SSML text that defines the prompt.",
-																				Optional:    true,
-																				Computed:    true,
+																				Required:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthBetween(1, 1000),
-																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// Value is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "A message in Speech Synthesis Markup Language (SSML).",
 																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
+																		// SSMLMessage is a write-only property.
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "The primary message that Amazon Lex should send to the user.",
-																Optional:    true,
-																Computed:    true,
-																Validators: []validator.Object{ /*START VALIDATORS*/
-																	fwvalidators.NotNullObject(),
-																}, /*END VALIDATORS*/
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
+																Required:    true,
+																// Message is a write-only property.
 															}, /*END ATTRIBUTE*/
 															// Property: Variations
 															"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -6676,23 +6030,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																				// Property: Value
 																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																					Description: "The string that is sent to your application.",
-																					Optional:    true,
-																					Computed:    true,
+																					Required:    true,
 																					Validators: []validator.String{ /*START VALIDATORS*/
 																						stringvalidator.LengthBetween(1, 1000),
-																						fwvalidators.NotNullString(),
 																					}, /*END VALIDATORS*/
-																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																						stringplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// Value is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																			Description: "A message in a custom format defined by the client application.",
 																			Optional:    true,
-																			Computed:    true,
-																			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																				objectplanmodifier.UseStateForUnknown(),
-																			}, /*END PLAN MODIFIERS*/
+																			// CustomPayload is a write-only property.
 																		}, /*END ATTRIBUTE*/
 																		// Property: ImageResponseCard
 																		"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -6704,86 +6051,64 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																							// Property: Text
 																							"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																								Description: "The text that appears on the button.",
-																								Optional:    true,
-																								Computed:    true,
+																								Required:    true,
 																								Validators: []validator.String{ /*START VALIDATORS*/
 																									stringvalidator.LengthBetween(1, 50),
-																									fwvalidators.NotNullString(),
 																								}, /*END VALIDATORS*/
-																								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																									stringplanmodifier.UseStateForUnknown(),
-																								}, /*END PLAN MODIFIERS*/
+																								// Text is a write-only property.
 																							}, /*END ATTRIBUTE*/
 																							// Property: Value
 																							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																								Description: "The value returned to Amazon Lex when the user chooses this button.",
-																								Optional:    true,
-																								Computed:    true,
+																								Required:    true,
 																								Validators: []validator.String{ /*START VALIDATORS*/
 																									stringvalidator.LengthBetween(1, 50),
-																									fwvalidators.NotNullString(),
 																								}, /*END VALIDATORS*/
-																								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																									stringplanmodifier.UseStateForUnknown(),
-																								}, /*END PLAN MODIFIERS*/
+																								// Value is a write-only property.
 																							}, /*END ATTRIBUTE*/
 																						}, /*END SCHEMA*/
 																					}, /*END NESTED OBJECT*/
 																					Description: "A list of buttons that should be displayed on the response card.",
 																					Optional:    true,
-																					Computed:    true,
 																					Validators: []validator.List{ /*START VALIDATORS*/
 																						listvalidator.SizeAtMost(5),
 																					}, /*END VALIDATORS*/
 																					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																						generic.Multiset(),
-																						listplanmodifier.UseStateForUnknown(),
 																					}, /*END PLAN MODIFIERS*/
+																					// Buttons is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																				// Property: ImageUrl
 																				"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 																					Description: "The URL of an image to display on the response card.",
 																					Optional:    true,
-																					Computed:    true,
 																					Validators: []validator.String{ /*START VALIDATORS*/
 																						stringvalidator.LengthBetween(1, 250),
 																					}, /*END VALIDATORS*/
-																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																						stringplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// ImageUrl is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																				// Property: Subtitle
 																				"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
 																					Description: "The subtitle to display on the response card.",
 																					Optional:    true,
-																					Computed:    true,
 																					Validators: []validator.String{ /*START VALIDATORS*/
 																						stringvalidator.LengthBetween(1, 250),
 																					}, /*END VALIDATORS*/
-																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																						stringplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// Subtitle is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																				// Property: Title
 																				"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																					Description: "The title to display on the response card.",
-																					Optional:    true,
-																					Computed:    true,
+																					Required:    true,
 																					Validators: []validator.String{ /*START VALIDATORS*/
 																						stringvalidator.LengthBetween(1, 250),
-																						fwvalidators.NotNullString(),
 																					}, /*END VALIDATORS*/
-																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																						stringplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// Title is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																			Description: "A message that defines a response card that the client application can show to the user.",
 																			Optional:    true,
-																			Computed:    true,
-																			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																				objectplanmodifier.UseStateForUnknown(),
-																			}, /*END PLAN MODIFIERS*/
+																			// ImageResponseCard is a write-only property.
 																		}, /*END ATTRIBUTE*/
 																		// Property: PlainTextMessage
 																		"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -6791,23 +6116,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																				// Property: Value
 																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																					Description: "The message to send to the user.",
-																					Optional:    true,
-																					Computed:    true,
+																					Required:    true,
 																					Validators: []validator.String{ /*START VALIDATORS*/
 																						stringvalidator.LengthBetween(1, 1000),
-																						fwvalidators.NotNullString(),
 																					}, /*END VALIDATORS*/
-																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																						stringplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// Value is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																			Description: "A message in plain text format.",
 																			Optional:    true,
-																			Computed:    true,
-																			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																				objectplanmodifier.UseStateForUnknown(),
-																			}, /*END PLAN MODIFIERS*/
+																			// PlainTextMessage is a write-only property.
 																		}, /*END ATTRIBUTE*/
 																		// Property: SSMLMessage
 																		"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -6815,77 +6133,55 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																				// Property: Value
 																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																					Description: "The SSML text that defines the prompt.",
-																					Optional:    true,
-																					Computed:    true,
+																					Required:    true,
 																					Validators: []validator.String{ /*START VALIDATORS*/
 																						stringvalidator.LengthBetween(1, 1000),
-																						fwvalidators.NotNullString(),
 																					}, /*END VALIDATORS*/
-																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																						stringplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// Value is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																			Description: "A message in Speech Synthesis Markup Language (SSML).",
 																			Optional:    true,
-																			Computed:    true,
-																			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																				objectplanmodifier.UseStateForUnknown(),
-																			}, /*END PLAN MODIFIERS*/
+																			// SSMLMessage is a write-only property.
 																		}, /*END ATTRIBUTE*/
 																	}, /*END SCHEMA*/
 																}, /*END NESTED OBJECT*/
 																Description: "Message variations to send to the user.",
 																Optional:    true,
-																Computed:    true,
 																Validators: []validator.List{ /*START VALIDATORS*/
 																	listvalidator.SizeAtMost(2),
 																}, /*END VALIDATORS*/
 																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																	generic.Multiset(),
-																	listplanmodifier.UseStateForUnknown(),
 																}, /*END PLAN MODIFIERS*/
+																// Variations is a write-only property.
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
 													Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-													Optional:    true,
-													Computed:    true,
+													Required:    true,
 													Validators: []validator.List{ /*START VALIDATORS*/
 														listvalidator.SizeBetween(1, 5),
-														fwvalidators.NotNullList(),
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 														generic.Multiset(),
-														listplanmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
+													// MessageGroupsList is a write-only property.
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 											Description: "A list of message groups that Amazon Lex uses to respond the user input.",
-											Optional:    true,
-											Computed:    true,
-											Validators: []validator.Object{ /*START VALIDATORS*/
-												fwvalidators.NotNullObject(),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-												objectplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											Required:    true,
+											// ClosingResponse is a write-only property.
 										}, /*END ATTRIBUTE*/
 										// Property: IsActive
 										"is_active": schema.BoolAttribute{ /*START ATTRIBUTE*/
 											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-												boolplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// IsActive is a write-only property.
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "Response that Amazon Lex sends to the user when the intent is closed.",
 									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// IntentClosingSetting is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: IntentConfirmationSetting
 								"intent_confirmation_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -6897,10 +6193,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 												"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
 													Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
 													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-														boolplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// AllowInterrupt is a write-only property.
 												}, /*END ATTRIBUTE*/
 												// Property: MessageGroupsList
 												"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -6915,23 +6208,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: Value
 																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The string that is sent to your application.",
-																				Optional:    true,
-																				Computed:    true,
+																				Required:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthBetween(1, 1000),
-																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// Value is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "A message in a custom format defined by the client application.",
 																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
+																		// CustomPayload is a write-only property.
 																	}, /*END ATTRIBUTE*/
 																	// Property: ImageResponseCard
 																	"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -6943,86 +6229,64 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Text
 																						"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The text that appears on the button.",
-																							Optional:    true,
-																							Computed:    true,
+																							Required:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 50),
-																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// Text is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The value returned to Amazon Lex when the user chooses this button.",
-																							Optional:    true,
-																							Computed:    true,
+																							Required:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 50),
-																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// Value is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																				}, /*END NESTED OBJECT*/
 																				Description: "A list of buttons that should be displayed on the response card.",
 																				Optional:    true,
-																				Computed:    true,
 																				Validators: []validator.List{ /*START VALIDATORS*/
 																					listvalidator.SizeAtMost(5),
 																				}, /*END VALIDATORS*/
 																				PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																					generic.Multiset(),
-																					listplanmodifier.UseStateForUnknown(),
 																				}, /*END PLAN MODIFIERS*/
+																				// Buttons is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																			// Property: ImageUrl
 																			"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The URL of an image to display on the response card.",
 																				Optional:    true,
-																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthBetween(1, 250),
 																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// ImageUrl is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																			// Property: Subtitle
 																			"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The subtitle to display on the response card.",
 																				Optional:    true,
-																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthBetween(1, 250),
 																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// Subtitle is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																			// Property: Title
 																			"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The title to display on the response card.",
-																				Optional:    true,
-																				Computed:    true,
+																				Required:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthBetween(1, 250),
-																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// Title is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "A message that defines a response card that the client application can show to the user.",
 																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
+																		// ImageResponseCard is a write-only property.
 																	}, /*END ATTRIBUTE*/
 																	// Property: PlainTextMessage
 																	"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -7030,23 +6294,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: Value
 																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The message to send to the user.",
-																				Optional:    true,
-																				Computed:    true,
+																				Required:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthBetween(1, 1000),
-																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// Value is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "A message in plain text format.",
 																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
+																		// PlainTextMessage is a write-only property.
 																	}, /*END ATTRIBUTE*/
 																	// Property: SSMLMessage
 																	"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -7054,34 +6311,21 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: Value
 																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The SSML text that defines the prompt.",
-																				Optional:    true,
-																				Computed:    true,
+																				Required:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthBetween(1, 1000),
-																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// Value is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "A message in Speech Synthesis Markup Language (SSML).",
 																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
+																		// SSMLMessage is a write-only property.
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "The primary message that Amazon Lex should send to the user.",
-																Optional:    true,
-																Computed:    true,
-																Validators: []validator.Object{ /*START VALIDATORS*/
-																	fwvalidators.NotNullObject(),
-																}, /*END VALIDATORS*/
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
+																Required:    true,
+																// Message is a write-only property.
 															}, /*END ATTRIBUTE*/
 															// Property: Variations
 															"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -7093,23 +6337,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																				// Property: Value
 																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																					Description: "The string that is sent to your application.",
-																					Optional:    true,
-																					Computed:    true,
+																					Required:    true,
 																					Validators: []validator.String{ /*START VALIDATORS*/
 																						stringvalidator.LengthBetween(1, 1000),
-																						fwvalidators.NotNullString(),
 																					}, /*END VALIDATORS*/
-																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																						stringplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// Value is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																			Description: "A message in a custom format defined by the client application.",
 																			Optional:    true,
-																			Computed:    true,
-																			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																				objectplanmodifier.UseStateForUnknown(),
-																			}, /*END PLAN MODIFIERS*/
+																			// CustomPayload is a write-only property.
 																		}, /*END ATTRIBUTE*/
 																		// Property: ImageResponseCard
 																		"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -7121,86 +6358,64 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																							// Property: Text
 																							"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																								Description: "The text that appears on the button.",
-																								Optional:    true,
-																								Computed:    true,
+																								Required:    true,
 																								Validators: []validator.String{ /*START VALIDATORS*/
 																									stringvalidator.LengthBetween(1, 50),
-																									fwvalidators.NotNullString(),
 																								}, /*END VALIDATORS*/
-																								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																									stringplanmodifier.UseStateForUnknown(),
-																								}, /*END PLAN MODIFIERS*/
+																								// Text is a write-only property.
 																							}, /*END ATTRIBUTE*/
 																							// Property: Value
 																							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																								Description: "The value returned to Amazon Lex when the user chooses this button.",
-																								Optional:    true,
-																								Computed:    true,
+																								Required:    true,
 																								Validators: []validator.String{ /*START VALIDATORS*/
 																									stringvalidator.LengthBetween(1, 50),
-																									fwvalidators.NotNullString(),
 																								}, /*END VALIDATORS*/
-																								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																									stringplanmodifier.UseStateForUnknown(),
-																								}, /*END PLAN MODIFIERS*/
+																								// Value is a write-only property.
 																							}, /*END ATTRIBUTE*/
 																						}, /*END SCHEMA*/
 																					}, /*END NESTED OBJECT*/
 																					Description: "A list of buttons that should be displayed on the response card.",
 																					Optional:    true,
-																					Computed:    true,
 																					Validators: []validator.List{ /*START VALIDATORS*/
 																						listvalidator.SizeAtMost(5),
 																					}, /*END VALIDATORS*/
 																					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																						generic.Multiset(),
-																						listplanmodifier.UseStateForUnknown(),
 																					}, /*END PLAN MODIFIERS*/
+																					// Buttons is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																				// Property: ImageUrl
 																				"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 																					Description: "The URL of an image to display on the response card.",
 																					Optional:    true,
-																					Computed:    true,
 																					Validators: []validator.String{ /*START VALIDATORS*/
 																						stringvalidator.LengthBetween(1, 250),
 																					}, /*END VALIDATORS*/
-																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																						stringplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// ImageUrl is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																				// Property: Subtitle
 																				"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
 																					Description: "The subtitle to display on the response card.",
 																					Optional:    true,
-																					Computed:    true,
 																					Validators: []validator.String{ /*START VALIDATORS*/
 																						stringvalidator.LengthBetween(1, 250),
 																					}, /*END VALIDATORS*/
-																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																						stringplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// Subtitle is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																				// Property: Title
 																				"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																					Description: "The title to display on the response card.",
-																					Optional:    true,
-																					Computed:    true,
+																					Required:    true,
 																					Validators: []validator.String{ /*START VALIDATORS*/
 																						stringvalidator.LengthBetween(1, 250),
-																						fwvalidators.NotNullString(),
 																					}, /*END VALIDATORS*/
-																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																						stringplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// Title is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																			Description: "A message that defines a response card that the client application can show to the user.",
 																			Optional:    true,
-																			Computed:    true,
-																			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																				objectplanmodifier.UseStateForUnknown(),
-																			}, /*END PLAN MODIFIERS*/
+																			// ImageResponseCard is a write-only property.
 																		}, /*END ATTRIBUTE*/
 																		// Property: PlainTextMessage
 																		"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -7208,23 +6423,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																				// Property: Value
 																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																					Description: "The message to send to the user.",
-																					Optional:    true,
-																					Computed:    true,
+																					Required:    true,
 																					Validators: []validator.String{ /*START VALIDATORS*/
 																						stringvalidator.LengthBetween(1, 1000),
-																						fwvalidators.NotNullString(),
 																					}, /*END VALIDATORS*/
-																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																						stringplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// Value is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																			Description: "A message in plain text format.",
 																			Optional:    true,
-																			Computed:    true,
-																			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																				objectplanmodifier.UseStateForUnknown(),
-																			}, /*END PLAN MODIFIERS*/
+																			// PlainTextMessage is a write-only property.
 																		}, /*END ATTRIBUTE*/
 																		// Property: SSMLMessage
 																		"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -7232,69 +6440,50 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																				// Property: Value
 																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																					Description: "The SSML text that defines the prompt.",
-																					Optional:    true,
-																					Computed:    true,
+																					Required:    true,
 																					Validators: []validator.String{ /*START VALIDATORS*/
 																						stringvalidator.LengthBetween(1, 1000),
-																						fwvalidators.NotNullString(),
 																					}, /*END VALIDATORS*/
-																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																						stringplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// Value is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																			Description: "A message in Speech Synthesis Markup Language (SSML).",
 																			Optional:    true,
-																			Computed:    true,
-																			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																				objectplanmodifier.UseStateForUnknown(),
-																			}, /*END PLAN MODIFIERS*/
+																			// SSMLMessage is a write-only property.
 																		}, /*END ATTRIBUTE*/
 																	}, /*END SCHEMA*/
 																}, /*END NESTED OBJECT*/
 																Description: "Message variations to send to the user.",
 																Optional:    true,
-																Computed:    true,
 																Validators: []validator.List{ /*START VALIDATORS*/
 																	listvalidator.SizeAtMost(2),
 																}, /*END VALIDATORS*/
 																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																	generic.Multiset(),
-																	listplanmodifier.UseStateForUnknown(),
 																}, /*END PLAN MODIFIERS*/
+																// Variations is a write-only property.
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
 													Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-													Optional:    true,
-													Computed:    true,
+													Required:    true,
 													Validators: []validator.List{ /*START VALIDATORS*/
 														listvalidator.SizeBetween(1, 5),
-														fwvalidators.NotNullList(),
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 														generic.Multiset(),
-														listplanmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
+													// MessageGroupsList is a write-only property.
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 											Description: "A list of message groups that Amazon Lex uses to respond the user input.",
-											Optional:    true,
-											Computed:    true,
-											Validators: []validator.Object{ /*START VALIDATORS*/
-												fwvalidators.NotNullObject(),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-												objectplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											Required:    true,
+											// DeclinationResponse is a write-only property.
 										}, /*END ATTRIBUTE*/
 										// Property: IsActive
 										"is_active": schema.BoolAttribute{ /*START ATTRIBUTE*/
 											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-												boolplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// IsActive is a write-only property.
 										}, /*END ATTRIBUTE*/
 										// Property: PromptSpecification
 										"prompt_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -7303,23 +6492,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 												"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
 													Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
 													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-														boolplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// AllowInterrupt is a write-only property.
 												}, /*END ATTRIBUTE*/
 												// Property: MaxRetries
 												"max_retries": schema.Int64Attribute{ /*START ATTRIBUTE*/
 													Description: "The maximum number of times the bot tries to elicit a resonse from the user using this prompt.",
-													Optional:    true,
-													Computed:    true,
+													Required:    true,
 													Validators: []validator.Int64{ /*START VALIDATORS*/
 														int64validator.Between(0, 5),
-														fwvalidators.NotNullInt64(),
 													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-														int64planmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// MaxRetries is a write-only property.
 												}, /*END ATTRIBUTE*/
 												// Property: MessageGroupsList
 												"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -7334,23 +6516,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: Value
 																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The string that is sent to your application.",
-																				Optional:    true,
-																				Computed:    true,
+																				Required:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthBetween(1, 1000),
-																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// Value is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "A message in a custom format defined by the client application.",
 																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
+																		// CustomPayload is a write-only property.
 																	}, /*END ATTRIBUTE*/
 																	// Property: ImageResponseCard
 																	"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -7362,86 +6537,64 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Text
 																						"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The text that appears on the button.",
-																							Optional:    true,
-																							Computed:    true,
+																							Required:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 50),
-																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// Text is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The value returned to Amazon Lex when the user chooses this button.",
-																							Optional:    true,
-																							Computed:    true,
+																							Required:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 50),
-																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// Value is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																				}, /*END NESTED OBJECT*/
 																				Description: "A list of buttons that should be displayed on the response card.",
 																				Optional:    true,
-																				Computed:    true,
 																				Validators: []validator.List{ /*START VALIDATORS*/
 																					listvalidator.SizeAtMost(5),
 																				}, /*END VALIDATORS*/
 																				PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																					generic.Multiset(),
-																					listplanmodifier.UseStateForUnknown(),
 																				}, /*END PLAN MODIFIERS*/
+																				// Buttons is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																			// Property: ImageUrl
 																			"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The URL of an image to display on the response card.",
 																				Optional:    true,
-																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthBetween(1, 250),
 																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// ImageUrl is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																			// Property: Subtitle
 																			"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The subtitle to display on the response card.",
 																				Optional:    true,
-																				Computed:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthBetween(1, 250),
 																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// Subtitle is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																			// Property: Title
 																			"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The title to display on the response card.",
-																				Optional:    true,
-																				Computed:    true,
+																				Required:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthBetween(1, 250),
-																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// Title is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "A message that defines a response card that the client application can show to the user.",
 																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
+																		// ImageResponseCard is a write-only property.
 																	}, /*END ATTRIBUTE*/
 																	// Property: PlainTextMessage
 																	"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -7449,23 +6602,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: Value
 																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The message to send to the user.",
-																				Optional:    true,
-																				Computed:    true,
+																				Required:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthBetween(1, 1000),
-																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// Value is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "A message in plain text format.",
 																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
+																		// PlainTextMessage is a write-only property.
 																	}, /*END ATTRIBUTE*/
 																	// Property: SSMLMessage
 																	"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -7473,34 +6619,21 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: Value
 																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The SSML text that defines the prompt.",
-																				Optional:    true,
-																				Computed:    true,
+																				Required:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.LengthBetween(1, 1000),
-																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// Value is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "A message in Speech Synthesis Markup Language (SSML).",
 																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
+																		// SSMLMessage is a write-only property.
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "The primary message that Amazon Lex should send to the user.",
-																Optional:    true,
-																Computed:    true,
-																Validators: []validator.Object{ /*START VALIDATORS*/
-																	fwvalidators.NotNullObject(),
-																}, /*END VALIDATORS*/
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
+																Required:    true,
+																// Message is a write-only property.
 															}, /*END ATTRIBUTE*/
 															// Property: Variations
 															"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -7512,23 +6645,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																				// Property: Value
 																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																					Description: "The string that is sent to your application.",
-																					Optional:    true,
-																					Computed:    true,
+																					Required:    true,
 																					Validators: []validator.String{ /*START VALIDATORS*/
 																						stringvalidator.LengthBetween(1, 1000),
-																						fwvalidators.NotNullString(),
 																					}, /*END VALIDATORS*/
-																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																						stringplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// Value is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																			Description: "A message in a custom format defined by the client application.",
 																			Optional:    true,
-																			Computed:    true,
-																			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																				objectplanmodifier.UseStateForUnknown(),
-																			}, /*END PLAN MODIFIERS*/
+																			// CustomPayload is a write-only property.
 																		}, /*END ATTRIBUTE*/
 																		// Property: ImageResponseCard
 																		"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -7540,86 +6666,64 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																							// Property: Text
 																							"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																								Description: "The text that appears on the button.",
-																								Optional:    true,
-																								Computed:    true,
+																								Required:    true,
 																								Validators: []validator.String{ /*START VALIDATORS*/
 																									stringvalidator.LengthBetween(1, 50),
-																									fwvalidators.NotNullString(),
 																								}, /*END VALIDATORS*/
-																								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																									stringplanmodifier.UseStateForUnknown(),
-																								}, /*END PLAN MODIFIERS*/
+																								// Text is a write-only property.
 																							}, /*END ATTRIBUTE*/
 																							// Property: Value
 																							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																								Description: "The value returned to Amazon Lex when the user chooses this button.",
-																								Optional:    true,
-																								Computed:    true,
+																								Required:    true,
 																								Validators: []validator.String{ /*START VALIDATORS*/
 																									stringvalidator.LengthBetween(1, 50),
-																									fwvalidators.NotNullString(),
 																								}, /*END VALIDATORS*/
-																								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																									stringplanmodifier.UseStateForUnknown(),
-																								}, /*END PLAN MODIFIERS*/
+																								// Value is a write-only property.
 																							}, /*END ATTRIBUTE*/
 																						}, /*END SCHEMA*/
 																					}, /*END NESTED OBJECT*/
 																					Description: "A list of buttons that should be displayed on the response card.",
 																					Optional:    true,
-																					Computed:    true,
 																					Validators: []validator.List{ /*START VALIDATORS*/
 																						listvalidator.SizeAtMost(5),
 																					}, /*END VALIDATORS*/
 																					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																						generic.Multiset(),
-																						listplanmodifier.UseStateForUnknown(),
 																					}, /*END PLAN MODIFIERS*/
+																					// Buttons is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																				// Property: ImageUrl
 																				"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 																					Description: "The URL of an image to display on the response card.",
 																					Optional:    true,
-																					Computed:    true,
 																					Validators: []validator.String{ /*START VALIDATORS*/
 																						stringvalidator.LengthBetween(1, 250),
 																					}, /*END VALIDATORS*/
-																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																						stringplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// ImageUrl is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																				// Property: Subtitle
 																				"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
 																					Description: "The subtitle to display on the response card.",
 																					Optional:    true,
-																					Computed:    true,
 																					Validators: []validator.String{ /*START VALIDATORS*/
 																						stringvalidator.LengthBetween(1, 250),
 																					}, /*END VALIDATORS*/
-																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																						stringplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// Subtitle is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																				// Property: Title
 																				"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																					Description: "The title to display on the response card.",
-																					Optional:    true,
-																					Computed:    true,
+																					Required:    true,
 																					Validators: []validator.String{ /*START VALIDATORS*/
 																						stringvalidator.LengthBetween(1, 250),
-																						fwvalidators.NotNullString(),
 																					}, /*END VALIDATORS*/
-																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																						stringplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// Title is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																			Description: "A message that defines a response card that the client application can show to the user.",
 																			Optional:    true,
-																			Computed:    true,
-																			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																				objectplanmodifier.UseStateForUnknown(),
-																			}, /*END PLAN MODIFIERS*/
+																			// ImageResponseCard is a write-only property.
 																		}, /*END ATTRIBUTE*/
 																		// Property: PlainTextMessage
 																		"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -7627,23 +6731,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																				// Property: Value
 																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																					Description: "The message to send to the user.",
-																					Optional:    true,
-																					Computed:    true,
+																					Required:    true,
 																					Validators: []validator.String{ /*START VALIDATORS*/
 																						stringvalidator.LengthBetween(1, 1000),
-																						fwvalidators.NotNullString(),
 																					}, /*END VALIDATORS*/
-																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																						stringplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// Value is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																			Description: "A message in plain text format.",
 																			Optional:    true,
-																			Computed:    true,
-																			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																				objectplanmodifier.UseStateForUnknown(),
-																			}, /*END PLAN MODIFIERS*/
+																			// PlainTextMessage is a write-only property.
 																		}, /*END ATTRIBUTE*/
 																		// Property: SSMLMessage
 																		"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -7651,65 +6748,52 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																				// Property: Value
 																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																					Description: "The SSML text that defines the prompt.",
-																					Optional:    true,
-																					Computed:    true,
+																					Required:    true,
 																					Validators: []validator.String{ /*START VALIDATORS*/
 																						stringvalidator.LengthBetween(1, 1000),
-																						fwvalidators.NotNullString(),
 																					}, /*END VALIDATORS*/
-																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																						stringplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// Value is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																			Description: "A message in Speech Synthesis Markup Language (SSML).",
 																			Optional:    true,
-																			Computed:    true,
-																			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																				objectplanmodifier.UseStateForUnknown(),
-																			}, /*END PLAN MODIFIERS*/
+																			// SSMLMessage is a write-only property.
 																		}, /*END ATTRIBUTE*/
 																	}, /*END SCHEMA*/
 																}, /*END NESTED OBJECT*/
 																Description: "Message variations to send to the user.",
 																Optional:    true,
-																Computed:    true,
 																Validators: []validator.List{ /*START VALIDATORS*/
 																	listvalidator.SizeAtMost(2),
 																}, /*END VALIDATORS*/
 																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																	generic.Multiset(),
-																	listplanmodifier.UseStateForUnknown(),
 																}, /*END PLAN MODIFIERS*/
+																// Variations is a write-only property.
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
 													Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-													Optional:    true,
-													Computed:    true,
+													Required:    true,
 													Validators: []validator.List{ /*START VALIDATORS*/
 														listvalidator.SizeBetween(1, 5),
-														fwvalidators.NotNullList(),
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 														generic.Multiset(),
-														listplanmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
+													// MessageGroupsList is a write-only property.
 												}, /*END ATTRIBUTE*/
 												// Property: MessageSelectionStrategy
 												"message_selection_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "Indicates how a message is selected from a message group among retries.",
 													Optional:    true,
-													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.OneOf(
 															"Random",
 															"Ordered",
 														),
 													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// MessageSelectionStrategy is a write-only property.
 												}, /*END ATTRIBUTE*/
 												// Property: PromptAttemptsSpecification
 												"prompt_attempts_specification": // Pattern: ""
@@ -7720,10 +6804,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 															"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
 																Description: "Indicates whether the user can interrupt a speech prompt attempt from the bot.",
 																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-																	boolplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
+																// AllowInterrupt is a write-only property.
 															}, /*END ATTRIBUTE*/
 															// Property: AllowedInputTypes
 															"allowed_input_types": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -7731,34 +6812,19 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: AllowAudioInput
 																	"allow_audio_input": schema.BoolAttribute{ /*START ATTRIBUTE*/
 																		Description: "Indicates whether audio input is allowed.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.Bool{ /*START VALIDATORS*/
-																			fwvalidators.NotNullBool(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-																			boolplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
+																		Required:    true,
+																		// AllowAudioInput is a write-only property.
 																	}, /*END ATTRIBUTE*/
 																	// Property: AllowDTMFInput
 																	"allow_dtmf_input": schema.BoolAttribute{ /*START ATTRIBUTE*/
 																		Description: "Indicates whether DTMF input is allowed.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.Bool{ /*START VALIDATORS*/
-																			fwvalidators.NotNullBool(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-																			boolplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
+																		Required:    true,
+																		// AllowDTMFInput is a write-only property.
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "Specifies the allowed input types.",
 																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
+																// AllowedInputTypes is a write-only property.
 															}, /*END ATTRIBUTE*/
 															// Property: AudioAndDTMFInputSpecification
 															"audio_and_dtmf_input_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -7769,36 +6835,25 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: EndTimeoutMs
 																			"end_timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
 																				Description: "Time for which a bot waits after the customer stops speaking to assume the utterance is finished.",
-																				Optional:    true,
-																				Computed:    true,
+																				Required:    true,
 																				Validators: []validator.Int64{ /*START VALIDATORS*/
 																					int64validator.AtLeast(1),
-																					fwvalidators.NotNullInt64(),
 																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-																					int64planmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// EndTimeoutMs is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																			// Property: MaxLengthMs
 																			"max_length_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
 																				Description: "Time for how long Amazon Lex waits before speech input is truncated and the speech is returned to application.",
-																				Optional:    true,
-																				Computed:    true,
+																				Required:    true,
 																				Validators: []validator.Int64{ /*START VALIDATORS*/
 																					int64validator.AtLeast(1),
-																					fwvalidators.NotNullInt64(),
 																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-																					int64planmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// MaxLengthMs is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "Specifies the audio input specifications.",
 																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
+																		// AudioSpecification is a write-only property.
 																	}, /*END ATTRIBUTE*/
 																	// Property: DTMFSpecification
 																	"dtmf_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -7806,83 +6861,57 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																			// Property: DeletionCharacter
 																			"deletion_character": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The DTMF character that clears the accumulated DTMF digits and immediately ends the input.",
-																				Optional:    true,
-																				Computed:    true,
+																				Required:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.RegexMatches(regexp.MustCompile("^[A-D0-9#*]{1}$"), ""),
-																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// DeletionCharacter is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																			// Property: EndCharacter
 																			"end_character": schema.StringAttribute{ /*START ATTRIBUTE*/
 																				Description: "The DTMF character that immediately ends input. If the user does not press this character, the input ends after the end timeout.",
-																				Optional:    true,
-																				Computed:    true,
+																				Required:    true,
 																				Validators: []validator.String{ /*START VALIDATORS*/
 																					stringvalidator.RegexMatches(regexp.MustCompile("^[A-D0-9#*]{1}$"), ""),
-																					fwvalidators.NotNullString(),
 																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// EndCharacter is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																			// Property: EndTimeoutMs
 																			"end_timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
 																				Description: "How long the bot should wait after the last DTMF character input before assuming that the input has concluded.",
-																				Optional:    true,
-																				Computed:    true,
+																				Required:    true,
 																				Validators: []validator.Int64{ /*START VALIDATORS*/
 																					int64validator.AtLeast(1),
-																					fwvalidators.NotNullInt64(),
 																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-																					int64planmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// EndTimeoutMs is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																			// Property: MaxLength
 																			"max_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
 																				Description: "The maximum number of DTMF digits allowed in an utterance.",
-																				Optional:    true,
-																				Computed:    true,
+																				Required:    true,
 																				Validators: []validator.Int64{ /*START VALIDATORS*/
 																					int64validator.Between(1, 1024),
-																					fwvalidators.NotNullInt64(),
 																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-																					int64planmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
+																				// MaxLength is a write-only property.
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																		Description: "Specifies the settings on DTMF input.",
 																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
+																		// DTMFSpecification is a write-only property.
 																	}, /*END ATTRIBUTE*/
 																	// Property: StartTimeoutMs
 																	"start_timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
 																		Description: "Time for which a bot waits before assuming that the customer isn't going to speak or press a key. This timeout is shared between Audio and DTMF inputs.",
-																		Optional:    true,
-																		Computed:    true,
+																		Required:    true,
 																		Validators: []validator.Int64{ /*START VALIDATORS*/
 																			int64validator.AtLeast(1),
-																			fwvalidators.NotNullInt64(),
 																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-																			int64planmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
+																		// StartTimeoutMs is a write-only property.
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "Specifies the audio and DTMF input specification.",
 																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
+																// AudioAndDTMFInputSpecification is a write-only property.
 															}, /*END ATTRIBUTE*/
 															// Property: TextInputSpecification
 															"text_input_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -7890,51 +6919,32 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																	// Property: StartTimeoutMs
 																	"start_timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
 																		Description: "Time for which a bot waits before re-prompting a customer for text input.",
-																		Optional:    true,
-																		Computed:    true,
+																		Required:    true,
 																		Validators: []validator.Int64{ /*START VALIDATORS*/
 																			int64validator.AtLeast(1),
-																			fwvalidators.NotNullInt64(),
 																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-																			int64planmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
+																		// StartTimeoutMs is a write-only property.
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "Specifies the text input specifications.",
 																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
+																// TextInputSpecification is a write-only property.
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
 													Description: "Specifies the advanced settings on each attempt of the prompt.",
 													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-														mapplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// PromptAttemptsSpecification is a write-only property.
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 											Description: "Prompts the user to confirm the intent.",
-											Optional:    true,
-											Computed:    true,
-											Validators: []validator.Object{ /*START VALIDATORS*/
-												fwvalidators.NotNullObject(),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-												objectplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											Required:    true,
+											// PromptSpecification is a write-only property.
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "Prompts that Amazon Lex sends to the user to confirm the completion of an intent.",
 									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// IntentConfirmationSetting is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: KendraConfiguration
 								"kendra_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -7942,59 +6952,42 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 										// Property: KendraIndex
 										"kendra_index": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "The Amazon Resource Name (ARN) of the Amazon Kendra index that you want the AMAZON.KendraSearchIntent intent to search.",
-											Optional:    true,
-											Computed:    true,
+											Required:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthBetween(32, 2048),
 												stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-zA-Z-]*:kendra:[a-z]+-[a-z]+-[0-9]:[0-9]{12}:index/[a-zA-Z0-9][a-zA-Z0-9_-]*$"), ""),
-												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// KendraIndex is a write-only property.
 										}, /*END ATTRIBUTE*/
 										// Property: QueryFilterString
 										"query_filter_string": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "A query filter that Amazon Lex sends to Amazon Kendra to filter the response from a query.",
 											Optional:    true,
-											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthBetween(1, 5000),
 											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// QueryFilterString is a write-only property.
 										}, /*END ATTRIBUTE*/
 										// Property: QueryFilterStringEnabled
 										"query_filter_string_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 											Description: "Determines whether the AMAZON.KendraSearchIntent intent uses a custom query string to query the Amazon Kendra index.",
 											Optional:    true,
-											Computed:    true,
-											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-												boolplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// QueryFilterStringEnabled is a write-only property.
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "Configuration for searching a Amazon Kendra index specified for the intent.",
 									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// KendraConfiguration is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: Name
 								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "Unique name for a resource.",
-									Optional:    true,
-									Computed:    true,
+									Required:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 100),
 										stringvalidator.RegexMatches(regexp.MustCompile("^([0-9a-zA-Z][_-]?)+$"), ""),
-										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// Name is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: OutputContexts
 								"output_contexts": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -8003,64 +6996,48 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Name
 											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "Unique name for a resource.",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 100),
 													stringvalidator.RegexMatches(regexp.MustCompile("^([0-9a-zA-Z][_-]?)+$"), ""),
-													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Name is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: TimeToLiveInSeconds
 											"time_to_live_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
 												Description: "The amount of time, in seconds, that the output context should remain active.",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.Int64{ /*START VALIDATORS*/
 													int64validator.Between(5, 86400),
-													fwvalidators.NotNullInt64(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-													int64planmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// TimeToLiveInSeconds is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: TurnsToLive
 											"turns_to_live": schema.Int64Attribute{ /*START ATTRIBUTE*/
 												Description: "The number of conversation turns that the output context should remain active.",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.Int64{ /*START VALIDATORS*/
 													int64validator.Between(1, 20),
-													fwvalidators.NotNullInt64(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-													int64planmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// TurnsToLive is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
 									Description: "A list of contexts that the intent activates when it is fulfilled.",
 									Optional:    true,
-									Computed:    true,
 									Validators: []validator.List{ /*START VALIDATORS*/
 										listvalidator.SizeAtMost(10),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 										generic.Multiset(),
-										listplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
+									// OutputContexts is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: ParentIntentSignature
 								"parent_intent_signature": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "A unique identifier for the built-in intent to base this intent on.",
 									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// ParentIntentSignature is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: SampleUtterances
 								"sample_utterances": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -8069,24 +7046,17 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Utterance
 											"utterance": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "The sample utterance that Amazon Lex uses to build its machine-learning model to recognize intents/slots.",
-												Optional:    true,
-												Computed:    true,
-												Validators: []validator.String{ /*START VALIDATORS*/
-													fwvalidators.NotNullString(),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												Required:    true,
+												// Utterance is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
 									Description: "An array of sample utterances",
 									Optional:    true,
-									Computed:    true,
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 										generic.Multiset(),
-										listplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
+									// SampleUtterances is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: SlotPriorities
 								"slot_priorities": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -8095,39 +7065,30 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Priority
 											"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
 												Description: "The priority that a slot should be elicited.",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.Int64{ /*START VALIDATORS*/
 													int64validator.Between(0, 100),
-													fwvalidators.NotNullInt64(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-													int64planmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Priority is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: SlotName
 											"slot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "The name of the slot.",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 100),
 													stringvalidator.RegexMatches(regexp.MustCompile("^([0-9a-zA-Z][_-]?)+$"), ""),
-													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// SlotName is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
 									Description: "List for slot priorities",
 									Optional:    true,
-									Computed:    true,
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 										generic.Multiset(),
-										listplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
+									// SlotPriorities is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: Slots
 								"slots": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
@@ -8137,13 +7098,10 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 											"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "A description of the resource",
 												Optional:    true,
-												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthAtMost(200),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Description is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: MultipleValuesSetting
 											"multiple_values_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -8151,32 +7109,22 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 													// Property: AllowMultipleValues
 													"allow_multiple_values": schema.BoolAttribute{ /*START ATTRIBUTE*/
 														Optional: true,
-														Computed: true,
-														PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-															boolplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
+														// AllowMultipleValues is a write-only property.
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
 												Description: "Indicates whether a slot can return multiple values.",
 												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-													objectplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// MultipleValuesSetting is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Name
 											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "Unique name for a resource.",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 100),
 													stringvalidator.RegexMatches(regexp.MustCompile("^([0-9a-zA-Z][_-]?)+$"), ""),
-													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Name is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: ObfuscationSetting
 											"obfuscation_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -8184,38 +7132,25 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 													// Property: ObfuscationSettingType
 													"obfuscation_setting_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 														Description: "Value that determines whether Amazon Lex obscures slot values in conversation logs. The default is to obscure the values.",
-														Optional:    true,
-														Computed:    true,
+														Required:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
 															stringvalidator.OneOf(
 																"None",
 																"DefaultObfuscation",
 															),
-															fwvalidators.NotNullString(),
 														}, /*END VALIDATORS*/
-														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-															stringplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
+														// ObfuscationSettingType is a write-only property.
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
 												Description: "Determines whether Amazon Lex obscures slot values in conversation logs.",
 												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-													objectplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// ObfuscationSetting is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: SlotTypeName
 											"slot_type_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "The slot type name that is used in the slot. Allows for custom and built-in slot type names",
-												Optional:    true,
-												Computed:    true,
-												Validators: []validator.String{ /*START VALIDATORS*/
-													fwvalidators.NotNullString(),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												Required:    true,
+												// SlotTypeName is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: ValueElicitationSetting
 											"value_elicitation_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -8230,37 +7165,28 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																		// Property: DefaultValue
 																		"default_value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																			Description: "The default value to use when a user doesn't provide a value for a slot.",
-																			Optional:    true,
-																			Computed:    true,
+																			Required:    true,
 																			Validators: []validator.String{ /*START VALIDATORS*/
 																				stringvalidator.LengthBetween(1, 202),
-																				fwvalidators.NotNullString(),
 																			}, /*END VALIDATORS*/
-																			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																				stringplanmodifier.UseStateForUnknown(),
-																			}, /*END PLAN MODIFIERS*/
+																			// DefaultValue is a write-only property.
 																		}, /*END ATTRIBUTE*/
 																	}, /*END SCHEMA*/
 																}, /*END NESTED OBJECT*/
 																Description: "A list of slot default values",
-																Optional:    true,
-																Computed:    true,
+																Required:    true,
 																Validators: []validator.List{ /*START VALIDATORS*/
 																	listvalidator.SizeAtMost(10),
-																	fwvalidators.NotNullList(),
 																}, /*END VALIDATORS*/
 																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																	generic.Multiset(),
-																	listplanmodifier.UseStateForUnknown(),
 																}, /*END PLAN MODIFIERS*/
+																// DefaultValueList is a write-only property.
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 														Description: "A list of default values for a slot.",
 														Optional:    true,
-														Computed:    true,
-														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-															objectplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
+														// DefaultValueSpecification is a write-only property.
 													}, /*END ATTRIBUTE*/
 													// Property: PromptSpecification
 													"prompt_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -8269,23 +7195,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 															"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
 																Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
 																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-																	boolplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
+																// AllowInterrupt is a write-only property.
 															}, /*END ATTRIBUTE*/
 															// Property: MaxRetries
 															"max_retries": schema.Int64Attribute{ /*START ATTRIBUTE*/
 																Description: "The maximum number of times the bot tries to elicit a resonse from the user using this prompt.",
-																Optional:    true,
-																Computed:    true,
+																Required:    true,
 																Validators: []validator.Int64{ /*START VALIDATORS*/
 																	int64validator.Between(0, 5),
-																	fwvalidators.NotNullInt64(),
 																}, /*END VALIDATORS*/
-																PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-																	int64planmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
+																// MaxRetries is a write-only property.
 															}, /*END ATTRIBUTE*/
 															// Property: MessageGroupsList
 															"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -8300,23 +7219,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The string that is sent to your application.",
-																							Optional:    true,
-																							Computed:    true,
+																							Required:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 1000),
-																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// Value is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message in a custom format defined by the client application.",
 																					Optional:    true,
-																					Computed:    true,
-																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																						objectplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// CustomPayload is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																				// Property: ImageResponseCard
 																				"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -8328,86 +7240,64 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									// Property: Text
 																									"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The text that appears on the button.",
-																										Optional:    true,
-																										Computed:    true,
+																										Required:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 50),
-																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
-																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																											stringplanmodifier.UseStateForUnknown(),
-																										}, /*END PLAN MODIFIERS*/
+																										// Text is a write-only property.
 																									}, /*END ATTRIBUTE*/
 																									// Property: Value
 																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The value returned to Amazon Lex when the user chooses this button.",
-																										Optional:    true,
-																										Computed:    true,
+																										Required:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 50),
-																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
-																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																											stringplanmodifier.UseStateForUnknown(),
-																										}, /*END PLAN MODIFIERS*/
+																										// Value is a write-only property.
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																							}, /*END NESTED OBJECT*/
 																							Description: "A list of buttons that should be displayed on the response card.",
 																							Optional:    true,
-																							Computed:    true,
 																							Validators: []validator.List{ /*START VALIDATORS*/
 																								listvalidator.SizeAtMost(5),
 																							}, /*END VALIDATORS*/
 																							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																								generic.Multiset(),
-																								listplanmodifier.UseStateForUnknown(),
 																							}, /*END PLAN MODIFIERS*/
+																							// Buttons is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																						// Property: ImageUrl
 																						"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The URL of an image to display on the response card.",
 																							Optional:    true,
-																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 250),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// ImageUrl is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																						// Property: Subtitle
 																						"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The subtitle to display on the response card.",
 																							Optional:    true,
-																							Computed:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 250),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// Subtitle is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																						// Property: Title
 																						"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The title to display on the response card.",
-																							Optional:    true,
-																							Computed:    true,
+																							Required:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 250),
-																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// Title is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message that defines a response card that the client application can show to the user.",
 																					Optional:    true,
-																					Computed:    true,
-																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																						objectplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// ImageResponseCard is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																				// Property: PlainTextMessage
 																				"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -8415,23 +7305,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The message to send to the user.",
-																							Optional:    true,
-																							Computed:    true,
+																							Required:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 1000),
-																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// Value is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message in plain text format.",
 																					Optional:    true,
-																					Computed:    true,
-																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																						objectplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// PlainTextMessage is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																				// Property: SSMLMessage
 																				"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -8439,34 +7322,21 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: Value
 																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The SSML text that defines the prompt.",
-																							Optional:    true,
-																							Computed:    true,
+																							Required:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.LengthBetween(1, 1000),
-																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// Value is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "A message in Speech Synthesis Markup Language (SSML).",
 																					Optional:    true,
-																					Computed:    true,
-																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																						objectplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// SSMLMessage is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																			Description: "The primary message that Amazon Lex should send to the user.",
-																			Optional:    true,
-																			Computed:    true,
-																			Validators: []validator.Object{ /*START VALIDATORS*/
-																				fwvalidators.NotNullObject(),
-																			}, /*END VALIDATORS*/
-																			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																				objectplanmodifier.UseStateForUnknown(),
-																			}, /*END PLAN MODIFIERS*/
+																			Required:    true,
+																			// Message is a write-only property.
 																		}, /*END ATTRIBUTE*/
 																		// Property: Variations
 																		"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -8478,23 +7348,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																							// Property: Value
 																							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																								Description: "The string that is sent to your application.",
-																								Optional:    true,
-																								Computed:    true,
+																								Required:    true,
 																								Validators: []validator.String{ /*START VALIDATORS*/
 																									stringvalidator.LengthBetween(1, 1000),
-																									fwvalidators.NotNullString(),
 																								}, /*END VALIDATORS*/
-																								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																									stringplanmodifier.UseStateForUnknown(),
-																								}, /*END PLAN MODIFIERS*/
+																								// Value is a write-only property.
 																							}, /*END ATTRIBUTE*/
 																						}, /*END SCHEMA*/
 																						Description: "A message in a custom format defined by the client application.",
 																						Optional:    true,
-																						Computed:    true,
-																						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																							objectplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
+																						// CustomPayload is a write-only property.
 																					}, /*END ATTRIBUTE*/
 																					// Property: ImageResponseCard
 																					"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -8506,86 +7369,64 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																										// Property: Text
 																										"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																											Description: "The text that appears on the button.",
-																											Optional:    true,
-																											Computed:    true,
+																											Required:    true,
 																											Validators: []validator.String{ /*START VALIDATORS*/
 																												stringvalidator.LengthBetween(1, 50),
-																												fwvalidators.NotNullString(),
 																											}, /*END VALIDATORS*/
-																											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																												stringplanmodifier.UseStateForUnknown(),
-																											}, /*END PLAN MODIFIERS*/
+																											// Text is a write-only property.
 																										}, /*END ATTRIBUTE*/
 																										// Property: Value
 																										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																											Description: "The value returned to Amazon Lex when the user chooses this button.",
-																											Optional:    true,
-																											Computed:    true,
+																											Required:    true,
 																											Validators: []validator.String{ /*START VALIDATORS*/
 																												stringvalidator.LengthBetween(1, 50),
-																												fwvalidators.NotNullString(),
 																											}, /*END VALIDATORS*/
-																											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																												stringplanmodifier.UseStateForUnknown(),
-																											}, /*END PLAN MODIFIERS*/
+																											// Value is a write-only property.
 																										}, /*END ATTRIBUTE*/
 																									}, /*END SCHEMA*/
 																								}, /*END NESTED OBJECT*/
 																								Description: "A list of buttons that should be displayed on the response card.",
 																								Optional:    true,
-																								Computed:    true,
 																								Validators: []validator.List{ /*START VALIDATORS*/
 																									listvalidator.SizeAtMost(5),
 																								}, /*END VALIDATORS*/
 																								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																									generic.Multiset(),
-																									listplanmodifier.UseStateForUnknown(),
 																								}, /*END PLAN MODIFIERS*/
+																								// Buttons is a write-only property.
 																							}, /*END ATTRIBUTE*/
 																							// Property: ImageUrl
 																							"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 																								Description: "The URL of an image to display on the response card.",
 																								Optional:    true,
-																								Computed:    true,
 																								Validators: []validator.String{ /*START VALIDATORS*/
 																									stringvalidator.LengthBetween(1, 250),
 																								}, /*END VALIDATORS*/
-																								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																									stringplanmodifier.UseStateForUnknown(),
-																								}, /*END PLAN MODIFIERS*/
+																								// ImageUrl is a write-only property.
 																							}, /*END ATTRIBUTE*/
 																							// Property: Subtitle
 																							"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
 																								Description: "The subtitle to display on the response card.",
 																								Optional:    true,
-																								Computed:    true,
 																								Validators: []validator.String{ /*START VALIDATORS*/
 																									stringvalidator.LengthBetween(1, 250),
 																								}, /*END VALIDATORS*/
-																								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																									stringplanmodifier.UseStateForUnknown(),
-																								}, /*END PLAN MODIFIERS*/
+																								// Subtitle is a write-only property.
 																							}, /*END ATTRIBUTE*/
 																							// Property: Title
 																							"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																								Description: "The title to display on the response card.",
-																								Optional:    true,
-																								Computed:    true,
+																								Required:    true,
 																								Validators: []validator.String{ /*START VALIDATORS*/
 																									stringvalidator.LengthBetween(1, 250),
-																									fwvalidators.NotNullString(),
 																								}, /*END VALIDATORS*/
-																								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																									stringplanmodifier.UseStateForUnknown(),
-																								}, /*END PLAN MODIFIERS*/
+																								// Title is a write-only property.
 																							}, /*END ATTRIBUTE*/
 																						}, /*END SCHEMA*/
 																						Description: "A message that defines a response card that the client application can show to the user.",
 																						Optional:    true,
-																						Computed:    true,
-																						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																							objectplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
+																						// ImageResponseCard is a write-only property.
 																					}, /*END ATTRIBUTE*/
 																					// Property: PlainTextMessage
 																					"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -8593,23 +7434,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																							// Property: Value
 																							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																								Description: "The message to send to the user.",
-																								Optional:    true,
-																								Computed:    true,
+																								Required:    true,
 																								Validators: []validator.String{ /*START VALIDATORS*/
 																									stringvalidator.LengthBetween(1, 1000),
-																									fwvalidators.NotNullString(),
 																								}, /*END VALIDATORS*/
-																								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																									stringplanmodifier.UseStateForUnknown(),
-																								}, /*END PLAN MODIFIERS*/
+																								// Value is a write-only property.
 																							}, /*END ATTRIBUTE*/
 																						}, /*END SCHEMA*/
 																						Description: "A message in plain text format.",
 																						Optional:    true,
-																						Computed:    true,
-																						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																							objectplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
+																						// PlainTextMessage is a write-only property.
 																					}, /*END ATTRIBUTE*/
 																					// Property: SSMLMessage
 																					"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -8617,65 +7451,52 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																							// Property: Value
 																							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																								Description: "The SSML text that defines the prompt.",
-																								Optional:    true,
-																								Computed:    true,
+																								Required:    true,
 																								Validators: []validator.String{ /*START VALIDATORS*/
 																									stringvalidator.LengthBetween(1, 1000),
-																									fwvalidators.NotNullString(),
 																								}, /*END VALIDATORS*/
-																								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																									stringplanmodifier.UseStateForUnknown(),
-																								}, /*END PLAN MODIFIERS*/
+																								// Value is a write-only property.
 																							}, /*END ATTRIBUTE*/
 																						}, /*END SCHEMA*/
 																						Description: "A message in Speech Synthesis Markup Language (SSML).",
 																						Optional:    true,
-																						Computed:    true,
-																						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																							objectplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
+																						// SSMLMessage is a write-only property.
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																			}, /*END NESTED OBJECT*/
 																			Description: "Message variations to send to the user.",
 																			Optional:    true,
-																			Computed:    true,
 																			Validators: []validator.List{ /*START VALIDATORS*/
 																				listvalidator.SizeAtMost(2),
 																			}, /*END VALIDATORS*/
 																			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																				generic.Multiset(),
-																				listplanmodifier.UseStateForUnknown(),
 																			}, /*END PLAN MODIFIERS*/
+																			// Variations is a write-only property.
 																		}, /*END ATTRIBUTE*/
 																	}, /*END SCHEMA*/
 																}, /*END NESTED OBJECT*/
 																Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-																Optional:    true,
-																Computed:    true,
+																Required:    true,
 																Validators: []validator.List{ /*START VALIDATORS*/
 																	listvalidator.SizeBetween(1, 5),
-																	fwvalidators.NotNullList(),
 																}, /*END VALIDATORS*/
 																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																	generic.Multiset(),
-																	listplanmodifier.UseStateForUnknown(),
 																}, /*END PLAN MODIFIERS*/
+																// MessageGroupsList is a write-only property.
 															}, /*END ATTRIBUTE*/
 															// Property: MessageSelectionStrategy
 															"message_selection_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
 																Description: "Indicates how a message is selected from a message group among retries.",
 																Optional:    true,
-																Computed:    true,
 																Validators: []validator.String{ /*START VALIDATORS*/
 																	stringvalidator.OneOf(
 																		"Random",
 																		"Ordered",
 																	),
 																}, /*END VALIDATORS*/
-																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																	stringplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
+																// MessageSelectionStrategy is a write-only property.
 															}, /*END ATTRIBUTE*/
 															// Property: PromptAttemptsSpecification
 															"prompt_attempts_specification": // Pattern: ""
@@ -8686,10 +7507,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																		"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
 																			Description: "Indicates whether the user can interrupt a speech prompt attempt from the bot.",
 																			Optional:    true,
-																			Computed:    true,
-																			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-																				boolplanmodifier.UseStateForUnknown(),
-																			}, /*END PLAN MODIFIERS*/
+																			// AllowInterrupt is a write-only property.
 																		}, /*END ATTRIBUTE*/
 																		// Property: AllowedInputTypes
 																		"allowed_input_types": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -8697,34 +7515,19 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																				// Property: AllowAudioInput
 																				"allow_audio_input": schema.BoolAttribute{ /*START ATTRIBUTE*/
 																					Description: "Indicates whether audio input is allowed.",
-																					Optional:    true,
-																					Computed:    true,
-																					Validators: []validator.Bool{ /*START VALIDATORS*/
-																						fwvalidators.NotNullBool(),
-																					}, /*END VALIDATORS*/
-																					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-																						boolplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					Required:    true,
+																					// AllowAudioInput is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																				// Property: AllowDTMFInput
 																				"allow_dtmf_input": schema.BoolAttribute{ /*START ATTRIBUTE*/
 																					Description: "Indicates whether DTMF input is allowed.",
-																					Optional:    true,
-																					Computed:    true,
-																					Validators: []validator.Bool{ /*START VALIDATORS*/
-																						fwvalidators.NotNullBool(),
-																					}, /*END VALIDATORS*/
-																					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-																						boolplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					Required:    true,
+																					// AllowDTMFInput is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																			Description: "Specifies the allowed input types.",
 																			Optional:    true,
-																			Computed:    true,
-																			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																				objectplanmodifier.UseStateForUnknown(),
-																			}, /*END PLAN MODIFIERS*/
+																			// AllowedInputTypes is a write-only property.
 																		}, /*END ATTRIBUTE*/
 																		// Property: AudioAndDTMFInputSpecification
 																		"audio_and_dtmf_input_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -8735,36 +7538,25 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: EndTimeoutMs
 																						"end_timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
 																							Description: "Time for which a bot waits after the customer stops speaking to assume the utterance is finished.",
-																							Optional:    true,
-																							Computed:    true,
+																							Required:    true,
 																							Validators: []validator.Int64{ /*START VALIDATORS*/
 																								int64validator.AtLeast(1),
-																								fwvalidators.NotNullInt64(),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-																								int64planmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// EndTimeoutMs is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																						// Property: MaxLengthMs
 																						"max_length_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
 																							Description: "Time for how long Amazon Lex waits before speech input is truncated and the speech is returned to application.",
-																							Optional:    true,
-																							Computed:    true,
+																							Required:    true,
 																							Validators: []validator.Int64{ /*START VALIDATORS*/
 																								int64validator.AtLeast(1),
-																								fwvalidators.NotNullInt64(),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-																								int64planmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// MaxLengthMs is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "Specifies the audio input specifications.",
 																					Optional:    true,
-																					Computed:    true,
-																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																						objectplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// AudioSpecification is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																				// Property: DTMFSpecification
 																				"dtmf_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -8772,83 +7564,57 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						// Property: DeletionCharacter
 																						"deletion_character": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The DTMF character that clears the accumulated DTMF digits and immediately ends the input.",
-																							Optional:    true,
-																							Computed:    true,
+																							Required:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.RegexMatches(regexp.MustCompile("^[A-D0-9#*]{1}$"), ""),
-																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// DeletionCharacter is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																						// Property: EndCharacter
 																						"end_character": schema.StringAttribute{ /*START ATTRIBUTE*/
 																							Description: "The DTMF character that immediately ends input. If the user does not press this character, the input ends after the end timeout.",
-																							Optional:    true,
-																							Computed:    true,
+																							Required:    true,
 																							Validators: []validator.String{ /*START VALIDATORS*/
 																								stringvalidator.RegexMatches(regexp.MustCompile("^[A-D0-9#*]{1}$"), ""),
-																								fwvalidators.NotNullString(),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																								stringplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// EndCharacter is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																						// Property: EndTimeoutMs
 																						"end_timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
 																							Description: "How long the bot should wait after the last DTMF character input before assuming that the input has concluded.",
-																							Optional:    true,
-																							Computed:    true,
+																							Required:    true,
 																							Validators: []validator.Int64{ /*START VALIDATORS*/
 																								int64validator.AtLeast(1),
-																								fwvalidators.NotNullInt64(),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-																								int64planmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// EndTimeoutMs is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																						// Property: MaxLength
 																						"max_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
 																							Description: "The maximum number of DTMF digits allowed in an utterance.",
-																							Optional:    true,
-																							Computed:    true,
+																							Required:    true,
 																							Validators: []validator.Int64{ /*START VALIDATORS*/
 																								int64validator.Between(1, 1024),
-																								fwvalidators.NotNullInt64(),
 																							}, /*END VALIDATORS*/
-																							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-																								int64planmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// MaxLength is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "Specifies the settings on DTMF input.",
 																					Optional:    true,
-																					Computed:    true,
-																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																						objectplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// DTMFSpecification is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																				// Property: StartTimeoutMs
 																				"start_timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
 																					Description: "Time for which a bot waits before assuming that the customer isn't going to speak or press a key. This timeout is shared between Audio and DTMF inputs.",
-																					Optional:    true,
-																					Computed:    true,
+																					Required:    true,
 																					Validators: []validator.Int64{ /*START VALIDATORS*/
 																						int64validator.AtLeast(1),
-																						fwvalidators.NotNullInt64(),
 																					}, /*END VALIDATORS*/
-																					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-																						int64planmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// StartTimeoutMs is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																			Description: "Specifies the audio and DTMF input specification.",
 																			Optional:    true,
-																			Computed:    true,
-																			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																				objectplanmodifier.UseStateForUnknown(),
-																			}, /*END PLAN MODIFIERS*/
+																			// AudioAndDTMFInputSpecification is a write-only property.
 																		}, /*END ATTRIBUTE*/
 																		// Property: TextInputSpecification
 																		"text_input_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -8856,40 +7622,27 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																				// Property: StartTimeoutMs
 																				"start_timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
 																					Description: "Time for which a bot waits before re-prompting a customer for text input.",
-																					Optional:    true,
-																					Computed:    true,
+																					Required:    true,
 																					Validators: []validator.Int64{ /*START VALIDATORS*/
 																						int64validator.AtLeast(1),
-																						fwvalidators.NotNullInt64(),
 																					}, /*END VALIDATORS*/
-																					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-																						int64planmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					// StartTimeoutMs is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																			Description: "Specifies the text input specifications.",
 																			Optional:    true,
-																			Computed:    true,
-																			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																				objectplanmodifier.UseStateForUnknown(),
-																			}, /*END PLAN MODIFIERS*/
+																			// TextInputSpecification is a write-only property.
 																		}, /*END ATTRIBUTE*/
 																	}, /*END SCHEMA*/
 																}, /*END NESTED OBJECT*/
 																Description: "Specifies the advanced settings on each attempt of the prompt.",
 																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-																	mapplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
+																// PromptAttemptsSpecification is a write-only property.
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 														Description: "The prompt that Amazon Lex uses to elicit the slot value from the user.",
 														Optional:    true,
-														Computed:    true,
-														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-															objectplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
+														// PromptSpecification is a write-only property.
 													}, /*END ATTRIBUTE*/
 													// Property: SampleUtterances
 													"sample_utterances": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -8898,40 +7651,29 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																// Property: Utterance
 																"utterance": schema.StringAttribute{ /*START ATTRIBUTE*/
 																	Description: "The sample utterance that Amazon Lex uses to build its machine-learning model to recognize intents/slots.",
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.String{ /*START VALIDATORS*/
-																		fwvalidators.NotNullString(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																		stringplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
+																	Required:    true,
+																	// Utterance is a write-only property.
 																}, /*END ATTRIBUTE*/
 															}, /*END SCHEMA*/
 														}, /*END NESTED OBJECT*/
 														Description: "If you know a specific pattern that users might respond to an Amazon Lex request for a slot value, you can provide those utterances to improve accuracy.",
 														Optional:    true,
-														Computed:    true,
 														PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 															generic.Multiset(),
-															listplanmodifier.UseStateForUnknown(),
 														}, /*END PLAN MODIFIERS*/
+														// SampleUtterances is a write-only property.
 													}, /*END ATTRIBUTE*/
 													// Property: SlotConstraint
 													"slot_constraint": schema.StringAttribute{ /*START ATTRIBUTE*/
 														Description: "Specifies whether the slot is required or optional.",
-														Optional:    true,
-														Computed:    true,
+														Required:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
 															stringvalidator.OneOf(
 																"Required",
 																"Optional",
 															),
-															fwvalidators.NotNullString(),
 														}, /*END VALIDATORS*/
-														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-															stringplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
+														// SlotConstraint is a write-only property.
 													}, /*END ATTRIBUTE*/
 													// Property: WaitAndContinueSpecification
 													"wait_and_continue_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -8943,10 +7685,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																	"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
 																		Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
 																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-																			boolplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
+																		// AllowInterrupt is a write-only property.
 																	}, /*END ATTRIBUTE*/
 																	// Property: MessageGroupsList
 																	"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -8961,23 +7700,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								// Property: Value
 																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The string that is sent to your application.",
-																									Optional:    true,
-																									Computed:    true,
+																									Required:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 1000),
-																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
-																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																										stringplanmodifier.UseStateForUnknown(),
-																									}, /*END PLAN MODIFIERS*/
+																									// Value is a write-only property.
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																							Description: "A message in a custom format defined by the client application.",
 																							Optional:    true,
-																							Computed:    true,
-																							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																								objectplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// CustomPayload is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																						// Property: ImageResponseCard
 																						"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -8989,86 +7721,64 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																											// Property: Text
 																											"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																												Description: "The text that appears on the button.",
-																												Optional:    true,
-																												Computed:    true,
+																												Required:    true,
 																												Validators: []validator.String{ /*START VALIDATORS*/
 																													stringvalidator.LengthBetween(1, 50),
-																													fwvalidators.NotNullString(),
 																												}, /*END VALIDATORS*/
-																												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																													stringplanmodifier.UseStateForUnknown(),
-																												}, /*END PLAN MODIFIERS*/
+																												// Text is a write-only property.
 																											}, /*END ATTRIBUTE*/
 																											// Property: Value
 																											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																												Description: "The value returned to Amazon Lex when the user chooses this button.",
-																												Optional:    true,
-																												Computed:    true,
+																												Required:    true,
 																												Validators: []validator.String{ /*START VALIDATORS*/
 																													stringvalidator.LengthBetween(1, 50),
-																													fwvalidators.NotNullString(),
 																												}, /*END VALIDATORS*/
-																												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																													stringplanmodifier.UseStateForUnknown(),
-																												}, /*END PLAN MODIFIERS*/
+																												// Value is a write-only property.
 																											}, /*END ATTRIBUTE*/
 																										}, /*END SCHEMA*/
 																									}, /*END NESTED OBJECT*/
 																									Description: "A list of buttons that should be displayed on the response card.",
 																									Optional:    true,
-																									Computed:    true,
 																									Validators: []validator.List{ /*START VALIDATORS*/
 																										listvalidator.SizeAtMost(5),
 																									}, /*END VALIDATORS*/
 																									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																										generic.Multiset(),
-																										listplanmodifier.UseStateForUnknown(),
 																									}, /*END PLAN MODIFIERS*/
+																									// Buttons is a write-only property.
 																								}, /*END ATTRIBUTE*/
 																								// Property: ImageUrl
 																								"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The URL of an image to display on the response card.",
 																									Optional:    true,
-																									Computed:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 250),
 																									}, /*END VALIDATORS*/
-																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																										stringplanmodifier.UseStateForUnknown(),
-																									}, /*END PLAN MODIFIERS*/
+																									// ImageUrl is a write-only property.
 																								}, /*END ATTRIBUTE*/
 																								// Property: Subtitle
 																								"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The subtitle to display on the response card.",
 																									Optional:    true,
-																									Computed:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 250),
 																									}, /*END VALIDATORS*/
-																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																										stringplanmodifier.UseStateForUnknown(),
-																									}, /*END PLAN MODIFIERS*/
+																									// Subtitle is a write-only property.
 																								}, /*END ATTRIBUTE*/
 																								// Property: Title
 																								"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The title to display on the response card.",
-																									Optional:    true,
-																									Computed:    true,
+																									Required:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 250),
-																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
-																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																										stringplanmodifier.UseStateForUnknown(),
-																									}, /*END PLAN MODIFIERS*/
+																									// Title is a write-only property.
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																							Description: "A message that defines a response card that the client application can show to the user.",
 																							Optional:    true,
-																							Computed:    true,
-																							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																								objectplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// ImageResponseCard is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																						// Property: PlainTextMessage
 																						"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -9076,23 +7786,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								// Property: Value
 																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The message to send to the user.",
-																									Optional:    true,
-																									Computed:    true,
+																									Required:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 1000),
-																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
-																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																										stringplanmodifier.UseStateForUnknown(),
-																									}, /*END PLAN MODIFIERS*/
+																									// Value is a write-only property.
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																							Description: "A message in plain text format.",
 																							Optional:    true,
-																							Computed:    true,
-																							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																								objectplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// PlainTextMessage is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																						// Property: SSMLMessage
 																						"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -9100,34 +7803,21 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								// Property: Value
 																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The SSML text that defines the prompt.",
-																									Optional:    true,
-																									Computed:    true,
+																									Required:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 1000),
-																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
-																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																										stringplanmodifier.UseStateForUnknown(),
-																									}, /*END PLAN MODIFIERS*/
+																									// Value is a write-only property.
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																							Description: "A message in Speech Synthesis Markup Language (SSML).",
 																							Optional:    true,
-																							Computed:    true,
-																							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																								objectplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// SSMLMessage is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "The primary message that Amazon Lex should send to the user.",
-																					Optional:    true,
-																					Computed:    true,
-																					Validators: []validator.Object{ /*START VALIDATORS*/
-																						fwvalidators.NotNullObject(),
-																					}, /*END VALIDATORS*/
-																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																						objectplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					Required:    true,
+																					// Message is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																				// Property: Variations
 																				"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -9139,23 +7829,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									// Property: Value
 																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The string that is sent to your application.",
-																										Optional:    true,
-																										Computed:    true,
+																										Required:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 1000),
-																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
-																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																											stringplanmodifier.UseStateForUnknown(),
-																										}, /*END PLAN MODIFIERS*/
+																										// Value is a write-only property.
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																								Description: "A message in a custom format defined by the client application.",
 																								Optional:    true,
-																								Computed:    true,
-																								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																									objectplanmodifier.UseStateForUnknown(),
-																								}, /*END PLAN MODIFIERS*/
+																								// CustomPayload is a write-only property.
 																							}, /*END ATTRIBUTE*/
 																							// Property: ImageResponseCard
 																							"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -9167,86 +7850,64 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																												// Property: Text
 																												"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																													Description: "The text that appears on the button.",
-																													Optional:    true,
-																													Computed:    true,
+																													Required:    true,
 																													Validators: []validator.String{ /*START VALIDATORS*/
 																														stringvalidator.LengthBetween(1, 50),
-																														fwvalidators.NotNullString(),
 																													}, /*END VALIDATORS*/
-																													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																														stringplanmodifier.UseStateForUnknown(),
-																													}, /*END PLAN MODIFIERS*/
+																													// Text is a write-only property.
 																												}, /*END ATTRIBUTE*/
 																												// Property: Value
 																												"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																													Description: "The value returned to Amazon Lex when the user chooses this button.",
-																													Optional:    true,
-																													Computed:    true,
+																													Required:    true,
 																													Validators: []validator.String{ /*START VALIDATORS*/
 																														stringvalidator.LengthBetween(1, 50),
-																														fwvalidators.NotNullString(),
 																													}, /*END VALIDATORS*/
-																													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																														stringplanmodifier.UseStateForUnknown(),
-																													}, /*END PLAN MODIFIERS*/
+																													// Value is a write-only property.
 																												}, /*END ATTRIBUTE*/
 																											}, /*END SCHEMA*/
 																										}, /*END NESTED OBJECT*/
 																										Description: "A list of buttons that should be displayed on the response card.",
 																										Optional:    true,
-																										Computed:    true,
 																										Validators: []validator.List{ /*START VALIDATORS*/
 																											listvalidator.SizeAtMost(5),
 																										}, /*END VALIDATORS*/
 																										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																											generic.Multiset(),
-																											listplanmodifier.UseStateForUnknown(),
 																										}, /*END PLAN MODIFIERS*/
+																										// Buttons is a write-only property.
 																									}, /*END ATTRIBUTE*/
 																									// Property: ImageUrl
 																									"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The URL of an image to display on the response card.",
 																										Optional:    true,
-																										Computed:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 250),
 																										}, /*END VALIDATORS*/
-																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																											stringplanmodifier.UseStateForUnknown(),
-																										}, /*END PLAN MODIFIERS*/
+																										// ImageUrl is a write-only property.
 																									}, /*END ATTRIBUTE*/
 																									// Property: Subtitle
 																									"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The subtitle to display on the response card.",
 																										Optional:    true,
-																										Computed:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 250),
 																										}, /*END VALIDATORS*/
-																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																											stringplanmodifier.UseStateForUnknown(),
-																										}, /*END PLAN MODIFIERS*/
+																										// Subtitle is a write-only property.
 																									}, /*END ATTRIBUTE*/
 																									// Property: Title
 																									"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The title to display on the response card.",
-																										Optional:    true,
-																										Computed:    true,
+																										Required:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 250),
-																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
-																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																											stringplanmodifier.UseStateForUnknown(),
-																										}, /*END PLAN MODIFIERS*/
+																										// Title is a write-only property.
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																								Description: "A message that defines a response card that the client application can show to the user.",
 																								Optional:    true,
-																								Computed:    true,
-																								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																									objectplanmodifier.UseStateForUnknown(),
-																								}, /*END PLAN MODIFIERS*/
+																								// ImageResponseCard is a write-only property.
 																							}, /*END ATTRIBUTE*/
 																							// Property: PlainTextMessage
 																							"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -9254,23 +7915,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									// Property: Value
 																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The message to send to the user.",
-																										Optional:    true,
-																										Computed:    true,
+																										Required:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 1000),
-																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
-																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																											stringplanmodifier.UseStateForUnknown(),
-																										}, /*END PLAN MODIFIERS*/
+																										// Value is a write-only property.
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																								Description: "A message in plain text format.",
 																								Optional:    true,
-																								Computed:    true,
-																								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																									objectplanmodifier.UseStateForUnknown(),
-																								}, /*END PLAN MODIFIERS*/
+																								// PlainTextMessage is a write-only property.
 																							}, /*END ATTRIBUTE*/
 																							// Property: SSMLMessage
 																							"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -9278,70 +7932,51 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									// Property: Value
 																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The SSML text that defines the prompt.",
-																										Optional:    true,
-																										Computed:    true,
+																										Required:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 1000),
-																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
-																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																											stringplanmodifier.UseStateForUnknown(),
-																										}, /*END PLAN MODIFIERS*/
+																										// Value is a write-only property.
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																								Description: "A message in Speech Synthesis Markup Language (SSML).",
 																								Optional:    true,
-																								Computed:    true,
-																								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																									objectplanmodifier.UseStateForUnknown(),
-																								}, /*END PLAN MODIFIERS*/
+																								// SSMLMessage is a write-only property.
 																							}, /*END ATTRIBUTE*/
 																						}, /*END SCHEMA*/
 																					}, /*END NESTED OBJECT*/
 																					Description: "Message variations to send to the user.",
 																					Optional:    true,
-																					Computed:    true,
 																					Validators: []validator.List{ /*START VALIDATORS*/
 																						listvalidator.SizeAtMost(2),
 																					}, /*END VALIDATORS*/
 																					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																						generic.Multiset(),
-																						listplanmodifier.UseStateForUnknown(),
 																					}, /*END PLAN MODIFIERS*/
+																					// Variations is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																		}, /*END NESTED OBJECT*/
 																		Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-																		Optional:    true,
-																		Computed:    true,
+																		Required:    true,
 																		Validators: []validator.List{ /*START VALIDATORS*/
 																			listvalidator.SizeBetween(1, 5),
-																			fwvalidators.NotNullList(),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																			generic.Multiset(),
-																			listplanmodifier.UseStateForUnknown(),
 																		}, /*END PLAN MODIFIERS*/
+																		// MessageGroupsList is a write-only property.
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "The response that Amazon Lex sends to indicate that the bot is ready to continue the conversation.",
-																Optional:    true,
-																Computed:    true,
-																Validators: []validator.Object{ /*START VALIDATORS*/
-																	fwvalidators.NotNullObject(),
-																}, /*END VALIDATORS*/
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
+																Required:    true,
+																// ContinueResponse is a write-only property.
 															}, /*END ATTRIBUTE*/
 															// Property: IsActive
 															"is_active": schema.BoolAttribute{ /*START ATTRIBUTE*/
 																Description: "Specifies whether the bot will wait for a user to respond.",
 																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-																	boolplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
+																// IsActive is a write-only property.
 															}, /*END ATTRIBUTE*/
 															// Property: StillWaitingResponse
 															"still_waiting_response": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -9350,23 +7985,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																	"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
 																		Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
 																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-																			boolplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
+																		// AllowInterrupt is a write-only property.
 																	}, /*END ATTRIBUTE*/
 																	// Property: FrequencyInSeconds
 																	"frequency_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
 																		Description: "How often a message should be sent to the user in seconds.",
-																		Optional:    true,
-																		Computed:    true,
+																		Required:    true,
 																		Validators: []validator.Int64{ /*START VALIDATORS*/
 																			int64validator.Between(1, 300),
-																			fwvalidators.NotNullInt64(),
 																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-																			int64planmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
+																		// FrequencyInSeconds is a write-only property.
 																	}, /*END ATTRIBUTE*/
 																	// Property: MessageGroupsList
 																	"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -9381,23 +8009,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								// Property: Value
 																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The string that is sent to your application.",
-																									Optional:    true,
-																									Computed:    true,
+																									Required:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 1000),
-																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
-																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																										stringplanmodifier.UseStateForUnknown(),
-																									}, /*END PLAN MODIFIERS*/
+																									// Value is a write-only property.
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																							Description: "A message in a custom format defined by the client application.",
 																							Optional:    true,
-																							Computed:    true,
-																							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																								objectplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// CustomPayload is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																						// Property: ImageResponseCard
 																						"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -9409,86 +8030,64 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																											// Property: Text
 																											"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																												Description: "The text that appears on the button.",
-																												Optional:    true,
-																												Computed:    true,
+																												Required:    true,
 																												Validators: []validator.String{ /*START VALIDATORS*/
 																													stringvalidator.LengthBetween(1, 50),
-																													fwvalidators.NotNullString(),
 																												}, /*END VALIDATORS*/
-																												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																													stringplanmodifier.UseStateForUnknown(),
-																												}, /*END PLAN MODIFIERS*/
+																												// Text is a write-only property.
 																											}, /*END ATTRIBUTE*/
 																											// Property: Value
 																											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																												Description: "The value returned to Amazon Lex when the user chooses this button.",
-																												Optional:    true,
-																												Computed:    true,
+																												Required:    true,
 																												Validators: []validator.String{ /*START VALIDATORS*/
 																													stringvalidator.LengthBetween(1, 50),
-																													fwvalidators.NotNullString(),
 																												}, /*END VALIDATORS*/
-																												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																													stringplanmodifier.UseStateForUnknown(),
-																												}, /*END PLAN MODIFIERS*/
+																												// Value is a write-only property.
 																											}, /*END ATTRIBUTE*/
 																										}, /*END SCHEMA*/
 																									}, /*END NESTED OBJECT*/
 																									Description: "A list of buttons that should be displayed on the response card.",
 																									Optional:    true,
-																									Computed:    true,
 																									Validators: []validator.List{ /*START VALIDATORS*/
 																										listvalidator.SizeAtMost(5),
 																									}, /*END VALIDATORS*/
 																									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																										generic.Multiset(),
-																										listplanmodifier.UseStateForUnknown(),
 																									}, /*END PLAN MODIFIERS*/
+																									// Buttons is a write-only property.
 																								}, /*END ATTRIBUTE*/
 																								// Property: ImageUrl
 																								"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The URL of an image to display on the response card.",
 																									Optional:    true,
-																									Computed:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 250),
 																									}, /*END VALIDATORS*/
-																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																										stringplanmodifier.UseStateForUnknown(),
-																									}, /*END PLAN MODIFIERS*/
+																									// ImageUrl is a write-only property.
 																								}, /*END ATTRIBUTE*/
 																								// Property: Subtitle
 																								"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The subtitle to display on the response card.",
 																									Optional:    true,
-																									Computed:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 250),
 																									}, /*END VALIDATORS*/
-																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																										stringplanmodifier.UseStateForUnknown(),
-																									}, /*END PLAN MODIFIERS*/
+																									// Subtitle is a write-only property.
 																								}, /*END ATTRIBUTE*/
 																								// Property: Title
 																								"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The title to display on the response card.",
-																									Optional:    true,
-																									Computed:    true,
+																									Required:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 250),
-																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
-																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																										stringplanmodifier.UseStateForUnknown(),
-																									}, /*END PLAN MODIFIERS*/
+																									// Title is a write-only property.
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																							Description: "A message that defines a response card that the client application can show to the user.",
 																							Optional:    true,
-																							Computed:    true,
-																							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																								objectplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// ImageResponseCard is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																						// Property: PlainTextMessage
 																						"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -9496,23 +8095,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								// Property: Value
 																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The message to send to the user.",
-																									Optional:    true,
-																									Computed:    true,
+																									Required:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 1000),
-																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
-																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																										stringplanmodifier.UseStateForUnknown(),
-																									}, /*END PLAN MODIFIERS*/
+																									// Value is a write-only property.
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																							Description: "A message in plain text format.",
 																							Optional:    true,
-																							Computed:    true,
-																							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																								objectplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// PlainTextMessage is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																						// Property: SSMLMessage
 																						"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -9520,34 +8112,21 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								// Property: Value
 																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The SSML text that defines the prompt.",
-																									Optional:    true,
-																									Computed:    true,
+																									Required:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 1000),
-																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
-																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																										stringplanmodifier.UseStateForUnknown(),
-																									}, /*END PLAN MODIFIERS*/
+																									// Value is a write-only property.
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																							Description: "A message in Speech Synthesis Markup Language (SSML).",
 																							Optional:    true,
-																							Computed:    true,
-																							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																								objectplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// SSMLMessage is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "The primary message that Amazon Lex should send to the user.",
-																					Optional:    true,
-																					Computed:    true,
-																					Validators: []validator.Object{ /*START VALIDATORS*/
-																						fwvalidators.NotNullObject(),
-																					}, /*END VALIDATORS*/
-																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																						objectplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					Required:    true,
+																					// Message is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																				// Property: Variations
 																				"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -9559,23 +8138,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									// Property: Value
 																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The string that is sent to your application.",
-																										Optional:    true,
-																										Computed:    true,
+																										Required:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 1000),
-																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
-																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																											stringplanmodifier.UseStateForUnknown(),
-																										}, /*END PLAN MODIFIERS*/
+																										// Value is a write-only property.
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																								Description: "A message in a custom format defined by the client application.",
 																								Optional:    true,
-																								Computed:    true,
-																								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																									objectplanmodifier.UseStateForUnknown(),
-																								}, /*END PLAN MODIFIERS*/
+																								// CustomPayload is a write-only property.
 																							}, /*END ATTRIBUTE*/
 																							// Property: ImageResponseCard
 																							"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -9587,86 +8159,64 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																												// Property: Text
 																												"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																													Description: "The text that appears on the button.",
-																													Optional:    true,
-																													Computed:    true,
+																													Required:    true,
 																													Validators: []validator.String{ /*START VALIDATORS*/
 																														stringvalidator.LengthBetween(1, 50),
-																														fwvalidators.NotNullString(),
 																													}, /*END VALIDATORS*/
-																													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																														stringplanmodifier.UseStateForUnknown(),
-																													}, /*END PLAN MODIFIERS*/
+																													// Text is a write-only property.
 																												}, /*END ATTRIBUTE*/
 																												// Property: Value
 																												"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																													Description: "The value returned to Amazon Lex when the user chooses this button.",
-																													Optional:    true,
-																													Computed:    true,
+																													Required:    true,
 																													Validators: []validator.String{ /*START VALIDATORS*/
 																														stringvalidator.LengthBetween(1, 50),
-																														fwvalidators.NotNullString(),
 																													}, /*END VALIDATORS*/
-																													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																														stringplanmodifier.UseStateForUnknown(),
-																													}, /*END PLAN MODIFIERS*/
+																													// Value is a write-only property.
 																												}, /*END ATTRIBUTE*/
 																											}, /*END SCHEMA*/
 																										}, /*END NESTED OBJECT*/
 																										Description: "A list of buttons that should be displayed on the response card.",
 																										Optional:    true,
-																										Computed:    true,
 																										Validators: []validator.List{ /*START VALIDATORS*/
 																											listvalidator.SizeAtMost(5),
 																										}, /*END VALIDATORS*/
 																										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																											generic.Multiset(),
-																											listplanmodifier.UseStateForUnknown(),
 																										}, /*END PLAN MODIFIERS*/
+																										// Buttons is a write-only property.
 																									}, /*END ATTRIBUTE*/
 																									// Property: ImageUrl
 																									"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The URL of an image to display on the response card.",
 																										Optional:    true,
-																										Computed:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 250),
 																										}, /*END VALIDATORS*/
-																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																											stringplanmodifier.UseStateForUnknown(),
-																										}, /*END PLAN MODIFIERS*/
+																										// ImageUrl is a write-only property.
 																									}, /*END ATTRIBUTE*/
 																									// Property: Subtitle
 																									"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The subtitle to display on the response card.",
 																										Optional:    true,
-																										Computed:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 250),
 																										}, /*END VALIDATORS*/
-																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																											stringplanmodifier.UseStateForUnknown(),
-																										}, /*END PLAN MODIFIERS*/
+																										// Subtitle is a write-only property.
 																									}, /*END ATTRIBUTE*/
 																									// Property: Title
 																									"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The title to display on the response card.",
-																										Optional:    true,
-																										Computed:    true,
+																										Required:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 250),
-																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
-																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																											stringplanmodifier.UseStateForUnknown(),
-																										}, /*END PLAN MODIFIERS*/
+																										// Title is a write-only property.
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																								Description: "A message that defines a response card that the client application can show to the user.",
 																								Optional:    true,
-																								Computed:    true,
-																								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																									objectplanmodifier.UseStateForUnknown(),
-																								}, /*END PLAN MODIFIERS*/
+																								// ImageResponseCard is a write-only property.
 																							}, /*END ATTRIBUTE*/
 																							// Property: PlainTextMessage
 																							"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -9674,23 +8224,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									// Property: Value
 																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The message to send to the user.",
-																										Optional:    true,
-																										Computed:    true,
+																										Required:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 1000),
-																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
-																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																											stringplanmodifier.UseStateForUnknown(),
-																										}, /*END PLAN MODIFIERS*/
+																										// Value is a write-only property.
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																								Description: "A message in plain text format.",
 																								Optional:    true,
-																								Computed:    true,
-																								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																									objectplanmodifier.UseStateForUnknown(),
-																								}, /*END PLAN MODIFIERS*/
+																								// PlainTextMessage is a write-only property.
 																							}, /*END ATTRIBUTE*/
 																							// Property: SSMLMessage
 																							"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -9698,71 +8241,54 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									// Property: Value
 																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The SSML text that defines the prompt.",
-																										Optional:    true,
-																										Computed:    true,
+																										Required:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 1000),
-																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
-																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																											stringplanmodifier.UseStateForUnknown(),
-																										}, /*END PLAN MODIFIERS*/
+																										// Value is a write-only property.
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																								Description: "A message in Speech Synthesis Markup Language (SSML).",
 																								Optional:    true,
-																								Computed:    true,
-																								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																									objectplanmodifier.UseStateForUnknown(),
-																								}, /*END PLAN MODIFIERS*/
+																								// SSMLMessage is a write-only property.
 																							}, /*END ATTRIBUTE*/
 																						}, /*END SCHEMA*/
 																					}, /*END NESTED OBJECT*/
 																					Description: "Message variations to send to the user.",
 																					Optional:    true,
-																					Computed:    true,
 																					Validators: []validator.List{ /*START VALIDATORS*/
 																						listvalidator.SizeAtMost(2),
 																					}, /*END VALIDATORS*/
 																					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																						generic.Multiset(),
-																						listplanmodifier.UseStateForUnknown(),
 																					}, /*END PLAN MODIFIERS*/
+																					// Variations is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																		}, /*END NESTED OBJECT*/
 																		Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-																		Optional:    true,
-																		Computed:    true,
+																		Required:    true,
 																		Validators: []validator.List{ /*START VALIDATORS*/
 																			listvalidator.SizeBetween(1, 5),
-																			fwvalidators.NotNullList(),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																			generic.Multiset(),
-																			listplanmodifier.UseStateForUnknown(),
 																		}, /*END PLAN MODIFIERS*/
+																		// MessageGroupsList is a write-only property.
 																	}, /*END ATTRIBUTE*/
 																	// Property: TimeoutInSeconds
 																	"timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
 																		Description: "If Amazon Lex waits longer than this length of time in seconds for a response, it will stop sending messages.",
-																		Optional:    true,
-																		Computed:    true,
+																		Required:    true,
 																		Validators: []validator.Int64{ /*START VALIDATORS*/
 																			int64validator.Between(1, 900),
-																			fwvalidators.NotNullInt64(),
 																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-																			int64planmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
+																		// TimeoutInSeconds is a write-only property.
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "The response that Amazon Lex sends periodically to the user to indicate that the bot is still waiting for input from the user.",
 																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
+																// StillWaitingResponse is a write-only property.
 															}, /*END ATTRIBUTE*/
 															// Property: WaitingResponse
 															"waiting_response": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -9771,10 +8297,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																	"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
 																		Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
 																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-																			boolplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
+																		// AllowInterrupt is a write-only property.
 																	}, /*END ATTRIBUTE*/
 																	// Property: MessageGroupsList
 																	"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -9789,23 +8312,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								// Property: Value
 																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The string that is sent to your application.",
-																									Optional:    true,
-																									Computed:    true,
+																									Required:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 1000),
-																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
-																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																										stringplanmodifier.UseStateForUnknown(),
-																									}, /*END PLAN MODIFIERS*/
+																									// Value is a write-only property.
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																							Description: "A message in a custom format defined by the client application.",
 																							Optional:    true,
-																							Computed:    true,
-																							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																								objectplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// CustomPayload is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																						// Property: ImageResponseCard
 																						"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -9817,86 +8333,64 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																											// Property: Text
 																											"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																												Description: "The text that appears on the button.",
-																												Optional:    true,
-																												Computed:    true,
+																												Required:    true,
 																												Validators: []validator.String{ /*START VALIDATORS*/
 																													stringvalidator.LengthBetween(1, 50),
-																													fwvalidators.NotNullString(),
 																												}, /*END VALIDATORS*/
-																												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																													stringplanmodifier.UseStateForUnknown(),
-																												}, /*END PLAN MODIFIERS*/
+																												// Text is a write-only property.
 																											}, /*END ATTRIBUTE*/
 																											// Property: Value
 																											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																												Description: "The value returned to Amazon Lex when the user chooses this button.",
-																												Optional:    true,
-																												Computed:    true,
+																												Required:    true,
 																												Validators: []validator.String{ /*START VALIDATORS*/
 																													stringvalidator.LengthBetween(1, 50),
-																													fwvalidators.NotNullString(),
 																												}, /*END VALIDATORS*/
-																												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																													stringplanmodifier.UseStateForUnknown(),
-																												}, /*END PLAN MODIFIERS*/
+																												// Value is a write-only property.
 																											}, /*END ATTRIBUTE*/
 																										}, /*END SCHEMA*/
 																									}, /*END NESTED OBJECT*/
 																									Description: "A list of buttons that should be displayed on the response card.",
 																									Optional:    true,
-																									Computed:    true,
 																									Validators: []validator.List{ /*START VALIDATORS*/
 																										listvalidator.SizeAtMost(5),
 																									}, /*END VALIDATORS*/
 																									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																										generic.Multiset(),
-																										listplanmodifier.UseStateForUnknown(),
 																									}, /*END PLAN MODIFIERS*/
+																									// Buttons is a write-only property.
 																								}, /*END ATTRIBUTE*/
 																								// Property: ImageUrl
 																								"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The URL of an image to display on the response card.",
 																									Optional:    true,
-																									Computed:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 250),
 																									}, /*END VALIDATORS*/
-																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																										stringplanmodifier.UseStateForUnknown(),
-																									}, /*END PLAN MODIFIERS*/
+																									// ImageUrl is a write-only property.
 																								}, /*END ATTRIBUTE*/
 																								// Property: Subtitle
 																								"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The subtitle to display on the response card.",
 																									Optional:    true,
-																									Computed:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 250),
 																									}, /*END VALIDATORS*/
-																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																										stringplanmodifier.UseStateForUnknown(),
-																									}, /*END PLAN MODIFIERS*/
+																									// Subtitle is a write-only property.
 																								}, /*END ATTRIBUTE*/
 																								// Property: Title
 																								"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The title to display on the response card.",
-																									Optional:    true,
-																									Computed:    true,
+																									Required:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 250),
-																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
-																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																										stringplanmodifier.UseStateForUnknown(),
-																									}, /*END PLAN MODIFIERS*/
+																									// Title is a write-only property.
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																							Description: "A message that defines a response card that the client application can show to the user.",
 																							Optional:    true,
-																							Computed:    true,
-																							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																								objectplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// ImageResponseCard is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																						// Property: PlainTextMessage
 																						"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -9904,23 +8398,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								// Property: Value
 																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The message to send to the user.",
-																									Optional:    true,
-																									Computed:    true,
+																									Required:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 1000),
-																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
-																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																										stringplanmodifier.UseStateForUnknown(),
-																									}, /*END PLAN MODIFIERS*/
+																									// Value is a write-only property.
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																							Description: "A message in plain text format.",
 																							Optional:    true,
-																							Computed:    true,
-																							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																								objectplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// PlainTextMessage is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																						// Property: SSMLMessage
 																						"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -9928,34 +8415,21 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								// Property: Value
 																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																									Description: "The SSML text that defines the prompt.",
-																									Optional:    true,
-																									Computed:    true,
+																									Required:    true,
 																									Validators: []validator.String{ /*START VALIDATORS*/
 																										stringvalidator.LengthBetween(1, 1000),
-																										fwvalidators.NotNullString(),
 																									}, /*END VALIDATORS*/
-																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																										stringplanmodifier.UseStateForUnknown(),
-																									}, /*END PLAN MODIFIERS*/
+																									// Value is a write-only property.
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																							Description: "A message in Speech Synthesis Markup Language (SSML).",
 																							Optional:    true,
-																							Computed:    true,
-																							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																								objectplanmodifier.UseStateForUnknown(),
-																							}, /*END PLAN MODIFIERS*/
+																							// SSMLMessage is a write-only property.
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																					Description: "The primary message that Amazon Lex should send to the user.",
-																					Optional:    true,
-																					Computed:    true,
-																					Validators: []validator.Object{ /*START VALIDATORS*/
-																						fwvalidators.NotNullObject(),
-																					}, /*END VALIDATORS*/
-																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																						objectplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
+																					Required:    true,
+																					// Message is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																				// Property: Variations
 																				"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -9967,23 +8441,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									// Property: Value
 																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The string that is sent to your application.",
-																										Optional:    true,
-																										Computed:    true,
+																										Required:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 1000),
-																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
-																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																											stringplanmodifier.UseStateForUnknown(),
-																										}, /*END PLAN MODIFIERS*/
+																										// Value is a write-only property.
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																								Description: "A message in a custom format defined by the client application.",
 																								Optional:    true,
-																								Computed:    true,
-																								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																									objectplanmodifier.UseStateForUnknown(),
-																								}, /*END PLAN MODIFIERS*/
+																								// CustomPayload is a write-only property.
 																							}, /*END ATTRIBUTE*/
 																							// Property: ImageResponseCard
 																							"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -9995,86 +8462,64 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																												// Property: Text
 																												"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																													Description: "The text that appears on the button.",
-																													Optional:    true,
-																													Computed:    true,
+																													Required:    true,
 																													Validators: []validator.String{ /*START VALIDATORS*/
 																														stringvalidator.LengthBetween(1, 50),
-																														fwvalidators.NotNullString(),
 																													}, /*END VALIDATORS*/
-																													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																														stringplanmodifier.UseStateForUnknown(),
-																													}, /*END PLAN MODIFIERS*/
+																													// Text is a write-only property.
 																												}, /*END ATTRIBUTE*/
 																												// Property: Value
 																												"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																													Description: "The value returned to Amazon Lex when the user chooses this button.",
-																													Optional:    true,
-																													Computed:    true,
+																													Required:    true,
 																													Validators: []validator.String{ /*START VALIDATORS*/
 																														stringvalidator.LengthBetween(1, 50),
-																														fwvalidators.NotNullString(),
 																													}, /*END VALIDATORS*/
-																													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																														stringplanmodifier.UseStateForUnknown(),
-																													}, /*END PLAN MODIFIERS*/
+																													// Value is a write-only property.
 																												}, /*END ATTRIBUTE*/
 																											}, /*END SCHEMA*/
 																										}, /*END NESTED OBJECT*/
 																										Description: "A list of buttons that should be displayed on the response card.",
 																										Optional:    true,
-																										Computed:    true,
 																										Validators: []validator.List{ /*START VALIDATORS*/
 																											listvalidator.SizeAtMost(5),
 																										}, /*END VALIDATORS*/
 																										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																											generic.Multiset(),
-																											listplanmodifier.UseStateForUnknown(),
 																										}, /*END PLAN MODIFIERS*/
+																										// Buttons is a write-only property.
 																									}, /*END ATTRIBUTE*/
 																									// Property: ImageUrl
 																									"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The URL of an image to display on the response card.",
 																										Optional:    true,
-																										Computed:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 250),
 																										}, /*END VALIDATORS*/
-																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																											stringplanmodifier.UseStateForUnknown(),
-																										}, /*END PLAN MODIFIERS*/
+																										// ImageUrl is a write-only property.
 																									}, /*END ATTRIBUTE*/
 																									// Property: Subtitle
 																									"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The subtitle to display on the response card.",
 																										Optional:    true,
-																										Computed:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 250),
 																										}, /*END VALIDATORS*/
-																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																											stringplanmodifier.UseStateForUnknown(),
-																										}, /*END PLAN MODIFIERS*/
+																										// Subtitle is a write-only property.
 																									}, /*END ATTRIBUTE*/
 																									// Property: Title
 																									"title": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The title to display on the response card.",
-																										Optional:    true,
-																										Computed:    true,
+																										Required:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 250),
-																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
-																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																											stringplanmodifier.UseStateForUnknown(),
-																										}, /*END PLAN MODIFIERS*/
+																										// Title is a write-only property.
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																								Description: "A message that defines a response card that the client application can show to the user.",
 																								Optional:    true,
-																								Computed:    true,
-																								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																									objectplanmodifier.UseStateForUnknown(),
-																								}, /*END PLAN MODIFIERS*/
+																								// ImageResponseCard is a write-only property.
 																							}, /*END ATTRIBUTE*/
 																							// Property: PlainTextMessage
 																							"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -10082,23 +8527,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									// Property: Value
 																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The message to send to the user.",
-																										Optional:    true,
-																										Computed:    true,
+																										Required:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 1000),
-																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
-																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																											stringplanmodifier.UseStateForUnknown(),
-																										}, /*END PLAN MODIFIERS*/
+																										// Value is a write-only property.
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																								Description: "A message in plain text format.",
 																								Optional:    true,
-																								Computed:    true,
-																								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																									objectplanmodifier.UseStateForUnknown(),
-																								}, /*END PLAN MODIFIERS*/
+																								// PlainTextMessage is a write-only property.
 																							}, /*END ATTRIBUTE*/
 																							// Property: SSMLMessage
 																							"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -10106,129 +8544,88 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									// Property: Value
 																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 																										Description: "The SSML text that defines the prompt.",
-																										Optional:    true,
-																										Computed:    true,
+																										Required:    true,
 																										Validators: []validator.String{ /*START VALIDATORS*/
 																											stringvalidator.LengthBetween(1, 1000),
-																											fwvalidators.NotNullString(),
 																										}, /*END VALIDATORS*/
-																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																											stringplanmodifier.UseStateForUnknown(),
-																										}, /*END PLAN MODIFIERS*/
+																										// Value is a write-only property.
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																								Description: "A message in Speech Synthesis Markup Language (SSML).",
 																								Optional:    true,
-																								Computed:    true,
-																								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																									objectplanmodifier.UseStateForUnknown(),
-																								}, /*END PLAN MODIFIERS*/
+																								// SSMLMessage is a write-only property.
 																							}, /*END ATTRIBUTE*/
 																						}, /*END SCHEMA*/
 																					}, /*END NESTED OBJECT*/
 																					Description: "Message variations to send to the user.",
 																					Optional:    true,
-																					Computed:    true,
 																					Validators: []validator.List{ /*START VALIDATORS*/
 																						listvalidator.SizeAtMost(2),
 																					}, /*END VALIDATORS*/
 																					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																						generic.Multiset(),
-																						listplanmodifier.UseStateForUnknown(),
 																					}, /*END PLAN MODIFIERS*/
+																					// Variations is a write-only property.
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																		}, /*END NESTED OBJECT*/
 																		Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-																		Optional:    true,
-																		Computed:    true,
+																		Required:    true,
 																		Validators: []validator.List{ /*START VALIDATORS*/
 																			listvalidator.SizeBetween(1, 5),
-																			fwvalidators.NotNullList(),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 																			generic.Multiset(),
-																			listplanmodifier.UseStateForUnknown(),
 																		}, /*END PLAN MODIFIERS*/
+																		// MessageGroupsList is a write-only property.
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "The response that Amazon Lex sends to indicate that the bot is waiting for the conversation to continue.",
-																Optional:    true,
-																Computed:    true,
-																Validators: []validator.Object{ /*START VALIDATORS*/
-																	fwvalidators.NotNullObject(),
-																}, /*END VALIDATORS*/
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
+																Required:    true,
+																// WaitingResponse is a write-only property.
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 														Description: "Specifies the prompts that Amazon Lex uses while a bot is waiting for customer input.",
 														Optional:    true,
-														Computed:    true,
-														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-															objectplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
+														// WaitAndContinueSpecification is a write-only property.
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
 												Description: "Settings that you can use for eliciting a slot value.",
-												Optional:    true,
-												Computed:    true,
-												Validators: []validator.Object{ /*START VALIDATORS*/
-													fwvalidators.NotNullObject(),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-													objectplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												Required:    true,
+												// ValueElicitationSetting is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
 									Description: "List of slots",
 									Optional:    true,
-									Computed:    true,
 									Validators: []validator.Set{ /*START VALIDATORS*/
 										setvalidator.SizeAtMost(100),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-										setplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// Slots is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
 						Description: "List of intents",
 						Optional:    true,
-						Computed:    true,
 						Validators: []validator.Set{ /*START VALIDATORS*/
 							setvalidator.SizeAtMost(1000),
 						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-							setplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// Intents is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: LocaleId
 					"locale_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The identifier of the language and locale that the bot will be used in.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						Required:    true,
+						// LocaleId is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: NluConfidenceThreshold
 					"nlu_confidence_threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
 						Description: "The specified confidence threshold for inserting the AMAZON.FallbackIntent and AMAZON.KendraSearchIntent intents.",
-						Optional:    true,
-						Computed:    true,
+						Required:    true,
 						Validators: []validator.Float64{ /*START VALIDATORS*/
 							float64validator.Between(0.000000, 1.000000),
-							fwvalidators.NotNullFloat64(),
 						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-							float64planmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// NluConfidenceThreshold is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: SlotTypes
 					"slot_types": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
@@ -10238,13 +8635,10 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 								"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "A description of the resource",
 									Optional:    true,
-									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(200),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// Description is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: ExternalSourceSetting
 								"external_source_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -10259,89 +8653,62 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 														"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Description: "The Amazon KMS key required to decrypt the contents of the grammar, if any.",
 															Optional:    true,
-															Computed:    true,
 															Validators: []validator.String{ /*START VALIDATORS*/
 																stringvalidator.LengthBetween(20, 2048),
 																stringvalidator.RegexMatches(regexp.MustCompile("^arn:[\\w\\-]+:kms:[\\w\\-]+:[\\d]{12}:(?:key\\/[\\w\\-]+|alias\\/[a-zA-Z0-9:\\/_\\-]{1,256})$"), ""),
 															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
+															// KmsKeyArn is a write-only property.
 														}, /*END ATTRIBUTE*/
 														// Property: S3BucketName
 														"s3_bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Description: "The name of the S3 bucket that contains the grammar source.",
-															Optional:    true,
-															Computed:    true,
+															Required:    true,
 															Validators: []validator.String{ /*START VALIDATORS*/
 																stringvalidator.LengthBetween(3, 63),
 																stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"), ""),
-																fwvalidators.NotNullString(),
 															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
+															// S3BucketName is a write-only property.
 														}, /*END ATTRIBUTE*/
 														// Property: S3ObjectKey
 														"s3_object_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Description: "The path to the grammar in the S3 bucket.",
-															Optional:    true,
-															Computed:    true,
+															Required:    true,
 															Validators: []validator.String{ /*START VALIDATORS*/
 																stringvalidator.LengthBetween(1, 1024),
 																stringvalidator.RegexMatches(regexp.MustCompile("[\\.\\-\\!\\*\\_\\'\\(\\)a-zA-Z0-9][\\.\\-\\!\\*\\_\\'\\(\\)\\/a-zA-Z0-9]*$"), ""),
-																fwvalidators.NotNullString(),
 															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
+															// S3ObjectKey is a write-only property.
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 													Description: "Describes the Amazon S3 bucket name and location for the grammar that is the source for the slot type.",
 													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-														objectplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// Source is a write-only property.
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 											Description: "Settings required for a slot type based on a grammar that you provide.",
 											Optional:    true,
-											Computed:    true,
-											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-												objectplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// GrammarSlotTypeSetting is a write-only property.
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "Provides information about the external source of the slot type's definition.",
 									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// ExternalSourceSetting is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: Name
 								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "Unique name for a resource.",
-									Optional:    true,
-									Computed:    true,
+									Required:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 100),
 										stringvalidator.RegexMatches(regexp.MustCompile("^([0-9a-zA-Z][_-]?)+$"), ""),
-										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// Name is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: ParentSlotTypeSignature
 								"parent_slot_type_signature": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The built-in slot type used as a parent of this slot type.",
 									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// ParentSlotTypeSignature is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: SlotTypeValues
 								"slot_type_values": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -10353,26 +8720,16 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 													// Property: Value
 													"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 														Description: "The value that can be used for a slot type.",
-														Optional:    true,
-														Computed:    true,
+														Required:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
 															stringvalidator.LengthBetween(1, 140),
-															fwvalidators.NotNullString(),
 														}, /*END VALIDATORS*/
-														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-															stringplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
+														// Value is a write-only property.
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
 												Description: "Defines one of the values for a slot type.",
-												Optional:    true,
-												Computed:    true,
-												Validators: []validator.Object{ /*START VALIDATORS*/
-													fwvalidators.NotNullObject(),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-													objectplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												Required:    true,
+												// SampleValue is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Synonyms
 											"synonyms": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -10381,41 +8738,35 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 														// Property: Value
 														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Description: "The value that can be used for a slot type.",
-															Optional:    true,
-															Computed:    true,
+															Required:    true,
 															Validators: []validator.String{ /*START VALIDATORS*/
 																stringvalidator.LengthBetween(1, 140),
-																fwvalidators.NotNullString(),
 															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
+															// Value is a write-only property.
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 												}, /*END NESTED OBJECT*/
 												Description: "Additional values related to the slot type entry.",
 												Optional:    true,
-												Computed:    true,
 												Validators: []validator.List{ /*START VALIDATORS*/
 													listvalidator.SizeAtMost(10000),
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 													generic.Multiset(),
-													listplanmodifier.UseStateForUnknown(),
 												}, /*END PLAN MODIFIERS*/
+												// Synonyms is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
 									Description: "A List of slot type values",
 									Optional:    true,
-									Computed:    true,
 									Validators: []validator.List{ /*START VALIDATORS*/
 										listvalidator.SizeAtMost(10000),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 										generic.Multiset(),
-										listplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
+									// SlotTypeValues is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: ValueSelectionSetting
 								"value_selection_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -10427,23 +8778,17 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 												"audio_recognition_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "Enables using slot values as a custom vocabulary when recognizing user utterances.",
 													Optional:    true,
-													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.OneOf(
 															"UseSlotValuesAsCustomVocabulary",
 														),
 													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// AudioRecognitionStrategy is a write-only property.
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 											Description: "Provides settings that enable advanced recognition settings for slot values.",
 											Optional:    true,
-											Computed:    true,
-											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-												objectplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// AdvancedRecognitionSetting is a write-only property.
 										}, /*END ATTRIBUTE*/
 										// Property: RegexFilter
 										"regex_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -10451,58 +8796,41 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 												// Property: Pattern
 												"pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "Regex pattern",
-													Optional:    true,
-													Computed:    true,
+													Required:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(1, 300),
-														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// Pattern is a write-only property.
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 											Description: "A regular expression used to validate the value of a slot.",
 											Optional:    true,
-											Computed:    true,
-											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-												objectplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// RegexFilter is a write-only property.
 										}, /*END ATTRIBUTE*/
 										// Property: ResolutionStrategy
 										"resolution_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
+											Required: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.OneOf(
 													"ORIGINAL_VALUE",
 													"TOP_RESOLUTION",
 												),
-												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// ResolutionStrategy is a write-only property.
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "Contains settings used by Amazon Lex to select a slot value.",
 									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// ValueSelectionSetting is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
 						Description: "List of SlotTypes",
 						Optional:    true,
-						Computed:    true,
 						Validators: []validator.Set{ /*START VALIDATORS*/
 							setvalidator.SizeAtMost(250),
 						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-							setplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// SlotTypes is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: VoiceSettings
 					"voice_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -10511,45 +8839,29 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 							"engine": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Indicates the type of Amazon Polly voice that Amazon Lex should use for voice interaction with the user. For more information, see the engine parameter of the SynthesizeSpeech operation in the Amazon Polly developer guide.",
 								Optional:    true,
-								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"standard",
 										"neural",
 									),
 								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// Engine is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: VoiceId
 							"voice_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the user.",
-								Optional:    true,
-								Computed:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									fwvalidators.NotNullString(),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								Required:    true,
+								// VoiceId is a write-only property.
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "Settings for using an Amazon Polly voice to communicate with a user.",
 						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-							objectplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// VoiceSettings is a write-only property.
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "List of bot locales",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// BotLocales is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: BotTags
@@ -10591,40 +8903,28 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Optional:    true,
-						Computed:    true,
+						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
-							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// Key is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Optional:    true,
-						Computed:    true,
+						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
-							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// Value is a write-only property.
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "A list of tags to add to the bot, which can only be added at bot creation.",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.Set{ /*START VALIDATORS*/
 				setvalidator.SizeAtMost(200),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// BotTags is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: DataPrivacy
@@ -11345,40 +9645,28 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Optional:    true,
-						Computed:    true,
+						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
-							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// Key is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Optional:    true,
-						Computed:    true,
+						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
-							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// Value is a write-only property.
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "A list of tags to add to the test alias for a bot, , which can only be added at bot/bot alias creation.",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.Set{ /*START VALIDATORS*/
 				setvalidator.SizeAtMost(200),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// TestBotAliasTags is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

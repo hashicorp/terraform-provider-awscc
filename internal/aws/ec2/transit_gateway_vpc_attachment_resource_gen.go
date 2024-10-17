@@ -43,10 +43,8 @@ func transitGatewayVpcAttachmentResource(ctx context.Context) (resource.Resource
 		"add_subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
 			Optional:    true,
-			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 			// AddSubnetIds is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -148,10 +146,8 @@ func transitGatewayVpcAttachmentResource(ctx context.Context) (resource.Resource
 		"remove_subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
 			Optional:    true,
-			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 			// RemoveSubnetIds is a write-only property.
 		}, /*END ATTRIBUTE*/

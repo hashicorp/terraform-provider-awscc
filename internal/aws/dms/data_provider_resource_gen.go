@@ -76,13 +76,9 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 		"data_provider_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The property describes an identifier for the data provider. It is used for describing/deleting/modifying can be name/arn",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 255),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// DataProviderIdentifier is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: DataProviderName

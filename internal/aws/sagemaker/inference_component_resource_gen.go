@@ -200,13 +200,9 @@ func inferenceComponentResource(ctx context.Context) (resource.Resource, error) 
 				"copy_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
 					Description: "The number of copies for the inference component",
 					Optional:    true,
-					Computed:    true,
 					Validators: []validator.Int64{ /*START VALIDATORS*/
 						int64validator.AtLeast(0),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-						int64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 					// CopyCount is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: CurrentCopyCount
@@ -447,14 +443,10 @@ func inferenceComponentResource(ctx context.Context) (resource.Resource, error) 
 						"image": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The image to use for the container that will be materialized for the inference component",
 							Optional:    true,
-							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthAtMost(255),
 								stringvalidator.RegexMatches(regexp.MustCompile("[\\S]+"), ""),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
 							// Image is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/

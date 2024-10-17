@@ -157,53 +157,33 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Namespace
 					"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "A unique namespace that identifies the option's associated AWS resource.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						Required:    true,
+						// Namespace is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: OptionName
 					"option_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The name of the configuration option.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						Required:    true,
+						// OptionName is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: ResourceName
 					"resource_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "A unique resource name for the option setting. Use it for a time–based scaling configuration option.",
 						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// ResourceName is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The current value for the configuration option.",
 						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// Value is a write-only property.
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "Key-value pairs defining configuration options for this environment, such as the instance type.",
 			Optional:    true,
-			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 			// OptionSettings is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -312,10 +292,6 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		"template_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the Elastic Beanstalk configuration template to use with the environment.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// TemplateName is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Tier

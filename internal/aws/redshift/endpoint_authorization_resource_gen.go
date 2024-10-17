@@ -156,10 +156,6 @@ func endpointAuthorizationResource(ctx context.Context) (resource.Resource, erro
 		"force": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: " Indicates whether to force the revoke action. If true, the Redshift-managed VPC endpoints associated with the endpoint authorization are also deleted.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// Force is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Grantee

@@ -103,14 +103,10 @@ func deliverySourceResource(ctx context.Context) (resource.Resource, error) {
 		"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ARN of the resource that will be sending the logs.",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(16, 2048),
 				stringvalidator.RegexMatches(regexp.MustCompile("[\\w#+=/:,.@-]*\\*?"), ""),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// ResourceArn is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: ResourceArns

@@ -12,7 +12,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -286,7 +285,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 							Default:  booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 								boolplanmodifier.UseStateForUnknown(),
+								boolplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
+							// CRLSign is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: DataEncipherment
 						"data_encipherment": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -295,7 +296,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 							Default:  booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 								boolplanmodifier.UseStateForUnknown(),
+								boolplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
+							// DataEncipherment is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: DecipherOnly
 						"decipher_only": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -304,7 +307,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 							Default:  booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 								boolplanmodifier.UseStateForUnknown(),
+								boolplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
+							// DecipherOnly is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: DigitalSignature
 						"digital_signature": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -313,7 +318,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 							Default:  booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 								boolplanmodifier.UseStateForUnknown(),
+								boolplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
+							// DigitalSignature is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: EncipherOnly
 						"encipher_only": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -322,7 +329,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 							Default:  booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 								boolplanmodifier.UseStateForUnknown(),
+								boolplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
+							// EncipherOnly is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: KeyAgreement
 						"key_agreement": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -331,7 +340,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 							Default:  booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 								boolplanmodifier.UseStateForUnknown(),
+								boolplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
+							// KeyAgreement is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: KeyCertSign
 						"key_cert_sign": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -340,7 +351,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 							Default:  booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 								boolplanmodifier.UseStateForUnknown(),
+								boolplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
+							// KeyCertSign is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: KeyEncipherment
 						"key_encipherment": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -349,7 +362,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 							Default:  booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 								boolplanmodifier.UseStateForUnknown(),
+								boolplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
+							// KeyEncipherment is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: NonRepudiation
 						"non_repudiation": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -358,7 +373,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 							Default:  booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 								boolplanmodifier.UseStateForUnknown(),
+								boolplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
+							// NonRepudiation is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Structure that contains X.509 KeyUsage information.",
@@ -366,7 +383,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
+						objectplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// KeyUsage is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: SubjectInformationAccess
 				"subject_information_access": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -384,7 +403,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 												Computed: true,
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 													stringplanmodifier.UseStateForUnknown(),
+													stringplanmodifier.RequiresReplaceIfConfigured(),
 												}, /*END PLAN MODIFIERS*/
+												// CommonName is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Country
 											"country": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -392,7 +413,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 												Computed: true,
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 													stringplanmodifier.UseStateForUnknown(),
+													stringplanmodifier.RequiresReplaceIfConfigured(),
 												}, /*END PLAN MODIFIERS*/
+												// Country is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: CustomAttributes
 											"custom_attributes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -408,7 +431,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 															}, /*END VALIDATORS*/
 															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 																stringplanmodifier.UseStateForUnknown(),
+																stringplanmodifier.RequiresReplaceIfConfigured(),
 															}, /*END PLAN MODIFIERS*/
+															// ObjectIdentifier is a write-only property.
 														}, /*END ATTRIBUTE*/
 														// Property: Value
 														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -419,7 +444,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 															}, /*END VALIDATORS*/
 															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 																stringplanmodifier.UseStateForUnknown(),
+																stringplanmodifier.RequiresReplaceIfConfigured(),
 															}, /*END PLAN MODIFIERS*/
+															// Value is a write-only property.
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 												}, /*END NESTED OBJECT*/
@@ -428,7 +455,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 												Computed:    true,
 												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 													listplanmodifier.UseStateForUnknown(),
+													listplanmodifier.RequiresReplaceIfConfigured(),
 												}, /*END PLAN MODIFIERS*/
+												// CustomAttributes is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: DistinguishedNameQualifier
 											"distinguished_name_qualifier": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -436,7 +465,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 												Computed: true,
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 													stringplanmodifier.UseStateForUnknown(),
+													stringplanmodifier.RequiresReplaceIfConfigured(),
 												}, /*END PLAN MODIFIERS*/
+												// DistinguishedNameQualifier is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: GenerationQualifier
 											"generation_qualifier": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -444,7 +475,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 												Computed: true,
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 													stringplanmodifier.UseStateForUnknown(),
+													stringplanmodifier.RequiresReplaceIfConfigured(),
 												}, /*END PLAN MODIFIERS*/
+												// GenerationQualifier is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: GivenName
 											"given_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -452,7 +485,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 												Computed: true,
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 													stringplanmodifier.UseStateForUnknown(),
+													stringplanmodifier.RequiresReplaceIfConfigured(),
 												}, /*END PLAN MODIFIERS*/
+												// GivenName is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Initials
 											"initials": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -460,7 +495,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 												Computed: true,
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 													stringplanmodifier.UseStateForUnknown(),
+													stringplanmodifier.RequiresReplaceIfConfigured(),
 												}, /*END PLAN MODIFIERS*/
+												// Initials is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Locality
 											"locality": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -468,7 +505,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 												Computed: true,
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 													stringplanmodifier.UseStateForUnknown(),
+													stringplanmodifier.RequiresReplaceIfConfigured(),
 												}, /*END PLAN MODIFIERS*/
+												// Locality is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Organization
 											"organization": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -476,7 +515,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 												Computed: true,
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 													stringplanmodifier.UseStateForUnknown(),
+													stringplanmodifier.RequiresReplaceIfConfigured(),
 												}, /*END PLAN MODIFIERS*/
+												// Organization is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: OrganizationalUnit
 											"organizational_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -484,7 +525,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 												Computed: true,
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 													stringplanmodifier.UseStateForUnknown(),
+													stringplanmodifier.RequiresReplaceIfConfigured(),
 												}, /*END PLAN MODIFIERS*/
+												// OrganizationalUnit is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Pseudonym
 											"pseudonym": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -492,7 +535,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 												Computed: true,
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 													stringplanmodifier.UseStateForUnknown(),
+													stringplanmodifier.RequiresReplaceIfConfigured(),
 												}, /*END PLAN MODIFIERS*/
+												// Pseudonym is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: SerialNumber
 											"serial_number": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -500,7 +545,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 												Computed: true,
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 													stringplanmodifier.UseStateForUnknown(),
+													stringplanmodifier.RequiresReplaceIfConfigured(),
 												}, /*END PLAN MODIFIERS*/
+												// SerialNumber is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: State
 											"state": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -508,7 +555,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 												Computed: true,
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 													stringplanmodifier.UseStateForUnknown(),
+													stringplanmodifier.RequiresReplaceIfConfigured(),
 												}, /*END PLAN MODIFIERS*/
+												// State is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Surname
 											"surname": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -516,7 +565,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 												Computed: true,
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 													stringplanmodifier.UseStateForUnknown(),
+													stringplanmodifier.RequiresReplaceIfConfigured(),
 												}, /*END PLAN MODIFIERS*/
+												// Surname is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Title
 											"title": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -524,7 +575,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 												Computed: true,
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 													stringplanmodifier.UseStateForUnknown(),
+													stringplanmodifier.RequiresReplaceIfConfigured(),
 												}, /*END PLAN MODIFIERS*/
+												// Title is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "Structure that contains X.500 distinguished name information for your CA.",
@@ -532,7 +585,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 										Computed:    true,
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 											objectplanmodifier.UseStateForUnknown(),
+											objectplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// DirectoryName is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: DnsName
 									"dns_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -541,7 +596,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 										Computed:    true,
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
+											stringplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// DnsName is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: EdiPartyName
 									"edi_party_name": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -552,7 +609,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 												Computed: true,
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 													stringplanmodifier.UseStateForUnknown(),
+													stringplanmodifier.RequiresReplaceIfConfigured(),
 												}, /*END PLAN MODIFIERS*/
+												// NameAssigner is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: PartyName
 											"party_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -563,7 +622,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 													stringplanmodifier.UseStateForUnknown(),
+													stringplanmodifier.RequiresReplaceIfConfigured(),
 												}, /*END PLAN MODIFIERS*/
+												// PartyName is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "Structure that contains X.509 EdiPartyName information.",
@@ -571,7 +632,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 										Computed:    true,
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 											objectplanmodifier.UseStateForUnknown(),
+											objectplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// EdiPartyName is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: IpAddress
 									"ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -580,7 +643,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 										Computed:    true,
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
+											stringplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// IpAddress is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: OtherName
 									"other_name": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -595,7 +660,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 													stringplanmodifier.UseStateForUnknown(),
+													stringplanmodifier.RequiresReplaceIfConfigured(),
 												}, /*END PLAN MODIFIERS*/
+												// TypeId is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Value
 											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -606,7 +673,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 													stringplanmodifier.UseStateForUnknown(),
+													stringplanmodifier.RequiresReplaceIfConfigured(),
 												}, /*END PLAN MODIFIERS*/
+												// Value is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "Structure that contains X.509 OtherName information.",
@@ -614,7 +683,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 										Computed:    true,
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 											objectplanmodifier.UseStateForUnknown(),
+											objectplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// OtherName is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: RegisteredId
 									"registered_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -623,7 +694,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 										Computed:    true,
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
+											stringplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// RegisteredId is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: Rfc822Name
 									"rfc_822_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -632,7 +705,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 										Computed:    true,
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
+											stringplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// Rfc822Name is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: UniformResourceIdentifier
 									"uniform_resource_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -641,7 +716,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 										Computed:    true,
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
+											stringplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// UniformResourceIdentifier is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Description: "Structure that contains X.509 GeneralName information. Assign one and ONLY one field.",
@@ -652,7 +729,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 									objectplanmodifier.UseStateForUnknown(),
+									objectplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
+								// AccessLocation is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: AccessMethod
 							"access_method": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -664,7 +743,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 										Computed:    true,
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
+											stringplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// AccessMethodType is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: CustomObjectIdentifier
 									"custom_object_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -673,7 +754,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 										Computed:    true,
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
+											stringplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
+										// CustomObjectIdentifier is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Description: "Structure that contains X.509 AccessMethod information. Assign one and ONLY one field.",
@@ -684,7 +767,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 									objectplanmodifier.UseStateForUnknown(),
+									objectplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
+								// AccessMethod is a write-only property.
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -693,7 +778,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 					Computed:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						listplanmodifier.UseStateForUnknown(),
+						listplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// SubjectInformationAccess is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Structure that contains CSR pass through extension information used by the CreateCertificateAuthority action.",
@@ -810,111 +897,65 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: OmitExtension
 								"omit_extension": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									Validators: []validator.Bool{ /*START VALIDATORS*/
-										fwvalidators.NotNullBool(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									Required: true,
+									// OmitExtension is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "Configures the default behavior of the CRL Distribution Point extension for certificates issued by your certificate authority",
 							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// CrlDistributionPointExtensionConfiguration is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: CustomCname
 						"custom_cname": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// CustomCname is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: Enabled
 						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.Bool{ /*START VALIDATORS*/
-								fwvalidators.NotNullBool(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								boolplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							Required: true,
+							// Enabled is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: ExpirationInDays
 						"expiration_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								int64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// ExpirationInDays is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: S3BucketName
 						"s3_bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// S3BucketName is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: S3ObjectAcl
 						"s3_object_acl": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// S3ObjectAcl is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Your certificate authority can create and maintain a certificate revocation list (CRL). A CRL contains information about certificates that have been revoked.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// CrlConfiguration is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: OcspConfiguration
 				"ocsp_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Enabled
 						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.Bool{ /*START VALIDATORS*/
-								fwvalidators.NotNullBool(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								boolplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							Required: true,
+							// Enabled is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: OcspCustomCname
 						"ocsp_custom_cname": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// OcspCustomCname is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Helps to configure online certificate status protocol (OCSP) responder for your certificate authority",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// OcspConfiguration is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Certificate revocation information used by the CreateCertificateAuthority and UpdateCertificateAuthority actions.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// RevocationConfiguration is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: SigningAlgorithm
@@ -1013,7 +1054,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// CommonName is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: Country
 				"country": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1021,7 +1064,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// Country is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: CustomAttributes
 				"custom_attributes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1037,7 +1082,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+									stringplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
+								// ObjectIdentifier is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1048,7 +1095,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+									stringplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
+								// Value is a write-only property.
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -1057,7 +1106,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 					Computed:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						listplanmodifier.UseStateForUnknown(),
+						listplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// CustomAttributes is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: DistinguishedNameQualifier
 				"distinguished_name_qualifier": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1065,7 +1116,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// DistinguishedNameQualifier is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: GenerationQualifier
 				"generation_qualifier": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1073,7 +1126,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// GenerationQualifier is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: GivenName
 				"given_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1081,7 +1136,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// GivenName is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: Initials
 				"initials": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1089,7 +1146,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// Initials is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: Locality
 				"locality": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1097,7 +1156,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// Locality is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: Organization
 				"organization": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1105,7 +1166,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// Organization is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: OrganizationalUnit
 				"organizational_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1113,7 +1176,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// OrganizationalUnit is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: Pseudonym
 				"pseudonym": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1121,7 +1186,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// Pseudonym is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: SerialNumber
 				"serial_number": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1129,7 +1196,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// SerialNumber is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: State
 				"state": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1137,7 +1206,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// State is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: Surname
 				"surname": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1145,7 +1216,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// Surname is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: Title
 				"title": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1153,7 +1226,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// Title is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Structure that contains X.500 distinguished name information for your CA.",
@@ -1189,30 +1264,17 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						Required: true,
+						// Key is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Optional: true,
-						Computed: true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// Value is a write-only property.
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// Tags is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Type

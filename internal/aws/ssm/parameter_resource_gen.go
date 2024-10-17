@@ -11,7 +11,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -38,10 +37,6 @@ func parameterResource(ctx context.Context) (resource.Resource, error) {
 		"allowed_pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A regular expression used to validate the parameter value. For example, for ``String`` types with values restricted to numbers, you can specify the following: ``AllowedPattern=^\\d+$``",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// AllowedPattern is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: DataType
@@ -79,10 +74,6 @@ func parameterResource(ctx context.Context) (resource.Resource, error) {
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Information about the parameter.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// Description is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Name
@@ -111,10 +102,6 @@ func parameterResource(ctx context.Context) (resource.Resource, error) {
 		"policies": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Information about the policies assigned to a parameter.\n  [Assigning parameter policies](https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-policies.html) in the *User Guide*.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// Policies is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -135,10 +122,6 @@ func parameterResource(ctx context.Context) (resource.Resource, error) {
 			ElementType: types.StringType,
 			Description: "Optional metadata that you assign to a resource in the form of an arbitrary set of tags (key-value pairs). Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag a SYS parameter to identify the type of resource to which it applies, the environment, or the type of configuration data referenced by the parameter.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-				mapplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// Tags is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Tier
@@ -156,7 +139,6 @@ func parameterResource(ctx context.Context) (resource.Resource, error) {
 		"tier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The parameter tier.",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"Standard",
@@ -164,9 +146,6 @@ func parameterResource(ctx context.Context) (resource.Resource, error) {
 					"Intelligent-Tiering",
 				),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// Tier is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Type

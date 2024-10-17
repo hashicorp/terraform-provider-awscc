@@ -120,9 +120,34 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 	var planModifiers []string
 	var fwPlanModifierPackage, fwPlanModifierType, fwValidatorType string
 
-	createOnly := e.CfResource.CreateOnlyProperties.ContainsPath(path)
-	readOnly := e.CfResource.ReadOnlyProperties.ContainsPath(path)
-	writeOnly := e.CfResource.WriteOnlyProperties.ContainsPath(path)
+	createOnly := false
+	readOnly := false
+	writeOnly := false
+
+	var chunks [][]string
+
+	// Build combinations
+	for i := 1; i <= len(path); i++ {
+		combination := path[:i]
+		chunks = append(chunks, combination)
+	}
+
+	for i := 0; i < len(chunks); i++ {
+		if e.CfResource.CreateOnlyProperties.ContainsPath(chunks[i]) {
+			createOnly = true
+		}
+
+		if e.CfResource.ReadOnlyProperties.ContainsPath(chunks[i]) {
+			readOnly = true
+		}
+
+		if e.CfResource.WriteOnlyProperties.ContainsPath(chunks[i]) {
+			writeOnly = true
+		}
+	}
+
+	// check every combination of path for e.CfResource.WriteOnlyProperties.ContainsPath(path)
+
 	hasDefaultValue := property.Default != nil
 
 	if readOnly && required {
@@ -154,7 +179,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 	}
 
 	// All Optional attributes are also Computed.
-	if optional && !computed {
+	if optional && !computed && !writeOnly {
 		computed = true
 	}
 

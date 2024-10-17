@@ -367,10 +367,6 @@ func configRuleResource(ctx context.Context) (resource.Resource, error) {
 						"policy_text": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The policy definition containing the logic for your CC Custom Policy rule.",
 							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
 							// PolicyText is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/

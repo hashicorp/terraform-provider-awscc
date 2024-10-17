@@ -16,14 +16,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -86,62 +84,47 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 					"content": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The content of the metadata form.",
 						Optional:    true,
-						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthAtMost(75000),
 						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// Content is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: FormName
 					"form_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The name of the metadata form.",
-						Optional:    true,
-						Computed:    true,
+						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
-							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// FormName is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: TypeIdentifier
 					"type_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The ID of the metadata form type.",
 						Optional:    true,
-						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 385),
 						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// TypeIdentifier is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: TypeRevision
 					"type_revision": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The revision of the metadata form type.",
 						Optional:    true,
-						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 64),
 						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// TypeRevision is a write-only property.
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "The metadata forms that are to be attached to the assets that this data source works with.",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeBetween(0, 10),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 			// AssetFormsInput is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -366,22 +349,16 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 						"auto_import_data_quality_result": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Description: "Specifies whether to automatically import data quality metrics as part of the data source run.",
 							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								boolplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// AutoImportDataQualityResult is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: DataAccessRole
 						"data_access_role": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The data access role included in the configuration details of the AWS Glue data source.",
 							Optional:    true,
-							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[^:]*:iam::\\d{12}:(role|role/service-role)/[\\w+=,.@-]{1,128}$"), ""),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// DataAccessRole is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: RelationalFilterConfigurations
 						"relational_filter_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -390,15 +367,11 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 									// Property: DatabaseName
 									"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "The database name specified in the relational filter configuration for the data source.",
-										Optional:    true,
-										Computed:    true,
+										Required:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(1, 128),
-											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// DatabaseName is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: FilterExpressions
 									"filter_expressions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -406,73 +379,54 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 												// Property: Expression
 												"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
+													Required: true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(1, 2048),
-														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// Expression is a write-only property.
 												}, /*END ATTRIBUTE*/
 												// Property: Type
 												"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The search filter expression type.",
-													Optional:    true,
-													Computed:    true,
+													Required:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.OneOf(
 															"INCLUDE",
 															"EXCLUDE",
 														),
-														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// Type is a write-only property.
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
 										Description: "The filter expressions specified in the relational filter configuration for the data source.",
 										Optional:    true,
-										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											generic.Multiset(),
-											listplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
+										// FilterExpressions is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: SchemaName
 									"schema_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "The schema name specified in the relational filter configuration for the data source.",
 										Optional:    true,
-										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(1, 128),
 										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// SchemaName is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
 							Description: "The relational filter configurations included in the configuration details of the AWS Glue data source.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.List{ /*START VALIDATORS*/
-								fwvalidators.NotNullList(),
-							}, /*END VALIDATORS*/
+							Required:    true,
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								generic.Multiset(),
-								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
+							// RelationalFilterConfigurations is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// GlueRunConfiguration is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: RedshiftRunConfiguration
 				"redshift_run_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -481,13 +435,10 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 						"data_access_role": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The data access role included in the configuration details of the Amazon Redshift data source.",
 							Optional:    true,
-							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[^:]*:iam::\\d{12}:(role|role/service-role)/[\\w+=,.@-]{1,128}$"), ""),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// DataAccessRole is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: RedshiftCredentialConfiguration
 						"redshift_credential_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -495,27 +446,17 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 								// Property: SecretManagerArn
 								"secret_manager_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The ARN of a secret manager for an Amazon Redshift cluster.",
-									Optional:    true,
-									Computed:    true,
+									Required:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[^:]*:secretsmanager:[a-z]{2}-?(iso|gov)?-{1}[a-z]*-{1}[0-9]:\\d{12}:secret:.*$"), ""),
-										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// SecretManagerArn is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "The details of the credentials required to access an Amazon Redshift cluster.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.Object{ /*START VALIDATORS*/
-								fwvalidators.NotNullObject(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							Required:    true,
+							// RedshiftCredentialConfiguration is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: RedshiftStorage
 						"redshift_storage": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -526,24 +467,17 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 										// Property: ClusterName
 										"cluster_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "The name of an Amazon Redshift cluster.",
-											Optional:    true,
-											Computed:    true,
+											Required:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthBetween(1, 63),
 												stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-z].[a-z0-9\\-]*$"), ""),
-												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// ClusterName is a write-only property.
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "The name of an Amazon Redshift cluster.",
 									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// RedshiftClusterSource is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: RedshiftServerlessSource
 								"redshift_serverless_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -551,35 +485,22 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 										// Property: WorkgroupName
 										"workgroup_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "The name of the Amazon Redshift Serverless workgroup.",
-											Optional:    true,
-											Computed:    true,
+											Required:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthBetween(3, 64),
 												stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9-]+$"), ""),
-												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// WorkgroupName is a write-only property.
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "The details of the Amazon Redshift Serverless workgroup storage.",
 									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// RedshiftServerlessSource is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "The details of the Amazon Redshift storage as part of the configuration of an Amazon Redshift data source run.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.Object{ /*START VALIDATORS*/
-								fwvalidators.NotNullObject(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							Required:    true,
+							// RedshiftStorage is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: RelationalFilterConfigurations
 						"relational_filter_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -588,15 +509,11 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 									// Property: DatabaseName
 									"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "The database name specified in the relational filter configuration for the data source.",
-										Optional:    true,
-										Computed:    true,
+										Required:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(1, 128),
-											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// DatabaseName is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: FilterExpressions
 									"filter_expressions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -604,82 +521,59 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 												// Property: Expression
 												"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
+													Required: true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(1, 2048),
-														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// Expression is a write-only property.
 												}, /*END ATTRIBUTE*/
 												// Property: Type
 												"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The search filter expression type.",
-													Optional:    true,
-													Computed:    true,
+													Required:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.OneOf(
 															"INCLUDE",
 															"EXCLUDE",
 														),
-														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// Type is a write-only property.
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
 										Description: "The filter expressions specified in the relational filter configuration for the data source.",
 										Optional:    true,
-										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											generic.Multiset(),
-											listplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
+										// FilterExpressions is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: SchemaName
 									"schema_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "The schema name specified in the relational filter configuration for the data source.",
 										Optional:    true,
-										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(1, 128),
 										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// SchemaName is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
 							Description: "The relational filter configurations included in the configuration details of the Amazon Redshift data source.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.List{ /*START VALIDATORS*/
-								fwvalidators.NotNullList(),
-							}, /*END VALIDATORS*/
+							Required:    true,
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								generic.Multiset(),
-								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
+							// RelationalFilterConfigurations is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The configuration details of the Amazon Redshift data source.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// RedshiftRunConfiguration is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Configuration of the data source. It can be set to either glueRunConfiguration or redshiftRunConfiguration.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// Configuration is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt

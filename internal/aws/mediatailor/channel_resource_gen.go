@@ -255,45 +255,30 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 							"manifest_window_seconds": schema.Float64Attribute{ /*START ATTRIBUTE*/
 								Description: "<p>The total duration (in seconds) of each manifest. Minimum value: <code>30</code> seconds. Maximum value: <code>3600</code> seconds.</p>",
 								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-									float64planmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// ManifestWindowSeconds is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: MinBufferTimeSeconds
 							"min_buffer_time_seconds": schema.Float64Attribute{ /*START ATTRIBUTE*/
 								Description: "<p>Minimum amount of content (measured in seconds) that a player must keep available in the buffer. Minimum value: <code>2</code> seconds. Maximum value: <code>60</code> seconds.</p>",
 								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-									float64planmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// MinBufferTimeSeconds is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: MinUpdatePeriodSeconds
 							"min_update_period_seconds": schema.Float64Attribute{ /*START ATTRIBUTE*/
 								Description: "<p>Minimum amount of time (in seconds) that the player should wait before requesting updates to the manifest. Minimum value: <code>2</code> seconds. Maximum value: <code>60</code> seconds.</p>",
 								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-									float64planmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// MinUpdatePeriodSeconds is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: SuggestedPresentationDelaySeconds
 							"suggested_presentation_delay_seconds": schema.Float64Attribute{ /*START ATTRIBUTE*/
 								Description: "<p>Amount of time (in seconds) that the player should be from the live point at the end of the manifest. Minimum value: <code>2</code> seconds. Maximum value: <code>60</code> seconds.</p>",
 								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-									float64planmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// SuggestedPresentationDelaySeconds is a write-only property.
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "<p>Dash manifest configuration parameters.</p>",
 						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-							objectplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// DashPlaylistSettings is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: HlsPlaylistSettings
 					"hls_playlist_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -303,7 +288,6 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 								ElementType: types.StringType,
 								Description: "<p>Determines the type of SCTE 35 tags to use in ad markup. Specify <code>DATERANGE</code> to use <code>DATERANGE</code> tags (for live or VOD content). Specify <code>SCTE35_ENHANCED</code> to use <code>EXT-X-CUE-OUT</code> and <code>EXT-X-CUE-IN</code> tags (for VOD content only).</p>",
 								Optional:    true,
-								Computed:    true,
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.ValueStringsAre(
 										stringvalidator.OneOf(
@@ -312,36 +296,30 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 										),
 									),
 								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-									listplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// AdMarkupType is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: ManifestWindowSeconds
 							"manifest_window_seconds": schema.Float64Attribute{ /*START ATTRIBUTE*/
 								Description: "<p>The total duration (in seconds) of each manifest. Minimum value: <code>30</code> seconds. Maximum value: <code>3600</code> seconds.</p>",
 								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-									float64planmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// ManifestWindowSeconds is a write-only property.
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "<p>HLS playlist configuration parameters.</p>",
 						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-							objectplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// HlsPlaylistSettings is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: ManifestName
 					"manifest_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "<p>The name of the manifest for the channel. The name appears in the <code>PlaybackUrl</code>.</p>",
 						Required:    true,
+						// ManifestName is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: SourceGroup
 					"source_group": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "<p>A string used to match which <code>HttpPackageConfiguration</code> is used for each <code>VodSource</code>.</p>",
 						Required:    true,
+						// SourceGroup is a write-only property.
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

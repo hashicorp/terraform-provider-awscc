@@ -16,8 +16,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
@@ -117,16 +115,12 @@ func stackSetResource(ctx context.Context) (resource.Resource, error) {
 		"call_as": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Specifies the AWS account that you are acting from. By default, SELF is specified. For self-managed permissions, specify SELF; for service-managed permissions, if you are signed in to the organization's management account, specify SELF. If you are signed in to a delegated administrator account, specify DELEGATED_ADMIN.",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"SELF",
 					"DELEGATED_ADMIN",
 				),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// CallAs is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Capabilities
@@ -294,97 +288,72 @@ func stackSetResource(ctx context.Context) (resource.Resource, error) {
 				"concurrency_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Specifies how the concurrency level behaves during the operation execution.",
 					Optional:    true,
-					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"STRICT_FAILURE_TOLERANCE",
 							"SOFT_FAILURE_TOLERANCE",
 						),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// ConcurrencyMode is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: FailureToleranceCount
 				"failure_tolerance_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
 					Optional: true,
-					Computed: true,
 					Validators: []validator.Int64{ /*START VALIDATORS*/
 						int64validator.AtLeast(0),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-						int64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// FailureToleranceCount is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: FailureTolerancePercentage
 				"failure_tolerance_percentage": schema.Int64Attribute{ /*START ATTRIBUTE*/
 					Optional: true,
-					Computed: true,
 					Validators: []validator.Int64{ /*START VALIDATORS*/
 						int64validator.Between(0, 100),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-						int64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// FailureTolerancePercentage is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: MaxConcurrentCount
 				"max_concurrent_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
 					Optional: true,
-					Computed: true,
 					Validators: []validator.Int64{ /*START VALIDATORS*/
 						int64validator.AtLeast(1),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-						int64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// MaxConcurrentCount is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: MaxConcurrentPercentage
 				"max_concurrent_percentage": schema.Int64Attribute{ /*START ATTRIBUTE*/
 					Optional: true,
-					Computed: true,
 					Validators: []validator.Int64{ /*START VALIDATORS*/
 						int64validator.Between(0, 100),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-						int64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// MaxConcurrentPercentage is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: RegionConcurrencyType
 				"region_concurrency_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The concurrency type of deploying StackSets operations in regions, could be in parallel or one region at a time",
 					Optional:    true,
-					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"SEQUENTIAL",
 							"PARALLEL",
 						),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// RegionConcurrencyType is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: RegionOrder
 				"region_order": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
 					Optional:    true,
-					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.ValueStringsAre(
 							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-]{1,128}$"), ""),
 						),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// RegionOrder is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The user-specified preferences for how AWS CloudFormation performs a stack set operation.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// OperationPreferences is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Parameters
@@ -586,7 +555,6 @@ func stackSetResource(ctx context.Context) (resource.Resource, error) {
 							"account_filter_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The filter type you want to apply on organizational units and accounts.",
 								Optional:    true,
-								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"NONE",
@@ -595,65 +563,48 @@ func stackSetResource(ctx context.Context) (resource.Resource, error) {
 										"DIFFERENCE",
 									),
 								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// AccountFilterType is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: Accounts
 							"accounts": schema.SetAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
 								Description: "AWS accounts that you want to create stack instances in the specified Region(s) for.",
 								Optional:    true,
-								Computed:    true,
 								Validators: []validator.Set{ /*START VALIDATORS*/
 									setvalidator.SizeAtLeast(1),
 									setvalidator.ValueStringsAre(
 										stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]{12}$"), ""),
 									),
 								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-									setplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// Accounts is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: AccountsUrl
 							"accounts_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Returns the value of the AccountsUrl property.",
 								Optional:    true,
-								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthBetween(1, 5120),
 									stringvalidator.RegexMatches(regexp.MustCompile("(s3://|http(s?)://).+"), ""),
 								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// AccountsUrl is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: OrganizationalUnitIds
 							"organizational_unit_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
 								Description: "The organization root ID or organizational unit (OU) IDs to which StackSets deploys.",
 								Optional:    true,
-								Computed:    true,
 								Validators: []validator.Set{ /*START VALIDATORS*/
 									setvalidator.SizeAtLeast(1),
 									setvalidator.ValueStringsAre(
 										stringvalidator.RegexMatches(regexp.MustCompile("^(ou-[a-z0-9]{4,32}-[a-z0-9]{8,32}|r-[a-z0-9]{4,32})$"), ""),
 									),
 								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-									setplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// OrganizationalUnitIds is a write-only property.
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: " The AWS OrganizationalUnitIds or Accounts for which to create stack instances in the specified Regions.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.Object{ /*START VALIDATORS*/
-							fwvalidators.NotNullObject(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-							objectplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						Required:    true,
+						// DeploymentTargets is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: ParameterOverrides
 					"parameter_overrides": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
@@ -662,61 +613,38 @@ func stackSetResource(ctx context.Context) (resource.Resource, error) {
 								// Property: ParameterKey
 								"parameter_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The key associated with the parameter. If you don't specify a key and value for a particular parameter, AWS CloudFormation uses the default value that is specified in your template.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										fwvalidators.NotNullString(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									Required:    true,
+									// ParameterKey is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: ParameterValue
 								"parameter_value": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The input value associated with the parameter.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										fwvalidators.NotNullString(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									Required:    true,
+									// ParameterValue is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
 						Description: "A list of stack set parameters whose values you want to override in the selected stack instances.",
 						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-							setplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// ParameterOverrides is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: Regions
 					"regions": schema.SetAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
 						Description: "The names of one or more Regions where you want to create stack instances using the specified AWS account(s).",
-						Optional:    true,
-						Computed:    true,
+						Required:    true,
 						Validators: []validator.Set{ /*START VALIDATORS*/
 							setvalidator.SizeAtLeast(1),
 							setvalidator.ValueStringsAre(
 								stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-]{1,128}$"), ""),
 							),
-							fwvalidators.NotNullSet(),
 						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-							setplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// Regions is a write-only property.
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "A group of stack instances with parameters in some specific accounts and regions.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// StackInstancesGroup is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: StackSetId
@@ -860,13 +788,9 @@ func stackSetResource(ctx context.Context) (resource.Resource, error) {
 		"template_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) that is located in an Amazon S3 bucket.",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 5120),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// TemplateURL is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

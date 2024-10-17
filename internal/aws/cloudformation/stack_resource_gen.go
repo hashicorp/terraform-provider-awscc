@@ -324,10 +324,6 @@ func stackResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"stack_policy_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// StackPolicyURL is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: StackStatus
@@ -466,13 +462,9 @@ func stackResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"template_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
-			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 1024),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// TemplateURL is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: TimeoutInMinutes

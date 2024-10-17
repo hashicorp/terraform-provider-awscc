@@ -115,13 +115,9 @@ func instanceProfileResource(ctx context.Context) (resource.Resource, error) {
 		"instance_profile_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The property describes an identifier for the instance profile. It is used for describing/deleting/modifying. Can be name/arn",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 255),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// InstanceProfileIdentifier is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceProfileName

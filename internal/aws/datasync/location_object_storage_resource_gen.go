@@ -155,14 +155,10 @@ func locationObjectStorageResource(ctx context.Context) (resource.Resource, erro
 		"secret_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Optional. The secret key is used if credentials are required to access the self-managed object storage server.",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(8, 200),
 				stringvalidator.RegexMatches(regexp.MustCompile("^.+$"), ""),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// SecretKey is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: ServerCertificate
@@ -264,14 +260,10 @@ func locationObjectStorageResource(ctx context.Context) (resource.Resource, erro
 		"subdirectory": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The subdirectory in the self-managed object storage server that is used to read data from.",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtMost(4096),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\p{Zs}]*$"), ""),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// Subdirectory is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
