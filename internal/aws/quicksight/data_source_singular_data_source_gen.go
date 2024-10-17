@@ -3524,6 +3524,21 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "<p>Error information for the data source creation or update.</p>",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: FolderArns
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "maxItems": 10,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"folder_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
@@ -3728,6 +3743,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "PRESTO",
 		//	    "REDSHIFT",
 		//	    "S3",
+		//	    "S3_TABLES",
 		//	    "SALESFORCE",
 		//	    "SERVICENOW",
 		//	    "SNOWFLAKE",
@@ -3824,6 +3840,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"domain":                           "Domain",
 		"enable_identity_propagation":      "EnableIdentityPropagation",
 		"error_info":                       "ErrorInfo",
+		"folder_arns":                      "FolderArns",
 		"host":                             "Host",
 		"iam_parameters":                   "IAMParameters",
 		"identity_center_configuration":    "IdentityCenterConfiguration",

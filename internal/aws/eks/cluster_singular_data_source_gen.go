@@ -77,11 +77,11 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Set this value to false to avoid creating the default networking addons when the cluster is created.",
+		//	  "description": "Set this value to false to avoid creating the default networking add-ons when the cluster is created.",
 		//	  "type": "boolean"
 		//	}
 		"bootstrap_self_managed_addons": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Set this value to false to avoid creating the default networking addons when the cluster is created.",
+			Description: "Set this value to false to avoid creating the default networking add-ons when the cluster is created.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CertificateAuthorityData
@@ -587,6 +587,31 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The desired Kubernetes version for your cluster. If you don't specify a value here, the latest version available in Amazon EKS is used.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ZonalShiftConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The current zonal shift configuration to use for the cluster.",
+		//	  "properties": {
+		//	    "Enabled": {
+		//	      "description": "Set this value to true to enable zonal shift for the cluster.",
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"zonal_shift_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Enabled
+				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Set this value to true to enable zonal shift for the cluster.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The current zonal shift configuration to use for the cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -615,6 +640,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"cluster_security_group_id":                   "ClusterSecurityGroupId",
 		"control_plane_instance_type":                 "ControlPlaneInstanceType",
 		"control_plane_placement":                     "ControlPlanePlacement",
+		"enabled":                                     "Enabled",
 		"enabled_types":                               "EnabledTypes",
 		"encryption_config":                           "EncryptionConfig",
 		"encryption_config_key_arn":                   "EncryptionConfigKeyArn",
@@ -646,6 +672,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"upgrade_policy":                              "UpgradePolicy",
 		"value":                                       "Value",
 		"version":                                     "Version",
+		"zonal_shift_config":                          "ZonalShiftConfig",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

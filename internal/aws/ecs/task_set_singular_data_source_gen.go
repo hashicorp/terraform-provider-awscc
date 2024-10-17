@@ -23,6 +23,46 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::ECS::TaskSet resource.
 func taskSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: CapacityProviderStrategy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Base": {
+		//	        "type": "integer"
+		//	      },
+		//	      "CapacityProvider": {
+		//	        "type": "string"
+		//	      },
+		//	      "Weight": {
+		//	        "type": "integer"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"capacity_provider_strategy": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Base
+					"base": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: CapacityProvider
+					"capacity_provider": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Weight
+					"weight": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Cluster
 		// CloudFormation resource type schema:
 		//
@@ -371,30 +411,34 @@ func taskSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::ECS::TaskSet").WithTerraformTypeName("awscc_ecs_task_set")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"assign_public_ip":      "AssignPublicIp",
-		"aws_vpc_configuration": "AwsVpcConfiguration",
-		"cluster":               "Cluster",
-		"container_name":        "ContainerName",
-		"container_port":        "ContainerPort",
-		"external_id":           "ExternalId",
-		"key":                   "Key",
-		"launch_type":           "LaunchType",
-		"load_balancers":        "LoadBalancers",
-		"network_configuration": "NetworkConfiguration",
-		"platform_version":      "PlatformVersion",
-		"port":                  "Port",
-		"registry_arn":          "RegistryArn",
-		"scale":                 "Scale",
-		"security_groups":       "SecurityGroups",
-		"service":               "Service",
-		"service_registries":    "ServiceRegistries",
-		"subnets":               "Subnets",
-		"tags":                  "Tags",
-		"target_group_arn":      "TargetGroupArn",
-		"task_definition":       "TaskDefinition",
-		"task_set_id":           "Id",
-		"unit":                  "Unit",
-		"value":                 "Value",
+		"assign_public_ip":           "AssignPublicIp",
+		"aws_vpc_configuration":      "AwsVpcConfiguration",
+		"base":                       "Base",
+		"capacity_provider":          "CapacityProvider",
+		"capacity_provider_strategy": "CapacityProviderStrategy",
+		"cluster":                    "Cluster",
+		"container_name":             "ContainerName",
+		"container_port":             "ContainerPort",
+		"external_id":                "ExternalId",
+		"key":                        "Key",
+		"launch_type":                "LaunchType",
+		"load_balancers":             "LoadBalancers",
+		"network_configuration":      "NetworkConfiguration",
+		"platform_version":           "PlatformVersion",
+		"port":                       "Port",
+		"registry_arn":               "RegistryArn",
+		"scale":                      "Scale",
+		"security_groups":            "SecurityGroups",
+		"service":                    "Service",
+		"service_registries":         "ServiceRegistries",
+		"subnets":                    "Subnets",
+		"tags":                       "Tags",
+		"target_group_arn":           "TargetGroupArn",
+		"task_definition":            "TaskDefinition",
+		"task_set_id":                "Id",
+		"unit":                       "Unit",
+		"value":                      "Value",
+		"weight":                     "Weight",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

@@ -33,19 +33,6 @@ func resolverRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 			Description: "The Amazon Resource Name (ARN) of the resolver rule.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
-		// Property: DelegationRecord
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "description": "The name server domain for queries to be delegated to if a query matches the delegation record.",
-		//	  "maxLength": 256,
-		//	  "minLength": 1,
-		//	  "type": "string"
-		//	}
-		"delegation_record": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name server domain for queries to be delegated to if a query matches the delegation record.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
 		// Property: DomainName
 		// CloudFormation resource type schema:
 		//
@@ -192,6 +179,12 @@ func resolverRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	          "DoH"
 		//	        ],
 		//	        "type": "string"
+		//	      },
+		//	      "ServerNameIndication": {
+		//	        "description": "The SNI of the target name servers for DoH/DoH-FIPS outbound endpoints",
+		//	        "maxLength": 255,
+		//	        "minLength": 0,
+		//	        "type": "string"
 		//	      }
 		//	    },
 		//	    "type": "object"
@@ -222,6 +215,11 @@ func resolverRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 						Description: "The protocol that you want to use to forward DNS queries. ",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
+					// Property: ServerNameIndication
+					"server_name_indication": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The SNI of the target name servers for DoH/DoH-FIPS outbound endpoints",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "An array that contains the IP addresses and ports that an outbound endpoint forwards DNS queries to. Typically, these are the IP addresses of DNS resolvers on your network. Specify IPv4 addresses. IPv6 is not supported.",
@@ -244,21 +242,21 @@ func resolverRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::ResolverRule").WithTerraformTypeName("awscc_route53resolver_resolver_rule")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                  "Arn",
-		"delegation_record":    "DelegationRecord",
-		"domain_name":          "DomainName",
-		"ip":                   "Ip",
-		"ipv_6":                "Ipv6",
-		"key":                  "Key",
-		"name":                 "Name",
-		"port":                 "Port",
-		"protocol":             "Protocol",
-		"resolver_endpoint_id": "ResolverEndpointId",
-		"resolver_rule_id":     "ResolverRuleId",
-		"rule_type":            "RuleType",
-		"tags":                 "Tags",
-		"target_ips":           "TargetIps",
-		"value":                "Value",
+		"arn":                    "Arn",
+		"domain_name":            "DomainName",
+		"ip":                     "Ip",
+		"ipv_6":                  "Ipv6",
+		"key":                    "Key",
+		"name":                   "Name",
+		"port":                   "Port",
+		"protocol":               "Protocol",
+		"resolver_endpoint_id":   "ResolverEndpointId",
+		"resolver_rule_id":       "ResolverRuleId",
+		"rule_type":              "RuleType",
+		"server_name_indication": "ServerNameIndication",
+		"tags":                   "Tags",
+		"target_ips":             "TargetIps",
+		"value":                  "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

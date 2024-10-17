@@ -349,7 +349,8 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                    "Test",
 		//	                    "Deploy",
 		//	                    "Invoke",
-		//	                    "Approval"
+		//	                    "Approval",
+		//	                    "Compute"
 		//	                  ],
 		//	                  "type": "string"
 		//	                },
@@ -373,6 +374,14 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "Provider"
 		//	              ],
 		//	              "type": "object"
+		//	            },
+		//	            "Commands": {
+		//	              "description": "The shell commands to run with your compute action in CodePipeline.",
+		//	              "items": {
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": false
 		//	            },
 		//	            "Configuration": {
 		//	              "description": "The action's configuration. These are key-value pairs that specify input values for an action.",
@@ -409,6 +418,14 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "additionalProperties": false,
 		//	                "description": "Represents information about the output of an action.",
 		//	                "properties": {
+		//	                  "Files": {
+		//	                    "description": "The files that you want to associate with the output artifact that will be exported from the compute action.",
+		//	                    "items": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "type": "array",
+		//	                    "uniqueItems": true
+		//	                  },
 		//	                  "Name": {
 		//	                    "description": "The name of the output of an artifact, such as \"My App\".",
 		//	                    "type": "string"
@@ -418,6 +435,14 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                  "Name"
 		//	                ],
 		//	                "type": "object"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": true
+		//	            },
+		//	            "OutputVariables": {
+		//	              "description": "The list of variables that are to be exported from the compute action.",
+		//	              "items": {
+		//	                "type": "string"
 		//	              },
 		//	              "type": "array",
 		//	              "uniqueItems": true
@@ -803,6 +828,12 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 									Description: "Represents information about an action type.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
+								// Property: Commands
+								"commands": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "The shell commands to run with your compute action in CodePipeline.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
 								// Property: Configuration
 								"configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
 									CustomType:  jsontypes.NormalizedType{},
@@ -836,6 +867,12 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 								"output_artifacts": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Files
+											"files": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Description: "The files that you want to associate with the output artifact that will be exported from the compute action.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
 											// Property: Name
 											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "The name of the output of an artifact, such as \"My App\".",
@@ -844,6 +881,12 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
 									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: OutputVariables
+								"output_variables": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "The list of variables that are to be exported from the compute action.",
+									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: Region
 								"region": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1633,6 +1676,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"blockers":                          "Blockers",
 		"branches":                          "Branches",
 		"category":                          "Category",
+		"commands":                          "Commands",
 		"conditions":                        "Conditions",
 		"configuration":                     "Configuration",
 		"default_value":                     "DefaultValue",
@@ -1643,6 +1687,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"excludes":                          "Excludes",
 		"execution_mode":                    "ExecutionMode",
 		"file_paths":                        "FilePaths",
+		"files":                             "Files",
 		"git_configuration":                 "GitConfiguration",
 		"id":                                "Id",
 		"includes":                          "Includes",
@@ -1654,6 +1699,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"on_failure":                        "OnFailure",
 		"on_success":                        "OnSuccess",
 		"output_artifacts":                  "OutputArtifacts",
+		"output_variables":                  "OutputVariables",
 		"owner":                             "Owner",
 		"pipeline_type":                     "PipelineType",
 		"provider":                          "Provider",

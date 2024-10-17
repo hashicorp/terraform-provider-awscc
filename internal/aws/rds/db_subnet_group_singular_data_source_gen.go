@@ -50,6 +50,7 @@ func dBSubnetGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//
 		//	{
 		//	  "description": "The EC2 Subnet IDs for the DB subnet group.",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
