@@ -1,4 +1,5 @@
-## 1.17.0 (Unreleased)
+## 1.18.0 (Unreleased)
+## 1.17.0 (October 17, 2024)
 
 BUG FIXES:
 
