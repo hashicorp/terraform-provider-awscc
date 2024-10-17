@@ -17,13 +17,14 @@ Definition of AWS::B2BI::Partnership Resource Type
 
 ### Required
 
+- `capabilities` (List of String)
 - `email` (String)
 - `name` (String)
 - `profile_id` (String)
 
 ### Optional
 
-- `capabilities` (List of String)
+- `capability_options` (Attributes) (see [below for nested schema](#nestedatt--capability_options))
 - `phone` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
@@ -35,6 +36,75 @@ Definition of AWS::B2BI::Partnership Resource Type
 - `partnership_arn` (String)
 - `partnership_id` (String)
 - `trading_partner_id` (String)
+
+<a id="nestedatt--capability_options"></a>
+### Nested Schema for `capability_options`
+
+Optional:
+
+- `outbound_edi` (Attributes) (see [below for nested schema](#nestedatt--capability_options--outbound_edi))
+
+<a id="nestedatt--capability_options--outbound_edi"></a>
+### Nested Schema for `capability_options.outbound_edi`
+
+Optional:
+
+- `x12` (Attributes) (see [below for nested schema](#nestedatt--capability_options--outbound_edi--x12))
+
+<a id="nestedatt--capability_options--outbound_edi--x12"></a>
+### Nested Schema for `capability_options.outbound_edi.x12`
+
+Optional:
+
+- `common` (Attributes) (see [below for nested schema](#nestedatt--capability_options--outbound_edi--x12--common))
+
+<a id="nestedatt--capability_options--outbound_edi--x12--common"></a>
+### Nested Schema for `capability_options.outbound_edi.x12.common`
+
+Optional:
+
+- `delimiters` (Attributes) (see [below for nested schema](#nestedatt--capability_options--outbound_edi--x12--common--delimiters))
+- `functional_group_headers` (Attributes) (see [below for nested schema](#nestedatt--capability_options--outbound_edi--x12--common--functional_group_headers))
+- `interchange_control_headers` (Attributes) (see [below for nested schema](#nestedatt--capability_options--outbound_edi--x12--common--interchange_control_headers))
+- `validate_edi` (Boolean)
+
+<a id="nestedatt--capability_options--outbound_edi--x12--common--delimiters"></a>
+### Nested Schema for `capability_options.outbound_edi.x12.common.delimiters`
+
+Optional:
+
+- `component_separator` (String)
+- `data_element_separator` (String)
+- `segment_terminator` (String)
+
+
+<a id="nestedatt--capability_options--outbound_edi--x12--common--functional_group_headers"></a>
+### Nested Schema for `capability_options.outbound_edi.x12.common.functional_group_headers`
+
+Optional:
+
+- `application_receiver_code` (String)
+- `application_sender_code` (String)
+- `responsible_agency_code` (String)
+
+
+<a id="nestedatt--capability_options--outbound_edi--x12--common--interchange_control_headers"></a>
+### Nested Schema for `capability_options.outbound_edi.x12.common.interchange_control_headers`
+
+Optional:
+
+- `acknowledgment_requested_code` (String)
+- `receiver_id` (String)
+- `receiver_id_qualifier` (String)
+- `repetition_separator` (String)
+- `sender_id` (String)
+- `sender_id_qualifier` (String)
+- `usage_indicator_code` (String)
+
+
+
+
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

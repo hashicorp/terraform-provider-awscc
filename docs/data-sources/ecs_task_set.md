@@ -21,6 +21,7 @@ Data Source schema for AWS::ECS::TaskSet
 
 ### Read-Only
 
+- `capacity_provider_strategy` (Attributes List) (see [below for nested schema](#nestedatt--capacity_provider_strategy))
 - `cluster` (String) The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service to create the task set in.
 - `external_id` (String) An optional non-unique tag that identifies this task set in external systems. If the task set is associated with a service discovery registry, the tasks in this task set will have the ECS_TASK_SET_EXTERNAL_ID AWS Cloud Map attribute set to the provided value.
 - `launch_type` (String) The launch type that new tasks in the task set will use. For more information, see https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html in the Amazon Elastic Container Service Developer Guide.
@@ -33,6 +34,16 @@ Data Source schema for AWS::ECS::TaskSet
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `task_definition` (String) The short name or full Amazon Resource Name (ARN) of the task definition for the tasks in the task set to use.
 - `task_set_id` (String) The ID of the task set.
+
+<a id="nestedatt--capacity_provider_strategy"></a>
+### Nested Schema for `capacity_provider_strategy`
+
+Read-Only:
+
+- `base` (Number)
+- `capacity_provider` (String)
+- `weight` (Number)
+
 
 <a id="nestedatt--load_balancers"></a>
 ### Nested Schema for `load_balancers`

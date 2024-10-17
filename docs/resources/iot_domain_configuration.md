@@ -17,7 +17,10 @@ Create and manage a Domain Configuration
 
 ### Optional
 
+- `application_protocol` (String)
+- `authentication_type` (String)
 - `authorizer_config` (Attributes) (see [below for nested schema](#nestedatt--authorizer_config))
+- `client_certificate_config` (Attributes) (see [below for nested schema](#nestedatt--client_certificate_config))
 - `domain_configuration_name` (String)
 - `domain_configuration_status` (String)
 - `domain_name` (String)
@@ -42,6 +45,14 @@ Optional:
 
 - `allow_authorizer_override` (Boolean)
 - `default_authorizer_name` (String)
+
+
+<a id="nestedatt--client_certificate_config"></a>
+### Nested Schema for `client_certificate_config`
+
+Optional:
+
+- `client_certificate_callback_arn` (String)
 
 
 <a id="nestedatt--server_certificate_config"></a>

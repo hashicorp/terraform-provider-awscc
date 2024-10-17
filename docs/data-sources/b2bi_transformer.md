@@ -24,10 +24,14 @@ Data Source schema for AWS::B2BI::Transformer
 - `created_at` (String)
 - `edi_type` (Attributes) (see [below for nested schema](#nestedatt--edi_type))
 - `file_format` (String)
-- `mapping_template` (String)
+- `input_conversion` (Attributes) (see [below for nested schema](#nestedatt--input_conversion))
+- `mapping` (Attributes) (see [below for nested schema](#nestedatt--mapping))
+- `mapping_template` (String) This shape is deprecated: This is a legacy trait. Please use input-conversion or output-conversion.
 - `modified_at` (String)
 - `name` (String)
-- `sample_document` (String)
+- `output_conversion` (Attributes) (see [below for nested schema](#nestedatt--output_conversion))
+- `sample_document` (String) This shape is deprecated: This is a legacy trait. Please use input-conversion or output-conversion.
+- `sample_documents` (Attributes) (see [below for nested schema](#nestedatt--sample_documents))
 - `status` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `transformer_arn` (String)
@@ -47,6 +51,85 @@ Read-Only:
 
 - `transaction_set` (String)
 - `version` (String)
+
+
+
+<a id="nestedatt--input_conversion"></a>
+### Nested Schema for `input_conversion`
+
+Read-Only:
+
+- `format_options` (Attributes) (see [below for nested schema](#nestedatt--input_conversion--format_options))
+- `from_format` (String)
+
+<a id="nestedatt--input_conversion--format_options"></a>
+### Nested Schema for `input_conversion.format_options`
+
+Read-Only:
+
+- `x12` (Attributes) (see [below for nested schema](#nestedatt--input_conversion--format_options--x12))
+
+<a id="nestedatt--input_conversion--format_options--x12"></a>
+### Nested Schema for `input_conversion.format_options.x12`
+
+Read-Only:
+
+- `transaction_set` (String)
+- `version` (String)
+
+
+
+
+<a id="nestedatt--mapping"></a>
+### Nested Schema for `mapping`
+
+Read-Only:
+
+- `template` (String)
+- `template_language` (String)
+
+
+<a id="nestedatt--output_conversion"></a>
+### Nested Schema for `output_conversion`
+
+Read-Only:
+
+- `format_options` (Attributes) (see [below for nested schema](#nestedatt--output_conversion--format_options))
+- `to_format` (String)
+
+<a id="nestedatt--output_conversion--format_options"></a>
+### Nested Schema for `output_conversion.format_options`
+
+Read-Only:
+
+- `x12` (Attributes) (see [below for nested schema](#nestedatt--output_conversion--format_options--x12))
+
+<a id="nestedatt--output_conversion--format_options--x12"></a>
+### Nested Schema for `output_conversion.format_options.x12`
+
+Read-Only:
+
+- `transaction_set` (String)
+- `version` (String)
+
+
+
+
+<a id="nestedatt--sample_documents"></a>
+### Nested Schema for `sample_documents`
+
+Read-Only:
+
+- `bucket_name` (String)
+- `keys` (Attributes List) (see [below for nested schema](#nestedatt--sample_documents--keys))
+
+<a id="nestedatt--sample_documents--keys"></a>
+### Nested Schema for `sample_documents.keys`
+
+Read-Only:
+
+- `input` (String)
+- `output` (String)
 
 
 

@@ -1,0 +1,1 @@
+$ terraform import awscc_wisdom_ai_prompt.example "ai_prompt_id|assistant_id"

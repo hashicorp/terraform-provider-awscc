@@ -26,3 +26,12 @@ Data Source schema for AWS::WorkSpacesWeb::IdentityProvider
 - `identity_provider_name` (String)
 - `identity_provider_type` (String)
 - `portal_arn` (String)
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)

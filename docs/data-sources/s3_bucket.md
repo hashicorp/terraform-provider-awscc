@@ -237,6 +237,7 @@ Read-Only:
 Read-Only:
 
 - `rules` (Attributes List) A lifecycle rule for individual objects in an Amazon S3 bucket. (see [below for nested schema](#nestedatt--lifecycle_configuration--rules))
+- `transition_default_minimum_object_size` (String)
 
 <a id="nestedatt--lifecycle_configuration--rules"></a>
 ### Nested Schema for `lifecycle_configuration.rules`
