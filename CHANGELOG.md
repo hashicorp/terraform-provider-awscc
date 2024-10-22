@@ -1,4 +1,11 @@
 ## 1.18.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_controltower_landing_zone`
+* **New Data Source:** `awscc_controltower_landing_zones`
+* **New Resource:** `awscc_controltower_landing_zone`
+
 ## 1.17.0 (October 17, 2024)
 
 BUG FIXES:
