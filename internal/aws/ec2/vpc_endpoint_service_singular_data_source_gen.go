@@ -60,6 +60,10 @@ func vPCEndpointServiceDataSource(ctx context.Context) (datasource.DataSource, e
 		//
 		//	{
 		//	  "items": {
+		//	    "relationshipRef": {
+		//	      "propertyPath": "/properties/LoadBalancerArn",
+		//	      "typeName": "AWS::ElasticLoadBalancingV2::LoadBalancer"
+		//	    },
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array",

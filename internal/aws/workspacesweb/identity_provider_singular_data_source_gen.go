@@ -96,6 +96,52 @@ func identityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		"portal_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 200,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -117,7 +163,10 @@ func identityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		"identity_provider_details": "IdentityProviderDetails",
 		"identity_provider_name":    "IdentityProviderName",
 		"identity_provider_type":    "IdentityProviderType",
+		"key":                       "Key",
 		"portal_arn":                "PortalArn",
+		"tags":                      "Tags",
+		"value":                     "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

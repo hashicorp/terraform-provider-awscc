@@ -394,7 +394,10 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 
 	err = waiter.Wait(ctx, &cloudcontrol.GetResourceRequestStatusInput{RequestToken: output.ProgressEvent.RequestToken}, r.createTimeout)
 
-	id := aws.ToString(progressEvent.Identifier)
+	var id string
+	if progressEvent != nil {
+		id = aws.ToString(progressEvent.Identifier)
+	}
 
 	if err != nil {
 		response.Diagnostics.Append(ServiceOperationWaiterErrorDiag("Cloud Control API", "CreateResource", err))

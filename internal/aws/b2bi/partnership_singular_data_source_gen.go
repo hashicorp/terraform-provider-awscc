@@ -40,6 +40,227 @@ func partnershipDataSource(ctx context.Context) (datasource.DataSource, error) {
 			ElementType: types.StringType,
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: CapabilityOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "OutboundEdi": {
+		//	      "properties": {
+		//	        "X12": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Common": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Delimiters": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "ComponentSeparator": {
+		//	                      "maxLength": 1,
+		//	                      "minLength": 1,
+		//	                      "pattern": "^[!\u0026'()*+,\\-./:;?=%@\\[\\]_{}|\u003c\u003e~^`\"]$",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "DataElementSeparator": {
+		//	                      "maxLength": 1,
+		//	                      "minLength": 1,
+		//	                      "pattern": "^[!\u0026'()*+,\\-./:;?=%@\\[\\]_{}|\u003c\u003e~^`\"]$",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "SegmentTerminator": {
+		//	                      "maxLength": 1,
+		//	                      "minLength": 1,
+		//	                      "pattern": "^[!\u0026'()*+,\\-./:;?=%@\\[\\]_{}|\u003c\u003e~^`\"]$",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "FunctionalGroupHeaders": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "ApplicationReceiverCode": {
+		//	                      "maxLength": 15,
+		//	                      "minLength": 2,
+		//	                      "pattern": "^[a-zA-Z0-9]*$",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "ApplicationSenderCode": {
+		//	                      "maxLength": 15,
+		//	                      "minLength": 2,
+		//	                      "pattern": "^[a-zA-Z0-9]*$",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "ResponsibleAgencyCode": {
+		//	                      "maxLength": 2,
+		//	                      "minLength": 1,
+		//	                      "pattern": "^[a-zA-Z0-9]*$",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "InterchangeControlHeaders": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "AcknowledgmentRequestedCode": {
+		//	                      "maxLength": 1,
+		//	                      "minLength": 1,
+		//	                      "pattern": "^[a-zA-Z0-9]*$",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "ReceiverId": {
+		//	                      "maxLength": 15,
+		//	                      "minLength": 15,
+		//	                      "pattern": "^[a-zA-Z0-9]*$",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "ReceiverIdQualifier": {
+		//	                      "maxLength": 2,
+		//	                      "minLength": 2,
+		//	                      "pattern": "^[a-zA-Z0-9]*$",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "RepetitionSeparator": {
+		//	                      "maxLength": 1,
+		//	                      "minLength": 1,
+		//	                      "type": "string"
+		//	                    },
+		//	                    "SenderId": {
+		//	                      "maxLength": 15,
+		//	                      "minLength": 15,
+		//	                      "pattern": "^[a-zA-Z0-9]*$",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "SenderIdQualifier": {
+		//	                      "maxLength": 2,
+		//	                      "minLength": 2,
+		//	                      "pattern": "^[a-zA-Z0-9]*$",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "UsageIndicatorCode": {
+		//	                      "maxLength": 1,
+		//	                      "minLength": 1,
+		//	                      "pattern": "^[a-zA-Z0-9]*$",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "ValidateEdi": {
+		//	                  "type": "boolean"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"capability_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: OutboundEdi
+				"outbound_edi": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: X12
+						"x12": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Common
+								"common": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Delimiters
+										"delimiters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: ComponentSeparator
+												"component_separator": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: DataElementSeparator
+												"data_element_separator": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: SegmentTerminator
+												"segment_terminator": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: FunctionalGroupHeaders
+										"functional_group_headers": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: ApplicationReceiverCode
+												"application_receiver_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: ApplicationSenderCode
+												"application_sender_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: ResponsibleAgencyCode
+												"responsible_agency_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: InterchangeControlHeaders
+										"interchange_control_headers": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: AcknowledgmentRequestedCode
+												"acknowledgment_requested_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: ReceiverId
+												"receiver_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: ReceiverIdQualifier
+												"receiver_id_qualifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: RepetitionSeparator
+												"repetition_separator": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: SenderId
+												"sender_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: SenderIdQualifier
+												"sender_id_qualifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: UsageIndicatorCode
+												"usage_indicator_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: ValidateEdi
+										"validate_edi": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -204,19 +425,40 @@ func partnershipDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::B2BI::Partnership").WithTerraformTypeName("awscc_b2bi_partnership")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"capabilities":       "Capabilities",
-		"created_at":         "CreatedAt",
-		"email":              "Email",
-		"key":                "Key",
-		"modified_at":        "ModifiedAt",
-		"name":               "Name",
-		"partnership_arn":    "PartnershipArn",
-		"partnership_id":     "PartnershipId",
-		"phone":              "Phone",
-		"profile_id":         "ProfileId",
-		"tags":               "Tags",
-		"trading_partner_id": "TradingPartnerId",
-		"value":              "Value",
+		"acknowledgment_requested_code": "AcknowledgmentRequestedCode",
+		"application_receiver_code":     "ApplicationReceiverCode",
+		"application_sender_code":       "ApplicationSenderCode",
+		"capabilities":                  "Capabilities",
+		"capability_options":            "CapabilityOptions",
+		"common":                        "Common",
+		"component_separator":           "ComponentSeparator",
+		"created_at":                    "CreatedAt",
+		"data_element_separator":        "DataElementSeparator",
+		"delimiters":                    "Delimiters",
+		"email":                         "Email",
+		"functional_group_headers":      "FunctionalGroupHeaders",
+		"interchange_control_headers":   "InterchangeControlHeaders",
+		"key":                           "Key",
+		"modified_at":                   "ModifiedAt",
+		"name":                          "Name",
+		"outbound_edi":                  "OutboundEdi",
+		"partnership_arn":               "PartnershipArn",
+		"partnership_id":                "PartnershipId",
+		"phone":                         "Phone",
+		"profile_id":                    "ProfileId",
+		"receiver_id":                   "ReceiverId",
+		"receiver_id_qualifier":         "ReceiverIdQualifier",
+		"repetition_separator":          "RepetitionSeparator",
+		"responsible_agency_code":       "ResponsibleAgencyCode",
+		"segment_terminator":            "SegmentTerminator",
+		"sender_id":                     "SenderId",
+		"sender_id_qualifier":           "SenderIdQualifier",
+		"tags":                          "Tags",
+		"trading_partner_id":            "TradingPartnerId",
+		"usage_indicator_code":          "UsageIndicatorCode",
+		"validate_edi":                  "ValidateEdi",
+		"value":                         "Value",
+		"x12":                           "X12",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

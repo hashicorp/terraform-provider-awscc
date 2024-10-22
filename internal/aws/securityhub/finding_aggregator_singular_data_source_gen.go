@@ -65,7 +65,7 @@ func findingAggregatorDataSource(ctx context.Context) (datasource.DataSource, er
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "If ``RegionLinkingMode`` is ``ALL_REGIONS_EXCEPT_SPECIFIED``, then this is a space-separated list of Regions that do not aggregate findings to the aggregation Region.\n If ``RegionLinkingMode`` is ``SPECIFIED_REGIONS``, then this is a space-separated list of Regions that do aggregate findings to the aggregation Region. \n An ``InvalidInputException`` error results if you populate this field while ``RegionLinkingMode`` is ``NO_REGIONS``.",
+		//	  "description": "If ``RegionLinkingMode`` is ``ALL_REGIONS_EXCEPT_SPECIFIED``, then this is a space-separated list of Regions that don't replicate and send findings to the home Region.\n If ``RegionLinkingMode`` is ``SPECIFIED_REGIONS``, then this is a space-separated list of Regions that do replicate and send findings to the home Region. \n An ``InvalidInputException`` error results if you populate this field while ``RegionLinkingMode`` is ``NO_REGIONS``.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "pattern": "^[a-zA-Z0-9-]{1,32}$",
@@ -78,7 +78,7 @@ func findingAggregatorDataSource(ctx context.Context) (datasource.DataSource, er
 		//	}
 		"regions": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "If ``RegionLinkingMode`` is ``ALL_REGIONS_EXCEPT_SPECIFIED``, then this is a space-separated list of Regions that do not aggregate findings to the aggregation Region.\n If ``RegionLinkingMode`` is ``SPECIFIED_REGIONS``, then this is a space-separated list of Regions that do aggregate findings to the aggregation Region. \n An ``InvalidInputException`` error results if you populate this field while ``RegionLinkingMode`` is ``NO_REGIONS``.",
+			Description: "If ``RegionLinkingMode`` is ``ALL_REGIONS_EXCEPT_SPECIFIED``, then this is a space-separated list of Regions that don't replicate and send findings to the home Region.\n If ``RegionLinkingMode`` is ``SPECIFIED_REGIONS``, then this is a space-separated list of Regions that do replicate and send findings to the home Region. \n An ``InvalidInputException`` error results if you populate this field while ``RegionLinkingMode`` is ``NO_REGIONS``.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

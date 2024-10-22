@@ -280,12 +280,14 @@ func schemaResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"schema_definition": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Definition for the initial schema version in plain-text.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 170000),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// SchemaDefinition is a write-only property.
 		}, /*END ATTRIBUTE*/

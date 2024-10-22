@@ -62,7 +62,7 @@ func tagDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "pattern": "^([{a-zA-Z}{\\s}{0-9}_.:\\*\\/=+\\-@%]*)$",
 		//	    "type": "string"
 		//	  },
-		//	  "maxItems": 50,
+		//	  "maxItems": 1000,
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}

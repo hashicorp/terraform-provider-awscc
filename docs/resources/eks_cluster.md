@@ -214,7 +214,7 @@ resource "awscc_kms_key" "main" {
 ### Optional
 
 - `access_config` (Attributes) An object representing the Access Config to use for the cluster. (see [below for nested schema](#nestedatt--access_config))
-- `bootstrap_self_managed_addons` (Boolean) Set this value to false to avoid creating the default networking addons when the cluster is created.
+- `bootstrap_self_managed_addons` (Boolean) Set this value to false to avoid creating the default networking add-ons when the cluster is created.
 - `encryption_config` (Attributes List) (see [below for nested schema](#nestedatt--encryption_config))
 - `kubernetes_network_config` (Attributes) The Kubernetes network configuration for the cluster. (see [below for nested schema](#nestedatt--kubernetes_network_config))
 - `logging` (Attributes) Enable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs based on log types. By default, cluster control plane logs aren't exported to CloudWatch Logs. (see [below for nested schema](#nestedatt--logging))
@@ -223,6 +223,7 @@ resource "awscc_kms_key" "main" {
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `upgrade_policy` (Attributes) An object representing the Upgrade Policy to use for the cluster. (see [below for nested schema](#nestedatt--upgrade_policy))
 - `version` (String) The desired Kubernetes version for your cluster. If you don't specify a value here, the latest version available in Amazon EKS is used.
+- `zonal_shift_config` (Attributes) The current zonal shift configuration to use for the cluster. (see [below for nested schema](#nestedatt--zonal_shift_config))
 
 ### Read-Only
 
@@ -346,6 +347,14 @@ Optional:
 Optional:
 
 - `support_type` (String) Specify the support type for your cluster.
+
+
+<a id="nestedatt--zonal_shift_config"></a>
+### Nested Schema for `zonal_shift_config`
+
+Optional:
+
+- `enabled` (Boolean) Set this value to true to enable zonal shift for the cluster.
 
 ## Import
 

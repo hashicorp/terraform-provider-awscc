@@ -83,7 +83,7 @@ func tagResource(ctx context.Context) (resource.Resource, error) {
 		//	    "pattern": "^([{a-zA-Z}{\\s}{0-9}_.:\\*\\/=+\\-@%]*)$",
 		//	    "type": "string"
 		//	  },
-		//	  "maxItems": 50,
+		//	  "maxItems": 1000,
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
@@ -92,7 +92,7 @@ func tagResource(ctx context.Context) (resource.Resource, error) {
 			Description: "A list of possible values an attribute can take.",
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeBetween(1, 50),
+				listvalidator.SizeBetween(1, 1000),
 				listvalidator.ValueStringsAre(
 					stringvalidator.LengthBetween(0, 256),
 					stringvalidator.RegexMatches(regexp.MustCompile("^([{a-zA-Z}{\\s}{0-9}_.:\\*\\/=+\\-@%]*)$"), ""),

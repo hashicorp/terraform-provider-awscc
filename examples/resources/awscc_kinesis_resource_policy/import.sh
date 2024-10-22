@@ -1,0 +1,1 @@
+$ terraform import awscc_kinesis_resource_policy.example "resource_arn"

@@ -14,7 +14,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -46,16 +48,368 @@ func partnershipResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"capabilities": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.ValueStringsAre(
 					stringvalidator.LengthBetween(1, 64),
 					stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
 				),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
+		}, /*END ATTRIBUTE*/
+		// Property: CapabilityOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "OutboundEdi": {
+		//	      "properties": {
+		//	        "X12": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Common": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Delimiters": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "ComponentSeparator": {
+		//	                      "maxLength": 1,
+		//	                      "minLength": 1,
+		//	                      "pattern": "^[!\u0026'()*+,\\-./:;?=%@\\[\\]_{}|\u003c\u003e~^`\"]$",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "DataElementSeparator": {
+		//	                      "maxLength": 1,
+		//	                      "minLength": 1,
+		//	                      "pattern": "^[!\u0026'()*+,\\-./:;?=%@\\[\\]_{}|\u003c\u003e~^`\"]$",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "SegmentTerminator": {
+		//	                      "maxLength": 1,
+		//	                      "minLength": 1,
+		//	                      "pattern": "^[!\u0026'()*+,\\-./:;?=%@\\[\\]_{}|\u003c\u003e~^`\"]$",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "FunctionalGroupHeaders": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "ApplicationReceiverCode": {
+		//	                      "maxLength": 15,
+		//	                      "minLength": 2,
+		//	                      "pattern": "^[a-zA-Z0-9]*$",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "ApplicationSenderCode": {
+		//	                      "maxLength": 15,
+		//	                      "minLength": 2,
+		//	                      "pattern": "^[a-zA-Z0-9]*$",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "ResponsibleAgencyCode": {
+		//	                      "maxLength": 2,
+		//	                      "minLength": 1,
+		//	                      "pattern": "^[a-zA-Z0-9]*$",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "InterchangeControlHeaders": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "AcknowledgmentRequestedCode": {
+		//	                      "maxLength": 1,
+		//	                      "minLength": 1,
+		//	                      "pattern": "^[a-zA-Z0-9]*$",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "ReceiverId": {
+		//	                      "maxLength": 15,
+		//	                      "minLength": 15,
+		//	                      "pattern": "^[a-zA-Z0-9]*$",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "ReceiverIdQualifier": {
+		//	                      "maxLength": 2,
+		//	                      "minLength": 2,
+		//	                      "pattern": "^[a-zA-Z0-9]*$",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "RepetitionSeparator": {
+		//	                      "maxLength": 1,
+		//	                      "minLength": 1,
+		//	                      "type": "string"
+		//	                    },
+		//	                    "SenderId": {
+		//	                      "maxLength": 15,
+		//	                      "minLength": 15,
+		//	                      "pattern": "^[a-zA-Z0-9]*$",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "SenderIdQualifier": {
+		//	                      "maxLength": 2,
+		//	                      "minLength": 2,
+		//	                      "pattern": "^[a-zA-Z0-9]*$",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "UsageIndicatorCode": {
+		//	                      "maxLength": 1,
+		//	                      "minLength": 1,
+		//	                      "pattern": "^[a-zA-Z0-9]*$",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "ValidateEdi": {
+		//	                  "type": "boolean"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"capability_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: OutboundEdi
+				"outbound_edi": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: X12
+						"x12": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Common
+								"common": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Delimiters
+										"delimiters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: ComponentSeparator
+												"component_separator": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Optional: true,
+													Computed: true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.LengthBetween(1, 1),
+														stringvalidator.RegexMatches(regexp.MustCompile("^[!&'()*+,\\-./:;?=%@\\[\\]_{}|<>~^`\"]$"), ""),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: DataElementSeparator
+												"data_element_separator": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Optional: true,
+													Computed: true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.LengthBetween(1, 1),
+														stringvalidator.RegexMatches(regexp.MustCompile("^[!&'()*+,\\-./:;?=%@\\[\\]_{}|<>~^`\"]$"), ""),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: SegmentTerminator
+												"segment_terminator": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Optional: true,
+													Computed: true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.LengthBetween(1, 1),
+														stringvalidator.RegexMatches(regexp.MustCompile("^[!&'()*+,\\-./:;?=%@\\[\\]_{}|<>~^`\"]$"), ""),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: FunctionalGroupHeaders
+										"functional_group_headers": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: ApplicationReceiverCode
+												"application_receiver_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Optional: true,
+													Computed: true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.LengthBetween(2, 15),
+														stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]*$"), ""),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: ApplicationSenderCode
+												"application_sender_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Optional: true,
+													Computed: true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.LengthBetween(2, 15),
+														stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]*$"), ""),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: ResponsibleAgencyCode
+												"responsible_agency_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Optional: true,
+													Computed: true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.LengthBetween(1, 2),
+														stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]*$"), ""),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: InterchangeControlHeaders
+										"interchange_control_headers": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: AcknowledgmentRequestedCode
+												"acknowledgment_requested_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Optional: true,
+													Computed: true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.LengthBetween(1, 1),
+														stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]*$"), ""),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: ReceiverId
+												"receiver_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Optional: true,
+													Computed: true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.LengthBetween(15, 15),
+														stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]*$"), ""),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: ReceiverIdQualifier
+												"receiver_id_qualifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Optional: true,
+													Computed: true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.LengthBetween(2, 2),
+														stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]*$"), ""),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: RepetitionSeparator
+												"repetition_separator": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Optional: true,
+													Computed: true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.LengthBetween(1, 1),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: SenderId
+												"sender_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Optional: true,
+													Computed: true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.LengthBetween(15, 15),
+														stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]*$"), ""),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: SenderIdQualifier
+												"sender_id_qualifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Optional: true,
+													Computed: true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.LengthBetween(2, 2),
+														stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]*$"), ""),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: UsageIndicatorCode
+												"usage_indicator_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Optional: true,
+													Computed: true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.LengthBetween(1, 1),
+														stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]*$"), ""),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: ValidateEdi
+										"validate_edi": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+												boolplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
@@ -291,19 +645,40 @@ func partnershipResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::B2BI::Partnership").WithTerraformTypeName("awscc_b2bi_partnership")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"capabilities":       "Capabilities",
-		"created_at":         "CreatedAt",
-		"email":              "Email",
-		"key":                "Key",
-		"modified_at":        "ModifiedAt",
-		"name":               "Name",
-		"partnership_arn":    "PartnershipArn",
-		"partnership_id":     "PartnershipId",
-		"phone":              "Phone",
-		"profile_id":         "ProfileId",
-		"tags":               "Tags",
-		"trading_partner_id": "TradingPartnerId",
-		"value":              "Value",
+		"acknowledgment_requested_code": "AcknowledgmentRequestedCode",
+		"application_receiver_code":     "ApplicationReceiverCode",
+		"application_sender_code":       "ApplicationSenderCode",
+		"capabilities":                  "Capabilities",
+		"capability_options":            "CapabilityOptions",
+		"common":                        "Common",
+		"component_separator":           "ComponentSeparator",
+		"created_at":                    "CreatedAt",
+		"data_element_separator":        "DataElementSeparator",
+		"delimiters":                    "Delimiters",
+		"email":                         "Email",
+		"functional_group_headers":      "FunctionalGroupHeaders",
+		"interchange_control_headers":   "InterchangeControlHeaders",
+		"key":                           "Key",
+		"modified_at":                   "ModifiedAt",
+		"name":                          "Name",
+		"outbound_edi":                  "OutboundEdi",
+		"partnership_arn":               "PartnershipArn",
+		"partnership_id":                "PartnershipId",
+		"phone":                         "Phone",
+		"profile_id":                    "ProfileId",
+		"receiver_id":                   "ReceiverId",
+		"receiver_id_qualifier":         "ReceiverIdQualifier",
+		"repetition_separator":          "RepetitionSeparator",
+		"responsible_agency_code":       "ResponsibleAgencyCode",
+		"segment_terminator":            "SegmentTerminator",
+		"sender_id":                     "SenderId",
+		"sender_id_qualifier":           "SenderIdQualifier",
+		"tags":                          "Tags",
+		"trading_partner_id":            "TradingPartnerId",
+		"usage_indicator_code":          "UsageIndicatorCode",
+		"validate_edi":                  "ValidateEdi",
+		"value":                         "Value",
+		"x12":                           "X12",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

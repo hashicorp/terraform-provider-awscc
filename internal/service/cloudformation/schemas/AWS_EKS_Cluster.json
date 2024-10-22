@@ -134,6 +134,17 @@
         }
       }
     },
+    "ZonalShiftConfig": {
+      "description": "The current zonal shift configuration to use for the cluster.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Enabled": {
+          "description": "Set this value to true to enable zonal shift for the cluster.",
+          "type": "boolean"
+        }
+      }
+    },
     "AccessConfig": {
       "description": "An object representing the Access Config to use for the cluster.",
       "additionalProperties": false,
@@ -252,6 +263,17 @@
       "required": [
         "Cidrs"
       ]
+    },
+    "BlockStorage": {
+      "description": "Todo: add description",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Enabled": {
+          "description": "Todo: add description",
+          "type": "boolean"
+        }
+      }
     },
     "UpgradePolicy": {
       "description": "An object representing the Upgrade Policy to use for the cluster.",
@@ -397,12 +419,15 @@
       "$ref": "#/definitions/Logging"
     },
     "BootstrapSelfManagedAddons": {
-      "description": "Set this value to false to avoid creating the default networking addons when the cluster is created.",
+      "description": "Set this value to false to avoid creating the default networking add-ons when the cluster is created.",
       "type": "boolean"
     },
     "EncryptionConfigKeyArn": {
       "description": "Amazon Resource Name (ARN) or alias of the customer master key (CMK).",
       "type": "string"
+    },
+    "ZonalShiftConfig": {
+      "$ref": "#/definitions/ZonalShiftConfig"
     },
     "AccessConfig": {
       "$ref": "#/definitions/AccessConfig"

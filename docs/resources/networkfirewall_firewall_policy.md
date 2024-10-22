@@ -70,8 +70,17 @@ Optional:
 
 Optional:
 
+- `flow_timeouts` (Attributes) (see [below for nested schema](#nestedatt--firewall_policy--stateful_engine_options--flow_timeouts))
 - `rule_order` (String)
 - `stream_exception_policy` (String)
+
+<a id="nestedatt--firewall_policy--stateful_engine_options--flow_timeouts"></a>
+### Nested Schema for `firewall_policy.stateful_engine_options.flow_timeouts`
+
+Optional:
+
+- `tcp_idle_timeout_seconds` (Number)
+
 
 
 <a id="nestedatt--firewall_policy--stateful_rule_group_references"></a>

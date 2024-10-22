@@ -109,11 +109,13 @@ Read-Only:
 Read-Only:
 
 - `action_type_id` (Attributes) Represents information about an action type. (see [below for nested schema](#nestedatt--stages--actions--action_type_id))
+- `commands` (List of String) The shell commands to run with your compute action in CodePipeline.
 - `configuration` (String) The action's configuration. These are key-value pairs that specify input values for an action.
 - `input_artifacts` (Attributes List) (see [below for nested schema](#nestedatt--stages--actions--input_artifacts))
 - `name` (String) The action declaration's name.
 - `namespace` (String) The variable namespace associated with the action. All variables produced as output by this action fall under this namespace.
 - `output_artifacts` (Attributes List) (see [below for nested schema](#nestedatt--stages--actions--output_artifacts))
+- `output_variables` (List of String) The list of variables that are to be exported from the compute action.
 - `region` (String) The action declaration's AWS Region, such as us-east-1.
 - `role_arn` (String) The ARN of the IAM service role that performs the declared action. This is assumed through the roleArn for the pipeline.
 - `run_order` (Number) The order in which actions are run.
@@ -143,6 +145,7 @@ Read-Only:
 
 Read-Only:
 
+- `files` (List of String) The files that you want to associate with the output artifact that will be exported from the compute action.
 - `name` (String) The name of the output of an artifact, such as "My App".
 
 

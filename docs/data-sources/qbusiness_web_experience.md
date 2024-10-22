@@ -25,6 +25,7 @@ Data Source schema for AWS::QBusiness::WebExperience
 - `created_at` (String)
 - `default_endpoint` (String)
 - `identity_provider_configuration` (Attributes) (see [below for nested schema](#nestedatt--identity_provider_configuration))
+- `origins` (List of String)
 - `role_arn` (String)
 - `sample_prompts_control_mode` (String)
 - `status` (String)

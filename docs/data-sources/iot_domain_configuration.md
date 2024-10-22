@@ -21,8 +21,11 @@ Data Source schema for AWS::IoT::DomainConfiguration
 
 ### Read-Only
 
+- `application_protocol` (String)
 - `arn` (String)
+- `authentication_type` (String)
 - `authorizer_config` (Attributes) (see [below for nested schema](#nestedatt--authorizer_config))
+- `client_certificate_config` (Attributes) (see [below for nested schema](#nestedatt--client_certificate_config))
 - `domain_configuration_name` (String)
 - `domain_configuration_status` (String)
 - `domain_name` (String)
@@ -42,6 +45,14 @@ Read-Only:
 
 - `allow_authorizer_override` (Boolean)
 - `default_authorizer_name` (String)
+
+
+<a id="nestedatt--client_certificate_config"></a>
+### Nested Schema for `client_certificate_config`
+
+Read-Only:
+
+- `client_certificate_callback_arn` (String)
 
 
 <a id="nestedatt--server_certificate_config"></a>

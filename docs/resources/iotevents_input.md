@@ -2,12 +2,12 @@
 page_title: "awscc_iotevents_input Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  The AWS::IoTEvents::Input resource creates an input. To monitor your devices and processes, they must have a way to get telemetry data into AWS IoT Events. This is done by sending messages as inputs to AWS IoT Events. For more information, see How to Use AWS IoT Events https://docs.aws.amazon.com/iotevents/latest/developerguide/how-to-use-iotevents.html in the AWS IoT Events Developer Guide.
+  The AWS::IoTEvents::Input resource creates an input. To monitor your devices and processes, they must have a way to get telemetry data into ITE. This is done by sending messages as inputs to ITE. For more information, see How to Use https://docs.aws.amazon.com/iotevents/latest/developerguide/how-to-use-iotevents.html in the Developer Guide.
 ---
 
 # awscc_iotevents_input (Resource)
 
-The AWS::IoTEvents::Input resource creates an input. To monitor your devices and processes, they must have a way to get telemetry data into AWS IoT Events. This is done by sending messages as *inputs* to AWS IoT Events. For more information, see [How to Use AWS IoT Events](https://docs.aws.amazon.com/iotevents/latest/developerguide/how-to-use-iotevents.html) in the *AWS IoT Events Developer Guide*.
+The AWS::IoTEvents::Input resource creates an input. To monitor your devices and processes, they must have a way to get telemetry data into ITE. This is done by sending messages as *inputs* to ITE. For more information, see [How to Use](https://docs.aws.amazon.com/iotevents/latest/developerguide/how-to-use-iotevents.html) in the *Developer Guide*.
 
 ## Basic Example
 
@@ -44,8 +44,7 @@ resource "awscc_iotevents_input" "example" {
 - `input_description` (String) A brief description of the input.
 - `input_name` (String) The name of the input.
 - `tags` (Attributes List) An array of key-value pairs to apply to this resource.
-
-For more information, see [Tag](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html). (see [below for nested schema](#nestedatt--tags))
+ For more information, see [Tag](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html). (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -56,16 +55,15 @@ For more information, see [Tag](https://docs.aws.amazon.com/AWSCloudFormation/la
 
 Required:
 
-- `attributes` (Attributes Set) The attributes from the JSON payload that are made available by the input. Inputs are derived from messages sent to the AWS IoT Events system using `BatchPutMessage`. Each such message contains a JSON payload, and those attributes (and their paired values) specified here are available for use in the `condition` expressions used by detectors that monitor this input. (see [below for nested schema](#nestedatt--input_definition--attributes))
+- `attributes` (Attributes Set) The attributes from the JSON payload that are made available by the input. Inputs are derived from messages sent to the ITE system using ``BatchPutMessage``. Each such message contains a JSON payload, and those attributes (and their paired values) specified here are available for use in the ``condition`` expressions used by detectors that monitor this input. (see [below for nested schema](#nestedatt--input_definition--attributes))
 
 <a id="nestedatt--input_definition--attributes"></a>
 ### Nested Schema for `input_definition.attributes`
 
 Required:
 
-- `json_path` (String) An expression that specifies an attribute-value pair in a JSON structure. Use this to specify an attribute from the JSON payload that is made available by the input. Inputs are derived from messages sent to AWS IoT Events (`BatchPutMessage`). Each such message contains a JSON payload. The attribute (and its paired value) specified here are available for use in the `condition` expressions used by detectors.
-
-_Syntax_: `<field-name>.<field-name>...`
+- `json_path` (String) An expression that specifies an attribute-value pair in a JSON structure. Use this to specify an attribute from the JSON payload that is made available by the input. Inputs are derived from messages sent to ITE (``BatchPutMessage``). Each such message contains a JSON payload. The attribute (and its paired value) specified here are available for use in the ``condition`` expressions used by detectors. 
+ Syntax: ``<field-name>.<field-name>...``
 
 
 
@@ -74,8 +72,8 @@ _Syntax_: `<field-name>.<field-name>...`
 
 Optional:
 
-- `key` (String) Key of the Tag.
-- `value` (String) Value of the Tag.
+- `key` (String) The tag's key.
+- `value` (String) The tag's value.
 
 ## Import
 

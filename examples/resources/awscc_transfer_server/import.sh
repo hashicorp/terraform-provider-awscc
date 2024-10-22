@@ -1,0 +1,1 @@
+$ terraform import awscc_transfer_server.example "arn"

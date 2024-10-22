@@ -19,6 +19,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
@@ -189,6 +190,37 @@ func webExperienceResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Origins
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "maxLength": 64,
+		//	    "minLength": 1,
+		//	    "pattern": "^(http:\\/\\/|https:\\/\\/)[a-zA-Z0-9-_.]+(?::[0-9]{1,5})?$",
+		//	    "type": "string"
+		//	  },
+		//	  "maxItems": 10,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"origins": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(0, 10),
+				listvalidator.ValueStringsAre(
+					stringvalidator.LengthBetween(1, 64),
+					stringvalidator.RegexMatches(regexp.MustCompile("^(http:\\/\\/|https:\\/\\/)[a-zA-Z0-9-_.]+(?::[0-9]{1,5})?$"), ""),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
@@ -451,6 +483,7 @@ func webExperienceResource(ctx context.Context) (resource.Resource, error) {
 		"identity_provider_configuration": "IdentityProviderConfiguration",
 		"key":                             "Key",
 		"open_id_connect_configuration":   "OpenIDConnectConfiguration",
+		"origins":                         "Origins",
 		"role_arn":                        "RoleArn",
 		"saml_configuration":              "SamlConfiguration",
 		"sample_prompts_control_mode":     "SamplePromptsControlMode",

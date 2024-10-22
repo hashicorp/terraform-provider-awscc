@@ -102,6 +102,7 @@ data "aws_partition" "current" {}
 ### Optional
 
 - `identity_provider_configuration` (Attributes) (see [below for nested schema](#nestedatt--identity_provider_configuration))
+- `origins` (List of String)
 - `role_arn` (String)
 - `sample_prompts_control_mode` (String)
 - `subtitle` (String)

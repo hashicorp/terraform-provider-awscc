@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1058 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1067 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -369,6 +369,11 @@ resource_schema "aws_appstream_entitlement" {
 
 resource_schema "aws_appstream_image_builder" {
   cloudformation_type_name = "AWS::AppStream::ImageBuilder"
+}
+
+resource_schema "aws_appsync_data_source" {
+  cloudformation_type_name               = "AWS::AppSync::DataSource"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_appsync_domain_name" {
@@ -2141,6 +2146,11 @@ resource_schema "aws_gamelift_build" {
 
 resource_schema "aws_gamelift_container_group_definition" {
   cloudformation_type_name = "AWS::GameLift::ContainerGroupDefinition"
+
+  # Latest schema updates are suppressed.
+  # git checkout internal/service/cloudformation/schemas/AWS_GameLift_ContainerGroupDefinition.json
+  # Suppression Reason: set of unknown type
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/2069
 }
 
 resource_schema "aws_gamelift_fleet" {
@@ -2187,8 +2197,16 @@ resource_schema "aws_globalaccelerator_listener" {
   cloudformation_type_name = "AWS::GlobalAccelerator::Listener"
 }
 
+resource_schema "aws_glue_crawler" {
+  cloudformation_type_name = "AWS::Glue::Crawler"
+}
+
 resource_schema "aws_glue_database" {
   cloudformation_type_name = "AWS::Glue::Database"
+}
+
+resource_schema "aws_glue_job" {
+  cloudformation_type_name = "AWS::Glue::Job"
 }
 
 resource_schema "aws_glue_registry" {
@@ -2211,6 +2229,16 @@ resource_schema "aws_glue_schema_version_metadata" {
 
 resource_schema "aws_glue_trigger" {
   cloudformation_type_name = "AWS::Glue::Trigger"
+}
+
+resource_schema "aws_glue_usage_profile" {
+  cloudformation_type_name = "AWS::Glue::UsageProfile"
+
+  # Suppression Reason: Configuration/JobConfiguration is of unsupported type: key-value map of ""
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/2070
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_grafana_workspace" {
@@ -2763,6 +2791,11 @@ resource_schema "aws_kendra_index" {
 
 resource_schema "aws_kendraranking_execution_plan" {
   cloudformation_type_name = "AWS::KendraRanking::ExecutionPlan"
+}
+
+resource_schema "aws_kinesis_resource_policy" {
+  cloudformation_type_name               = "AWS::Kinesis::ResourcePolicy"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_kinesis_stream" {
@@ -3633,6 +3666,10 @@ resource_schema "aws_quicksight_data_source" {
   cloudformation_type_name = "AWS::QuickSight::DataSource"
 }
 
+resource_schema "aws_quicksight_folder" {
+  cloudformation_type_name = "AWS::QuickSight::Folder"
+}
+
 resource_schema "aws_quicksight_refresh_schedule" {
   cloudformation_type_name = "AWS::QuickSight::RefreshSchedule"
 }
@@ -4332,6 +4369,10 @@ resource_schema "aws_secretsmanager_secret" {
   cloudformation_type_name = "AWS::SecretsManager::Secret"
 }
 
+resource_schema "aws_secretsmanager_secret_target_attachment" {
+  cloudformation_type_name = "AWS::SecretsManager::SecretTargetAttachment"
+}
+
 resource_schema "aws_securityhub_automation_rule" {
   cloudformation_type_name = "AWS::SecurityHub::AutomationRule"
 
@@ -4545,6 +4586,10 @@ resource_schema "aws_transfer_profile" {
   cloudformation_type_name = "AWS::Transfer::Profile"
 }
 
+resource_schema "aws_transfer_server" {
+  cloudformation_type_name = "AWS::Transfer::Server"
+}
+
 resource_schema "aws_transfer_workflow" {
   cloudformation_type_name = "AWS::Transfer::Workflow"
 }
@@ -4653,6 +4698,11 @@ resource_schema "aws_wafv2_web_acl" {
 
 resource_schema "aws_wafv2_web_acl_association" {
   cloudformation_type_name               = "AWS::WAFv2::WebACLAssociation"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_wisdom_ai_prompt" {
+  cloudformation_type_name               = "AWS::Wisdom::AIPrompt"
   suppress_plural_data_source_generation = true
 }
 
