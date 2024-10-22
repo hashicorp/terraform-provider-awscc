@@ -148,6 +148,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_connect_security_keys -cftype AWS::Connect::SecurityKey -package connect ../aws/connect/security_key_plural_data_source_gen.go ../aws/connect/security_key_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_connect_traffic_distribution_groups -cftype AWS::Connect::TrafficDistributionGroup -package connect ../aws/connect/traffic_distribution_group_plural_data_source_gen.go ../aws/connect/traffic_distribution_group_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_connectcampaigns_campaigns -cftype AWS::ConnectCampaigns::Campaign -package connectcampaigns ../aws/connectcampaigns/campaign_plural_data_source_gen.go ../aws/connectcampaigns/campaign_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_controltower_landing_zones -cftype AWS::ControlTower::LandingZone -package controltower ../aws/controltower/landing_zone_plural_data_source_gen.go ../aws/controltower/landing_zone_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_dms_data_providers -cftype AWS::DMS::DataProvider -package dms ../aws/dms/data_provider_plural_data_source_gen.go ../aws/dms/data_provider_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_dms_instance_profiles -cftype AWS::DMS::InstanceProfile -package dms ../aws/dms/instance_profile_plural_data_source_gen.go ../aws/dms/instance_profile_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_dms_migration_projects -cftype AWS::DMS::MigrationProject -package dms ../aws/dms/migration_project_plural_data_source_gen.go ../aws/dms/migration_project_plural_data_source_gen_test.go
@@ -853,6 +854,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/config"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/connect"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/connectcampaigns"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/controltower"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/cur"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/databrew"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/datapipeline"

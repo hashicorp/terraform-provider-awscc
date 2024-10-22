@@ -1150,11 +1150,13 @@ resource_schema "aws_controltower_enabled_control" {
 resource_schema "aws_controltower_landing_zone" {
   cloudformation_type_name = "AWS::ControlTower::LandingZone"
 
-  # Suppression Reason: Manifest is of unsupported type: .
+  # Suppression update: issue fixed on the latest schema.
+  
+  # Historical suppression Reason: Manifest is of unsupported type: .
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1519
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
+  suppress_resource_generation             = false
+  suppress_singular_data_source_generation = false
+  suppress_plural_data_source_generation   = false
 }
 
 resource_schema "aws_customerprofiles_calculated_attribute_definition" {
