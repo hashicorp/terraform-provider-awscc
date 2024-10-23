@@ -14,11 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -496,40 +492,29 @@ func integrationResource(ctx context.Context) (resource.Resource, error) {
 				// Property: Description
 				"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
-					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthAtMost(2048),
 						stringvalidator.RegexMatches(regexp.MustCompile("[\\w!@#\\-.?,\\s]*"), ""),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// Description is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: FlowName
 				"flow_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
+					Required: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthAtMost(256),
 						stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9][\\w!@#.-]+"), ""),
-						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// FlowName is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: KmsArn
 				"kms_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
+					Required: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthBetween(20, 2048),
 						stringvalidator.RegexMatches(regexp.MustCompile("arn:aws:kms:.*:[0-9]+:.*"), ""),
-						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// KmsArn is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: SourceFlowConfig
 				"source_flow_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -537,19 +522,15 @@ func integrationResource(ctx context.Context) (resource.Resource, error) {
 						// Property: ConnectorProfileName
 						"connector_profile_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthAtMost(256),
 								stringvalidator.RegexMatches(regexp.MustCompile("[\\w/!@#+=.-]+"), ""),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// ConnectorProfileName is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: ConnectorType
 						"connector_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
+							Required: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"Salesforce",
@@ -558,11 +539,8 @@ func integrationResource(ctx context.Context) (resource.Resource, error) {
 									"Zendesk",
 									"S3",
 								),
-								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// ConnectorType is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: IncrementalPullConfig
 						"incremental_pull_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -570,20 +548,14 @@ func integrationResource(ctx context.Context) (resource.Resource, error) {
 								// Property: DatetimeTypeFieldName
 								"datetime_type_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Optional: true,
-									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// DatetimeTypeFieldName is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// IncrementalPullConfig is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: SourceConnectorProperties
 						"source_connector_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -593,58 +565,41 @@ func integrationResource(ctx context.Context) (resource.Resource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Object
 										"object": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
+											Required: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthAtMost(512),
 												stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
-												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// Object is a write-only property.
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// Marketo is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: S3
 								"s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: BucketName
 										"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
+											Required: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthBetween(3, 63),
 												stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
-												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// BucketName is a write-only property.
 										}, /*END ATTRIBUTE*/
 										// Property: BucketPrefix
 										"bucket_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Optional: true,
-											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthAtMost(512),
 												stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
 											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// BucketPrefix is a write-only property.
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// S3 is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: Salesforce
 								"salesforce": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -652,104 +607,65 @@ func integrationResource(ctx context.Context) (resource.Resource, error) {
 										// Property: EnableDynamicFieldUpdate
 										"enable_dynamic_field_update": schema.BoolAttribute{ /*START ATTRIBUTE*/
 											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-												boolplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// EnableDynamicFieldUpdate is a write-only property.
 										}, /*END ATTRIBUTE*/
 										// Property: IncludeDeletedRecords
 										"include_deleted_records": schema.BoolAttribute{ /*START ATTRIBUTE*/
 											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-												boolplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// IncludeDeletedRecords is a write-only property.
 										}, /*END ATTRIBUTE*/
 										// Property: Object
 										"object": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
+											Required: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthAtMost(512),
 												stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
-												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// Object is a write-only property.
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// Salesforce is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: ServiceNow
 								"service_now": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Object
 										"object": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
+											Required: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthAtMost(512),
 												stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
-												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// Object is a write-only property.
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// ServiceNow is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: Zendesk
 								"zendesk": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Object
 										"object": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
+											Required: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthAtMost(512),
 												stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
-												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// Object is a write-only property.
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// Zendesk is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.Object{ /*START VALIDATORS*/
-								fwvalidators.NotNullObject(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							Required: true,
+							// SourceConnectorProperties is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Optional: true,
-					Computed: true,
-					Validators: []validator.Object{ /*START VALIDATORS*/
-						fwvalidators.NotNullObject(),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					Required: true,
+					// SourceFlowConfig is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: Tasks
 				"tasks": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -761,7 +677,6 @@ func integrationResource(ctx context.Context) (resource.Resource, error) {
 									// Property: Marketo
 									"marketo": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Optional: true,
-										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"PROJECTION",
@@ -782,14 +697,11 @@ func integrationResource(ctx context.Context) (resource.Resource, error) {
 												"NO_OP",
 											),
 										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// Marketo is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: S3
 									"s3": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Optional: true,
-										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"PROJECTION",
@@ -814,14 +726,11 @@ func integrationResource(ctx context.Context) (resource.Resource, error) {
 												"NO_OP",
 											),
 										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// S3 is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: Salesforce
 									"salesforce": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Optional: true,
-										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"PROJECTION",
@@ -847,14 +756,11 @@ func integrationResource(ctx context.Context) (resource.Resource, error) {
 												"NO_OP",
 											),
 										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// Salesforce is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: ServiceNow
 									"service_now": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Optional: true,
-										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"PROJECTION",
@@ -880,14 +786,11 @@ func integrationResource(ctx context.Context) (resource.Resource, error) {
 												"NO_OP",
 											),
 										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// ServiceNow is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: Zendesk
 									"zendesk": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Optional: true,
-										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"PROJECTION",
@@ -906,44 +809,32 @@ func integrationResource(ctx context.Context) (resource.Resource, error) {
 												"NO_OP",
 											),
 										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// Zendesk is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Optional: true,
-								Computed: true,
-								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-									objectplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// ConnectorOperator is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: DestinationField
 							"destination_field": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Optional: true,
-								Computed: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtMost(256),
 									stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
 								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// DestinationField is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: SourceFields
 							"source_fields": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
-								Optional:    true,
-								Computed:    true,
+								Required:    true,
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.ValueStringsAre(
 										stringvalidator.LengthAtMost(2048),
 										stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
 									),
-									fwvalidators.NotNullList(),
 								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-									listplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// SourceFields is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: TaskProperties
 							"task_properties": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -951,8 +842,7 @@ func integrationResource(ctx context.Context) (resource.Resource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: OperatorPropertyKey
 										"operator_property_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
+											Required: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.OneOf(
 													"VALUE",
@@ -970,37 +860,26 @@ func integrationResource(ctx context.Context) (resource.Resource, error) {
 													"CONCAT_FORMAT",
 													"SUBFIELD_CATEGORY_MAP",
 												),
-												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// OperatorPropertyKey is a write-only property.
 										}, /*END ATTRIBUTE*/
 										// Property: Property
 										"property": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
+											Required: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthAtMost(2048),
 												stringvalidator.RegexMatches(regexp.MustCompile(".+"), ""),
-												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// Property is a write-only property.
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
 								Optional: true,
-								Computed: true,
-								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-									listplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// TaskProperties is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: TaskType
 							"task_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
-								Computed: true,
+								Required: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"Arithmetic",
@@ -1011,22 +890,13 @@ func integrationResource(ctx context.Context) (resource.Resource, error) {
 										"Truncate",
 										"Validate",
 									),
-									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// TaskType is a write-only property.
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Optional: true,
-					Computed: true,
-					Validators: []validator.List{ /*START VALIDATORS*/
-						fwvalidators.NotNullList(),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					Required: true,
+					// Tasks is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: TriggerConfig
 				"trigger_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1040,123 +910,81 @@ func integrationResource(ctx context.Context) (resource.Resource, error) {
 										// Property: DataPullMode
 										"data_pull_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Optional: true,
-											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.OneOf(
 													"Incremental",
 													"Complete",
 												),
 											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// DataPullMode is a write-only property.
 										}, /*END ATTRIBUTE*/
 										// Property: FirstExecutionFrom
 										"first_execution_from": schema.Float64Attribute{ /*START ATTRIBUTE*/
 											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-												float64planmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// FirstExecutionFrom is a write-only property.
 										}, /*END ATTRIBUTE*/
 										// Property: ScheduleEndTime
 										"schedule_end_time": schema.Float64Attribute{ /*START ATTRIBUTE*/
 											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-												float64planmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// ScheduleEndTime is a write-only property.
 										}, /*END ATTRIBUTE*/
 										// Property: ScheduleExpression
 										"schedule_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
+											Required: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthAtMost(256),
 												stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
-												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// ScheduleExpression is a write-only property.
 										}, /*END ATTRIBUTE*/
 										// Property: ScheduleOffset
 										"schedule_offset": schema.Int64Attribute{ /*START ATTRIBUTE*/
 											Optional: true,
-											Computed: true,
 											Validators: []validator.Int64{ /*START VALIDATORS*/
 												int64validator.Between(0, 36000),
 											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-												int64planmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// ScheduleOffset is a write-only property.
 										}, /*END ATTRIBUTE*/
 										// Property: ScheduleStartTime
 										"schedule_start_time": schema.Float64Attribute{ /*START ATTRIBUTE*/
 											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-												float64planmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// ScheduleStartTime is a write-only property.
 										}, /*END ATTRIBUTE*/
 										// Property: Timezone
 										"timezone": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Optional: true,
-											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthAtMost(256),
 												stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
 											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// Timezone is a write-only property.
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// Scheduled is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// TriggerProperties is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: TriggerType
 						"trigger_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
+							Required: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"Scheduled",
 									"Event",
 									"OnDemand",
 								),
-								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// TriggerType is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Optional: true,
-					Computed: true,
-					Validators: []validator.Object{ /*START VALIDATORS*/
-						fwvalidators.NotNullObject(),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					Required: true,
+					// TriggerConfig is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// FlowDefinition is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedAt

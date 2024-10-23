@@ -547,7 +547,6 @@ func multiplexprogramResource(ctx context.Context) (resource.Resource, error) {
 		"preferred_channel_pipeline": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The settings for this multiplex program.",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"CURRENTLY_ACTIVE",
@@ -555,9 +554,6 @@ func multiplexprogramResource(ctx context.Context) (resource.Resource, error) {
 					"PIPELINE_1",
 				),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// PreferredChannelPipeline is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: ProgramName

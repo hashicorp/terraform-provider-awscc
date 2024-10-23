@@ -170,11 +170,17 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 							Validators: []validator.Int64{ /*START VALIDATORS*/
 								int64validator.Between(1, 100),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.RequiresReplace(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: InstanceType
 						"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The ML compute instance type for the processing job.",
 							Required:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.RequiresReplace(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: VolumeKmsKeyId
 						"volume_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -183,6 +189,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: VolumeSizeInGB
@@ -192,10 +199,16 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 							Validators: []validator.Int64{ /*START VALIDATORS*/
 								int64validator.Between(1, 16384),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.RequiresReplace(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Configuration for the cluster used to run model monitoring jobs.",
 					Required:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.RequiresReplace(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Identifies the resources to deploy for a monitoring job.",
@@ -256,6 +269,9 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 						stringvalidator.LengthAtMost(1024),
 						stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.RequiresReplace(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Environment
 				"environment":       // Pattern: ""
@@ -267,6 +283,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 					Computed:    true,
 					PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
 						mapplanmodifier.UseStateForUnknown(),
+						mapplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: ImageUri
@@ -277,6 +294,9 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 						stringvalidator.LengthAtMost(255),
 						stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.RequiresReplace(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Container image configuration object for the monitoring job.",
@@ -328,6 +348,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: ConstraintsResource
@@ -344,6 +365,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -352,6 +374,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
+						objectplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -529,6 +552,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: DatasetFormat
@@ -544,6 +568,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 											Computed:    true,
 											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 												boolplanmodifier.UseStateForUnknown(),
+												boolplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
@@ -552,6 +577,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 									Computed:    true,
 									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 										objectplanmodifier.UseStateForUnknown(),
+										objectplanmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Json
@@ -564,6 +590,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 											Computed:    true,
 											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 												boolplanmodifier.UseStateForUnknown(),
+												boolplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
@@ -572,6 +599,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 									Computed:    true,
 									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 										objectplanmodifier.UseStateForUnknown(),
+										objectplanmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Parquet
@@ -581,6 +609,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 									Computed:    true,
 									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 										boolplanmodifier.UseStateForUnknown(),
+										boolplanmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -592,6 +621,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 								objectplanmodifier.UseStateForUnknown(),
+								objectplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: FeaturesAttribute
@@ -604,6 +634,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: InferenceAttribute
@@ -616,6 +647,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: LocalPath
@@ -630,6 +662,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: ProbabilityAttribute
@@ -642,6 +675,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: S3DataDistributionType
@@ -657,6 +691,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: S3InputMode
@@ -672,6 +707,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -680,6 +716,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
+						objectplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: EndpointInput
@@ -697,6 +734,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: FeaturesAttribute
@@ -709,6 +747,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: InferenceAttribute
@@ -721,6 +760,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: LocalPath
@@ -735,6 +775,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: ProbabilityAttribute
@@ -747,6 +788,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: S3DataDistributionType
@@ -762,6 +804,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: S3InputMode
@@ -777,6 +820,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -785,6 +829,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
+						objectplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -873,6 +918,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: MonitoringOutputs
@@ -890,6 +936,9 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 											stringvalidator.LengthAtMost(256),
 											stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.RequiresReplace(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: S3UploadMode
 									"s3_upload_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -904,6 +953,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
+											stringplanmodifier.RequiresReplaceIfConfigured(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: S3Uri
@@ -914,15 +964,24 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 											stringvalidator.LengthAtMost(512),
 											stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
 										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.RequiresReplace(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Description: "Information about where and how to store the results of a monitoring job.",
 								Required:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.RequiresReplace(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "Monitoring outputs for monitoring jobs. This is where the output of the periodic monitoring jobs is uploaded.",
 					Required:    true,
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.RequiresReplace(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The output configuration for monitoring jobs.",
@@ -991,6 +1050,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
+						boolplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: EnableNetworkIsolation
@@ -1000,6 +1060,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
+						boolplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: VpcConfig
@@ -1021,6 +1082,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								listplanmodifier.UseStateForUnknown(),
+								listplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Subnets
@@ -1039,6 +1101,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								listplanmodifier.UseStateForUnknown(),
+								listplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -1047,6 +1110,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
+						objectplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -1111,6 +1175,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
+						int64planmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -1169,7 +1234,9 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
+						// Key is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1183,7 +1250,9 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
+						// Value is a write-only property.
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -1274,6 +1343,8 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 		"vpc_config":                                "VpcConfig",
 	})
 
+	opts = opts.IsImmutableType(true)
+
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/EndpointName",
 		"/properties/Tags",
@@ -1281,8 +1352,6 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 		"/properties/Tags/*/Value",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
-
-	opts = opts.WithUpdateTimeoutInMinutes(0)
 
 	v, err := generic.NewResource(ctx, opts...)
 

@@ -14,9 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -58,10 +56,6 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"attach_missing_permission": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "If set to true, the managed policies for SSM and CW will be attached to the instance roles if they are missing",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// AttachMissingPermission is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: AutoConfigurationEnabled
@@ -1199,44 +1193,34 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 					"component_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The ARN of the compnonent.",
 						Optional:    true,
-						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(20, 300),
 							stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:[\\w\\d-]+:([\\w\\d-]*)?:[\\w\\d_-]*([:/].+)*$"), ""),
 						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// ComponentARN is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: ComponentConfigurationMode
 					"component_configuration_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The component monitoring configuration mode.",
-						Optional:    true,
-						Computed:    true,
+						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.OneOf(
 								"DEFAULT",
 								"DEFAULT_WITH_OVERWRITE",
 								"CUSTOM",
 							),
-							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// ComponentConfigurationMode is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: ComponentName
 					"component_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The name of the component.",
 						Optional:    true,
-						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[\\d\\w\\-_.+]*$"), ""),
 						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// ComponentName is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: CustomComponentConfiguration
 					"custom_component_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1251,23 +1235,14 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 												// Property: AlarmMetricName
 												"alarm_metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The name of the metric to be monitored for the component.",
-													Optional:    true,
-													Computed:    true,
-													Validators: []validator.String{ /*START VALIDATORS*/
-														fwvalidators.NotNullString(),
-													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													Required:    true,
+													// AlarmMetricName is a write-only property.
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
 										Description: "A list of metrics to monitor for the component.",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-											listplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// AlarmMetrics is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: Alarms
 									"alarms": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1276,21 +1251,16 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 												// Property: AlarmName
 												"alarm_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The name of the CloudWatch alarm to be monitored for the component.",
-													Optional:    true,
-													Computed:    true,
+													Required:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(1, 255),
-														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// AlarmName is a write-only property.
 												}, /*END ATTRIBUTE*/
 												// Property: Severity
 												"severity": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "Indicates the degree of outage when the alarm goes off.",
 													Optional:    true,
-													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.OneOf(
 															"HIGH",
@@ -1298,18 +1268,13 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 															"LOW",
 														),
 													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// Severity is a write-only property.
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
 										Description: "A list of alarms to monitor for the component.",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-											listplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// Alarms is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: HAClusterPrometheusExporter
 									"ha_cluster_prometheus_exporter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1318,18 +1283,12 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 											"prometheus_port": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "Prometheus exporter port.",
 												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// PrometheusPort is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "The HA cluster Prometheus Exporter settings.",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											objectplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// HAClusterPrometheusExporter is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: HANAPrometheusExporter
 									"hana_prometheus_exporter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1337,67 +1296,37 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 											// Property: AgreeToInstallHANADBClient
 											"agree_to_install_hanadb_client": schema.BoolAttribute{ /*START ATTRIBUTE*/
 												Description: "A flag which indicates agreeing to install SAP HANA DB client.",
-												Optional:    true,
-												Computed:    true,
-												Validators: []validator.Bool{ /*START VALIDATORS*/
-													fwvalidators.NotNullBool(),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-													boolplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												Required:    true,
+												// AgreeToInstallHANADBClient is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: HANAPort
 											"hana_port": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "The HANA DB port.",
-												Optional:    true,
-												Computed:    true,
-												Validators: []validator.String{ /*START VALIDATORS*/
-													fwvalidators.NotNullString(),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												Required:    true,
+												// HANAPort is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: HANASID
 											"hanasid": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "HANA DB SID.",
-												Optional:    true,
-												Computed:    true,
-												Validators: []validator.String{ /*START VALIDATORS*/
-													fwvalidators.NotNullString(),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												Required:    true,
+												// HANASID is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: HANASecretName
 											"hana_secret_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "The secret name which manages the HANA DB credentials e.g. {\n  \"username\": \"<>\",\n  \"password\": \"<>\"\n}.",
-												Optional:    true,
-												Computed:    true,
-												Validators: []validator.String{ /*START VALIDATORS*/
-													fwvalidators.NotNullString(),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												Required:    true,
+												// HANASecretName is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: PrometheusPort
 											"prometheus_port": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "Prometheus exporter port.",
 												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// PrometheusPort is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "The HANA DB Prometheus Exporter settings.",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											objectplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// HANAPrometheusExporter is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: JMXPrometheusExporter
 									"jmx_prometheus_exporter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1406,36 +1335,24 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 											"host_port": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "Java agent host port",
 												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// HostPort is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: JMXURL
 											"jmxurl": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "JMX service URL.",
 												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// JMXURL is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: PrometheusPort
 											"prometheus_port": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "Prometheus exporter port.",
 												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// PrometheusPort is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "The JMX Prometheus Exporter settings.",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											objectplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// JMXPrometheusExporter is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: Logs
 									"logs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1445,7 +1362,6 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 												"encoding": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The type of encoding of the logs to be monitored.",
 													Optional:    true,
-													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.OneOf(
 															"utf-8",
@@ -1453,70 +1369,52 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 															"ascii",
 														),
 													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// Encoding is a write-only property.
 												}, /*END ATTRIBUTE*/
 												// Property: LogGroupName
 												"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The CloudWatch log group name to be associated to the monitored log.",
 													Optional:    true,
-													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(1, 512),
 														stringvalidator.RegexMatches(regexp.MustCompile("[\\.\\-_/#A-Za-z0-9]+"), ""),
 													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// LogGroupName is a write-only property.
 												}, /*END ATTRIBUTE*/
 												// Property: LogPath
 												"log_path": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The path of the logs to be monitored.",
 													Optional:    true,
-													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(1, 260),
 														stringvalidator.RegexMatches(regexp.MustCompile("^([a-zA-Z]:\\\\[\\\\\\S|*\\S]?.*|/[^\"']*)$"), ""),
 													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// LogPath is a write-only property.
 												}, /*END ATTRIBUTE*/
 												// Property: LogType
 												"log_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The log type decides the log patterns against which Application Insights analyzes the log.",
-													Optional:    true,
-													Computed:    true,
+													Required:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.RegexMatches(regexp.MustCompile("^[A-Z][[A-Z]_]*$"), ""),
-														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// LogType is a write-only property.
 												}, /*END ATTRIBUTE*/
 												// Property: PatternSet
 												"pattern_set": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The name of the log pattern set.",
 													Optional:    true,
-													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(1, 30),
 														stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9.-_]*"), ""),
 													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// PatternSet is a write-only property.
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
 										Description: "A list of logs to monitor for the component.",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-											listplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// Logs is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: NetWeaverPrometheusExporter
 									"net_weaver_prometheus_exporter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1525,47 +1423,31 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 											"instance_numbers": schema.ListAttribute{ /*START ATTRIBUTE*/
 												ElementType: types.StringType,
 												Description: "SAP instance numbers for ASCS, ERS, and App Servers.",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.List{ /*START VALIDATORS*/
 													listvalidator.ValueStringsAre(
 														stringvalidator.LengthBetween(1, 2),
 														stringvalidator.RegexMatches(regexp.MustCompile("\\b([0-9]|[0-9][0-9])\\b"), ""),
 													),
-													fwvalidators.NotNullList(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-													listplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// InstanceNumbers is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: PrometheusPort
 											"prometheus_port": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "Prometheus exporter port.",
 												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// PrometheusPort is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: SAPSID
 											"sapsid": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "SAP NetWeaver SID.",
-												Optional:    true,
-												Computed:    true,
-												Validators: []validator.String{ /*START VALIDATORS*/
-													fwvalidators.NotNullString(),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												Required:    true,
+												// SAPSID is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "The NetWeaver Prometheus Exporter settings.",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											objectplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// NetWeaverPrometheusExporter is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: Processes
 									"processes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1578,49 +1460,30 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 															// Property: AlarmMetricName
 															"alarm_metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																Description: "The name of the metric to be monitored for the component.",
-																Optional:    true,
-																Computed:    true,
-																Validators: []validator.String{ /*START VALIDATORS*/
-																	fwvalidators.NotNullString(),
-																}, /*END VALIDATORS*/
-																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																	stringplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
+																Required:    true,
+																// AlarmMetricName is a write-only property.
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
 													Description: "A list of metrics to monitor for the component.",
-													Optional:    true,
-													Computed:    true,
-													Validators: []validator.List{ /*START VALIDATORS*/
-														fwvalidators.NotNullList(),
-													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-														listplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													Required:    true,
+													// AlarmMetrics is a write-only property.
 												}, /*END ATTRIBUTE*/
 												// Property: ProcessName
 												"process_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The name of the process to be monitored for the component.",
-													Optional:    true,
-													Computed:    true,
+													Required:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(1, 256),
 														stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_,-]+$"), ""),
-														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// ProcessName is a write-only property.
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
 										Description: "A list of processes to monitor for the component. Only Windows EC2 instances can have a processes section.",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-											listplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// Processes is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: SQLServerPrometheusExporter
 									"sql_server_prometheus_exporter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1628,34 +1491,19 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 											// Property: PrometheusPort
 											"prometheus_port": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "Prometheus exporter port.",
-												Optional:    true,
-												Computed:    true,
-												Validators: []validator.String{ /*START VALIDATORS*/
-													fwvalidators.NotNullString(),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												Required:    true,
+												// PrometheusPort is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: SQLSecretName
 											"sql_secret_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "Secret name which managers SQL exporter connection. e.g. {\"data_source_name\": \"sqlserver://<USERNAME>:<PASSWORD>@localhost:1433\"}",
-												Optional:    true,
-												Computed:    true,
-												Validators: []validator.String{ /*START VALIDATORS*/
-													fwvalidators.NotNullString(),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												Required:    true,
+												// SQLSecretName is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "The SQL Prometheus Exporter settings.",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											objectplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// SQLServerPrometheusExporter is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: WindowsEvents
 									"windows_events": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1665,8 +1513,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 												"event_levels": schema.ListAttribute{ /*START ATTRIBUTE*/
 													ElementType: types.StringType,
 													Description: "The levels of event to log. ",
-													Optional:    true,
-													Computed:    true,
+													Required:    true,
 													Validators: []validator.List{ /*START VALIDATORS*/
 														listvalidator.SizeAtLeast(1),
 														listvalidator.ValueStringsAre(
@@ -1678,69 +1525,49 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 																"VERBOSE",
 															),
 														),
-														fwvalidators.NotNullList(),
 													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-														listplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// EventLevels is a write-only property.
 												}, /*END ATTRIBUTE*/
 												// Property: EventName
 												"event_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The type of Windows Events to log.",
-													Optional:    true,
-													Computed:    true,
+													Required:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(1, 260),
 														stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_ \\\\/-]+$"), ""),
-														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// EventName is a write-only property.
 												}, /*END ATTRIBUTE*/
 												// Property: LogGroupName
 												"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The CloudWatch log group name to be associated to the monitored log.",
-													Optional:    true,
-													Computed:    true,
+													Required:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(1, 512),
 														stringvalidator.RegexMatches(regexp.MustCompile("[\\.\\-_/#A-Za-z0-9]+"), ""),
-														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// LogGroupName is a write-only property.
 												}, /*END ATTRIBUTE*/
 												// Property: PatternSet
 												"pattern_set": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The name of the log pattern set.",
 													Optional:    true,
-													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(1, 30),
 														stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9.-_]*"), ""),
 													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// PatternSet is a write-only property.
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
 										Description: "A list of Windows Events to log.",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-											listplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// WindowsEvents is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Description: "The configuration settings",
 								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-									objectplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// ConfigurationDetails is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: SubComponentTypeConfigurations
 							"sub_component_type_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1756,23 +1583,14 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 															// Property: AlarmMetricName
 															"alarm_metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																Description: "The name of the metric to be monitored for the component.",
-																Optional:    true,
-																Computed:    true,
-																Validators: []validator.String{ /*START VALIDATORS*/
-																	fwvalidators.NotNullString(),
-																}, /*END VALIDATORS*/
-																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																	stringplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
+																Required:    true,
+																// AlarmMetricName is a write-only property.
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
 													Description: "A list of metrics to monitor for the component.",
 													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-														listplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// AlarmMetrics is a write-only property.
 												}, /*END ATTRIBUTE*/
 												// Property: Logs
 												"logs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1782,7 +1600,6 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 															"encoding": schema.StringAttribute{ /*START ATTRIBUTE*/
 																Description: "The type of encoding of the logs to be monitored.",
 																Optional:    true,
-																Computed:    true,
 																Validators: []validator.String{ /*START VALIDATORS*/
 																	stringvalidator.OneOf(
 																		"utf-8",
@@ -1790,70 +1607,52 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 																		"ascii",
 																	),
 																}, /*END VALIDATORS*/
-																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																	stringplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
+																// Encoding is a write-only property.
 															}, /*END ATTRIBUTE*/
 															// Property: LogGroupName
 															"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																Description: "The CloudWatch log group name to be associated to the monitored log.",
 																Optional:    true,
-																Computed:    true,
 																Validators: []validator.String{ /*START VALIDATORS*/
 																	stringvalidator.LengthBetween(1, 512),
 																	stringvalidator.RegexMatches(regexp.MustCompile("[\\.\\-_/#A-Za-z0-9]+"), ""),
 																}, /*END VALIDATORS*/
-																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																	stringplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
+																// LogGroupName is a write-only property.
 															}, /*END ATTRIBUTE*/
 															// Property: LogPath
 															"log_path": schema.StringAttribute{ /*START ATTRIBUTE*/
 																Description: "The path of the logs to be monitored.",
 																Optional:    true,
-																Computed:    true,
 																Validators: []validator.String{ /*START VALIDATORS*/
 																	stringvalidator.LengthBetween(1, 260),
 																	stringvalidator.RegexMatches(regexp.MustCompile("^([a-zA-Z]:\\\\[\\\\\\S|*\\S]?.*|/[^\"']*)$"), ""),
 																}, /*END VALIDATORS*/
-																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																	stringplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
+																// LogPath is a write-only property.
 															}, /*END ATTRIBUTE*/
 															// Property: LogType
 															"log_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 																Description: "The log type decides the log patterns against which Application Insights analyzes the log.",
-																Optional:    true,
-																Computed:    true,
+																Required:    true,
 																Validators: []validator.String{ /*START VALIDATORS*/
 																	stringvalidator.RegexMatches(regexp.MustCompile("^[A-Z][[A-Z]_]*$"), ""),
-																	fwvalidators.NotNullString(),
 																}, /*END VALIDATORS*/
-																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																	stringplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
+																// LogType is a write-only property.
 															}, /*END ATTRIBUTE*/
 															// Property: PatternSet
 															"pattern_set": schema.StringAttribute{ /*START ATTRIBUTE*/
 																Description: "The name of the log pattern set.",
 																Optional:    true,
-																Computed:    true,
 																Validators: []validator.String{ /*START VALIDATORS*/
 																	stringvalidator.LengthBetween(1, 30),
 																	stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9.-_]*"), ""),
 																}, /*END VALIDATORS*/
-																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																	stringplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
+																// PatternSet is a write-only property.
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
 													Description: "A list of logs to monitor for the component.",
 													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-														listplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// Logs is a write-only property.
 												}, /*END ATTRIBUTE*/
 												// Property: Processes
 												"processes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1866,49 +1665,30 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 																		// Property: AlarmMetricName
 																		"alarm_metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																			Description: "The name of the metric to be monitored for the component.",
-																			Optional:    true,
-																			Computed:    true,
-																			Validators: []validator.String{ /*START VALIDATORS*/
-																				fwvalidators.NotNullString(),
-																			}, /*END VALIDATORS*/
-																			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																				stringplanmodifier.UseStateForUnknown(),
-																			}, /*END PLAN MODIFIERS*/
+																			Required:    true,
+																			// AlarmMetricName is a write-only property.
 																		}, /*END ATTRIBUTE*/
 																	}, /*END SCHEMA*/
 																}, /*END NESTED OBJECT*/
 																Description: "A list of metrics to monitor for the component.",
-																Optional:    true,
-																Computed:    true,
-																Validators: []validator.List{ /*START VALIDATORS*/
-																	fwvalidators.NotNullList(),
-																}, /*END VALIDATORS*/
-																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																	listplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
+																Required:    true,
+																// AlarmMetrics is a write-only property.
 															}, /*END ATTRIBUTE*/
 															// Property: ProcessName
 															"process_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																Description: "The name of the process to be monitored for the component.",
-																Optional:    true,
-																Computed:    true,
+																Required:    true,
 																Validators: []validator.String{ /*START VALIDATORS*/
 																	stringvalidator.LengthBetween(1, 256),
 																	stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_,-]+$"), ""),
-																	fwvalidators.NotNullString(),
 																}, /*END VALIDATORS*/
-																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																	stringplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
+																// ProcessName is a write-only property.
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
 													Description: "A list of processes to monitor for the component. Only Windows EC2 instances can have a processes section.",
 													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-														listplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// Processes is a write-only property.
 												}, /*END ATTRIBUTE*/
 												// Property: WindowsEvents
 												"windows_events": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1918,8 +1698,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 															"event_levels": schema.ListAttribute{ /*START ATTRIBUTE*/
 																ElementType: types.StringType,
 																Description: "The levels of event to log. ",
-																Optional:    true,
-																Computed:    true,
+																Required:    true,
 																Validators: []validator.List{ /*START VALIDATORS*/
 																	listvalidator.SizeAtLeast(1),
 																	listvalidator.ValueStringsAre(
@@ -1931,108 +1710,75 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 																			"VERBOSE",
 																		),
 																	),
-																	fwvalidators.NotNullList(),
 																}, /*END VALIDATORS*/
-																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																	listplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
+																// EventLevels is a write-only property.
 															}, /*END ATTRIBUTE*/
 															// Property: EventName
 															"event_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																Description: "The type of Windows Events to log.",
-																Optional:    true,
-																Computed:    true,
+																Required:    true,
 																Validators: []validator.String{ /*START VALIDATORS*/
 																	stringvalidator.LengthBetween(1, 260),
 																	stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_ \\\\/-]+$"), ""),
-																	fwvalidators.NotNullString(),
 																}, /*END VALIDATORS*/
-																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																	stringplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
+																// EventName is a write-only property.
 															}, /*END ATTRIBUTE*/
 															// Property: LogGroupName
 															"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																Description: "The CloudWatch log group name to be associated to the monitored log.",
-																Optional:    true,
-																Computed:    true,
+																Required:    true,
 																Validators: []validator.String{ /*START VALIDATORS*/
 																	stringvalidator.LengthBetween(1, 512),
 																	stringvalidator.RegexMatches(regexp.MustCompile("[\\.\\-_/#A-Za-z0-9]+"), ""),
-																	fwvalidators.NotNullString(),
 																}, /*END VALIDATORS*/
-																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																	stringplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
+																// LogGroupName is a write-only property.
 															}, /*END ATTRIBUTE*/
 															// Property: PatternSet
 															"pattern_set": schema.StringAttribute{ /*START ATTRIBUTE*/
 																Description: "The name of the log pattern set.",
 																Optional:    true,
-																Computed:    true,
 																Validators: []validator.String{ /*START VALIDATORS*/
 																	stringvalidator.LengthBetween(1, 30),
 																	stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9.-_]*"), ""),
 																}, /*END VALIDATORS*/
-																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																	stringplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
+																// PatternSet is a write-only property.
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
 													Description: "A list of Windows Events to log.",
 													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-														listplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// WindowsEvents is a write-only property.
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 											Description: "The configuration settings of sub components.",
-											Optional:    true,
-											Computed:    true,
-											Validators: []validator.Object{ /*START VALIDATORS*/
-												fwvalidators.NotNullObject(),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-												objectplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											Required:    true,
+											// SubComponentConfigurationDetails is a write-only property.
 										}, /*END ATTRIBUTE*/
 										// Property: SubComponentType
 										"sub_component_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "The sub component type.",
-											Optional:    true,
-											Computed:    true,
+											Required:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.OneOf(
 													"AWS::EC2::Instance",
 													"AWS::EC2::Volume",
 												),
-												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// SubComponentType is a write-only property.
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
 								Description: "Sub component configurations of the component.",
 								Optional:    true,
-								Computed:    true,
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.SizeAtLeast(1),
 								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-									listplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// SubComponentTypeConfigurations is a write-only property.
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "The monitoring configuration of the component.",
 						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-							objectplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// CustomComponentConfiguration is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: DefaultOverwriteComponentConfiguration
 					"default_overwrite_component_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -2047,23 +1793,14 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 												// Property: AlarmMetricName
 												"alarm_metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The name of the metric to be monitored for the component.",
-													Optional:    true,
-													Computed:    true,
-													Validators: []validator.String{ /*START VALIDATORS*/
-														fwvalidators.NotNullString(),
-													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													Required:    true,
+													// AlarmMetricName is a write-only property.
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
 										Description: "A list of metrics to monitor for the component.",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-											listplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// AlarmMetrics is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: Alarms
 									"alarms": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -2072,21 +1809,16 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 												// Property: AlarmName
 												"alarm_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The name of the CloudWatch alarm to be monitored for the component.",
-													Optional:    true,
-													Computed:    true,
+													Required:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(1, 255),
-														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// AlarmName is a write-only property.
 												}, /*END ATTRIBUTE*/
 												// Property: Severity
 												"severity": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "Indicates the degree of outage when the alarm goes off.",
 													Optional:    true,
-													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.OneOf(
 															"HIGH",
@@ -2094,18 +1826,13 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 															"LOW",
 														),
 													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// Severity is a write-only property.
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
 										Description: "A list of alarms to monitor for the component.",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-											listplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// Alarms is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: HAClusterPrometheusExporter
 									"ha_cluster_prometheus_exporter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -2114,18 +1841,12 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 											"prometheus_port": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "Prometheus exporter port.",
 												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// PrometheusPort is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "The HA cluster Prometheus Exporter settings.",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											objectplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// HAClusterPrometheusExporter is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: HANAPrometheusExporter
 									"hana_prometheus_exporter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -2133,67 +1854,37 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 											// Property: AgreeToInstallHANADBClient
 											"agree_to_install_hanadb_client": schema.BoolAttribute{ /*START ATTRIBUTE*/
 												Description: "A flag which indicates agreeing to install SAP HANA DB client.",
-												Optional:    true,
-												Computed:    true,
-												Validators: []validator.Bool{ /*START VALIDATORS*/
-													fwvalidators.NotNullBool(),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-													boolplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												Required:    true,
+												// AgreeToInstallHANADBClient is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: HANAPort
 											"hana_port": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "The HANA DB port.",
-												Optional:    true,
-												Computed:    true,
-												Validators: []validator.String{ /*START VALIDATORS*/
-													fwvalidators.NotNullString(),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												Required:    true,
+												// HANAPort is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: HANASID
 											"hanasid": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "HANA DB SID.",
-												Optional:    true,
-												Computed:    true,
-												Validators: []validator.String{ /*START VALIDATORS*/
-													fwvalidators.NotNullString(),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												Required:    true,
+												// HANASID is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: HANASecretName
 											"hana_secret_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "The secret name which manages the HANA DB credentials e.g. {\n  \"username\": \"<>\",\n  \"password\": \"<>\"\n}.",
-												Optional:    true,
-												Computed:    true,
-												Validators: []validator.String{ /*START VALIDATORS*/
-													fwvalidators.NotNullString(),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												Required:    true,
+												// HANASecretName is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: PrometheusPort
 											"prometheus_port": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "Prometheus exporter port.",
 												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// PrometheusPort is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "The HANA DB Prometheus Exporter settings.",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											objectplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// HANAPrometheusExporter is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: JMXPrometheusExporter
 									"jmx_prometheus_exporter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -2202,36 +1893,24 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 											"host_port": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "Java agent host port",
 												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// HostPort is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: JMXURL
 											"jmxurl": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "JMX service URL.",
 												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// JMXURL is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: PrometheusPort
 											"prometheus_port": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "Prometheus exporter port.",
 												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// PrometheusPort is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "The JMX Prometheus Exporter settings.",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											objectplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// JMXPrometheusExporter is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: Logs
 									"logs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -2241,7 +1920,6 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 												"encoding": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The type of encoding of the logs to be monitored.",
 													Optional:    true,
-													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.OneOf(
 															"utf-8",
@@ -2249,70 +1927,52 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 															"ascii",
 														),
 													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// Encoding is a write-only property.
 												}, /*END ATTRIBUTE*/
 												// Property: LogGroupName
 												"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The CloudWatch log group name to be associated to the monitored log.",
 													Optional:    true,
-													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(1, 512),
 														stringvalidator.RegexMatches(regexp.MustCompile("[\\.\\-_/#A-Za-z0-9]+"), ""),
 													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// LogGroupName is a write-only property.
 												}, /*END ATTRIBUTE*/
 												// Property: LogPath
 												"log_path": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The path of the logs to be monitored.",
 													Optional:    true,
-													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(1, 260),
 														stringvalidator.RegexMatches(regexp.MustCompile("^([a-zA-Z]:\\\\[\\\\\\S|*\\S]?.*|/[^\"']*)$"), ""),
 													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// LogPath is a write-only property.
 												}, /*END ATTRIBUTE*/
 												// Property: LogType
 												"log_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The log type decides the log patterns against which Application Insights analyzes the log.",
-													Optional:    true,
-													Computed:    true,
+													Required:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.RegexMatches(regexp.MustCompile("^[A-Z][[A-Z]_]*$"), ""),
-														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// LogType is a write-only property.
 												}, /*END ATTRIBUTE*/
 												// Property: PatternSet
 												"pattern_set": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The name of the log pattern set.",
 													Optional:    true,
-													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(1, 30),
 														stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9.-_]*"), ""),
 													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// PatternSet is a write-only property.
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
 										Description: "A list of logs to monitor for the component.",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-											listplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// Logs is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: NetWeaverPrometheusExporter
 									"net_weaver_prometheus_exporter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -2321,47 +1981,31 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 											"instance_numbers": schema.ListAttribute{ /*START ATTRIBUTE*/
 												ElementType: types.StringType,
 												Description: "SAP instance numbers for ASCS, ERS, and App Servers.",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.List{ /*START VALIDATORS*/
 													listvalidator.ValueStringsAre(
 														stringvalidator.LengthBetween(1, 2),
 														stringvalidator.RegexMatches(regexp.MustCompile("\\b([0-9]|[0-9][0-9])\\b"), ""),
 													),
-													fwvalidators.NotNullList(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-													listplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// InstanceNumbers is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: PrometheusPort
 											"prometheus_port": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "Prometheus exporter port.",
 												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// PrometheusPort is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: SAPSID
 											"sapsid": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "SAP NetWeaver SID.",
-												Optional:    true,
-												Computed:    true,
-												Validators: []validator.String{ /*START VALIDATORS*/
-													fwvalidators.NotNullString(),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												Required:    true,
+												// SAPSID is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "The NetWeaver Prometheus Exporter settings.",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											objectplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// NetWeaverPrometheusExporter is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: Processes
 									"processes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -2374,49 +2018,30 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 															// Property: AlarmMetricName
 															"alarm_metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																Description: "The name of the metric to be monitored for the component.",
-																Optional:    true,
-																Computed:    true,
-																Validators: []validator.String{ /*START VALIDATORS*/
-																	fwvalidators.NotNullString(),
-																}, /*END VALIDATORS*/
-																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																	stringplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
+																Required:    true,
+																// AlarmMetricName is a write-only property.
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
 													Description: "A list of metrics to monitor for the component.",
-													Optional:    true,
-													Computed:    true,
-													Validators: []validator.List{ /*START VALIDATORS*/
-														fwvalidators.NotNullList(),
-													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-														listplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													Required:    true,
+													// AlarmMetrics is a write-only property.
 												}, /*END ATTRIBUTE*/
 												// Property: ProcessName
 												"process_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The name of the process to be monitored for the component.",
-													Optional:    true,
-													Computed:    true,
+													Required:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(1, 256),
 														stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_,-]+$"), ""),
-														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// ProcessName is a write-only property.
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
 										Description: "A list of processes to monitor for the component. Only Windows EC2 instances can have a processes section.",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-											listplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// Processes is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: SQLServerPrometheusExporter
 									"sql_server_prometheus_exporter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -2424,34 +2049,19 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 											// Property: PrometheusPort
 											"prometheus_port": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "Prometheus exporter port.",
-												Optional:    true,
-												Computed:    true,
-												Validators: []validator.String{ /*START VALIDATORS*/
-													fwvalidators.NotNullString(),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												Required:    true,
+												// PrometheusPort is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: SQLSecretName
 											"sql_secret_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "Secret name which managers SQL exporter connection. e.g. {\"data_source_name\": \"sqlserver://<USERNAME>:<PASSWORD>@localhost:1433\"}",
-												Optional:    true,
-												Computed:    true,
-												Validators: []validator.String{ /*START VALIDATORS*/
-													fwvalidators.NotNullString(),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												Required:    true,
+												// SQLSecretName is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "The SQL Prometheus Exporter settings.",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											objectplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// SQLServerPrometheusExporter is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: WindowsEvents
 									"windows_events": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -2461,8 +2071,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 												"event_levels": schema.ListAttribute{ /*START ATTRIBUTE*/
 													ElementType: types.StringType,
 													Description: "The levels of event to log. ",
-													Optional:    true,
-													Computed:    true,
+													Required:    true,
 													Validators: []validator.List{ /*START VALIDATORS*/
 														listvalidator.SizeAtLeast(1),
 														listvalidator.ValueStringsAre(
@@ -2474,69 +2083,49 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 																"VERBOSE",
 															),
 														),
-														fwvalidators.NotNullList(),
 													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-														listplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// EventLevels is a write-only property.
 												}, /*END ATTRIBUTE*/
 												// Property: EventName
 												"event_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The type of Windows Events to log.",
-													Optional:    true,
-													Computed:    true,
+													Required:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(1, 260),
 														stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_ \\\\/-]+$"), ""),
-														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// EventName is a write-only property.
 												}, /*END ATTRIBUTE*/
 												// Property: LogGroupName
 												"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The CloudWatch log group name to be associated to the monitored log.",
-													Optional:    true,
-													Computed:    true,
+													Required:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(1, 512),
 														stringvalidator.RegexMatches(regexp.MustCompile("[\\.\\-_/#A-Za-z0-9]+"), ""),
-														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// LogGroupName is a write-only property.
 												}, /*END ATTRIBUTE*/
 												// Property: PatternSet
 												"pattern_set": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "The name of the log pattern set.",
 													Optional:    true,
-													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(1, 30),
 														stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9.-_]*"), ""),
 													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// PatternSet is a write-only property.
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
 										Description: "A list of Windows Events to log.",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-											listplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// WindowsEvents is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Description: "The configuration settings",
 								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-									objectplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// ConfigurationDetails is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: SubComponentTypeConfigurations
 							"sub_component_type_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -2552,23 +2141,14 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 															// Property: AlarmMetricName
 															"alarm_metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																Description: "The name of the metric to be monitored for the component.",
-																Optional:    true,
-																Computed:    true,
-																Validators: []validator.String{ /*START VALIDATORS*/
-																	fwvalidators.NotNullString(),
-																}, /*END VALIDATORS*/
-																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																	stringplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
+																Required:    true,
+																// AlarmMetricName is a write-only property.
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
 													Description: "A list of metrics to monitor for the component.",
 													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-														listplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// AlarmMetrics is a write-only property.
 												}, /*END ATTRIBUTE*/
 												// Property: Logs
 												"logs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -2578,7 +2158,6 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 															"encoding": schema.StringAttribute{ /*START ATTRIBUTE*/
 																Description: "The type of encoding of the logs to be monitored.",
 																Optional:    true,
-																Computed:    true,
 																Validators: []validator.String{ /*START VALIDATORS*/
 																	stringvalidator.OneOf(
 																		"utf-8",
@@ -2586,70 +2165,52 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 																		"ascii",
 																	),
 																}, /*END VALIDATORS*/
-																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																	stringplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
+																// Encoding is a write-only property.
 															}, /*END ATTRIBUTE*/
 															// Property: LogGroupName
 															"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																Description: "The CloudWatch log group name to be associated to the monitored log.",
 																Optional:    true,
-																Computed:    true,
 																Validators: []validator.String{ /*START VALIDATORS*/
 																	stringvalidator.LengthBetween(1, 512),
 																	stringvalidator.RegexMatches(regexp.MustCompile("[\\.\\-_/#A-Za-z0-9]+"), ""),
 																}, /*END VALIDATORS*/
-																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																	stringplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
+																// LogGroupName is a write-only property.
 															}, /*END ATTRIBUTE*/
 															// Property: LogPath
 															"log_path": schema.StringAttribute{ /*START ATTRIBUTE*/
 																Description: "The path of the logs to be monitored.",
 																Optional:    true,
-																Computed:    true,
 																Validators: []validator.String{ /*START VALIDATORS*/
 																	stringvalidator.LengthBetween(1, 260),
 																	stringvalidator.RegexMatches(regexp.MustCompile("^([a-zA-Z]:\\\\[\\\\\\S|*\\S]?.*|/[^\"']*)$"), ""),
 																}, /*END VALIDATORS*/
-																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																	stringplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
+																// LogPath is a write-only property.
 															}, /*END ATTRIBUTE*/
 															// Property: LogType
 															"log_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 																Description: "The log type decides the log patterns against which Application Insights analyzes the log.",
-																Optional:    true,
-																Computed:    true,
+																Required:    true,
 																Validators: []validator.String{ /*START VALIDATORS*/
 																	stringvalidator.RegexMatches(regexp.MustCompile("^[A-Z][[A-Z]_]*$"), ""),
-																	fwvalidators.NotNullString(),
 																}, /*END VALIDATORS*/
-																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																	stringplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
+																// LogType is a write-only property.
 															}, /*END ATTRIBUTE*/
 															// Property: PatternSet
 															"pattern_set": schema.StringAttribute{ /*START ATTRIBUTE*/
 																Description: "The name of the log pattern set.",
 																Optional:    true,
-																Computed:    true,
 																Validators: []validator.String{ /*START VALIDATORS*/
 																	stringvalidator.LengthBetween(1, 30),
 																	stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9.-_]*"), ""),
 																}, /*END VALIDATORS*/
-																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																	stringplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
+																// PatternSet is a write-only property.
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
 													Description: "A list of logs to monitor for the component.",
 													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-														listplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// Logs is a write-only property.
 												}, /*END ATTRIBUTE*/
 												// Property: Processes
 												"processes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -2662,49 +2223,30 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 																		// Property: AlarmMetricName
 																		"alarm_metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																			Description: "The name of the metric to be monitored for the component.",
-																			Optional:    true,
-																			Computed:    true,
-																			Validators: []validator.String{ /*START VALIDATORS*/
-																				fwvalidators.NotNullString(),
-																			}, /*END VALIDATORS*/
-																			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																				stringplanmodifier.UseStateForUnknown(),
-																			}, /*END PLAN MODIFIERS*/
+																			Required:    true,
+																			// AlarmMetricName is a write-only property.
 																		}, /*END ATTRIBUTE*/
 																	}, /*END SCHEMA*/
 																}, /*END NESTED OBJECT*/
 																Description: "A list of metrics to monitor for the component.",
-																Optional:    true,
-																Computed:    true,
-																Validators: []validator.List{ /*START VALIDATORS*/
-																	fwvalidators.NotNullList(),
-																}, /*END VALIDATORS*/
-																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																	listplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
+																Required:    true,
+																// AlarmMetrics is a write-only property.
 															}, /*END ATTRIBUTE*/
 															// Property: ProcessName
 															"process_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																Description: "The name of the process to be monitored for the component.",
-																Optional:    true,
-																Computed:    true,
+																Required:    true,
 																Validators: []validator.String{ /*START VALIDATORS*/
 																	stringvalidator.LengthBetween(1, 256),
 																	stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_,-]+$"), ""),
-																	fwvalidators.NotNullString(),
 																}, /*END VALIDATORS*/
-																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																	stringplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
+																// ProcessName is a write-only property.
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
 													Description: "A list of processes to monitor for the component. Only Windows EC2 instances can have a processes section.",
 													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-														listplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// Processes is a write-only property.
 												}, /*END ATTRIBUTE*/
 												// Property: WindowsEvents
 												"windows_events": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -2714,8 +2256,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 															"event_levels": schema.ListAttribute{ /*START ATTRIBUTE*/
 																ElementType: types.StringType,
 																Description: "The levels of event to log. ",
-																Optional:    true,
-																Computed:    true,
+																Required:    true,
 																Validators: []validator.List{ /*START VALIDATORS*/
 																	listvalidator.SizeAtLeast(1),
 																	listvalidator.ValueStringsAre(
@@ -2727,133 +2268,92 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 																			"VERBOSE",
 																		),
 																	),
-																	fwvalidators.NotNullList(),
 																}, /*END VALIDATORS*/
-																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																	listplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
+																// EventLevels is a write-only property.
 															}, /*END ATTRIBUTE*/
 															// Property: EventName
 															"event_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																Description: "The type of Windows Events to log.",
-																Optional:    true,
-																Computed:    true,
+																Required:    true,
 																Validators: []validator.String{ /*START VALIDATORS*/
 																	stringvalidator.LengthBetween(1, 260),
 																	stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_ \\\\/-]+$"), ""),
-																	fwvalidators.NotNullString(),
 																}, /*END VALIDATORS*/
-																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																	stringplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
+																// EventName is a write-only property.
 															}, /*END ATTRIBUTE*/
 															// Property: LogGroupName
 															"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 																Description: "The CloudWatch log group name to be associated to the monitored log.",
-																Optional:    true,
-																Computed:    true,
+																Required:    true,
 																Validators: []validator.String{ /*START VALIDATORS*/
 																	stringvalidator.LengthBetween(1, 512),
 																	stringvalidator.RegexMatches(regexp.MustCompile("[\\.\\-_/#A-Za-z0-9]+"), ""),
-																	fwvalidators.NotNullString(),
 																}, /*END VALIDATORS*/
-																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																	stringplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
+																// LogGroupName is a write-only property.
 															}, /*END ATTRIBUTE*/
 															// Property: PatternSet
 															"pattern_set": schema.StringAttribute{ /*START ATTRIBUTE*/
 																Description: "The name of the log pattern set.",
 																Optional:    true,
-																Computed:    true,
 																Validators: []validator.String{ /*START VALIDATORS*/
 																	stringvalidator.LengthBetween(1, 30),
 																	stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9.-_]*"), ""),
 																}, /*END VALIDATORS*/
-																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																	stringplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
+																// PatternSet is a write-only property.
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
 													Description: "A list of Windows Events to log.",
 													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-														listplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// WindowsEvents is a write-only property.
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 											Description: "The configuration settings of sub components.",
-											Optional:    true,
-											Computed:    true,
-											Validators: []validator.Object{ /*START VALIDATORS*/
-												fwvalidators.NotNullObject(),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-												objectplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											Required:    true,
+											// SubComponentConfigurationDetails is a write-only property.
 										}, /*END ATTRIBUTE*/
 										// Property: SubComponentType
 										"sub_component_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "The sub component type.",
-											Optional:    true,
-											Computed:    true,
+											Required:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.OneOf(
 													"AWS::EC2::Instance",
 													"AWS::EC2::Volume",
 												),
-												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// SubComponentType is a write-only property.
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
 								Description: "Sub component configurations of the component.",
 								Optional:    true,
-								Computed:    true,
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.SizeAtLeast(1),
 								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-									listplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// SubComponentTypeConfigurations is a write-only property.
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "The overwritten settings on default component monitoring configuration.",
 						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-							objectplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// DefaultOverwriteComponentConfiguration is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: Tier
 					"tier": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The tier of the application component.",
-						Optional:    true,
-						Computed:    true,
+						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.RegexMatches(regexp.MustCompile("^[A-Z][[A-Z]_]*$"), ""),
-							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// Tier is a write-only property.
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "The monitoring settings of the components.",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeAtLeast(1),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// ComponentMonitoringSettings is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: CustomComponents
@@ -2901,46 +2401,34 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 					// Property: ComponentName
 					"component_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The name of the component.",
-						Optional:    true,
-						Computed:    true,
+						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[\\d\\w\\-_.+]*$"), ""),
-							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// ComponentName is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: ResourceList
 					"resource_list": schema.ListAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
 						Description: "The list of resource ARNs that belong to the component.",
-						Optional:    true,
-						Computed:    true,
+						Required:    true,
 						Validators: []validator.List{ /*START VALIDATORS*/
 							listvalidator.SizeAtLeast(1),
 							listvalidator.ValueStringsAre(
 								stringvalidator.LengthBetween(20, 300),
 								stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:[\\w\\d-]+:([\\w\\d-]*)?:[\\w\\d_-]*([:/].+)*$"), ""),
 							),
-							fwvalidators.NotNullList(),
 						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-							listplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// ResourceList is a write-only property.
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "The custom grouped components.",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeAtLeast(1),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// CustomComponents is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: GroupingType
@@ -3040,80 +2528,54 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 								// Property: Pattern
 								"pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The log pattern.",
-									Optional:    true,
-									Computed:    true,
+									Required:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 50),
-										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// Pattern is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: PatternName
 								"pattern_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The name of the log pattern.",
-									Optional:    true,
-									Computed:    true,
+									Required:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 50),
 										stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9.-_]*"), ""),
-										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// PatternName is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: Rank
 								"rank": schema.Int64Attribute{ /*START ATTRIBUTE*/
 									Description: "Rank of the log pattern.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.Int64{ /*START VALIDATORS*/
-										fwvalidators.NotNullInt64(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-										int64planmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									Required:    true,
+									// Rank is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
 						Description: "The log patterns of a set.",
-						Optional:    true,
-						Computed:    true,
+						Required:    true,
 						Validators: []validator.List{ /*START VALIDATORS*/
 							listvalidator.SizeAtLeast(1),
-							fwvalidators.NotNullList(),
 						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-							listplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// LogPatterns is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: PatternSetName
 					"pattern_set_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The name of the log pattern set.",
-						Optional:    true,
-						Computed:    true,
+						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 30),
 							stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9.-_]*"), ""),
-							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// PatternSetName is a write-only property.
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "The log pattern sets.",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeAtLeast(1),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// LogPatternSets is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: OpsCenterEnabled
@@ -3144,14 +2606,10 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"ops_item_sns_topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The SNS topic provided to Application Insights that is associated to the created opsItem.",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(20, 300),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:[\\w\\d-]+:([\\w\\d-]*)?:[\\w\\d_-]*([:/].+)*$"), ""),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// OpsItemSNSTopicArn is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: ResourceGroupName

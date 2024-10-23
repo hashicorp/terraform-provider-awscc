@@ -110,13 +110,9 @@ func memberInvitationResource(ctx context.Context) (resource.Resource, error) {
 		"message": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A message to be included in the email invitation sent to the invited account. Updating this field has no effect.",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 1000),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// Message is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

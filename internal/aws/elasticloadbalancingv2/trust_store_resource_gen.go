@@ -38,10 +38,6 @@ func trustStoreResource(ctx context.Context) (resource.Resource, error) {
 		"ca_certificates_bundle_s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the S3 bucket to fetch the CA certificate bundle from.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// CaCertificatesBundleS3Bucket is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: CaCertificatesBundleS3Key
@@ -54,10 +50,6 @@ func trustStoreResource(ctx context.Context) (resource.Resource, error) {
 		"ca_certificates_bundle_s3_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the S3 object to fetch the CA certificate bundle from.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// CaCertificatesBundleS3Key is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: CaCertificatesBundleS3ObjectVersion
@@ -70,10 +62,6 @@ func trustStoreResource(ctx context.Context) (resource.Resource, error) {
 		"ca_certificates_bundle_s3_object_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The version of the S3 bucket that contains the CA certificate bundle.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// CaCertificatesBundleS3ObjectVersion is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Name

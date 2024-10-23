@@ -14,8 +14,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -83,6 +81,7 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -743,7 +742,6 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 				// Property: AppType
 				"app_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
-					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"JupyterServer",
@@ -755,9 +753,7 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 							"CodeEditor",
 						),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// AppType is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: CodeEditorAppSettings
 				"code_editor_app_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -772,27 +768,18 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 										"idle_timeout_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
 											Description: "The space idle timeout value set in minutes",
 											Optional:    true,
-											Computed:    true,
 											Validators: []validator.Int64{ /*START VALIDATORS*/
 												int64validator.Between(60, 525600),
 											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-												int64planmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// IdleTimeoutInMinutes is a write-only property.
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// IdleSettings is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// AppLifecycleManagement is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: DefaultResourceSpec
 						"default_resource_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -801,7 +788,6 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 								"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The instance type that the image version runs on.",
 									Optional:    true,
-									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.OneOf(
 											"system",
@@ -869,63 +855,46 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 											"ml.trn1n.32xlarge",
 										),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// InstanceType is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: LifecycleConfigArn
 								"lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
 									Optional:    true,
-									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*"), ""),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// LifecycleConfigArn is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: SageMakerImageArn
 								"sage_maker_image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The ARN of the SageMaker image that the image version belongs to.",
 									Optional:    true,
-									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$"), ""),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// SageMakerImageArn is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: SageMakerImageVersionArn
 								"sage_maker_image_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The ARN of the image version created on the instance.",
 									Optional:    true,
-									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$"), ""),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// SageMakerImageVersionArn is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// DefaultResourceSpec is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The CodeEditor app settings.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// CodeEditorAppSettings is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: CustomFileSystems
 				"custom_file_systems": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -936,35 +905,25 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: FileSystemId
 									"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Optional: true,
-										Computed: true,
+										Required: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(11, 21),
 											stringvalidator.RegexMatches(regexp.MustCompile("^(fs-[0-9a-f]{8,})$"), ""),
-											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// FileSystemId is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Optional: true,
-								Computed: true,
-								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-									objectplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// EFSFileSystem is a write-only property.
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Optional: true,
-					Computed: true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(0, 1),
 						listvalidator.UniqueValues(),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// CustomFileSystems is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: JupyterLabAppSettings
 				"jupyter_lab_app_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -979,27 +938,18 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 										"idle_timeout_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
 											Description: "The space idle timeout value set in minutes",
 											Optional:    true,
-											Computed:    true,
 											Validators: []validator.Int64{ /*START VALIDATORS*/
 												int64validator.Between(60, 525600),
 											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-												int64planmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// IdleTimeoutInMinutes is a write-only property.
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// IdleSettings is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// AppLifecycleManagement is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: CodeRepositories
 						"code_repositories": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1008,27 +958,20 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 									// Property: RepositoryUrl
 									"repository_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "A CodeRepository (valid URL) to be used within Jupyter's Git extension.",
-										Optional:    true,
-										Computed:    true,
+										Required:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthAtMost(256),
-											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// RepositoryUrl is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
 							Description: "A list of CodeRepositories available for use with JupyterLab apps.",
 							Optional:    true,
-							Computed:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(0, 30),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// CodeRepositories is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: DefaultResourceSpec
 						"default_resource_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1037,7 +980,6 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 								"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The instance type that the image version runs on.",
 									Optional:    true,
-									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.OneOf(
 											"system",
@@ -1105,63 +1047,46 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 											"ml.trn1n.32xlarge",
 										),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// InstanceType is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: LifecycleConfigArn
 								"lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
 									Optional:    true,
-									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*"), ""),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// LifecycleConfigArn is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: SageMakerImageArn
 								"sage_maker_image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The ARN of the SageMaker image that the image version belongs to.",
 									Optional:    true,
-									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$"), ""),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// SageMakerImageArn is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: SageMakerImageVersionArn
 								"sage_maker_image_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The ARN of the image version created on the instance.",
 									Optional:    true,
-									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$"), ""),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// SageMakerImageVersionArn is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// DefaultResourceSpec is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The JupyterLab app settings.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// JupyterLabAppSettings is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: JupyterServerAppSettings
 				"jupyter_server_app_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1173,7 +1098,6 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 								"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The instance type that the image version runs on.",
 									Optional:    true,
-									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.OneOf(
 											"system",
@@ -1241,62 +1165,47 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 											"ml.trn1n.32xlarge",
 										),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// InstanceType is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: LifecycleConfigArn
 								"lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
 									Optional:    true,
-									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*"), ""),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// LifecycleConfigArn is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: SageMakerImageArn
 								"sage_maker_image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The ARN of the SageMaker image that the image version belongs to.",
 									Optional:    true,
-									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$"), ""),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// SageMakerImageArn is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: SageMakerImageVersionArn
 								"sage_maker_image_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The ARN of the image version created on the instance.",
 									Optional:    true,
-									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$"), ""),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// SageMakerImageVersionArn is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// DefaultResourceSpec is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: LifecycleConfigArns
 						"lifecycle_config_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
 							Description: "A list of LifecycleConfigArns available for use with JupyterServer apps.",
 							Optional:    true,
-							Computed:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(0, 30),
 								listvalidator.ValueStringsAre(
@@ -1304,17 +1213,12 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 									stringvalidator.RegexMatches(regexp.MustCompile("arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*"), ""),
 								),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// LifecycleConfigArns is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The Jupyter server's app settings.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// JupyterServerAppSettings is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: KernelGatewayAppSettings
 				"kernel_gateway_app_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1326,54 +1230,40 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 									// Property: AppImageConfigName
 									"app_image_config_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "The Name of the AppImageConfig.",
-										Optional:    true,
-										Computed:    true,
+										Required:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthAtMost(63),
 											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"), ""),
-											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// AppImageConfigName is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: ImageName
 									"image_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "The name of the CustomImage. Must be unique to your account.",
-										Optional:    true,
-										Computed:    true,
+										Required:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthAtMost(63),
 											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]([-.]?[a-zA-Z0-9]){0,62}$"), ""),
-											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// ImageName is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: ImageVersionNumber
 									"image_version_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
 										Description: "The version number of the CustomImage.",
 										Optional:    true,
-										Computed:    true,
 										Validators: []validator.Int64{ /*START VALIDATORS*/
 											int64validator.AtLeast(0),
 										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-											int64planmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// ImageVersionNumber is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
 							Description: "A list of custom SageMaker images that are configured to run as a KernelGateway app.",
 							Optional:    true,
-							Computed:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(0, 30),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// CustomImages is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: DefaultResourceSpec
 						"default_resource_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1382,7 +1272,6 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 								"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The instance type that the image version runs on.",
 									Optional:    true,
-									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.OneOf(
 											"system",
@@ -1450,63 +1339,48 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 											"ml.trn1n.32xlarge",
 										),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// InstanceType is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: LifecycleConfigArn
 								"lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
 									Optional:    true,
-									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*"), ""),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// LifecycleConfigArn is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: SageMakerImageArn
 								"sage_maker_image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The ARN of the SageMaker image that the image version belongs to.",
 									Optional:    true,
-									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$"), ""),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// SageMakerImageArn is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: SageMakerImageVersionArn
 								"sage_maker_image_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The ARN of the image version created on the instance.",
 									Optional:    true,
-									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$"), ""),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// SageMakerImageVersionArn is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the KernelGateway app.",
 							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// DefaultResourceSpec is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: LifecycleConfigArns
 						"lifecycle_config_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
 							Description: "A list of LifecycleConfigArns available for use with KernelGateway apps.",
 							Optional:    true,
-							Computed:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(0, 30),
 								listvalidator.ValueStringsAre(
@@ -1514,17 +1388,12 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 									stringvalidator.RegexMatches(regexp.MustCompile("arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*"), ""),
 								),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// LifecycleConfigArns is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The kernel gateway app settings.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// KernelGatewayAppSettings is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: SpaceStorageSettings
 				"space_storage_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1535,39 +1404,25 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 								// Property: EbsVolumeSizeInGb
 								"ebs_volume_size_in_gb": schema.Int64Attribute{ /*START ATTRIBUTE*/
 									Description: "Size of the Amazon EBS volume in Gb",
-									Optional:    true,
-									Computed:    true,
+									Required:    true,
 									Validators: []validator.Int64{ /*START VALIDATORS*/
 										int64validator.Between(5, 16384),
-										fwvalidators.NotNullInt64(),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-										int64planmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// EbsVolumeSizeInGb is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "Properties related to the space's Amazon Elastic Block Store volume.",
 							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// EbsStorageSettings is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Default storage settings for a space.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// SpaceStorageSettings is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "A collection of settings.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// SpaceSettings is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: SpaceSharingSettings
@@ -1604,6 +1459,7 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -1649,39 +1505,27 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Required: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
-							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// Key is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Required: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
-							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// Value is a write-only property.
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "A list of tags to apply to the space.",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeBetween(0, 50),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// Tags is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Url

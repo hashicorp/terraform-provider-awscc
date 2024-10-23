@@ -61,14 +61,10 @@ func slackWorkspaceConfigurationResource(ctx context.Context) (resource.Resource
 		"version_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "An identifier used to update an existing Slack workspace configuration in AWS CloudFormation.",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 256),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]+$"), ""),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// VersionId is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

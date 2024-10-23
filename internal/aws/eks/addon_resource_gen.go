@@ -12,7 +12,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -153,36 +152,22 @@ func addonResource(ctx context.Context) (resource.Resource, error) {
 					// Property: RoleArn
 					"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The IAM role ARN that the pod identity association is created for.",
-						Optional:    true,
-						Computed:    true,
+						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-cn|-us-gov|-iso(-[a-z])?)?:iam::\\d{12}:(role)\\/*"), ""),
-							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// RoleArn is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: ServiceAccount
 					"service_account": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The Kubernetes service account that the pod identity association is created for.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						Required:    true,
+						// ServiceAccount is a write-only property.
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "An array of pod identities to apply to this add-on.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// PodIdentityAssociations is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: PreserveOnDelete
@@ -195,10 +180,6 @@ func addonResource(ctx context.Context) (resource.Resource, error) {
 		"preserve_on_delete": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "PreserveOnDelete parameter value",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// PreserveOnDelete is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: ResolveConflicts
@@ -217,7 +198,6 @@ func addonResource(ctx context.Context) (resource.Resource, error) {
 		"resolve_conflicts": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Resolve parameter value conflicts",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtLeast(1),
 				stringvalidator.OneOf(
@@ -226,9 +206,6 @@ func addonResource(ctx context.Context) (resource.Resource, error) {
 					"PRESERVE",
 				),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// ResolveConflicts is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: ServiceAccountRoleArn

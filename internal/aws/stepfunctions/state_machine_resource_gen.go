@@ -15,7 +15,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -57,10 +56,6 @@ func stateMachineResource(ctx context.Context) (resource.Resource, error) {
 		"definition": schema.StringAttribute{ /*START ATTRIBUTE*/
 			CustomType: jsontypes.NormalizedType{},
 			Optional:   true,
-			Computed:   true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// Definition is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: DefinitionS3Location
@@ -89,40 +84,21 @@ func stateMachineResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Bucket
 				"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						fwvalidators.NotNullString(),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					Required: true,
+					// Bucket is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: Key
 				"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						fwvalidators.NotNullString(),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					Required: true,
+					// Key is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: Version
 				"version": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// Version is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// DefinitionS3Location is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: DefinitionString
@@ -159,10 +135,6 @@ func stateMachineResource(ctx context.Context) (resource.Resource, error) {
 		schema.MapAttribute{        /*START ATTRIBUTE*/
 			ElementType: types.StringType,
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-				mapplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// DefinitionSubstitutions is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: LoggingConfiguration

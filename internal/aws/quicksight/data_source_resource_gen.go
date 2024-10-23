@@ -2471,13 +2471,10 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 				"copy_source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "<p>The Amazon Resource Name (ARN) of a data source that has the credential pair that you\n            want to use. When <code>CopySourceArn</code> is not null, the credential pair from the\n            data source in the ARN is used as the credentials for the\n            <code>DataSourceCredentials</code> structure.</p>",
 					Optional:    true,
-					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.RegexMatches(regexp.MustCompile("^arn:[-a-z0-9]*:quicksight:[-a-z0-9]*:[0-9]{12}:datasource/.+$"), ""),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// CopySourceArn is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: CredentialPair
 				"credential_pair": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -2492,23 +2489,16 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Domain
 											"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>The OpenSearch domain.</p>",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 64),
-													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Domain is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "<p>The parameters for OpenSearch.</p>",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											objectplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// AmazonElasticsearchParameters is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: AmazonOpenSearchParameters
 									"amazon_open_search_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -2516,23 +2506,16 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Domain
 											"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>The OpenSearch domain.</p>",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 64),
-													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Domain is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "<p>The parameters for OpenSearch.</p>",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											objectplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// AmazonOpenSearchParameters is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: AthenaParameters
 									"athena_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -2541,33 +2524,24 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 											"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific Athena data source. For example, say an account administrator has turned off all Athena access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow Athena access for the single Athena data source that is specified in the structure, even if the account-wide role forbidding Athena access is still active.</p>",
 												Optional:    true,
-												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(20, 2048),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// RoleArn is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: WorkGroup
 											"work_group": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>The workgroup that Amazon Athena uses.</p>",
 												Optional:    true,
-												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 128),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// WorkGroup is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "<p>Parameters for Amazon Athena.</p>",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											objectplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// AthenaParameters is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: AuroraParameters
 									"aurora_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -2575,28 +2549,20 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Database
 											"database": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>Database.</p>",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 128),
-													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Database is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Host
 											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>Host.</p>",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 256),
-													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Host is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Port
 											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
@@ -2610,14 +2576,12 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 												PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 													float64planmodifier.UseStateForUnknown(),
 												}, /*END PLAN MODIFIERS*/
+												// Port is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "<p>Parameters for Amazon Aurora.</p>",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											objectplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// AuroraParameters is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: AuroraPostgreSqlParameters
 									"aurora_postgre_sql_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -2625,28 +2589,20 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Database
 											"database": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>The Amazon Aurora PostgreSQL database to connect to.</p>",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 128),
-													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Database is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Host
 											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>The Amazon Aurora PostgreSQL-Compatible host to connect to.</p>",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 256),
-													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Host is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Port
 											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
@@ -2660,14 +2616,12 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 												PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 													float64planmodifier.UseStateForUnknown(),
 												}, /*END PLAN MODIFIERS*/
+												// Port is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "<p>Parameters for Amazon Aurora PostgreSQL-Compatible Edition.</p>",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											objectplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// AuroraPostgreSqlParameters is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: DatabricksParameters
 									"databricks_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -2675,15 +2629,11 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Host
 											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>The host name of the Databricks data source.</p>",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 256),
-													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Host is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Port
 											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
@@ -2697,27 +2647,21 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 												PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 													float64planmodifier.UseStateForUnknown(),
 												}, /*END PLAN MODIFIERS*/
+												// Port is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: SqlEndpointPath
 											"sql_endpoint_path": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>The HTTP path of the Databricks data source.</p>",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 4096),
-													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// SqlEndpointPath is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "<p>The parameters that are required to connect to a Databricks data source.</p>",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											objectplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// DatabricksParameters is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: MariaDbParameters
 									"maria_db_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -2725,28 +2669,20 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Database
 											"database": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>Database.</p>",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 128),
-													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Database is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Host
 											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>Host.</p>",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 256),
-													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Host is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Port
 											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
@@ -2760,14 +2696,12 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 												PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 													float64planmodifier.UseStateForUnknown(),
 												}, /*END PLAN MODIFIERS*/
+												// Port is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "<p>The parameters for MariaDB.</p>",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											objectplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// MariaDbParameters is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: MySqlParameters
 									"my_sql_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -2775,28 +2709,20 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Database
 											"database": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>Database.</p>",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 128),
-													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Database is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Host
 											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>Host.</p>",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 256),
-													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Host is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Port
 											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
@@ -2810,14 +2736,12 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 												PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 													float64planmodifier.UseStateForUnknown(),
 												}, /*END PLAN MODIFIERS*/
+												// Port is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "<p>The parameters for MySQL.</p>",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											objectplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// MySqlParameters is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: OracleParameters
 									"oracle_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -2825,28 +2749,20 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Database
 											"database": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>The database.</p>",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 128),
-													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Database is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Host
 											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>An Oracle host.</p>",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 256),
-													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Host is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Port
 											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
@@ -2860,14 +2776,12 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 												PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 													float64planmodifier.UseStateForUnknown(),
 												}, /*END PLAN MODIFIERS*/
+												// Port is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "<p>The parameters for Oracle.</p>",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											objectplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// OracleParameters is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: PostgreSqlParameters
 									"postgre_sql_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -2875,28 +2789,20 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Database
 											"database": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>Database.</p>",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 128),
-													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Database is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Host
 											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>Host.</p>",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 256),
-													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Host is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Port
 											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
@@ -2910,14 +2816,12 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 												PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 													float64planmodifier.UseStateForUnknown(),
 												}, /*END PLAN MODIFIERS*/
+												// Port is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "<p>The parameters for PostgreSQL.</p>",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											objectplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// PostgreSqlParameters is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: PrestoParameters
 									"presto_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -2925,28 +2829,20 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Catalog
 											"catalog": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>Catalog.</p>",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(0, 128),
-													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Catalog is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Host
 											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>Host.</p>",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 256),
-													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Host is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Port
 											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
@@ -2960,14 +2856,12 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 												PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 													float64planmodifier.UseStateForUnknown(),
 												}, /*END PLAN MODIFIERS*/
+												// Port is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "<p>The parameters for Presto.</p>",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											objectplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// PrestoParameters is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: RdsParameters
 									"rds_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -2975,36 +2869,25 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Database
 											"database": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>Database.</p>",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 128),
-													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Database is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: InstanceId
 											"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>Instance ID.</p>",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 64),
-													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// InstanceId is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "<p>The parameters for Amazon RDS.</p>",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											objectplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// RdsParameters is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: RedshiftParameters
 									"redshift_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -3013,38 +2896,28 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 											"cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>Cluster ID. This field can be blank if the <code>Host</code> and <code>Port</code> are\n            provided.</p>",
 												Optional:    true,
-												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 64),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// ClusterId is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Database
 											"database": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>Database.</p>",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 128),
-													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Database is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Host
 											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>",
 												Optional:    true,
-												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 256),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Host is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: IAMParameters
 											"iam_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -3058,55 +2931,43 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 														PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 															boolplanmodifier.UseStateForUnknown(),
 														}, /*END PLAN MODIFIERS*/
+														// AutoCreateDatabaseUser is a write-only property.
 													}, /*END ATTRIBUTE*/
 													// Property: DatabaseGroups
 													"database_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
 														ElementType: types.StringType,
 														Description: "<p>A list of groups whose permissions will be granted to Amazon QuickSight to access the cluster. These permissions are combined with the permissions granted to Amazon QuickSight by the <code>DatabaseUser</code>. If you choose to include this parameter, the <code>RoleArn</code> must grant access to <code>redshift:JoinGroup</code>.</p>",
 														Optional:    true,
-														Computed:    true,
 														Validators: []validator.List{ /*START VALIDATORS*/
 															listvalidator.SizeBetween(1, 50),
 															listvalidator.ValueStringsAre(
 																stringvalidator.LengthBetween(1, 64),
 															),
 														}, /*END VALIDATORS*/
-														PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-															listplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
+														// DatabaseGroups is a write-only property.
 													}, /*END ATTRIBUTE*/
 													// Property: DatabaseUser
 													"database_user": schema.StringAttribute{ /*START ATTRIBUTE*/
 														Description: "<p>The user whose permissions and group memberships will be used by Amazon QuickSight to access the cluster. If this user already exists in your database, Amazon QuickSight is granted the same permissions that the user has. If the user doesn't exist, set the value of <code>AutoCreateDatabaseUser</code> to <code>True</code> to create a new user with PUBLIC permissions.</p>",
 														Optional:    true,
-														Computed:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
 															stringvalidator.LengthBetween(1, 64),
 														}, /*END VALIDATORS*/
-														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-															stringplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
+														// DatabaseUser is a write-only property.
 													}, /*END ATTRIBUTE*/
 													// Property: RoleArn
 													"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 														Description: "<p>Use the <code>RoleArn</code> structure to allow Amazon QuickSight to call <code>redshift:GetClusterCredentials</code> on your cluster. The calling principal must have <code>iam:PassRole</code> access to pass the role to Amazon QuickSight. The role's trust policy must allow the Amazon QuickSight service principal to assume the role.</p>",
-														Optional:    true,
-														Computed:    true,
+														Required:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
 															stringvalidator.LengthBetween(20, 2048),
-															fwvalidators.NotNullString(),
 														}, /*END VALIDATORS*/
-														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-															stringplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
+														// RoleArn is a write-only property.
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
 												Description: "<p>A structure that grants Amazon QuickSight access to your cluster and make a call to the <code>redshift:GetClusterCredentials</code> API. For more information on the <code>redshift:GetClusterCredentials</code> API, see <a href=\"https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html\">\n               <code>GetClusterCredentials</code>\n            </a>.</p>",
 												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-													objectplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// IAMParameters is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: IdentityCenterConfiguration
 											"identity_center_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -3115,18 +2976,12 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 													"enable_identity_propagation": schema.BoolAttribute{ /*START ATTRIBUTE*/
 														Description: "<p>A Boolean option that controls whether Trusted Identity Propagation should be used.</p>",
 														Optional:    true,
-														Computed:    true,
-														PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-															boolplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
+														// EnableIdentityPropagation is a write-only property.
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
 												Description: "<p>The parameters for an IAM Identity Center configuration.</p>",
 												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-													objectplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// IdentityCenterConfiguration is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Port
 											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
@@ -3140,14 +2995,12 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 												PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 													float64planmodifier.UseStateForUnknown(),
 												}, /*END PLAN MODIFIERS*/
+												// Port is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "<p>The parameters for Amazon Redshift. The <code>ClusterId</code> field can be blank if\n            <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p>",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											objectplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// RedshiftParameters is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: S3Parameters
 									"s3_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -3158,59 +3011,39 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 													// Property: Bucket
 													"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
 														Description: "<p>Amazon S3 bucket.</p>",
-														Optional:    true,
-														Computed:    true,
+														Required:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
 															stringvalidator.LengthBetween(1, 1024),
-															fwvalidators.NotNullString(),
 														}, /*END VALIDATORS*/
-														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-															stringplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
+														// Bucket is a write-only property.
 													}, /*END ATTRIBUTE*/
 													// Property: Key
 													"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 														Description: "<p>Amazon S3 key that identifies an object.</p>",
-														Optional:    true,
-														Computed:    true,
+														Required:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
 															stringvalidator.LengthBetween(1, 1024),
-															fwvalidators.NotNullString(),
 														}, /*END VALIDATORS*/
-														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-															stringplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
+														// Key is a write-only property.
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
 												Description: "<p>Amazon S3 manifest file location.</p>",
-												Optional:    true,
-												Computed:    true,
-												Validators: []validator.Object{ /*START VALIDATORS*/
-													fwvalidators.NotNullObject(),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-													objectplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												Required:    true,
+												// ManifestFileLocation is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: RoleArn
 											"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific S3 data source. For example, say an account administrator has turned off all S3 access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow S3 access for the single S3 data source that is specified in the structure, even if the account-wide role forbidding S3 access is still active.</p>",
 												Optional:    true,
-												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(20, 2048),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// RoleArn is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "<p>The parameters for S3.</p>",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											objectplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// S3Parameters is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: SnowflakeParameters
 									"snowflake_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -3218,49 +3051,34 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Database
 											"database": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>Database.</p>",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 128),
-													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Database is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Host
 											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>Host.</p>",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 256),
-													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Host is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Warehouse
 											"warehouse": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>Warehouse.</p>",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(0, 128),
-													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Warehouse is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "<p>The parameters for Snowflake.</p>",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											objectplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// SnowflakeParameters is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: SparkParameters
 									"spark_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -3268,15 +3086,11 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Host
 											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>Host.</p>",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 256),
-													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Host is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Port
 											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
@@ -3290,14 +3104,12 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 												PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 													float64planmodifier.UseStateForUnknown(),
 												}, /*END PLAN MODIFIERS*/
+												// Port is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "<p>The parameters for Spark.</p>",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											objectplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// SparkParameters is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: SqlServerParameters
 									"sql_server_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -3305,28 +3117,20 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Database
 											"database": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>Database.</p>",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 128),
-													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Database is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Host
 											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>Host.</p>",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 256),
-													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Host is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Port
 											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
@@ -3340,14 +3144,12 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 												PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 													float64planmodifier.UseStateForUnknown(),
 												}, /*END PLAN MODIFIERS*/
+												// Port is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "<p>The parameters for SQL Server.</p>",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											objectplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// SqlServerParameters is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: StarburstParameters
 									"starburst_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -3355,28 +3157,20 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Catalog
 											"catalog": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>The catalog name for the Starburst data source.</p>",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(0, 128),
-													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Catalog is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Host
 											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>The host name of the Starburst data source.</p>",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 256),
-													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Host is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Port
 											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
@@ -3390,28 +3184,23 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 												PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 													float64planmodifier.UseStateForUnknown(),
 												}, /*END PLAN MODIFIERS*/
+												// Port is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: ProductType
 											"product_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Optional: true,
-												Computed: true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.OneOf(
 														"GALAXY",
 														"ENTERPRISE",
 													),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// ProductType is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "<p>The parameters that are required to connect to a Starburst data source.</p>",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											objectplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// StarburstParameters is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: TeradataParameters
 									"teradata_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -3419,28 +3208,20 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Database
 											"database": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>Database.</p>",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 128),
-													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Database is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Host
 											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>Host.</p>",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 256),
-													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Host is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Port
 											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
@@ -3454,14 +3235,12 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 												PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 													float64planmodifier.UseStateForUnknown(),
 												}, /*END PLAN MODIFIERS*/
+												// Port is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "<p>The parameters for Teradata.</p>",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											objectplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// TeradataParameters is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: TrinoParameters
 									"trino_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -3469,28 +3248,20 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Catalog
 											"catalog": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>The catalog name for the Trino data source.</p>",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(0, 128),
-													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Catalog is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Host
 											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>The host name of the Trino data source.</p>",
-												Optional:    true,
-												Computed:    true,
+												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 256),
-													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Host is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Port
 											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
@@ -3504,81 +3275,58 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 												PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 													float64planmodifier.UseStateForUnknown(),
 												}, /*END PLAN MODIFIERS*/
+												// Port is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "<p>The parameters that are required to connect to a Trino data source.</p>",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											objectplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// TrinoParameters is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
 							Description: "<p>A set of alternate data source parameters that you want to share for these\n            credentials. The credentials are applied in tandem with the data source parameters when\n            you copy a data source by using a create or update request. The API operation compares\n            the <code>DataSourceParameters</code> structure that's in the request with the\n            structures in the <code>AlternateDataSourceParameters</code> allow list. If the\n            structures are an exact match, the request is allowed to use the new data source with\n            the existing credentials. If the <code>AlternateDataSourceParameters</code> list is\n            null, the <code>DataSourceParameters</code> originally used with these\n                <code>Credentials</code> is automatically allowed.</p>",
 							Optional:    true,
-							Computed:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(1, 50),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// AlternateDataSourceParameters is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: Password
 						"password": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "<p>Password.</p>",
-							Optional:    true,
-							Computed:    true,
+							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 1024),
-								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// Password is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: Username
 						"username": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "<p>User name.</p>",
-							Optional:    true,
-							Computed:    true,
+							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 64),
-								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// Username is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "<p>The combination of user name and password that are used as credentials.</p>",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// CredentialPair is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: SecretArn
 				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "<p>The Amazon Resource Name (ARN) of the secret associated with the data source in Amazon Secrets Manager.</p>",
 					Optional:    true,
-					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthBetween(1, 2048),
 						stringvalidator.RegexMatches(regexp.MustCompile("^arn:[-a-z0-9]*:secretsmanager:[-a-z0-9]*:[0-9]{12}:secret:.+$"), ""),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// SecretArn is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "<p>Data source credentials. This is a variant type structure. For this structure to be\n            valid, only one of the attributes can be non-null.</p>",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// Credentials is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: DataSourceId

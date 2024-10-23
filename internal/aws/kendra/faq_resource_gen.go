@@ -223,6 +223,9 @@ func faqResource(ctx context.Context) (resource.Resource, error) {
 						stringvalidator.LengthBetween(3, 63),
 						stringvalidator.RegexMatches(regexp.MustCompile("[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]"), ""),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.RequiresReplace(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Key
 				"key": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -230,6 +233,9 @@ func faqResource(ctx context.Context) (resource.Resource, error) {
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthBetween(1, 1024),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.RequiresReplace(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "FAQ S3 path",

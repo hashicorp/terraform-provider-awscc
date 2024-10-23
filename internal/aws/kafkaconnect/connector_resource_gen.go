@@ -442,6 +442,9 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 						"bootstrap_servers": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The bootstrap servers string of the Apache Kafka cluster.",
 							Required:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.RequiresReplace(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Vpc
 						"vpc": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -451,6 +454,9 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 									ElementType: types.StringType,
 									Description: "The AWS security groups to associate with the elastic network interfaces in order to specify what the connector has access to.",
 									Required:    true,
+									PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+										setplanmodifier.RequiresReplace(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Subnets
 								"subnets": schema.SetAttribute{ /*START ATTRIBUTE*/
@@ -460,14 +466,23 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 									Validators: []validator.Set{ /*START VALIDATORS*/
 										setvalidator.SizeAtLeast(1),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+										setplanmodifier.RequiresReplace(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "Information about a VPC used with the connector.",
 							Required:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.RequiresReplace(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Details of how to connect to an Apache Kafka cluster.",
 					Required:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.RequiresReplace(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Details of how to connect to the Kafka cluster.",
@@ -509,6 +524,9 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 							"IAM",
 						),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.RequiresReplace(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Details of the client authentication used by the Kafka cluster.",
@@ -550,6 +568,9 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 							"TLS",
 						),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.RequiresReplace(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Details of encryption in transit to the Kafka cluster.",
@@ -668,6 +689,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 										boolplanmodifier.UseStateForUnknown(),
+										boolplanmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: LogGroup
@@ -677,6 +699,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 									Computed:    true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
+										stringplanmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -685,6 +708,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 								objectplanmodifier.UseStateForUnknown(),
+								objectplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Firehose
@@ -697,6 +721,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 									Computed:    true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
+										stringplanmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Enabled
@@ -709,6 +734,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 										boolplanmodifier.UseStateForUnknown(),
+										boolplanmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -717,6 +743,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 								objectplanmodifier.UseStateForUnknown(),
+								objectplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: S3
@@ -729,6 +756,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 									Computed:    true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
+										stringplanmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Enabled
@@ -741,6 +769,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 										boolplanmodifier.UseStateForUnknown(),
+										boolplanmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Prefix
@@ -750,6 +779,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 									Computed:    true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
+										stringplanmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -758,6 +788,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 								objectplanmodifier.UseStateForUnknown(),
+								objectplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -769,6 +800,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
+						objectplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -835,6 +867,9 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.RegexMatches(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn):kafkaconnect:.*"), ""),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.RequiresReplace(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Revision
 							"revision": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -843,10 +878,16 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 								Validators: []validator.Int64{ /*START VALIDATORS*/
 									int64validator.AtLeast(1),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.RequiresReplace(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "Details about a custom plugin.",
 						Required:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.RequiresReplace(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -979,6 +1020,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
+						int64planmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: WorkerConfigurationArn
@@ -992,6 +1034,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/

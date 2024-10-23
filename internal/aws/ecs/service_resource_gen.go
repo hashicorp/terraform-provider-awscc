@@ -14,7 +14,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
@@ -325,6 +324,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -1006,14 +1006,8 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 				// Property: Enabled
 				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "Specifies whether to use Service Connect with this service.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.Bool{ /*START VALIDATORS*/
-						fwvalidators.NotNullBool(),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						boolplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					Required:    true,
+					// Enabled is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: LogConfiguration
 				"log_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1022,10 +1016,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 						"log_driver": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The log driver to use for the container.\n For tasks on FARGATElong, the supported log drivers are ``awslogs``, ``splunk``, and ``awsfirelens``.\n For tasks hosted on Amazon EC2 instances, the supported log drivers are ``awslogs``, ``fluentd``, ``gelf``, ``json-file``, ``journald``, ``syslog``, ``splunk``, and ``awsfirelens``.\n For more information about using the ``awslogs`` log driver, see [Send Amazon ECS logs to CloudWatch](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html) in the *Amazon Elastic Container Service Developer Guide*.\n For more information about using the ``awsfirelens`` log driver, see [Send Amazon ECS logs to an service or Partner](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html).\n  If you have a custom driver that isn't listed, you can fork the Amazon ECS container agent project that's [available on GitHub](https://docs.aws.amazon.com/https://github.com/aws/amazon-ecs-agent) and customize it to work with that driver. We encourage you to submit pull requests for changes that you would like to have included. However, we don't currently provide support for running modified copies of this software.",
 							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// LogDriver is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: Options
 						"options":           // Pattern: ""
@@ -1033,10 +1024,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 							ElementType: types.StringType,
 							Description: "The configuration options to send to the log driver. This parameter requires version 1.19 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log in to your container instance and run the following command: ``sudo docker version --format '{{.Server.APIVersion}}'``",
 							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-								mapplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// Options is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: SecretOptions
 						"secret_options": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1045,53 +1033,34 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 									// Property: Name
 									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "The name of the secret.",
-										Optional:    true,
-										Computed:    true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											fwvalidators.NotNullString(),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										Required:    true,
+										// Name is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: ValueFrom
 									"value_from": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "The secret to expose to the container. The supported values are either the full ARN of the ASMlong secret or the full ARN of the parameter in the SSM Parameter Store.\n For information about the require IAMlong permissions, see [Required IAM permissions for Amazon ECS secrets](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-secrets.html#secrets-iam) (for Secrets Manager) or [Required IAM permissions for Amazon ECS secrets](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-parameters.html) (for Systems Manager Parameter store) in the *Amazon Elastic Container Service Developer Guide*.\n  If the SSM Parameter Store parameter exists in the same Region as the task you're launching, then you can use either the full ARN or name of the parameter. If the parameter exists in a different Region, then the full ARN must be specified.",
-										Optional:    true,
-										Computed:    true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											fwvalidators.NotNullString(),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										Required:    true,
+										// ValueFrom is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
 							Description: "The secrets to pass to the log configuration. For more information, see [Specifying sensitive data](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html) in the *Amazon Elastic Container Service Developer Guide*.",
 							Optional:    true,
-							Computed:    true,
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								generic.Multiset(),
-								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
+							// SecretOptions is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The log configuration for the container. This parameter maps to ``LogConfig`` in the docker container create command and the ``--log-driver`` option to docker run.\n By default, containers use the same logging driver that the Docker daemon uses. However, the container might use a different logging driver than the Docker daemon by specifying a log driver configuration in the container definition.\n Understand the following when specifying a log configuration for your containers.\n  +  Amazon ECS currently supports a subset of the logging drivers available to the Docker daemon. Additional log drivers may be available in future releases of the Amazon ECS container agent.\n For tasks on FARGATElong, the supported log drivers are ``awslogs``, ``splunk``, and ``awsfirelens``.\n For tasks hosted on Amazon EC2 instances, the supported log drivers are ``awslogs``, ``fluentd``, ``gelf``, ``json-file``, ``journald``,``syslog``, ``splunk``, and ``awsfirelens``.\n  +  This parameter requires version 1.18 of the Docker Remote API or greater on your container instance.\n  +  For tasks that are hosted on Amazon EC2 instances, the Amazon ECS container agent must register the available logging drivers with the ``ECS_AVAILABLE_LOGGING_DRIVERS`` environment variable before containers placed on that instance can use these log configuration options. For more information, see [Amazon ECS container agent configuration](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html) in the *Amazon Elastic Container Service Developer Guide*.\n  +  For tasks that are on FARGATElong, because you don't have access to the underlying infrastructure your tasks are hosted on, any additional software needed must be installed outside of the task. For example, the Fluentd output aggregators or a remote host running Logstash to send Gelf logs to.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// LogConfiguration is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: Namespace
 				"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The namespace name or full Amazon Resource Name (ARN) of the CMAPlong namespace for use with Service Connect. The namespace must be in the same AWS Region as the Amazon ECS service and cluster. The type of namespace doesn't affect Service Connect. For more information about CMAPlong, see [Working with Services](https://docs.aws.amazon.com/cloud-map/latest/dg/working-with-services.html) in the *Developer Guide*.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// Namespace is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: Services
 				"services": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1105,61 +1074,37 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 										"dns_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "The ``dnsName`` is the name that you use in the applications of client tasks to connect to this service. The name must be a valid DNS name but doesn't need to be fully-qualified. The name can include up to 127 characters. The name can include lowercase letters, numbers, underscores (_), hyphens (-), and periods (.). The name can't start with a hyphen.\n If this parameter isn't specified, the default value of ``discoveryName.namespace`` is used. If the ``discoveryName`` isn't specified, the port mapping name from the task definition is used in ``portName.namespace``.\n To avoid changing your applications in client Amazon ECS services, set this to the same name that the client application uses by default. For example, a few common names are ``database``, ``db``, or the lowercase name of a database, such as ``mysql`` or ``redis``. For more information, see [Service Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html) in the *Amazon Elastic Container Service Developer Guide*.",
 											Optional:    true,
-											Computed:    true,
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// DnsName is a write-only property.
 										}, /*END ATTRIBUTE*/
 										// Property: Port
 										"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
 											Description: "The listening port number for the Service Connect proxy. This port is available inside of all of the tasks within the same namespace.\n To avoid changing your applications in client Amazon ECS services, set this to the same port that the client application uses by default. For more information, see [Service Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html) in the *Amazon Elastic Container Service Developer Guide*.",
-											Optional:    true,
-											Computed:    true,
-											Validators: []validator.Int64{ /*START VALIDATORS*/
-												fwvalidators.NotNullInt64(),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-												int64planmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											Required:    true,
+											// Port is a write-only property.
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
 								Description: "The list of client aliases for this Service Connect service. You use these to assign names that can be used by client applications. The maximum number of client aliases that you can have in this list is 1.\n Each alias (\"endpoint\") is a fully-qualified name and port number that other Amazon ECS tasks (\"clients\") can use to connect to this service.\n Each name and port mapping must be unique within the namespace.\n For each ``ServiceConnectService``, you must provide at least one ``clientAlias`` with one ``port``.",
 								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-									listplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// ClientAliases is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: DiscoveryName
 							"discovery_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The ``discoveryName`` is the name of the new CMAP service that Amazon ECS creates for this Amazon ECS service. This must be unique within the CMAP namespace. The name can contain up to 64 characters. The name can include lowercase letters, numbers, underscores (_), and hyphens (-). The name can't start with a hyphen.\n If the ``discoveryName`` isn't specified, the port mapping name from the task definition is used in ``portName.namespace``.",
 								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// DiscoveryName is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: IngressPortOverride
 							"ingress_port_override": schema.Int64Attribute{ /*START ATTRIBUTE*/
 								Description: "The port number for the Service Connect proxy to listen on.\n Use the value of this field to bypass the proxy for traffic on the port number specified in the named ``portMapping`` in the task definition of this application, and then use it in your VPC security groups to allow traffic into the proxy for this Amazon ECS service.\n In ``awsvpc`` mode and Fargate, the default value is the container port number. The container port number is in the ``portMapping`` in the task definition. In bridge mode, the default value is the ephemeral port of the Service Connect proxy.",
 								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-									int64planmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// IngressPortOverride is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: PortName
 							"port_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The ``portName`` must match the name of one of the ``portMappings`` from all the containers in the task definition of this Amazon ECS service.",
-								Optional:    true,
-								Computed:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									fwvalidators.NotNullString(),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								Required:    true,
+								// PortName is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: Timeout
 							"timeout": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1168,27 +1113,18 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 									"idle_timeout_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
 										Description: "The amount of time in seconds a connection will stay active while idle. A value of ``0`` can be set to disable ``idleTimeout``.\n The ``idleTimeout`` default for ``HTTP``/``HTTP2``/``GRPC`` is 5 minutes.\n The ``idleTimeout`` default for ``TCP`` is 1 hour.",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-											int64planmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// IdleTimeoutSeconds is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: PerRequestTimeoutSeconds
 									"per_request_timeout_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
 										Description: "The amount of time waiting for the upstream to respond with a complete response per request. A value of ``0`` can be set to disable ``perRequestTimeout``. ``perRequestTimeout`` can only be set if Service Connect ``appProtocol`` isn't ``TCP``. Only ``idleTimeout`` is allowed for ``TCP`` ``appProtocol``.",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-											int64planmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// PerRequestTimeoutSeconds is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Description: "A reference to an object that represents the configured timeouts for Service Connect.",
 								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-									objectplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// Timeout is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: Tls
 							"tls": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1200,64 +1136,39 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 											"aws_pca_authority_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "The ARN of the AWS Private Certificate Authority certificate.",
 												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// AwsPcaAuthorityArn is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "The signer certificate authority.",
-										Optional:    true,
-										Computed:    true,
-										Validators: []validator.Object{ /*START VALIDATORS*/
-											fwvalidators.NotNullObject(),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											objectplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										Required:    true,
+										// IssuerCertificateAuthority is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: KmsKey
 									"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "The AWS Key Management Service key.",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// KmsKey is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: RoleArn
 									"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "The Amazon Resource Name (ARN) of the IAM role that's associated with the Service Connect TLS.",
 										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// RoleArn is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Description: "A reference to an object that represents a Transport Layer Security (TLS) configuration.",
 								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-									objectplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// Tls is a write-only property.
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "The list of Service Connect service objects. These are names and aliases (also known as endpoints) that are used by other Amazon ECS services to connect to this service. \n This field is not required for a \"client\" Amazon ECS service that's a member of a namespace only to connect to other services within the namespace. An example of this would be a frontend application that accepts incoming requests from either a load balancer that's attached to the service or by other means.\n An object selects a port from the task definition, assigns a name for the CMAPlong service, and a list of aliases (endpoints) and ports for client applications to refer to this service.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// Services is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The configuration for this service to discover and connect to services, and be discovered by, and connected from, other services within a namespace.\n Tasks that run in a namespace can use short names to connect to services in the namespace. Tasks can connect to services across all of the clusters in the namespace. Tasks connect through a managed proxy container that collects logs and metrics for increased visibility. Only the tasks that Amazon ECS services create are supported with Service Connect. For more information, see [Service Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html) in the *Amazon Elastic Container Service Developer Guide*.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// ServiceConnectConfiguration is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: ServiceName
@@ -1543,67 +1454,43 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 							"encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
 								Description: "Indicates whether the volume should be encrypted. If no value is specified, encryption is turned on by default. This parameter maps 1:1 with the ``Encrypted`` parameter of the [CreateVolume API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in the *Amazon EC2 API Reference*.",
 								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-									boolplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// Encrypted is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: FilesystemType
 							"filesystem_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The Linux filesystem type for the volume. For volumes created from a snapshot, you must specify the same filesystem type that the volume was using when the snapshot was created. If there is a filesystem type mismatch, the task will fail to start.\n The available filesystem types are\u2028 ``ext3``, ``ext4``, and ``xfs``. If no value is specified, the ``xfs`` filesystem type is used by default.",
 								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// FilesystemType is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: Iops
 							"iops": schema.Int64Attribute{ /*START ATTRIBUTE*/
 								Description: "The number of I/O operations per second (IOPS). For ``gp3``, ``io1``, and ``io2`` volumes, this represents the number of IOPS that are provisioned for the volume. For ``gp2`` volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting.\n The following are the supported values for each volume type.\n  +   ``gp3``: 3,000 - 16,000 IOPS\n  +   ``io1``: 100 - 64,000 IOPS\n  +   ``io2``: 100 - 256,000 IOPS\n  \n This parameter is required for ``io1`` and ``io2`` volume types. The default for ``gp3`` volumes is ``3,000 IOPS``. This parameter is not supported for ``st1``, ``sc1``, or ``standard`` volume types.\n This parameter maps 1:1 with the ``Iops`` parameter of the [CreateVolume API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in the *Amazon EC2 API Reference*.",
 								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-									int64planmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// Iops is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: KmsKeyId
 							"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The Amazon Resource Name (ARN) identifier of the AWS Key Management Service key to use for Amazon EBS encryption. When encryption is turned on and no AWS Key Management Service key is specified, the default AWS managed key for Amazon EBS volumes is used. This parameter maps 1:1 with the ``KmsKeyId`` parameter of the [CreateVolume API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in the *Amazon EC2 API Reference*.\n   AWS authenticates the AWS Key Management Service key asynchronously. Therefore, if you specify an ID, alias, or ARN that is invalid, the action can appear to complete, but eventually fails.",
 								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// KmsKeyId is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: RoleArn
 							"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The ARN of the IAM role to associate with this volume. This is the Amazon ECS infrastructure IAM role that is used to manage your AWS infrastructure. We recommend using the Amazon ECS-managed ``AmazonECSInfrastructureRolePolicyForVolumes`` IAM policy with this role. For more information, see [Amazon ECS infrastructure IAM role](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/infrastructure_IAM_role.html) in the *Amazon ECS Developer Guide*.",
-								Optional:    true,
-								Computed:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									fwvalidators.NotNullString(),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								Required:    true,
+								// RoleArn is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: SizeInGiB
 							"size_in_gi_b": schema.Int64Attribute{ /*START ATTRIBUTE*/
 								Description: "The size of the volume in GiB. You must specify either a volume size or a snapshot ID. If you specify a snapshot ID, the snapshot size is used for the volume size by default. You can optionally specify a volume size greater than or equal to the snapshot size. This parameter maps 1:1 with the ``Size`` parameter of the [CreateVolume API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in the *Amazon EC2 API Reference*.\n The following are the supported volume size values for each volume type.\n  +   ``gp2`` and ``gp3``: 1-16,384\n  +   ``io1`` and ``io2``: 4-16,384\n  +   ``st1`` and ``sc1``: 125-16,384\n  +   ``standard``: 1-1,024",
 								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-									int64planmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// SizeInGiB is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: SnapshotId
 							"snapshot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The snapshot that Amazon ECS uses to create the volume. You must specify either a snapshot ID or a volume size. This parameter maps 1:1 with the ``SnapshotId`` parameter of the [CreateVolume API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in the *Amazon EC2 API Reference*.",
 								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// SnapshotId is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: TagSpecifications
 							"tag_specifications": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1613,28 +1500,19 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 										"propagate_tags": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "Determines whether to propagate the tags from the task definition to \u2028the Amazon EBS volume. Tags can only propagate to a ``SERVICE`` specified in \u2028``ServiceVolumeConfiguration``. If no value is specified, the tags aren't \u2028propagated.",
 											Optional:    true,
-											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.OneOf(
 													"SERVICE",
 													"TASK_DEFINITION",
 												),
 											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// PropagateTags is a write-only property.
 										}, /*END ATTRIBUTE*/
 										// Property: ResourceType
 										"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "The type of volume resource.",
-											Optional:    true,
-											Computed:    true,
-											Validators: []validator.String{ /*START VALIDATORS*/
-												fwvalidators.NotNullString(),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											Required:    true,
+											// ResourceType is a write-only property.
 										}, /*END ATTRIBUTE*/
 										// Property: Tags
 										"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1644,84 +1522,53 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 													"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 														Description: "One part of a key-value pair that make up a tag. A ``key`` is a general label that acts like a category for more specific tag values.",
 														Optional:    true,
-														Computed:    true,
-														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-															stringplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
+														// Key is a write-only property.
 													}, /*END ATTRIBUTE*/
 													// Property: Value
 													"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 														Description: "The optional part of a key-value pair that make up a tag. A ``value`` acts as a descriptor within a tag category (key).",
 														Optional:    true,
-														Computed:    true,
-														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-															stringplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
+														// Value is a write-only property.
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
 											}, /*END NESTED OBJECT*/
 											Description: "The tags applied to this Amazon EBS volume. ``AmazonECSCreated`` and ``AmazonECSManaged`` are reserved tags that can't be used.",
 											Optional:    true,
-											Computed:    true,
-											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-												listplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// Tags is a write-only property.
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
 								Description: "The tags to apply to the volume. Amazon ECS applies service-managed tags by default. This parameter maps 1:1 with the ``TagSpecifications.N`` parameter of the [CreateVolume API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in the *Amazon EC2 API Reference*.",
 								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-									listplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// TagSpecifications is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: Throughput
 							"throughput": schema.Int64Attribute{ /*START ATTRIBUTE*/
 								Description: "The throughput to provision for a volume, in MiB/s, with a maximum of 1,000 MiB/s. This parameter maps 1:1 with the ``Throughput`` parameter of the [CreateVolume API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in the *Amazon EC2 API Reference*.\n  This parameter is only supported for the ``gp3`` volume type.",
 								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-									int64planmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// Throughput is a write-only property.
 							}, /*END ATTRIBUTE*/
 							// Property: VolumeType
 							"volume_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The volume type. This parameter maps 1:1 with the ``VolumeType`` parameter of the [CreateVolume API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in the *Amazon EC2 API Reference*. For more information, see [Amazon EBS volume types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html) in the *Amazon EC2 User Guide*.\n The following are the supported volume types.\n  +  General Purpose SSD: ``gp2``|``gp3`` \n  +  Provisioned IOPS SSD: ``io1``|``io2`` \n  +  Throughput Optimized HDD: ``st1`` \n  +  Cold HDD: ``sc1`` \n  +  Magnetic: ``standard`` \n  The magnetic volume type is not supported on Fargate.",
 								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								// VolumeType is a write-only property.
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "The configuration for the Amazon EBS volume that Amazon ECS creates and manages on your behalf. These settings are used to create each Amazon EBS volume, with one volume created for each task in the service. The Amazon EBS volumes are visible in your account in the Amazon EC2 console once they are created.",
 						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-							objectplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						// ManagedEBSVolume is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: Name
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The name of the volume. This value must match the volume name from the ``Volume`` object in the task definition.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						Required:    true,
+						// Name is a write-only property.
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "The configuration for a volume specified in the task definition as a volume that is configured at launch time. Currently, the only supported volume type is an Amazon EBS volume.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// VolumeConfigurations is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

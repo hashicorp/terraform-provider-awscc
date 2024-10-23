@@ -230,14 +230,10 @@ func packageVersionResource(ctx context.Context) (resource.Resource, error) {
 		"updated_latest_patch_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "If the version was marked latest, the new version to maker as latest.",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 255),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9]+$"), ""),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// UpdatedLatestPatchVersion is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

@@ -62,7 +62,9 @@ func trustStoreRevocationResource(ctx context.Context) (resource.Resource, error
 						Computed: true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
+						// RevocationType is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: S3Bucket
 					"s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -70,7 +72,9 @@ func trustStoreRevocationResource(ctx context.Context) (resource.Resource, error
 						Computed: true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
+						// S3Bucket is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: S3Key
 					"s3_key": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -78,7 +82,9 @@ func trustStoreRevocationResource(ctx context.Context) (resource.Resource, error
 						Computed: true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
+						// S3Key is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: S3ObjectVersion
 					"s3_object_version": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -86,7 +92,9 @@ func trustStoreRevocationResource(ctx context.Context) (resource.Resource, error
 						Computed: true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
+						// S3ObjectVersion is a write-only property.
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -218,12 +226,12 @@ func trustStoreRevocationResource(ctx context.Context) (resource.Resource, error
 		"trust_store_revocations":   "TrustStoreRevocations",
 	})
 
+	opts = opts.IsImmutableType(true)
+
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/RevocationContents",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
-
-	opts = opts.WithUpdateTimeoutInMinutes(0)
 
 	v, err := generic.NewResource(ctx, opts...)
 

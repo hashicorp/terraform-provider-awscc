@@ -439,6 +439,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+									stringplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: LaunchTemplateName
@@ -451,6 +452,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+									stringplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Version
@@ -462,6 +464,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+									stringplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -469,6 +472,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
+							objectplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Overrides
@@ -481,6 +485,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 									Computed: true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
+										stringplanmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: InstanceRequirements
@@ -495,6 +500,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 														int64planmodifier.UseStateForUnknown(),
+														int64planmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: Min
@@ -503,6 +509,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 														int64planmodifier.UseStateForUnknown(),
+														int64planmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
@@ -510,6 +517,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 												objectplanmodifier.UseStateForUnknown(),
+												objectplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: AcceleratorManufacturers
@@ -530,6 +538,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 												listplanmodifier.UseStateForUnknown(),
+												listplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: AcceleratorNames
@@ -557,6 +566,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 												listplanmodifier.UseStateForUnknown(),
+												listplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: AcceleratorTotalMemoryMiB
@@ -568,6 +578,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 														int64planmodifier.UseStateForUnknown(),
+														int64planmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: Min
@@ -576,6 +587,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 														int64planmodifier.UseStateForUnknown(),
+														int64planmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
@@ -583,6 +595,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 												objectplanmodifier.UseStateForUnknown(),
+												objectplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: AcceleratorTypes
@@ -601,6 +614,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 												listplanmodifier.UseStateForUnknown(),
+												listplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: AllowedInstanceTypes
@@ -616,6 +630,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 												listplanmodifier.UseStateForUnknown(),
+												listplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: BareMetal
@@ -631,6 +646,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
+												stringplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: BaselineEbsBandwidthMbps
@@ -642,6 +658,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 														int64planmodifier.UseStateForUnknown(),
+														int64planmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: Min
@@ -650,6 +667,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 														int64planmodifier.UseStateForUnknown(),
+														int64planmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
@@ -657,6 +675,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 												objectplanmodifier.UseStateForUnknown(),
+												objectplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: BurstablePerformance
@@ -672,6 +691,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
+												stringplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: CpuManufacturers
@@ -690,6 +710,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 												listplanmodifier.UseStateForUnknown(),
+												listplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: ExcludedInstanceTypes
@@ -705,6 +726,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 												listplanmodifier.UseStateForUnknown(),
+												listplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: InstanceGenerations
@@ -722,6 +744,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 												listplanmodifier.UseStateForUnknown(),
+												listplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: LocalStorage
@@ -737,6 +760,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
+												stringplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: LocalStorageTypes
@@ -754,6 +778,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 												listplanmodifier.UseStateForUnknown(),
+												listplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: MaxSpotPriceAsPercentageOfOptimalOnDemandPrice
@@ -762,6 +787,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 												int64planmodifier.UseStateForUnknown(),
+												int64planmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: MemoryGiBPerVCpu
@@ -773,6 +799,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 														float64planmodifier.UseStateForUnknown(),
+														float64planmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: Min
@@ -781,6 +808,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 														float64planmodifier.UseStateForUnknown(),
+														float64planmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
@@ -788,6 +816,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 												objectplanmodifier.UseStateForUnknown(),
+												objectplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: MemoryMiB
@@ -799,6 +828,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 														int64planmodifier.UseStateForUnknown(),
+														int64planmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: Min
@@ -807,6 +837,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 														int64planmodifier.UseStateForUnknown(),
+														int64planmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
@@ -814,6 +845,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 												objectplanmodifier.UseStateForUnknown(),
+												objectplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: NetworkBandwidthGbps
@@ -825,6 +857,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 														float64planmodifier.UseStateForUnknown(),
+														float64planmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: Min
@@ -833,6 +866,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 														float64planmodifier.UseStateForUnknown(),
+														float64planmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
@@ -840,6 +874,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 												objectplanmodifier.UseStateForUnknown(),
+												objectplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: NetworkInterfaceCount
@@ -851,6 +886,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 														int64planmodifier.UseStateForUnknown(),
+														int64planmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: Min
@@ -859,6 +895,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 														int64planmodifier.UseStateForUnknown(),
+														int64planmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
@@ -866,6 +903,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 												objectplanmodifier.UseStateForUnknown(),
+												objectplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: OnDemandMaxPricePercentageOverLowestPrice
@@ -874,6 +912,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 												int64planmodifier.UseStateForUnknown(),
+												int64planmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: RequireHibernateSupport
@@ -882,6 +921,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 												boolplanmodifier.UseStateForUnknown(),
+												boolplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: SpotMaxPricePercentageOverLowestPrice
@@ -890,6 +930,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 												int64planmodifier.UseStateForUnknown(),
+												int64planmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: TotalLocalStorageGB
@@ -901,6 +942,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 														float64planmodifier.UseStateForUnknown(),
+														float64planmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: Min
@@ -909,6 +951,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 														float64planmodifier.UseStateForUnknown(),
+														float64planmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
@@ -916,6 +959,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 												objectplanmodifier.UseStateForUnknown(),
+												objectplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: VCpuCount
@@ -927,6 +971,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 														int64planmodifier.UseStateForUnknown(),
+														int64planmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: Min
@@ -935,6 +980,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 														int64planmodifier.UseStateForUnknown(),
+														int64planmodifier.RequiresReplaceIfConfigured(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
@@ -942,6 +988,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 												objectplanmodifier.UseStateForUnknown(),
+												objectplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
@@ -949,6 +996,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 									Computed: true,
 									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 										objectplanmodifier.UseStateForUnknown(),
+										objectplanmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: InstanceType
@@ -957,6 +1005,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 									Computed: true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
+										stringplanmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: MaxPrice
@@ -965,6 +1014,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 									Computed: true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
+										stringplanmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Placement
@@ -976,6 +1026,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
+												stringplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: AvailabilityZone
@@ -984,6 +1035,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
+												stringplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: GroupName
@@ -992,6 +1044,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
+												stringplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: HostId
@@ -1000,6 +1053,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
+												stringplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: HostResourceGroupArn
@@ -1008,6 +1062,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
+												stringplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: PartitionNumber
@@ -1016,6 +1071,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 												int64planmodifier.UseStateForUnknown(),
+												int64planmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: SpreadDomain
@@ -1024,6 +1080,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
+												stringplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: Tenancy
@@ -1032,6 +1089,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
+												stringplanmodifier.RequiresReplaceIfConfigured(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
@@ -1039,6 +1097,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 									Computed: true,
 									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 										objectplanmodifier.UseStateForUnknown(),
+										objectplanmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Priority
@@ -1047,6 +1106,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 									Computed: true,
 									PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 										float64planmodifier.UseStateForUnknown(),
+										float64planmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: SubnetId
@@ -1055,6 +1115,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 									Computed: true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
+										stringplanmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: WeightedCapacity
@@ -1063,6 +1124,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 									Computed: true,
 									PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 										float64planmodifier.UseStateForUnknown(),
+										float64planmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -1071,6 +1133,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 						Computed: true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 							listplanmodifier.UseStateForUnknown(),
+							listplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -1127,6 +1190,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: CapacityReservationOptions
@@ -1143,6 +1207,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -1150,6 +1215,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
+						objectplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: MaxTotalPrice
@@ -1158,6 +1224,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: MinTargetCapacity
@@ -1166,6 +1233,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
+						int64planmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: SingleAvailabilityZone
@@ -1174,6 +1242,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
+						boolplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: SingleInstanceType
@@ -1182,6 +1251,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
+						boolplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -1295,6 +1365,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: InstanceInterruptionBehavior
@@ -1310,6 +1381,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: InstancePoolsToUseCount
@@ -1318,6 +1390,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
+						int64planmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: MaintenanceStrategies
@@ -1338,6 +1411,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
+										stringplanmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: TerminationDelay
@@ -1346,6 +1420,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 									Computed: true,
 									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 										int64planmodifier.UseStateForUnknown(),
+										int64planmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -1353,6 +1428,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 							Computed: true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 								objectplanmodifier.UseStateForUnknown(),
+								objectplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -1360,6 +1436,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
+						objectplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: MaxTotalPrice
@@ -1368,6 +1445,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: MinTargetCapacity
@@ -1376,6 +1454,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
+						int64planmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: SingleAvailabilityZone
@@ -1384,6 +1463,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
+						boolplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: SingleInstanceType
@@ -1392,6 +1472,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
+						boolplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -1547,6 +1628,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Tags
@@ -1562,6 +1644,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
+										stringplanmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Value
@@ -1573,6 +1656,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
+										stringplanmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -1581,6 +1665,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 						Computed: true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 							listplanmodifier.UseStateForUnknown(),
+							listplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/

@@ -14,7 +14,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -177,13 +176,9 @@ func conformancePackResource(ctx context.Context) (resource.Resource, error) {
 		"template_body": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A string containing full conformance pack template body. You can only specify one of the template body or template S3Uri fields.",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 51200),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// TemplateBody is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: TemplateS3Uri
@@ -199,14 +194,10 @@ func conformancePackResource(ctx context.Context) (resource.Resource, error) {
 		"template_s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Location of file containing the template body which points to the conformance pack template that is located in an Amazon S3 bucket. You can only specify one of the template body or template S3Uri fields.",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 1024),
 				stringvalidator.RegexMatches(regexp.MustCompile("s3://.*"), ""),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// TemplateS3Uri is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: TemplateSSMDocumentDetails
@@ -234,32 +225,22 @@ func conformancePackResource(ctx context.Context) (resource.Resource, error) {
 				// Property: DocumentName
 				"document_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
-					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthBetween(3, 128),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// DocumentName is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: DocumentVersion
 				"document_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
-					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthBetween(1, 128),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// DocumentVersion is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The TemplateSSMDocumentDetails object contains the name of the SSM document and the version of the SSM document.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// TemplateSSMDocumentDetails is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

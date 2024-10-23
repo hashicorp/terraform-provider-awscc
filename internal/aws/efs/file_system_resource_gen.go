@@ -118,10 +118,6 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 		"bypass_policy_lockout_safety_check": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "(Optional) A boolean that specifies whether or not to bypass the ``FileSystemPolicy`` lockout safety check. The lockout safety check determines whether the policy in the request will lock out, or prevent, the IAM principal that is making the request from making future ``PutFileSystemPolicy`` requests on this file system. Set ``BypassPolicyLockoutSafetyCheck`` to ``True`` only when you intend to prevent the IAM principal that is making the request from making subsequent ``PutFileSystemPolicy`` requests on this file system. The default value is ``False``.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// BypassPolicyLockoutSafetyCheck is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Encrypted

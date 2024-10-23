@@ -150,10 +150,16 @@ func replicatorResource(ctx context.Context) (resource.Resource, error) {
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.RegexMatches(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn):kafka:.*"), ""),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.RequiresReplace(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "Details of an Amazon MSK cluster. Exactly one of AmazonMskCluster is required.",
 						Required:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.RequiresReplace(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: VpcConfig
 					"vpc_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -169,6 +175,7 @@ func replicatorResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 									setplanmodifier.UseStateForUnknown(),
+									setplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: SubnetIds
@@ -179,10 +186,16 @@ func replicatorResource(ctx context.Context) (resource.Resource, error) {
 								Validators: []validator.Set{ /*START VALIDATORS*/
 									setvalidator.SizeBetween(2, 3),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+									setplanmodifier.RequiresReplace(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "Details of an Amazon VPC which has network connectivity to the Apache Kafka cluster.",
 						Required:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.RequiresReplace(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

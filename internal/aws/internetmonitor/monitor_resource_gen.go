@@ -15,7 +15,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
@@ -247,10 +246,6 @@ func monitorResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"include_linked_accounts": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// IncludeLinkedAccounts is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: InternetMeasurementsLogDelivery
@@ -345,14 +340,10 @@ func monitorResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"linked_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
-			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(12, 12),
 				stringvalidator.RegexMatches(regexp.MustCompile("^(\\d{12})$"), ""),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// LinkedAccountId is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: MaxCityNetworksToMonitor
@@ -497,7 +488,6 @@ func monitorResource(ctx context.Context) (resource.Resource, error) {
 		"resources_to_add": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.ValueStringsAre(
 					stringvalidator.LengthBetween(20, 2048),
@@ -505,7 +495,6 @@ func monitorResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 			// ResourcesToAdd is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -524,7 +513,6 @@ func monitorResource(ctx context.Context) (resource.Resource, error) {
 		"resources_to_remove": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.ValueStringsAre(
 					stringvalidator.LengthBetween(20, 2048),
@@ -532,7 +520,6 @@ func monitorResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 			// ResourcesToRemove is a write-only property.
 		}, /*END ATTRIBUTE*/

@@ -120,7 +120,9 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
+						// CredentialType is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: DatabaseName
 					"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -128,7 +130,9 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 						Computed: true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
+						// DatabaseName is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: SecretId
 					"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -136,7 +140,9 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 						Computed: true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
+						// SecretId is a write-only property.
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

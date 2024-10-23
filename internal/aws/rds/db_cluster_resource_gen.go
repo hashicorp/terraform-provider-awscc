@@ -301,10 +301,6 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		"db_instance_parameter_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the DB parameter group to apply to all instances of the DB cluster.\n  When you apply a parameter group using the ``DBInstanceParameterGroupName`` parameter, the DB cluster isn't rebooted automatically. Also, parameter changes are applied immediately rather than during the next maintenance window.\n  Valid for Cluster Type: Aurora DB clusters only\n Default: The existing name setting\n Constraints:\n  +  The DB parameter group must be in the same DB parameter group family as this DB cluster.\n  +  The ``DBInstanceParameterGroupName`` parameter is valid in combination with the ``AllowMajorVersionUpgrade`` parameter for a major version upgrade only.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// DBInstanceParameterGroupName is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: DBSubnetGroupName
@@ -659,10 +655,6 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		"master_user_password": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The master password for the DB instance.\n  If you specify the ``SourceDBClusterIdentifier``, ``SnapshotIdentifier``, or ``GlobalClusterIdentifier`` property, don't specify this property. The value is inherited from the source DB cluster, the snapshot, or the primary DB cluster for the global database cluster, respectively.\n  Valid for: Aurora DB clusters and Multi-AZ DB clusters",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// MasterUserPassword is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: MasterUserSecret

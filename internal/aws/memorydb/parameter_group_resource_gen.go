@@ -99,10 +99,6 @@ func parameterGroupResource(ctx context.Context) (resource.Resource, error) {
 			CustomType:  jsontypes.NormalizedType{},
 			Description: "An map of parameter names and values for the parameter update. You must supply at least one parameter name and value; subsequent arguments are optional.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// Parameters is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Tags

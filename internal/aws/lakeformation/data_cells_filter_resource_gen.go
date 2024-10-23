@@ -98,6 +98,7 @@ func dataCellsFilterResource(ctx context.Context) (resource.Resource, error) {
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						generic.Multiset(),
 						listplanmodifier.UseStateForUnknown(),
+						listplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -176,6 +177,7 @@ func dataCellsFilterResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: FilterExpression
@@ -185,6 +187,7 @@ func dataCellsFilterResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -268,9 +271,9 @@ func dataCellsFilterResource(ctx context.Context) (resource.Resource, error) {
 		"table_name":            "TableName",
 	})
 
-	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+	opts = opts.IsImmutableType(true)
 
-	opts = opts.WithUpdateTimeoutInMinutes(0)
+	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	v, err := generic.NewResource(ctx, opts...)
 

@@ -13,14 +13,11 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -300,64 +297,34 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: ApiKeyName
 						"api_key_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								fwvalidators.NotNullString(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							Required: true,
+							// ApiKeyName is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: ApiKeyValue
 						"api_key_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								fwvalidators.NotNullString(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							Required: true,
+							// ApiKeyValue is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// ApiKeyAuthParameters is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: BasicAuthParameters
 				"basic_auth_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Password
 						"password": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								fwvalidators.NotNullString(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							Required: true,
+							// Password is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: Username
 						"username": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								fwvalidators.NotNullString(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							Required: true,
+							// Username is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// BasicAuthParameters is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: InvocationHttpParameters
 				"invocation_http_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -374,36 +341,22 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 											boolplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
+										// IsValueSecret is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: Key
 									"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Optional: true,
-										Computed: true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											fwvalidators.NotNullString(),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										Required: true,
+										// Key is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: Value
 									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Optional: true,
-										Computed: true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											fwvalidators.NotNullString(),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										Required: true,
+										// Value is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
 							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// BodyParameters is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: HeaderParameters
 						"header_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -417,36 +370,22 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 											boolplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
+										// IsValueSecret is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: Key
 									"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Optional: true,
-										Computed: true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											fwvalidators.NotNullString(),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										Required: true,
+										// Key is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: Value
 									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Optional: true,
-										Computed: true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											fwvalidators.NotNullString(),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										Required: true,
+										// Value is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
 							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// HeaderParameters is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: QueryStringParameters
 						"query_string_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -460,109 +399,66 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 											boolplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
+										// IsValueSecret is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: Key
 									"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Optional: true,
-										Computed: true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											fwvalidators.NotNullString(),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										Required: true,
+										// Key is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: Value
 									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Optional: true,
-										Computed: true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											fwvalidators.NotNullString(),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										Required: true,
+										// Value is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
 							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// QueryStringParameters is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// InvocationHttpParameters is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: OAuthParameters
 				"o_auth_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: AuthorizationEndpoint
 						"authorization_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
+							Required: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 2048),
-								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// AuthorizationEndpoint is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: ClientParameters
 						"client_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: ClientID
 								"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										fwvalidators.NotNullString(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									Required: true,
+									// ClientID is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: ClientSecret
 								"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										fwvalidators.NotNullString(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									Required: true,
+									// ClientSecret is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.Object{ /*START VALIDATORS*/
-								fwvalidators.NotNullObject(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							Required: true,
+							// ClientParameters is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: HttpMethod
 						"http_method": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
+							Required: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"GET",
 									"POST",
 									"PUT",
 								),
-								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// HttpMethod is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: OAuthHttpParameters
 						"o_auth_http_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -579,36 +475,22 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 												PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 													boolplanmodifier.UseStateForUnknown(),
 												}, /*END PLAN MODIFIERS*/
+												// IsValueSecret is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Key
 											"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Optional: true,
-												Computed: true,
-												Validators: []validator.String{ /*START VALIDATORS*/
-													fwvalidators.NotNullString(),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												Required: true,
+												// Key is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Value
 											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Optional: true,
-												Computed: true,
-												Validators: []validator.String{ /*START VALIDATORS*/
-													fwvalidators.NotNullString(),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												Required: true,
+												// Value is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
 									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-										listplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// BodyParameters is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: HeaderParameters
 								"header_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -622,36 +504,22 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 												PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 													boolplanmodifier.UseStateForUnknown(),
 												}, /*END PLAN MODIFIERS*/
+												// IsValueSecret is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Key
 											"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Optional: true,
-												Computed: true,
-												Validators: []validator.String{ /*START VALIDATORS*/
-													fwvalidators.NotNullString(),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												Required: true,
+												// Key is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Value
 											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Optional: true,
-												Computed: true,
-												Validators: []validator.String{ /*START VALIDATORS*/
-													fwvalidators.NotNullString(),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												Required: true,
+												// Value is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
 									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-										listplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// HeaderParameters is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: QueryStringParameters
 								"query_string_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -665,57 +533,33 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 												PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 													boolplanmodifier.UseStateForUnknown(),
 												}, /*END PLAN MODIFIERS*/
+												// IsValueSecret is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Key
 											"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Optional: true,
-												Computed: true,
-												Validators: []validator.String{ /*START VALIDATORS*/
-													fwvalidators.NotNullString(),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												Required: true,
+												// Key is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Value
 											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Optional: true,
-												Computed: true,
-												Validators: []validator.String{ /*START VALIDATORS*/
-													fwvalidators.NotNullString(),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												Required: true,
+												// Value is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
 									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-										listplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// QueryStringParameters is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// OAuthHttpParameters is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// OAuthParameters is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// AuthParameters is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: AuthorizationType

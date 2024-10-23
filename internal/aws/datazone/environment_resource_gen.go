@@ -247,10 +247,6 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		"environment_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Environment role arn for custom aws environment permissions",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// EnvironmentRoleArn is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: GlossaryTerms
@@ -442,6 +438,7 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
@@ -451,6 +448,7 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/

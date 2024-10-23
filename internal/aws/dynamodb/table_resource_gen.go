@@ -575,7 +575,9 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// InputCompressionType is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: InputFormat
 				"input_format": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -587,7 +589,9 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// InputFormat is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: InputFormatOptions
 				"input_format_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -602,7 +606,9 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 									Computed:    true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
+										stringplanmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
+									// Delimiter is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: HeaderList
 								"header_list": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -615,7 +621,9 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 										listplanmodifier.UseStateForUnknown(),
+										listplanmodifier.RequiresReplaceIfConfigured(),
 									}, /*END PLAN MODIFIERS*/
+									// HeaderList is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "The options for imported source files in CSV format. The values are Delimiter and HeaderList.",
@@ -623,7 +631,9 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 								objectplanmodifier.UseStateForUnknown(),
+								objectplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
+							// Csv is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Additional properties that specify how the input is formatted,",
@@ -631,7 +641,9 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
+						objectplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// InputFormatOptions is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: S3BucketSource
 				"s3_bucket_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -646,7 +658,9 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
+							// S3Bucket is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: S3BucketOwner
 						"s3_bucket_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -655,7 +669,9 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
+							// S3BucketOwner is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: S3KeyPrefix
 						"s3_key_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -664,7 +680,9 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
+							// S3KeyPrefix is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The S3 bucket that provides the source for the import.",
@@ -675,7 +693,9 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
+						objectplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// S3BucketSource is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Specifies the properties of data being imported from the S3 bucket source to the table.\n  If you specify the ``ImportSourceSpecification`` property, and also specify either the ``StreamSpecification``, the ``TableClass`` property, or the ``DeletionProtectionEnabled`` property, the IAM entity creating/updating stack must have ``UpdateTable`` permission.",

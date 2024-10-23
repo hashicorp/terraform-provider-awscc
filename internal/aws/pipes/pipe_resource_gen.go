@@ -28,7 +28,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -1004,13 +1003,10 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 						// Property: BatchSize
 						"batch_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
 								int64validator.Between(1, 10000),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								int64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// BatchSize is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: Credentials
 						"credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1019,56 +1015,39 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 								"basic_auth": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "Optional SecretManager ARN which stores the database credentials",
 									Optional:    true,
-									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 1600),
 										stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$"), ""),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// BasicAuth is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.Object{ /*START VALIDATORS*/
-								fwvalidators.NotNullObject(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							Required: true,
+							// Credentials is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: MaximumBatchingWindowInSeconds
 						"maximum_batching_window_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
 								int64validator.Between(0, 300),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								int64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// MaximumBatchingWindowInSeconds is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: QueueName
 						"queue_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
+							Required: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 1000),
 								stringvalidator.RegexMatches(regexp.MustCompile("^[\\s\\S]*$"), ""),
-								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-								stringplanmodifier.RequiresReplaceIfConfigured(),
+								stringplanmodifier.RequiresReplace(),
 							}, /*END PLAN MODIFIERS*/
+							// QueueName is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// ActiveMQBrokerParameters is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: DynamoDBStreamParameters
 				"dynamo_db_stream_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1076,13 +1055,10 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 						// Property: BatchSize
 						"batch_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
 								int64validator.Between(1, 10000),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								int64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// BatchSize is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: DeadLetterConfig
 						"dead_letter_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1090,101 +1066,75 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 								// Property: Arn
 								"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Optional: true,
-									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 1600),
 										stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)$"), ""),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// Arn is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// DeadLetterConfig is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: MaximumBatchingWindowInSeconds
 						"maximum_batching_window_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
 								int64validator.Between(0, 300),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								int64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// MaximumBatchingWindowInSeconds is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: MaximumRecordAgeInSeconds
 						"maximum_record_age_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
 								int64validator.Between(-1, 604800),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								int64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// MaximumRecordAgeInSeconds is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: MaximumRetryAttempts
 						"maximum_retry_attempts": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
 								int64validator.Between(-1, 10000),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								int64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// MaximumRetryAttempts is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: OnPartialBatchItemFailure
 						"on_partial_batch_item_failure": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"AUTOMATIC_BISECT",
 								),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// OnPartialBatchItemFailure is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: ParallelizationFactor
 						"parallelization_factor": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
 								int64validator.Between(1, 10),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								int64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// ParallelizationFactor is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: StartingPosition
 						"starting_position": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
+							Required: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"TRIM_HORIZON",
 									"LATEST",
 								),
-								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-								stringplanmodifier.RequiresReplaceIfConfigured(),
+								stringplanmodifier.RequiresReplace(),
 							}, /*END PLAN MODIFIERS*/
+							// StartingPosition is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// DynamoDBStreamParameters is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: FilterCriteria
 				"filter_criteria": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1196,31 +1146,22 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 									// Property: Pattern
 									"pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Optional: true,
-										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(0, 4096),
 										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// Pattern is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(0, 5),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// Filters is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// FilterCriteria is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: KinesisStreamParameters
 				"kinesis_stream_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1228,13 +1169,10 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 						// Property: BatchSize
 						"batch_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
 								int64validator.Between(1, 10000),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								int64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// BatchSize is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: DeadLetterConfig
 						"dead_letter_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1242,95 +1180,72 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 								// Property: Arn
 								"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Optional: true,
-									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 1600),
 										stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)$"), ""),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// Arn is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// DeadLetterConfig is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: MaximumBatchingWindowInSeconds
 						"maximum_batching_window_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
 								int64validator.Between(0, 300),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								int64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// MaximumBatchingWindowInSeconds is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: MaximumRecordAgeInSeconds
 						"maximum_record_age_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
 								int64validator.Between(-1, 604800),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								int64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// MaximumRecordAgeInSeconds is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: MaximumRetryAttempts
 						"maximum_retry_attempts": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
 								int64validator.Between(-1, 10000),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								int64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// MaximumRetryAttempts is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: OnPartialBatchItemFailure
 						"on_partial_batch_item_failure": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"AUTOMATIC_BISECT",
 								),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// OnPartialBatchItemFailure is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: ParallelizationFactor
 						"parallelization_factor": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
 								int64validator.Between(1, 10),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								int64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// ParallelizationFactor is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: StartingPosition
 						"starting_position": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
+							Required: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"TRIM_HORIZON",
 									"LATEST",
 									"AT_TIMESTAMP",
 								),
-								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-								stringplanmodifier.RequiresReplaceIfConfigured(),
+								stringplanmodifier.RequiresReplace(),
 							}, /*END PLAN MODIFIERS*/
+							// StartingPosition is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: StartingPositionTimestamp
 						"starting_position_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1341,13 +1256,11 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 								stringplanmodifier.UseStateForUnknown(),
 								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
+							// StartingPositionTimestamp is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// KinesisStreamParameters is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: ManagedStreamingKafkaParameters
 				"managed_streaming_kafka_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1355,13 +1268,10 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 						// Property: BatchSize
 						"batch_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
 								int64validator.Between(1, 10000),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								int64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// BatchSize is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: ConsumerGroupID
 						"consumer_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1375,6 +1285,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 								stringplanmodifier.UseStateForUnknown(),
 								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
+							// ConsumerGroupID is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: Credentials
 						"credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1383,45 +1294,33 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 								"client_certificate_tls_auth": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "Optional SecretManager ARN which stores the database credentials",
 									Optional:    true,
-									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 1600),
 										stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$"), ""),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// ClientCertificateTlsAuth is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: SaslScram512Auth
 								"sasl_scram_512_auth": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "Optional SecretManager ARN which stores the database credentials",
 									Optional:    true,
-									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 1600),
 										stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$"), ""),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// SaslScram512Auth is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// Credentials is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: MaximumBatchingWindowInSeconds
 						"maximum_batching_window_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
 								int64validator.Between(0, 300),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								int64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// MaximumBatchingWindowInSeconds is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: StartingPosition
 						"starting_position": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1437,27 +1336,23 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 								stringplanmodifier.UseStateForUnknown(),
 								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
+							// StartingPosition is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: TopicName
 						"topic_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
+							Required: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 249),
 								stringvalidator.RegexMatches(regexp.MustCompile("^[^.]([a-zA-Z0-9\\-_.]+)$"), ""),
-								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-								stringplanmodifier.RequiresReplaceIfConfigured(),
+								stringplanmodifier.RequiresReplace(),
 							}, /*END PLAN MODIFIERS*/
+							// TopicName is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// ManagedStreamingKafkaParameters is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: RabbitMQBrokerParameters
 				"rabbit_mq_broker_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1465,13 +1360,10 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 						// Property: BatchSize
 						"batch_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
 								int64validator.Between(1, 10000),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								int64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// BatchSize is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: Credentials
 						"credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1480,49 +1372,35 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 								"basic_auth": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "Optional SecretManager ARN which stores the database credentials",
 									Optional:    true,
-									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 1600),
 										stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$"), ""),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// BasicAuth is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.Object{ /*START VALIDATORS*/
-								fwvalidators.NotNullObject(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							Required: true,
+							// Credentials is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: MaximumBatchingWindowInSeconds
 						"maximum_batching_window_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
 								int64validator.Between(0, 300),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								int64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// MaximumBatchingWindowInSeconds is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: QueueName
 						"queue_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
+							Required: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 1000),
 								stringvalidator.RegexMatches(regexp.MustCompile("^[\\s\\S]*$"), ""),
-								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-								stringplanmodifier.RequiresReplaceIfConfigured(),
+								stringplanmodifier.RequiresReplace(),
 							}, /*END PLAN MODIFIERS*/
+							// QueueName is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: VirtualHost
 						"virtual_host": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1536,13 +1414,11 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 								stringplanmodifier.UseStateForUnknown(),
 								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
+							// VirtualHost is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// RabbitMQBrokerParameters is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: SelfManagedKafkaParameters
 				"self_managed_kafka_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1563,17 +1439,15 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 								listplanmodifier.UseStateForUnknown(),
 								listplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
+							// AdditionalBootstrapServers is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: BatchSize
 						"batch_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
 								int64validator.Between(1, 10000),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								int64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// BatchSize is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: ConsumerGroupID
 						"consumer_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1587,6 +1461,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 								stringplanmodifier.UseStateForUnknown(),
 								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
+							// ConsumerGroupID is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: Credentials
 						"credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1595,84 +1470,63 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 								"basic_auth": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "Optional SecretManager ARN which stores the database credentials",
 									Optional:    true,
-									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 1600),
 										stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$"), ""),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// BasicAuth is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: ClientCertificateTlsAuth
 								"client_certificate_tls_auth": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "Optional SecretManager ARN which stores the database credentials",
 									Optional:    true,
-									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 1600),
 										stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$"), ""),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// ClientCertificateTlsAuth is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: SaslScram256Auth
 								"sasl_scram_256_auth": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "Optional SecretManager ARN which stores the database credentials",
 									Optional:    true,
-									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 1600),
 										stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$"), ""),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// SaslScram256Auth is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: SaslScram512Auth
 								"sasl_scram_512_auth": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "Optional SecretManager ARN which stores the database credentials",
 									Optional:    true,
-									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 1600),
 										stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$"), ""),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// SaslScram512Auth is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// Credentials is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: MaximumBatchingWindowInSeconds
 						"maximum_batching_window_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
 								int64validator.Between(0, 300),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								int64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// MaximumBatchingWindowInSeconds is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: ServerRootCaCertificate
 						"server_root_ca_certificate": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "Optional SecretManager ARN which stores the database credentials",
 							Optional:    true,
-							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 1600),
 								stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$"), ""),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// ServerRootCaCertificate is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: StartingPosition
 						"starting_position": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1688,20 +1542,19 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 								stringplanmodifier.UseStateForUnknown(),
 								stringplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
+							// StartingPosition is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: TopicName
 						"topic_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
+							Required: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 249),
 								stringvalidator.RegexMatches(regexp.MustCompile("^[^.]([a-zA-Z0-9\\-_.]+)$"), ""),
-								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-								stringplanmodifier.RequiresReplaceIfConfigured(),
+								stringplanmodifier.RequiresReplace(),
 							}, /*END PLAN MODIFIERS*/
+							// TopicName is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: Vpc
 						"vpc": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1711,7 +1564,6 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 									ElementType: types.StringType,
 									Description: "List of SecurityGroupId.",
 									Optional:    true,
-									Computed:    true,
 									Validators: []validator.List{ /*START VALIDATORS*/
 										listvalidator.SizeBetween(0, 5),
 										listvalidator.ValueStringsAre(
@@ -1719,16 +1571,13 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 											stringvalidator.RegexMatches(regexp.MustCompile("^sg-[0-9a-zA-Z]*$"), ""),
 										),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-										listplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// SecurityGroup is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: Subnets
 								"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
 									ElementType: types.StringType,
 									Description: "List of SubnetId.",
 									Optional:    true,
-									Computed:    true,
 									Validators: []validator.List{ /*START VALIDATORS*/
 										listvalidator.SizeBetween(0, 16),
 										listvalidator.ValueStringsAre(
@@ -1736,23 +1585,15 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 											stringvalidator.RegexMatches(regexp.MustCompile("^subnet-[0-9a-z]*$"), ""),
 										),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-										listplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// Subnets is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// Vpc is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// SelfManagedKafkaParameters is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: SqsQueueParameters
 				"sqs_queue_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1760,38 +1601,25 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 						// Property: BatchSize
 						"batch_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
 								int64validator.Between(1, 10000),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								int64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// BatchSize is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: MaximumBatchingWindowInSeconds
 						"maximum_batching_window_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
 								int64validator.Between(0, 300),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								int64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// MaximumBatchingWindowInSeconds is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// SqsQueueParameters is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// SourceParameters is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: StateReason
@@ -2742,13 +2570,11 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 										int64planmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
+									// Size is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// ArrayProperties is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: ContainerOverrides
 						"container_overrides": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -2757,10 +2583,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 								"command": schema.ListAttribute{ /*START ATTRIBUTE*/
 									ElementType: types.StringType,
 									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-										listplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// Command is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: Environment
 								"environment": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -2769,34 +2592,22 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Name
 											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Optional: true,
-												Computed: true,
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Name is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Value
 											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Optional: true,
-												Computed: true,
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Value is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
 									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-										listplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// Environment is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: InstanceType
 								"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// InstanceType is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: ResourceRequirements
 								"resource_requirements": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -2804,45 +2615,29 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 											// Property: Type
 											"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Optional: true,
-												Computed: true,
+												Required: true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.OneOf(
 														"GPU",
 														"MEMORY",
 														"VCPU",
 													),
-													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Type is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Value
 											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Optional: true,
-												Computed: true,
-												Validators: []validator.String{ /*START VALIDATORS*/
-													fwvalidators.NotNullString(),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												Required: true,
+												// Value is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
 									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-										listplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// ResourceRequirements is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// ContainerOverrides is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: DependsOn
 						"depends_on": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -2851,67 +2646,43 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 									// Property: JobId
 									"job_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Optional: true,
-										Computed: true,
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// JobId is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: Type
 									"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Optional: true,
-										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"N_TO_N",
 												"SEQUENTIAL",
 											),
 										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// Type is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(0, 20),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// DependsOn is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: JobDefinition
 						"job_definition": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								fwvalidators.NotNullString(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							Required: true,
+							// JobDefinition is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: JobName
 						"job_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								fwvalidators.NotNullString(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							Required: true,
+							// JobName is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: Parameters
 						"parameters":        // Pattern: ""
 						schema.MapAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
 							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-								mapplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// Parameters is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: RetryStrategy
 						"retry_strategy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -2927,20 +2698,15 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 										int64planmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
+									// Attempts is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// RetryStrategy is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// BatchJobParameters is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: CloudWatchLogsParameters
 				"cloudwatch_logs_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -2948,32 +2714,23 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 						// Property: LogStreamName
 						"log_stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 256),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// LogStreamName is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: Timestamp
 						"timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 256),
 								stringvalidator.RegexMatches(regexp.MustCompile("^\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*$"), ""),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// Timestamp is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// CloudWatchLogsParameters is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: EcsTaskParameters
 				"ecs_task_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -2993,18 +2750,15 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 											int64planmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
+										// Base is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: CapacityProvider
 									"capacity_provider": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Optional: true,
-										Computed: true,
+										Required: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(1, 255),
-											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// CapacityProvider is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: Weight
 									"weight": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -3017,17 +2771,15 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 											int64planmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
+										// Weight is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(0, 6),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// CapacityProviderStrategy is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: EnableECSManagedTags
 						"enable_ecs_managed_tags": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -3037,6 +2789,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
+							// EnableECSManagedTags is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: EnableExecuteCommand
 						"enable_execute_command": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -3046,19 +2799,16 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
+							// EnableExecuteCommand is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: Group
 						"group": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// Group is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: LaunchType
 						"launch_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"EC2",
@@ -3066,9 +2816,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 									"EXTERNAL",
 								),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// LaunchType is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: NetworkConfiguration
 						"network_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -3079,22 +2827,18 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 										// Property: AssignPublicIp
 										"assign_public_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Optional: true,
-											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.OneOf(
 													"ENABLED",
 													"DISABLED",
 												),
 											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// AssignPublicIp is a write-only property.
 										}, /*END ATTRIBUTE*/
 										// Property: SecurityGroups
 										"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
 											ElementType: types.StringType,
 											Optional:    true,
-											Computed:    true,
 											Validators: []validator.List{ /*START VALIDATORS*/
 												listvalidator.SizeBetween(0, 5),
 												listvalidator.ValueStringsAre(
@@ -3102,40 +2846,28 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 													stringvalidator.RegexMatches(regexp.MustCompile("^sg-[0-9a-zA-Z]*|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
 												),
 											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-												listplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// SecurityGroups is a write-only property.
 										}, /*END ATTRIBUTE*/
 										// Property: Subnets
 										"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
 											ElementType: types.StringType,
-											Optional:    true,
-											Computed:    true,
+											Required:    true,
 											Validators: []validator.List{ /*START VALIDATORS*/
 												listvalidator.SizeBetween(0, 16),
 												listvalidator.ValueStringsAre(
 													stringvalidator.LengthBetween(1, 1024),
 													stringvalidator.RegexMatches(regexp.MustCompile("^subnet-[0-9a-z]*|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
 												),
-												fwvalidators.NotNullList(),
 											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-												listplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
+											// Subnets is a write-only property.
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// AwsvpcConfiguration is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// NetworkConfiguration is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: Overrides
 						"overrides": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -3148,18 +2880,12 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 											"command": schema.ListAttribute{ /*START ATTRIBUTE*/
 												ElementType: types.StringType,
 												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-													listplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Command is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Cpu
 											"cpu": schema.Int64Attribute{ /*START ATTRIBUTE*/
 												Optional: true,
-												Computed: true,
-												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-													int64planmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Cpu is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Environment
 											"environment": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -3168,26 +2894,17 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 														// Property: Name
 														"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Optional: true,
-															Computed: true,
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
+															// Name is a write-only property.
 														}, /*END ATTRIBUTE*/
 														// Property: Value
 														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Optional: true,
-															Computed: true,
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
+															// Value is a write-only property.
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 												}, /*END NESTED OBJECT*/
 												Optional: true,
-												Computed: true,
-												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-													listplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Environment is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: EnvironmentFiles
 											"environment_files": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -3195,60 +2912,38 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 														// Property: Type
 														"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Optional: true,
-															Computed: true,
+															Required: true,
 															Validators: []validator.String{ /*START VALIDATORS*/
 																stringvalidator.OneOf(
 																	"s3",
 																),
-																fwvalidators.NotNullString(),
 															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
+															// Type is a write-only property.
 														}, /*END ATTRIBUTE*/
 														// Property: Value
 														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Optional: true,
-															Computed: true,
-															Validators: []validator.String{ /*START VALIDATORS*/
-																fwvalidators.NotNullString(),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
+															Required: true,
+															// Value is a write-only property.
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 												}, /*END NESTED OBJECT*/
 												Optional: true,
-												Computed: true,
-												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-													listplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// EnvironmentFiles is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Memory
 											"memory": schema.Int64Attribute{ /*START ATTRIBUTE*/
 												Optional: true,
-												Computed: true,
-												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-													int64planmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Memory is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: MemoryReservation
 											"memory_reservation": schema.Int64Attribute{ /*START ATTRIBUTE*/
 												Optional: true,
-												Computed: true,
-												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-													int64planmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// MemoryReservation is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: Name
 											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Optional: true,
-												Computed: true,
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// Name is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: ResourceRequirements
 											"resource_requirements": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -3256,53 +2951,34 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 														// Property: Type
 														"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Optional: true,
-															Computed: true,
+															Required: true,
 															Validators: []validator.String{ /*START VALIDATORS*/
 																stringvalidator.OneOf(
 																	"GPU",
 																	"InferenceAccelerator",
 																),
-																fwvalidators.NotNullString(),
 															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
+															// Type is a write-only property.
 														}, /*END ATTRIBUTE*/
 														// Property: Value
 														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Optional: true,
-															Computed: true,
-															Validators: []validator.String{ /*START VALIDATORS*/
-																fwvalidators.NotNullString(),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
+															Required: true,
+															// Value is a write-only property.
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 												}, /*END NESTED OBJECT*/
 												Optional: true,
-												Computed: true,
-												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-													listplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// ResourceRequirements is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
 									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-										listplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// ContainerOverrides is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: Cpu
 								"cpu": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// Cpu is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: EphemeralStorage
 								"ephemeral_storage": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -3318,25 +2994,20 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 												int64planmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
+											// SizeInGiB is a write-only property.
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// EphemeralStorage is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: ExecutionRoleArn
 								"execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Optional: true,
-									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 1600),
 										stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// ExecutionRoleArn is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: InferenceAcceleratorOverrides
 								"inference_accelerator_overrides": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -3345,53 +3016,35 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 											// Property: DeviceName
 											"device_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Optional: true,
-												Computed: true,
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// DeviceName is a write-only property.
 											}, /*END ATTRIBUTE*/
 											// Property: DeviceType
 											"device_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Optional: true,
-												Computed: true,
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												// DeviceType is a write-only property.
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
 									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-										listplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// InferenceAcceleratorOverrides is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: Memory
 								"memory": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// Memory is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: TaskRoleArn
 								"task_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Optional: true,
-									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 1600),
 										stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// TaskRoleArn is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// Overrides is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: PlacementConstraints
 						"placement_constraints": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -3400,38 +3053,29 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 									// Property: Expression
 									"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Optional: true,
-										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(0, 2000),
 										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// Expression is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: Type
 									"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Optional: true,
-										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"distinctInstance",
 												"memberOf",
 											),
 										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// Type is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(0, 10),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// PlacementConstraints is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: PlacementStrategy
 						"placement_strategy": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -3440,18 +3084,14 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 									// Property: Field
 									"field": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Optional: true,
-										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(0, 255),
 										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// Field is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: Type
 									"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Optional: true,
-										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"random",
@@ -3459,52 +3099,38 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 												"binpack",
 											),
 										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// Type is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(0, 5),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// PlacementStrategy is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: PlatformVersion
 						"platform_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// PlatformVersion is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: PropagateTags
 						"propagate_tags": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"TASK_DEFINITION",
 								),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// PropagateTags is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: ReferenceId
 						"reference_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(0, 1024),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// ReferenceId is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: Tags
 						"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -3512,66 +3138,45 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Key
 									"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Optional: true,
-										Computed: true,
+										Required: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(1, 128),
-											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// Key is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: Value
 									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Optional: true,
-										Computed: true,
+										Required: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(0, 256),
-											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// Value is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
 							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// Tags is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: TaskCount
 						"task_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
 								int64validator.AtLeast(1),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								int64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// TaskCount is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: TaskDefinitionArn
 						"task_definition_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
+							Required: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 1600),
 								stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
-								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// TaskDefinitionArn is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// EcsTaskParameters is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: EventBridgeEventBusParameters
 				"event_bridge_event_bus_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -3579,31 +3184,24 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 						// Property: DetailType
 						"detail_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 128),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// DetailType is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: EndpointId
 						"endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 50),
 								stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9\\-]+[\\.][A-Za-z0-9\\-]+$"), ""),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// EndpointId is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: Resources
 						"resources": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
 							Optional:    true,
-							Computed:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(0, 10),
 								listvalidator.ValueStringsAre(
@@ -3611,39 +3209,28 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 									stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
 								),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// Resources is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: Source
 						"source": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 256),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// Source is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: Time
 						"time": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 256),
 								stringvalidator.RegexMatches(regexp.MustCompile("^\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*$"), ""),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// Time is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// EventBridgeEventBusParameters is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: HttpParameters
 				"http_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -3653,69 +3240,47 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 						schema.MapAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
 							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-								mapplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// HeaderParameters is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: PathParameterValues
 						"path_parameter_values": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
 							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// PathParameterValues is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: QueryStringParameters
 						"query_string_parameters": // Pattern: ""
 						schema.MapAttribute{       /*START ATTRIBUTE*/
 							ElementType: types.StringType,
 							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-								mapplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// QueryStringParameters is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// HttpParameters is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: InputTemplate
 				"input_template": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
-					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthBetween(0, 8192),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// InputTemplate is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: KinesisStreamParameters
 				"kinesis_stream_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: PartitionKey
 						"partition_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
+							Required: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(0, 256),
-								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// PartitionKey is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// KinesisStreamParameters is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: LambdaFunctionParameters
 				"lambda_function_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -3723,23 +3288,17 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 						// Property: InvocationType
 						"invocation_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"REQUEST_RESPONSE",
 									"FIRE_AND_FORGET",
 								),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// InvocationType is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// LambdaFunctionParameters is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: RedshiftDataParameters
 				"redshift_data_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -3747,69 +3306,52 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 						// Property: Database
 						"database": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "Redshift Database",
-							Optional:    true,
-							Computed:    true,
+							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 64),
-								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// Database is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: DbUser
 						"db_user": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "Database user name",
 							Optional:    true,
-							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 128),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// DbUser is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: SecretManagerArn
 						"secret_manager_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "Optional SecretManager ARN which stores the database credentials",
 							Optional:    true,
-							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 1600),
 								stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// SecretManagerArn is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: Sqls
 						"sqls": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
 							Description: "A list of SQLs.",
-							Optional:    true,
-							Computed:    true,
+							Required:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(1, 40),
 								listvalidator.ValueStringsAre(
 									stringvalidator.LengthBetween(1, 100000),
 								),
-								fwvalidators.NotNullList(),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// Sqls is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: StatementName
 						"statement_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "A name for Redshift DataAPI statement which can be used as filter of ListStatement.",
 							Optional:    true,
-							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 500),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// StatementName is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: WithEvent
 						"with_event": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -3819,13 +3361,11 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
+							// WithEvent is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// RedshiftDataParameters is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: SageMakerPipelineParameters
 				"sage_maker_pipeline_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -3836,46 +3376,32 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Name
 									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Optional: true,
-										Computed: true,
+										Required: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(1, 256),
 											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
-											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// Name is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: Value
 									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Optional: true,
-										Computed: true,
+										Required: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(0, 1024),
-											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// Value is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(0, 200),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// PipelineParameterList is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// SageMakerPipelineParameters is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: SqsQueueParameters
 				"sqs_queue_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -3883,31 +3409,22 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 						// Property: MessageDeduplicationId
 						"message_deduplication_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(0, 100),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// MessageDeduplicationId is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: MessageGroupId
 						"message_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(0, 100),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// MessageGroupId is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// SqsQueueParameters is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: StepFunctionStateMachineParameters
 				"step_function_state_machine_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -3915,23 +3432,17 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 						// Property: InvocationType
 						"invocation_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"REQUEST_RESPONSE",
 									"FIRE_AND_FORGET",
 								),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// InvocationType is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// StepFunctionStateMachineParameters is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: TimestreamParameters
 				"timestream_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -3942,58 +3453,41 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: DimensionName
 									"dimension_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Optional: true,
-										Computed: true,
+										Required: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(1, 256),
-											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// DimensionName is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: DimensionValue
 									"dimension_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Optional: true,
-										Computed: true,
+										Required: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(1, 2048),
-											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// DimensionValue is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: DimensionValueType
 									"dimension_value_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Optional: true,
-										Computed: true,
+										Required: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"VARCHAR",
 											),
-											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// DimensionValueType is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							Optional: true,
-							Computed: true,
+							Required: true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(1, 128),
-								fwvalidators.NotNullList(),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// DimensionMappings is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: EpochTimeUnit
 						"epoch_time_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"MILLISECONDS",
@@ -4002,9 +3496,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 									"NANOSECONDS",
 								),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// EpochTimeUnit is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: MultiMeasureMappings
 						"multi_measure_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -4016,20 +3508,15 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 												// Property: MeasureValue
 												"measure_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
+													Required: true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(1, 2048),
-														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// MeasureValue is a write-only property.
 												}, /*END ATTRIBUTE*/
 												// Property: MeasureValueType
 												"measure_value_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
+													Required: true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.OneOf(
 															"DOUBLE",
@@ -4038,58 +3525,40 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 															"BOOLEAN",
 															"TIMESTAMP",
 														),
-														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// MeasureValueType is a write-only property.
 												}, /*END ATTRIBUTE*/
 												// Property: MultiMeasureAttributeName
 												"multi_measure_attribute_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
+													Required: true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(1, 256),
-														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
+													// MultiMeasureAttributeName is a write-only property.
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
-										Optional: true,
-										Computed: true,
+										Required: true,
 										Validators: []validator.List{ /*START VALIDATORS*/
 											listvalidator.SizeBetween(1, 256),
-											fwvalidators.NotNullList(),
 										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-											listplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// MultiMeasureAttributeMappings is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: MultiMeasureName
 									"multi_measure_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Optional: true,
-										Computed: true,
+										Required: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(1, 256),
-											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// MultiMeasureName is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(0, 1024),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// MultiMeasureMappings is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: SingleMeasureMappings
 						"single_measure_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -4097,32 +3566,23 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: MeasureName
 									"measure_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Optional: true,
-										Computed: true,
+										Required: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(1, 1024),
-											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// MeasureName is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: MeasureValue
 									"measure_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Optional: true,
-										Computed: true,
+										Required: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(1, 2048),
-											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// MeasureValue is a write-only property.
 									}, /*END ATTRIBUTE*/
 									// Property: MeasureValueType
 									"measure_value_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Optional: true,
-										Computed: true,
+										Required: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"DOUBLE",
@@ -4131,85 +3591,58 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 												"BOOLEAN",
 												"TIMESTAMP",
 											),
-											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
+										// MeasureValueType is a write-only property.
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(0, 8192),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// SingleMeasureMappings is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: TimeFieldType
 						"time_field_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"EPOCH",
 									"TIMESTAMP_FORMAT",
 								),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// TimeFieldType is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: TimeValue
 						"time_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
+							Required: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 256),
-								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// TimeValue is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: TimestampFormat
 						"timestamp_format": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 256),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// TimestampFormat is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: VersionValue
 						"version_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
+							Required: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 256),
-								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// VersionValue is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// TimestreamParameters is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// TargetParameters is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

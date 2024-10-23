@@ -100,6 +100,9 @@ func groupMembershipResource(ctx context.Context) (resource.Resource, error) {
 						stringvalidator.LengthBetween(1, 47),
 						stringvalidator.RegexMatches(regexp.MustCompile("^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$"), ""),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.RequiresReplace(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "An object containing the identifier of a group member.",
@@ -154,9 +157,9 @@ func groupMembershipResource(ctx context.Context) (resource.Resource, error) {
 		"user_id":           "UserId",
 	})
 
-	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+	opts = opts.IsImmutableType(true)
 
-	opts = opts.WithUpdateTimeoutInMinutes(0)
+	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	v, err := generic.NewResource(ctx, opts...)
 

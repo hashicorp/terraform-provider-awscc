@@ -97,14 +97,10 @@ func hypervisorResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"log_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
-			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(0, 2048),
 				stringvalidator.RegexMatches(regexp.MustCompile("^$|^arn:(aws|aws-cn|aws-us-gov):logs:([a-zA-Z0-9-]+):([0-9]+):log-group:[a-zA-Z0-9_\\-\\/\\.]+:\\*$"), ""),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// LogGroupArn is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Name
@@ -118,14 +114,10 @@ func hypervisorResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
-			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 100),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-]*$"), ""),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// Name is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Password
@@ -139,14 +131,10 @@ func hypervisorResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"password": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
-			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 100),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[ -~]+$"), ""),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// Password is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -191,7 +179,9 @@ func hypervisorResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
+						// Key is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -204,7 +194,9 @@ func hypervisorResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
+						// Value is a write-only property.
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -227,14 +219,10 @@ func hypervisorResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"username": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
-			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 100),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[ -\\.0-\\[\\]-~]*[!-\\.0-\\[\\]-~][ -\\.0-\\[\\]-~]*$"), ""),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// Username is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

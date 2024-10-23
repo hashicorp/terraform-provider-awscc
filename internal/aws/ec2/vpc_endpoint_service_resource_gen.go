@@ -48,10 +48,6 @@ func vPCEndpointServiceResource(ctx context.Context) (resource.Resource, error) 
 		//	}
 		"contributor_insights_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// ContributorInsightsEnabled is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: GatewayLoadBalancerArns

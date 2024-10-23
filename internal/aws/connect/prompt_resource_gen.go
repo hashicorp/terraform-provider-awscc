@@ -108,14 +108,10 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 		"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "S3 URI of the customer's audio file for creating prompts resource..",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 2000),
 				stringvalidator.RegexMatches(regexp.MustCompile("s3://\\S+/.+|https://\\S+\\.s3(\\.\\S+)?\\.amazonaws\\.com/\\S+"), ""),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// S3Uri is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Tags

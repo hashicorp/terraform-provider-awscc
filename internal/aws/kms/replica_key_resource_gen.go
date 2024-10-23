@@ -13,7 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -113,13 +112,9 @@ func replicaKeyResource(ctx context.Context) (resource.Resource, error) {
 		"pending_window_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "Specifies the number of days in the waiting period before AWS KMS deletes an AWS KMS key that has been removed from a CloudFormation stack. Enter a value between 7 and 30 days. The default value is 30 days.",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.Int64{ /*START VALIDATORS*/
 				int64validator.Between(7, 30),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// PendingWindowInDays is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: PrimaryKeyArn

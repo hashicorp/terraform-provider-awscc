@@ -95,10 +95,6 @@ func workGroupResource(ctx context.Context) (resource.Resource, error) {
 		"recursive_delete_option": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "The option to delete the workgroup and its contents even if the workgroup contains any named queries.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// RecursiveDeleteOption is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: State
@@ -317,10 +313,6 @@ func workGroupResource(ctx context.Context) (resource.Resource, error) {
 				"additional_configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Additional Configuration that are passed to Athena Spark Calculations running in this workgroup",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 					// AdditionalConfiguration is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: BytesScannedCutoffPerQuery
@@ -667,22 +659,16 @@ func workGroupResource(ctx context.Context) (resource.Resource, error) {
 				"additional_configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Additional Configuration that are passed to Athena Spark Calculations running in this workgroup",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// AdditionalConfiguration is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: BytesScannedCutoffPerQuery
 				"bytes_scanned_cutoff_per_query": schema.Int64Attribute{ /*START ATTRIBUTE*/
 					Description: "The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.",
 					Optional:    true,
-					Computed:    true,
 					Validators: []validator.Int64{ /*START VALIDATORS*/
 						int64validator.AtLeast(10000000),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-						int64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// BytesScannedCutoffPerQuery is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: CustomerContentEncryptionConfiguration
 				"customer_content_encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -690,31 +676,19 @@ func workGroupResource(ctx context.Context) (resource.Resource, error) {
 						// Property: KmsKey
 						"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID. ",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								fwvalidators.NotNullString(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							Required:    true,
+							// KmsKey is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Indicates the KMS key for encrypting notebook content.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// CustomerContentEncryptionConfiguration is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: EnforceWorkGroupConfiguration
 				"enforce_work_group_configuration": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "If set to \"true\", the settings for the workgroup override client-side settings. If set to \"false\", client-side settings are used",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						boolplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// EnforceWorkGroupConfiguration is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: EngineVersion
 				"engine_version": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -726,67 +700,47 @@ func workGroupResource(ctx context.Context) (resource.Resource, error) {
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
+							// EffectiveEngineVersion is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: SelectedEngineVersion
 						"selected_engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The engine version requested by the user. Possible values are determined by the output of ListEngineVersions, including Auto. The default is Auto.",
 							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// SelectedEngineVersion is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The Athena engine version for running queries.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// EngineVersion is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: ExecutionRole
 				"execution_role": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Execution Role ARN required to run Athena Spark Calculations",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// ExecutionRole is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: PublishCloudWatchMetricsEnabled
 				"publish_cloudwatch_metrics_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						boolplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// PublishCloudWatchMetricsEnabled is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: RemoveBytesScannedCutoffPerQuery
 				"remove_bytes_scanned_cutoff_per_query": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "Indicates that the data usage control limit per query is removed.",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						boolplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// RemoveBytesScannedCutoffPerQuery is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: RemoveCustomerContentEncryptionConfiguration
 				"remove_customer_content_encryption_configuration": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						boolplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// RemoveCustomerContentEncryptionConfiguration is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: RequesterPaysEnabled
 				"requester_pays_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "If set to true, allows members assigned to a workgroup to reference Amazon S3 Requester Pays buckets in queries. If set to false, workgroup members cannot query data from Requester Pays buckets, and queries that retrieve data from Requester Pays buckets cause an error. ",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						boolplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// RequesterPaysEnabled is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: ResultConfigurationUpdates
 				"result_configuration_updates": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -797,25 +751,18 @@ func workGroupResource(ctx context.Context) (resource.Resource, error) {
 								// Property: S3AclOption
 								"s3_acl_option": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The Amazon S3 canned ACL that Athena should specify when storing query results. Currently the only supported canned ACL is BUCKET_OWNER_FULL_CONTROL",
-									Optional:    true,
-									Computed:    true,
+									Required:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.OneOf(
 											"BUCKET_OWNER_FULL_CONTROL",
 										),
-										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// S3AclOption is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "Indicates that an Amazon S3 canned ACL should be set to control ownership of stored query results",
 							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// AclConfiguration is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: EncryptionConfiguration
 						"encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -823,102 +770,67 @@ func workGroupResource(ctx context.Context) (resource.Resource, error) {
 								// Property: EncryptionOption
 								"encryption_option": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (SSE-S3), server-side encryption with KMS-managed keys (SSE-KMS), or client-side encryption with KMS-managed keys (CSE-KMS) is used.",
-									Optional:    true,
-									Computed:    true,
+									Required:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.OneOf(
 											"SSE_S3",
 											"SSE_KMS",
 											"CSE_KMS",
 										),
-										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// EncryptionOption is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: KmsKey
 								"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID. ",
 									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
+									// KmsKey is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "If query results are encrypted in Amazon S3, indicates the encryption option used (for example, SSE-KMS or CSE-KMS) and key information.",
 							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// EncryptionConfiguration is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: ExpectedBucketOwner
 						"expected_bucket_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The AWS account ID of the owner of S3 bucket where query results are stored",
 							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// ExpectedBucketOwner is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: OutputLocation
 						"output_location": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The location in Amazon S3 where your query results are stored, such as s3://path/to/query/bucket/. To run the query, you must specify the query results location using one of the ways: either for individual queries using either this setting (client-side), or in the workgroup, using WorkGroupConfiguration",
 							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// OutputLocation is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: RemoveAclConfiguration
 						"remove_acl_configuration": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								boolplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// RemoveAclConfiguration is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: RemoveEncryptionConfiguration
 						"remove_encryption_configuration": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								boolplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// RemoveEncryptionConfiguration is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: RemoveExpectedBucketOwner
 						"remove_expected_bucket_owner": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								boolplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// RemoveExpectedBucketOwner is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: RemoveOutputLocation
 						"remove_output_location": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								boolplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							// RemoveOutputLocation is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The result configuration information about the queries in this workgroup that will be updated. Includes the updated results location and an updated option for encrypting query results. ",
 					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					// ResultConfigurationUpdates is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The workgroup configuration update object",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// WorkGroupConfigurationUpdates is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

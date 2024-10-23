@@ -15,7 +15,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -45,13 +44,9 @@ func imageVersionResource(ctx context.Context) (resource.Resource, error) {
 		"alias": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The alias of the image version.",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 128),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// Alias is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Aliases
@@ -72,15 +67,11 @@ func imageVersionResource(ctx context.Context) (resource.Resource, error) {
 			ElementType: types.StringType,
 			Description: "List of aliases for the image version.",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.ValueStringsAre(
 					stringvalidator.LengthBetween(1, 128),
 				),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// Aliases is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: BaseImage

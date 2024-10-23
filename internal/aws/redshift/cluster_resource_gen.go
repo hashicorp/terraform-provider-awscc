@@ -134,10 +134,6 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"classic": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "A boolean value indicating whether the resize operation is using the classic resize process. If you don't provide this parameter or set the value to false , the resize type is elastic.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// Classic is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: ClusterIdentifier
@@ -285,10 +281,6 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"defer_maintenance": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "A boolean indicating whether to enable the deferred maintenance window.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// DeferMaintenance is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: DeferMaintenanceDuration
@@ -301,10 +293,6 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"defer_maintenance_duration": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "An integer indicating the duration of the maintenance window in days. If you specify a duration, you can't specify an end time. The duration must be 45 days or less.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// DeferMaintenanceDuration is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: DeferMaintenanceEndTime
@@ -628,10 +616,6 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"manage_master_password": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "A boolean indicating if the redshift cluster's admin user credentials is managed by Redshift or not. You can't use MasterUserPassword if ManageMasterPassword is true. If ManageMasterPassword is false or not set, Amazon Redshift uses MasterUserPassword for the admin user account's password.",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// ManageMasterPassword is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: ManualSnapshotRetentionPeriod
@@ -693,13 +677,9 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"master_user_password": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The password associated with the master user account for the cluster that is being created. You can't use MasterUserPassword if ManageMasterPassword is true. Password must be between 8 and 64 characters in length, should have at least one uppercase letter.Must contain at least one lowercase letter.Must contain one number.Can be any printable ASCII character.",
 			Optional:    true,
-			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtMost(64),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// MasterUserPassword is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: MasterUsername

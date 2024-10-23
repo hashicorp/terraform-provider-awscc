@@ -101,20 +101,12 @@ func subscriberNotificationResource(ctx context.Context) (resource.Resource, err
 						"authorization_api_key_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The key name for the notification subscription.",
 							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
 							// AuthorizationApiKeyName is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: AuthorizationApiKeyValue
 						"authorization_api_key_value": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The key value for the notification subscription.",
 							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
 							// AuthorizationApiKeyValue is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: Endpoint
@@ -135,16 +127,12 @@ func subscriberNotificationResource(ctx context.Context) (resource.Resource, err
 						"http_method": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The HTTPS method used for the notification subscription.",
 							Optional:    true,
-							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"POST",
 									"PUT",
 								),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
 							// HttpMethod is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: TargetRoleArn

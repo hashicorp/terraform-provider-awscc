@@ -128,6 +128,7 @@ func launchConfigurationResource(ctx context.Context) (resource.Resource, error)
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Ebs
@@ -140,6 +141,7 @@ func launchConfigurationResource(ctx context.Context) (resource.Resource, error)
 								Computed:    true,
 								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 									boolplanmodifier.UseStateForUnknown(),
+									boolplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Encrypted
@@ -149,6 +151,7 @@ func launchConfigurationResource(ctx context.Context) (resource.Resource, error)
 								Computed:    true,
 								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 									boolplanmodifier.UseStateForUnknown(),
+									boolplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Iops
@@ -158,6 +161,7 @@ func launchConfigurationResource(ctx context.Context) (resource.Resource, error)
 								Computed:    true,
 								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 									int64planmodifier.UseStateForUnknown(),
+									int64planmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: SnapshotId
@@ -167,6 +171,7 @@ func launchConfigurationResource(ctx context.Context) (resource.Resource, error)
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+									stringplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Throughput
@@ -176,6 +181,7 @@ func launchConfigurationResource(ctx context.Context) (resource.Resource, error)
 								Computed:    true,
 								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 									int64planmodifier.UseStateForUnknown(),
+									int64planmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: VolumeSize
@@ -185,6 +191,7 @@ func launchConfigurationResource(ctx context.Context) (resource.Resource, error)
 								Computed:    true,
 								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 									int64planmodifier.UseStateForUnknown(),
+									int64planmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: VolumeType
@@ -194,6 +201,7 @@ func launchConfigurationResource(ctx context.Context) (resource.Resource, error)
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+									stringplanmodifier.RequiresReplaceIfConfigured(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -202,6 +210,7 @@ func launchConfigurationResource(ctx context.Context) (resource.Resource, error)
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
+							objectplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: NoDevice
@@ -211,6 +220,7 @@ func launchConfigurationResource(ctx context.Context) (resource.Resource, error)
 						Computed:    true,
 						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 							boolplanmodifier.UseStateForUnknown(),
+							boolplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: VirtualName
@@ -220,6 +230,7 @@ func launchConfigurationResource(ctx context.Context) (resource.Resource, error)
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -447,6 +458,7 @@ func launchConfigurationResource(ctx context.Context) (resource.Resource, error)
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: HttpPutResponseHopLimit
@@ -456,6 +468,7 @@ func launchConfigurationResource(ctx context.Context) (resource.Resource, error)
 					Computed:    true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
+						int64planmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: HttpTokens
@@ -465,6 +478,7 @@ func launchConfigurationResource(ctx context.Context) (resource.Resource, error)
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -627,12 +641,12 @@ func launchConfigurationResource(ctx context.Context) (resource.Resource, error)
 		"volume_type":                      "VolumeType",
 	})
 
+	opts = opts.IsImmutableType(true)
+
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/InstanceId",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
-
-	opts = opts.WithUpdateTimeoutInMinutes(0)
 
 	v, err := generic.NewResource(ctx, opts...)
 

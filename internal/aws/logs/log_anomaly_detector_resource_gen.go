@@ -40,10 +40,6 @@ func logAnomalyDetectorResource(ctx context.Context) (resource.Resource, error) 
 		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Account ID for owner of detector",
 			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 			// AccountId is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: AnomalyDetectorArn
