@@ -36,6 +36,7 @@ Data Source schema for AWS::SageMaker::Domain
 - `single_sign_on_application_arn` (String) The ARN of the application managed by SageMaker in IAM Identity Center. This value is only returned for domains created after October 1, 2023.
 - `single_sign_on_managed_application_instance_id` (String) The SSO managed application instance ID.
 - `subnet_ids` (List of String) The VPC subnets that Studio uses for communication.
+- `tag_propagation` (String) Indicates whether the tags added to Domain, User Profile and Space entity is propagated to all SageMaker resources.
 - `tags` (Attributes List) A list of tags to apply to the user profile. (see [below for nested schema](#nestedatt--tags))
 - `url` (String) The URL to the created domain.
 - `vpc_id` (String) The ID of the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.
@@ -500,6 +501,7 @@ Read-Only:
 Read-Only:
 
 - `docker_settings` (Attributes) A collection of settings that are required to start docker-proxy server. (see [below for nested schema](#nestedatt--domain_settings--docker_settings))
+- `execution_role_identity_config` (String) The configuration for attaching a SageMaker user profile name to the execution role as a sts:SourceIdentity key.
 - `r_studio_server_pro_domain_settings` (Attributes) A collection of settings that update the current configuration for the RStudioServerPro Domain-level app. (see [below for nested schema](#nestedatt--domain_settings--r_studio_server_pro_domain_settings))
 - `security_group_ids` (List of String) The security groups for the Amazon Virtual Private Cloud that the Domain uses for communication between Domain-level apps and user apps.
 

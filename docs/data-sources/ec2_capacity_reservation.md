@@ -37,6 +37,7 @@ Data Source schema for AWS::EC2::CapacityReservation
 - `tag_specifications` (Attributes List) (see [below for nested schema](#nestedatt--tag_specifications))
 - `tenancy` (String)
 - `total_instance_count` (Number)
+- `unused_reservation_billing_owner_id` (String)
 
 <a id="nestedatt--tag_specifications"></a>
 ### Nested Schema for `tag_specifications`

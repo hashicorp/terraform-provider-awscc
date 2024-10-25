@@ -54,6 +54,7 @@ resource "awscc_ec2_capacity_reservation" "example-capacity-reservation-end-date
 - `placement_group_arn` (String)
 - `tag_specifications` (Attributes List) (see [below for nested schema](#nestedatt--tag_specifications))
 - `tenancy` (String)
+- `unused_reservation_billing_owner_id` (String)
 
 ### Read-Only
 

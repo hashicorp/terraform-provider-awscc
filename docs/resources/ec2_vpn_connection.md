@@ -131,25 +131,48 @@ Optional:
 
 Optional:
 
-- `dpd_timeout_action` (String)
-- `dpd_timeout_seconds` (Number)
-- `enable_tunnel_lifecycle_control` (Boolean)
-- `ike_versions` (Attributes List) (see [below for nested schema](#nestedatt--vpn_tunnel_options_specifications--ike_versions))
-- `log_options` (Attributes) (see [below for nested schema](#nestedatt--vpn_tunnel_options_specifications--log_options))
-- `phase_1_dh_group_numbers` (Attributes List) (see [below for nested schema](#nestedatt--vpn_tunnel_options_specifications--phase_1_dh_group_numbers))
-- `phase_1_encryption_algorithms` (Attributes List) (see [below for nested schema](#nestedatt--vpn_tunnel_options_specifications--phase_1_encryption_algorithms))
-- `phase_1_integrity_algorithms` (Attributes List) (see [below for nested schema](#nestedatt--vpn_tunnel_options_specifications--phase_1_integrity_algorithms))
-- `phase_1_lifetime_seconds` (Number)
-- `phase_2_dh_group_numbers` (Attributes List) (see [below for nested schema](#nestedatt--vpn_tunnel_options_specifications--phase_2_dh_group_numbers))
-- `phase_2_encryption_algorithms` (Attributes List) (see [below for nested schema](#nestedatt--vpn_tunnel_options_specifications--phase_2_encryption_algorithms))
-- `phase_2_integrity_algorithms` (Attributes List) (see [below for nested schema](#nestedatt--vpn_tunnel_options_specifications--phase_2_integrity_algorithms))
-- `phase_2_lifetime_seconds` (Number)
+- `dpd_timeout_action` (String) The action to take after DPD timeout occurs. Specify ``restart`` to restart the IKE initiation. Specify ``clear`` to end the IKE session.
+ Valid Values: ``clear`` | ``none`` | ``restart`` 
+ Default: ``clear``
+- `dpd_timeout_seconds` (Number) The number of seconds after which a DPD timeout occurs.
+ Constraints: A value greater than or equal to 30.
+ Default: ``30``
+- `enable_tunnel_lifecycle_control` (Boolean) Turn on or off tunnel endpoint lifecycle control feature.
+- `ike_versions` (Attributes List) The IKE versions that are permitted for the VPN tunnel.
+ Valid values: ``ikev1`` | ``ikev2`` (see [below for nested schema](#nestedatt--vpn_tunnel_options_specifications--ike_versions))
+- `log_options` (Attributes) Options for logging VPN tunnel activity. (see [below for nested schema](#nestedatt--vpn_tunnel_options_specifications--log_options))
+- `phase_1_dh_group_numbers` (Attributes List) One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for phase 1 IKE negotiations.
+ Valid values: ``2`` | ``14`` | ``15`` | ``16`` | ``17`` | ``18`` | ``19`` | ``20`` | ``21`` | ``22`` | ``23`` | ``24`` (see [below for nested schema](#nestedatt--vpn_tunnel_options_specifications--phase_1_dh_group_numbers))
+- `phase_1_encryption_algorithms` (Attributes List) One or more encryption algorithms that are permitted for the VPN tunnel for phase 1 IKE negotiations.
+ Valid values: ``AES128`` | ``AES256`` | ``AES128-GCM-16`` | ``AES256-GCM-16`` (see [below for nested schema](#nestedatt--vpn_tunnel_options_specifications--phase_1_encryption_algorithms))
+- `phase_1_integrity_algorithms` (Attributes List) One or more integrity algorithms that are permitted for the VPN tunnel for phase 1 IKE negotiations.
+ Valid values: ``SHA1`` | ``SHA2-256`` | ``SHA2-384`` | ``SHA2-512`` (see [below for nested schema](#nestedatt--vpn_tunnel_options_specifications--phase_1_integrity_algorithms))
+- `phase_1_lifetime_seconds` (Number) The lifetime for phase 1 of the IKE negotiation, in seconds.
+ Constraints: A value between 900 and 28,800.
+ Default: ``28800``
+- `phase_2_dh_group_numbers` (Attributes List) One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for phase 2 IKE negotiations.
+ Valid values: ``2`` | ``5`` | ``14`` | ``15`` | ``16`` | ``17`` | ``18`` | ``19`` | ``20`` | ``21`` | ``22`` | ``23`` | ``24`` (see [below for nested schema](#nestedatt--vpn_tunnel_options_specifications--phase_2_dh_group_numbers))
+- `phase_2_encryption_algorithms` (Attributes List) One or more encryption algorithms that are permitted for the VPN tunnel for phase 2 IKE negotiations.
+ Valid values: ``AES128`` | ``AES256`` | ``AES128-GCM-16`` | ``AES256-GCM-16`` (see [below for nested schema](#nestedatt--vpn_tunnel_options_specifications--phase_2_encryption_algorithms))
+- `phase_2_integrity_algorithms` (Attributes List) One or more integrity algorithms that are permitted for the VPN tunnel for phase 2 IKE negotiations.
+ Valid values: ``SHA1`` | ``SHA2-256`` | ``SHA2-384`` | ``SHA2-512`` (see [below for nested schema](#nestedatt--vpn_tunnel_options_specifications--phase_2_integrity_algorithms))
+- `phase_2_lifetime_seconds` (Number) The lifetime for phase 2 of the IKE negotiation, in seconds.
+ Constraints: A value between 900 and 3,600. The value must be less than the value for ``Phase1LifetimeSeconds``.
+ Default: ``3600``
 - `pre_shared_key` (String) The pre-shared key (PSK) to establish initial authentication between the virtual private gateway and customer gateway.
  Constraints: Allowed characters are alphanumeric characters, periods (.), and underscores (_). Must be between 8 and 64 characters in length and cannot start with zero (0).
-- `rekey_fuzz_percentage` (Number)
-- `rekey_margin_time_seconds` (Number)
-- `replay_window_size` (Number)
-- `startup_action` (String)
+- `rekey_fuzz_percentage` (Number) The percentage of the rekey window (determined by ``RekeyMarginTimeSeconds``) during which the rekey time is randomly selected.
+ Constraints: A value between 0 and 100.
+ Default: ``100``
+- `rekey_margin_time_seconds` (Number) The margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the VPN connection performs an IKE rekey. The exact time of the rekey is randomly selected based on the value for ``RekeyFuzzPercentage``.
+ Constraints: A value between 60 and half of ``Phase2LifetimeSeconds``.
+ Default: ``270``
+- `replay_window_size` (Number) The number of packets in an IKE replay window.
+ Constraints: A value between 64 and 2048.
+ Default: ``1024``
+- `startup_action` (String) The action to take when the establishing the tunnel for the VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify ``start`` for AWS to initiate the IKE negotiation.
+ Valid Values: ``add`` | ``start`` 
+ Default: ``add``
 - `tunnel_inside_cidr` (String) The range of inside IP addresses for the tunnel. Any specified CIDR blocks must be unique across all VPN connections that use the same virtual private gateway. 
  Constraints: A size /30 CIDR block from the ``169.254.0.0/16`` range. The following CIDR blocks are reserved and cannot be used:
   +   ``169.254.0.0/30`` 
@@ -159,14 +182,15 @@ Optional:
   +   ``169.254.4.0/30`` 
   +   ``169.254.5.0/30`` 
   +   ``169.254.169.252/30``
-- `tunnel_inside_ipv_6_cidr` (String)
+- `tunnel_inside_ipv_6_cidr` (String) The range of inside IPv6 addresses for the tunnel. Any specified CIDR blocks must be unique across all VPN connections that use the same transit gateway.
+ Constraints: A size /126 CIDR block from the local ``fd00::/8`` range.
 
 <a id="nestedatt--vpn_tunnel_options_specifications--ike_versions"></a>
 ### Nested Schema for `vpn_tunnel_options_specifications.ike_versions`
 
 Optional:
 
-- `value` (String)
+- `value` (String) The IKE version.
 
 
 <a id="nestedatt--vpn_tunnel_options_specifications--log_options"></a>
@@ -174,16 +198,18 @@ Optional:
 
 Optional:
 
-- `cloudwatch_log_options` (Attributes) (see [below for nested schema](#nestedatt--vpn_tunnel_options_specifications--log_options--cloudwatch_log_options))
+- `cloudwatch_log_options` (Attributes) Options for sending VPN tunnel logs to CloudWatch. (see [below for nested schema](#nestedatt--vpn_tunnel_options_specifications--log_options--cloudwatch_log_options))
 
 <a id="nestedatt--vpn_tunnel_options_specifications--log_options--cloudwatch_log_options"></a>
 ### Nested Schema for `vpn_tunnel_options_specifications.log_options.cloudwatch_log_options`
 
 Optional:
 
-- `log_enabled` (Boolean)
-- `log_group_arn` (String)
-- `log_output_format` (String)
+- `log_enabled` (Boolean) Enable or disable VPN tunnel logging feature. Default value is ``False``.
+ Valid values: ``True`` | ``False``
+- `log_group_arn` (String) The Amazon Resource Name (ARN) of the CloudWatch log group to send logs to.
+- `log_output_format` (String) Set log format. Default format is ``json``.
+ Valid values: ``json`` | ``text``
 
 
 
@@ -192,7 +218,7 @@ Optional:
 
 Optional:
 
-- `value` (Number)
+- `value` (Number) The Diffie-Hellmann group number.
 
 
 <a id="nestedatt--vpn_tunnel_options_specifications--phase_1_encryption_algorithms"></a>
@@ -200,7 +226,7 @@ Optional:
 
 Optional:
 
-- `value` (String)
+- `value` (String) The value for the encryption algorithm.
 
 
 <a id="nestedatt--vpn_tunnel_options_specifications--phase_1_integrity_algorithms"></a>
@@ -208,7 +234,7 @@ Optional:
 
 Optional:
 
-- `value` (String)
+- `value` (String) The value for the integrity algorithm.
 
 
 <a id="nestedatt--vpn_tunnel_options_specifications--phase_2_dh_group_numbers"></a>
@@ -216,7 +242,7 @@ Optional:
 
 Optional:
 
-- `value` (Number)
+- `value` (Number) The Diffie-Hellmann group number.
 
 
 <a id="nestedatt--vpn_tunnel_options_specifications--phase_2_encryption_algorithms"></a>
@@ -224,7 +250,7 @@ Optional:
 
 Optional:
 
-- `value` (String)
+- `value` (String) The encryption algorithm.
 
 
 <a id="nestedatt--vpn_tunnel_options_specifications--phase_2_integrity_algorithms"></a>
@@ -232,7 +258,7 @@ Optional:
 
 Optional:
 
-- `value` (String)
+- `value` (String) The integrity algorithm.
 
 ## Import
 
