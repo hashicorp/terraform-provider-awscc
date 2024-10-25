@@ -350,6 +350,11 @@
         "path": "./examples/resources/awscc_appsync_function_configuration/import.sh"
     },
     {
+        "resource": "awscc_appsync_graph_ql_api",
+        "identifier": ["ApiId"],
+        "path": "./examples/resources/awscc_appsync_graph_ql_api/import.sh"
+    },
+    {
         "resource": "awscc_appsync_resolver",
         "identifier": ["ResolverArn"],
         "path": "./examples/resources/awscc_appsync_resolver/import.sh"
@@ -483,6 +488,11 @@
         "resource": "awscc_backup_framework",
         "identifier": ["FrameworkArn"],
         "path": "./examples/resources/awscc_backup_framework/import.sh"
+    },
+    {
+        "resource": "awscc_backup_logically_air_gapped_backup_vault",
+        "identifier": ["BackupVaultName"],
+        "path": "./examples/resources/awscc_backup_logically_air_gapped_backup_vault/import.sh"
     },
     {
         "resource": "awscc_backup_report_plan",
@@ -948,6 +958,11 @@
         "resource": "awscc_cognito_user_pool_group",
         "identifier": ["UserPoolId","GroupName"],
         "path": "./examples/resources/awscc_cognito_user_pool_group/import.sh"
+    },
+    {
+        "resource": "awscc_cognito_user_pool_identity_provider",
+        "identifier": ["UserPoolId","ProviderName"],
+        "path": "./examples/resources/awscc_cognito_user_pool_identity_provider/import.sh"
     },
     {
         "resource": "awscc_cognito_user_pool_resource_server",
@@ -4100,6 +4115,11 @@
         "path": "./examples/resources/awscc_redshift_event_subscription/import.sh"
     },
     {
+        "resource": "awscc_redshift_integration",
+        "identifier": ["IntegrationArn"],
+        "path": "./examples/resources/awscc_redshift_integration/import.sh"
+    },
+    {
         "resource": "awscc_redshift_scheduled_action",
         "identifier": ["ScheduledActionName"],
         "path": "./examples/resources/awscc_redshift_scheduled_action/import.sh"
@@ -4243,6 +4263,11 @@
         "resource": "awscc_route53_key_signing_key",
         "identifier": ["HostedZoneId","Name"],
         "path": "./examples/resources/awscc_route53_key_signing_key/import.sh"
+    },
+    {
+        "resource": "awscc_route53_record_set",
+        "identifier": ["Name","HostedZoneId","Type","SetIdentifier"],
+        "path": "./examples/resources/awscc_route53_record_set/import.sh"
     },
     {
         "resource": "awscc_route53profiles_profile",
@@ -4668,6 +4693,11 @@
         "resource": "awscc_sagemaker_domain",
         "identifier": ["DomainId"],
         "path": "./examples/resources/awscc_sagemaker_domain/import.sh"
+    },
+    {
+        "resource": "awscc_sagemaker_endpoint",
+        "identifier": ["EndpointArn"],
+        "path": "./examples/resources/awscc_sagemaker_endpoint/import.sh"
     },
     {
         "resource": "awscc_sagemaker_feature_group",
