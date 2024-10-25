@@ -129,6 +129,17 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "An optional description of the cluster.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Engine
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The engine type used by the cluster.",
+		//	  "type": "string"
+		//	}
+		"engine": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The engine type used by the cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EngineVersion
 		// CloudFormation resource type schema:
 		//
@@ -439,6 +450,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"cluster_name":               "ClusterName",
 		"data_tiering":               "DataTiering",
 		"description":                "Description",
+		"engine":                     "Engine",
 		"engine_version":             "EngineVersion",
 		"final_snapshot_name":        "FinalSnapshotName",
 		"key":                        "Key",

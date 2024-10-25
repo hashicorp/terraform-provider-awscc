@@ -287,7 +287,7 @@ func cisScanConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "properties": {
 		//	    "AccountIds": {
 		//	      "items": {
-		//	        "pattern": "^\\d{12}|ALL_MEMBERS|SELF$",
+		//	        "pattern": "^\\d{12}|ALL_ACCOUNTS|SELF$",
 		//	        "type": "string"
 		//	      },
 		//	      "maxItems": 10000,

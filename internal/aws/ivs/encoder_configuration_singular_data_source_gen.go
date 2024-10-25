@@ -124,16 +124,16 @@ func encoderConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	    },
 		//	    "Height": {
 		//	      "default": 720,
-		//	      "description": "Video-resolution height. Note that the maximum value is determined by width times height, such that the maximum total pixels is 2073600 (1920x1080 or 1080x1920). Default: 720.",
+		//	      "description": "Video-resolution height. This must be an even number. Note that the maximum value is determined by width times height, such that the maximum total pixels is 2073600 (1920x1080 or 1080x1920). Default: 720.",
 		//	      "maximum": 1920,
-		//	      "minimum": 1,
+		//	      "minimum": 2,
 		//	      "type": "integer"
 		//	    },
 		//	    "Width": {
 		//	      "default": 1280,
-		//	      "description": "Video-resolution width. Note that the maximum value is determined by width times height, such that the maximum total pixels is 2073600 (1920x1080 or 1080x1920). Default: 1280.",
+		//	      "description": "Video-resolution width. This must be an even number. Note that the maximum value is determined by width times height, such that the maximum total pixels is 2073600 (1920x1080 or 1080x1920). Default: 1280.",
 		//	      "maximum": 1920,
-		//	      "minimum": 1,
+		//	      "minimum": 2,
 		//	      "type": "integer"
 		//	    }
 		//	  },
@@ -153,12 +153,12 @@ func encoderConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 				}, /*END ATTRIBUTE*/
 				// Property: Height
 				"height": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Video-resolution height. Note that the maximum value is determined by width times height, such that the maximum total pixels is 2073600 (1920x1080 or 1080x1920). Default: 720.",
+					Description: "Video-resolution height. This must be an even number. Note that the maximum value is determined by width times height, such that the maximum total pixels is 2073600 (1920x1080 or 1080x1920). Default: 720.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Width
 				"width": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Video-resolution width. Note that the maximum value is determined by width times height, such that the maximum total pixels is 2073600 (1920x1080 or 1080x1920). Default: 1280.",
+					Description: "Video-resolution width. This must be an even number. Note that the maximum value is determined by width times height, such that the maximum total pixels is 2073600 (1920x1080 or 1080x1920). Default: 1280.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/

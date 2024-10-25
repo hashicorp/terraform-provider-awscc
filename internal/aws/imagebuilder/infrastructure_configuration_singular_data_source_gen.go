@@ -180,6 +180,63 @@ func infrastructureConfigurationDataSource(ctx context.Context) (datasource.Data
 			Description: "The name of the infrastructure configuration.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Placement
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The placement option settings for the infrastructure configuration.",
+		//	  "properties": {
+		//	    "AvailabilityZone": {
+		//	      "description": "AvailabilityZone",
+		//	      "type": "string"
+		//	    },
+		//	    "HostId": {
+		//	      "description": "HostId",
+		//	      "type": "string"
+		//	    },
+		//	    "HostResourceGroupArn": {
+		//	      "description": "HostResourceGroupArn",
+		//	      "type": "string"
+		//	    },
+		//	    "Tenancy": {
+		//	      "description": "Tenancy",
+		//	      "enum": [
+		//	        "default",
+		//	        "dedicated",
+		//	        "host"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"placement": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AvailabilityZone
+				"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "AvailabilityZone",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: HostId
+				"host_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "HostId",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: HostResourceGroupArn
+				"host_resource_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "HostResourceGroupArn",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Tenancy
+				"tenancy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Tenancy",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The placement option settings for the infrastructure configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceTags
 		// CloudFormation resource type schema:
 		//
@@ -285,7 +342,10 @@ func infrastructureConfigurationDataSource(ctx context.Context) (datasource.Data
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                           "Arn",
+		"availability_zone":             "AvailabilityZone",
 		"description":                   "Description",
+		"host_id":                       "HostId",
+		"host_resource_group_arn":       "HostResourceGroupArn",
 		"http_put_response_hop_limit":   "HttpPutResponseHopLimit",
 		"http_tokens":                   "HttpTokens",
 		"instance_metadata_options":     "InstanceMetadataOptions",
@@ -294,6 +354,7 @@ func infrastructureConfigurationDataSource(ctx context.Context) (datasource.Data
 		"key_pair":                      "KeyPair",
 		"logging":                       "Logging",
 		"name":                          "Name",
+		"placement":                     "Placement",
 		"resource_tags":                 "ResourceTags",
 		"s3_bucket_name":                "S3BucketName",
 		"s3_key_prefix":                 "S3KeyPrefix",
@@ -302,6 +363,7 @@ func infrastructureConfigurationDataSource(ctx context.Context) (datasource.Data
 		"sns_topic_arn":                 "SnsTopicArn",
 		"subnet_id":                     "SubnetId",
 		"tags":                          "Tags",
+		"tenancy":                       "Tenancy",
 		"terminate_instance_on_failure": "TerminateInstanceOnFailure",
 	})
 
