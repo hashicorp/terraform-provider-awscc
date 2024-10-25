@@ -182,6 +182,21 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Engine
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The engine type used by the cluster.",
+		//	  "type": "string"
+		//	}
+		"engine": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The engine type used by the cluster.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: EngineVersion
 		// CloudFormation resource type schema:
 		//
@@ -605,6 +620,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"cluster_name":               "ClusterName",
 		"data_tiering":               "DataTiering",
 		"description":                "Description",
+		"engine":                     "Engine",
 		"engine_version":             "EngineVersion",
 		"final_snapshot_name":        "FinalSnapshotName",
 		"key":                        "Key",
@@ -637,7 +653,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
-	opts = opts.WithUpdateTimeoutInMinutes(0)
+	opts = opts.WithUpdateTimeoutInMinutes(2160)
 
 	v, err := generic.NewResource(ctx, opts...)
 

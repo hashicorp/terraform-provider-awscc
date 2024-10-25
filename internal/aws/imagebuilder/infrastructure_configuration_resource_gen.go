@@ -241,6 +241,90 @@ func infrastructureConfigurationResource(ctx context.Context) (resource.Resource
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Placement
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The placement option settings for the infrastructure configuration.",
+		//	  "properties": {
+		//	    "AvailabilityZone": {
+		//	      "description": "AvailabilityZone",
+		//	      "type": "string"
+		//	    },
+		//	    "HostId": {
+		//	      "description": "HostId",
+		//	      "type": "string"
+		//	    },
+		//	    "HostResourceGroupArn": {
+		//	      "description": "HostResourceGroupArn",
+		//	      "type": "string"
+		//	    },
+		//	    "Tenancy": {
+		//	      "description": "Tenancy",
+		//	      "enum": [
+		//	        "default",
+		//	        "dedicated",
+		//	        "host"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"placement": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AvailabilityZone
+				"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "AvailabilityZone",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: HostId
+				"host_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "HostId",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: HostResourceGroupArn
+				"host_resource_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "HostResourceGroupArn",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Tenancy
+				"tenancy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Tenancy",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"default",
+							"dedicated",
+							"host",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The placement option settings for the infrastructure configuration.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceTags
 		// CloudFormation resource type schema:
 		//
@@ -376,7 +460,10 @@ func infrastructureConfigurationResource(ctx context.Context) (resource.Resource
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                           "Arn",
+		"availability_zone":             "AvailabilityZone",
 		"description":                   "Description",
+		"host_id":                       "HostId",
+		"host_resource_group_arn":       "HostResourceGroupArn",
 		"http_put_response_hop_limit":   "HttpPutResponseHopLimit",
 		"http_tokens":                   "HttpTokens",
 		"instance_metadata_options":     "InstanceMetadataOptions",
@@ -385,6 +472,7 @@ func infrastructureConfigurationResource(ctx context.Context) (resource.Resource
 		"key_pair":                      "KeyPair",
 		"logging":                       "Logging",
 		"name":                          "Name",
+		"placement":                     "Placement",
 		"resource_tags":                 "ResourceTags",
 		"s3_bucket_name":                "S3BucketName",
 		"s3_key_prefix":                 "S3KeyPrefix",
@@ -393,6 +481,7 @@ func infrastructureConfigurationResource(ctx context.Context) (resource.Resource
 		"sns_topic_arn":                 "SnsTopicArn",
 		"subnet_id":                     "SubnetId",
 		"tags":                          "Tags",
+		"tenancy":                       "Tenancy",
 		"terminate_instance_on_failure": "TerminateInstanceOnFailure",
 	})
 

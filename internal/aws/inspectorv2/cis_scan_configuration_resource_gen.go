@@ -431,7 +431,7 @@ func cisScanConfigurationResource(ctx context.Context) (resource.Resource, error
 		//	  "properties": {
 		//	    "AccountIds": {
 		//	      "items": {
-		//	        "pattern": "^\\d{12}|ALL_MEMBERS|SELF$",
+		//	        "pattern": "^\\d{12}|ALL_ACCOUNTS|SELF$",
 		//	        "type": "string"
 		//	      },
 		//	      "maxItems": 10000,
@@ -468,7 +468,7 @@ func cisScanConfigurationResource(ctx context.Context) (resource.Resource, error
 						listvalidator.SizeBetween(1, 10000),
 						listvalidator.UniqueValues(),
 						listvalidator.ValueStringsAre(
-							stringvalidator.RegexMatches(regexp.MustCompile("^\\d{12}|ALL_MEMBERS|SELF$"), ""),
+							stringvalidator.RegexMatches(regexp.MustCompile("^\\d{12}|ALL_ACCOUNTS|SELF$"), ""),
 						),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/

@@ -308,7 +308,7 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		"volume_type":          "VolumeType",
 	})
 
-	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+	opts = opts.WithCreateTimeoutInMinutes(725).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(2160)
 

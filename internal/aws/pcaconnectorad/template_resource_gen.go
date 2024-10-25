@@ -54,7 +54,6 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
-			// ConnectorArn is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Definition
 		// CloudFormation resource type schema:
@@ -3296,7 +3295,6 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Required: true,
-			// Definition is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
@@ -3315,7 +3313,6 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
-			// Name is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: ReenrollAllCertificateHolders
 		// CloudFormation resource type schema:
@@ -3351,7 +3348,6 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
 				mapplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
-			// Tags is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: TemplateArn
 		// CloudFormation resource type schema:
@@ -3459,11 +3455,7 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/ConnectorArn",
-		"/properties/Definition",
-		"/properties/Name",
 		"/properties/ReenrollAllCertificateHolders",
-		"/properties/Tags",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

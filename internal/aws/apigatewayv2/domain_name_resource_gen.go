@@ -32,11 +32,11 @@ func domainNameResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The custom domain name for your API in Amazon API Gateway. Uppercase letters are not supported.",
+		//	  "description": "The custom domain name for your API in Amazon API Gateway. Uppercase letters and the underscore (``_``) character are not supported.",
 		//	  "type": "string"
 		//	}
 		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The custom domain name for your API in Amazon API Gateway. Uppercase letters are not supported.",
+			Description: "The custom domain name for your API in Amazon API Gateway. Uppercase letters and the underscore (``_``) character are not supported.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -49,7 +49,7 @@ func domainNameResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The domain name configurations.",
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "The ``DomainNameConfiguration`` property type specifies the configuration for an API's domain name.\n ``DomainNameConfiguration`` is a property of the [AWS::ApiGatewayV2::DomainName](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-domainname.html) resource.",
+		//	    "description": "The ``DomainNameConfiguration`` property type specifies the configuration for an API's domain name.\n  ``DomainNameConfiguration`` is a property of the [AWS::ApiGatewayV2::DomainName](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-domainname.html) resource.",
 		//	    "properties": {
 		//	      "CertificateArn": {
 		//	        "description": "An AWS-managed certificate that will be used by the edge-optimized endpoint for this domain name. AWS Certificate Manager is the only supported source.",

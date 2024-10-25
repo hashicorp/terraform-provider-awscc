@@ -4163,6 +4163,14 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "type": "object"
 		//	    },
+		//	    "ExecutionRoleIdentityConfig": {
+		//	      "description": "The configuration for attaching a SageMaker user profile name to the execution role as a sts:SourceIdentity key.",
+		//	      "enum": [
+		//	        "USER_PROFILE_NAME",
+		//	        "DISABLED"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "RStudioServerProDomainSettings": {
 		//	      "additionalProperties": false,
 		//	      "description": "A collection of settings that update the current configuration for the RStudioServerPro Domain-level app.",
@@ -4343,6 +4351,21 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ExecutionRoleIdentityConfig
+				"execution_role_identity_config": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The configuration for attaching a SageMaker user profile name to the execution role as a sts:SourceIdentity key.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"USER_PROFILE_NAME",
+							"DISABLED",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: RStudioServerProDomainSettings
@@ -4660,6 +4683,31 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 				generic.Multiset(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: TagPropagation
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates whether the tags added to Domain, User Profile and Space entity is propagated to all SageMaker resources.",
+		//	  "enum": [
+		//	    "ENABLED",
+		//	    "DISABLED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"tag_propagation": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether the tags added to Domain, User Profile and Space entity is propagated to all SageMaker resources.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ENABLED",
+					"DISABLED",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -4816,6 +4864,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"efs_file_system_config":                         "EFSFileSystemConfig",
 		"enable_docker_access":                           "EnableDockerAccess",
 		"execution_role":                                 "ExecutionRole",
+		"execution_role_identity_config":                 "ExecutionRoleIdentityConfig",
 		"file_system_id":                                 "FileSystemId",
 		"file_system_path":                               "FileSystemPath",
 		"gid":                                            "Gid",
@@ -4859,6 +4908,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"studio_web_portal":                              "StudioWebPortal",
 		"studio_web_portal_settings":                     "StudioWebPortalSettings",
 		"subnet_ids":                                     "SubnetIds",
+		"tag_propagation":                                "TagPropagation",
 		"tags":                                           "Tags",
 		"uid":                                            "Uid",
 		"url":                                            "Url",

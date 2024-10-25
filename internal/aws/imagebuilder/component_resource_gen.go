@@ -149,7 +149,8 @@ func componentResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The platform of the component.",
 		//	  "enum": [
 		//	    "Windows",
-		//	    "Linux"
+		//	    "Linux",
+		//	    "macOS"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -160,6 +161,7 @@ func componentResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.OneOf(
 					"Windows",
 					"Linux",
+					"macOS",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

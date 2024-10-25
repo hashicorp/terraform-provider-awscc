@@ -49,7 +49,6 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
-			// CertificateAuthorityArn is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: ConnectorArn
 		// CloudFormation resource type schema:
@@ -81,7 +80,6 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
-			// DirectoryId is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
@@ -103,7 +101,6 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
 				mapplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
-			// Tags is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: VpcInformation
 		// CloudFormation resource type schema:
@@ -149,7 +146,6 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
-			// VpcInformation is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -181,12 +177,6 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		"vpc_information":           "VpcInformation",
 	})
 
-	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/CertificateAuthorityArn",
-		"/properties/DirectoryId",
-		"/properties/Tags",
-		"/properties/VpcInformation",
-	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
