@@ -133,11 +133,11 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A comma-separated value string of one or more health check types.\n The valid values are ``EC2``, ``ELB``, and ``VPC_LATTICE``. ``EC2`` is the default health check and cannot be disabled. For more information, see [Health checks for instances in an Auto Scaling group](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-health-checks.html) in the *Amazon EC2 Auto Scaling User Guide*.\n Only specify ``EC2`` if you must clear a value that was previously set.",
+		//	  "description": "A comma-separated value string of one or more health check types.\n The valid values are ``EC2``, ``EBS``, ``ELB``, and ``VPC_LATTICE``. ``EC2`` is the default health check and cannot be disabled. For more information, see [Health checks for instances in an Auto Scaling group](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-health-checks.html) in the *Amazon EC2 Auto Scaling User Guide*.\n Only specify ``EC2`` if you must clear a value that was previously set.",
 		//	  "type": "string"
 		//	}
 		"health_check_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A comma-separated value string of one or more health check types.\n The valid values are ``EC2``, ``ELB``, and ``VPC_LATTICE``. ``EC2`` is the default health check and cannot be disabled. For more information, see [Health checks for instances in an Auto Scaling group](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-health-checks.html) in the *Amazon EC2 Auto Scaling User Guide*.\n Only specify ``EC2`` if you must clear a value that was previously set.",
+			Description: "A comma-separated value string of one or more health check types.\n The valid values are ``EC2``, ``EBS``, ``ELB``, and ``VPC_LATTICE``. ``EC2`` is the default health check and cannot be disabled. For more information, see [Health checks for instances in an Auto Scaling group](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-health-checks.html) in the *Amazon EC2 Auto Scaling User Guide*.\n Only specify ``EC2`` if you must clear a value that was previously set.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceId
@@ -1379,6 +1379,48 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 			Description: "A policy or a list of policies that are used to select the instance to terminate. These policies are executed in the order that you list them. For more information, see [Configure termination policies for Amazon EC2 Auto Scaling](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-termination-policies.html) in the *Amazon EC2 Auto Scaling User Guide*.\n Valid values: ``Default`` | ``AllocationStrategy`` | ``ClosestToNextInstanceHour`` | ``NewestInstance`` | ``OldestInstance`` | ``OldestLaunchConfiguration`` | ``OldestLaunchTemplate`` | ``arn:aws:lambda:region:account-id:function:my-function:my-alias``",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: TrafficSources
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "",
+		//	    "properties": {
+		//	      "Identifier": {
+		//	        "type": "string"
+		//	      },
+		//	      "Type": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Identifier",
+		//	      "Type"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"traffic_sources": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Identifier
+					"identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VPCZoneIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -1437,6 +1479,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		"health_check_grace_period":         "HealthCheckGracePeriod",
 		"health_check_type":                 "HealthCheckType",
 		"heartbeat_timeout":                 "HeartbeatTimeout",
+		"identifier":                        "Identifier",
 		"instance_generations":              "InstanceGenerations",
 		"instance_id":                       "InstanceId",
 		"instance_maintenance_policy":       "InstanceMaintenancePolicy",
@@ -1495,6 +1538,8 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		"termination_policies":   "TerminationPolicies",
 		"topic_arn":              "TopicARN",
 		"total_local_storage_gb": "TotalLocalStorageGB",
+		"traffic_sources":        "TrafficSources",
+		"type":                   "Type",
 		"v_cpu_count":            "VCpuCount",
 		"value":                  "Value",
 		"version":                "Version",

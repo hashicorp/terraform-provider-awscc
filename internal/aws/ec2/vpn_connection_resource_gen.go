@@ -326,7 +326,7 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 		//	    "description": "The tunnel options for a single VPN tunnel.",
 		//	    "properties": {
 		//	      "DPDTimeoutAction": {
-		//	        "description": "",
+		//	        "description": "The action to take after DPD timeout occurs. Specify ``restart`` to restart the IKE initiation. Specify ``clear`` to end the IKE session.\n Valid Values: ``clear`` | ``none`` | ``restart`` \n Default: ``clear``",
 		//	        "enum": [
 		//	          "clear",
 		//	          "none",
@@ -335,22 +335,23 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "DPDTimeoutSeconds": {
-		//	        "description": "",
+		//	        "description": "The number of seconds after which a DPD timeout occurs.\n Constraints: A value greater than or equal to 30.\n Default: ``30``",
 		//	        "minimum": 30,
 		//	        "type": "integer"
 		//	      },
 		//	      "EnableTunnelLifecycleControl": {
-		//	        "description": "",
+		//	        "description": "Turn on or off tunnel endpoint lifecycle control feature.",
 		//	        "type": "boolean"
 		//	      },
 		//	      "IKEVersions": {
-		//	        "description": "",
+		//	        "description": "The IKE versions that are permitted for the VPN tunnel.\n Valid values: ``ikev1`` | ``ikev2``",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "additionalProperties": false,
-		//	          "description": "",
+		//	          "description": "The IKE version that is permitted for the VPN tunnel.",
 		//	          "properties": {
 		//	            "Value": {
+		//	              "description": "The IKE version.",
 		//	              "enum": [
 		//	                "ikev1",
 		//	                "ikev2"
@@ -365,19 +366,22 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "LogOptions": {
 		//	        "additionalProperties": false,
-		//	        "description": "",
+		//	        "description": "Options for logging VPN tunnel activity.",
 		//	        "properties": {
 		//	          "CloudwatchLogOptions": {
 		//	            "additionalProperties": false,
-		//	            "description": "",
+		//	            "description": "Options for sending VPN tunnel logs to CloudWatch.",
 		//	            "properties": {
 		//	              "LogEnabled": {
+		//	                "description": "Enable or disable VPN tunnel logging feature. Default value is ``False``.\n Valid values: ``True`` | ``False``",
 		//	                "type": "boolean"
 		//	              },
 		//	              "LogGroupArn": {
+		//	                "description": "The Amazon Resource Name (ARN) of the CloudWatch log group to send logs to.",
 		//	                "type": "string"
 		//	              },
 		//	              "LogOutputFormat": {
+		//	                "description": "Set log format. Default format is ``json``.\n Valid values: ``json`` | ``text``",
 		//	                "enum": [
 		//	                  "json",
 		//	                  "text"
@@ -391,13 +395,14 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "object"
 		//	      },
 		//	      "Phase1DHGroupNumbers": {
-		//	        "description": "",
+		//	        "description": "One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for phase 1 IKE negotiations.\n Valid values: ``2`` | ``14`` | ``15`` | ``16`` | ``17`` | ``18`` | ``19`` | ``20`` | ``21`` | ``22`` | ``23`` | ``24``",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "additionalProperties": false,
-		//	          "description": "",
+		//	          "description": "Specifies a Diffie-Hellman group number for the VPN tunnel for phase 1 IKE negotiations.",
 		//	          "properties": {
 		//	            "Value": {
+		//	              "description": "The Diffie-Hellmann group number.",
 		//	              "enum": [
 		//	                2,
 		//	                14,
@@ -421,13 +426,14 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 		//	        "uniqueItems": false
 		//	      },
 		//	      "Phase1EncryptionAlgorithms": {
-		//	        "description": "",
+		//	        "description": "One or more encryption algorithms that are permitted for the VPN tunnel for phase 1 IKE negotiations.\n Valid values: ``AES128`` | ``AES256`` | ``AES128-GCM-16`` | ``AES256-GCM-16``",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "additionalProperties": false,
-		//	          "description": "",
+		//	          "description": "Specifies the encryption algorithm for the VPN tunnel for phase 1 IKE negotiations.",
 		//	          "properties": {
 		//	            "Value": {
+		//	              "description": "The value for the encryption algorithm.",
 		//	              "enum": [
 		//	                "AES128",
 		//	                "AES256",
@@ -443,13 +449,14 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 		//	        "uniqueItems": false
 		//	      },
 		//	      "Phase1IntegrityAlgorithms": {
-		//	        "description": "",
+		//	        "description": "One or more integrity algorithms that are permitted for the VPN tunnel for phase 1 IKE negotiations.\n Valid values: ``SHA1`` | ``SHA2-256`` | ``SHA2-384`` | ``SHA2-512``",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "additionalProperties": false,
-		//	          "description": "",
+		//	          "description": "Specifies the integrity algorithm for the VPN tunnel for phase 1 IKE negotiations.",
 		//	          "properties": {
 		//	            "Value": {
+		//	              "description": "The value for the integrity algorithm.",
 		//	              "enum": [
 		//	                "SHA1",
 		//	                "SHA2-256",
@@ -465,19 +472,20 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 		//	        "uniqueItems": false
 		//	      },
 		//	      "Phase1LifetimeSeconds": {
-		//	        "description": "",
+		//	        "description": "The lifetime for phase 1 of the IKE negotiation, in seconds.\n Constraints: A value between 900 and 28,800.\n Default: ``28800``",
 		//	        "maximum": 28800,
 		//	        "minimum": 900,
 		//	        "type": "integer"
 		//	      },
 		//	      "Phase2DHGroupNumbers": {
-		//	        "description": "",
+		//	        "description": "One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for phase 2 IKE negotiations.\n Valid values: ``2`` | ``5`` | ``14`` | ``15`` | ``16`` | ``17`` | ``18`` | ``19`` | ``20`` | ``21`` | ``22`` | ``23`` | ``24``",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "additionalProperties": false,
-		//	          "description": "",
+		//	          "description": "Specifies a Diffie-Hellman group number for the VPN tunnel for phase 2 IKE negotiations.",
 		//	          "properties": {
 		//	            "Value": {
+		//	              "description": "The Diffie-Hellmann group number.",
 		//	              "enum": [
 		//	                2,
 		//	                14,
@@ -501,13 +509,14 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 		//	        "uniqueItems": false
 		//	      },
 		//	      "Phase2EncryptionAlgorithms": {
-		//	        "description": "",
+		//	        "description": "One or more encryption algorithms that are permitted for the VPN tunnel for phase 2 IKE negotiations.\n Valid values: ``AES128`` | ``AES256`` | ``AES128-GCM-16`` | ``AES256-GCM-16``",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "additionalProperties": false,
-		//	          "description": "",
+		//	          "description": "Specifies the encryption algorithm for the VPN tunnel for phase 2 IKE negotiations.",
 		//	          "properties": {
 		//	            "Value": {
+		//	              "description": "The encryption algorithm.",
 		//	              "enum": [
 		//	                "AES128",
 		//	                "AES256",
@@ -523,13 +532,14 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 		//	        "uniqueItems": false
 		//	      },
 		//	      "Phase2IntegrityAlgorithms": {
-		//	        "description": "",
+		//	        "description": "One or more integrity algorithms that are permitted for the VPN tunnel for phase 2 IKE negotiations.\n Valid values: ``SHA1`` | ``SHA2-256`` | ``SHA2-384`` | ``SHA2-512``",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "additionalProperties": false,
-		//	          "description": "",
+		//	          "description": "Specifies the integrity algorithm for the VPN tunnel for phase 2 IKE negotiations.",
 		//	          "properties": {
 		//	            "Value": {
+		//	              "description": "The integrity algorithm.",
 		//	              "enum": [
 		//	                "SHA1",
 		//	                "SHA2-256",
@@ -545,7 +555,7 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 		//	        "uniqueItems": false
 		//	      },
 		//	      "Phase2LifetimeSeconds": {
-		//	        "description": "",
+		//	        "description": "The lifetime for phase 2 of the IKE negotiation, in seconds.\n Constraints: A value between 900 and 3,600. The value must be less than the value for ``Phase1LifetimeSeconds``.\n Default: ``3600``",
 		//	        "maximum": 3600,
 		//	        "minimum": 900,
 		//	        "type": "integer"
@@ -555,24 +565,24 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "RekeyFuzzPercentage": {
-		//	        "description": "",
+		//	        "description": "The percentage of the rekey window (determined by ``RekeyMarginTimeSeconds``) during which the rekey time is randomly selected.\n Constraints: A value between 0 and 100.\n Default: ``100``",
 		//	        "maximum": 100,
 		//	        "minimum": 0,
 		//	        "type": "integer"
 		//	      },
 		//	      "RekeyMarginTimeSeconds": {
-		//	        "description": "",
+		//	        "description": "The margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the VPN connection performs an IKE rekey. The exact time of the rekey is randomly selected based on the value for ``RekeyFuzzPercentage``.\n Constraints: A value between 60 and half of ``Phase2LifetimeSeconds``.\n Default: ``270``",
 		//	        "minimum": 60,
 		//	        "type": "integer"
 		//	      },
 		//	      "ReplayWindowSize": {
-		//	        "description": "",
+		//	        "description": "The number of packets in an IKE replay window.\n Constraints: A value between 64 and 2048.\n Default: ``1024``",
 		//	        "maximum": 2048,
 		//	        "minimum": 64,
 		//	        "type": "integer"
 		//	      },
 		//	      "StartupAction": {
-		//	        "description": "",
+		//	        "description": "The action to take when the establishing the tunnel for the VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify ``start`` for AWS to initiate the IKE negotiation.\n Valid Values: ``add`` | ``start`` \n Default: ``add``",
 		//	        "enum": [
 		//	          "add",
 		//	          "start"
@@ -584,7 +594,7 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "TunnelInsideIpv6Cidr": {
-		//	        "description": "",
+		//	        "description": "The range of inside IPv6 addresses for the tunnel. Any specified CIDR blocks must be unique across all VPN connections that use the same transit gateway.\n Constraints: A size /126 CIDR block from the local ``fd00::/8`` range.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -598,7 +608,7 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: DPDTimeoutAction
 					"dpd_timeout_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "",
+						Description: "The action to take after DPD timeout occurs. Specify ``restart`` to restart the IKE initiation. Specify ``clear`` to end the IKE session.\n Valid Values: ``clear`` | ``none`` | ``restart`` \n Default: ``clear``",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -614,7 +624,7 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: DPDTimeoutSeconds
 					"dpd_timeout_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "",
+						Description: "The number of seconds after which a DPD timeout occurs.\n Constraints: A value greater than or equal to 30.\n Default: ``30``",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -626,7 +636,7 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: EnableTunnelLifecycleControl
 					"enable_tunnel_lifecycle_control": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "",
+						Description: "Turn on or off tunnel endpoint lifecycle control feature.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -639,8 +649,9 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Value
 								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "The IKE version.",
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.OneOf(
 											"ikev1",
@@ -653,7 +664,7 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "",
+						Description: "The IKE versions that are permitted for the VPN tunnel.\n Valid values: ``ikev1`` | ``ikev2``",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -669,24 +680,27 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: LogEnabled
 									"log_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-										Optional: true,
-										Computed: true,
+										Description: "Enable or disable VPN tunnel logging feature. Default value is ``False``.\n Valid values: ``True`` | ``False``",
+										Optional:    true,
+										Computed:    true,
 										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 											boolplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: LogGroupArn
 									"log_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Optional: true,
-										Computed: true,
+										Description: "The Amazon Resource Name (ARN) of the CloudWatch log group to send logs to.",
+										Optional:    true,
+										Computed:    true,
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: LogOutputFormat
 									"log_output_format": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Optional: true,
-										Computed: true,
+										Description: "Set log format. Default format is ``json``.\n Valid values: ``json`` | ``text``",
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"json",
@@ -698,7 +712,7 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Description: "",
+								Description: "Options for sending VPN tunnel logs to CloudWatch.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -706,7 +720,7 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "",
+						Description: "Options for logging VPN tunnel activity.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -719,8 +733,9 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Value
 								"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "The Diffie-Hellmann group number.",
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.Int64{ /*START VALIDATORS*/
 										int64validator.OneOf(
 											2,
@@ -743,7 +758,7 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "",
+						Description: "One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for phase 1 IKE negotiations.\n Valid values: ``2`` | ``14`` | ``15`` | ``16`` | ``17`` | ``18`` | ``19`` | ``20`` | ``21`` | ``22`` | ``23`` | ``24``",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -757,8 +772,9 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Value
 								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "The value for the encryption algorithm.",
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.OneOf(
 											"AES128",
@@ -773,7 +789,7 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "",
+						Description: "One or more encryption algorithms that are permitted for the VPN tunnel for phase 1 IKE negotiations.\n Valid values: ``AES128`` | ``AES256`` | ``AES128-GCM-16`` | ``AES256-GCM-16``",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -787,8 +803,9 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Value
 								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "The value for the integrity algorithm.",
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.OneOf(
 											"SHA1",
@@ -803,7 +820,7 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "",
+						Description: "One or more integrity algorithms that are permitted for the VPN tunnel for phase 1 IKE negotiations.\n Valid values: ``SHA1`` | ``SHA2-256`` | ``SHA2-384`` | ``SHA2-512``",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -813,7 +830,7 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Phase1LifetimeSeconds
 					"phase_1_lifetime_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "",
+						Description: "The lifetime for phase 1 of the IKE negotiation, in seconds.\n Constraints: A value between 900 and 28,800.\n Default: ``28800``",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -829,8 +846,9 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Value
 								"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "The Diffie-Hellmann group number.",
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.Int64{ /*START VALIDATORS*/
 										int64validator.OneOf(
 											2,
@@ -853,7 +871,7 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "",
+						Description: "One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for phase 2 IKE negotiations.\n Valid values: ``2`` | ``5`` | ``14`` | ``15`` | ``16`` | ``17`` | ``18`` | ``19`` | ``20`` | ``21`` | ``22`` | ``23`` | ``24``",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -867,8 +885,9 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Value
 								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "The encryption algorithm.",
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.OneOf(
 											"AES128",
@@ -883,7 +902,7 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "",
+						Description: "One or more encryption algorithms that are permitted for the VPN tunnel for phase 2 IKE negotiations.\n Valid values: ``AES128`` | ``AES256`` | ``AES128-GCM-16`` | ``AES256-GCM-16``",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -897,8 +916,9 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Value
 								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "The integrity algorithm.",
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.OneOf(
 											"SHA1",
@@ -913,7 +933,7 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "",
+						Description: "One or more integrity algorithms that are permitted for the VPN tunnel for phase 2 IKE negotiations.\n Valid values: ``SHA1`` | ``SHA2-256`` | ``SHA2-384`` | ``SHA2-512``",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -923,7 +943,7 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Phase2LifetimeSeconds
 					"phase_2_lifetime_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "",
+						Description: "The lifetime for phase 2 of the IKE negotiation, in seconds.\n Constraints: A value between 900 and 3,600. The value must be less than the value for ``Phase1LifetimeSeconds``.\n Default: ``3600``",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -944,7 +964,7 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: RekeyFuzzPercentage
 					"rekey_fuzz_percentage": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "",
+						Description: "The percentage of the rekey window (determined by ``RekeyMarginTimeSeconds``) during which the rekey time is randomly selected.\n Constraints: A value between 0 and 100.\n Default: ``100``",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -956,7 +976,7 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: RekeyMarginTimeSeconds
 					"rekey_margin_time_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "",
+						Description: "The margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the VPN connection performs an IKE rekey. The exact time of the rekey is randomly selected based on the value for ``RekeyFuzzPercentage``.\n Constraints: A value between 60 and half of ``Phase2LifetimeSeconds``.\n Default: ``270``",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -968,7 +988,7 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: ReplayWindowSize
 					"replay_window_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "",
+						Description: "The number of packets in an IKE replay window.\n Constraints: A value between 64 and 2048.\n Default: ``1024``",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -980,7 +1000,7 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: StartupAction
 					"startup_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "",
+						Description: "The action to take when the establishing the tunnel for the VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify ``start`` for AWS to initiate the IKE negotiation.\n Valid Values: ``add`` | ``start`` \n Default: ``add``",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -1004,7 +1024,7 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: TunnelInsideIpv6Cidr
 					"tunnel_inside_ipv_6_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "",
+						Description: "The range of inside IPv6 addresses for the tunnel. Any specified CIDR blocks must be unique across all VPN connections that use the same transit gateway.\n Constraints: A size /126 CIDR block from the local ``fd00::/8`` range.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

@@ -29,6 +29,7 @@ You cannot modify the value of AutoMinorVersionUpgrade after the cluster is crea
 - `cluster_endpoint` (Attributes) The cluster endpoint. (see [below for nested schema](#nestedatt--cluster_endpoint))
 - `data_tiering` (String) Enables data tiering. Data tiering is only supported for clusters using the r6gd node type. This parameter must be set when using r6gd nodes.
 - `description` (String) An optional description of the cluster.
+- `engine` (String) The engine type used by the cluster.
 - `engine_version` (String) The Redis engine version used by the cluster.
 - `final_snapshot_name` (String) The user-supplied name of a final cluster snapshot. This is the unique name that identifies the snapshot. MemoryDB creates the snapshot, and then deletes the cluster immediately afterward.
 - `kms_key_id` (String) The ID of the KMS key used to encrypt the cluster.

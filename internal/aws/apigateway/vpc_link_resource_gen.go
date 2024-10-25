@@ -33,11 +33,11 @@ func vpcLinkResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The description of the VPC link.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the VPC link.",
+			Description: "",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -48,11 +48,11 @@ func vpcLinkResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The name used to label and identify the VPC link.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name used to label and identify the VPC link.",
+			Description: "",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -119,7 +119,7 @@ func vpcLinkResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ARN of the network load balancer of the VPC targeted by the VPC link. The network load balancer must be owned by the same AWS-account of the API owner.",
+		//	  "description": "",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -129,7 +129,7 @@ func vpcLinkResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"target_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "The ARN of the network load balancer of the VPC targeted by the VPC link. The network load balancer must be owned by the same AWS-account of the API owner.",
+			Description: "",
 			Required:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),

@@ -42,5 +42,5 @@ Read-Only:
 
 - `bitrate` (Number) Bitrate for generated output, in bps. Default: 2500000.
 - `framerate` (Number) Video frame rate, in fps. Default: 30.
-- `height` (Number) Video-resolution height. Note that the maximum value is determined by width times height, such that the maximum total pixels is 2073600 (1920x1080 or 1080x1920). Default: 720.
-- `width` (Number) Video-resolution width. Note that the maximum value is determined by width times height, such that the maximum total pixels is 2073600 (1920x1080 or 1080x1920). Default: 1280.
+- `height` (Number) Video-resolution height. This must be an even number. Note that the maximum value is determined by width times height, such that the maximum total pixels is 2073600 (1920x1080 or 1080x1920). Default: 720.
+- `width` (Number) Video-resolution width. This must be an even number. Note that the maximum value is determined by width times height, such that the maximum total pixels is 2073600 (1920x1080 or 1080x1920). Default: 1280.

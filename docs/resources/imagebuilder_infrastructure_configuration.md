@@ -27,6 +27,7 @@ Resource schema for AWS::ImageBuilder::InfrastructureConfiguration
 - `instance_types` (List of String) The instance types of the infrastructure configuration.
 - `key_pair` (String) The EC2 key pair of the infrastructure configuration..
 - `logging` (Attributes) The logging configuration of the infrastructure configuration. (see [below for nested schema](#nestedatt--logging))
+- `placement` (Attributes) The placement option settings for the infrastructure configuration. (see [below for nested schema](#nestedatt--placement))
 - `resource_tags` (Map of String) The tags attached to the resource created by Image Builder.
 - `security_group_ids` (List of String) The security group IDs of the infrastructure configuration.
 - `sns_topic_arn` (String) The SNS Topic Amazon Resource Name (ARN) of the infrastructure configuration.
@@ -62,6 +63,18 @@ Optional:
 
 - `s3_bucket_name` (String) S3BucketName
 - `s3_key_prefix` (String) S3KeyPrefix
+
+
+
+<a id="nestedatt--placement"></a>
+### Nested Schema for `placement`
+
+Optional:
+
+- `availability_zone` (String) AvailabilityZone
+- `host_id` (String) HostId
+- `host_resource_group_arn` (String) HostResourceGroupArn
+- `tenancy` (String) Tenancy
 
 ## Import
 

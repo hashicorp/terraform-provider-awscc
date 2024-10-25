@@ -91,12 +91,14 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
+			Optional: true,
+			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(3, 63),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// Name is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -111,7 +113,8 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"network_fabric_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
+			Optional: true,
+			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"TRANSIT_GATEWAY",
@@ -119,7 +122,8 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// NetworkFabricType is a write-only property.
 		}, /*END ATTRIBUTE*/

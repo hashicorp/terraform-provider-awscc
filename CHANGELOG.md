@@ -2,9 +2,25 @@
 
 FEATURES:
 
+* **New Data Source:** `awscc_appsync_graph_ql_api`
+* **New Data Source:** `awscc_appsync_graph_ql_apis`
+* **New Data Source:** `awscc_backup_logically_air_gapped_backup_vault`
+* **New Data Source:** `awscc_backup_logically_air_gapped_backup_vaults`
+* **New Data Source:** `awscc_cognito_user_pool_identity_provider`
 * **New Data Source:** `awscc_controltower_landing_zone`
 * **New Data Source:** `awscc_controltower_landing_zones`
+* **New Data Source:** `awscc_redshift_integration`
+* **New Data Source:** `awscc_redshift_integrations`
+* **New Data Source:** `awscc_route53_record_set`
+* **New Data Source:** `awscc_sagemaker_endpoint`
+* **New Data Source:** `awscc_sagemaker_endpoints`
+* **New Resource:** `awscc_appsync_graph_ql_api`
+* **New Resource:** `awscc_backup_logically_air_gapped_backup_vault`
+* **New Resource:** `awscc_cognito_user_pool_identity_provider`
 * **New Resource:** `awscc_controltower_landing_zone`
+* **New Resource:** `awscc_redshift_integration`
+* **New Resource:** `awscc_route53_record_set`
+* **New Resource:** `awscc_sagemaker_endpoint`
 
 ## 1.17.0 (October 17, 2024)
 

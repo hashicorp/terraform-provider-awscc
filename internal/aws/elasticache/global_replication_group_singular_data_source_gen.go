@@ -56,6 +56,17 @@ func globalReplicationGroupDataSource(ctx context.Context) (datasource.DataSourc
 			Description: "Cache parameter group name to use for the new engine version. This parameter cannot be modified independently.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Engine
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The engine of the Global Datastore.",
+		//	  "type": "string"
+		//	}
+		"engine": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The engine of the Global Datastore.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EngineVersion
 		// CloudFormation resource type schema:
 		//
@@ -279,6 +290,7 @@ func globalReplicationGroupDataSource(ctx context.Context) (datasource.DataSourc
 		"automatic_failover_enabled":           "AutomaticFailoverEnabled",
 		"cache_node_type":                      "CacheNodeType",
 		"cache_parameter_group_name":           "CacheParameterGroupName",
+		"engine":                               "Engine",
 		"engine_version":                       "EngineVersion",
 		"global_node_group_count":              "GlobalNodeGroupCount",
 		"global_replication_group_description": "GlobalReplicationGroupDescription",

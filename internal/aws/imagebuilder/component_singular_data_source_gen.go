@@ -109,7 +109,8 @@ func componentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The platform of the component.",
 		//	  "enum": [
 		//	    "Windows",
-		//	    "Linux"
+		//	    "Linux",
+		//	    "macOS"
 		//	  ],
 		//	  "type": "string"
 		//	}

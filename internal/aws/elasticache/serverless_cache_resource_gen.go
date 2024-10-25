@@ -277,9 +277,6 @@ func serverlessCacheResource(ctx context.Context) (resource.Resource, error) {
 		"engine": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The engine name of the Serverless Cache.",
 			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: FinalSnapshotName
 		// CloudFormation resource type schema:
@@ -340,7 +337,6 @@ func serverlessCacheResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ReaderEndpoint

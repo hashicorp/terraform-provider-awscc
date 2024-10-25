@@ -140,6 +140,7 @@ resource "awscc_sagemaker_app_image_config" "example" {
 - `default_space_settings` (Attributes) The default space settings. (see [below for nested schema](#nestedatt--default_space_settings))
 - `domain_settings` (Attributes) A collection of Domain settings. (see [below for nested schema](#nestedatt--domain_settings))
 - `kms_key_id` (String) SageMaker uses AWS KMS to encrypt the EFS volume attached to the domain with an AWS managed customer master key (CMK) by default.
+- `tag_propagation` (String) Indicates whether the tags added to Domain, User Profile and Space entity is propagated to all SageMaker resources.
 - `tags` (Attributes List) A list of tags to apply to the user profile. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -616,6 +617,7 @@ Optional:
 Optional:
 
 - `docker_settings` (Attributes) A collection of settings that are required to start docker-proxy server. (see [below for nested schema](#nestedatt--domain_settings--docker_settings))
+- `execution_role_identity_config` (String) The configuration for attaching a SageMaker user profile name to the execution role as a sts:SourceIdentity key.
 - `r_studio_server_pro_domain_settings` (Attributes) A collection of settings that update the current configuration for the RStudioServerPro Domain-level app. (see [below for nested schema](#nestedatt--domain_settings--r_studio_server_pro_domain_settings))
 - `security_group_ids` (List of String) The security groups for the Amazon Virtual Private Cloud that the Domain uses for communication between Domain-level apps and user apps.
 

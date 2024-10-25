@@ -78,6 +78,21 @@ func globalReplicationGroupResource(ctx context.Context) (resource.Resource, err
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Engine
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The engine of the Global Datastore.",
+		//	  "type": "string"
+		//	}
+		"engine": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The engine of the Global Datastore.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: EngineVersion
 		// CloudFormation resource type schema:
 		//
@@ -384,6 +399,7 @@ func globalReplicationGroupResource(ctx context.Context) (resource.Resource, err
 		"automatic_failover_enabled":           "AutomaticFailoverEnabled",
 		"cache_node_type":                      "CacheNodeType",
 		"cache_parameter_group_name":           "CacheParameterGroupName",
+		"engine":                               "Engine",
 		"engine_version":                       "EngineVersion",
 		"global_node_group_count":              "GlobalNodeGroupCount",
 		"global_replication_group_description": "GlobalReplicationGroupDescription",

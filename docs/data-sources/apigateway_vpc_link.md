@@ -21,10 +21,10 @@ Data Source schema for AWS::ApiGateway::VpcLink
 
 ### Read-Only
 
-- `description` (String) The description of the VPC link.
-- `name` (String) The name used to label and identify the VPC link.
+- `description` (String)
+- `name` (String)
 - `tags` (Attributes Set) An array of arbitrary tags (key-value pairs) to associate with the VPC link. (see [below for nested schema](#nestedatt--tags))
-- `target_arns` (List of String) The ARN of the network load balancer of the VPC targeted by the VPC link. The network load balancer must be owned by the same AWS-account of the API owner.
+- `target_arns` (List of String)
 - `vpc_link_id` (String)
 
 <a id="nestedatt--tags"></a>

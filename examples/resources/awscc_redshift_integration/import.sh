@@ -1,0 +1,1 @@
+$ terraform import awscc_redshift_integration.example "integration_arn"

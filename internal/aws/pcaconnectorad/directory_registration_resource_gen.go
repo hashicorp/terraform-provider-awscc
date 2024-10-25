@@ -44,7 +44,6 @@ func directoryRegistrationResource(ctx context.Context) (resource.Resource, erro
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
-			// DirectoryId is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: DirectoryRegistrationArn
 		// CloudFormation resource type schema:
@@ -81,7 +80,6 @@ func directoryRegistrationResource(ctx context.Context) (resource.Resource, erro
 			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
 				mapplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
-			// Tags is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -110,10 +108,6 @@ func directoryRegistrationResource(ctx context.Context) (resource.Resource, erro
 		"tags":                       "Tags",
 	})
 
-	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/DirectoryId",
-		"/properties/Tags",
-	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

@@ -37,12 +37,12 @@ resource "awscc_elasticloadbalancingv2_load_balancer" "example" {
 
 ### Required
 
-- `name` (String) The name used to label and identify the VPC link.
-- `target_arns` (List of String) The ARN of the network load balancer of the VPC targeted by the VPC link. The network load balancer must be owned by the same AWS-account of the API owner.
+- `name` (String)
+- `target_arns` (List of String)
 
 ### Optional
 
-- `description` (String) The description of the VPC link.
+- `description` (String)
 - `tags` (Attributes Set) An array of arbitrary tags (key-value pairs) to associate with the VPC link. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

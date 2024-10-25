@@ -130,7 +130,7 @@ func aPIKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "items": {
 		//	        "maxLength": 200,
 		//	        "minLength": 5,
-		//	        "pattern": "^geo:\\w*\\*?$",
+		//	        "pattern": "^(geo|geo-routes|geo-places|geo-maps):\\w*\\*?$",
 		//	        "type": "string"
 		//	      },
 		//	      "maxItems": 24,

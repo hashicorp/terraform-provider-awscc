@@ -31,7 +31,7 @@ resource "awscc_apigatewayv2_domain_name" "example" {
 
 ### Required
 
-- `domain_name` (String) The custom domain name for your API in Amazon API Gateway. Uppercase letters are not supported.
+- `domain_name` (String) The custom domain name for your API in Amazon API Gateway. Uppercase letters and the underscore (``_``) character are not supported.
 
 ### Optional
 

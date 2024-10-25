@@ -186,7 +186,7 @@ func aPIKeyResource(ctx context.Context) (resource.Resource, error) {
 		//	      "items": {
 		//	        "maxLength": 200,
 		//	        "minLength": 5,
-		//	        "pattern": "^geo:\\w*\\*?$",
+		//	        "pattern": "^(geo|geo-routes|geo-places|geo-maps):\\w*\\*?$",
 		//	        "type": "string"
 		//	      },
 		//	      "maxItems": 24,
@@ -232,7 +232,7 @@ func aPIKeyResource(ctx context.Context) (resource.Resource, error) {
 						listvalidator.SizeBetween(1, 24),
 						listvalidator.ValueStringsAre(
 							stringvalidator.LengthBetween(5, 200),
-							stringvalidator.RegexMatches(regexp.MustCompile("^geo:\\w*\\*?$"), ""),
+							stringvalidator.RegexMatches(regexp.MustCompile("^(geo|geo-routes|geo-places|geo-maps):\\w*\\*?$"), ""),
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/

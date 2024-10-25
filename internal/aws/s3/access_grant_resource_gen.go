@@ -297,7 +297,6 @@ func accessGrantResource(ctx context.Context) (resource.Resource, error) {
 				setplanmodifier.UseStateForUnknown(),
 				setplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
-			// Tags is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -339,7 +338,6 @@ func accessGrantResource(ctx context.Context) (resource.Resource, error) {
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/Tags",
 		"/properties/S3PrefixType",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

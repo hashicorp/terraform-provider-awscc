@@ -24,6 +24,7 @@ The AWS::ElastiCache::GlobalReplicationGroup resource creates an Amazon ElastiCa
 - `automatic_failover_enabled` (Boolean) AutomaticFailoverEnabled
 - `cache_node_type` (String) The cache node type of the Global Datastore
 - `cache_parameter_group_name` (String) Cache parameter group name to use for the new engine version. This parameter cannot be modified independently.
+- `engine` (String) The engine of the Global Datastore.
 - `engine_version` (String) The engine version of the Global Datastore.
 - `global_node_group_count` (Number) Indicates the number of node groups in the Global Datastore.
 - `global_replication_group_description` (String) The optional description of the Global Datastore

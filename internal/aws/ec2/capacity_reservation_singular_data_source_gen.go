@@ -222,6 +222,15 @@ func capacityReservationDataSource(ctx context.Context) (datasource.DataSource, 
 		"total_instance_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: UnusedReservationBillingOwnerId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"unused_reservation_billing_owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -239,26 +248,27 @@ func capacityReservationDataSource(ctx context.Context) (datasource.DataSource, 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::CapacityReservation").WithTerraformTypeName("awscc_ec2_capacity_reservation")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"availability_zone":        "AvailabilityZone",
-		"available_instance_count": "AvailableInstanceCount",
-		"capacity_reservation_id":  "Id",
-		"ebs_optimized":            "EbsOptimized",
-		"end_date":                 "EndDate",
-		"end_date_type":            "EndDateType",
-		"ephemeral_storage":        "EphemeralStorage",
-		"instance_count":           "InstanceCount",
-		"instance_match_criteria":  "InstanceMatchCriteria",
-		"instance_platform":        "InstancePlatform",
-		"instance_type":            "InstanceType",
-		"key":                      "Key",
-		"out_post_arn":             "OutPostArn",
-		"placement_group_arn":      "PlacementGroupArn",
-		"resource_type":            "ResourceType",
-		"tag_specifications":       "TagSpecifications",
-		"tags":                     "Tags",
-		"tenancy":                  "Tenancy",
-		"total_instance_count":     "TotalInstanceCount",
-		"value":                    "Value",
+		"availability_zone":                   "AvailabilityZone",
+		"available_instance_count":            "AvailableInstanceCount",
+		"capacity_reservation_id":             "Id",
+		"ebs_optimized":                       "EbsOptimized",
+		"end_date":                            "EndDate",
+		"end_date_type":                       "EndDateType",
+		"ephemeral_storage":                   "EphemeralStorage",
+		"instance_count":                      "InstanceCount",
+		"instance_match_criteria":             "InstanceMatchCriteria",
+		"instance_platform":                   "InstancePlatform",
+		"instance_type":                       "InstanceType",
+		"key":                                 "Key",
+		"out_post_arn":                        "OutPostArn",
+		"placement_group_arn":                 "PlacementGroupArn",
+		"resource_type":                       "ResourceType",
+		"tag_specifications":                  "TagSpecifications",
+		"tags":                                "Tags",
+		"tenancy":                             "Tenancy",
+		"total_instance_count":                "TotalInstanceCount",
+		"unused_reservation_billing_owner_id": "UnusedReservationBillingOwnerId",
+		"value":                               "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

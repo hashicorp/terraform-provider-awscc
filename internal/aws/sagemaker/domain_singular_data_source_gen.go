@@ -2560,6 +2560,14 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "type": "object"
 		//	    },
+		//	    "ExecutionRoleIdentityConfig": {
+		//	      "description": "The configuration for attaching a SageMaker user profile name to the execution role as a sts:SourceIdentity key.",
+		//	      "enum": [
+		//	        "USER_PROFILE_NAME",
+		//	        "DISABLED"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "RStudioServerProDomainSettings": {
 		//	      "additionalProperties": false,
 		//	      "description": "A collection of settings that update the current configuration for the RStudioServerPro Domain-level app.",
@@ -2716,6 +2724,11 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Description: "A collection of settings that are required to start docker-proxy server.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: ExecutionRoleIdentityConfig
+				"execution_role_identity_config": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The configuration for attaching a SageMaker user profile name to the execution role as a sts:SourceIdentity key.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: RStudioServerProDomainSettings
 				"r_studio_server_pro_domain_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -2857,6 +2870,21 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The VPC subnets that Studio uses for communication.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: TagPropagation
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates whether the tags added to Domain, User Profile and Space entity is propagated to all SageMaker resources.",
+		//	  "enum": [
+		//	    "ENABLED",
+		//	    "DISABLED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"tag_propagation": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether the tags added to Domain, User Profile and Space entity is propagated to all SageMaker resources.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -2972,6 +3000,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"efs_file_system_config":                         "EFSFileSystemConfig",
 		"enable_docker_access":                           "EnableDockerAccess",
 		"execution_role":                                 "ExecutionRole",
+		"execution_role_identity_config":                 "ExecutionRoleIdentityConfig",
 		"file_system_id":                                 "FileSystemId",
 		"file_system_path":                               "FileSystemPath",
 		"gid":                                            "Gid",
@@ -3015,6 +3044,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"studio_web_portal":                              "StudioWebPortal",
 		"studio_web_portal_settings":                     "StudioWebPortalSettings",
 		"subnet_ids":                                     "SubnetIds",
+		"tag_propagation":                                "TagPropagation",
 		"tags":                                           "Tags",
 		"uid":                                            "Uid",
 		"url":                                            "Url",

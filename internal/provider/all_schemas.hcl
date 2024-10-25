@@ -390,6 +390,10 @@ resource_schema "aws_appsync_function_configuration" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_appsync_graph_ql_api" {
+  cloudformation_type_name = "AWS::AppSync::GraphQLApi"
+}
+
 resource_schema "aws_appsync_resolver" {
   cloudformation_type_name               = "AWS::AppSync::Resolver"
   suppress_plural_data_source_generation = true
@@ -511,6 +515,10 @@ resource_schema "aws_backup_backup_vault" {
 
 resource_schema "aws_backup_framework" {
   cloudformation_type_name = "AWS::Backup::Framework"
+}
+
+resource_schema "aws_backup_logically_air_gapped_backup_vault" {
+  cloudformation_type_name = "AWS::Backup::LogicallyAirGappedBackupVault"
 }
 
 resource_schema "aws_backup_report_plan" {
@@ -932,6 +940,11 @@ resource_schema "aws_cognito_user_pool_client" {
 
 resource_schema "aws_cognito_user_pool_group" {
   cloudformation_type_name               = "AWS::Cognito::UserPoolGroup"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_cognito_user_pool_identity_provider" {
+  cloudformation_type_name               = "AWS::Cognito::UserPoolIdentityProvider"
   suppress_plural_data_source_generation = true
 }
 
@@ -3781,6 +3794,10 @@ resource_schema "aws_redshift_event_subscription" {
   cloudformation_type_name = "AWS::Redshift::EventSubscription"
 }
 
+resource_schema "aws_redshift_integration" {
+  cloudformation_type_name = "AWS::Redshift::Integration"
+}
+
 resource_schema "aws_redshift_scheduled_action" {
   cloudformation_type_name = "AWS::Redshift::ScheduledAction"
 }
@@ -3911,6 +3928,11 @@ resource_schema "aws_route53_hosted_zone" {
 
 resource_schema "aws_route53_key_signing_key" {
   cloudformation_type_name = "AWS::Route53::KeySigningKey"
+}
+
+resource_schema "aws_route53_record_set" {
+  cloudformation_type_name               = "AWS::Route53::RecordSet"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_route53profiles_profile" {
@@ -4265,6 +4287,10 @@ resource_schema "aws_sagemaker_device_fleet" {
 
 resource_schema "aws_sagemaker_domain" {
   cloudformation_type_name = "AWS::SageMaker::Domain"
+}
+
+resource_schema "aws_sagemaker_endpoint" {
+  cloudformation_type_name = "AWS::SageMaker::Endpoint"
 }
 
 resource_schema "aws_sagemaker_feature_group" {
