@@ -37,6 +37,7 @@ Data Source schema for AWS::OpenSearchService::Domain
 - `ebs_options` (Attributes) (see [below for nested schema](#nestedatt--ebs_options))
 - `encryption_at_rest_options` (Attributes) (see [below for nested schema](#nestedatt--encryption_at_rest_options))
 - `engine_version` (String)
+- `identity_center_options` (Attributes) Options for configuring Identity Center (see [below for nested schema](#nestedatt--identity_center_options))
 - `ip_address_type` (String)
 - `log_publishing_options` (Attributes Map) (see [below for nested schema](#nestedatt--log_publishing_options))
 - `node_to_node_encryption_options` (Attributes) (see [below for nested schema](#nestedatt--node_to_node_encryption_options))
@@ -183,6 +184,19 @@ Read-Only:
 
 - `enabled` (Boolean)
 - `kms_key_id` (String)
+
+
+<a id="nestedatt--identity_center_options"></a>
+### Nested Schema for `identity_center_options`
+
+Read-Only:
+
+- `enabled_api_access` (Boolean) Whether Identity Center is enabled.
+- `identity_center_application_arn` (String) The ARN of the Identity Center application.
+- `identity_center_instance_arn` (String) The ARN of the Identity Center instance.
+- `identity_store_id` (String) The IdentityStoreId for Identity Center options.
+- `roles_key` (String) The roles key for Identity Center options.
+- `subject_key` (String) The subject key for Identity Center options.
 
 
 <a id="nestedatt--log_publishing_options"></a>

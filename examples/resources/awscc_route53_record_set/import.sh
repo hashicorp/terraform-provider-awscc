@@ -1,1 +1,1 @@
-$ terraform import awscc_route53_record_set.example "name|hosted_zone_id|type|set_identifier"
+$ terraform import awscc_route53_record_set.example "id"

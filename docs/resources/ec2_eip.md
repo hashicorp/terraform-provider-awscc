@@ -49,10 +49,12 @@ resource "awscc_ec2_eip" "main" {
 
 ### Optional
 
+- `address` (String)
 - `domain` (String) The network (``vpc``).
  If you define an Elastic IP address and associate it with a VPC that is defined in the same template, you must declare a dependency on the VPC-gateway attachment by using the [DependsOn Attribute](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-dependson.html) on this resource.
 - `instance_id` (String) The ID of the instance.
   Updates to the ``InstanceId`` property may require *some interruptions*. Updates on an EIP reassociates the address on its associated resource.
+- `ipam_pool_id` (String)
 - `network_border_group` (String) A unique set of Availability Zones, Local Zones, or Wavelength Zones from which AWS advertises IP addresses. Use this parameter to limit the IP address to this location. IP addresses cannot move between network border groups.
  Use [DescribeAvailabilityZones](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html) to view the network border groups.
 - `public_ipv_4_pool` (String) The ID of an address pool that you own. Use this parameter to let Amazon EC2 select an address from the address pool.

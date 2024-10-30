@@ -1,0 +1,1 @@
+$ terraform import awscc_opensearchservice_application.example "name"

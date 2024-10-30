@@ -23,9 +23,9 @@ Data Source schema for AWS::SageMaker::StudioLifecycleConfig
 
 - `studio_lifecycle_config_app_type` (String) The App type that the Lifecycle Configuration is attached to.
 - `studio_lifecycle_config_arn` (String) The Amazon Resource Name (ARN) of the Lifecycle Configuration.
-- `studio_lifecycle_config_content` (String) The content of your Amazon SageMaker Studio Lifecycle Configuration script.
+- `studio_lifecycle_config_content` (String) The content of your Amazon SageMaker Studio Lifecycle Configuration script. This content must be base64 encoded.
 - `studio_lifecycle_config_name` (String) The name of the Amazon SageMaker Studio Lifecycle Configuration.
-- `tags` (Attributes List) Tags to be associated with the Lifecycle Configuration. (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes List) Tags to be associated with the Lifecycle Configuration. Each tag consists of a key and an optional value. Tag keys must be unique per resource. Tags are searchable using the Search API. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

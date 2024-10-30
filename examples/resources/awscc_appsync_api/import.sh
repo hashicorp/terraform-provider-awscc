@@ -1,0 +1,1 @@
+$ terraform import awscc_appsync_api.example "api_arn"
