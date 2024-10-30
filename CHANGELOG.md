@@ -1,4 +1,23 @@
 ## 1.19.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_appconfig_deployment_strategies`
+* **New Data Source:** `awscc_appconfig_deployment_strategy`
+* **New Data Source:** `awscc_appsync_api`
+* **New Data Source:** `awscc_appsync_apis`
+* **New Data Source:** `awscc_dms_data_migration`
+* **New Data Source:** `awscc_dms_data_migrations`
+* **New Data Source:** `awscc_opensearchservice_application`
+* **New Data Source:** `awscc_opensearchservice_applications`
+* **New Data Source:** `awscc_secretsmanager_rotation_schedule`
+* **New Data Source:** `awscc_secretsmanager_rotation_schedules`
+* **New Resource:** `awscc_appconfig_deployment_strategy`
+* **New Resource:** `awscc_appsync_api`
+* **New Resource:** `awscc_dms_data_migration`
+* **New Resource:** `awscc_opensearchservice_application`
+* **New Resource:** `awscc_secretsmanager_rotation_schedule`
+
 ## 1.18.0 (October 25, 2024)
 
 FEATURES:
