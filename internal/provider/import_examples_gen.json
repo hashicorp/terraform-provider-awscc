@@ -225,6 +225,11 @@
         "path": "./examples/resources/awscc_appconfig_configuration_profile/import.sh"
     },
     {
+        "resource": "awscc_appconfig_deployment_strategy",
+        "identifier": ["Id"],
+        "path": "./examples/resources/awscc_appconfig_deployment_strategy/import.sh"
+    },
+    {
         "resource": "awscc_appconfig_environment",
         "identifier": ["ApplicationId","EnvironmentId"],
         "path": "./examples/resources/awscc_appconfig_environment/import.sh"
@@ -328,6 +333,11 @@
         "resource": "awscc_appstream_image_builder",
         "identifier": ["Name"],
         "path": "./examples/resources/awscc_appstream_image_builder/import.sh"
+    },
+    {
+        "resource": "awscc_appsync_api",
+        "identifier": ["ApiArn"],
+        "path": "./examples/resources/awscc_appsync_api/import.sh"
     },
     {
         "resource": "awscc_appsync_data_source",
@@ -1183,6 +1193,11 @@
         "resource": "awscc_customerprofiles_object_type",
         "identifier": ["DomainName","ObjectTypeName"],
         "path": "./examples/resources/awscc_customerprofiles_object_type/import.sh"
+    },
+    {
+        "resource": "awscc_dms_data_migration",
+        "identifier": ["DataMigrationArn"],
+        "path": "./examples/resources/awscc_dms_data_migration/import.sh"
     },
     {
         "resource": "awscc_dms_data_provider",
@@ -3785,6 +3800,11 @@
         "path": "./examples/resources/awscc_opensearchserverless_vpc_endpoint/import.sh"
     },
     {
+        "resource": "awscc_opensearchservice_application",
+        "identifier": ["Name"],
+        "path": "./examples/resources/awscc_opensearchservice_application/import.sh"
+    },
+    {
         "resource": "awscc_opensearchservice_domain",
         "identifier": ["DomainName"],
         "path": "./examples/resources/awscc_opensearchservice_domain/import.sh"
@@ -4793,6 +4813,11 @@
         "resource": "awscc_secretsmanager_resource_policy",
         "identifier": ["Id"],
         "path": "./examples/resources/awscc_secretsmanager_resource_policy/import.sh"
+    },
+    {
+        "resource": "awscc_secretsmanager_rotation_schedule",
+        "identifier": ["Id"],
+        "path": "./examples/resources/awscc_secretsmanager_rotation_schedule/import.sh"
     },
     {
         "resource": "awscc_secretsmanager_secret",
