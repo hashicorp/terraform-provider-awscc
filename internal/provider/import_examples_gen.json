@@ -4266,7 +4266,7 @@
     },
     {
         "resource": "awscc_route53_record_set",
-        "identifier": ["Name","HostedZoneId","Type","SetIdentifier"],
+        "identifier": ["Id"],
         "path": "./examples/resources/awscc_route53_record_set/import.sh"
     },
     {
