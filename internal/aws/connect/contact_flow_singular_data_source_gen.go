@@ -168,7 +168,8 @@ func contactFlowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "AGENT_WHISPER",
 		//	    "OUTBOUND_WHISPER",
 		//	    "AGENT_TRANSFER",
-		//	    "QUEUE_TRANSFER"
+		//	    "QUEUE_TRANSFER",
+		//	    "CAMPAIGN"
 		//	  ],
 		//	  "type": "string"
 		//	}

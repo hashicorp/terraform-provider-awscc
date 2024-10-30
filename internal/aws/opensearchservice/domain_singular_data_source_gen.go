@@ -631,6 +631,85 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: IdentityCenterOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Options for configuring Identity Center",
+		//	  "properties": {
+		//	    "EnabledAPIAccess": {
+		//	      "description": "Whether Identity Center is enabled.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "IdentityCenterApplicationARN": {
+		//	      "description": "The ARN of the Identity Center application.",
+		//	      "type": "string"
+		//	    },
+		//	    "IdentityCenterInstanceARN": {
+		//	      "description": "The ARN of the Identity Center instance.",
+		//	      "type": "string"
+		//	    },
+		//	    "IdentityStoreId": {
+		//	      "description": "The IdentityStoreId for Identity Center options.",
+		//	      "type": "string"
+		//	    },
+		//	    "RolesKey": {
+		//	      "description": "The roles key for Identity Center options.",
+		//	      "enum": [
+		//	        "GroupName",
+		//	        "GroupId"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "SubjectKey": {
+		//	      "description": "The subject key for Identity Center options.",
+		//	      "enum": [
+		//	        "UserName",
+		//	        "UserId",
+		//	        "Email"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"identity_center_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EnabledAPIAccess
+				"enabled_api_access": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether Identity Center is enabled.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IdentityCenterApplicationARN
+				"identity_center_application_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the Identity Center application.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IdentityCenterInstanceARN
+				"identity_center_instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the Identity Center instance.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IdentityStoreId
+				"identity_store_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The IdentityStoreId for Identity Center options.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RolesKey
+				"roles_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The roles key for Identity Center options.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SubjectKey
+				"subject_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The subject key for Identity Center options.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Options for configuring Identity Center",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LogPublishingOptions
 		// CloudFormation resource type schema:
 		//
@@ -1013,12 +1092,17 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"ebs_enabled":                     "EBSEnabled",
 		"ebs_options":                     "EBSOptions",
 		"enabled":                         "Enabled",
+		"enabled_api_access":              "EnabledAPIAccess",
 		"encryption_at_rest_options":      "EncryptionAtRestOptions",
 		"enforce_https":                   "EnforceHTTPS",
 		"engine_version":                  "EngineVersion",
 		"entity_id":                       "EntityId",
 		"hours":                           "Hours",
+		"identity_center_application_arn": "IdentityCenterApplicationARN",
+		"identity_center_instance_arn":    "IdentityCenterInstanceARN",
+		"identity_center_options":         "IdentityCenterOptions",
 		"identity_pool_id":                "IdentityPoolId",
+		"identity_store_id":               "IdentityStoreId",
 		"idp":                             "Idp",
 		"instance_count":                  "InstanceCount",
 		"instance_type":                   "InstanceType",

@@ -57,14 +57,14 @@ func studioLifecycleConfigDataSource(ctx context.Context) (datasource.DataSource
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The content of your Amazon SageMaker Studio Lifecycle Configuration script.",
+		//	  "description": "The content of your Amazon SageMaker Studio Lifecycle Configuration script. This content must be base64 encoded.",
 		//	  "maxLength": 16384,
 		//	  "minLength": 1,
 		//	  "pattern": "[\\S\\s]+",
 		//	  "type": "string"
 		//	}
 		"studio_lifecycle_config_content": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The content of your Amazon SageMaker Studio Lifecycle Configuration script.",
+			Description: "The content of your Amazon SageMaker Studio Lifecycle Configuration script. This content must be base64 encoded.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: StudioLifecycleConfigName
@@ -85,7 +85,7 @@ func studioLifecycleConfigDataSource(ctx context.Context) (datasource.DataSource
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Tags to be associated with the Lifecycle Configuration.",
+		//	  "description": "Tags to be associated with the Lifecycle Configuration. Each tag consists of a key and an optional value. Tag keys must be unique per resource. Tags are searchable using the Search API.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
@@ -125,7 +125,7 @@ func studioLifecycleConfigDataSource(ctx context.Context) (datasource.DataSource
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "Tags to be associated with the Lifecycle Configuration.",
+			Description: "Tags to be associated with the Lifecycle Configuration. Each tag consists of a key and an optional value. Tag keys must be unique per resource. Tags are searchable using the Search API.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

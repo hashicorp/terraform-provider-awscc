@@ -84,7 +84,7 @@ func firewallPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "additionalProperties": false,
 		//	          "properties": {
 		//	            "TcpIdleTimeoutSeconds": {
-		//	              "maximum": 600,
+		//	              "maximum": 6000,
 		//	              "minimum": 60,
 		//	              "type": "integer"
 		//	            }

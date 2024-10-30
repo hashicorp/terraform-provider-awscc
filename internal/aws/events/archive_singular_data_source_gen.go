@@ -29,6 +29,7 @@ func archiveDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "maxLength": 48,
 		//	  "minLength": 1,
+		//	  "pattern": "[\\.\\-_A-Za-z0-9]+",
 		//	  "type": "string"
 		//	}
 		"archive_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -38,6 +39,7 @@ func archiveDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "pattern": "^arn:aws([a-z]|\\-)*:events:([a-z]|\\d|\\-)*:([0-9]{12})?:.+\\/.+$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/

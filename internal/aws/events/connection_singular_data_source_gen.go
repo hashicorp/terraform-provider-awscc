@@ -27,6 +27,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The arn of the connection resource.",
+		//	  "pattern": "^arn:aws([a-z]|\\-)*:events:([a-z]|\\d|\\-)*:([0-9]{12})?:connection\\/[\\.\\-_A-Za-z0-9]+\\/[\\-A-Za-z0-9]+$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -60,9 +61,11 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "additionalProperties": false,
 		//	      "properties": {
 		//	        "ApiKeyName": {
+		//	          "pattern": "^[ \\t]*[^\\x00-\\x1F\\x7F]+([ \\t]+[^\\x00-\\x1F\\x7F]+)*[ \\t]*$",
 		//	          "type": "string"
 		//	        },
 		//	        "ApiKeyValue": {
+		//	          "pattern": "^[ \\t]*[^\\x00-\\x1F\\x7F]+([ \\t]+[^\\x00-\\x1F\\x7F]+)*[ \\t]*$",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -76,9 +79,11 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "additionalProperties": false,
 		//	      "properties": {
 		//	        "Password": {
+		//	          "pattern": "^[ \\t]*[^\\x00-\\x1F\\x7F]+([ \\t]+[^\\x00-\\x1F\\x7F]+)*[ \\t]*$",
 		//	          "type": "string"
 		//	        },
 		//	        "Username": {
+		//	          "pattern": "^[ \\t]*[^\\x00-\\x1F\\x7F]+([ \\t]+[^\\x00-\\x1F\\x7F]+)*[ \\t]*$",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -169,15 +174,18 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "AuthorizationEndpoint": {
 		//	          "maxLength": 2048,
 		//	          "minLength": 1,
+		//	          "pattern": "^((%[0-9A-Fa-f]{2}|[-()_.!~*';/?:@\\x26=+$,A-Za-z0-9])+)([).!';/?:,])?$",
 		//	          "type": "string"
 		//	        },
 		//	        "ClientParameters": {
 		//	          "additionalProperties": false,
 		//	          "properties": {
 		//	            "ClientID": {
+		//	              "pattern": "^[ \\t]*[^\\x00-\\x1F\\x7F]+([ \\t]+[^\\x00-\\x1F\\x7F]+)*[ \\t]*$",
 		//	              "type": "string"
 		//	            },
 		//	            "ClientSecret": {
+		//	              "pattern": "^[ \\t]*[^\\x00-\\x1F\\x7F]+([ \\t]+[^\\x00-\\x1F\\x7F]+)*[ \\t]*$",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -507,6 +515,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Name of the connection.",
 		//	  "maxLength": 64,
 		//	  "minLength": 1,
+		//	  "pattern": "[\\.\\-_A-Za-z0-9]+",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -518,6 +527,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The arn of the secrets manager secret created in the customer account.",
+		//	  "pattern": "^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]|\\d|\\-)*:([0-9]{12})?:secret:[\\/_+=\\.@\\-A-Za-z0-9]+$",
 		//	  "type": "string"
 		//	}
 		"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
