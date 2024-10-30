@@ -849,9 +849,25 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 		//	          "Result": {
 		//	            "description": "The specified result for when the failure conditions are met, such as rolling back the stage",
 		//	            "enum": [
-		//	              "ROLLBACK"
+		//	              "ROLLBACK",
+		//	              "RETRY"
 		//	            ],
 		//	            "type": "string"
+		//	          },
+		//	          "RetryConfiguration": {
+		//	            "additionalProperties": false,
+		//	            "description": "The configuration that specifies the retry configuration for a stage",
+		//	            "properties": {
+		//	              "RetryMode": {
+		//	                "description": "The specified retry mode type for the given stage. FAILED_ACTIONS will retry only the failed actions. ALL_ACTIONS will retry both failed and successful",
+		//	                "enum": [
+		//	                  "ALL_ACTIONS",
+		//	                  "FAILED_ACTIONS"
+		//	                ],
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
 		//	          }
 		//	        },
 		//	        "type": "object"
@@ -1537,10 +1553,37 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"ROLLBACK",
+										"RETRY",
 									),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: RetryConfiguration
+							"retry_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: RetryMode
+									"retry_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The specified retry mode type for the given stage. FAILED_ACTIONS will retry only the failed actions. ALL_ACTIONS will retry both failed and successful",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"ALL_ACTIONS",
+												"FAILED_ACTIONS",
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "The configuration that specifies the retry configuration for a stage",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -2408,6 +2451,8 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 		"region":                            "Region",
 		"restart_execution_on_update":       "RestartExecutionOnUpdate",
 		"result":                            "Result",
+		"retry_configuration":               "RetryConfiguration",
+		"retry_mode":                        "RetryMode",
 		"role_arn":                          "RoleArn",
 		"rule_type_id":                      "RuleTypeId",
 		"rules":                             "Rules",

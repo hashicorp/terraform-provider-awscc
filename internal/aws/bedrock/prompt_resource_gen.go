@@ -242,12 +242,6 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 		//	                "minimum": 0,
 		//	                "type": "number"
 		//	              },
-		//	              "TopK": {
-		//	                "description": "Sample from the k most likely next tokens",
-		//	                "maximum": 500,
-		//	                "minimum": 0,
-		//	                "type": "number"
-		//	              },
 		//	              "TopP": {
 		//	                "description": "Cumulative probability cutoff for token selection",
 		//	                "maximum": 1,
@@ -261,10 +255,10 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "object"
 		//	      },
 		//	      "ModelId": {
-		//	        "description": "ARN or name of a Bedrock model.",
+		//	        "description": "ARN or Id of a Bedrock Foundational Model or Inference Profile, or the ARN of a imported model, or a provisioned throughput ARN for custom models.",
 		//	        "maxLength": 2048,
 		//	        "minLength": 1,
-		//	        "pattern": "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|([0-9]{12}:provisioned-model/[a-z0-9]{12})))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|(([0-9a-zA-Z][_-]?)+)$",
+		//	        "pattern": "^(arn:aws(-[^:]{1,12})?:bedrock:[a-z0-9-]{1,20}:([0-9]{12})?:([a-z-]+/)?)?([a-zA-Z0-9.-]{1,63}){0,2}(([:][a-z0-9-]{1,63}){0,2})?(/[a-z0-9]{1,12})?$",
 		//	        "type": "string"
 		//	      },
 		//	      "Name": {
@@ -350,11 +344,12 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "required": [
 		//	      "Name",
-		//	      "TemplateType"
+		//	      "TemplateType",
+		//	      "TemplateConfiguration"
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "maxItems": 3,
+		//	  "maxItems": 1,
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
@@ -404,18 +399,6 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 											float64planmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
-									// Property: TopK
-									"top_k": schema.Float64Attribute{ /*START ATTRIBUTE*/
-										Description: "Sample from the k most likely next tokens",
-										Optional:    true,
-										Computed:    true,
-										Validators: []validator.Float64{ /*START VALIDATORS*/
-											float64validator.Between(0.000000, 500.000000),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-											float64planmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
 									// Property: TopP
 									"top_p": schema.Float64Attribute{ /*START ATTRIBUTE*/
 										Description: "Cumulative probability cutoff for token selection",
@@ -446,12 +429,12 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: ModelId
 					"model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "ARN or name of a Bedrock model.",
+						Description: "ARN or Id of a Bedrock Foundational Model or Inference Profile, or the ARN of a imported model, or a provisioned throughput ARN for custom models.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 2048),
-							stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|([0-9]{12}:provisioned-model/[a-z0-9]{12})))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|(([0-9a-zA-Z][_-]?)+)$"), ""),
+							stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws(-[^:]{1,12})?:bedrock:[a-z0-9-]{1,20}:([0-9]{12})?:([a-z-]+/)?)?([a-zA-Z0-9.-]{1,63}){0,2}(([:][a-z0-9-]{1,63}){0,2})?(/[a-z0-9]{1,12})?$"), ""),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -578,6 +561,9 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 						Description: "Prompt template configuration",
 						Optional:    true,
 						Computed:    true,
+						Validators: []validator.Object{ /*START VALIDATORS*/
+							fwvalidators.NotNullObject(),
+						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
@@ -603,7 +589,7 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeBetween(0, 3),
+				listvalidator.SizeBetween(0, 1),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
@@ -668,7 +654,6 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 		"template_type":               "TemplateType",
 		"text":                        "Text",
 		"text_s3_location":            "TextS3Location",
-		"top_k":                       "TopK",
 		"top_p":                       "TopP",
 		"updated_at":                  "UpdatedAt",
 		"variants":                    "Variants",

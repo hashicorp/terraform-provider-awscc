@@ -229,7 +229,8 @@ func contactFlowResource(ctx context.Context) (resource.Resource, error) {
 		//	    "AGENT_WHISPER",
 		//	    "OUTBOUND_WHISPER",
 		//	    "AGENT_TRANSFER",
-		//	    "QUEUE_TRANSFER"
+		//	    "QUEUE_TRANSFER",
+		//	    "CAMPAIGN"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -247,6 +248,7 @@ func contactFlowResource(ctx context.Context) (resource.Resource, error) {
 					"OUTBOUND_WHISPER",
 					"AGENT_TRANSFER",
 					"QUEUE_TRANSFER",
+					"CAMPAIGN",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

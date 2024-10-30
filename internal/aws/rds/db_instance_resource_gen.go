@@ -1122,9 +1122,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
-			// Port is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: PreferredBackupWindow
 		// CloudFormation resource type schema:
@@ -1704,7 +1702,6 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/DBSnapshotIdentifier",
 		"/properties/DeleteAutomatedBackups",
 		"/properties/MasterUserPassword",
-		"/properties/Port",
 		"/properties/RestoreTime",
 		"/properties/SourceDBInstanceAutomatedBackupsArn",
 		"/properties/SourceDBInstanceIdentifier",

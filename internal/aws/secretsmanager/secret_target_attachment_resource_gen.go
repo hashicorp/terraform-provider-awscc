@@ -44,6 +44,9 @@ func secretTargetAttachmentResource(ctx context.Context) (resource.Resource, err
 		//	}
 		"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: TargetId
 		// CloudFormation resource type schema:

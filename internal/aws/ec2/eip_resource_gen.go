@@ -27,6 +27,23 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::EC2::EIP resource.
 func eIPResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Address
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"address": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// Address is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: AllocationId
 		// CloudFormation resource type schema:
 		//
@@ -71,6 +88,23 @@ func eIPResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: IpamPoolId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"ipam_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// IpamPoolId is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: NetworkBorderGroup
 		// CloudFormation resource type schema:
@@ -221,9 +255,11 @@ func eIPResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::EIP").WithTerraformTypeName("awscc_ec2_eip")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"address":              "Address",
 		"allocation_id":        "AllocationId",
 		"domain":               "Domain",
 		"instance_id":          "InstanceId",
+		"ipam_pool_id":         "IpamPoolId",
 		"key":                  "Key",
 		"network_border_group": "NetworkBorderGroup",
 		"public_ip":            "PublicIp",
@@ -235,6 +271,8 @@ func eIPResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/TransferAddress",
+		"/properties/IpamPoolId",
+		"/properties/Address",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
