@@ -79,14 +79,14 @@ func studioLifecycleConfigResource(ctx context.Context) (resource.Resource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The content of your Amazon SageMaker Studio Lifecycle Configuration script.",
+		//	  "description": "The content of your Amazon SageMaker Studio Lifecycle Configuration script. This content must be base64 encoded.",
 		//	  "maxLength": 16384,
 		//	  "minLength": 1,
 		//	  "pattern": "[\\S\\s]+",
 		//	  "type": "string"
 		//	}
 		"studio_lifecycle_config_content": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The content of your Amazon SageMaker Studio Lifecycle Configuration script.",
+			Description: "The content of your Amazon SageMaker Studio Lifecycle Configuration script. This content must be base64 encoded.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 16384),
@@ -121,7 +121,7 @@ func studioLifecycleConfigResource(ctx context.Context) (resource.Resource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Tags to be associated with the Lifecycle Configuration.",
+		//	  "description": "Tags to be associated with the Lifecycle Configuration. Each tag consists of a key and an optional value. Tag keys must be unique per resource. Tags are searchable using the Search API.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
@@ -177,7 +177,7 @@ func studioLifecycleConfigResource(ctx context.Context) (resource.Resource, erro
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "Tags to be associated with the Lifecycle Configuration.",
+			Description: "Tags to be associated with the Lifecycle Configuration. Each tag consists of a key and an optional value. Tag keys must be unique per resource. Tags are searchable using the Search API.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/

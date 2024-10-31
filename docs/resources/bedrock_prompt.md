@@ -79,7 +79,7 @@ resource "awscc_bedrock_prompt" "example" {
 Optional:
 
 - `inference_configuration` (Attributes) Model inference configuration (see [below for nested schema](#nestedatt--variants--inference_configuration))
-- `model_id` (String) ARN or name of a Bedrock model.
+- `model_id` (String) ARN or Id of a Bedrock Foundational Model or Inference Profile, or the ARN of a imported model, or a provisioned throughput ARN for custom models.
 - `name` (String) Name for a variant.
 - `template_configuration` (Attributes) Prompt template configuration (see [below for nested schema](#nestedatt--variants--template_configuration))
 - `template_type` (String) Prompt template type
@@ -99,7 +99,6 @@ Optional:
 - `max_tokens` (Number) Maximum length of output
 - `stop_sequences` (List of String) List of stop sequences
 - `temperature` (Number) Controls randomness, higher values increase diversity
-- `top_k` (Number) Sample from the k most likely next tokens
 - `top_p` (Number) Cumulative probability cutoff for token selection
 
 

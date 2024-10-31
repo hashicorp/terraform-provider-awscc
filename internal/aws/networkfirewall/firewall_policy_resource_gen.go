@@ -105,7 +105,7 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	          "additionalProperties": false,
 		//	          "properties": {
 		//	            "TcpIdleTimeoutSeconds": {
-		//	              "maximum": 600,
+		//	              "maximum": 6000,
 		//	              "minimum": 60,
 		//	              "type": "integer"
 		//	            }
@@ -341,7 +341,7 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 									Optional: true,
 									Computed: true,
 									Validators: []validator.Int64{ /*START VALIDATORS*/
-										int64validator.Between(60, 600),
+										int64validator.Between(60, 6000),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 										int64planmodifier.UseStateForUnknown(),

@@ -146,8 +146,18 @@ Read-Only:
 
 Read-Only:
 
+- `guardrail_configuration` (Attributes) Configuration for a guardrail (see [below for nested schema](#nestedatt--definition--nodes--configuration--knowledge_base--guardrail_configuration))
 - `knowledge_base_id` (String) Identifier of the KnowledgeBase
-- `model_id` (String) ARN or name of a Bedrock model.
+- `model_id` (String) ARN or Id of a Bedrock Foundational Model or Inference Profile, or the ARN of a imported model, or a provisioned throughput ARN for custom models.
+
+<a id="nestedatt--definition--nodes--configuration--knowledge_base--guardrail_configuration"></a>
+### Nested Schema for `definition.nodes.configuration.knowledge_base.guardrail_configuration`
+
+Read-Only:
+
+- `guardrail_identifier` (String) Identifier for the guardrail, could be the id or the arn
+- `guardrail_version` (String) Version of the guardrail
+
 
 
 <a id="nestedatt--definition--nodes--configuration--lambda_function"></a>
@@ -172,7 +182,17 @@ Read-Only:
 
 Read-Only:
 
+- `guardrail_configuration` (Attributes) Configuration for a guardrail (see [below for nested schema](#nestedatt--definition--nodes--configuration--prompt--guardrail_configuration))
 - `source_configuration` (Attributes) Prompt source configuration for prompt node (see [below for nested schema](#nestedatt--definition--nodes--configuration--prompt--source_configuration))
+
+<a id="nestedatt--definition--nodes--configuration--prompt--guardrail_configuration"></a>
+### Nested Schema for `definition.nodes.configuration.prompt.guardrail_configuration`
+
+Read-Only:
+
+- `guardrail_identifier` (String) Identifier for the guardrail, could be the id or the arn
+- `guardrail_version` (String) Version of the guardrail
+
 
 <a id="nestedatt--definition--nodes--configuration--prompt--source_configuration"></a>
 ### Nested Schema for `definition.nodes.configuration.prompt.source_configuration`
@@ -188,7 +208,7 @@ Read-Only:
 Read-Only:
 
 - `inference_configuration` (Attributes) Model inference configuration (see [below for nested schema](#nestedatt--definition--nodes--configuration--prompt--source_configuration--inline--inference_configuration))
-- `model_id` (String) ARN or name of a Bedrock model.
+- `model_id` (String) ARN or Id of a Bedrock Foundational Model or Inference Profile, or the ARN of a imported model, or a provisioned throughput ARN for custom models.
 - `template_configuration` (Attributes) Prompt template configuration (see [below for nested schema](#nestedatt--definition--nodes--configuration--prompt--source_configuration--inline--template_configuration))
 - `template_type` (String) Prompt template type
 
@@ -207,7 +227,6 @@ Read-Only:
 - `max_tokens` (Number) Maximum length of output
 - `stop_sequences` (List of String) List of stop sequences
 - `temperature` (Number) Controls randomness, higher values increase diversity
-- `top_k` (Number) Sample from the k most likely next tokens
 - `top_p` (Number) Cumulative probability cutoff for token selection
 
 

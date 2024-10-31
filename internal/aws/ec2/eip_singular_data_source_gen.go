@@ -22,6 +22,17 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::EC2::EIP resource.
 func eIPDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Address
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"address": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AllocationId
 		// CloudFormation resource type schema:
 		//
@@ -53,6 +64,17 @@ func eIPDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the instance.\n  Updates to the ``InstanceId`` property may require *some interruptions*. Updates on an EIP reassociates the address on its associated resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: IpamPoolId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"ipam_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NetworkBorderGroup
@@ -162,9 +184,11 @@ func eIPDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::EIP").WithTerraformTypeName("awscc_ec2_eip")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"address":              "Address",
 		"allocation_id":        "AllocationId",
 		"domain":               "Domain",
 		"instance_id":          "InstanceId",
+		"ipam_pool_id":         "IpamPoolId",
 		"key":                  "Key",
 		"network_border_group": "NetworkBorderGroup",
 		"public_ip":            "PublicIp",

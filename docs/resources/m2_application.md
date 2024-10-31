@@ -17,12 +17,12 @@ Represents an application that runs on an AWS Mainframe Modernization Environmen
 
 ### Required
 
-- `definition` (Attributes) (see [below for nested schema](#nestedatt--definition))
 - `engine_type` (String)
 - `name` (String)
 
 ### Optional
 
+- `definition` (Attributes) (see [below for nested schema](#nestedatt--definition))
 - `description` (String)
 - `kms_key_id` (String) The ID or the Amazon Resource Name (ARN) of the customer managed KMS Key used for encrypting application-related resources.
 - `role_arn` (String)

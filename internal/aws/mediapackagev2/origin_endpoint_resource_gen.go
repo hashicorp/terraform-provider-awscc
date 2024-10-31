@@ -16,6 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
@@ -159,6 +160,11 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	        "additionalProperties": false,
 		//	        "description": "\u003cp\u003eFilter configuration includes settings for manifest filtering, start and end times, and time delay that apply to all of your egress requests for this manifest. \u003c/p\u003e",
 		//	        "properties": {
+		//	          "ClipStartTime": {
+		//	            "description": "\u003cp\u003eOptionally specify the clip start time for all of your manifest egress requests. When you include clip start time, note that you cannot use clip start time query parameters for this manifest's endpoint URL.\u003c/p\u003e",
+		//	            "format": "date-time",
+		//	            "type": "string"
+		//	          },
 		//	          "End": {
 		//	            "description": "\u003cp\u003eOptionally specify the end time for all of your manifest egress requests. When you include end time, note that you cannot use end time query parameters for this manifest's endpoint URL.\u003c/p\u003e",
 		//	            "format": "date-time",
@@ -293,6 +299,16 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 					// Property: FilterConfiguration
 					"filter_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ClipStartTime
+							"clip_start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+								CustomType:  timetypes.RFC3339Type{},
+								Description: "<p>Optionally specify the clip start time for all of your manifest egress requests. When you include clip start time, note that you cannot use clip start time query parameters for this manifest's endpoint URL.</p>",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: End
 							"end": schema.StringAttribute{ /*START ATTRIBUTE*/
 								CustomType:  timetypes.RFC3339Type{},
@@ -612,6 +628,11 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	        "additionalProperties": false,
 		//	        "description": "\u003cp\u003eFilter configuration includes settings for manifest filtering, start and end times, and time delay that apply to all of your egress requests for this manifest. \u003c/p\u003e",
 		//	        "properties": {
+		//	          "ClipStartTime": {
+		//	            "description": "\u003cp\u003eOptionally specify the clip start time for all of your manifest egress requests. When you include clip start time, note that you cannot use clip start time query parameters for this manifest's endpoint URL.\u003c/p\u003e",
+		//	            "format": "date-time",
+		//	            "type": "string"
+		//	          },
 		//	          "End": {
 		//	            "description": "\u003cp\u003eOptionally specify the end time for all of your manifest egress requests. When you include end time, note that you cannot use end time query parameters for this manifest's endpoint URL.\u003c/p\u003e",
 		//	            "format": "date-time",
@@ -665,6 +686,24 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "type": "object"
 		//	      },
+		//	      "StartTag": {
+		//	        "additionalProperties": false,
+		//	        "description": "\u003cp\u003eTo insert an EXT-X-START tag in your HLS playlist, specify a StartTag configuration object with a valid TimeOffset. When you do, you can also optionally specify whether to include a PRECISE value in the EXT-X-START tag.\u003c/p\u003e",
+		//	        "properties": {
+		//	          "Precise": {
+		//	            "description": "\u003cp\u003eSpecify the value for PRECISE within your EXT-X-START tag. Leave blank, or choose false, to use the default value NO. Choose yes to use the value YES.\u003c/p\u003e",
+		//	            "type": "boolean"
+		//	          },
+		//	          "TimeOffset": {
+		//	            "description": "\u003cp\u003eSpecify the value for TIME-OFFSET within your EXT-X-START tag. Enter a signed floating point value which, if positive, must be less than the configured manifest duration minus three times the configured segment target duration. If negative, the absolute value must be larger than three times the configured segment target duration, and the absolute value must be smaller than the configured manifest duration.\u003c/p\u003e",
+		//	            "type": "number"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "TimeOffset"
+		//	        ],
+		//	        "type": "object"
+		//	      },
 		//	      "Url": {
 		//	        "description": "\u003cp\u003eThe egress domain URL for stream delivery from MediaPackage.\u003c/p\u003e",
 		//	        "type": "string"
@@ -696,6 +735,16 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 					// Property: FilterConfiguration
 					"filter_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ClipStartTime
+							"clip_start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+								CustomType:  timetypes.RFC3339Type{},
+								Description: "<p>Optionally specify the clip start time for all of your manifest egress requests. When you include clip start time, note that you cannot use clip start time query parameters for this manifest's endpoint URL.</p>",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: End
 							"end": schema.StringAttribute{ /*START ATTRIBUTE*/
 								CustomType:  timetypes.RFC3339Type{},
@@ -798,6 +847,38 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "<p>The SCTE configuration.</p>",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: StartTag
+					"start_tag": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Precise
+							"precise": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Specify the value for PRECISE within your EXT-X-START tag. Leave blank, or choose false, to use the default value NO. Choose yes to use the value YES.</p>",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+									boolplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: TimeOffset
+							"time_offset": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "<p>Specify the value for TIME-OFFSET within your EXT-X-START tag. Enter a signed floating point value which, if positive, must be less than the configured manifest duration minus three times the configured segment target duration. If negative, the absolute value must be larger than three times the configured segment target duration, and the absolute value must be smaller than the configured manifest duration.</p>",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.Float64{ /*START VALIDATORS*/
+									fwvalidators.NotNullFloat64(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+									float64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>To insert an EXT-X-START tag in your HLS playlist, specify a StartTag configuration object with a valid TimeOffset. When you do, you can also optionally specify whether to include a PRECISE value in the EXT-X-START tag.</p>",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -858,6 +939,11 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	        "additionalProperties": false,
 		//	        "description": "\u003cp\u003eFilter configuration includes settings for manifest filtering, start and end times, and time delay that apply to all of your egress requests for this manifest. \u003c/p\u003e",
 		//	        "properties": {
+		//	          "ClipStartTime": {
+		//	            "description": "\u003cp\u003eOptionally specify the clip start time for all of your manifest egress requests. When you include clip start time, note that you cannot use clip start time query parameters for this manifest's endpoint URL.\u003c/p\u003e",
+		//	            "format": "date-time",
+		//	            "type": "string"
+		//	          },
 		//	          "End": {
 		//	            "description": "\u003cp\u003eOptionally specify the end time for all of your manifest egress requests. When you include end time, note that you cannot use end time query parameters for this manifest's endpoint URL.\u003c/p\u003e",
 		//	            "format": "date-time",
@@ -911,6 +997,24 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "type": "object"
 		//	      },
+		//	      "StartTag": {
+		//	        "additionalProperties": false,
+		//	        "description": "\u003cp\u003eTo insert an EXT-X-START tag in your HLS playlist, specify a StartTag configuration object with a valid TimeOffset. When you do, you can also optionally specify whether to include a PRECISE value in the EXT-X-START tag.\u003c/p\u003e",
+		//	        "properties": {
+		//	          "Precise": {
+		//	            "description": "\u003cp\u003eSpecify the value for PRECISE within your EXT-X-START tag. Leave blank, or choose false, to use the default value NO. Choose yes to use the value YES.\u003c/p\u003e",
+		//	            "type": "boolean"
+		//	          },
+		//	          "TimeOffset": {
+		//	            "description": "\u003cp\u003eSpecify the value for TIME-OFFSET within your EXT-X-START tag. Enter a signed floating point value which, if positive, must be less than the configured manifest duration minus three times the configured segment target duration. If negative, the absolute value must be larger than three times the configured segment target duration, and the absolute value must be smaller than the configured manifest duration.\u003c/p\u003e",
+		//	            "type": "number"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "TimeOffset"
+		//	        ],
+		//	        "type": "object"
+		//	      },
 		//	      "Url": {
 		//	        "description": "\u003cp\u003eThe egress domain URL for stream delivery from MediaPackage.\u003c/p\u003e",
 		//	        "type": "string"
@@ -942,6 +1046,16 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 					// Property: FilterConfiguration
 					"filter_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ClipStartTime
+							"clip_start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+								CustomType:  timetypes.RFC3339Type{},
+								Description: "<p>Optionally specify the clip start time for all of your manifest egress requests. When you include clip start time, note that you cannot use clip start time query parameters for this manifest's endpoint URL.</p>",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: End
 							"end": schema.StringAttribute{ /*START ATTRIBUTE*/
 								CustomType:  timetypes.RFC3339Type{},
@@ -1044,6 +1158,38 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "<p>The SCTE configuration.</p>",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: StartTag
+					"start_tag": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Precise
+							"precise": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Specify the value for PRECISE within your EXT-X-START tag. Leave blank, or choose false, to use the default value NO. Choose yes to use the value YES.</p>",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+									boolplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: TimeOffset
+							"time_offset": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "<p>Specify the value for TIME-OFFSET within your EXT-X-START tag. Enter a signed floating point value which, if positive, must be less than the configured manifest duration minus three times the configured segment target duration. If negative, the absolute value must be larger than three times the configured segment target duration, and the absolute value must be smaller than the configured manifest duration.</p>",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.Float64{ /*START VALIDATORS*/
+									fwvalidators.NotNullFloat64(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+									float64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>To insert an EXT-X-START tag in your HLS playlist, specify a StartTag configuration object with a valid TimeOffset. When you do, you can also optionally specify whether to include a PRECISE value in the EXT-X-START tag.</p>",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1699,6 +1845,7 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		"channel_group_name":                   "ChannelGroupName",
 		"channel_name":                         "ChannelName",
 		"child_manifest_name":                  "ChildManifestName",
+		"clip_start_time":                      "ClipStartTime",
 		"cmaf_encryption_method":               "CmafEncryptionMethod",
 		"constant_initialization_vector":       "ConstantInitializationVector",
 		"container_type":                       "ContainerType",
@@ -1730,6 +1877,7 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		"modified_at":                          "ModifiedAt",
 		"origin_endpoint_name":                 "OriginEndpointName",
 		"period_triggers":                      "PeriodTriggers",
+		"precise":                              "Precise",
 		"preset_speke_20_audio":                "PresetSpeke20Audio",
 		"preset_speke_20_video":                "PresetSpeke20Video",
 		"program_date_time_interval_seconds":   "ProgramDateTimeIntervalSeconds",
@@ -1745,10 +1893,12 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		"segment_template_format":              "SegmentTemplateFormat",
 		"speke_key_provider":                   "SpekeKeyProvider",
 		"start":                                "Start",
+		"start_tag":                            "StartTag",
 		"startover_window_seconds":             "StartoverWindowSeconds",
 		"suggested_presentation_delay_seconds": "SuggestedPresentationDelaySeconds",
 		"tags":                                 "Tags",
 		"time_delay_seconds":                   "TimeDelaySeconds",
+		"time_offset":                          "TimeOffset",
 		"timing_mode":                          "TimingMode",
 		"timing_source":                        "TimingSource",
 		"ts_encryption_method":                 "TsEncryptionMethod",

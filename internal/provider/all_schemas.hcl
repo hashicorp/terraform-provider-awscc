@@ -255,6 +255,10 @@ resource_schema "aws_appconfig_configuration_profile" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_appconfig_deployment_strategy" {
+  cloudformation_type_name = "AWS::AppConfig::DeploymentStrategy"
+}
+
 resource_schema "aws_appconfig_environment" {
   cloudformation_type_name               = "AWS::AppConfig::Environment"
   suppress_plural_data_source_generation = true
@@ -369,6 +373,10 @@ resource_schema "aws_appstream_entitlement" {
 
 resource_schema "aws_appstream_image_builder" {
   cloudformation_type_name = "AWS::AppStream::ImageBuilder"
+}
+
+resource_schema "aws_appsync_api" {
+  cloudformation_type_name = "AWS::AppSync::Api"
 }
 
 resource_schema "aws_appsync_data_source" {
@@ -1200,6 +1208,10 @@ resource_schema "aws_customerprofiles_integration" {
 resource_schema "aws_customerprofiles_object_type" {
   cloudformation_type_name               = "AWS::CustomerProfiles::ObjectType"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_dms_data_migration" {
+  cloudformation_type_name = "AWS::DMS::DataMigration"
 }
 
 resource_schema "aws_dms_data_provider" {
@@ -3494,6 +3506,10 @@ resource_schema "aws_opensearchserverless_vpc_endpoint" {
   cloudformation_type_name = "AWS::OpenSearchServerless::VpcEndpoint"
 }
 
+resource_schema "aws_opensearchservice_application" {
+  cloudformation_type_name = "AWS::OpenSearchService::Application"
+}
+
 resource_schema "aws_opensearchservice_domain" {
   cloudformation_type_name               = "AWS::OpenSearchService::Domain"
   suppress_plural_data_source_generation = true
@@ -4389,6 +4405,10 @@ resource_schema "aws_scheduler_schedule_group" {
 
 resource_schema "aws_secretsmanager_resource_policy" {
   cloudformation_type_name = "AWS::SecretsManager::ResourcePolicy"
+}
+
+resource_schema "aws_secretsmanager_rotation_schedule" {
+  cloudformation_type_name = "AWS::SecretsManager::RotationSchedule"
 }
 
 resource_schema "aws_secretsmanager_secret" {

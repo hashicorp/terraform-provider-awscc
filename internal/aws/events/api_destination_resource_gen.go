@@ -7,6 +7,7 @@ package events
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -33,6 +34,7 @@ func apiDestinationResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The arn of the api destination.",
+		//	  "pattern": "^arn:aws([a-z]|\\-)*:events:([a-z]|\\d|\\-)*:([0-9]{12})?:api-destination/[\\.\\-_A-Za-z0-9]+/[\\-A-Za-z0-9]+$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -47,11 +49,15 @@ func apiDestinationResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The arn of the connection.",
+		//	  "pattern": "^arn:aws([a-z]|\\-)*:events:([a-z]|\\d|\\-)*:([0-9]{12})?:connection/[\\.\\-_A-Za-z0-9]+/[\\-A-Za-z0-9]+$",
 		//	  "type": "string"
 		//	}
 		"connection_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The arn of the connection.",
 			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws([a-z]|\\-)*:events:([a-z]|\\d|\\-)*:([0-9]{12})?:connection/[\\.\\-_A-Za-z0-9]+/[\\-A-Za-z0-9]+$"), ""),
+			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
@@ -104,11 +110,15 @@ func apiDestinationResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "Url endpoint to invoke.",
+		//	  "pattern": "^((%[0-9A-Fa-f]{2}|[-()_.!~*';/?:@\\x26=+$,A-Za-z0-9])+)([).!';/?:,])?$",
 		//	  "type": "string"
 		//	}
 		"invocation_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Url endpoint to invoke.",
 			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^((%[0-9A-Fa-f]{2}|[-()_.!~*';/?:@\\x26=+$,A-Za-z0-9])+)([).!';/?:,])?$"), ""),
+			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: InvocationRateLimitPerSecond
 		// CloudFormation resource type schema:
@@ -134,6 +144,7 @@ func apiDestinationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Name of the apiDestination.",
 		//	  "maxLength": 64,
 		//	  "minLength": 1,
+		//	  "pattern": "[\\.\\-_A-Za-z0-9]+",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -142,6 +153,7 @@ func apiDestinationResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 64),
+				stringvalidator.RegexMatches(regexp.MustCompile("[\\.\\-_A-Za-z0-9]+"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),

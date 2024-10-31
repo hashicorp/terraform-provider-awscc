@@ -686,9 +686,25 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "Result": {
 		//	            "description": "The specified result for when the failure conditions are met, such as rolling back the stage",
 		//	            "enum": [
-		//	              "ROLLBACK"
+		//	              "ROLLBACK",
+		//	              "RETRY"
 		//	            ],
 		//	            "type": "string"
+		//	          },
+		//	          "RetryConfiguration": {
+		//	            "additionalProperties": false,
+		//	            "description": "The configuration that specifies the retry configuration for a stage",
+		//	            "properties": {
+		//	              "RetryMode": {
+		//	                "description": "The specified retry mode type for the given stage. FAILED_ACTIONS will retry only the failed actions. ALL_ACTIONS will retry both failed and successful",
+		//	                "enum": [
+		//	                  "ALL_ACTIONS",
+		//	                  "FAILED_ACTIONS"
+		//	                ],
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
 		//	          }
 		//	        },
 		//	        "type": "object"
@@ -1112,6 +1128,18 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 							// Property: Result
 							"result": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The specified result for when the failure conditions are met, such as rolling back the stage",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: RetryConfiguration
+							"retry_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: RetryMode
+									"retry_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The specified retry mode type for the given stage. FAILED_ACTIONS will retry only the failed actions. ALL_ACTIONS will retry both failed and successful",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "The configuration that specifies the retry configuration for a stage",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -1710,6 +1738,8 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"region":                            "Region",
 		"restart_execution_on_update":       "RestartExecutionOnUpdate",
 		"result":                            "Result",
+		"retry_configuration":               "RetryConfiguration",
+		"retry_mode":                        "RetryMode",
 		"role_arn":                          "RoleArn",
 		"rule_type_id":                      "RuleTypeId",
 		"rules":                             "Rules",

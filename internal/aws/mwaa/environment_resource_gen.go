@@ -624,7 +624,7 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "Maximum webserver compute units.",
-		//	  "minimum": 2,
+		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
 		"max_webservers": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -632,7 +632,7 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.Int64{ /*START VALIDATORS*/
-				int64validator.AtLeast(2),
+				int64validator.AtLeast(1),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -662,7 +662,7 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "Minimum webserver compute units.",
-		//	  "minimum": 2,
+		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
 		"min_webservers": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -670,7 +670,7 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.Int64{ /*START VALIDATORS*/
-				int64validator.AtLeast(2),
+				int64validator.AtLeast(1),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),

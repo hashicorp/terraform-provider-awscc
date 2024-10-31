@@ -7,6 +7,7 @@ package events
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -36,6 +37,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The arn of the connection resource.",
+		//	  "pattern": "^arn:aws([a-z]|\\-)*:events:([a-z]|\\d|\\-)*:([0-9]{12})?:connection\\/[\\.\\-_A-Za-z0-9]+\\/[\\-A-Za-z0-9]+$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -72,9 +74,11 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		//	      "additionalProperties": false,
 		//	      "properties": {
 		//	        "ApiKeyName": {
+		//	          "pattern": "^[ \\t]*[^\\x00-\\x1F\\x7F]+([ \\t]+[^\\x00-\\x1F\\x7F]+)*[ \\t]*$",
 		//	          "type": "string"
 		//	        },
 		//	        "ApiKeyValue": {
+		//	          "pattern": "^[ \\t]*[^\\x00-\\x1F\\x7F]+([ \\t]+[^\\x00-\\x1F\\x7F]+)*[ \\t]*$",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -88,9 +92,11 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		//	      "additionalProperties": false,
 		//	      "properties": {
 		//	        "Password": {
+		//	          "pattern": "^[ \\t]*[^\\x00-\\x1F\\x7F]+([ \\t]+[^\\x00-\\x1F\\x7F]+)*[ \\t]*$",
 		//	          "type": "string"
 		//	        },
 		//	        "Username": {
+		//	          "pattern": "^[ \\t]*[^\\x00-\\x1F\\x7F]+([ \\t]+[^\\x00-\\x1F\\x7F]+)*[ \\t]*$",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -181,15 +187,18 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		//	        "AuthorizationEndpoint": {
 		//	          "maxLength": 2048,
 		//	          "minLength": 1,
+		//	          "pattern": "^((%[0-9A-Fa-f]{2}|[-()_.!~*';/?:@\\x26=+$,A-Za-z0-9])+)([).!';/?:,])?$",
 		//	          "type": "string"
 		//	        },
 		//	        "ClientParameters": {
 		//	          "additionalProperties": false,
 		//	          "properties": {
 		//	            "ClientID": {
+		//	              "pattern": "^[ \\t]*[^\\x00-\\x1F\\x7F]+([ \\t]+[^\\x00-\\x1F\\x7F]+)*[ \\t]*$",
 		//	              "type": "string"
 		//	            },
 		//	            "ClientSecret": {
+		//	              "pattern": "^[ \\t]*[^\\x00-\\x1F\\x7F]+([ \\t]+[^\\x00-\\x1F\\x7F]+)*[ \\t]*$",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -303,6 +312,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^[ \\t]*[^\\x00-\\x1F\\x7F]+([ \\t]+[^\\x00-\\x1F\\x7F]+)*[ \\t]*$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -314,6 +324,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^[ \\t]*[^\\x00-\\x1F\\x7F]+([ \\t]+[^\\x00-\\x1F\\x7F]+)*[ \\t]*$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -335,6 +346,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^[ \\t]*[^\\x00-\\x1F\\x7F]+([ \\t]+[^\\x00-\\x1F\\x7F]+)*[ \\t]*$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -346,6 +358,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^[ \\t]*[^\\x00-\\x1F\\x7F]+([ \\t]+[^\\x00-\\x1F\\x7F]+)*[ \\t]*$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -507,6 +520,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 2048),
+								stringvalidator.RegexMatches(regexp.MustCompile("^((%[0-9A-Fa-f]{2}|[-()_.!~*';/?:@\\x26=+$,A-Za-z0-9])+)([).!';/?:,])?$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -521,6 +535,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 									Optional: true,
 									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.RegexMatches(regexp.MustCompile("^[ \\t]*[^\\x00-\\x1F\\x7F]+([ \\t]+[^\\x00-\\x1F\\x7F]+)*[ \\t]*$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -532,6 +547,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 									Optional: true,
 									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.RegexMatches(regexp.MustCompile("^[ \\t]*[^\\x00-\\x1F\\x7F]+([ \\t]+[^\\x00-\\x1F\\x7F]+)*[ \\t]*$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -769,6 +785,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Name of the connection.",
 		//	  "maxLength": 64,
 		//	  "minLength": 1,
+		//	  "pattern": "[\\.\\-_A-Za-z0-9]+",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -777,6 +794,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 64),
+				stringvalidator.RegexMatches(regexp.MustCompile("[\\.\\-_A-Za-z0-9]+"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -788,6 +806,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The arn of the secrets manager secret created in the customer account.",
+		//	  "pattern": "^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]|\\d|\\-)*:([0-9]{12})?:secret:[\\/_+=\\.@\\-A-Za-z0-9]+$",
 		//	  "type": "string"
 		//	}
 		"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/

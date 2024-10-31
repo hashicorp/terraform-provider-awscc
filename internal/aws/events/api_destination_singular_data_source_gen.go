@@ -27,6 +27,7 @@ func apiDestinationDataSource(ctx context.Context) (datasource.DataSource, error
 		//
 		//	{
 		//	  "description": "The arn of the api destination.",
+		//	  "pattern": "^arn:aws([a-z]|\\-)*:events:([a-z]|\\d|\\-)*:([0-9]{12})?:api-destination/[\\.\\-_A-Za-z0-9]+/[\\-A-Za-z0-9]+$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -38,6 +39,7 @@ func apiDestinationDataSource(ctx context.Context) (datasource.DataSource, error
 		//
 		//	{
 		//	  "description": "The arn of the connection.",
+		//	  "pattern": "^arn:aws([a-z]|\\-)*:events:([a-z]|\\d|\\-)*:([0-9]{12})?:connection/[\\.\\-_A-Za-z0-9]+/[\\-A-Za-z0-9]+$",
 		//	  "type": "string"
 		//	}
 		"connection_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -77,6 +79,7 @@ func apiDestinationDataSource(ctx context.Context) (datasource.DataSource, error
 		//
 		//	{
 		//	  "description": "Url endpoint to invoke.",
+		//	  "pattern": "^((%[0-9A-Fa-f]{2}|[-()_.!~*';/?:@\\x26=+$,A-Za-z0-9])+)([).!';/?:,])?$",
 		//	  "type": "string"
 		//	}
 		"invocation_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -100,6 +103,7 @@ func apiDestinationDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Name of the apiDestination.",
 		//	  "maxLength": 64,
 		//	  "minLength": 1,
+		//	  "pattern": "[\\.\\-_A-Za-z0-9]+",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/

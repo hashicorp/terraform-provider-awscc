@@ -238,6 +238,24 @@ func flowVersionResource(ctx context.Context) (resource.Resource, error) {
 		//	                "additionalProperties": false,
 		//	                "description": "Knowledge base flow node configuration",
 		//	                "properties": {
+		//	                  "GuardrailConfiguration": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "Configuration for a guardrail",
+		//	                    "properties": {
+		//	                      "GuardrailIdentifier": {
+		//	                        "description": "Identifier for the guardrail, could be the id or the arn",
+		//	                        "maxLength": 2048,
+		//	                        "pattern": "^(([a-z0-9]+)|(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:guardrail/[a-z0-9]+))$",
+		//	                        "type": "string"
+		//	                      },
+		//	                      "GuardrailVersion": {
+		//	                        "description": "Version of the guardrail",
+		//	                        "pattern": "^(([0-9]{1,8})|(DRAFT))$",
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  },
 		//	                  "KnowledgeBaseId": {
 		//	                    "description": "Identifier of the KnowledgeBase",
 		//	                    "maxLength": 10,
@@ -245,10 +263,10 @@ func flowVersionResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "type": "string"
 		//	                  },
 		//	                  "ModelId": {
-		//	                    "description": "ARN or name of a Bedrock model.",
+		//	                    "description": "ARN or Id of a Bedrock Foundational Model or Inference Profile, or the ARN of a imported model, or a provisioned throughput ARN for custom models.",
 		//	                    "maxLength": 2048,
 		//	                    "minLength": 1,
-		//	                    "pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}(([:][a-z0-9-]{1,63}){0,2})?/[a-z0-9]{12})|(:foundation-model/([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2})))|(([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2}))|(([0-9a-zA-Z][_-]?)+)$",
+		//	                    "pattern": "^(arn:aws(-[^:]{1,12})?:bedrock:[a-z0-9-]{1,20}:([0-9]{12})?:([a-z-]+/)?)?([a-zA-Z0-9.-]{1,63}){0,2}(([:][a-z0-9-]{1,63}){0,2})?(/[a-z0-9]{1,12})?$",
 		//	                    "type": "string"
 		//	                  }
 		//	                },
@@ -305,6 +323,24 @@ func flowVersionResource(ctx context.Context) (resource.Resource, error) {
 		//	                "additionalProperties": false,
 		//	                "description": "Prompt flow node configuration",
 		//	                "properties": {
+		//	                  "GuardrailConfiguration": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "Configuration for a guardrail",
+		//	                    "properties": {
+		//	                      "GuardrailIdentifier": {
+		//	                        "description": "Identifier for the guardrail, could be the id or the arn",
+		//	                        "maxLength": 2048,
+		//	                        "pattern": "^(([a-z0-9]+)|(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:guardrail/[a-z0-9]+))$",
+		//	                        "type": "string"
+		//	                      },
+		//	                      "GuardrailVersion": {
+		//	                        "description": "Version of the guardrail",
+		//	                        "pattern": "^(([0-9]{1,8})|(DRAFT))$",
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  },
 		//	                  "SourceConfiguration": {
 		//	                    "description": "Prompt source configuration for prompt node",
 		//	                    "properties": {
@@ -341,12 +377,6 @@ func flowVersionResource(ctx context.Context) (resource.Resource, error) {
 		//	                                    "minimum": 0,
 		//	                                    "type": "number"
 		//	                                  },
-		//	                                  "TopK": {
-		//	                                    "description": "Sample from the k most likely next tokens",
-		//	                                    "maximum": 500,
-		//	                                    "minimum": 0,
-		//	                                    "type": "number"
-		//	                                  },
 		//	                                  "TopP": {
 		//	                                    "description": "Cumulative probability cutoff for token selection",
 		//	                                    "maximum": 1,
@@ -360,10 +390,10 @@ func flowVersionResource(ctx context.Context) (resource.Resource, error) {
 		//	                            "type": "object"
 		//	                          },
 		//	                          "ModelId": {
-		//	                            "description": "ARN or name of a Bedrock model.",
+		//	                            "description": "ARN or Id of a Bedrock Foundational Model or Inference Profile, or the ARN of a imported model, or a provisioned throughput ARN for custom models.",
 		//	                            "maxLength": 2048,
 		//	                            "minLength": 1,
-		//	                            "pattern": "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|([0-9]{12}:provisioned-model/[a-z0-9]{12})))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|(([0-9a-zA-Z][_-]?)+)$",
+		//	                            "pattern": "^(arn:aws(-[^:]{1,12})?:bedrock:[a-z0-9-]{1,20}:([0-9]{12})?:([a-z-]+/)?)?([a-zA-Z0-9.-]{1,63}){0,2}(([:][a-z0-9-]{1,63}){0,2})?(/[a-z0-9]{1,12})?$",
 		//	                            "type": "string"
 		//	                          },
 		//	                          "TemplateConfiguration": {
@@ -753,6 +783,23 @@ func flowVersionResource(ctx context.Context) (resource.Resource, error) {
 									// Property: KnowledgeBase
 									"knowledge_base": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: GuardrailConfiguration
+											"guardrail_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: GuardrailIdentifier
+													"guardrail_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Identifier for the guardrail, could be the id or the arn",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: GuardrailVersion
+													"guardrail_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Version of the guardrail",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "Configuration for a guardrail",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
 											// Property: KnowledgeBaseId
 											"knowledge_base_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "Identifier of the KnowledgeBase",
@@ -760,7 +807,7 @@ func flowVersionResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END ATTRIBUTE*/
 											// Property: ModelId
 											"model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "ARN or name of a Bedrock model.",
+												Description: "ARN or Id of a Bedrock Foundational Model or Inference Profile, or the ARN of a imported model, or a provisioned throughput ARN for custom models.",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
@@ -805,6 +852,23 @@ func flowVersionResource(ctx context.Context) (resource.Resource, error) {
 									// Property: Prompt
 									"prompt": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: GuardrailConfiguration
+											"guardrail_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: GuardrailIdentifier
+													"guardrail_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Identifier for the guardrail, could be the id or the arn",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: GuardrailVersion
+													"guardrail_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Version of the guardrail",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "Configuration for a guardrail",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
 											// Property: SourceConfiguration
 											"source_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -833,11 +897,6 @@ func flowVersionResource(ctx context.Context) (resource.Resource, error) {
 																				Description: "Controls randomness, higher values increase diversity",
 																				Computed:    true,
 																			}, /*END ATTRIBUTE*/
-																			// Property: TopK
-																			"top_k": schema.Float64Attribute{ /*START ATTRIBUTE*/
-																				Description: "Sample from the k most likely next tokens",
-																				Computed:    true,
-																			}, /*END ATTRIBUTE*/
 																			// Property: TopP
 																			"top_p": schema.Float64Attribute{ /*START ATTRIBUTE*/
 																				Description: "Cumulative probability cutoff for token selection",
@@ -853,7 +912,7 @@ func flowVersionResource(ctx context.Context) (resource.Resource, error) {
 															}, /*END ATTRIBUTE*/
 															// Property: ModelId
 															"model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "ARN or name of a Bedrock model.",
+																Description: "ARN or Id of a Bedrock Foundational Model or Inference Profile, or the ARN of a imported model, or a provisioned throughput ARN for custom models.",
 																Computed:    true,
 															}, /*END ATTRIBUTE*/
 															// Property: TemplateConfiguration
@@ -1200,6 +1259,9 @@ func flowVersionResource(ctx context.Context) (resource.Resource, error) {
 		"expression":                  "Expression",
 		"flow_arn":                    "FlowArn",
 		"flow_id":                     "FlowId",
+		"guardrail_configuration":     "GuardrailConfiguration",
+		"guardrail_identifier":        "GuardrailIdentifier",
+		"guardrail_version":           "GuardrailVersion",
 		"inference_configuration":     "InferenceConfiguration",
 		"inline":                      "Inline",
 		"input":                       "Input",
@@ -1236,7 +1298,6 @@ func flowVersionResource(ctx context.Context) (resource.Resource, error) {
 		"template_configuration":      "TemplateConfiguration",
 		"template_type":               "TemplateType",
 		"text":                        "Text",
-		"top_k":                       "TopK",
 		"top_p":                       "TopP",
 		"type":                        "Type",
 		"version":                     "Version",

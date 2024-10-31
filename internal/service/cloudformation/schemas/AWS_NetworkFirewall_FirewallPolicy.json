@@ -263,7 +263,7 @@
             "TcpIdleTimeoutSeconds": {
               "type": "integer",
               "minimum": 60,
-              "maximum": 600
+              "maximum": 6000
             }
           },
           "additionalProperties": false

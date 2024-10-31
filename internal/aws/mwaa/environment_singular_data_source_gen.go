@@ -425,7 +425,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "Maximum webserver compute units.",
-		//	  "minimum": 2,
+		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
 		"max_webservers": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -449,7 +449,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "Minimum webserver compute units.",
-		//	  "minimum": 2,
+		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
 		"min_webservers": schema.Int64Attribute{ /*START ATTRIBUTE*/

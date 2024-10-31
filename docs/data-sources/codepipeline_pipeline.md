@@ -215,6 +215,7 @@ Read-Only:
 
 - `conditions` (Attributes List) (see [below for nested schema](#nestedatt--stages--on_failure--conditions))
 - `result` (String) The specified result for when the failure conditions are met, such as rolling back the stage
+- `retry_configuration` (Attributes) The configuration that specifies the retry configuration for a stage (see [below for nested schema](#nestedatt--stages--on_failure--retry_configuration))
 
 <a id="nestedatt--stages--on_failure--conditions"></a>
 ### Nested Schema for `stages.on_failure.conditions`
@@ -255,6 +256,14 @@ Read-Only:
 - `version` (String) A string that describes the rule version.
 
 
+
+
+<a id="nestedatt--stages--on_failure--retry_configuration"></a>
+### Nested Schema for `stages.on_failure.retry_configuration`
+
+Read-Only:
+
+- `retry_mode` (String) The specified retry mode type for the given stage. FAILED_ACTIONS will retry only the failed actions. ALL_ACTIONS will retry both failed and successful
 
 
 
