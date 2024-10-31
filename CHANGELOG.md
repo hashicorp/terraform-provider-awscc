@@ -1,4 +1,5 @@
-## 1.19.0 (Unreleased)
+## 1.20.0 (Unreleased)
+## 1.19.0 (October 31, 2024)
 
 FEATURES:
 
