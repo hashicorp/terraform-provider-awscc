@@ -66,8 +66,12 @@ resource "awscc_iam_role" "ebs_csi_role" {
 
 # Now that the IAM role is ready, create EBS CSI addon
 resource "awscc_eks_addon" "ebs_csi" {
-  cluster_name             = awscc_eks_cluster.eks_cluster.name
+  cluster_name             = var.cluster_name
   addon_name               = "aws-ebs-csi-driver"
   service_account_role_arn = awscc_iam_role.ebs_csi_role.arn
   resolve_conflicts        = "OVERWRITE"
+}
+
+variable "cluster_name" {
+  type = string
 }
