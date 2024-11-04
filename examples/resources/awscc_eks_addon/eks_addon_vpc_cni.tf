@@ -57,8 +57,12 @@ resource "awscc_iam_role" "eks_vpc_cni_role" {
 
 # Now that the IAM role is ready, create the VPC CNI plugin:
 resource "awscc_eks_addon" "vpc_cni" {
-  cluster_name             = awscc_eks_cluster.eks_cluster.name
+  cluster_name             = var.cluster_name
   addon_name               = "vpc-cni"
   service_account_role_arn = awscc_iam_role.eks_vpc_cni_role.arn
   resolve_conflicts        = "OVERWRITE"
+}
+
+variable "cluster_name" {
+  type = string
 }
