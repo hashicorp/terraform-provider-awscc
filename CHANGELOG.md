@@ -1,4 +1,23 @@
 ## 1.20.0 (Unreleased)
+
+* **New Data Source:** `awscc_appsync_channel_namespace`
+* **New Data Source:** `awscc_bedrock_application_inference_profile`
+* **New Data Source:** `awscc_bedrock_application_inference_profiles`
+* **New Data Source:** `awscc_ec2_security_group_vpc_association`
+* **New Data Source:** `awscc_ec2_security_group_vpc_associations`
+* **New Data Source:** `awscc_rds_db_shard_group`
+* **New Data Source:** `awscc_rds_db_shard_groups`
+* **New Data Source:** `awscc_wisdom_ai_agent`
+* **New Data Source:** `awscc_wisdom_ai_agent_version`
+* **New Data Source:** `awscc_wisdom_ai_prompt_version`
+* **New Resource:** `awscc_appsync_channel_namespace`
+* **New Resource:** `awscc_bedrock_application_inference_profile`
+* **New Resource:** `awscc_ec2_security_group_vpc_association`
+* **New Resource:** `awscc_rds_db_shard_group`
+* **New Resource:** `awscc_wisdom_ai_agent`
+* **New Resource:** `awscc_wisdom_ai_agent_version`
+* **New Resource:** `awscc_wisdom_ai_prompt_version`
+
 ## 1.19.0 (October 31, 2024)
 
 FEATURES:
