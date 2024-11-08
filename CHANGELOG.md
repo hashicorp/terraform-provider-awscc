@@ -1,4 +1,5 @@
-## 1.20.0 (Unreleased)
+## 1.21.0 (Unreleased)
+## 1.20.0 (November  8, 2024)
 
 * **New Data Source:** `awscc_appsync_channel_namespace`
 * **New Data Source:** `awscc_bedrock_application_inference_profile`
