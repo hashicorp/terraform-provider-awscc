@@ -22,4 +22,4 @@ Data Source schema for AWS::ApiGateway::Account
 ### Read-Only
 
 - `account_id` (String)
-- `cloudwatch_role_arn` (String) The ARN of an Amazon CloudWatch role for the current Account.
+- `cloudwatch_role_arn` (String)

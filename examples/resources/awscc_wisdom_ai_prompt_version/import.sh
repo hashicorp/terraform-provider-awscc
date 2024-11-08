@@ -1,0 +1,1 @@
+$ terraform import awscc_wisdom_ai_prompt_version.example "assistant_id|ai_prompt_id|version_number"

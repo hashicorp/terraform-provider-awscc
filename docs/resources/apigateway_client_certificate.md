@@ -30,8 +30,8 @@ resource "awscc_apigateway_client_certificate" "example" {
 
 ### Optional
 
-- `description` (String) The description of the client certificate.
-- `tags` (Attributes List) The collection of tags. Each tag element is associated with a given resource. (see [below for nested schema](#nestedatt--tags))
+- `description` (String)
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

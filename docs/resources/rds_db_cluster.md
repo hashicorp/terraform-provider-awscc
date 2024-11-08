@@ -76,6 +76,7 @@ resource "awscc_rds_db_cluster" "example_db_cluster" {
   +  Must be a value from 1 to 35
   
  Valid for: Aurora DB clusters and Multi-AZ DB clusters
+- `cluster_scalability_type` (String)
 - `copy_tags_to_snapshot` (Boolean) A value that indicates whether to copy all tags from the DB cluster to snapshots of the DB cluster. The default is not to copy them.
  Valid for: Aurora DB clusters and Multi-AZ DB clusters
 - `database_name` (String) The name of your database. If you don't provide a name, then Amazon RDS won't create a database in this DB cluster. For naming constraints, see [Naming Constraints](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_Limits.html#RDS_Limits.Constraints) in the *Amazon Aurora User Guide*. 
@@ -272,11 +273,11 @@ resource "awscc_rds_db_cluster" "example_db_cluster" {
  Valid for Cluster Type: Multi-AZ DB clusters only
  Default: The default behavior varies depending on whether ``DBSubnetGroupName`` is specified.
  If ``DBSubnetGroupName`` isn't specified, and ``PubliclyAccessible`` isn't specified, the following applies:
-  +  If the default VPC in the target Region doesn’t have an internet gateway attached to it, the DB cluster is private.
+  +  If the default VPC in the target Region doesn?t have an internet gateway attached to it, the DB cluster is private.
   +  If the default VPC in the target Region has an internet gateway attached to it, the DB cluster is public.
   
  If ``DBSubnetGroupName`` is specified, and ``PubliclyAccessible`` isn't specified, the following applies:
-  +  If the subnets are part of a VPC that doesn’t have an internet gateway attached to it, the DB cluster is private.
+  +  If the subnets are part of a VPC that doesn?t have an internet gateway attached to it, the DB cluster is private.
   +  If the subnets are part of a VPC that has an internet gateway attached to it, the DB cluster is public.
 - `read_endpoint` (Attributes) This data type represents the information you need to connect to an Amazon RDS DB instance. This data type is used as a response element in the following actions:
   +   ``CreateDBInstance`` 

@@ -52,9 +52,9 @@ resource "awscc_apigateway_resource" "DemoAPIGatewayResource" {
 
 ### Required
 
-- `parent_id` (String) The parent resource's identifier.
-- `path_part` (String) The last path segment for this resource.
-- `rest_api_id` (String) The string identifier of the associated RestApi.
+- `parent_id` (String)
+- `path_part` (String)
+- `rest_api_id` (String)
 
 ### Read-Only
 

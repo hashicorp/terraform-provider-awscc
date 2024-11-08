@@ -3,12 +3,12 @@
 page_title: "awscc_nimblestudio_launch_profile Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Represents a launch profile which delegates access to a collection of studio components to studio users
+  Resource Type definition for AWS::NimbleStudio::LaunchProfile
 ---
 
 # awscc_nimblestudio_launch_profile (Resource)
 
-Represents a launch profile which delegates access to a collection of studio components to studio users
+Resource Type definition for AWS::NimbleStudio::LaunchProfile
 
 
 
@@ -17,19 +17,16 @@ Represents a launch profile which delegates access to a collection of studio com
 
 ### Required
 
-- `ec_2_subnet_ids` (List of String) <p>Specifies the IDs of the EC2 subnets where streaming sessions will be accessible from.
-            These subnets must support the specified instance types. </p>
-- `launch_profile_protocol_versions` (List of String) <p>The version number of the protocol that is used by the launch profile. The only valid
-            version is "2021-03-31".</p>
-- `name` (String) <p>The name for the launch profile.</p>
-- `stream_configuration` (Attributes) <p>A configuration for a streaming session.</p> (see [below for nested schema](#nestedatt--stream_configuration))
-- `studio_component_ids` (List of String) <p>Unique identifiers for a collection of studio components that can be used with this
-            launch profile.</p>
-- `studio_id` (String) <p>The studio ID. </p>
+- `ec_2_subnet_ids` (List of String)
+- `launch_profile_protocol_versions` (List of String)
+- `name` (String)
+- `stream_configuration` (Attributes) (see [below for nested schema](#nestedatt--stream_configuration))
+- `studio_component_ids` (List of String)
+- `studio_id` (String)
 
 ### Optional
 
-- `description` (String) <p>The description.</p>
+- `description` (String)
 - `tags` (Map of String)
 
 ### Read-Only
@@ -43,50 +40,25 @@ Represents a launch profile which delegates access to a collection of studio com
 Required:
 
 - `clipboard_mode` (String)
-- `ec_2_instance_types` (List of String) <p>The EC2 instance types that users can select from when launching a streaming session
-            with this launch profile.</p>
-- `streaming_image_ids` (List of String) <p>The streaming images that users can select from when launching a streaming session
-            with this launch profile.</p>
+- `ec_2_instance_types` (List of String)
+- `streaming_image_ids` (List of String)
 
 Optional:
 
 - `automatic_termination_mode` (String)
-- `max_session_length_in_minutes` (Number) <p>The length of time, in minutes, that a streaming session can be active before it is
-            stopped or terminated. After this point, Nimble Studio automatically terminates or
-            stops the session. The default length of time is 690 minutes, and the maximum length of
-            time is 30 days.</p>
-- `max_stopped_session_length_in_minutes` (Number) <p>Integer that determines if you can start and stop your sessions and how long a session
-            can stay in the <code>STOPPED</code> state. The default value is 0. The maximum value is
-            5760.</p>
-         <p>This field is allowed only when <code>sessionPersistenceMode</code> is
-                <code>ACTIVATED</code> and <code>automaticTerminationMode</code> is
-                <code>ACTIVATED</code>.</p>
-         <p>If the value is set to 0, your sessions can?t be <code>STOPPED</code>. If you then
-            call <code>StopStreamingSession</code>, the session fails. If the time that a session
-            stays in the <code>READY</code> state exceeds the <code>maxSessionLengthInMinutes</code>
-            value, the session will automatically be terminated (instead of
-            <code>STOPPED</code>).</p>
-         <p>If the value is set to a positive number, the session can be stopped. You can call
-                <code>StopStreamingSession</code> to stop sessions in the <code>READY</code> state.
-            If the time that a session stays in the <code>READY</code> state exceeds the
-                <code>maxSessionLengthInMinutes</code> value, the session will automatically be
-            stopped (instead of terminated).</p>
-- `session_backup` (Attributes) <p>Configures how streaming sessions are backed up when launched from this launch
-            profile.</p> (see [below for nested schema](#nestedatt--stream_configuration--session_backup))
+- `max_session_length_in_minutes` (Number)
+- `max_stopped_session_length_in_minutes` (Number)
+- `session_backup` (Attributes) (see [below for nested schema](#nestedatt--stream_configuration--session_backup))
 - `session_persistence_mode` (String)
-- `session_storage` (Attributes) <p>The configuration for a streaming session?s upload storage.</p> (see [below for nested schema](#nestedatt--stream_configuration--session_storage))
-- `volume_configuration` (Attributes) <p>Custom volume configuration for the root volumes that are attached to streaming
-            sessions.</p>
-         <p>This parameter is only allowed when <code>sessionPersistenceMode</code> is
-                <code>ACTIVATED</code>.</p> (see [below for nested schema](#nestedatt--stream_configuration--volume_configuration))
+- `session_storage` (Attributes) (see [below for nested schema](#nestedatt--stream_configuration--session_storage))
+- `volume_configuration` (Attributes) (see [below for nested schema](#nestedatt--stream_configuration--volume_configuration))
 
 <a id="nestedatt--stream_configuration--session_backup"></a>
 ### Nested Schema for `stream_configuration.session_backup`
 
 Optional:
 
-- `max_backups_to_retain` (Number) <p>The maximum number of backups that each streaming session created from this launch
-            profile can have.</p>
+- `max_backups_to_retain` (Number)
 - `mode` (String)
 
 
@@ -95,18 +67,16 @@ Optional:
 
 Optional:
 
-- `mode` (List of String) <p>Allows artists to upload files to their workstations. The only valid option is
-                <code>UPLOAD</code>.</p>
-- `root` (Attributes) <p>The upload storage root location (folder) on streaming workstations where files are
-            uploaded.</p> (see [below for nested schema](#nestedatt--stream_configuration--session_storage--root))
+- `mode` (List of String)
+- `root` (Attributes) (see [below for nested schema](#nestedatt--stream_configuration--session_storage--root))
 
 <a id="nestedatt--stream_configuration--session_storage--root"></a>
 ### Nested Schema for `stream_configuration.session_storage.root`
 
 Optional:
 
-- `linux` (String) <p>The folder path in Linux workstations where files are uploaded.</p>
-- `windows` (String) <p>The folder path in Windows workstations where files are uploaded.</p>
+- `linux` (String)
+- `windows` (String)
 
 
 
@@ -115,17 +85,14 @@ Optional:
 
 Optional:
 
-- `iops` (Number) <p>The number of I/O operations per second for the root volume that is attached to
-            streaming session.</p>
-- `size` (Number) <p>The size of the root volume that is attached to the streaming session. The root volume
-            size is measured in GiBs.</p>
-- `throughput` (Number) <p>The throughput to provision for the root volume that is attached to the streaming
-            session. The throughput is measured in MiB/s.</p>
+- `iops` (Number)
+- `size` (Number)
+- `throughput` (Number)
 
 ## Import
 
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_nimblestudio_launch_profile.example "launch_profile_id|studio_id"
+$ terraform import awscc_nimblestudio_launch_profile.example "launch_profile_id"
 ```

@@ -17,13 +17,13 @@ The ``AWS::ApiGateway::BasePathMapping`` resource creates a base path that clien
 
 ### Required
 
-- `domain_name` (String) The domain name of the BasePathMapping resource to be described.
+- `domain_name` (String)
 
 ### Optional
 
-- `base_path` (String) The base path name that callers of the API must provide as part of the URL after the domain name.
-- `rest_api_id` (String) The string identifier of the associated RestApi.
-- `stage` (String) The name of the associated stage.
+- `base_path` (String)
+- `rest_api_id` (String)
+- `stage` (String)
 
 ### Read-Only
 
