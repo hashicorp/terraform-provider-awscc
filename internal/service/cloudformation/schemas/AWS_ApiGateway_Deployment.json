@@ -76,11 +76,11 @@
       "type": "object",
       "properties": {
         "CacheTtlInSeconds": {
-          "description": "Specifies the time to live (TTL), in seconds, for cached responses. The higher the TTL, the longer the response will be cached.",
+          "description": "",
           "type": "integer"
         },
         "LoggingLevel": {
-          "description": "Specifies the logging level for this method, which affects the log entries pushed to Amazon CloudWatch Logs. Valid values are ``OFF``, ``ERROR``, and ``INFO``. Choose ``ERROR`` to write only error-level entries to CloudWatch Logs, or choose ``INFO`` to include all ``ERROR`` events as well as extra informational events.",
+          "description": "",
           "type": "string"
         },
         "ResourcePath": {
@@ -88,23 +88,23 @@
           "type": "string"
         },
         "CacheDataEncrypted": {
-          "description": "Specifies whether the cached responses are encrypted.",
+          "description": "",
           "type": "boolean"
         },
         "DataTraceEnabled": {
-          "description": "Specifies whether data trace logging is enabled for this method, which affects the log entries pushed to Amazon CloudWatch Logs. This can be useful to troubleshoot APIs, but can result in logging sensitive data. We recommend that you don't enable this option for production APIs.",
+          "description": "",
           "type": "boolean"
         },
         "ThrottlingBurstLimit": {
-          "description": "Specifies the throttling burst limit.",
+          "description": "",
           "type": "integer"
         },
         "CachingEnabled": {
-          "description": "Specifies whether responses should be cached and returned for requests. A cache cluster must be enabled on the stage for responses to be cached.",
+          "description": "",
           "type": "boolean"
         },
         "MetricsEnabled": {
-          "description": "Specifies whether Amazon CloudWatch metrics are enabled for this method.",
+          "description": "",
           "type": "boolean"
         },
         "HttpMethod": {
@@ -112,7 +112,7 @@
           "type": "string"
         },
         "ThrottlingRateLimit": {
-          "description": "Specifies the throttling rate limit.",
+          "description": "",
           "type": "number"
         }
       }
@@ -211,7 +211,7 @@
           }
         },
         "CacheClusterEnabled": {
-          "description": "Specifies whether a cache cluster is enabled for the stage.",
+          "description": "",
           "type": "boolean"
         }
       }
@@ -227,16 +227,16 @@
               "type": "string"
             }
           },
-          "description": "Stage variables overridden for a canary release deployment, including new stage variables introduced in the canary. These stage variables are represented as a string-to-string map between stage variable names and their values.",
+          "description": "",
           "additionalProperties": false,
           "type": "object"
         },
         "PercentTraffic": {
-          "description": "The percent (0-100) of traffic diverted to a canary deployment.",
+          "description": "",
           "type": "number"
         },
         "UseStageCache": {
-          "description": "A Boolean flag to indicate whether the canary deployment uses the stage cache or not.",
+          "description": "",
           "type": "boolean"
         }
       }
@@ -271,16 +271,16 @@
               "type": "string"
             }
           },
-          "description": "A stage variable overrides used for the canary release deployment. They can override existing stage variables or add new stage variables for the canary release deployment. These stage variables are represented as a string-to-string map between stage variable names and their values.",
+          "description": "",
           "additionalProperties": false,
           "type": "object"
         },
         "PercentTraffic": {
-          "description": "The percentage (0.0-100.0) of traffic routed to the canary deployment.",
+          "description": "",
           "type": "number"
         },
         "UseStageCache": {
-          "description": "A Boolean flag to indicate whether the canary release deployment uses the stage cache or not.",
+          "description": "",
           "type": "boolean"
         }
       }
@@ -291,11 +291,11 @@
       "type": "object",
       "properties": {
         "Format": {
-          "description": "A single line format of the access logs of data, as specified by selected $context variables. The format must include at least ``$context.requestId``.",
+          "description": "",
           "type": "string"
         },
         "DestinationArn": {
-          "description": "The Amazon Resource Name (ARN) of the CloudWatch Logs log group or Kinesis Data Firehose delivery stream to receive access logs. If you specify a Kinesis Data Firehose delivery stream, the stream name must begin with ``amazon-apigateway-``.",
+          "description": "",
           "type": "string"
         }
       }
@@ -307,7 +307,7 @@
       "type": "string"
     },
     "Description": {
-      "description": "The description for the Deployment resource to create.",
+      "description": "",
       "type": "string"
     },
     "StageDescription": {
@@ -315,15 +315,15 @@
       "$ref": "#/definitions/StageDescription"
     },
     "StageName": {
-      "description": "The name of the Stage resource for the Deployment resource to create.",
+      "description": "",
       "type": "string"
     },
     "RestApiId": {
-      "description": "The string identifier of the associated RestApi.",
+      "description": "",
       "type": "string"
     },
     "DeploymentCanarySettings": {
-      "description": "The input configuration for a canary deployment.",
+      "description": "",
       "$ref": "#/definitions/DeploymentCanarySettings"
     }
   }

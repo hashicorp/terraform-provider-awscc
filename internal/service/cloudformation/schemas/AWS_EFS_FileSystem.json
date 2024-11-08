@@ -215,8 +215,14 @@
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
-    "cloudFormationSystemTags": false,
-    "tagProperty": "/properties/FileSystemTags"
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/FileSystemTags",
+    "permissions": [
+      "elasticfilesystem:TagResource",
+      "elasticfilesystem:ListTagsForResource",
+      "elasticfilesystem:UntagResource",
+      "elasticfilesystem:DeleteTags"
+    ]
   },
   "handlers": {
     "create": {

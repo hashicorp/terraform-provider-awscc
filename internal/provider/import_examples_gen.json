@@ -3711,12 +3711,12 @@
     },
     {
         "resource": "awscc_nimblestudio_launch_profile",
-        "identifier": ["LaunchProfileId","StudioId"],
+        "identifier": ["LaunchProfileId"],
         "path": "./examples/resources/awscc_nimblestudio_launch_profile/import.sh"
     },
     {
         "resource": "awscc_nimblestudio_streaming_image",
-        "identifier": ["StudioId","StreamingImageId"],
+        "identifier": ["StreamingImageId"],
         "path": "./examples/resources/awscc_nimblestudio_streaming_image/import.sh"
     },
     {
@@ -3726,7 +3726,7 @@
     },
     {
         "resource": "awscc_nimblestudio_studio_component",
-        "identifier": ["StudioComponentId","StudioId"],
+        "identifier": ["StudioComponentId"],
         "path": "./examples/resources/awscc_nimblestudio_studio_component/import.sh"
     },
     {
