@@ -663,6 +663,21 @@ func taskDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The ARN of the task.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: TaskMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies the task mode for the task.",
+		//	  "enum": [
+		//	    "BASIC",
+		//	    "ENHANCED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"task_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the task mode for the task.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TaskReportConfig
 		// CloudFormation resource type schema:
 		//
@@ -966,6 +981,7 @@ func taskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"subdirectory":                       "Subdirectory",
 		"tags":                               "Tags",
 		"task_arn":                           "TaskArn",
+		"task_mode":                          "TaskMode",
 		"task_queueing":                      "TaskQueueing",
 		"task_report_config":                 "TaskReportConfig",
 		"transfer_mode":                      "TransferMode",

@@ -37,22 +37,22 @@ func apiKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "An MKT customer identifier, when integrating with the AWS SaaS Marketplace.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"customer_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "An MKT customer identifier, when integrating with the AWS SaaS Marketplace.",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The description of the ApiKey.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the ApiKey.",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Enabled
@@ -60,22 +60,22 @@ func apiKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": false,
-		//	  "description": "Specifies whether the ApiKey can be used by callers.",
+		//	  "description": "",
 		//	  "type": "boolean"
 		//	}
 		"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether the ApiKey can be used by callers.",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: GenerateDistinctId
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Specifies whether (``true``) or not (``false``) the key identifier is distinct from the created API key value. This parameter is deprecated and should not be used.",
+		//	  "description": "",
 		//	  "type": "boolean"
 		//	}
 		"generate_distinct_id": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether (``true``) or not (``false``) the key identifier is distinct from the created API key value. This parameter is deprecated and should not be used.",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
@@ -93,17 +93,17 @@ func apiKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "DEPRECATED FOR USAGE PLANS - Specifies stages associated with the API key.",
+		//	  "description": "",
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "description": "``StageKey`` is a property of the [AWS::ApiGateway::ApiKey](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-apikey.html) resource that specifies the stage to associate with the API key. This association allows only clients with the key to make requests to methods in that stage.",
 		//	    "properties": {
 		//	      "RestApiId": {
-		//	        "description": "The string identifier of the associated RestApi.",
+		//	        "description": "",
 		//	        "type": "string"
 		//	      },
 		//	      "StageName": {
-		//	        "description": "The stage name associated with the stage key.",
+		//	        "description": "",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -117,24 +117,24 @@ func apiKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: RestApiId
 					"rest_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The string identifier of the associated RestApi.",
+						Description: "",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: StageName
 					"stage_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The stage name associated with the stage key.",
+						Description: "",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "DEPRECATED FOR USAGE PLANS - Specifies stages associated with the API key.",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with ``aws:``. The tag value can be up to 256 characters.",
+		//	  "description": "",
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "description": "",
@@ -175,18 +175,18 @@ func apiKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with ``aws:``. The tag value can be up to 256 characters.",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Value
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Specifies a value of the API key.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies a value of the API key.",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

@@ -27,45 +27,30 @@ func streamingImageDataSource(ctx context.Context) (datasource.DataSource, error
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "\u003cp\u003eA human-readable description of the streaming image.\u003c/p\u003e",
-		//	  "maxLength": 256,
-		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "<p>A human-readable description of the streaming image.</p>",
-			Computed:    true,
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Ec2ImageId
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "\u003cp\u003eThe ID of an EC2 machine image with which to create this streaming image.\u003c/p\u003e",
-		//	  "pattern": "^ami-[0-9A-z]+$",
 		//	  "type": "string"
 		//	}
 		"ec_2_image_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "<p>The ID of an EC2 machine image with which to create this streaming image.</p>",
-			Computed:    true,
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: EncryptionConfiguration
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "\u003cp\u003eTODO\u003c/p\u003e",
 		//	  "properties": {
 		//	    "KeyArn": {
-		//	      "description": "\u003cp\u003eThe ARN for a KMS key that is used to encrypt studio data.\u003c/p\u003e",
-		//	      "minLength": 4,
-		//	      "pattern": "^arn:.*",
 		//	      "type": "string"
 		//	    },
 		//	    "KeyType": {
-		//	      "description": "\u003cp/\u003e",
-		//	      "enum": [
-		//	        "CUSTOMER_MANAGED_KEY"
-		//	      ],
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -78,68 +63,73 @@ func streamingImageDataSource(ctx context.Context) (datasource.DataSource, error
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: KeyArn
 				"key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "<p>The ARN for a KMS key that is used to encrypt studio data.</p>",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: KeyType
 				"key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "<p/>",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "<p>TODO</p>",
-			Computed:    true,
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: EncryptionConfigurationKeyArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"encryption_configuration_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: EncryptionConfigurationKeyType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"encryption_configuration_key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: EulaIds
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "\u003cp\u003eThe list of EULAs that must be accepted before a Streaming Session can be started using this streaming image.\u003c/p\u003e",
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
-		//	  "type": "array"
+		//	  "type": "array",
+		//	  "uniqueItems": false
 		//	}
 		"eula_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "<p>The list of EULAs that must be accepted before a Streaming Session can be started using this streaming image.</p>",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "\u003cp\u003eA friendly name for a streaming image resource.\u003c/p\u003e",
-		//	  "maxLength": 64,
-		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "<p>A friendly name for a streaming image resource.</p>",
-			Computed:    true,
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Owner
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "\u003cp\u003eThe owner of the streaming image, either the studioId that contains the streaming image, or 'amazon' for images that are provided by Amazon Nimble Studio.\u003c/p\u003e",
 		//	  "type": "string"
 		//	}
 		"owner": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "<p>The owner of the streaming image, either the studioId that contains the streaming image, or 'amazon' for images that are provided by Amazon Nimble Studio.</p>",
-			Computed:    true,
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Platform
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "\u003cp\u003eThe platform of the streaming image, either WINDOWS or LINUX.\u003c/p\u003e",
-		//	  "pattern": "^[a-zA-Z]*$",
 		//	  "type": "string"
 		//	}
 		"platform": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "<p>The platform of the streaming image, either WINDOWS or LINUX.</p>",
-			Computed:    true,
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: StreamingImageId
 		// CloudFormation resource type schema:
@@ -154,19 +144,15 @@ func streamingImageDataSource(ctx context.Context) (datasource.DataSource, error
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "\u003cp\u003eThe studioId. \u003c/p\u003e",
 		//	  "type": "string"
 		//	}
 		"studio_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "<p>The studioId. </p>",
-			Computed:    true,
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "additionalProperties": false,
-		//	  "description": "",
 		//	  "patternProperties": {
 		//	    "": {
 		//	      "type": "string"
@@ -177,7 +163,6 @@ func streamingImageDataSource(ctx context.Context) (datasource.DataSource, error
 		"tags":              // Pattern: ""
 		schema.MapAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
@@ -197,18 +182,20 @@ func streamingImageDataSource(ctx context.Context) (datasource.DataSource, error
 	opts = opts.WithCloudFormationTypeName("AWS::NimbleStudio::StreamingImage").WithTerraformTypeName("awscc_nimblestudio_streaming_image")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"description":              "Description",
-		"ec_2_image_id":            "Ec2ImageId",
-		"encryption_configuration": "EncryptionConfiguration",
-		"eula_ids":                 "EulaIds",
-		"key_arn":                  "KeyArn",
-		"key_type":                 "KeyType",
-		"name":                     "Name",
-		"owner":                    "Owner",
-		"platform":                 "Platform",
-		"streaming_image_id":       "StreamingImageId",
-		"studio_id":                "StudioId",
-		"tags":                     "Tags",
+		"description":                       "Description",
+		"ec_2_image_id":                     "Ec2ImageId",
+		"encryption_configuration":          "EncryptionConfiguration",
+		"encryption_configuration_key_arn":  "EncryptionConfigurationKeyArn",
+		"encryption_configuration_key_type": "EncryptionConfigurationKeyType",
+		"eula_ids":                          "EulaIds",
+		"key_arn":                           "KeyArn",
+		"key_type":                          "KeyType",
+		"name":                              "Name",
+		"owner":                             "Owner",
+		"platform":                          "Platform",
+		"streaming_image_id":                "StreamingImageId",
+		"studio_id":                         "StudioId",
+		"tags":                              "Tags",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

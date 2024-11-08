@@ -26,44 +26,44 @@ func basePathMappingDataSource(ctx context.Context) (datasource.DataSource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The base path name that callers of the API must provide as part of the URL after the domain name.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"base_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The base path name that callers of the API must provide as part of the URL after the domain name.",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DomainName
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The domain name of the BasePathMapping resource to be described.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The domain name of the BasePathMapping resource to be described.",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RestApiId
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The string identifier of the associated RestApi.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"rest_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The string identifier of the associated RestApi.",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Stage
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The name of the associated stage.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"stage": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the associated stage.",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
