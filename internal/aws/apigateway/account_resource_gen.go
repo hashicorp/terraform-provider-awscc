@@ -28,11 +28,11 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ARN of an Amazon CloudWatch role for the current Account.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"cloudwatch_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of an Amazon CloudWatch role for the current Account.",
+			Description: "",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

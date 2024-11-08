@@ -34,6 +34,33 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 			Description: "The name of the Auto Scaling group. This name must be unique per Region per account.\n The name can contain any ASCII character 33 to 126 including most punctuation characters, digits, and upper and lowercased letters.\n  You cannot use a colon (:) in the name.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: AvailabilityZoneDistribution
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "",
+		//	  "properties": {
+		//	    "CapacityDistributionStrategy": {
+		//	      "enum": [
+		//	        "balanced-best-effort",
+		//	        "balanced-only"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"availability_zone_distribution": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CapacityDistributionStrategy
+				"capacity_distribution_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityZones
 		// CloudFormation resource type schema:
 		//
@@ -1383,16 +1410,18 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The traffic sources associated with this Auto Scaling group.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "",
+		//	    "description": "Identifying information for a traffic source.",
 		//	    "properties": {
 		//	      "Identifier": {
+		//	        "description": "Identifies the traffic source.\n For Application Load Balancers, Gateway Load Balancers, Network Load Balancers, and VPC Lattice, this will be the Amazon Resource Name (ARN) for a target group in this account and Region. For Classic Load Balancers, this will be the name of the Classic Load Balancer in this account and Region.\n For example: \n  +  Application Load Balancer ARN: ``arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/1234567890123456`` \n  +  Classic Load Balancer name: ``my-classic-load-balancer`` \n  +  VPC Lattice ARN: ``arn:aws:vpc-lattice:us-west-2:123456789012:targetgroup/tg-1234567890123456`` \n  \n To get the ARN of a target group for a Application Load Balancer, Gateway Load Balancer, or Network Load Balancer, or the name of a Classic Load Balancer, use the Elastic Load Balancing [DescribeTargetGroups](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html) and [DescribeLoadBalancers](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html) API operations.\n To get the ARN of a target group for VPC Lattice, use the VPC Lattice [GetTargetGroup](https://docs.aws.amazon.com/vpc-lattice/latest/APIReference/API_GetTargetGroup.html) API operation.",
 		//	        "type": "string"
 		//	      },
 		//	      "Type": {
+		//	        "description": "Provides additional context for the value of ``Identifier``.\n The following lists the valid values:\n  +   ``elb`` if ``Identifier`` is the name of a Classic Load Balancer.\n  +   ``elbv2`` if ``Identifier`` is the ARN of an Application Load Balancer, Gateway Load Balancer, or Network Load Balancer target group.\n  +   ``vpc-lattice`` if ``Identifier`` is the ARN of a VPC Lattice target group.\n  \n Required if the identifier is the name of a Classic Load Balancer.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -1410,15 +1439,17 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Identifier
 					"identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "Identifies the traffic source.\n For Application Load Balancers, Gateway Load Balancers, Network Load Balancers, and VPC Lattice, this will be the Amazon Resource Name (ARN) for a target group in this account and Region. For Classic Load Balancers, this will be the name of the Classic Load Balancer in this account and Region.\n For example: \n  +  Application Load Balancer ARN: ``arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/1234567890123456`` \n  +  Classic Load Balancer name: ``my-classic-load-balancer`` \n  +  VPC Lattice ARN: ``arn:aws:vpc-lattice:us-west-2:123456789012:targetgroup/tg-1234567890123456`` \n  \n To get the ARN of a target group for a Application Load Balancer, Gateway Load Balancer, or Network Load Balancer, or the name of a Classic Load Balancer, use the Elastic Load Balancing [DescribeTargetGroups](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html) and [DescribeLoadBalancers](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html) API operations.\n To get the ARN of a target group for VPC Lattice, use the VPC Lattice [GetTargetGroup](https://docs.aws.amazon.com/vpc-lattice/latest/APIReference/API_GetTargetGroup.html) API operation.",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Type
 					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "Provides additional context for the value of ``Identifier``.\n The following lists the valid values:\n  +   ``elb`` if ``Identifier`` is the name of a Classic Load Balancer.\n  +   ``elbv2`` if ``Identifier`` is the ARN of an Application Load Balancer, Gateway Load Balancer, or Network Load Balancer target group.\n  +   ``vpc-lattice`` if ``Identifier`` is the ARN of a VPC Lattice target group.\n  \n Required if the identifier is the name of a Classic Load Balancer.",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "",
+			Description: "The traffic sources associated with this Auto Scaling group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VPCZoneIdentifier
@@ -1462,10 +1493,12 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		"accelerator_types":                 "AcceleratorTypes",
 		"allowed_instance_types":            "AllowedInstanceTypes",
 		"auto_scaling_group_name":           "AutoScalingGroupName",
+		"availability_zone_distribution":    "AvailabilityZoneDistribution",
 		"availability_zones":                "AvailabilityZones",
 		"bare_metal":                        "BareMetal",
 		"baseline_ebs_bandwidth_mbps":       "BaselineEbsBandwidthMbps",
 		"burstable_performance":             "BurstablePerformance",
+		"capacity_distribution_strategy":    "CapacityDistributionStrategy",
 		"capacity_rebalance":                "CapacityRebalance",
 		"context":                           "Context",
 		"cooldown":                          "Cooldown",

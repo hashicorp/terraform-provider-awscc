@@ -7,14 +7,9 @@ package nimblestudio
 
 import (
 	"context"
-	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
-	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
-	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
@@ -40,18 +35,11 @@ func launchProfileResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "\u003cp\u003eThe description.\u003c/p\u003e",
-		//	  "maxLength": 256,
-		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "<p>The description.</p>",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 256),
-			}, /*END VALIDATORS*/
+			Optional: true,
+			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -60,21 +48,15 @@ func launchProfileResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "\u003cp\u003eSpecifies the IDs of the EC2 subnets where streaming sessions will be accessible from.\n            These subnets must support the specified instance types. \u003c/p\u003e",
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
-		//	  "maxItems": 6,
-		//	  "minItems": 0,
-		//	  "type": "array"
+		//	  "type": "array",
+		//	  "uniqueItems": false
 		//	}
 		"ec_2_subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "<p>Specifies the IDs of the EC2 subnets where streaming sessions will be accessible from.\n            These subnets must support the specified instance types. </p>",
 			Required:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeBetween(0, 6),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -95,161 +77,82 @@ func launchProfileResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "\u003cp\u003eThe version number of the protocol that is used by the launch profile. The only valid\n            version is \"2021-03-31\".\u003c/p\u003e",
 		//	  "items": {
-		//	    "description": "\u003cp\u003eThe version number of the protocol that is used by the launch profile. The only valid\n            version is \"2021-03-31\".\u003c/p\u003e",
-		//	    "maxLength": 10,
-		//	    "minLength": 0,
-		//	    "pattern": "^2021\\-03\\-31$",
 		//	    "type": "string"
 		//	  },
-		//	  "type": "array"
+		//	  "type": "array",
+		//	  "uniqueItems": false
 		//	}
 		"launch_profile_protocol_versions": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "<p>The version number of the protocol that is used by the launch profile. The only valid\n            version is \"2021-03-31\".</p>",
 			Required:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(0, 10),
-					stringvalidator.RegexMatches(regexp.MustCompile("^2021\\-03\\-31$"), ""),
-				),
-			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "\u003cp\u003eThe name for the launch profile.\u003c/p\u003e",
-		//	  "maxLength": 64,
-		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "<p>The name for the launch profile.</p>",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 64),
-			}, /*END VALIDATORS*/
+			Required: true,
 		}, /*END ATTRIBUTE*/
 		// Property: StreamConfiguration
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "\u003cp\u003eA configuration for a streaming session.\u003c/p\u003e",
 		//	  "properties": {
 		//	    "AutomaticTerminationMode": {
-		//	      "enum": [
-		//	        "DEACTIVATED",
-		//	        "ACTIVATED"
-		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ClipboardMode": {
-		//	      "enum": [
-		//	        "ENABLED",
-		//	        "DISABLED"
-		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "Ec2InstanceTypes": {
-		//	      "description": "\u003cp\u003eThe EC2 instance types that users can select from when launching a streaming session\n            with this launch profile.\u003c/p\u003e",
 		//	      "items": {
-		//	        "enum": [
-		//	          "g4dn.xlarge",
-		//	          "g4dn.2xlarge",
-		//	          "g4dn.4xlarge",
-		//	          "g4dn.8xlarge",
-		//	          "g4dn.12xlarge",
-		//	          "g4dn.16xlarge",
-		//	          "g3.4xlarge",
-		//	          "g3s.xlarge",
-		//	          "g5.xlarge",
-		//	          "g5.2xlarge",
-		//	          "g5.4xlarge",
-		//	          "g5.8xlarge",
-		//	          "g5.16xlarge"
-		//	        ],
 		//	        "type": "string"
 		//	      },
-		//	      "maxItems": 30,
-		//	      "minItems": 1,
-		//	      "type": "array"
+		//	      "type": "array",
+		//	      "uniqueItems": false
 		//	    },
 		//	    "MaxSessionLengthInMinutes": {
-		//	      "default": 690,
-		//	      "description": "\u003cp\u003eThe length of time, in minutes, that a streaming session can be active before it is\n            stopped or terminated. After this point, Nimble Studio automatically terminates or\n            stops the session. The default length of time is 690 minutes, and the maximum length of\n            time is 30 days.\u003c/p\u003e",
-		//	      "maximum": 43200,
-		//	      "minimum": 1,
 		//	      "type": "number"
 		//	    },
 		//	    "MaxStoppedSessionLengthInMinutes": {
-		//	      "default": 0,
-		//	      "description": "\u003cp\u003eInteger that determines if you can start and stop your sessions and how long a session\n            can stay in the \u003ccode\u003eSTOPPED\u003c/code\u003e state. The default value is 0. The maximum value is\n            5760.\u003c/p\u003e\n         \u003cp\u003eThis field is allowed only when \u003ccode\u003esessionPersistenceMode\u003c/code\u003e is\n                \u003ccode\u003eACTIVATED\u003c/code\u003e and \u003ccode\u003eautomaticTerminationMode\u003c/code\u003e is\n                \u003ccode\u003eACTIVATED\u003c/code\u003e.\u003c/p\u003e\n         \u003cp\u003eIf the value is set to 0, your sessions can?t be \u003ccode\u003eSTOPPED\u003c/code\u003e. If you then\n            call \u003ccode\u003eStopStreamingSession\u003c/code\u003e, the session fails. If the time that a session\n            stays in the \u003ccode\u003eREADY\u003c/code\u003e state exceeds the \u003ccode\u003emaxSessionLengthInMinutes\u003c/code\u003e\n            value, the session will automatically be terminated (instead of\n            \u003ccode\u003eSTOPPED\u003c/code\u003e).\u003c/p\u003e\n         \u003cp\u003eIf the value is set to a positive number, the session can be stopped. You can call\n                \u003ccode\u003eStopStreamingSession\u003c/code\u003e to stop sessions in the \u003ccode\u003eREADY\u003c/code\u003e state.\n            If the time that a session stays in the \u003ccode\u003eREADY\u003c/code\u003e state exceeds the\n                \u003ccode\u003emaxSessionLengthInMinutes\u003c/code\u003e value, the session will automatically be\n            stopped (instead of terminated).\u003c/p\u003e",
-		//	      "maximum": 5760,
-		//	      "minimum": 0,
 		//	      "type": "number"
 		//	    },
 		//	    "SessionBackup": {
 		//	      "additionalProperties": false,
-		//	      "description": "\u003cp\u003eConfigures how streaming sessions are backed up when launched from this launch\n            profile.\u003c/p\u003e",
 		//	      "properties": {
 		//	        "MaxBackupsToRetain": {
-		//	          "default": 0,
-		//	          "description": "\u003cp\u003eThe maximum number of backups that each streaming session created from this launch\n            profile can have.\u003c/p\u003e",
-		//	          "maximum": 10,
-		//	          "minimum": 0,
 		//	          "type": "number"
 		//	        },
 		//	        "Mode": {
-		//	          "enum": [
-		//	            "AUTOMATIC",
-		//	            "DEACTIVATED"
-		//	          ],
 		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "SessionPersistenceMode": {
-		//	      "enum": [
-		//	        "DEACTIVATED",
-		//	        "ACTIVATED"
-		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "SessionStorage": {
 		//	      "additionalProperties": false,
-		//	      "description": "\u003cp\u003eThe configuration for a streaming session?s upload storage.\u003c/p\u003e",
 		//	      "properties": {
 		//	        "Mode": {
-		//	          "description": "\u003cp\u003eAllows artists to upload files to their workstations. The only valid option is\n                \u003ccode\u003eUPLOAD\u003c/code\u003e.\u003c/p\u003e",
 		//	          "items": {
-		//	            "enum": [
-		//	              "UPLOAD"
-		//	            ],
 		//	            "type": "string"
 		//	          },
-		//	          "minItems": 1,
-		//	          "type": "array"
+		//	          "type": "array",
+		//	          "uniqueItems": false
 		//	        },
 		//	        "Root": {
 		//	          "additionalProperties": false,
-		//	          "description": "\u003cp\u003eThe upload storage root location (folder) on streaming workstations where files are\n            uploaded.\u003c/p\u003e",
 		//	          "properties": {
 		//	            "Linux": {
-		//	              "description": "\u003cp\u003eThe folder path in Linux workstations where files are uploaded.\u003c/p\u003e",
-		//	              "maxLength": 128,
-		//	              "minLength": 1,
-		//	              "pattern": "^(\\$HOME|/)[/]?([A-Za-z0-9-_]+/)*([A-Za-z0-9_-]+)$",
 		//	              "type": "string"
 		//	            },
 		//	            "Windows": {
-		//	              "description": "\u003cp\u003eThe folder path in Windows workstations where files are uploaded.\u003c/p\u003e",
-		//	              "maxLength": 128,
-		//	              "minLength": 1,
-		//	              "pattern": "^((\\%HOMEPATH\\%)|[a-zA-Z]:)[\\\\/](?:[a-zA-Z0-9_-]+[\\\\/])*[a-zA-Z0-9_-]+$",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -262,40 +165,22 @@ func launchProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "StreamingImageIds": {
-		//	      "description": "\u003cp\u003eThe streaming images that users can select from when launching a streaming session\n            with this launch profile.\u003c/p\u003e",
 		//	      "items": {
-		//	        "maxLength": 22,
-		//	        "minLength": 0,
-		//	        "pattern": "^[a-zA-Z0-9-_]*$",
 		//	        "type": "string"
 		//	      },
-		//	      "maxItems": 20,
-		//	      "minItems": 1,
-		//	      "type": "array"
+		//	      "type": "array",
+		//	      "uniqueItems": false
 		//	    },
 		//	    "VolumeConfiguration": {
 		//	      "additionalProperties": false,
-		//	      "description": "\u003cp\u003eCustom volume configuration for the root volumes that are attached to streaming\n            sessions.\u003c/p\u003e\n         \u003cp\u003eThis parameter is only allowed when \u003ccode\u003esessionPersistenceMode\u003c/code\u003e is\n                \u003ccode\u003eACTIVATED\u003c/code\u003e.\u003c/p\u003e",
 		//	      "properties": {
 		//	        "Iops": {
-		//	          "default": 3000,
-		//	          "description": "\u003cp\u003eThe number of I/O operations per second for the root volume that is attached to\n            streaming session.\u003c/p\u003e",
-		//	          "maximum": 16000,
-		//	          "minimum": 3000,
 		//	          "type": "number"
 		//	        },
 		//	        "Size": {
-		//	          "default": 500,
-		//	          "description": "\u003cp\u003eThe size of the root volume that is attached to the streaming session. The root volume\n            size is measured in GiBs.\u003c/p\u003e",
-		//	          "maximum": 16000,
-		//	          "minimum": 100,
 		//	          "type": "number"
 		//	        },
 		//	        "Throughput": {
-		//	          "default": 125,
-		//	          "description": "\u003cp\u003eThe throughput to provision for the root volume that is attached to the streaming\n            session. The throughput is measured in MiB/s.\u003c/p\u003e",
-		//	          "maximum": 1000,
-		//	          "minimum": 125,
 		//	          "type": "number"
 		//	        }
 		//	      },
@@ -304,8 +189,8 @@ func launchProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "required": [
 		//	    "ClipboardMode",
-		//	    "Ec2InstanceTypes",
-		//	    "StreamingImageIds"
+		//	    "StreamingImageIds",
+		//	    "Ec2InstanceTypes"
 		//	  ],
 		//	  "type": "object"
 		//	}
@@ -315,12 +200,6 @@ func launchProfileResource(ctx context.Context) (resource.Resource, error) {
 				"automatic_termination_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
 					Computed: true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"DEACTIVATED",
-							"ACTIVATED",
-						),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -328,61 +207,24 @@ func launchProfileResource(ctx context.Context) (resource.Resource, error) {
 				// Property: ClipboardMode
 				"clipboard_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Required: true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"ENABLED",
-							"DISABLED",
-						),
-					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Ec2InstanceTypes
 				"ec_2_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "<p>The EC2 instance types that users can select from when launching a streaming session\n            with this launch profile.</p>",
 					Required:    true,
-					Validators: []validator.List{ /*START VALIDATORS*/
-						listvalidator.SizeBetween(1, 30),
-						listvalidator.ValueStringsAre(
-							stringvalidator.OneOf(
-								"g4dn.xlarge",
-								"g4dn.2xlarge",
-								"g4dn.4xlarge",
-								"g4dn.8xlarge",
-								"g4dn.12xlarge",
-								"g4dn.16xlarge",
-								"g3.4xlarge",
-								"g3s.xlarge",
-								"g5.xlarge",
-								"g5.2xlarge",
-								"g5.4xlarge",
-								"g5.8xlarge",
-								"g5.16xlarge",
-							),
-						),
-					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
 				// Property: MaxSessionLengthInMinutes
 				"max_session_length_in_minutes": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "<p>The length of time, in minutes, that a streaming session can be active before it is\n            stopped or terminated. After this point, Nimble Studio automatically terminates or\n            stops the session. The default length of time is 690 minutes, and the maximum length of\n            time is 30 days.</p>",
-					Optional:    true,
-					Computed:    true,
-					Default:     float64default.StaticFloat64(690.000000),
-					Validators: []validator.Float64{ /*START VALIDATORS*/
-						float64validator.Between(1.000000, 43200.000000),
-					}, /*END VALIDATORS*/
+					Optional: true,
+					Computed: true,
 					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 						float64planmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: MaxStoppedSessionLengthInMinutes
 				"max_stopped_session_length_in_minutes": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "<p>Integer that determines if you can start and stop your sessions and how long a session\n            can stay in the <code>STOPPED</code> state. The default value is 0. The maximum value is\n            5760.</p>\n         <p>This field is allowed only when <code>sessionPersistenceMode</code> is\n                <code>ACTIVATED</code> and <code>automaticTerminationMode</code> is\n                <code>ACTIVATED</code>.</p>\n         <p>If the value is set to 0, your sessions can?t be <code>STOPPED</code>. If you then\n            call <code>StopStreamingSession</code>, the session fails. If the time that a session\n            stays in the <code>READY</code> state exceeds the <code>maxSessionLengthInMinutes</code>\n            value, the session will automatically be terminated (instead of\n            <code>STOPPED</code>).</p>\n         <p>If the value is set to a positive number, the session can be stopped. You can call\n                <code>StopStreamingSession</code> to stop sessions in the <code>READY</code> state.\n            If the time that a session stays in the <code>READY</code> state exceeds the\n                <code>maxSessionLengthInMinutes</code> value, the session will automatically be\n            stopped (instead of terminated).</p>",
-					Optional:    true,
-					Computed:    true,
-					Default:     float64default.StaticFloat64(0.000000),
-					Validators: []validator.Float64{ /*START VALIDATORS*/
-						float64validator.Between(0.000000, 5760.000000),
-					}, /*END VALIDATORS*/
+					Optional: true,
+					Computed: true,
 					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 						float64planmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -392,13 +234,8 @@ func launchProfileResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: MaxBackupsToRetain
 						"max_backups_to_retain": schema.Float64Attribute{ /*START ATTRIBUTE*/
-							Description: "<p>The maximum number of backups that each streaming session created from this launch\n            profile can have.</p>",
-							Optional:    true,
-							Computed:    true,
-							Default:     float64default.StaticFloat64(0.000000),
-							Validators: []validator.Float64{ /*START VALIDATORS*/
-								float64validator.Between(0.000000, 10.000000),
-							}, /*END VALIDATORS*/
+							Optional: true,
+							Computed: true,
 							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 								float64planmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
@@ -407,20 +244,13 @@ func launchProfileResource(ctx context.Context) (resource.Resource, error) {
 						"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
 							Computed: true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.OneOf(
-									"AUTOMATIC",
-									"DEACTIVATED",
-								),
-							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "<p>Configures how streaming sessions are backed up when launched from this launch\n            profile.</p>",
-					Optional:    true,
-					Computed:    true,
+					Optional: true,
+					Computed: true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -429,12 +259,6 @@ func launchProfileResource(ctx context.Context) (resource.Resource, error) {
 				"session_persistence_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
 					Computed: true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"DEACTIVATED",
-							"ACTIVATED",
-						),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -445,16 +269,9 @@ func launchProfileResource(ctx context.Context) (resource.Resource, error) {
 						// Property: Mode
 						"mode": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
-							Description: "<p>Allows artists to upload files to their workstations. The only valid option is\n                <code>UPLOAD</code>.</p>",
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
-								listvalidator.SizeAtLeast(1),
-								listvalidator.ValueStringsAre(
-									stringvalidator.OneOf(
-										"UPLOAD",
-									),
-								),
 								fwvalidators.NotNullList(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -466,42 +283,30 @@ func launchProfileResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Linux
 								"linux": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "<p>The folder path in Linux workstations where files are uploaded.</p>",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 128),
-										stringvalidator.RegexMatches(regexp.MustCompile("^(\\$HOME|/)[/]?([A-Za-z0-9-_]+/)*([A-Za-z0-9_-]+)$"), ""),
-									}, /*END VALIDATORS*/
+									Optional: true,
+									Computed: true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Windows
 								"windows": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "<p>The folder path in Windows workstations where files are uploaded.</p>",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 128),
-										stringvalidator.RegexMatches(regexp.MustCompile("^((\\%HOMEPATH\\%)|[a-zA-Z]:)[\\\\/](?:[a-zA-Z0-9_-]+[\\\\/])*[a-zA-Z0-9_-]+$"), ""),
-									}, /*END VALIDATORS*/
+									Optional: true,
+									Computed: true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "<p>The upload storage root location (folder) on streaming workstations where files are\n            uploaded.</p>",
-							Optional:    true,
-							Computed:    true,
+							Optional: true,
+							Computed: true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "<p>The configuration for a streaming session?s upload storage.</p>",
-					Optional:    true,
-					Computed:    true,
+					Optional: true,
+					Computed: true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -509,100 +314,67 @@ func launchProfileResource(ctx context.Context) (resource.Resource, error) {
 				// Property: StreamingImageIds
 				"streaming_image_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "<p>The streaming images that users can select from when launching a streaming session\n            with this launch profile.</p>",
 					Required:    true,
-					Validators: []validator.List{ /*START VALIDATORS*/
-						listvalidator.SizeBetween(1, 20),
-						listvalidator.ValueStringsAre(
-							stringvalidator.LengthBetween(0, 22),
-							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-_]*$"), ""),
-						),
-					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
 				// Property: VolumeConfiguration
 				"volume_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Iops
 						"iops": schema.Float64Attribute{ /*START ATTRIBUTE*/
-							Description: "<p>The number of I/O operations per second for the root volume that is attached to\n            streaming session.</p>",
-							Optional:    true,
-							Computed:    true,
-							Default:     float64default.StaticFloat64(3000.000000),
-							Validators: []validator.Float64{ /*START VALIDATORS*/
-								float64validator.Between(3000.000000, 16000.000000),
-							}, /*END VALIDATORS*/
+							Optional: true,
+							Computed: true,
 							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 								float64planmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Size
 						"size": schema.Float64Attribute{ /*START ATTRIBUTE*/
-							Description: "<p>The size of the root volume that is attached to the streaming session. The root volume\n            size is measured in GiBs.</p>",
-							Optional:    true,
-							Computed:    true,
-							Default:     float64default.StaticFloat64(500.000000),
-							Validators: []validator.Float64{ /*START VALIDATORS*/
-								float64validator.Between(100.000000, 16000.000000),
-							}, /*END VALIDATORS*/
+							Optional: true,
+							Computed: true,
 							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 								float64planmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Throughput
 						"throughput": schema.Float64Attribute{ /*START ATTRIBUTE*/
-							Description: "<p>The throughput to provision for the root volume that is attached to the streaming\n            session. The throughput is measured in MiB/s.</p>",
-							Optional:    true,
-							Computed:    true,
-							Default:     float64default.StaticFloat64(125.000000),
-							Validators: []validator.Float64{ /*START VALIDATORS*/
-								float64validator.Between(125.000000, 1000.000000),
-							}, /*END VALIDATORS*/
+							Optional: true,
+							Computed: true,
 							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 								float64planmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "<p>Custom volume configuration for the root volumes that are attached to streaming\n            sessions.</p>\n         <p>This parameter is only allowed when <code>sessionPersistenceMode</code> is\n                <code>ACTIVATED</code>.</p>",
-					Optional:    true,
-					Computed:    true,
+					Optional: true,
+					Computed: true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "<p>A configuration for a streaming session.</p>",
-			Required:    true,
+			Required: true,
 		}, /*END ATTRIBUTE*/
 		// Property: StudioComponentIds
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "\u003cp\u003eUnique identifiers for a collection of studio components that can be used with this\n            launch profile.\u003c/p\u003e",
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
-		//	  "maxItems": 100,
-		//	  "minItems": 1,
-		//	  "type": "array"
+		//	  "type": "array",
+		//	  "uniqueItems": false
 		//	}
 		"studio_component_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "<p>Unique identifiers for a collection of studio components that can be used with this\n            launch profile.</p>",
 			Required:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeBetween(1, 100),
-			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: StudioId
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "\u003cp\u003eThe studio ID. \u003c/p\u003e",
 		//	  "type": "string"
 		//	}
 		"studio_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "<p>The studio ID. </p>",
-			Required:    true,
+			Required: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -611,7 +383,6 @@ func launchProfileResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "additionalProperties": false,
 		//	  "patternProperties": {
 		//	    "": {
 		//	      "type": "string"
@@ -641,7 +412,7 @@ func launchProfileResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Represents a launch profile which delegates access to a collection of studio components to studio users",
+		Description: "Resource Type definition for AWS::NimbleStudio::LaunchProfile",
 		Version:     1,
 		Attributes:  attributes,
 	}

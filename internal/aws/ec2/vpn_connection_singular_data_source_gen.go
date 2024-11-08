@@ -395,6 +395,7 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	              "description": "The Diffie-Hellmann group number.",
 		//	              "enum": [
 		//	                2,
+		//	                5,
 		//	                14,
 		//	                15,
 		//	                16,

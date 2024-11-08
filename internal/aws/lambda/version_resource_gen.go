@@ -9,7 +9,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -87,10 +86,6 @@ func versionResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "anyOf": [
-		//	    {},
-		//	    {}
-		//	  ],
 		//	  "description": "The name of the Lambda function.",
 		//	  "maxLength": 140,
 		//	  "minLength": 1,
@@ -106,22 +101,6 @@ func versionResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
-		// Property: Policy
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "description": "The resource policy of your function",
-		//	  "type": "object"
-		//	}
-		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  jsontypes.NormalizedType{},
-			Description: "The resource policy of your function",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ProvisionedConcurrencyConfig
@@ -264,7 +243,6 @@ func versionResource(ctx context.Context) (resource.Resource, error) {
 		"description":                       "Description",
 		"function_arn":                      "FunctionArn",
 		"function_name":                     "FunctionName",
-		"policy":                            "Policy",
 		"provisioned_concurrency_config":    "ProvisionedConcurrencyConfig",
 		"provisioned_concurrent_executions": "ProvisionedConcurrentExecutions",
 		"runtime_policy":                    "RuntimePolicy",

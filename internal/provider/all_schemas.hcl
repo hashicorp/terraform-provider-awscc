@@ -379,6 +379,11 @@ resource_schema "aws_appsync_api" {
   cloudformation_type_name = "AWS::AppSync::Api"
 }
 
+resource_schema "aws_appsync_channel_namespace" {
+  cloudformation_type_name               = "AWS::AppSync::ChannelNamespace"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_appsync_data_source" {
   cloudformation_type_name               = "AWS::AppSync::DataSource"
   suppress_plural_data_source_generation = true
@@ -564,6 +569,10 @@ resource_schema "aws_bedrock_agent" {
 resource_schema "aws_bedrock_agent_alias" {
   cloudformation_type_name               = "AWS::Bedrock::AgentAlias"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_bedrock_application_inference_profile" {
+  cloudformation_type_name = "AWS::Bedrock::ApplicationInferenceProfile"
 }
 
 resource_schema "aws_bedrock_data_source" {
@@ -1172,7 +1181,7 @@ resource_schema "aws_controltower_landing_zone" {
   cloudformation_type_name = "AWS::ControlTower::LandingZone"
 
   # Suppression update: issue fixed on the latest schema.
-  
+
   # Historical suppression Reason: Manifest is of unsupported type: .
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1519
   suppress_resource_generation             = false
@@ -1642,6 +1651,10 @@ resource_schema "aws_ec2_security_group_egress" {
 
 resource_schema "aws_ec2_security_group_ingress" {
   cloudformation_type_name = "AWS::EC2::SecurityGroupIngress"
+}
+
+resource_schema "aws_ec2_security_group_vpc_association" {
+  cloudformation_type_name = "AWS::EC2::SecurityGroupVpcAssociation"
 }
 
 resource_schema "aws_ec2_snapshot_block_public_access" {
@@ -3762,6 +3775,10 @@ resource_schema "aws_rds_db_proxy_target_group" {
   cloudformation_type_name = "AWS::RDS::DBProxyTargetGroup"
 }
 
+resource_schema "aws_rds_db_shard_group" {
+  cloudformation_type_name = "AWS::RDS::DBShardGroup"
+}
+
 resource_schema "aws_rds_db_subnet_group" {
   cloudformation_type_name = "AWS::RDS::DBSubnetGroup"
 }
@@ -4636,6 +4653,17 @@ resource_schema "aws_transfer_server" {
   cloudformation_type_name = "AWS::Transfer::Server"
 }
 
+resource_schema "aws_transfer_user" {
+  cloudformation_type_name               = "AWS::Transfer::User"
+  suppress_plural_data_source_generation = true
+
+  # Suppression Reason:
+  # PosixProfile/SecondaryGids is of unsupported type for list item validation: number
+  # Ref: https://github.com/hashicorp/terraform-provider-awscc/issues/2095
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+}
+
 resource_schema "aws_transfer_workflow" {
   cloudformation_type_name = "AWS::Transfer::Workflow"
 }
@@ -4747,8 +4775,23 @@ resource_schema "aws_wafv2_web_acl_association" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_wisdom_ai_agent" {
+  cloudformation_type_name               = "AWS::Wisdom::AIAgent"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_wisdom_ai_agent_version" {
+  cloudformation_type_name               = "AWS::Wisdom::AIAgentVersion"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_wisdom_ai_prompt" {
   cloudformation_type_name               = "AWS::Wisdom::AIPrompt"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_wisdom_ai_prompt_version" {
+  cloudformation_type_name               = "AWS::Wisdom::AIPromptVersion"
   suppress_plural_data_source_generation = true
 }
 

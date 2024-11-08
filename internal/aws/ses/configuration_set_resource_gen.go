@@ -9,11 +9,13 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -40,6 +42,12 @@ func configurationSetResource(ctx context.Context) (resource.Resource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "An object that defines the dedicated IP pool that is used to send emails that you send using the configuration set.",
 		//	  "properties": {
+		//	    "MaxDeliverySeconds": {
+		//	      "description": "Specifies the maximum time until which SES will retry sending emails",
+		//	      "maximum": 50400,
+		//	      "minimum": 300,
+		//	      "type": "number"
+		//	    },
 		//	    "SendingPoolName": {
 		//	      "description": "The name of the dedicated IP pool to associate with the configuration set.",
 		//	      "type": "string"
@@ -54,6 +62,18 @@ func configurationSetResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"delivery_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaxDeliverySeconds
+				"max_delivery_seconds": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the maximum time until which SES will retry sending emails",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Float64{ /*START VALIDATORS*/
+						float64validator.Between(300.000000, 50400.000000),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+						float64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: SendingPoolName
 				"sending_pool_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The name of the dedicated IP pool to associate with the configuration set.",
@@ -374,6 +394,7 @@ func configurationSetResource(ctx context.Context) (resource.Resource, error) {
 		"delivery_options":           "DeliveryOptions",
 		"engagement_metrics":         "EngagementMetrics",
 		"guardian_options":           "GuardianOptions",
+		"max_delivery_seconds":       "MaxDeliverySeconds",
 		"name":                       "Name",
 		"optimized_shared_delivery":  "OptimizedSharedDelivery",
 		"reputation_metrics_enabled": "ReputationMetricsEnabled",

@@ -21,7 +21,7 @@ Data Source schema for AWS::ApiGateway::BasePathMapping
 
 ### Read-Only
 
-- `base_path` (String) The base path name that callers of the API must provide as part of the URL after the domain name.
-- `domain_name` (String) The domain name of the BasePathMapping resource to be described.
-- `rest_api_id` (String) The string identifier of the associated RestApi.
-- `stage` (String) The name of the associated stage.
+- `base_path` (String)
+- `domain_name` (String)
+- `rest_api_id` (String)
+- `stage` (String)

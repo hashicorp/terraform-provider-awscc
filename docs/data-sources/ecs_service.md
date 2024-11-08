@@ -25,7 +25,7 @@ Data Source schema for AWS::ECS::Service
  If a ``capacityProviderStrategy`` is specified, the ``launchType`` parameter must be omitted. If no ``capacityProviderStrategy`` or ``launchType`` is specified, the ``defaultCapacityProviderStrategy`` for the cluster is used.
  A capacity provider strategy may contain a maximum of 6 capacity providers. (see [below for nested schema](#nestedatt--capacity_provider_strategy))
 - `cluster` (String) The short name or full Amazon Resource Name (ARN) of the cluster that you run your service on. If you do not specify a cluster, the default cluster is assumed.
-- `deployment_configuration` (Attributes) Optional deployment parameters that control how many tasks run during the deployment and the ordering of stopping and starting tasks. (see [below for nested schema](#nestedatt--deployment_configuration))
+- `deployment_configuration` (Attributes) Optional deployment parameters that control how many tasks run during the deployment and the failure detection methods. (see [below for nested schema](#nestedatt--deployment_configuration))
 - `deployment_controller` (Attributes) The deployment controller to use for the service. If no deployment controller is specified, the default value of ``ECS`` is used. (see [below for nested schema](#nestedatt--deployment_controller))
 - `desired_count` (Number) The number of instantiations of the specified task definition to place and keep running in your service.
  For new services, if a desired count is not specified, a default value of ``1`` is used. When using the ``DAEMON`` scheduling strategy, the desired count is not required.
@@ -152,7 +152,7 @@ Read-Only:
 - `container_name` (String) The name of the container (as it appears in a container definition) to associate with the load balancer.
  You need to specify the container name when configuring the target group for an Amazon ECS load balancer.
 - `container_port` (Number) The port on the container to associate with the load balancer. This port must correspond to a ``containerPort`` in the task definition the tasks in the service are using. For tasks that use the EC2 launch type, the container instance they're launched on must allow ingress traffic on the ``hostPort`` of the port mapping.
-- `load_balancer_name` (String) The name of the load balancer to associate with the Amazon ECS service or task set.
+- `load_balancer_name` (String) The name of the load balancer to associate with the service or task set.
  If you are using an Application Load Balancer or a Network Load Balancer the load balancer name parameter should be omitted.
 - `target_group_arn` (String) The full Amazon Resource Name (ARN) of the Elastic Load Balancing target group or groups associated with a service or task set.
  A target group ARN is only specified when using an Application Load Balancer or Network Load Balancer. 
@@ -350,8 +350,9 @@ Read-Only:
 Read-Only:
 
 - `encrypted` (Boolean) Indicates whether the volume should be encrypted. If no value is specified, encryption is turned on by default. This parameter maps 1:1 with the ``Encrypted`` parameter of the [CreateVolume API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in the *Amazon EC2 API Reference*.
-- `filesystem_type` (String) The Linux filesystem type for the volume. For volumes created from a snapshot, you must specify the same filesystem type that the volume was using when the snapshot was created. If there is a filesystem type mismatch, the task will fail to start.
- The available filesystem types are  ``ext3``, ``ext4``, and ``xfs``. If no value is specified, the ``xfs`` filesystem type is used by default.
+- `filesystem_type` (String) The filesystem type for the volume. For volumes created from a snapshot, you must specify the same filesystem type that the volume was using when the snapshot was created. If there is a filesystem type mismatch, the task will fail to start.
+ The available Linux filesystem types are  ``ext3``, ``ext4``, and ``xfs``. If no value is specified, the ``xfs`` filesystem type is used by default.
+ The available Windows filesystem types are ``NTFS``.
 - `iops` (Number) The number of I/O operations per second (IOPS). For ``gp3``, ``io1``, and ``io2`` volumes, this represents the number of IOPS that are provisioned for the volume. For ``gp2`` volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting.
  The following are the supported values for each volume type.
   +   ``gp3``: 3,000 - 16,000 IOPS

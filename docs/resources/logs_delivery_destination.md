@@ -30,6 +30,7 @@ The policy must be in JSON string format.
 
 Length Constraints: Maximum length of 51200
 - `destination_resource_arn` (String) The ARN of the Amazon Web Services destination that this delivery destination represents. That Amazon Web Services destination can be a log group in CloudWatch Logs, an Amazon S3 bucket, or a delivery stream in Firehose.
+- `output_format` (String) The format of the logs that are sent to this delivery destination.
 - `tags` (Attributes Set) The tags that have been assigned to this delivery destination. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

@@ -126,7 +126,7 @@ resource "awscc_ec2_launch_template" "with eip" {
 
 - `launch_template_name` (String) A name for the launch template.
 - `tag_specifications` (Attributes List) The tags to apply to the launch template on creation. To tag the launch template, the resource type must be ``launch-template``.
- To specify the tags for the resources that are created when an instance is launched, you must use [TagSpecifications](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html#cfn-ec2-launchtemplate-launchtemplatedata-tagspecifications). (see [below for nested schema](#nestedatt--tag_specifications))
+ To specify the tags for resources that are created during instance launch, use [TagSpecifications](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html#cfn-ec2-launchtemplate-launchtemplatedata-tagspecifications). (see [below for nested schema](#nestedatt--tag_specifications))
 - `version_description` (String) A description for the first version of the launch template.
 
 ### Read-Only
@@ -150,7 +150,8 @@ Optional:
 - `ebs_optimized` (Boolean) Indicates whether the instance is optimized for Amazon EBS I/O. This optimization provides dedicated throughput to Amazon EBS and an optimized configuration stack to provide optimal Amazon EBS I/O performance. This optimization isn't available with all instance types. Additional usage charges apply when using an EBS-optimized instance.
 - `elastic_gpu_specifications` (Attributes List) Deprecated.
   Amazon Elastic Graphics reached end of life on January 8, 2024. For workloads that require graphics acceleration, we recommend that you use Amazon EC2 G4ad, G4dn, or G5 instances. (see [below for nested schema](#nestedatt--launch_template_data--elastic_gpu_specifications))
-- `elastic_inference_accelerators` (Attributes List) An elastic inference accelerator to associate with the instance. Elastic inference accelerators are a resource you can attach to your Amazon EC2 instances to accelerate your Deep Learning (DL) inference workloads.
+- `elastic_inference_accelerators` (Attributes List) Amazon Elastic Inference is no longer available.
+  An elastic inference accelerator to associate with the instance. Elastic inference accelerators are a resource you can attach to your Amazon EC2 instances to accelerate your Deep Learning (DL) inference workloads.
  You cannot specify accelerators from different generations in the same request.
   Starting April 15, 2023, AWS will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service. (see [below for nested schema](#nestedatt--launch_template_data--elastic_inference_accelerators))
 - `enclave_options` (Attributes) Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see [What is Nitro Enclaves?](https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html) in the *Nitro Enclaves User Guide*.
@@ -177,7 +178,7 @@ Optional:
   
   If you specify ``InstanceRequirements``, you can't specify ``InstanceType``.
  Attribute-based instance type selection is only supported when using Auto Scaling groups, EC2 Fleet, and Spot Fleet to launch instances. If you plan to use the launch template in the [launch instance wizard](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-instance-wizard.html), or with the [RunInstances](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html) API or [AWS::EC2::Instance](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html) AWS CloudFormation resource, you can't specify ``InstanceRequirements``.
-  For more information, see [Attribute-based instance type selection for EC2 Fleet](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html), [Attribute-based instance type selection for Spot Fleet](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-attribute-based-instance-type-selection.html), and [Spot placement score](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html) in the *Amazon EC2 User Guide*. (see [below for nested schema](#nestedatt--launch_template_data--instance_requirements))
+  For more information, see [Specify attributes for instance type selection for EC2 Fleet or Spot Fleet](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html) and [Spot placement score](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html) in the *Amazon EC2 User Guide*. (see [below for nested schema](#nestedatt--launch_template_data--instance_requirements))
 - `instance_type` (String) The instance type. For more information, see [Amazon EC2 instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the *Amazon EC2 User Guide*.
  If you specify ``InstanceType``, you can't specify ``InstanceRequirements``.
 - `kernel_id` (String) The ID of the kernel.
@@ -197,8 +198,7 @@ Optional:
  If you specify a network interface, you must specify any security groups as part of the network interface instead.
 - `security_groups` (List of String) The names of the security groups. For a nondefault VPC, you must use security group IDs instead.
  If you specify a network interface, you must specify any security groups as part of the network interface instead of using this parameter.
-- `tag_specifications` (Attributes List) The tags to apply to the resources that are created during instance launch.
- To tag a resource after it has been created, see [CreateTags](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html).
+- `tag_specifications` (Attributes List) The tags to apply to resources that are created during instance launch.
  To tag the launch template itself, use [TagSpecifications](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html#cfn-ec2-launchtemplate-tagspecifications). (see [below for nested schema](#nestedatt--launch_template_data--tag_specifications))
 - `user_data` (String) The user data to make available to the instance. You must provide base64-encoded text. User data is limited to 16 KB. For more information, see [Run commands on your Amazon EC2 instance at launch](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html) in the *Amazon EC2 User Guide*.
  If you are creating the launch template for use with BATCH, the user data must be provided in the [MIME multi-part archive format](https://docs.aws.amazon.com/https://cloudinit.readthedocs.io/en/latest/topics/format.html#mime-multi-part-archive). For more information, see [Amazon EC2 user data in launch templates](https://docs.aws.amazon.com/batch/latest/userguide/launch-templates.html) in the *User Guide*.
@@ -228,7 +228,7 @@ Optional:
   
  For ``io2`` volumes, you can achieve up to 256,000 IOPS on [instances built on the Nitro System](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances). On other instances, you can achieve performance up to 32,000 IOPS.
  This parameter is supported for ``io1``, ``io2``, and ``gp3`` volumes only.
-- `kms_key_id` (String) The ARN of the symmetric KMSlong (KMS) CMK used for encryption.
+- `kms_key_id` (String) Identifier (key ID, key alias, key ARN, or alias ARN) of the customer managed KMS key to use for EBS encryption.
 - `snapshot_id` (String) The ID of the snapshot.
 - `throughput` (Number) The throughput to provision for a ``gp3`` volume, with a maximum of 1,000 MiB/s.
  Valid Range: Minimum value of 125. Maximum value of 1000.
@@ -388,7 +388,6 @@ Optional:
 - `accelerator_types` (List of String) The accelerator types that must be on the instance type.
   +  For instance types with GPU accelerators, specify ``gpu``.
   +  For instance types with FPGA accelerators, specify ``fpga``.
-  +  For instance types with inference accelerators, specify ``inference``.
   
  Default: Any accelerator type
 - `allowed_instance_types` (List of String) The instance types to apply your specified attributes against. All other instance types are ignored, even if they match your specified attributes.
@@ -609,9 +608,10 @@ Optional:
 - `device_index` (Number) The device index for the network interface attachment. Each network interface requires a device index. If you create a launch template that includes secondary network interfaces but not a primary network interface, then you must add a primary network interface as a launch parameter when you launch an instance from the template.
 - `ena_srd_specification` (Attributes) The ENA Express configuration for the network interface. (see [below for nested schema](#nestedatt--launch_template_data--network_interfaces--ena_srd_specification))
 - `groups` (List of String) The IDs of one or more security groups.
-- `interface_type` (String) The type of network interface. To create an Elastic Fabric Adapter (EFA), specify ``efa``. For more information, see [Elastic Fabric Adapter](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html) in the *Amazon EC2 User Guide*.
+- `interface_type` (String) The type of network interface. To create an Elastic Fabric Adapter (EFA), specify ``efa`` or ``efa``. For more information, see [Elastic Fabric Adapter](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html) in the *Amazon EC2 User Guide*.
  If you are not creating an EFA, specify ``interface`` or omit this parameter.
- Valid values: ``interface`` | ``efa``
+ If you specify ``efa-only``, do not assign any IP addresses to the network interface. EFA-only network interfaces do not support IP addresses.
+ Valid values: ``interface`` | ``efa`` | ``efa-only``
 - `ipv_4_prefix_count` (Number) The number of IPv4 prefixes to be automatically assigned to the network interface. You cannot use this option if you use the ``Ipv4Prefix`` option.
 - `ipv_4_prefixes` (Attributes List) One or more IPv4 prefixes to be assigned to the network interface. You cannot use this option if you use the ``Ipv4PrefixCount`` option. (see [below for nested schema](#nestedatt--launch_template_data--network_interfaces--ipv_4_prefixes))
 - `ipv_6_address_count` (Number) The number of IPv6 addresses to assign to a network interface. Amazon EC2 automatically selects the IPv6 addresses from the subnet range. You can't use this option if specifying specific IPv6 addresses.

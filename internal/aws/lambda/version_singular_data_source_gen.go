@@ -8,7 +8,6 @@ package lambda
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -63,10 +62,6 @@ func versionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "anyOf": [
-		//	    {},
-		//	    {}
-		//	  ],
 		//	  "description": "The name of the Lambda function.",
 		//	  "maxLength": 140,
 		//	  "minLength": 1,
@@ -75,18 +70,6 @@ func versionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"function_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the Lambda function.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
-		// Property: Policy
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "description": "The resource policy of your function",
-		//	  "type": "object"
-		//	}
-		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  jsontypes.NormalizedType{},
-			Description: "The resource policy of your function",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProvisionedConcurrencyConfig
@@ -189,7 +172,6 @@ func versionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description":                       "Description",
 		"function_arn":                      "FunctionArn",
 		"function_name":                     "FunctionName",
-		"policy":                            "Policy",
 		"provisioned_concurrency_config":    "ProvisionedConcurrencyConfig",
 		"provisioned_concurrent_executions": "ProvisionedConcurrentExecutions",
 		"runtime_policy":                    "RuntimePolicy",

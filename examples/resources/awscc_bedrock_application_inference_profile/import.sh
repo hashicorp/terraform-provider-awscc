@@ -1,0 +1,1 @@
+$ terraform import awscc_bedrock_application_inference_profile.example "inference_profile_identifier"

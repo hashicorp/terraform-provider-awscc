@@ -120,7 +120,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "Optional deployment parameters that control how many tasks run during the deployment and the ordering of stopping and starting tasks.",
+		//	  "description": "Optional deployment parameters that control how many tasks run during the deployment and the failure detection methods.",
 		//	  "properties": {
 		//	    "Alarms": {
 		//	      "additionalProperties": false,
@@ -283,7 +283,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "Optional deployment parameters that control how many tasks run during the deployment and the ordering of stopping and starting tasks.",
+			Description: "Optional deployment parameters that control how many tasks run during the deployment and the failure detection methods.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -442,7 +442,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "integer"
 		//	      },
 		//	      "LoadBalancerName": {
-		//	        "description": "The name of the load balancer to associate with the Amazon ECS service or task set.\n If you are using an Application Load Balancer or a Network Load Balancer the load balancer name parameter should be omitted.",
+		//	        "description": "The name of the load balancer to associate with the service or task set.\n If you are using an Application Load Balancer or a Network Load Balancer the load balancer name parameter should be omitted.",
 		//	        "type": "string"
 		//	      },
 		//	      "TargetGroupArn": {
@@ -477,7 +477,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: LoadBalancerName
 					"load_balancer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the load balancer to associate with the Amazon ECS service or task set.\n If you are using an Application Load Balancer or a Network Load Balancer the load balancer name parameter should be omitted.",
+						Description: "The name of the load balancer to associate with the service or task set.\n If you are using an Application Load Balancer or a Network Load Balancer the load balancer name parameter should be omitted.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1439,7 +1439,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "boolean"
 		//	          },
 		//	          "FilesystemType": {
-		//	            "description": "The Linux filesystem type for the volume. For volumes created from a snapshot, you must specify the same filesystem type that the volume was using when the snapshot was created. If there is a filesystem type mismatch, the task will fail to start.\n The available filesystem types are\u2028 ``ext3``, ``ext4``, and ``xfs``. If no value is specified, the ``xfs`` filesystem type is used by default.",
+		//	            "description": "The filesystem type for the volume. For volumes created from a snapshot, you must specify the same filesystem type that the volume was using when the snapshot was created. If there is a filesystem type mismatch, the task will fail to start.\n The available Linux filesystem types are\u2028 ``ext3``, ``ext4``, and ``xfs``. If no value is specified, the ``xfs`` filesystem type is used by default.\n The available Windows filesystem types are ``NTFS``.",
 		//	            "type": "string"
 		//	          },
 		//	          "Iops": {
@@ -1550,7 +1550,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: FilesystemType
 							"filesystem_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The Linux filesystem type for the volume. For volumes created from a snapshot, you must specify the same filesystem type that the volume was using when the snapshot was created. If there is a filesystem type mismatch, the task will fail to start.\n The available filesystem types are\u2028 ``ext3``, ``ext4``, and ``xfs``. If no value is specified, the ``xfs`` filesystem type is used by default.",
+								Description: "The filesystem type for the volume. For volumes created from a snapshot, you must specify the same filesystem type that the volume was using when the snapshot was created. If there is a filesystem type mismatch, the task will fail to start.\n The available Linux filesystem types are\u2028 ``ext3``, ``ext4``, and ``xfs``. If no value is specified, the ``xfs`` filesystem type is used by default.\n The available Windows filesystem types are ``NTFS``.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

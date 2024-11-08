@@ -31,13 +31,13 @@ resource "awscc_apigateway_request_validator" "example" {
 
 ### Required
 
-- `rest_api_id` (String) The string identifier of the associated RestApi.
+- `rest_api_id` (String)
 
 ### Optional
 
-- `name` (String) The name of this RequestValidator
-- `validate_request_body` (Boolean) A Boolean flag to indicate whether to validate a request body according to the configured Model schema.
-- `validate_request_parameters` (Boolean) A Boolean flag to indicate whether to validate request parameters (``true``) or not (``false``).
+- `name` (String)
+- `validate_request_body` (Boolean)
+- `validate_request_parameters` (Boolean)
 
 ### Read-Only
 

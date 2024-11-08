@@ -35,6 +35,7 @@ Data Source schema for AWS::DataSync::Task
 - `status` (String) The status of the task that was described.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `task_arn` (String) The ARN of the task.
+- `task_mode` (String) Specifies the task mode for the task.
 - `task_report_config` (Attributes) Specifies how you want to configure a task report, which provides detailed information about for your Datasync transfer. (see [below for nested schema](#nestedatt--task_report_config))
 
 <a id="nestedatt--excludes"></a>

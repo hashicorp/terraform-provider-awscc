@@ -117,6 +117,9 @@ func membershipResource(ctx context.Context) (resource.Resource, error) {
 		//	                "PARQUET"
 		//	              ],
 		//	              "type": "string"
+		//	            },
+		//	            "SingleFileOutput": {
+		//	              "type": "boolean"
 		//	            }
 		//	          },
 		//	          "required": [
@@ -183,6 +186,14 @@ func membershipResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SingleFileOutput
+								"single_file_output": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -418,6 +429,7 @@ func membershipResource(ctx context.Context) (resource.Resource, error) {
 		"result_format":                    "ResultFormat",
 		"role_arn":                         "RoleArn",
 		"s3":                               "S3",
+		"single_file_output":               "SingleFileOutput",
 		"tags":                             "Tags",
 		"value":                            "Value",
 	})

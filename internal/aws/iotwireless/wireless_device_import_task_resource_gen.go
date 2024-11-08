@@ -155,27 +155,6 @@ func wirelessDeviceImportTaskResource(ctx context.Context) (resource.Resource, e
 		//	{
 		//	  "additionalProperties": false,
 		//	  "description": "sidewalk contain file for created device and role",
-		//	  "oneOf": [
-		//	    {
-		//	      "allOf": [
-		//	        {
-		//	          "required": [
-		//	            "DeviceCreationFile"
-		//	          ]
-		//	        },
-		//	        {
-		//	          "required": [
-		//	            "Role"
-		//	          ]
-		//	        }
-		//	      ]
-		//	    },
-		//	    {
-		//	      "required": [
-		//	        "SidewalkManufacturingSn"
-		//	      ]
-		//	    }
-		//	  ],
 		//	  "properties": {
 		//	    "DeviceCreationFile": {
 		//	      "maxLength": 1024,

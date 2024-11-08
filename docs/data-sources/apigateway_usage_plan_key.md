@@ -22,6 +22,6 @@ Data Source schema for AWS::ApiGateway::UsagePlanKey
 ### Read-Only
 
 - `key_id` (String) The Id of the UsagePlanKey resource.
-- `key_type` (String) The type of a UsagePlanKey resource for a plan customer.
+- `key_type` (String)
 - `usage_plan_id` (String) The Id of the UsagePlan resource representing the usage plan containing the UsagePlanKey resource representing a plan customer.
 - `usage_plan_key_id` (String)

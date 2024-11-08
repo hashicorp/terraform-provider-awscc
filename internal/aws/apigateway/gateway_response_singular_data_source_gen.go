@@ -39,7 +39,7 @@ func gatewayResponseDataSource(ctx context.Context) (datasource.DataSource, erro
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "Response parameters (paths, query strings and headers) of the GatewayResponse as a string-to-string map of key-value pairs.",
+		//	  "description": "",
 		//	  "patternProperties": {
 		//	    "": {
 		//	      "type": "string"
@@ -50,7 +50,7 @@ func gatewayResponseDataSource(ctx context.Context) (datasource.DataSource, erro
 		"response_parameters": // Pattern: ""
 		schema.MapAttribute{   /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "Response parameters (paths, query strings and headers) of the GatewayResponse as a string-to-string map of key-value pairs.",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ResponseTemplates
@@ -58,7 +58,7 @@ func gatewayResponseDataSource(ctx context.Context) (datasource.DataSource, erro
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "Response templates of the GatewayResponse as a string-to-string map of key-value pairs.",
+		//	  "description": "",
 		//	  "patternProperties": {
 		//	    "": {
 		//	      "type": "string"
@@ -69,40 +69,40 @@ func gatewayResponseDataSource(ctx context.Context) (datasource.DataSource, erro
 		"response_templates": // Pattern: ""
 		schema.MapAttribute{  /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "Response templates of the GatewayResponse as a string-to-string map of key-value pairs.",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ResponseType
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The response type of the associated GatewayResponse.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"response_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The response type of the associated GatewayResponse.",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RestApiId
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The string identifier of the associated RestApi.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"rest_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The string identifier of the associated RestApi.",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: StatusCode
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The HTTP status code for this GatewayResponse.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"status_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The HTTP status code for this GatewayResponse.",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

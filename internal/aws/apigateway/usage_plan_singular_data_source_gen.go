@@ -26,34 +26,34 @@ func usagePlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The associated API stages of a usage plan.",
+		//	  "description": "",
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "API stage name of the associated API stage in a usage plan.",
+		//	    "description": "",
 		//	    "properties": {
 		//	      "ApiId": {
-		//	        "description": "API Id of the associated API stage in a usage plan.",
+		//	        "description": "",
 		//	        "type": "string"
 		//	      },
 		//	      "Stage": {
-		//	        "description": "API stage name of the associated API stage in a usage plan.",
+		//	        "description": "",
 		//	        "type": "string"
 		//	      },
 		//	      "Throttle": {
 		//	        "additionalProperties": false,
-		//	        "description": "Map containing method level throttling information for API stage in a usage plan.",
+		//	        "description": "",
 		//	        "patternProperties": {
 		//	          "": {
 		//	            "additionalProperties": false,
 		//	            "description": "``ThrottleSettings`` is a property of the [AWS::ApiGateway::UsagePlan](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-usageplan.html) resource that specifies the overall request rate (average requests per second) and burst capacity when users call your REST APIs.",
 		//	            "properties": {
 		//	              "BurstLimit": {
-		//	                "description": "The API target request burst rate limit. This allows more requests through for a period of time than the target rate limit.",
+		//	                "description": "",
 		//	                "minimum": 0,
 		//	                "type": "integer"
 		//	              },
 		//	              "RateLimit": {
-		//	                "description": "The API target request rate limit.",
+		//	                "description": "",
 		//	                "minimum": 0,
 		//	                "type": "number"
 		//	              }
@@ -74,12 +74,12 @@ func usagePlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: ApiId
 					"api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "API Id of the associated API stage in a usage plan.",
+						Description: "",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Stage
 					"stage": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "API stage name of the associated API stage in a usage plan.",
+						Description: "",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Throttle
@@ -89,33 +89,33 @@ func usagePlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: BurstLimit
 								"burst_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "The API target request burst rate limit. This allows more requests through for a period of time than the target rate limit.",
+									Description: "",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: RateLimit
 								"rate_limit": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Description: "The API target request rate limit.",
+									Description: "",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "Map containing method level throttling information for API stage in a usage plan.",
+						Description: "",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "The associated API stages of a usage plan.",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The description of a usage plan.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of a usage plan.",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Id
@@ -134,20 +134,20 @@ func usagePlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The target maximum number of permitted requests per a given unit time interval.",
+		//	  "description": "``QuotaSettings`` is a property of the [AWS::ApiGateway::UsagePlan](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-usageplan.html) resource that specifies a target for the maximum number of requests users can make to your REST APIs.\n In some cases clients can exceed the targets that you set. Don?t rely on usage plans to control costs. Consider using [](https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html) to monitor costs and [](https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html) to manage API requests.",
 		//	  "properties": {
 		//	    "Limit": {
-		//	      "description": "The target maximum number of requests that can be made in a given time period.",
+		//	      "description": "",
 		//	      "minimum": 0,
 		//	      "type": "integer"
 		//	    },
 		//	    "Offset": {
-		//	      "description": "The number of requests subtracted from the given limit in the initial time period.",
+		//	      "description": "",
 		//	      "minimum": 0,
 		//	      "type": "integer"
 		//	    },
 		//	    "Period": {
-		//	      "description": "The time period in which the limit applies. Valid values are \"DAY\", \"WEEK\" or \"MONTH\".",
+		//	      "description": "",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -157,28 +157,28 @@ func usagePlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Limit
 				"limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The target maximum number of requests that can be made in a given time period.",
+					Description: "",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Offset
 				"offset": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The number of requests subtracted from the given limit in the initial time period.",
+					Description: "",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Period
 				"period": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The time period in which the limit applies. Valid values are \"DAY\", \"WEEK\" or \"MONTH\".",
+					Description: "",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The target maximum number of permitted requests per a given unit time interval.",
+			Description: "``QuotaSettings`` is a property of the [AWS::ApiGateway::UsagePlan](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-usageplan.html) resource that specifies a target for the maximum number of requests users can make to your REST APIs.\n In some cases clients can exceed the targets that you set. Don?t rely on usage plans to control costs. Consider using [](https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html) to monitor costs and [](https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html) to manage API requests.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The collection of tags. Each tag element is associated with a given resource.",
+		//	  "description": "",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
@@ -221,7 +221,7 @@ func usagePlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "The collection of tags. Each tag element is associated with a given resource.",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Throttle
@@ -229,15 +229,15 @@ func usagePlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "A map containing method level throttling information for API stage in a usage plan.",
+		//	  "description": "``ThrottleSettings`` is a property of the [AWS::ApiGateway::UsagePlan](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-usageplan.html) resource that specifies the overall request rate (average requests per second) and burst capacity when users call your REST APIs.",
 		//	  "properties": {
 		//	    "BurstLimit": {
-		//	      "description": "The API target request burst rate limit. This allows more requests through for a period of time than the target rate limit.",
+		//	      "description": "",
 		//	      "minimum": 0,
 		//	      "type": "integer"
 		//	    },
 		//	    "RateLimit": {
-		//	      "description": "The API target request rate limit.",
+		//	      "description": "",
 		//	      "minimum": 0,
 		//	      "type": "number"
 		//	    }
@@ -248,27 +248,27 @@ func usagePlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: BurstLimit
 				"burst_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The API target request burst rate limit. This allows more requests through for a period of time than the target rate limit.",
+					Description: "",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: RateLimit
 				"rate_limit": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "The API target request rate limit.",
+					Description: "",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "A map containing method level throttling information for API stage in a usage plan.",
+			Description: "``ThrottleSettings`` is a property of the [AWS::ApiGateway::UsagePlan](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-usageplan.html) resource that specifies the overall request rate (average requests per second) and burst capacity when users call your REST APIs.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UsagePlanName
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The name of a usage plan.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"usage_plan_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of a usage plan.",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

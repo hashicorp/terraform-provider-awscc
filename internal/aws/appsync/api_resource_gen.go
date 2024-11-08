@@ -16,13 +16,11 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
@@ -70,20 +68,31 @@ func apiResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "description": "A map of DNS names for the AppSync API.",
-		//	  "patternProperties": {
-		//	    "": {
+		//	  "properties": {
+		//	    "Http": {
+		//	      "type": "string"
+		//	    },
+		//	    "Realtime": {
 		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "type": "object"
 		//	}
-		"dns":               // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+		"dns": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Http
+				"http": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Realtime
+				"realtime": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "A map of DNS names for the AppSync API.",
 			Computed:    true,
-			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-				mapplanmodifier.UseStateForUnknown(),
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: EventConfig
@@ -757,6 +766,7 @@ func apiResource(ctx context.Context) (resource.Resource, error) {
 		"default_subscribe_auth_modes":     "DefaultSubscribeAuthModes",
 		"dns":                              "Dns",
 		"event_config":                     "EventConfig",
+		"http":                             "Http",
 		"iat_ttl":                          "IatTTL",
 		"identity_validation_expression":   "IdentityValidationExpression",
 		"issuer":                           "Issuer",
@@ -767,6 +777,7 @@ func apiResource(ctx context.Context) (resource.Resource, error) {
 		"name":                             "Name",
 		"open_id_connect_config":           "OpenIDConnectConfig",
 		"owner_contact":                    "OwnerContact",
+		"realtime":                         "Realtime",
 		"tags":                             "Tags",
 		"user_pool_id":                     "UserPoolId",
 		"value":                            "Value",

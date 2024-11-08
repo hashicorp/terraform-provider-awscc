@@ -1,0 +1,1 @@
+$ terraform import awscc_wisdom_ai_agent_version.example "assistant_id|ai_agent_id|version_number"

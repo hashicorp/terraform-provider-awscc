@@ -28,11 +28,11 @@ func resourceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The parent resource's identifier.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"parent_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The parent resource's identifier.",
+			Description: "",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -42,11 +42,11 @@ func resourceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The last path segment for this resource.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"path_part": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The last path segment for this resource.",
+			Description: "",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -70,11 +70,11 @@ func resourceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The string identifier of the associated RestApi.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"rest_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The string identifier of the associated RestApi.",
+			Description: "",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),

@@ -28,11 +28,11 @@ func basePathMappingResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The base path name that callers of the API must provide as part of the URL after the domain name.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"base_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The base path name that callers of the API must provide as part of the URL after the domain name.",
+			Description: "",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -44,11 +44,11 @@ func basePathMappingResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The domain name of the BasePathMapping resource to be described.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The domain name of the BasePathMapping resource to be described.",
+			Description: "",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -58,11 +58,11 @@ func basePathMappingResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The string identifier of the associated RestApi.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"rest_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The string identifier of the associated RestApi.",
+			Description: "",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -73,11 +73,11 @@ func basePathMappingResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The name of the associated stage.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"stage": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the associated stage.",
+			Description: "",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

@@ -30,11 +30,11 @@ func documentationVersionResource(ctx context.Context) (resource.Resource, error
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A description about the new documentation snapshot.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description about the new documentation snapshot.",
+			Description: "",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -45,12 +45,12 @@ func documentationVersionResource(ctx context.Context) (resource.Resource, error
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The version identifier of the to-be-updated documentation version.",
+		//	  "description": "",
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"documentation_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The version identifier of the to-be-updated documentation version.",
+			Description: "",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtLeast(1),
@@ -63,12 +63,12 @@ func documentationVersionResource(ctx context.Context) (resource.Resource, error
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The string identifier of the associated RestApi.",
+		//	  "description": "",
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"rest_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The string identifier of the associated RestApi.",
+			Description: "",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtLeast(1),

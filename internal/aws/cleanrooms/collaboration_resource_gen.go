@@ -35,6 +35,30 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::CleanRooms::Collaboration resource.
 func collaborationResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AnalyticsEngine
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "CLEAN_ROOMS_SQL",
+		//	    "SPARK"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"analytics_engine": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"CLEAN_ROOMS_SQL",
+					"SPARK",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -534,25 +558,26 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 		"allow_cleartext":  "AllowCleartext",
 		"allow_duplicates": "AllowDuplicates",
 		"allow_joins_on_columns_with_different_names": "AllowJoinsOnColumnsWithDifferentNames",
-		"arn":                           "Arn",
-		"collaboration_identifier":      "CollaborationIdentifier",
-		"creator_display_name":          "CreatorDisplayName",
-		"creator_member_abilities":      "CreatorMemberAbilities",
-		"creator_payment_configuration": "CreatorPaymentConfiguration",
-		"data_encryption_metadata":      "DataEncryptionMetadata",
-		"description":                   "Description",
-		"display_name":                  "DisplayName",
-		"is_responsible":                "IsResponsible",
-		"key":                           "Key",
-		"member_abilities":              "MemberAbilities",
-		"members":                       "Members",
-		"name":                          "Name",
-		"payment_configuration":         "PaymentConfiguration",
-		"preserve_nulls":                "PreserveNulls",
-		"query_compute":                 "QueryCompute",
-		"query_log_status":              "QueryLogStatus",
-		"tags":                          "Tags",
-		"value":                         "Value",
+		"analytics_engine":                            "AnalyticsEngine",
+		"arn":                                         "Arn",
+		"collaboration_identifier":                    "CollaborationIdentifier",
+		"creator_display_name":                        "CreatorDisplayName",
+		"creator_member_abilities":                    "CreatorMemberAbilities",
+		"creator_payment_configuration":               "CreatorPaymentConfiguration",
+		"data_encryption_metadata":                    "DataEncryptionMetadata",
+		"description":                                 "Description",
+		"display_name":                                "DisplayName",
+		"is_responsible":                              "IsResponsible",
+		"key":                                         "Key",
+		"member_abilities":                            "MemberAbilities",
+		"members":                                     "Members",
+		"name":                                        "Name",
+		"payment_configuration":                       "PaymentConfiguration",
+		"preserve_nulls":                              "PreserveNulls",
+		"query_compute":                               "QueryCompute",
+		"query_log_status":                            "QueryLogStatus",
+		"tags":                                        "Tags",
+		"value":                                       "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

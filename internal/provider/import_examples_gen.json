@@ -340,6 +340,11 @@
         "path": "./examples/resources/awscc_appsync_api/import.sh"
     },
     {
+        "resource": "awscc_appsync_channel_namespace",
+        "identifier": ["ChannelNamespaceArn"],
+        "path": "./examples/resources/awscc_appsync_channel_namespace/import.sh"
+    },
+    {
         "resource": "awscc_appsync_data_source",
         "identifier": ["DataSourceArn"],
         "path": "./examples/resources/awscc_appsync_data_source/import.sh"
@@ -548,6 +553,11 @@
         "resource": "awscc_bedrock_agent_alias",
         "identifier": ["AgentId","AgentAliasId"],
         "path": "./examples/resources/awscc_bedrock_agent_alias/import.sh"
+    },
+    {
+        "resource": "awscc_bedrock_application_inference_profile",
+        "identifier": ["InferenceProfileIdentifier"],
+        "path": "./examples/resources/awscc_bedrock_application_inference_profile/import.sh"
     },
     {
         "resource": "awscc_bedrock_data_source",
@@ -1693,6 +1703,11 @@
         "resource": "awscc_ec2_security_group_ingress",
         "identifier": ["Id"],
         "path": "./examples/resources/awscc_ec2_security_group_ingress/import.sh"
+    },
+    {
+        "resource": "awscc_ec2_security_group_vpc_association",
+        "identifier": ["GroupId","VpcId"],
+        "path": "./examples/resources/awscc_ec2_security_group_vpc_association/import.sh"
     },
     {
         "resource": "awscc_ec2_snapshot_block_public_access",
@@ -3711,12 +3726,12 @@
     },
     {
         "resource": "awscc_nimblestudio_launch_profile",
-        "identifier": ["LaunchProfileId","StudioId"],
+        "identifier": ["LaunchProfileId"],
         "path": "./examples/resources/awscc_nimblestudio_launch_profile/import.sh"
     },
     {
         "resource": "awscc_nimblestudio_streaming_image",
-        "identifier": ["StudioId","StreamingImageId"],
+        "identifier": ["StreamingImageId"],
         "path": "./examples/resources/awscc_nimblestudio_streaming_image/import.sh"
     },
     {
@@ -3726,7 +3741,7 @@
     },
     {
         "resource": "awscc_nimblestudio_studio_component",
-        "identifier": ["StudioComponentId","StudioId"],
+        "identifier": ["StudioComponentId"],
         "path": "./examples/resources/awscc_nimblestudio_studio_component/import.sh"
     },
     {
@@ -4073,6 +4088,11 @@
         "resource": "awscc_rds_db_proxy_target_group",
         "identifier": ["TargetGroupArn"],
         "path": "./examples/resources/awscc_rds_db_proxy_target_group/import.sh"
+    },
+    {
+        "resource": "awscc_rds_db_shard_group",
+        "identifier": ["DBShardGroupIdentifier"],
+        "path": "./examples/resources/awscc_rds_db_shard_group/import.sh"
     },
     {
         "resource": "awscc_rds_db_subnet_group",
@@ -5160,9 +5180,24 @@
         "path": "./examples/resources/awscc_wafv2_web_acl_association/import.sh"
     },
     {
+        "resource": "awscc_wisdom_ai_agent",
+        "identifier": ["AIAgentId","AssistantId"],
+        "path": "./examples/resources/awscc_wisdom_ai_agent/import.sh"
+    },
+    {
+        "resource": "awscc_wisdom_ai_agent_version",
+        "identifier": ["AssistantId","AIAgentId","VersionNumber"],
+        "path": "./examples/resources/awscc_wisdom_ai_agent_version/import.sh"
+    },
+    {
         "resource": "awscc_wisdom_ai_prompt",
         "identifier": ["AIPromptId","AssistantId"],
         "path": "./examples/resources/awscc_wisdom_ai_prompt/import.sh"
+    },
+    {
+        "resource": "awscc_wisdom_ai_prompt_version",
+        "identifier": ["AssistantId","AIPromptId","VersionNumber"],
+        "path": "./examples/resources/awscc_wisdom_ai_prompt_version/import.sh"
     },
     {
         "resource": "awscc_wisdom_assistant",

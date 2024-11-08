@@ -45,7 +45,7 @@ func gatewayResponseResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "Response parameters (paths, query strings and headers) of the GatewayResponse as a string-to-string map of key-value pairs.",
+		//	  "description": "",
 		//	  "patternProperties": {
 		//	    "": {
 		//	      "type": "string"
@@ -56,7 +56,7 @@ func gatewayResponseResource(ctx context.Context) (resource.Resource, error) {
 		"response_parameters": // Pattern: ""
 		schema.MapAttribute{   /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "Response parameters (paths, query strings and headers) of the GatewayResponse as a string-to-string map of key-value pairs.",
+			Description: "",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
@@ -68,7 +68,7 @@ func gatewayResponseResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "Response templates of the GatewayResponse as a string-to-string map of key-value pairs.",
+		//	  "description": "",
 		//	  "patternProperties": {
 		//	    "": {
 		//	      "type": "string"
@@ -79,7 +79,7 @@ func gatewayResponseResource(ctx context.Context) (resource.Resource, error) {
 		"response_templates": // Pattern: ""
 		schema.MapAttribute{  /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "Response templates of the GatewayResponse as a string-to-string map of key-value pairs.",
+			Description: "",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
@@ -90,11 +90,11 @@ func gatewayResponseResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The response type of the associated GatewayResponse.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"response_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The response type of the associated GatewayResponse.",
+			Description: "",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -104,11 +104,11 @@ func gatewayResponseResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The string identifier of the associated RestApi.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"rest_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The string identifier of the associated RestApi.",
+			Description: "",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -118,11 +118,11 @@ func gatewayResponseResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The HTTP status code for this GatewayResponse.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"status_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The HTTP status code for this GatewayResponse.",
+			Description: "",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

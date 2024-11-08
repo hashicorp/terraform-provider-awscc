@@ -31,6 +31,7 @@
         "connect:CreateHoursOfOperationOverride",
         "connect:UpdateHoursOfOperationOverride",
         "connect:DeleteHoursOfOperationOverride",
+        "connect:ListHoursOfOperationOverrides",
         "connect:TagResource",
         "connect:UntagResource"
       ]

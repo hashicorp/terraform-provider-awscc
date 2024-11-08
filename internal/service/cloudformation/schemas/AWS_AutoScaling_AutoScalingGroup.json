@@ -268,6 +268,20 @@
         }
       }
     },
+    "AvailabilityZoneDistribution": {
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "CapacityDistributionStrategy": {
+          "type": "string",
+          "enum": [
+            "balanced-best-effort",
+            "balanced-only"
+          ]
+        }
+      }
+    },
     "NotificationConfiguration": {
       "description": "A structure that specifies an Amazon SNS notification configuration for the ``NotificationConfigurations`` property of the [AWS::AutoScaling::AutoScalingGroup](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-autoscaling-autoscalinggroup.html) resource.\n For an example template snippet, see [Configure Amazon EC2 Auto Scaling resources](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-ec2-auto-scaling.html).\n For more information, see [Get Amazon SNS notifications when your Auto Scaling group scales](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ASGettingNotifications.html) in the *Amazon EC2 Auto Scaling User Guide*.",
       "additionalProperties": false,
@@ -495,14 +509,16 @@
       }
     },
     "TrafficSourceIdentifier": {
-      "description": "",
+      "description": "Identifying information for a traffic source.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "Type": {
+          "description": "Provides additional context for the value of ``Identifier``.\n The following lists the valid values:\n  +   ``elb`` if ``Identifier`` is the name of a Classic Load Balancer.\n  +   ``elbv2`` if ``Identifier`` is the ARN of an Application Load Balancer, Gateway Load Balancer, or Network Load Balancer target group.\n  +   ``vpc-lattice`` if ``Identifier`` is the ARN of a VPC Lattice target group.\n  \n Required if the identifier is the name of a Classic Load Balancer.",
           "type": "string"
         },
         "Identifier": {
+          "description": "Identifies the traffic source.\n For Application Load Balancers, Gateway Load Balancers, Network Load Balancers, and VPC Lattice, this will be the Amazon Resource Name (ARN) for a target group in this account and Region. For Classic Load Balancers, this will be the name of the Classic Load Balancer in this account and Region.\n For example: \n  +  Application Load Balancer ARN: ``arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/1234567890123456`` \n  +  Classic Load Balancer name: ``my-classic-load-balancer`` \n  +  VPC Lattice ARN: ``arn:aws:vpc-lattice:us-west-2:123456789012:targetgroup/tg-1234567890123456`` \n  \n To get the ARN of a target group for a Application Load Balancer, Gateway Load Balancer, or Network Load Balancer, or the name of a Classic Load Balancer, use the Elastic Load Balancing [DescribeTargetGroups](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html) and [DescribeLoadBalancers](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html) API operations.\n To get the ARN of a target group for VPC Lattice, use the VPC Lattice [GetTargetGroup](https://docs.aws.amazon.com/vpc-lattice/latest/APIReference/API_GetTargetGroup.html) API operation.",
           "type": "string"
         }
       },
@@ -793,6 +809,10 @@
       "description": "",
       "$ref": "#/definitions/NotificationConfiguration"
     },
+    "AvailabilityZoneDistribution": {
+      "description": "",
+      "$ref": "#/definitions/AvailabilityZoneDistribution"
+    },
     "MetricsCollection": {
       "uniqueItems": false,
       "description": "Enables the monitoring of group metrics of an Auto Scaling group. By default, these metrics are disabled.",
@@ -831,7 +851,7 @@
     },
     "TrafficSources": {
       "uniqueItems": true,
-      "description": "",
+      "description": "The traffic sources associated with this Auto Scaling group.",
       "insertionOrder": false,
       "type": "array",
       "items": {

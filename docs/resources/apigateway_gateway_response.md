@@ -50,14 +50,14 @@ resource "awscc_apigateway_gateway_response" "example" {
 
 ### Required
 
-- `response_type` (String) The response type of the associated GatewayResponse.
-- `rest_api_id` (String) The string identifier of the associated RestApi.
+- `response_type` (String)
+- `rest_api_id` (String)
 
 ### Optional
 
-- `response_parameters` (Map of String) Response parameters (paths, query strings and headers) of the GatewayResponse as a string-to-string map of key-value pairs.
-- `response_templates` (Map of String) Response templates of the GatewayResponse as a string-to-string map of key-value pairs.
-- `status_code` (String) The HTTP status code for this GatewayResponse.
+- `response_parameters` (Map of String)
+- `response_templates` (Map of String)
+- `status_code` (String)
 
 ### Read-Only
 

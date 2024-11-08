@@ -82,12 +82,13 @@ resource "awscc_apigateway_rest_api" "example" {
 
 ### Optional
 
-- `api_stages` (Attributes List) The associated API stages of a usage plan. (see [below for nested schema](#nestedatt--api_stages))
-- `description` (String) The description of a usage plan.
-- `quota` (Attributes) The target maximum number of permitted requests per a given unit time interval. (see [below for nested schema](#nestedatt--quota))
-- `tags` (Attributes List) The collection of tags. Each tag element is associated with a given resource. (see [below for nested schema](#nestedatt--tags))
-- `throttle` (Attributes) A map containing method level throttling information for API stage in a usage plan. (see [below for nested schema](#nestedatt--throttle))
-- `usage_plan_name` (String) The name of a usage plan.
+- `api_stages` (Attributes List) (see [below for nested schema](#nestedatt--api_stages))
+- `description` (String)
+- `quota` (Attributes) ``QuotaSettings`` is a property of the [AWS::ApiGateway::UsagePlan](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-usageplan.html) resource that specifies a target for the maximum number of requests users can make to your REST APIs.
+ In some cases clients can exceed the targets that you set. Don?t rely on usage plans to control costs. Consider using [](https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html) to monitor costs and [](https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html) to manage API requests. (see [below for nested schema](#nestedatt--quota))
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `throttle` (Attributes) ``ThrottleSettings`` is a property of the [AWS::ApiGateway::UsagePlan](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-usageplan.html) resource that specifies the overall request rate (average requests per second) and burst capacity when users call your REST APIs. (see [below for nested schema](#nestedatt--throttle))
+- `usage_plan_name` (String)
 
 ### Read-Only
 
@@ -99,17 +100,17 @@ resource "awscc_apigateway_rest_api" "example" {
 
 Optional:
 
-- `api_id` (String) API Id of the associated API stage in a usage plan.
-- `stage` (String) API stage name of the associated API stage in a usage plan.
-- `throttle` (Attributes Map) Map containing method level throttling information for API stage in a usage plan. (see [below for nested schema](#nestedatt--api_stages--throttle))
+- `api_id` (String)
+- `stage` (String)
+- `throttle` (Attributes Map) (see [below for nested schema](#nestedatt--api_stages--throttle))
 
 <a id="nestedatt--api_stages--throttle"></a>
 ### Nested Schema for `api_stages.throttle`
 
 Optional:
 
-- `burst_limit` (Number) The API target request burst rate limit. This allows more requests through for a period of time than the target rate limit.
-- `rate_limit` (Number) The API target request rate limit.
+- `burst_limit` (Number)
+- `rate_limit` (Number)
 
 
 
@@ -118,9 +119,9 @@ Optional:
 
 Optional:
 
-- `limit` (Number) The target maximum number of requests that can be made in a given time period.
-- `offset` (Number) The number of requests subtracted from the given limit in the initial time period.
-- `period` (String) The time period in which the limit applies. Valid values are "DAY", "WEEK" or "MONTH".
+- `limit` (Number)
+- `offset` (Number)
+- `period` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -137,8 +138,8 @@ Optional:
 
 Optional:
 
-- `burst_limit` (Number) The API target request burst rate limit. This allows more requests through for a period of time than the target rate limit.
-- `rate_limit` (Number) The API target request rate limit.
+- `burst_limit` (Number)
+- `rate_limit` (Number)
 
 ## Import
 

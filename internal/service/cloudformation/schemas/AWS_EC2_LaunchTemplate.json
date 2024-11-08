@@ -70,7 +70,7 @@
         },
         "TagSpecifications": {
           "uniqueItems": false,
-          "description": "The tags to apply to the resources that are created during instance launch.\n To tag a resource after it has been created, see [CreateTags](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html).\n To tag the launch template itself, use [TagSpecifications](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html#cfn-ec2-launchtemplate-tagspecifications).",
+          "description": "The tags to apply to resources that are created during instance launch.\n To tag the launch template itself, use [TagSpecifications](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html#cfn-ec2-launchtemplate-tagspecifications).",
           "type": "array",
           "items": {
             "$ref": "#/definitions/TagSpecification"
@@ -114,7 +114,7 @@
         },
         "ElasticInferenceAccelerators": {
           "uniqueItems": false,
-          "description": "An elastic inference accelerator to associate with the instance. Elastic inference accelerators are a resource you can attach to your Amazon EC2 instances to accelerate your Deep Learning (DL) inference workloads.\n You cannot specify accelerators from different generations in the same request.\n  Starting April 15, 2023, AWS will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service.",
+          "description": "Amazon Elastic Inference is no longer available.\n  An elastic inference accelerator to associate with the instance. Elastic inference accelerators are a resource you can attach to your Amazon EC2 instances to accelerate your Deep Learning (DL) inference workloads.\n You cannot specify accelerators from different generations in the same request.\n  Starting April 15, 2023, AWS will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/LaunchTemplateElasticInferenceAccelerator"
@@ -201,7 +201,7 @@
           "$ref": "#/definitions/InstanceMarketOptions"
         },
         "InstanceRequirements": {
-          "description": "The attributes for the instance types. When you specify instance attributes, Amazon EC2 will identify instance types with these attributes.\n You must specify ``VCpuCount`` and ``MemoryMiB``. All other attributes are optional. Any unspecified optional attribute is set to its default.\n When you specify multiple attributes, you get instance types that satisfy all of the specified attributes. If you specify multiple values for an attribute, you get instance types that satisfy any of the specified values.\n To limit the list of instance types from which Amazon EC2 can identify matching instance types, you can use one of the following parameters, but not both in the same request:\n  +   ``AllowedInstanceTypes`` - The instance types to include in the list. All other instance types are ignored, even if they match your specified attributes.\n  +   ``ExcludedInstanceTypes`` - The instance types to exclude from the list, even if they match your specified attributes.\n  \n  If you specify ``InstanceRequirements``, you can't specify ``InstanceType``.\n Attribute-based instance type selection is only supported when using Auto Scaling groups, EC2 Fleet, and Spot Fleet to launch instances. If you plan to use the launch template in the [launch instance wizard](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-instance-wizard.html), or with the [RunInstances](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html) API or [AWS::EC2::Instance](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html) AWS CloudFormation resource, you can't specify ``InstanceRequirements``.\n  For more information, see [Attribute-based instance type selection for EC2 Fleet](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html), [Attribute-based instance type selection for Spot Fleet](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-attribute-based-instance-type-selection.html), and [Spot placement score](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html) in the *Amazon EC2 User Guide*.",
+          "description": "The attributes for the instance types. When you specify instance attributes, Amazon EC2 will identify instance types with these attributes.\n You must specify ``VCpuCount`` and ``MemoryMiB``. All other attributes are optional. Any unspecified optional attribute is set to its default.\n When you specify multiple attributes, you get instance types that satisfy all of the specified attributes. If you specify multiple values for an attribute, you get instance types that satisfy any of the specified values.\n To limit the list of instance types from which Amazon EC2 can identify matching instance types, you can use one of the following parameters, but not both in the same request:\n  +   ``AllowedInstanceTypes`` - The instance types to include in the list. All other instance types are ignored, even if they match your specified attributes.\n  +   ``ExcludedInstanceTypes`` - The instance types to exclude from the list, even if they match your specified attributes.\n  \n  If you specify ``InstanceRequirements``, you can't specify ``InstanceType``.\n Attribute-based instance type selection is only supported when using Auto Scaling groups, EC2 Fleet, and Spot Fleet to launch instances. If you plan to use the launch template in the [launch instance wizard](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-instance-wizard.html), or with the [RunInstances](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html) API or [AWS::EC2::Instance](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html) AWS CloudFormation resource, you can't specify ``InstanceRequirements``.\n  For more information, see [Specify attributes for instance type selection for EC2 Fleet or Spot Fleet](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html) and [Spot placement score](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html) in the *Amazon EC2 User Guide*.",
           "$ref": "#/definitions/InstanceRequirements"
         },
         "RamDiskId": {
@@ -259,6 +259,16 @@
         "Type": {
           "description": "The type of Elastic Graphics accelerator.",
           "type": "string"
+        }
+      }
+    },
+    "Cpu": {
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "References": {
+          "$ref": "#/definitions/References"
         }
       }
     },
@@ -401,7 +411,7 @@
           "type": "string"
         },
         "KmsKeyId": {
-          "description": "The ARN of the symmetric KMSlong (KMS) CMK used for encryption.",
+          "description": "Identifier (key ID, key alias, key ARN, or alias ARN) of the customer managed KMS key to use for EBS encryption.",
           "type": "string"
         },
         "Encrypted": {
@@ -525,6 +535,17 @@
         "Max": {
           "description": "The maximum number of network interfaces. To specify no maximum limit, omit this parameter.",
           "type": "integer"
+        }
+      }
+    },
+    "Reference": {
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "InstanceFamily": {
+          "description": "The instance family to refer. Ensure that you specify the correct family name. For example, C6i and C6g are valid values, but C6 is not.",
+          "type": "string"
         }
       }
     },
@@ -660,7 +681,7 @@
           "type": "integer"
         },
         "InterfaceType": {
-          "description": "The type of network interface. To create an Elastic Fabric Adapter (EFA), specify ``efa``. For more information, see [Elastic Fabric Adapter](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html) in the *Amazon EC2 User Guide*.\n If you are not creating an EFA, specify ``interface`` or omit this parameter.\n Valid values: ``interface`` | ``efa``",
+          "description": "The type of network interface. To create an Elastic Fabric Adapter (EFA), specify ``efa`` or ``efa``. For more information, see [Elastic Fabric Adapter](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html) in the *Amazon EC2 User Guide*.\n If you are not creating an EFA, specify ``interface`` or omit this parameter.\n If you specify ``efa-only``, do not assign any IP addresses to the network interface. EFA-only network interfaces do not support IP addresses.\n Valid values: ``interface`` | ``efa`` | ``efa-only``",
           "type": "string"
         },
         "AssociateCarrierIpAddress": {
@@ -739,7 +760,7 @@
       }
     },
     "LaunchTemplateTagSpecification": {
-      "description": "Specifies the tags to apply to the launch template during creation.\n  ``LaunchTemplateTagSpecification`` is a property of [AWS::EC2::LaunchTemplate](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html).",
+      "description": "Specifies the tags to apply to the launch template during creation.\n To specify the tags for the resources that are created during instance launch, use [AWS::EC2::LaunchTemplate TagSpecification](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-tagspecification.html).\n  ``LaunchTemplateTagSpecification`` is a property of [AWS::EC2::LaunchTemplate](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html).",
       "additionalProperties": false,
       "type": "object",
       "properties": {
@@ -758,7 +779,7 @@
       }
     },
     "TagSpecification": {
-      "description": "Specifies the tags to apply to a resource when the resource is created for the launch template.\n  ``TagSpecification`` is a property type of [TagSpecifications](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html#cfn-ec2-launchtemplate-launchtemplatedata-tagspecifications). [TagSpecifications](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html#cfn-ec2-launchtemplate-launchtemplatedata-tagspecifications) is a property of [AWS::EC2::LaunchTemplate LaunchTemplateData](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html).",
+      "description": "Specifies the tags to apply to resources that are created during instance launch.\n  ``TagSpecification`` is a property type of [TagSpecifications](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html#cfn-ec2-launchtemplate-launchtemplatedata-tagspecifications). [TagSpecifications](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html#cfn-ec2-launchtemplate-launchtemplatedata-tagspecifications) is a property of [AWS::EC2::LaunchTemplate LaunchTemplateData](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html).",
       "additionalProperties": false,
       "type": "object",
       "properties": {
@@ -832,6 +853,15 @@
         }
       }
     },
+    "References": {
+      "uniqueItems": true,
+      "description": "A list of references to be used as baseline for the CPU performance. Currently, you can only specify a single reference across different instance type variations such as CPU manufacturers, architectures etc.",
+      "insertionOrder": true,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Reference"
+      }
+    },
     "LaunchTemplateElasticInferenceAccelerator": {
       "description": "Specifies an elastic inference accelerator.\n  ``LaunchTemplateElasticInferenceAccelerator`` is a property of [AWS::EC2::LaunchTemplate LaunchTemplateData](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html).",
       "additionalProperties": false,
@@ -863,18 +893,10 @@
       }
     },
     "InstanceRequirements": {
-      "description": "The attributes for the instance types. When you specify instance attributes, Amazon EC2 will identify instance types with these attributes.\n You must specify ``VCpuCount`` and ``MemoryMiB``. All other attributes are optional. Any unspecified optional attribute is set to its default.\n When you specify multiple attributes, you get instance types that satisfy all of the specified attributes. If you specify multiple values for an attribute, you get instance types that satisfy any of the specified values.\n To limit the list of instance types from which Amazon EC2 can identify matching instance types, you can use one of the following parameters, but not both in the same request:\n  +   ``AllowedInstanceTypes`` - The instance types to include in the list. All other instance types are ignored, even if they match your specified attributes.\n  +   ``ExcludedInstanceTypes`` - The instance types to exclude from the list, even if they match your specified attributes.\n  \n  If you specify ``InstanceRequirements``, you can't specify ``InstanceType``.\n Attribute-based instance type selection is only supported when using Auto Scaling groups, EC2 Fleet, and Spot Fleet to launch instances. If you plan to use the launch template in the [launch instance wizard](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-instance-wizard.html), or with the [RunInstances](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html) API or [AWS::EC2::Instance](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html) AWS CloudFormation resource, you can't specify ``InstanceRequirements``.\n  For more information, see [Attribute-based instance type selection for EC2 Fleet](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html), [Attribute-based instance type selection for Spot Fleet](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-attribute-based-instance-type-selection.html), and [Spot placement score](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html) in the *Amazon EC2 User Guide*.",
+      "description": "The attributes for the instance types. When you specify instance attributes, Amazon EC2 will identify instance types with these attributes.\n You must specify ``VCpuCount`` and ``MemoryMiB``. All other attributes are optional. Any unspecified optional attribute is set to its default.\n When you specify multiple attributes, you get instance types that satisfy all of the specified attributes. If you specify multiple values for an attribute, you get instance types that satisfy any of the specified values.\n To limit the list of instance types from which Amazon EC2 can identify matching instance types, you can use one of the following parameters, but not both in the same request:\n  +   ``AllowedInstanceTypes`` - The instance types to include in the list. All other instance types are ignored, even if they match your specified attributes.\n  +   ``ExcludedInstanceTypes`` - The instance types to exclude from the list, even if they match your specified attributes.\n  \n  If you specify ``InstanceRequirements``, you can't specify ``InstanceType``.\n Attribute-based instance type selection is only supported when using Auto Scaling groups, EC2 Fleet, and Spot Fleet to launch instances. If you plan to use the launch template in the [launch instance wizard](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-instance-wizard.html), or with the [RunInstances](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html) API or [AWS::EC2::Instance](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html) AWS CloudFormation resource, you can't specify ``InstanceRequirements``.\n  For more information, see [Specify attributes for instance type selection for EC2 Fleet or Spot Fleet](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html) and [Spot placement score](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html) in the *Amazon EC2 User Guide*.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
-        "LocalStorageTypes": {
-          "uniqueItems": false,
-          "description": "The type of local storage that is required.\n  +  For instance types with hard disk drive (HDD) storage, specify ``hdd``.\n  +  For instance types with solid state drive (SSD) storage, specify ``ssd``.\n  \n Default: ``hdd`` and ``ssd``",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
         "InstanceGenerations": {
           "uniqueItems": false,
           "description": "Indicates whether current or previous generation instance types are included. The current generation instance types are recommended for use. Current generation instance types are typically the latest two to three generations in each instance family. For more information, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the *Amazon EC2 User Guide*.\n For current generation instance types, specify ``current``.\n For previous generation instance types, specify ``previous``.\n Default: Current and previous generation instance types",
@@ -883,17 +905,13 @@
             "type": "string"
           }
         },
-        "NetworkInterfaceCount": {
-          "description": "The minimum and maximum number of network interfaces.\n Default: No minimum or maximum limits",
-          "$ref": "#/definitions/NetworkInterfaceCount"
-        },
         "MemoryGiBPerVCpu": {
           "description": "The minimum and maximum amount of memory per vCPU, in GiB.\n Default: No minimum or maximum limits",
           "$ref": "#/definitions/MemoryGiBPerVCpu"
         },
         "AcceleratorTypes": {
           "uniqueItems": false,
-          "description": "The accelerator types that must be on the instance type.\n  +  For instance types with GPU accelerators, specify ``gpu``.\n  +  For instance types with FPGA accelerators, specify ``fpga``.\n  +  For instance types with inference accelerators, specify ``inference``.\n  \n Default: Any accelerator type",
+          "description": "The accelerator types that must be on the instance type.\n  +  For instance types with GPU accelerators, specify ``gpu``.\n  +  For instance types with FPGA accelerators, specify ``fpga``.\n  \n Default: Any accelerator type",
           "type": "array",
           "items": {
             "type": "string"
@@ -903,26 +921,9 @@
           "description": "The minimum and maximum number of vCPUs.",
           "$ref": "#/definitions/VCpuCount"
         },
-        "ExcludedInstanceTypes": {
-          "uniqueItems": false,
-          "description": "The instance types to exclude.\n You can use strings with one or more wild cards, represented by an asterisk (``*``), to exclude an instance type, size, or generation. The following are examples: ``m5.8xlarge``, ``c5*.*``, ``m5a.*``, ``r*``, ``*3*``.\n For example, if you specify ``c5*``,Amazon EC2 will exclude the entire C5 instance family, which includes all C5a and C5n instance types. If you specify ``m5a.*``, Amazon EC2 will exclude all the M5a instance types, but not the M5n instance types.\n  If you specify ``ExcludedInstanceTypes``, you can't specify ``AllowedInstanceTypes``.\n  Default: No excluded instance types",
-          "type": "array",
-          "items": {
-            "description": "The user data to make available to the instance.",
-            "type": "string"
-          }
-        },
         "AcceleratorManufacturers": {
           "uniqueItems": false,
           "description": "Indicates whether instance types must have accelerators by specific manufacturers.\n  +  For instance types with AWS devices, specify ``amazon-web-services``.\n  +  For instance types with AMD devices, specify ``amd``.\n  +  For instance types with Habana devices, specify ``habana``.\n  +  For instance types with NVIDIA devices, specify ``nvidia``.\n  +  For instance types with Xilinx devices, specify ``xilinx``.\n  \n Default: Any manufacturer",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "AllowedInstanceTypes": {
-          "uniqueItems": false,
-          "description": "The instance types to apply your specified attributes against. All other instance types are ignored, even if they match your specified attributes.\n You can use strings with one or more wild cards, represented by an asterisk (``*``), to allow an instance type, size, or generation. The following are examples: ``m5.8xlarge``, ``c5*.*``, ``m5a.*``, ``r*``, ``*3*``.\n For example, if you specify ``c5*``,Amazon EC2 will allow the entire C5 instance family, which includes all C5a and C5n instance types. If you specify ``m5a.*``, Amazon EC2 will allow all the M5a instance types, but not the M5n instance types.\n  If you specify ``AllowedInstanceTypes``, you can't specify ``ExcludedInstanceTypes``.\n  Default: All instance types",
           "type": "array",
           "items": {
             "type": "string"
@@ -940,14 +941,6 @@
             "type": "string"
           }
         },
-        "AcceleratorCount": {
-          "description": "The minimum and maximum number of accelerators (GPUs, FPGAs, or AWS Inferentia chips) on an instance.\n To exclude accelerator-enabled instance types, set ``Max`` to ``0``.\n Default: No minimum or maximum limits",
-          "$ref": "#/definitions/AcceleratorCount"
-        },
-        "NetworkBandwidthGbps": {
-          "description": "The minimum and maximum amount of network bandwidth, in gigabits per second (Gbps).\n Default: No minimum or maximum limits",
-          "$ref": "#/definitions/NetworkBandwidthGbps"
-        },
         "BareMetal": {
           "description": "Indicates whether bare metal instance types must be included, excluded, or required.\n  +  To include bare metal instance types, specify ``included``.\n  +  To require only bare metal instance types, specify ``required``.\n  +  To exclude bare metal instance types, specify ``excluded``.\n  \n Default: ``excluded``",
           "type": "string"
@@ -960,6 +953,51 @@
           "description": "[Price protection] The price protection threshold for Spot Instances, as a percentage of an identified On-Demand price. The identified On-Demand price is the price of the lowest priced current generation C, M, or R instance type with your specified attributes. If no current generation C, M, or R instance type matches your attributes, then the identified price is from the lowest priced current generation instance types, and failing that, from the lowest priced previous generation instance types that match your attributes. When Amazon EC2 selects instance types with your attributes, it will exclude instance types whose price exceeds your specified threshold.\n The parameter accepts an integer, which Amazon EC2 interprets as a percentage.\n If you set ``TargetCapacityUnitType`` to ``vcpu`` or ``memory-mib``, the price protection threshold is based on the per vCPU or per memory price instead of the per instance price.\n  Only one of ``SpotMaxPricePercentageOverLowestPrice`` or ``MaxSpotPriceAsPercentageOfOptimalOnDemandPrice`` can be specified. If you don't specify either, Amazon EC2 will automatically apply optimal price protection to consistently select from a wide range of instance types. To indicate no price protection threshold for Spot Instances, meaning you want to consider all instance types that match your attributes, include one of these parameters and specify a high value, such as ``999999``.",
           "type": "integer"
         },
+        "OnDemandMaxPricePercentageOverLowestPrice": {
+          "description": "[Price protection] The price protection threshold for On-Demand Instances, as a percentage higher than an identified On-Demand price. The identified On-Demand price is the price of the lowest priced current generation C, M, or R instance type with your specified attributes. When Amazon EC2 selects instance types with your attributes, it will exclude instance types whose price exceeds your specified threshold.\n The parameter accepts an integer, which Amazon EC2 interprets as a percentage.\n To turn off price protection, specify a high value, such as ``999999``.\n This parameter is not supported for [GetSpotPlacementScores](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetSpotPlacementScores.html) and [GetInstanceTypesFromInstanceRequirements](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceTypesFromInstanceRequirements.html).\n  If you set ``TargetCapacityUnitType`` to ``vcpu`` or ``memory-mib``, the price protection threshold is applied based on the per-vCPU or per-memory price instead of the per-instance price.\n  Default: ``20``",
+          "type": "integer"
+        },
+        "MemoryMiB": {
+          "description": "The minimum and maximum amount of memory, in MiB.",
+          "$ref": "#/definitions/MemoryMiB"
+        },
+        "LocalStorageTypes": {
+          "uniqueItems": false,
+          "description": "The type of local storage that is required.\n  +  For instance types with hard disk drive (HDD) storage, specify ``hdd``.\n  +  For instance types with solid state drive (SSD) storage, specify ``ssd``.\n  \n Default: ``hdd`` and ``ssd``",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "NetworkInterfaceCount": {
+          "description": "The minimum and maximum number of network interfaces.\n Default: No minimum or maximum limits",
+          "$ref": "#/definitions/NetworkInterfaceCount"
+        },
+        "ExcludedInstanceTypes": {
+          "uniqueItems": false,
+          "description": "The instance types to exclude.\n You can use strings with one or more wild cards, represented by an asterisk (``*``), to exclude an instance type, size, or generation. The following are examples: ``m5.8xlarge``, ``c5*.*``, ``m5a.*``, ``r*``, ``*3*``.\n For example, if you specify ``c5*``,Amazon EC2 will exclude the entire C5 instance family, which includes all C5a and C5n instance types. If you specify ``m5a.*``, Amazon EC2 will exclude all the M5a instance types, but not the M5n instance types.\n  If you specify ``ExcludedInstanceTypes``, you can't specify ``AllowedInstanceTypes``.\n  Default: No excluded instance types",
+          "type": "array",
+          "items": {
+            "description": "The user data to make available to the instance.",
+            "type": "string"
+          }
+        },
+        "AllowedInstanceTypes": {
+          "uniqueItems": false,
+          "description": "The instance types to apply your specified attributes against. All other instance types are ignored, even if they match your specified attributes.\n You can use strings with one or more wild cards, represented by an asterisk (``*``), to allow an instance type, size, or generation. The following are examples: ``m5.8xlarge``, ``c5*.*``, ``m5a.*``, ``r*``, ``*3*``.\n For example, if you specify ``c5*``,Amazon EC2 will allow the entire C5 instance family, which includes all C5a and C5n instance types. If you specify ``m5a.*``, Amazon EC2 will allow all the M5a instance types, but not the M5n instance types.\n  If you specify ``AllowedInstanceTypes``, you can't specify ``ExcludedInstanceTypes``.\n  Default: All instance types",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "AcceleratorCount": {
+          "description": "The minimum and maximum number of accelerators (GPUs, FPGAs, or AWS Inferentia chips) on an instance.\n To exclude accelerator-enabled instance types, set ``Max`` to ``0``.\n Default: No minimum or maximum limits",
+          "$ref": "#/definitions/AcceleratorCount"
+        },
+        "NetworkBandwidthGbps": {
+          "description": "The minimum and maximum amount of network bandwidth, in gigabits per second (Gbps).\n Default: No minimum or maximum limits",
+          "$ref": "#/definitions/NetworkBandwidthGbps"
+        },
         "SpotMaxPricePercentageOverLowestPrice": {
           "description": "[Price protection] The price protection threshold for Spot Instances, as a percentage higher than an identified Spot price. The identified Spot price is the Spot price of the lowest priced current generation C, M, or R instance type with your specified attributes. If no current generation C, M, or R instance type matches your attributes, then the identified Spot price is from the lowest priced current generation instance types, and failing that, from the lowest priced previous generation instance types that match your attributes. When Amazon EC2 selects instance types with your attributes, it will exclude instance types whose Spot price exceeds your specified threshold.\n The parameter accepts an integer, which Amazon EC2 interprets as a percentage.\n If you set ``TargetCapacityUnitType`` to ``vcpu`` or ``memory-mib``, the price protection threshold is applied based on the per-vCPU or per-memory price instead of the per-instance price.\n This parameter is not supported for [GetSpotPlacementScores](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetSpotPlacementScores.html) and [GetInstanceTypesFromInstanceRequirements](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceTypesFromInstanceRequirements.html).\n  Only one of ``SpotMaxPricePercentageOverLowestPrice`` or ``MaxSpotPriceAsPercentageOfOptimalOnDemandPrice`` can be specified. If you don't specify either, Amazon EC2 will automatically apply optimal price protection to consistently select from a wide range of instance types. To indicate no price protection threshold for Spot Instances, meaning you want to consider all instance types that match your attributes, include one of these parameters and specify a high value, such as ``999999``.\n  Default: ``100``",
           "type": "integer"
@@ -967,10 +1005,6 @@
         "BaselineEbsBandwidthMbps": {
           "description": "The minimum and maximum baseline bandwidth to Amazon EBS, in Mbps. For more information, see [Amazon EBS\u2013optimized instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html) in the *Amazon EC2 User Guide*.\n Default: No minimum or maximum limits",
           "$ref": "#/definitions/BaselineEbsBandwidthMbps"
-        },
-        "OnDemandMaxPricePercentageOverLowestPrice": {
-          "description": "[Price protection] The price protection threshold for On-Demand Instances, as a percentage higher than an identified On-Demand price. The identified On-Demand price is the price of the lowest priced current generation C, M, or R instance type with your specified attributes. When Amazon EC2 selects instance types with your attributes, it will exclude instance types whose price exceeds your specified threshold.\n The parameter accepts an integer, which Amazon EC2 interprets as a percentage.\n To turn off price protection, specify a high value, such as ``999999``.\n This parameter is not supported for [GetSpotPlacementScores](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetSpotPlacementScores.html) and [GetInstanceTypesFromInstanceRequirements](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceTypesFromInstanceRequirements.html).\n  If you set ``TargetCapacityUnitType`` to ``vcpu`` or ``memory-mib``, the price protection threshold is applied based on the per-vCPU or per-memory price instead of the per-instance price.\n  Default: ``20``",
-          "type": "integer"
         },
         "AcceleratorNames": {
           "uniqueItems": false,
@@ -987,10 +1021,6 @@
         "BurstablePerformance": {
           "description": "Indicates whether burstable performance T instance types are included, excluded, or required. For more information, see [Burstable performance instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html).\n  +  To include burstable performance instance types, specify ``included``.\n  +  To require only burstable performance instance types, specify ``required``.\n  +  To exclude burstable performance instance types, specify ``excluded``.\n  \n Default: ``excluded``",
           "type": "string"
-        },
-        "MemoryMiB": {
-          "description": "The minimum and maximum amount of memory, in MiB.",
-          "$ref": "#/definitions/MemoryMiB"
         },
         "TotalLocalStorageGB": {
           "description": "The minimum and maximum amount of total local storage, in GB.\n Default: No minimum or maximum limits",
@@ -1126,7 +1156,7 @@
     },
     "TagSpecifications": {
       "uniqueItems": false,
-      "description": "The tags to apply to the launch template on creation. To tag the launch template, the resource type must be ``launch-template``.\n To specify the tags for the resources that are created when an instance is launched, you must use [TagSpecifications](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html#cfn-ec2-launchtemplate-launchtemplatedata-tagspecifications).",
+      "description": "The tags to apply to the launch template on creation. To tag the launch template, the resource type must be ``launch-template``.\n To specify the tags for resources that are created during instance launch, use [TagSpecifications](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html#cfn-ec2-launchtemplate-launchtemplatedata-tagspecifications).",
       "type": "array",
       "items": {
         "$ref": "#/definitions/LaunchTemplateTagSpecification"

@@ -22,8 +22,8 @@ Data Source schema for AWS::ApiGateway::GatewayResponse
 ### Read-Only
 
 - `gateway_response_id` (String)
-- `response_parameters` (Map of String) Response parameters (paths, query strings and headers) of the GatewayResponse as a string-to-string map of key-value pairs.
-- `response_templates` (Map of String) Response templates of the GatewayResponse as a string-to-string map of key-value pairs.
-- `response_type` (String) The response type of the associated GatewayResponse.
-- `rest_api_id` (String) The string identifier of the associated RestApi.
-- `status_code` (String) The HTTP status code for this GatewayResponse.
+- `response_parameters` (Map of String)
+- `response_templates` (Map of String)
+- `response_type` (String)
+- `rest_api_id` (String)
+- `status_code` (String)

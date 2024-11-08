@@ -29,11 +29,11 @@ func requestValidatorResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The name of this RequestValidator",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of this RequestValidator",
+			Description: "",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -59,11 +59,11 @@ func requestValidatorResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The string identifier of the associated RestApi.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"rest_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The string identifier of the associated RestApi.",
+			Description: "",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -73,11 +73,11 @@ func requestValidatorResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A Boolean flag to indicate whether to validate a request body according to the configured Model schema.",
+		//	  "description": "",
 		//	  "type": "boolean"
 		//	}
 		"validate_request_body": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "A Boolean flag to indicate whether to validate a request body according to the configured Model schema.",
+			Description: "",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -88,11 +88,11 @@ func requestValidatorResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A Boolean flag to indicate whether to validate request parameters (``true``) or not (``false``).",
+		//	  "description": "",
 		//	  "type": "boolean"
 		//	}
 		"validate_request_parameters": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "A Boolean flag to indicate whether to validate request parameters (``true``) or not (``false``).",
+			Description: "",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/

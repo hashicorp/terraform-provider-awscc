@@ -43,12 +43,12 @@ resource "awscc_apigateway_rest_api" "example" {
 
 ### Required
 
-- `documentation_version` (String) The version identifier of the to-be-updated documentation version.
-- `rest_api_id` (String) The string identifier of the associated RestApi.
+- `documentation_version` (String)
+- `rest_api_id` (String)
 
 ### Optional
 
-- `description` (String) A description about the new documentation snapshot.
+- `description` (String)
 
 ### Read-Only
 
