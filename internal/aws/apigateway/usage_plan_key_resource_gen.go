@@ -58,14 +58,14 @@ func usagePlanKeyResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The type of a UsagePlanKey resource for a plan customer.",
+		//	  "description": "",
 		//	  "enum": [
 		//	    "API_KEY"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of a UsagePlanKey resource for a plan customer.",
+			Description: "",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(

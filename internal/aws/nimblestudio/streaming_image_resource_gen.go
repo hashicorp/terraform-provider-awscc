@@ -7,9 +7,7 @@ package nimblestudio
 
 import (
 	"context"
-	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
@@ -17,7 +15,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
@@ -35,18 +32,11 @@ func streamingImageResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "\u003cp\u003eA human-readable description of the streaming image.\u003c/p\u003e",
-		//	  "maxLength": 256,
-		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "<p>A human-readable description of the streaming image.</p>",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 256),
-			}, /*END VALIDATORS*/
+			Optional: true,
+			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -55,16 +45,10 @@ func streamingImageResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "\u003cp\u003eThe ID of an EC2 machine image with which to create this streaming image.\u003c/p\u003e",
-		//	  "pattern": "^ami-[0-9A-z]+$",
 		//	  "type": "string"
 		//	}
 		"ec_2_image_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "<p>The ID of an EC2 machine image with which to create this streaming image.</p>",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("^ami-[0-9A-z]+$"), ""),
-			}, /*END VALIDATORS*/
+			Required: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -74,19 +58,11 @@ func streamingImageResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "\u003cp\u003eTODO\u003c/p\u003e",
 		//	  "properties": {
 		//	    "KeyArn": {
-		//	      "description": "\u003cp\u003eThe ARN for a KMS key that is used to encrypt studio data.\u003c/p\u003e",
-		//	      "minLength": 4,
-		//	      "pattern": "^arn:.*",
 		//	      "type": "string"
 		//	    },
 		//	    "KeyType": {
-		//	      "description": "\u003cp/\u003e",
-		//	      "enum": [
-		//	        "CUSTOMER_MANAGED_KEY"
-		//	      ],
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -99,34 +75,56 @@ func streamingImageResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: KeyArn
 				"key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "<p>The ARN for a KMS key that is used to encrypt studio data.</p>",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: KeyType
 				"key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "<p/>",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "<p>TODO</p>",
-			Computed:    true,
+			Computed: true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EncryptionConfigurationKeyArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"encryption_configuration_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EncryptionConfigurationKeyType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"encryption_configuration_key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: EulaIds
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "\u003cp\u003eThe list of EULAs that must be accepted before a Streaming Session can be started using this streaming image.\u003c/p\u003e",
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
-		//	  "type": "array"
+		//	  "type": "array",
+		//	  "uniqueItems": false
 		//	}
 		"eula_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "<p>The list of EULAs that must be accepted before a Streaming Session can be started using this streaming image.</p>",
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
@@ -136,28 +134,19 @@ func streamingImageResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "\u003cp\u003eA friendly name for a streaming image resource.\u003c/p\u003e",
-		//	  "maxLength": 64,
-		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "<p>A friendly name for a streaming image resource.</p>",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 64),
-			}, /*END VALIDATORS*/
+			Required: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Owner
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "\u003cp\u003eThe owner of the streaming image, either the studioId that contains the streaming image, or 'amazon' for images that are provided by Amazon Nimble Studio.\u003c/p\u003e",
 		//	  "type": "string"
 		//	}
 		"owner": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "<p>The owner of the streaming image, either the studioId that contains the streaming image, or 'amazon' for images that are provided by Amazon Nimble Studio.</p>",
-			Computed:    true,
+			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -166,13 +155,10 @@ func streamingImageResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "\u003cp\u003eThe platform of the streaming image, either WINDOWS or LINUX.\u003c/p\u003e",
-		//	  "pattern": "^[a-zA-Z]*$",
 		//	  "type": "string"
 		//	}
 		"platform": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "<p>The platform of the streaming image, either WINDOWS or LINUX.</p>",
-			Computed:    true,
+			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -193,12 +179,10 @@ func streamingImageResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "\u003cp\u003eThe studioId. \u003c/p\u003e",
 		//	  "type": "string"
 		//	}
 		"studio_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "<p>The studioId. </p>",
-			Required:    true,
+			Required: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -207,8 +191,6 @@ func streamingImageResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "additionalProperties": false,
-		//	  "description": "",
 		//	  "patternProperties": {
 		//	    "": {
 		//	      "type": "string"
@@ -219,7 +201,6 @@ func streamingImageResource(ctx context.Context) (resource.Resource, error) {
 		"tags":              // Pattern: ""
 		schema.MapAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
@@ -239,7 +220,7 @@ func streamingImageResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Represents a streaming session machine image that can be used to launch a streaming session",
+		Description: "Resource Type definition for AWS::NimbleStudio::StreamingImage",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -249,18 +230,20 @@ func streamingImageResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::NimbleStudio::StreamingImage").WithTerraformTypeName("awscc_nimblestudio_streaming_image")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"description":              "Description",
-		"ec_2_image_id":            "Ec2ImageId",
-		"encryption_configuration": "EncryptionConfiguration",
-		"eula_ids":                 "EulaIds",
-		"key_arn":                  "KeyArn",
-		"key_type":                 "KeyType",
-		"name":                     "Name",
-		"owner":                    "Owner",
-		"platform":                 "Platform",
-		"streaming_image_id":       "StreamingImageId",
-		"studio_id":                "StudioId",
-		"tags":                     "Tags",
+		"description":                       "Description",
+		"ec_2_image_id":                     "Ec2ImageId",
+		"encryption_configuration":          "EncryptionConfiguration",
+		"encryption_configuration_key_arn":  "EncryptionConfigurationKeyArn",
+		"encryption_configuration_key_type": "EncryptionConfigurationKeyType",
+		"eula_ids":                          "EulaIds",
+		"key_arn":                           "KeyArn",
+		"key_type":                          "KeyType",
+		"name":                              "Name",
+		"owner":                             "Owner",
+		"platform":                          "Platform",
+		"streaming_image_id":                "StreamingImageId",
+		"studio_id":                         "StudioId",
+		"tags":                              "Tags",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

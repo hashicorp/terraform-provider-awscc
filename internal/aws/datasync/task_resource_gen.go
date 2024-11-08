@@ -1044,6 +1044,32 @@ func taskResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: TaskMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies the task mode for the task.",
+		//	  "enum": [
+		//	    "BASIC",
+		//	    "ENHANCED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"task_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the task mode for the task.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"BASIC",
+					"ENHANCED",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TaskReportConfig
 		// CloudFormation resource type schema:
 		//
@@ -1482,6 +1508,7 @@ func taskResource(ctx context.Context) (resource.Resource, error) {
 		"subdirectory":                       "Subdirectory",
 		"tags":                               "Tags",
 		"task_arn":                           "TaskArn",
+		"task_mode":                          "TaskMode",
 		"task_queueing":                      "TaskQueueing",
 		"task_report_config":                 "TaskReportConfig",
 		"transfer_mode":                      "TransferMode",

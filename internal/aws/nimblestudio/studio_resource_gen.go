@@ -7,9 +7,7 @@ package nimblestudio
 
 import (
 	"context"
-	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
@@ -35,42 +33,28 @@ func studioResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "\u003cp\u003eThe IAM role that Studio Admins will assume when logging in to the Nimble Studio portal.\u003c/p\u003e",
 		//	  "type": "string"
 		//	}
 		"admin_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "<p>The IAM role that Studio Admins will assume when logging in to the Nimble Studio portal.</p>",
-			Required:    true,
+			Required: true,
 		}, /*END ATTRIBUTE*/
 		// Property: DisplayName
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "\u003cp\u003eA friendly name for the studio.\u003c/p\u003e",
-		//	  "maxLength": 64,
-		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "<p>A friendly name for the studio.</p>",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 64),
-			}, /*END VALIDATORS*/
+			Required: true,
 		}, /*END ATTRIBUTE*/
 		// Property: HomeRegion
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "\u003cp\u003eThe Amazon Web Services Region where the studio resource is located.\u003c/p\u003e",
-		//	  "maxLength": 50,
-		//	  "minLength": 0,
-		//	  "pattern": "[a-z]{2}-?(iso|gov)?-{1}[a-z]*-{1}[0-9]",
 		//	  "type": "string"
 		//	}
 		"home_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "<p>The Amazon Web Services Region where the studio resource is located.</p>",
-			Computed:    true,
+			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -79,12 +63,10 @@ func studioResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "\u003cp\u003eThe Amazon Web Services SSO application client ID used to integrate with Amazon Web Services SSO to enable Amazon Web Services SSO users to log in to Nimble Studio portal.\u003c/p\u003e",
 		//	  "type": "string"
 		//	}
 		"sso_client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "<p>The Amazon Web Services SSO application client ID used to integrate with Amazon Web Services SSO to enable Amazon Web Services SSO users to log in to Nimble Studio portal.</p>",
-			Computed:    true,
+			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -94,20 +76,11 @@ func studioResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "\u003cp\u003eConfiguration of the encryption method that is used for the studio.\u003c/p\u003e",
 		//	  "properties": {
 		//	    "KeyArn": {
-		//	      "description": "\u003cp\u003eThe ARN for a KMS key that is used to encrypt studio data.\u003c/p\u003e",
-		//	      "minLength": 4,
-		//	      "pattern": "^arn:.*",
 		//	      "type": "string"
 		//	    },
 		//	    "KeyType": {
-		//	      "description": "\u003cp\u003eThe type of KMS key that is used to encrypt studio data.\u003c/p\u003e",
-		//	      "enum": [
-		//	        "AWS_OWNED_KEY",
-		//	        "CUSTOMER_MANAGED_KEY"
-		//	      ],
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -120,27 +93,17 @@ func studioResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: KeyArn
 				"key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "<p>The ARN for a KMS key that is used to encrypt studio data.</p>",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtLeast(4),
-						stringvalidator.RegexMatches(regexp.MustCompile("^arn:.*"), ""),
-					}, /*END VALIDATORS*/
+					Optional: true,
+					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: KeyType
 				"key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "<p>The type of KMS key that is used to encrypt studio data.</p>",
-					Optional:    true,
-					Computed:    true,
+					Optional: true,
+					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"AWS_OWNED_KEY",
-							"CUSTOMER_MANAGED_KEY",
-						),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -148,9 +111,8 @@ func studioResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "<p>Configuration of the encryption method that is used for the studio.</p>",
-			Optional:    true,
-			Computed:    true,
+			Optional: true,
+			Computed: true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -171,19 +133,10 @@ func studioResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "\u003cp\u003eThe studio name that is used in the URL of the Nimble Studio portal when accessed by Nimble Studio users.\u003c/p\u003e",
-		//	  "maxLength": 64,
-		//	  "minLength": 3,
-		//	  "pattern": "^[a-z0-9]*$",
 		//	  "type": "string"
 		//	}
 		"studio_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "<p>The studio name that is used in the URL of the Nimble Studio portal when accessed by Nimble Studio users.</p>",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(3, 64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9]*$"), ""),
-			}, /*END VALIDATORS*/
+			Required: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -192,12 +145,10 @@ func studioResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "\u003cp\u003eThe address of the web page for the studio.\u003c/p\u003e",
 		//	  "type": "string"
 		//	}
 		"studio_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "<p>The address of the web page for the studio.</p>",
-			Computed:    true,
+			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -206,8 +157,6 @@ func studioResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "additionalProperties": false,
-		//	  "description": "",
 		//	  "patternProperties": {
 		//	    "": {
 		//	      "type": "string"
@@ -218,7 +167,6 @@ func studioResource(ctx context.Context) (resource.Resource, error) {
 		"tags":              // Pattern: ""
 		schema.MapAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
@@ -230,12 +178,10 @@ func studioResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "\u003cp\u003eThe IAM role that Studio Users will assume when logging in to the Nimble Studio portal.\u003c/p\u003e",
 		//	  "type": "string"
 		//	}
 		"user_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "<p>The IAM role that Studio Users will assume when logging in to the Nimble Studio portal.</p>",
-			Required:    true,
+			Required: true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -249,7 +195,7 @@ func studioResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Represents a studio that contains other Nimble Studio resources",
+		Description: "Resource Type definition for AWS::NimbleStudio::Studio",
 		Version:     1,
 		Attributes:  attributes,
 	}
