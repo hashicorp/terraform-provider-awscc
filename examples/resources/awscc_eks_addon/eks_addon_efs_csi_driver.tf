@@ -1,4 +1,9 @@
+# AWS IAM expects the OIDC provider URL without the `https://` prefix in the condition block. This creates a local variable for it:
+# locals {
+#   oidc_provider = replace(awscc_eks_cluster.eks_cluster.open_id_connect_issuer_url, "https://", "")
+# }
 
+# Create custom policy for KMS support. It's optional, but recommended.
 resource "awscc_iam_managed_policy" "efs_csi_kms_policy" {
     managed_policy_name = "AmazonEKS_EFS_CSI_KMS_Policy"
     policy_document = jsonencode({
