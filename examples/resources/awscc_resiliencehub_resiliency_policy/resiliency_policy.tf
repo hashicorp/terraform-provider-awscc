@@ -20,9 +20,9 @@ resource "awscc_resiliencehub_resiliency_policy" "example" {
     }
   }
   policy_description       = "This is an example policy"
-  data_location_constraint = "us-west-2"
-  tags = [{
+  data_location_constraint = "SameContinent"
+  tags = {
     key   = "Modified By"
     value = "AWSCC"
-  }]
+  }
 }
