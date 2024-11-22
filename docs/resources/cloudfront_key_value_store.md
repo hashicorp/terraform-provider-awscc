@@ -2,12 +2,12 @@
 page_title: "awscc_cloudfront_key_value_store Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource Type definition for AWS::CloudFront::KeyValueStore
+  The key value store. Use this to separate data from function code, allowing you to update data without having to publish a new version of a function. The key value store holds keys and their corresponding values.
 ---
 
 # awscc_cloudfront_key_value_store (Resource)
 
-Resource Type definition for AWS::CloudFront::KeyValueStore
+The key value store. Use this to separate data from function code, allowing you to update data without having to publish a new version of a function. The key value store holds keys and their corresponding values.
 
 ## Example Usage
 
@@ -40,12 +40,12 @@ resource "awscc_cloudfront_key_value_store" "example" {
 
 ### Required
 
-- `name` (String)
+- `name` (String) The name of the key value store.
 
 ### Optional
 
-- `comment` (String)
-- `import_source` (Attributes) (see [below for nested schema](#nestedatt--import_source))
+- `comment` (String) A comment for the key value store.
+- `import_source` (Attributes) The import source for the key value store. (see [below for nested schema](#nestedatt--import_source))
 
 ### Read-Only
 
@@ -59,8 +59,8 @@ resource "awscc_cloudfront_key_value_store" "example" {
 
 Optional:
 
-- `source_arn` (String)
-- `source_type` (String)
+- `source_arn` (String) The Amazon Resource Name (ARN) of the import source for the key value store.
+- `source_type` (String) The source type of the import source for the key value store.
 
 ## Import
 

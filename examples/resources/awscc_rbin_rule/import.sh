@@ -1,0 +1,1 @@
+$ terraform import awscc_rbin_rule.example "arn"

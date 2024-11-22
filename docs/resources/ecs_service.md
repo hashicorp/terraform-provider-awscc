@@ -69,11 +69,12 @@ resource "awscc_ecs_service" "nginx" {
 
 ### Optional
 
+- `availability_zone_rebalancing` (String)
 - `capacity_provider_strategy` (Attributes List) The capacity provider strategy to use for the service.
  If a ``capacityProviderStrategy`` is specified, the ``launchType`` parameter must be omitted. If no ``capacityProviderStrategy`` or ``launchType`` is specified, the ``defaultCapacityProviderStrategy`` for the cluster is used.
  A capacity provider strategy may contain a maximum of 6 capacity providers. (see [below for nested schema](#nestedatt--capacity_provider_strategy))
 - `cluster` (String) The short name or full Amazon Resource Name (ARN) of the cluster that you run your service on. If you do not specify a cluster, the default cluster is assumed.
-- `deployment_configuration` (Attributes) Optional deployment parameters that control how many tasks run during the deployment and the failure detection methods. (see [below for nested schema](#nestedatt--deployment_configuration))
+- `deployment_configuration` (Attributes) Optional deployment parameters that control how many tasks run during the deployment and the ordering of stopping and starting tasks. (see [below for nested schema](#nestedatt--deployment_configuration))
 - `deployment_controller` (Attributes) The deployment controller to use for the service. If no deployment controller is specified, the default value of ``ECS`` is used. (see [below for nested schema](#nestedatt--deployment_controller))
 - `desired_count` (Number) The number of instantiations of the specified task definition to place and keep running in your service.
  For new services, if a desired count is not specified, a default value of ``1`` is used. When using the ``DAEMON`` scheduling strategy, the desired count is not required.
@@ -120,6 +121,7 @@ resource "awscc_ecs_service" "nginx" {
  A task definition must be specified if the service uses either the ``ECS`` or ``CODE_DEPLOY`` deployment controllers.
  For more information about deployment types, see [Amazon ECS deployment types](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html).
 - `volume_configurations` (Attributes List) The configuration for a volume specified in the task definition as a volume that is configured at launch time. Currently, the only supported volume type is an Amazon EBS volume. (see [below for nested schema](#nestedatt--volume_configurations))
+- `vpc_lattice_configurations` (Attributes List) (see [below for nested schema](#nestedatt--vpc_lattice_configurations))
 
 ### Read-Only
 
@@ -204,7 +206,7 @@ Optional:
 - `container_name` (String) The name of the container (as it appears in a container definition) to associate with the load balancer.
  You need to specify the container name when configuring the target group for an Amazon ECS load balancer.
 - `container_port` (Number) The port on the container to associate with the load balancer. This port must correspond to a ``containerPort`` in the task definition the tasks in the service are using. For tasks that use the EC2 launch type, the container instance they're launched on must allow ingress traffic on the ``hostPort`` of the port mapping.
-- `load_balancer_name` (String) The name of the load balancer to associate with the service or task set.
+- `load_balancer_name` (String) The name of the load balancer to associate with the Amazon ECS service or task set.
  If you are using an Application Load Balancer or a Network Load Balancer the load balancer name parameter should be omitted.
 - `target_group_arn` (String) The full Amazon Resource Name (ARN) of the Elastic Load Balancing target group or groups associated with a service or task set.
  A target group ARN is only specified when using an Application Load Balancer or Network Load Balancer. 
@@ -451,6 +453,19 @@ Optional:
 
 - `key` (String) One part of a key-value pair that make up a tag. A ``key`` is a general label that acts like a category for more specific tag values.
 - `value` (String) The optional part of a key-value pair that make up a tag. A ``value`` acts as a descriptor within a tag category (key).
+
+
+
+
+
+<a id="nestedatt--vpc_lattice_configurations"></a>
+### Nested Schema for `vpc_lattice_configurations`
+
+Optional:
+
+- `port_name` (String)
+- `role_arn` (String)
+- `target_group_arn` (String)
 
 ## Import
 

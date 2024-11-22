@@ -33,6 +33,7 @@ resource "awscc_s3express_directory_bucket" "example" {
 
 - `bucket_encryption` (Attributes) Specifies default encryption for a bucket using server-side encryption with Amazon S3 managed keys (SSE-S3) or AWS KMS keys (SSE-KMS). (see [below for nested schema](#nestedatt--bucket_encryption))
 - `bucket_name` (String) Specifies a name for the bucket. The bucket name must contain only lowercase letters, numbers, and hyphens (-). A directory bucket name must be unique in the chosen Availability Zone. The bucket name must also follow the format 'bucket_base_name--az_id--x-s3' (for example, 'DOC-EXAMPLE-BUCKET--usw2-az1--x-s3'). If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the bucket name.
+- `lifecycle_configuration` (Attributes) Lifecycle rules that define how Amazon S3 Express manages objects during their lifetime. (see [below for nested schema](#nestedatt--lifecycle_configuration))
 
 ### Read-Only
 
@@ -62,6 +63,36 @@ Optional:
 
 - `kms_master_key_id` (String) AWS Key Management Service (KMS) customer managed key ID to use for the default encryption. This parameter is allowed only if SSEAlgorithm is set to aws:kms. You can specify this parameter with the key ID or the Amazon Resource Name (ARN) of the KMS key
 - `sse_algorithm` (String)
+
+
+
+
+<a id="nestedatt--lifecycle_configuration"></a>
+### Nested Schema for `lifecycle_configuration`
+
+Optional:
+
+- `rules` (Attributes List) A lifecycle rule for individual objects in an Amazon S3 Express bucket. (see [below for nested schema](#nestedatt--lifecycle_configuration--rules))
+
+<a id="nestedatt--lifecycle_configuration--rules"></a>
+### Nested Schema for `lifecycle_configuration.rules`
+
+Optional:
+
+- `abort_incomplete_multipart_upload` (Attributes) Specifies the days since the initiation of an incomplete multipart upload that Amazon S3 will wait before permanently removing all parts of the upload. (see [below for nested schema](#nestedatt--lifecycle_configuration--rules--abort_incomplete_multipart_upload))
+- `expiration_in_days` (Number)
+- `id` (String)
+- `object_size_greater_than` (String)
+- `object_size_less_than` (String)
+- `prefix` (String)
+- `status` (String)
+
+<a id="nestedatt--lifecycle_configuration--rules--abort_incomplete_multipart_upload"></a>
+### Nested Schema for `lifecycle_configuration.rules.abort_incomplete_multipart_upload`
+
+Optional:
+
+- `days_after_initiation` (Number) Specifies the number of days after which Amazon S3 aborts an incomplete multipart upload.
 
 ## Import
 

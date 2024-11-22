@@ -27,6 +27,8 @@ Resource schema for AWS::IoTSiteWise::Portal
 - `notification_sender_email` (String) The email address that sends alarm notifications.
 - `portal_auth_mode` (String) The service to use to authenticate users to the portal. Choose from SSO or IAM. You can't change this value after you create a portal.
 - `portal_description` (String) A description for the portal.
+- `portal_type` (String) The type of portal
+- `portal_type_configuration` (Attributes Map) Map to associate detail of configuration related with a PortalType. (see [below for nested schema](#nestedatt--portal_type_configuration))
 - `tags` (Attributes List) A list of key-value pairs that contain metadata for the portal. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -44,6 +46,14 @@ Optional:
 
 - `alarm_role_arn` (String) The ARN of the IAM role that allows the alarm to perform actions and access AWS resources and services, such as AWS IoT Events.
 - `notification_lambda_arn` (String) The ARN of the AWS Lambda function that manages alarm notifications. For more information, see Managing alarm notifications in the AWS IoT Events Developer Guide.
+
+
+<a id="nestedatt--portal_type_configuration"></a>
+### Nested Schema for `portal_type_configuration`
+
+Optional:
+
+- `portal_tools` (List of String) List of enabled Tools for a certain portal.
 
 
 <a id="nestedatt--tags"></a>

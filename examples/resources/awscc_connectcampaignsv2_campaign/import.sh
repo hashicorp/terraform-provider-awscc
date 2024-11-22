@@ -1,0 +1,1 @@
+$ terraform import awscc_connectcampaignsv2_campaign.example "arn"

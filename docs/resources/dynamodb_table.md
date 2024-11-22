@@ -6,7 +6,7 @@ description: |-
   The AWS::DynamoDB::Table resource creates a DDB table. For more information, see CreateTable https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_CreateTable.html in the API Reference.
   You should be aware of the following behaviors when working with DDB tables:
   CFNlong typically creates DDB tables in parallel. However, if your template includes multiple DDB tables with indexes, you must declare dependencies so that the tables are created sequentially. DDBlong limits the number of tables with secondary indexes that are in the creating state. If you create multiple tables with indexes at the same time, DDB returns an error and the stack operation fails. For an example, see DynamoDB Table with a DependsOn Attribute https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html#aws-resource-dynamodb-table--examples--DynamoDB_Table_with_a_DependsOn_Attribute.
-  Our guidance is to use the latest schema documented here for your CFNlong templates. This schema supports the provisioning of all table settings below. When using this schema in your CFNlong templates, please ensure that your Identity and Access Management (IAM) policies are updated with appropriate permissions to allow for the authorization of these setting changes.
+  Our guidance is to use the latest schema documented for your CFNlong templates. This schema supports the provisioning of all table settings below. When using this schema in your CFNlong templates, please ensure that your Identity and Access Management (IAM) policies are updated with appropriate permissions to allow for the authorization of these setting changes.
 ---
 
 # awscc_dynamodb_table (Resource)
@@ -15,7 +15,7 @@ The ``AWS::DynamoDB::Table`` resource creates a DDB table. For more information,
  You should be aware of the following behaviors when working with DDB tables:
   +   CFNlong typically creates DDB tables in parallel. However, if your template includes multiple DDB tables with indexes, you must declare dependencies so that the tables are created sequentially. DDBlong limits the number of tables with secondary indexes that are in the creating state. If you create multiple tables with indexes at the same time, DDB returns an error and the stack operation fails. For an example, see [DynamoDB Table with a DependsOn Attribute](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html#aws-resource-dynamodb-table--examples--DynamoDB_Table_with_a_DependsOn_Attribute).
   
-   Our guidance is to use the latest schema documented here for your CFNlong templates. This schema supports the provisioning of all table settings below. When using this schema in your CFNlong templates, please ensure that your Identity and Access Management (IAM) policies are updated with appropriate permissions to allow for the authorization of these setting changes.
+   Our guidance is to use the latest schema documented for your CFNlong templates. This schema supports the provisioning of all table settings below. When using this schema in your CFNlong templates, please ensure that your Identity and Access Management (IAM) policies are updated with appropriate permissions to allow for the authorization of these setting changes.
 
 
 
@@ -64,6 +64,7 @@ The ``AWS::DynamoDB::Table`` resource creates a DDB table. For more information,
  For more information, see [Tag](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html). (see [below for nested schema](#nestedatt--tags))
 - `time_to_live_specification` (Attributes) Specifies the Time to Live (TTL) settings for the table.
   For detailed information about the limits in DynamoDB, see [Limits in Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html) in the Amazon DynamoDB Developer Guide. (see [below for nested schema](#nestedatt--time_to_live_specification))
+- `warm_throughput` (Attributes) Represents the warm throughput (in read units per second and write units per second) for creating a table. (see [below for nested schema](#nestedatt--warm_throughput))
 
 ### Read-Only
 
@@ -108,6 +109,7 @@ Optional:
 - `projection` (Attributes) Represents attributes that are copied (projected) from the table into the global secondary index. These are in addition to the primary key attributes and index key attributes, which are automatically projected. (see [below for nested schema](#nestedatt--global_secondary_indexes--projection))
 - `provisioned_throughput` (Attributes) Represents the provisioned throughput settings for the specified global secondary index.
  For current minimum and maximum provisioned throughput values, see [Service, Account, and Table Quotas](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html) in the *Amazon DynamoDB Developer Guide*. (see [below for nested schema](#nestedatt--global_secondary_indexes--provisioned_throughput))
+- `warm_throughput` (Attributes) Represents the warm throughput value (in read units per second and write units per second) for the specified secondary index. If you use this parameter, you must specify ``ReadUnitsPerSecond``, ``WriteUnitsPerSecond``, or both. (see [below for nested schema](#nestedatt--global_secondary_indexes--warm_throughput))
 
 <a id="nestedatt--global_secondary_indexes--contributor_insights_specification"></a>
 ### Nested Schema for `global_secondary_indexes.contributor_insights_specification`
@@ -166,6 +168,15 @@ Optional:
  If read/write capacity mode is ``PAY_PER_REQUEST`` the value is set to 0.
 - `write_capacity_units` (Number) The maximum number of writes consumed per second before DynamoDB returns a ``ThrottlingException``. For more information, see [Specifying Read and Write Requirements](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughput.html) in the *Amazon DynamoDB Developer Guide*.
  If read/write capacity mode is ``PAY_PER_REQUEST`` the value is set to 0.
+
+
+<a id="nestedatt--global_secondary_indexes--warm_throughput"></a>
+### Nested Schema for `global_secondary_indexes.warm_throughput`
+
+Optional:
+
+- `read_units_per_second` (Number) Represents the number of read operations your base table can instantaneously support.
+- `write_units_per_second` (Number) Represents the number of write operations your base table can instantaneously support.
 
 
 
@@ -350,6 +361,15 @@ Optional:
    +  The ``AttributeName`` property is required when enabling the TTL, or when TTL is already enabled.
   +  To update this property, you must first disable TTL and then enable TTL with the new attribute name.
 - `enabled` (Boolean) Indicates whether TTL is to be enabled (true) or disabled (false) on the table.
+
+
+<a id="nestedatt--warm_throughput"></a>
+### Nested Schema for `warm_throughput`
+
+Optional:
+
+- `read_units_per_second` (Number) Represents the number of read operations your base table can instantaneously support.
+- `write_units_per_second` (Number) Represents the number of write operations your base table can instantaneously support.
 
 ## Import
 

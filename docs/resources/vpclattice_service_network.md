@@ -19,6 +19,7 @@ A service network is a logical boundary for a collection of services. You can as
 
 - `auth_type` (String)
 - `name` (String)
+- `sharing_config` (Attributes) (see [below for nested schema](#nestedatt--sharing_config))
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -28,6 +29,14 @@ A service network is a logical boundary for a collection of services. You can as
 - `id` (String) Uniquely identifies the resource.
 - `last_updated_at` (String)
 - `service_network_id` (String)
+
+<a id="nestedatt--sharing_config"></a>
+### Nested Schema for `sharing_config`
+
+Optional:
+
+- `enabled` (Boolean)
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

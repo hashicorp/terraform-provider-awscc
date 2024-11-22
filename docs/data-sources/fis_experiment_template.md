@@ -24,6 +24,7 @@ Data Source schema for AWS::FIS::ExperimentTemplate
 - `actions` (Attributes Map) The actions for the experiment. (see [below for nested schema](#nestedatt--actions))
 - `description` (String) A description for the experiment template.
 - `experiment_options` (Attributes) (see [below for nested schema](#nestedatt--experiment_options))
+- `experiment_report_configuration` (Attributes) (see [below for nested schema](#nestedatt--experiment_report_configuration))
 - `experiment_template_id` (String)
 - `log_configuration` (Attributes) (see [below for nested schema](#nestedatt--log_configuration))
 - `role_arn` (String) The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.
@@ -50,6 +51,50 @@ Read-Only:
 
 - `account_targeting` (String) The account targeting setting for the experiment template.
 - `empty_target_resolution_mode` (String) The target resolution failure mode for the experiment template.
+
+
+<a id="nestedatt--experiment_report_configuration"></a>
+### Nested Schema for `experiment_report_configuration`
+
+Read-Only:
+
+- `data_sources` (Attributes) (see [below for nested schema](#nestedatt--experiment_report_configuration--data_sources))
+- `outputs` (Attributes) (see [below for nested schema](#nestedatt--experiment_report_configuration--outputs))
+- `post_experiment_duration` (String)
+- `pre_experiment_duration` (String)
+
+<a id="nestedatt--experiment_report_configuration--data_sources"></a>
+### Nested Schema for `experiment_report_configuration.data_sources`
+
+Read-Only:
+
+- `cloudwatch_dashboards` (Attributes List) (see [below for nested schema](#nestedatt--experiment_report_configuration--data_sources--cloudwatch_dashboards))
+
+<a id="nestedatt--experiment_report_configuration--data_sources--cloudwatch_dashboards"></a>
+### Nested Schema for `experiment_report_configuration.data_sources.cloudwatch_dashboards`
+
+Read-Only:
+
+- `dashboard_identifier` (String)
+
+
+
+<a id="nestedatt--experiment_report_configuration--outputs"></a>
+### Nested Schema for `experiment_report_configuration.outputs`
+
+Read-Only:
+
+- `experiment_report_s3_configuration` (Attributes) (see [below for nested schema](#nestedatt--experiment_report_configuration--outputs--experiment_report_s3_configuration))
+
+<a id="nestedatt--experiment_report_configuration--outputs--experiment_report_s3_configuration"></a>
+### Nested Schema for `experiment_report_configuration.outputs.experiment_report_s3_configuration`
+
+Read-Only:
+
+- `bucket_name` (String)
+- `prefix` (String)
+
+
 
 
 <a id="nestedatt--log_configuration"></a>

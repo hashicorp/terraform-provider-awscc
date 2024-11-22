@@ -29,6 +29,7 @@ Data Source schema for AWS::Synthetics::Canary
 - `execution_role_arn` (String) Lambda Execution role used to run your canaries
 - `failure_retention_period` (Number) Retention period of failed canary runs represented in number of days
 - `name` (String) Name of the canary.
+- `provisioned_resource_cleanup` (String) Setting to control if provisioned resources created by Synthetics are deleted alongside the canary. Default is AUTOMATIC.
 - `resources_to_replicate_tags` (List of String) List of resources which canary tags should be replicated to.
 - `run_config` (Attributes) Provide canary run configuration (see [below for nested schema](#nestedatt--run_config))
 - `runtime_version` (String) Runtime version of Synthetics Library

@@ -170,6 +170,9 @@ Optional:
 - `kms_key_id` (String) The ID of an kms-key-long used to protect the encrypted file system.
 - `region` (String) The AWS-Region in which the destination file system is located.
   For One Zone file systems, the replication configuration must specify the AWS-Region in which the destination file system is located.
+- `role_arn` (String)
+- `status` (String)
+- `status_message` (String)
 
 ## Import
 

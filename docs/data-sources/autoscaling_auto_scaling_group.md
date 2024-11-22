@@ -25,8 +25,10 @@ Data Source schema for AWS::AutoScaling::AutoScalingGroup
  The name can contain any ASCII character 33 to 126 including most punctuation characters, digits, and upper and lowercased letters.
   You cannot use a colon (:) in the name.
 - `availability_zone_distribution` (Attributes) (see [below for nested schema](#nestedatt--availability_zone_distribution))
+- `availability_zone_impairment_policy` (Attributes) (see [below for nested schema](#nestedatt--availability_zone_impairment_policy))
 - `availability_zones` (List of String) A list of Availability Zones where instances in the Auto Scaling group can be created. Used for launching into the default VPC subnet in each Availability Zone when not using the ``VPCZoneIdentifier`` property, or for attaching a network interface when an existing network interface ID is specified in a launch template.
 - `capacity_rebalance` (Boolean) Indicates whether Capacity Rebalancing is enabled. Otherwise, Capacity Rebalancing is disabled. When you turn on Capacity Rebalancing, Amazon EC2 Auto Scaling attempts to launch a Spot Instance whenever Amazon EC2 notifies that a Spot Instance is at an elevated risk of interruption. After launching a new instance, it then terminates an old instance. For more information, see [Use Capacity Rebalancing to handle Amazon EC2 Spot Interruptions](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-capacity-rebalancing.html) in the in the *Amazon EC2 Auto Scaling User Guide*.
+- `capacity_reservation_specification` (Attributes) (see [below for nested schema](#nestedatt--capacity_reservation_specification))
 - `context` (String) Reserved.
 - `cooldown` (String) *Only needed if you use simple scaling policies.* 
  The amount of time, in seconds, between one scaling activity ending and another one starting due to simple scaling policies. For more information, see [Scaling cooldowns for Amazon EC2 Auto Scaling](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-scaling-cooldowns.html) in the *Amazon EC2 Auto Scaling User Guide*.
@@ -71,6 +73,7 @@ Data Source schema for AWS::AutoScaling::AutoScalingGroup
 - `placement_group` (String) The name of the placement group into which to launch your instances. For more information, see [Placement groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html) in the *Amazon EC2 User Guide for Linux Instances*.
   A *cluster* placement group is a logical grouping of instances within a single Availability Zone. You cannot specify multiple Availability Zones and a cluster placement group.
 - `service_linked_role_arn` (String) The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling group uses to call other AWS service on your behalf. By default, Amazon EC2 Auto Scaling uses a service-linked role named ``AWSServiceRoleForAutoScaling``, which it creates if it does not exist. For more information, see [Service-linked roles](https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-service-linked-role.html) in the *Amazon EC2 Auto Scaling User Guide*.
+- `skip_zonal_shift_validation` (Boolean)
 - `tags` (Attributes List) One or more tags. You can tag your Auto Scaling group and propagate the tags to the Amazon EC2 instances it launches. Tags are not propagated to Amazon EBS volumes. To add tags to Amazon EBS volumes, specify the tags in a launch template but use caution. If the launch template specifies an instance tag with a key that is also specified for the Auto Scaling group, Amazon EC2 Auto Scaling overrides the value of that instance tag with the value specified by the Auto Scaling group. For more information, see [Tag Auto Scaling groups and instances](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-tagging.html) in the *Amazon EC2 Auto Scaling User Guide*. (see [below for nested schema](#nestedatt--tags))
 - `target_group_ar_ns` (List of String) The Amazon Resource Names (ARN) of the Elastic Load Balancing target groups to associate with the Auto Scaling group. Instances are registered as targets with the target groups. The target groups receive incoming traffic and route requests to one or more registered targets. For more information, see [Use Elastic Load Balancing to distribute traffic across the instances in your Auto Scaling group](https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html) in the *Amazon EC2 Auto Scaling User Guide*.
 - `termination_policies` (List of String) A policy or a list of policies that are used to select the instance to terminate. These policies are executed in the order that you list them. For more information, see [Configure termination policies for Amazon EC2 Auto Scaling](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-termination-policies.html) in the *Amazon EC2 Auto Scaling User Guide*.
@@ -87,6 +90,33 @@ Data Source schema for AWS::AutoScaling::AutoScalingGroup
 Read-Only:
 
 - `capacity_distribution_strategy` (String)
+
+
+<a id="nestedatt--availability_zone_impairment_policy"></a>
+### Nested Schema for `availability_zone_impairment_policy`
+
+Read-Only:
+
+- `impaired_zone_health_check_behavior` (String)
+- `zonal_shift_enabled` (Boolean)
+
+
+<a id="nestedatt--capacity_reservation_specification"></a>
+### Nested Schema for `capacity_reservation_specification`
+
+Read-Only:
+
+- `capacity_reservation_preference` (String)
+- `capacity_reservation_target` (Attributes) (see [below for nested schema](#nestedatt--capacity_reservation_specification--capacity_reservation_target))
+
+<a id="nestedatt--capacity_reservation_specification--capacity_reservation_target"></a>
+### Nested Schema for `capacity_reservation_specification.capacity_reservation_target`
+
+Read-Only:
+
+- `capacity_reservation_ids` (List of String)
+- `capacity_reservation_resource_group_arns` (List of String)
+
 
 
 <a id="nestedatt--instance_maintenance_policy"></a>
@@ -277,6 +307,7 @@ Read-Only:
  Default: ``excluded``
 - `baseline_ebs_bandwidth_mbps` (Attributes) The minimum and maximum baseline bandwidth performance for an instance type, in Mbps. For more information, see [Amazon EBS–optimized instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html) in the *Amazon EC2 User Guide for Linux Instances*.
  Default: No minimum or maximum limits (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--baseline_ebs_bandwidth_mbps))
+- `baseline_performance_factors` (Attributes) (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--baseline_performance_factors))
 - `burstable_performance` (String) Indicates whether burstable performance instance types are included, excluded, or required. For more information, see [Burstable performance instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html) in the *Amazon EC2 User Guide for Linux Instances*.
  Default: ``excluded``
 - `cpu_manufacturers` (Set of String) Lists which specific CPU manufacturers to include.
@@ -353,6 +384,30 @@ Read-Only:
 
 - `max` (Number) The maximum value in Mbps.
 - `min` (Number) The minimum value in Mbps.
+
+
+<a id="nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--baseline_performance_factors"></a>
+### Nested Schema for `mixed_instances_policy.launch_template.overrides.instance_requirements.baseline_performance_factors`
+
+Read-Only:
+
+- `cpu` (Attributes) (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--baseline_performance_factors--cpu))
+
+<a id="nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--baseline_performance_factors--cpu"></a>
+### Nested Schema for `mixed_instances_policy.launch_template.overrides.instance_requirements.baseline_performance_factors.cpu`
+
+Read-Only:
+
+- `references` (Attributes List) (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--baseline_performance_factors--cpu--references))
+
+<a id="nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--baseline_performance_factors--cpu--references"></a>
+### Nested Schema for `mixed_instances_policy.launch_template.overrides.instance_requirements.baseline_performance_factors.cpu.references`
+
+Read-Only:
+
+- `instance_family` (String)
+
+
 
 
 <a id="nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--memory_gi_b_per_v_cpu"></a>
