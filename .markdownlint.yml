@@ -18,5 +18,3 @@ MD048:
 
 MD013: false # Line length: https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md#md013---line-length
 MD014: false # Dollar signs before commands with no output: https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md#md014---dollar-signs-used-before-commands-without-showing-output
-
-
