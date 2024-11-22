@@ -245,7 +245,7 @@
         "m2:ListTagsForResource",
         "m2:TagResource"
       ],
-      "timeoutInMinutes": 60
+      "timeoutInMinutes": 120
     },
     "read": {
       "permissions": [
@@ -262,7 +262,7 @@
         "m2:UpdateEnvironment",
         "kms:DescribeKey"
       ],
-      "timeoutInMinutes": 60
+      "timeoutInMinutes": 120
     },
     "delete": {
       "permissions": [
@@ -270,7 +270,7 @@
         "m2:DeleteEnvironment",
         "m2:GetEnvironment"
       ],
-      "timeoutInMinutes": 60
+      "timeoutInMinutes": 120
     },
     "list": {
       "permissions": [
