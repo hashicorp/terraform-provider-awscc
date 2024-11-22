@@ -54,6 +54,61 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: BurnRateConfigurations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Each object in this array defines the length of the look-back window used to calculate one burn rate metric for this SLO. The burn rate measures how fast the service is consuming the error budget, relative to the attainment goal of the SLO.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "This object defines the length of the look-back window used to calculate one burn rate metric for this SLO. The burn rate measures how fast the service is consuming the error budget, relative to the attainment goal of the SLO. A burn rate of exactly 1 indicates that the SLO goal will be met exactly.\nFor example, if you specify 60 as the number of minutes in the look-back window, the burn rate is calculated as the following:\nburn rate = error rate over the look-back window / (1 - attainment goal percentage)",
+		//	    "properties": {
+		//	      "LookBackWindowMinutes": {
+		//	        "description": "The number of minutes to use as the look-back window.",
+		//	        "maximum": 10080,
+		//	        "minimum": 1,
+		//	        "type": "integer"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "LookBackWindowMinutes"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 10,
+		//	  "minItems": 0,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"burn_rate_configurations": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: LookBackWindowMinutes
+					"look_back_window_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "The number of minutes to use as the look-back window.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.Int64{ /*START VALIDATORS*/
+							int64validator.Between(1, 10080),
+							fwvalidators.NotNullInt64(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+							int64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Each object in this array defines the length of the look-back window used to calculate one burn rate metric for this SLO. The burn rate measures how fast the service is consuming the error budget, relative to the attainment goal of the SLO.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.Set{ /*START VALIDATORS*/
+				setvalidator.SizeBetween(0, 10),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
@@ -1852,6 +1907,7 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 		"arn":                            "Arn",
 		"attainment_goal":                "AttainmentGoal",
 		"bad_count_metric":               "BadCountMetric",
+		"burn_rate_configurations":       "BurnRateConfigurations",
 		"calendar_interval":              "CalendarInterval",
 		"comparison_operator":            "ComparisonOperator",
 		"created_time":                   "CreatedTime",
@@ -1868,6 +1924,7 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 		"key":                            "Key",
 		"key_attributes":                 "KeyAttributes",
 		"last_updated_time":              "LastUpdatedTime",
+		"look_back_window_minutes":       "LookBackWindowMinutes",
 		"metric":                         "Metric",
 		"metric_data_queries":            "MetricDataQueries",
 		"metric_name":                    "MetricName",

@@ -62,6 +62,7 @@ resource "awscc_connect_hours_of_operation" "example" {
 ### Optional
 
 - `description` (String) The description of the hours of operation.
+- `hours_of_operation_overrides` (Attributes List) One or more hours of operation overrides assigned to an hour of operation. (see [below for nested schema](#nestedatt--hours_of_operation_overrides))
 - `tags` (Attributes Set) One or more tags. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -94,6 +95,47 @@ Required:
 
 - `hours` (Number) The hours.
 - `minutes` (Number) The minutes.
+
+
+
+<a id="nestedatt--hours_of_operation_overrides"></a>
+### Nested Schema for `hours_of_operation_overrides`
+
+Optional:
+
+- `effective_from` (String) The date from which the hours of operation override would be effective.
+- `effective_till` (String) The date till which the hours of operation override would be effective.
+- `hours_of_operation_override_id` (String) The Resource Identifier for the hours of operation override.
+- `override_config` (Attributes Set) Configuration information for the hours of operation override: day, start time, and end time. (see [below for nested schema](#nestedatt--hours_of_operation_overrides--override_config))
+- `override_description` (String) The description of the hours of operation override.
+- `override_name` (String) The name of the hours of operation override.
+
+<a id="nestedatt--hours_of_operation_overrides--override_config"></a>
+### Nested Schema for `hours_of_operation_overrides.override_config`
+
+Optional:
+
+- `day` (String) The day that the hours of operation override applies to.
+- `end_time` (Attributes) The new end time that your contact center closes for the overriden days. (see [below for nested schema](#nestedatt--hours_of_operation_overrides--override_config--end_time))
+- `start_time` (Attributes) The new start time that your contact center opens for the overriden days. (see [below for nested schema](#nestedatt--hours_of_operation_overrides--override_config--start_time))
+
+<a id="nestedatt--hours_of_operation_overrides--override_config--end_time"></a>
+### Nested Schema for `hours_of_operation_overrides.override_config.end_time`
+
+Optional:
+
+- `hours` (Number) The hours.
+- `minutes` (Number) The minutes.
+
+
+<a id="nestedatt--hours_of_operation_overrides--override_config--start_time"></a>
+### Nested Schema for `hours_of_operation_overrides.override_config.start_time`
+
+Optional:
+
+- `hours` (Number) The hours.
+- `minutes` (Number) The minutes.
+
 
 
 

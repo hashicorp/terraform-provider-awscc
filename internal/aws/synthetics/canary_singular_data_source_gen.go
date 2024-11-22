@@ -213,6 +213,21 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Name of the canary.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ProvisionedResourceCleanup
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Setting to control if provisioned resources created by Synthetics are deleted alongside the canary. Default is AUTOMATIC.",
+		//	  "enum": [
+		//	    "AUTOMATIC",
+		//	    "OFF"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"provisioned_resource_cleanup": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Setting to control if provisioned resources created by Synthetics are deleted alongside the canary. Default is AUTOMATIC.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourcesToReplicateTags
 		// CloudFormation resource type schema:
 		//
@@ -575,6 +590,7 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"kms_key_arn":                                "KmsKeyArn",
 		"memory_in_mb":                               "MemoryInMB",
 		"name":                                       "Name",
+		"provisioned_resource_cleanup":               "ProvisionedResourceCleanup",
 		"resources_to_replicate_tags":                "ResourcesToReplicateTags",
 		"run_config":                                 "RunConfig",
 		"runtime_version":                            "RuntimeVersion",

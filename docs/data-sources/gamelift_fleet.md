@@ -26,7 +26,6 @@ Data Source schema for AWS::GameLift::Fleet
 - `build_id` (String) A unique identifier for a build to be deployed on the new fleet. If you are deploying the fleet with a custom game build, you must specify this property. The build must have been successfully uploaded to Amazon GameLift and be in a READY status. This fleet setting cannot be changed once the fleet is created.
 - `certificate_configuration` (Attributes) Indicates whether to generate a TLS/SSL certificate for the new fleet. TLS certificates are used for encrypting traffic between game clients and game servers running on GameLift. If this parameter is not set, certificate generation is disabled. This fleet setting cannot be changed once the fleet is created. (see [below for nested schema](#nestedatt--certificate_configuration))
 - `compute_type` (String) ComputeType to differentiate EC2 hardware managed by GameLift and Anywhere hardware managed by the customer.
-- `container_groups_configuration` (Attributes) Specifies container groups that this instance will hold. You must specify exactly one replica group. Optionally, you may specify exactly one daemon group. You can't change this property after you create the fleet. (see [below for nested schema](#nestedatt--container_groups_configuration))
 - `description` (String) A human-readable description of a fleet.
 - `desired_ec2_instances` (Number) [DEPRECATED] The number of EC2 instances that you want this fleet to host. When creating a new fleet, GameLift automatically sets this value to "1" and initiates a single instance. Once the fleet is active, update this value to trigger GameLift to add or remove instances from the fleet.
 - `ec2_inbound_permissions` (Attributes List) A range of IP addresses and port settings that allow inbound traffic to connect to server processes on an Amazon GameLift server. (see [below for nested schema](#nestedatt--ec2_inbound_permissions))
@@ -69,34 +68,6 @@ Read-Only:
 Read-Only:
 
 - `certificate_type` (String)
-
-
-<a id="nestedatt--container_groups_configuration"></a>
-### Nested Schema for `container_groups_configuration`
-
-Read-Only:
-
-- `connection_port_range` (Attributes) Defines the range of ports on the instance that allow inbound traffic to connect with containers in a fleet. (see [below for nested schema](#nestedatt--container_groups_configuration--connection_port_range))
-- `container_group_definition_names` (List of String) The names of the container group definitions that will be created in an instance. You must specify exactly one REPLICA container group. You have the option to also specify one DAEMON container group.
-- `container_groups_per_instance` (Attributes) The number of container groups per instance. (see [below for nested schema](#nestedatt--container_groups_configuration--container_groups_per_instance))
-
-<a id="nestedatt--container_groups_configuration--connection_port_range"></a>
-### Nested Schema for `container_groups_configuration.connection_port_range`
-
-Read-Only:
-
-- `from_port` (Number) A starting value for a range of allowed port numbers.
-- `to_port` (Number) An ending value for a range of allowed port numbers. Port numbers are end-inclusive. This value must be higher than FromPort.
-
-
-<a id="nestedatt--container_groups_configuration--container_groups_per_instance"></a>
-### Nested Schema for `container_groups_configuration.container_groups_per_instance`
-
-Read-Only:
-
-- `desired_replica_container_groups_per_instance` (Number) Use this parameter to override the number of replica container groups GameLift will launch per instance with a number that is lower than that calculated maximum.
-- `max_replica_container_groups_per_instance` (Number) GameLift calculates the maximum number of replica container groups it can launch per instance based on instance properties such as CPU, memory, and connection ports.
-
 
 
 <a id="nestedatt--ec2_inbound_permissions"></a>

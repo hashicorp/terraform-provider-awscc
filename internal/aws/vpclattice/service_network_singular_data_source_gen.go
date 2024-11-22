@@ -90,6 +90,30 @@ func serviceNetworkDataSource(ctx context.Context) (datasource.DataSource, error
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: SharingConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "enabled": {
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "enabled"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"sharing_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: enabled
+				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -155,10 +179,12 @@ func serviceNetworkDataSource(ctx context.Context) (datasource.DataSource, error
 		"arn":                "Arn",
 		"auth_type":          "AuthType",
 		"created_at":         "CreatedAt",
+		"enabled":            "enabled",
 		"key":                "Key",
 		"last_updated_at":    "LastUpdatedAt",
 		"name":               "Name",
 		"service_network_id": "Id",
+		"sharing_config":     "SharingConfig",
 		"tags":               "Tags",
 		"value":              "Value",
 	})

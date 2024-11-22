@@ -2,12 +2,12 @@
 page_title: "awscc_cloudfront_public_key Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource Type definition for AWS::CloudFront::PublicKey
+  A public key that you can use with signed URLs and signed cookies https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html, or with field-level encryption https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html.
 ---
 
 # awscc_cloudfront_public_key (Resource)
 
-Resource Type definition for AWS::CloudFront::PublicKey
+A public key that you can use with [signed URLs and signed cookies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html), or with [field-level encryption](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html).
 
 ## Example Usage
 
@@ -29,7 +29,7 @@ resource "awscc_cloudfront_public_key" "example" {
 
 ### Required
 
-- `public_key_config` (Attributes) (see [below for nested schema](#nestedatt--public_key_config))
+- `public_key_config` (Attributes) Configuration information about a public key that you can use with [signed URLs and signed cookies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html), or with [field-level encryption](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html). (see [below for nested schema](#nestedatt--public_key_config))
 
 ### Read-Only
 
@@ -42,13 +42,13 @@ resource "awscc_cloudfront_public_key" "example" {
 
 Required:
 
-- `caller_reference` (String)
-- `encoded_key` (String)
-- `name` (String)
+- `caller_reference` (String) A string included in the request to help make sure that the request can't be replayed.
+- `encoded_key` (String) The public key that you can use with [signed URLs and signed cookies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html), or with [field-level encryption](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html).
+- `name` (String) A name to help identify the public key.
 
 Optional:
 
-- `comment` (String)
+- `comment` (String) A comment to describe the public key. The comment cannot be longer than 128 characters.
 
 ## Import
 

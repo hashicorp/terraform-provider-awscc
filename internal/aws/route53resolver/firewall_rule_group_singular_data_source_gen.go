@@ -108,6 +108,23 @@ func firewallRuleGroupDataSource(ctx context.Context) (datasource.DataSource, er
 		//	        ],
 		//	        "type": "string"
 		//	      },
+		//	      "ConfidenceThreshold": {
+		//	        "description": "FirewallDomainRedirectionAction",
+		//	        "enum": [
+		//	          "LOW",
+		//	          "MEDIUM",
+		//	          "HIGH"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "DnsThreatProtection": {
+		//	        "description": "FirewallDomainRedirectionAction",
+		//	        "enum": [
+		//	          "DGA",
+		//	          "DNS_TUNNELING"
+		//	        ],
+		//	        "type": "string"
+		//	      },
 		//	      "FirewallDomainListId": {
 		//	        "description": "ResourceId",
 		//	        "maxLength": 64,
@@ -122,6 +139,12 @@ func firewallRuleGroupDataSource(ctx context.Context) (datasource.DataSource, er
 		//	        ],
 		//	        "type": "string"
 		//	      },
+		//	      "FirewallThreatProtectionId": {
+		//	        "description": "ResourceId",
+		//	        "maxLength": 64,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
 		//	      "Priority": {
 		//	        "description": "Rule Priority",
 		//	        "type": "integer"
@@ -134,7 +157,6 @@ func firewallRuleGroupDataSource(ctx context.Context) (datasource.DataSource, er
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "FirewallDomainListId",
 		//	      "Priority",
 		//	      "Action"
 		//	    ],
@@ -171,6 +193,16 @@ func firewallRuleGroupDataSource(ctx context.Context) (datasource.DataSource, er
 						Description: "BlockResponse",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
+					// Property: ConfidenceThreshold
+					"confidence_threshold": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "FirewallDomainRedirectionAction",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: DnsThreatProtection
+					"dns_threat_protection": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "FirewallDomainRedirectionAction",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 					// Property: FirewallDomainListId
 					"firewall_domain_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "ResourceId",
@@ -179,6 +211,11 @@ func firewallRuleGroupDataSource(ctx context.Context) (datasource.DataSource, er
 					// Property: FirewallDomainRedirectionAction
 					"firewall_domain_redirection_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "FirewallDomainRedirectionAction",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: FirewallThreatProtectionId
+					"firewall_threat_protection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "ResourceId",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Priority
@@ -377,12 +414,15 @@ func firewallRuleGroupDataSource(ctx context.Context) (datasource.DataSource, er
 		"block_override_domain":              "BlockOverrideDomain",
 		"block_override_ttl":                 "BlockOverrideTtl",
 		"block_response":                     "BlockResponse",
+		"confidence_threshold":               "ConfidenceThreshold",
 		"creation_time":                      "CreationTime",
 		"creator_request_id":                 "CreatorRequestId",
+		"dns_threat_protection":              "DnsThreatProtection",
 		"firewall_domain_list_id":            "FirewallDomainListId",
 		"firewall_domain_redirection_action": "FirewallDomainRedirectionAction",
 		"firewall_rule_group_id":             "Id",
 		"firewall_rules":                     "FirewallRules",
+		"firewall_threat_protection_id":      "FirewallThreatProtectionId",
 		"key":                                "Key",
 		"modification_time":                  "ModificationTime",
 		"name":                               "Name",

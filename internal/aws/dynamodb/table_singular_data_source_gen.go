@@ -235,6 +235,35 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "ReadCapacityUnits"
 		//	        ],
 		//	        "type": "object"
+		//	      },
+		//	      "WarmThroughput": {
+		//	        "additionalProperties": false,
+		//	        "anyOf": [
+		//	          {
+		//	            "required": [
+		//	              "ReadUnitsPerSecond"
+		//	            ]
+		//	          },
+		//	          {
+		//	            "required": [
+		//	              "WriteUnitsPerSecond"
+		//	            ]
+		//	          }
+		//	        ],
+		//	        "description": "Represents the warm throughput value (in read units per second and write units per second) for the specified secondary index. If you use this parameter, you must specify ``ReadUnitsPerSecond``, ``WriteUnitsPerSecond``, or both.",
+		//	        "properties": {
+		//	          "ReadUnitsPerSecond": {
+		//	            "description": "Represents the number of read operations your base table can instantaneously support.",
+		//	            "minimum": 1,
+		//	            "type": "integer"
+		//	          },
+		//	          "WriteUnitsPerSecond": {
+		//	            "description": "Represents the number of write operations your base table can instantaneously support.",
+		//	            "minimum": 1,
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "type": "object"
 		//	      }
 		//	    },
 		//	    "required": [
@@ -336,6 +365,23 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "Represents the provisioned throughput settings for the specified global secondary index.\n For current minimum and maximum provisioned throughput values, see [Service, Account, and Table Quotas](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html) in the *Amazon DynamoDB Developer Guide*.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: WarmThroughput
+					"warm_throughput": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ReadUnitsPerSecond
+							"read_units_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "Represents the number of read operations your base table can instantaneously support.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: WriteUnitsPerSecond
+							"write_units_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "Represents the number of write operations your base table can instantaneously support.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Represents the warm throughput value (in read units per second and write units per second) for the specified secondary index. If you use this parameter, you must specify ``ReadUnitsPerSecond``, ``WriteUnitsPerSecond``, or both.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -1003,6 +1049,54 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Specifies the Time to Live (TTL) settings for the table.\n  For detailed information about the limits in DynamoDB, see [Limits in Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html) in the Amazon DynamoDB Developer Guide.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: WarmThroughput
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "anyOf": [
+		//	    {
+		//	      "required": [
+		//	        "ReadUnitsPerSecond"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "WriteUnitsPerSecond"
+		//	      ]
+		//	    }
+		//	  ],
+		//	  "description": "Represents the warm throughput (in read units per second and write units per second) for creating a table.",
+		//	  "properties": {
+		//	    "ReadUnitsPerSecond": {
+		//	      "description": "Represents the number of read operations your base table can instantaneously support.",
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    },
+		//	    "WriteUnitsPerSecond": {
+		//	      "description": "Represents the number of write operations your base table can instantaneously support.",
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"warm_throughput": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ReadUnitsPerSecond
+				"read_units_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Represents the number of read operations your base table can instantaneously support.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: WriteUnitsPerSecond
+				"write_units_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Represents the number of write operations your base table can instantaneously support.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Represents the warm throughput (in read units per second and write units per second) for creating a table.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -1055,6 +1149,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"projection_type":                      "ProjectionType",
 		"provisioned_throughput":               "ProvisionedThroughput",
 		"read_capacity_units":                  "ReadCapacityUnits",
+		"read_units_per_second":                "ReadUnitsPerSecond",
 		"resource_policy":                      "ResourcePolicy",
 		"s3_bucket":                            "S3Bucket",
 		"s3_bucket_owner":                      "S3BucketOwner",
@@ -1071,7 +1166,9 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags":                                 "Tags",
 		"time_to_live_specification":           "TimeToLiveSpecification",
 		"value":                                "Value",
+		"warm_throughput":                      "WarmThroughput",
 		"write_capacity_units":                 "WriteCapacityUnits",
+		"write_units_per_second":               "WriteUnitsPerSecond",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

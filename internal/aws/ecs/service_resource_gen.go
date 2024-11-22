@@ -34,6 +34,33 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::ECS::Service resource.
 func serviceResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AvailabilityZoneRebalancing
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": "DISABLED",
+		//	  "description": "",
+		//	  "enum": [
+		//	    "ENABLED",
+		//	    "DISABLED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"availability_zone_rebalancing": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			Default:     stringdefault.StaticString("DISABLED"),
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ENABLED",
+					"DISABLED",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CapacityProviderStrategy
 		// CloudFormation resource type schema:
 		//
@@ -120,7 +147,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "Optional deployment parameters that control how many tasks run during the deployment and the failure detection methods.",
+		//	  "description": "Optional deployment parameters that control how many tasks run during the deployment and the ordering of stopping and starting tasks.",
 		//	  "properties": {
 		//	    "Alarms": {
 		//	      "additionalProperties": false,
@@ -283,7 +310,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "Optional deployment parameters that control how many tasks run during the deployment and the failure detection methods.",
+			Description: "Optional deployment parameters that control how many tasks run during the deployment and the ordering of stopping and starting tasks.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -442,7 +469,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "integer"
 		//	      },
 		//	      "LoadBalancerName": {
-		//	        "description": "The name of the load balancer to associate with the service or task set.\n If you are using an Application Load Balancer or a Network Load Balancer the load balancer name parameter should be omitted.",
+		//	        "description": "The name of the load balancer to associate with the Amazon ECS service or task set.\n If you are using an Application Load Balancer or a Network Load Balancer the load balancer name parameter should be omitted.",
 		//	        "type": "string"
 		//	      },
 		//	      "TargetGroupArn": {
@@ -477,7 +504,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: LoadBalancerName
 					"load_balancer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the load balancer to associate with the service or task set.\n If you are using an Application Load Balancer or a Network Load Balancer the load balancer name parameter should be omitted.",
+						Description: "The name of the load balancer to associate with the Amazon ECS service or task set.\n If you are using an Application Load Balancer or a Network Load Balancer the load balancer name parameter should be omitted.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1724,6 +1751,79 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END PLAN MODIFIERS*/
 			// VolumeConfigurations is a write-only property.
 		}, /*END ATTRIBUTE*/
+		// Property: VpcLatticeConfigurations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "",
+		//	    "properties": {
+		//	      "PortName": {
+		//	        "type": "string"
+		//	      },
+		//	      "RoleArn": {
+		//	        "type": "string"
+		//	      },
+		//	      "TargetGroupArn": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "RoleArn",
+		//	      "TargetGroupArn",
+		//	      "PortName"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"vpc_lattice_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: PortName
+					"port_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: RoleArn
+					"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: TargetGroupArn
+					"target_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -1749,6 +1849,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		"alarm_names":                       "AlarmNames",
 		"alarms":                            "Alarms",
 		"assign_public_ip":                  "AssignPublicIp",
+		"availability_zone_rebalancing":     "AvailabilityZoneRebalancing",
 		"aws_pca_authority_arn":             "AwsPcaAuthorityArn",
 		"awsvpc_configuration":              "AwsvpcConfiguration",
 		"base":                              "Base",
@@ -1827,6 +1928,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		"value_from":                        "ValueFrom",
 		"volume_configurations":             "VolumeConfigurations",
 		"volume_type":                       "VolumeType",
+		"vpc_lattice_configurations":        "VpcLatticeConfigurations",
 		"weight":                            "Weight",
 	})
 

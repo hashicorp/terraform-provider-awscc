@@ -311,7 +311,8 @@ func cisScanConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	    }
 		//	  },
 		//	  "required": [
-		//	    "AccountIds"
+		//	    "AccountIds",
+		//	    "TargetResourceTags"
 		//	  ]
 		//	}
 		"targets": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/

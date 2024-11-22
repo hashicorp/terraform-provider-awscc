@@ -1957,7 +1957,12 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "InferenceRecommender",
 		//	              "Endpoints",
 		//	              "Projects",
-		//	              "InferenceOptimization"
+		//	              "InferenceOptimization",
+		//	              "HyperPodClusters",
+		//	              "Comet",
+		//	              "DeepchecksLLMEvaluation",
+		//	              "Fiddler",
+		//	              "LakeraGuard"
 		//	            ],
 		//	            "type": "string"
 		//	          },

@@ -1,0 +1,1 @@
+$ terraform import awscc_m2_deployment.example "application_id"

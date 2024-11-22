@@ -1,4 +1,55 @@
 ## 1.21.0 (Unreleased)
+
+* **New Data Source:** `awscc_apigateway_base_path_mapping_v2`
+* **New Data Source:** `awscc_apigateway_domain_name_access_association`
+* **New Data Source:** `awscc_apigateway_domain_name_access_associations`
+* **New Data Source:** `awscc_apigateway_domain_name_v2`
+* **New Data Source:** `awscc_apigateway_domain_name_v2s`
+* **New Data Source:** `awscc_chatbot_custom_action`
+* **New Data Source:** `awscc_chatbot_custom_actions`
+* **New Data Source:** `awscc_cloudformation_guard_hook`
+* **New Data Source:** `awscc_cloudformation_guard_hooks`
+* **New Data Source:** `awscc_cloudformation_lambda_hook`
+* **New Data Source:** `awscc_cloudformation_lambda_hooks`
+* **New Data Source:** `awscc_cloudtrail_dashboard`
+* **New Data Source:** `awscc_cloudtrail_dashboards`
+* **New Data Source:** `awscc_connect_email_address`
+* **New Data Source:** `awscc_connectcampaignsv2_campaign`
+* **New Data Source:** `awscc_customerprofiles_segment_definition`
+* **New Data Source:** `awscc_gamelift_container_fleet`
+* **New Data Source:** `awscc_gamelift_container_fleets`
+* **New Data Source:** `awscc_iotfleetwise_state_template`
+* **New Data Source:** `awscc_iotfleetwise_state_templates`
+* **New Data Source:** `awscc_ivs_ingest_configuration`
+* **New Data Source:** `awscc_ivs_ingest_configurations`
+* **New Data Source:** `awscc_m2_deployment`
+* **New Data Source:** `awscc_rbin_rule`
+* **New Data Source:** `awscc_resourcegroups_tag_sync_task`
+* **New Data Source:** `awscc_resourcegroups_tag_sync_tasks`
+* **New Data Source:** `awscc_wisdom_message_template`
+* **New Data Source:** `awscc_wisdom_message_template_version`
+* **New Data Source:** `awscc_workspacesweb_data_protection_settings`
+* **New Data Source:** `awscc_workspacesweb_data_protection_settings_plural`
+* **New Resource:** `awscc_apigateway_base_path_mapping_v2`
+* **New Resource:** `awscc_apigateway_domain_name_access_association`
+* **New Resource:** `awscc_apigateway_domain_name_v2`
+* **New Resource:** `awscc_chatbot_custom_action`
+* **New Resource:** `awscc_cloudformation_guard_hook`
+* **New Resource:** `awscc_cloudformation_lambda_hook`
+* **New Resource:** `awscc_cloudtrail_dashboard`
+* **New Resource:** `awscc_connect_email_address`
+* **New Resource:** `awscc_connectcampaignsv2_campaign`
+* **New Resource:** `awscc_customerprofiles_segment_definition`
+* **New Resource:** `awscc_gamelift_container_fleet`
+* **New Resource:** `awscc_iotfleetwise_state_template`
+* **New Resource:** `awscc_ivs_ingest_configuration`
+* **New Resource:** `awscc_m2_deployment`
+* **New Resource:** `awscc_rbin_rule`
+* **New Resource:** `awscc_resourcegroups_tag_sync_task`
+* **New Resource:** `awscc_wisdom_message_template`
+* **New Resource:** `awscc_wisdom_message_template_version`
+* **New Resource:** `awscc_workspacesweb_data_protection_settings`
+
 ## 1.20.0 (November  8, 2024)
 
 * **New Data Source:** `awscc_appsync_channel_namespace`

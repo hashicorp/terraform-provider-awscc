@@ -41,7 +41,7 @@ For more information, see https://docs.aws.amazon.com/AmazonECR/latest/userguide
 Read-Only:
 
 - `encryption_type` (String) The encryption type to use.
-- `kms_key` (String) If you use the KMS encryption type, specify the CMK to use for encryption. The alias, key ID, or full ARN of the CMK can be specified. The key must exist in the same Region as the repository. If no key is specified, the default AWS managed CMK for Amazon ECR will be used.
+- `kms_key` (String) If you use the KMS or KMS_DSSE encryption type, specify the CMK to use for encryption. The alias, key ID, or full ARN of the CMK can be specified. The key must exist in the same Region as the repository. If no key is specified, the default AWS managed CMK for Amazon ECR will be used.
 
 
 <a id="nestedatt--resource_tags"></a>

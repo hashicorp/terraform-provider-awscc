@@ -21,7 +21,7 @@ Data Source schema for AWS::CloudFront::ContinuousDeploymentPolicy
 
 ### Read-Only
 
-- `continuous_deployment_policy_config` (Attributes) (see [below for nested schema](#nestedatt--continuous_deployment_policy_config))
+- `continuous_deployment_policy_config` (Attributes) Contains the configuration for a continuous deployment policy. (see [below for nested schema](#nestedatt--continuous_deployment_policy_config))
 - `continuous_deployment_policy_id` (String)
 - `last_modified_time` (String)
 
@@ -30,12 +30,12 @@ Data Source schema for AWS::CloudFront::ContinuousDeploymentPolicy
 
 Read-Only:
 
-- `enabled` (Boolean)
-- `single_header_policy_config` (Attributes) (see [below for nested schema](#nestedatt--continuous_deployment_policy_config--single_header_policy_config))
-- `single_weight_policy_config` (Attributes) (see [below for nested schema](#nestedatt--continuous_deployment_policy_config--single_weight_policy_config))
-- `staging_distribution_dns_names` (List of String)
-- `traffic_config` (Attributes) (see [below for nested schema](#nestedatt--continuous_deployment_policy_config--traffic_config))
-- `type` (String)
+- `enabled` (Boolean) A Boolean that indicates whether this continuous deployment policy is enabled (in effect). When this value is ``true``, this policy is enabled and in effect. When this value is ``false``, this policy is not enabled and has no effect.
+- `single_header_policy_config` (Attributes) This configuration determines which HTTP requests are sent to the staging distribution. If the HTTP request contains a header and value that matches what you specify here, the request is sent to the staging distribution. Otherwise the request is sent to the primary distribution. (see [below for nested schema](#nestedatt--continuous_deployment_policy_config--single_header_policy_config))
+- `single_weight_policy_config` (Attributes) This configuration determines the percentage of HTTP requests that are sent to the staging distribution. (see [below for nested schema](#nestedatt--continuous_deployment_policy_config--single_weight_policy_config))
+- `staging_distribution_dns_names` (List of String) The CloudFront domain name of the staging distribution. For example: ``d111111abcdef8.cloudfront.net``.
+- `traffic_config` (Attributes) Contains the parameters for routing production traffic from your primary to staging distributions. (see [below for nested schema](#nestedatt--continuous_deployment_policy_config--traffic_config))
+- `type` (String) The type of traffic configuration.
 
 <a id="nestedatt--continuous_deployment_policy_config--single_header_policy_config"></a>
 ### Nested Schema for `continuous_deployment_policy_config.single_header_policy_config`
@@ -51,7 +51,7 @@ Read-Only:
 
 Read-Only:
 
-- `session_stickiness_config` (Attributes) (see [below for nested schema](#nestedatt--continuous_deployment_policy_config--single_weight_policy_config--session_stickiness_config))
+- `session_stickiness_config` (Attributes) Session stickiness provides the ability to define multiple requests from a single viewer as a single session. This prevents the potentially inconsistent experience of sending some of a given user's requests to your staging distribution, while others are sent to your primary distribution. Define the session duration using TTL values. (see [below for nested schema](#nestedatt--continuous_deployment_policy_config--single_weight_policy_config--session_stickiness_config))
 - `weight` (Number)
 
 <a id="nestedatt--continuous_deployment_policy_config--single_weight_policy_config--session_stickiness_config"></a>
@@ -59,8 +59,8 @@ Read-Only:
 
 Read-Only:
 
-- `idle_ttl` (Number)
-- `maximum_ttl` (Number)
+- `idle_ttl` (Number) The amount of time after which you want sessions to cease if no requests are received. Allowed values are 300?3600 seconds (5?60 minutes).
+- `maximum_ttl` (Number) The maximum amount of time to consider requests from the viewer as being part of the same session. Allowed values are 300?3600 seconds (5?60 minutes).
 
 
 
@@ -69,17 +69,17 @@ Read-Only:
 
 Read-Only:
 
-- `single_header_config` (Attributes) (see [below for nested schema](#nestedatt--continuous_deployment_policy_config--traffic_config--single_header_config))
-- `single_weight_config` (Attributes) (see [below for nested schema](#nestedatt--continuous_deployment_policy_config--traffic_config--single_weight_config))
-- `type` (String)
+- `single_header_config` (Attributes) Determines which HTTP requests are sent to the staging distribution. (see [below for nested schema](#nestedatt--continuous_deployment_policy_config--traffic_config--single_header_config))
+- `single_weight_config` (Attributes) Contains the percentage of traffic to send to the staging distribution. (see [below for nested schema](#nestedatt--continuous_deployment_policy_config--traffic_config--single_weight_config))
+- `type` (String) The type of traffic configuration.
 
 <a id="nestedatt--continuous_deployment_policy_config--traffic_config--single_header_config"></a>
 ### Nested Schema for `continuous_deployment_policy_config.traffic_config.single_header_config`
 
 Read-Only:
 
-- `header` (String)
-- `value` (String)
+- `header` (String) The request header name that you want CloudFront to send to your staging distribution. The header must contain the prefix ``aws-cf-cd-``.
+- `value` (String) The request header value.
 
 
 <a id="nestedatt--continuous_deployment_policy_config--traffic_config--single_weight_config"></a>
@@ -87,13 +87,13 @@ Read-Only:
 
 Read-Only:
 
-- `session_stickiness_config` (Attributes) (see [below for nested schema](#nestedatt--continuous_deployment_policy_config--traffic_config--single_weight_config--session_stickiness_config))
-- `weight` (Number)
+- `session_stickiness_config` (Attributes) Session stickiness provides the ability to define multiple requests from a single viewer as a single session. This prevents the potentially inconsistent experience of sending some of a given user's requests to your staging distribution, while others are sent to your primary distribution. Define the session duration using TTL values. (see [below for nested schema](#nestedatt--continuous_deployment_policy_config--traffic_config--single_weight_config--session_stickiness_config))
+- `weight` (Number) The percentage of traffic to send to a staging distribution, expressed as a decimal number between 0 and 0.15. For example, a value of 0.10 means 10% of traffic is sent to the staging distribution.
 
 <a id="nestedatt--continuous_deployment_policy_config--traffic_config--single_weight_config--session_stickiness_config"></a>
 ### Nested Schema for `continuous_deployment_policy_config.traffic_config.single_weight_config.session_stickiness_config`
 
 Read-Only:
 
-- `idle_ttl` (Number)
-- `maximum_ttl` (Number)
+- `idle_ttl` (Number) The amount of time after which you want sessions to cease if no requests are received. Allowed values are 300?3600 seconds (5?60 minutes).
+- `maximum_ttl` (Number) The maximum amount of time to consider requests from the viewer as being part of the same session. Allowed values are 300?3600 seconds (5?60 minutes).

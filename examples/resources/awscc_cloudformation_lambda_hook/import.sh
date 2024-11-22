@@ -1,0 +1,1 @@
+$ terraform import awscc_cloudformation_lambda_hook.example "hook_arn"

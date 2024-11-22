@@ -22,6 +22,7 @@ Data Source schema for AWS::ApplicationSignals::ServiceLevelObjective
 ### Read-Only
 
 - `arn` (String) The ARN of this SLO.
+- `burn_rate_configurations` (Attributes Set) Each object in this array defines the length of the look-back window used to calculate one burn rate metric for this SLO. The burn rate measures how fast the service is consuming the error budget, relative to the attainment goal of the SLO. (see [below for nested schema](#nestedatt--burn_rate_configurations))
 - `created_time` (Number) Epoch time in seconds of the time that this SLO was created
 - `description` (String) An optional description for this SLO. Default is 'No description'
 - `evaluation_type` (String) Displays whether this is a period-based SLO or a request-based SLO.
@@ -31,6 +32,14 @@ Data Source schema for AWS::ApplicationSignals::ServiceLevelObjective
 - `request_based_sli` (Attributes) This structure contains information about the performance metric that a request-based SLO monitors. (see [below for nested schema](#nestedatt--request_based_sli))
 - `sli` (Attributes) This structure contains information about the performance metric that an SLO monitors. (see [below for nested schema](#nestedatt--sli))
 - `tags` (Attributes Set) The list of tag keys and values associated with the resource you specified (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--burn_rate_configurations"></a>
+### Nested Schema for `burn_rate_configurations`
+
+Read-Only:
+
+- `look_back_window_minutes` (Number) The number of minutes to use as the look-back window.
+
 
 <a id="nestedatt--goal"></a>
 ### Nested Schema for `goal`

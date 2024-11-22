@@ -27,7 +27,16 @@ Data Source schema for AWS::VpcLattice::ServiceNetwork
 - `last_updated_at` (String)
 - `name` (String)
 - `service_network_id` (String)
+- `sharing_config` (Attributes) (see [below for nested schema](#nestedatt--sharing_config))
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--sharing_config"></a>
+### Nested Schema for `sharing_config`
+
+Read-Only:
+
+- `enabled` (Boolean)
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

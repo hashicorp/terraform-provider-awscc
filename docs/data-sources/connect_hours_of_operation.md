@@ -24,6 +24,7 @@ Data Source schema for AWS::Connect::HoursOfOperation
 - `config` (Attributes Set) Configuration information for the hours of operation: day, start time, and end time. (see [below for nested schema](#nestedatt--config))
 - `description` (String) The description of the hours of operation.
 - `hours_of_operation_arn` (String) The Amazon Resource Name (ARN) for the hours of operation.
+- `hours_of_operation_overrides` (Attributes List) One or more hours of operation overrides assigned to an hour of operation. (see [below for nested schema](#nestedatt--hours_of_operation_overrides))
 - `instance_arn` (String) The identifier of the Amazon Connect instance.
 - `name` (String) The name of the hours of operation.
 - `tags` (Attributes Set) One or more tags. (see [below for nested schema](#nestedatt--tags))
@@ -54,6 +55,47 @@ Read-Only:
 
 - `hours` (Number) The hours.
 - `minutes` (Number) The minutes.
+
+
+
+<a id="nestedatt--hours_of_operation_overrides"></a>
+### Nested Schema for `hours_of_operation_overrides`
+
+Read-Only:
+
+- `effective_from` (String) The date from which the hours of operation override would be effective.
+- `effective_till` (String) The date till which the hours of operation override would be effective.
+- `hours_of_operation_override_id` (String) The Resource Identifier for the hours of operation override.
+- `override_config` (Attributes Set) Configuration information for the hours of operation override: day, start time, and end time. (see [below for nested schema](#nestedatt--hours_of_operation_overrides--override_config))
+- `override_description` (String) The description of the hours of operation override.
+- `override_name` (String) The name of the hours of operation override.
+
+<a id="nestedatt--hours_of_operation_overrides--override_config"></a>
+### Nested Schema for `hours_of_operation_overrides.override_config`
+
+Read-Only:
+
+- `day` (String) The day that the hours of operation override applies to.
+- `end_time` (Attributes) The new end time that your contact center closes for the overriden days. (see [below for nested schema](#nestedatt--hours_of_operation_overrides--override_config--end_time))
+- `start_time` (Attributes) The new start time that your contact center opens for the overriden days. (see [below for nested schema](#nestedatt--hours_of_operation_overrides--override_config--start_time))
+
+<a id="nestedatt--hours_of_operation_overrides--override_config--end_time"></a>
+### Nested Schema for `hours_of_operation_overrides.override_config.end_time`
+
+Read-Only:
+
+- `hours` (Number) The hours.
+- `minutes` (Number) The minutes.
+
+
+<a id="nestedatt--hours_of_operation_overrides--override_config--start_time"></a>
+### Nested Schema for `hours_of_operation_overrides.override_config.start_time`
+
+Read-Only:
+
+- `hours` (Number) The hours.
+- `minutes` (Number) The minutes.
+
 
 
 

@@ -34,6 +34,7 @@ Data Source schema for AWS::DynamoDB::GlobalTable
 - `table_id` (String)
 - `table_name` (String)
 - `time_to_live_specification` (Attributes) (see [below for nested schema](#nestedatt--time_to_live_specification))
+- `warm_throughput` (Attributes) (see [below for nested schema](#nestedatt--warm_throughput))
 - `write_on_demand_throughput_settings` (Attributes) (see [below for nested schema](#nestedatt--write_on_demand_throughput_settings))
 - `write_provisioned_throughput_settings` (Attributes) (see [below for nested schema](#nestedatt--write_provisioned_throughput_settings))
 
@@ -54,6 +55,7 @@ Read-Only:
 - `index_name` (String)
 - `key_schema` (Attributes List) (see [below for nested schema](#nestedatt--global_secondary_indexes--key_schema))
 - `projection` (Attributes) (see [below for nested schema](#nestedatt--global_secondary_indexes--projection))
+- `warm_throughput` (Attributes) (see [below for nested schema](#nestedatt--global_secondary_indexes--warm_throughput))
 - `write_on_demand_throughput_settings` (Attributes) (see [below for nested schema](#nestedatt--global_secondary_indexes--write_on_demand_throughput_settings))
 - `write_provisioned_throughput_settings` (Attributes) (see [below for nested schema](#nestedatt--global_secondary_indexes--write_provisioned_throughput_settings))
 
@@ -73,6 +75,15 @@ Read-Only:
 
 - `non_key_attributes` (Set of String)
 - `projection_type` (String)
+
+
+<a id="nestedatt--global_secondary_indexes--warm_throughput"></a>
+### Nested Schema for `global_secondary_indexes.warm_throughput`
+
+Read-Only:
+
+- `read_units_per_second` (Number)
+- `write_units_per_second` (Number)
 
 
 <a id="nestedatt--global_secondary_indexes--write_on_demand_throughput_settings"></a>
@@ -358,6 +369,15 @@ Read-Only:
 
 - `attribute_name` (String)
 - `enabled` (Boolean)
+
+
+<a id="nestedatt--warm_throughput"></a>
+### Nested Schema for `warm_throughput`
+
+Read-Only:
+
+- `read_units_per_second` (Number)
+- `write_units_per_second` (Number)
 
 
 <a id="nestedatt--write_on_demand_throughput_settings"></a>

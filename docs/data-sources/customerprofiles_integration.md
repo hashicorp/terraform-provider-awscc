@@ -23,6 +23,7 @@ Data Source schema for AWS::CustomerProfiles::Integration
 
 - `created_at` (String) The time of this integration got created
 - `domain_name` (String) The unique name of the domain.
+- `event_trigger_names` (List of String) A list of unique names for active event triggers associated with the integration.
 - `flow_definition` (Attributes) (see [below for nested schema](#nestedatt--flow_definition))
 - `last_updated_at` (String) The time of this integration got last updated at
 - `object_type_name` (String) The name of the ObjectType defined for the 3rd party data in Profile Service

@@ -153,11 +153,12 @@ resource "awscc_elasticloadbalancingv2_load_balancer" "example" {
 
 ### Optional
 
+- `enable_prefix_for_ipv_6_source_nat` (String)
 - `enforce_security_group_inbound_rules_on_private_link_traffic` (String) Indicates whether to evaluate inbound security group rules for traffic sent to a Network Load Balancer through privatelink.
 - `ip_address_type` (String) Note: Internal load balancers must use the ``ipv4`` IP address type.
  [Application Load Balancers] The IP address type. The possible values are ``ipv4`` (for only IPv4 addresses), ``dualstack`` (for IPv4 and IPv6 addresses), and ``dualstack-without-public-ipv4`` (for IPv6 only public addresses, with private IPv4 and IPv6 addresses).
  Note: Application Load Balancer authentication only supports IPv4 addresses when connecting to an Identity Provider (IdP) or Amazon Cognito endpoint. Without a public IPv4 address the load balancer cannot complete the authentication process, resulting in HTTP 500 errors.
- [Network Load Balancers] The IP address type. The possible values are ``ipv4`` (for only IPv4 addresses) and ``dualstack`` (for IPv4 and IPv6 addresses). You can’t specify ``dualstack`` for a load balancer with a UDP or TCP_UDP listener.
+ [Network Load Balancers] The IP address type. The possible values are ``ipv4`` (for only IPv4 addresses) and ``dualstack`` (for IPv4 and IPv6 addresses). You can?t specify ``dualstack`` for a load balancer with a UDP or TCP_UDP listener.
  [Gateway Load Balancers] The IP address type. The possible values are ``ipv4`` (for only IPv4 addresses) and ``dualstack`` (for IPv4 and IPv6 addresses).
 - `load_balancer_attributes` (Attributes Set) The load balancer attributes. (see [below for nested schema](#nestedatt--load_balancer_attributes))
 - `name` (String) The name of the load balancer. This name must be unique per region per account, can have a maximum of 32 characters, must contain only alphanumeric characters or hyphens, must not begin or end with a hyphen, and must not begin with "internal-".
@@ -228,6 +229,7 @@ Optional:
   
  The following attributes are supported by only Network Load Balancers:
   +   ``dns_record.client_routing_policy`` - Indicates how traffic is distributed among the load balancer Availability Zones. The possible values are ``availability_zone_affinity`` with 100 percent zonal affinity, ``partial_availability_zone_affinity`` with 85 percent zonal affinity, and ``any_availability_zone`` with 0 percent zonal affinity.
+  +   ``zonal_shift.config.enabled`` - Indicates whether zonal shift is enabled. The possible values are ``true`` and ``false``. The default is ``false``.
 - `value` (String) The value of the attribute.
 
 
@@ -239,6 +241,7 @@ Optional:
 - `allocation_id` (String) [Network Load Balancers] The allocation ID of the Elastic IP address for an internet-facing load balancer.
 - `i_pv_6_address` (String) [Network Load Balancers] The IPv6 address.
 - `private_i_pv_4_address` (String) [Network Load Balancers] The private IPv4 address for an internal load balancer.
+- `source_nat_ipv_6_prefix` (String)
 - `subnet_id` (String) The ID of the subnet.
 
 

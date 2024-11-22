@@ -534,6 +534,281 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: DataPartitions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Id": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "pattern": "^[a-zA-Z0-9]+$",
+		//	        "type": "string"
+		//	      },
+		//	      "StorageOptions": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "MaximumSize": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Unit": {
+		//	                "enum": [
+		//	                  "MB",
+		//	                  "GB",
+		//	                  "TB"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "Value": {
+		//	                "maximum": 1073741824,
+		//	                "minimum": 1,
+		//	                "type": "integer"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Unit",
+		//	              "Value"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "MinimumTimeToLive": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Unit": {
+		//	                "enum": [
+		//	                  "HOURS",
+		//	                  "DAYS",
+		//	                  "WEEKS"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "Value": {
+		//	                "maximum": 10000,
+		//	                "minimum": 1,
+		//	                "type": "integer"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Unit",
+		//	              "Value"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "StorageLocation": {
+		//	            "maxLength": 4096,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "MaximumSize",
+		//	          "MinimumTimeToLive",
+		//	          "StorageLocation"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "UploadOptions": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "ConditionLanguageVersion": {
+		//	            "minimum": 1,
+		//	            "type": "integer"
+		//	          },
+		//	          "Expression": {
+		//	            "maxLength": 2048,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Expression"
+		//	        ],
+		//	        "type": "object"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Id",
+		//	      "StorageOptions"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 20,
+		//	  "minItems": 0,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"data_partitions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Id
+					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]+$"), ""),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: StorageOptions
+					"storage_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: MaximumSize
+							"maximum_size": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Unit
+									"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"MB",
+												"GB",
+												"TB",
+											),
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Value
+									"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.Int64{ /*START VALIDATORS*/
+											int64validator.Between(1, 1073741824),
+											fwvalidators.NotNullInt64(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.Object{ /*START VALIDATORS*/
+									fwvalidators.NotNullObject(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: MinimumTimeToLive
+							"minimum_time_to_live": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Unit
+									"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"HOURS",
+												"DAYS",
+												"WEEKS",
+											),
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Value
+									"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.Int64{ /*START VALIDATORS*/
+											int64validator.Between(1, 10000),
+											fwvalidators.NotNullInt64(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.Object{ /*START VALIDATORS*/
+									fwvalidators.NotNullObject(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: StorageLocation
+							"storage_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 4096),
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.Object{ /*START VALIDATORS*/
+							fwvalidators.NotNullObject(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: UploadOptions
+					"upload_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ConditionLanguageVersion
+							"condition_language_version": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.Int64{ /*START VALIDATORS*/
+									int64validator.AtLeast(1),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Expression
+							"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 2048),
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(0, 20),
+				listvalidator.UniqueValues(),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+				listplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -691,6 +966,12 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
+		//	      "DataPartitionId": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "pattern": "^[a-zA-Z0-9]+$",
+		//	        "type": "string"
+		//	      },
 		//	      "MaxSampleCount": {
 		//	        "maximum": 4294967295,
 		//	        "minimum": 1,
@@ -720,6 +1001,18 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		"signals_to_collect": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: DataPartitionId
+					"data_partition_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]+$"), ""),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: MaxSampleCount
 					"max_sample_count": schema.Float64Attribute{ /*START ATTRIBUTE*/
 						Optional: true,
@@ -1153,6 +1446,8 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		"data_destination_configs":          "DataDestinationConfigs",
 		"data_extra_dimensions":             "DataExtraDimensions",
 		"data_format":                       "DataFormat",
+		"data_partition_id":                 "DataPartitionId",
+		"data_partitions":                   "DataPartitions",
 		"description":                       "Description",
 		"diagnostics_mode":                  "DiagnosticsMode",
 		"execution_frequency_ms":            "ExecutionFrequencyMs",
@@ -1160,10 +1455,13 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		"expiry_time":                       "ExpiryTime",
 		"expression":                        "Expression",
 		"fully_qualified_name":              "FullyQualifiedName",
+		"id":                                "Id",
 		"key":                               "Key",
 		"last_modification_time":            "LastModificationTime",
 		"max_sample_count":                  "MaxSampleCount",
+		"maximum_size":                      "MaximumSize",
 		"minimum_sampling_interval_ms":      "MinimumSamplingIntervalMs",
+		"minimum_time_to_live":              "MinimumTimeToLive",
 		"minimum_trigger_interval_ms":       "MinimumTriggerIntervalMs",
 		"mqtt_topic_arn":                    "MqttTopicArn",
 		"mqtt_topic_config":                 "MqttTopicConfig",
@@ -1181,6 +1479,8 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		"start_time":                        "StartTime",
 		"status":                            "Status",
 		"storage_compression_format":        "StorageCompressionFormat",
+		"storage_location":                  "StorageLocation",
+		"storage_options":                   "StorageOptions",
 		"tags":                              "Tags",
 		"target_arn":                        "TargetArn",
 		"time_based":                        "TimeBased",
@@ -1188,6 +1488,8 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		"timestream_config":                 "TimestreamConfig",
 		"timestream_table_arn":              "TimestreamTableArn",
 		"trigger_mode":                      "TriggerMode",
+		"unit":                              "Unit",
+		"upload_options":                    "UploadOptions",
 		"value":                             "Value",
 	})
 

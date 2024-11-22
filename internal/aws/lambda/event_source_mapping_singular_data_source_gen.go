@@ -55,13 +55,13 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function. Lambda passes all of the records in the batch to the function in a single call, up to the payload limit for synchronous invocation (6 MB).\n  +   *Amazon Kinesis* – Default 100. Max 10,000.\n  +   *Amazon DynamoDB Streams* – Default 100. Max 10,000.\n  +   *Amazon Simple Queue Service* – Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.\n  +   *Amazon Managed Streaming for Apache Kafka* – Default 100. Max 10,000.\n  +   *Self-managed Apache Kafka* – Default 100. Max 10,000.\n  +   *Amazon MQ (ActiveMQ and RabbitMQ)* – Default 100. Max 10,000.\n  +   *DocumentDB* – Default 100. Max 10,000.",
+		//	  "description": "The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function. Lambda passes all of the records in the batch to the function in a single call, up to the payload limit for synchronous invocation (6 MB).\n  +   *Amazon Kinesis* ? Default 100. Max 10,000.\n  +   *Amazon DynamoDB Streams* ? Default 100. Max 10,000.\n  +   *Amazon Simple Queue Service* ? Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.\n  +   *Amazon Managed Streaming for Apache Kafka* ? Default 100. Max 10,000.\n  +   *Self-managed Apache Kafka* ? Default 100. Max 10,000.\n  +   *Amazon MQ (ActiveMQ and RabbitMQ)* ? Default 100. Max 10,000.\n  +   *DocumentDB* ? Default 100. Max 10,000.",
 		//	  "maximum": 10000,
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
 		"batch_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function. Lambda passes all of the records in the batch to the function in a single call, up to the payload limit for synchronous invocation (6 MB).\n  +   *Amazon Kinesis* – Default 100. Max 10,000.\n  +   *Amazon DynamoDB Streams* – Default 100. Max 10,000.\n  +   *Amazon Simple Queue Service* – Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.\n  +   *Amazon Managed Streaming for Apache Kafka* – Default 100. Max 10,000.\n  +   *Self-managed Apache Kafka* – Default 100. Max 10,000.\n  +   *Amazon MQ (ActiveMQ and RabbitMQ)* – Default 100. Max 10,000.\n  +   *DocumentDB* – Default 100. Max 10,000.",
+			Description: "The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function. Lambda passes all of the records in the batch to the function in a single call, up to the payload limit for synchronous invocation (6 MB).\n  +   *Amazon Kinesis* ? Default 100. Max 10,000.\n  +   *Amazon DynamoDB Streams* ? Default 100. Max 10,000.\n  +   *Amazon Simple Queue Service* ? Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.\n  +   *Amazon Managed Streaming for Apache Kafka* ? Default 100. Max 10,000.\n  +   *Self-managed Apache Kafka* ? Default 100. Max 10,000.\n  +   *Amazon MQ (ActiveMQ and RabbitMQ)* ? Default 100. Max 10,000.\n  +   *DocumentDB* ? Default 100. Max 10,000.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BisectBatchOnFunctionError
@@ -183,14 +183,14 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The Amazon Resource Name (ARN) of the event source.\n  +   *Amazon Kinesis* – The ARN of the data stream or a stream consumer.\n  +   *Amazon DynamoDB Streams* – The ARN of the stream.\n  +   *Amazon Simple Queue Service* – The ARN of the queue.\n  +   *Amazon Managed Streaming for Apache Kafka* – The ARN of the cluster or the ARN of the VPC connection (for [cross-account event source mappings](https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#msk-multi-vpc)).\n  +   *Amazon MQ* – The ARN of the broker.\n  +   *Amazon DocumentDB* – The ARN of the DocumentDB change stream.",
+		//	  "description": "The Amazon Resource Name (ARN) of the event source.\n  +   *Amazon Kinesis* ? The ARN of the data stream or a stream consumer.\n  +   *Amazon DynamoDB Streams* ? The ARN of the stream.\n  +   *Amazon Simple Queue Service* ? The ARN of the queue.\n  +   *Amazon Managed Streaming for Apache Kafka* ? The ARN of the cluster or the ARN of the VPC connection (for [cross-account event source mappings](https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#msk-multi-vpc)).\n  +   *Amazon MQ* ? The ARN of the broker.\n  +   *Amazon DocumentDB* ? The ARN of the DocumentDB change stream.",
 		//	  "maxLength": 1024,
 		//	  "minLength": 12,
 		//	  "pattern": "arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:([a-z]{2}(-gov)?(-iso([a-z])?)?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)",
 		//	  "type": "string"
 		//	}
 		"event_source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the event source.\n  +   *Amazon Kinesis* – The ARN of the data stream or a stream consumer.\n  +   *Amazon DynamoDB Streams* – The ARN of the stream.\n  +   *Amazon Simple Queue Service* – The ARN of the queue.\n  +   *Amazon Managed Streaming for Apache Kafka* – The ARN of the cluster or the ARN of the VPC connection (for [cross-account event source mappings](https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#msk-multi-vpc)).\n  +   *Amazon MQ* – The ARN of the broker.\n  +   *Amazon DocumentDB* – The ARN of the DocumentDB change stream.",
+			Description: "The Amazon Resource Name (ARN) of the event source.\n  +   *Amazon Kinesis* ? The ARN of the data stream or a stream consumer.\n  +   *Amazon DynamoDB Streams* ? The ARN of the stream.\n  +   *Amazon Simple Queue Service* ? The ARN of the queue.\n  +   *Amazon Managed Streaming for Apache Kafka* ? The ARN of the cluster or the ARN of the VPC connection (for [cross-account event source mappings](https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#msk-multi-vpc)).\n  +   *Amazon MQ* ? The ARN of the broker.\n  +   *Amazon DocumentDB* ? The ARN of the DocumentDB change stream.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EventSourceMappingArn
@@ -262,14 +262,14 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The name or ARN of the Lambda function.\n  **Name formats**\n +   *Function name* – ``MyFunction``.\n  +   *Function ARN* – ``arn:aws:lambda:us-west-2:123456789012:function:MyFunction``.\n  +   *Version or Alias ARN* – ``arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD``.\n  +   *Partial ARN* – ``123456789012:function:MyFunction``.\n  \n The length constraint applies only to the full ARN. If you specify only the function name, it's limited to 64 characters in length.",
+		//	  "description": "The name or ARN of the Lambda function.\n  **Name formats**\n +   *Function name* ? ``MyFunction``.\n  +   *Function ARN* ? ``arn:aws:lambda:us-west-2:123456789012:function:MyFunction``.\n  +   *Version or Alias ARN* ? ``arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD``.\n  +   *Partial ARN* ? ``123456789012:function:MyFunction``.\n  \n The length constraint applies only to the full ARN. If you specify only the function name, it's limited to 64 characters in length.",
 		//	  "maxLength": 140,
 		//	  "minLength": 1,
 		//	  "pattern": "(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?(-iso([a-z])?)?-[a-z]+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?",
 		//	  "type": "string"
 		//	}
 		"function_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name or ARN of the Lambda function.\n  **Name formats**\n +   *Function name* – ``MyFunction``.\n  +   *Function ARN* – ``arn:aws:lambda:us-west-2:123456789012:function:MyFunction``.\n  +   *Version or Alias ARN* – ``arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD``.\n  +   *Partial ARN* – ``123456789012:function:MyFunction``.\n  \n The length constraint applies only to the full ARN. If you specify only the function name, it's limited to 64 characters in length.",
+			Description: "The name or ARN of the Lambda function.\n  **Name formats**\n +   *Function name* ? ``MyFunction``.\n  +   *Function ARN* ? ``arn:aws:lambda:us-west-2:123456789012:function:MyFunction``.\n  +   *Version or Alias ARN* ? ``arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD``.\n  +   *Partial ARN* ? ``123456789012:function:MyFunction``.\n  \n The length constraint applies only to the full ARN. If you specify only the function name, it's limited to 64 characters in length.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: FunctionResponseTypes
@@ -360,6 +360,41 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 			Description: "(Kinesis and DynamoDB Streams only) Discard records after the specified number of retries. The default value is -1, which sets the maximum number of retries to infinite. When MaximumRetryAttempts is infinite, Lambda retries failed records until the record expires in the event source.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: MetricsConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "",
+		//	  "properties": {
+		//	    "Metrics": {
+		//	      "description": "Metric groups to enable.",
+		//	      "items": {
+		//	        "enum": [
+		//	          "EventCount"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 1,
+		//	      "minItems": 0,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"metrics_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Metrics
+				"metrics": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Metric groups to enable.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ParallelizationFactor
 		// CloudFormation resource type schema:
 		//
@@ -371,6 +406,44 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	}
 		"parallelization_factor": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "(Kinesis and DynamoDB Streams only) The number of batches to process concurrently from each shard. The default value is 1.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ProvisionedPollerConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "",
+		//	  "properties": {
+		//	    "MaximumPollers": {
+		//	      "description": "The maximum number of event pollers this event source can scale up to.",
+		//	      "maximum": 2000,
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    },
+		//	    "MinimumPollers": {
+		//	      "description": "The minimum number of event pollers this event source can scale down to.",
+		//	      "maximum": 200,
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"provisioned_poller_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaximumPollers
+				"maximum_pollers": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The maximum number of event pollers this event source can scale up to.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MinimumPollers
+				"minimum_pollers": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The minimum number of event pollers this event source can scale down to.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Queues
@@ -509,7 +582,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	    "description": "An array of the authentication protocol, VPC components, or virtual host to secure and define your event source.",
 		//	    "properties": {
 		//	      "Type": {
-		//	        "description": "The type of authentication protocol, VPC components, or virtual host for your event source. For example: ``\"Type\":\"SASL_SCRAM_512_AUTH\"``.\n  +   ``BASIC_AUTH`` – (Amazon MQ) The ASMlong secret that stores your broker credentials.\n  +   ``BASIC_AUTH`` – (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key used for SASL/PLAIN authentication of your Apache Kafka brokers.\n  +   ``VPC_SUBNET`` – (Self-managed Apache Kafka) The subnets associated with your VPC. Lambda connects to these subnets to fetch data from your self-managed Apache Kafka cluster.\n  +   ``VPC_SECURITY_GROUP`` – (Self-managed Apache Kafka) The VPC security group used to manage access to your self-managed Apache Kafka brokers.\n  +   ``SASL_SCRAM_256_AUTH`` – (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key used for SASL SCRAM-256 authentication of your self-managed Apache Kafka brokers.\n  +   ``SASL_SCRAM_512_AUTH`` – (Amazon MSK, Self-managed Apache Kafka) The Secrets Manager ARN of your secret key used for SASL SCRAM-512 authentication of your self-managed Apache Kafka brokers.\n  +   ``VIRTUAL_HOST`` –- (RabbitMQ) The name of the virtual host in your RabbitMQ broker. Lambda uses this RabbitMQ host as the event source. This property cannot be specified in an UpdateEventSourceMapping API call.\n  +   ``CLIENT_CERTIFICATE_TLS_AUTH`` – (Amazon MSK, self-managed Apache Kafka) The Secrets Manager ARN of your secret key containing the certificate chain (X.509 PEM), private key (PKCS#8 PEM), and private key password (optional) used for mutual TLS authentication of your MSK/Apache Kafka brokers.\n  +   ``SERVER_ROOT_CA_CERTIFICATE`` – (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key containing the root CA certificate (X.509 PEM) used for TLS encryption of your Apache Kafka brokers.",
+		//	        "description": "The type of authentication protocol, VPC components, or virtual host for your event source. For example: ``\"Type\":\"SASL_SCRAM_512_AUTH\"``.\n  +   ``BASIC_AUTH`` ? (Amazon MQ) The ASMlong secret that stores your broker credentials.\n  +   ``BASIC_AUTH`` ? (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key used for SASL/PLAIN authentication of your Apache Kafka brokers.\n  +   ``VPC_SUBNET`` ? (Self-managed Apache Kafka) The subnets associated with your VPC. Lambda connects to these subnets to fetch data from your self-managed Apache Kafka cluster.\n  +   ``VPC_SECURITY_GROUP`` ? (Self-managed Apache Kafka) The VPC security group used to manage access to your self-managed Apache Kafka brokers.\n  +   ``SASL_SCRAM_256_AUTH`` ? (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key used for SASL SCRAM-256 authentication of your self-managed Apache Kafka brokers.\n  +   ``SASL_SCRAM_512_AUTH`` ? (Amazon MSK, Self-managed Apache Kafka) The Secrets Manager ARN of your secret key used for SASL SCRAM-512 authentication of your self-managed Apache Kafka brokers.\n  +   ``VIRTUAL_HOST`` ?- (RabbitMQ) The name of the virtual host in your RabbitMQ broker. Lambda uses this RabbitMQ host as the event source. This property cannot be specified in an UpdateEventSourceMapping API call.\n  +   ``CLIENT_CERTIFICATE_TLS_AUTH`` ? (Amazon MSK, self-managed Apache Kafka) The Secrets Manager ARN of your secret key containing the certificate chain (X.509 PEM), private key (PKCS#8 PEM), and private key password (optional) used for mutual TLS authentication of your MSK/Apache Kafka brokers.\n  +   ``SERVER_ROOT_CA_CERTIFICATE`` ? (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key containing the root CA certificate (X.509 PEM) used for TLS encryption of your Apache Kafka brokers.",
 		//	        "enum": [
 		//	          "BASIC_AUTH",
 		//	          "VPC_SUBNET",
@@ -542,7 +615,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Type
 					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The type of authentication protocol, VPC components, or virtual host for your event source. For example: ``\"Type\":\"SASL_SCRAM_512_AUTH\"``.\n  +   ``BASIC_AUTH`` – (Amazon MQ) The ASMlong secret that stores your broker credentials.\n  +   ``BASIC_AUTH`` – (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key used for SASL/PLAIN authentication of your Apache Kafka brokers.\n  +   ``VPC_SUBNET`` – (Self-managed Apache Kafka) The subnets associated with your VPC. Lambda connects to these subnets to fetch data from your self-managed Apache Kafka cluster.\n  +   ``VPC_SECURITY_GROUP`` – (Self-managed Apache Kafka) The VPC security group used to manage access to your self-managed Apache Kafka brokers.\n  +   ``SASL_SCRAM_256_AUTH`` – (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key used for SASL SCRAM-256 authentication of your self-managed Apache Kafka brokers.\n  +   ``SASL_SCRAM_512_AUTH`` – (Amazon MSK, Self-managed Apache Kafka) The Secrets Manager ARN of your secret key used for SASL SCRAM-512 authentication of your self-managed Apache Kafka brokers.\n  +   ``VIRTUAL_HOST`` –- (RabbitMQ) The name of the virtual host in your RabbitMQ broker. Lambda uses this RabbitMQ host as the event source. This property cannot be specified in an UpdateEventSourceMapping API call.\n  +   ``CLIENT_CERTIFICATE_TLS_AUTH`` – (Amazon MSK, self-managed Apache Kafka) The Secrets Manager ARN of your secret key containing the certificate chain (X.509 PEM), private key (PKCS#8 PEM), and private key password (optional) used for mutual TLS authentication of your MSK/Apache Kafka brokers.\n  +   ``SERVER_ROOT_CA_CERTIFICATE`` – (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key containing the root CA certificate (X.509 PEM) used for TLS encryption of your Apache Kafka brokers.",
+						Description: "The type of authentication protocol, VPC components, or virtual host for your event source. For example: ``\"Type\":\"SASL_SCRAM_512_AUTH\"``.\n  +   ``BASIC_AUTH`` ? (Amazon MQ) The ASMlong secret that stores your broker credentials.\n  +   ``BASIC_AUTH`` ? (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key used for SASL/PLAIN authentication of your Apache Kafka brokers.\n  +   ``VPC_SUBNET`` ? (Self-managed Apache Kafka) The subnets associated with your VPC. Lambda connects to these subnets to fetch data from your self-managed Apache Kafka cluster.\n  +   ``VPC_SECURITY_GROUP`` ? (Self-managed Apache Kafka) The VPC security group used to manage access to your self-managed Apache Kafka brokers.\n  +   ``SASL_SCRAM_256_AUTH`` ? (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key used for SASL SCRAM-256 authentication of your self-managed Apache Kafka brokers.\n  +   ``SASL_SCRAM_512_AUTH`` ? (Amazon MSK, Self-managed Apache Kafka) The Secrets Manager ARN of your secret key used for SASL SCRAM-512 authentication of your self-managed Apache Kafka brokers.\n  +   ``VIRTUAL_HOST`` ?- (RabbitMQ) The name of the virtual host in your RabbitMQ broker. Lambda uses this RabbitMQ host as the event source. This property cannot be specified in an UpdateEventSourceMapping API call.\n  +   ``CLIENT_CERTIFICATE_TLS_AUTH`` ? (Amazon MSK, self-managed Apache Kafka) The Secrets Manager ARN of your secret key containing the certificate chain (X.509 PEM), private key (PKCS#8 PEM), and private key password (optional) used for mutual TLS authentication of your MSK/Apache Kafka brokers.\n  +   ``SERVER_ROOT_CA_CERTIFICATE`` ? (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key containing the root CA certificate (X.509 PEM) used for TLS encryption of your Apache Kafka brokers.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: URI
@@ -704,11 +777,16 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		"kms_key_arn":                            "KmsKeyArn",
 		"maximum_batching_window_in_seconds":     "MaximumBatchingWindowInSeconds",
 		"maximum_concurrency":                    "MaximumConcurrency",
+		"maximum_pollers":                        "MaximumPollers",
 		"maximum_record_age_in_seconds":          "MaximumRecordAgeInSeconds",
 		"maximum_retry_attempts":                 "MaximumRetryAttempts",
+		"metrics":                                "Metrics",
+		"metrics_config":                         "MetricsConfig",
+		"minimum_pollers":                        "MinimumPollers",
 		"on_failure":                             "OnFailure",
 		"parallelization_factor":                 "ParallelizationFactor",
 		"pattern":                                "Pattern",
+		"provisioned_poller_config":              "ProvisionedPollerConfig",
 		"queues":                                 "Queues",
 		"scaling_config":                         "ScalingConfig",
 		"self_managed_event_source":              "SelfManagedEventSource",

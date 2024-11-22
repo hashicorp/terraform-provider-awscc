@@ -206,7 +206,8 @@ func eC2FleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                    "enum": [
 		//	                      "intel",
 		//	                      "amd",
-		//	                      "amazon-web-services"
+		//	                      "amazon-web-services",
+		//	                      "apple"
 		//	                    ],
 		//	                    "type": "string"
 		//	                  },

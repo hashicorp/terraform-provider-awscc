@@ -29,6 +29,7 @@ Resource Type definition for AWS::Synthetics::Canary
 - `artifact_config` (Attributes) Provide artifact configuration (see [below for nested schema](#nestedatt--artifact_config))
 - `delete_lambda_resources_on_canary_deletion` (Boolean) Deletes associated lambda resources created by Synthetics if set to True. Default is False
 - `failure_retention_period` (Number) Retention period of failed canary runs represented in number of days
+- `provisioned_resource_cleanup` (String) Setting to control if provisioned resources created by Synthetics are deleted alongside the canary. Default is AUTOMATIC.
 - `resources_to_replicate_tags` (List of String) List of resources which canary tags should be replicated to.
 - `run_config` (Attributes) Provide canary run configuration (see [below for nested schema](#nestedatt--run_config))
 - `start_canary_after_creation` (Boolean) Runs canary if set to True. Default is False

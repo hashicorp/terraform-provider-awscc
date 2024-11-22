@@ -285,6 +285,31 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ProvisionedResourceCleanup
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Setting to control if provisioned resources created by Synthetics are deleted alongside the canary. Default is AUTOMATIC.",
+		//	  "enum": [
+		//	    "AUTOMATIC",
+		//	    "OFF"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"provisioned_resource_cleanup": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Setting to control if provisioned resources created by Synthetics are deleted alongside the canary. Default is AUTOMATIC.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"AUTOMATIC",
+					"OFF",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ResourcesToReplicateTags
 		// CloudFormation resource type schema:
 		//
@@ -771,6 +796,7 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		"kms_key_arn":                                "KmsKeyArn",
 		"memory_in_mb":                               "MemoryInMB",
 		"name":                                       "Name",
+		"provisioned_resource_cleanup":               "ProvisionedResourceCleanup",
 		"resources_to_replicate_tags":                "ResourcesToReplicateTags",
 		"run_config":                                 "RunConfig",
 		"runtime_version":                            "RuntimeVersion",

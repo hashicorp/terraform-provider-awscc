@@ -22,6 +22,7 @@ Enables access logs to be sent to Amazon CloudWatch, Amazon S3, and Amazon Kines
 ### Optional
 
 - `resource_identifier` (String)
+- `service_network_log_type` (String)
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

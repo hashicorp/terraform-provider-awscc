@@ -34,11 +34,13 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "A flag that determines whether to automatically publish the function to the ``LIVE`` stage when it?s created. To automatically publish to the ``LIVE`` stage, set this property to ``true``.",
 		//	  "type": "boolean"
 		//	}
 		"auto_publish": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "A flag that determines whether to automatically publish the function to the ``LIVE`` stage when it?s created. To automatically publish to the ``LIVE`` stage, set this property to ``true``.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -48,10 +50,12 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"function_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -60,25 +64,32 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The function code. For more information about writing a CloudFront function, see [Writing function code for CloudFront Functions](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/writing-function-code.html) in the *Amazon CloudFront Developer Guide*.",
 		//	  "type": "string"
 		//	}
 		"function_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
+			Description: "The function code. For more information about writing a CloudFront function, see [Writing function code for CloudFront Functions](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/writing-function-code.html) in the *Amazon CloudFront Developer Guide*.",
+			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: FunctionConfig
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "Contains configuration information about a CloudFront function.",
 		//	  "properties": {
 		//	    "Comment": {
+		//	      "description": "A comment to describe the function.",
 		//	      "type": "string"
 		//	    },
 		//	    "KeyValueStoreAssociations": {
+		//	      "description": "The configuration for the key value store associations.",
 		//	      "items": {
 		//	        "additionalProperties": false,
+		//	        "description": "The key value store association.",
 		//	        "properties": {
 		//	          "KeyValueStoreARN": {
+		//	            "description": "The Amazon Resource Name (ARN) of the key value store association.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -91,6 +102,7 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "Runtime": {
+		//	      "description": "The function's runtime environment version.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -104,7 +116,8 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Comment
 				"comment": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Description: "A comment to describe the function.",
+					Required:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: KeyValueStoreAssociations
 				"key_value_store_associations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -112,8 +125,9 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: KeyValueStoreARN
 							"key_value_store_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
-								Computed: true,
+								Description: "The Amazon Resource Name (ARN) of the key value store association.",
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
@@ -123,8 +137,9 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Optional: true,
-					Computed: true,
+					Description: "The configuration for the key value store associations.",
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.UniqueValues(),
 					}, /*END VALIDATORS*/
@@ -134,18 +149,22 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Runtime
 				"runtime": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Description: "The function's runtime environment version.",
+					Required:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Required: true,
+			Description: "Contains configuration information about a CloudFront function.",
+			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: FunctionMetadata
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "Contains metadata about a CloudFront function.",
 		//	  "properties": {
 		//	    "FunctionARN": {
+		//	      "description": "The Amazon Resource Name (ARN) of the function. The ARN uniquely identifies the function.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -155,14 +174,16 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: FunctionARN
 				"function_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "The Amazon Resource Name (ARN) of the function. The ARN uniquely identifies the function.",
+					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Optional: true,
-			Computed: true,
+			Description: "Contains metadata about a CloudFront function.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -171,19 +192,23 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "A name to identify the function.",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
+			Description: "A name to identify the function.",
+			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Stage
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"stage": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -200,7 +225,7 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Resource Type definition for AWS::CloudFront::Function",
+		Description: "Creates a CF function.\n To create a function, you provide the function code and some configuration information about the function. The response contains an Amazon Resource Name (ARN) that uniquely identifies the function, and the function?s stage.\n By default, when you create a function, it?s in the ``DEVELOPMENT`` stage. In this stage, you can [test the function](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/test-function.html) in the CF console (or with ``TestFunction`` in the CF API).\n When you?re ready to use your function with a CF distribution, publish the function to the ``LIVE`` stage. You can do this in the CF console, with ``PublishFunction`` in the CF API, or by updating the ``AWS::CloudFront::Function`` resource with the ``AutoPublish`` property set to ``true``. When the function is published to the ``LIVE`` stage, you can attach it to a distribution?s cache behavior, using the function?s ARN.\n To automatically publish the function to the ``LIVE`` stage when it?s created, set the ``AutoPublish`` property to ``true``.",
 		Version:     1,
 		Attributes:  attributes,
 	}

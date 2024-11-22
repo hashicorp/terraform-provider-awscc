@@ -21,7 +21,7 @@ Data Source schema for AWS::CloudFront::KeyGroup
 
 ### Read-Only
 
-- `key_group_config` (Attributes) (see [below for nested schema](#nestedatt--key_group_config))
+- `key_group_config` (Attributes) The key group configuration. (see [below for nested schema](#nestedatt--key_group_config))
 - `key_group_id` (String)
 - `last_modified_time` (String)
 
@@ -30,6 +30,6 @@ Data Source schema for AWS::CloudFront::KeyGroup
 
 Read-Only:
 
-- `comment` (String)
-- `items` (List of String)
-- `name` (String)
+- `comment` (String) A comment to describe the key group. The comment cannot be longer than 128 characters.
+- `items` (List of String) A list of the identifiers of the public keys in the key group.
+- `name` (String) A name to identify the key group.

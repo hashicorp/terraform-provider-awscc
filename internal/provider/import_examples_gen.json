@@ -90,6 +90,11 @@
         "path": "./examples/resources/awscc_apigateway_base_path_mapping/import.sh"
     },
     {
+        "resource": "awscc_apigateway_base_path_mapping_v2",
+        "identifier": ["BasePathMappingArn"],
+        "path": "./examples/resources/awscc_apigateway_base_path_mapping_v2/import.sh"
+    },
+    {
         "resource": "awscc_apigateway_client_certificate",
         "identifier": ["ClientCertificateId"],
         "path": "./examples/resources/awscc_apigateway_client_certificate/import.sh"
@@ -113,6 +118,16 @@
         "resource": "awscc_apigateway_domain_name",
         "identifier": ["DomainName"],
         "path": "./examples/resources/awscc_apigateway_domain_name/import.sh"
+    },
+    {
+        "resource": "awscc_apigateway_domain_name_access_association",
+        "identifier": ["DomainNameAccessAssociationArn"],
+        "path": "./examples/resources/awscc_apigateway_domain_name_access_association/import.sh"
+    },
+    {
+        "resource": "awscc_apigateway_domain_name_v2",
+        "identifier": ["DomainNameArn"],
+        "path": "./examples/resources/awscc_apigateway_domain_name_v2/import.sh"
     },
     {
         "resource": "awscc_apigateway_gateway_response",
@@ -660,6 +675,11 @@
         "path": "./examples/resources/awscc_certificatemanager_account/import.sh"
     },
     {
+        "resource": "awscc_chatbot_custom_action",
+        "identifier": ["CustomActionArn"],
+        "path": "./examples/resources/awscc_chatbot_custom_action/import.sh"
+    },
+    {
         "resource": "awscc_chatbot_microsoft_teams_channel_configuration",
         "identifier": ["Arn"],
         "path": "./examples/resources/awscc_chatbot_microsoft_teams_channel_configuration/import.sh"
@@ -710,6 +730,11 @@
         "path": "./examples/resources/awscc_cleanroomsml_training_dataset/import.sh"
     },
     {
+        "resource": "awscc_cloudformation_guard_hook",
+        "identifier": ["HookArn"],
+        "path": "./examples/resources/awscc_cloudformation_guard_hook/import.sh"
+    },
+    {
         "resource": "awscc_cloudformation_hook_default_version",
         "identifier": ["Arn"],
         "path": "./examples/resources/awscc_cloudformation_hook_default_version/import.sh"
@@ -723,6 +748,11 @@
         "resource": "awscc_cloudformation_hook_version",
         "identifier": ["Arn"],
         "path": "./examples/resources/awscc_cloudformation_hook_version/import.sh"
+    },
+    {
+        "resource": "awscc_cloudformation_lambda_hook",
+        "identifier": ["HookArn"],
+        "path": "./examples/resources/awscc_cloudformation_lambda_hook/import.sh"
     },
     {
         "resource": "awscc_cloudformation_module_default_version",
@@ -838,6 +868,11 @@
         "resource": "awscc_cloudtrail_channel",
         "identifier": ["ChannelArn"],
         "path": "./examples/resources/awscc_cloudtrail_channel/import.sh"
+    },
+    {
+        "resource": "awscc_cloudtrail_dashboard",
+        "identifier": ["DashboardArn"],
+        "path": "./examples/resources/awscc_cloudtrail_dashboard/import.sh"
     },
     {
         "resource": "awscc_cloudtrail_event_data_store",
@@ -1070,6 +1105,11 @@
         "path": "./examples/resources/awscc_connect_contact_flow_module/import.sh"
     },
     {
+        "resource": "awscc_connect_email_address",
+        "identifier": ["EmailAddressArn"],
+        "path": "./examples/resources/awscc_connect_email_address/import.sh"
+    },
+    {
         "resource": "awscc_connect_hours_of_operation",
         "identifier": ["HoursOfOperationArn"],
         "path": "./examples/resources/awscc_connect_hours_of_operation/import.sh"
@@ -1170,6 +1210,11 @@
         "path": "./examples/resources/awscc_connectcampaigns_campaign/import.sh"
     },
     {
+        "resource": "awscc_connectcampaignsv2_campaign",
+        "identifier": ["Arn"],
+        "path": "./examples/resources/awscc_connectcampaignsv2_campaign/import.sh"
+    },
+    {
         "resource": "awscc_controltower_enabled_control",
         "identifier": ["TargetIdentifier","ControlIdentifier"],
         "path": "./examples/resources/awscc_controltower_enabled_control/import.sh"
@@ -1203,6 +1248,11 @@
         "resource": "awscc_customerprofiles_object_type",
         "identifier": ["DomainName","ObjectTypeName"],
         "path": "./examples/resources/awscc_customerprofiles_object_type/import.sh"
+    },
+    {
+        "resource": "awscc_customerprofiles_segment_definition",
+        "identifier": ["DomainName","SegmentDefinitionName"],
+        "path": "./examples/resources/awscc_customerprofiles_segment_definition/import.sh"
     },
     {
         "resource": "awscc_dms_data_migration",
@@ -2300,6 +2350,11 @@
         "path": "./examples/resources/awscc_gamelift_build/import.sh"
     },
     {
+        "resource": "awscc_gamelift_container_fleet",
+        "identifier": ["FleetId"],
+        "path": "./examples/resources/awscc_gamelift_container_fleet/import.sh"
+    },
+    {
         "resource": "awscc_gamelift_container_group_definition",
         "identifier": ["Name"],
         "path": "./examples/resources/awscc_gamelift_container_group_definition/import.sh"
@@ -2548,6 +2603,11 @@
         "resource": "awscc_ivs_encoder_configuration",
         "identifier": ["Arn"],
         "path": "./examples/resources/awscc_ivs_encoder_configuration/import.sh"
+    },
+    {
+        "resource": "awscc_ivs_ingest_configuration",
+        "identifier": ["Arn"],
+        "path": "./examples/resources/awscc_ivs_ingest_configuration/import.sh"
     },
     {
         "resource": "awscc_ivs_playback_key_pair",
@@ -2873,6 +2933,11 @@
         "resource": "awscc_iotfleetwise_signal_catalog",
         "identifier": ["Name"],
         "path": "./examples/resources/awscc_iotfleetwise_signal_catalog/import.sh"
+    },
+    {
+        "resource": "awscc_iotfleetwise_state_template",
+        "identifier": ["Name"],
+        "path": "./examples/resources/awscc_iotfleetwise_state_template/import.sh"
     },
     {
         "resource": "awscc_iotfleetwise_vehicle",
@@ -3343,6 +3408,11 @@
         "resource": "awscc_m2_application",
         "identifier": ["ApplicationArn"],
         "path": "./examples/resources/awscc_m2_application/import.sh"
+    },
+    {
+        "resource": "awscc_m2_deployment",
+        "identifier": ["ApplicationId"],
+        "path": "./examples/resources/awscc_m2_deployment/import.sh"
     },
     {
         "resource": "awscc_m2_environment",
@@ -4125,6 +4195,11 @@
         "path": "./examples/resources/awscc_rum_app_monitor/import.sh"
     },
     {
+        "resource": "awscc_rbin_rule",
+        "identifier": ["Arn"],
+        "path": "./examples/resources/awscc_rbin_rule/import.sh"
+    },
+    {
         "resource": "awscc_redshift_cluster",
         "identifier": ["ClusterIdentifier"],
         "path": "./examples/resources/awscc_redshift_cluster/import.sh"
@@ -4233,6 +4308,11 @@
         "resource": "awscc_resourcegroups_group",
         "identifier": ["Name"],
         "path": "./examples/resources/awscc_resourcegroups_group/import.sh"
+    },
+    {
+        "resource": "awscc_resourcegroups_tag_sync_task",
+        "identifier": ["TaskArn"],
+        "path": "./examples/resources/awscc_resourcegroups_tag_sync_task/import.sh"
     },
     {
         "resource": "awscc_robomaker_fleet",
@@ -5215,6 +5295,16 @@
         "path": "./examples/resources/awscc_wisdom_knowledge_base/import.sh"
     },
     {
+        "resource": "awscc_wisdom_message_template",
+        "identifier": ["MessageTemplateArn"],
+        "path": "./examples/resources/awscc_wisdom_message_template/import.sh"
+    },
+    {
+        "resource": "awscc_wisdom_message_template_version",
+        "identifier": ["MessageTemplateVersionArn"],
+        "path": "./examples/resources/awscc_wisdom_message_template_version/import.sh"
+    },
+    {
         "resource": "awscc_workspaces_connection_alias",
         "identifier": ["AliasId"],
         "path": "./examples/resources/awscc_workspaces_connection_alias/import.sh"
@@ -5233,6 +5323,11 @@
         "resource": "awscc_workspacesweb_browser_settings",
         "identifier": ["BrowserSettingsArn"],
         "path": "./examples/resources/awscc_workspacesweb_browser_settings/import.sh"
+    },
+    {
+        "resource": "awscc_workspacesweb_data_protection_settings",
+        "identifier": ["DataProtectionSettingsArn"],
+        "path": "./examples/resources/awscc_workspacesweb_data_protection_settings/import.sh"
     },
     {
         "resource": "awscc_workspacesweb_identity_provider",

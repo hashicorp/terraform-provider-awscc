@@ -27,6 +27,7 @@ Data Source schema for AWS::WorkSpacesWeb::Portal
 - `browser_type` (String)
 - `creation_date` (String)
 - `customer_managed_key` (String)
+- `data_protection_settings_arn` (String)
 - `display_name` (String)
 - `instance_type` (String)
 - `ip_access_settings_arn` (String)

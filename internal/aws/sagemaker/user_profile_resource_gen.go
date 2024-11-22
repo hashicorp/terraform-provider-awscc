@@ -1073,7 +1073,12 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	              "InferenceRecommender",
 		//	              "Endpoints",
 		//	              "Projects",
-		//	              "InferenceOptimization"
+		//	              "InferenceOptimization",
+		//	              "HyperPodClusters",
+		//	              "Comet",
+		//	              "DeepchecksLLMEvaluation",
+		//	              "Fiddler",
+		//	              "LakeraGuard"
 		//	            ],
 		//	            "type": "string"
 		//	          },
@@ -2379,6 +2384,11 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 										"Endpoints",
 										"Projects",
 										"InferenceOptimization",
+										"HyperPodClusters",
+										"Comet",
+										"DeepchecksLLMEvaluation",
+										"Fiddler",
+										"LakeraGuard",
 									),
 								),
 							}, /*END VALIDATORS*/

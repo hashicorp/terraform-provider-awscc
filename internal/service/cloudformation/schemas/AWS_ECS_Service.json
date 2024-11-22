@@ -12,7 +12,7 @@
     "cloudFormationSystemTags": false
   },
   "propertyTransform": {
-    "/properties/Role": "Role $OR $join([\"arn:(aws)[-]{0,1}[a-z]{0,2}[-]{0,1}[a-z]{0,3}:iam::[0-9]{12}[:]role/{1}\", Role])"
+    "/properties/Role": "Role $OR $join([\"arn:(aws)[-]{0,1}[a-z]{0,3}[-]{0,1}[a-z]{0,3}:iam::[0-9]{12}[:]role/{1}\", Role])"
   },
   "handlers": {
     "read": {
@@ -150,6 +150,27 @@
         }
       }
     },
+    "VpcLatticeConfiguration": {
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "TargetGroupArn": {
+          "type": "string"
+        },
+        "PortName": {
+          "type": "string"
+        },
+        "RoleArn": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "RoleArn",
+        "TargetGroupArn",
+        "PortName"
+      ]
+    },
     "LoadBalancer": {
       "description": "The ``LoadBalancer`` property specifies details on a load balancer that is used with a service.\n If the service is using the ``CODE_DEPLOY`` deployment controller, the service is required to use either an Application Load Balancer or Network Load Balancer. When you are creating an ACDlong deployment group, you specify two target groups (referred to as a ``targetGroupPair``). Each target group binds to a separate task set in the deployment. The load balancer can also have up to two listeners, a required listener for production traffic and an optional listener that allows you to test new revisions of the service before routing production traffic to it.\n Services with tasks that use the ``awsvpc`` network mode (for example, those with the Fargate launch type) only support Application Load Balancers and Network Load Balancers. Classic Load Balancers are not supported. Also, when you create any target groups for these services, you must choose ``ip`` as the target type, not ``instance``. Tasks that use the ``awsvpc`` network mode are associated with an elastic network interface, not an Amazon EC2 instance.",
       "additionalProperties": false,
@@ -160,7 +181,7 @@
           "type": "string"
         },
         "LoadBalancerName": {
-          "description": "The name of the load balancer to associate with the service or task set.\n If you are using an Application Load Balancer or a Network Load Balancer the load balancer name parameter should be omitted.",
+          "description": "The name of the load balancer to associate with the Amazon ECS service or task set.\n If you are using an Application Load Balancer or a Network Load Balancer the load balancer name parameter should be omitted.",
           "type": "string"
         },
         "ContainerName": {
@@ -520,7 +541,7 @@
       ]
     },
     "DeploymentConfiguration": {
-      "description": "Optional deployment parameters that control how many tasks run during the deployment and the failure detection methods.",
+      "description": "Optional deployment parameters that control how many tasks run during a deployment and the ordering of stopping and starting tasks.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
@@ -668,6 +689,15 @@
       "description": "",
       "type": "string"
     },
+    "AvailabilityZoneRebalancing": {
+      "default": "DISABLED",
+      "description": "",
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
     "SchedulingStrategy": {
       "description": "The scheduling strategy to use for the service. For more information, see [Services](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html).\n There are two service scheduler strategies available:\n  +   ``REPLICA``-The replica scheduling strategy places and maintains the desired number of tasks across your cluster. By default, the service scheduler spreads tasks across Availability Zones. You can use task placement strategies and constraints to customize task placement decisions. This scheduler strategy is required if the service uses the ``CODE_DEPLOY`` or ``EXTERNAL`` deployment controller types.\n  +   ``DAEMON``-The daemon scheduling strategy deploys exactly one task on each active container instance that meets all of the task placement constraints that you specify in your cluster. The service scheduler also evaluates the task placement constraints for running tasks and will stop tasks that don't meet the placement constraints. When you're using this strategy, you don't need to specify a desired number of tasks, a task placement strategy, or use Service Auto Scaling policies.\n  Tasks using the Fargate launch type or the ``CODE_DEPLOY`` or ``EXTERNAL`` deployment controller types don't support the ``DAEMON`` scheduling strategy.",
       "type": "string",
@@ -725,6 +755,13 @@
       "description": "The number of instantiations of the specified task definition to place and keep running in your service.\n For new services, if a desired count is not specified, a default value of ``1`` is used. When using the ``DAEMON`` scheduling strategy, the desired count is not required.\n For existing services, if a desired count is not specified, it is omitted from the operation.",
       "type": "integer"
     },
+    "VpcLatticeConfigurations": {
+      "description": "",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/VpcLatticeConfiguration"
+      }
+    },
     "DeploymentController": {
       "description": "The deployment controller to use for the service. If no deployment controller is specified, the default value of ``ECS`` is used.",
       "$ref": "#/definitions/DeploymentController"
@@ -742,7 +779,7 @@
       "type": "string"
     },
     "DeploymentConfiguration": {
-      "description": "Optional deployment parameters that control how many tasks run during the deployment and the failure detection methods.",
+      "description": "Optional deployment parameters that control how many tasks run during the deployment and the ordering of stopping and starting tasks.",
       "$ref": "#/definitions/DeploymentConfiguration"
     }
   }

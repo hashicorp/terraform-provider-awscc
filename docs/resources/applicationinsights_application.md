@@ -30,6 +30,7 @@ Resource schema for AWS::ApplicationInsights::Application
 - `log_pattern_sets` (Attributes List) The log pattern sets. (see [below for nested schema](#nestedatt--log_pattern_sets))
 - `ops_center_enabled` (Boolean) When set to true, creates opsItems for any problems detected on an application.
 - `ops_item_sns_topic_arn` (String) The SNS topic provided to Application Insights that is associated to the created opsItem.
+- `sns_notification_arn` (String) Application Insights sends notifications to this SNS topic whenever there is a problem update in the associated application.
 - `tags` (Attributes List) The tags of Application Insights application. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

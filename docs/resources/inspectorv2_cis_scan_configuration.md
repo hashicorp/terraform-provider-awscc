@@ -130,9 +130,6 @@ Optional:
 Required:
 
 - `account_ids` (List of String)
-
-Optional:
-
 - `target_resource_tags` (Map of List of String)
 
 ## Import

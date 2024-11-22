@@ -23,6 +23,22 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::ECS::Service resource.
 func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AvailabilityZoneRebalancing
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": "DISABLED",
+		//	  "description": "",
+		//	  "enum": [
+		//	    "ENABLED",
+		//	    "DISABLED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"availability_zone_rebalancing": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CapacityProviderStrategy
 		// CloudFormation resource type schema:
 		//
@@ -88,7 +104,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "Optional deployment parameters that control how many tasks run during the deployment and the failure detection methods.",
+		//	  "description": "Optional deployment parameters that control how many tasks run during the deployment and the ordering of stopping and starting tasks.",
 		//	  "properties": {
 		//	    "Alarms": {
 		//	      "additionalProperties": false,
@@ -200,7 +216,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "Optional deployment parameters that control how many tasks run during the deployment and the failure detection methods.",
+			Description: "Optional deployment parameters that control how many tasks run during the deployment and the ordering of stopping and starting tasks.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DeploymentController
@@ -311,7 +327,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "integer"
 		//	      },
 		//	      "LoadBalancerName": {
-		//	        "description": "The name of the load balancer to associate with the service or task set.\n If you are using an Application Load Balancer or a Network Load Balancer the load balancer name parameter should be omitted.",
+		//	        "description": "The name of the load balancer to associate with the Amazon ECS service or task set.\n If you are using an Application Load Balancer or a Network Load Balancer the load balancer name parameter should be omitted.",
 		//	        "type": "string"
 		//	      },
 		//	      "TargetGroupArn": {
@@ -338,7 +354,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: LoadBalancerName
 					"load_balancer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the load balancer to associate with the service or task set.\n If you are using an Application Load Balancer or a Network Load Balancer the load balancer name parameter should be omitted.",
+						Description: "The name of the load balancer to associate with the Amazon ECS service or task set.\n If you are using an Application Load Balancer or a Network Load Balancer the load balancer name parameter should be omitted.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: TargetGroupArn
@@ -1226,6 +1242,54 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The configuration for a volume specified in the task definition as a volume that is configured at launch time. Currently, the only supported volume type is an Amazon EBS volume.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: VpcLatticeConfigurations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "",
+		//	    "properties": {
+		//	      "PortName": {
+		//	        "type": "string"
+		//	      },
+		//	      "RoleArn": {
+		//	        "type": "string"
+		//	      },
+		//	      "TargetGroupArn": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "RoleArn",
+		//	      "TargetGroupArn",
+		//	      "PortName"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"vpc_lattice_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: PortName
+					"port_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: RoleArn
+					"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: TargetGroupArn
+					"target_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -1246,6 +1310,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"alarm_names":                       "AlarmNames",
 		"alarms":                            "Alarms",
 		"assign_public_ip":                  "AssignPublicIp",
+		"availability_zone_rebalancing":     "AvailabilityZoneRebalancing",
 		"aws_pca_authority_arn":             "AwsPcaAuthorityArn",
 		"awsvpc_configuration":              "AwsvpcConfiguration",
 		"base":                              "Base",
@@ -1324,6 +1389,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"value_from":                        "ValueFrom",
 		"volume_configurations":             "VolumeConfigurations",
 		"volume_type":                       "VolumeType",
+		"vpc_lattice_configurations":        "VpcLatticeConfigurations",
 		"weight":                            "Weight",
 	})
 

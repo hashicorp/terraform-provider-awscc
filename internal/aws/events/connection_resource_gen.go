@@ -330,6 +330,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
+							// ApiKeyValue is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
@@ -352,6 +353,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
+							// Password is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: Username
 						"username": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -510,6 +512,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
+					// InvocationHttpParameters is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: OAuthParameters
 				"o_auth_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -553,6 +556,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
+									// ClientSecret is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
@@ -625,6 +629,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 										listplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
+									// BodyParameters is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: HeaderParameters
 								"header_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -668,6 +673,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 										listplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
+									// HeaderParameters is a write-only property.
 								}, /*END ATTRIBUTE*/
 								// Property: QueryStringParameters
 								"query_string_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -711,6 +717,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 										listplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
+									// QueryStringParameters is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
@@ -732,7 +739,6 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
-			// AuthParameters is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: AuthorizationType
 		// CloudFormation resource type schema:
@@ -806,7 +812,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The arn of the secrets manager secret created in the customer account.",
-		//	  "pattern": "^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]|\\d|\\-)*:([0-9]{12})?:secret:[\\/_+=\\.@\\-A-Za-z0-9]+$",
+		//	  "pattern": "^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]|\\d|\\-)*:([0-9]{12})?:secret:([a-z]|\\d|\\-)*(!)*[\\/_+=\\.@\\-A-Za-z0-9]+$",
 		//	  "type": "string"
 		//	}
 		"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -867,7 +873,13 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/AuthParameters",
+		"/properties/AuthParameters/BasicAuthParameters/Password",
+		"/properties/AuthParameters/ApiKeyAuthParameters/ApiKeyValue",
+		"/properties/AuthParameters/OAuthParameters/ClientParameters/ClientSecret",
+		"/properties/AuthParameters/OAuthParameters/OAuthHttpParameters/HeaderParameters",
+		"/properties/AuthParameters/OAuthParameters/OAuthHttpParameters/QueryStringParameters",
+		"/properties/AuthParameters/OAuthParameters/OAuthHttpParameters/BodyParameters",
+		"/properties/AuthParameters/InvocationHttpParameters",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

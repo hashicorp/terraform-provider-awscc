@@ -32,6 +32,7 @@ Data Source schema for AWS::ApplicationInsights::Application
 - `ops_center_enabled` (Boolean) When set to true, creates opsItems for any problems detected on an application.
 - `ops_item_sns_topic_arn` (String) The SNS topic provided to Application Insights that is associated to the created opsItem.
 - `resource_group_name` (String) The name of the resource group.
+- `sns_notification_arn` (String) Application Insights sends notifications to this SNS topic whenever there is a problem update in the associated application.
 - `tags` (Attributes List) The tags of Application Insights application. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--component_monitoring_settings"></a>

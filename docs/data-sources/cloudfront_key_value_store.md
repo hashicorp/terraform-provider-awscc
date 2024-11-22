@@ -22,10 +22,10 @@ Data Source schema for AWS::CloudFront::KeyValueStore
 ### Read-Only
 
 - `arn` (String)
-- `comment` (String)
-- `import_source` (Attributes) (see [below for nested schema](#nestedatt--import_source))
+- `comment` (String) A comment for the key value store.
+- `import_source` (Attributes) The import source for the key value store. (see [below for nested schema](#nestedatt--import_source))
 - `key_value_store_id` (String)
-- `name` (String)
+- `name` (String) The name of the key value store.
 - `status` (String)
 
 <a id="nestedatt--import_source"></a>
@@ -33,5 +33,5 @@ Data Source schema for AWS::CloudFront::KeyValueStore
 
 Read-Only:
 
-- `source_arn` (String)
-- `source_type` (String)
+- `source_arn` (String) The Amazon Resource Name (ARN) of the import source for the key value store.
+- `source_type` (String) The source type of the import source for the key value store.

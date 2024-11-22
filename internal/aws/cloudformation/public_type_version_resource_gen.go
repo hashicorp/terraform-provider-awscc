@@ -108,7 +108,7 @@ func publicTypeVersionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The publisher id assigned by CloudFormation for publishing in this region.",
 		//	  "maxLength": 40,
 		//	  "minLength": 1,
-		//	  "pattern": "[0-9a-zA-Z]{40}",
+		//	  "pattern": "[0-9a-zA-Z-]{40}",
 		//	  "type": "string"
 		//	}
 		"publisher_id": schema.StringAttribute{ /*START ATTRIBUTE*/
