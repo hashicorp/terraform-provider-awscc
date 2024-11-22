@@ -29,8 +29,10 @@ func cloudFrontOriginAccessIdentityResource(ctx context.Context) (resource.Resou
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "The current configuration information for the identity.",
 		//	  "properties": {
 		//	    "Comment": {
+		//	      "description": "A comment to describe the origin access identity. The comment cannot be longer than 128 characters.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -43,19 +45,23 @@ func cloudFrontOriginAccessIdentityResource(ctx context.Context) (resource.Resou
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Comment
 				"comment": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Description: "A comment to describe the origin access identity. The comment cannot be longer than 128 characters.",
+					Required:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Required: true,
+			Description: "The current configuration information for the identity.",
+			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"cloudfront_origin_access_identity_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -64,10 +70,12 @@ func cloudFrontOriginAccessIdentityResource(ctx context.Context) (resource.Resou
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"s3_canonical_user_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -84,7 +92,7 @@ func cloudFrontOriginAccessIdentityResource(ctx context.Context) (resource.Resou
 	}
 
 	schema := schema.Schema{
-		Description: "Resource Type definition for AWS::CloudFront::CloudFrontOriginAccessIdentity",
+		Description: "The request to create a new origin access identity (OAI). An origin access identity is a special CloudFront user that you can associate with Amazon S3 origins, so that you can secure all or just some of your Amazon S3 content. For more information, see [Restricting Access to Amazon S3 Content by Using an Origin Access Identity](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html) in the *Amazon CloudFront Developer Guide*.",
 		Version:     1,
 		Attributes:  attributes,
 	}

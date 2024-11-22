@@ -256,6 +256,39 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: NodeRepairConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The node auto repair configuration for node group.",
+		//	  "properties": {
+		//	    "Enabled": {
+		//	      "description": "Set this value to true to enable node auto repair for the node group.",
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"node_repair_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Enabled
+				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Set this value to true to enable node auto repair for the node group.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The node auto repair configuration for node group.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: NodeRole
 		// CloudFormation resource type schema:
 		//
@@ -643,6 +676,7 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 		"disk_size":                  "DiskSize",
 		"ec_2_ssh_key":               "Ec2SshKey",
 		"effect":                     "Effect",
+		"enabled":                    "Enabled",
 		"force_update_enabled":       "ForceUpdateEnabled",
 		"id":                         "Id",
 		"instance_types":             "InstanceTypes",
@@ -654,6 +688,7 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 		"max_unavailable_percentage": "MaxUnavailablePercentage",
 		"min_size":                   "MinSize",
 		"name":                       "Name",
+		"node_repair_config":         "NodeRepairConfig",
 		"node_role":                  "NodeRole",
 		"nodegroup_id":               "Id",
 		"nodegroup_name":             "NodegroupName",

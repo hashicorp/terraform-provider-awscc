@@ -368,6 +368,61 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		//	        "InstanceCapabilities": {
 		//	          "additionalProperties": false,
 		//	          "properties": {
+		//	            "AcceleratorCapabilities": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Count": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "Max": {
+		//	                      "maximum": 2147483647,
+		//	                      "minimum": 0,
+		//	                      "type": "integer"
+		//	                    },
+		//	                    "Min": {
+		//	                      "maximum": 2147483647,
+		//	                      "minimum": 0,
+		//	                      "type": "integer"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "Min"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "Selections": {
+		//	                  "items": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "Name": {
+		//	                        "enum": [
+		//	                          "t4",
+		//	                          "a10g",
+		//	                          "l4",
+		//	                          "l40s"
+		//	                        ],
+		//	                        "type": "string"
+		//	                      },
+		//	                      "Runtime": {
+		//	                        "maxLength": 100,
+		//	                        "minLength": 1,
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "Name"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  },
+		//	                  "minItems": 1,
+		//	                  "type": "array"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Selections"
+		//	              ],
+		//	              "type": "object"
+		//	            },
 		//	            "AllowedInstanceTypes": {
 		//	              "items": {
 		//	                "pattern": "^[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$",
@@ -888,6 +943,93 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 						// Property: InstanceCapabilities
 						"instance_capabilities": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AcceleratorCapabilities
+								"accelerator_capabilities": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Count
+										"count": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Max
+												"max": schema.Int64Attribute{ /*START ATTRIBUTE*/
+													Optional: true,
+													Computed: true,
+													Validators: []validator.Int64{ /*START VALIDATORS*/
+														int64validator.Between(0, 2147483647),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+														int64planmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: Min
+												"min": schema.Int64Attribute{ /*START ATTRIBUTE*/
+													Optional: true,
+													Computed: true,
+													Validators: []validator.Int64{ /*START VALIDATORS*/
+														int64validator.Between(0, 2147483647),
+														fwvalidators.NotNullInt64(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+														int64planmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Selections
+										"selections": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Name
+													"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Optional: true,
+														Computed: true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.OneOf(
+																"t4",
+																"a10g",
+																"l4",
+																"l40s",
+															),
+															fwvalidators.NotNullString(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: Runtime
+													"runtime": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Optional: true,
+														Computed: true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.LengthBetween(1, 100),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												listvalidator.SizeAtLeast(1),
+												fwvalidators.NotNullList(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
 								// Property: AllowedInstanceTypes
 								"allowed_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
 									ElementType: types.StringType,
@@ -1440,6 +1582,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Deadline::Fleet").WithTerraformTypeName("awscc_deadline_fleet")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"accelerator_capabilities":      "AcceleratorCapabilities",
 		"accelerator_count":             "AcceleratorCount",
 		"accelerator_total_memory_mi_b": "AcceleratorTotalMemoryMiB",
 		"accelerator_types":             "AcceleratorTypes",
@@ -1449,6 +1592,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		"attributes":                    "Attributes",
 		"capabilities":                  "Capabilities",
 		"configuration":                 "Configuration",
+		"count":                         "Count",
 		"cpu_architecture_type":         "CpuArchitectureType",
 		"custom_amounts":                "CustomAmounts",
 		"custom_attributes":             "CustomAttributes",
@@ -1472,6 +1616,8 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		"os_family":                     "OsFamily",
 		"role_arn":                      "RoleArn",
 		"root_ebs_volume":               "RootEbsVolume",
+		"runtime":                       "Runtime",
+		"selections":                    "Selections",
 		"service_managed_ec_2":          "ServiceManagedEc2",
 		"size_gi_b":                     "SizeGiB",
 		"status":                        "Status",

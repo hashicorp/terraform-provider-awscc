@@ -10,10 +10,14 @@ import (
 	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -220,6 +224,330 @@ func hoursOfOperationResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: HoursOfOperationOverrides
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "One or more hours of operation overrides assigned to an hour of operation.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Overrides attached to the hours of operation.",
+		//	    "properties": {
+		//	      "EffectiveFrom": {
+		//	        "description": "The date from which the hours of operation override would be effective.",
+		//	        "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+		//	        "type": "string"
+		//	      },
+		//	      "EffectiveTill": {
+		//	        "description": "The date till which the hours of operation override would be effective.",
+		//	        "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+		//	        "type": "string"
+		//	      },
+		//	      "HoursOfOperationOverrideId": {
+		//	        "description": "The Resource Identifier for the hours of operation override.",
+		//	        "pattern": "^[-a-zA-Z0-9]*$",
+		//	        "type": "string"
+		//	      },
+		//	      "OverrideConfig": {
+		//	        "description": "Configuration information for the hours of operation override: day, start time, and end time.",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "description": "Contains information about the hours of operation override.",
+		//	          "properties": {
+		//	            "Day": {
+		//	              "description": "The day that the hours of operation override applies to.",
+		//	              "enum": [
+		//	                "SUNDAY",
+		//	                "MONDAY",
+		//	                "TUESDAY",
+		//	                "WEDNESDAY",
+		//	                "THURSDAY",
+		//	                "FRIDAY",
+		//	                "SATURDAY"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "EndTime": {
+		//	              "additionalProperties": false,
+		//	              "description": "The new end time that your contact center closes for the overriden days.",
+		//	              "properties": {
+		//	                "Hours": {
+		//	                  "description": "The hours.",
+		//	                  "maximum": 23,
+		//	                  "minimum": 0,
+		//	                  "type": "integer"
+		//	                },
+		//	                "Minutes": {
+		//	                  "description": "The minutes.",
+		//	                  "maximum": 59,
+		//	                  "minimum": 0,
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Hours",
+		//	                "Minutes"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "StartTime": {
+		//	              "additionalProperties": false,
+		//	              "description": "The new start time that your contact center opens for the overriden days.",
+		//	              "properties": {
+		//	                "Hours": {
+		//	                  "description": "The hours.",
+		//	                  "maximum": 23,
+		//	                  "minimum": 0,
+		//	                  "type": "integer"
+		//	                },
+		//	                "Minutes": {
+		//	                  "description": "The minutes.",
+		//	                  "maximum": 59,
+		//	                  "minimum": 0,
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Hours",
+		//	                "Minutes"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Day",
+		//	            "StartTime",
+		//	            "EndTime"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "maxItems": 100,
+		//	        "type": "array",
+		//	        "uniqueItems": true
+		//	      },
+		//	      "OverrideDescription": {
+		//	        "description": "The description of the hours of operation override.",
+		//	        "maxLength": 250,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "OverrideName": {
+		//	        "description": "The name of the hours of operation override.",
+		//	        "maxLength": 127,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "OverrideName",
+		//	      "EffectiveFrom",
+		//	      "EffectiveTill",
+		//	      "OverrideConfig"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "type": "array"
+		//	}
+		"hours_of_operation_overrides": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: EffectiveFrom
+					"effective_from": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The date from which the hours of operation override would be effective.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.RegexMatches(regexp.MustCompile("^\\d{4}-\\d{2}-\\d{2}$"), ""),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: EffectiveTill
+					"effective_till": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The date till which the hours of operation override would be effective.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.RegexMatches(regexp.MustCompile("^\\d{4}-\\d{2}-\\d{2}$"), ""),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: HoursOfOperationOverrideId
+					"hours_of_operation_override_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Resource Identifier for the hours of operation override.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.RegexMatches(regexp.MustCompile("^[-a-zA-Z0-9]*$"), ""),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: OverrideConfig
+					"override_config": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Day
+								"day": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The day that the hours of operation override applies to.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"SUNDAY",
+											"MONDAY",
+											"TUESDAY",
+											"WEDNESDAY",
+											"THURSDAY",
+											"FRIDAY",
+											"SATURDAY",
+										),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: EndTime
+								"end_time": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Hours
+										"hours": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The hours.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Int64{ /*START VALIDATORS*/
+												int64validator.Between(0, 23),
+												fwvalidators.NotNullInt64(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Minutes
+										"minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The minutes.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Int64{ /*START VALIDATORS*/
+												int64validator.Between(0, 59),
+												fwvalidators.NotNullInt64(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The new end time that your contact center closes for the overriden days.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Object{ /*START VALIDATORS*/
+										fwvalidators.NotNullObject(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: StartTime
+								"start_time": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Hours
+										"hours": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The hours.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Int64{ /*START VALIDATORS*/
+												int64validator.Between(0, 23),
+												fwvalidators.NotNullInt64(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Minutes
+										"minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The minutes.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Int64{ /*START VALIDATORS*/
+												int64validator.Between(0, 59),
+												fwvalidators.NotNullInt64(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The new start time that your contact center opens for the overriden days.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Object{ /*START VALIDATORS*/
+										fwvalidators.NotNullObject(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "Configuration information for the hours of operation override: day, start time, and end time.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.Set{ /*START VALIDATORS*/
+							setvalidator.SizeAtMost(100),
+							fwvalidators.NotNullSet(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+							setplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: OverrideDescription
+					"override_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The description of the hours of operation override.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 250),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: OverrideName
+					"override_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name of the hours of operation override.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 127),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "One or more hours of operation overrides assigned to an hour of operation.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeAtMost(50),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceArn
 		// CloudFormation resource type schema:
 		//
@@ -358,20 +686,27 @@ func hoursOfOperationResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Connect::HoursOfOperation").WithTerraformTypeName("awscc_connect_hours_of_operation")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"config":                 "Config",
-		"day":                    "Day",
-		"description":            "Description",
-		"end_time":               "EndTime",
-		"hours":                  "Hours",
-		"hours_of_operation_arn": "HoursOfOperationArn",
-		"instance_arn":           "InstanceArn",
-		"key":                    "Key",
-		"minutes":                "Minutes",
-		"name":                   "Name",
-		"start_time":             "StartTime",
-		"tags":                   "Tags",
-		"time_zone":              "TimeZone",
-		"value":                  "Value",
+		"config":                         "Config",
+		"day":                            "Day",
+		"description":                    "Description",
+		"effective_from":                 "EffectiveFrom",
+		"effective_till":                 "EffectiveTill",
+		"end_time":                       "EndTime",
+		"hours":                          "Hours",
+		"hours_of_operation_arn":         "HoursOfOperationArn",
+		"hours_of_operation_override_id": "HoursOfOperationOverrideId",
+		"hours_of_operation_overrides":   "HoursOfOperationOverrides",
+		"instance_arn":                   "InstanceArn",
+		"key":                            "Key",
+		"minutes":                        "Minutes",
+		"name":                           "Name",
+		"override_config":                "OverrideConfig",
+		"override_description":           "OverrideDescription",
+		"override_name":                  "OverrideName",
+		"start_time":                     "StartTime",
+		"tags":                           "Tags",
+		"time_zone":                      "TimeZone",
+		"value":                          "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

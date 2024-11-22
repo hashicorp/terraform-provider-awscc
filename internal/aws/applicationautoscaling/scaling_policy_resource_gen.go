@@ -71,6 +71,978 @@ func scalingPolicyResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The scaling policy type.\n The following policy types are supported: \n  ``TargetTrackingScaling``—Not supported for Amazon EMR\n  ``StepScaling``—Not supported for DynamoDB, Amazon Comprehend, Lambda, Amazon Keyspaces, Amazon MSK, Amazon ElastiCache, or Neptune.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: PredictiveScalingPolicyConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "",
+		//	  "properties": {
+		//	    "MaxCapacityBreachBehavior": {
+		//	      "type": "string"
+		//	    },
+		//	    "MaxCapacityBuffer": {
+		//	      "type": "integer"
+		//	    },
+		//	    "MetricSpecifications": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "",
+		//	        "properties": {
+		//	          "CustomizedCapacityMetricSpecification": {
+		//	            "additionalProperties": false,
+		//	            "description": "",
+		//	            "properties": {
+		//	              "MetricDataQueries": {
+		//	                "insertionOrder": false,
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "",
+		//	                  "properties": {
+		//	                    "Expression": {
+		//	                      "description": "The math expression to perform on the returned data, if this object is performing a math expression.",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Id": {
+		//	                      "description": "A short name that identifies the object's results in the response.",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Label": {
+		//	                      "description": "A human-readable label for this metric or expression. This is especially useful if this is a math expression, so that you know what the value represents.",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "MetricStat": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "Information about the metric data to return.",
+		//	                      "properties": {
+		//	                        "Metric": {
+		//	                          "additionalProperties": false,
+		//	                          "description": "The CloudWatch metric to return, including the metric name, namespace, and dimensions. ",
+		//	                          "properties": {
+		//	                            "Dimensions": {
+		//	                              "description": "The dimensions for the metric.",
+		//	                              "insertionOrder": false,
+		//	                              "items": {
+		//	                                "additionalProperties": false,
+		//	                                "description": "",
+		//	                                "properties": {
+		//	                                  "Name": {
+		//	                                    "description": "The name of the dimension.",
+		//	                                    "type": "string"
+		//	                                  },
+		//	                                  "Value": {
+		//	                                    "description": "The value of the dimension.",
+		//	                                    "type": "string"
+		//	                                  }
+		//	                                },
+		//	                                "type": "object"
+		//	                              },
+		//	                              "type": "array",
+		//	                              "uniqueItems": false
+		//	                            },
+		//	                            "MetricName": {
+		//	                              "description": "The name of the metric.",
+		//	                              "type": "string"
+		//	                            },
+		//	                            "Namespace": {
+		//	                              "description": "The namespace of the metric.",
+		//	                              "type": "string"
+		//	                            }
+		//	                          },
+		//	                          "type": "object"
+		//	                        },
+		//	                        "Stat": {
+		//	                          "description": "The statistic to return. It can include any CloudWatch statistic or extended statistic.",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "Unit": {
+		//	                          "description": "The unit to use for the returned data points.",
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "type": "object"
+		//	                    },
+		//	                    "ReturnData": {
+		//	                      "description": "Indicates whether to return the timestamps and raw data values of this metric.",
+		//	                      "type": "boolean"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "type": "array",
+		//	                "uniqueItems": true
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "MetricDataQueries"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "CustomizedLoadMetricSpecification": {
+		//	            "additionalProperties": false,
+		//	            "description": "",
+		//	            "properties": {
+		//	              "MetricDataQueries": {
+		//	                "insertionOrder": false,
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "",
+		//	                  "properties": {
+		//	                    "Expression": {
+		//	                      "description": "The math expression to perform on the returned data, if this object is performing a math expression.",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Id": {
+		//	                      "description": "A short name that identifies the object's results in the response.",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Label": {
+		//	                      "description": "A human-readable label for this metric or expression. This is especially useful if this is a math expression, so that you know what the value represents.",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "MetricStat": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "Information about the metric data to return.",
+		//	                      "properties": {
+		//	                        "Metric": {
+		//	                          "additionalProperties": false,
+		//	                          "description": "The CloudWatch metric to return, including the metric name, namespace, and dimensions. ",
+		//	                          "properties": {
+		//	                            "Dimensions": {
+		//	                              "description": "The dimensions for the metric.",
+		//	                              "insertionOrder": false,
+		//	                              "items": {
+		//	                                "additionalProperties": false,
+		//	                                "description": "",
+		//	                                "properties": {
+		//	                                  "Name": {
+		//	                                    "description": "The name of the dimension.",
+		//	                                    "type": "string"
+		//	                                  },
+		//	                                  "Value": {
+		//	                                    "description": "The value of the dimension.",
+		//	                                    "type": "string"
+		//	                                  }
+		//	                                },
+		//	                                "type": "object"
+		//	                              },
+		//	                              "type": "array",
+		//	                              "uniqueItems": false
+		//	                            },
+		//	                            "MetricName": {
+		//	                              "description": "The name of the metric.",
+		//	                              "type": "string"
+		//	                            },
+		//	                            "Namespace": {
+		//	                              "description": "The namespace of the metric.",
+		//	                              "type": "string"
+		//	                            }
+		//	                          },
+		//	                          "type": "object"
+		//	                        },
+		//	                        "Stat": {
+		//	                          "description": "The statistic to return. It can include any CloudWatch statistic or extended statistic.",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "Unit": {
+		//	                          "description": "The unit to use for the returned data points.",
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "type": "object"
+		//	                    },
+		//	                    "ReturnData": {
+		//	                      "description": "Indicates whether to return the timestamps and raw data values of this metric.",
+		//	                      "type": "boolean"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "type": "array",
+		//	                "uniqueItems": true
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "MetricDataQueries"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "CustomizedScalingMetricSpecification": {
+		//	            "additionalProperties": false,
+		//	            "description": "",
+		//	            "properties": {
+		//	              "MetricDataQueries": {
+		//	                "insertionOrder": false,
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "",
+		//	                  "properties": {
+		//	                    "Expression": {
+		//	                      "description": "The math expression to perform on the returned data, if this object is performing a math expression.",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Id": {
+		//	                      "description": "A short name that identifies the object's results in the response.",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Label": {
+		//	                      "description": "A human-readable label for this metric or expression. This is especially useful if this is a math expression, so that you know what the value represents.",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "MetricStat": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "Information about the metric data to return.",
+		//	                      "properties": {
+		//	                        "Metric": {
+		//	                          "additionalProperties": false,
+		//	                          "description": "The CloudWatch metric to return, including the metric name, namespace, and dimensions. ",
+		//	                          "properties": {
+		//	                            "Dimensions": {
+		//	                              "description": "The dimensions for the metric.",
+		//	                              "insertionOrder": false,
+		//	                              "items": {
+		//	                                "additionalProperties": false,
+		//	                                "description": "",
+		//	                                "properties": {
+		//	                                  "Name": {
+		//	                                    "description": "The name of the dimension.",
+		//	                                    "type": "string"
+		//	                                  },
+		//	                                  "Value": {
+		//	                                    "description": "The value of the dimension.",
+		//	                                    "type": "string"
+		//	                                  }
+		//	                                },
+		//	                                "type": "object"
+		//	                              },
+		//	                              "type": "array",
+		//	                              "uniqueItems": false
+		//	                            },
+		//	                            "MetricName": {
+		//	                              "description": "The name of the metric.",
+		//	                              "type": "string"
+		//	                            },
+		//	                            "Namespace": {
+		//	                              "description": "The namespace of the metric.",
+		//	                              "type": "string"
+		//	                            }
+		//	                          },
+		//	                          "type": "object"
+		//	                        },
+		//	                        "Stat": {
+		//	                          "description": "The statistic to return. It can include any CloudWatch statistic or extended statistic.",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "Unit": {
+		//	                          "description": "The unit to use for the returned data points.",
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "type": "object"
+		//	                    },
+		//	                    "ReturnData": {
+		//	                      "description": "Indicates whether to return the timestamps and raw data values of this metric.",
+		//	                      "type": "boolean"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "type": "array",
+		//	                "uniqueItems": true
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "MetricDataQueries"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "PredefinedLoadMetricSpecification": {
+		//	            "additionalProperties": false,
+		//	            "description": "",
+		//	            "properties": {
+		//	              "PredefinedMetricType": {
+		//	                "type": "string"
+		//	              },
+		//	              "ResourceLabel": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "PredefinedMetricType"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "PredefinedMetricPairSpecification": {
+		//	            "additionalProperties": false,
+		//	            "description": "",
+		//	            "properties": {
+		//	              "PredefinedMetricType": {
+		//	                "type": "string"
+		//	              },
+		//	              "ResourceLabel": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "PredefinedMetricType"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "PredefinedScalingMetricSpecification": {
+		//	            "additionalProperties": false,
+		//	            "description": "",
+		//	            "properties": {
+		//	              "PredefinedMetricType": {
+		//	                "type": "string"
+		//	              },
+		//	              "ResourceLabel": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "PredefinedMetricType"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "TargetValue": {
+		//	            "type": "number"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "TargetValue"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "Mode": {
+		//	      "type": "string"
+		//	    },
+		//	    "SchedulingBufferTime": {
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "MetricSpecifications"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"predictive_scaling_policy_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaxCapacityBreachBehavior
+				"max_capacity_breach_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MaxCapacityBuffer
+				"max_capacity_buffer": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MetricSpecifications
+				"metric_specifications": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CustomizedCapacityMetricSpecification
+							"customized_capacity_metric_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: MetricDataQueries
+									"metric_data_queries": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Expression
+												"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The math expression to perform on the returned data, if this object is performing a math expression.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: Id
+												"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "A short name that identifies the object's results in the response.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: Label
+												"label": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "A human-readable label for this metric or expression. This is especially useful if this is a math expression, so that you know what the value represents.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: MetricStat
+												"metric_stat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Metric
+														"metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Dimensions
+																"dimensions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																	NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Name
+																			"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The name of the dimension.",
+																				Optional:    true,
+																				Computed:    true,
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																			// Property: Value
+																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The value of the dimension.",
+																				Optional:    true,
+																				Computed:    true,
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																	}, /*END NESTED OBJECT*/
+																	Description: "The dimensions for the metric.",
+																	Optional:    true,
+																	Computed:    true,
+																	PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																		generic.Multiset(),
+																		listplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
+																}, /*END ATTRIBUTE*/
+																// Property: MetricName
+																"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "The name of the metric.",
+																	Optional:    true,
+																	Computed:    true,
+																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																		stringplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
+																}, /*END ATTRIBUTE*/
+																// Property: Namespace
+																"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "The namespace of the metric.",
+																	Optional:    true,
+																	Computed:    true,
+																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																		stringplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Description: "The CloudWatch metric to return, including the metric name, namespace, and dimensions. ",
+															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																objectplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: Stat
+														"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The statistic to return. It can include any CloudWatch statistic or extended statistic.",
+															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: Unit
+														"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The unit to use for the returned data points.",
+															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "Information about the metric data to return.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+														objectplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: ReturnData
+												"return_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Description: "Indicates whether to return the timestamps and raw data values of this metric.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+														boolplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.Set{ /*START VALIDATORS*/
+											fwvalidators.NotNullSet(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+											setplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: CustomizedLoadMetricSpecification
+							"customized_load_metric_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: MetricDataQueries
+									"metric_data_queries": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Expression
+												"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The math expression to perform on the returned data, if this object is performing a math expression.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: Id
+												"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "A short name that identifies the object's results in the response.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: Label
+												"label": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "A human-readable label for this metric or expression. This is especially useful if this is a math expression, so that you know what the value represents.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: MetricStat
+												"metric_stat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Metric
+														"metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Dimensions
+																"dimensions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																	NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Name
+																			"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The name of the dimension.",
+																				Optional:    true,
+																				Computed:    true,
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																			// Property: Value
+																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The value of the dimension.",
+																				Optional:    true,
+																				Computed:    true,
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																	}, /*END NESTED OBJECT*/
+																	Description: "The dimensions for the metric.",
+																	Optional:    true,
+																	Computed:    true,
+																	PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																		generic.Multiset(),
+																		listplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
+																}, /*END ATTRIBUTE*/
+																// Property: MetricName
+																"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "The name of the metric.",
+																	Optional:    true,
+																	Computed:    true,
+																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																		stringplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
+																}, /*END ATTRIBUTE*/
+																// Property: Namespace
+																"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "The namespace of the metric.",
+																	Optional:    true,
+																	Computed:    true,
+																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																		stringplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Description: "The CloudWatch metric to return, including the metric name, namespace, and dimensions. ",
+															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																objectplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: Stat
+														"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The statistic to return. It can include any CloudWatch statistic or extended statistic.",
+															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: Unit
+														"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The unit to use for the returned data points.",
+															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "Information about the metric data to return.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+														objectplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: ReturnData
+												"return_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Description: "Indicates whether to return the timestamps and raw data values of this metric.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+														boolplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.Set{ /*START VALIDATORS*/
+											fwvalidators.NotNullSet(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+											setplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: CustomizedScalingMetricSpecification
+							"customized_scaling_metric_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: MetricDataQueries
+									"metric_data_queries": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Expression
+												"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The math expression to perform on the returned data, if this object is performing a math expression.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: Id
+												"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "A short name that identifies the object's results in the response.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: Label
+												"label": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "A human-readable label for this metric or expression. This is especially useful if this is a math expression, so that you know what the value represents.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: MetricStat
+												"metric_stat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Metric
+														"metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Dimensions
+																"dimensions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																	NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Name
+																			"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The name of the dimension.",
+																				Optional:    true,
+																				Computed:    true,
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																			// Property: Value
+																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The value of the dimension.",
+																				Optional:    true,
+																				Computed:    true,
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																	}, /*END NESTED OBJECT*/
+																	Description: "The dimensions for the metric.",
+																	Optional:    true,
+																	Computed:    true,
+																	PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																		generic.Multiset(),
+																		listplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
+																}, /*END ATTRIBUTE*/
+																// Property: MetricName
+																"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "The name of the metric.",
+																	Optional:    true,
+																	Computed:    true,
+																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																		stringplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
+																}, /*END ATTRIBUTE*/
+																// Property: Namespace
+																"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "The namespace of the metric.",
+																	Optional:    true,
+																	Computed:    true,
+																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																		stringplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Description: "The CloudWatch metric to return, including the metric name, namespace, and dimensions. ",
+															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																objectplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: Stat
+														"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The statistic to return. It can include any CloudWatch statistic or extended statistic.",
+															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: Unit
+														"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The unit to use for the returned data points.",
+															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "Information about the metric data to return.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+														objectplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: ReturnData
+												"return_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Description: "Indicates whether to return the timestamps and raw data values of this metric.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+														boolplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.Set{ /*START VALIDATORS*/
+											fwvalidators.NotNullSet(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+											setplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: PredefinedLoadMetricSpecification
+							"predefined_load_metric_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: PredefinedMetricType
+									"predefined_metric_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: ResourceLabel
+									"resource_label": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: PredefinedMetricPairSpecification
+							"predefined_metric_pair_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: PredefinedMetricType
+									"predefined_metric_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: ResourceLabel
+									"resource_label": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: PredefinedScalingMetricSpecification
+							"predefined_scaling_metric_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: PredefinedMetricType
+									"predefined_metric_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: ResourceLabel
+									"resource_label": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: TargetValue
+							"target_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.Float64{ /*START VALIDATORS*/
+									fwvalidators.NotNullFloat64(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+									float64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Set{ /*START VALIDATORS*/
+						fwvalidators.NotNullSet(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						setplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Mode
+				"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SchedulingBufferTime
+				"scheduling_buffer_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceId
 		// CloudFormation resource type schema:
 		//
@@ -783,29 +1755,41 @@ func scalingPolicyResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::ApplicationAutoScaling::ScalingPolicy").WithTerraformTypeName("awscc_applicationautoscaling_scaling_policy")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"adjustment_type":                   "AdjustmentType",
-		"arn":                               "Arn",
-		"cooldown":                          "Cooldown",
-		"customized_metric_specification":   "CustomizedMetricSpecification",
-		"dimensions":                        "Dimensions",
-		"disable_scale_in":                  "DisableScaleIn",
-		"expression":                        "Expression",
-		"id":                                "Id",
-		"label":                             "Label",
-		"metric":                            "Metric",
-		"metric_aggregation_type":           "MetricAggregationType",
-		"metric_interval_lower_bound":       "MetricIntervalLowerBound",
-		"metric_interval_upper_bound":       "MetricIntervalUpperBound",
-		"metric_name":                       "MetricName",
-		"metric_stat":                       "MetricStat",
-		"metrics":                           "Metrics",
-		"min_adjustment_magnitude":          "MinAdjustmentMagnitude",
-		"name":                              "Name",
-		"namespace":                         "Namespace",
-		"policy_name":                       "PolicyName",
-		"policy_type":                       "PolicyType",
-		"predefined_metric_specification":   "PredefinedMetricSpecification",
-		"predefined_metric_type":            "PredefinedMetricType",
+		"adjustment_type": "AdjustmentType",
+		"arn":             "Arn",
+		"cooldown":        "Cooldown",
+		"customized_capacity_metric_specification": "CustomizedCapacityMetricSpecification",
+		"customized_load_metric_specification":     "CustomizedLoadMetricSpecification",
+		"customized_metric_specification":          "CustomizedMetricSpecification",
+		"customized_scaling_metric_specification":  "CustomizedScalingMetricSpecification",
+		"dimensions":                           "Dimensions",
+		"disable_scale_in":                     "DisableScaleIn",
+		"expression":                           "Expression",
+		"id":                                   "Id",
+		"label":                                "Label",
+		"max_capacity_breach_behavior":         "MaxCapacityBreachBehavior",
+		"max_capacity_buffer":                  "MaxCapacityBuffer",
+		"metric":                               "Metric",
+		"metric_aggregation_type":              "MetricAggregationType",
+		"metric_data_queries":                  "MetricDataQueries",
+		"metric_interval_lower_bound":          "MetricIntervalLowerBound",
+		"metric_interval_upper_bound":          "MetricIntervalUpperBound",
+		"metric_name":                          "MetricName",
+		"metric_specifications":                "MetricSpecifications",
+		"metric_stat":                          "MetricStat",
+		"metrics":                              "Metrics",
+		"min_adjustment_magnitude":             "MinAdjustmentMagnitude",
+		"mode":                                 "Mode",
+		"name":                                 "Name",
+		"namespace":                            "Namespace",
+		"policy_name":                          "PolicyName",
+		"policy_type":                          "PolicyType",
+		"predefined_load_metric_specification": "PredefinedLoadMetricSpecification",
+		"predefined_metric_pair_specification": "PredefinedMetricPairSpecification",
+		"predefined_metric_specification":      "PredefinedMetricSpecification",
+		"predefined_metric_type":               "PredefinedMetricType",
+		"predefined_scaling_metric_specification": "PredefinedScalingMetricSpecification",
+		"predictive_scaling_policy_configuration": "PredictiveScalingPolicyConfiguration",
 		"resource_id":                       "ResourceId",
 		"resource_label":                    "ResourceLabel",
 		"return_data":                       "ReturnData",
@@ -814,6 +1798,7 @@ func scalingPolicyResource(ctx context.Context) (resource.Resource, error) {
 		"scale_out_cooldown":                "ScaleOutCooldown",
 		"scaling_adjustment":                "ScalingAdjustment",
 		"scaling_target_id":                 "ScalingTargetId",
+		"scheduling_buffer_time":            "SchedulingBufferTime",
 		"service_namespace":                 "ServiceNamespace",
 		"stat":                              "Stat",
 		"statistic":                         "Statistic",

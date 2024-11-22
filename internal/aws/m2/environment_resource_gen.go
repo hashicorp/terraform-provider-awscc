@@ -527,9 +527,9 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		"tags":                         "Tags",
 	})
 
-	opts = opts.WithCreateTimeoutInMinutes(60).WithDeleteTimeoutInMinutes(60)
+	opts = opts.WithCreateTimeoutInMinutes(120).WithDeleteTimeoutInMinutes(120)
 
-	opts = opts.WithUpdateTimeoutInMinutes(60)
+	opts = opts.WithUpdateTimeoutInMinutes(120)
 
 	v, err := generic.NewResource(ctx, opts...)
 

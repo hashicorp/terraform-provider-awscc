@@ -40,10 +40,12 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"response_headers_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -52,10 +54,12 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -65,20 +69,26 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "A response headers policy configuration.",
 		//	  "properties": {
 		//	    "Comment": {
+		//	      "description": "A comment to describe the response headers policy.\n The comment cannot be longer than 128 characters.",
 		//	      "type": "string"
 		//	    },
 		//	    "CorsConfig": {
 		//	      "additionalProperties": false,
+		//	      "description": "A configuration for a set of HTTP response headers that are used for cross-origin resource sharing (CORS).",
 		//	      "properties": {
 		//	        "AccessControlAllowCredentials": {
+		//	          "description": "A Boolean that CloudFront uses as the value for the ``Access-Control-Allow-Credentials`` HTTP response header.\n For more information about the ``Access-Control-Allow-Credentials`` HTTP response header, see [Access-Control-Allow-Credentials](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials) in the MDN Web Docs.",
 		//	          "type": "boolean"
 		//	        },
 		//	        "AccessControlAllowHeaders": {
 		//	          "additionalProperties": false,
+		//	          "description": "A list of HTTP header names that CloudFront includes as values for the ``Access-Control-Allow-Headers`` HTTP response header.\n For more information about the ``Access-Control-Allow-Headers`` HTTP response header, see [Access-Control-Allow-Headers](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers) in the MDN Web Docs.",
 		//	          "properties": {
 		//	            "Items": {
+		//	              "description": "The list of HTTP header names. You can specify ``*`` to allow all headers.",
 		//	              "insertionOrder": false,
 		//	              "items": {
 		//	                "type": "string"
@@ -93,8 +103,10 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 		//	        },
 		//	        "AccessControlAllowMethods": {
 		//	          "additionalProperties": false,
+		//	          "description": "A list of HTTP methods that CloudFront includes as values for the ``Access-Control-Allow-Methods`` HTTP response header.\n For more information about the ``Access-Control-Allow-Methods`` HTTP response header, see [Access-Control-Allow-Methods](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Methods) in the MDN Web Docs.",
 		//	          "properties": {
 		//	            "Items": {
+		//	              "description": "The list of HTTP methods. Valid values are:\n  +   ``GET`` \n  +   ``DELETE`` \n  +   ``HEAD`` \n  +   ``OPTIONS`` \n  +   ``PATCH`` \n  +   ``POST`` \n  +   ``PUT`` \n  +   ``ALL`` \n  \n  ``ALL`` is a special value that includes all of the listed HTTP methods.",
 		//	              "insertionOrder": false,
 		//	              "items": {
 		//	                "type": "string"
@@ -109,8 +121,10 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 		//	        },
 		//	        "AccessControlAllowOrigins": {
 		//	          "additionalProperties": false,
+		//	          "description": "A list of origins (domain names) that CloudFront can use as the value for the ``Access-Control-Allow-Origin`` HTTP response header.\n For more information about the ``Access-Control-Allow-Origin`` HTTP response header, see [Access-Control-Allow-Origin](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin) in the MDN Web Docs.",
 		//	          "properties": {
 		//	            "Items": {
+		//	              "description": "The list of origins (domain names). You can specify ``*`` to allow all origins.",
 		//	              "insertionOrder": false,
 		//	              "items": {
 		//	                "type": "string"
@@ -125,8 +139,10 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 		//	        },
 		//	        "AccessControlExposeHeaders": {
 		//	          "additionalProperties": false,
+		//	          "description": "A list of HTTP headers that CloudFront includes as values for the ``Access-Control-Expose-Headers`` HTTP response header.\n For more information about the ``Access-Control-Expose-Headers`` HTTP response header, see [Access-Control-Expose-Headers](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Expose-Headers) in the MDN Web Docs.",
 		//	          "properties": {
 		//	            "Items": {
+		//	              "description": "The list of HTTP headers. You can specify ``*`` to expose all headers.",
 		//	              "insertionOrder": false,
 		//	              "items": {
 		//	                "type": "string"
@@ -140,9 +156,11 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 		//	          "type": "object"
 		//	        },
 		//	        "AccessControlMaxAgeSec": {
+		//	          "description": "A number that CloudFront uses as the value for the ``Access-Control-Max-Age`` HTTP response header.\n For more information about the ``Access-Control-Max-Age`` HTTP response header, see [Access-Control-Max-Age](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Max-Age) in the MDN Web Docs.",
 		//	          "type": "integer"
 		//	        },
 		//	        "OriginOverride": {
+		//	          "description": "A Boolean that determines whether CloudFront overrides HTTP response headers received from the origin with the ones specified in this response headers policy.",
 		//	          "type": "boolean"
 		//	        }
 		//	      },
@@ -157,19 +175,25 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 		//	    },
 		//	    "CustomHeadersConfig": {
 		//	      "additionalProperties": false,
+		//	      "description": "A configuration for a set of custom HTTP response headers.",
 		//	      "properties": {
 		//	        "Items": {
+		//	          "description": "The list of HTTP response headers and their values.",
 		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "additionalProperties": false,
+		//	            "description": "An HTTP response header name and its value. CloudFront includes this header in HTTP responses that it sends for requests that match a cache behavior that's associated with this response headers policy.",
 		//	            "properties": {
 		//	              "Header": {
+		//	                "description": "The HTTP response header name.",
 		//	                "type": "string"
 		//	              },
 		//	              "Override": {
+		//	                "description": "A Boolean that determines whether CloudFront overrides a response header with the same name received from the origin with the header specified here.",
 		//	                "type": "boolean"
 		//	              },
 		//	              "Value": {
+		//	                "description": "The value for the HTTP response header.",
 		//	                "type": "string"
 		//	              }
 		//	            },
@@ -190,17 +214,22 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 		//	      "type": "object"
 		//	    },
 		//	    "Name": {
+		//	      "description": "A name to identify the response headers policy.\n The name must be unique for response headers policies in this AWS-account.",
 		//	      "type": "string"
 		//	    },
 		//	    "RemoveHeadersConfig": {
 		//	      "additionalProperties": false,
+		//	      "description": "A configuration for a set of HTTP headers to remove from the HTTP response.",
 		//	      "properties": {
 		//	        "Items": {
+		//	          "description": "The list of HTTP header names.",
 		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "additionalProperties": false,
+		//	            "description": "The name of an HTTP header that CloudFront removes from HTTP responses to requests that match the cache behavior that this response headers policy is attached to.",
 		//	            "properties": {
 		//	              "Header": {
+		//	                "description": "The HTTP header name.",
 		//	                "type": "string"
 		//	              }
 		//	            },
@@ -220,14 +249,18 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 		//	    },
 		//	    "SecurityHeadersConfig": {
 		//	      "additionalProperties": false,
+		//	      "description": "A configuration for a set of security-related HTTP response headers.",
 		//	      "properties": {
 		//	        "ContentSecurityPolicy": {
 		//	          "additionalProperties": false,
+		//	          "description": "The policy directives and their values that CloudFront includes as values for the ``Content-Security-Policy`` HTTP response header.\n For more information about the ``Content-Security-Policy`` HTTP response header, see [Content-Security-Policy](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy) in the MDN Web Docs.",
 		//	          "properties": {
 		//	            "ContentSecurityPolicy": {
+		//	              "description": "The policy directives and their values that CloudFront includes as values for the ``Content-Security-Policy`` HTTP response header.\n For more information about the ``Content-Security-Policy`` HTTP response header, see [Content-Security-Policy](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy) in the MDN Web Docs.",
 		//	              "type": "string"
 		//	            },
 		//	            "Override": {
+		//	              "description": "A Boolean that determines whether CloudFront overrides the ``Content-Security-Policy`` HTTP response header received from the origin with the one specified in this response headers policy.",
 		//	              "type": "boolean"
 		//	            }
 		//	          },
@@ -239,8 +272,10 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 		//	        },
 		//	        "ContentTypeOptions": {
 		//	          "additionalProperties": false,
+		//	          "description": "Determines whether CloudFront includes the ``X-Content-Type-Options`` HTTP response header with its value set to ``nosniff``.\n For more information about the ``X-Content-Type-Options`` HTTP response header, see [X-Content-Type-Options](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options) in the MDN Web Docs.",
 		//	          "properties": {
 		//	            "Override": {
+		//	              "description": "A Boolean that determines whether CloudFront overrides the ``X-Content-Type-Options`` HTTP response header received from the origin with the one specified in this response headers policy.",
 		//	              "type": "boolean"
 		//	            }
 		//	          },
@@ -251,12 +286,15 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 		//	        },
 		//	        "FrameOptions": {
 		//	          "additionalProperties": false,
+		//	          "description": "Determines whether CloudFront includes the ``X-Frame-Options`` HTTP response header and the header's value.\n For more information about the ``X-Frame-Options`` HTTP response header, see [X-Frame-Options](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options) in the MDN Web Docs.",
 		//	          "properties": {
 		//	            "FrameOption": {
+		//	              "description": "The value of the ``X-Frame-Options`` HTTP response header. Valid values are ``DENY`` and ``SAMEORIGIN``.\n For more information about these values, see [X-Frame-Options](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options) in the MDN Web Docs.",
 		//	              "pattern": "^(DENY|SAMEORIGIN)$",
 		//	              "type": "string"
 		//	            },
 		//	            "Override": {
+		//	              "description": "A Boolean that determines whether CloudFront overrides the ``X-Frame-Options`` HTTP response header received from the origin with the one specified in this response headers policy.",
 		//	              "type": "boolean"
 		//	            }
 		//	          },
@@ -268,11 +306,14 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 		//	        },
 		//	        "ReferrerPolicy": {
 		//	          "additionalProperties": false,
+		//	          "description": "Determines whether CloudFront includes the ``Referrer-Policy`` HTTP response header and the header's value.\n For more information about the ``Referrer-Policy`` HTTP response header, see [Referrer-Policy](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy) in the MDN Web Docs.",
 		//	          "properties": {
 		//	            "Override": {
+		//	              "description": "A Boolean that determines whether CloudFront overrides the ``Referrer-Policy`` HTTP response header received from the origin with the one specified in this response headers policy.",
 		//	              "type": "boolean"
 		//	            },
 		//	            "ReferrerPolicy": {
+		//	              "description": "Determines whether CloudFront includes the ``Referrer-Policy`` HTTP response header and the header's value.\n For more information about the ``Referrer-Policy`` HTTP response header, see [Referrer-Policy](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy) in the MDN Web Docs.",
 		//	              "pattern": "^(no-referrer|no-referrer-when-downgrade|origin|origin-when-cross-origin|same-origin|strict-origin|strict-origin-when-cross-origin|unsafe-url)$",
 		//	              "type": "string"
 		//	            }
@@ -285,17 +326,22 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 		//	        },
 		//	        "StrictTransportSecurity": {
 		//	          "additionalProperties": false,
+		//	          "description": "Determines whether CloudFront includes the ``Strict-Transport-Security`` HTTP response header and the header's value.\n For more information about the ``Strict-Transport-Security`` HTTP response header, see [Security headers](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/understanding-response-headers-policies.html#understanding-response-headers-policies-security) in the *Amazon CloudFront Developer Guide* and [Strict-Transport-Security](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security) in the MDN Web Docs.",
 		//	          "properties": {
 		//	            "AccessControlMaxAgeSec": {
+		//	              "description": "A number that CloudFront uses as the value for the ``max-age`` directive in the ``Strict-Transport-Security`` HTTP response header.",
 		//	              "type": "integer"
 		//	            },
 		//	            "IncludeSubdomains": {
+		//	              "description": "A Boolean that determines whether CloudFront includes the ``includeSubDomains`` directive in the ``Strict-Transport-Security`` HTTP response header.",
 		//	              "type": "boolean"
 		//	            },
 		//	            "Override": {
+		//	              "description": "A Boolean that determines whether CloudFront overrides the ``Strict-Transport-Security`` HTTP response header received from the origin with the one specified in this response headers policy.",
 		//	              "type": "boolean"
 		//	            },
 		//	            "Preload": {
+		//	              "description": "A Boolean that determines whether CloudFront includes the ``preload`` directive in the ``Strict-Transport-Security`` HTTP response header.",
 		//	              "type": "boolean"
 		//	            }
 		//	          },
@@ -307,17 +353,22 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 		//	        },
 		//	        "XSSProtection": {
 		//	          "additionalProperties": false,
+		//	          "description": "Determines whether CloudFront includes the ``X-XSS-Protection`` HTTP response header and the header's value.\n For more information about the ``X-XSS-Protection`` HTTP response header, see [X-XSS-Protection](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection) in the MDN Web Docs.",
 		//	          "properties": {
 		//	            "ModeBlock": {
+		//	              "description": "A Boolean that determines whether CloudFront includes the ``mode=block`` directive in the ``X-XSS-Protection`` header.\n For more information about this directive, see [X-XSS-Protection](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection) in the MDN Web Docs.",
 		//	              "type": "boolean"
 		//	            },
 		//	            "Override": {
+		//	              "description": "A Boolean that determines whether CloudFront overrides the ``X-XSS-Protection`` HTTP response header received from the origin with the one specified in this response headers policy.",
 		//	              "type": "boolean"
 		//	            },
 		//	            "Protection": {
+		//	              "description": "A Boolean that determines the value of the ``X-XSS-Protection`` HTTP response header. When this setting is ``true``, the value of the ``X-XSS-Protection`` header is ``1``. When this setting is ``false``, the value of the ``X-XSS-Protection`` header is ``0``.\n For more information about these settings, see [X-XSS-Protection](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection) in the MDN Web Docs.",
 		//	              "type": "boolean"
 		//	            },
 		//	            "ReportUri": {
+		//	              "description": "A reporting URI, which CloudFront uses as the value of the ``report`` directive in the ``X-XSS-Protection`` header.\n You cannot specify a ``ReportUri`` when ``ModeBlock`` is ``true``.\n For more information about using a reporting URL, see [X-XSS-Protection](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection) in the MDN Web Docs.",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -332,11 +383,14 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 		//	    },
 		//	    "ServerTimingHeadersConfig": {
 		//	      "additionalProperties": false,
+		//	      "description": "A configuration for enabling the ``Server-Timing`` header in HTTP responses sent from CloudFront.",
 		//	      "properties": {
 		//	        "Enabled": {
+		//	          "description": "A Boolean that determines whether CloudFront adds the ``Server-Timing`` header to HTTP responses that it sends in response to requests that match a cache behavior that's associated with this response headers policy.",
 		//	          "type": "boolean"
 		//	        },
 		//	        "SamplingRate": {
+		//	          "description": "A number 0?100 (inclusive) that specifies the percentage of responses that you want CloudFront to add the ``Server-Timing`` header to. When you set the sampling rate to 100, CloudFront adds the ``Server-Timing`` header to the HTTP response for every request that matches the cache behavior that this response headers policy is attached to. When you set it to 50, CloudFront adds the header to 50% of the responses for requests that match the cache behavior. You can set the sampling rate to any number 0?100 with up to four decimal places.",
 		//	          "maximum": 100,
 		//	          "minimum": 0,
 		//	          "type": "number"
@@ -357,8 +411,9 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Comment
 				"comment": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
+					Description: "A comment to describe the response headers policy.\n The comment cannot be longer than 128 characters.",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -368,8 +423,9 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: AccessControlAllowCredentials
 						"access_control_allow_credentials": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
+							Description: "A Boolean that CloudFront uses as the value for the ``Access-Control-Allow-Credentials`` HTTP response header.\n For more information about the ``Access-Control-Allow-Credentials`` HTTP response header, see [Access-Control-Allow-Credentials](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials) in the MDN Web Docs.",
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.Bool{ /*START VALIDATORS*/
 								fwvalidators.NotNullBool(),
 							}, /*END VALIDATORS*/
@@ -383,6 +439,7 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 								// Property: Items
 								"items": schema.ListAttribute{ /*START ATTRIBUTE*/
 									ElementType: types.StringType,
+									Description: "The list of HTTP header names. You can specify ``*`` to allow all headers.",
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.List{ /*START VALIDATORS*/
@@ -394,8 +451,9 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
+							Description: "A list of HTTP header names that CloudFront includes as values for the ``Access-Control-Allow-Headers`` HTTP response header.\n For more information about the ``Access-Control-Allow-Headers`` HTTP response header, see [Access-Control-Allow-Headers](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers) in the MDN Web Docs.",
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.Object{ /*START VALIDATORS*/
 								fwvalidators.NotNullObject(),
 							}, /*END VALIDATORS*/
@@ -409,6 +467,7 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 								// Property: Items
 								"items": schema.ListAttribute{ /*START ATTRIBUTE*/
 									ElementType: types.StringType,
+									Description: "The list of HTTP methods. Valid values are:\n  +   ``GET`` \n  +   ``DELETE`` \n  +   ``HEAD`` \n  +   ``OPTIONS`` \n  +   ``PATCH`` \n  +   ``POST`` \n  +   ``PUT`` \n  +   ``ALL`` \n  \n  ``ALL`` is a special value that includes all of the listed HTTP methods.",
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.List{ /*START VALIDATORS*/
@@ -420,8 +479,9 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
+							Description: "A list of HTTP methods that CloudFront includes as values for the ``Access-Control-Allow-Methods`` HTTP response header.\n For more information about the ``Access-Control-Allow-Methods`` HTTP response header, see [Access-Control-Allow-Methods](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Methods) in the MDN Web Docs.",
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.Object{ /*START VALIDATORS*/
 								fwvalidators.NotNullObject(),
 							}, /*END VALIDATORS*/
@@ -435,6 +495,7 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 								// Property: Items
 								"items": schema.ListAttribute{ /*START ATTRIBUTE*/
 									ElementType: types.StringType,
+									Description: "The list of origins (domain names). You can specify ``*`` to allow all origins.",
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.List{ /*START VALIDATORS*/
@@ -446,8 +507,9 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
+							Description: "A list of origins (domain names) that CloudFront can use as the value for the ``Access-Control-Allow-Origin`` HTTP response header.\n For more information about the ``Access-Control-Allow-Origin`` HTTP response header, see [Access-Control-Allow-Origin](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin) in the MDN Web Docs.",
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.Object{ /*START VALIDATORS*/
 								fwvalidators.NotNullObject(),
 							}, /*END VALIDATORS*/
@@ -461,6 +523,7 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 								// Property: Items
 								"items": schema.ListAttribute{ /*START ATTRIBUTE*/
 									ElementType: types.StringType,
+									Description: "The list of HTTP headers. You can specify ``*`` to expose all headers.",
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.List{ /*START VALIDATORS*/
@@ -472,24 +535,27 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
+							Description: "A list of HTTP headers that CloudFront includes as values for the ``Access-Control-Expose-Headers`` HTTP response header.\n For more information about the ``Access-Control-Expose-Headers`` HTTP response header, see [Access-Control-Expose-Headers](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Expose-Headers) in the MDN Web Docs.",
+							Optional:    true,
+							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: AccessControlMaxAgeSec
 						"access_control_max_age_sec": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
+							Description: "A number that CloudFront uses as the value for the ``Access-Control-Max-Age`` HTTP response header.\n For more information about the ``Access-Control-Max-Age`` HTTP response header, see [Access-Control-Max-Age](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Max-Age) in the MDN Web Docs.",
+							Optional:    true,
+							Computed:    true,
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 								int64planmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: OriginOverride
 						"origin_override": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
+							Description: "A Boolean that determines whether CloudFront overrides HTTP response headers received from the origin with the ones specified in this response headers policy.",
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.Bool{ /*START VALIDATORS*/
 								fwvalidators.NotNullBool(),
 							}, /*END VALIDATORS*/
@@ -498,8 +564,9 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Optional: true,
-					Computed: true,
+					Description: "A configuration for a set of HTTP response headers that are used for cross-origin resource sharing (CORS).",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -513,8 +580,9 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Header
 									"header": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Optional: true,
-										Computed: true,
+										Description: "The HTTP response header name.",
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
@@ -524,8 +592,9 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 									}, /*END ATTRIBUTE*/
 									// Property: Override
 									"override": schema.BoolAttribute{ /*START ATTRIBUTE*/
-										Optional: true,
-										Computed: true,
+										Description: "A Boolean that determines whether CloudFront overrides a response header with the same name received from the origin with the header specified here.",
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.Bool{ /*START VALIDATORS*/
 											fwvalidators.NotNullBool(),
 										}, /*END VALIDATORS*/
@@ -535,8 +604,9 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 									}, /*END ATTRIBUTE*/
 									// Property: Value
 									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Optional: true,
-										Computed: true,
+										Description: "The value for the HTTP response header.",
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
@@ -546,8 +616,9 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							Optional: true,
-							Computed: true,
+							Description: "The list of HTTP response headers and their values.",
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								fwvalidators.NotNullList(),
 							}, /*END VALIDATORS*/
@@ -557,15 +628,17 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Optional: true,
-					Computed: true,
+					Description: "A configuration for a set of custom HTTP response headers.",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Name
 				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Description: "A name to identify the response headers policy.\n The name must be unique for response headers policies in this AWS-account.",
+					Required:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: RemoveHeadersConfig
 				"remove_headers_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -576,8 +649,9 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Header
 									"header": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Optional: true,
-										Computed: true,
+										Description: "The HTTP header name.",
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
@@ -587,8 +661,9 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							Optional: true,
-							Computed: true,
+							Description: "The list of HTTP header names.",
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.Set{ /*START VALIDATORS*/
 								fwvalidators.NotNullSet(),
 							}, /*END VALIDATORS*/
@@ -597,8 +672,9 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Optional: true,
-					Computed: true,
+					Description: "A configuration for a set of HTTP headers to remove from the HTTP response.",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -611,8 +687,9 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: ContentSecurityPolicy
 								"content_security_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "The policy directives and their values that CloudFront includes as values for the ``Content-Security-Policy`` HTTP response header.\n For more information about the ``Content-Security-Policy`` HTTP response header, see [Content-Security-Policy](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy) in the MDN Web Docs.",
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -622,8 +699,9 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 								}, /*END ATTRIBUTE*/
 								// Property: Override
 								"override": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "A Boolean that determines whether CloudFront overrides the ``Content-Security-Policy`` HTTP response header received from the origin with the one specified in this response headers policy.",
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.Bool{ /*START VALIDATORS*/
 										fwvalidators.NotNullBool(),
 									}, /*END VALIDATORS*/
@@ -632,8 +710,9 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
+							Description: "The policy directives and their values that CloudFront includes as values for the ``Content-Security-Policy`` HTTP response header.\n For more information about the ``Content-Security-Policy`` HTTP response header, see [Content-Security-Policy](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy) in the MDN Web Docs.",
+							Optional:    true,
+							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
@@ -643,8 +722,9 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Override
 								"override": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "A Boolean that determines whether CloudFront overrides the ``X-Content-Type-Options`` HTTP response header received from the origin with the one specified in this response headers policy.",
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.Bool{ /*START VALIDATORS*/
 										fwvalidators.NotNullBool(),
 									}, /*END VALIDATORS*/
@@ -653,8 +733,9 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
+							Description: "Determines whether CloudFront includes the ``X-Content-Type-Options`` HTTP response header with its value set to ``nosniff``.\n For more information about the ``X-Content-Type-Options`` HTTP response header, see [X-Content-Type-Options](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options) in the MDN Web Docs.",
+							Optional:    true,
+							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
@@ -664,8 +745,9 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: FrameOption
 								"frame_option": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "The value of the ``X-Frame-Options`` HTTP response header. Valid values are ``DENY`` and ``SAMEORIGIN``.\n For more information about these values, see [X-Frame-Options](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options) in the MDN Web Docs.",
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.RegexMatches(regexp.MustCompile("^(DENY|SAMEORIGIN)$"), ""),
 										fwvalidators.NotNullString(),
@@ -676,8 +758,9 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 								}, /*END ATTRIBUTE*/
 								// Property: Override
 								"override": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "A Boolean that determines whether CloudFront overrides the ``X-Frame-Options`` HTTP response header received from the origin with the one specified in this response headers policy.",
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.Bool{ /*START VALIDATORS*/
 										fwvalidators.NotNullBool(),
 									}, /*END VALIDATORS*/
@@ -686,8 +769,9 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
+							Description: "Determines whether CloudFront includes the ``X-Frame-Options`` HTTP response header and the header's value.\n For more information about the ``X-Frame-Options`` HTTP response header, see [X-Frame-Options](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options) in the MDN Web Docs.",
+							Optional:    true,
+							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
@@ -697,8 +781,9 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Override
 								"override": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "A Boolean that determines whether CloudFront overrides the ``Referrer-Policy`` HTTP response header received from the origin with the one specified in this response headers policy.",
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.Bool{ /*START VALIDATORS*/
 										fwvalidators.NotNullBool(),
 									}, /*END VALIDATORS*/
@@ -708,8 +793,9 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 								}, /*END ATTRIBUTE*/
 								// Property: ReferrerPolicy
 								"referrer_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "Determines whether CloudFront includes the ``Referrer-Policy`` HTTP response header and the header's value.\n For more information about the ``Referrer-Policy`` HTTP response header, see [Referrer-Policy](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy) in the MDN Web Docs.",
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.RegexMatches(regexp.MustCompile("^(no-referrer|no-referrer-when-downgrade|origin|origin-when-cross-origin|same-origin|strict-origin|strict-origin-when-cross-origin|unsafe-url)$"), ""),
 										fwvalidators.NotNullString(),
@@ -719,8 +805,9 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
+							Description: "Determines whether CloudFront includes the ``Referrer-Policy`` HTTP response header and the header's value.\n For more information about the ``Referrer-Policy`` HTTP response header, see [Referrer-Policy](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy) in the MDN Web Docs.",
+							Optional:    true,
+							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
@@ -730,8 +817,9 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: AccessControlMaxAgeSec
 								"access_control_max_age_sec": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "A number that CloudFront uses as the value for the ``max-age`` directive in the ``Strict-Transport-Security`` HTTP response header.",
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.Int64{ /*START VALIDATORS*/
 										fwvalidators.NotNullInt64(),
 									}, /*END VALIDATORS*/
@@ -741,16 +829,18 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 								}, /*END ATTRIBUTE*/
 								// Property: IncludeSubdomains
 								"include_subdomains": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "A Boolean that determines whether CloudFront includes the ``includeSubDomains`` directive in the ``Strict-Transport-Security`` HTTP response header.",
+									Optional:    true,
+									Computed:    true,
 									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 										boolplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Override
 								"override": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "A Boolean that determines whether CloudFront overrides the ``Strict-Transport-Security`` HTTP response header received from the origin with the one specified in this response headers policy.",
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.Bool{ /*START VALIDATORS*/
 										fwvalidators.NotNullBool(),
 									}, /*END VALIDATORS*/
@@ -760,15 +850,17 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 								}, /*END ATTRIBUTE*/
 								// Property: Preload
 								"preload": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "A Boolean that determines whether CloudFront includes the ``preload`` directive in the ``Strict-Transport-Security`` HTTP response header.",
+									Optional:    true,
+									Computed:    true,
 									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 										boolplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
+							Description: "Determines whether CloudFront includes the ``Strict-Transport-Security`` HTTP response header and the header's value.\n For more information about the ``Strict-Transport-Security`` HTTP response header, see [Security headers](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/understanding-response-headers-policies.html#understanding-response-headers-policies-security) in the *Amazon CloudFront Developer Guide* and [Strict-Transport-Security](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security) in the MDN Web Docs.",
+							Optional:    true,
+							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
@@ -778,16 +870,18 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: ModeBlock
 								"mode_block": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "A Boolean that determines whether CloudFront includes the ``mode=block`` directive in the ``X-XSS-Protection`` header.\n For more information about this directive, see [X-XSS-Protection](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection) in the MDN Web Docs.",
+									Optional:    true,
+									Computed:    true,
 									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 										boolplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Override
 								"override": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "A Boolean that determines whether CloudFront overrides the ``X-XSS-Protection`` HTTP response header received from the origin with the one specified in this response headers policy.",
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.Bool{ /*START VALIDATORS*/
 										fwvalidators.NotNullBool(),
 									}, /*END VALIDATORS*/
@@ -797,8 +891,9 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 								}, /*END ATTRIBUTE*/
 								// Property: Protection
 								"protection": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "A Boolean that determines the value of the ``X-XSS-Protection`` HTTP response header. When this setting is ``true``, the value of the ``X-XSS-Protection`` header is ``1``. When this setting is ``false``, the value of the ``X-XSS-Protection`` header is ``0``.\n For more information about these settings, see [X-XSS-Protection](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection) in the MDN Web Docs.",
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.Bool{ /*START VALIDATORS*/
 										fwvalidators.NotNullBool(),
 									}, /*END VALIDATORS*/
@@ -808,22 +903,25 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 								}, /*END ATTRIBUTE*/
 								// Property: ReportUri
 								"report_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "A reporting URI, which CloudFront uses as the value of the ``report`` directive in the ``X-XSS-Protection`` header.\n You cannot specify a ``ReportUri`` when ``ModeBlock`` is ``true``.\n For more information about using a reporting URL, see [X-XSS-Protection](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection) in the MDN Web Docs.",
+									Optional:    true,
+									Computed:    true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
+							Description: "Determines whether CloudFront includes the ``X-XSS-Protection`` HTTP response header and the header's value.\n For more information about the ``X-XSS-Protection`` HTTP response header, see [X-XSS-Protection](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection) in the MDN Web Docs.",
+							Optional:    true,
+							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Optional: true,
-					Computed: true,
+					Description: "A configuration for a set of security-related HTTP response headers.",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -833,8 +931,9 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Enabled
 						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
+							Description: "A Boolean that determines whether CloudFront adds the ``Server-Timing`` header to HTTP responses that it sends in response to requests that match a cache behavior that's associated with this response headers policy.",
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.Bool{ /*START VALIDATORS*/
 								fwvalidators.NotNullBool(),
 							}, /*END VALIDATORS*/
@@ -844,8 +943,9 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 						}, /*END ATTRIBUTE*/
 						// Property: SamplingRate
 						"sampling_rate": schema.Float64Attribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
+							Description: "A number 0?100 (inclusive) that specifies the percentage of responses that you want CloudFront to add the ``Server-Timing`` header to. When you set the sampling rate to 100, CloudFront adds the ``Server-Timing`` header to the HTTP response for every request that matches the cache behavior that this response headers policy is attached to. When you set it to 50, CloudFront adds the header to 50% of the responses for requests that match the cache behavior. You can set the sampling rate to any number 0?100 with up to four decimal places.",
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.Float64{ /*START VALIDATORS*/
 								float64validator.Between(0.000000, 100.000000),
 							}, /*END VALIDATORS*/
@@ -854,14 +954,16 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Optional: true,
-					Computed: true,
+					Description: "A configuration for enabling the ``Server-Timing`` header in HTTP responses sent from CloudFront.",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Required: true,
+			Description: "A response headers policy configuration.",
+			Required:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -875,7 +977,7 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 	}
 
 	schema := schema.Schema{
-		Description: "Resource Type definition for AWS::CloudFront::ResponseHeadersPolicy",
+		Description: "A response headers policy.\n A response headers policy contains information about a set of HTTP response headers.\n After you create a response headers policy, you can use its ID to attach it to one or more cache behaviors in a CloudFront distribution. When it's attached to a cache behavior, the response headers policy affects the HTTP headers that CloudFront includes in HTTP responses to requests that match the cache behavior. CloudFront adds or removes response headers according to the configuration of the response headers policy.\n For more information, see [Adding or removing HTTP headers in CloudFront responses](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/modifying-response-headers.html) in the *Amazon CloudFront Developer Guide*.",
 		Version:     1,
 		Attributes:  attributes,
 	}

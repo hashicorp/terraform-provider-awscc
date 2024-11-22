@@ -3175,6 +3175,29 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: SNSNotificationArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Application Insights sends notifications to this SNS topic whenever there is a problem update in the associated application.",
+		//	  "maxLength": 300,
+		//	  "minLength": 20,
+		//	  "pattern": "^arn:aws(-[\\w]+)*:[\\w\\d-]+:([\\w\\d-]*)?:[\\w\\d_-]*([:/].+)*$",
+		//	  "type": "string"
+		//	}
+		"sns_notification_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Application Insights sends notifications to this SNS topic whenever there is a problem update in the associated application.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(20, 300),
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:[\\w\\d-]+:([\\w\\d-]*)?:[\\w\\d_-]*([:/].+)*$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// SNSNotificationArn is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -3322,6 +3345,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"resource_list":                             "ResourceList",
 		"sapsid":                                    "SAPSID",
 		"severity":                                  "Severity",
+		"sns_notification_arn":                      "SNSNotificationArn",
 		"sql_secret_name":                           "SQLSecretName",
 		"sql_server_prometheus_exporter":            "SQLServerPrometheusExporter",
 		"sub_component_configuration_details":       "SubComponentConfigurationDetails",
@@ -3339,6 +3363,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/CustomComponents",
 		"/properties/GroupingType",
 		"/properties/OpsItemSNSTopicArn",
+		"/properties/SNSNotificationArn",
 		"/properties/AttachMissingPermission",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(600).WithDeleteTimeoutInMinutes(0)

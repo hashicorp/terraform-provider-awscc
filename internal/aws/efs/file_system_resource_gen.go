@@ -7,6 +7,7 @@ package efs
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
@@ -414,6 +415,7 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 		//	          },
 		//	          "FileSystemId": {
 		//	            "description": "The ID of the destination Amazon EFS file system.",
+		//	            "pattern": "^(arn:aws[-a-z]*:elasticfilesystem:[0-9a-z-:]+:file-system/fs-[0-9a-f]{8,40}|fs-[0-9a-f]{8,40})$",
 		//	            "type": "string"
 		//	          },
 		//	          "KmsKeyId": {
@@ -422,6 +424,18 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 		//	          },
 		//	          "Region": {
 		//	            "description": "The AWS-Region in which the destination file system is located.\n  For One Zone file systems, the replication configuration must specify the AWS-Region in which the destination file system is located.",
+		//	            "type": "string"
+		//	          },
+		//	          "RoleArn": {
+		//	            "description": "",
+		//	            "type": "string"
+		//	          },
+		//	          "Status": {
+		//	            "description": "",
+		//	            "type": "string"
+		//	          },
+		//	          "StatusMessage": {
+		//	            "description": "",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -455,6 +469,9 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 								Description: "The ID of the destination Amazon EFS file system.",
 								Optional:    true,
 								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[-a-z]*:elasticfilesystem:[0-9a-z-:]+:file-system/fs-[0-9a-f]{8,40}|fs-[0-9a-f]{8,40})$"), ""),
+								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
@@ -471,6 +488,33 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Region
 							"region": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The AWS-Region in which the destination file system is located.\n  For One Zone file systems, the replication configuration must specify the AWS-Region in which the destination file system is located.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: RoleArn
+							"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Status
+							"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: StatusMessage
+							"status_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -553,7 +597,9 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 		"region":                              "Region",
 		"replication_configuration":           "ReplicationConfiguration",
 		"replication_overwrite_protection":    "ReplicationOverwriteProtection",
+		"role_arn":                            "RoleArn",
 		"status":                              "Status",
+		"status_message":                      "StatusMessage",
 		"throughput_mode":                     "ThroughputMode",
 		"transition_to_archive":               "TransitionToArchive",
 		"transition_to_ia":                    "TransitionToIA",

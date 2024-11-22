@@ -235,7 +235,8 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "enum": [
 		//	                      "intel",
 		//	                      "amd",
-		//	                      "amazon-web-services"
+		//	                      "amazon-web-services",
+		//	                      "apple"
 		//	                    ],
 		//	                    "type": "string"
 		//	                  },
@@ -685,6 +686,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 														"intel",
 														"amd",
 														"amazon-web-services",
+														"apple",
 													),
 												),
 											}, /*END VALIDATORS*/

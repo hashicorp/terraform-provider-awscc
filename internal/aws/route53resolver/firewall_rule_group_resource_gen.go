@@ -125,6 +125,23 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	        ],
 		//	        "type": "string"
 		//	      },
+		//	      "ConfidenceThreshold": {
+		//	        "description": "FirewallDomainRedirectionAction",
+		//	        "enum": [
+		//	          "LOW",
+		//	          "MEDIUM",
+		//	          "HIGH"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "DnsThreatProtection": {
+		//	        "description": "FirewallDomainRedirectionAction",
+		//	        "enum": [
+		//	          "DGA",
+		//	          "DNS_TUNNELING"
+		//	        ],
+		//	        "type": "string"
+		//	      },
 		//	      "FirewallDomainListId": {
 		//	        "description": "ResourceId",
 		//	        "maxLength": 64,
@@ -139,6 +156,12 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	        ],
 		//	        "type": "string"
 		//	      },
+		//	      "FirewallThreatProtectionId": {
+		//	        "description": "ResourceId",
+		//	        "maxLength": 64,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
 		//	      "Priority": {
 		//	        "description": "Rule Priority",
 		//	        "type": "integer"
@@ -151,7 +174,6 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "FirewallDomainListId",
 		//	      "Priority",
 		//	      "Action"
 		//	    ],
@@ -234,6 +256,37 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
+					// Property: ConfidenceThreshold
+					"confidence_threshold": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "FirewallDomainRedirectionAction",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"LOW",
+								"MEDIUM",
+								"HIGH",
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: DnsThreatProtection
+					"dns_threat_protection": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "FirewallDomainRedirectionAction",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"DGA",
+								"DNS_TUNNELING",
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: FirewallDomainListId
 					"firewall_domain_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "ResourceId",
@@ -241,7 +294,6 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 64),
-							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -257,6 +309,18 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 								"INSPECT_REDIRECTION_DOMAIN",
 								"TRUST_REDIRECTION_DOMAIN",
 							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: FirewallThreatProtectionId
+					"firewall_threat_protection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "ResourceId",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 64),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -530,12 +594,15 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 		"block_override_domain":              "BlockOverrideDomain",
 		"block_override_ttl":                 "BlockOverrideTtl",
 		"block_response":                     "BlockResponse",
+		"confidence_threshold":               "ConfidenceThreshold",
 		"creation_time":                      "CreationTime",
 		"creator_request_id":                 "CreatorRequestId",
+		"dns_threat_protection":              "DnsThreatProtection",
 		"firewall_domain_list_id":            "FirewallDomainListId",
 		"firewall_domain_redirection_action": "FirewallDomainRedirectionAction",
 		"firewall_rule_group_id":             "Id",
 		"firewall_rules":                     "FirewallRules",
+		"firewall_threat_protection_id":      "FirewallThreatProtectionId",
 		"key":                                "Key",
 		"modification_time":                  "ModificationTime",
 		"name":                               "Name",

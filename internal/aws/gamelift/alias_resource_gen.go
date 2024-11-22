@@ -100,7 +100,7 @@ func aliasResource(ctx context.Context) (resource.Resource, error) {
 		//	  "properties": {
 		//	    "FleetId": {
 		//	      "description": "A unique identifier for a fleet that the alias points to. If you specify SIMPLE for the Type property, you must specify this property.",
-		//	      "pattern": "^fleet-\\S+",
+		//	      "pattern": "^[a-z]*fleet-[a-zA-Z0-9\\-]+",
 		//	      "type": "string"
 		//	    },
 		//	    "Message": {
@@ -129,7 +129,7 @@ func aliasResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.RegexMatches(regexp.MustCompile("^fleet-\\S+"), ""),
+						stringvalidator.RegexMatches(regexp.MustCompile("^[a-z]*fleet-[a-zA-Z0-9\\-]+"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),

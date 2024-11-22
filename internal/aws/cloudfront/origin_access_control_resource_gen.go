@@ -31,10 +31,12 @@ func originAccessControlResource(ctx context.Context) (resource.Resource, error)
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"origin_access_control_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -44,22 +46,28 @@ func originAccessControlResource(ctx context.Context) (resource.Resource, error)
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "The origin access control.",
 		//	  "properties": {
 		//	    "Description": {
+		//	      "description": "A description of the origin access control.",
 		//	      "type": "string"
 		//	    },
 		//	    "Name": {
+		//	      "description": "A name to identify the origin access control. You can specify up to 64 characters.",
 		//	      "type": "string"
 		//	    },
 		//	    "OriginAccessControlOriginType": {
+		//	      "description": "The type of origin that this origin access control is for.",
 		//	      "pattern": "^(s3|mediastore|lambda|mediapackagev2)$",
 		//	      "type": "string"
 		//	    },
 		//	    "SigningBehavior": {
+		//	      "description": "Specifies which requests CloudFront signs (adds authentication information to). Specify ``always`` for the most common use case. For more information, see [origin access control advanced settings](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html#oac-advanced-settings) in the *Amazon CloudFront Developer Guide*.\n This field can have one of the following values:\n  +   ``always`` ? CloudFront signs all origin requests, overwriting the ``Authorization`` header from the viewer request if one exists.\n  +   ``never`` ? CloudFront doesn't sign any origin requests. This value turns off origin access control for all origins in all distributions that use this origin access control.\n  +   ``no-override`` ? If the viewer request doesn't contain the ``Authorization`` header, then CloudFront signs the origin request. If the viewer request contains the ``Authorization`` header, then CloudFront doesn't sign the origin request and instead passes along the ``Authorization`` header from the viewer request. *WARNING: To pass along the Authorization header from the viewer request, you must add the Authorization header to a cache policy for all cache behaviors that use origins associated with this origin access control.*",
 		//	      "pattern": "^(never|no-override|always)$",
 		//	      "type": "string"
 		//	    },
 		//	    "SigningProtocol": {
+		//	      "description": "The signing protocol of the origin access control, which determines how CloudFront signs (authenticates) requests. The only valid value is ``sigv4``.",
 		//	      "pattern": "^(sigv4)$",
 		//	      "type": "string"
 		//	    }
@@ -76,39 +84,45 @@ func originAccessControlResource(ctx context.Context) (resource.Resource, error)
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Description
 				"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
+					Description: "A description of the origin access control.",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Name
 				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Description: "A name to identify the origin access control. You can specify up to 64 characters.",
+					Required:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: OriginAccessControlOriginType
 				"origin_access_control_origin_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Description: "The type of origin that this origin access control is for.",
+					Required:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.RegexMatches(regexp.MustCompile("^(s3|mediastore|lambda|mediapackagev2)$"), ""),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
 				// Property: SigningBehavior
 				"signing_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Description: "Specifies which requests CloudFront signs (adds authentication information to). Specify ``always`` for the most common use case. For more information, see [origin access control advanced settings](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html#oac-advanced-settings) in the *Amazon CloudFront Developer Guide*.\n This field can have one of the following values:\n  +   ``always`` ? CloudFront signs all origin requests, overwriting the ``Authorization`` header from the viewer request if one exists.\n  +   ``never`` ? CloudFront doesn't sign any origin requests. This value turns off origin access control for all origins in all distributions that use this origin access control.\n  +   ``no-override`` ? If the viewer request doesn't contain the ``Authorization`` header, then CloudFront signs the origin request. If the viewer request contains the ``Authorization`` header, then CloudFront doesn't sign the origin request and instead passes along the ``Authorization`` header from the viewer request. *WARNING: To pass along the Authorization header from the viewer request, you must add the Authorization header to a cache policy for all cache behaviors that use origins associated with this origin access control.*",
+					Required:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.RegexMatches(regexp.MustCompile("^(never|no-override|always)$"), ""),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
 				// Property: SigningProtocol
 				"signing_protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Description: "The signing protocol of the origin access control, which determines how CloudFront signs (authenticates) requests. The only valid value is ``sigv4``.",
+					Required:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.RegexMatches(regexp.MustCompile("^(sigv4)$"), ""),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Required: true,
+			Description: "The origin access control.",
+			Required:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -122,7 +136,7 @@ func originAccessControlResource(ctx context.Context) (resource.Resource, error)
 	}
 
 	schema := schema.Schema{
-		Description: "Resource Type definition for AWS::CloudFront::OriginAccessControl",
+		Description: "Creates a new origin access control in CloudFront. After you create an origin access control, you can add it to an origin in a CloudFront distribution so that CloudFront sends authenticated (signed) requests to the origin.\n This makes it possible to block public access to the origin, allowing viewers (users) to access the origin's content only through CloudFront.\n For more information about using a CloudFront origin access control, see [Restricting access to an origin](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-origin.html) in the *Amazon CloudFront Developer Guide*.",
 		Version:     1,
 		Attributes:  attributes,
 	}

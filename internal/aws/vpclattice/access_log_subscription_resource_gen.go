@@ -111,22 +111,45 @@ func accessLogSubscriptionResource(ctx context.Context) (resource.Resource, erro
 		//
 		//	{
 		//	  "maxLength": 2048,
-		//	  "minLength": 20,
-		//	  "pattern": "^((((sn)|(svc))-[0-9a-z]{17})|(arn(:[a-z0-9]+([.-][a-z0-9]+)*){2}(:([a-z0-9]+([.-][a-z0-9]+)*)?){2}:((servicenetwork/sn)|(service/svc))-[0-9a-z]{17}))$",
+		//	  "minLength": 17,
+		//	  "pattern": "^((((sn)|(svc)|(rcfg))-[0-9a-z]{17})|(arn(:[a-z0-9]+([.-][a-z0-9]+)*){2}(:([a-z0-9]+([.-][a-z0-9]+)*)?){2}:((servicenetwork/sn)|(resourceconfiguration/rcfg)|(service/svc))-[0-9a-z]{17}))$",
 		//	  "type": "string"
 		//	}
 		"resource_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(20, 2048),
-				stringvalidator.RegexMatches(regexp.MustCompile("^((((sn)|(svc))-[0-9a-z]{17})|(arn(:[a-z0-9]+([.-][a-z0-9]+)*){2}(:([a-z0-9]+([.-][a-z0-9]+)*)?){2}:((servicenetwork/sn)|(service/svc))-[0-9a-z]{17}))$"), ""),
+				stringvalidator.LengthBetween(17, 2048),
+				stringvalidator.RegexMatches(regexp.MustCompile("^((((sn)|(svc)|(rcfg))-[0-9a-z]{17})|(arn(:[a-z0-9]+([.-][a-z0-9]+)*){2}(:([a-z0-9]+([.-][a-z0-9]+)*)?){2}:((servicenetwork/sn)|(resourceconfiguration/rcfg)|(service/svc))-[0-9a-z]{17}))$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// ResourceIdentifier is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: ServiceNetworkLogType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "SERVICE",
+		//	    "RESOURCE"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"service_network_log_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"SERVICE",
+					"RESOURCE",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
@@ -225,6 +248,7 @@ func accessLogSubscriptionResource(ctx context.Context) (resource.Resource, erro
 		"resource_arn":               "ResourceArn",
 		"resource_id":                "ResourceId",
 		"resource_identifier":        "ResourceIdentifier",
+		"service_network_log_type":   "ServiceNetworkLogType",
 		"tags":                       "Tags",
 		"value":                      "Value",
 	})
