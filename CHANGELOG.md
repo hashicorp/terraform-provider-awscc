@@ -1,4 +1,5 @@
-## 1.21.0 (Unreleased)
+## 1.22.0 (Unreleased)
+## 1.21.0 (November 22, 2024)
 
 * **New Data Source:** `awscc_apigateway_base_path_mapping_v2`
 * **New Data Source:** `awscc_apigateway_domain_name_access_association`
