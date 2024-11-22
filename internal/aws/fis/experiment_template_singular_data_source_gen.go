@@ -174,6 +174,127 @@ func experimentTemplateDataSource(ctx context.Context) (datasource.DataSource, e
 			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: ExperimentReportConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "DataSources": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "CloudWatchDashboards": {
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "DashboardIdentifier": {
+		//	                "maxLength": 512,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "DashboardIdentifier"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "Outputs": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "ExperimentReportS3Configuration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "BucketName": {
+		//	              "maxLength": 63,
+		//	              "minLength": 3,
+		//	              "type": "string"
+		//	            },
+		//	            "Prefix": {
+		//	              "maxLength": 1024,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "BucketName"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ExperimentReportS3Configuration"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "PostExperimentDuration": {
+		//	      "type": "string"
+		//	    },
+		//	    "PreExperimentDuration": {
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Outputs",
+		//	    "DataSources"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"experiment_report_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DataSources
+				"data_sources": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CloudWatchDashboards
+						"cloudwatch_dashboards": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: DashboardIdentifier
+									"dashboard_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Outputs
+				"outputs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ExperimentReportS3Configuration
+						"experiment_report_s3_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: BucketName
+								"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Prefix
+								"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: PostExperimentDuration
+				"post_experiment_duration": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: PreExperimentDuration
+				"pre_experiment_duration": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -496,35 +617,43 @@ func experimentTemplateDataSource(ctx context.Context) (datasource.DataSource, e
 	opts = opts.WithCloudFormationTypeName("AWS::FIS::ExperimentTemplate").WithTerraformTypeName("awscc_fis_experiment_template")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"account_targeting":             "AccountTargeting",
-		"action_id":                     "ActionId",
-		"actions":                       "Actions",
-		"bucket_name":                   "BucketName",
-		"cloudwatch_logs_configuration": "CloudWatchLogsConfiguration",
-		"description":                   "Description",
-		"empty_target_resolution_mode":  "EmptyTargetResolutionMode",
-		"experiment_options":            "ExperimentOptions",
-		"experiment_template_id":        "Id",
-		"filters":                       "Filters",
-		"log_configuration":             "LogConfiguration",
-		"log_group_arn":                 "LogGroupArn",
-		"log_schema_version":            "LogSchemaVersion",
-		"parameters":                    "Parameters",
-		"path":                          "Path",
-		"prefix":                        "Prefix",
-		"resource_arns":                 "ResourceArns",
-		"resource_tags":                 "ResourceTags",
-		"resource_type":                 "ResourceType",
-		"role_arn":                      "RoleArn",
-		"s3_configuration":              "S3Configuration",
-		"selection_mode":                "SelectionMode",
-		"source":                        "Source",
-		"start_after":                   "StartAfter",
-		"stop_conditions":               "StopConditions",
-		"tags":                          "Tags",
-		"targets":                       "Targets",
-		"value":                         "Value",
-		"values":                        "Values",
+		"account_targeting":                  "AccountTargeting",
+		"action_id":                          "ActionId",
+		"actions":                            "Actions",
+		"bucket_name":                        "BucketName",
+		"cloudwatch_dashboards":              "CloudWatchDashboards",
+		"cloudwatch_logs_configuration":      "CloudWatchLogsConfiguration",
+		"dashboard_identifier":               "DashboardIdentifier",
+		"data_sources":                       "DataSources",
+		"description":                        "Description",
+		"empty_target_resolution_mode":       "EmptyTargetResolutionMode",
+		"experiment_options":                 "ExperimentOptions",
+		"experiment_report_configuration":    "ExperimentReportConfiguration",
+		"experiment_report_s3_configuration": "ExperimentReportS3Configuration",
+		"experiment_template_id":             "Id",
+		"filters":                            "Filters",
+		"log_configuration":                  "LogConfiguration",
+		"log_group_arn":                      "LogGroupArn",
+		"log_schema_version":                 "LogSchemaVersion",
+		"outputs":                            "Outputs",
+		"parameters":                         "Parameters",
+		"path":                               "Path",
+		"post_experiment_duration":           "PostExperimentDuration",
+		"pre_experiment_duration":            "PreExperimentDuration",
+		"prefix":                             "Prefix",
+		"resource_arns":                      "ResourceArns",
+		"resource_tags":                      "ResourceTags",
+		"resource_type":                      "ResourceType",
+		"role_arn":                           "RoleArn",
+		"s3_configuration":                   "S3Configuration",
+		"selection_mode":                     "SelectionMode",
+		"source":                             "Source",
+		"start_after":                        "StartAfter",
+		"stop_conditions":                    "StopConditions",
+		"tags":                               "Tags",
+		"targets":                            "Targets",
+		"value":                              "Value",
+		"values":                             "Values",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

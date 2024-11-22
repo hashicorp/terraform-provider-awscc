@@ -175,6 +175,214 @@ func hoursOfOperationDataSource(ctx context.Context) (datasource.DataSource, err
 			Description: "The Amazon Resource Name (ARN) for the hours of operation.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: HoursOfOperationOverrides
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "One or more hours of operation overrides assigned to an hour of operation.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Overrides attached to the hours of operation.",
+		//	    "properties": {
+		//	      "EffectiveFrom": {
+		//	        "description": "The date from which the hours of operation override would be effective.",
+		//	        "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+		//	        "type": "string"
+		//	      },
+		//	      "EffectiveTill": {
+		//	        "description": "The date till which the hours of operation override would be effective.",
+		//	        "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+		//	        "type": "string"
+		//	      },
+		//	      "HoursOfOperationOverrideId": {
+		//	        "description": "The Resource Identifier for the hours of operation override.",
+		//	        "pattern": "^[-a-zA-Z0-9]*$",
+		//	        "type": "string"
+		//	      },
+		//	      "OverrideConfig": {
+		//	        "description": "Configuration information for the hours of operation override: day, start time, and end time.",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "description": "Contains information about the hours of operation override.",
+		//	          "properties": {
+		//	            "Day": {
+		//	              "description": "The day that the hours of operation override applies to.",
+		//	              "enum": [
+		//	                "SUNDAY",
+		//	                "MONDAY",
+		//	                "TUESDAY",
+		//	                "WEDNESDAY",
+		//	                "THURSDAY",
+		//	                "FRIDAY",
+		//	                "SATURDAY"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "EndTime": {
+		//	              "additionalProperties": false,
+		//	              "description": "The new end time that your contact center closes for the overriden days.",
+		//	              "properties": {
+		//	                "Hours": {
+		//	                  "description": "The hours.",
+		//	                  "maximum": 23,
+		//	                  "minimum": 0,
+		//	                  "type": "integer"
+		//	                },
+		//	                "Minutes": {
+		//	                  "description": "The minutes.",
+		//	                  "maximum": 59,
+		//	                  "minimum": 0,
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Hours",
+		//	                "Minutes"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "StartTime": {
+		//	              "additionalProperties": false,
+		//	              "description": "The new start time that your contact center opens for the overriden days.",
+		//	              "properties": {
+		//	                "Hours": {
+		//	                  "description": "The hours.",
+		//	                  "maximum": 23,
+		//	                  "minimum": 0,
+		//	                  "type": "integer"
+		//	                },
+		//	                "Minutes": {
+		//	                  "description": "The minutes.",
+		//	                  "maximum": 59,
+		//	                  "minimum": 0,
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Hours",
+		//	                "Minutes"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Day",
+		//	            "StartTime",
+		//	            "EndTime"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "maxItems": 100,
+		//	        "type": "array",
+		//	        "uniqueItems": true
+		//	      },
+		//	      "OverrideDescription": {
+		//	        "description": "The description of the hours of operation override.",
+		//	        "maxLength": 250,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "OverrideName": {
+		//	        "description": "The name of the hours of operation override.",
+		//	        "maxLength": 127,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "OverrideName",
+		//	      "EffectiveFrom",
+		//	      "EffectiveTill",
+		//	      "OverrideConfig"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "type": "array"
+		//	}
+		"hours_of_operation_overrides": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: EffectiveFrom
+					"effective_from": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The date from which the hours of operation override would be effective.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: EffectiveTill
+					"effective_till": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The date till which the hours of operation override would be effective.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: HoursOfOperationOverrideId
+					"hours_of_operation_override_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Resource Identifier for the hours of operation override.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: OverrideConfig
+					"override_config": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Day
+								"day": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The day that the hours of operation override applies to.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: EndTime
+								"end_time": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Hours
+										"hours": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The hours.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Minutes
+										"minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The minutes.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The new end time that your contact center closes for the overriden days.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: StartTime
+								"start_time": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Hours
+										"hours": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The hours.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Minutes
+										"minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The minutes.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The new start time that your contact center opens for the overriden days.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "Configuration information for the hours of operation override: day, start time, and end time.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: OverrideDescription
+					"override_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The description of the hours of operation override.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: OverrideName
+					"override_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name of the hours of operation override.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "One or more hours of operation overrides assigned to an hour of operation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceArn
 		// CloudFormation resource type schema:
 		//
@@ -279,20 +487,27 @@ func hoursOfOperationDataSource(ctx context.Context) (datasource.DataSource, err
 	opts = opts.WithCloudFormationTypeName("AWS::Connect::HoursOfOperation").WithTerraformTypeName("awscc_connect_hours_of_operation")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"config":                 "Config",
-		"day":                    "Day",
-		"description":            "Description",
-		"end_time":               "EndTime",
-		"hours":                  "Hours",
-		"hours_of_operation_arn": "HoursOfOperationArn",
-		"instance_arn":           "InstanceArn",
-		"key":                    "Key",
-		"minutes":                "Minutes",
-		"name":                   "Name",
-		"start_time":             "StartTime",
-		"tags":                   "Tags",
-		"time_zone":              "TimeZone",
-		"value":                  "Value",
+		"config":                         "Config",
+		"day":                            "Day",
+		"description":                    "Description",
+		"effective_from":                 "EffectiveFrom",
+		"effective_till":                 "EffectiveTill",
+		"end_time":                       "EndTime",
+		"hours":                          "Hours",
+		"hours_of_operation_arn":         "HoursOfOperationArn",
+		"hours_of_operation_override_id": "HoursOfOperationOverrideId",
+		"hours_of_operation_overrides":   "HoursOfOperationOverrides",
+		"instance_arn":                   "InstanceArn",
+		"key":                            "Key",
+		"minutes":                        "Minutes",
+		"name":                           "Name",
+		"override_config":                "OverrideConfig",
+		"override_description":           "OverrideDescription",
+		"override_name":                  "OverrideName",
+		"start_time":                     "StartTime",
+		"tags":                           "Tags",
+		"time_zone":                      "TimeZone",
+		"value":                          "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

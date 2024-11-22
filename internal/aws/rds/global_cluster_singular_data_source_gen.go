@@ -85,6 +85,29 @@ func globalClusterDataSource(ctx context.Context) (datasource.DataSource, error)
 			Description: "The cluster identifier of the new global database cluster. This parameter is stored as a lowercase string.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: GlobalEndpoint
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Address": {
+		//	      "description": "The writer endpoint for the global database cluster. This endpoint always points to the writer DB instance in the current primary cluster.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"global_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Address
+				"address": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The writer endpoint for the global database cluster. This endpoint always points to the writer DB instance in the current primary cluster.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceDBClusterIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -178,11 +201,13 @@ func globalClusterDataSource(ctx context.Context) (datasource.DataSource, error)
 	opts = opts.WithCloudFormationTypeName("AWS::RDS::GlobalCluster").WithTerraformTypeName("awscc_rds_global_cluster")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"address":                      "Address",
 		"deletion_protection":          "DeletionProtection",
 		"engine":                       "Engine",
 		"engine_lifecycle_support":     "EngineLifecycleSupport",
 		"engine_version":               "EngineVersion",
 		"global_cluster_identifier":    "GlobalClusterIdentifier",
+		"global_endpoint":              "GlobalEndpoint",
 		"key":                          "Key",
 		"source_db_cluster_identifier": "SourceDBClusterIdentifier",
 		"storage_encrypted":            "StorageEncrypted",

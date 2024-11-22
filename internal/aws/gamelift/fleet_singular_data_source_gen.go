@@ -117,128 +117,12 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "ComputeType to differentiate EC2 hardware managed by GameLift and Anywhere hardware managed by the customer.",
 		//	  "enum": [
 		//	    "EC2",
-		//	    "ANYWHERE",
-		//	    "CONTAINER"
+		//	    "ANYWHERE"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"compute_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "ComputeType to differentiate EC2 hardware managed by GameLift and Anywhere hardware managed by the customer.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
-		// Property: ContainerGroupsConfiguration
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "additionalProperties": false,
-		//	  "description": "Specifies container groups that this instance will hold. You must specify exactly one replica group. Optionally, you may specify exactly one daemon group. You can't change this property after you create the fleet.",
-		//	  "properties": {
-		//	    "ConnectionPortRange": {
-		//	      "additionalProperties": false,
-		//	      "description": "Defines the range of ports on the instance that allow inbound traffic to connect with containers in a fleet.",
-		//	      "properties": {
-		//	        "FromPort": {
-		//	          "description": "A starting value for a range of allowed port numbers.",
-		//	          "maximum": 60000,
-		//	          "minimum": 1,
-		//	          "type": "integer"
-		//	        },
-		//	        "ToPort": {
-		//	          "description": "An ending value for a range of allowed port numbers. Port numbers are end-inclusive. This value must be higher than FromPort.",
-		//	          "maximum": 60000,
-		//	          "minimum": 1,
-		//	          "type": "integer"
-		//	        }
-		//	      },
-		//	      "required": [
-		//	        "FromPort",
-		//	        "ToPort"
-		//	      ],
-		//	      "type": "object"
-		//	    },
-		//	    "ContainerGroupDefinitionNames": {
-		//	      "description": "The names of the container group definitions that will be created in an instance. You must specify exactly one REPLICA container group. You have the option to also specify one DAEMON container group.",
-		//	      "insertionOrder": false,
-		//	      "items": {
-		//	        "maxLength": 128,
-		//	        "minLength": 1,
-		//	        "pattern": "^[a-zA-Z0-9\\-]+$",
-		//	        "type": "string"
-		//	      },
-		//	      "maxItems": 2,
-		//	      "minItems": 1,
-		//	      "type": "array"
-		//	    },
-		//	    "ContainerGroupsPerInstance": {
-		//	      "additionalProperties": false,
-		//	      "description": "The number of container groups per instance.",
-		//	      "properties": {
-		//	        "DesiredReplicaContainerGroupsPerInstance": {
-		//	          "description": "Use this parameter to override the number of replica container groups GameLift will launch per instance with a number that is lower than that calculated maximum.",
-		//	          "maximum": 5000,
-		//	          "minimum": 1,
-		//	          "type": "integer"
-		//	        },
-		//	        "MaxReplicaContainerGroupsPerInstance": {
-		//	          "description": "GameLift calculates the maximum number of replica container groups it can launch per instance based on instance properties such as CPU, memory, and connection ports.",
-		//	          "maximum": 5000,
-		//	          "minimum": 1,
-		//	          "type": "integer"
-		//	        }
-		//	      },
-		//	      "type": "object"
-		//	    }
-		//	  },
-		//	  "required": [
-		//	    "ContainerGroupDefinitionNames",
-		//	    "ConnectionPortRange"
-		//	  ],
-		//	  "type": "object"
-		//	}
-		"container_groups_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ConnectionPortRange
-				"connection_port_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: FromPort
-						"from_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "A starting value for a range of allowed port numbers.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ToPort
-						"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "An ending value for a range of allowed port numbers. Port numbers are end-inclusive. This value must be higher than FromPort.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Defines the range of ports on the instance that allow inbound traffic to connect with containers in a fleet.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ContainerGroupDefinitionNames
-				"container_group_definition_names": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The names of the container group definitions that will be created in an instance. You must specify exactly one REPLICA container group. You have the option to also specify one DAEMON container group.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ContainerGroupsPerInstance
-				"container_groups_per_instance": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: DesiredReplicaContainerGroupsPerInstance
-						"desired_replica_container_groups_per_instance": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "Use this parameter to override the number of replica container groups GameLift will launch per instance with a number that is lower than that calculated maximum.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: MaxReplicaContainerGroupsPerInstance
-						"max_replica_container_groups_per_instance": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "GameLift calculates the maximum number of replica container groups it can launch per instance based on instance properties such as CPU, memory, and connection ports.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The number of container groups per instance.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Specifies container groups that this instance will hold. You must specify exactly one replica group. Optionally, you may specify exactly one daemon group. You can't change this property after you create the fleet.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
@@ -991,67 +875,61 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::GameLift::Fleet").WithTerraformTypeName("awscc_gamelift_fleet")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"anywhere_configuration":                        "AnywhereConfiguration",
-		"apply_capacity":                                "ApplyCapacity",
-		"build_id":                                      "BuildId",
-		"certificate_configuration":                     "CertificateConfiguration",
-		"certificate_type":                              "CertificateType",
-		"comparison_operator":                           "ComparisonOperator",
-		"compute_type":                                  "ComputeType",
-		"concurrent_executions":                         "ConcurrentExecutions",
-		"connection_port_range":                         "ConnectionPortRange",
-		"container_group_definition_names":              "ContainerGroupDefinitionNames",
-		"container_groups_configuration":                "ContainerGroupsConfiguration",
-		"container_groups_per_instance":                 "ContainerGroupsPerInstance",
-		"cost":                                          "Cost",
-		"description":                                   "Description",
-		"desired_ec2_instances":                         "DesiredEC2Instances",
-		"desired_replica_container_groups_per_instance": "DesiredReplicaContainerGroupsPerInstance",
-		"ec2_inbound_permissions":                       "EC2InboundPermissions",
-		"ec2_instance_type":                             "EC2InstanceType",
-		"evaluation_periods":                            "EvaluationPeriods",
-		"fleet_id":                                      "FleetId",
-		"fleet_type":                                    "FleetType",
-		"from_port":                                     "FromPort",
-		"game_session_activation_timeout_seconds":       "GameSessionActivationTimeoutSeconds",
-		"instance_role_arn":                             "InstanceRoleARN",
-		"instance_role_credentials_provider":            "InstanceRoleCredentialsProvider",
-		"ip_range":                                      "IpRange",
-		"launch_path":                                   "LaunchPath",
-		"location":                                      "Location",
-		"location_capacity":                             "LocationCapacity",
-		"locations":                                     "Locations",
-		"log_paths":                                     "LogPaths",
-		"max_concurrent_game_session_activations":       "MaxConcurrentGameSessionActivations",
-		"max_replica_container_groups_per_instance":     "MaxReplicaContainerGroupsPerInstance",
-		"max_size":                                      "MaxSize",
-		"metric_groups":                                 "MetricGroups",
-		"metric_name":                                   "MetricName",
-		"min_size":                                      "MinSize",
-		"name":                                          "Name",
-		"new_game_session_protection_policy":            "NewGameSessionProtectionPolicy",
-		"new_game_sessions_per_creator":                 "NewGameSessionsPerCreator",
-		"parameters":                                    "Parameters",
-		"peer_vpc_aws_account_id":                       "PeerVpcAwsAccountId",
-		"peer_vpc_id":                                   "PeerVpcId",
-		"policy_period_in_minutes":                      "PolicyPeriodInMinutes",
-		"policy_type":                                   "PolicyType",
-		"protocol":                                      "Protocol",
-		"resource_creation_limit_policy":                "ResourceCreationLimitPolicy",
-		"runtime_configuration":                         "RuntimeConfiguration",
-		"scaling_adjustment":                            "ScalingAdjustment",
-		"scaling_adjustment_type":                       "ScalingAdjustmentType",
-		"scaling_policies":                              "ScalingPolicies",
-		"script_id":                                     "ScriptId",
-		"server_launch_parameters":                      "ServerLaunchParameters",
-		"server_launch_path":                            "ServerLaunchPath",
-		"server_processes":                              "ServerProcesses",
-		"status":                                        "Status",
-		"target_configuration":                          "TargetConfiguration",
-		"target_value":                                  "TargetValue",
-		"threshold":                                     "Threshold",
-		"to_port":                                       "ToPort",
-		"update_status":                                 "UpdateStatus",
+		"anywhere_configuration":    "AnywhereConfiguration",
+		"apply_capacity":            "ApplyCapacity",
+		"build_id":                  "BuildId",
+		"certificate_configuration": "CertificateConfiguration",
+		"certificate_type":          "CertificateType",
+		"comparison_operator":       "ComparisonOperator",
+		"compute_type":              "ComputeType",
+		"concurrent_executions":     "ConcurrentExecutions",
+		"cost":                      "Cost",
+		"description":               "Description",
+		"desired_ec2_instances":     "DesiredEC2Instances",
+		"ec2_inbound_permissions":   "EC2InboundPermissions",
+		"ec2_instance_type":         "EC2InstanceType",
+		"evaluation_periods":        "EvaluationPeriods",
+		"fleet_id":                  "FleetId",
+		"fleet_type":                "FleetType",
+		"from_port":                 "FromPort",
+		"game_session_activation_timeout_seconds": "GameSessionActivationTimeoutSeconds",
+		"instance_role_arn":                       "InstanceRoleARN",
+		"instance_role_credentials_provider":      "InstanceRoleCredentialsProvider",
+		"ip_range":                                "IpRange",
+		"launch_path":                             "LaunchPath",
+		"location":                                "Location",
+		"location_capacity":                       "LocationCapacity",
+		"locations":                               "Locations",
+		"log_paths":                               "LogPaths",
+		"max_concurrent_game_session_activations": "MaxConcurrentGameSessionActivations",
+		"max_size":                           "MaxSize",
+		"metric_groups":                      "MetricGroups",
+		"metric_name":                        "MetricName",
+		"min_size":                           "MinSize",
+		"name":                               "Name",
+		"new_game_session_protection_policy": "NewGameSessionProtectionPolicy",
+		"new_game_sessions_per_creator":      "NewGameSessionsPerCreator",
+		"parameters":                         "Parameters",
+		"peer_vpc_aws_account_id":            "PeerVpcAwsAccountId",
+		"peer_vpc_id":                        "PeerVpcId",
+		"policy_period_in_minutes":           "PolicyPeriodInMinutes",
+		"policy_type":                        "PolicyType",
+		"protocol":                           "Protocol",
+		"resource_creation_limit_policy":     "ResourceCreationLimitPolicy",
+		"runtime_configuration":              "RuntimeConfiguration",
+		"scaling_adjustment":                 "ScalingAdjustment",
+		"scaling_adjustment_type":            "ScalingAdjustmentType",
+		"scaling_policies":                   "ScalingPolicies",
+		"script_id":                          "ScriptId",
+		"server_launch_parameters":           "ServerLaunchParameters",
+		"server_launch_path":                 "ServerLaunchPath",
+		"server_processes":                   "ServerProcesses",
+		"status":                             "Status",
+		"target_configuration":               "TargetConfiguration",
+		"target_value":                       "TargetValue",
+		"threshold":                          "Threshold",
+		"to_port":                            "ToPort",
+		"update_status":                      "UpdateStatus",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

@@ -26,39 +26,48 @@ func keyValueStoreDataSource(ctx context.Context) (datasource.DataSource, error)
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Comment
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "A comment for the key value store.",
 		//	  "type": "string"
 		//	}
 		"comment": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "A comment for the key value store.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"key_value_store_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ImportSource
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "The import source for the key value store.",
 		//	  "properties": {
 		//	    "SourceArn": {
+		//	      "description": "The Amazon Resource Name (ARN) of the import source for the key value store.",
 		//	      "type": "string"
 		//	    },
 		//	    "SourceType": {
+		//	      "description": "The source type of the import source for the key value store.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -72,32 +81,39 @@ func keyValueStoreDataSource(ctx context.Context) (datasource.DataSource, error)
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: SourceArn
 				"source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "The Amazon Resource Name (ARN) of the import source for the key value store.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: SourceType
 				"source_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "The source type of the import source for the key value store.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Computed: true,
+			Description: "The import source for the key value store.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The name of the key value store.",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The name of the key value store.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 

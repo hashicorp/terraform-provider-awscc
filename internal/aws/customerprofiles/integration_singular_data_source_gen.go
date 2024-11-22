@@ -48,6 +48,27 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The unique name of the domain.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: EventTriggerNames
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A list of unique names for active event triggers associated with the integration.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "maxLength": 64,
+		//	    "minLength": 1,
+		//	    "pattern": "^[a-zA-Z0-9_-]+$",
+		//	    "type": "string"
+		//	  },
+		//	  "maxItems": 1,
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"event_trigger_names": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A list of unique names for active event triggers associated with the integration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FlowDefinition
 		// CloudFormation resource type schema:
 		//
@@ -847,6 +868,7 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"destination_field":           "DestinationField",
 		"domain_name":                 "DomainName",
 		"enable_dynamic_field_update": "EnableDynamicFieldUpdate",
+		"event_trigger_names":         "EventTriggerNames",
 		"first_execution_from":        "FirstExecutionFrom",
 		"flow_definition":             "FlowDefinition",
 		"flow_name":                   "FlowName",

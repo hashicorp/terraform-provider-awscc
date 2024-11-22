@@ -346,6 +346,61 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "InstanceCapabilities": {
 		//	          "additionalProperties": false,
 		//	          "properties": {
+		//	            "AcceleratorCapabilities": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Count": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "Max": {
+		//	                      "maximum": 2147483647,
+		//	                      "minimum": 0,
+		//	                      "type": "integer"
+		//	                    },
+		//	                    "Min": {
+		//	                      "maximum": 2147483647,
+		//	                      "minimum": 0,
+		//	                      "type": "integer"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "Min"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "Selections": {
+		//	                  "items": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "Name": {
+		//	                        "enum": [
+		//	                          "t4",
+		//	                          "a10g",
+		//	                          "l4",
+		//	                          "l40s"
+		//	                        ],
+		//	                        "type": "string"
+		//	                      },
+		//	                      "Runtime": {
+		//	                        "maxLength": 100,
+		//	                        "minLength": 1,
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "Name"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  },
+		//	                  "minItems": 1,
+		//	                  "type": "array"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Selections"
+		//	              ],
+		//	              "type": "object"
+		//	            },
 		//	            "AllowedInstanceTypes": {
 		//	              "items": {
 		//	                "pattern": "^[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$",
@@ -666,6 +721,42 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 						// Property: InstanceCapabilities
 						"instance_capabilities": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AcceleratorCapabilities
+								"accelerator_capabilities": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Count
+										"count": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Max
+												"max": schema.Int64Attribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: Min
+												"min": schema.Int64Attribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Selections
+										"selections": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Name
+													"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: Runtime
+													"runtime": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
 								// Property: AllowedInstanceTypes
 								"allowed_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
 									ElementType: types.StringType,
@@ -955,6 +1046,7 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Deadline::Fleet").WithTerraformTypeName("awscc_deadline_fleet")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"accelerator_capabilities":      "AcceleratorCapabilities",
 		"accelerator_count":             "AcceleratorCount",
 		"accelerator_total_memory_mi_b": "AcceleratorTotalMemoryMiB",
 		"accelerator_types":             "AcceleratorTypes",
@@ -964,6 +1056,7 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"attributes":                    "Attributes",
 		"capabilities":                  "Capabilities",
 		"configuration":                 "Configuration",
+		"count":                         "Count",
 		"cpu_architecture_type":         "CpuArchitectureType",
 		"custom_amounts":                "CustomAmounts",
 		"custom_attributes":             "CustomAttributes",
@@ -987,6 +1080,8 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"os_family":                     "OsFamily",
 		"role_arn":                      "RoleArn",
 		"root_ebs_volume":               "RootEbsVolume",
+		"runtime":                       "Runtime",
+		"selections":                    "Selections",
 		"service_managed_ec_2":          "ServiceManagedEc2",
 		"size_gi_b":                     "SizeGiB",
 		"status":                        "Status",

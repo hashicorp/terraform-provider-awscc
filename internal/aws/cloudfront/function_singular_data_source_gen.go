@@ -26,43 +26,54 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "A flag that determines whether to automatically publish the function to the ``LIVE`` stage when it?s created. To automatically publish to the ``LIVE`` stage, set this property to ``true``.",
 		//	  "type": "boolean"
 		//	}
 		"auto_publish": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "A flag that determines whether to automatically publish the function to the ``LIVE`` stage when it?s created. To automatically publish to the ``LIVE`` stage, set this property to ``true``.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: FunctionARN
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"function_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: FunctionCode
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The function code. For more information about writing a CloudFront function, see [Writing function code for CloudFront Functions](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/writing-function-code.html) in the *Amazon CloudFront Developer Guide*.",
 		//	  "type": "string"
 		//	}
 		"function_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The function code. For more information about writing a CloudFront function, see [Writing function code for CloudFront Functions](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/writing-function-code.html) in the *Amazon CloudFront Developer Guide*.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: FunctionConfig
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "Contains configuration information about a CloudFront function.",
 		//	  "properties": {
 		//	    "Comment": {
+		//	      "description": "A comment to describe the function.",
 		//	      "type": "string"
 		//	    },
 		//	    "KeyValueStoreAssociations": {
+		//	      "description": "The configuration for the key value store associations.",
 		//	      "items": {
 		//	        "additionalProperties": false,
+		//	        "description": "The key value store association.",
 		//	        "properties": {
 		//	          "KeyValueStoreARN": {
+		//	            "description": "The Amazon Resource Name (ARN) of the key value store association.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -75,6 +86,7 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "Runtime": {
+		//	      "description": "The function's runtime environment version.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -88,7 +100,8 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Comment
 				"comment": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "A comment to describe the function.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: KeyValueStoreAssociations
 				"key_value_store_associations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -96,26 +109,32 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: KeyValueStoreARN
 							"key_value_store_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
+								Description: "The Amazon Resource Name (ARN) of the key value store association.",
+								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Computed: true,
+					Description: "The configuration for the key value store associations.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Runtime
 				"runtime": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "The function's runtime environment version.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Computed: true,
+			Description: "Contains configuration information about a CloudFront function.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: FunctionMetadata
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "Contains metadata about a CloudFront function.",
 		//	  "properties": {
 		//	    "FunctionARN": {
+		//	      "description": "The Amazon Resource Name (ARN) of the function. The ARN uniquely identifies the function.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -125,28 +144,34 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: FunctionARN
 				"function_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "The Amazon Resource Name (ARN) of the function. The ARN uniquely identifies the function.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Computed: true,
+			Description: "Contains metadata about a CloudFront function.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "A name to identify the function.",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "A name to identify the function.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Stage
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"stage": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 

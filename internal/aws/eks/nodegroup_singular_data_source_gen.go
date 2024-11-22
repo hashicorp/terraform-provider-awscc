@@ -174,6 +174,31 @@ func nodegroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "An object representing a node group's launch template specification.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: NodeRepairConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The node auto repair configuration for node group.",
+		//	  "properties": {
+		//	    "Enabled": {
+		//	      "description": "Set this value to true to enable node auto repair for the node group.",
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"node_repair_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Enabled
+				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Set this value to true to enable node auto repair for the node group.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The node auto repair configuration for node group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NodeRole
 		// CloudFormation resource type schema:
 		//
@@ -443,6 +468,7 @@ func nodegroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"disk_size":                  "DiskSize",
 		"ec_2_ssh_key":               "Ec2SshKey",
 		"effect":                     "Effect",
+		"enabled":                    "Enabled",
 		"force_update_enabled":       "ForceUpdateEnabled",
 		"id":                         "Id",
 		"instance_types":             "InstanceTypes",
@@ -454,6 +480,7 @@ func nodegroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"max_unavailable_percentage": "MaxUnavailablePercentage",
 		"min_size":                   "MinSize",
 		"name":                       "Name",
+		"node_repair_config":         "NodeRepairConfig",
 		"node_role":                  "NodeRole",
 		"nodegroup_id":               "Id",
 		"nodegroup_name":             "NodegroupName",

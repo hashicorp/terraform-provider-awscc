@@ -27,8 +27,10 @@ func cloudFrontOriginAccessIdentityDataSource(ctx context.Context) (datasource.D
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "The current configuration information for the identity.",
 		//	  "properties": {
 		//	    "Comment": {
+		//	      "description": "A comment to describe the origin access identity. The comment cannot be longer than 128 characters.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -41,28 +43,34 @@ func cloudFrontOriginAccessIdentityDataSource(ctx context.Context) (datasource.D
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Comment
 				"comment": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "A comment to describe the origin access identity. The comment cannot be longer than 128 characters.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Computed: true,
+			Description: "The current configuration information for the identity.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"cloudfront_origin_access_identity_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: S3CanonicalUserId
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"s3_canonical_user_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 

@@ -139,6 +139,32 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        },
 		//	        "type": "object"
 		//	      },
+		//	      "WarmThroughput": {
+		//	        "additionalProperties": false,
+		//	        "anyOf": [
+		//	          {
+		//	            "required": [
+		//	              "ReadUnitsPerSecond"
+		//	            ]
+		//	          },
+		//	          {
+		//	            "required": [
+		//	              "WriteUnitsPerSecond"
+		//	            ]
+		//	          }
+		//	        ],
+		//	        "properties": {
+		//	          "ReadUnitsPerSecond": {
+		//	            "minimum": 1,
+		//	            "type": "integer"
+		//	          },
+		//	          "WriteUnitsPerSecond": {
+		//	            "minimum": 1,
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
 		//	      "WriteOnDemandThroughputSettings": {
 		//	        "additionalProperties": false,
 		//	        "properties": {
@@ -246,6 +272,20 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: ProjectionType
 							"projection_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: WarmThroughput
+					"warm_throughput": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ReadUnitsPerSecond
+							"read_units_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: WriteUnitsPerSecond
+							"write_units_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
 								Computed: true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -1129,6 +1169,48 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: WarmThroughput
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "anyOf": [
+		//	    {
+		//	      "required": [
+		//	        "ReadUnitsPerSecond"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "WriteUnitsPerSecond"
+		//	      ]
+		//	    }
+		//	  ],
+		//	  "properties": {
+		//	    "ReadUnitsPerSecond": {
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    },
+		//	    "WriteUnitsPerSecond": {
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"warm_throughput": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ReadUnitsPerSecond
+				"read_units_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: WriteUnitsPerSecond
+				"write_units_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: WriteOnDemandThroughputSettings
 		// CloudFormation resource type schema:
 		//
@@ -1301,6 +1383,7 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"read_capacity_units":                  "ReadCapacityUnits",
 		"read_on_demand_throughput_settings":   "ReadOnDemandThroughputSettings",
 		"read_provisioned_throughput_settings": "ReadProvisionedThroughputSettings",
+		"read_units_per_second":                "ReadUnitsPerSecond",
 		"region":                               "Region",
 		"replica_stream_specification":         "ReplicaStreamSpecification",
 		"replicas":                             "Replicas",
@@ -1322,9 +1405,11 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"target_value":                          "TargetValue",
 		"time_to_live_specification":            "TimeToLiveSpecification",
 		"value":                                 "Value",
+		"warm_throughput":                       "WarmThroughput",
 		"write_capacity_auto_scaling_settings":  "WriteCapacityAutoScalingSettings",
 		"write_on_demand_throughput_settings":   "WriteOnDemandThroughputSettings",
 		"write_provisioned_throughput_settings": "WriteProvisionedThroughputSettings",
+		"write_units_per_second":                "WriteUnitsPerSecond",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

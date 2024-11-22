@@ -296,6 +296,7 @@ func fileSystemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          },
 		//	          "FileSystemId": {
 		//	            "description": "The ID of the destination Amazon EFS file system.",
+		//	            "pattern": "^(arn:aws[-a-z]*:elasticfilesystem:[0-9a-z-:]+:file-system/fs-[0-9a-f]{8,40}|fs-[0-9a-f]{8,40})$",
 		//	            "type": "string"
 		//	          },
 		//	          "KmsKeyId": {
@@ -304,6 +305,18 @@ func fileSystemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          },
 		//	          "Region": {
 		//	            "description": "The AWS-Region in which the destination file system is located.\n  For One Zone file systems, the replication configuration must specify the AWS-Region in which the destination file system is located.",
+		//	            "type": "string"
+		//	          },
+		//	          "RoleArn": {
+		//	            "description": "",
+		//	            "type": "string"
+		//	          },
+		//	          "Status": {
+		//	            "description": "",
+		//	            "type": "string"
+		//	          },
+		//	          "StatusMessage": {
+		//	            "description": "",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -341,6 +354,21 @@ func fileSystemDataSource(ctx context.Context) (datasource.DataSource, error) {
 							// Property: Region
 							"region": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The AWS-Region in which the destination file system is located.\n  For One Zone file systems, the replication configuration must specify the AWS-Region in which the destination file system is located.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: RoleArn
+							"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Status
+							"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: StatusMessage
+							"status_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -398,7 +426,9 @@ func fileSystemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"region":                              "Region",
 		"replication_configuration":           "ReplicationConfiguration",
 		"replication_overwrite_protection":    "ReplicationOverwriteProtection",
+		"role_arn":                            "RoleArn",
 		"status":                              "Status",
+		"status_message":                      "StatusMessage",
 		"throughput_mode":                     "ThroughputMode",
 		"transition_to_archive":               "TransitionToArchive",
 		"transition_to_ia":                    "TransitionToIA",
