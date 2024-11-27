@@ -1005,6 +1005,11 @@
         "path": "./examples/resources/awscc_cognito_log_delivery_configuration/import.sh"
     },
     {
+        "resource": "awscc_cognito_managed_login_branding",
+        "identifier": ["UserPoolId","ManagedLoginBrandingId"],
+        "path": "./examples/resources/awscc_cognito_managed_login_branding/import.sh"
+    },
+    {
         "resource": "awscc_cognito_user_pool_client",
         "identifier": ["UserPoolId","ClientId"],
         "path": "./examples/resources/awscc_cognito_user_pool_client/import.sh"
@@ -1858,6 +1863,16 @@
         "resource": "awscc_ec2_vpc",
         "identifier": ["VpcId"],
         "path": "./examples/resources/awscc_ec2_vpc/import.sh"
+    },
+    {
+        "resource": "awscc_ec2_vpc_block_public_access_exclusion",
+        "identifier": ["ExclusionId"],
+        "path": "./examples/resources/awscc_ec2_vpc_block_public_access_exclusion/import.sh"
+    },
+    {
+        "resource": "awscc_ec2_vpc_block_public_access_options",
+        "identifier": ["AccountId"],
+        "path": "./examples/resources/awscc_ec2_vpc_block_public_access_options/import.sh"
     },
     {
         "resource": "awscc_ec2_vpc_cidr_block",

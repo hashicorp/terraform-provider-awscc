@@ -1311,6 +1311,9 @@ func scalingPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	                    ],
 		//	                    "type": "object"
 		//	                  },
+		//	                  "Period": {
+		//	                    "type": "integer"
+		//	                  },
 		//	                  "Stat": {
 		//	                    "type": "string"
 		//	                  },
@@ -1323,6 +1326,9 @@ func scalingPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "Metric"
 		//	                ],
 		//	                "type": "object"
+		//	              },
+		//	              "Period": {
+		//	                "type": "integer"
 		//	              },
 		//	              "ReturnData": {
 		//	                "type": "boolean"
@@ -1338,6 +1344,9 @@ func scalingPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "Namespace": {
 		//	          "type": "string"
+		//	        },
+		//	        "Period": {
+		//	          "type": "integer"
 		//	        },
 		//	        "Statistic": {
 		//	          "type": "string"
@@ -1525,6 +1534,14 @@ func scalingPolicyResource(ctx context.Context) (resource.Resource, error) {
 													objectplanmodifier.UseStateForUnknown(),
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
+											// Property: Period
+											"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+													int64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
 											// Property: Stat
 											"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Optional: true,
@@ -1551,6 +1568,14 @@ func scalingPolicyResource(ctx context.Context) (resource.Resource, error) {
 											objectplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
+									// Property: Period
+									"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
 									// Property: ReturnData
 									"return_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
 										Optional: true,
@@ -1573,6 +1598,14 @@ func scalingPolicyResource(ctx context.Context) (resource.Resource, error) {
 							Computed: true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Period
+						"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Statistic
@@ -1705,6 +1738,7 @@ func scalingPolicyResource(ctx context.Context) (resource.Resource, error) {
 		"mode":                                 "Mode",
 		"name":                                 "Name",
 		"namespace":                            "Namespace",
+		"period":                               "Period",
 		"policy_name":                          "PolicyName",
 		"policy_type":                          "PolicyType",
 		"predefined_load_metric_specification": "PredefinedLoadMetricSpecification",

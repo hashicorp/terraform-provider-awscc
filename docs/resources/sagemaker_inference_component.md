@@ -18,15 +18,15 @@ Resource Type definition for AWS::SageMaker::InferenceComponent
 ### Required
 
 - `endpoint_name` (String) The name of the endpoint the inference component is associated with
-- `runtime_config` (Attributes) The runtime config for the inference component (see [below for nested schema](#nestedatt--runtime_config))
 - `specification` (Attributes) The specification for the inference component (see [below for nested schema](#nestedatt--specification))
-- `variant_name` (String) The name of the endpoint variant the inference component is associated with
 
 ### Optional
 
 - `endpoint_arn` (String) The Amazon Resource Name (ARN) of the endpoint the inference component is associated with
 - `inference_component_name` (String) The name of the inference component
+- `runtime_config` (Attributes) The runtime config for the inference component (see [below for nested schema](#nestedatt--runtime_config))
 - `tags` (Attributes List) An array of tags to apply to the resource (see [below for nested schema](#nestedatt--tags))
+- `variant_name` (String) The name of the endpoint variant the inference component is associated with
 
 ### Read-Only
 
@@ -37,28 +37,13 @@ Resource Type definition for AWS::SageMaker::InferenceComponent
 - `inference_component_status` (String)
 - `last_modified_time` (String)
 
-<a id="nestedatt--runtime_config"></a>
-### Nested Schema for `runtime_config`
-
-Optional:
-
-- `copy_count` (Number) The number of copies for the inference component
-
-Read-Only:
-
-- `current_copy_count` (Number) The number of copies for the inference component
-- `desired_copy_count` (Number) The number of copies for the inference component
-
-
 <a id="nestedatt--specification"></a>
 ### Nested Schema for `specification`
 
-Required:
-
-- `compute_resource_requirements` (Attributes) (see [below for nested schema](#nestedatt--specification--compute_resource_requirements))
-
 Optional:
 
+- `base_inference_component_name` (String) The name of the base inference component
+- `compute_resource_requirements` (Attributes) (see [below for nested schema](#nestedatt--specification--compute_resource_requirements))
 - `container` (Attributes) (see [below for nested schema](#nestedatt--specification--container))
 - `model_name` (String) The name of the model to use with the inference component
 - `startup_parameters` (Attributes) (see [below for nested schema](#nestedatt--specification--startup_parameters))
@@ -106,6 +91,19 @@ Optional:
 - `container_startup_health_check_timeout_in_seconds` (Number)
 - `model_data_download_timeout_in_seconds` (Number)
 
+
+
+<a id="nestedatt--runtime_config"></a>
+### Nested Schema for `runtime_config`
+
+Optional:
+
+- `copy_count` (Number) The number of copies for the inference component
+
+Read-Only:
+
+- `current_copy_count` (Number) The number of copies for the inference component
+- `desired_copy_count` (Number) The number of copies for the inference component
 
 
 <a id="nestedatt--tags"></a>

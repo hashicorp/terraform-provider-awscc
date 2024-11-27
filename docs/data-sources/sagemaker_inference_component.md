@@ -49,6 +49,7 @@ Read-Only:
 
 Read-Only:
 
+- `base_inference_component_name` (String) The name of the base inference component
 - `compute_resource_requirements` (Attributes) (see [below for nested schema](#nestedatt--specification--compute_resource_requirements))
 - `container` (Attributes) (see [below for nested schema](#nestedatt--specification--container))
 - `model_name` (String) The name of the model to use with the inference component

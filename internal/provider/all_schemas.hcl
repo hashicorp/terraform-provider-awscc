@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1074 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1103 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -974,6 +974,11 @@ resource_schema "aws_cognito_log_delivery_configuration" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_cognito_managed_login_branding" {
+  cloudformation_type_name               = "AWS::Cognito::ManagedLoginBranding"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_cognito_user_pool" {
   cloudformation_type_name = "AWS::Cognito::UserPool"
 
@@ -1787,6 +1792,15 @@ resource_schema "aws_ec2_transit_gateway_vpc_attachment" {
 
 resource_schema "aws_ec2_vpc" {
   cloudformation_type_name = "AWS::EC2::VPC"
+}
+
+resource_schema "aws_ec2_vpc_block_public_access_exclusion" {
+  cloudformation_type_name = "AWS::EC2::VPCBlockPublicAccessExclusion"
+}
+
+resource_schema "aws_ec2_vpc_block_public_access_options" {
+  cloudformation_type_name               = "AWS::EC2::VPCBlockPublicAccessOptions"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_ec2_vpc_cidr_block" {

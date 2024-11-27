@@ -367,7 +367,9 @@ func taskTemplateDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	          "DATE_TIME",
 		//	          "BOOLEAN",
 		//	          "SINGLE_SELECT",
-		//	          "EMAIL"
+		//	          "EMAIL",
+		//	          "EXPIRY_DURATION",
+		//	          "SELF_ASSIGN"
 		//	        ],
 		//	        "type": "string"
 		//	      }
