@@ -174,6 +174,12 @@ func inferenceComponentDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "additionalProperties": false,
 		//	  "description": "The specification for the inference component",
 		//	  "properties": {
+		//	    "BaseInferenceComponentName": {
+		//	      "description": "The name of the base inference component",
+		//	      "maxLength": 63,
+		//	      "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
+		//	      "type": "string"
+		//	    },
 		//	    "ComputeResourceRequirements": {
 		//	      "additionalProperties": false,
 		//	      "description": "",
@@ -273,13 +279,15 @@ func inferenceComponentDataSource(ctx context.Context) (datasource.DataSource, e
 		//	      "type": "object"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "ComputeResourceRequirements"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BaseInferenceComponentName
+				"base_inference_component_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the base inference component",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: ComputeResourceRequirements
 				"compute_resource_requirements": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -451,6 +459,7 @@ func inferenceComponentDataSource(ctx context.Context) (datasource.DataSource, e
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"artifact_url":                  "ArtifactUrl",
+		"base_inference_component_name": "BaseInferenceComponentName",
 		"compute_resource_requirements": "ComputeResourceRequirements",
 		"container":                     "Container",
 		"container_startup_health_check_timeout_in_seconds": "ContainerStartupHealthCheckTimeoutInSeconds",
