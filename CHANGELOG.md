@@ -1,5 +1,18 @@
 ## 1.22.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_cognito_managed_login_branding`
+* **New Data Source:** `awscc_ec2_vpc_block_public_access_exclusion`
+* **New Data Source:** `awscc_ec2_vpc_block_public_access_exclusions`
+* **New Data Source:** `awscc_ec2_vpc_block_public_access_options`
+* **New Resource:** `awscc_cognito_managed_login_branding`
+* **New Resource:** `awscc_ec2_vpc_block_public_access_exclusion`
+* **New Resource:** `awscc_ec2_vpc_block_public_access_options`
+
 ## 1.21.0 (November 22, 2024)
+
+FEATURES:
 
 * **New Data Source:** `awscc_apigateway_base_path_mapping_v2`
 * **New Data Source:** `awscc_apigateway_domain_name_access_association`
@@ -52,6 +65,8 @@
 * **New Resource:** `awscc_workspacesweb_data_protection_settings`
 
 ## 1.20.0 (November  8, 2024)
+
+FEATURES:
 
 * **New Data Source:** `awscc_appsync_channel_namespace`
 * **New Data Source:** `awscc_bedrock_application_inference_profile`
