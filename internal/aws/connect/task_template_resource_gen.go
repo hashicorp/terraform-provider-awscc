@@ -502,7 +502,9 @@ func taskTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	          "DATE_TIME",
 		//	          "BOOLEAN",
 		//	          "SINGLE_SELECT",
-		//	          "EMAIL"
+		//	          "EMAIL",
+		//	          "EXPIRY_DURATION",
+		//	          "SELF_ASSIGN"
 		//	        ],
 		//	        "type": "string"
 		//	      }
@@ -594,6 +596,8 @@ func taskTemplateResource(ctx context.Context) (resource.Resource, error) {
 								"BOOLEAN",
 								"SINGLE_SELECT",
 								"EMAIL",
+								"EXPIRY_DURATION",
+								"SELF_ASSIGN",
 							),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
