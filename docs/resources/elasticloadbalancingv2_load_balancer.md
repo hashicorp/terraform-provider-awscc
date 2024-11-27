@@ -153,33 +153,32 @@ resource "awscc_elasticloadbalancingv2_load_balancer" "example" {
 
 ### Optional
 
-- `enable_prefix_for_ipv_6_source_nat` (String)
+- `enable_prefix_for_ipv_6_source_nat` (String) [Network Load Balancers with UDP listeners] Indicates whether to use an IPv6 prefix from each subnet for source NAT. The IP address type must be ``dualstack``. The default value is ``off``.
 - `enforce_security_group_inbound_rules_on_private_link_traffic` (String) Indicates whether to evaluate inbound security group rules for traffic sent to a Network Load Balancer through privatelink.
-- `ip_address_type` (String) Note: Internal load balancers must use the ``ipv4`` IP address type.
- [Application Load Balancers] The IP address type. The possible values are ``ipv4`` (for only IPv4 addresses), ``dualstack`` (for IPv4 and IPv6 addresses), and ``dualstack-without-public-ipv4`` (for IPv6 only public addresses, with private IPv4 and IPv6 addresses).
- Note: Application Load Balancer authentication only supports IPv4 addresses when connecting to an Identity Provider (IdP) or Amazon Cognito endpoint. Without a public IPv4 address the load balancer cannot complete the authentication process, resulting in HTTP 500 errors.
- [Network Load Balancers] The IP address type. The possible values are ``ipv4`` (for only IPv4 addresses) and ``dualstack`` (for IPv4 and IPv6 addresses). You can?t specify ``dualstack`` for a load balancer with a UDP or TCP_UDP listener.
- [Gateway Load Balancers] The IP address type. The possible values are ``ipv4`` (for only IPv4 addresses) and ``dualstack`` (for IPv4 and IPv6 addresses).
+- `ip_address_type` (String) The IP address type. Internal load balancers must use ``ipv4``.
+ [Application Load Balancers] The possible values are ``ipv4`` (IPv4 addresses), ``dualstack`` (IPv4 and IPv6 addresses), and ``dualstack-without-public-ipv4`` (public IPv6 addresses and private IPv4 and IPv6 addresses).
+ Application Load Balancer authentication supports IPv4 addresses only when connecting to an Identity Provider (IdP) or Amazon Cognito endpoint. Without a public IPv4 address the load balancer can't complete the authentication process, resulting in HTTP 500 errors.
+ [Network Load Balancers and Gateway Load Balancers] The possible values are ``ipv4`` (IPv4 addresses) and ``dualstack`` (IPv4 and IPv6 addresses).
 - `load_balancer_attributes` (Attributes Set) The load balancer attributes. (see [below for nested schema](#nestedatt--load_balancer_attributes))
+- `minimum_load_balancer_capacity` (Attributes) (see [below for nested schema](#nestedatt--minimum_load_balancer_capacity))
 - `name` (String) The name of the load balancer. This name must be unique per region per account, can have a maximum of 32 characters, must contain only alphanumeric characters or hyphens, must not begin or end with a hyphen, and must not begin with "internal-".
  If you don't specify a name, AWS CloudFormation generates a unique physical ID for the load balancer. If you specify a name, you cannot perform updates that require replacement of this resource, but you can perform other updates. To replace the resource, specify a new name.
 - `scheme` (String) The nodes of an Internet-facing load balancer have public IP addresses. The DNS name of an Internet-facing load balancer is publicly resolvable to the public IP addresses of the nodes. Therefore, Internet-facing load balancers can route requests from clients over the internet.
  The nodes of an internal load balancer have only private IP addresses. The DNS name of an internal load balancer is publicly resolvable to the private IP addresses of the nodes. Therefore, internal load balancers can route requests only from clients with access to the VPC for the load balancer.
  The default is an Internet-facing load balancer.
- You cannot specify a scheme for a Gateway Load Balancer.
+ You can't specify a scheme for a Gateway Load Balancer.
 - `security_groups` (Set of String) [Application Load Balancers and Network Load Balancers] The IDs of the security groups for the load balancer.
 - `subnet_mappings` (Attributes Set) The IDs of the subnets. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings, but not both.
- [Application Load Balancers] You must specify subnets from at least two Availability Zones. You cannot specify Elastic IP addresses for your subnets.
+ [Application Load Balancers] You must specify subnets from at least two Availability Zones. You can't specify Elastic IP addresses for your subnets.
  [Application Load Balancers on Outposts] You must specify one Outpost subnet.
  [Application Load Balancers on Local Zones] You can specify subnets from one or more Local Zones.
  [Network Load Balancers] You can specify subnets from one or more Availability Zones. You can specify one Elastic IP address per subnet if you need static IP addresses for your internet-facing load balancer. For internal load balancers, you can specify one private IP address per subnet from the IPv4 range of the subnet. For internet-facing load balancer, you can specify one IPv6 address per subnet.
- [Gateway Load Balancers] You can specify subnets from one or more Availability Zones. You cannot specify Elastic IP addresses for your subnets. (see [below for nested schema](#nestedatt--subnet_mappings))
+ [Gateway Load Balancers] You can specify subnets from one or more Availability Zones. You can't specify Elastic IP addresses for your subnets. (see [below for nested schema](#nestedatt--subnet_mappings))
 - `subnets` (Set of String) The IDs of the subnets. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings, but not both. To specify an Elastic IP address, specify subnet mappings instead of subnets.
  [Application Load Balancers] You must specify subnets from at least two Availability Zones.
  [Application Load Balancers on Outposts] You must specify one Outpost subnet.
  [Application Load Balancers on Local Zones] You can specify subnets from one or more Local Zones.
- [Network Load Balancers] You can specify subnets from one or more Availability Zones.
- [Gateway Load Balancers] You can specify subnets from one or more Availability Zones.
+ [Network Load Balancers and Gateway Load Balancers] You can specify subnets from one or more Availability Zones.
 - `tags` (Attributes List) The tags to assign to the load balancer. (see [below for nested schema](#nestedatt--tags))
 - `type` (String) The type of load balancer. The default is ``application``.
 
@@ -200,7 +199,7 @@ Optional:
 - `key` (String) The name of the attribute.
  The following attributes are supported by all load balancers:
   +   ``deletion_protection.enabled`` - Indicates whether deletion protection is enabled. The value is ``true`` or ``false``. The default is ``false``.
-  +   ``load_balancing.cross_zone.enabled`` - Indicates whether cross-zone load balancing is enabled. The possible values are ``true`` and ``false``. The default for Network Load Balancers and Gateway Load Balancers is ``false``. The default for Application Load Balancers is ``true``, and cannot be changed.
+  +   ``load_balancing.cross_zone.enabled`` - Indicates whether cross-zone load balancing is enabled. The possible values are ``true`` and ``false``. The default for Network Load Balancers and Gateway Load Balancers is ``false``. The default for Application Load Balancers is ``true``, and can't be changed.
   
  The following attributes are supported by both Application Load Balancers and Network Load Balancers:
   +   ``access_logs.s3.enabled`` - Indicates whether access logs are enabled. The value is ``true`` or ``false``. The default is ``false``.
@@ -233,6 +232,14 @@ Optional:
 - `value` (String) The value of the attribute.
 
 
+<a id="nestedatt--minimum_load_balancer_capacity"></a>
+### Nested Schema for `minimum_load_balancer_capacity`
+
+Optional:
+
+- `capacity_units` (Number)
+
+
 <a id="nestedatt--subnet_mappings"></a>
 ### Nested Schema for `subnet_mappings`
 
@@ -241,7 +248,7 @@ Optional:
 - `allocation_id` (String) [Network Load Balancers] The allocation ID of the Elastic IP address for an internet-facing load balancer.
 - `i_pv_6_address` (String) [Network Load Balancers] The IPv6 address.
 - `private_i_pv_4_address` (String) [Network Load Balancers] The private IPv4 address for an internal load balancer.
-- `source_nat_ipv_6_prefix` (String)
+- `source_nat_ipv_6_prefix` (String) [Network Load Balancers with UDP listeners] The IPv6 prefix to use for source NAT. Specify an IPv6 prefix (/80 netmask) from the subnet CIDR block or ``auto_assigned`` to use an IPv6 prefix selected at random from the subnet CIDR block.
 - `subnet_id` (String) The ID of the subnet.
 
 

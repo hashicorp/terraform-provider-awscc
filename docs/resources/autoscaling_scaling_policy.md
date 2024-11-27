@@ -267,6 +267,7 @@ Optional:
 - `metric_name` (String)
 - `metrics` (Attributes Set) (see [below for nested schema](#nestedatt--target_tracking_configuration--customized_metric_specification--metrics))
 - `namespace` (String)
+- `period` (Number)
 - `statistic` (String)
 - `unit` (String)
 
@@ -288,6 +289,7 @@ Optional:
 - `id` (String)
 - `label` (String)
 - `metric_stat` (Attributes) (see [below for nested schema](#nestedatt--target_tracking_configuration--customized_metric_specification--metrics--metric_stat))
+- `period` (Number)
 - `return_data` (Boolean)
 
 <a id="nestedatt--target_tracking_configuration--customized_metric_specification--metrics--metric_stat"></a>
@@ -296,6 +298,7 @@ Optional:
 Optional:
 
 - `metric` (Attributes) (see [below for nested schema](#nestedatt--target_tracking_configuration--customized_metric_specification--metrics--metric_stat--metric))
+- `period` (Number)
 - `stat` (String)
 - `unit` (String)
 

@@ -30,6 +30,7 @@ Data Source schema for AWS::Wisdom::KnowledgeBase
 - `server_side_encryption_configuration` (Attributes) (see [below for nested schema](#nestedatt--server_side_encryption_configuration))
 - `source_configuration` (Attributes) (see [below for nested schema](#nestedatt--source_configuration))
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
+- `vector_ingestion_configuration` (Attributes) (see [below for nested schema](#nestedatt--vector_ingestion_configuration))
 
 <a id="nestedatt--rendering_configuration"></a>
 ### Nested Schema for `rendering_configuration`
@@ -53,6 +54,7 @@ Read-Only:
 Read-Only:
 
 - `app_integrations` (Attributes) (see [below for nested schema](#nestedatt--source_configuration--app_integrations))
+- `managed_source_configuration` (Attributes) (see [below for nested schema](#nestedatt--source_configuration--managed_source_configuration))
 
 <a id="nestedatt--source_configuration--app_integrations"></a>
 ### Nested Schema for `source_configuration.app_integrations`
@@ -63,6 +65,50 @@ Read-Only:
 - `object_fields` (List of String)
 
 
+<a id="nestedatt--source_configuration--managed_source_configuration"></a>
+### Nested Schema for `source_configuration.managed_source_configuration`
+
+Read-Only:
+
+- `web_crawler_configuration` (Attributes) (see [below for nested schema](#nestedatt--source_configuration--managed_source_configuration--web_crawler_configuration))
+
+<a id="nestedatt--source_configuration--managed_source_configuration--web_crawler_configuration"></a>
+### Nested Schema for `source_configuration.managed_source_configuration.web_crawler_configuration`
+
+Read-Only:
+
+- `crawler_limits` (Attributes) (see [below for nested schema](#nestedatt--source_configuration--managed_source_configuration--web_crawler_configuration--crawler_limits))
+- `exclusion_filters` (List of String)
+- `inclusion_filters` (List of String)
+- `scope` (String)
+- `url_configuration` (Attributes) (see [below for nested schema](#nestedatt--source_configuration--managed_source_configuration--web_crawler_configuration--url_configuration))
+
+<a id="nestedatt--source_configuration--managed_source_configuration--web_crawler_configuration--crawler_limits"></a>
+### Nested Schema for `source_configuration.managed_source_configuration.web_crawler_configuration.crawler_limits`
+
+Read-Only:
+
+- `rate_limit` (Number)
+
+
+<a id="nestedatt--source_configuration--managed_source_configuration--web_crawler_configuration--url_configuration"></a>
+### Nested Schema for `source_configuration.managed_source_configuration.web_crawler_configuration.url_configuration`
+
+Read-Only:
+
+- `seed_urls` (Attributes List) (see [below for nested schema](#nestedatt--source_configuration--managed_source_configuration--web_crawler_configuration--url_configuration--seed_urls))
+
+<a id="nestedatt--source_configuration--managed_source_configuration--web_crawler_configuration--url_configuration--seed_urls"></a>
+### Nested Schema for `source_configuration.managed_source_configuration.web_crawler_configuration.url_configuration.seed_urls`
+
+Read-Only:
+
+- `url` (String)
+
+
+
+
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
@@ -71,3 +117,82 @@ Read-Only:
 
 - `key` (String)
 - `value` (String)
+
+
+<a id="nestedatt--vector_ingestion_configuration"></a>
+### Nested Schema for `vector_ingestion_configuration`
+
+Read-Only:
+
+- `chunking_configuration` (Attributes) (see [below for nested schema](#nestedatt--vector_ingestion_configuration--chunking_configuration))
+- `parsing_configuration` (Attributes) (see [below for nested schema](#nestedatt--vector_ingestion_configuration--parsing_configuration))
+
+<a id="nestedatt--vector_ingestion_configuration--chunking_configuration"></a>
+### Nested Schema for `vector_ingestion_configuration.chunking_configuration`
+
+Read-Only:
+
+- `chunking_strategy` (String)
+- `fixed_size_chunking_configuration` (Attributes) (see [below for nested schema](#nestedatt--vector_ingestion_configuration--chunking_configuration--fixed_size_chunking_configuration))
+- `hierarchical_chunking_configuration` (Attributes) (see [below for nested schema](#nestedatt--vector_ingestion_configuration--chunking_configuration--hierarchical_chunking_configuration))
+- `semantic_chunking_configuration` (Attributes) (see [below for nested schema](#nestedatt--vector_ingestion_configuration--chunking_configuration--semantic_chunking_configuration))
+
+<a id="nestedatt--vector_ingestion_configuration--chunking_configuration--fixed_size_chunking_configuration"></a>
+### Nested Schema for `vector_ingestion_configuration.chunking_configuration.fixed_size_chunking_configuration`
+
+Read-Only:
+
+- `max_tokens` (Number)
+- `overlap_percentage` (Number)
+
+
+<a id="nestedatt--vector_ingestion_configuration--chunking_configuration--hierarchical_chunking_configuration"></a>
+### Nested Schema for `vector_ingestion_configuration.chunking_configuration.hierarchical_chunking_configuration`
+
+Read-Only:
+
+- `level_configurations` (Attributes List) (see [below for nested schema](#nestedatt--vector_ingestion_configuration--chunking_configuration--hierarchical_chunking_configuration--level_configurations))
+- `overlap_tokens` (Number)
+
+<a id="nestedatt--vector_ingestion_configuration--chunking_configuration--hierarchical_chunking_configuration--level_configurations"></a>
+### Nested Schema for `vector_ingestion_configuration.chunking_configuration.hierarchical_chunking_configuration.level_configurations`
+
+Read-Only:
+
+- `max_tokens` (Number)
+
+
+
+<a id="nestedatt--vector_ingestion_configuration--chunking_configuration--semantic_chunking_configuration"></a>
+### Nested Schema for `vector_ingestion_configuration.chunking_configuration.semantic_chunking_configuration`
+
+Read-Only:
+
+- `breakpoint_percentile_threshold` (Number)
+- `buffer_size` (Number)
+- `max_tokens` (Number)
+
+
+
+<a id="nestedatt--vector_ingestion_configuration--parsing_configuration"></a>
+### Nested Schema for `vector_ingestion_configuration.parsing_configuration`
+
+Read-Only:
+
+- `bedrock_foundation_model_configuration` (Attributes) (see [below for nested schema](#nestedatt--vector_ingestion_configuration--parsing_configuration--bedrock_foundation_model_configuration))
+- `parsing_strategy` (String)
+
+<a id="nestedatt--vector_ingestion_configuration--parsing_configuration--bedrock_foundation_model_configuration"></a>
+### Nested Schema for `vector_ingestion_configuration.parsing_configuration.bedrock_foundation_model_configuration`
+
+Read-Only:
+
+- `model_arn` (String)
+- `parsing_prompt` (Attributes) (see [below for nested schema](#nestedatt--vector_ingestion_configuration--parsing_configuration--bedrock_foundation_model_configuration--parsing_prompt))
+
+<a id="nestedatt--vector_ingestion_configuration--parsing_configuration--bedrock_foundation_model_configuration--parsing_prompt"></a>
+### Nested Schema for `vector_ingestion_configuration.parsing_configuration.bedrock_foundation_model_configuration.parsing_prompt`
+
+Read-Only:
+
+- `parsing_prompt_text` (String)
