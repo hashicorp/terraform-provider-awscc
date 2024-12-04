@@ -10,7 +10,287 @@ description: |-
 
 Resource Schema for AWS::EKS::Addon
 
+## Example Usage
 
+### EKS Addons : CoreDNS and Kube-Proxy
+To use awscc_eks_addon for creating CoreDNS and Kube-Proxy addon
+```terraform
+resource "awscc_eks_addon" "coredns" {
+  cluster_name      = var.cluster_name
+  addon_name        = "coredns"
+  addon_version     = "v1.11.3-eksbuild.1"
+  resolve_conflicts = "OVERWRITE"
+  tags = [{
+    key   = "Modified By"
+    value = "AWSCC"
+  }]
+}
+
+resource "awscc_eks_addon" "kube_proxy" {
+  cluster_name = var.cluster_name
+  addon_name   = "kube-proxy"
+  # Optional: addon_version = "v1.30.5-eksbuild.2"
+  # Optional: resolve_conflicts = "OVERWRITE"
+  tags = [{
+    key   = "Modified By"
+    value = "AWSCC"
+  }]
+}
+
+
+variable "cluster_name" {
+  type = string
+}
+```
+
+### EKS Addon: VPC-CNI
+To use awscc_eks_addon for creating VPC-CNI addon along with the required IAM role and policy 
+```terraform
+# AWS IAM expects the OIDC provider URL without the `https://` prefix in the condition block. 
+# This creates a local variable for it:
+locals {
+  oidc_provider = replace(awscc_eks_cluster.eks_cluster.open_id_connect_issuer_url, "https://", "")
+}
+
+# IAM policy and role for EKS VPC CNI IPv6 support
+
+resource "awscc_iam_managed_policy" "eks_vpc_cni_ipv6_policy" {
+  managed_policy_name = "AmazonEKS_CNI_IPv6_Policy"
+  policy_document = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "ec2:AssignIpv6Addresses",
+          "ec2:DescribeInstances",
+          "ec2:DescribeTags",
+          "ec2:DescribeNetworkInterfaces",
+          "ec2:DescribeInstanceTypes"
+        ]
+        Resource = "*"
+      },
+      {
+        Effect   = "Allow"
+        Action   = ["ec2:CreateTags"]
+        Resource = "arn:aws:ec2:*:*:network-interface/*"
+      }
+    ]
+  })
+}
+
+resource "awscc_iam_role" "eks_vpc_cni_role" {
+  role_name = "AmazonEKSVPCCNIRole"
+  assume_role_policy_document = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect    = "Allow"
+        Principal = { Federated = awscc_iam_oidc_provider.eks.arn }
+        Action    = "sts:AssumeRoleWithWebIdentity"
+        Condition = {
+          StringEquals = {
+            "${local.oidc_provider}:aud" = "sts.amazonaws.com"
+            "${local.oidc_provider}:sub" = "system:serviceaccount:kube-system:aws-node"
+          }
+        }
+      }
+    ]
+  })
+  managed_policy_arns = [
+    "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
+    awscc_iam_managed_policy.eks_vpc_cni_ipv6_policy.policy_arn
+  ]
+}
+
+resource "awscc_eks_addon" "vpc_cni" {
+  cluster_name             = var.cluster_name
+  addon_name               = "vpc-cni"
+  service_account_role_arn = awscc_iam_role.eks_vpc_cni_role.arn
+  resolve_conflicts        = "OVERWRITE"
+  tags = [{
+    key   = "Modified By"
+    value = "AWSCC"
+  }]
+}
+
+variable "cluster_name" {
+  type = string
+}
+```
+
+### EKS Addon: EBS CSI Driver
+To use awscc_eks_addon for creating EBS CSI Driver addon along with the required IAM role and policy
+```terraform
+# AWS IAM expects the OIDC provider URL without the `https://` prefix in the condition block. This creates a local variable for it:
+# locals {
+#   oidc_provider = replace(awscc_eks_cluster.eks_cluster.open_id_connect_issuer_url, "https://", "")
+# }
+
+# Optional Custom policy for KMS support and EBS CSI Driver Role
+resource "awscc_iam_managed_policy" "ebs_csi_kms_policy" {
+  managed_policy_name = "AmazonEKS_EBS_CSI_KMS_Policy"
+  policy_document = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "kms:CreateGrant",
+          "kms:ListGrants",
+          "kms:RevokeGrant"
+        ]
+        Resource = [var.kms_key_arn]
+        Condition = {
+          Bool = {
+            "kms:GrantIsForAWSResource" = "true"
+          }
+        }
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "kms:Encrypt",
+          "kms:Decrypt",
+          "kms:ReEncrypt*",
+          "kms:GenerateDataKey*",
+          "kms:DescribeKey"
+        ]
+        Resource = [var.kms_key_arn]
+      }
+    ]
+  })
+}
+
+resource "awscc_iam_role" "ebs_csi_role" {
+  role_name = "AmazonEKS_EBS_CSI_DriverRole"
+  assume_role_policy_document = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Effect = "Allow"
+      Principal = {
+        Federated = awscc_iam_oidc_provider.eks.arn
+        # Example: "arn:aws:iam::111122223333:oidc-provider/oidc.eks.region-code.amazonaws.com/id/EXAMPLED539D4633E53DE1B71EXAMPLE"
+      }
+      Action = "sts:AssumeRoleWithWebIdentity"
+      Condition = {
+        StringEquals = {
+          "${local.oidc_provider}:aud" = "sts.amazonaws.com"
+          "${local.oidc_provider}:sub" = "system:serviceaccount:kube-system:ebs-csi-controller-sa"
+        }
+      }
+    }]
+  })
+  managed_policy_arns = [
+    "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy",
+    awscc_iam_managed_policy.ebs_csi_kms_policy.policy_arn
+  ]
+}
+
+
+resource "awscc_eks_addon" "ebs_csi" {
+  cluster_name             = var.cluster_name
+  addon_name               = "aws-ebs-csi-driver"
+  service_account_role_arn = awscc_iam_role.ebs_csi_role.arn
+  resolve_conflicts        = "OVERWRITE"
+  tags = [{
+    key   = "Modified By"
+    value = "AWSCC"
+  }]
+}
+
+variable "cluster_name" {
+  type = string
+}
+```
+
+### EKS Addon: EFS CSI Driver
+To use awscc_eks_addon for creating EFS CSI Driver addon along with the required IAM role and policy
+```terraform
+# AWS IAM expects the OIDC provider URL without the `https://` prefix in the condition block. 
+# This creates a local variable for it:
+locals {
+  oidc_provider = replace(awscc_eks_cluster.eks_cluster.open_id_connect_issuer_url, "https://", "")
+}
+
+# Optional Custom policy for KMS support and EBS CSI Driver Role
+
+
+resource "awscc_iam_managed_policy" "efs_csi_kms_policy" {
+  managed_policy_name = "AmazonEKS_EFS_CSI_KMS_Policy"
+  policy_document = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "kms:CreateGrant",
+          "kms:ListGrants",
+          "kms:RevokeGrant"
+        ]
+        Resource = [var.kms_key_arn]
+        Condition = {
+          Bool = {
+            "kms:GrantIsForAWSResource" = "true"
+          }
+        }
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "kms:Encrypt",
+          "kms:Decrypt",
+          "kms:ReEncrypt*",
+          "kms:GenerateDataKey*",
+          "kms:DescribeKey"
+        ]
+        Resource = [var.kms_key_arn]
+      }
+    ]
+  })
+}
+
+resource "awscc_iam_role" "efs_csi_role" {
+  role_name = "AmazonEKS_EFS_CSI_Driver_Role"
+  assume_role_policy_document = jsonencode({
+    Statement = [{
+      Action = "sts:AssumeRoleWithWebIdentity"
+      Effect = "Allow"
+      Principal = {
+        Federated = awscc_iam_oidc_provider.eks.arn
+        # Example: "arn:aws:iam::111122223333:oidc-provider/oidc.eks.region-code.amazonaws.com/id/EXAMPLED539D4633E53DE1B71EXAMPLE"
+      }
+      Condition = {
+        StringEquals = {
+          "${local.oidc_provider}:sub" = "system:serviceaccount:kube-system:efs-csi-controller-sa"
+          "${local.oidc_provider}:aud" = "sts.amazonaws.com"
+        }
+      }
+    }]
+    Version = "2012-10-17"
+  })
+  managed_policy_arns = [
+    awscc_iam_managed_policy.efs_csi_kms_policy.arn,
+    "arn:aws:iam::aws:policy/service-role/AmazonEFSCSIDriverPolicy"
+  ]
+}
+
+resource "awscc_eks_addon" "efs_csi" {
+  cluster_name             = awscc_eks_cluster.cluster_name
+  addon_name               = "aws-efs-csi-driver"
+  addon_version            = "v2.0.8-eksbuild.1"
+  service_account_role_arn = awscc_iam_role.efs_csi_role.arn
+  resolve_conflicts        = "OVERWRITE"
+  tags = [{
+    key   = "Modified By"
+    value = "AWSCC"
+  }]
+}
+
+variable "cluster_name" {
+  type = string
+}
+```
 
 <!-- schema generated by tfplugindocs -->
 ## Schema
