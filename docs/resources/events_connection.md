@@ -75,6 +75,7 @@ resource "awscc_events_connection" "auth0_connection" {
 - `auth_parameters` (Attributes) (see [below for nested schema](#nestedatt--auth_parameters))
 - `authorization_type` (String)
 - `description` (String) Description of the connection.
+- `invocation_connectivity_parameters` (Attributes) The private resource the HTTP request will be sent to. (see [below for nested schema](#nestedatt--invocation_connectivity_parameters))
 - `name` (String) Name of the connection.
 
 ### Read-Only
@@ -90,6 +91,7 @@ Optional:
 
 - `api_key_auth_parameters` (Attributes) (see [below for nested schema](#nestedatt--auth_parameters--api_key_auth_parameters))
 - `basic_auth_parameters` (Attributes) (see [below for nested schema](#nestedatt--auth_parameters--basic_auth_parameters))
+- `connectivity_parameters` (Attributes) (see [below for nested schema](#nestedatt--auth_parameters--connectivity_parameters))
 - `invocation_http_parameters` (Attributes) (see [below for nested schema](#nestedatt--auth_parameters--invocation_http_parameters))
 - `o_auth_parameters` (Attributes) (see [below for nested schema](#nestedatt--auth_parameters--o_auth_parameters))
 
@@ -109,6 +111,26 @@ Optional:
 
 - `password` (String)
 - `username` (String)
+
+
+<a id="nestedatt--auth_parameters--connectivity_parameters"></a>
+### Nested Schema for `auth_parameters.connectivity_parameters`
+
+Optional:
+
+- `resource_parameters` (Attributes) (see [below for nested schema](#nestedatt--auth_parameters--connectivity_parameters--resource_parameters))
+
+<a id="nestedatt--auth_parameters--connectivity_parameters--resource_parameters"></a>
+### Nested Schema for `auth_parameters.connectivity_parameters.resource_parameters`
+
+Optional:
+
+- `resource_configuration_arn` (String)
+
+Read-Only:
+
+- `resource_association_arn` (String)
+
 
 
 <a id="nestedatt--auth_parameters--invocation_http_parameters"></a>
@@ -207,6 +229,28 @@ Optional:
 - `is_value_secret` (Boolean)
 - `key` (String)
 - `value` (String)
+
+
+
+
+
+<a id="nestedatt--invocation_connectivity_parameters"></a>
+### Nested Schema for `invocation_connectivity_parameters`
+
+Optional:
+
+- `resource_parameters` (Attributes) (see [below for nested schema](#nestedatt--invocation_connectivity_parameters--resource_parameters))
+
+<a id="nestedatt--invocation_connectivity_parameters--resource_parameters"></a>
+### Nested Schema for `invocation_connectivity_parameters.resource_parameters`
+
+Optional:
+
+- `resource_configuration_arn` (String)
+
+Read-Only:
+
+- `resource_association_arn` (String)
 
 ## Import
 

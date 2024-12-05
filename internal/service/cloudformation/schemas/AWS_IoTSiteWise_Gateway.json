@@ -156,7 +156,18 @@
     }
   },
   "additionalProperties": false,
-  "taggable": true,
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "iotsitewise:TagResource",
+      "iotsitewise:UntagResource",
+      "iotsitewise:ListTagsForResource"
+    ]
+  },
   "required": [
     "GatewayName",
     "GatewayPlatform"
@@ -212,7 +223,8 @@
     },
     "list": {
       "permissions": [
-        "iotsitewise:ListGateways"
+        "iotsitewise:ListGateways",
+        "iotsitewise:ListTagsForResource"
       ]
     }
   }

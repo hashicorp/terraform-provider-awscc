@@ -2755,6 +2755,11 @@
         "path": "./examples/resources/awscc_internetmonitor_monitor/import.sh"
     },
     {
+        "resource": "awscc_invoicing_invoice_unit",
+        "identifier": ["InvoiceUnitArn"],
+        "path": "./examples/resources/awscc_invoicing_invoice_unit/import.sh"
+    },
+    {
         "resource": "awscc_iot_account_audit_configuration",
         "identifier": ["AccountId"],
         "path": "./examples/resources/awscc_iot_account_audit_configuration/import.sh"
@@ -3365,6 +3370,11 @@
         "path": "./examples/resources/awscc_logs_destination/import.sh"
     },
     {
+        "resource": "awscc_logs_integration",
+        "identifier": ["IntegrationName"],
+        "path": "./examples/resources/awscc_logs_integration/import.sh"
+    },
+    {
         "resource": "awscc_logs_log_anomaly_detector",
         "identifier": ["AnomalyDetectorArn"],
         "path": "./examples/resources/awscc_logs_log_anomaly_detector/import.sh"
@@ -3683,6 +3693,11 @@
         "resource": "awscc_memorydb_cluster",
         "identifier": ["ClusterName"],
         "path": "./examples/resources/awscc_memorydb_cluster/import.sh"
+    },
+    {
+        "resource": "awscc_memorydb_multi_region_cluster",
+        "identifier": ["MultiRegionClusterName"],
+        "path": "./examples/resources/awscc_memorydb_multi_region_cluster/import.sh"
     },
     {
         "resource": "awscc_memorydb_parameter_group",

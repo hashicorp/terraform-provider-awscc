@@ -154,6 +154,7 @@ Optional:
 - `current_count` (Number) The number of instances that are currently in the instance group of a SageMaker HyperPod cluster.
 - `instance_storage_configs` (Attributes List) The instance storage configuration for the instance group. (see [below for nested schema](#nestedatt--instance_groups--instance_storage_configs))
 - `on_start_deep_health_checks` (List of String) Nodes will undergo advanced stress test to detect and replace faulty instances, based on the type of deep health check(s) passed in.
+- `override_vpc_config` (Attributes) Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs, hosted models, and compute resources have access to. You can control access to and from your resources by configuring a VPC. (see [below for nested schema](#nestedatt--instance_groups--override_vpc_config))
 - `threads_per_core` (Number) The number you specified to TreadsPerCore in CreateCluster for enabling or disabling multithreading. For instance types that support multithreading, you can specify 1 for disabling multithreading and 2 for enabling multithreading.
 
 <a id="nestedatt--instance_groups--life_cycle_config"></a>
@@ -179,6 +180,15 @@ Optional:
 
 - `volume_size_in_gb` (Number) The size in gigabytes (GB) of the additional EBS volume to be attached to the instances in the SageMaker HyperPod cluster instance group. The additional EBS volume is attached to each instance within the SageMaker HyperPod cluster instance group and mounted to /opt/sagemaker.
 
+
+
+<a id="nestedatt--instance_groups--override_vpc_config"></a>
+### Nested Schema for `instance_groups.override_vpc_config`
+
+Optional:
+
+- `security_group_ids` (List of String) The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security groups for the VPC that is specified in the Subnets field.
+- `subnets` (List of String) The ID of the subnets in the VPC to which you want to connect your training job or model.
 
 
 

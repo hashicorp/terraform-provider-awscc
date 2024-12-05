@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1103 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1106 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -2586,6 +2586,10 @@ resource_schema "aws_internetmonitor_monitor" {
   cloudformation_type_name = "AWS::InternetMonitor::Monitor"
 }
 
+resource_schema "aws_invoicing_invoice_unit" {
+  cloudformation_type_name = "AWS::Invoicing::InvoiceUnit"
+}
+
 resource_schema "aws_iot_account_audit_configuration" {
   cloudformation_type_name = "AWS::IoT::AccountAuditConfiguration"
 }
@@ -3122,6 +3126,10 @@ resource_schema "aws_logs_destination" {
   cloudformation_type_name = "AWS::Logs::Destination"
 }
 
+resource_schema "aws_logs_integration" {
+  cloudformation_type_name = "AWS::Logs::Integration"
+}
+
 resource_schema "aws_logs_log_anomaly_detector" {
   cloudformation_type_name = "AWS::Logs::LogAnomalyDetector"
 }
@@ -3402,6 +3410,10 @@ resource_schema "aws_memorydb_acl" {
 
 resource_schema "aws_memorydb_cluster" {
   cloudformation_type_name = "AWS::MemoryDB::Cluster"
+}
+
+resource_schema "aws_memorydb_multi_region_cluster" {
+  cloudformation_type_name = "AWS::MemoryDB::MultiRegionCluster"
 }
 
 resource_schema "aws_memorydb_parameter_group" {

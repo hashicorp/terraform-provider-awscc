@@ -108,13 +108,15 @@
     "/properties/Arn"
   ],
   "createOnlyProperties": [
+    "/properties/LoggingConfig"
+  ],
+  "writeOnlyProperties": [
     "/properties/ExecutionRoleArn",
-    "/properties/LoggingConfig",
-    "/properties/TypeNameAlias",
-    "/properties/TypeName",
     "/properties/Type",
-    "/properties/PublisherId",
-    "/properties/PublicTypeArn"
+    "/properties/LoggingConfig",
+    "/properties/VersionBump",
+    "/properties/AutoUpdate",
+    "/properties/MajorVersion"
   ],
   "primaryIdentifier": [
     "/properties/Arn"

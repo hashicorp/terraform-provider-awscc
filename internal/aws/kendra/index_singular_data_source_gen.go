@@ -259,7 +259,8 @@ func indexDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Edition of index",
 		//	  "enum": [
 		//	    "DEVELOPER_EDITION",
-		//	    "ENTERPRISE_EDITION"
+		//	    "ENTERPRISE_EDITION",
+		//	    "GEN_AI_ENTERPRISE_EDITION"
 		//	  ],
 		//	  "type": "string"
 		//	}
