@@ -1,0 +1,1 @@
+$ terraform import awscc_memorydb_multi_region_cluster.example "multi_region_cluster_name"

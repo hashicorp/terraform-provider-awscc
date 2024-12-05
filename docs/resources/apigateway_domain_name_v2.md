@@ -20,7 +20,6 @@ Resource Type definition for AWS::ApiGateway::DomainNameV2.
 - `certificate_arn` (String)
 - `domain_name` (String)
 - `endpoint_configuration` (Attributes) (see [below for nested schema](#nestedatt--endpoint_configuration))
-- `management_policy` (String)
 - `policy` (String)
 - `security_policy` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))

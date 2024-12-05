@@ -26,7 +26,6 @@ Data Source schema for AWS::ApiGateway::DomainNameV2
 - `domain_name_arn` (String) The amazon resource name (ARN) of the domain name resource.
 - `domain_name_id` (String)
 - `endpoint_configuration` (Attributes) (see [below for nested schema](#nestedatt--endpoint_configuration))
-- `management_policy` (String)
 - `policy` (String)
 - `security_policy` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
