@@ -114,19 +114,6 @@ func domainNameV2Resource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
-		// Property: ManagementPolicy
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "type": "string"
-		//	}
-		"management_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
 		// Property: Policy
 		// CloudFormation resource type schema:
 		//
@@ -227,7 +214,6 @@ func domainNameV2Resource(ctx context.Context) (resource.Resource, error) {
 		"domain_name_id":         "DomainNameId",
 		"endpoint_configuration": "EndpointConfiguration",
 		"key":                    "Key",
-		"management_policy":      "ManagementPolicy",
 		"policy":                 "Policy",
 		"security_policy":        "SecurityPolicy",
 		"tags":                   "Tags",

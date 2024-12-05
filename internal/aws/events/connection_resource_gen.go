@@ -106,6 +106,35 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "object"
 		//	    },
+		//	    "ConnectivityParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "ResourceParameters": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "ResourceAssociationArn": {
+		//	              "maxLength": 2048,
+		//	              "minLength": 20,
+		//	              "pattern": "^arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:servicenetworkresourceassociation/snra-[0-9a-z]{17}$",
+		//	              "type": "string"
+		//	            },
+		//	            "ResourceConfigurationArn": {
+		//	              "maxLength": 2048,
+		//	              "pattern": "^arn:[a-z0-9f\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:resourceconfiguration/rcfg-[0-9a-z]{17}$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ResourceConfigurationArn"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ResourceParameters"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "InvocationHttpParameters": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -365,6 +394,49 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ConnectivityParameters
+				"connectivity_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ResourceParameters
+						"resource_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ResourceAssociationArn
+								"resource_association_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ResourceConfigurationArn
+								"resource_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(2048),
+										stringvalidator.RegexMatches(regexp.MustCompile("^arn:[a-z0-9f\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:resourceconfiguration/rcfg-[0-9a-z]{17}$"), ""),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -784,6 +856,82 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: InvocationConnectivityParameters
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The private resource the HTTP request will be sent to.",
+		//	  "properties": {
+		//	    "ResourceParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "ResourceAssociationArn": {
+		//	          "maxLength": 2048,
+		//	          "minLength": 20,
+		//	          "pattern": "^arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:servicenetworkresourceassociation/snra-[0-9a-z]{17}$",
+		//	          "type": "string"
+		//	        },
+		//	        "ResourceConfigurationArn": {
+		//	          "maxLength": 2048,
+		//	          "pattern": "^arn:[a-z0-9f\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:resourceconfiguration/rcfg-[0-9a-z]{17}$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ResourceConfigurationArn"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "ResourceParameters"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"invocation_connectivity_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ResourceParameters
+				"resource_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ResourceAssociationArn
+						"resource_association_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ResourceConfigurationArn
+						"resource_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthAtMost(2048),
+								stringvalidator.RegexMatches(regexp.MustCompile("^arn:[a-z0-9f\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:resourceconfiguration/rcfg-[0-9a-z]{17}$"), ""),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Object{ /*START VALIDATORS*/
+						fwvalidators.NotNullObject(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The private resource the HTTP request will be sent to.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -844,32 +992,37 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Events::Connection").WithTerraformTypeName("awscc_events_connection")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"api_key_auth_parameters":    "ApiKeyAuthParameters",
-		"api_key_name":               "ApiKeyName",
-		"api_key_value":              "ApiKeyValue",
-		"arn":                        "Arn",
-		"auth_parameters":            "AuthParameters",
-		"authorization_endpoint":     "AuthorizationEndpoint",
-		"authorization_type":         "AuthorizationType",
-		"basic_auth_parameters":      "BasicAuthParameters",
-		"body_parameters":            "BodyParameters",
-		"client_id":                  "ClientID",
-		"client_parameters":          "ClientParameters",
-		"client_secret":              "ClientSecret",
-		"description":                "Description",
-		"header_parameters":          "HeaderParameters",
-		"http_method":                "HttpMethod",
-		"invocation_http_parameters": "InvocationHttpParameters",
-		"is_value_secret":            "IsValueSecret",
-		"key":                        "Key",
-		"name":                       "Name",
-		"o_auth_http_parameters":     "OAuthHttpParameters",
-		"o_auth_parameters":          "OAuthParameters",
-		"password":                   "Password",
-		"query_string_parameters":    "QueryStringParameters",
-		"secret_arn":                 "SecretArn",
-		"username":                   "Username",
-		"value":                      "Value",
+		"api_key_auth_parameters":            "ApiKeyAuthParameters",
+		"api_key_name":                       "ApiKeyName",
+		"api_key_value":                      "ApiKeyValue",
+		"arn":                                "Arn",
+		"auth_parameters":                    "AuthParameters",
+		"authorization_endpoint":             "AuthorizationEndpoint",
+		"authorization_type":                 "AuthorizationType",
+		"basic_auth_parameters":              "BasicAuthParameters",
+		"body_parameters":                    "BodyParameters",
+		"client_id":                          "ClientID",
+		"client_parameters":                  "ClientParameters",
+		"client_secret":                      "ClientSecret",
+		"connectivity_parameters":            "ConnectivityParameters",
+		"description":                        "Description",
+		"header_parameters":                  "HeaderParameters",
+		"http_method":                        "HttpMethod",
+		"invocation_connectivity_parameters": "InvocationConnectivityParameters",
+		"invocation_http_parameters":         "InvocationHttpParameters",
+		"is_value_secret":                    "IsValueSecret",
+		"key":                                "Key",
+		"name":                               "Name",
+		"o_auth_http_parameters":             "OAuthHttpParameters",
+		"o_auth_parameters":                  "OAuthParameters",
+		"password":                           "Password",
+		"query_string_parameters":            "QueryStringParameters",
+		"resource_association_arn":           "ResourceAssociationArn",
+		"resource_configuration_arn":         "ResourceConfigurationArn",
+		"resource_parameters":                "ResourceParameters",
+		"secret_arn":                         "SecretArn",
+		"username":                           "Username",
+		"value":                              "Value",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
