@@ -553,6 +553,7 @@
 //go:generate go run generators/resource/main.go -resource awscc_inspectorv2_cis_scan_configuration -cfschema ../service/cloudformation/schemas/AWS_InspectorV2_CisScanConfiguration.json -package inspectorv2 -- ../aws/inspectorv2/cis_scan_configuration_resource_gen.go ../aws/inspectorv2/cis_scan_configuration_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_inspectorv2_filter -cfschema ../service/cloudformation/schemas/AWS_InspectorV2_Filter.json -package inspectorv2 -- ../aws/inspectorv2/filter_resource_gen.go ../aws/inspectorv2/filter_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_internetmonitor_monitor -cfschema ../service/cloudformation/schemas/AWS_InternetMonitor_Monitor.json -package internetmonitor -- ../aws/internetmonitor/monitor_resource_gen.go ../aws/internetmonitor/monitor_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_invoicing_invoice_unit -cfschema ../service/cloudformation/schemas/AWS_Invoicing_InvoiceUnit.json -package invoicing -- ../aws/invoicing/invoice_unit_resource_gen.go ../aws/invoicing/invoice_unit_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_iot_account_audit_configuration -cfschema ../service/cloudformation/schemas/AWS_IoT_AccountAuditConfiguration.json -package iot -- ../aws/iot/account_audit_configuration_resource_gen.go ../aws/iot/account_audit_configuration_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_iot_authorizer -cfschema ../service/cloudformation/schemas/AWS_IoT_Authorizer.json -package iot -- ../aws/iot/authorizer_resource_gen.go ../aws/iot/authorizer_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_iot_billing_group -cfschema ../service/cloudformation/schemas/AWS_IoT_BillingGroup.json -package iot -- ../aws/iot/billing_group_resource_gen.go ../aws/iot/billing_group_resource_gen_test.go
@@ -675,6 +676,7 @@
 //go:generate go run generators/resource/main.go -resource awscc_logs_delivery_destination -cfschema ../service/cloudformation/schemas/AWS_Logs_DeliveryDestination.json -package logs -- ../aws/logs/delivery_destination_resource_gen.go ../aws/logs/delivery_destination_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_logs_delivery_source -cfschema ../service/cloudformation/schemas/AWS_Logs_DeliverySource.json -package logs -- ../aws/logs/delivery_source_resource_gen.go ../aws/logs/delivery_source_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_logs_destination -cfschema ../service/cloudformation/schemas/AWS_Logs_Destination.json -package logs -- ../aws/logs/destination_resource_gen.go ../aws/logs/destination_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_logs_integration -cfschema ../service/cloudformation/schemas/AWS_Logs_Integration.json -package logs -- ../aws/logs/integration_resource_gen.go ../aws/logs/integration_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_logs_log_anomaly_detector -cfschema ../service/cloudformation/schemas/AWS_Logs_LogAnomalyDetector.json -package logs -- ../aws/logs/log_anomaly_detector_resource_gen.go ../aws/logs/log_anomaly_detector_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_logs_log_group -cfschema ../service/cloudformation/schemas/AWS_Logs_LogGroup.json -package logs -- ../aws/logs/log_group_resource_gen.go ../aws/logs/log_group_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_logs_log_stream -cfschema ../service/cloudformation/schemas/AWS_Logs_LogStream.json -package logs -- ../aws/logs/log_stream_resource_gen.go ../aws/logs/log_stream_resource_gen_test.go
@@ -739,6 +741,7 @@
 //go:generate go run generators/resource/main.go -resource awscc_mediatailor_vod_source -cfschema ../service/cloudformation/schemas/AWS_MediaTailor_VodSource.json -package mediatailor -- ../aws/mediatailor/vod_source_resource_gen.go ../aws/mediatailor/vod_source_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_memorydb_acl -cfschema ../service/cloudformation/schemas/AWS_MemoryDB_ACL.json -package memorydb -- ../aws/memorydb/acl_resource_gen.go ../aws/memorydb/acl_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_memorydb_cluster -cfschema ../service/cloudformation/schemas/AWS_MemoryDB_Cluster.json -package memorydb -- ../aws/memorydb/cluster_resource_gen.go ../aws/memorydb/cluster_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_memorydb_multi_region_cluster -cfschema ../service/cloudformation/schemas/AWS_MemoryDB_MultiRegionCluster.json -package memorydb -- ../aws/memorydb/multi_region_cluster_resource_gen.go ../aws/memorydb/multi_region_cluster_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_memorydb_parameter_group -cfschema ../service/cloudformation/schemas/AWS_MemoryDB_ParameterGroup.json -package memorydb -- ../aws/memorydb/parameter_group_resource_gen.go ../aws/memorydb/parameter_group_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_memorydb_subnet_group -cfschema ../service/cloudformation/schemas/AWS_MemoryDB_SubnetGroup.json -package memorydb -- ../aws/memorydb/subnet_group_resource_gen.go ../aws/memorydb/subnet_group_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_memorydb_user -cfschema ../service/cloudformation/schemas/AWS_MemoryDB_User.json -package memorydb -- ../aws/memorydb/user_resource_gen.go ../aws/memorydb/user_resource_gen_test.go
@@ -1188,6 +1191,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/inspector"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/inspectorv2"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/internetmonitor"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/invoicing"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iot"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iotanalytics"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iotcoredeviceadvisor"

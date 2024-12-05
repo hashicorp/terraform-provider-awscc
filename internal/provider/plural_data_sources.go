@@ -403,6 +403,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_inspectorv2_cis_scan_configurations -cftype AWS::InspectorV2::CisScanConfiguration -package inspectorv2 ../aws/inspectorv2/cis_scan_configuration_plural_data_source_gen.go ../aws/inspectorv2/cis_scan_configuration_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_inspectorv2_filters -cftype AWS::InspectorV2::Filter -package inspectorv2 ../aws/inspectorv2/filter_plural_data_source_gen.go ../aws/inspectorv2/filter_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_internetmonitor_monitors -cftype AWS::InternetMonitor::Monitor -package internetmonitor ../aws/internetmonitor/monitor_plural_data_source_gen.go ../aws/internetmonitor/monitor_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_invoicing_invoice_units -cftype AWS::Invoicing::InvoiceUnit -package invoicing ../aws/invoicing/invoice_unit_plural_data_source_gen.go ../aws/invoicing/invoice_unit_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_iot_account_audit_configurations -cftype AWS::IoT::AccountAuditConfiguration -package iot ../aws/iot/account_audit_configuration_plural_data_source_gen.go ../aws/iot/account_audit_configuration_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_iot_authorizers -cftype AWS::IoT::Authorizer -package iot ../aws/iot/authorizer_plural_data_source_gen.go ../aws/iot/authorizer_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_iot_billing_groups -cftype AWS::IoT::BillingGroup -package iot ../aws/iot/billing_group_plural_data_source_gen.go ../aws/iot/billing_group_plural_data_source_gen_test.go
@@ -512,6 +513,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_logs_delivery_destinations -cftype AWS::Logs::DeliveryDestination -package logs ../aws/logs/delivery_destination_plural_data_source_gen.go ../aws/logs/delivery_destination_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_logs_delivery_sources -cftype AWS::Logs::DeliverySource -package logs ../aws/logs/delivery_source_plural_data_source_gen.go ../aws/logs/delivery_source_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_logs_destinations -cftype AWS::Logs::Destination -package logs ../aws/logs/destination_plural_data_source_gen.go ../aws/logs/destination_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_logs_integrations -cftype AWS::Logs::Integration -package logs ../aws/logs/integration_plural_data_source_gen.go ../aws/logs/integration_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_logs_log_anomaly_detectors -cftype AWS::Logs::LogAnomalyDetector -package logs ../aws/logs/log_anomaly_detector_plural_data_source_gen.go ../aws/logs/log_anomaly_detector_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_logs_log_groups -cftype AWS::Logs::LogGroup -package logs ../aws/logs/log_group_plural_data_source_gen.go ../aws/logs/log_group_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_logs_metric_filters -cftype AWS::Logs::MetricFilter -package logs ../aws/logs/metric_filter_plural_data_source_gen.go ../aws/logs/metric_filter_plural_data_source_gen_test.go
@@ -560,6 +562,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_mediatailor_source_locations -cftype AWS::MediaTailor::SourceLocation -package mediatailor ../aws/mediatailor/source_location_plural_data_source_gen.go ../aws/mediatailor/source_location_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_memorydb_acls -cftype AWS::MemoryDB::ACL -package memorydb ../aws/memorydb/acl_plural_data_source_gen.go ../aws/memorydb/acl_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_memorydb_clusters -cftype AWS::MemoryDB::Cluster -package memorydb ../aws/memorydb/cluster_plural_data_source_gen.go ../aws/memorydb/cluster_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_memorydb_multi_region_clusters -cftype AWS::MemoryDB::MultiRegionCluster -package memorydb ../aws/memorydb/multi_region_cluster_plural_data_source_gen.go ../aws/memorydb/multi_region_cluster_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_memorydb_parameter_groups -cftype AWS::MemoryDB::ParameterGroup -package memorydb ../aws/memorydb/parameter_group_plural_data_source_gen.go ../aws/memorydb/parameter_group_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_memorydb_subnet_groups -cftype AWS::MemoryDB::SubnetGroup -package memorydb ../aws/memorydb/subnet_group_plural_data_source_gen.go ../aws/memorydb/subnet_group_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_memorydb_users -cftype AWS::MemoryDB::User -package memorydb ../aws/memorydb/user_plural_data_source_gen.go ../aws/memorydb/user_plural_data_source_gen_test.go
@@ -926,6 +929,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/inspector"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/inspectorv2"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/internetmonitor"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/invoicing"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iot"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iotanalytics"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iotcoredeviceadvisor"
