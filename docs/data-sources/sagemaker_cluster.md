@@ -45,6 +45,7 @@ Read-Only:
 - `instance_type` (String) The instance type of the instance group of a SageMaker HyperPod cluster.
 - `life_cycle_config` (Attributes) The lifecycle configuration for a SageMaker HyperPod cluster. (see [below for nested schema](#nestedatt--instance_groups--life_cycle_config))
 - `on_start_deep_health_checks` (List of String) Nodes will undergo advanced stress test to detect and replace faulty instances, based on the type of deep health check(s) passed in.
+- `override_vpc_config` (Attributes) Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs, hosted models, and compute resources have access to. You can control access to and from your resources by configuring a VPC. (see [below for nested schema](#nestedatt--instance_groups--override_vpc_config))
 - `threads_per_core` (Number) The number you specified to TreadsPerCore in CreateCluster for enabling or disabling multithreading. For instance types that support multithreading, you can specify 1 for disabling multithreading and 2 for enabling multithreading.
 
 <a id="nestedatt--instance_groups--instance_storage_configs"></a>
@@ -70,6 +71,15 @@ Read-Only:
 
 - `on_create` (String) The file name of the entrypoint script of lifecycle scripts under SourceS3Uri. This entrypoint script runs during cluster creation.
 - `source_s3_uri` (String) An Amazon S3 bucket path where your lifecycle scripts are stored.
+
+
+<a id="nestedatt--instance_groups--override_vpc_config"></a>
+### Nested Schema for `instance_groups.override_vpc_config`
+
+Read-Only:
+
+- `security_group_ids` (List of String) The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security groups for the VPC that is specified in the Subnets field.
+- `subnets` (List of String) The ID of the subnets in the VPC to which you want to connect your training job or model.
 
 
 
