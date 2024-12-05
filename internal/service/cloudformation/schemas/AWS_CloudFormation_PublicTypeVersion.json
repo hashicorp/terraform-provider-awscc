@@ -91,7 +91,8 @@
         "cloudformation:DescribePublisher",
         "s3:GetObject",
         "s3:PutObject"
-      ]
+      ],
+      "timeoutInMinutes": 2160
     },
     "delete": {
       "permissions": []

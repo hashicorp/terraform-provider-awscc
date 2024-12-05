@@ -47,12 +47,6 @@
         "string"
       ]
     },
-    "ManagementPolicy": {
-      "type": [
-        "object",
-        "string"
-      ]
-    },
     "DomainNameId": {
       "type": "string"
     },
@@ -99,8 +93,7 @@
       "permissions": [
         "apigateway:POST",
         "apigateway:GET",
-        "apigateway:UpdateDomainNamePolicy",
-        "apigateway:UpdateDomainNameManagementPolicy"
+        "apigateway:UpdateDomainNamePolicy"
       ]
     },
     "read": {
@@ -113,16 +106,14 @@
         "apigateway:GET",
         "apigateway:PUT",
         "apigateway:PATCH",
-        "apigateway:UpdateDomainNamePolicy",
-        "apigateway:UpdateDomainNameManagementPolicy"
+        "apigateway:UpdateDomainNamePolicy"
       ]
     },
     "delete": {
       "permissions": [
         "apigateway:DELETE",
         "apigateway:GET",
-        "apigateway:UpdateDomainNamePolicy",
-        "apigateway:UpdateDomainNameManagementPolicy"
+        "apigateway:UpdateDomainNamePolicy"
       ]
     },
     "list": {
