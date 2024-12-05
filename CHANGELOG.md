@@ -1,4 +1,17 @@
 ## 1.23.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_invoicing_invoice_unit`
+* **New Data Source:** `awscc_invoicing_invoice_units`
+* **New Data Source:** `awscc_logs_integration`
+* **New Data Source:** `awscc_logs_integrations`
+* **New Data Source:** `awscc_memorydb_multi_region_cluster`
+* **New Data Source:** `awscc_memorydb_multi_region_clusters`
+* **New Resource:** `awscc_invoicing_invoice_unit`
+* **New Resource:** `awscc_logs_integration`
+* **New Resource:** `awscc_memorydb_multi_region_cluster`
+
 ## 1.22.0 (November 27, 2024)
 
 FEATURES:
