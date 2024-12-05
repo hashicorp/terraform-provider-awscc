@@ -93,6 +93,35 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      ],
 		//	      "type": "object"
 		//	    },
+		//	    "ConnectivityParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "ResourceParameters": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "ResourceAssociationArn": {
+		//	              "maxLength": 2048,
+		//	              "minLength": 20,
+		//	              "pattern": "^arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:servicenetworkresourceassociation/snra-[0-9a-z]{17}$",
+		//	              "type": "string"
+		//	            },
+		//	            "ResourceConfigurationArn": {
+		//	              "maxLength": 2048,
+		//	              "pattern": "^arn:[a-z0-9f\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:resourceconfiguration/rcfg-[0-9a-z]{17}$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ResourceConfigurationArn"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ResourceParameters"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "InvocationHttpParameters": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -319,6 +348,26 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END SCHEMA*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: ConnectivityParameters
+				"connectivity_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ResourceParameters
+						"resource_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ResourceAssociationArn
+								"resource_association_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: ResourceConfigurationArn
+								"resource_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: InvocationHttpParameters
 				"invocation_http_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -508,6 +557,59 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Description of the connection.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: InvocationConnectivityParameters
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The private resource the HTTP request will be sent to.",
+		//	  "properties": {
+		//	    "ResourceParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "ResourceAssociationArn": {
+		//	          "maxLength": 2048,
+		//	          "minLength": 20,
+		//	          "pattern": "^arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:servicenetworkresourceassociation/snra-[0-9a-z]{17}$",
+		//	          "type": "string"
+		//	        },
+		//	        "ResourceConfigurationArn": {
+		//	          "maxLength": 2048,
+		//	          "pattern": "^arn:[a-z0-9f\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:resourceconfiguration/rcfg-[0-9a-z]{17}$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ResourceConfigurationArn"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "ResourceParameters"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"invocation_connectivity_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ResourceParameters
+				"resource_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ResourceAssociationArn
+						"resource_association_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ResourceConfigurationArn
+						"resource_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The private resource the HTTP request will be sent to.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -551,32 +653,37 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Events::Connection").WithTerraformTypeName("awscc_events_connection")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"api_key_auth_parameters":    "ApiKeyAuthParameters",
-		"api_key_name":               "ApiKeyName",
-		"api_key_value":              "ApiKeyValue",
-		"arn":                        "Arn",
-		"auth_parameters":            "AuthParameters",
-		"authorization_endpoint":     "AuthorizationEndpoint",
-		"authorization_type":         "AuthorizationType",
-		"basic_auth_parameters":      "BasicAuthParameters",
-		"body_parameters":            "BodyParameters",
-		"client_id":                  "ClientID",
-		"client_parameters":          "ClientParameters",
-		"client_secret":              "ClientSecret",
-		"description":                "Description",
-		"header_parameters":          "HeaderParameters",
-		"http_method":                "HttpMethod",
-		"invocation_http_parameters": "InvocationHttpParameters",
-		"is_value_secret":            "IsValueSecret",
-		"key":                        "Key",
-		"name":                       "Name",
-		"o_auth_http_parameters":     "OAuthHttpParameters",
-		"o_auth_parameters":          "OAuthParameters",
-		"password":                   "Password",
-		"query_string_parameters":    "QueryStringParameters",
-		"secret_arn":                 "SecretArn",
-		"username":                   "Username",
-		"value":                      "Value",
+		"api_key_auth_parameters":            "ApiKeyAuthParameters",
+		"api_key_name":                       "ApiKeyName",
+		"api_key_value":                      "ApiKeyValue",
+		"arn":                                "Arn",
+		"auth_parameters":                    "AuthParameters",
+		"authorization_endpoint":             "AuthorizationEndpoint",
+		"authorization_type":                 "AuthorizationType",
+		"basic_auth_parameters":              "BasicAuthParameters",
+		"body_parameters":                    "BodyParameters",
+		"client_id":                          "ClientID",
+		"client_parameters":                  "ClientParameters",
+		"client_secret":                      "ClientSecret",
+		"connectivity_parameters":            "ConnectivityParameters",
+		"description":                        "Description",
+		"header_parameters":                  "HeaderParameters",
+		"http_method":                        "HttpMethod",
+		"invocation_connectivity_parameters": "InvocationConnectivityParameters",
+		"invocation_http_parameters":         "InvocationHttpParameters",
+		"is_value_secret":                    "IsValueSecret",
+		"key":                                "Key",
+		"name":                               "Name",
+		"o_auth_http_parameters":             "OAuthHttpParameters",
+		"o_auth_parameters":                  "OAuthParameters",
+		"password":                           "Password",
+		"query_string_parameters":            "QueryStringParameters",
+		"resource_association_arn":           "ResourceAssociationArn",
+		"resource_configuration_arn":         "ResourceConfigurationArn",
+		"resource_parameters":                "ResourceParameters",
+		"secret_arn":                         "SecretArn",
+		"username":                           "Username",
+		"value":                              "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

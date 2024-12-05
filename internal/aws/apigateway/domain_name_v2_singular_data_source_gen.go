@@ -86,15 +86,6 @@ func domainNameV2DataSource(ctx context.Context) (datasource.DataSource, error) 
 			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
-		// Property: ManagementPolicy
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "type": "string"
-		//	}
-		"management_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
 		// Property: Policy
 		// CloudFormation resource type schema:
 		//
@@ -169,7 +160,6 @@ func domainNameV2DataSource(ctx context.Context) (datasource.DataSource, error) 
 		"domain_name_id":         "DomainNameId",
 		"endpoint_configuration": "EndpointConfiguration",
 		"key":                    "Key",
-		"management_policy":      "ManagementPolicy",
 		"policy":                 "Policy",
 		"security_policy":        "SecurityPolicy",
 		"tags":                   "Tags",
