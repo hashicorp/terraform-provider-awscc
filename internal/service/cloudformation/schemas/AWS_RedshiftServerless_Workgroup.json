@@ -56,6 +56,20 @@
       },
       "additionalProperties": false
     },
+    "PerformanceTarget": {
+      "type": "object",
+      "properties": {
+        "Status": {
+          "$ref": "#/definitions/PerformanceTargetStatus"
+        },
+        "Level": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        }
+      },
+      "additionalProperties": false
+    },
     "VpcEndpoint": {
       "type": "object",
       "properties": {
@@ -144,6 +158,9 @@
         },
         "CreationDate": {
           "type": "string"
+        },
+        "PricePerformanceTarget": {
+          "$ref": "#/definitions/PerformanceTarget"
         }
       },
       "additionalProperties": false
@@ -175,6 +192,13 @@
         "AVAILABLE",
         "MODIFYING",
         "DELETING"
+      ]
+    },
+    "PerformanceTargetStatus": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
       ]
     }
   },
@@ -250,6 +274,11 @@
     "Port": {
       "description": "The custom port to use when connecting to a workgroup. Valid port ranges are 5431-5455 and 8191-8215. The default is 5439.",
       "type": "integer"
+    },
+    "PricePerformanceTarget": {
+      "description": "A property that represents the price performance target settings for the workgroup.",
+      "type": "object",
+      "$ref": "#/definitions/PerformanceTarget"
     },
     "Tags": {
       "description": "The map of the key-value pairs used to tag the workgroup.",

@@ -89,6 +89,11 @@
       "required": [
         "KmsEncryptionConfig"
       ],
+      "default": {
+        "KmsEncryptionConfig": {
+          "CmkType": "AWS_OWNED_KMS_KEY"
+        }
+      },
       "additionalProperties": false
     },
     "KmsEncryptionConfig": {
@@ -147,6 +152,10 @@
       "required": [
         "AuthorizationStrategy"
       ],
+      "default": {
+        "AuthorizationStrategy": "AWS_AUTH",
+        "FineGrainedAuthorizationEnabled": false
+      },
       "additionalProperties": false
     },
     "Tag": {
