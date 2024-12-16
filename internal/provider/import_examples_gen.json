@@ -550,6 +550,11 @@
         "path": "./examples/resources/awscc_batch_compute_environment/import.sh"
     },
     {
+        "resource": "awscc_batch_job_definition",
+        "identifier": ["JobDefinitionName"],
+        "path": "./examples/resources/awscc_batch_job_definition/import.sh"
+    },
+    {
         "resource": "awscc_batch_job_queue",
         "identifier": ["JobQueueArn"],
         "path": "./examples/resources/awscc_batch_job_queue/import.sh"
@@ -668,6 +673,11 @@
         "resource": "awscc_cassandra_table",
         "identifier": ["KeyspaceName","TableName"],
         "path": "./examples/resources/awscc_cassandra_table/import.sh"
+    },
+    {
+        "resource": "awscc_cassandra_type",
+        "identifier": ["KeyspaceName","TypeName"],
+        "path": "./examples/resources/awscc_cassandra_type/import.sh"
     },
     {
         "resource": "awscc_certificatemanager_account",
@@ -1653,6 +1663,11 @@
         "resource": "awscc_ec2_key_pair",
         "identifier": ["KeyName"],
         "path": "./examples/resources/awscc_ec2_key_pair/import.sh"
+    },
+    {
+        "resource": "awscc_ec2_launch_template",
+        "identifier": ["LaunchTemplateId"],
+        "path": "./examples/resources/awscc_ec2_launch_template/import.sh"
     },
     {
         "resource": "awscc_ec2_local_gateway_route",
@@ -2785,6 +2800,11 @@
         "path": "./examples/resources/awscc_iot_certificate_provider/import.sh"
     },
     {
+        "resource": "awscc_iot_command",
+        "identifier": ["CommandId"],
+        "path": "./examples/resources/awscc_iot_command/import.sh"
+    },
+    {
         "resource": "awscc_iot_custom_metric",
         "identifier": ["MetricName"],
         "path": "./examples/resources/awscc_iot_custom_metric/import.sh"
@@ -3775,6 +3795,11 @@
         "path": "./examples/resources/awscc_networkmanager_device/import.sh"
     },
     {
+        "resource": "awscc_networkmanager_direct_connect_gateway_attachment",
+        "identifier": ["AttachmentId"],
+        "path": "./examples/resources/awscc_networkmanager_direct_connect_gateway_attachment/import.sh"
+    },
+    {
         "resource": "awscc_networkmanager_global_network",
         "identifier": ["Id"],
         "path": "./examples/resources/awscc_networkmanager_global_network/import.sh"
@@ -4070,6 +4095,11 @@
         "path": "./examples/resources/awscc_qbusiness_index/import.sh"
     },
     {
+        "resource": "awscc_qbusiness_permission",
+        "identifier": ["ApplicationId","StatementId"],
+        "path": "./examples/resources/awscc_qbusiness_permission/import.sh"
+    },
+    {
         "resource": "awscc_qbusiness_plugin",
         "identifier": ["ApplicationId","PluginId"],
         "path": "./examples/resources/awscc_qbusiness_plugin/import.sh"
@@ -4143,6 +4173,11 @@
         "resource": "awscc_ram_permission",
         "identifier": ["Arn"],
         "path": "./examples/resources/awscc_ram_permission/import.sh"
+    },
+    {
+        "resource": "awscc_ram_resource_share",
+        "identifier": ["Arn"],
+        "path": "./examples/resources/awscc_ram_resource_share/import.sh"
     },
     {
         "resource": "awscc_rds_custom_db_engine_version",
@@ -4608,6 +4643,16 @@
         "resource": "awscc_s3outposts_endpoint",
         "identifier": ["Arn"],
         "path": "./examples/resources/awscc_s3outposts_endpoint/import.sh"
+    },
+    {
+        "resource": "awscc_s3tables_table_bucket",
+        "identifier": ["TableBucketARN"],
+        "path": "./examples/resources/awscc_s3tables_table_bucket/import.sh"
+    },
+    {
+        "resource": "awscc_s3tables_table_bucket_policy",
+        "identifier": ["TableBucketARN"],
+        "path": "./examples/resources/awscc_s3tables_table_bucket_policy/import.sh"
     },
     {
         "resource": "awscc_ses_configuration_set",
@@ -5230,6 +5275,16 @@
         "path": "./examples/resources/awscc_vpclattice_listener/import.sh"
     },
     {
+        "resource": "awscc_vpclattice_resource_configuration",
+        "identifier": ["Arn"],
+        "path": "./examples/resources/awscc_vpclattice_resource_configuration/import.sh"
+    },
+    {
+        "resource": "awscc_vpclattice_resource_gateway",
+        "identifier": ["Arn"],
+        "path": "./examples/resources/awscc_vpclattice_resource_gateway/import.sh"
+    },
+    {
         "resource": "awscc_vpclattice_resource_policy",
         "identifier": ["ResourceArn"],
         "path": "./examples/resources/awscc_vpclattice_resource_policy/import.sh"
@@ -5248,6 +5303,11 @@
         "resource": "awscc_vpclattice_service_network",
         "identifier": ["Arn"],
         "path": "./examples/resources/awscc_vpclattice_service_network/import.sh"
+    },
+    {
+        "resource": "awscc_vpclattice_service_network_resource_association",
+        "identifier": ["Arn"],
+        "path": "./examples/resources/awscc_vpclattice_service_network_resource_association/import.sh"
     },
     {
         "resource": "awscc_vpclattice_service_network_service_association",
@@ -5293,6 +5353,16 @@
         "resource": "awscc_wisdom_ai_agent_version",
         "identifier": ["AssistantId","AIAgentId","VersionNumber"],
         "path": "./examples/resources/awscc_wisdom_ai_agent_version/import.sh"
+    },
+    {
+        "resource": "awscc_wisdom_ai_guardrail",
+        "identifier": ["AIGuardrailId","AssistantId"],
+        "path": "./examples/resources/awscc_wisdom_ai_guardrail/import.sh"
+    },
+    {
+        "resource": "awscc_wisdom_ai_guardrail_version",
+        "identifier": ["AssistantId","AIGuardrailId","VersionNumber"],
+        "path": "./examples/resources/awscc_wisdom_ai_guardrail_version/import.sh"
     },
     {
         "resource": "awscc_wisdom_ai_prompt",
