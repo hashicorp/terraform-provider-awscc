@@ -9,6 +9,7 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -185,6 +186,63 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PricePerformanceTarget
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "A property that represents the price performance target settings for the workgroup.",
+		//	  "properties": {
+		//	    "Level": {
+		//	      "maximum": 100,
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    },
+		//	    "Status": {
+		//	      "enum": [
+		//	        "ENABLED",
+		//	        "DISABLED"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"price_performance_target": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Level
+				"level": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.Between(1, 100),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Status
+				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"ENABLED",
+							"DISABLED",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A property that represents the price performance target settings for the workgroup.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: PubliclyAccessible
@@ -438,6 +496,24 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 		//	      "pattern": "^[a-z0-9-]+$",
 		//	      "type": "string"
 		//	    },
+		//	    "PricePerformanceTarget": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Level": {
+		//	          "maximum": 100,
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        },
+		//	        "Status": {
+		//	          "enum": [
+		//	            "ENABLED",
+		//	            "DISABLED"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "PubliclyAccessible": {
 		//	      "type": "boolean"
 		//	    },
@@ -583,6 +659,20 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 				"namespace_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: PricePerformanceTarget
+				"price_performance_target": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Level
+						"level": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Status
+						"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: PubliclyAccessible
 				"publicly_accessible": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
@@ -668,36 +758,38 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::RedshiftServerless::Workgroup").WithTerraformTypeName("awscc_redshiftserverless_workgroup")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"address":              "Address",
-		"availability_zone":    "AvailabilityZone",
-		"base_capacity":        "BaseCapacity",
-		"config_parameters":    "ConfigParameters",
-		"creation_date":        "CreationDate",
-		"endpoint":             "Endpoint",
-		"enhanced_vpc_routing": "EnhancedVpcRouting",
-		"key":                  "Key",
-		"max_capacity":         "MaxCapacity",
-		"namespace_name":       "NamespaceName",
-		"network_interface_id": "NetworkInterfaceId",
-		"network_interfaces":   "NetworkInterfaces",
-		"parameter_key":        "ParameterKey",
-		"parameter_value":      "ParameterValue",
-		"port":                 "Port",
-		"private_ip_address":   "PrivateIpAddress",
-		"publicly_accessible":  "PubliclyAccessible",
-		"security_group_ids":   "SecurityGroupIds",
-		"status":               "Status",
-		"subnet_id":            "SubnetId",
-		"subnet_ids":           "SubnetIds",
-		"tags":                 "Tags",
-		"value":                "Value",
-		"vpc_endpoint_id":      "VpcEndpointId",
-		"vpc_endpoints":        "VpcEndpoints",
-		"vpc_id":               "VpcId",
-		"workgroup":            "Workgroup",
-		"workgroup_arn":        "WorkgroupArn",
-		"workgroup_id":         "WorkgroupId",
-		"workgroup_name":       "WorkgroupName",
+		"address":                  "Address",
+		"availability_zone":        "AvailabilityZone",
+		"base_capacity":            "BaseCapacity",
+		"config_parameters":        "ConfigParameters",
+		"creation_date":            "CreationDate",
+		"endpoint":                 "Endpoint",
+		"enhanced_vpc_routing":     "EnhancedVpcRouting",
+		"key":                      "Key",
+		"level":                    "Level",
+		"max_capacity":             "MaxCapacity",
+		"namespace_name":           "NamespaceName",
+		"network_interface_id":     "NetworkInterfaceId",
+		"network_interfaces":       "NetworkInterfaces",
+		"parameter_key":            "ParameterKey",
+		"parameter_value":          "ParameterValue",
+		"port":                     "Port",
+		"price_performance_target": "PricePerformanceTarget",
+		"private_ip_address":       "PrivateIpAddress",
+		"publicly_accessible":      "PubliclyAccessible",
+		"security_group_ids":       "SecurityGroupIds",
+		"status":                   "Status",
+		"subnet_id":                "SubnetId",
+		"subnet_ids":               "SubnetIds",
+		"tags":                     "Tags",
+		"value":                    "Value",
+		"vpc_endpoint_id":          "VpcEndpointId",
+		"vpc_endpoints":            "VpcEndpoints",
+		"vpc_id":                   "VpcId",
+		"workgroup":                "Workgroup",
+		"workgroup_arn":            "WorkgroupArn",
+		"workgroup_id":             "WorkgroupId",
+		"workgroup_name":           "WorkgroupName",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

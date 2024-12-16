@@ -196,6 +196,43 @@ func queueResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: OutboundEmailConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The outbound email address ID.",
+		//	  "properties": {
+		//	    "OutboundEmailAddressId": {
+		//	      "description": "The email address connect resource ID.",
+		//	      "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/email-address/[-a-zA-Z0-9]*$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"outbound_email_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: OutboundEmailAddressId
+				"outbound_email_address_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The email address connect resource ID.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/email-address/[-a-zA-Z0-9]*$"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The outbound email address ID.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: QueueArn
 		// CloudFormation resource type schema:
 		//
@@ -391,6 +428,8 @@ func queueResource(ctx context.Context) (resource.Resource, error) {
 		"outbound_caller_config":        "OutboundCallerConfig",
 		"outbound_caller_id_name":       "OutboundCallerIdName",
 		"outbound_caller_id_number_arn": "OutboundCallerIdNumberArn",
+		"outbound_email_address_id":     "OutboundEmailAddressId",
+		"outbound_email_config":         "OutboundEmailConfig",
 		"outbound_flow_arn":             "OutboundFlowArn",
 		"queue_arn":                     "QueueArn",
 		"quick_connect_arns":            "QuickConnectArns",

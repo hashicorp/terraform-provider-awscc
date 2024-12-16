@@ -223,6 +223,30 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: NetworkType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "ipv4",
+		//	    "dual"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ipv4",
+					"dual",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PreferredMaintenanceWindow
 		// CloudFormation resource type schema:
 		//
@@ -519,6 +543,7 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		"kms_key_id":                   "KmsKeyId",
 		"mount_point":                  "MountPoint",
 		"name":                         "Name",
+		"network_type":                 "NetworkType",
 		"preferred_maintenance_window": "PreferredMaintenanceWindow",
 		"publicly_accessible":          "PubliclyAccessible",
 		"security_group_ids":           "SecurityGroupIds",

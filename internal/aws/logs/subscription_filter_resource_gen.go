@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -26,6 +27,21 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::Logs::SubscriptionFilter resource.
 func subscriptionFilterResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ApplyOnTransformedLogs
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "boolean"
+		//	}
+		"apply_on_transformed_logs": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DestinationArn
 		// CloudFormation resource type schema:
 		//
@@ -140,12 +156,13 @@ func subscriptionFilterResource(ctx context.Context) (resource.Resource, error) 
 	opts = opts.WithCloudFormationTypeName("AWS::Logs::SubscriptionFilter").WithTerraformTypeName("awscc_logs_subscription_filter")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"destination_arn": "DestinationArn",
-		"distribution":    "Distribution",
-		"filter_name":     "FilterName",
-		"filter_pattern":  "FilterPattern",
-		"log_group_name":  "LogGroupName",
-		"role_arn":        "RoleArn",
+		"apply_on_transformed_logs": "ApplyOnTransformedLogs",
+		"destination_arn":           "DestinationArn",
+		"distribution":              "Distribution",
+		"filter_name":               "FilterName",
+		"filter_pattern":            "FilterPattern",
+		"log_group_name":            "LogGroupName",
+		"role_arn":                  "RoleArn",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

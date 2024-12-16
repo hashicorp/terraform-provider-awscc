@@ -39,7 +39,7 @@ func integrationResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "User provided identifier for integration, unique to the user account.",
-		//	  "maxLength": 256,
+		//	  "maxLength": 50,
 		//	  "minLength": 1,
 		//	  "pattern": "[\\.\\-_/#A-Za-z0-9]+",
 		//	  "type": "string"
@@ -48,7 +48,7 @@ func integrationResource(ctx context.Context) (resource.Resource, error) {
 			Description: "User provided identifier for integration, unique to the user account.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.LengthBetween(1, 50),
 				stringvalidator.RegexMatches(regexp.MustCompile("[\\.\\-_/#A-Za-z0-9]+"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

@@ -14,6 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
@@ -32,6 +33,21 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::Logs::MetricFilter resource.
 func metricFilterResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ApplyOnTransformedLogs
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "boolean"
+		//	}
+		"apply_on_transformed_logs": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: FilterName
 		// CloudFormation resource type schema:
 		//
@@ -356,18 +372,19 @@ func metricFilterResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Logs::MetricFilter").WithTerraformTypeName("awscc_logs_metric_filter")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"default_value":          "DefaultValue",
-		"dimensions":             "Dimensions",
-		"filter_name":            "FilterName",
-		"filter_pattern":         "FilterPattern",
-		"key":                    "Key",
-		"log_group_name":         "LogGroupName",
-		"metric_name":            "MetricName",
-		"metric_namespace":       "MetricNamespace",
-		"metric_transformations": "MetricTransformations",
-		"metric_value":           "MetricValue",
-		"unit":                   "Unit",
-		"value":                  "Value",
+		"apply_on_transformed_logs": "ApplyOnTransformedLogs",
+		"default_value":             "DefaultValue",
+		"dimensions":                "Dimensions",
+		"filter_name":               "FilterName",
+		"filter_pattern":            "FilterPattern",
+		"key":                       "Key",
+		"log_group_name":            "LogGroupName",
+		"metric_name":               "MetricName",
+		"metric_namespace":          "MetricNamespace",
+		"metric_transformations":    "MetricTransformations",
+		"metric_value":              "MetricValue",
+		"unit":                      "Unit",
+		"value":                     "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
