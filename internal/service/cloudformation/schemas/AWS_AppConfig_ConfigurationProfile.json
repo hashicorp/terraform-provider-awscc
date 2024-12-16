@@ -1,5 +1,4 @@
 {
-  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-appconfig",
   "tagging": {
     "permissions": [
       "appconfig:TagResource",
@@ -12,6 +11,27 @@
     "tagProperty": "/properties/Tags",
     "cloudFormationSystemTags": true
   },
+  "typeName": "AWS::AppConfig::ConfigurationProfile",
+  "readOnlyProperties": [
+    "/properties/ConfigurationProfileId",
+    "/properties/KmsKeyArn"
+  ],
+  "description": "An example resource schema demonstrating some basic constructs and validation rules.",
+  "createOnlyProperties": [
+    "/properties/LocationUri",
+    "/properties/Type",
+    "/properties/ApplicationId"
+  ],
+  "primaryIdentifier": [
+    "/properties/ApplicationId",
+    "/properties/ConfigurationProfileId"
+  ],
+  "required": [
+    "LocationUri",
+    "ApplicationId",
+    "Name"
+  ],
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-appconfig",
   "handlers": {
     "read": {
       "permissions": [
@@ -57,22 +77,10 @@
       ]
     }
   },
-  "typeName": "AWS::AppConfig::ConfigurationProfile",
-  "readOnlyProperties": [
-    "/properties/ConfigurationProfileId",
-    "/properties/KmsKeyArn"
-  ],
-  "description": "An example resource schema demonstrating some basic constructs and validation rules.",
-  "createOnlyProperties": [
-    "/properties/LocationUri",
-    "/properties/Type",
-    "/properties/ApplicationId"
+  "writeOnlyProperties": [
+    "/properties/DeletionProtectionCheck"
   ],
   "additionalProperties": false,
-  "primaryIdentifier": [
-    "/properties/ApplicationId",
-    "/properties/ConfigurationProfileId"
-  ],
   "definitions": {
     "Validators": {
       "description": "A list of methods for validating the configuration.",
@@ -162,6 +170,15 @@
       "type": "string",
       "maxLength": 2048
     },
+    "DeletionProtectionCheck": {
+      "description": "On resource deletion this controls whether the Deletion Protection check should be applied, bypassed, or (the default) whether the behavior should be controlled by the account-level Deletion Protection setting. See https://docs.aws.amazon.com/appconfig/latest/userguide/deletion-protection.html",
+      "type": "string",
+      "enum": [
+        "ACCOUNT_DEFAULT",
+        "APPLY",
+        "BYPASS"
+      ]
+    },
     "ApplicationId": {
       "pattern": "[a-z0-9]{4,7}",
       "description": "The application ID.",
@@ -182,10 +199,5 @@
       "type": "string",
       "maxLength": 128
     }
-  },
-  "required": [
-    "LocationUri",
-    "ApplicationId",
-    "Name"
-  ]
+  }
 }

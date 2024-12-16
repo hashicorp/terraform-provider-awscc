@@ -76,16 +76,16 @@
   "additionalProperties": false,
   "definitions": {
     "PredictiveScalingMetricDataQuery": {
-      "description": "",
+      "description": "The metric data to return. Also defines whether this call is returning data for one metric only, or whether it is performing a math expression on the values of returned metric statistics to create a new time series. A time series is a series of data points, each of which is associated with a timestamp.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "ReturnData": {
-          "description": "Indicates whether to return the timestamps and raw data values of this metric.",
+          "description": "Indicates whether to return the timestamps and raw data values of this metric. \n If you use any math expressions, specify ``true`` for this value for only the final math expression that the metric specification is based on. You must specify ``false`` for ``ReturnData`` for all the other metrics and expressions used in the metric specification.\n If you are only retrieving metrics and not performing any math expressions, do not specify anything for ``ReturnData``. This sets it to its default (``true``).",
           "type": "boolean"
         },
         "Expression": {
-          "description": "The math expression to perform on the returned data, if this object is performing a math expression.",
+          "description": "The math expression to perform on the returned data, if this object is performing a math expression. This expression can use the ``Id`` of the other metrics to refer to those metrics, and can also use the ``Id`` of other expressions to use the result of those expressions. \n Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both.",
           "type": "string"
         },
         "Label": {
@@ -93,11 +93,11 @@
           "type": "string"
         },
         "MetricStat": {
-          "description": "Information about the metric data to return.",
+          "description": "Information about the metric data to return. \n Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both.",
           "$ref": "#/definitions/PredictiveScalingMetricStat"
         },
         "Id": {
-          "description": "A short name that identifies the object's results in the response.",
+          "description": "A short name that identifies the object's results in the response. This name must be unique among all ``MetricDataQuery`` objects specified for a single scaling policy. If you are performing math expressions on this set of data, this name represents that data and can serve as a variable in the mathematical expression. The valid characters are letters, numbers, and underscores. The first character must be a lowercase letter.",
           "type": "string"
         }
       }
@@ -122,7 +122,7 @@
       }
     },
     "PredictiveScalingMetricDimension": {
-      "description": "",
+      "description": "Describes the dimension of a metric.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
@@ -152,12 +152,13 @@
       }
     },
     "PredictiveScalingCustomizedCapacityMetric": {
-      "description": "",
+      "description": "Represents a CloudWatch metric of your choosing for a predictive scaling policy.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "MetricDataQueries": {
           "uniqueItems": true,
+          "description": "One or more metric data queries to provide data points for a metric specification.",
           "insertionOrder": false,
           "type": "array",
           "items": {
@@ -197,12 +198,13 @@
       }
     },
     "PredictiveScalingCustomizedScalingMetric": {
-      "description": "",
+      "description": "One or more metric data queries to provide data points for a metric specification.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "MetricDataQueries": {
           "uniqueItems": true,
+          "description": "One or more metric data queries to provide data points for a metric specification.",
           "insertionOrder": false,
           "type": "array",
           "items": {
@@ -256,14 +258,16 @@
       }
     },
     "PredictiveScalingPredefinedLoadMetric": {
-      "description": "",
+      "description": "Describes a load metric for a predictive scaling policy. \n When returned in the output of ``DescribePolicies``, it indicates that a predictive scaling policy uses individually specified load and scaling metrics instead of a metric pair.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "PredefinedMetricType": {
+          "description": "The metric type.",
           "type": "string"
         },
         "ResourceLabel": {
+          "description": "A label that uniquely identifies a target group.",
           "type": "string"
         }
       },
@@ -306,14 +310,16 @@
       ]
     },
     "PredictiveScalingPredefinedMetricPair": {
-      "description": "",
+      "description": "Represents a metric pair for a predictive scaling policy.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "PredefinedMetricType": {
+          "description": "Indicates which metrics to use. There are two different types of metrics for each metric type: one is a load metric and one is a scaling metric.",
           "type": "string"
         },
         "ResourceLabel": {
+          "description": "A label that uniquely identifies a specific target group from which to determine the total and average request count.",
           "type": "string"
         }
       },
@@ -381,21 +387,25 @@
       ]
     },
     "PredictiveScalingPolicyConfiguration": {
-      "description": "",
+      "description": "Represents a predictive scaling policy configuration.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "MaxCapacityBreachBehavior": {
+          "description": "Defines the behavior that should be applied if the forecast capacity approaches or exceeds the maximum capacity. Defaults to ``HonorMaxCapacity`` if not specified.",
           "type": "string"
         },
         "MaxCapacityBuffer": {
+          "description": "The size of the capacity buffer to use when the forecast capacity is close to or exceeds the maximum capacity. The value is specified as a percentage relative to the forecast capacity. For example, if the buffer is 10, this means a 10 percent buffer, such that if the forecast capacity is 50, and the maximum capacity is 40, then the effective maximum capacity is 55. \n Required if the ``MaxCapacityBreachBehavior`` property is set to ``IncreaseMaxCapacity``, and cannot be used otherwise.",
           "type": "integer"
         },
         "Mode": {
+          "description": "The predictive scaling mode. Defaults to ``ForecastOnly`` if not specified.",
           "type": "string"
         },
         "MetricSpecifications": {
           "uniqueItems": true,
+          "description": "This structure includes the metrics and target utilization to use for predictive scaling. \n This is an array, but we currently only support a single metric specification. That is, you can specify a target value and a single metric pair, or a target value and one scaling metric and one load metric.",
           "insertionOrder": false,
           "type": "array",
           "items": {
@@ -403,6 +413,7 @@
           }
         },
         "SchedulingBufferTime": {
+          "description": "The amount of time, in seconds, that the start time can be advanced. \n The value must be less than the forecast interval duration of 3600 seconds (60 minutes). Defaults to 300 seconds if not specified.",
           "type": "integer"
         }
       },
@@ -411,14 +422,16 @@
       ]
     },
     "PredictiveScalingPredefinedScalingMetric": {
-      "description": "",
+      "description": "Describes a scaling metric for a predictive scaling policy. \n When returned in the output of ``DescribePolicies``, it indicates that a predictive scaling policy uses individually specified load and scaling metrics instead of a metric pair.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "PredefinedMetricType": {
+          "description": "The metric type.",
           "type": "string"
         },
         "ResourceLabel": {
+          "description": "A label that uniquely identifies a specific target group from which to determine the average request count.",
           "type": "string"
         }
       },
@@ -427,29 +440,36 @@
       ]
     },
     "PredictiveScalingMetricSpecification": {
-      "description": "",
+      "description": "This structure specifies the metrics and target utilization settings for a predictive scaling policy. \n You must specify either a metric pair, or a load metric and a scaling metric individually. Specifying a metric pair instead of individual metrics provides a simpler way to configure metrics for a scaling policy. You choose the metric pair, and the policy automatically knows the correct sum and average statistics to use for the load metric and the scaling metric.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "CustomizedLoadMetricSpecification": {
+          "description": "The customized load metric specification.",
           "$ref": "#/definitions/PredictiveScalingCustomizedLoadMetric"
         },
         "PredefinedLoadMetricSpecification": {
+          "description": "The predefined load metric specification.",
           "$ref": "#/definitions/PredictiveScalingPredefinedLoadMetric"
         },
         "TargetValue": {
+          "description": "Specifies the target utilization.",
           "type": "number"
         },
         "PredefinedScalingMetricSpecification": {
+          "description": "The predefined scaling metric specification.",
           "$ref": "#/definitions/PredictiveScalingPredefinedScalingMetric"
         },
         "CustomizedCapacityMetricSpecification": {
+          "description": "The customized capacity metric specification.",
           "$ref": "#/definitions/PredictiveScalingCustomizedCapacityMetric"
         },
         "CustomizedScalingMetricSpecification": {
+          "description": "The customized scaling metric specification.",
           "$ref": "#/definitions/PredictiveScalingCustomizedScalingMetric"
         },
         "PredefinedMetricPairSpecification": {
+          "description": "The predefined metric pair specification that determines the appropriate scaling metric and load metric to use.",
           "$ref": "#/definitions/PredictiveScalingPredefinedMetricPair"
         }
       },
@@ -458,7 +478,7 @@
       ]
     },
     "PredictiveScalingMetric": {
-      "description": "",
+      "description": "Describes the scaling metric.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
@@ -468,7 +488,7 @@
         },
         "Dimensions": {
           "uniqueItems": false,
-          "description": "The dimensions for the metric.",
+          "description": "Describes the dimensions of the metric.",
           "insertionOrder": false,
           "type": "array",
           "items": {
@@ -482,12 +502,13 @@
       }
     },
     "PredictiveScalingCustomizedLoadMetric": {
-      "description": "",
+      "description": "The customized load metric specification.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "MetricDataQueries": {
           "uniqueItems": true,
+          "description": "",
           "insertionOrder": false,
           "type": "array",
           "items": {
@@ -524,20 +545,20 @@
       }
     },
     "PredictiveScalingMetricStat": {
-      "description": "",
+      "description": "This structure defines the CloudWatch metric to return, along with the statistic and unit.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "Stat": {
-          "description": "The statistic to return. It can include any CloudWatch statistic or extended statistic.",
+          "description": "The statistic to return. It can include any CloudWatch statistic or extended statistic. For a list of valid values, see the table in [Statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic) in the *Amazon CloudWatch User Guide*. \n The most commonly used metrics for predictive scaling are ``Average`` and ``Sum``.",
           "type": "string"
         },
         "Metric": {
-          "description": "The CloudWatch metric to return, including the metric name, namespace, and dimensions. ",
+          "description": "The CloudWatch metric to return, including the metric name, namespace, and dimensions. To get the exact metric name, namespace, and dimensions, inspect the [Metric](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html) object that is returned by a call to [ListMetrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html).",
           "$ref": "#/definitions/PredictiveScalingMetric"
         },
         "Unit": {
-          "description": "The unit to use for the returned data points.",
+          "description": "The unit to use for the returned data points. For a complete list of the units that CloudWatch supports, see the [MetricDatum](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html) data type in the *Amazon CloudWatch API Reference*.",
           "type": "string"
         }
       }
@@ -613,7 +634,7 @@
       "$ref": "#/definitions/StepScalingPolicyConfiguration"
     },
     "PredictiveScalingPolicyConfiguration": {
-      "description": "",
+      "description": "The predictive scaling policy configuration.",
       "$ref": "#/definitions/PredictiveScalingPolicyConfiguration"
     }
   }

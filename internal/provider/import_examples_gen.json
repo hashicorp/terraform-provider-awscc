@@ -1655,11 +1655,6 @@
         "path": "./examples/resources/awscc_ec2_key_pair/import.sh"
     },
     {
-        "resource": "awscc_ec2_launch_template",
-        "identifier": ["LaunchTemplateId"],
-        "path": "./examples/resources/awscc_ec2_launch_template/import.sh"
-    },
-    {
         "resource": "awscc_ec2_local_gateway_route",
         "identifier": ["DestinationCidrBlock","LocalGatewayRouteTableId"],
         "path": "./examples/resources/awscc_ec2_local_gateway_route/import.sh"
