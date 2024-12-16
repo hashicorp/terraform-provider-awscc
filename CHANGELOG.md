@@ -37,7 +37,7 @@ FEATURES:
 * **New Resource:** `awscc_vpclattice_resource_gateway`
 * **New Resource:** `awscc_vpclattice_service_network_resource_association`
 * **New Resource:** `awscc_wisdom_ai_guardrail`
-* **New Resource:** `awscc_wisdom_ai_guardrail_version`PC
+* **New Resource:** `awscc_wisdom_ai_guardrail_version`
 
 ## 1.23.0 (December  5, 2024)
 
