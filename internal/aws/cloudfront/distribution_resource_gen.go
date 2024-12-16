@@ -8,6 +8,7 @@ package cloudfront
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
@@ -183,6 +184,19 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		//	            },
 		//	            "type": "array",
 		//	            "uniqueItems": false
+		//	          },
+		//	          "GrpcConfig": {
+		//	            "additionalProperties": false,
+		//	            "description": "",
+		//	            "properties": {
+		//	              "Enabled": {
+		//	                "type": "boolean"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Enabled"
+		//	            ],
+		//	            "type": "object"
 		//	          },
 		//	          "LambdaFunctionAssociations": {
 		//	            "description": "A complex type that contains zero or more Lambda@Edge function associations for a cache behavior.",
@@ -476,6 +490,19 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "array",
 		//	          "uniqueItems": false
 		//	        },
+		//	        "GrpcConfig": {
+		//	          "additionalProperties": false,
+		//	          "description": "",
+		//	          "properties": {
+		//	            "Enabled": {
+		//	              "type": "boolean"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Enabled"
+		//	          ],
+		//	          "type": "object"
+		//	        },
 		//	        "LambdaFunctionAssociations": {
 		//	          "description": "A complex type that contains zero or more Lambda@Edge function associations for a cache behavior.",
 		//	          "items": {
@@ -598,9 +625,6 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "string"
 		//	        }
 		//	      },
-		//	      "required": [
-		//	        "Bucket"
-		//	      ],
 		//	      "type": "object"
 		//	    },
 		//	    "OriginGroups": {
@@ -683,6 +707,13 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "Items"
 		//	                ],
 		//	                "type": "object"
+		//	              },
+		//	              "SelectionCriteria": {
+		//	                "enum": [
+		//	                  "default",
+		//	                  "media-quality-based"
+		//	                ],
+		//	                "type": "string"
 		//	              }
 		//	            },
 		//	            "required": [
@@ -1152,6 +1183,28 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 								Computed:    true,
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: GrpcConfig
+							"grpc_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Enabled
+									"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.Bool{ /*START VALIDATORS*/
+											fwvalidators.NotNullBool(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+											boolplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: LambdaFunctionAssociations
@@ -1637,6 +1690,28 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
+						// Property: GrpcConfig
+						"grpc_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Enabled
+								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Bool{ /*START VALIDATORS*/
+										fwvalidators.NotNullBool(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: LambdaFunctionAssociations
 						"lambda_function_associations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -1813,9 +1888,6 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							Description: "The Amazon S3 bucket to store the access logs in, for example, ``myawslogbucket.s3.amazonaws.com``.",
 							Optional:    true,
 							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								fwvalidators.NotNullString(),
-							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
@@ -1972,6 +2044,20 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: SelectionCriteria
+									"selection_criteria": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"default",
+												"media-quality-based",
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
@@ -2568,6 +2654,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		"function_arn":                    "FunctionARN",
 		"function_associations":           "FunctionAssociations",
 		"geo_restriction":                 "GeoRestriction",
+		"grpc_config":                     "GrpcConfig",
 		"header_name":                     "HeaderName",
 		"header_value":                    "HeaderValue",
 		"headers":                         "Headers",
@@ -2617,6 +2704,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		"restrictions":                    "Restrictions",
 		"s3_origin":                       "S3Origin",
 		"s3_origin_config":                "S3OriginConfig",
+		"selection_criteria":              "SelectionCriteria",
 		"smooth_streaming":                "SmoothStreaming",
 		"ssl_support_method":              "SslSupportMethod",
 		"staging":                         "Staging",

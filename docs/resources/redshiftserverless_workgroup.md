@@ -27,6 +27,7 @@ Definition of AWS::RedshiftServerless::Workgroup Resource Type
 - `max_capacity` (Number) The max compute capacity of the workgroup in Redshift Processing Units (RPUs).
 - `namespace_name` (String) The namespace the workgroup is associated with.
 - `port` (Number) The custom port to use when connecting to a workgroup. Valid port ranges are 5431-5455 and 8191-8215. The default is 5439.
+- `price_performance_target` (Attributes) A property that represents the price performance target settings for the workgroup. (see [below for nested schema](#nestedatt--price_performance_target))
 - `publicly_accessible` (Boolean) A value that specifies whether the workgroup can be accessible from a public network.
 - `security_group_ids` (List of String) A list of security group IDs to associate with the workgroup.
 - `subnet_ids` (List of String) A list of subnet IDs the workgroup is associated with.
@@ -44,6 +45,15 @@ Optional:
 
 - `parameter_key` (String)
 - `parameter_value` (String)
+
+
+<a id="nestedatt--price_performance_target"></a>
+### Nested Schema for `price_performance_target`
+
+Optional:
+
+- `level` (Number)
+- `status` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -67,6 +77,7 @@ Read-Only:
 - `enhanced_vpc_routing` (Boolean)
 - `max_capacity` (Number)
 - `namespace_name` (String)
+- `price_performance_target` (Attributes) (see [below for nested schema](#nestedatt--workgroup--price_performance_target))
 - `publicly_accessible` (Boolean)
 - `security_group_ids` (List of String)
 - `status` (String)
@@ -111,6 +122,17 @@ Read-Only:
 - `network_interface_id` (String)
 - `private_ip_address` (String)
 - `subnet_id` (String)
+
+
+
+
+<a id="nestedatt--workgroup--price_performance_target"></a>
+### Nested Schema for `workgroup.price_performance_target`
+
+Read-Only:
+
+- `level` (Number)
+- `status` (String)
 
 ## Import
 

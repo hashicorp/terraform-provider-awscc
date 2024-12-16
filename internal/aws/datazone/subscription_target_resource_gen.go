@@ -208,7 +208,11 @@ func subscriptionTargetResource(ctx context.Context) (resource.Resource, error) 
 		//	}
 		"manage_access_role": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The manage access role that is used to create the subscription target.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:

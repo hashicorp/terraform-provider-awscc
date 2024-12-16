@@ -444,6 +444,18 @@ func taskTemplateDataSource(ctx context.Context) (datasource.DataSource, error) 
 			Description: "The name of the task template.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: SelfAssignContactFlowArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The identifier of the contact flow.",
+		//	  "pattern": "^$|arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*$",
+		//	  "type": "string"
+		//	}
+		"self_assign_contact_flow_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the contact flow.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -527,26 +539,27 @@ func taskTemplateDataSource(ctx context.Context) (datasource.DataSource, error) 
 	opts = opts.WithCloudFormationTypeName("AWS::Connect::TaskTemplate").WithTerraformTypeName("awscc_connect_task_template")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                   "Arn",
-		"client_token":          "ClientToken",
-		"constraints":           "Constraints",
-		"contact_flow_arn":      "ContactFlowArn",
-		"default_value":         "DefaultValue",
-		"defaults":              "Defaults",
-		"description":           "Description",
-		"fields":                "Fields",
-		"id":                    "Id",
-		"instance_arn":          "InstanceArn",
-		"invisible_fields":      "InvisibleFields",
-		"key":                   "Key",
-		"name":                  "Name",
-		"read_only_fields":      "ReadOnlyFields",
-		"required_fields":       "RequiredFields",
-		"single_select_options": "SingleSelectOptions",
-		"status":                "Status",
-		"tags":                  "Tags",
-		"type":                  "Type",
-		"value":                 "Value",
+		"arn":                          "Arn",
+		"client_token":                 "ClientToken",
+		"constraints":                  "Constraints",
+		"contact_flow_arn":             "ContactFlowArn",
+		"default_value":                "DefaultValue",
+		"defaults":                     "Defaults",
+		"description":                  "Description",
+		"fields":                       "Fields",
+		"id":                           "Id",
+		"instance_arn":                 "InstanceArn",
+		"invisible_fields":             "InvisibleFields",
+		"key":                          "Key",
+		"name":                         "Name",
+		"read_only_fields":             "ReadOnlyFields",
+		"required_fields":              "RequiredFields",
+		"self_assign_contact_flow_arn": "SelfAssignContactFlowArn",
+		"single_select_options":        "SingleSelectOptions",
+		"status":                       "Status",
+		"tags":                         "Tags",
+		"type":                         "Type",
+		"value":                        "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

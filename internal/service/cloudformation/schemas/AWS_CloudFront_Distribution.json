@@ -59,6 +59,10 @@
           "uniqueItems": false,
           "description": "A list of CloudFront functions that are associated with this cache behavior. CloudFront functions must be published to the ``LIVE`` stage to associate them with a cache behavior."
         },
+        "GrpcConfig": {
+          "$ref": "#/definitions/GrpcConfig",
+          "description": ""
+        },
         "LambdaFunctionAssociations": {
           "items": {
             "$ref": "#/definitions/LambdaFunctionAssociation"
@@ -284,6 +288,10 @@
           "type": "array",
           "uniqueItems": false,
           "description": "A list of CloudFront functions that are associated with this cache behavior. Your functions must be published to the ``LIVE`` stage to associate them with a cache behavior."
+        },
+        "GrpcConfig": {
+          "$ref": "#/definitions/GrpcConfig",
+          "description": ""
         },
         "LambdaFunctionAssociations": {
           "items": {
@@ -558,6 +566,19 @@
       "type": "object",
       "description": "A complex type that controls the countries in which your content is distributed. CF determines the location of your users using ``MaxMind`` GeoIP databases. To disable geo restriction, remove the [Restrictions](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-distribution-distributionconfig.html#cfn-cloudfront-distribution-distributionconfig-restrictions) property from your stack template."
     },
+    "GrpcConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "Enabled": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "Enabled"
+      ],
+      "type": "object",
+      "description": ""
+    },
     "LambdaFunctionAssociation": {
       "additionalProperties": false,
       "properties": {
@@ -652,9 +673,6 @@
           "description": "An optional string that you want CloudFront to prefix to the access log ``filenames`` for this distribution, for example, ``myprefix/``. If you want to enable logging, but you don't want to specify a prefix, you still must include an empty ``Prefix`` element in the ``Logging`` element."
         }
       },
-      "required": [
-        "Bucket"
-      ],
       "type": "object",
       "description": "A complex type that controls whether access logs are written for the distribution."
     },
@@ -747,6 +765,10 @@
         "Members": {
           "$ref": "#/definitions/OriginGroupMembers",
           "description": "A complex type that contains information about the origins in an origin group."
+        },
+        "SelectionCriteria": {
+          "$ref": "#/definitions/OriginGroupSelectionCriteria",
+          "description": ""
         }
       },
       "required": [
@@ -807,6 +829,13 @@
       ],
       "type": "object",
       "description": "A complex data type for the origins included in an origin group."
+    },
+    "OriginGroupSelectionCriteria": {
+      "enum": [
+        "default",
+        "media-quality-based"
+      ],
+      "type": "string"
     },
     "OriginGroups": {
       "additionalProperties": false,

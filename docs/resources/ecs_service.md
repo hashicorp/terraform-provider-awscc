@@ -69,7 +69,8 @@ resource "awscc_ecs_service" "nginx" {
 
 ### Optional
 
-- `availability_zone_rebalancing` (String)
+- `availability_zone_rebalancing` (String) Indicates whether to use Availability Zone rebalancing for the service.
+ For more information, see [Balancing an Amazon ECS service across Availability Zones](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-rebalancing.html) in the *Amazon Elastic Container Service Developer Guide*.
 - `capacity_provider_strategy` (Attributes List) The capacity provider strategy to use for the service.
  If a ``capacityProviderStrategy`` is specified, the ``launchType`` parameter must be omitted. If no ``capacityProviderStrategy`` or ``launchType`` is specified, the ``defaultCapacityProviderStrategy`` for the cluster is used.
  A capacity provider strategy may contain a maximum of 6 capacity providers. (see [below for nested schema](#nestedatt--capacity_provider_strategy))
@@ -82,9 +83,8 @@ resource "awscc_ecs_service" "nginx" {
 - `enable_ecs_managed_tags` (Boolean) Specifies whether to turn on Amazon ECS managed tags for the tasks within the service. For more information, see [Tagging your Amazon ECS resources](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html) in the *Amazon Elastic Container Service Developer Guide*.
  When you use Amazon ECS managed tags, you need to set the ``propagateTags`` request parameter.
 - `enable_execute_command` (Boolean) Determines whether the execute command functionality is turned on for the service. If ``true``, the execute command functionality is turned on for all containers in tasks as part of the service.
-- `health_check_grace_period_seconds` (Number) The period of time, in seconds, that the Amazon ECS service scheduler ignores unhealthy Elastic Load Balancing target health checks after a task has first started. This is only used when your service is configured to use a load balancer. If your service has a load balancer defined and you don't specify a health check grace period value, the default value of ``0`` is used.
- If you do not use an Elastic Load Balancing, we recommend that you use the ``startPeriod`` in the task definition health check parameters. For more information, see [Health check](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_HealthCheck.html).
- If your service's tasks take a while to start and respond to Elastic Load Balancing health checks, you can specify a health check grace period of up to 2,147,483,647 seconds (about 69 years). During that time, the Amazon ECS service scheduler ignores health check status. This grace period can prevent the service scheduler from marking tasks as unhealthy and stopping them before they have time to come up.
+- `health_check_grace_period_seconds` (Number) The period of time, in seconds, that the Amazon ECS service scheduler ignores unhealthy Elastic Load Balancing, VPC Lattice, and container health checks after a task has first started. If you don't specify a health check grace period value, the default value of ``0`` is used. If you don't use any of the health checks, then ``healthCheckGracePeriodSeconds`` is unused.
+ If your service's tasks take a while to start and respond to health checks, you can specify a health check grace period of up to 2,147,483,647 seconds (about 69 years). During that time, the Amazon ECS service scheduler ignores health check status. This grace period can prevent the service scheduler from marking tasks as unhealthy and stopping them before they have time to come up.
 - `launch_type` (String) The launch type on which to run your service. For more information, see [Amazon ECS Launch Types](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html) in the *Amazon Elastic Container Service Developer Guide*.
 - `load_balancers` (Attributes List) A list of load balancer objects to associate with the service. If you specify the ``Role`` property, ``LoadBalancers`` must be specified as well. For information about the number of load balancers that you can specify per service, see [Service Load Balancing](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html) in the *Amazon Elastic Container Service Developer Guide*. (see [below for nested schema](#nestedatt--load_balancers))
 - `network_configuration` (Attributes) The network configuration for the service. This parameter is required for task definitions that use the ``awsvpc`` network mode to receive their own elastic network interface, and it is not supported for other network modes. For more information, see [Task Networking](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html) in the *Amazon Elastic Container Service Developer Guide*. (see [below for nested schema](#nestedatt--network_configuration))
@@ -121,7 +121,7 @@ resource "awscc_ecs_service" "nginx" {
  A task definition must be specified if the service uses either the ``ECS`` or ``CODE_DEPLOY`` deployment controllers.
  For more information about deployment types, see [Amazon ECS deployment types](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html).
 - `volume_configurations` (Attributes List) The configuration for a volume specified in the task definition as a volume that is configured at launch time. Currently, the only supported volume type is an Amazon EBS volume. (see [below for nested schema](#nestedatt--volume_configurations))
-- `vpc_lattice_configurations` (Attributes List) (see [below for nested schema](#nestedatt--vpc_lattice_configurations))
+- `vpc_lattice_configurations` (Attributes List) The VPC Lattice configuration for the service being created. (see [below for nested schema](#nestedatt--vpc_lattice_configurations))
 
 ### Read-Only
 
@@ -228,7 +228,7 @@ Optional:
 
 Optional:
 
-- `assign_public_ip` (String) Whether the task's elastic network interface receives a public IP address. The default value is ``DISABLED``.
+- `assign_public_ip` (String) Whether the task's elastic network interface receives a public IP address. The default value is ``ENABLED``.
 - `security_groups` (List of String) The IDs of the security groups associated with the task or service. If you don't specify a security group, the default security group for the VPC is used. There's a limit of 5 security groups that can be specified per ``awsvpcConfiguration``.
   All specified security groups must be from the same VPC.
 - `subnets` (List of String) The IDs of the subnets associated with the task or service. There's a limit of 16 subnets that can be specified per ``awsvpcConfiguration``.
@@ -463,9 +463,9 @@ Optional:
 
 Optional:
 
-- `port_name` (String)
-- `role_arn` (String)
-- `target_group_arn` (String)
+- `port_name` (String) The name of the port mapping to register in the VPC Lattice target group. This is the name of the ``portMapping`` you defined in your task definition.
+- `role_arn` (String) The ARN of the IAM role to associate with this VPC Lattice configuration. This is the Amazon ECS  infrastructure IAM role that is used to manage your VPC Lattice infrastructure.
+- `target_group_arn` (String) The full Amazon Resource Name (ARN) of the target group or groups associated with the VPC Lattice configuration that the Amazon ECS tasks will be registered to.
 
 ## Import
 

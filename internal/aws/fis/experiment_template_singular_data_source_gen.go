@@ -239,8 +239,7 @@ func experimentTemplateDataSource(ctx context.Context) (datasource.DataSource, e
 		//	    }
 		//	  },
 		//	  "required": [
-		//	    "Outputs",
-		//	    "DataSources"
+		//	    "Outputs"
 		//	  ],
 		//	  "type": "object"
 		//	}

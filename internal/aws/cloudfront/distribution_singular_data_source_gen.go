@@ -170,6 +170,19 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	            "type": "array",
 		//	            "uniqueItems": false
 		//	          },
+		//	          "GrpcConfig": {
+		//	            "additionalProperties": false,
+		//	            "description": "",
+		//	            "properties": {
+		//	              "Enabled": {
+		//	                "type": "boolean"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Enabled"
+		//	            ],
+		//	            "type": "object"
+		//	          },
 		//	          "LambdaFunctionAssociations": {
 		//	            "description": "A complex type that contains zero or more Lambda@Edge function associations for a cache behavior.",
 		//	            "items": {
@@ -462,6 +475,19 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	          "type": "array",
 		//	          "uniqueItems": false
 		//	        },
+		//	        "GrpcConfig": {
+		//	          "additionalProperties": false,
+		//	          "description": "",
+		//	          "properties": {
+		//	            "Enabled": {
+		//	              "type": "boolean"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Enabled"
+		//	          ],
+		//	          "type": "object"
+		//	        },
 		//	        "LambdaFunctionAssociations": {
 		//	          "description": "A complex type that contains zero or more Lambda@Edge function associations for a cache behavior.",
 		//	          "items": {
@@ -584,9 +610,6 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	          "type": "string"
 		//	        }
 		//	      },
-		//	      "required": [
-		//	        "Bucket"
-		//	      ],
 		//	      "type": "object"
 		//	    },
 		//	    "OriginGroups": {
@@ -669,6 +692,13 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	                  "Items"
 		//	                ],
 		//	                "type": "object"
+		//	              },
+		//	              "SelectionCriteria": {
+		//	                "enum": [
+		//	                  "default",
+		//	                  "media-quality-based"
+		//	                ],
+		//	                "type": "string"
 		//	              }
 		//	            },
 		//	            "required": [
@@ -1048,6 +1078,17 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 								Description: "A list of CloudFront functions that are associated with this cache behavior. CloudFront functions must be published to the ``LIVE`` stage to associate them with a cache behavior.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
+							// Property: GrpcConfig
+							"grpc_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Enabled
+									"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
 							// Property: LambdaFunctionAssociations
 							"lambda_function_associations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -1302,6 +1343,17 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 							Description: "A list of CloudFront functions that are associated with this cache behavior. Your functions must be published to the ``LIVE`` stage to associate them with a cache behavior.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
+						// Property: GrpcConfig
+						"grpc_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Enabled
+								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
 						// Property: LambdaFunctionAssociations
 						"lambda_function_associations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -1486,6 +1538,10 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 										}, /*END SCHEMA*/
 										Description: "A complex type that contains information about the origins in an origin group.",
 										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: SelectionCriteria
+									"selection_criteria": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
@@ -1839,6 +1895,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"function_arn":                    "FunctionARN",
 		"function_associations":           "FunctionAssociations",
 		"geo_restriction":                 "GeoRestriction",
+		"grpc_config":                     "GrpcConfig",
 		"header_name":                     "HeaderName",
 		"header_value":                    "HeaderValue",
 		"headers":                         "Headers",
@@ -1888,6 +1945,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"restrictions":                    "Restrictions",
 		"s3_origin":                       "S3Origin",
 		"s3_origin_config":                "S3OriginConfig",
+		"selection_criteria":              "SelectionCriteria",
 		"smooth_streaming":                "SmoothStreaming",
 		"ssl_support_method":              "SslSupportMethod",
 		"staging":                         "Staging",

@@ -268,7 +268,9 @@ func aIPromptResource(ctx context.Context) (resource.Resource, error) {
 		//	  "enum": [
 		//	    "ANSWER_GENERATION",
 		//	    "INTENT_LABELING_GENERATION",
-		//	    "QUERY_REFORMULATION"
+		//	    "QUERY_REFORMULATION",
+		//	    "SELF_SERVICE_PRE_PROCESSING",
+		//	    "SELF_SERVICE_ANSWER_GENERATION"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -279,6 +281,8 @@ func aIPromptResource(ctx context.Context) (resource.Resource, error) {
 					"ANSWER_GENERATION",
 					"INTENT_LABELING_GENERATION",
 					"QUERY_REFORMULATION",
+					"SELF_SERVICE_PRE_PROCESSING",
+					"SELF_SERVICE_ANSWER_GENERATION",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

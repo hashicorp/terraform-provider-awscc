@@ -151,6 +151,19 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The name of the environment.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: NetworkType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "ipv4",
+		//	    "dual"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: PreferredMaintenanceWindow
 		// CloudFormation resource type schema:
 		//
@@ -358,6 +371,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"kms_key_id":                   "KmsKeyId",
 		"mount_point":                  "MountPoint",
 		"name":                         "Name",
+		"network_type":                 "NetworkType",
 		"preferred_maintenance_window": "PreferredMaintenanceWindow",
 		"publicly_accessible":          "PubliclyAccessible",
 		"security_group_ids":           "SecurityGroupIds",

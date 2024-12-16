@@ -186,7 +186,9 @@ func aIPromptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "enum": [
 		//	    "ANSWER_GENERATION",
 		//	    "INTENT_LABELING_GENERATION",
-		//	    "QUERY_REFORMULATION"
+		//	    "QUERY_REFORMULATION",
+		//	    "SELF_SERVICE_PRE_PROCESSING",
+		//	    "SELF_SERVICE_ANSWER_GENERATION"
 		//	  ],
 		//	  "type": "string"
 		//	}

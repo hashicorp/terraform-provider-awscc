@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1106 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1121 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -572,6 +572,10 @@ resource_schema "aws_batch_compute_environment" {
   cloudformation_type_name = "AWS::Batch::ComputeEnvironment"
 }
 
+resource_schema "aws_batch_job_definition" {
+  cloudformation_type_name = "AWS::Batch::JobDefinition"
+}
+
 resource_schema "aws_batch_job_queue" {
   cloudformation_type_name = "AWS::Batch::JobQueue"
 }
@@ -682,6 +686,10 @@ resource_schema "aws_cassandra_keyspace" {
 
 resource_schema "aws_cassandra_table" {
   cloudformation_type_name = "AWS::Cassandra::Table"
+}
+
+resource_schema "aws_cassandra_type" {
+  cloudformation_type_name = "AWS::Cassandra::Type"
 }
 
 resource_schema "aws_certificatemanager_account" {
@@ -1619,6 +1627,11 @@ resource_schema "aws_ec2_key_pair" {
 
 resource_schema "aws_ec2_launch_template" {
   cloudformation_type_name = "AWS::EC2::LaunchTemplate"
+
+  # Latest schema updates are suppressed.
+  # git checkout internal/service/cloudformation/schemas/AWS_EC2_LaunchTemplate.json
+  # Suppression Reason:  Object has no key 'NetworkPerformanceOptions'
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/2133
 }
 
 resource_schema "aws_ec2_local_gateway_route" {
@@ -2614,6 +2627,10 @@ resource_schema "aws_iot_certificate_provider" {
   cloudformation_type_name = "AWS::IoT::CertificateProvider"
 }
 
+resource_schema "aws_iot_command" {
+  cloudformation_type_name = "AWS::IoT::Command"
+}
+
 resource_schema "aws_iot_custom_metric" {
   cloudformation_type_name = "AWS::IoT::CustomMetric"
 }
@@ -3160,6 +3177,16 @@ resource_schema "aws_logs_subscription_filter" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_logs_transformer" {
+  cloudformation_type_name = "AWS::Logs::Transformer"
+
+  # Suppression Reason: TransformerConfig/Csv/Columns is of unsupported type: list of ""
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/1515
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
 resource_schema "aws_lookoutequipment_inference_scheduler" {
   cloudformation_type_name = "AWS::LookoutEquipment::InferenceScheduler"
 }
@@ -3482,6 +3509,10 @@ resource_schema "aws_networkmanager_device" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_networkmanager_direct_connect_gateway_attachment" {
+  cloudformation_type_name = "AWS::NetworkManager::DirectConnectGatewayAttachment"
+}
+
 resource_schema "aws_networkmanager_global_network" {
   cloudformation_type_name = "AWS::NetworkManager::GlobalNetwork"
 }
@@ -3739,6 +3770,16 @@ resource_schema "aws_qbusiness_application" {
   cloudformation_type_name = "AWS::QBusiness::Application"
 }
 
+resource_schema "aws_qbusiness_data_accessor" {
+  cloudformation_type_name               = "AWS::QBusiness::DataAccessor"
+  suppress_plural_data_source_generation = true
+
+  # Suppression Reason: stack overflow
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/2134
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+}
+
 resource_schema "aws_qbusiness_data_source" {
   cloudformation_type_name               = "AWS::QBusiness::DataSource"
   suppress_plural_data_source_generation = true
@@ -3746,6 +3787,11 @@ resource_schema "aws_qbusiness_data_source" {
 
 resource_schema "aws_qbusiness_index" {
   cloudformation_type_name               = "AWS::QBusiness::Index"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_qbusiness_permission" {
+  cloudformation_type_name               = "AWS::QBusiness::Permission"
   suppress_plural_data_source_generation = true
 }
 
@@ -3833,6 +3879,10 @@ resource_schema "aws_quicksight_vpc_connection" {
 
 resource_schema "aws_ram_permission" {
   cloudformation_type_name = "AWS::RAM::Permission"
+}
+
+resource_schema "aws_ram_resource_share" {
+  cloudformation_type_name = "AWS::RAM::ResourceShare"
 }
 
 resource_schema "aws_rds_custom_db_engine_version" {
@@ -4229,6 +4279,14 @@ resource_schema "aws_s3outposts_bucket_policy" {
 
 resource_schema "aws_s3outposts_endpoint" {
   cloudformation_type_name = "AWS::S3Outposts::Endpoint"
+}
+
+resource_schema "aws_s3tables_table_bucket" {
+  cloudformation_type_name = "AWS::S3Tables::TableBucket"
+}
+
+resource_schema "aws_s3tables_table_bucket_policy" {
+  cloudformation_type_name = "AWS::S3Tables::TableBucketPolicy"
 }
 
 resource_schema "aws_ses_configuration_set" {
@@ -4807,6 +4865,14 @@ resource_schema "aws_vpclattice_listener" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_vpclattice_resource_configuration" {
+  cloudformation_type_name = "AWS::VpcLattice::ResourceConfiguration"
+}
+
+resource_schema "aws_vpclattice_resource_gateway" {
+  cloudformation_type_name = "AWS::VpcLattice::ResourceGateway"
+}
+
 resource_schema "aws_vpclattice_resource_policy" {
   cloudformation_type_name               = "AWS::VpcLattice::ResourcePolicy"
   suppress_plural_data_source_generation = true
@@ -4823,6 +4889,10 @@ resource_schema "aws_vpclattice_service" {
 
 resource_schema "aws_vpclattice_service_network" {
   cloudformation_type_name = "AWS::VpcLattice::ServiceNetwork"
+}
+
+resource_schema "aws_vpclattice_service_network_resource_association" {
+  cloudformation_type_name = "AWS::VpcLattice::ServiceNetworkResourceAssociation"
 }
 
 resource_schema "aws_vpclattice_service_network_service_association" {
@@ -4883,6 +4953,16 @@ resource_schema "aws_wisdom_ai_agent" {
 
 resource_schema "aws_wisdom_ai_agent_version" {
   cloudformation_type_name               = "AWS::Wisdom::AIAgentVersion"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_wisdom_ai_guardrail" {
+  cloudformation_type_name               = "AWS::Wisdom::AIGuardrail"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_wisdom_ai_guardrail_version" {
+  cloudformation_type_name               = "AWS::Wisdom::AIGuardrailVersion"
   suppress_plural_data_source_generation = true
 }
 

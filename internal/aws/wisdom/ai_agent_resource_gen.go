@@ -97,6 +97,10 @@ func aIAgentResource(ctx context.Context) (resource.Resource, error) {
 		//	    "AnswerRecommendationAIAgentConfiguration": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
+		//	        "AnswerGenerationAIGuardrailId": {
+		//	          "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$",
+		//	          "type": "string"
+		//	        },
 		//	        "AnswerGenerationAIPromptId": {
 		//	          "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$",
 		//	          "type": "string"
@@ -256,6 +260,10 @@ func aIAgentResource(ctx context.Context) (resource.Resource, error) {
 		//	    "ManualSearchAIAgentConfiguration": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
+		//	        "AnswerGenerationAIGuardrailId": {
+		//	          "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$",
+		//	          "type": "string"
+		//	        },
 		//	        "AnswerGenerationAIPromptId": {
 		//	          "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$",
 		//	          "type": "string"
@@ -403,6 +411,165 @@ func aIAgentResource(ctx context.Context) (resource.Resource, error) {
 		//	        }
 		//	      },
 		//	      "type": "object"
+		//	    },
+		//	    "SelfServiceAIAgentConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "AssociationConfigurations": {
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "AssociationConfigurationData": {
+		//	                "properties": {
+		//	                  "KnowledgeBaseAssociationConfigurationData": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "ContentTagFilter": {
+		//	                        "properties": {
+		//	                          "AndConditions": {
+		//	                            "items": {
+		//	                              "additionalProperties": false,
+		//	                              "properties": {
+		//	                                "Key": {
+		//	                                  "maxLength": 128,
+		//	                                  "minLength": 1,
+		//	                                  "pattern": "",
+		//	                                  "type": "string"
+		//	                                },
+		//	                                "Value": {
+		//	                                  "maxLength": 256,
+		//	                                  "minLength": 1,
+		//	                                  "type": "string"
+		//	                                }
+		//	                              },
+		//	                              "required": [
+		//	                                "Key"
+		//	                              ],
+		//	                              "type": "object"
+		//	                            },
+		//	                            "type": "array"
+		//	                          },
+		//	                          "OrConditions": {
+		//	                            "items": {
+		//	                              "properties": {
+		//	                                "AndConditions": {
+		//	                                  "items": {
+		//	                                    "additionalProperties": false,
+		//	                                    "properties": {
+		//	                                      "Key": {
+		//	                                        "maxLength": 128,
+		//	                                        "minLength": 1,
+		//	                                        "pattern": "",
+		//	                                        "type": "string"
+		//	                                      },
+		//	                                      "Value": {
+		//	                                        "maxLength": 256,
+		//	                                        "minLength": 1,
+		//	                                        "type": "string"
+		//	                                      }
+		//	                                    },
+		//	                                    "required": [
+		//	                                      "Key"
+		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "type": "array"
+		//	                                },
+		//	                                "TagCondition": {
+		//	                                  "additionalProperties": false,
+		//	                                  "properties": {
+		//	                                    "Key": {
+		//	                                      "maxLength": 128,
+		//	                                      "minLength": 1,
+		//	                                      "pattern": "",
+		//	                                      "type": "string"
+		//	                                    },
+		//	                                    "Value": {
+		//	                                      "maxLength": 256,
+		//	                                      "minLength": 1,
+		//	                                      "type": "string"
+		//	                                    }
+		//	                                  },
+		//	                                  "required": [
+		//	                                    "Key"
+		//	                                  ],
+		//	                                  "type": "object"
+		//	                                }
+		//	                              },
+		//	                              "type": "object"
+		//	                            },
+		//	                            "type": "array"
+		//	                          },
+		//	                          "TagCondition": {
+		//	                            "additionalProperties": false,
+		//	                            "properties": {
+		//	                              "Key": {
+		//	                                "maxLength": 128,
+		//	                                "minLength": 1,
+		//	                                "pattern": "",
+		//	                                "type": "string"
+		//	                              },
+		//	                              "Value": {
+		//	                                "maxLength": 256,
+		//	                                "minLength": 1,
+		//	                                "type": "string"
+		//	                              }
+		//	                            },
+		//	                            "required": [
+		//	                              "Key"
+		//	                            ],
+		//	                            "type": "object"
+		//	                          }
+		//	                        },
+		//	                        "type": "object"
+		//	                      },
+		//	                      "MaxResults": {
+		//	                        "maximum": 100,
+		//	                        "minimum": 1,
+		//	                        "type": "number"
+		//	                      },
+		//	                      "OverrideKnowledgeBaseSearchType": {
+		//	                        "enum": [
+		//	                          "HYBRID",
+		//	                          "SEMANTIC"
+		//	                        ],
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
+		//	              "AssociationId": {
+		//	                "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
+		//	                "type": "string"
+		//	              },
+		//	              "AssociationType": {
+		//	                "enum": [
+		//	                  "KNOWLEDGE_BASE"
+		//	                ],
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array"
+		//	        },
+		//	        "SelfServiceAIGuardrailId": {
+		//	          "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$",
+		//	          "type": "string"
+		//	        },
+		//	        "SelfServiceAnswerGenerationAIPromptId": {
+		//	          "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$",
+		//	          "type": "string"
+		//	        },
+		//	        "SelfServicePreProcessingAIPromptId": {
+		//	          "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -412,6 +579,17 @@ func aIAgentResource(ctx context.Context) (resource.Resource, error) {
 				// Property: AnswerRecommendationAIAgentConfiguration
 				"answer_recommendation_ai_agent_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AnswerGenerationAIGuardrailId
+						"answer_generation_ai_guardrail_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: AnswerGenerationAIPromptId
 						"answer_generation_ai_prompt_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
@@ -694,6 +872,17 @@ func aIAgentResource(ctx context.Context) (resource.Resource, error) {
 				// Property: ManualSearchAIAgentConfiguration
 				"manual_search_ai_agent_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AnswerGenerationAIGuardrailId
+						"answer_generation_ai_guardrail_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: AnswerGenerationAIPromptId
 						"answer_generation_ai_prompt_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
@@ -951,6 +1140,288 @@ func aIAgentResource(ctx context.Context) (resource.Resource, error) {
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: SelfServiceAIAgentConfiguration
+				"self_service_ai_agent_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AssociationConfigurations
+						"association_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AssociationConfigurationData
+									"association_configuration_data": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: KnowledgeBaseAssociationConfigurationData
+											"knowledge_base_association_configuration_data": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: ContentTagFilter
+													"content_tag_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: AndConditions
+															"and_conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: Key
+																		"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Optional: true,
+																			Computed: true,
+																			Validators: []validator.String{ /*START VALIDATORS*/
+																				stringvalidator.LengthBetween(1, 128),
+																				fwvalidators.NotNullString(),
+																			}, /*END VALIDATORS*/
+																			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																				stringplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
+																		}, /*END ATTRIBUTE*/
+																		// Property: Value
+																		"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Optional: true,
+																			Computed: true,
+																			Validators: []validator.String{ /*START VALIDATORS*/
+																				stringvalidator.LengthBetween(1, 256),
+																			}, /*END VALIDATORS*/
+																			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																				stringplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Optional: true,
+																Computed: true,
+																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																	listplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: OrConditions
+															"or_conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: AndConditions
+																		"and_conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Key
+																					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Optional: true,
+																						Computed: true,
+																						Validators: []validator.String{ /*START VALIDATORS*/
+																							stringvalidator.LengthBetween(1, 128),
+																							fwvalidators.NotNullString(),
+																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
+																					}, /*END ATTRIBUTE*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Optional: true,
+																						Computed: true,
+																						Validators: []validator.String{ /*START VALIDATORS*/
+																							stringvalidator.LengthBetween(1, 256),
+																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																			}, /*END NESTED OBJECT*/
+																			Optional: true,
+																			Computed: true,
+																			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																				listplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
+																		}, /*END ATTRIBUTE*/
+																		// Property: TagCondition
+																		"tag_condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Key
+																				"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Optional: true,
+																					Computed: true,
+																					Validators: []validator.String{ /*START VALIDATORS*/
+																						stringvalidator.LengthBetween(1, 128),
+																						fwvalidators.NotNullString(),
+																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																						stringplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																				// Property: Value
+																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Optional: true,
+																					Computed: true,
+																					Validators: []validator.String{ /*START VALIDATORS*/
+																						stringvalidator.LengthBetween(1, 256),
+																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																						stringplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Optional: true,
+																			Computed: true,
+																			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																				objectplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Optional: true,
+																Computed: true,
+																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																	listplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: TagCondition
+															"tag_condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Key
+																	"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Optional: true,
+																		Computed: true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			stringvalidator.LengthBetween(1, 128),
+																			fwvalidators.NotNullString(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																	// Property: Value
+																	"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Optional: true,
+																		Computed: true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			stringvalidator.LengthBetween(1, 256),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Optional: true,
+																Computed: true,
+																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																	objectplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Optional: true,
+														Computed: true,
+														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+															objectplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: MaxResults
+													"max_results": schema.Float64Attribute{ /*START ATTRIBUTE*/
+														Optional: true,
+														Computed: true,
+														Validators: []validator.Float64{ /*START VALIDATORS*/
+															float64validator.Between(1.000000, 100.000000),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+															float64planmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: OverrideKnowledgeBaseSearchType
+													"override_knowledge_base_search_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Optional: true,
+														Computed: true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.OneOf(
+																"HYBRID",
+																"SEMANTIC",
+															),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: AssociationId
+									"association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.RegexMatches(regexp.MustCompile("^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"), ""),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: AssociationType
+									"association_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"KNOWLEDGE_BASE",
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SelfServiceAIGuardrailId
+						"self_service_ai_guardrail_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SelfServiceAnswerGenerationAIPromptId
+						"self_service_answer_generation_ai_prompt_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SelfServicePreProcessingAIPromptId
+						"self_service_pre_processing_ai_prompt_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Required: true,
 		}, /*END ATTRIBUTE*/
@@ -1025,7 +1496,8 @@ func aIAgentResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "enum": [
 		//	    "MANUAL_SEARCH",
-		//	    "ANSWER_RECOMMENDATION"
+		//	    "ANSWER_RECOMMENDATION",
+		//	    "SELF_SERVICE"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -1035,6 +1507,7 @@ func aIAgentResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.OneOf(
 					"MANUAL_SEARCH",
 					"ANSWER_RECOMMENDATION",
+					"SELF_SERVICE",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1063,21 +1536,22 @@ func aIAgentResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Wisdom::AIAgent").WithTerraformTypeName("awscc_wisdom_ai_agent")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"ai_agent_arn":                   "AIAgentArn",
-		"ai_agent_id":                    "AIAgentId",
-		"and_conditions":                 "AndConditions",
-		"answer_generation_ai_prompt_id": "AnswerGenerationAIPromptId",
+		"ai_agent_arn":                                 "AIAgentArn",
+		"ai_agent_id":                                  "AIAgentId",
+		"and_conditions":                               "AndConditions",
+		"answer_generation_ai_guardrail_id":            "AnswerGenerationAIGuardrailId",
+		"answer_generation_ai_prompt_id":               "AnswerGenerationAIPromptId",
 		"answer_recommendation_ai_agent_configuration": "AnswerRecommendationAIAgentConfiguration",
-		"assistant_arn":                           "AssistantArn",
-		"assistant_id":                            "AssistantId",
-		"association_configuration_data":          "AssociationConfigurationData",
-		"association_configurations":              "AssociationConfigurations",
-		"association_id":                          "AssociationId",
-		"association_type":                        "AssociationType",
-		"configuration":                           "Configuration",
-		"content_tag_filter":                      "ContentTagFilter",
-		"description":                             "Description",
-		"intent_labeling_generation_ai_prompt_id": "IntentLabelingGenerationAIPromptId",
+		"assistant_arn":                                "AssistantArn",
+		"assistant_id":                                 "AssistantId",
+		"association_configuration_data":               "AssociationConfigurationData",
+		"association_configurations":                   "AssociationConfigurations",
+		"association_id":                               "AssociationId",
+		"association_type":                             "AssociationType",
+		"configuration":                                "Configuration",
+		"content_tag_filter":                           "ContentTagFilter",
+		"description":                                  "Description",
+		"intent_labeling_generation_ai_prompt_id":      "IntentLabelingGenerationAIPromptId",
 		"key": "Key",
 		"knowledge_base_association_configuration_data": "KnowledgeBaseAssociationConfigurationData",
 		"manual_search_ai_agent_configuration":          "ManualSearchAIAgentConfiguration",
@@ -1086,6 +1560,10 @@ func aIAgentResource(ctx context.Context) (resource.Resource, error) {
 		"or_conditions":                                 "OrConditions",
 		"override_knowledge_base_search_type":           "OverrideKnowledgeBaseSearchType",
 		"query_reformulation_ai_prompt_id":              "QueryReformulationAIPromptId",
+		"self_service_ai_agent_configuration":           "SelfServiceAIAgentConfiguration",
+		"self_service_ai_guardrail_id":                  "SelfServiceAIGuardrailId",
+		"self_service_answer_generation_ai_prompt_id":   "SelfServiceAnswerGenerationAIPromptId",
+		"self_service_pre_processing_ai_prompt_id":      "SelfServicePreProcessingAIPromptId",
 		"tag_condition":                                 "TagCondition",
 		"tags":                                          "Tags",
 		"type":                                          "Type",

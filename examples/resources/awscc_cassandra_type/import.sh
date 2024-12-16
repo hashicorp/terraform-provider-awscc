@@ -1,0 +1,1 @@
+$ terraform import awscc_cassandra_type.example "keyspace_name|type_name"

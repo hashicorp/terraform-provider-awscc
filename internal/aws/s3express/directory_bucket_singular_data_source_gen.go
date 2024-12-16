@@ -37,14 +37,14 @@ func directoryBucketDataSource(ctx context.Context) (datasource.DataSource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Returns the code for the Availability Zone where the directory bucket was created.",
+		//	  "description": "Returns the code for the Availability Zone or Local Zone where the directory bucket was created. An example for the code of an Availability Zone is 'us-east-1f'.",
 		//	  "examples": [
 		//	    "us-east-1f"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"availability_zone_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Returns the code for the Availability Zone where the directory bucket was created.",
+			Description: "Returns the code for the Availability Zone or Local Zone where the directory bucket was created. An example for the code of an Availability Zone is 'us-east-1f'.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BucketEncryption
@@ -142,27 +142,28 @@ func directoryBucketDataSource(ctx context.Context) (datasource.DataSource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Specifies a name for the bucket. The bucket name must contain only lowercase letters, numbers, and hyphens (-). A directory bucket name must be unique in the chosen Availability Zone. The bucket name must also follow the format 'bucket_base_name--az_id--x-s3' (for example, 'DOC-EXAMPLE-BUCKET--usw2-az1--x-s3'). If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the bucket name.",
+		//	  "description": "Specifies a name for the bucket. The bucket name must contain only lowercase letters, numbers, and hyphens (-). A directory bucket name must be unique in the chosen Availability Zone or Local Zone. The bucket name must also follow the format 'bucket_base_name--zone_id--x-s3'. The zone_id can be the ID of an Availability Zone or a Local Zone. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the bucket name.",
 		//	  "maxLength": 63,
 		//	  "pattern": "^[a-z0-9][a-z0-9//.//-]*[a-z0-9]$",
 		//	  "type": "string"
 		//	}
 		"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies a name for the bucket. The bucket name must contain only lowercase letters, numbers, and hyphens (-). A directory bucket name must be unique in the chosen Availability Zone. The bucket name must also follow the format 'bucket_base_name--az_id--x-s3' (for example, 'DOC-EXAMPLE-BUCKET--usw2-az1--x-s3'). If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the bucket name.",
+			Description: "Specifies a name for the bucket. The bucket name must contain only lowercase letters, numbers, and hyphens (-). A directory bucket name must be unique in the chosen Availability Zone or Local Zone. The bucket name must also follow the format 'bucket_base_name--zone_id--x-s3'. The zone_id can be the ID of an Availability Zone or a Local Zone. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the bucket name.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DataRedundancy
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Specifies the number of Availability Zone that's used for redundancy for the bucket.",
+		//	  "description": "Specifies the number of Availability Zone or Local Zone that's used for redundancy for the bucket.",
 		//	  "enum": [
-		//	    "SingleAvailabilityZone"
+		//	    "SingleAvailabilityZone",
+		//	    "SingleLocalZone"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"data_redundancy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the number of Availability Zone that's used for redundancy for the bucket.",
+			Description: "Specifies the number of Availability Zone or Local Zone that's used for redundancy for the bucket.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LifecycleConfiguration
@@ -291,11 +292,11 @@ func directoryBucketDataSource(ctx context.Context) (datasource.DataSource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Specifies the AZ ID of the Availability Zone where the directory bucket will be created. An example AZ ID value is 'use1-az5'.",
+		//	  "description": "Specifies the Zone ID of the Availability Zone or Local Zone where the directory bucket will be created. An example Availability Zone ID value is 'use1-az5'.",
 		//	  "type": "string"
 		//	}
 		"location_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the AZ ID of the Availability Zone where the directory bucket will be created. An example AZ ID value is 'use1-az5'.",
+			Description: "Specifies the Zone ID of the Availability Zone or Local Zone where the directory bucket will be created. An example Availability Zone ID value is 'use1-az5'.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

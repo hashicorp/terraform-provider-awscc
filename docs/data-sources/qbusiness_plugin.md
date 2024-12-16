@@ -58,8 +58,10 @@ Read-Only:
 
 Read-Only:
 
+- `authorization_url` (String)
 - `role_arn` (String)
 - `secret_arn` (String)
+- `token_url` (String)
 
 
 

@@ -313,8 +313,7 @@ func experimentTemplateResource(ctx context.Context) (resource.Resource, error) 
 		//	    }
 		//	  },
 		//	  "required": [
-		//	    "Outputs",
-		//	    "DataSources"
+		//	    "Outputs"
 		//	  ],
 		//	  "type": "object"
 		//	}
@@ -350,9 +349,6 @@ func experimentTemplateResource(ctx context.Context) (resource.Resource, error) 
 					}, /*END SCHEMA*/
 					Optional: true,
 					Computed: true,
-					Validators: []validator.Object{ /*START VALIDATORS*/
-						fwvalidators.NotNullObject(),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/

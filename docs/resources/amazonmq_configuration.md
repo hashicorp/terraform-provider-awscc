@@ -17,13 +17,13 @@ Resource Type definition for AWS::AmazonMQ::Configuration
 
 ### Required
 
-- `data` (String) The base64-encoded XML configuration.
 - `engine_type` (String) The type of broker engine. Note: Currently, Amazon MQ only supports ACTIVEMQ for creating and editing broker configurations.
 - `name` (String) The name of the configuration.
 
 ### Optional
 
 - `authentication_strategy` (String) The authentication strategy associated with the configuration. The default is SIMPLE.
+- `data` (String) The base64-encoded XML configuration.
 - `description` (String) The description of the configuration.
 - `engine_version` (String) The version of the broker engine.
 - `tags` (Attributes List) Create tags when creating the configuration. (see [below for nested schema](#nestedatt--tags))

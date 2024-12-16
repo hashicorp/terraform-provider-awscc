@@ -186,6 +186,10 @@
       "type": "string",
       "maxLength": 512
     },
+    "ApplyOnTransformedLogs": {
+      "description": "",
+      "type": "boolean"
+    },
     "FilterName": {
       "minLength": 1,
       "pattern": "^[^:*]{1,512}",

@@ -28,7 +28,7 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "User provided identifier for integration, unique to the user account.",
-		//	  "maxLength": 256,
+		//	  "maxLength": 50,
 		//	  "minLength": 1,
 		//	  "pattern": "[\\.\\-_/#A-Za-z0-9]+",
 		//	  "type": "string"

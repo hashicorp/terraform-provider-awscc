@@ -18,6 +18,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"github.com/hashicorp/terraform-provider-awscc/internal/defaults"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
@@ -186,6 +187,10 @@ func fHIRDatastoreResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "default": {
+		//	    "AuthorizationStrategy": "AWS_AUTH",
+		//	    "FineGrainedAuthorizationEnabled": false
+		//	  },
 		//	  "description": "The identity provider configuration for the datastore",
 		//	  "properties": {
 		//	    "AuthorizationStrategy": {
@@ -271,6 +276,10 @@ func fHIRDatastoreResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				defaults.StaticPartialObject(map[string]interface{}{
+					"authorization_strategy":             "AWS_AUTH",
+					"fine_grained_authorization_enabled": false,
+				}),
 				objectplanmodifier.UseStateForUnknown(),
 				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
@@ -326,6 +335,11 @@ func fHIRDatastoreResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "default": {
+		//	    "KmsEncryptionConfig": {
+		//	      "CmkType": "AWS_OWNED_KMS_KEY"
+		//	    }
+		//	  },
 		//	  "description": "The server-side encryption key configuration for a customer provided encryption key.",
 		//	  "properties": {
 		//	    "KmsEncryptionConfig": {
@@ -409,6 +423,11 @@ func fHIRDatastoreResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				defaults.StaticPartialObject(map[string]interface{}{
+					"kms_encryption_config": map[string]interface{}{
+						"cmk_type": "AWS_OWNED_KMS_KEY",
+					},
+				}),
 				objectplanmodifier.UseStateForUnknown(),
 				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/

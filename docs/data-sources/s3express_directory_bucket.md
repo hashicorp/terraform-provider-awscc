@@ -22,12 +22,12 @@ Data Source schema for AWS::S3Express::DirectoryBucket
 ### Read-Only
 
 - `arn` (String) Returns the Amazon Resource Name (ARN) of the specified bucket.
-- `availability_zone_name` (String) Returns the code for the Availability Zone where the directory bucket was created.
+- `availability_zone_name` (String) Returns the code for the Availability Zone or Local Zone where the directory bucket was created. An example for the code of an Availability Zone is 'us-east-1f'.
 - `bucket_encryption` (Attributes) Specifies default encryption for a bucket using server-side encryption with Amazon S3 managed keys (SSE-S3) or AWS KMS keys (SSE-KMS). (see [below for nested schema](#nestedatt--bucket_encryption))
-- `bucket_name` (String) Specifies a name for the bucket. The bucket name must contain only lowercase letters, numbers, and hyphens (-). A directory bucket name must be unique in the chosen Availability Zone. The bucket name must also follow the format 'bucket_base_name--az_id--x-s3' (for example, 'DOC-EXAMPLE-BUCKET--usw2-az1--x-s3'). If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the bucket name.
-- `data_redundancy` (String) Specifies the number of Availability Zone that's used for redundancy for the bucket.
+- `bucket_name` (String) Specifies a name for the bucket. The bucket name must contain only lowercase letters, numbers, and hyphens (-). A directory bucket name must be unique in the chosen Availability Zone or Local Zone. The bucket name must also follow the format 'bucket_base_name--zone_id--x-s3'. The zone_id can be the ID of an Availability Zone or a Local Zone. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the bucket name.
+- `data_redundancy` (String) Specifies the number of Availability Zone or Local Zone that's used for redundancy for the bucket.
 - `lifecycle_configuration` (Attributes) Lifecycle rules that define how Amazon S3 Express manages objects during their lifetime. (see [below for nested schema](#nestedatt--lifecycle_configuration))
-- `location_name` (String) Specifies the AZ ID of the Availability Zone where the directory bucket will be created. An example AZ ID value is 'use1-az5'.
+- `location_name` (String) Specifies the Zone ID of the Availability Zone or Local Zone where the directory bucket will be created. An example Availability Zone ID value is 'use1-az5'.
 
 <a id="nestedatt--bucket_encryption"></a>
 ### Nested Schema for `bucket_encryption`

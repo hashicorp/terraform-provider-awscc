@@ -60,36 +60,40 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "",
+		//	  "description": "The predictive scaling policy configuration.",
 		//	  "properties": {
 		//	    "MaxCapacityBreachBehavior": {
+		//	      "description": "Defines the behavior that should be applied if the forecast capacity approaches or exceeds the maximum capacity. Defaults to ``HonorMaxCapacity`` if not specified.",
 		//	      "type": "string"
 		//	    },
 		//	    "MaxCapacityBuffer": {
+		//	      "description": "The size of the capacity buffer to use when the forecast capacity is close to or exceeds the maximum capacity. The value is specified as a percentage relative to the forecast capacity. For example, if the buffer is 10, this means a 10 percent buffer, such that if the forecast capacity is 50, and the maximum capacity is 40, then the effective maximum capacity is 55. \n Required if the ``MaxCapacityBreachBehavior`` property is set to ``IncreaseMaxCapacity``, and cannot be used otherwise.",
 		//	      "type": "integer"
 		//	    },
 		//	    "MetricSpecifications": {
+		//	      "description": "This structure includes the metrics and target utilization to use for predictive scaling. \n This is an array, but we currently only support a single metric specification. That is, you can specify a target value and a single metric pair, or a target value and one scaling metric and one load metric.",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "additionalProperties": false,
-		//	        "description": "",
+		//	        "description": "This structure specifies the metrics and target utilization settings for a predictive scaling policy. \n You must specify either a metric pair, or a load metric and a scaling metric individually. Specifying a metric pair instead of individual metrics provides a simpler way to configure metrics for a scaling policy. You choose the metric pair, and the policy automatically knows the correct sum and average statistics to use for the load metric and the scaling metric.",
 		//	        "properties": {
 		//	          "CustomizedCapacityMetricSpecification": {
 		//	            "additionalProperties": false,
-		//	            "description": "",
+		//	            "description": "The customized capacity metric specification.",
 		//	            "properties": {
 		//	              "MetricDataQueries": {
+		//	                "description": "One or more metric data queries to provide data points for a metric specification.",
 		//	                "insertionOrder": false,
 		//	                "items": {
 		//	                  "additionalProperties": false,
-		//	                  "description": "",
+		//	                  "description": "The metric data to return. Also defines whether this call is returning data for one metric only, or whether it is performing a math expression on the values of returned metric statistics to create a new time series. A time series is a series of data points, each of which is associated with a timestamp.",
 		//	                  "properties": {
 		//	                    "Expression": {
-		//	                      "description": "The math expression to perform on the returned data, if this object is performing a math expression.",
+		//	                      "description": "The math expression to perform on the returned data, if this object is performing a math expression. This expression can use the ``Id`` of the other metrics to refer to those metrics, and can also use the ``Id`` of other expressions to use the result of those expressions. \n Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Id": {
-		//	                      "description": "A short name that identifies the object's results in the response.",
+		//	                      "description": "A short name that identifies the object's results in the response. This name must be unique among all ``MetricDataQuery`` objects specified for a single scaling policy. If you are performing math expressions on this set of data, this name represents that data and can serve as a variable in the mathematical expression. The valid characters are letters, numbers, and underscores. The first character must be a lowercase letter.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Label": {
@@ -98,18 +102,18 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                    },
 		//	                    "MetricStat": {
 		//	                      "additionalProperties": false,
-		//	                      "description": "Information about the metric data to return.",
+		//	                      "description": "Information about the metric data to return. \n Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both.",
 		//	                      "properties": {
 		//	                        "Metric": {
 		//	                          "additionalProperties": false,
-		//	                          "description": "The CloudWatch metric to return, including the metric name, namespace, and dimensions. ",
+		//	                          "description": "The CloudWatch metric to return, including the metric name, namespace, and dimensions. To get the exact metric name, namespace, and dimensions, inspect the [Metric](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html) object that is returned by a call to [ListMetrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html).",
 		//	                          "properties": {
 		//	                            "Dimensions": {
-		//	                              "description": "The dimensions for the metric.",
+		//	                              "description": "Describes the dimensions of the metric.",
 		//	                              "insertionOrder": false,
 		//	                              "items": {
 		//	                                "additionalProperties": false,
-		//	                                "description": "",
+		//	                                "description": "Describes the dimension of a metric.",
 		//	                                "properties": {
 		//	                                  "Name": {
 		//	                                    "description": "The name of the dimension.",
@@ -137,18 +141,18 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                          "type": "object"
 		//	                        },
 		//	                        "Stat": {
-		//	                          "description": "The statistic to return. It can include any CloudWatch statistic or extended statistic.",
+		//	                          "description": "The statistic to return. It can include any CloudWatch statistic or extended statistic. For a list of valid values, see the table in [Statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic) in the *Amazon CloudWatch User Guide*. \n The most commonly used metrics for predictive scaling are ``Average`` and ``Sum``.",
 		//	                          "type": "string"
 		//	                        },
 		//	                        "Unit": {
-		//	                          "description": "The unit to use for the returned data points.",
+		//	                          "description": "The unit to use for the returned data points. For a complete list of the units that CloudWatch supports, see the [MetricDatum](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html) data type in the *Amazon CloudWatch API Reference*.",
 		//	                          "type": "string"
 		//	                        }
 		//	                      },
 		//	                      "type": "object"
 		//	                    },
 		//	                    "ReturnData": {
-		//	                      "description": "Indicates whether to return the timestamps and raw data values of this metric.",
+		//	                      "description": "Indicates whether to return the timestamps and raw data values of this metric. \n If you use any math expressions, specify ``true`` for this value for only the final math expression that the metric specification is based on. You must specify ``false`` for ``ReturnData`` for all the other metrics and expressions used in the metric specification.\n If you are only retrieving metrics and not performing any math expressions, do not specify anything for ``ReturnData``. This sets it to its default (``true``).",
 		//	                      "type": "boolean"
 		//	                    }
 		//	                  },
@@ -165,20 +169,21 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	          },
 		//	          "CustomizedLoadMetricSpecification": {
 		//	            "additionalProperties": false,
-		//	            "description": "",
+		//	            "description": "The customized load metric specification.",
 		//	            "properties": {
 		//	              "MetricDataQueries": {
+		//	                "description": "",
 		//	                "insertionOrder": false,
 		//	                "items": {
 		//	                  "additionalProperties": false,
-		//	                  "description": "",
+		//	                  "description": "The metric data to return. Also defines whether this call is returning data for one metric only, or whether it is performing a math expression on the values of returned metric statistics to create a new time series. A time series is a series of data points, each of which is associated with a timestamp.",
 		//	                  "properties": {
 		//	                    "Expression": {
-		//	                      "description": "The math expression to perform on the returned data, if this object is performing a math expression.",
+		//	                      "description": "The math expression to perform on the returned data, if this object is performing a math expression. This expression can use the ``Id`` of the other metrics to refer to those metrics, and can also use the ``Id`` of other expressions to use the result of those expressions. \n Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Id": {
-		//	                      "description": "A short name that identifies the object's results in the response.",
+		//	                      "description": "A short name that identifies the object's results in the response. This name must be unique among all ``MetricDataQuery`` objects specified for a single scaling policy. If you are performing math expressions on this set of data, this name represents that data and can serve as a variable in the mathematical expression. The valid characters are letters, numbers, and underscores. The first character must be a lowercase letter.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Label": {
@@ -187,18 +192,18 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                    },
 		//	                    "MetricStat": {
 		//	                      "additionalProperties": false,
-		//	                      "description": "Information about the metric data to return.",
+		//	                      "description": "Information about the metric data to return. \n Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both.",
 		//	                      "properties": {
 		//	                        "Metric": {
 		//	                          "additionalProperties": false,
-		//	                          "description": "The CloudWatch metric to return, including the metric name, namespace, and dimensions. ",
+		//	                          "description": "The CloudWatch metric to return, including the metric name, namespace, and dimensions. To get the exact metric name, namespace, and dimensions, inspect the [Metric](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html) object that is returned by a call to [ListMetrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html).",
 		//	                          "properties": {
 		//	                            "Dimensions": {
-		//	                              "description": "The dimensions for the metric.",
+		//	                              "description": "Describes the dimensions of the metric.",
 		//	                              "insertionOrder": false,
 		//	                              "items": {
 		//	                                "additionalProperties": false,
-		//	                                "description": "",
+		//	                                "description": "Describes the dimension of a metric.",
 		//	                                "properties": {
 		//	                                  "Name": {
 		//	                                    "description": "The name of the dimension.",
@@ -226,18 +231,18 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                          "type": "object"
 		//	                        },
 		//	                        "Stat": {
-		//	                          "description": "The statistic to return. It can include any CloudWatch statistic or extended statistic.",
+		//	                          "description": "The statistic to return. It can include any CloudWatch statistic or extended statistic. For a list of valid values, see the table in [Statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic) in the *Amazon CloudWatch User Guide*. \n The most commonly used metrics for predictive scaling are ``Average`` and ``Sum``.",
 		//	                          "type": "string"
 		//	                        },
 		//	                        "Unit": {
-		//	                          "description": "The unit to use for the returned data points.",
+		//	                          "description": "The unit to use for the returned data points. For a complete list of the units that CloudWatch supports, see the [MetricDatum](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html) data type in the *Amazon CloudWatch API Reference*.",
 		//	                          "type": "string"
 		//	                        }
 		//	                      },
 		//	                      "type": "object"
 		//	                    },
 		//	                    "ReturnData": {
-		//	                      "description": "Indicates whether to return the timestamps and raw data values of this metric.",
+		//	                      "description": "Indicates whether to return the timestamps and raw data values of this metric. \n If you use any math expressions, specify ``true`` for this value for only the final math expression that the metric specification is based on. You must specify ``false`` for ``ReturnData`` for all the other metrics and expressions used in the metric specification.\n If you are only retrieving metrics and not performing any math expressions, do not specify anything for ``ReturnData``. This sets it to its default (``true``).",
 		//	                      "type": "boolean"
 		//	                    }
 		//	                  },
@@ -254,20 +259,21 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	          },
 		//	          "CustomizedScalingMetricSpecification": {
 		//	            "additionalProperties": false,
-		//	            "description": "",
+		//	            "description": "The customized scaling metric specification.",
 		//	            "properties": {
 		//	              "MetricDataQueries": {
+		//	                "description": "One or more metric data queries to provide data points for a metric specification.",
 		//	                "insertionOrder": false,
 		//	                "items": {
 		//	                  "additionalProperties": false,
-		//	                  "description": "",
+		//	                  "description": "The metric data to return. Also defines whether this call is returning data for one metric only, or whether it is performing a math expression on the values of returned metric statistics to create a new time series. A time series is a series of data points, each of which is associated with a timestamp.",
 		//	                  "properties": {
 		//	                    "Expression": {
-		//	                      "description": "The math expression to perform on the returned data, if this object is performing a math expression.",
+		//	                      "description": "The math expression to perform on the returned data, if this object is performing a math expression. This expression can use the ``Id`` of the other metrics to refer to those metrics, and can also use the ``Id`` of other expressions to use the result of those expressions. \n Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Id": {
-		//	                      "description": "A short name that identifies the object's results in the response.",
+		//	                      "description": "A short name that identifies the object's results in the response. This name must be unique among all ``MetricDataQuery`` objects specified for a single scaling policy. If you are performing math expressions on this set of data, this name represents that data and can serve as a variable in the mathematical expression. The valid characters are letters, numbers, and underscores. The first character must be a lowercase letter.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Label": {
@@ -276,18 +282,18 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                    },
 		//	                    "MetricStat": {
 		//	                      "additionalProperties": false,
-		//	                      "description": "Information about the metric data to return.",
+		//	                      "description": "Information about the metric data to return. \n Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both.",
 		//	                      "properties": {
 		//	                        "Metric": {
 		//	                          "additionalProperties": false,
-		//	                          "description": "The CloudWatch metric to return, including the metric name, namespace, and dimensions. ",
+		//	                          "description": "The CloudWatch metric to return, including the metric name, namespace, and dimensions. To get the exact metric name, namespace, and dimensions, inspect the [Metric](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html) object that is returned by a call to [ListMetrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html).",
 		//	                          "properties": {
 		//	                            "Dimensions": {
-		//	                              "description": "The dimensions for the metric.",
+		//	                              "description": "Describes the dimensions of the metric.",
 		//	                              "insertionOrder": false,
 		//	                              "items": {
 		//	                                "additionalProperties": false,
-		//	                                "description": "",
+		//	                                "description": "Describes the dimension of a metric.",
 		//	                                "properties": {
 		//	                                  "Name": {
 		//	                                    "description": "The name of the dimension.",
@@ -315,18 +321,18 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                          "type": "object"
 		//	                        },
 		//	                        "Stat": {
-		//	                          "description": "The statistic to return. It can include any CloudWatch statistic or extended statistic.",
+		//	                          "description": "The statistic to return. It can include any CloudWatch statistic or extended statistic. For a list of valid values, see the table in [Statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic) in the *Amazon CloudWatch User Guide*. \n The most commonly used metrics for predictive scaling are ``Average`` and ``Sum``.",
 		//	                          "type": "string"
 		//	                        },
 		//	                        "Unit": {
-		//	                          "description": "The unit to use for the returned data points.",
+		//	                          "description": "The unit to use for the returned data points. For a complete list of the units that CloudWatch supports, see the [MetricDatum](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html) data type in the *Amazon CloudWatch API Reference*.",
 		//	                          "type": "string"
 		//	                        }
 		//	                      },
 		//	                      "type": "object"
 		//	                    },
 		//	                    "ReturnData": {
-		//	                      "description": "Indicates whether to return the timestamps and raw data values of this metric.",
+		//	                      "description": "Indicates whether to return the timestamps and raw data values of this metric. \n If you use any math expressions, specify ``true`` for this value for only the final math expression that the metric specification is based on. You must specify ``false`` for ``ReturnData`` for all the other metrics and expressions used in the metric specification.\n If you are only retrieving metrics and not performing any math expressions, do not specify anything for ``ReturnData``. This sets it to its default (``true``).",
 		//	                      "type": "boolean"
 		//	                    }
 		//	                  },
@@ -343,12 +349,14 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	          },
 		//	          "PredefinedLoadMetricSpecification": {
 		//	            "additionalProperties": false,
-		//	            "description": "",
+		//	            "description": "The predefined load metric specification.",
 		//	            "properties": {
 		//	              "PredefinedMetricType": {
+		//	                "description": "The metric type.",
 		//	                "type": "string"
 		//	              },
 		//	              "ResourceLabel": {
+		//	                "description": "A label that uniquely identifies a target group.",
 		//	                "type": "string"
 		//	              }
 		//	            },
@@ -359,12 +367,14 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	          },
 		//	          "PredefinedMetricPairSpecification": {
 		//	            "additionalProperties": false,
-		//	            "description": "",
+		//	            "description": "The predefined metric pair specification that determines the appropriate scaling metric and load metric to use.",
 		//	            "properties": {
 		//	              "PredefinedMetricType": {
+		//	                "description": "Indicates which metrics to use. There are two different types of metrics for each metric type: one is a load metric and one is a scaling metric.",
 		//	                "type": "string"
 		//	              },
 		//	              "ResourceLabel": {
+		//	                "description": "A label that uniquely identifies a specific target group from which to determine the total and average request count.",
 		//	                "type": "string"
 		//	              }
 		//	            },
@@ -375,12 +385,14 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	          },
 		//	          "PredefinedScalingMetricSpecification": {
 		//	            "additionalProperties": false,
-		//	            "description": "",
+		//	            "description": "The predefined scaling metric specification.",
 		//	            "properties": {
 		//	              "PredefinedMetricType": {
+		//	                "description": "The metric type.",
 		//	                "type": "string"
 		//	              },
 		//	              "ResourceLabel": {
+		//	                "description": "A label that uniquely identifies a specific target group from which to determine the average request count.",
 		//	                "type": "string"
 		//	              }
 		//	            },
@@ -390,6 +402,7 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	            "type": "object"
 		//	          },
 		//	          "TargetValue": {
+		//	            "description": "Specifies the target utilization.",
 		//	            "type": "number"
 		//	          }
 		//	        },
@@ -402,9 +415,11 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	      "uniqueItems": true
 		//	    },
 		//	    "Mode": {
+		//	      "description": "The predictive scaling mode. Defaults to ``ForecastOnly`` if not specified.",
 		//	      "type": "string"
 		//	    },
 		//	    "SchedulingBufferTime": {
+		//	      "description": "The amount of time, in seconds, that the start time can be advanced. \n The value must be less than the forecast interval duration of 3600 seconds (60 minutes). Defaults to 300 seconds if not specified.",
 		//	      "type": "integer"
 		//	    }
 		//	  },
@@ -417,11 +432,13 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: MaxCapacityBreachBehavior
 				"max_capacity_breach_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "Defines the behavior that should be applied if the forecast capacity approaches or exceeds the maximum capacity. Defaults to ``HonorMaxCapacity`` if not specified.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: MaxCapacityBuffer
 				"max_capacity_buffer": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "The size of the capacity buffer to use when the forecast capacity is close to or exceeds the maximum capacity. The value is specified as a percentage relative to the forecast capacity. For example, if the buffer is 10, this means a 10 percent buffer, such that if the forecast capacity is 50, and the maximum capacity is 40, then the effective maximum capacity is 55. \n Required if the ``MaxCapacityBreachBehavior`` property is set to ``IncreaseMaxCapacity``, and cannot be used otherwise.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: MetricSpecifications
 				"metric_specifications": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
@@ -436,12 +453,12 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 												// Property: Expression
 												"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The math expression to perform on the returned data, if this object is performing a math expression.",
+													Description: "The math expression to perform on the returned data, if this object is performing a math expression. This expression can use the ``Id`` of the other metrics to refer to those metrics, and can also use the ``Id`` of other expressions to use the result of those expressions. \n Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Id
 												"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "A short name that identifies the object's results in the response.",
+													Description: "A short name that identifies the object's results in the response. This name must be unique among all ``MetricDataQuery`` objects specified for a single scaling policy. If you are performing math expressions on this set of data, this name represents that data and can serve as a variable in the mathematical expression. The valid characters are letters, numbers, and underscores. The first character must be a lowercase letter.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Label
@@ -471,7 +488,7 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																	}, /*END NESTED OBJECT*/
-																	Description: "The dimensions for the metric.",
+																	Description: "Describes the dimensions of the metric.",
 																	Computed:    true,
 																}, /*END ATTRIBUTE*/
 																// Property: MetricName
@@ -485,34 +502,35 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 																	Computed:    true,
 																}, /*END ATTRIBUTE*/
 															}, /*END SCHEMA*/
-															Description: "The CloudWatch metric to return, including the metric name, namespace, and dimensions. ",
+															Description: "The CloudWatch metric to return, including the metric name, namespace, and dimensions. To get the exact metric name, namespace, and dimensions, inspect the [Metric](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html) object that is returned by a call to [ListMetrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html).",
 															Computed:    true,
 														}, /*END ATTRIBUTE*/
 														// Property: Stat
 														"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The statistic to return. It can include any CloudWatch statistic or extended statistic.",
+															Description: "The statistic to return. It can include any CloudWatch statistic or extended statistic. For a list of valid values, see the table in [Statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic) in the *Amazon CloudWatch User Guide*. \n The most commonly used metrics for predictive scaling are ``Average`` and ``Sum``.",
 															Computed:    true,
 														}, /*END ATTRIBUTE*/
 														// Property: Unit
 														"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The unit to use for the returned data points.",
+															Description: "The unit to use for the returned data points. For a complete list of the units that CloudWatch supports, see the [MetricDatum](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html) data type in the *Amazon CloudWatch API Reference*.",
 															Computed:    true,
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
-													Description: "Information about the metric data to return.",
+													Description: "Information about the metric data to return. \n Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: ReturnData
 												"return_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Description: "Indicates whether to return the timestamps and raw data values of this metric.",
+													Description: "Indicates whether to return the timestamps and raw data values of this metric. \n If you use any math expressions, specify ``true`` for this value for only the final math expression that the metric specification is based on. You must specify ``false`` for ``ReturnData`` for all the other metrics and expressions used in the metric specification.\n If you are only retrieving metrics and not performing any math expressions, do not specify anything for ``ReturnData``. This sets it to its default (``true``).",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
-										Computed: true,
+										Description: "One or more metric data queries to provide data points for a metric specification.",
+										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Description: "",
+								Description: "The customized capacity metric specification.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: CustomizedLoadMetricSpecification
@@ -524,12 +542,12 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 												// Property: Expression
 												"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The math expression to perform on the returned data, if this object is performing a math expression.",
+													Description: "The math expression to perform on the returned data, if this object is performing a math expression. This expression can use the ``Id`` of the other metrics to refer to those metrics, and can also use the ``Id`` of other expressions to use the result of those expressions. \n Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Id
 												"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "A short name that identifies the object's results in the response.",
+													Description: "A short name that identifies the object's results in the response. This name must be unique among all ``MetricDataQuery`` objects specified for a single scaling policy. If you are performing math expressions on this set of data, this name represents that data and can serve as a variable in the mathematical expression. The valid characters are letters, numbers, and underscores. The first character must be a lowercase letter.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Label
@@ -559,7 +577,7 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																	}, /*END NESTED OBJECT*/
-																	Description: "The dimensions for the metric.",
+																	Description: "Describes the dimensions of the metric.",
 																	Computed:    true,
 																}, /*END ATTRIBUTE*/
 																// Property: MetricName
@@ -573,34 +591,35 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 																	Computed:    true,
 																}, /*END ATTRIBUTE*/
 															}, /*END SCHEMA*/
-															Description: "The CloudWatch metric to return, including the metric name, namespace, and dimensions. ",
+															Description: "The CloudWatch metric to return, including the metric name, namespace, and dimensions. To get the exact metric name, namespace, and dimensions, inspect the [Metric](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html) object that is returned by a call to [ListMetrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html).",
 															Computed:    true,
 														}, /*END ATTRIBUTE*/
 														// Property: Stat
 														"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The statistic to return. It can include any CloudWatch statistic or extended statistic.",
+															Description: "The statistic to return. It can include any CloudWatch statistic or extended statistic. For a list of valid values, see the table in [Statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic) in the *Amazon CloudWatch User Guide*. \n The most commonly used metrics for predictive scaling are ``Average`` and ``Sum``.",
 															Computed:    true,
 														}, /*END ATTRIBUTE*/
 														// Property: Unit
 														"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The unit to use for the returned data points.",
+															Description: "The unit to use for the returned data points. For a complete list of the units that CloudWatch supports, see the [MetricDatum](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html) data type in the *Amazon CloudWatch API Reference*.",
 															Computed:    true,
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
-													Description: "Information about the metric data to return.",
+													Description: "Information about the metric data to return. \n Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: ReturnData
 												"return_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Description: "Indicates whether to return the timestamps and raw data values of this metric.",
+													Description: "Indicates whether to return the timestamps and raw data values of this metric. \n If you use any math expressions, specify ``true`` for this value for only the final math expression that the metric specification is based on. You must specify ``false`` for ``ReturnData`` for all the other metrics and expressions used in the metric specification.\n If you are only retrieving metrics and not performing any math expressions, do not specify anything for ``ReturnData``. This sets it to its default (``true``).",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
-										Computed: true,
+										Description: "",
+										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Description: "",
+								Description: "The customized load metric specification.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: CustomizedScalingMetricSpecification
@@ -612,12 +631,12 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 												// Property: Expression
 												"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The math expression to perform on the returned data, if this object is performing a math expression.",
+													Description: "The math expression to perform on the returned data, if this object is performing a math expression. This expression can use the ``Id`` of the other metrics to refer to those metrics, and can also use the ``Id`` of other expressions to use the result of those expressions. \n Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Id
 												"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "A short name that identifies the object's results in the response.",
+													Description: "A short name that identifies the object's results in the response. This name must be unique among all ``MetricDataQuery`` objects specified for a single scaling policy. If you are performing math expressions on this set of data, this name represents that data and can serve as a variable in the mathematical expression. The valid characters are letters, numbers, and underscores. The first character must be a lowercase letter.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Label
@@ -647,7 +666,7 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 																			}, /*END ATTRIBUTE*/
 																		}, /*END SCHEMA*/
 																	}, /*END NESTED OBJECT*/
-																	Description: "The dimensions for the metric.",
+																	Description: "Describes the dimensions of the metric.",
 																	Computed:    true,
 																}, /*END ATTRIBUTE*/
 																// Property: MetricName
@@ -661,34 +680,35 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 																	Computed:    true,
 																}, /*END ATTRIBUTE*/
 															}, /*END SCHEMA*/
-															Description: "The CloudWatch metric to return, including the metric name, namespace, and dimensions. ",
+															Description: "The CloudWatch metric to return, including the metric name, namespace, and dimensions. To get the exact metric name, namespace, and dimensions, inspect the [Metric](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html) object that is returned by a call to [ListMetrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html).",
 															Computed:    true,
 														}, /*END ATTRIBUTE*/
 														// Property: Stat
 														"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The statistic to return. It can include any CloudWatch statistic or extended statistic.",
+															Description: "The statistic to return. It can include any CloudWatch statistic or extended statistic. For a list of valid values, see the table in [Statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic) in the *Amazon CloudWatch User Guide*. \n The most commonly used metrics for predictive scaling are ``Average`` and ``Sum``.",
 															Computed:    true,
 														}, /*END ATTRIBUTE*/
 														// Property: Unit
 														"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The unit to use for the returned data points.",
+															Description: "The unit to use for the returned data points. For a complete list of the units that CloudWatch supports, see the [MetricDatum](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html) data type in the *Amazon CloudWatch API Reference*.",
 															Computed:    true,
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
-													Description: "Information about the metric data to return.",
+													Description: "Information about the metric data to return. \n Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: ReturnData
 												"return_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Description: "Indicates whether to return the timestamps and raw data values of this metric.",
+													Description: "Indicates whether to return the timestamps and raw data values of this metric. \n If you use any math expressions, specify ``true`` for this value for only the final math expression that the metric specification is based on. You must specify ``false`` for ``ReturnData`` for all the other metrics and expressions used in the metric specification.\n If you are only retrieving metrics and not performing any math expressions, do not specify anything for ``ReturnData``. This sets it to its default (``true``).",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
-										Computed: true,
+										Description: "One or more metric data queries to provide data points for a metric specification.",
+										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Description: "",
+								Description: "The customized scaling metric specification.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: PredefinedLoadMetricSpecification
@@ -696,14 +716,16 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: PredefinedMetricType
 									"predefined_metric_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
+										Description: "The metric type.",
+										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: ResourceLabel
 									"resource_label": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
+										Description: "A label that uniquely identifies a target group.",
+										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Description: "",
+								Description: "The predefined load metric specification.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: PredefinedMetricPairSpecification
@@ -711,14 +733,16 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: PredefinedMetricType
 									"predefined_metric_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
+										Description: "Indicates which metrics to use. There are two different types of metrics for each metric type: one is a load metric and one is a scaling metric.",
+										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: ResourceLabel
 									"resource_label": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
+										Description: "A label that uniquely identifies a specific target group from which to determine the total and average request count.",
+										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Description: "",
+								Description: "The predefined metric pair specification that determines the appropriate scaling metric and load metric to use.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: PredefinedScalingMetricSpecification
@@ -726,34 +750,40 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: PredefinedMetricType
 									"predefined_metric_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
+										Description: "The metric type.",
+										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: ResourceLabel
 									"resource_label": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
+										Description: "A label that uniquely identifies a specific target group from which to determine the average request count.",
+										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Description: "",
+								Description: "The predefined scaling metric specification.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: TargetValue
 							"target_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
+								Description: "Specifies the target utilization.",
+								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Computed: true,
+					Description: "This structure includes the metrics and target utilization to use for predictive scaling. \n This is an array, but we currently only support a single metric specification. That is, you can specify a target value and a single metric pair, or a target value and one scaling metric and one load metric.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Mode
 				"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "The predictive scaling mode. Defaults to ``ForecastOnly`` if not specified.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: SchedulingBufferTime
 				"scheduling_buffer_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "The amount of time, in seconds, that the start time can be advanced. \n The value must be less than the forecast interval duration of 3600 seconds (60 minutes). Defaults to 300 seconds if not specified.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "",
+			Description: "The predictive scaling policy configuration.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ResourceId

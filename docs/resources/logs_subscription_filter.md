@@ -31,6 +31,7 @@ The ``AWS::Logs::SubscriptionFilter`` resource specifies a subscription filter a
 
 ### Optional
 
+- `apply_on_transformed_logs` (Boolean)
 - `distribution` (String) The method used to distribute log data to the destination, which can be either random or grouped by log stream.
 - `filter_name` (String) The name of the subscription filter.
 - `role_arn` (String) The ARN of an IAM role that grants CWL permissions to deliver ingested log events to the destination stream. You don't need to provide the ARN when you are working with a logical destination for cross-account delivery.

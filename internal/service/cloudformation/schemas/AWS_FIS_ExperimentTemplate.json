@@ -320,8 +320,7 @@
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "Outputs",
-        "DataSources"
+        "Outputs"
       ],
       "properties": {
         "Outputs": {

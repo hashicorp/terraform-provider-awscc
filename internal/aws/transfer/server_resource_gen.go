@@ -664,6 +664,26 @@ func serverResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: State
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "OFFLINE",
+		//	    "ONLINE",
+		//	    "STARTING",
+		//	    "STOPPING",
+		//	    "START_FAILED",
+		//	    "STOP_FAILED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: StructuredLogDestinations
 		// CloudFormation resource type schema:
 		//
@@ -971,6 +991,7 @@ func serverResource(ctx context.Context) (resource.Resource, error) {
 		"server_id":                                "ServerId",
 		"set_stat_option":                          "SetStatOption",
 		"sftp_authentication_methods":              "SftpAuthenticationMethods",
+		"state":                                    "State",
 		"structured_log_destinations":              "StructuredLogDestinations",
 		"subnet_ids":                               "SubnetIds",
 		"tags":                                     "Tags",

@@ -28,7 +28,7 @@ Data Source schema for AWS::ApplicationAutoScaling::ScalingPolicy
  The following policy types are supported: 
   ``TargetTrackingScaling``—Not supported for Amazon EMR
   ``StepScaling``—Not supported for DynamoDB, Amazon Comprehend, Lambda, Amazon Keyspaces, Amazon MSK, Amazon ElastiCache, or Neptune.
-- `predictive_scaling_policy_configuration` (Attributes) (see [below for nested schema](#nestedatt--predictive_scaling_policy_configuration))
+- `predictive_scaling_policy_configuration` (Attributes) The predictive scaling policy configuration. (see [below for nested schema](#nestedatt--predictive_scaling_policy_configuration))
 - `resource_id` (String) The identifier of the resource associated with the scaling policy. This string consists of the resource type and unique identifier.
   +  ECS service - The resource type is ``service`` and the unique identifier is the cluster name and service name. Example: ``service/my-cluster/my-service``.
   +  Spot Fleet - The resource type is ``spot-fleet-request`` and the unique identifier is the Spot Fleet request ID. Example: ``spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE``.
@@ -84,58 +84,66 @@ Data Source schema for AWS::ApplicationAutoScaling::ScalingPolicy
 
 Read-Only:
 
-- `max_capacity_breach_behavior` (String)
-- `max_capacity_buffer` (Number)
-- `metric_specifications` (Attributes Set) (see [below for nested schema](#nestedatt--predictive_scaling_policy_configuration--metric_specifications))
-- `mode` (String)
-- `scheduling_buffer_time` (Number)
+- `max_capacity_breach_behavior` (String) Defines the behavior that should be applied if the forecast capacity approaches or exceeds the maximum capacity. Defaults to ``HonorMaxCapacity`` if not specified.
+- `max_capacity_buffer` (Number) The size of the capacity buffer to use when the forecast capacity is close to or exceeds the maximum capacity. The value is specified as a percentage relative to the forecast capacity. For example, if the buffer is 10, this means a 10 percent buffer, such that if the forecast capacity is 50, and the maximum capacity is 40, then the effective maximum capacity is 55. 
+ Required if the ``MaxCapacityBreachBehavior`` property is set to ``IncreaseMaxCapacity``, and cannot be used otherwise.
+- `metric_specifications` (Attributes Set) This structure includes the metrics and target utilization to use for predictive scaling. 
+ This is an array, but we currently only support a single metric specification. That is, you can specify a target value and a single metric pair, or a target value and one scaling metric and one load metric. (see [below for nested schema](#nestedatt--predictive_scaling_policy_configuration--metric_specifications))
+- `mode` (String) The predictive scaling mode. Defaults to ``ForecastOnly`` if not specified.
+- `scheduling_buffer_time` (Number) The amount of time, in seconds, that the start time can be advanced. 
+ The value must be less than the forecast interval duration of 3600 seconds (60 minutes). Defaults to 300 seconds if not specified.
 
 <a id="nestedatt--predictive_scaling_policy_configuration--metric_specifications"></a>
 ### Nested Schema for `predictive_scaling_policy_configuration.metric_specifications`
 
 Read-Only:
 
-- `customized_capacity_metric_specification` (Attributes) (see [below for nested schema](#nestedatt--predictive_scaling_policy_configuration--metric_specifications--customized_capacity_metric_specification))
-- `customized_load_metric_specification` (Attributes) (see [below for nested schema](#nestedatt--predictive_scaling_policy_configuration--metric_specifications--customized_load_metric_specification))
-- `customized_scaling_metric_specification` (Attributes) (see [below for nested schema](#nestedatt--predictive_scaling_policy_configuration--metric_specifications--customized_scaling_metric_specification))
-- `predefined_load_metric_specification` (Attributes) (see [below for nested schema](#nestedatt--predictive_scaling_policy_configuration--metric_specifications--predefined_load_metric_specification))
-- `predefined_metric_pair_specification` (Attributes) (see [below for nested schema](#nestedatt--predictive_scaling_policy_configuration--metric_specifications--predefined_metric_pair_specification))
-- `predefined_scaling_metric_specification` (Attributes) (see [below for nested schema](#nestedatt--predictive_scaling_policy_configuration--metric_specifications--predefined_scaling_metric_specification))
-- `target_value` (Number)
+- `customized_capacity_metric_specification` (Attributes) The customized capacity metric specification. (see [below for nested schema](#nestedatt--predictive_scaling_policy_configuration--metric_specifications--customized_capacity_metric_specification))
+- `customized_load_metric_specification` (Attributes) The customized load metric specification. (see [below for nested schema](#nestedatt--predictive_scaling_policy_configuration--metric_specifications--customized_load_metric_specification))
+- `customized_scaling_metric_specification` (Attributes) The customized scaling metric specification. (see [below for nested schema](#nestedatt--predictive_scaling_policy_configuration--metric_specifications--customized_scaling_metric_specification))
+- `predefined_load_metric_specification` (Attributes) The predefined load metric specification. (see [below for nested schema](#nestedatt--predictive_scaling_policy_configuration--metric_specifications--predefined_load_metric_specification))
+- `predefined_metric_pair_specification` (Attributes) The predefined metric pair specification that determines the appropriate scaling metric and load metric to use. (see [below for nested schema](#nestedatt--predictive_scaling_policy_configuration--metric_specifications--predefined_metric_pair_specification))
+- `predefined_scaling_metric_specification` (Attributes) The predefined scaling metric specification. (see [below for nested schema](#nestedatt--predictive_scaling_policy_configuration--metric_specifications--predefined_scaling_metric_specification))
+- `target_value` (Number) Specifies the target utilization.
 
 <a id="nestedatt--predictive_scaling_policy_configuration--metric_specifications--customized_capacity_metric_specification"></a>
 ### Nested Schema for `predictive_scaling_policy_configuration.metric_specifications.customized_capacity_metric_specification`
 
 Read-Only:
 
-- `metric_data_queries` (Attributes Set) (see [below for nested schema](#nestedatt--predictive_scaling_policy_configuration--metric_specifications--customized_capacity_metric_specification--metric_data_queries))
+- `metric_data_queries` (Attributes Set) One or more metric data queries to provide data points for a metric specification. (see [below for nested schema](#nestedatt--predictive_scaling_policy_configuration--metric_specifications--customized_capacity_metric_specification--metric_data_queries))
 
 <a id="nestedatt--predictive_scaling_policy_configuration--metric_specifications--customized_capacity_metric_specification--metric_data_queries"></a>
 ### Nested Schema for `predictive_scaling_policy_configuration.metric_specifications.customized_capacity_metric_specification.metric_data_queries`
 
 Read-Only:
 
-- `expression` (String) The math expression to perform on the returned data, if this object is performing a math expression.
-- `id` (String) A short name that identifies the object's results in the response.
+- `expression` (String) The math expression to perform on the returned data, if this object is performing a math expression. This expression can use the ``Id`` of the other metrics to refer to those metrics, and can also use the ``Id`` of other expressions to use the result of those expressions. 
+ Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both.
+- `id` (String) A short name that identifies the object's results in the response. This name must be unique among all ``MetricDataQuery`` objects specified for a single scaling policy. If you are performing math expressions on this set of data, this name represents that data and can serve as a variable in the mathematical expression. The valid characters are letters, numbers, and underscores. The first character must be a lowercase letter.
 - `label` (String) A human-readable label for this metric or expression. This is especially useful if this is a math expression, so that you know what the value represents.
-- `metric_stat` (Attributes) Information about the metric data to return. (see [below for nested schema](#nestedatt--predictive_scaling_policy_configuration--metric_specifications--customized_capacity_metric_specification--metric_data_queries--metric_stat))
-- `return_data` (Boolean) Indicates whether to return the timestamps and raw data values of this metric.
+- `metric_stat` (Attributes) Information about the metric data to return. 
+ Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both. (see [below for nested schema](#nestedatt--predictive_scaling_policy_configuration--metric_specifications--customized_capacity_metric_specification--metric_data_queries--metric_stat))
+- `return_data` (Boolean) Indicates whether to return the timestamps and raw data values of this metric. 
+ If you use any math expressions, specify ``true`` for this value for only the final math expression that the metric specification is based on. You must specify ``false`` for ``ReturnData`` for all the other metrics and expressions used in the metric specification.
+ If you are only retrieving metrics and not performing any math expressions, do not specify anything for ``ReturnData``. This sets it to its default (``true``).
 
 <a id="nestedatt--predictive_scaling_policy_configuration--metric_specifications--customized_capacity_metric_specification--metric_data_queries--metric_stat"></a>
 ### Nested Schema for `predictive_scaling_policy_configuration.metric_specifications.customized_capacity_metric_specification.metric_data_queries.metric_stat`
 
 Read-Only:
 
-- `metric` (Attributes) The CloudWatch metric to return, including the metric name, namespace, and dimensions. (see [below for nested schema](#nestedatt--predictive_scaling_policy_configuration--metric_specifications--customized_capacity_metric_specification--metric_data_queries--metric_stat--metric))
-- `stat` (String) The statistic to return. It can include any CloudWatch statistic or extended statistic.
-- `unit` (String) The unit to use for the returned data points.
+- `metric` (Attributes) The CloudWatch metric to return, including the metric name, namespace, and dimensions. To get the exact metric name, namespace, and dimensions, inspect the [Metric](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html) object that is returned by a call to [ListMetrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html). (see [below for nested schema](#nestedatt--predictive_scaling_policy_configuration--metric_specifications--customized_capacity_metric_specification--metric_data_queries--metric_stat--metric))
+- `stat` (String) The statistic to return. It can include any CloudWatch statistic or extended statistic. For a list of valid values, see the table in [Statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic) in the *Amazon CloudWatch User Guide*. 
+ The most commonly used metrics for predictive scaling are ``Average`` and ``Sum``.
+- `unit` (String) The unit to use for the returned data points. For a complete list of the units that CloudWatch supports, see the [MetricDatum](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html) data type in the *Amazon CloudWatch API Reference*.
 
 <a id="nestedatt--predictive_scaling_policy_configuration--metric_specifications--customized_capacity_metric_specification--metric_data_queries--metric_stat--metric"></a>
 ### Nested Schema for `predictive_scaling_policy_configuration.metric_specifications.customized_capacity_metric_specification.metric_data_queries.metric_stat.metric`
 
 Read-Only:
 
-- `dimensions` (Attributes List) The dimensions for the metric. (see [below for nested schema](#nestedatt--predictive_scaling_policy_configuration--metric_specifications--customized_capacity_metric_specification--metric_data_queries--metric_stat--metric--dimensions))
+- `dimensions` (Attributes List) Describes the dimensions of the metric. (see [below for nested schema](#nestedatt--predictive_scaling_policy_configuration--metric_specifications--customized_capacity_metric_specification--metric_data_queries--metric_stat--metric--dimensions))
 - `metric_name` (String) The name of the metric.
 - `namespace` (String) The namespace of the metric.
 
@@ -164,27 +172,32 @@ Read-Only:
 
 Read-Only:
 
-- `expression` (String) The math expression to perform on the returned data, if this object is performing a math expression.
-- `id` (String) A short name that identifies the object's results in the response.
+- `expression` (String) The math expression to perform on the returned data, if this object is performing a math expression. This expression can use the ``Id`` of the other metrics to refer to those metrics, and can also use the ``Id`` of other expressions to use the result of those expressions. 
+ Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both.
+- `id` (String) A short name that identifies the object's results in the response. This name must be unique among all ``MetricDataQuery`` objects specified for a single scaling policy. If you are performing math expressions on this set of data, this name represents that data and can serve as a variable in the mathematical expression. The valid characters are letters, numbers, and underscores. The first character must be a lowercase letter.
 - `label` (String) A human-readable label for this metric or expression. This is especially useful if this is a math expression, so that you know what the value represents.
-- `metric_stat` (Attributes) Information about the metric data to return. (see [below for nested schema](#nestedatt--predictive_scaling_policy_configuration--metric_specifications--customized_load_metric_specification--metric_data_queries--metric_stat))
-- `return_data` (Boolean) Indicates whether to return the timestamps and raw data values of this metric.
+- `metric_stat` (Attributes) Information about the metric data to return. 
+ Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both. (see [below for nested schema](#nestedatt--predictive_scaling_policy_configuration--metric_specifications--customized_load_metric_specification--metric_data_queries--metric_stat))
+- `return_data` (Boolean) Indicates whether to return the timestamps and raw data values of this metric. 
+ If you use any math expressions, specify ``true`` for this value for only the final math expression that the metric specification is based on. You must specify ``false`` for ``ReturnData`` for all the other metrics and expressions used in the metric specification.
+ If you are only retrieving metrics and not performing any math expressions, do not specify anything for ``ReturnData``. This sets it to its default (``true``).
 
 <a id="nestedatt--predictive_scaling_policy_configuration--metric_specifications--customized_load_metric_specification--metric_data_queries--metric_stat"></a>
 ### Nested Schema for `predictive_scaling_policy_configuration.metric_specifications.customized_load_metric_specification.metric_data_queries.metric_stat`
 
 Read-Only:
 
-- `metric` (Attributes) The CloudWatch metric to return, including the metric name, namespace, and dimensions. (see [below for nested schema](#nestedatt--predictive_scaling_policy_configuration--metric_specifications--customized_load_metric_specification--metric_data_queries--metric_stat--metric))
-- `stat` (String) The statistic to return. It can include any CloudWatch statistic or extended statistic.
-- `unit` (String) The unit to use for the returned data points.
+- `metric` (Attributes) The CloudWatch metric to return, including the metric name, namespace, and dimensions. To get the exact metric name, namespace, and dimensions, inspect the [Metric](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html) object that is returned by a call to [ListMetrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html). (see [below for nested schema](#nestedatt--predictive_scaling_policy_configuration--metric_specifications--customized_load_metric_specification--metric_data_queries--metric_stat--metric))
+- `stat` (String) The statistic to return. It can include any CloudWatch statistic or extended statistic. For a list of valid values, see the table in [Statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic) in the *Amazon CloudWatch User Guide*. 
+ The most commonly used metrics for predictive scaling are ``Average`` and ``Sum``.
+- `unit` (String) The unit to use for the returned data points. For a complete list of the units that CloudWatch supports, see the [MetricDatum](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html) data type in the *Amazon CloudWatch API Reference*.
 
 <a id="nestedatt--predictive_scaling_policy_configuration--metric_specifications--customized_load_metric_specification--metric_data_queries--metric_stat--metric"></a>
 ### Nested Schema for `predictive_scaling_policy_configuration.metric_specifications.customized_load_metric_specification.metric_data_queries.metric_stat.metric`
 
 Read-Only:
 
-- `dimensions` (Attributes List) The dimensions for the metric. (see [below for nested schema](#nestedatt--predictive_scaling_policy_configuration--metric_specifications--customized_load_metric_specification--metric_data_queries--metric_stat--metric--dimensions))
+- `dimensions` (Attributes List) Describes the dimensions of the metric. (see [below for nested schema](#nestedatt--predictive_scaling_policy_configuration--metric_specifications--customized_load_metric_specification--metric_data_queries--metric_stat--metric--dimensions))
 - `metric_name` (String) The name of the metric.
 - `namespace` (String) The namespace of the metric.
 
@@ -206,34 +219,39 @@ Read-Only:
 
 Read-Only:
 
-- `metric_data_queries` (Attributes Set) (see [below for nested schema](#nestedatt--predictive_scaling_policy_configuration--metric_specifications--customized_scaling_metric_specification--metric_data_queries))
+- `metric_data_queries` (Attributes Set) One or more metric data queries to provide data points for a metric specification. (see [below for nested schema](#nestedatt--predictive_scaling_policy_configuration--metric_specifications--customized_scaling_metric_specification--metric_data_queries))
 
 <a id="nestedatt--predictive_scaling_policy_configuration--metric_specifications--customized_scaling_metric_specification--metric_data_queries"></a>
 ### Nested Schema for `predictive_scaling_policy_configuration.metric_specifications.customized_scaling_metric_specification.metric_data_queries`
 
 Read-Only:
 
-- `expression` (String) The math expression to perform on the returned data, if this object is performing a math expression.
-- `id` (String) A short name that identifies the object's results in the response.
+- `expression` (String) The math expression to perform on the returned data, if this object is performing a math expression. This expression can use the ``Id`` of the other metrics to refer to those metrics, and can also use the ``Id`` of other expressions to use the result of those expressions. 
+ Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both.
+- `id` (String) A short name that identifies the object's results in the response. This name must be unique among all ``MetricDataQuery`` objects specified for a single scaling policy. If you are performing math expressions on this set of data, this name represents that data and can serve as a variable in the mathematical expression. The valid characters are letters, numbers, and underscores. The first character must be a lowercase letter.
 - `label` (String) A human-readable label for this metric or expression. This is especially useful if this is a math expression, so that you know what the value represents.
-- `metric_stat` (Attributes) Information about the metric data to return. (see [below for nested schema](#nestedatt--predictive_scaling_policy_configuration--metric_specifications--customized_scaling_metric_specification--metric_data_queries--metric_stat))
-- `return_data` (Boolean) Indicates whether to return the timestamps and raw data values of this metric.
+- `metric_stat` (Attributes) Information about the metric data to return. 
+ Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both. (see [below for nested schema](#nestedatt--predictive_scaling_policy_configuration--metric_specifications--customized_scaling_metric_specification--metric_data_queries--metric_stat))
+- `return_data` (Boolean) Indicates whether to return the timestamps and raw data values of this metric. 
+ If you use any math expressions, specify ``true`` for this value for only the final math expression that the metric specification is based on. You must specify ``false`` for ``ReturnData`` for all the other metrics and expressions used in the metric specification.
+ If you are only retrieving metrics and not performing any math expressions, do not specify anything for ``ReturnData``. This sets it to its default (``true``).
 
 <a id="nestedatt--predictive_scaling_policy_configuration--metric_specifications--customized_scaling_metric_specification--metric_data_queries--metric_stat"></a>
 ### Nested Schema for `predictive_scaling_policy_configuration.metric_specifications.customized_scaling_metric_specification.metric_data_queries.metric_stat`
 
 Read-Only:
 
-- `metric` (Attributes) The CloudWatch metric to return, including the metric name, namespace, and dimensions. (see [below for nested schema](#nestedatt--predictive_scaling_policy_configuration--metric_specifications--customized_scaling_metric_specification--metric_data_queries--metric_stat--metric))
-- `stat` (String) The statistic to return. It can include any CloudWatch statistic or extended statistic.
-- `unit` (String) The unit to use for the returned data points.
+- `metric` (Attributes) The CloudWatch metric to return, including the metric name, namespace, and dimensions. To get the exact metric name, namespace, and dimensions, inspect the [Metric](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html) object that is returned by a call to [ListMetrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html). (see [below for nested schema](#nestedatt--predictive_scaling_policy_configuration--metric_specifications--customized_scaling_metric_specification--metric_data_queries--metric_stat--metric))
+- `stat` (String) The statistic to return. It can include any CloudWatch statistic or extended statistic. For a list of valid values, see the table in [Statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic) in the *Amazon CloudWatch User Guide*. 
+ The most commonly used metrics for predictive scaling are ``Average`` and ``Sum``.
+- `unit` (String) The unit to use for the returned data points. For a complete list of the units that CloudWatch supports, see the [MetricDatum](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html) data type in the *Amazon CloudWatch API Reference*.
 
 <a id="nestedatt--predictive_scaling_policy_configuration--metric_specifications--customized_scaling_metric_specification--metric_data_queries--metric_stat--metric"></a>
 ### Nested Schema for `predictive_scaling_policy_configuration.metric_specifications.customized_scaling_metric_specification.metric_data_queries.metric_stat.metric`
 
 Read-Only:
 
-- `dimensions` (Attributes List) The dimensions for the metric. (see [below for nested schema](#nestedatt--predictive_scaling_policy_configuration--metric_specifications--customized_scaling_metric_specification--metric_data_queries--metric_stat--metric--dimensions))
+- `dimensions` (Attributes List) Describes the dimensions of the metric. (see [below for nested schema](#nestedatt--predictive_scaling_policy_configuration--metric_specifications--customized_scaling_metric_specification--metric_data_queries--metric_stat--metric--dimensions))
 - `metric_name` (String) The name of the metric.
 - `namespace` (String) The namespace of the metric.
 
@@ -255,8 +273,8 @@ Read-Only:
 
 Read-Only:
 
-- `predefined_metric_type` (String)
-- `resource_label` (String)
+- `predefined_metric_type` (String) The metric type.
+- `resource_label` (String) A label that uniquely identifies a target group.
 
 
 <a id="nestedatt--predictive_scaling_policy_configuration--metric_specifications--predefined_metric_pair_specification"></a>
@@ -264,8 +282,8 @@ Read-Only:
 
 Read-Only:
 
-- `predefined_metric_type` (String)
-- `resource_label` (String)
+- `predefined_metric_type` (String) Indicates which metrics to use. There are two different types of metrics for each metric type: one is a load metric and one is a scaling metric.
+- `resource_label` (String) A label that uniquely identifies a specific target group from which to determine the total and average request count.
 
 
 <a id="nestedatt--predictive_scaling_policy_configuration--metric_specifications--predefined_scaling_metric_specification"></a>
@@ -273,8 +291,8 @@ Read-Only:
 
 Read-Only:
 
-- `predefined_metric_type` (String)
-- `resource_label` (String)
+- `predefined_metric_type` (String) The metric type.
+- `resource_label` (String) A label that uniquely identifies a specific target group from which to determine the average request count.
 
 
 

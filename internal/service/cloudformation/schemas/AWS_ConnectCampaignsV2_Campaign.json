@@ -359,10 +359,13 @@
     },
     "Source": {
       "type": "object",
-      "description": "The possible types of channel config parameters",
+      "description": "The possible source of the campaign",
       "properties": {
         "CustomerProfilesSegmentArn": {
           "$ref": "#/definitions/Arn"
+        },
+        "EventTrigger": {
+          "$ref": "#/definitions/EventTrigger"
         }
       },
       "oneOf": [
@@ -370,8 +373,23 @@
           "required": [
             "CustomerProfilesSegmentArn"
           ]
+        },
+        {
+          "required": [
+            "EventTrigger"
+          ]
         }
       ],
+      "additionalProperties": false
+    },
+    "EventTrigger": {
+      "type": "object",
+      "description": "The event trigger of the campaign",
+      "properties": {
+        "CustomerProfilesDomainArn": {
+          "$ref": "#/definitions/Arn"
+        }
+      },
       "additionalProperties": false
     },
     "TimeRange": {

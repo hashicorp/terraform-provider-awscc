@@ -47,7 +47,7 @@
       "type": "string",
       "pattern": "[\\.\\-_/#A-Za-z0-9]+",
       "minLength": 1,
-      "maxLength": 256
+      "maxLength": 50
     },
     "IntegrationType": {
       "description": "The type of the Integration.",
