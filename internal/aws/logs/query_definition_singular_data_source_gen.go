@@ -69,6 +69,23 @@ func queryDefinitionDataSource(ctx context.Context) (datasource.DataSource, erro
 			Description: "Unique identifier of a query definition",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: QueryLanguage
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": "CWLI",
+		//	  "description": "Query language of the query string. Possible values are CWLI, SQL, PPL, with CWLI being the default.",
+		//	  "enum": [
+		//	    "CWLI",
+		//	    "SQL",
+		//	    "PPL"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"query_language": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Query language of the query string. Possible values are CWLI, SQL, PPL, with CWLI being the default.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: QueryString
 		// CloudFormation resource type schema:
 		//
@@ -102,6 +119,7 @@ func queryDefinitionDataSource(ctx context.Context) (datasource.DataSource, erro
 		"log_group_names":     "LogGroupNames",
 		"name":                "Name",
 		"query_definition_id": "QueryDefinitionId",
+		"query_language":      "QueryLanguage",
 		"query_string":        "QueryString",
 	})
 

@@ -22,6 +22,17 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::Logs::SubscriptionFilter resource.
 func subscriptionFilterDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ApplyOnTransformedLogs
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "boolean"
+		//	}
+		"apply_on_transformed_logs": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DestinationArn
 		// CloudFormation resource type schema:
 		//
@@ -109,12 +120,13 @@ func subscriptionFilterDataSource(ctx context.Context) (datasource.DataSource, e
 	opts = opts.WithCloudFormationTypeName("AWS::Logs::SubscriptionFilter").WithTerraformTypeName("awscc_logs_subscription_filter")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"destination_arn": "DestinationArn",
-		"distribution":    "Distribution",
-		"filter_name":     "FilterName",
-		"filter_pattern":  "FilterPattern",
-		"log_group_name":  "LogGroupName",
-		"role_arn":        "RoleArn",
+		"apply_on_transformed_logs": "ApplyOnTransformedLogs",
+		"destination_arn":           "DestinationArn",
+		"distribution":              "Distribution",
+		"filter_name":               "FilterName",
+		"filter_pattern":            "FilterPattern",
+		"log_group_name":            "LogGroupName",
+		"role_arn":                  "RoleArn",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

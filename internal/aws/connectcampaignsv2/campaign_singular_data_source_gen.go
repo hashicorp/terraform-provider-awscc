@@ -1311,11 +1311,16 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The possible types of channel config parameters",
+		//	  "description": "The possible source of the campaign",
 		//	  "oneOf": [
 		//	    {
 		//	      "required": [
 		//	        "CustomerProfilesSegmentArn"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "EventTrigger"
 		//	      ]
 		//	    }
 		//	  ],
@@ -1326,6 +1331,20 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "minLength": 20,
 		//	      "pattern": "^arn:.*$",
 		//	      "type": "string"
+		//	    },
+		//	    "EventTrigger": {
+		//	      "additionalProperties": false,
+		//	      "description": "The event trigger of the campaign",
+		//	      "properties": {
+		//	        "CustomerProfilesDomainArn": {
+		//	          "description": "Arn",
+		//	          "maxLength": 500,
+		//	          "minLength": 20,
+		//	          "pattern": "^arn:.*$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -1337,8 +1356,20 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Description: "Arn",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: EventTrigger
+				"event_trigger": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CustomerProfilesDomainArn
+						"customer_profiles_domain_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Arn",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The event trigger of the campaign",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The possible types of channel config parameters",
+			Description: "The possible source of the campaign",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -1422,6 +1453,7 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"connect_source_email_address":      "ConnectSourceEmailAddress",
 		"connect_source_phone_number":       "ConnectSourcePhoneNumber",
 		"connect_source_phone_number_arn":   "ConnectSourcePhoneNumberArn",
+		"customer_profiles_domain_arn":      "CustomerProfilesDomainArn",
 		"customer_profiles_segment_arn":     "CustomerProfilesSegmentArn",
 		"daily_hours":                       "DailyHours",
 		"default_outbound_config":           "DefaultOutboundConfig",
@@ -1430,6 +1462,7 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"enable_answer_machine_detection":   "EnableAnswerMachineDetection",
 		"end_date":                          "EndDate",
 		"end_time":                          "EndTime",
+		"event_trigger":                     "EventTrigger",
 		"frequency":                         "Frequency",
 		"key":                               "Key",
 		"local_time_zone_config":            "LocalTimeZoneConfig",

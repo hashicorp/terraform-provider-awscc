@@ -45,6 +45,22 @@ func configurationProfileDataSource(ctx context.Context) (datasource.DataSource,
 			Description: "The configuration profile ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: DeletionProtectionCheck
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "On resource deletion this controls whether the Deletion Protection check should be applied, bypassed, or (the default) whether the behavior should be controlled by the account-level Deletion Protection setting. See https://docs.aws.amazon.com/appconfig/latest/userguide/deletion-protection.html",
+		//	  "enum": [
+		//	    "ACCOUNT_DEFAULT",
+		//	    "APPLY",
+		//	    "BYPASS"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"deletion_protection_check": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "On resource deletion this controls whether the Deletion Protection check should be applied, bypassed, or (the default) whether the behavior should be controlled by the account-level Deletion Protection setting. See https://docs.aws.amazon.com/appconfig/latest/userguide/deletion-protection.html",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -244,20 +260,21 @@ func configurationProfileDataSource(ctx context.Context) (datasource.DataSource,
 	opts = opts.WithCloudFormationTypeName("AWS::AppConfig::ConfigurationProfile").WithTerraformTypeName("awscc_appconfig_configuration_profile")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"application_id":           "ApplicationId",
-		"configuration_profile_id": "ConfigurationProfileId",
-		"content":                  "Content",
-		"description":              "Description",
-		"key":                      "Key",
-		"kms_key_arn":              "KmsKeyArn",
-		"kms_key_identifier":       "KmsKeyIdentifier",
-		"location_uri":             "LocationUri",
-		"name":                     "Name",
-		"retrieval_role_arn":       "RetrievalRoleArn",
-		"tags":                     "Tags",
-		"type":                     "Type",
-		"validators":               "Validators",
-		"value":                    "Value",
+		"application_id":            "ApplicationId",
+		"configuration_profile_id":  "ConfigurationProfileId",
+		"content":                   "Content",
+		"deletion_protection_check": "DeletionProtectionCheck",
+		"description":               "Description",
+		"key":                       "Key",
+		"kms_key_arn":               "KmsKeyArn",
+		"kms_key_identifier":        "KmsKeyIdentifier",
+		"location_uri":              "LocationUri",
+		"name":                      "Name",
+		"retrieval_role_arn":        "RetrievalRoleArn",
+		"tags":                      "Tags",
+		"type":                      "Type",
+		"validators":                "Validators",
+		"value":                     "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

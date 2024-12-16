@@ -593,8 +593,36 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "Athena": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "DatabaseName": {
+		//	          "maxLength": 128,
+		//	          "type": "string"
+		//	        },
+		//	        "OutputLocation": {
+		//	          "maxLength": 1024,
+		//	          "minLength": 8,
+		//	          "type": "string"
+		//	        },
+		//	        "TableName": {
+		//	          "maxLength": 128,
+		//	          "type": "string"
+		//	        },
+		//	        "WorkGroup": {
+		//	          "maxLength": 128,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "DatabaseName",
+		//	        "TableName",
+		//	        "WorkGroup"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "Glue": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -614,15 +642,101 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	        "TableName"
 		//	      ],
 		//	      "type": "object"
+		//	    },
+		//	    "Snowflake": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "AccountIdentifier": {
+		//	          "maxLength": 256,
+		//	          "minLength": 3,
+		//	          "type": "string"
+		//	        },
+		//	        "DatabaseName": {
+		//	          "maxLength": 256,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "SchemaName": {
+		//	          "maxLength": 256,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "SecretArn": {
+		//	          "maxLength": 256,
+		//	          "type": "string"
+		//	        },
+		//	        "TableName": {
+		//	          "maxLength": 256,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "TableSchema": {
+		//	          "properties": {
+		//	            "V1": {
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "ColumnName": {
+		//	                    "maxLength": 128,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "ColumnType": {
+		//	                    "maxLength": 255,
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "ColumnName",
+		//	                  "ColumnType"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "maxItems": 250,
+		//	              "minItems": 1,
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "AccountIdentifier",
+		//	        "DatabaseName",
+		//	        "SchemaName",
+		//	        "SecretArn",
+		//	        "TableName",
+		//	        "TableSchema"
+		//	      ],
+		//	      "type": "object"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "Glue"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"table_reference": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Athena
+				"athena": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DatabaseName
+						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: OutputLocation
+						"output_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: TableName
+						"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: WorkGroup
+						"work_group": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: Glue
 				"glue": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -632,6 +746,54 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 						}, /*END ATTRIBUTE*/
 						// Property: TableName
 						"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Snowflake
+				"snowflake": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AccountIdentifier
+						"account_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: DatabaseName
+						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SchemaName
+						"schema_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SecretArn
+						"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: TableName
+						"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: TableSchema
+						"table_schema": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: V1
+								"v1": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: ColumnName
+											"column_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: ColumnType
+											"column_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -702,6 +864,7 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 	opts = opts.WithCloudFormationTypeName("AWS::CleanRooms::ConfiguredTable").WithTerraformTypeName("awscc_cleanrooms_configured_table")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"account_identifier":          "AccountIdentifier",
 		"additional_analyses":         "AdditionalAnalyses",
 		"aggregate_columns":           "AggregateColumns",
 		"aggregation":                 "Aggregation",
@@ -712,8 +875,10 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 		"analysis_method":             "AnalysisMethod",
 		"analysis_rules":              "AnalysisRules",
 		"arn":                         "Arn",
+		"athena":                      "Athena",
 		"column_name":                 "ColumnName",
 		"column_names":                "ColumnNames",
+		"column_type":                 "ColumnType",
 		"columns":                     "Columns",
 		"configured_table_identifier": "ConfiguredTableIdentifier",
 		"custom":                      "Custom",
@@ -732,14 +897,20 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 		"minimum":                     "Minimum",
 		"name":                        "Name",
 		"output_constraints":          "OutputConstraints",
+		"output_location":             "OutputLocation",
 		"policy":                      "Policy",
 		"scalar_functions":            "ScalarFunctions",
+		"schema_name":                 "SchemaName",
+		"secret_arn":                  "SecretArn",
+		"snowflake":                   "Snowflake",
 		"table_name":                  "TableName",
 		"table_reference":             "TableReference",
+		"table_schema":                "TableSchema",
 		"tags":                        "Tags",
 		"type":                        "Type",
 		"v1":                          "V1",
 		"value":                       "Value",
+		"work_group":                  "WorkGroup",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)
