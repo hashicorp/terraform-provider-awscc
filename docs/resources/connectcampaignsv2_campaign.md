@@ -27,7 +27,7 @@ Definition of AWS::ConnectCampaignsV2::Campaign Resource Type
 - `communication_time_config` (Attributes) Campaign communication time config (see [below for nested schema](#nestedatt--communication_time_config))
 - `connect_campaign_flow_arn` (String) Arn
 - `schedule` (Attributes) Campaign schedule (see [below for nested schema](#nestedatt--schedule))
-- `source` (Attributes) The possible types of channel config parameters (see [below for nested schema](#nestedatt--source))
+- `source` (Attributes) The possible source of the campaign (see [below for nested schema](#nestedatt--source))
 - `tags` (Attributes Set) One or more tags. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -377,6 +377,15 @@ Optional:
 Optional:
 
 - `customer_profiles_segment_arn` (String) Arn
+- `event_trigger` (Attributes) The event trigger of the campaign (see [below for nested schema](#nestedatt--source--event_trigger))
+
+<a id="nestedatt--source--event_trigger"></a>
+### Nested Schema for `source.event_trigger`
+
+Optional:
+
+- `customer_profiles_domain_arn` (String) Arn
+
 
 
 <a id="nestedatt--tags"></a>

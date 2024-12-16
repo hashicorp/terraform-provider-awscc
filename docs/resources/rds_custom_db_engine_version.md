@@ -3,12 +3,12 @@
 page_title: "awscc_rds_custom_db_engine_version Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  The AWS::RDS::CustomDBEngineVersion resource creates an Amazon RDS custom DB engine version.
+  Creates a custom DB engine version (CEV).
 ---
 
 # awscc_rds_custom_db_engine_version (Resource)
 
-The AWS::RDS::CustomDBEngineVersion resource creates an Amazon RDS custom DB engine version.
+Creates a custom DB engine version (CEV).
 
 
 
@@ -17,25 +17,35 @@ The AWS::RDS::CustomDBEngineVersion resource creates an Amazon RDS custom DB eng
 
 ### Required
 
-- `engine` (String) The database engine to use for your custom engine version (CEV). The only supported value is `custom-oracle-ee`.
-- `engine_version` (String) The name of your CEV. The name format is 19.customized_string . For example, a valid name is 19.my_cev1. This setting is required for RDS Custom for Oracle, but optional for Amazon RDS. The combination of Engine and EngineVersion is unique per customer per Region.
+- `engine` (String) The database engine to use for your custom engine version (CEV).
+ Valid values:
+  +   ``custom-oracle-ee`` 
+  +   ``custom-oracle-ee-cdb``
+- `engine_version` (String) The name of your CEV. The name format is ``major version.customized_string``. For example, a valid CEV name is ``19.my_cev1``. This setting is required for RDS Custom for Oracle, but optional for Amazon RDS. The combination of ``Engine`` and ``EngineVersion`` is unique per customer per Region.
+  *Constraints:* Minimum length is 1. Maximum length is 60.
+  *Pattern:* ``^[a-z0-9_.-]{1,60$``}
 
 ### Optional
 
-- `database_installation_files_s3_bucket_name` (String) The name of an Amazon S3 bucket that contains database installation files for your CEV. For example, a valid bucket name is `my-custom-installation-files`.
-- `database_installation_files_s3_prefix` (String) The Amazon S3 directory that contains the database installation files for your CEV. For example, a valid bucket name is `123456789012/cev1`. If this setting isn't specified, no prefix is assumed.
+- `database_installation_files_s3_bucket_name` (String) The name of an Amazon S3 bucket that contains database installation files for your CEV. For example, a valid bucket name is ``my-custom-installation-files``.
+- `database_installation_files_s3_prefix` (String) The Amazon S3 directory that contains the database installation files for your CEV. For example, a valid bucket name is ``123456789012/cev1``. If this setting isn't specified, no prefix is assumed.
 - `description` (String) An optional description of your CEV.
-- `image_id` (String) The identifier of Amazon Machine Image (AMI) used for CEV.
-- `kms_key_id` (String) The AWS KMS key identifier for an encrypted CEV. A symmetric KMS key is required for RDS Custom, but optional for Amazon RDS.
+- `image_id` (String) A value that indicates the ID of the AMI.
+- `kms_key_id` (String) The AWS KMS key identifier for an encrypted CEV. A symmetric encryption KMS key is required for RDS Custom, but optional for Amazon RDS.
+ If you have an existing symmetric encryption KMS key in your account, you can use it with RDS Custom. No further action is necessary. If you don't already have a symmetric encryption KMS key in your account, follow the instructions in [Creating a symmetric encryption KMS key](https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html#create-symmetric-cmk) in the *Key Management Service Developer Guide*.
+ You can choose the same symmetric encryption key when you create a CEV and a DB instance, or choose different keys.
 - `manifest` (String) The CEV manifest, which is a JSON document that describes the installation .zip files stored in Amazon S3. Specify the name/value pairs in a file or a quoted string. RDS Custom applies the patches in the order in which they are listed.
-- `source_custom_db_engine_version_identifier` (String) The identifier of the source custom engine version.
-- `status` (String) The availability status to be assigned to the CEV.
-- `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
-- `use_aws_provided_latest_image` (Boolean) A value that indicates whether AWS provided latest image is applied automatically to the Custom Engine Version. By default, AWS provided latest image is applied automatically. This value is only applied on create.
+ The following JSON fields are valid:
+  + MediaImportTemplateVersion Version of the CEV manifest. The date is in the format YYYY-MM-DD. + databaseInstallationFileNames Ordered list of installation files for the CEV. + opatchFileNames Ordered list of OPatch installers used for the Oracle DB engine. + psuRuPatchFileNames The PSU and RU patches for this CEV. + OtherPatchFileNames The patches that are not in the list of PSU and RU patches. Amazon RDS applies these patches after applying the PSU and RU patches. 
+ For more information, see [Creating the CEV manifest](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.html#custom-cev.preparing.manifest) in the *Amazon RDS User Guide*.
+- `source_custom_db_engine_version_identifier` (String) The ARN of a CEV to use as a source for creating a new CEV. You can specify a different Amazon Machine Imagine (AMI) by using either ``Source`` or ``UseAwsProvidedLatestImage``. You can't specify a different JSON manifest when you specify ``SourceCustomDbEngineVersionIdentifier``.
+- `status` (String) A value that indicates the status of a custom engine version (CEV).
+- `tags` (Attributes List) A list of tags. For more information, see [Tagging Amazon RDS Resources](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in the *Amazon RDS User Guide.* (see [below for nested schema](#nestedatt--tags))
+- `use_aws_provided_latest_image` (Boolean) Specifies whether to use the latest service-provided Amazon Machine Image (AMI) for the CEV. If you specify ``UseAwsProvidedLatestImage``, you can't also specify ``ImageId``.
 
 ### Read-Only
 
-- `db_engine_version_arn` (String) The ARN of the custom engine version.
+- `db_engine_version_arn` (String)
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--tags"></a>
@@ -43,8 +53,8 @@ The AWS::RDS::CustomDBEngineVersion resource creates an Amazon RDS custom DB eng
 
 Optional:
 
-- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$").
+- `value` (String) A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$").
 
 ## Import
 

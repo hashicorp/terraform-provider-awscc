@@ -30,6 +30,7 @@ Data Source schema for AWS::M2::Environment
 - `instance_type` (String) The type of instance underlying the environment.
 - `kms_key_id` (String) The ID or the Amazon Resource Name (ARN) of the customer managed KMS Key used for encrypting environment-related resources.
 - `name` (String) The name of the environment.
+- `network_type` (String)
 - `preferred_maintenance_window` (String) Configures a desired maintenance window for the environment. If you do not provide a value, a random system-generated value will be assigned.
 - `publicly_accessible` (Boolean) Specifies whether the environment is publicly accessible.
 - `security_group_ids` (List of String) The list of security groups for the VPC associated with this environment.

@@ -51,6 +51,7 @@ data "aws_ssoadmin_instances" "example" {}
 - `identity_type` (String)
 - `personalization_configuration` (Attributes) (see [below for nested schema](#nestedatt--personalization_configuration))
 - `q_apps_configuration` (Attributes) (see [below for nested schema](#nestedatt--q_apps_configuration))
+- `quick_sight_configuration` (Attributes) (see [below for nested schema](#nestedatt--quick_sight_configuration))
 - `role_arn` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
@@ -103,6 +104,14 @@ Optional:
 Optional:
 
 - `q_apps_control_mode` (String)
+
+
+<a id="nestedatt--quick_sight_configuration"></a>
+### Nested Schema for `quick_sight_configuration`
+
+Optional:
+
+- `client_namespace` (String)
 
 
 <a id="nestedatt--tags"></a>

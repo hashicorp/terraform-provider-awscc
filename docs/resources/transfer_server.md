@@ -40,6 +40,7 @@ Definition of AWS::Transfer::Server Resource Type
 - `as_2_service_managed_egress_ip_addresses` (List of String) The list of egress IP addresses of this server. These IP addresses are only relevant for servers that use the AS2 protocol. They are used for sending asynchronous MDNs. These IP addresses are assigned automatically when you create an AS2 server. Additionally, if you update an existing server and add the AS2 protocol, static IP addresses are assigned as well.
 - `id` (String) Uniquely identifies the resource.
 - `server_id` (String)
+- `state` (String)
 
 <a id="nestedatt--endpoint_details"></a>
 ### Nested Schema for `endpoint_details`

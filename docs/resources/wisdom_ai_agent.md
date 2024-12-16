@@ -41,12 +41,14 @@ Optional:
 
 - `answer_recommendation_ai_agent_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--answer_recommendation_ai_agent_configuration))
 - `manual_search_ai_agent_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--manual_search_ai_agent_configuration))
+- `self_service_ai_agent_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--self_service_ai_agent_configuration))
 
 <a id="nestedatt--configuration--answer_recommendation_ai_agent_configuration"></a>
 ### Nested Schema for `configuration.answer_recommendation_ai_agent_configuration`
 
 Optional:
 
+- `answer_generation_ai_guardrail_id` (String)
 - `answer_generation_ai_prompt_id` (String)
 - `association_configurations` (Attributes List) (see [below for nested schema](#nestedatt--configuration--answer_recommendation_ai_agent_configuration--association_configurations))
 - `intent_labeling_generation_ai_prompt_id` (String)
@@ -141,6 +143,7 @@ Optional:
 
 Optional:
 
+- `answer_generation_ai_guardrail_id` (String)
 - `answer_generation_ai_prompt_id` (String)
 - `association_configurations` (Attributes List) (see [below for nested schema](#nestedatt--configuration--manual_search_ai_agent_configuration--association_configurations))
 
@@ -216,6 +219,100 @@ Optional:
 
 <a id="nestedatt--configuration--manual_search_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data--content_tag_filter--tag_condition"></a>
 ### Nested Schema for `configuration.manual_search_ai_agent_configuration.association_configurations.association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition`
+
+Optional:
+
+- `key` (String)
+- `value` (String)
+
+
+
+
+
+
+
+<a id="nestedatt--configuration--self_service_ai_agent_configuration"></a>
+### Nested Schema for `configuration.self_service_ai_agent_configuration`
+
+Optional:
+
+- `association_configurations` (Attributes List) (see [below for nested schema](#nestedatt--configuration--self_service_ai_agent_configuration--association_configurations))
+- `self_service_ai_guardrail_id` (String)
+- `self_service_answer_generation_ai_prompt_id` (String)
+- `self_service_pre_processing_ai_prompt_id` (String)
+
+<a id="nestedatt--configuration--self_service_ai_agent_configuration--association_configurations"></a>
+### Nested Schema for `configuration.self_service_ai_agent_configuration.association_configurations`
+
+Optional:
+
+- `association_configuration_data` (Attributes) (see [below for nested schema](#nestedatt--configuration--self_service_ai_agent_configuration--association_configurations--association_configuration_data))
+- `association_id` (String)
+- `association_type` (String)
+
+<a id="nestedatt--configuration--self_service_ai_agent_configuration--association_configurations--association_configuration_data"></a>
+### Nested Schema for `configuration.self_service_ai_agent_configuration.association_configurations.association_configuration_data`
+
+Optional:
+
+- `knowledge_base_association_configuration_data` (Attributes) (see [below for nested schema](#nestedatt--configuration--self_service_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data))
+
+<a id="nestedatt--configuration--self_service_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data"></a>
+### Nested Schema for `configuration.self_service_ai_agent_configuration.association_configurations.association_configuration_data.knowledge_base_association_configuration_data`
+
+Optional:
+
+- `content_tag_filter` (Attributes) (see [below for nested schema](#nestedatt--configuration--self_service_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data--content_tag_filter))
+- `max_results` (Number)
+- `override_knowledge_base_search_type` (String)
+
+<a id="nestedatt--configuration--self_service_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data--content_tag_filter"></a>
+### Nested Schema for `configuration.self_service_ai_agent_configuration.association_configurations.association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter`
+
+Optional:
+
+- `and_conditions` (Attributes List) (see [below for nested schema](#nestedatt--configuration--self_service_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data--content_tag_filter--and_conditions))
+- `or_conditions` (Attributes List) (see [below for nested schema](#nestedatt--configuration--self_service_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data--content_tag_filter--or_conditions))
+- `tag_condition` (Attributes) (see [below for nested schema](#nestedatt--configuration--self_service_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data--content_tag_filter--tag_condition))
+
+<a id="nestedatt--configuration--self_service_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data--content_tag_filter--and_conditions"></a>
+### Nested Schema for `configuration.self_service_ai_agent_configuration.association_configurations.association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions`
+
+Optional:
+
+- `key` (String)
+- `value` (String)
+
+
+<a id="nestedatt--configuration--self_service_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data--content_tag_filter--or_conditions"></a>
+### Nested Schema for `configuration.self_service_ai_agent_configuration.association_configurations.association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions`
+
+Optional:
+
+- `and_conditions` (Attributes List) (see [below for nested schema](#nestedatt--configuration--self_service_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data--content_tag_filter--or_conditions--and_conditions))
+- `tag_condition` (Attributes) (see [below for nested schema](#nestedatt--configuration--self_service_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data--content_tag_filter--or_conditions--tag_condition))
+
+<a id="nestedatt--configuration--self_service_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data--content_tag_filter--or_conditions--and_conditions"></a>
+### Nested Schema for `configuration.self_service_ai_agent_configuration.association_configurations.association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions.and_conditions`
+
+Optional:
+
+- `key` (String)
+- `value` (String)
+
+
+<a id="nestedatt--configuration--self_service_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data--content_tag_filter--or_conditions--tag_condition"></a>
+### Nested Schema for `configuration.self_service_ai_agent_configuration.association_configurations.association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions.tag_condition`
+
+Optional:
+
+- `key` (String)
+- `value` (String)
+
+
+
+<a id="nestedatt--configuration--self_service_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data--content_tag_filter--tag_condition"></a>
+### Nested Schema for `configuration.self_service_ai_agent_configuration.association_configurations.association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition`
 
 Optional:
 

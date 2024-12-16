@@ -58,6 +58,7 @@ resource "awscc_logs_log_group" "this" {
 
 ### Optional
 
+- `apply_on_transformed_logs` (Boolean)
 - `filter_name` (String) The name of the metric filter.
 
 ### Read-Only

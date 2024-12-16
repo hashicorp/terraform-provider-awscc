@@ -22,6 +22,7 @@ Data Source schema for AWS::AppConfig::Environment
 ### Read-Only
 
 - `application_id` (String) The application ID.
+- `deletion_protection_check` (String) On resource deletion this controls whether the Deletion Protection check should be applied, bypassed, or (the default) whether the behavior should be controlled by the account-level Deletion Protection setting. See https://docs.aws.amazon.com/appconfig/latest/userguide/deletion-protection.html
 - `description` (String) A description of the environment.
 - `environment_id` (String) The environment ID.
 - `monitors` (Attributes List) Amazon CloudWatch alarms to monitor during the deployment process. (see [below for nested schema](#nestedatt--monitors))

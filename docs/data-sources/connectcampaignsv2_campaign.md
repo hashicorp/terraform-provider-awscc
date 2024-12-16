@@ -29,7 +29,7 @@ Data Source schema for AWS::ConnectCampaignsV2::Campaign
 - `connect_instance_id` (String) Amazon Connect Instance Id
 - `name` (String) Campaign name
 - `schedule` (Attributes) Campaign schedule (see [below for nested schema](#nestedatt--schedule))
-- `source` (Attributes) The possible types of channel config parameters (see [below for nested schema](#nestedatt--source))
+- `source` (Attributes) The possible source of the campaign (see [below for nested schema](#nestedatt--source))
 - `tags` (Attributes Set) One or more tags. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--channel_subtype_config"></a>
@@ -374,6 +374,15 @@ Read-Only:
 Read-Only:
 
 - `customer_profiles_segment_arn` (String) Arn
+- `event_trigger` (Attributes) The event trigger of the campaign (see [below for nested schema](#nestedatt--source--event_trigger))
+
+<a id="nestedatt--source--event_trigger"></a>
+### Nested Schema for `source.event_trigger`
+
+Read-Only:
+
+- `customer_profiles_domain_arn` (String) Arn
+
 
 
 <a id="nestedatt--tags"></a>

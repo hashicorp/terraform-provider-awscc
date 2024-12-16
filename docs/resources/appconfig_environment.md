@@ -35,6 +35,7 @@ resource "awscc_appconfig_environment" "example" {
 
 ### Optional
 
+- `deletion_protection_check` (String) On resource deletion this controls whether the Deletion Protection check should be applied, bypassed, or (the default) whether the behavior should be controlled by the account-level Deletion Protection setting. See https://docs.aws.amazon.com/appconfig/latest/userguide/deletion-protection.html
 - `description` (String) A description of the environment.
 - `monitors` (Attributes List) Amazon CloudWatch alarms to monitor during the deployment process. (see [below for nested schema](#nestedatt--monitors))
 - `tags` (Attributes Set) Metadata to assign to the environment. Tags help organize and categorize your AWS AppConfig resources. Each tag consists of a key and an optional value, both of which you define. (see [below for nested schema](#nestedatt--tags))

@@ -37,17 +37,60 @@ Represents a table that can be associated with collaborations
 <a id="nestedatt--table_reference"></a>
 ### Nested Schema for `table_reference`
 
-Required:
+Optional:
 
+- `athena` (Attributes) (see [below for nested schema](#nestedatt--table_reference--athena))
 - `glue` (Attributes) (see [below for nested schema](#nestedatt--table_reference--glue))
+- `snowflake` (Attributes) (see [below for nested schema](#nestedatt--table_reference--snowflake))
+
+<a id="nestedatt--table_reference--athena"></a>
+### Nested Schema for `table_reference.athena`
+
+Optional:
+
+- `database_name` (String)
+- `output_location` (String)
+- `table_name` (String)
+- `work_group` (String)
+
 
 <a id="nestedatt--table_reference--glue"></a>
 ### Nested Schema for `table_reference.glue`
 
-Required:
+Optional:
 
 - `database_name` (String)
 - `table_name` (String)
+
+
+<a id="nestedatt--table_reference--snowflake"></a>
+### Nested Schema for `table_reference.snowflake`
+
+Optional:
+
+- `account_identifier` (String)
+- `database_name` (String)
+- `schema_name` (String)
+- `secret_arn` (String)
+- `table_name` (String)
+- `table_schema` (Attributes) (see [below for nested schema](#nestedatt--table_reference--snowflake--table_schema))
+
+<a id="nestedatt--table_reference--snowflake--table_schema"></a>
+### Nested Schema for `table_reference.snowflake.table_schema`
+
+Optional:
+
+- `v1` (Attributes List) (see [below for nested schema](#nestedatt--table_reference--snowflake--table_schema--v1))
+
+<a id="nestedatt--table_reference--snowflake--table_schema--v1"></a>
+### Nested Schema for `table_reference.snowflake.table_schema.v1`
+
+Optional:
+
+- `column_name` (String)
+- `column_type` (String)
+
+
 
 
 
