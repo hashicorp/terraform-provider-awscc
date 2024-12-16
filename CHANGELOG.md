@@ -1,4 +1,44 @@
 ## 1.24.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_batch_job_definition`
+* **New Data Source:** `awscc_batch_job_definitions`
+* **New Data Source:** `awscc_cassandra_type`
+* **New Data Source:** `awscc_cassandra_types`
+* **New Data Source:** `awscc_iot_command`
+* **New Data Source:** `awscc_iot_commands`
+* **New Data Source:** `awscc_networkmanager_direct_connect_gateway_attachment`
+* **New Data Source:** `awscc_networkmanager_direct_connect_gateway_attachments`
+* **New Data Source:** `awscc_qbusiness_permission`
+* **New Data Source:** `awscc_ram_resource_share`
+* **New Data Source:** `awscc_ram_resource_shares`
+* **New Data Source:** `awscc_s3tables_table_bucket`
+* **New Data Source:** `awscc_s3tables_table_bucket_policies`
+* **New Data Source:** `awscc_s3tables_table_bucket_policy`
+* **New Data Source:** `awscc_s3tables_table_buckets`
+* **New Data Source:** `awscc_vpclattice_resource_configuration`
+* **New Data Source:** `awscc_vpclattice_resource_configurations`
+* **New Data Source:** `awscc_vpclattice_resource_gateway`
+* **New Data Source:** `awscc_vpclattice_resource_gateways`
+* **New Data Source:** `awscc_vpclattice_service_network_resource_association`
+* **New Data Source:** `awscc_vpclattice_service_network_resource_associations`
+* **New Data Source:** `awscc_wisdom_ai_guardrail`
+* **New Data Source:** `awscc_wisdom_ai_guardrail_version`
+* **New Resource:** `awscc_batch_job_definition`
+* **New Resource:** `awscc_cassandra_type`
+* **New Resource:** `awscc_iot_command`
+* **New Resource:** `awscc_networkmanager_direct_connect_gateway_attachment`
+* **New Resource:** `awscc_qbusiness_permission`
+* **New Resource:** `awscc_ram_resource_share`
+* **New Resource:** `awscc_s3tables_table_bucket`
+* **New Resource:** `awscc_s3tables_table_bucket_policy`
+* **New Resource:** `awscc_vpclattice_resource_configuration`
+* **New Resource:** `awscc_vpclattice_resource_gateway`
+* **New Resource:** `awscc_vpclattice_service_network_resource_association`
+* **New Resource:** `awscc_wisdom_ai_guardrail`
+* **New Resource:** `awscc_wisdom_ai_guardrail_version`PC
+
 ## 1.23.0 (December  5, 2024)
 
 FEATURES:
