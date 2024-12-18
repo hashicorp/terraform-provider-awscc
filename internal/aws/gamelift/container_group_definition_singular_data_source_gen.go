@@ -23,42 +23,447 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::GameLift::ContainerGroupDefinition resource.
 func containerGroupDefinitionDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
-		// Property: ContainerDefinitions
+		// Property: ContainerGroupDefinitionArn
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A collection of container definitions that define the containers in this group.",
+		//	  "description": "The Amazon Resource Name (ARN) that is assigned to a Amazon GameLift container group resource and uniquely identifies it across all AWS Regions.",
+		//	  "maxLength": 512,
+		//	  "minLength": 1,
+		//	  "pattern": "^arn:.*:containergroupdefinition\\/[a-zA-Z0-9\\-]+(:[0-9]+)?$",
+		//	  "type": "string"
+		//	}
+		"container_group_definition_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) that is assigned to a Amazon GameLift container group resource and uniquely identifies it across all AWS Regions.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ContainerGroupType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The scope of the container group",
+		//	  "enum": [
+		//	    "GAME_SERVER",
+		//	    "PER_INSTANCE"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"container_group_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The scope of the container group",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: CreationTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (for example \"1469498468.057\").",
+		//	  "type": "string"
+		//	}
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (for example \"1469498468.057\").",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: GameServerContainerDefinition
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Specifies the information required to run game servers with this container group",
+		//	  "properties": {
+		//	    "ContainerName": {
+		//	      "description": "A descriptive label for the container definition. Container definition names must be unique with a container group definition.",
+		//	      "maxLength": 128,
+		//	      "minLength": 1,
+		//	      "pattern": "^[a-zA-Z0-9-]+$",
+		//	      "type": "string"
+		//	    },
+		//	    "DependsOn": {
+		//	      "description": "A list of container dependencies that determines when this container starts up and shuts down. For container groups with multiple containers, dependencies let you define a startup/shutdown sequence across the containers.",
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "A dependency that impacts a container's startup and shutdown.",
+		//	        "properties": {
+		//	          "Condition": {
+		//	            "description": "The type of dependency.",
+		//	            "enum": [
+		//	              "START",
+		//	              "COMPLETE",
+		//	              "SUCCESS",
+		//	              "HEALTHY"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "ContainerName": {
+		//	            "description": "A descriptive label for the container definition. The container being defined depends on this container's condition.",
+		//	            "maxLength": 128,
+		//	            "minLength": 1,
+		//	            "pattern": "^[a-zA-Z0-9-]+$",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "ContainerName",
+		//	          "Condition"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "EnvironmentOverride": {
+		//	      "description": "The environment variables to pass to a container.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "An environment variable to set inside a container, in the form of a key-value pair.",
+		//	        "properties": {
+		//	          "Name": {
+		//	            "description": "The environment variable name.",
+		//	            "maxLength": 255,
+		//	            "minLength": 1,
+		//	            "pattern": "^.*$",
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "description": "The environment variable value.",
+		//	            "maxLength": 255,
+		//	            "minLength": 1,
+		//	            "pattern": "^.*$",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Name",
+		//	          "Value"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 20,
+		//	      "minItems": 1,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "ImageUri": {
+		//	      "description": "Specifies the image URI of this container.",
+		//	      "maxLength": 255,
+		//	      "minLength": 1,
+		//	      "pattern": "^[a-zA-Z0-9-_\\.@\\/:]+$",
+		//	      "type": "string"
+		//	    },
+		//	    "MountPoints": {
+		//	      "description": "A list of mount point configurations to be used in a container.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "Defines the mount point configuration within a container.",
+		//	        "properties": {
+		//	          "AccessLevel": {
+		//	            "description": "The access permissions for the mounted path.",
+		//	            "enum": [
+		//	              "READ_ONLY",
+		//	              "READ_AND_WRITE"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "ContainerPath": {
+		//	            "description": "The path inside the container where the mount is accessible.",
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "pattern": "^(\\/+[^\\/]+\\/*)+$",
+		//	            "type": "string"
+		//	          },
+		//	          "InstancePath": {
+		//	            "description": "The path on the host that will be mounted in the container.",
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "pattern": "^\\/[\\s\\S]*$",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "InstancePath"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "PortConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Defines the ports on the container.",
+		//	      "properties": {
+		//	        "ContainerPortRanges": {
+		//	          "description": "Specifies one or more ranges of ports on a container.",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "description": "A set of one or more port numbers that can be opened on the container.",
+		//	            "properties": {
+		//	              "FromPort": {
+		//	                "description": "A starting value for the range of allowed port numbers.",
+		//	                "maximum": 60000,
+		//	                "minimum": 1,
+		//	                "type": "integer"
+		//	              },
+		//	              "Protocol": {
+		//	                "description": "Defines the protocol of these ports.",
+		//	                "enum": [
+		//	                  "TCP",
+		//	                  "UDP"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "ToPort": {
+		//	                "description": "An ending value for the range of allowed port numbers. Port numbers are end-inclusive. This value must be equal to or greater than FromPort.",
+		//	                "maximum": 60000,
+		//	                "minimum": 1,
+		//	                "type": "integer"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "FromPort",
+		//	              "Protocol",
+		//	              "ToPort"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 100,
+		//	          "minItems": 1,
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ContainerPortRanges"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "ResolvedImageDigest": {
+		//	      "description": "The digest of the container image.",
+		//	      "pattern": "^sha256:[a-fA-F0-9]{64}$",
+		//	      "type": "string"
+		//	    },
+		//	    "ServerSdkVersion": {
+		//	      "description": "The version of the server SDK used in this container group",
+		//	      "maxLength": 128,
+		//	      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "ContainerName",
+		//	    "ImageUri",
+		//	    "ServerSdkVersion"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"game_server_container_definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ContainerName
+				"container_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A descriptive label for the container definition. Container definition names must be unique with a container group definition.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DependsOn
+				"depends_on": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Condition
+							"condition": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The type of dependency.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ContainerName
+							"container_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A descriptive label for the container definition. The container being defined depends on this container's condition.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A list of container dependencies that determines when this container starts up and shuts down. For container groups with multiple containers, dependencies let you define a startup/shutdown sequence across the containers.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EnvironmentOverride
+				"environment_override": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The environment variable name.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The environment variable value.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The environment variables to pass to a container.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ImageUri
+				"image_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the image URI of this container.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MountPoints
+				"mount_points": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AccessLevel
+							"access_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The access permissions for the mounted path.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ContainerPath
+							"container_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The path inside the container where the mount is accessible.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: InstancePath
+							"instance_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The path on the host that will be mounted in the container.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A list of mount point configurations to be used in a container.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PortConfiguration
+				"port_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ContainerPortRanges
+						"container_port_ranges": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: FromPort
+									"from_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "A starting value for the range of allowed port numbers.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Protocol
+									"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Defines the protocol of these ports.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: ToPort
+									"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "An ending value for the range of allowed port numbers. Port numbers are end-inclusive. This value must be equal to or greater than FromPort.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "Specifies one or more ranges of ports on a container.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Defines the ports on the container.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ResolvedImageDigest
+				"resolved_image_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The digest of the container image.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ServerSdkVersion
+				"server_sdk_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The version of the server SDK used in this container group",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies the information required to run game servers with this container group",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A descriptive label for the container group definition.",
+		//	  "maxLength": 128,
+		//	  "minLength": 1,
+		//	  "pattern": "^[a-zA-Z0-9-]+$",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A descriptive label for the container group definition.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: OperatingSystem
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The operating system of the container group",
+		//	  "enum": [
+		//	    "AMAZON_LINUX_2023"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"operating_system": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The operating system of the container group",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: SourceVersionNumber
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A specific ContainerGroupDefinition version to be updated",
+		//	  "minimum": 0,
+		//	  "type": "integer"
+		//	}
+		"source_version_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "A specific ContainerGroupDefinition version to be updated",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Status
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A string indicating ContainerGroupDefinition status.",
+		//	  "enum": [
+		//	    "READY",
+		//	    "COPYING",
+		//	    "FAILED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A string indicating ContainerGroupDefinition status.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: StatusReason
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A string indicating the reason for ContainerGroupDefinition status.",
+		//	  "type": "string"
+		//	}
+		"status_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A string indicating the reason for ContainerGroupDefinition status.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: SupportContainerDefinitions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A collection of support container definitions that define the containers in this group.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "Details about a container that is used in a container fleet",
+		//	    "description": "Supports the function of the main container group",
 		//	    "properties": {
-		//	      "Command": {
-		//	        "description": "The command that's passed to the container.",
-		//	        "insertionOrder": true,
-		//	        "items": {
-		//	          "maxLength": 255,
-		//	          "minLength": 1,
-		//	          "pattern": "^.*$",
-		//	          "type": "string"
-		//	        },
-		//	        "maxItems": 20,
-		//	        "minItems": 1,
-		//	        "type": "array",
-		//	        "uniqueItems": false
-		//	      },
 		//	      "ContainerName": {
-		//	        "description": "A descriptive label for the container definition. Container definition names must be unique with a container group definition.",
+		//	        "description": "A descriptive label for the container definition.",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
 		//	        "pattern": "^[a-zA-Z0-9-]+$",
 		//	        "type": "string"
-		//	      },
-		//	      "Cpu": {
-		//	        "description": "The maximum number of CPU units reserved for this container. The value is expressed as an integer amount of CPU units. 1 vCPU is equal to 1024 CPU units",
-		//	        "maximum": 10240,
-		//	        "minimum": 1,
-		//	        "type": "integer"
 		//	      },
 		//	      "DependsOn": {
 		//	        "description": "A list of container dependencies that determines when this container starts up and shuts down. For container groups with multiple containers, dependencies let you define a startup/shutdown sequence across the containers.",
@@ -96,20 +501,7 @@ func containerGroupDefinitionDataSource(ctx context.Context) (datasource.DataSou
 		//	        "type": "array",
 		//	        "uniqueItems": true
 		//	      },
-		//	      "EntryPoint": {
-		//	        "description": "The entry point that's passed to the container so that it will run as an executable. If there are multiple arguments, each argument is a string in the array.",
-		//	        "insertionOrder": true,
-		//	        "items": {
-		//	          "maxLength": 1024,
-		//	          "minLength": 1,
-		//	          "type": "string"
-		//	        },
-		//	        "maxItems": 20,
-		//	        "minItems": 1,
-		//	        "type": "array",
-		//	        "uniqueItems": false
-		//	      },
-		//	      "Environment": {
+		//	      "EnvironmentOverride": {
 		//	        "description": "The environment variables to pass to a container.",
 		//	        "insertionOrder": false,
 		//	        "items": {
@@ -201,24 +593,51 @@ func containerGroupDefinitionDataSource(ctx context.Context) (datasource.DataSou
 		//	        "pattern": "^[a-zA-Z0-9-_\\.@\\/:]+$",
 		//	        "type": "string"
 		//	      },
-		//	      "MemoryLimits": {
-		//	        "additionalProperties": false,
-		//	        "description": "Specifies how much memory is available to the container. You must specify at least this parameter or the TotalMemoryLimit parameter of the ContainerGroupDefinition.",
-		//	        "properties": {
-		//	          "HardLimit": {
-		//	            "description": "The hard limit of memory to reserve for the container.",
-		//	            "maximum": 1024000,
-		//	            "minimum": 4,
-		//	            "type": "integer"
+		//	      "MemoryHardLimitMebibytes": {
+		//	        "description": "The total memory limit of container groups following this definition in MiB",
+		//	        "maximum": 1024000,
+		//	        "minimum": 4,
+		//	        "type": "integer"
+		//	      },
+		//	      "MountPoints": {
+		//	        "description": "A list of mount point configurations to be used in a container.",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "description": "Defines the mount point configuration within a container.",
+		//	          "properties": {
+		//	            "AccessLevel": {
+		//	              "description": "The access permissions for the mounted path.",
+		//	              "enum": [
+		//	                "READ_ONLY",
+		//	                "READ_AND_WRITE"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "ContainerPath": {
+		//	              "description": "The path inside the container where the mount is accessible.",
+		//	              "maxLength": 1024,
+		//	              "minLength": 1,
+		//	              "pattern": "^(\\/+[^\\/]+\\/*)+$",
+		//	              "type": "string"
+		//	            },
+		//	            "InstancePath": {
+		//	              "description": "The path on the host that will be mounted in the container.",
+		//	              "maxLength": 1024,
+		//	              "minLength": 1,
+		//	              "pattern": "^\\/[\\s\\S]*$",
+		//	              "type": "string"
+		//	            }
 		//	          },
-		//	          "SoftLimit": {
-		//	            "description": "The amount of memory that is reserved for the container.",
-		//	            "maximum": 1024000,
-		//	            "minimum": 4,
-		//	            "type": "integer"
-		//	          }
+		//	          "required": [
+		//	            "InstancePath"
+		//	          ],
+		//	          "type": "object"
 		//	        },
-		//	        "type": "object"
+		//	        "maxItems": 10,
+		//	        "minItems": 1,
+		//	        "type": "array",
+		//	        "uniqueItems": true
 		//	      },
 		//	      "PortConfiguration": {
 		//	        "additionalProperties": false,
@@ -275,12 +694,11 @@ func containerGroupDefinitionDataSource(ctx context.Context) (datasource.DataSou
 		//	        "pattern": "^sha256:[a-fA-F0-9]{64}$",
 		//	        "type": "string"
 		//	      },
-		//	      "WorkingDirectory": {
-		//	        "description": "The working directory to run commands inside the container in.",
-		//	        "maxLength": 255,
-		//	        "minLength": 1,
-		//	        "pattern": "^.*$",
-		//	        "type": "string"
+		//	      "Vcpu": {
+		//	        "description": "The number of virtual CPUs to give to the support group",
+		//	        "maximum": 10,
+		//	        "minimum": 0.125,
+		//	        "type": "number"
 		//	      }
 		//	    },
 		//	    "required": [
@@ -294,23 +712,12 @@ func containerGroupDefinitionDataSource(ctx context.Context) (datasource.DataSou
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"container_definitions": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		"support_container_definitions": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Command
-					"command": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "The command that's passed to the container.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
 					// Property: ContainerName
 					"container_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A descriptive label for the container definition. Container definition names must be unique with a container group definition.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Cpu
-					"cpu": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The maximum number of CPU units reserved for this container. The value is expressed as an integer amount of CPU units. 1 vCPU is equal to 1024 CPU units",
+						Description: "A descriptive label for the container definition.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: DependsOn
@@ -332,14 +739,8 @@ func containerGroupDefinitionDataSource(ctx context.Context) (datasource.DataSou
 						Description: "A list of container dependencies that determines when this container starts up and shuts down. For container groups with multiple containers, dependencies let you define a startup/shutdown sequence across the containers.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
-					// Property: EntryPoint
-					"entry_point": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "The entry point that's passed to the container so that it will run as an executable. If there are multiple arguments, each argument is a string in the array.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Environment
-					"environment": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					// Property: EnvironmentOverride
+					"environment_override": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Name
@@ -400,21 +801,33 @@ func containerGroupDefinitionDataSource(ctx context.Context) (datasource.DataSou
 						Description: "Specifies the image URI of this container.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
-					// Property: MemoryLimits
-					"memory_limits": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: HardLimit
-							"hard_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "The hard limit of memory to reserve for the container.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: SoftLimit
-							"soft_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "The amount of memory that is reserved for the container.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Specifies how much memory is available to the container. You must specify at least this parameter or the TotalMemoryLimit parameter of the ContainerGroupDefinition.",
+					// Property: MemoryHardLimitMebibytes
+					"memory_hard_limit_mebibytes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "The total memory limit of container groups following this definition in MiB",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: MountPoints
+					"mount_points": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AccessLevel
+								"access_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The access permissions for the mounted path.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ContainerPath
+								"container_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The path inside the container where the mount is accessible.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: InstancePath
+								"instance_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The path on the host that will be mounted in the container.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "A list of mount point configurations to be used in a container.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: PortConfiguration
@@ -453,82 +866,14 @@ func containerGroupDefinitionDataSource(ctx context.Context) (datasource.DataSou
 						Description: "The digest of the container image.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
-					// Property: WorkingDirectory
-					"working_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The working directory to run commands inside the container in.",
+					// Property: Vcpu
+					"vcpu": schema.Float64Attribute{ /*START ATTRIBUTE*/
+						Description: "The number of virtual CPUs to give to the support group",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "A collection of container definitions that define the containers in this group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
-		// Property: ContainerGroupDefinitionArn
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "description": "The Amazon Resource Name (ARN) that is assigned to a Amazon GameLift container group resource and uniquely identifies it across all AWS Regions.",
-		//	  "maxLength": 512,
-		//	  "minLength": 1,
-		//	  "pattern": "^arn:.*:containergroupdefinition/containergroupdefinition-[a-zA-Z0-9-]+$|^arn:.*:containergroupdefinition/[a-zA-Z0-9-\\:]+$",
-		//	  "type": "string"
-		//	}
-		"container_group_definition_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) that is assigned to a Amazon GameLift container group resource and uniquely identifies it across all AWS Regions.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
-		// Property: CreationTime
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "description": "A time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (for example \"1469498468.057\").",
-		//	  "type": "string"
-		//	}
-		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (for example \"1469498468.057\").",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
-		// Property: Name
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "description": "A descriptive label for the container group definition.",
-		//	  "maxLength": 128,
-		//	  "minLength": 1,
-		//	  "pattern": "^[a-zA-Z0-9-]+$",
-		//	  "type": "string"
-		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A descriptive label for the container group definition.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
-		// Property: OperatingSystem
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "description": "The operating system of the container group",
-		//	  "enum": [
-		//	    "AMAZON_LINUX_2023"
-		//	  ],
-		//	  "type": "string"
-		//	}
-		"operating_system": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The operating system of the container group",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
-		// Property: SchedulingStrategy
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "description": "Specifies whether the container group includes replica or daemon containers.",
-		//	  "enum": [
-		//	    "REPLICA",
-		//	    "DAEMON"
-		//	  ],
-		//	  "type": "string"
-		//	}
-		"scheduling_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether the container group includes replica or daemon containers.",
+			Description: "A collection of support container definitions that define the containers in this group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -585,30 +930,55 @@ func containerGroupDefinitionDataSource(ctx context.Context) (datasource.DataSou
 			Description: "An array of key-value pairs to apply to this resource.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
-		// Property: TotalCpuLimit
+		// Property: TotalMemoryLimitMebibytes
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The maximum number of CPU units reserved for this container group. The value is expressed as an integer amount of CPU units. (1 vCPU is equal to 1024 CPU units.)",
-		//	  "maximum": 10240,
-		//	  "minimum": 128,
-		//	  "type": "integer"
-		//	}
-		"total_cpu_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The maximum number of CPU units reserved for this container group. The value is expressed as an integer amount of CPU units. (1 vCPU is equal to 1024 CPU units.)",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
-		// Property: TotalMemoryLimit
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "description": "The maximum amount of memory (in MiB) to allocate for this container group.",
+		//	  "description": "The total memory limit of container groups following this definition in MiB",
 		//	  "maximum": 1024000,
 		//	  "minimum": 4,
 		//	  "type": "integer"
 		//	}
-		"total_memory_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The maximum amount of memory (in MiB) to allocate for this container group.",
+		"total_memory_limit_mebibytes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The total memory limit of container groups following this definition in MiB",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: TotalVcpuLimit
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The total amount of virtual CPUs on the container group definition",
+		//	  "maximum": 10,
+		//	  "minimum": 0.125,
+		//	  "type": "number"
+		//	}
+		"total_vcpu_limit": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "The total amount of virtual CPUs on the container group definition",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: VersionDescription
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The description of this version",
+		//	  "maxLength": 1024,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"version_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of this version",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: VersionNumber
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The version of this ContainerGroupDefinition",
+		//	  "minimum": 0,
+		//	  "type": "integer"
+		//	}
+		"version_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The version of this ContainerGroupDefinition",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
@@ -628,41 +998,48 @@ func containerGroupDefinitionDataSource(ctx context.Context) (datasource.DataSou
 	opts = opts.WithCloudFormationTypeName("AWS::GameLift::ContainerGroupDefinition").WithTerraformTypeName("awscc_gamelift_container_group_definition")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"command":                        "Command",
-		"condition":                      "Condition",
-		"container_definitions":          "ContainerDefinitions",
-		"container_group_definition_arn": "ContainerGroupDefinitionArn",
-		"container_name":                 "ContainerName",
-		"container_port_ranges":          "ContainerPortRanges",
-		"cpu":                            "Cpu",
-		"creation_time":                  "CreationTime",
-		"depends_on":                     "DependsOn",
-		"entry_point":                    "EntryPoint",
-		"environment":                    "Environment",
-		"essential":                      "Essential",
-		"from_port":                      "FromPort",
-		"hard_limit":                     "HardLimit",
-		"health_check":                   "HealthCheck",
-		"image_uri":                      "ImageUri",
-		"interval":                       "Interval",
-		"key":                            "Key",
-		"memory_limits":                  "MemoryLimits",
-		"name":                           "Name",
-		"operating_system":               "OperatingSystem",
-		"port_configuration":             "PortConfiguration",
-		"protocol":                       "Protocol",
-		"resolved_image_digest":          "ResolvedImageDigest",
-		"retries":                        "Retries",
-		"scheduling_strategy":            "SchedulingStrategy",
-		"soft_limit":                     "SoftLimit",
-		"start_period":                   "StartPeriod",
-		"tags":                           "Tags",
-		"timeout":                        "Timeout",
-		"to_port":                        "ToPort",
-		"total_cpu_limit":                "TotalCpuLimit",
-		"total_memory_limit":             "TotalMemoryLimit",
-		"value":                          "Value",
-		"working_directory":              "WorkingDirectory",
+		"access_level":                     "AccessLevel",
+		"command":                          "Command",
+		"condition":                        "Condition",
+		"container_group_definition_arn":   "ContainerGroupDefinitionArn",
+		"container_group_type":             "ContainerGroupType",
+		"container_name":                   "ContainerName",
+		"container_path":                   "ContainerPath",
+		"container_port_ranges":            "ContainerPortRanges",
+		"creation_time":                    "CreationTime",
+		"depends_on":                       "DependsOn",
+		"environment_override":             "EnvironmentOverride",
+		"essential":                        "Essential",
+		"from_port":                        "FromPort",
+		"game_server_container_definition": "GameServerContainerDefinition",
+		"health_check":                     "HealthCheck",
+		"image_uri":                        "ImageUri",
+		"instance_path":                    "InstancePath",
+		"interval":                         "Interval",
+		"key":                              "Key",
+		"memory_hard_limit_mebibytes":      "MemoryHardLimitMebibytes",
+		"mount_points":                     "MountPoints",
+		"name":                             "Name",
+		"operating_system":                 "OperatingSystem",
+		"port_configuration":               "PortConfiguration",
+		"protocol":                         "Protocol",
+		"resolved_image_digest":            "ResolvedImageDigest",
+		"retries":                          "Retries",
+		"server_sdk_version":               "ServerSdkVersion",
+		"source_version_number":            "SourceVersionNumber",
+		"start_period":                     "StartPeriod",
+		"status":                           "Status",
+		"status_reason":                    "StatusReason",
+		"support_container_definitions":    "SupportContainerDefinitions",
+		"tags":                             "Tags",
+		"timeout":                          "Timeout",
+		"to_port":                          "ToPort",
+		"total_memory_limit_mebibytes":     "TotalMemoryLimitMebibytes",
+		"total_vcpu_limit":                 "TotalVcpuLimit",
+		"value":                            "Value",
+		"vcpu":                             "Vcpu",
+		"version_description":              "VersionDescription",
+		"version_number":                   "VersionNumber",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)
