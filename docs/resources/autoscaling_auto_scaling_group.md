@@ -158,8 +158,8 @@ data "aws_ami" "amazon_linux" {
 - `auto_scaling_group_name` (String) The name of the Auto Scaling group. This name must be unique per Region per account.
  The name can contain any ASCII character 33 to 126 including most punctuation characters, digits, and upper and lowercased letters.
   You cannot use a colon (:) in the name.
-- `availability_zone_distribution` (Attributes) (see [below for nested schema](#nestedatt--availability_zone_distribution))
-- `availability_zone_impairment_policy` (Attributes) (see [below for nested schema](#nestedatt--availability_zone_impairment_policy))
+- `availability_zone_distribution` (Attributes) The instance capacity distribution across Availability Zones. (see [below for nested schema](#nestedatt--availability_zone_distribution))
+- `availability_zone_impairment_policy` (Attributes) The Availability Zone impairment policy. (see [below for nested schema](#nestedatt--availability_zone_impairment_policy))
 - `availability_zones` (List of String) A list of Availability Zones where instances in the Auto Scaling group can be created. Used for launching into the default VPC subnet in each Availability Zone when not using the ``VPCZoneIdentifier`` property, or for attaching a network interface when an existing network interface ID is specified in a launch template.
 - `capacity_rebalance` (Boolean) Indicates whether Capacity Rebalancing is enabled. Otherwise, Capacity Rebalancing is disabled. When you turn on Capacity Rebalancing, Amazon EC2 Auto Scaling attempts to launch a Spot Instance whenever Amazon EC2 notifies that a Spot Instance is at an elevated risk of interruption. After launching a new instance, it then terminates an old instance. For more information, see [Use Capacity Rebalancing to handle Amazon EC2 Spot Interruptions](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-capacity-rebalancing.html) in the in the *Amazon EC2 Auto Scaling User Guide*.
 - `capacity_reservation_specification` (Attributes) (see [below for nested schema](#nestedatt--capacity_reservation_specification))
@@ -224,7 +224,9 @@ data "aws_ami" "amazon_linux" {
 
 Optional:
 
-- `capacity_distribution_strategy` (String)
+- `capacity_distribution_strategy` (String) If launches fail in an Availability Zone, the following strategies are available. The default is ``balanced-best-effort``. 
+  +   ``balanced-only`` - If launches fail in an Availability Zone, Auto Scaling will continue to attempt to launch in the unhealthy zone to preserve a balanced distribution.
+  +   ``balanced-best-effort`` - If launches fail in an Availability Zone, Auto Scaling will attempt to launch in another healthy Availability Zone instead.
 
 
 <a id="nestedatt--availability_zone_impairment_policy"></a>
@@ -232,8 +234,8 @@ Optional:
 
 Optional:
 
-- `impaired_zone_health_check_behavior` (String)
-- `zonal_shift_enabled` (Boolean)
+- `impaired_zone_health_check_behavior` (String) Specifies the health check behavior for the impaired Availability Zone in an active zonal shift. If you select ``Replace unhealthy``, instances that appear unhealthy will be replaced in all Availability Zones. If you select ``Ignore unhealthy``, instances will not be replaced in the Availability Zone with the active zonal shift. For more information, see [Auto Scaling group zonal shift](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-zonal-shift.html) in the *Amazon EC2 Auto Scaling User Guide*.
+- `zonal_shift_enabled` (Boolean) If ``true``, enable zonal shift for your Auto Scaling group.
 
 
 <a id="nestedatt--capacity_reservation_specification"></a>

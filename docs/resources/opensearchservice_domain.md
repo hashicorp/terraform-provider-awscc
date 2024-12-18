@@ -122,6 +122,7 @@ Optional:
 - `instance_count` (Number)
 - `instance_type` (String)
 - `multi_az_with_standby_enabled` (Boolean)
+- `node_options` (Attributes List) (see [below for nested schema](#nestedatt--cluster_config--node_options))
 - `warm_count` (Number)
 - `warm_enabled` (Boolean)
 - `warm_type` (String)
@@ -134,6 +135,25 @@ Optional:
 Optional:
 
 - `enabled` (Boolean)
+
+
+<a id="nestedatt--cluster_config--node_options"></a>
+### Nested Schema for `cluster_config.node_options`
+
+Optional:
+
+- `node_config` (Attributes) (see [below for nested schema](#nestedatt--cluster_config--node_options--node_config))
+- `node_type` (String)
+
+<a id="nestedatt--cluster_config--node_options--node_config"></a>
+### Nested Schema for `cluster_config.node_options.node_config`
+
+Optional:
+
+- `count` (Number)
+- `enabled` (Boolean)
+- `type` (String)
+
 
 
 <a id="nestedatt--cluster_config--zone_awareness_config"></a>
