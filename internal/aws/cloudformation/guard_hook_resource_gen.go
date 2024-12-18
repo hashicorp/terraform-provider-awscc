@@ -40,15 +40,12 @@ func guardHookResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The typename alias for the hook.",
-		//	  "pattern": "^[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}$",
+		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
 		"alias": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The typename alias for the hook.",
 			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}$"), ""),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -707,7 +704,8 @@ func guardHookResource(ctx context.Context) (resource.Resource, error) {
 		//	    "enum": [
 		//	      "RESOURCE",
 		//	      "STACK",
-		//	      "CHANGE_SET"
+		//	      "CHANGE_SET",
+		//	      "CLOUD_CONTROL"
 		//	    ],
 		//	    "type": "string"
 		//	  },
@@ -725,6 +723,7 @@ func guardHookResource(ctx context.Context) (resource.Resource, error) {
 						"RESOURCE",
 						"STACK",
 						"CHANGE_SET",
+						"CLOUD_CONTROL",
 					),
 				),
 			}, /*END VALIDATORS*/

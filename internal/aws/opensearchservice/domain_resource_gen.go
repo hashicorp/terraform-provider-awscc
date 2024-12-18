@@ -423,6 +423,36 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	    "MultiAZWithStandbyEnabled": {
 		//	      "type": "boolean"
 		//	    },
+		//	    "NodeOptions": {
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "NodeConfig": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Count": {
+		//	                "type": "integer"
+		//	              },
+		//	              "Enabled": {
+		//	                "type": "boolean"
+		//	              },
+		//	              "Type": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "NodeType": {
+		//	            "enum": [
+		//	              "coordinator"
+		//	            ],
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array"
+		//	    },
 		//	    "WarmCount": {
 		//	      "type": "integer"
 		//	    },
@@ -513,6 +543,65 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: NodeOptions
+				"node_options": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: NodeConfig
+							"node_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Count
+									"count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Enabled
+									"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+											boolplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Type
+									"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: NodeType
+							"node_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"coordinator",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: WarmCount
@@ -1531,6 +1620,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"cluster_config":                  "ClusterConfig",
 		"cognito_options":                 "CognitoOptions",
 		"cold_storage_options":            "ColdStorageOptions",
+		"count":                           "Count",
 		"current_version":                 "CurrentVersion",
 		"custom_endpoint":                 "CustomEndpoint",
 		"custom_endpoint_certificate_arn": "CustomEndpointCertificateArn",
@@ -1579,7 +1669,10 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"minutes":                         "Minutes",
 		"multi_az_with_standby_enabled":   "MultiAZWithStandbyEnabled",
 		"new_version":                     "NewVersion",
+		"node_config":                     "NodeConfig",
+		"node_options":                    "NodeOptions",
 		"node_to_node_encryption_options": "NodeToNodeEncryptionOptions",
+		"node_type":                       "NodeType",
 		"off_peak_window":                 "OffPeakWindow",
 		"off_peak_window_options":         "OffPeakWindowOptions",
 		"optional_deployment":             "OptionalDeployment",
@@ -1598,6 +1691,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"tags":                            "Tags",
 		"throughput":                      "Throughput",
 		"tls_security_policy":             "TLSSecurityPolicy",
+		"type":                            "Type",
 		"update_available":                "UpdateAvailable",
 		"update_status":                   "UpdateStatus",
 		"user_pool_id":                    "UserPoolId",
