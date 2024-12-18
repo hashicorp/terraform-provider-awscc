@@ -15,11 +15,11 @@
     },
     "SourceArn": {
       "type": "string",
-      "description": "The Amazon Resource Name (ARN) of the database to use as the source for replication, for example, arn:aws:dynamodb:us-east-2:123412341234:table/dynamotable"
+      "description": "The Amazon Resource Name (ARN) of the database to use as the source for replication"
     },
     "TargetArn": {
       "type": "string",
-      "description": "The Amazon Resource Name (ARN) of the Redshift data warehouse to use as the target for replication, for example, arn:aws:redshift:us-east-2:123412341234:namespace:e43aab3e-10a3-4ec4-83d4-f227ff9bfbcf"
+      "description": "The Amazon Resource Name (ARN) of the Redshift data warehouse to use as the target for replication"
     },
     "Tags": {
       "type": "array",
@@ -103,7 +103,7 @@
           "minLength": 0
         }
       },
-      "description": "An optional set of non-secret key?value pairs that contains additional contextual information about the data.",
+      "description": "An optional set of non-secret key\u2013value pairs that contains additional contextual information about the data.",
       "additionalProperties": false
     }
   },
