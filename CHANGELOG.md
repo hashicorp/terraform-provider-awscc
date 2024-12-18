@@ -10,6 +10,10 @@ FEATURES:
 * **New Data Source:** `awscc_iot_commands`
 * **New Data Source:** `awscc_networkmanager_direct_connect_gateway_attachment`
 * **New Data Source:** `awscc_networkmanager_direct_connect_gateway_attachments`
+* **New Data Source:** `awscc_pcs_cluster`
+* **New Data Source:** `awscc_pcs_clusters`
+* **New Data Source:** `awscc_pcs_compute_node_group`
+* **New Data Source:** `awscc_pcs_queue`
 * **New Data Source:** `awscc_qbusiness_permission`
 * **New Data Source:** `awscc_ram_resource_share`
 * **New Data Source:** `awscc_ram_resource_shares`
@@ -29,6 +33,9 @@ FEATURES:
 * **New Resource:** `awscc_cassandra_type`
 * **New Resource:** `awscc_iot_command`
 * **New Resource:** `awscc_networkmanager_direct_connect_gateway_attachment`
+* **New Resource:** `awscc_pcs_cluster`
+* **New Resource:** `awscc_pcs_compute_node_group`
+* **New Resource:** `awscc_pcs_queue`
 * **New Resource:** `awscc_qbusiness_permission`
 * **New Resource:** `awscc_ram_resource_share`
 * **New Resource:** `awscc_s3tables_table_bucket`
