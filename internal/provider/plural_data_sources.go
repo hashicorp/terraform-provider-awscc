@@ -605,6 +605,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_pcaconnectorad_connectors -cftype AWS::PCAConnectorAD::Connector -package pcaconnectorad ../aws/pcaconnectorad/connector_plural_data_source_gen.go ../aws/pcaconnectorad/connector_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_pcaconnectorad_directory_registrations -cftype AWS::PCAConnectorAD::DirectoryRegistration -package pcaconnectorad ../aws/pcaconnectorad/directory_registration_plural_data_source_gen.go ../aws/pcaconnectorad/directory_registration_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_pcaconnectorscep_connectors -cftype AWS::PCAConnectorSCEP::Connector -package pcaconnectorscep ../aws/pcaconnectorscep/connector_plural_data_source_gen.go ../aws/pcaconnectorscep/connector_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_pcs_clusters -cftype AWS::PCS::Cluster -package pcs ../aws/pcs/cluster_plural_data_source_gen.go ../aws/pcs/cluster_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_panorama_application_instances -cftype AWS::Panorama::ApplicationInstance -package panorama ../aws/panorama/application_instance_plural_data_source_gen.go ../aws/panorama/application_instance_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_panorama_packages -cftype AWS::Panorama::Package -package panorama ../aws/panorama/package_plural_data_source_gen.go ../aws/panorama/package_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_paymentcryptography_aliases -cftype AWS::PaymentCryptography::Alias -package paymentcryptography ../aws/paymentcryptography/alias_plural_data_source_gen.go ../aws/paymentcryptography/alias_plural_data_source_gen_test.go
@@ -996,6 +997,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/paymentcryptography"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/pcaconnectorad"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/pcaconnectorscep"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/pcs"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/personalize"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/pinpoint"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/pipes"

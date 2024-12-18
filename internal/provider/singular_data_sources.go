@@ -804,6 +804,9 @@
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_pcaconnectorad_template_group_access_control_entry -cfschema ../service/cloudformation/schemas/AWS_PCAConnectorAD_TemplateGroupAccessControlEntry.json -package pcaconnectorad ../aws/pcaconnectorad/template_group_access_control_entry_singular_data_source_gen.go ../aws/pcaconnectorad/template_group_access_control_entry_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_pcaconnectorscep_challenge -cfschema ../service/cloudformation/schemas/AWS_PCAConnectorSCEP_Challenge.json -package pcaconnectorscep ../aws/pcaconnectorscep/challenge_singular_data_source_gen.go ../aws/pcaconnectorscep/challenge_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_pcaconnectorscep_connector -cfschema ../service/cloudformation/schemas/AWS_PCAConnectorSCEP_Connector.json -package pcaconnectorscep ../aws/pcaconnectorscep/connector_singular_data_source_gen.go ../aws/pcaconnectorscep/connector_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source awscc_pcs_cluster -cfschema ../service/cloudformation/schemas/AWS_PCS_Cluster.json -package pcs ../aws/pcs/cluster_singular_data_source_gen.go ../aws/pcs/cluster_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source awscc_pcs_compute_node_group -cfschema ../service/cloudformation/schemas/AWS_PCS_ComputeNodeGroup.json -package pcs ../aws/pcs/compute_node_group_singular_data_source_gen.go ../aws/pcs/compute_node_group_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source awscc_pcs_queue -cfschema ../service/cloudformation/schemas/AWS_PCS_Queue.json -package pcs ../aws/pcs/queue_singular_data_source_gen.go ../aws/pcs/queue_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_panorama_application_instance -cfschema ../service/cloudformation/schemas/AWS_Panorama_ApplicationInstance.json -package panorama ../aws/panorama/application_instance_singular_data_source_gen.go ../aws/panorama/application_instance_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_panorama_package -cfschema ../service/cloudformation/schemas/AWS_Panorama_Package.json -package panorama ../aws/panorama/package_singular_data_source_gen.go ../aws/panorama/package_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_panorama_package_version -cfschema ../service/cloudformation/schemas/AWS_Panorama_PackageVersion.json -package panorama ../aws/panorama/package_version_singular_data_source_gen.go ../aws/panorama/package_version_singular_data_source_gen_test.go
@@ -1262,6 +1265,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/paymentcryptography"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/pcaconnectorad"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/pcaconnectorscep"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/pcs"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/personalize"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/pinpoint"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/pipes"
