@@ -28,7 +28,7 @@ func guardHookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The typename alias for the hook.",
-		//	  "pattern": "^[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}$",
+		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
 		"alias": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -485,7 +485,8 @@ func guardHookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "enum": [
 		//	      "RESOURCE",
 		//	      "STACK",
-		//	      "CHANGE_SET"
+		//	      "CHANGE_SET",
+		//	      "CLOUD_CONTROL"
 		//	    ],
 		//	    "type": "string"
 		//	  },

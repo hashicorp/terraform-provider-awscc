@@ -193,6 +193,31 @@ func eC2FleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                  },
 		//	                  "type": "object"
 		//	                },
+		//	                "BaselinePerformanceFactors": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "Cpu": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "References": {
+		//	                          "items": {
+		//	                            "additionalProperties": false,
+		//	                            "properties": {
+		//	                              "InstanceFamily": {
+		//	                                "type": "string"
+		//	                              }
+		//	                            },
+		//	                            "type": "object"
+		//	                          },
+		//	                          "type": "array",
+		//	                          "uniqueItems": false
+		//	                        }
+		//	                      },
+		//	                      "type": "object"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
 		//	                "BurstablePerformance": {
 		//	                  "enum": [
 		//	                    "included",
@@ -492,6 +517,30 @@ func eC2FleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 												}, /*END ATTRIBUTE*/
 												// Property: Min
 												"min": schema.Int64Attribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: BaselinePerformanceFactors
+										"baseline_performance_factors": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Cpu
+												"cpu": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: References
+														"references": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+															NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: InstanceFamily
+																	"instance_family": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+															}, /*END NESTED OBJECT*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
 													Computed: true,
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
@@ -1137,10 +1186,12 @@ func eC2FleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"availability_zone":                  "AvailabilityZone",
 		"bare_metal":                         "BareMetal",
 		"baseline_ebs_bandwidth_mbps":        "BaselineEbsBandwidthMbps",
+		"baseline_performance_factors":       "BaselinePerformanceFactors",
 		"burstable_performance":              "BurstablePerformance",
 		"capacity_rebalance":                 "CapacityRebalance",
 		"capacity_reservation_options":       "CapacityReservationOptions",
 		"context":                            "Context",
+		"cpu":                                "Cpu",
 		"cpu_manufacturers":                  "CpuManufacturers",
 		"default_target_capacity_type":       "DefaultTargetCapacityType",
 		"excess_capacity_termination_policy": "ExcessCapacityTerminationPolicy",
@@ -1149,6 +1200,7 @@ func eC2FleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"group_name":                         "GroupName",
 		"host_id":                            "HostId",
 		"host_resource_group_arn":            "HostResourceGroupArn",
+		"instance_family":                    "InstanceFamily",
 		"instance_generations":               "InstanceGenerations",
 		"instance_interruption_behavior":     "InstanceInterruptionBehavior",
 		"instance_pools_to_use_count":        "InstancePoolsToUseCount",
@@ -1173,40 +1225,41 @@ func eC2FleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"network_bandwidth_gbps":  "NetworkBandwidthGbps",
 		"network_interface_count": "NetworkInterfaceCount",
 		"on_demand_max_price_percentage_over_lowest_price": "OnDemandMaxPricePercentageOverLowestPrice",
-		"on_demand_options":                           "OnDemandOptions",
-		"on_demand_target_capacity":                   "OnDemandTargetCapacity",
-		"overrides":                                   "Overrides",
-		"partition_number":                            "PartitionNumber",
-		"placement":                                   "Placement",
-		"priority":                                    "Priority",
-		"replace_unhealthy_instances":                 "ReplaceUnhealthyInstances",
-		"replacement_strategy":                        "ReplacementStrategy",
-		"require_hibernate_support":                   "RequireHibernateSupport",
-		"resource_type":                               "ResourceType",
-		"single_availability_zone":                    "SingleAvailabilityZone",
-		"single_instance_type":                        "SingleInstanceType",
+		"on_demand_options":           "OnDemandOptions",
+		"on_demand_target_capacity":   "OnDemandTargetCapacity",
+		"overrides":                   "Overrides",
+		"partition_number":            "PartitionNumber",
+		"placement":                   "Placement",
+		"priority":                    "Priority",
+		"references":                  "References",
+		"replace_unhealthy_instances": "ReplaceUnhealthyInstances",
+		"replacement_strategy":        "ReplacementStrategy",
+		"require_hibernate_support":   "RequireHibernateSupport",
+		"resource_type":               "ResourceType",
+		"single_availability_zone":    "SingleAvailabilityZone",
+		"single_instance_type":        "SingleInstanceType",
 		"spot_max_price_percentage_over_lowest_price": "SpotMaxPricePercentageOverLowestPrice",
-		"spot_options":                                "SpotOptions",
-		"spot_target_capacity":                        "SpotTargetCapacity",
-		"spread_domain":                               "SpreadDomain",
-		"subnet_id":                                   "SubnetId",
-		"tag_specifications":                          "TagSpecifications",
-		"tags":                                        "Tags",
-		"target_capacity_specification":               "TargetCapacitySpecification",
-		"target_capacity_unit_type":                   "TargetCapacityUnitType",
-		"tenancy":                                     "Tenancy",
-		"terminate_instances_with_expiration":         "TerminateInstancesWithExpiration",
-		"termination_delay":                           "TerminationDelay",
-		"total_local_storage_gb":                      "TotalLocalStorageGB",
-		"total_target_capacity":                       "TotalTargetCapacity",
-		"type":                                        "Type",
-		"usage_strategy":                              "UsageStrategy",
-		"v_cpu_count":                                 "VCpuCount",
-		"valid_from":                                  "ValidFrom",
-		"valid_until":                                 "ValidUntil",
-		"value":                                       "Value",
-		"version":                                     "Version",
-		"weighted_capacity":                           "WeightedCapacity",
+		"spot_options":                        "SpotOptions",
+		"spot_target_capacity":                "SpotTargetCapacity",
+		"spread_domain":                       "SpreadDomain",
+		"subnet_id":                           "SubnetId",
+		"tag_specifications":                  "TagSpecifications",
+		"tags":                                "Tags",
+		"target_capacity_specification":       "TargetCapacitySpecification",
+		"target_capacity_unit_type":           "TargetCapacityUnitType",
+		"tenancy":                             "Tenancy",
+		"terminate_instances_with_expiration": "TerminateInstancesWithExpiration",
+		"termination_delay":                   "TerminationDelay",
+		"total_local_storage_gb":              "TotalLocalStorageGB",
+		"total_target_capacity":               "TotalTargetCapacity",
+		"type":                                "Type",
+		"usage_strategy":                      "UsageStrategy",
+		"v_cpu_count":                         "VCpuCount",
+		"valid_from":                          "ValidFrom",
+		"valid_until":                         "ValidUntil",
+		"value":                               "Value",
+		"version":                             "Version",
+		"weighted_capacity":                   "WeightedCapacity",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

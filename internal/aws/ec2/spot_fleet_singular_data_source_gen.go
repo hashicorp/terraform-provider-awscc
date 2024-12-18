@@ -253,6 +253,31 @@ func spotFleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                },
 		//	                "type": "object"
 		//	              },
+		//	              "BaselinePerformanceFactors": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "Cpu": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "References": {
+		//	                        "items": {
+		//	                          "additionalProperties": false,
+		//	                          "properties": {
+		//	                            "InstanceFamily": {
+		//	                              "type": "string"
+		//	                            }
+		//	                          },
+		//	                          "type": "object"
+		//	                        },
+		//	                        "type": "array",
+		//	                        "uniqueItems": false
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
 		//	              "BurstablePerformance": {
 		//	                "enum": [
 		//	                  "included",
@@ -770,6 +795,31 @@ func spotFleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                        },
 		//	                        "Min": {
 		//	                          "type": "integer"
+		//	                        }
+		//	                      },
+		//	                      "type": "object"
+		//	                    },
+		//	                    "BaselinePerformanceFactors": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "Cpu": {
+		//	                          "additionalProperties": false,
+		//	                          "properties": {
+		//	                            "References": {
+		//	                              "items": {
+		//	                                "additionalProperties": false,
+		//	                                "properties": {
+		//	                                  "InstanceFamily": {
+		//	                                    "type": "string"
+		//	                                  }
+		//	                                },
+		//	                                "type": "object"
+		//	                              },
+		//	                              "type": "array",
+		//	                              "uniqueItems": false
+		//	                            }
+		//	                          },
+		//	                          "type": "object"
 		//	                        }
 		//	                      },
 		//	                      "type": "object"
@@ -1328,6 +1378,30 @@ func spotFleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 										}, /*END SCHEMA*/
 										Computed: true,
 									}, /*END ATTRIBUTE*/
+									// Property: BaselinePerformanceFactors
+									"baseline_performance_factors": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Cpu
+											"cpu": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: References
+													"references": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+														NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: InstanceFamily
+																"instance_family": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Computed: true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+														}, /*END NESTED OBJECT*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
 									// Property: BurstablePerformance
 									"burstable_performance": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Computed: true,
@@ -1735,6 +1809,30 @@ func spotFleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 													}, /*END SCHEMA*/
 													Computed: true,
 												}, /*END ATTRIBUTE*/
+												// Property: BaselinePerformanceFactors
+												"baseline_performance_factors": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Cpu
+														"cpu": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: References
+																"references": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																	NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: InstanceFamily
+																			"instance_family": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Computed: true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																	}, /*END NESTED OBJECT*/
+																	Computed: true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
 												// Property: BurstablePerformance
 												"burstable_performance": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Computed: true,
@@ -2064,12 +2162,14 @@ func spotFleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"availability_zone":                  "AvailabilityZone",
 		"bare_metal":                         "BareMetal",
 		"baseline_ebs_bandwidth_mbps":        "BaselineEbsBandwidthMbps",
+		"baseline_performance_factors":       "BaselinePerformanceFactors",
 		"block_device_mappings":              "BlockDeviceMappings",
 		"burstable_performance":              "BurstablePerformance",
 		"capacity_rebalance":                 "CapacityRebalance",
 		"classic_load_balancers":             "ClassicLoadBalancers",
 		"classic_load_balancers_config":      "ClassicLoadBalancersConfig",
 		"context":                            "Context",
+		"cpu":                                "Cpu",
 		"cpu_manufacturers":                  "CpuManufacturers",
 		"delete_on_termination":              "DeleteOnTermination",
 		"description":                        "Description",
@@ -2087,6 +2187,7 @@ func spotFleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"iam_fleet_role":                     "IamFleetRole",
 		"iam_instance_profile":               "IamInstanceProfile",
 		"image_id":                           "ImageId",
+		"instance_family":                    "InstanceFamily",
 		"instance_generations":               "InstanceGenerations",
 		"instance_interruption_behavior":     "InstanceInterruptionBehavior",
 		"instance_pools_to_use_count":        "InstancePoolsToUseCount",
@@ -2130,6 +2231,7 @@ func spotFleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"private_ip_address":                               "PrivateIpAddress",
 		"private_ip_addresses":                             "PrivateIpAddresses",
 		"ramdisk_id":                                       "RamdiskId",
+		"references":                                       "References",
 		"replace_unhealthy_instances":                      "ReplaceUnhealthyInstances",
 		"replacement_strategy":                             "ReplacementStrategy",
 		"require_hibernate_support":                        "RequireHibernateSupport",
