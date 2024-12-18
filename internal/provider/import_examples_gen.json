@@ -4010,6 +4010,21 @@
         "path": "./examples/resources/awscc_pcaconnectorscep_connector/import.sh"
     },
     {
+        "resource": "awscc_pcs_cluster",
+        "identifier": ["Arn"],
+        "path": "./examples/resources/awscc_pcs_cluster/import.sh"
+    },
+    {
+        "resource": "awscc_pcs_compute_node_group",
+        "identifier": ["Arn"],
+        "path": "./examples/resources/awscc_pcs_compute_node_group/import.sh"
+    },
+    {
+        "resource": "awscc_pcs_queue",
+        "identifier": ["Arn"],
+        "path": "./examples/resources/awscc_pcs_queue/import.sh"
+    },
+    {
         "resource": "awscc_panorama_application_instance",
         "identifier": ["ApplicationInstanceId"],
         "path": "./examples/resources/awscc_panorama_application_instance/import.sh"

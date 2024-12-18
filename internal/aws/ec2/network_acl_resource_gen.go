@@ -132,7 +132,7 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Specifies a network ACL for your VPC.",
+		Description: "Specifies a network ACL for your VPC.\n To add a network ACL entry, see [AWS::EC2::NetworkAclEntry](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-networkaclentry.html).",
 		Version:     1,
 		Attributes:  attributes,
 	}

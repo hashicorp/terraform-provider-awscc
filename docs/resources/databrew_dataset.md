@@ -25,6 +25,7 @@ Resource schema for AWS::DataBrew::Dataset.
 - `format` (String) Dataset format
 - `format_options` (Attributes) Format options for dataset (see [below for nested schema](#nestedatt--format_options))
 - `path_options` (Attributes) PathOptions (see [below for nested schema](#nestedatt--path_options))
+- `source` (String) Source type of the dataset
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -57,6 +58,7 @@ Optional:
 Optional:
 
 - `bucket` (String)
+- `bucket_owner` (String) Bucket owner
 - `key` (String)
 
 
@@ -77,6 +79,7 @@ Optional:
 Optional:
 
 - `bucket` (String)
+- `bucket_owner` (String) Bucket owner
 - `key` (String)
 
 
@@ -95,6 +98,7 @@ Optional:
 Optional:
 
 - `bucket` (String)
+- `bucket_owner` (String) Bucket owner
 - `key` (String)
 
 

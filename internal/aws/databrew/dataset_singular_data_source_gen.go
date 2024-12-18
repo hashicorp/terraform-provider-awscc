@@ -196,6 +196,12 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "Bucket": {
 		//	              "type": "string"
 		//	            },
+		//	            "BucketOwner": {
+		//	              "description": "Bucket owner",
+		//	              "maxLength": 12,
+		//	              "minLength": 12,
+		//	              "type": "string"
+		//	            },
 		//	            "Key": {
 		//	              "type": "string"
 		//	            }
@@ -230,6 +236,12 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "Bucket": {
 		//	              "type": "string"
 		//	            },
+		//	            "BucketOwner": {
+		//	              "description": "Bucket owner",
+		//	              "maxLength": 12,
+		//	              "minLength": 12,
+		//	              "type": "string"
+		//	            },
 		//	            "Key": {
 		//	              "type": "string"
 		//	            }
@@ -260,6 +272,12 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "description": "Input location",
 		//	      "properties": {
 		//	        "Bucket": {
+		//	          "type": "string"
+		//	        },
+		//	        "BucketOwner": {
+		//	          "description": "Bucket owner",
+		//	          "maxLength": 12,
+		//	          "minLength": 12,
 		//	          "type": "string"
 		//	        },
 		//	        "Key": {
@@ -301,6 +319,11 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 								"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
 								}, /*END ATTRIBUTE*/
+								// Property: BucketOwner
+								"bucket_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Bucket owner",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
 								// Property: Key
 								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
@@ -337,6 +360,11 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 								"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
 								}, /*END ATTRIBUTE*/
+								// Property: BucketOwner
+								"bucket_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Bucket owner",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
 								// Property: Key
 								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
@@ -365,6 +393,11 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 						// Property: Bucket
 						"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: BucketOwner
+						"bucket_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Bucket owner",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Key
 						"key": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -734,6 +767,22 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "PathOptions",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Source
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Source type of the dataset",
+		//	  "enum": [
+		//	    "S3",
+		//	    "DATA-CATALOG",
+		//	    "DATABASE"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"source": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Source type of the dataset",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -796,6 +845,7 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"bucket":                        "Bucket",
+		"bucket_owner":                  "BucketOwner",
 		"catalog_id":                    "CatalogId",
 		"create_column":                 "CreateColumn",
 		"csv":                           "Csv",
@@ -832,6 +882,7 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"s3_input_definition":           "S3InputDefinition",
 		"sheet_indexes":                 "SheetIndexes",
 		"sheet_names":                   "SheetNames",
+		"source":                        "Source",
 		"source_arn":                    "SourceArn",
 		"table_name":                    "TableName",
 		"tags":                          "Tags",

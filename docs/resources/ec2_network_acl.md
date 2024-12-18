@@ -3,11 +3,13 @@ page_title: "awscc_ec2_network_acl Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
   Specifies a network ACL for your VPC.
+  To add a network ACL entry, see AWS::EC2::NetworkAclEntry https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-networkaclentry.html.
 ---
 
 # awscc_ec2_network_acl (Resource)
 
 Specifies a network ACL for your VPC.
+ To add a network ACL entry, see [AWS::EC2::NetworkAclEntry](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-networkaclentry.html).
 
 ## Example Usage
 

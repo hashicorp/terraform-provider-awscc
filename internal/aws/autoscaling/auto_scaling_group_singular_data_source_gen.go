@@ -39,9 +39,10 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "",
+		//	  "description": "The instance capacity distribution across Availability Zones.",
 		//	  "properties": {
 		//	    "CapacityDistributionStrategy": {
+		//	      "description": "If launches fail in an Availability Zone, the following strategies are available. The default is ``balanced-best-effort``. \n  +   ``balanced-only`` - If launches fail in an Availability Zone, Auto Scaling will continue to attempt to launch in the unhealthy zone to preserve a balanced distribution.\n  +   ``balanced-best-effort`` - If launches fail in an Availability Zone, Auto Scaling will attempt to launch in another healthy Availability Zone instead.",
 		//	      "enum": [
 		//	        "balanced-best-effort",
 		//	        "balanced-only"
@@ -55,10 +56,11 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: CapacityDistributionStrategy
 				"capacity_distribution_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "If launches fail in an Availability Zone, the following strategies are available. The default is ``balanced-best-effort``. \n  +   ``balanced-only`` - If launches fail in an Availability Zone, Auto Scaling will continue to attempt to launch in the unhealthy zone to preserve a balanced distribution.\n  +   ``balanced-best-effort`` - If launches fail in an Availability Zone, Auto Scaling will attempt to launch in another healthy Availability Zone instead.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "",
+			Description: "The instance capacity distribution across Availability Zones.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityZoneImpairmentPolicy
@@ -66,9 +68,10 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "",
+		//	  "description": "The Availability Zone impairment policy.",
 		//	  "properties": {
 		//	    "ImpairedZoneHealthCheckBehavior": {
+		//	      "description": "Specifies the health check behavior for the impaired Availability Zone in an active zonal shift. If you select ``Replace unhealthy``, instances that appear unhealthy will be replaced in all Availability Zones. If you select ``Ignore unhealthy``, instances will not be replaced in the Availability Zone with the active zonal shift. For more information, see [Auto Scaling group zonal shift](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-zonal-shift.html) in the *Amazon EC2 Auto Scaling User Guide*.",
 		//	      "enum": [
 		//	        "IgnoreUnhealthy",
 		//	        "ReplaceUnhealthy"
@@ -76,6 +79,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	      "type": "string"
 		//	    },
 		//	    "ZonalShiftEnabled": {
+		//	      "description": "If ``true``, enable zonal shift for your Auto Scaling group.",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -89,14 +93,16 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: ImpairedZoneHealthCheckBehavior
 				"impaired_zone_health_check_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "Specifies the health check behavior for the impaired Availability Zone in an active zonal shift. If you select ``Replace unhealthy``, instances that appear unhealthy will be replaced in all Availability Zones. If you select ``Ignore unhealthy``, instances will not be replaced in the Availability Zone with the active zonal shift. For more information, see [Auto Scaling group zonal shift](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-zonal-shift.html) in the *Amazon EC2 Auto Scaling User Guide*.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ZonalShiftEnabled
 				"zonal_shift_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "If ``true``, enable zonal shift for your Auto Scaling group.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "",
+			Description: "The Availability Zone impairment policy.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityZones
@@ -742,6 +748,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	                              "description": "",
 		//	                              "properties": {
 		//	                                "InstanceFamily": {
+		//	                                  "description": "",
 		//	                                  "type": "string"
 		//	                                }
 		//	                              },
@@ -1124,7 +1131,8 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 																		// Property: InstanceFamily
 																		"instance_family": schema.StringAttribute{ /*START ATTRIBUTE*/
-																			Computed: true,
+																			Description: "",
+																			Computed:    true,
 																		}, /*END ATTRIBUTE*/
 																	}, /*END SCHEMA*/
 																}, /*END NESTED OBJECT*/

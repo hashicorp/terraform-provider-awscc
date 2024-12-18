@@ -57,9 +57,10 @@ func autoScalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "",
+		//	  "description": "The instance capacity distribution across Availability Zones.",
 		//	  "properties": {
 		//	    "CapacityDistributionStrategy": {
+		//	      "description": "If launches fail in an Availability Zone, the following strategies are available. The default is ``balanced-best-effort``. \n  +   ``balanced-only`` - If launches fail in an Availability Zone, Auto Scaling will continue to attempt to launch in the unhealthy zone to preserve a balanced distribution.\n  +   ``balanced-best-effort`` - If launches fail in an Availability Zone, Auto Scaling will attempt to launch in another healthy Availability Zone instead.",
 		//	      "enum": [
 		//	        "balanced-best-effort",
 		//	        "balanced-only"
@@ -73,8 +74,9 @@ func autoScalingGroupResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: CapacityDistributionStrategy
 				"capacity_distribution_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
+					Description: "If launches fail in an Availability Zone, the following strategies are available. The default is ``balanced-best-effort``. \n  +   ``balanced-only`` - If launches fail in an Availability Zone, Auto Scaling will continue to attempt to launch in the unhealthy zone to preserve a balanced distribution.\n  +   ``balanced-best-effort`` - If launches fail in an Availability Zone, Auto Scaling will attempt to launch in another healthy Availability Zone instead.",
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"balanced-best-effort",
@@ -86,7 +88,7 @@ func autoScalingGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "",
+			Description: "The instance capacity distribution across Availability Zones.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -98,9 +100,10 @@ func autoScalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "",
+		//	  "description": "The Availability Zone impairment policy.",
 		//	  "properties": {
 		//	    "ImpairedZoneHealthCheckBehavior": {
+		//	      "description": "Specifies the health check behavior for the impaired Availability Zone in an active zonal shift. If you select ``Replace unhealthy``, instances that appear unhealthy will be replaced in all Availability Zones. If you select ``Ignore unhealthy``, instances will not be replaced in the Availability Zone with the active zonal shift. For more information, see [Auto Scaling group zonal shift](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-zonal-shift.html) in the *Amazon EC2 Auto Scaling User Guide*.",
 		//	      "enum": [
 		//	        "IgnoreUnhealthy",
 		//	        "ReplaceUnhealthy"
@@ -108,6 +111,7 @@ func autoScalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "ZonalShiftEnabled": {
+		//	      "description": "If ``true``, enable zonal shift for your Auto Scaling group.",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -121,8 +125,9 @@ func autoScalingGroupResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: ImpairedZoneHealthCheckBehavior
 				"impaired_zone_health_check_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
+					Description: "Specifies the health check behavior for the impaired Availability Zone in an active zonal shift. If you select ``Replace unhealthy``, instances that appear unhealthy will be replaced in all Availability Zones. If you select ``Ignore unhealthy``, instances will not be replaced in the Availability Zone with the active zonal shift. For more information, see [Auto Scaling group zonal shift](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-zonal-shift.html) in the *Amazon EC2 Auto Scaling User Guide*.",
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"IgnoreUnhealthy",
@@ -136,8 +141,9 @@ func autoScalingGroupResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: ZonalShiftEnabled
 				"zonal_shift_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
+					Description: "If ``true``, enable zonal shift for your Auto Scaling group.",
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.Bool{ /*START VALIDATORS*/
 						fwvalidators.NotNullBool(),
 					}, /*END VALIDATORS*/
@@ -146,7 +152,7 @@ func autoScalingGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "",
+			Description: "The Availability Zone impairment policy.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -974,6 +980,7 @@ func autoScalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                              "description": "",
 		//	                              "properties": {
 		//	                                "InstanceFamily": {
+		//	                                  "description": "",
 		//	                                  "type": "string"
 		//	                                }
 		//	                              },
@@ -1465,8 +1472,9 @@ func autoScalingGroupResource(ctx context.Context) (resource.Resource, error) {
 																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 																		// Property: InstanceFamily
 																		"instance_family": schema.StringAttribute{ /*START ATTRIBUTE*/
-																			Optional: true,
-																			Computed: true,
+																			Description: "",
+																			Optional:    true,
+																			Computed:    true,
 																			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 																				stringplanmodifier.UseStateForUnknown(),
 																			}, /*END PLAN MODIFIERS*/

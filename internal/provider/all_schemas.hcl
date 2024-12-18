@@ -3709,6 +3709,20 @@ resource_schema "aws_pcaconnectorscep_connector" {
   cloudformation_type_name = "AWS::PCAConnectorSCEP::Connector"
 }
 
+resource_schema "aws_pcs_cluster" {
+  cloudformation_type_name = "AWS::PCS::Cluster"
+}
+
+resource_schema "aws_pcs_compute_node_group" {
+  cloudformation_type_name               = "AWS::PCS::ComputeNodeGroup"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_pcs_queue" {
+  cloudformation_type_name               = "AWS::PCS::Queue"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_panorama_application_instance" {
   cloudformation_type_name = "AWS::Panorama::ApplicationInstance"
 }

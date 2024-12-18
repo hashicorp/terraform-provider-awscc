@@ -269,6 +269,31 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 		//	                },
 		//	                "type": "object"
 		//	              },
+		//	              "BaselinePerformanceFactors": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "Cpu": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "References": {
+		//	                        "items": {
+		//	                          "additionalProperties": false,
+		//	                          "properties": {
+		//	                            "InstanceFamily": {
+		//	                              "type": "string"
+		//	                            }
+		//	                          },
+		//	                          "type": "object"
+		//	                        },
+		//	                        "type": "array",
+		//	                        "uniqueItems": false
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
 		//	              "BurstablePerformance": {
 		//	                "enum": [
 		//	                  "included",
@@ -786,6 +811,31 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 		//	                        },
 		//	                        "Min": {
 		//	                          "type": "integer"
+		//	                        }
+		//	                      },
+		//	                      "type": "object"
+		//	                    },
+		//	                    "BaselinePerformanceFactors": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "Cpu": {
+		//	                          "additionalProperties": false,
+		//	                          "properties": {
+		//	                            "References": {
+		//	                              "items": {
+		//	                                "additionalProperties": false,
+		//	                                "properties": {
+		//	                                  "InstanceFamily": {
+		//	                                    "type": "string"
+		//	                                  }
+		//	                                },
+		//	                                "type": "object"
+		//	                              },
+		//	                              "type": "array",
+		//	                              "uniqueItems": false
+		//	                            }
+		//	                          },
+		//	                          "type": "object"
 		//	                        }
 		//	                      },
 		//	                      "type": "object"
@@ -1573,6 +1623,46 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 												Computed: true,
 												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 													int64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: BaselinePerformanceFactors
+									"baseline_performance_factors": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Cpu
+											"cpu": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: References
+													"references": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+														NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: InstanceFamily
+																"instance_family": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Optional: true,
+																	Computed: true,
+																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																		stringplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+														}, /*END NESTED OBJECT*/
+														Optional: true,
+														Computed: true,
+														PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+															listplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
@@ -2529,6 +2619,46 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 														objectplanmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
+												// Property: BaselinePerformanceFactors
+												"baseline_performance_factors": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Cpu
+														"cpu": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: References
+																"references": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																	NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: InstanceFamily
+																			"instance_family": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Optional: true,
+																				Computed: true,
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																	}, /*END NESTED OBJECT*/
+																	Optional: true,
+																	Computed: true,
+																	PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																		listplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Optional: true,
+															Computed: true,
+															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																objectplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Optional: true,
+													Computed: true,
+													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+														objectplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
 												// Property: BurstablePerformance
 												"burstable_performance": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Optional: true,
@@ -3275,12 +3405,14 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 		"availability_zone":                  "AvailabilityZone",
 		"bare_metal":                         "BareMetal",
 		"baseline_ebs_bandwidth_mbps":        "BaselineEbsBandwidthMbps",
+		"baseline_performance_factors":       "BaselinePerformanceFactors",
 		"block_device_mappings":              "BlockDeviceMappings",
 		"burstable_performance":              "BurstablePerformance",
 		"capacity_rebalance":                 "CapacityRebalance",
 		"classic_load_balancers":             "ClassicLoadBalancers",
 		"classic_load_balancers_config":      "ClassicLoadBalancersConfig",
 		"context":                            "Context",
+		"cpu":                                "Cpu",
 		"cpu_manufacturers":                  "CpuManufacturers",
 		"delete_on_termination":              "DeleteOnTermination",
 		"description":                        "Description",
@@ -3298,6 +3430,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 		"iam_fleet_role":                     "IamFleetRole",
 		"iam_instance_profile":               "IamInstanceProfile",
 		"image_id":                           "ImageId",
+		"instance_family":                    "InstanceFamily",
 		"instance_generations":               "InstanceGenerations",
 		"instance_interruption_behavior":     "InstanceInterruptionBehavior",
 		"instance_pools_to_use_count":        "InstancePoolsToUseCount",
@@ -3341,6 +3474,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 		"private_ip_address":                               "PrivateIpAddress",
 		"private_ip_addresses":                             "PrivateIpAddresses",
 		"ramdisk_id":                                       "RamdiskId",
+		"references":                                       "References",
 		"replace_unhealthy_instances":                      "ReplaceUnhealthyInstances",
 		"replacement_strategy":                             "ReplacementStrategy",
 		"require_hibernate_support":                        "RequireHibernateSupport",
