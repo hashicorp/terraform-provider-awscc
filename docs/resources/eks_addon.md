@@ -193,7 +193,7 @@ variable "cluster_name" {
 - `addon_name` (String) Name of Addon
 - `cluster_name` (String) Name of Cluster
 
-### Optional
+### Optional 
 
 - `addon_version` (String) Version of Addon
 - `configuration_values` (String) The configuration values to use with the add-on
