@@ -11,7 +11,16 @@ description: |-
 
 ## Example Usage
 
+### Basic usage to create coredns and kube_proxy addons
 {{ tffile (printf "examples/resources/%s/eks_addon.tf" .Name)}}
+
+### Create EBS CSI addon
+To use {{.Name}} for creating Amazon EKS Cluster with control plane logging enabled
+{{ tffile (printf "examples/resources/%s/eks_addon_ebs_csi_driver.tf" .Name)}}
+
+### Create VPC CNI addon:
+To use {{.Name}} for creating Amazon EKS Cluster with secrets encryption enabled using AWS KMS
+{{ tffile (printf "examples/resources/%s/eks_addon_vpc_cni.tf" .Name)}}
 
 {{ .SchemaMarkdown | trimspace }}
 {{- if .HasImport }}
