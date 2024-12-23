@@ -1,0 +1,1 @@
+$ terraform import awscc_customerprofiles_segment_definition.example "domain_name|segment_definition_name"

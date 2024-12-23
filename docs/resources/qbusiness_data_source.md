@@ -147,6 +147,7 @@ data "aws_region" "current" {}
 
 - `description` (String)
 - `document_enrichment_configuration` (Attributes) (see [below for nested schema](#nestedatt--document_enrichment_configuration))
+- `media_extraction_configuration` (Attributes) (see [below for nested schema](#nestedatt--media_extraction_configuration))
 - `role_arn` (String)
 - `sync_schedule` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
@@ -285,6 +286,22 @@ Optional:
 - `string_value` (String)
 
 
+
+
+
+<a id="nestedatt--media_extraction_configuration"></a>
+### Nested Schema for `media_extraction_configuration`
+
+Optional:
+
+- `image_extraction_configuration` (Attributes) (see [below for nested schema](#nestedatt--media_extraction_configuration--image_extraction_configuration))
+
+<a id="nestedatt--media_extraction_configuration--image_extraction_configuration"></a>
+### Nested Schema for `media_extraction_configuration.image_extraction_configuration`
+
+Optional:
+
+- `image_extraction_status` (String)
 
 
 

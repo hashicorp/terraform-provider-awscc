@@ -66,7 +66,11 @@ func configurationResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"data": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The base64-encoded XML configuration.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 			// Data is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Description

@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -51,16 +50,27 @@ func apiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "description": "A map of DNS names for the AppSync API.",
-		//	  "patternProperties": {
-		//	    "": {
+		//	  "properties": {
+		//	    "Http": {
+		//	      "type": "string"
+		//	    },
+		//	    "Realtime": {
 		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "type": "object"
 		//	}
-		"dns":               // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+		"dns": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Http
+				"http": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Realtime
+				"realtime": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "A map of DNS names for the AppSync API.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -516,6 +526,7 @@ func apiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"default_subscribe_auth_modes":     "DefaultSubscribeAuthModes",
 		"dns":                              "Dns",
 		"event_config":                     "EventConfig",
+		"http":                             "Http",
 		"iat_ttl":                          "IatTTL",
 		"identity_validation_expression":   "IdentityValidationExpression",
 		"issuer":                           "Issuer",
@@ -526,6 +537,7 @@ func apiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"name":                             "Name",
 		"open_id_connect_config":           "OpenIDConnectConfig",
 		"owner_contact":                    "OwnerContact",
+		"realtime":                         "Realtime",
 		"tags":                             "Tags",
 		"user_pool_id":                     "UserPoolId",
 		"value":                            "Value",

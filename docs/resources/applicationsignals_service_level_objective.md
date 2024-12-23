@@ -21,6 +21,7 @@ Resource Type definition for AWS::ApplicationSignals::ServiceLevelObjective
 
 ### Optional
 
+- `burn_rate_configurations` (Attributes Set) Each object in this array defines the length of the look-back window used to calculate one burn rate metric for this SLO. The burn rate measures how fast the service is consuming the error budget, relative to the attainment goal of the SLO. (see [below for nested schema](#nestedatt--burn_rate_configurations))
 - `description` (String) An optional description for this SLO. Default is 'No description'
 - `goal` (Attributes) A structure that contains the attributes that determine the goal of the SLO. This includes the time period for evaluation and the attainment threshold. (see [below for nested schema](#nestedatt--goal))
 - `request_based_sli` (Attributes) This structure contains information about the performance metric that a request-based SLO monitors. (see [below for nested schema](#nestedatt--request_based_sli))
@@ -34,6 +35,14 @@ Resource Type definition for AWS::ApplicationSignals::ServiceLevelObjective
 - `evaluation_type` (String) Displays whether this is a period-based SLO or a request-based SLO.
 - `id` (String) Uniquely identifies the resource.
 - `last_updated_time` (Number) Epoch time in seconds of the time that this SLO was most recently updated
+
+<a id="nestedatt--burn_rate_configurations"></a>
+### Nested Schema for `burn_rate_configurations`
+
+Optional:
+
+- `look_back_window_minutes` (Number) The number of minutes to use as the look-back window.
+
 
 <a id="nestedatt--goal"></a>
 ### Nested Schema for `goal`

@@ -400,7 +400,8 @@ func indexResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Edition of index",
 		//	  "enum": [
 		//	    "DEVELOPER_EDITION",
-		//	    "ENTERPRISE_EDITION"
+		//	    "ENTERPRISE_EDITION",
+		//	    "GEN_AI_ENTERPRISE_EDITION"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -411,6 +412,7 @@ func indexResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.OneOf(
 					"DEVELOPER_EDITION",
 					"ENTERPRISE_EDITION",
+					"GEN_AI_ENTERPRISE_EDITION",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

@@ -14,6 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -34,6 +35,21 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::Cassandra::Keyspace resource.
 func keyspaceResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ClientSideTimestampsEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates whether client-side timestamps are enabled (true) or disabled (false) for all tables in the keyspace. To add a Region to a single-Region keyspace with at least one table, the value must be set to true. After you enabled client-side timestamps for a table, you can?t disable it again.",
+		//	  "type": "boolean"
+		//	}
+		"client_side_timestamps_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether client-side timestamps are enabled (true) or disabled (false) for all tables in the keyspace. To add a Region to a single-Region keyspace with at least one table, the value must be set to true. After you enabled client-side timestamps for a table, you can?t disable it again.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: KeyspaceName
 		// CloudFormation resource type schema:
 		//
@@ -159,7 +175,6 @@ func keyspaceResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -252,13 +267,14 @@ func keyspaceResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Cassandra::Keyspace").WithTerraformTypeName("awscc_cassandra_keyspace")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"key":                       "Key",
-		"keyspace_name":             "KeyspaceName",
-		"region_list":               "RegionList",
-		"replication_specification": "ReplicationSpecification",
-		"replication_strategy":      "ReplicationStrategy",
-		"tags":                      "Tags",
-		"value":                     "Value",
+		"client_side_timestamps_enabled": "ClientSideTimestampsEnabled",
+		"key":                            "Key",
+		"keyspace_name":                  "KeyspaceName",
+		"region_list":                    "RegionList",
+		"replication_specification":      "ReplicationSpecification",
+		"replication_strategy":           "ReplicationStrategy",
+		"tags":                           "Tags",
+		"value":                          "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

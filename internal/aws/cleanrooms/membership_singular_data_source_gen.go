@@ -92,6 +92,9 @@ func membershipDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "PARQUET"
 		//	              ],
 		//	              "type": "string"
+		//	            },
+		//	            "SingleFileOutput": {
+		//	              "type": "boolean"
 		//	            }
 		//	          },
 		//	          "required": [
@@ -135,6 +138,10 @@ func membershipDataSource(ctx context.Context) (datasource.DataSource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: ResultFormat
 								"result_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: SingleFileOutput
+								"single_file_output": schema.BoolAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -293,6 +300,7 @@ func membershipDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"result_format":                    "ResultFormat",
 		"role_arn":                         "RoleArn",
 		"s3":                               "S3",
+		"single_file_output":               "SingleFileOutput",
 		"tags":                             "Tags",
 		"value":                            "Value",
 	})

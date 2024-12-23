@@ -110,6 +110,7 @@ func softwarePackageVersionResource(ctx context.Context) (resource.Resource, err
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "pattern": "^arn:[!-~]+$",
 		//	  "type": "string"
 		//	}
 		"package_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/

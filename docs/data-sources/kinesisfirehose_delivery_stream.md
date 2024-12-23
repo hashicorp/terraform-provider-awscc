@@ -24,6 +24,7 @@ Data Source schema for AWS::KinesisFirehose::DeliveryStream
 - `amazon_open_search_serverless_destination_configuration` (Attributes) (see [below for nested schema](#nestedatt--amazon_open_search_serverless_destination_configuration))
 - `amazonopensearchservice_destination_configuration` (Attributes) (see [below for nested schema](#nestedatt--amazonopensearchservice_destination_configuration))
 - `arn` (String)
+- `database_source_configuration` (Attributes) (see [below for nested schema](#nestedatt--database_source_configuration))
 - `delivery_stream_encryption_configuration_input` (Attributes) (see [below for nested schema](#nestedatt--delivery_stream_encryption_configuration_input))
 - `delivery_stream_name` (String)
 - `delivery_stream_type` (String)
@@ -312,6 +313,79 @@ Read-Only:
 - `role_arn` (String)
 - `security_group_ids` (List of String)
 - `subnet_ids` (List of String)
+
+
+
+<a id="nestedatt--database_source_configuration"></a>
+### Nested Schema for `database_source_configuration`
+
+Read-Only:
+
+- `columns` (Attributes) (see [below for nested schema](#nestedatt--database_source_configuration--columns))
+- `database_source_authentication_configuration` (Attributes) (see [below for nested schema](#nestedatt--database_source_configuration--database_source_authentication_configuration))
+- `database_source_vpc_configuration` (Attributes) (see [below for nested schema](#nestedatt--database_source_configuration--database_source_vpc_configuration))
+- `databases` (Attributes) (see [below for nested schema](#nestedatt--database_source_configuration--databases))
+- `digest` (String)
+- `endpoint` (String)
+- `port` (Number)
+- `public_certificate` (String)
+- `snapshot_watermark_table` (String)
+- `ssl_mode` (String)
+- `surrogate_keys` (List of String)
+- `tables` (Attributes) (see [below for nested schema](#nestedatt--database_source_configuration--tables))
+- `type` (String)
+
+<a id="nestedatt--database_source_configuration--columns"></a>
+### Nested Schema for `database_source_configuration.columns`
+
+Read-Only:
+
+- `exclude` (List of String)
+- `include` (List of String)
+
+
+<a id="nestedatt--database_source_configuration--database_source_authentication_configuration"></a>
+### Nested Schema for `database_source_configuration.database_source_authentication_configuration`
+
+Read-Only:
+
+- `secrets_manager_configuration` (Attributes) (see [below for nested schema](#nestedatt--database_source_configuration--database_source_authentication_configuration--secrets_manager_configuration))
+
+<a id="nestedatt--database_source_configuration--database_source_authentication_configuration--secrets_manager_configuration"></a>
+### Nested Schema for `database_source_configuration.database_source_authentication_configuration.secrets_manager_configuration`
+
+Read-Only:
+
+- `enabled` (Boolean)
+- `role_arn` (String)
+- `secret_arn` (String)
+
+
+
+<a id="nestedatt--database_source_configuration--database_source_vpc_configuration"></a>
+### Nested Schema for `database_source_configuration.database_source_vpc_configuration`
+
+Read-Only:
+
+- `vpc_endpoint_service_name` (String)
+
+
+<a id="nestedatt--database_source_configuration--databases"></a>
+### Nested Schema for `database_source_configuration.databases`
+
+Read-Only:
+
+- `exclude` (List of String)
+- `include` (List of String)
+
+
+<a id="nestedatt--database_source_configuration--tables"></a>
+### Nested Schema for `database_source_configuration.tables`
+
+Read-Only:
+
+- `exclude` (List of String)
+- `include` (List of String)
 
 
 

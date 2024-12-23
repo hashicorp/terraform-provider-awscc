@@ -21,12 +21,12 @@ Data Source schema for AWS::CloudFront::Function
 
 ### Read-Only
 
-- `auto_publish` (Boolean)
+- `auto_publish` (Boolean) A flag that determines whether to automatically publish the function to the ``LIVE`` stage when it?s created. To automatically publish to the ``LIVE`` stage, set this property to ``true``.
 - `function_arn` (String)
-- `function_code` (String)
-- `function_config` (Attributes) (see [below for nested schema](#nestedatt--function_config))
-- `function_metadata` (Attributes) (see [below for nested schema](#nestedatt--function_metadata))
-- `name` (String)
+- `function_code` (String) The function code. For more information about writing a CloudFront function, see [Writing function code for CloudFront Functions](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/writing-function-code.html) in the *Amazon CloudFront Developer Guide*.
+- `function_config` (Attributes) Contains configuration information about a CloudFront function. (see [below for nested schema](#nestedatt--function_config))
+- `function_metadata` (Attributes) Contains metadata about a CloudFront function. (see [below for nested schema](#nestedatt--function_metadata))
+- `name` (String) A name to identify the function.
 - `stage` (String)
 
 <a id="nestedatt--function_config"></a>
@@ -34,16 +34,16 @@ Data Source schema for AWS::CloudFront::Function
 
 Read-Only:
 
-- `comment` (String)
-- `key_value_store_associations` (Attributes List) (see [below for nested schema](#nestedatt--function_config--key_value_store_associations))
-- `runtime` (String)
+- `comment` (String) A comment to describe the function.
+- `key_value_store_associations` (Attributes List) The configuration for the key value store associations. (see [below for nested schema](#nestedatt--function_config--key_value_store_associations))
+- `runtime` (String) The function's runtime environment version.
 
 <a id="nestedatt--function_config--key_value_store_associations"></a>
 ### Nested Schema for `function_config.key_value_store_associations`
 
 Read-Only:
 
-- `key_value_store_arn` (String)
+- `key_value_store_arn` (String) The Amazon Resource Name (ARN) of the key value store association.
 
 
 
@@ -52,4 +52,4 @@ Read-Only:
 
 Read-Only:
 
-- `function_arn` (String)
+- `function_arn` (String) The Amazon Resource Name (ARN) of the function. The ARN uniquely identifies the function.

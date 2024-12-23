@@ -57,6 +57,7 @@ Optional:
 - `bucket` (String)
 - `key_prefix` (String)
 - `result_format` (String)
+- `single_file_output` (Boolean)
 
 
 

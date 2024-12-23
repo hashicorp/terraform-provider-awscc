@@ -27,21 +27,26 @@ func keyGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"key_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KeyGroupConfig
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "The key group configuration.",
 		//	  "properties": {
 		//	    "Comment": {
+		//	      "description": "A comment to describe the key group. The comment cannot be longer than 128 characters.",
 		//	      "type": "string"
 		//	    },
 		//	    "Items": {
+		//	      "description": "A list of the identifiers of the public keys in the key group.",
 		//	      "items": {
 		//	        "type": "string"
 		//	      },
@@ -49,6 +54,7 @@ func keyGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "uniqueItems": false
 		//	    },
 		//	    "Name": {
+		//	      "description": "A name to identify the key group.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -62,28 +68,34 @@ func keyGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Comment
 				"comment": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "A comment to describe the key group. The comment cannot be longer than 128 characters.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Items
 				"items": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
+					Description: "A list of the identifiers of the public keys in the key group.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Name
 				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "A name to identify the key group.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Computed: true,
+			Description: "The key group configuration.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LastModifiedTime
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 

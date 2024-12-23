@@ -298,6 +298,7 @@ Read-Only:
  Default: ``excluded``
 - `baseline_ebs_bandwidth_mbps` (Attributes) The minimum and maximum baseline bandwidth to Amazon EBS, in Mbps. For more information, see [Amazon EBS–optimized instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html) in the *Amazon EC2 User Guide*.
  Default: No minimum or maximum limits (see [below for nested schema](#nestedatt--launch_template_data--instance_requirements--baseline_ebs_bandwidth_mbps))
+- `baseline_performance_factors` (Attributes) (see [below for nested schema](#nestedatt--launch_template_data--instance_requirements--baseline_performance_factors))
 - `burstable_performance` (String) Indicates whether burstable performance T instance types are included, excluded, or required. For more information, see [Burstable performance instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html).
   +  To include burstable performance instance types, specify ``included``.
   +  To require only burstable performance instance types, specify ``required``.
@@ -386,6 +387,30 @@ Read-Only:
 
 - `max` (Number) The maximum baseline bandwidth, in Mbps. To specify no maximum limit, omit this parameter.
 - `min` (Number) The minimum baseline bandwidth, in Mbps. To specify no minimum limit, omit this parameter.
+
+
+<a id="nestedatt--launch_template_data--instance_requirements--baseline_performance_factors"></a>
+### Nested Schema for `launch_template_data.instance_requirements.baseline_performance_factors`
+
+Read-Only:
+
+- `cpu` (Attributes) (see [below for nested schema](#nestedatt--launch_template_data--instance_requirements--baseline_performance_factors--cpu))
+
+<a id="nestedatt--launch_template_data--instance_requirements--baseline_performance_factors--cpu"></a>
+### Nested Schema for `launch_template_data.instance_requirements.baseline_performance_factors.cpu`
+
+Read-Only:
+
+- `references` (Attributes List) A list of references to be used as baseline for the CPU performance. Currently, you can only specify a single reference across different instance type variations such as CPU manufacturers, architectures etc. (see [below for nested schema](#nestedatt--launch_template_data--instance_requirements--baseline_performance_factors--cpu--references))
+
+<a id="nestedatt--launch_template_data--instance_requirements--baseline_performance_factors--cpu--references"></a>
+### Nested Schema for `launch_template_data.instance_requirements.baseline_performance_factors.cpu.references`
+
+Read-Only:
+
+- `instance_family` (String) The instance family to refer. Ensure that you specify the correct family name. For example, C6i and C6g are valid values, but C6 is not.
+
+
 
 
 <a id="nestedatt--launch_template_data--instance_requirements--memory_gi_b_per_v_cpu"></a>

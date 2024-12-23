@@ -36,7 +36,7 @@ func configuredTableAssociationResource(ctx context.Context) (resource.Resource,
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "maxLength": 100,
+		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/

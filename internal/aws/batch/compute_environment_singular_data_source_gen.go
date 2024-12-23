@@ -105,6 +105,34 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 		//	        "LaunchTemplateName": {
 		//	          "type": "string"
 		//	        },
+		//	        "Overrides": {
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "LaunchTemplateId": {
+		//	                "type": "string"
+		//	              },
+		//	              "LaunchTemplateName": {
+		//	                "type": "string"
+		//	              },
+		//	              "TargetInstanceTypes": {
+		//	                "insertionOrder": false,
+		//	                "items": {
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array",
+		//	                "uniqueItems": false
+		//	              },
+		//	              "Version": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        },
 		//	        "Version": {
 		//	          "type": "string"
 		//	        }
@@ -224,6 +252,31 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 						}, /*END ATTRIBUTE*/
 						// Property: LaunchTemplateName
 						"launch_template_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Overrides
+						"overrides": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: LaunchTemplateId
+									"launch_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: LaunchTemplateName
+									"launch_template_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: TargetInstanceTypes
+									"target_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Version
+									"version": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
 						// Property: Version
@@ -456,6 +509,7 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 		"launch_template_name":           "LaunchTemplateName",
 		"maxv_cpus":                      "MaxvCpus",
 		"minv_cpus":                      "MinvCpus",
+		"overrides":                      "Overrides",
 		"placement_group":                "PlacementGroup",
 		"replace_compute_environment":    "ReplaceComputeEnvironment",
 		"security_group_ids":             "SecurityGroupIds",
@@ -464,6 +518,7 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 		"state":                          "State",
 		"subnets":                        "Subnets",
 		"tags":                           "Tags",
+		"target_instance_types":          "TargetInstanceTypes",
 		"terminate_jobs_on_update":       "TerminateJobsOnUpdate",
 		"type":                           "Type",
 		"unmanagedv_cpus":                "UnmanagedvCpus",

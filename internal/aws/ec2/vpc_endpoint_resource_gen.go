@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -65,6 +66,76 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: DnsOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "",
+		//	  "properties": {
+		//	    "DnsRecordIpType": {
+		//	      "enum": [
+		//	        "ipv4",
+		//	        "ipv6",
+		//	        "dualstack",
+		//	        "service-defined",
+		//	        "not-specified"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "PrivateDnsOnlyForInboundResolverEndpoint": {
+		//	      "enum": [
+		//	        "OnlyInboundResolver",
+		//	        "AllResolvers",
+		//	        "NotSpecified"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"dns_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DnsRecordIpType
+				"dns_record_ip_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"ipv4",
+							"ipv6",
+							"dualstack",
+							"service-defined",
+							"not-specified",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: PrivateDnsOnlyForInboundResolverEndpoint
+				"private_dns_only_for_inbound_resolver_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"OnlyInboundResolver",
+							"AllResolvers",
+							"NotSpecified",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -75,6 +146,35 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 		"vpc_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "",
 			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: IpAddressType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "enum": [
+		//	    "ipv4",
+		//	    "ipv6",
+		//	    "dualstack",
+		//	    "not-specified"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ipv4",
+					"ipv6",
+					"dualstack",
+					"not-specified",
+				),
+			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -128,6 +228,22 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ResourceConfigurationArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"resource_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: RouteTableIds
@@ -190,9 +306,27 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"service_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the endpoint service.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ServiceNetworkArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"service_network_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: SubnetIds
@@ -228,7 +362,9 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	  "enum": [
 		//	    "Interface",
 		//	    "Gateway",
-		//	    "GatewayLoadBalancer"
+		//	    "GatewayLoadBalancer",
+		//	    "ServiceNetwork",
+		//	    "Resource"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -241,6 +377,8 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 					"Interface",
 					"Gateway",
 					"GatewayLoadBalancer",
+					"ServiceNetwork",
+					"Resource",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -286,16 +424,22 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"creation_timestamp":    "CreationTimestamp",
 		"dns_entries":           "DnsEntries",
+		"dns_options":           "DnsOptions",
+		"dns_record_ip_type":    "DnsRecordIpType",
+		"ip_address_type":       "IpAddressType",
 		"network_interface_ids": "NetworkInterfaceIds",
 		"policy_document":       "PolicyDocument",
 		"private_dns_enabled":   "PrivateDnsEnabled",
-		"route_table_ids":       "RouteTableIds",
-		"security_group_ids":    "SecurityGroupIds",
-		"service_name":          "ServiceName",
-		"subnet_ids":            "SubnetIds",
-		"vpc_endpoint_id":       "Id",
-		"vpc_endpoint_type":     "VpcEndpointType",
-		"vpc_id":                "VpcId",
+		"private_dns_only_for_inbound_resolver_endpoint": "PrivateDnsOnlyForInboundResolverEndpoint",
+		"resource_configuration_arn":                     "ResourceConfigurationArn",
+		"route_table_ids":                                "RouteTableIds",
+		"security_group_ids":                             "SecurityGroupIds",
+		"service_name":                                   "ServiceName",
+		"service_network_arn":                            "ServiceNetworkArn",
+		"subnet_ids":                                     "SubnetIds",
+		"vpc_endpoint_id":                                "Id",
+		"vpc_endpoint_type":                              "VpcEndpointType",
+		"vpc_id":                                         "VpcId",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(210).WithDeleteTimeoutInMinutes(210)

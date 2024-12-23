@@ -34,7 +34,10 @@ func projectMembershipResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "enum": [
 		//	    "PROJECT_OWNER",
-		//	    "PROJECT_CONTRIBUTOR"
+		//	    "PROJECT_CONTRIBUTOR",
+		//	    "PROJECT_CATALOG_VIEWER",
+		//	    "PROJECT_CATALOG_CONSUMER",
+		//	    "PROJECT_CATALOG_STEWARD"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -44,6 +47,9 @@ func projectMembershipResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.OneOf(
 					"PROJECT_OWNER",
 					"PROJECT_CONTRIBUTOR",
+					"PROJECT_CATALOG_VIEWER",
+					"PROJECT_CATALOG_CONSUMER",
+					"PROJECT_CATALOG_STEWARD",
 				),
 			}, /*END VALIDATORS*/
 			// Designation is a write-only property.

@@ -1,0 +1,1 @@
+$ terraform import awscc_ec2_security_group_vpc_association.example "group_id|vpc_id"

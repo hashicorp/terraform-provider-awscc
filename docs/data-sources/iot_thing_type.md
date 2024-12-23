@@ -42,5 +42,22 @@ Read-Only:
 
 Read-Only:
 
+- `mqtt_5_configuration` (Attributes) (see [below for nested schema](#nestedatt--thing_type_properties--mqtt_5_configuration))
 - `searchable_attributes` (List of String)
 - `thing_type_description` (String)
+
+<a id="nestedatt--thing_type_properties--mqtt_5_configuration"></a>
+### Nested Schema for `thing_type_properties.mqtt_5_configuration`
+
+Read-Only:
+
+- `propagating_attributes` (Attributes List) (see [below for nested schema](#nestedatt--thing_type_properties--mqtt_5_configuration--propagating_attributes))
+
+<a id="nestedatt--thing_type_properties--mqtt_5_configuration--propagating_attributes"></a>
+### Nested Schema for `thing_type_properties.mqtt_5_configuration.propagating_attributes`
+
+Read-Only:
+
+- `connection_attribute` (String)
+- `thing_attribute` (String)
+- `user_property_key` (String)

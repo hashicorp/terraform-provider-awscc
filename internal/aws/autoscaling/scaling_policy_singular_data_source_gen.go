@@ -915,6 +915,9 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                    ],
 		//	                    "type": "object"
 		//	                  },
+		//	                  "Period": {
+		//	                    "type": "integer"
+		//	                  },
 		//	                  "Stat": {
 		//	                    "type": "string"
 		//	                  },
@@ -927,6 +930,9 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                  "Metric"
 		//	                ],
 		//	                "type": "object"
+		//	              },
+		//	              "Period": {
+		//	                "type": "integer"
 		//	              },
 		//	              "ReturnData": {
 		//	                "type": "boolean"
@@ -942,6 +948,9 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	        },
 		//	        "Namespace": {
 		//	          "type": "string"
+		//	        },
+		//	        "Period": {
+		//	          "type": "integer"
 		//	        },
 		//	        "Statistic": {
 		//	          "type": "string"
@@ -1053,6 +1062,10 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 												}, /*END SCHEMA*/
 												Computed: true,
 											}, /*END ATTRIBUTE*/
+											// Property: Period
+											"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
 											// Property: Stat
 											"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Computed: true,
@@ -1062,6 +1075,10 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 												Computed: true,
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Period
+									"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
 										Computed: true,
 									}, /*END ATTRIBUTE*/
 									// Property: ReturnData
@@ -1074,6 +1091,10 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 						}, /*END ATTRIBUTE*/
 						// Property: Namespace
 						"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Period
+						"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
 						// Property: Statistic
@@ -1159,6 +1180,7 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		"mode":                                 "Mode",
 		"name":                                 "Name",
 		"namespace":                            "Namespace",
+		"period":                               "Period",
 		"policy_name":                          "PolicyName",
 		"policy_type":                          "PolicyType",
 		"predefined_load_metric_specification": "PredefinedLoadMetricSpecification",

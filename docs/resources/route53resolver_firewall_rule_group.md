@@ -45,8 +45,11 @@ Optional:
 - `block_override_domain` (String) BlockOverrideDomain
 - `block_override_ttl` (Number) BlockOverrideTtl
 - `block_response` (String) BlockResponse
+- `confidence_threshold` (String) FirewallDomainRedirectionAction
+- `dns_threat_protection` (String) FirewallDomainRedirectionAction
 - `firewall_domain_list_id` (String) ResourceId
 - `firewall_domain_redirection_action` (String) FirewallDomainRedirectionAction
+- `firewall_threat_protection_id` (String) ResourceId
 - `priority` (Number) Rule Priority
 - `qtype` (String) Qtype
 

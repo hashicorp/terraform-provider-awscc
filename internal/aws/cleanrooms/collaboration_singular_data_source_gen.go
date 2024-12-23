@@ -23,6 +23,19 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::CleanRooms::Collaboration resource.
 func collaborationDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AnalyticsEngine
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "CLEAN_ROOMS_SQL",
+		//	    "SPARK"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"analytics_engine": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -367,25 +380,26 @@ func collaborationDataSource(ctx context.Context) (datasource.DataSource, error)
 		"allow_cleartext":  "AllowCleartext",
 		"allow_duplicates": "AllowDuplicates",
 		"allow_joins_on_columns_with_different_names": "AllowJoinsOnColumnsWithDifferentNames",
-		"arn":                           "Arn",
-		"collaboration_identifier":      "CollaborationIdentifier",
-		"creator_display_name":          "CreatorDisplayName",
-		"creator_member_abilities":      "CreatorMemberAbilities",
-		"creator_payment_configuration": "CreatorPaymentConfiguration",
-		"data_encryption_metadata":      "DataEncryptionMetadata",
-		"description":                   "Description",
-		"display_name":                  "DisplayName",
-		"is_responsible":                "IsResponsible",
-		"key":                           "Key",
-		"member_abilities":              "MemberAbilities",
-		"members":                       "Members",
-		"name":                          "Name",
-		"payment_configuration":         "PaymentConfiguration",
-		"preserve_nulls":                "PreserveNulls",
-		"query_compute":                 "QueryCompute",
-		"query_log_status":              "QueryLogStatus",
-		"tags":                          "Tags",
-		"value":                         "Value",
+		"analytics_engine":                            "AnalyticsEngine",
+		"arn":                                         "Arn",
+		"collaboration_identifier":                    "CollaborationIdentifier",
+		"creator_display_name":                        "CreatorDisplayName",
+		"creator_member_abilities":                    "CreatorMemberAbilities",
+		"creator_payment_configuration":               "CreatorPaymentConfiguration",
+		"data_encryption_metadata":                    "DataEncryptionMetadata",
+		"description":                                 "Description",
+		"display_name":                                "DisplayName",
+		"is_responsible":                              "IsResponsible",
+		"key":                                         "Key",
+		"member_abilities":                            "MemberAbilities",
+		"members":                                     "Members",
+		"name":                                        "Name",
+		"payment_configuration":                       "PaymentConfiguration",
+		"preserve_nulls":                              "PreserveNulls",
+		"query_compute":                               "QueryCompute",
+		"query_log_status":                            "QueryLogStatus",
+		"tags":                                        "Tags",
+		"value":                                       "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

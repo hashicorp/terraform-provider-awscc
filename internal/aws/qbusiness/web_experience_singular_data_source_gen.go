@@ -47,6 +47,60 @@ func webExperienceDataSource(ctx context.Context) (datasource.DataSource, error)
 			CustomType: timetypes.RFC3339Type{},
 			Computed:   true,
 		}, /*END ATTRIBUTE*/
+		// Property: CustomizationConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "CustomCSSUrl": {
+		//	      "maxLength": 1284,
+		//	      "minLength": 0,
+		//	      "pattern": "^(https?://[a-zA-Z0-9-_.+%/]+\\.css)?$",
+		//	      "type": "string"
+		//	    },
+		//	    "FaviconUrl": {
+		//	      "maxLength": 1284,
+		//	      "minLength": 0,
+		//	      "pattern": "^(https?://[a-zA-Z0-9-_.+%/]+\\.(svg|ico))?$",
+		//	      "type": "string"
+		//	    },
+		//	    "FontUrl": {
+		//	      "maxLength": 1284,
+		//	      "minLength": 0,
+		//	      "pattern": "^(https?://[a-zA-Z0-9-_.+%/]+\\.(ttf|woff|woff2|otf))?$",
+		//	      "type": "string"
+		//	    },
+		//	    "LogoUrl": {
+		//	      "maxLength": 1284,
+		//	      "minLength": 0,
+		//	      "pattern": "^(https?://[a-zA-Z0-9-_.+%/]+\\.(svg|png))?$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"customization_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CustomCSSUrl
+				"custom_css_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: FaviconUrl
+				"favicon_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: FontUrl
+				"font_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: LogoUrl
+				"logo_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: DefaultEndpoint
 		// CloudFormation resource type schema:
 		//
@@ -327,9 +381,14 @@ func webExperienceDataSource(ctx context.Context) (datasource.DataSource, error)
 		"application_id":                  "ApplicationId",
 		"authentication_url":              "AuthenticationUrl",
 		"created_at":                      "CreatedAt",
+		"custom_css_url":                  "CustomCSSUrl",
+		"customization_configuration":     "CustomizationConfiguration",
 		"default_endpoint":                "DefaultEndpoint",
+		"favicon_url":                     "FaviconUrl",
+		"font_url":                        "FontUrl",
 		"identity_provider_configuration": "IdentityProviderConfiguration",
 		"key":                             "Key",
+		"logo_url":                        "LogoUrl",
 		"open_id_connect_configuration":   "OpenIDConnectConfiguration",
 		"origins":                         "Origins",
 		"role_arn":                        "RoleArn",

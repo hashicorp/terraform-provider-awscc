@@ -1109,6 +1109,325 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: DatabaseSourceConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Columns": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Exclude": {
+		//	          "items": {
+		//	            "maxLength": 194,
+		//	            "minLength": 1,
+		//	            "pattern": "",
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array"
+		//	        },
+		//	        "Include": {
+		//	          "items": {
+		//	            "maxLength": 194,
+		//	            "minLength": 1,
+		//	            "pattern": "",
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "DatabaseSourceAuthenticationConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "SecretsManagerConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Enabled": {
+		//	              "type": "boolean"
+		//	            },
+		//	            "RoleARN": {
+		//	              "maxLength": 512,
+		//	              "minLength": 1,
+		//	              "pattern": "arn:.*:iam::\\d{12}:role/[a-zA-Z_0-9+=,.@\\-_/]+",
+		//	              "relationshipRef": {
+		//	                "propertyPath": "/properties/Arn",
+		//	                "typeName": "AWS::IAM::Role"
+		//	              },
+		//	              "type": "string"
+		//	            },
+		//	            "SecretARN": {
+		//	              "maxLength": 2048,
+		//	              "minLength": 1,
+		//	              "pattern": "arn:.*:secretsmanager:[a-zA-Z0-9\\-]+:\\d{12}:secret:[a-zA-Z0-9\\-/_+=.@]+",
+		//	              "relationshipRef": {
+		//	                "propertyPath": "/properties/Arn",
+		//	                "typeName": "AWS::SecretsManager::Secret"
+		//	              },
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Enabled"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "SecretsManagerConfiguration"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "DatabaseSourceVPCConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "VpcEndpointServiceName": {
+		//	          "maxLength": 255,
+		//	          "minLength": 47,
+		//	          "pattern": "([a-zA-Z0-9\\-\\_]+\\.){2,3}vpce\\.[a-zA-Z0-9\\-]*\\.vpce-svc\\-[a-zA-Z0-9\\-]{17}$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "VpcEndpointServiceName"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "Databases": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Exclude": {
+		//	          "items": {
+		//	            "maxLength": 64,
+		//	            "minLength": 1,
+		//	            "pattern": "",
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array"
+		//	        },
+		//	        "Include": {
+		//	          "items": {
+		//	            "maxLength": 64,
+		//	            "minLength": 1,
+		//	            "pattern": "",
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "Digest": {
+		//	      "maxLength": 512,
+		//	      "minLength": 1,
+		//	      "pattern": ".*",
+		//	      "type": "string"
+		//	    },
+		//	    "Endpoint": {
+		//	      "maxLength": 255,
+		//	      "minLength": 1,
+		//	      "pattern": "",
+		//	      "type": "string"
+		//	    },
+		//	    "Port": {
+		//	      "maximum": 65535,
+		//	      "minimum": 0,
+		//	      "type": "integer"
+		//	    },
+		//	    "PublicCertificate": {
+		//	      "maxLength": 4096,
+		//	      "minLength": 1,
+		//	      "pattern": ".*",
+		//	      "type": "string"
+		//	    },
+		//	    "SSLMode": {
+		//	      "enum": [
+		//	        "Disabled",
+		//	        "Enabled"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "SnapshotWatermarkTable": {
+		//	      "maxLength": 129,
+		//	      "minLength": 1,
+		//	      "pattern": "",
+		//	      "type": "string"
+		//	    },
+		//	    "SurrogateKeys": {
+		//	      "items": {
+		//	        "maxLength": 1024,
+		//	        "minLength": 1,
+		//	        "pattern": "^\\S+$",
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array"
+		//	    },
+		//	    "Tables": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Exclude": {
+		//	          "items": {
+		//	            "maxLength": 129,
+		//	            "minLength": 1,
+		//	            "pattern": "",
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array"
+		//	        },
+		//	        "Include": {
+		//	          "items": {
+		//	            "maxLength": 129,
+		//	            "minLength": 1,
+		//	            "pattern": "",
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "Type": {
+		//	      "enum": [
+		//	        "MySQL",
+		//	        "PostgreSQL"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Type",
+		//	    "Endpoint",
+		//	    "Port",
+		//	    "Databases",
+		//	    "Tables",
+		//	    "SnapshotWatermarkTable",
+		//	    "DatabaseSourceAuthenticationConfiguration",
+		//	    "DatabaseSourceVPCConfiguration"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"database_source_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Columns
+				"columns": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Exclude
+						"exclude": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Include
+						"include": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: DatabaseSourceAuthenticationConfiguration
+				"database_source_authentication_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: SecretsManagerConfiguration
+						"secrets_manager_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Enabled
+								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: RoleARN
+								"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: SecretARN
+								"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: DatabaseSourceVPCConfiguration
+				"database_source_vpc_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: VpcEndpointServiceName
+						"vpc_endpoint_service_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Databases
+				"databases": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Exclude
+						"exclude": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Include
+						"include": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Digest
+				"digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Endpoint
+				"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Port
+				"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: PublicCertificate
+				"public_certificate": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SSLMode
+				"ssl_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SnapshotWatermarkTable
+				"snapshot_watermark_table": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SurrogateKeys
+				"surrogate_keys": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Tables
+				"tables": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Exclude
+						"exclude": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Include
+						"include": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeliveryStreamEncryptionConfigurationInput
 		// CloudFormation resource type schema:
 		//
@@ -1168,6 +1487,7 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//
 		//	{
 		//	  "enum": [
+		//	    "DatabaseAsSource",
 		//	    "DirectPut",
 		//	    "KinesisStreamAsSource",
 		//	    "MSKAsSource"
@@ -2943,7 +3263,7 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	        "RoleARN": {
 		//	          "maxLength": 512,
 		//	          "minLength": 1,
-		//	          "pattern": "arn:.*",
+		//	          "pattern": "arn:.*:iam::\\d{12}:role/[a-zA-Z_0-9+=,.@\\-_/]+",
 		//	          "relationshipRef": {
 		//	            "propertyPath": "/properties/Arn",
 		//	            "typeName": "AWS::IAM::Role"
@@ -2951,9 +3271,9 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "type": "string"
 		//	        },
 		//	        "SecretARN": {
-		//	          "maxLength": 512,
+		//	          "maxLength": 2048,
 		//	          "minLength": 1,
-		//	          "pattern": "arn:.*",
+		//	          "pattern": "arn:.*:secretsmanager:[a-zA-Z0-9\\-]+:\\d{12}:secret:[a-zA-Z0-9\\-/_+=.@]+",
 		//	          "relationshipRef": {
 		//	            "propertyPath": "/properties/Arn",
 		//	            "typeName": "AWS::SecretsManager::Secret"
@@ -4226,7 +4546,7 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	        "RoleARN": {
 		//	          "maxLength": 512,
 		//	          "minLength": 1,
-		//	          "pattern": "arn:.*",
+		//	          "pattern": "arn:.*:iam::\\d{12}:role/[a-zA-Z_0-9+=,.@\\-_/]+",
 		//	          "relationshipRef": {
 		//	            "propertyPath": "/properties/Arn",
 		//	            "typeName": "AWS::IAM::Role"
@@ -4234,9 +4554,9 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "type": "string"
 		//	        },
 		//	        "SecretARN": {
-		//	          "maxLength": 512,
+		//	          "maxLength": 2048,
 		//	          "minLength": 1,
-		//	          "pattern": "arn:.*",
+		//	          "pattern": "arn:.*:secretsmanager:[a-zA-Z0-9\\-]+:\\d{12}:secret:[a-zA-Z0-9\\-/_+=.@]+",
 		//	          "relationshipRef": {
 		//	            "propertyPath": "/properties/Arn",
 		//	            "typeName": "AWS::SecretsManager::Secret"
@@ -5031,7 +5351,7 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	        "RoleARN": {
 		//	          "maxLength": 512,
 		//	          "minLength": 1,
-		//	          "pattern": "arn:.*",
+		//	          "pattern": "arn:.*:iam::\\d{12}:role/[a-zA-Z_0-9+=,.@\\-_/]+",
 		//	          "relationshipRef": {
 		//	            "propertyPath": "/properties/Arn",
 		//	            "typeName": "AWS::IAM::Role"
@@ -5039,9 +5359,9 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "type": "string"
 		//	        },
 		//	        "SecretARN": {
-		//	          "maxLength": 512,
+		//	          "maxLength": 2048,
 		//	          "minLength": 1,
-		//	          "pattern": "arn:.*",
+		//	          "pattern": "arn:.*:secretsmanager:[a-zA-Z0-9\\-]+:\\d{12}:secret:[a-zA-Z0-9\\-/_+=.@]+",
 		//	          "relationshipRef": {
 		//	            "propertyPath": "/properties/Arn",
 		//	            "typeName": "AWS::SecretsManager::Secret"
@@ -5612,7 +5932,7 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	        "RoleARN": {
 		//	          "maxLength": 512,
 		//	          "minLength": 1,
-		//	          "pattern": "arn:.*",
+		//	          "pattern": "arn:.*:iam::\\d{12}:role/[a-zA-Z_0-9+=,.@\\-_/]+",
 		//	          "relationshipRef": {
 		//	            "propertyPath": "/properties/Arn",
 		//	            "typeName": "AWS::IAM::Role"
@@ -5620,9 +5940,9 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "type": "string"
 		//	        },
 		//	        "SecretARN": {
-		//	          "maxLength": 512,
+		//	          "maxLength": 2048,
 		//	          "minLength": 1,
-		//	          "pattern": "arn:.*",
+		//	          "pattern": "arn:.*:secretsmanager:[a-zA-Z0-9\\-]+:\\d{12}:secret:[a-zA-Z0-9\\-/_+=.@]+",
 		//	          "relationshipRef": {
 		//	            "propertyPath": "/properties/Arn",
 		//	            "typeName": "AWS::SecretsManager::Secret"
@@ -5928,6 +6248,7 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		"cluster_jdbcurl":                          "ClusterJDBCURL",
 		"collection_endpoint":                      "CollectionEndpoint",
 		"column_to_json_key_mappings":              "ColumnToJsonKeyMappings",
+		"columns":                                  "Columns",
 		"common_attributes":                        "CommonAttributes",
 		"compression":                              "Compression",
 		"compression_format":                       "CompressionFormat",
@@ -5944,7 +6265,11 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		"data_table_name":                          "DataTableName",
 		"database":                                 "Database",
 		"database_name":                            "DatabaseName",
-		"default_document_id_format":               "DefaultDocumentIdFormat",
+		"database_source_authentication_configuration":   "DatabaseSourceAuthenticationConfiguration",
+		"database_source_configuration":                  "DatabaseSourceConfiguration",
+		"database_source_vpc_configuration":              "DatabaseSourceVPCConfiguration",
+		"databases":                                      "Databases",
+		"default_document_id_format":                     "DefaultDocumentIdFormat",
 		"delivery_stream_encryption_configuration_input": "DeliveryStreamEncryptionConfigurationInput",
 		"delivery_stream_name":                           "DeliveryStreamName",
 		"delivery_stream_type":                           "DeliveryStreamType",
@@ -5953,6 +6278,7 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		"destination_table_configuration_list":           "DestinationTableConfigurationList",
 		"destination_table_name":                         "DestinationTableName",
 		"dictionary_key_threshold":                       "DictionaryKeyThreshold",
+		"digest":                                         "Digest",
 		"document_id_options":                            "DocumentIdOptions",
 		"domain_arn":                                     "DomainARN",
 		"duration_in_seconds":                            "DurationInSeconds",
@@ -5962,8 +6288,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		"enable_padding":                                 "EnablePadding",
 		"enabled":                                        "Enabled",
 		"encryption_configuration":                       "EncryptionConfiguration",
+		"endpoint":                                       "Endpoint",
 		"endpoint_configuration":                         "EndpointConfiguration",
 		"error_output_prefix":                            "ErrorOutputPrefix",
+		"exclude":                                        "Exclude",
 		"extended_s3_destination_configuration":          "ExtendedS3DestinationConfiguration",
 		"file_extension":                                 "FileExtension",
 		"format_version":                                 "FormatVersion",
@@ -5974,6 +6302,7 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		"hive_json_ser_de":                               "HiveJsonSerDe",
 		"http_endpoint_destination_configuration":        "HttpEndpointDestinationConfiguration",
 		"iceberg_destination_configuration":              "IcebergDestinationConfiguration",
+		"include":                                        "Include",
 		"index_name":                                     "IndexName",
 		"index_rotation_period":                          "IndexRotationPeriod",
 		"input_format_configuration":                     "InputFormatConfiguration",
@@ -6003,11 +6332,13 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		"parameters":                                     "Parameters",
 		"parquet_ser_de":                                 "ParquetSerDe",
 		"password":                                       "Password",
+		"port":                                           "Port",
 		"prefix":                                         "Prefix",
 		"private_key":                                    "PrivateKey",
 		"private_link_vpce_id":                           "PrivateLinkVpceId",
 		"processing_configuration":                       "ProcessingConfiguration",
 		"processors":                                     "Processors",
+		"public_certificate":                             "PublicCertificate",
 		"read_from_timestamp":                            "ReadFromTimestamp",
 		"redshift_destination_configuration":             "RedshiftDestinationConfiguration",
 		"region":                                         "Region",
@@ -6028,15 +6359,19 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		"security_group_ids":                             "SecurityGroupIds",
 		"serializer":                                     "Serializer",
 		"size_in_m_bs":                                   "SizeInMBs",
+		"snapshot_watermark_table":                       "SnapshotWatermarkTable",
 		"snowflake_destination_configuration":            "SnowflakeDestinationConfiguration",
 		"snowflake_role":                                 "SnowflakeRole",
 		"snowflake_role_configuration":                   "SnowflakeRoleConfiguration",
 		"snowflake_vpc_configuration":                    "SnowflakeVpcConfiguration",
 		"splunk_destination_configuration":               "SplunkDestinationConfiguration",
+		"ssl_mode":                                       "SSLMode",
 		"stripe_size_bytes":                              "StripeSizeBytes",
 		"subnet_ids":                                     "SubnetIds",
+		"surrogate_keys":                                 "SurrogateKeys",
 		"table":                                          "Table",
 		"table_name":                                     "TableName",
+		"tables":                                         "Tables",
 		"tags":                                           "Tags",
 		"timestamp_formats":                              "TimestampFormats",
 		"topic_name":                                     "TopicName",
@@ -6049,6 +6384,7 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		"value":                                          "Value",
 		"version_id":                                     "VersionId",
 		"vpc_configuration":                              "VpcConfiguration",
+		"vpc_endpoint_service_name":                      "VpcEndpointServiceName",
 		"writer_version":                                 "WriterVersion",
 	})
 

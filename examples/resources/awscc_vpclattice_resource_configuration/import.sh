@@ -1,0 +1,1 @@
+$ terraform import awscc_vpclattice_resource_configuration.example "arn"

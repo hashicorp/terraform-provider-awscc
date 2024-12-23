@@ -2147,6 +2147,20 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The name of the resource group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: SNSNotificationArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Application Insights sends notifications to this SNS topic whenever there is a problem update in the associated application.",
+		//	  "maxLength": 300,
+		//	  "minLength": 20,
+		//	  "pattern": "^arn:aws(-[\\w]+)*:[\\w\\d-]+:([\\w\\d-]*)?:[\\w\\d_-]*([:/].+)*$",
+		//	  "type": "string"
+		//	}
+		"sns_notification_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Application Insights sends notifications to this SNS topic whenever there is a problem update in the associated application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -2266,6 +2280,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"resource_list":                             "ResourceList",
 		"sapsid":                                    "SAPSID",
 		"severity":                                  "Severity",
+		"sns_notification_arn":                      "SNSNotificationArn",
 		"sql_secret_name":                           "SQLSecretName",
 		"sql_server_prometheus_exporter":            "SQLServerPrometheusExporter",
 		"sub_component_configuration_details":       "SubComponentConfigurationDetails",

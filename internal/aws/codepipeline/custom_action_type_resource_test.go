@@ -6,8 +6,8 @@
 package codepipeline_test
 
 import (
-	"testing"
 	"fmt"
+	"testing"
 
 	"github.com/hashicorp/terraform-plugin-testing/helper/resource"
 	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
@@ -20,7 +20,7 @@ func TestAccAWSCodePipelineCustomActionType_success(t *testing.T) {
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
-			Config:      testAccAWSCodePipelineCustomActionTypeConfig(&td, rName),
+			Config: testAccAWSCodePipelineCustomActionTypeConfig(&td, rName),
 			Check: resource.ComposeAggregateTestCheckFunc(
 				td.CheckExistsInAWS(),
 				resource.TestCheckResourceAttr(resourceName, "category", "Test"),

@@ -1,0 +1,1 @@
+$ terraform import awscc_workspacesweb_data_protection_settings.example "data_protection_settings_arn"

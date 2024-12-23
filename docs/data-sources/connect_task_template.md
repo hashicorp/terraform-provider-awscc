@@ -30,6 +30,7 @@ Data Source schema for AWS::Connect::TaskTemplate
 - `fields` (Attributes List) The list of task template's fields (see [below for nested schema](#nestedatt--fields))
 - `instance_arn` (String) The identifier (arn) of the instance.
 - `name` (String) The name of the task template.
+- `self_assign_contact_flow_arn` (String) The identifier of the contact flow.
 - `status` (String) The status of the task template
 - `tags` (Attributes Set) One or more tags. (see [below for nested schema](#nestedatt--tags))
 

@@ -127,6 +127,29 @@ func deliveryDestinationResource(ctx context.Context) (resource.Resource, error)
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: OutputFormat
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The format of the logs that are sent to this delivery destination.",
+		//	  "maxLength": 12,
+		//	  "minLength": 1,
+		//	  "pattern": "^[0-9A-Za-z]+$",
+		//	  "type": "string"
+		//	}
+		"output_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The format of the logs that are sent to this delivery destination.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 12),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9A-Za-z]+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -225,6 +248,7 @@ func deliveryDestinationResource(ctx context.Context) (resource.Resource, error)
 		"destination_resource_arn":    "DestinationResourceArn",
 		"key":                         "Key",
 		"name":                        "Name",
+		"output_format":               "OutputFormat",
 		"tags":                        "Tags",
 		"value":                       "Value",
 	})

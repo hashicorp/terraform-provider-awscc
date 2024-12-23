@@ -39,12 +39,15 @@ func continuousDeploymentPolicyResource(ctx context.Context) (resource.Resource,
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "Contains the configuration for a continuous deployment policy.",
 		//	  "properties": {
 		//	    "Enabled": {
+		//	      "description": "A Boolean that indicates whether this continuous deployment policy is enabled (in effect). When this value is ``true``, this policy is enabled and in effect. When this value is ``false``, this policy is not enabled and has no effect.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "SingleHeaderPolicyConfig": {
 		//	      "additionalProperties": false,
+		//	      "description": "This configuration determines which HTTP requests are sent to the staging distribution. If the HTTP request contains a header and value that matches what you specify here, the request is sent to the staging distribution. Otherwise the request is sent to the primary distribution.",
 		//	      "properties": {
 		//	        "Header": {
 		//	          "maxLength": 256,
@@ -65,16 +68,20 @@ func continuousDeploymentPolicyResource(ctx context.Context) (resource.Resource,
 		//	    },
 		//	    "SingleWeightPolicyConfig": {
 		//	      "additionalProperties": false,
+		//	      "description": "This configuration determines the percentage of HTTP requests that are sent to the staging distribution.",
 		//	      "properties": {
 		//	        "SessionStickinessConfig": {
 		//	          "additionalProperties": false,
+		//	          "description": "Session stickiness provides the ability to define multiple requests from a single viewer as a single session. This prevents the potentially inconsistent experience of sending some of a given user's requests to your staging distribution, while others are sent to your primary distribution. Define the session duration using TTL values.",
 		//	          "properties": {
 		//	            "IdleTTL": {
+		//	              "description": "The amount of time after which you want sessions to cease if no requests are received. Allowed values are 300?3600 seconds (5?60 minutes).",
 		//	              "maximum": 3600,
 		//	              "minimum": 300,
 		//	              "type": "integer"
 		//	            },
 		//	            "MaximumTTL": {
+		//	              "description": "The maximum amount of time to consider requests from the viewer as being part of the same session. Allowed values are 300?3600 seconds (5?60 minutes).",
 		//	              "maximum": 3600,
 		//	              "minimum": 300,
 		//	              "type": "integer"
@@ -98,6 +105,7 @@ func continuousDeploymentPolicyResource(ctx context.Context) (resource.Resource,
 		//	      "type": "object"
 		//	    },
 		//	    "StagingDistributionDnsNames": {
+		//	      "description": "The CloudFront domain name of the staging distribution. For example: ``d111111abcdef8.cloudfront.net``.",
 		//	      "insertionOrder": true,
 		//	      "items": {
 		//	        "type": "string"
@@ -108,16 +116,20 @@ func continuousDeploymentPolicyResource(ctx context.Context) (resource.Resource,
 		//	    },
 		//	    "TrafficConfig": {
 		//	      "additionalProperties": false,
+		//	      "description": "Contains the parameters for routing production traffic from your primary to staging distributions.",
 		//	      "properties": {
 		//	        "SingleHeaderConfig": {
 		//	          "additionalProperties": false,
+		//	          "description": "Determines which HTTP requests are sent to the staging distribution.",
 		//	          "properties": {
 		//	            "Header": {
+		//	              "description": "The request header name that you want CloudFront to send to your staging distribution. The header must contain the prefix ``aws-cf-cd-``.",
 		//	              "maxLength": 256,
 		//	              "minLength": 1,
 		//	              "type": "string"
 		//	            },
 		//	            "Value": {
+		//	              "description": "The request header value.",
 		//	              "maxLength": 1783,
 		//	              "minLength": 1,
 		//	              "type": "string"
@@ -131,16 +143,20 @@ func continuousDeploymentPolicyResource(ctx context.Context) (resource.Resource,
 		//	        },
 		//	        "SingleWeightConfig": {
 		//	          "additionalProperties": false,
+		//	          "description": "Contains the percentage of traffic to send to the staging distribution.",
 		//	          "properties": {
 		//	            "SessionStickinessConfig": {
 		//	              "additionalProperties": false,
+		//	              "description": "Session stickiness provides the ability to define multiple requests from a single viewer as a single session. This prevents the potentially inconsistent experience of sending some of a given user's requests to your staging distribution, while others are sent to your primary distribution. Define the session duration using TTL values.",
 		//	              "properties": {
 		//	                "IdleTTL": {
+		//	                  "description": "The amount of time after which you want sessions to cease if no requests are received. Allowed values are 300?3600 seconds (5?60 minutes).",
 		//	                  "maximum": 3600,
 		//	                  "minimum": 300,
 		//	                  "type": "integer"
 		//	                },
 		//	                "MaximumTTL": {
+		//	                  "description": "The maximum amount of time to consider requests from the viewer as being part of the same session. Allowed values are 300?3600 seconds (5?60 minutes).",
 		//	                  "maximum": 3600,
 		//	                  "minimum": 300,
 		//	                  "type": "integer"
@@ -153,6 +169,7 @@ func continuousDeploymentPolicyResource(ctx context.Context) (resource.Resource,
 		//	              "type": "object"
 		//	            },
 		//	            "Weight": {
+		//	              "description": "The percentage of traffic to send to a staging distribution, expressed as a decimal number between 0 and 0.15. For example, a value of 0.10 means 10% of traffic is sent to the staging distribution.",
 		//	              "maximum": 1,
 		//	              "minimum": 0,
 		//	              "type": "number"
@@ -164,6 +181,7 @@ func continuousDeploymentPolicyResource(ctx context.Context) (resource.Resource,
 		//	          "type": "object"
 		//	        },
 		//	        "Type": {
+		//	          "description": "The type of traffic configuration.",
 		//	          "enum": [
 		//	            "SingleWeight",
 		//	            "SingleHeader"
@@ -177,6 +195,7 @@ func continuousDeploymentPolicyResource(ctx context.Context) (resource.Resource,
 		//	      "type": "object"
 		//	    },
 		//	    "Type": {
+		//	      "description": "The type of traffic configuration.",
 		//	      "enum": [
 		//	        "SingleWeight",
 		//	        "SingleHeader"
@@ -194,7 +213,8 @@ func continuousDeploymentPolicyResource(ctx context.Context) (resource.Resource,
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Enabled
 				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Description: "A Boolean that indicates whether this continuous deployment policy is enabled (in effect). When this value is ``true``, this policy is enabled and in effect. When this value is ``false``, this policy is not enabled and has no effect.",
+					Required:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: SingleHeaderPolicyConfig
 				"single_header_policy_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -224,8 +244,9 @@ func continuousDeploymentPolicyResource(ctx context.Context) (resource.Resource,
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Optional: true,
-					Computed: true,
+					Description: "This configuration determines which HTTP requests are sent to the staging distribution. If the HTTP request contains a header and value that matches what you specify here, the request is sent to the staging distribution. Otherwise the request is sent to the primary distribution.",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -238,8 +259,9 @@ func continuousDeploymentPolicyResource(ctx context.Context) (resource.Resource,
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: IdleTTL
 								"idle_ttl": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "The amount of time after which you want sessions to cease if no requests are received. Allowed values are 300?3600 seconds (5?60 minutes).",
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.Int64{ /*START VALIDATORS*/
 										int64validator.Between(300, 3600),
 										fwvalidators.NotNullInt64(),
@@ -250,8 +272,9 @@ func continuousDeploymentPolicyResource(ctx context.Context) (resource.Resource,
 								}, /*END ATTRIBUTE*/
 								// Property: MaximumTTL
 								"maximum_ttl": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "The maximum amount of time to consider requests from the viewer as being part of the same session. Allowed values are 300?3600 seconds (5?60 minutes).",
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.Int64{ /*START VALIDATORS*/
 										int64validator.Between(300, 3600),
 										fwvalidators.NotNullInt64(),
@@ -261,8 +284,9 @@ func continuousDeploymentPolicyResource(ctx context.Context) (resource.Resource,
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
+							Description: "Session stickiness provides the ability to define multiple requests from a single viewer as a single session. This prevents the potentially inconsistent experience of sending some of a given user's requests to your staging distribution, while others are sent to your primary distribution. Define the session duration using TTL values.",
+							Optional:    true,
+							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
@@ -280,8 +304,9 @@ func continuousDeploymentPolicyResource(ctx context.Context) (resource.Resource,
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Optional: true,
-					Computed: true,
+					Description: "This configuration determines the percentage of HTTP requests that are sent to the staging distribution.",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -289,6 +314,7 @@ func continuousDeploymentPolicyResource(ctx context.Context) (resource.Resource,
 				// Property: StagingDistributionDnsNames
 				"staging_distribution_dns_names": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
+					Description: "The CloudFront domain name of the staging distribution. For example: ``d111111abcdef8.cloudfront.net``.",
 					Required:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeAtLeast(1),
@@ -303,8 +329,9 @@ func continuousDeploymentPolicyResource(ctx context.Context) (resource.Resource,
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Header
 								"header": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "The request header name that you want CloudFront to send to your staging distribution. The header must contain the prefix ``aws-cf-cd-``.",
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 256),
 										fwvalidators.NotNullString(),
@@ -315,8 +342,9 @@ func continuousDeploymentPolicyResource(ctx context.Context) (resource.Resource,
 								}, /*END ATTRIBUTE*/
 								// Property: Value
 								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "The request header value.",
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 1783),
 										fwvalidators.NotNullString(),
@@ -326,8 +354,9 @@ func continuousDeploymentPolicyResource(ctx context.Context) (resource.Resource,
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
+							Description: "Determines which HTTP requests are sent to the staging distribution.",
+							Optional:    true,
+							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
@@ -340,8 +369,9 @@ func continuousDeploymentPolicyResource(ctx context.Context) (resource.Resource,
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: IdleTTL
 										"idle_ttl": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
+											Description: "The amount of time after which you want sessions to cease if no requests are received. Allowed values are 300?3600 seconds (5?60 minutes).",
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.Int64{ /*START VALIDATORS*/
 												int64validator.Between(300, 3600),
 												fwvalidators.NotNullInt64(),
@@ -352,8 +382,9 @@ func continuousDeploymentPolicyResource(ctx context.Context) (resource.Resource,
 										}, /*END ATTRIBUTE*/
 										// Property: MaximumTTL
 										"maximum_ttl": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
+											Description: "The maximum amount of time to consider requests from the viewer as being part of the same session. Allowed values are 300?3600 seconds (5?60 minutes).",
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.Int64{ /*START VALIDATORS*/
 												int64validator.Between(300, 3600),
 												fwvalidators.NotNullInt64(),
@@ -363,16 +394,18 @@ func continuousDeploymentPolicyResource(ctx context.Context) (resource.Resource,
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
-									Optional: true,
-									Computed: true,
+									Description: "Session stickiness provides the ability to define multiple requests from a single viewer as a single session. This prevents the potentially inconsistent experience of sending some of a given user's requests to your staging distribution, while others are sent to your primary distribution. Define the session duration using TTL values.",
+									Optional:    true,
+									Computed:    true,
 									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 										objectplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Weight
 								"weight": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "The percentage of traffic to send to a staging distribution, expressed as a decimal number between 0 and 0.15. For example, a value of 0.10 means 10% of traffic is sent to the staging distribution.",
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.Float64{ /*START VALIDATORS*/
 										float64validator.Between(0.000000, 1.000000),
 										fwvalidators.NotNullFloat64(),
@@ -382,16 +415,18 @@ func continuousDeploymentPolicyResource(ctx context.Context) (resource.Resource,
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
+							Description: "Contains the percentage of traffic to send to the staging distribution.",
+							Optional:    true,
+							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Type
 						"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
+							Description: "The type of traffic configuration.",
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"SingleWeight",
@@ -404,16 +439,18 @@ func continuousDeploymentPolicyResource(ctx context.Context) (resource.Resource,
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Optional: true,
-					Computed: true,
+					Description: "Contains the parameters for routing production traffic from your primary to staging distributions.",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Type
 				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
+					Description: "The type of traffic configuration.",
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"SingleWeight",
@@ -425,16 +462,19 @@ func continuousDeploymentPolicyResource(ctx context.Context) (resource.Resource,
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Required: true,
+			Description: "Contains the configuration for a continuous deployment policy.",
+			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"continuous_deployment_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -443,10 +483,12 @@ func continuousDeploymentPolicyResource(ctx context.Context) (resource.Resource,
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -463,7 +505,7 @@ func continuousDeploymentPolicyResource(ctx context.Context) (resource.Resource,
 	}
 
 	schema := schema.Schema{
-		Description: "Resource Type definition for AWS::CloudFront::ContinuousDeploymentPolicy",
+		Description: "Creates a continuous deployment policy that routes a subset of production traffic from a primary distribution to a staging distribution.\n After you create and update a staging distribution, you can use a continuous deployment policy to incrementally move traffic to the staging distribution. This enables you to test changes to a distribution's configuration before moving all of your production traffic to the new configuration.\n For more information, see [Using CloudFront continuous deployment to safely test CDN configuration changes](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/continuous-deployment.html) in the *Amazon CloudFront Developer Guide*.",
 		Version:     1,
 		Attributes:  attributes,
 	}

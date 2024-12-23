@@ -21,6 +21,7 @@ Data Source schema for AWS::CleanRooms::Collaboration
 
 ### Read-Only
 
+- `analytics_engine` (String)
 - `arn` (String)
 - `collaboration_identifier` (String)
 - `creator_display_name` (String)

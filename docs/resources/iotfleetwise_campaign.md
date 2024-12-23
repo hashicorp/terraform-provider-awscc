@@ -28,6 +28,7 @@ Definition of AWS::IoTFleetWise::Campaign Resource Type
 - `compression` (String)
 - `data_destination_configs` (Attributes List) (see [below for nested schema](#nestedatt--data_destination_configs))
 - `data_extra_dimensions` (List of String)
+- `data_partitions` (Attributes List) (see [below for nested schema](#nestedatt--data_partitions))
 - `description` (String)
 - `diagnostics_mode` (String)
 - `expiry_time` (String)
@@ -114,11 +115,59 @@ Optional:
 
 
 
+<a id="nestedatt--data_partitions"></a>
+### Nested Schema for `data_partitions`
+
+Optional:
+
+- `id` (String)
+- `storage_options` (Attributes) (see [below for nested schema](#nestedatt--data_partitions--storage_options))
+- `upload_options` (Attributes) (see [below for nested schema](#nestedatt--data_partitions--upload_options))
+
+<a id="nestedatt--data_partitions--storage_options"></a>
+### Nested Schema for `data_partitions.storage_options`
+
+Optional:
+
+- `maximum_size` (Attributes) (see [below for nested schema](#nestedatt--data_partitions--storage_options--maximum_size))
+- `minimum_time_to_live` (Attributes) (see [below for nested schema](#nestedatt--data_partitions--storage_options--minimum_time_to_live))
+- `storage_location` (String)
+
+<a id="nestedatt--data_partitions--storage_options--maximum_size"></a>
+### Nested Schema for `data_partitions.storage_options.maximum_size`
+
+Optional:
+
+- `unit` (String)
+- `value` (Number)
+
+
+<a id="nestedatt--data_partitions--storage_options--minimum_time_to_live"></a>
+### Nested Schema for `data_partitions.storage_options.minimum_time_to_live`
+
+Optional:
+
+- `unit` (String)
+- `value` (Number)
+
+
+
+<a id="nestedatt--data_partitions--upload_options"></a>
+### Nested Schema for `data_partitions.upload_options`
+
+Optional:
+
+- `condition_language_version` (Number)
+- `expression` (String)
+
+
+
 <a id="nestedatt--signals_to_collect"></a>
 ### Nested Schema for `signals_to_collect`
 
 Optional:
 
+- `data_partition_id` (String)
 - `max_sample_count` (Number)
 - `minimum_sampling_interval_ms` (Number)
 - `name` (String)

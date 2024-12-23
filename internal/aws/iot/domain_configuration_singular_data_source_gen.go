@@ -194,6 +194,17 @@ func domainConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "properties": {
 		//	    "EnableOCSPCheck": {
 		//	      "type": "boolean"
+		//	    },
+		//	    "OcspAuthorizedResponderArn": {
+		//	      "maxLength": 2048,
+		//	      "minLength": 1,
+		//	      "pattern": "^arn:aws(-cn|-us-gov|-iso-b|-iso)?:acm:[a-z]{2}-(gov-|iso-|isob-)?[a-z]{4,9}-\\d{1}:\\d{12}:certificate/[a-zA-Z0-9/-]+$",
+		//	      "type": "string"
+		//	    },
+		//	    "OcspLambdaArn": {
+		//	      "maxLength": 170,
+		//	      "minLength": 1,
+		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -202,6 +213,14 @@ func domainConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: EnableOCSPCheck
 				"enable_ocsp_check": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: OcspAuthorizedResponderArn
+				"ocsp_authorized_responder_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: OcspLambdaArn
+				"ocsp_lambda_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -371,6 +390,8 @@ func domainConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		"domain_type":                      "DomainType",
 		"enable_ocsp_check":                "EnableOCSPCheck",
 		"key":                              "Key",
+		"ocsp_authorized_responder_arn":    "OcspAuthorizedResponderArn",
+		"ocsp_lambda_arn":                  "OcspLambdaArn",
 		"security_policy":                  "SecurityPolicy",
 		"server_certificate_arn":           "ServerCertificateArn",
 		"server_certificate_arns":          "ServerCertificateArns",

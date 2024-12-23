@@ -391,6 +391,37 @@ func launchTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          },
 		//	          "type": "object"
 		//	        },
+		//	        "BaselinePerformanceFactors": {
+		//	          "additionalProperties": false,
+		//	          "description": "",
+		//	          "properties": {
+		//	            "Cpu": {
+		//	              "additionalProperties": false,
+		//	              "description": "",
+		//	              "properties": {
+		//	                "References": {
+		//	                  "description": "A list of references to be used as baseline for the CPU performance. Currently, you can only specify a single reference across different instance type variations such as CPU manufacturers, architectures etc.",
+		//	                  "insertionOrder": true,
+		//	                  "items": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "",
+		//	                    "properties": {
+		//	                      "InstanceFamily": {
+		//	                        "description": "The instance family to refer. Ensure that you specify the correct family name. For example, C6i and C6g are valid values, but C6 is not.",
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  },
+		//	                  "type": "array",
+		//	                  "uniqueItems": true
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
 		//	        "BurstablePerformance": {
 		//	          "description": "Indicates whether burstable performance T instance types are included, excluded, or required. For more information, see [Burstable performance instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html).\n  +  To include burstable performance instance types, specify ``included``.\n  +  To require only burstable performance instance types, specify ``required``.\n  +  To exclude burstable performance instance types, specify ``excluded``.\n  \n Default: ``excluded``",
 		//	          "type": "string"
@@ -1298,6 +1329,34 @@ func launchTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 							Description: "The minimum and maximum baseline bandwidth to Amazon EBS, in Mbps. For more information, see [Amazon EBS–optimized instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html) in the *Amazon EC2 User Guide*.\n Default: No minimum or maximum limits",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
+						// Property: BaselinePerformanceFactors
+						"baseline_performance_factors": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Cpu
+								"cpu": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: References
+										"references": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: InstanceFamily
+													"instance_family": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The instance family to refer. Ensure that you specify the correct family name. For example, C6i and C6g are valid values, but C6 is not.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Description: "A list of references to be used as baseline for the CPU performance. Currently, you can only specify a single reference across different instance type variations such as CPU manufacturers, architectures etc.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
 						// Property: BurstablePerformance
 						"burstable_performance": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "Indicates whether burstable performance T instance types are included, excluded, or required. For more information, see [Burstable performance instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html).\n  +  To include burstable performance instance types, specify ``included``.\n  +  To require only burstable performance instance types, specify ``required``.\n  +  To exclude burstable performance instance types, specify ``excluded``.\n  \n Default: ``excluded``",
@@ -2013,6 +2072,7 @@ func launchTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		"availability_zone":                       "AvailabilityZone",
 		"bare_metal":                              "BareMetal",
 		"baseline_ebs_bandwidth_mbps":             "BaselineEbsBandwidthMbps",
+		"baseline_performance_factors":            "BaselinePerformanceFactors",
 		"block_device_mappings":                   "BlockDeviceMappings",
 		"block_duration_minutes":                  "BlockDurationMinutes",
 		"burstable_performance":                   "BurstablePerformance",
@@ -2025,6 +2085,7 @@ func launchTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		"connection_tracking_specification":       "ConnectionTrackingSpecification",
 		"core_count":                              "CoreCount",
 		"count":                                   "Count",
+		"cpu":                                     "Cpu",
 		"cpu_credits":                             "CpuCredits",
 		"cpu_manufacturers":                       "CpuManufacturers",
 		"cpu_options":                             "CpuOptions",
@@ -2063,6 +2124,7 @@ func launchTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		"http_tokens":                             "HttpTokens",
 		"iam_instance_profile":                    "IamInstanceProfile",
 		"image_id":                                "ImageId",
+		"instance_family":                         "InstanceFamily",
 		"instance_generations":                    "InstanceGenerations",
 		"instance_initiated_shutdown_behavior":    "InstanceInitiatedShutdownBehavior",
 		"instance_interruption_behavior":          "InstanceInterruptionBehavior",
@@ -2119,6 +2181,7 @@ func launchTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		"private_ip_address":                 "PrivateIpAddress",
 		"private_ip_addresses":               "PrivateIpAddresses",
 		"ram_disk_id":                        "RamDiskId",
+		"references":                         "References",
 		"require_hibernate_support":          "RequireHibernateSupport",
 		"resource_type":                      "ResourceType",
 		"secondary_private_ip_address_count": "SecondaryPrivateIpAddressCount",

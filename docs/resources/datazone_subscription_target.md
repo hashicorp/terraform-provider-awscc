@@ -21,13 +21,13 @@ Subscription targets enables one to access the data to which you have subscribed
 - `authorized_principals` (List of String) The authorized principals of the subscription target.
 - `domain_identifier` (String) The ID of the Amazon DataZone domain in which subscription target would be created.
 - `environment_identifier` (String) The ID of the environment in which subscription target would be created.
-- `manage_access_role` (String) The manage access role that is used to create the subscription target.
 - `name` (String) The name of the subscription target.
 - `subscription_target_config` (Attributes List) The configuration of the subscription target. (see [below for nested schema](#nestedatt--subscription_target_config))
 - `type` (String) The type of the subscription target.
 
 ### Optional
 
+- `manage_access_role` (String) The manage access role that is used to create the subscription target.
 - `provider_name` (String) The provider of the subscription target.
 
 ### Read-Only

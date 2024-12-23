@@ -965,6 +965,65 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: MediaExtractionConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "ImageExtractionConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "ImageExtractionStatus": {
+		//	          "enum": [
+		//	            "ENABLED",
+		//	            "DISABLED"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ImageExtractionStatus"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"media_extraction_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ImageExtractionConfiguration
+				"image_extraction_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ImageExtractionStatus
+						"image_extraction_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"ENABLED",
+									"DISABLED",
+								),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -1232,12 +1291,15 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"display_name":                       "DisplayName",
 		"document_content_operator":          "DocumentContentOperator",
 		"document_enrichment_configuration":  "DocumentEnrichmentConfiguration",
+		"image_extraction_configuration":     "ImageExtractionConfiguration",
+		"image_extraction_status":            "ImageExtractionStatus",
 		"index_id":                           "IndexId",
 		"inline_configurations":              "InlineConfigurations",
 		"invocation_condition":               "InvocationCondition",
 		"key":                                "Key",
 		"lambda_arn":                         "LambdaArn",
 		"long_value":                         "LongValue",
+		"media_extraction_configuration":     "MediaExtractionConfiguration",
 		"operator":                           "Operator",
 		"post_extraction_hook_configuration": "PostExtractionHookConfiguration",
 		"pre_extraction_hook_configuration":  "PreExtractionHookConfiguration",

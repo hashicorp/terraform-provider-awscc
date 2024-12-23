@@ -3,12 +3,12 @@
 page_title: "awscc_cloudfront_monitoring_subscription Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource Type definition for AWS::CloudFront::MonitoringSubscription
+  A monitoring subscription. This structure contains information about whether additional CloudWatch metrics are enabled for a given CloudFront distribution.
 ---
 
 # awscc_cloudfront_monitoring_subscription (Resource)
 
-Resource Type definition for AWS::CloudFront::MonitoringSubscription
+A monitoring subscription. This structure contains information about whether additional CloudWatch metrics are enabled for a given CloudFront distribution.
 
 
 
@@ -17,8 +17,8 @@ Resource Type definition for AWS::CloudFront::MonitoringSubscription
 
 ### Required
 
-- `distribution_id` (String)
-- `monitoring_subscription` (Attributes) (see [below for nested schema](#nestedatt--monitoring_subscription))
+- `distribution_id` (String) The ID of the distribution that you are enabling metrics for.
+- `monitoring_subscription` (Attributes) A subscription configuration for additional CloudWatch metrics. (see [below for nested schema](#nestedatt--monitoring_subscription))
 
 ### Read-Only
 
@@ -29,14 +29,14 @@ Resource Type definition for AWS::CloudFront::MonitoringSubscription
 
 Optional:
 
-- `realtime_metrics_subscription_config` (Attributes) (see [below for nested schema](#nestedatt--monitoring_subscription--realtime_metrics_subscription_config))
+- `realtime_metrics_subscription_config` (Attributes) A subscription configuration for additional CloudWatch metrics. (see [below for nested schema](#nestedatt--monitoring_subscription--realtime_metrics_subscription_config))
 
 <a id="nestedatt--monitoring_subscription--realtime_metrics_subscription_config"></a>
 ### Nested Schema for `monitoring_subscription.realtime_metrics_subscription_config`
 
 Optional:
 
-- `realtime_metrics_subscription_status` (String)
+- `realtime_metrics_subscription_status` (String) A flag that indicates whether additional CloudWatch metrics are enabled for a given CloudFront distribution.
 
 ## Import
 

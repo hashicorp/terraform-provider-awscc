@@ -140,6 +140,7 @@ Optional:
 
 Optional:
 
+- `accelerator_capabilities` (Attributes) (see [below for nested schema](#nestedatt--configuration--service_managed_ec_2--instance_capabilities--accelerator_capabilities))
 - `allowed_instance_types` (List of String)
 - `cpu_architecture_type` (String)
 - `custom_amounts` (Attributes List) (see [below for nested schema](#nestedatt--configuration--service_managed_ec_2--instance_capabilities--custom_amounts))
@@ -149,6 +150,33 @@ Optional:
 - `os_family` (String)
 - `root_ebs_volume` (Attributes) (see [below for nested schema](#nestedatt--configuration--service_managed_ec_2--instance_capabilities--root_ebs_volume))
 - `v_cpu_count` (Attributes) (see [below for nested schema](#nestedatt--configuration--service_managed_ec_2--instance_capabilities--v_cpu_count))
+
+<a id="nestedatt--configuration--service_managed_ec_2--instance_capabilities--accelerator_capabilities"></a>
+### Nested Schema for `configuration.service_managed_ec_2.instance_capabilities.accelerator_capabilities`
+
+Optional:
+
+- `count` (Attributes) (see [below for nested schema](#nestedatt--configuration--service_managed_ec_2--instance_capabilities--accelerator_capabilities--count))
+- `selections` (Attributes List) (see [below for nested schema](#nestedatt--configuration--service_managed_ec_2--instance_capabilities--accelerator_capabilities--selections))
+
+<a id="nestedatt--configuration--service_managed_ec_2--instance_capabilities--accelerator_capabilities--count"></a>
+### Nested Schema for `configuration.service_managed_ec_2.instance_capabilities.accelerator_capabilities.count`
+
+Optional:
+
+- `max` (Number)
+- `min` (Number)
+
+
+<a id="nestedatt--configuration--service_managed_ec_2--instance_capabilities--accelerator_capabilities--selections"></a>
+### Nested Schema for `configuration.service_managed_ec_2.instance_capabilities.accelerator_capabilities.selections`
+
+Optional:
+
+- `name` (String)
+- `runtime` (String)
+
+
 
 <a id="nestedatt--configuration--service_managed_ec_2--instance_capabilities--custom_amounts"></a>
 ### Nested Schema for `configuration.service_managed_ec_2.instance_capabilities.custom_amounts`

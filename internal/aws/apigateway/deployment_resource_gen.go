@@ -39,15 +39,15 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The input configuration for a canary deployment.",
+		//	  "description": "The ``DeploymentCanarySettings`` property type specifies settings for the canary deployment.",
 		//	  "properties": {
 		//	    "PercentTraffic": {
-		//	      "description": "The percentage (0.0-100.0) of traffic routed to the canary deployment.",
+		//	      "description": "",
 		//	      "type": "number"
 		//	    },
 		//	    "StageVariableOverrides": {
 		//	      "additionalProperties": false,
-		//	      "description": "A stage variable overrides used for the canary release deployment. They can override existing stage variables or add new stage variables for the canary release deployment. These stage variables are represented as a string-to-string map between stage variable names and their values.",
+		//	      "description": "",
 		//	      "patternProperties": {
 		//	        "": {
 		//	          "type": "string"
@@ -56,7 +56,7 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "UseStageCache": {
-		//	      "description": "A Boolean flag to indicate whether the canary release deployment uses the stage cache or not.",
+		//	      "description": "",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -66,7 +66,7 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: PercentTraffic
 				"percent_traffic": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "The percentage (0.0-100.0) of traffic routed to the canary deployment.",
+					Description: "",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
@@ -77,7 +77,7 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 				"stage_variable_overrides": // Pattern: ""
 				schema.MapAttribute{        /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "A stage variable overrides used for the canary release deployment. They can override existing stage variables or add new stage variables for the canary release deployment. These stage variables are represented as a string-to-string map between stage variable names and their values.",
+					Description: "",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
@@ -86,7 +86,7 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: UseStageCache
 				"use_stage_cache": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "A Boolean flag to indicate whether the canary release deployment uses the stage cache or not.",
+					Description: "",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -94,7 +94,7 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The input configuration for a canary deployment.",
+			Description: "The ``DeploymentCanarySettings`` property type specifies settings for the canary deployment.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -121,11 +121,11 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The description for the Deployment resource to create.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description for the Deployment resource to create.",
+			Description: "",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -136,11 +136,11 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The string identifier of the associated RestApi.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"rest_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The string identifier of the associated RestApi.",
+			Description: "",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -158,18 +158,18 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "Specifies settings for logging access in this stage.",
 		//	      "properties": {
 		//	        "DestinationArn": {
-		//	          "description": "The Amazon Resource Name (ARN) of the CloudWatch Logs log group or Kinesis Data Firehose delivery stream to receive access logs. If you specify a Kinesis Data Firehose delivery stream, the stream name must begin with ``amazon-apigateway-``.",
+		//	          "description": "",
 		//	          "type": "string"
 		//	        },
 		//	        "Format": {
-		//	          "description": "A single line format of the access logs of data, as specified by selected $context variables. The format must include at least ``$context.requestId``.",
+		//	          "description": "",
 		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "CacheClusterEnabled": {
-		//	      "description": "Specifies whether a cache cluster is enabled for the stage.",
+		//	      "description": "",
 		//	      "type": "boolean"
 		//	    },
 		//	    "CacheClusterSize": {
@@ -193,12 +193,12 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "Specifies settings for the canary deployment in this stage.",
 		//	      "properties": {
 		//	        "PercentTraffic": {
-		//	          "description": "The percent (0-100) of traffic diverted to a canary deployment.",
+		//	          "description": "",
 		//	          "type": "number"
 		//	        },
 		//	        "StageVariableOverrides": {
 		//	          "additionalProperties": false,
-		//	          "description": "Stage variables overridden for a canary release deployment, including new stage variables introduced in the canary. These stage variables are represented as a string-to-string map between stage variable names and their values.",
+		//	          "description": "",
 		//	          "patternProperties": {
 		//	            "": {
 		//	              "type": "string"
@@ -207,7 +207,7 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "object"
 		//	        },
 		//	        "UseStageCache": {
-		//	          "description": "A Boolean flag to indicate whether the canary deployment uses the stage cache or not.",
+		//	          "description": "",
 		//	          "type": "boolean"
 		//	        }
 		//	      },
@@ -241,19 +241,19 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 		//	        "description": "The ``MethodSetting`` property type configures settings for all methods in a stage.\n The ``MethodSettings`` property of the [Amazon API Gateway Deployment StageDescription](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-deployment-stagedescription.html) property type contains a list of ``MethodSetting`` property types.",
 		//	        "properties": {
 		//	          "CacheDataEncrypted": {
-		//	            "description": "Specifies whether the cached responses are encrypted.",
+		//	            "description": "",
 		//	            "type": "boolean"
 		//	          },
 		//	          "CacheTtlInSeconds": {
-		//	            "description": "Specifies the time to live (TTL), in seconds, for cached responses. The higher the TTL, the longer the response will be cached.",
+		//	            "description": "",
 		//	            "type": "integer"
 		//	          },
 		//	          "CachingEnabled": {
-		//	            "description": "Specifies whether responses should be cached and returned for requests. A cache cluster must be enabled on the stage for responses to be cached.",
+		//	            "description": "",
 		//	            "type": "boolean"
 		//	          },
 		//	          "DataTraceEnabled": {
-		//	            "description": "Specifies whether data trace logging is enabled for this method, which affects the log entries pushed to Amazon CloudWatch Logs. This can be useful to troubleshoot APIs, but can result in logging sensitive data. We recommend that you don't enable this option for production APIs.",
+		//	            "description": "",
 		//	            "type": "boolean"
 		//	          },
 		//	          "HttpMethod": {
@@ -261,11 +261,11 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "string"
 		//	          },
 		//	          "LoggingLevel": {
-		//	            "description": "Specifies the logging level for this method, which affects the log entries pushed to Amazon CloudWatch Logs. Valid values are ``OFF``, ``ERROR``, and ``INFO``. Choose ``ERROR`` to write only error-level entries to CloudWatch Logs, or choose ``INFO`` to include all ``ERROR`` events as well as extra informational events.",
+		//	            "description": "",
 		//	            "type": "string"
 		//	          },
 		//	          "MetricsEnabled": {
-		//	            "description": "Specifies whether Amazon CloudWatch metrics are enabled for this method.",
+		//	            "description": "",
 		//	            "type": "boolean"
 		//	          },
 		//	          "ResourcePath": {
@@ -273,11 +273,11 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "string"
 		//	          },
 		//	          "ThrottlingBurstLimit": {
-		//	            "description": "Specifies the throttling burst limit.",
+		//	            "description": "",
 		//	            "type": "integer"
 		//	          },
 		//	          "ThrottlingRateLimit": {
-		//	            "description": "Specifies the throttling rate limit.",
+		//	            "description": "",
 		//	            "type": "number"
 		//	          }
 		//	        },
@@ -347,7 +347,7 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: DestinationArn
 						"destination_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The Amazon Resource Name (ARN) of the CloudWatch Logs log group or Kinesis Data Firehose delivery stream to receive access logs. If you specify a Kinesis Data Firehose delivery stream, the stream name must begin with ``amazon-apigateway-``.",
+							Description: "",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -356,7 +356,7 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: Format
 						"format": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "A single line format of the access logs of data, as specified by selected $context variables. The format must include at least ``$context.requestId``.",
+							Description: "",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -373,7 +373,7 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: CacheClusterEnabled
 				"cache_cluster_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies whether a cache cluster is enabled for the stage.",
+					Description: "",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -421,7 +421,7 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: PercentTraffic
 						"percent_traffic": schema.Float64Attribute{ /*START ATTRIBUTE*/
-							Description: "The percent (0-100) of traffic diverted to a canary deployment.",
+							Description: "",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
@@ -432,7 +432,7 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 						"stage_variable_overrides": // Pattern: ""
 						schema.MapAttribute{        /*START ATTRIBUTE*/
 							ElementType: types.StringType,
-							Description: "Stage variables overridden for a canary release deployment, including new stage variables introduced in the canary. These stage variables are represented as a string-to-string map between stage variable names and their values.",
+							Description: "",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
@@ -441,7 +441,7 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: UseStageCache
 						"use_stage_cache": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "A Boolean flag to indicate whether the canary deployment uses the stage cache or not.",
+							Description: "",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -507,7 +507,7 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: CacheDataEncrypted
 							"cache_data_encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "Specifies whether the cached responses are encrypted.",
+								Description: "",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -516,7 +516,7 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: CacheTtlInSeconds
 							"cache_ttl_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "Specifies the time to live (TTL), in seconds, for cached responses. The higher the TTL, the longer the response will be cached.",
+								Description: "",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -525,7 +525,7 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: CachingEnabled
 							"caching_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "Specifies whether responses should be cached and returned for requests. A cache cluster must be enabled on the stage for responses to be cached.",
+								Description: "",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -534,7 +534,7 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: DataTraceEnabled
 							"data_trace_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "Specifies whether data trace logging is enabled for this method, which affects the log entries pushed to Amazon CloudWatch Logs. This can be useful to troubleshoot APIs, but can result in logging sensitive data. We recommend that you don't enable this option for production APIs.",
+								Description: "",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -552,7 +552,7 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: LoggingLevel
 							"logging_level": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Specifies the logging level for this method, which affects the log entries pushed to Amazon CloudWatch Logs. Valid values are ``OFF``, ``ERROR``, and ``INFO``. Choose ``ERROR`` to write only error-level entries to CloudWatch Logs, or choose ``INFO`` to include all ``ERROR`` events as well as extra informational events.",
+								Description: "",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -561,7 +561,7 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: MetricsEnabled
 							"metrics_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "Specifies whether Amazon CloudWatch metrics are enabled for this method.",
+								Description: "",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -579,7 +579,7 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: ThrottlingBurstLimit
 							"throttling_burst_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "Specifies the throttling burst limit.",
+								Description: "",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -588,7 +588,7 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: ThrottlingRateLimit
 							"throttling_rate_limit": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "Specifies the throttling rate limit.",
+								Description: "",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
@@ -702,11 +702,11 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The name of the Stage resource for the Deployment resource to create.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"stage_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the Stage resource for the Deployment resource to create.",
+			Description: "",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

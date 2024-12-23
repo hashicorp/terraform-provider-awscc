@@ -235,6 +235,35 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "ReadCapacityUnits"
 		//	        ],
 		//	        "type": "object"
+		//	      },
+		//	      "WarmThroughput": {
+		//	        "additionalProperties": false,
+		//	        "anyOf": [
+		//	          {
+		//	            "required": [
+		//	              "ReadUnitsPerSecond"
+		//	            ]
+		//	          },
+		//	          {
+		//	            "required": [
+		//	              "WriteUnitsPerSecond"
+		//	            ]
+		//	          }
+		//	        ],
+		//	        "description": "Represents the warm throughput value (in read units per second and write units per second) for the specified secondary index. If you use this parameter, you must specify ``ReadUnitsPerSecond``, ``WriteUnitsPerSecond``, or both.",
+		//	        "properties": {
+		//	          "ReadUnitsPerSecond": {
+		//	            "description": "Represents the number of read operations your base table can instantaneously support.",
+		//	            "minimum": 1,
+		//	            "type": "integer"
+		//	          },
+		//	          "WriteUnitsPerSecond": {
+		//	            "description": "Represents the number of write operations your base table can instantaneously support.",
+		//	            "minimum": 1,
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "type": "object"
 		//	      }
 		//	    },
 		//	    "required": [
@@ -338,6 +367,23 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Description: "Represents the provisioned throughput settings for the specified global secondary index.\n For current minimum and maximum provisioned throughput values, see [Service, Account, and Table Quotas](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html) in the *Amazon DynamoDB Developer Guide*.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
+					// Property: WarmThroughput
+					"warm_throughput": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ReadUnitsPerSecond
+							"read_units_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "Represents the number of read operations your base table can instantaneously support.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: WriteUnitsPerSecond
+							"write_units_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "Represents the number of write operations your base table can instantaneously support.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Represents the warm throughput value (in read units per second and write units per second) for the specified secondary index. If you use this parameter, you must specify ``ReadUnitsPerSecond``, ``WriteUnitsPerSecond``, or both.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "Global secondary indexes to be created on the table. You can create up to 20 global secondary indexes.\n  If you update a table to include a new global secondary index, CFNlong initiates the index creation and then proceeds with the stack update. CFNlong doesn't wait for the index to complete creation because the backfilling phase can take a long time, depending on the size of the table. You can't use the index or update the table until the index's status is ``ACTIVE``. You can track its status by using the DynamoDB [DescribeTable](https://docs.aws.amazon.com/cli/latest/reference/dynamodb/describe-table.html) command.\n If you add or delete an index during an update, we recommend that you don't update any other resources. If your stack fails to update and is rolled back while adding a new index, you must manually delete the index. \n Updates are not supported. The following are exceptions:\n  +  If you update either the contributor insights specification or the provisioned throughput values of global secondary indexes, you can update the table without interruption.\n  +  You can delete or add one global secondary index without interruption. If you do both in the same update (for example, by changing the index's logical ID), the update fails.",
@@ -348,7 +394,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "Specifies the properties of data being imported from the S3 bucket source to the table.\n  If you specify the ``ImportSourceSpecification`` property, and also specify either the ``StreamSpecification``, the ``TableClass`` property, or the ``DeletionProtectionEnabled`` property, the IAM entity creating/updating stack must have ``UpdateTable`` permission.",
+		//	  "description": "Specifies the properties of data being imported from the S3 bucket source to the\" table.\n  If you specify the ``ImportSourceSpecification`` property, and also specify either the ``StreamSpecification``, the ``TableClass`` property, the ``DeletionProtectionEnabled`` property, or the ``WarmThroughput`` property, the IAM entity creating/updating stack must have ``UpdateTable`` permission.",
 		//	  "properties": {
 		//	    "InputCompressionType": {
 		//	      "description": "Type of compression to be used on the input coming from the imported table.",
@@ -477,7 +523,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "Specifies the properties of data being imported from the S3 bucket source to the table.\n  If you specify the ``ImportSourceSpecification`` property, and also specify either the ``StreamSpecification``, the ``TableClass`` property, or the ``DeletionProtectionEnabled`` property, the IAM entity creating/updating stack must have ``UpdateTable`` permission.",
+			Description: "Specifies the properties of data being imported from the S3 bucket source to the\" table.\n  If you specify the ``ImportSourceSpecification`` property, and also specify either the ``StreamSpecification``, the ``TableClass`` property, the ``DeletionProtectionEnabled`` property, or the ``WarmThroughput`` property, the IAM entity creating/updating stack must have ``UpdateTable`` permission.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KeySchema
@@ -1003,6 +1049,54 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Specifies the Time to Live (TTL) settings for the table.\n  For detailed information about the limits in DynamoDB, see [Limits in Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html) in the Amazon DynamoDB Developer Guide.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: WarmThroughput
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "anyOf": [
+		//	    {
+		//	      "required": [
+		//	        "ReadUnitsPerSecond"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "WriteUnitsPerSecond"
+		//	      ]
+		//	    }
+		//	  ],
+		//	  "description": "Represents the warm throughput (in read units per second and write units per second) for creating a table.",
+		//	  "properties": {
+		//	    "ReadUnitsPerSecond": {
+		//	      "description": "Represents the number of read operations your base table can instantaneously support.",
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    },
+		//	    "WriteUnitsPerSecond": {
+		//	      "description": "Represents the number of write operations your base table can instantaneously support.",
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"warm_throughput": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ReadUnitsPerSecond
+				"read_units_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Represents the number of read operations your base table can instantaneously support.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: WriteUnitsPerSecond
+				"write_units_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Represents the number of write operations your base table can instantaneously support.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Represents the warm throughput (in read units per second and write units per second) for creating a table.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -1055,6 +1149,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"projection_type":                      "ProjectionType",
 		"provisioned_throughput":               "ProvisionedThroughput",
 		"read_capacity_units":                  "ReadCapacityUnits",
+		"read_units_per_second":                "ReadUnitsPerSecond",
 		"resource_policy":                      "ResourcePolicy",
 		"s3_bucket":                            "S3Bucket",
 		"s3_bucket_owner":                      "S3BucketOwner",
@@ -1071,7 +1166,9 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags":                                 "Tags",
 		"time_to_live_specification":           "TimeToLiveSpecification",
 		"value":                                "Value",
+		"warm_throughput":                      "WarmThroughput",
 		"write_capacity_units":                 "WriteCapacityUnits",
+		"write_units_per_second":               "WriteUnitsPerSecond",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

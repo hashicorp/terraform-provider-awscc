@@ -22,7 +22,7 @@ Data Source schema for AWS::CloudFront::OriginRequestPolicy
 ### Read-Only
 
 - `last_modified_time` (String)
-- `origin_request_policy_config` (Attributes) (see [below for nested schema](#nestedatt--origin_request_policy_config))
+- `origin_request_policy_config` (Attributes) The origin request policy configuration. (see [below for nested schema](#nestedatt--origin_request_policy_config))
 - `origin_request_policy_id` (String)
 
 <a id="nestedatt--origin_request_policy_config"></a>
@@ -30,19 +30,23 @@ Data Source schema for AWS::CloudFront::OriginRequestPolicy
 
 Read-Only:
 
-- `comment` (String)
-- `cookies_config` (Attributes) (see [below for nested schema](#nestedatt--origin_request_policy_config--cookies_config))
-- `headers_config` (Attributes) (see [below for nested schema](#nestedatt--origin_request_policy_config--headers_config))
-- `name` (String)
-- `query_strings_config` (Attributes) (see [below for nested schema](#nestedatt--origin_request_policy_config--query_strings_config))
+- `comment` (String) A comment to describe the origin request policy. The comment cannot be longer than 128 characters.
+- `cookies_config` (Attributes) The cookies from viewer requests to include in origin requests. (see [below for nested schema](#nestedatt--origin_request_policy_config--cookies_config))
+- `headers_config` (Attributes) The HTTP headers to include in origin requests. These can include headers from viewer requests and additional headers added by CloudFront. (see [below for nested schema](#nestedatt--origin_request_policy_config--headers_config))
+- `name` (String) A unique name to identify the origin request policy.
+- `query_strings_config` (Attributes) The URL query strings from viewer requests to include in origin requests. (see [below for nested schema](#nestedatt--origin_request_policy_config--query_strings_config))
 
 <a id="nestedatt--origin_request_policy_config--cookies_config"></a>
 ### Nested Schema for `origin_request_policy_config.cookies_config`
 
 Read-Only:
 
-- `cookie_behavior` (String)
-- `cookies` (List of String)
+- `cookie_behavior` (String) Determines whether cookies in viewer requests are included in requests that CloudFront sends to the origin. Valid values are:
+  +   ``none`` ? No cookies in viewer requests are included in requests that CloudFront sends to the origin. Even when this field is set to ``none``, any cookies that are listed in a ``CachePolicy`` *are* included in origin requests.
+  +   ``whitelist`` ? Only the cookies in viewer requests that are listed in the ``CookieNames`` type are included in requests that CloudFront sends to the origin.
+  +   ``all`` ? All cookies in viewer requests are included in requests that CloudFront sends to the origin.
+  +   ``allExcept`` ? All cookies in viewer requests are included in requests that CloudFront sends to the origin, *except* for those listed in the ``CookieNames`` type, which are not included.
+- `cookies` (List of String) Contains a list of cookie names.
 
 
 <a id="nestedatt--origin_request_policy_config--headers_config"></a>
@@ -50,8 +54,13 @@ Read-Only:
 
 Read-Only:
 
-- `header_behavior` (String)
-- `headers` (List of String)
+- `header_behavior` (String) Determines whether any HTTP headers are included in requests that CloudFront sends to the origin. Valid values are:
+  +   ``none`` ? No HTTP headers in viewer requests are included in requests that CloudFront sends to the origin. Even when this field is set to ``none``, any headers that are listed in a ``CachePolicy`` *are* included in origin requests.
+  +   ``whitelist`` ? Only the HTTP headers that are listed in the ``Headers`` type are included in requests that CloudFront sends to the origin.
+  +   ``allViewer`` ? All HTTP headers in viewer requests are included in requests that CloudFront sends to the origin.
+  +   ``allViewerAndWhitelistCloudFront`` ? All HTTP headers in viewer requests and the additional CloudFront headers that are listed in the ``Headers`` type are included in requests that CloudFront sends to the origin. The additional headers are added by CloudFront.
+  +   ``allExcept`` ? All HTTP headers in viewer requests are included in requests that CloudFront sends to the origin, *except* for those listed in the ``Headers`` type, which are not included.
+- `headers` (List of String) Contains a list of HTTP header names.
 
 
 <a id="nestedatt--origin_request_policy_config--query_strings_config"></a>
@@ -59,5 +68,9 @@ Read-Only:
 
 Read-Only:
 
-- `query_string_behavior` (String)
-- `query_strings` (List of String)
+- `query_string_behavior` (String) Determines whether any URL query strings in viewer requests are included in requests that CloudFront sends to the origin. Valid values are:
+  +   ``none`` ? No query strings in viewer requests are included in requests that CloudFront sends to the origin. Even when this field is set to ``none``, any query strings that are listed in a ``CachePolicy`` *are* included in origin requests.
+  +   ``whitelist`` ? Only the query strings in viewer requests that are listed in the ``QueryStringNames`` type are included in requests that CloudFront sends to the origin.
+  +   ``all`` ? All query strings in viewer requests are included in requests that CloudFront sends to the origin.
+  +   ``allExcept`` ? All query strings in viewer requests are included in requests that CloudFront sends to the origin, *except* for those listed in the ``QueryStringNames`` type, which are not included.
+- `query_strings` (List of String) Contains a list of query string names.

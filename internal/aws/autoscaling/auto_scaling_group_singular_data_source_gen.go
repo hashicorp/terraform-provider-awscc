@@ -34,6 +34,77 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 			Description: "The name of the Auto Scaling group. This name must be unique per Region per account.\n The name can contain any ASCII character 33 to 126 including most punctuation characters, digits, and upper and lowercased letters.\n  You cannot use a colon (:) in the name.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: AvailabilityZoneDistribution
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The instance capacity distribution across Availability Zones.",
+		//	  "properties": {
+		//	    "CapacityDistributionStrategy": {
+		//	      "description": "If launches fail in an Availability Zone, the following strategies are available. The default is ``balanced-best-effort``. \n  +   ``balanced-only`` - If launches fail in an Availability Zone, Auto Scaling will continue to attempt to launch in the unhealthy zone to preserve a balanced distribution.\n  +   ``balanced-best-effort`` - If launches fail in an Availability Zone, Auto Scaling will attempt to launch in another healthy Availability Zone instead.",
+		//	      "enum": [
+		//	        "balanced-best-effort",
+		//	        "balanced-only"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"availability_zone_distribution": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CapacityDistributionStrategy
+				"capacity_distribution_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "If launches fail in an Availability Zone, the following strategies are available. The default is ``balanced-best-effort``. \n  +   ``balanced-only`` - If launches fail in an Availability Zone, Auto Scaling will continue to attempt to launch in the unhealthy zone to preserve a balanced distribution.\n  +   ``balanced-best-effort`` - If launches fail in an Availability Zone, Auto Scaling will attempt to launch in another healthy Availability Zone instead.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The instance capacity distribution across Availability Zones.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: AvailabilityZoneImpairmentPolicy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The Availability Zone impairment policy.",
+		//	  "properties": {
+		//	    "ImpairedZoneHealthCheckBehavior": {
+		//	      "description": "Specifies the health check behavior for the impaired Availability Zone in an active zonal shift. If you select ``Replace unhealthy``, instances that appear unhealthy will be replaced in all Availability Zones. If you select ``Ignore unhealthy``, instances will not be replaced in the Availability Zone with the active zonal shift. For more information, see [Auto Scaling group zonal shift](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-zonal-shift.html) in the *Amazon EC2 Auto Scaling User Guide*.",
+		//	      "enum": [
+		//	        "IgnoreUnhealthy",
+		//	        "ReplaceUnhealthy"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ZonalShiftEnabled": {
+		//	      "description": "If ``true``, enable zonal shift for your Auto Scaling group.",
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "ImpairedZoneHealthCheckBehavior",
+		//	    "ZonalShiftEnabled"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"availability_zone_impairment_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ImpairedZoneHealthCheckBehavior
+				"impaired_zone_health_check_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the health check behavior for the impaired Availability Zone in an active zonal shift. If you select ``Replace unhealthy``, instances that appear unhealthy will be replaced in all Availability Zones. If you select ``Ignore unhealthy``, instances will not be replaced in the Availability Zone with the active zonal shift. For more information, see [Auto Scaling group zonal shift](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-zonal-shift.html) in the *Amazon EC2 Auto Scaling User Guide*.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ZonalShiftEnabled
+				"zonal_shift_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "If ``true``, enable zonal shift for your Auto Scaling group.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The Availability Zone impairment policy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityZones
 		// CloudFormation resource type schema:
 		//
@@ -60,6 +131,72 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	}
 		"capacity_rebalance": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Indicates whether Capacity Rebalancing is enabled. Otherwise, Capacity Rebalancing is disabled. When you turn on Capacity Rebalancing, Amazon EC2 Auto Scaling attempts to launch a Spot Instance whenever Amazon EC2 notifies that a Spot Instance is at an elevated risk of interruption. After launching a new instance, it then terminates an old instance. For more information, see [Use Capacity Rebalancing to handle Amazon EC2 Spot Interruptions](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-capacity-rebalancing.html) in the in the *Amazon EC2 Auto Scaling User Guide*.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: CapacityReservationSpecification
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "",
+		//	  "properties": {
+		//	    "CapacityReservationPreference": {
+		//	      "type": "string"
+		//	    },
+		//	    "CapacityReservationTarget": {
+		//	      "additionalProperties": false,
+		//	      "description": "",
+		//	      "properties": {
+		//	        "CapacityReservationIds": {
+		//	          "insertionOrder": true,
+		//	          "items": {
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        },
+		//	        "CapacityReservationResourceGroupArns": {
+		//	          "insertionOrder": true,
+		//	          "items": {
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "CapacityReservationPreference"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"capacity_reservation_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CapacityReservationPreference
+				"capacity_reservation_preference": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CapacityReservationTarget
+				"capacity_reservation_target": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CapacityReservationIds
+						"capacity_reservation_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: CapacityReservationResourceGroupArns
+						"capacity_reservation_resource_group_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Context
@@ -596,6 +733,36 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	                    },
 		//	                    "type": "object"
 		//	                  },
+		//	                  "BaselinePerformanceFactors": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "",
+		//	                    "properties": {
+		//	                      "Cpu": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "",
+		//	                        "properties": {
+		//	                          "References": {
+		//	                            "insertionOrder": true,
+		//	                            "items": {
+		//	                              "additionalProperties": false,
+		//	                              "description": "",
+		//	                              "properties": {
+		//	                                "InstanceFamily": {
+		//	                                  "description": "",
+		//	                                  "type": "string"
+		//	                                }
+		//	                              },
+		//	                              "type": "object"
+		//	                            },
+		//	                            "type": "array",
+		//	                            "uniqueItems": true
+		//	                          }
+		//	                        },
+		//	                        "type": "object"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  },
 		//	                  "BurstablePerformance": {
 		//	                    "description": "Indicates whether burstable performance instance types are included, excluded, or required. For more information, see [Burstable performance instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html) in the *Amazon EC2 User Guide for Linux Instances*.\n Default: ``excluded``",
 		//	                    "type": "string"
@@ -952,6 +1119,33 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 												Description: "The minimum and maximum baseline bandwidth performance for an instance type, in Mbps. For more information, see [Amazon EBS–optimized instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html) in the *Amazon EC2 User Guide for Linux Instances*.\n Default: No minimum or maximum limits",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
+											// Property: BaselinePerformanceFactors
+											"baseline_performance_factors": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Cpu
+													"cpu": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: References
+															"references": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: InstanceFamily
+																		"instance_family": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Description: "",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
 											// Property: BurstablePerformance
 											"burstable_performance": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "Indicates whether burstable performance instance types are included, excluded, or required. For more information, see [Burstable performance instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html) in the *Amazon EC2 User Guide for Linux Instances*.\n Default: ``excluded``",
@@ -1290,6 +1484,17 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 			Description: "The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling group uses to call other AWS service on your behalf. By default, Amazon EC2 Auto Scaling uses a service-linked role named ``AWSServiceRoleForAutoScaling``, which it creates if it does not exist. For more information, see [Service-linked roles](https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-service-linked-role.html) in the *Amazon EC2 Auto Scaling User Guide*.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: SkipZonalShiftValidation
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "boolean"
+		//	}
+		"skip_zonal_shift_validation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1383,16 +1588,18 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The traffic sources associated with this Auto Scaling group.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "",
+		//	    "description": "Identifying information for a traffic source.",
 		//	    "properties": {
 		//	      "Identifier": {
+		//	        "description": "Identifies the traffic source.\n For Application Load Balancers, Gateway Load Balancers, Network Load Balancers, and VPC Lattice, this will be the Amazon Resource Name (ARN) for a target group in this account and Region. For Classic Load Balancers, this will be the name of the Classic Load Balancer in this account and Region.\n For example: \n  +  Application Load Balancer ARN: ``arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/1234567890123456`` \n  +  Classic Load Balancer name: ``my-classic-load-balancer`` \n  +  VPC Lattice ARN: ``arn:aws:vpc-lattice:us-west-2:123456789012:targetgroup/tg-1234567890123456`` \n  \n To get the ARN of a target group for a Application Load Balancer, Gateway Load Balancer, or Network Load Balancer, or the name of a Classic Load Balancer, use the Elastic Load Balancing [DescribeTargetGroups](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html) and [DescribeLoadBalancers](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html) API operations.\n To get the ARN of a target group for VPC Lattice, use the VPC Lattice [GetTargetGroup](https://docs.aws.amazon.com/vpc-lattice/latest/APIReference/API_GetTargetGroup.html) API operation.",
 		//	        "type": "string"
 		//	      },
 		//	      "Type": {
+		//	        "description": "Provides additional context for the value of ``Identifier``.\n The following lists the valid values:\n  +   ``elb`` if ``Identifier`` is the name of a Classic Load Balancer.\n  +   ``elbv2`` if ``Identifier`` is the ARN of an Application Load Balancer, Gateway Load Balancer, or Network Load Balancer target group.\n  +   ``vpc-lattice`` if ``Identifier`` is the ARN of a VPC Lattice target group.\n  \n Required if the identifier is the name of a Classic Load Balancer.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -1410,15 +1617,17 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Identifier
 					"identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "Identifies the traffic source.\n For Application Load Balancers, Gateway Load Balancers, Network Load Balancers, and VPC Lattice, this will be the Amazon Resource Name (ARN) for a target group in this account and Region. For Classic Load Balancers, this will be the name of the Classic Load Balancer in this account and Region.\n For example: \n  +  Application Load Balancer ARN: ``arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/1234567890123456`` \n  +  Classic Load Balancer name: ``my-classic-load-balancer`` \n  +  VPC Lattice ARN: ``arn:aws:vpc-lattice:us-west-2:123456789012:targetgroup/tg-1234567890123456`` \n  \n To get the ARN of a target group for a Application Load Balancer, Gateway Load Balancer, or Network Load Balancer, or the name of a Classic Load Balancer, use the Elastic Load Balancing [DescribeTargetGroups](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html) and [DescribeLoadBalancers](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html) API operations.\n To get the ARN of a target group for VPC Lattice, use the VPC Lattice [GetTargetGroup](https://docs.aws.amazon.com/vpc-lattice/latest/APIReference/API_GetTargetGroup.html) API operation.",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Type
 					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "Provides additional context for the value of ``Identifier``.\n The following lists the valid values:\n  +   ``elb`` if ``Identifier`` is the name of a Classic Load Balancer.\n  +   ``elbv2`` if ``Identifier`` is the ARN of an Application Load Balancer, Gateway Load Balancer, or Network Load Balancer target group.\n  +   ``vpc-lattice`` if ``Identifier`` is the ARN of a VPC Lattice target group.\n  \n Required if the identifier is the name of a Classic Load Balancer.",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "",
+			Description: "The traffic sources associated with this Auto Scaling group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VPCZoneIdentifier
@@ -1455,53 +1664,65 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 	opts = opts.WithCloudFormationTypeName("AWS::AutoScaling::AutoScalingGroup").WithTerraformTypeName("awscc_autoscaling_auto_scaling_group")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"accelerator_count":                 "AcceleratorCount",
-		"accelerator_manufacturers":         "AcceleratorManufacturers",
-		"accelerator_names":                 "AcceleratorNames",
-		"accelerator_total_memory_mi_b":     "AcceleratorTotalMemoryMiB",
-		"accelerator_types":                 "AcceleratorTypes",
-		"allowed_instance_types":            "AllowedInstanceTypes",
-		"auto_scaling_group_name":           "AutoScalingGroupName",
-		"availability_zones":                "AvailabilityZones",
-		"bare_metal":                        "BareMetal",
-		"baseline_ebs_bandwidth_mbps":       "BaselineEbsBandwidthMbps",
-		"burstable_performance":             "BurstablePerformance",
-		"capacity_rebalance":                "CapacityRebalance",
-		"context":                           "Context",
-		"cooldown":                          "Cooldown",
-		"cpu_manufacturers":                 "CpuManufacturers",
-		"default_instance_warmup":           "DefaultInstanceWarmup",
-		"default_result":                    "DefaultResult",
-		"desired_capacity":                  "DesiredCapacity",
-		"desired_capacity_type":             "DesiredCapacityType",
-		"excluded_instance_types":           "ExcludedInstanceTypes",
-		"granularity":                       "Granularity",
-		"health_check_grace_period":         "HealthCheckGracePeriod",
-		"health_check_type":                 "HealthCheckType",
-		"heartbeat_timeout":                 "HeartbeatTimeout",
-		"identifier":                        "Identifier",
-		"instance_generations":              "InstanceGenerations",
-		"instance_id":                       "InstanceId",
-		"instance_maintenance_policy":       "InstanceMaintenancePolicy",
-		"instance_requirements":             "InstanceRequirements",
-		"instance_type":                     "InstanceType",
-		"instances_distribution":            "InstancesDistribution",
-		"key":                               "Key",
-		"launch_configuration_name":         "LaunchConfigurationName",
-		"launch_template":                   "LaunchTemplate",
-		"launch_template_id":                "LaunchTemplateId",
-		"launch_template_name":              "LaunchTemplateName",
-		"launch_template_specification":     "LaunchTemplateSpecification",
-		"lifecycle_hook_name":               "LifecycleHookName",
-		"lifecycle_hook_specification_list": "LifecycleHookSpecificationList",
-		"lifecycle_transition":              "LifecycleTransition",
-		"load_balancer_names":               "LoadBalancerNames",
-		"local_storage":                     "LocalStorage",
-		"local_storage_types":               "LocalStorageTypes",
-		"max":                               "Max",
-		"max_healthy_percentage":            "MaxHealthyPercentage",
-		"max_instance_lifetime":             "MaxInstanceLifetime",
-		"max_size":                          "MaxSize",
+		"accelerator_count":                        "AcceleratorCount",
+		"accelerator_manufacturers":                "AcceleratorManufacturers",
+		"accelerator_names":                        "AcceleratorNames",
+		"accelerator_total_memory_mi_b":            "AcceleratorTotalMemoryMiB",
+		"accelerator_types":                        "AcceleratorTypes",
+		"allowed_instance_types":                   "AllowedInstanceTypes",
+		"auto_scaling_group_name":                  "AutoScalingGroupName",
+		"availability_zone_distribution":           "AvailabilityZoneDistribution",
+		"availability_zone_impairment_policy":      "AvailabilityZoneImpairmentPolicy",
+		"availability_zones":                       "AvailabilityZones",
+		"bare_metal":                               "BareMetal",
+		"baseline_ebs_bandwidth_mbps":              "BaselineEbsBandwidthMbps",
+		"baseline_performance_factors":             "BaselinePerformanceFactors",
+		"burstable_performance":                    "BurstablePerformance",
+		"capacity_distribution_strategy":           "CapacityDistributionStrategy",
+		"capacity_rebalance":                       "CapacityRebalance",
+		"capacity_reservation_ids":                 "CapacityReservationIds",
+		"capacity_reservation_preference":          "CapacityReservationPreference",
+		"capacity_reservation_resource_group_arns": "CapacityReservationResourceGroupArns",
+		"capacity_reservation_specification":       "CapacityReservationSpecification",
+		"capacity_reservation_target":              "CapacityReservationTarget",
+		"context":                                  "Context",
+		"cooldown":                                 "Cooldown",
+		"cpu":                                      "Cpu",
+		"cpu_manufacturers":                        "CpuManufacturers",
+		"default_instance_warmup":                  "DefaultInstanceWarmup",
+		"default_result":                           "DefaultResult",
+		"desired_capacity":                         "DesiredCapacity",
+		"desired_capacity_type":                    "DesiredCapacityType",
+		"excluded_instance_types":                  "ExcludedInstanceTypes",
+		"granularity":                              "Granularity",
+		"health_check_grace_period":                "HealthCheckGracePeriod",
+		"health_check_type":                        "HealthCheckType",
+		"heartbeat_timeout":                        "HeartbeatTimeout",
+		"identifier":                               "Identifier",
+		"impaired_zone_health_check_behavior":      "ImpairedZoneHealthCheckBehavior",
+		"instance_family":                          "InstanceFamily",
+		"instance_generations":                     "InstanceGenerations",
+		"instance_id":                              "InstanceId",
+		"instance_maintenance_policy":              "InstanceMaintenancePolicy",
+		"instance_requirements":                    "InstanceRequirements",
+		"instance_type":                            "InstanceType",
+		"instances_distribution":                   "InstancesDistribution",
+		"key":                                      "Key",
+		"launch_configuration_name":                "LaunchConfigurationName",
+		"launch_template":                          "LaunchTemplate",
+		"launch_template_id":                       "LaunchTemplateId",
+		"launch_template_name":                     "LaunchTemplateName",
+		"launch_template_specification":            "LaunchTemplateSpecification",
+		"lifecycle_hook_name":                      "LifecycleHookName",
+		"lifecycle_hook_specification_list":        "LifecycleHookSpecificationList",
+		"lifecycle_transition":                     "LifecycleTransition",
+		"load_balancer_names":                      "LoadBalancerNames",
+		"local_storage":                            "LocalStorage",
+		"local_storage_types":                      "LocalStorageTypes",
+		"max":                                      "Max",
+		"max_healthy_percentage":                   "MaxHealthyPercentage",
+		"max_instance_lifetime":                    "MaxInstanceLifetime",
+		"max_size":                                 "MaxSize",
 		"max_spot_price_as_percentage_of_optimal_on_demand_price": "MaxSpotPriceAsPercentageOfOptimalOnDemandPrice",
 		"memory_gi_b_per_v_cpu":                                   "MemoryGiBPerVCpu",
 		"memory_mi_b":                                             "MemoryMiB",
@@ -1526,9 +1747,11 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		"overrides":                                               "Overrides",
 		"placement_group":                                         "PlacementGroup",
 		"propagate_at_launch":                                     "PropagateAtLaunch",
+		"references":                                              "References",
 		"require_hibernate_support":                               "RequireHibernateSupport",
 		"role_arn":                                                "RoleARN",
 		"service_linked_role_arn":                                 "ServiceLinkedRoleARN",
+		"skip_zonal_shift_validation":                             "SkipZonalShiftValidation",
 		"spot_allocation_strategy":                                "SpotAllocationStrategy",
 		"spot_instance_pools":                                     "SpotInstancePools",
 		"spot_max_price":                                          "SpotMaxPrice",
@@ -1545,6 +1768,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		"version":                "Version",
 		"vpc_zone_identifier":    "VPCZoneIdentifier",
 		"weighted_capacity":      "WeightedCapacity",
+		"zonal_shift_enabled":    "ZonalShiftEnabled",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

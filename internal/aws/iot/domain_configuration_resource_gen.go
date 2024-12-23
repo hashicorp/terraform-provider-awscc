@@ -303,6 +303,17 @@ func domainConfigurationResource(ctx context.Context) (resource.Resource, error)
 		//	  "properties": {
 		//	    "EnableOCSPCheck": {
 		//	      "type": "boolean"
+		//	    },
+		//	    "OcspAuthorizedResponderArn": {
+		//	      "maxLength": 2048,
+		//	      "minLength": 1,
+		//	      "pattern": "^arn:aws(-cn|-us-gov|-iso-b|-iso)?:acm:[a-z]{2}-(gov-|iso-|isob-)?[a-z]{4,9}-\\d{1}:\\d{12}:certificate/[a-zA-Z0-9/-]+$",
+		//	      "type": "string"
+		//	    },
+		//	    "OcspLambdaArn": {
+		//	      "maxLength": 170,
+		//	      "minLength": 1,
+		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -315,6 +326,29 @@ func domainConfigurationResource(ctx context.Context) (resource.Resource, error)
 					Computed: true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: OcspAuthorizedResponderArn
+				"ocsp_authorized_responder_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 2048),
+						stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-cn|-us-gov|-iso-b|-iso)?:acm:[a-z]{2}-(gov-|iso-|isob-)?[a-z]{4,9}-\\d{1}:\\d{12}:certificate/[a-zA-Z0-9/-]+$"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: OcspLambdaArn
+				"ocsp_lambda_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 170),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -546,6 +580,8 @@ func domainConfigurationResource(ctx context.Context) (resource.Resource, error)
 		"domain_type":                      "DomainType",
 		"enable_ocsp_check":                "EnableOCSPCheck",
 		"key":                              "Key",
+		"ocsp_authorized_responder_arn":    "OcspAuthorizedResponderArn",
+		"ocsp_lambda_arn":                  "OcspLambdaArn",
 		"security_policy":                  "SecurityPolicy",
 		"server_certificate_arn":           "ServerCertificateArn",
 		"server_certificate_arns":          "ServerCertificateArns",

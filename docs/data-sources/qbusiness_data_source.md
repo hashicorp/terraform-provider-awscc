@@ -30,6 +30,7 @@ Data Source schema for AWS::QBusiness::DataSource
 - `display_name` (String)
 - `document_enrichment_configuration` (Attributes) (see [below for nested schema](#nestedatt--document_enrichment_configuration))
 - `index_id` (String)
+- `media_extraction_configuration` (Attributes) (see [below for nested schema](#nestedatt--media_extraction_configuration))
 - `role_arn` (String)
 - `status` (String)
 - `sync_schedule` (String)
@@ -161,6 +162,22 @@ Read-Only:
 - `string_value` (String)
 
 
+
+
+
+<a id="nestedatt--media_extraction_configuration"></a>
+### Nested Schema for `media_extraction_configuration`
+
+Read-Only:
+
+- `image_extraction_configuration` (Attributes) (see [below for nested schema](#nestedatt--media_extraction_configuration--image_extraction_configuration))
+
+<a id="nestedatt--media_extraction_configuration--image_extraction_configuration"></a>
+### Nested Schema for `media_extraction_configuration.image_extraction_configuration`
+
+Read-Only:
+
+- `image_extraction_status` (String)
 
 
 

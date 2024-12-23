@@ -239,18 +239,20 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The type of policy to create. You can specify one of the following values: AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, SERVICE_CONTROL_POLICY, TAG_POLICY, CHATBOT_POLICY",
+		//	  "description": "The type of policy to create. You can specify one of the following values: AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, SERVICE_CONTROL_POLICY, TAG_POLICY, CHATBOT_POLICY, RESOURCE_CONTROL_POLICY,DECLARATIVE_POLICY_EC2",
 		//	  "enum": [
 		//	    "SERVICE_CONTROL_POLICY",
 		//	    "AISERVICES_OPT_OUT_POLICY",
 		//	    "BACKUP_POLICY",
 		//	    "TAG_POLICY",
-		//	    "CHATBOT_POLICY"
+		//	    "CHATBOT_POLICY",
+		//	    "RESOURCE_CONTROL_POLICY",
+		//	    "DECLARATIVE_POLICY_EC2"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of policy to create. You can specify one of the following values: AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, SERVICE_CONTROL_POLICY, TAG_POLICY, CHATBOT_POLICY",
+			Description: "The type of policy to create. You can specify one of the following values: AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, SERVICE_CONTROL_POLICY, TAG_POLICY, CHATBOT_POLICY, RESOURCE_CONTROL_POLICY,DECLARATIVE_POLICY_EC2",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
@@ -259,6 +261,8 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 					"BACKUP_POLICY",
 					"TAG_POLICY",
 					"CHATBOT_POLICY",
+					"RESOURCE_CONTROL_POLICY",
+					"DECLARATIVE_POLICY_EC2",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

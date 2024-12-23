@@ -3,12 +3,16 @@
 page_title: "awscc_cloudfront_continuous_deployment_policy Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource Type definition for AWS::CloudFront::ContinuousDeploymentPolicy
+  Creates a continuous deployment policy that routes a subset of production traffic from a primary distribution to a staging distribution.
+  After you create and update a staging distribution, you can use a continuous deployment policy to incrementally move traffic to the staging distribution. This enables you to test changes to a distribution's configuration before moving all of your production traffic to the new configuration.
+  For more information, see Using CloudFront continuous deployment to safely test CDN configuration changes https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/continuous-deployment.html in the Amazon CloudFront Developer Guide.
 ---
 
 # awscc_cloudfront_continuous_deployment_policy (Resource)
 
-Resource Type definition for AWS::CloudFront::ContinuousDeploymentPolicy
+Creates a continuous deployment policy that routes a subset of production traffic from a primary distribution to a staging distribution.
+ After you create and update a staging distribution, you can use a continuous deployment policy to incrementally move traffic to the staging distribution. This enables you to test changes to a distribution's configuration before moving all of your production traffic to the new configuration.
+ For more information, see [Using CloudFront continuous deployment to safely test CDN configuration changes](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/continuous-deployment.html) in the *Amazon CloudFront Developer Guide*.
 
 
 
@@ -17,7 +21,7 @@ Resource Type definition for AWS::CloudFront::ContinuousDeploymentPolicy
 
 ### Required
 
-- `continuous_deployment_policy_config` (Attributes) (see [below for nested schema](#nestedatt--continuous_deployment_policy_config))
+- `continuous_deployment_policy_config` (Attributes) Contains the configuration for a continuous deployment policy. (see [below for nested schema](#nestedatt--continuous_deployment_policy_config))
 
 ### Read-Only
 
@@ -30,15 +34,15 @@ Resource Type definition for AWS::CloudFront::ContinuousDeploymentPolicy
 
 Required:
 
-- `enabled` (Boolean)
-- `staging_distribution_dns_names` (List of String)
+- `enabled` (Boolean) A Boolean that indicates whether this continuous deployment policy is enabled (in effect). When this value is ``true``, this policy is enabled and in effect. When this value is ``false``, this policy is not enabled and has no effect.
+- `staging_distribution_dns_names` (List of String) The CloudFront domain name of the staging distribution. For example: ``d111111abcdef8.cloudfront.net``.
 
 Optional:
 
-- `single_header_policy_config` (Attributes) (see [below for nested schema](#nestedatt--continuous_deployment_policy_config--single_header_policy_config))
-- `single_weight_policy_config` (Attributes) (see [below for nested schema](#nestedatt--continuous_deployment_policy_config--single_weight_policy_config))
-- `traffic_config` (Attributes) (see [below for nested schema](#nestedatt--continuous_deployment_policy_config--traffic_config))
-- `type` (String)
+- `single_header_policy_config` (Attributes) This configuration determines which HTTP requests are sent to the staging distribution. If the HTTP request contains a header and value that matches what you specify here, the request is sent to the staging distribution. Otherwise the request is sent to the primary distribution. (see [below for nested schema](#nestedatt--continuous_deployment_policy_config--single_header_policy_config))
+- `single_weight_policy_config` (Attributes) This configuration determines the percentage of HTTP requests that are sent to the staging distribution. (see [below for nested schema](#nestedatt--continuous_deployment_policy_config--single_weight_policy_config))
+- `traffic_config` (Attributes) Contains the parameters for routing production traffic from your primary to staging distributions. (see [below for nested schema](#nestedatt--continuous_deployment_policy_config--traffic_config))
+- `type` (String) The type of traffic configuration.
 
 <a id="nestedatt--continuous_deployment_policy_config--single_header_policy_config"></a>
 ### Nested Schema for `continuous_deployment_policy_config.single_header_policy_config`
@@ -54,7 +58,7 @@ Optional:
 
 Optional:
 
-- `session_stickiness_config` (Attributes) (see [below for nested schema](#nestedatt--continuous_deployment_policy_config--single_weight_policy_config--session_stickiness_config))
+- `session_stickiness_config` (Attributes) Session stickiness provides the ability to define multiple requests from a single viewer as a single session. This prevents the potentially inconsistent experience of sending some of a given user's requests to your staging distribution, while others are sent to your primary distribution. Define the session duration using TTL values. (see [below for nested schema](#nestedatt--continuous_deployment_policy_config--single_weight_policy_config--session_stickiness_config))
 - `weight` (Number)
 
 <a id="nestedatt--continuous_deployment_policy_config--single_weight_policy_config--session_stickiness_config"></a>
@@ -62,8 +66,8 @@ Optional:
 
 Optional:
 
-- `idle_ttl` (Number)
-- `maximum_ttl` (Number)
+- `idle_ttl` (Number) The amount of time after which you want sessions to cease if no requests are received. Allowed values are 300?3600 seconds (5?60 minutes).
+- `maximum_ttl` (Number) The maximum amount of time to consider requests from the viewer as being part of the same session. Allowed values are 300?3600 seconds (5?60 minutes).
 
 
 
@@ -72,17 +76,17 @@ Optional:
 
 Optional:
 
-- `single_header_config` (Attributes) (see [below for nested schema](#nestedatt--continuous_deployment_policy_config--traffic_config--single_header_config))
-- `single_weight_config` (Attributes) (see [below for nested schema](#nestedatt--continuous_deployment_policy_config--traffic_config--single_weight_config))
-- `type` (String)
+- `single_header_config` (Attributes) Determines which HTTP requests are sent to the staging distribution. (see [below for nested schema](#nestedatt--continuous_deployment_policy_config--traffic_config--single_header_config))
+- `single_weight_config` (Attributes) Contains the percentage of traffic to send to the staging distribution. (see [below for nested schema](#nestedatt--continuous_deployment_policy_config--traffic_config--single_weight_config))
+- `type` (String) The type of traffic configuration.
 
 <a id="nestedatt--continuous_deployment_policy_config--traffic_config--single_header_config"></a>
 ### Nested Schema for `continuous_deployment_policy_config.traffic_config.single_header_config`
 
 Optional:
 
-- `header` (String)
-- `value` (String)
+- `header` (String) The request header name that you want CloudFront to send to your staging distribution. The header must contain the prefix ``aws-cf-cd-``.
+- `value` (String) The request header value.
 
 
 <a id="nestedatt--continuous_deployment_policy_config--traffic_config--single_weight_config"></a>
@@ -90,16 +94,16 @@ Optional:
 
 Optional:
 
-- `session_stickiness_config` (Attributes) (see [below for nested schema](#nestedatt--continuous_deployment_policy_config--traffic_config--single_weight_config--session_stickiness_config))
-- `weight` (Number)
+- `session_stickiness_config` (Attributes) Session stickiness provides the ability to define multiple requests from a single viewer as a single session. This prevents the potentially inconsistent experience of sending some of a given user's requests to your staging distribution, while others are sent to your primary distribution. Define the session duration using TTL values. (see [below for nested schema](#nestedatt--continuous_deployment_policy_config--traffic_config--single_weight_config--session_stickiness_config))
+- `weight` (Number) The percentage of traffic to send to a staging distribution, expressed as a decimal number between 0 and 0.15. For example, a value of 0.10 means 10% of traffic is sent to the staging distribution.
 
 <a id="nestedatt--continuous_deployment_policy_config--traffic_config--single_weight_config--session_stickiness_config"></a>
 ### Nested Schema for `continuous_deployment_policy_config.traffic_config.single_weight_config.session_stickiness_config`
 
 Optional:
 
-- `idle_ttl` (Number)
-- `maximum_ttl` (Number)
+- `idle_ttl` (Number) The amount of time after which you want sessions to cease if no requests are received. Allowed values are 300?3600 seconds (5?60 minutes).
+- `maximum_ttl` (Number) The maximum amount of time to consider requests from the viewer as being part of the same session. Allowed values are 300?3600 seconds (5?60 minutes).
 
 ## Import
 

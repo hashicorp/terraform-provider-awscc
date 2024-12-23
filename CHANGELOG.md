@@ -1,4 +1,154 @@
-## 1.20.0 (Unreleased)
+## 1.25.0 (Unreleased)
+## 1.24.0 (December 19, 2024)
+
+FEATURES:
+
+* **New Data Source:** `awscc_batch_job_definition`
+* **New Data Source:** `awscc_batch_job_definitions`
+* **New Data Source:** `awscc_cassandra_type`
+* **New Data Source:** `awscc_cassandra_types`
+* **New Data Source:** `awscc_iot_command`
+* **New Data Source:** `awscc_iot_commands`
+* **New Data Source:** `awscc_networkmanager_direct_connect_gateway_attachment`
+* **New Data Source:** `awscc_networkmanager_direct_connect_gateway_attachments`
+* **New Data Source:** `awscc_pcs_cluster`
+* **New Data Source:** `awscc_pcs_clusters`
+* **New Data Source:** `awscc_pcs_compute_node_group`
+* **New Data Source:** `awscc_pcs_queue`
+* **New Data Source:** `awscc_qbusiness_permission`
+* **New Data Source:** `awscc_ram_resource_share`
+* **New Data Source:** `awscc_ram_resource_shares`
+* **New Data Source:** `awscc_s3tables_table_bucket`
+* **New Data Source:** `awscc_s3tables_table_bucket_policies`
+* **New Data Source:** `awscc_s3tables_table_bucket_policy`
+* **New Data Source:** `awscc_s3tables_table_buckets`
+* **New Data Source:** `awscc_vpclattice_resource_configuration`
+* **New Data Source:** `awscc_vpclattice_resource_configurations`
+* **New Data Source:** `awscc_vpclattice_resource_gateway`
+* **New Data Source:** `awscc_vpclattice_resource_gateways`
+* **New Data Source:** `awscc_vpclattice_service_network_resource_association`
+* **New Data Source:** `awscc_vpclattice_service_network_resource_associations`
+* **New Data Source:** `awscc_wisdom_ai_guardrail`
+* **New Data Source:** `awscc_wisdom_ai_guardrail_version`
+* **New Resource:** `awscc_batch_job_definition`
+* **New Resource:** `awscc_cassandra_type`
+* **New Resource:** `awscc_iot_command`
+* **New Resource:** `awscc_networkmanager_direct_connect_gateway_attachment`
+* **New Resource:** `awscc_pcs_cluster`
+* **New Resource:** `awscc_pcs_compute_node_group`
+* **New Resource:** `awscc_pcs_queue`
+* **New Resource:** `awscc_qbusiness_permission`
+* **New Resource:** `awscc_ram_resource_share`
+* **New Resource:** `awscc_s3tables_table_bucket`
+* **New Resource:** `awscc_s3tables_table_bucket_policy`
+* **New Resource:** `awscc_vpclattice_resource_configuration`
+* **New Resource:** `awscc_vpclattice_resource_gateway`
+* **New Resource:** `awscc_vpclattice_service_network_resource_association`
+* **New Resource:** `awscc_wisdom_ai_guardrail`
+* **New Resource:** `awscc_wisdom_ai_guardrail_version`
+
+## 1.23.0 (December  5, 2024)
+
+FEATURES:
+
+* **New Data Source:** `awscc_invoicing_invoice_unit`
+* **New Data Source:** `awscc_invoicing_invoice_units`
+* **New Data Source:** `awscc_logs_integration`
+* **New Data Source:** `awscc_logs_integrations`
+* **New Data Source:** `awscc_memorydb_multi_region_cluster`
+* **New Data Source:** `awscc_memorydb_multi_region_clusters`
+* **New Resource:** `awscc_invoicing_invoice_unit`
+* **New Resource:** `awscc_logs_integration`
+* **New Resource:** `awscc_memorydb_multi_region_cluster`
+
+## 1.22.0 (November 27, 2024)
+
+FEATURES:
+
+* **New Data Source:** `awscc_cognito_managed_login_branding`
+* **New Data Source:** `awscc_ec2_vpc_block_public_access_exclusion`
+* **New Data Source:** `awscc_ec2_vpc_block_public_access_exclusions`
+* **New Data Source:** `awscc_ec2_vpc_block_public_access_options`
+* **New Resource:** `awscc_cognito_managed_login_branding`
+* **New Resource:** `awscc_ec2_vpc_block_public_access_exclusion`
+* **New Resource:** `awscc_ec2_vpc_block_public_access_options`
+
+## 1.21.0 (November 22, 2024)
+
+FEATURES:
+
+* **New Data Source:** `awscc_apigateway_base_path_mapping_v2`
+* **New Data Source:** `awscc_apigateway_domain_name_access_association`
+* **New Data Source:** `awscc_apigateway_domain_name_access_associations`
+* **New Data Source:** `awscc_apigateway_domain_name_v2`
+* **New Data Source:** `awscc_apigateway_domain_name_v2s`
+* **New Data Source:** `awscc_chatbot_custom_action`
+* **New Data Source:** `awscc_chatbot_custom_actions`
+* **New Data Source:** `awscc_cloudformation_guard_hook`
+* **New Data Source:** `awscc_cloudformation_guard_hooks`
+* **New Data Source:** `awscc_cloudformation_lambda_hook`
+* **New Data Source:** `awscc_cloudformation_lambda_hooks`
+* **New Data Source:** `awscc_cloudtrail_dashboard`
+* **New Data Source:** `awscc_cloudtrail_dashboards`
+* **New Data Source:** `awscc_connect_email_address`
+* **New Data Source:** `awscc_connectcampaignsv2_campaign`
+* **New Data Source:** `awscc_customerprofiles_segment_definition`
+* **New Data Source:** `awscc_gamelift_container_fleet`
+* **New Data Source:** `awscc_gamelift_container_fleets`
+* **New Data Source:** `awscc_iotfleetwise_state_template`
+* **New Data Source:** `awscc_iotfleetwise_state_templates`
+* **New Data Source:** `awscc_ivs_ingest_configuration`
+* **New Data Source:** `awscc_ivs_ingest_configurations`
+* **New Data Source:** `awscc_m2_deployment`
+* **New Data Source:** `awscc_rbin_rule`
+* **New Data Source:** `awscc_resourcegroups_tag_sync_task`
+* **New Data Source:** `awscc_resourcegroups_tag_sync_tasks`
+* **New Data Source:** `awscc_wisdom_message_template`
+* **New Data Source:** `awscc_wisdom_message_template_version`
+* **New Data Source:** `awscc_workspacesweb_data_protection_settings`
+* **New Data Source:** `awscc_workspacesweb_data_protection_settings_plural`
+* **New Resource:** `awscc_apigateway_base_path_mapping_v2`
+* **New Resource:** `awscc_apigateway_domain_name_access_association`
+* **New Resource:** `awscc_apigateway_domain_name_v2`
+* **New Resource:** `awscc_chatbot_custom_action`
+* **New Resource:** `awscc_cloudformation_guard_hook`
+* **New Resource:** `awscc_cloudformation_lambda_hook`
+* **New Resource:** `awscc_cloudtrail_dashboard`
+* **New Resource:** `awscc_connect_email_address`
+* **New Resource:** `awscc_connectcampaignsv2_campaign`
+* **New Resource:** `awscc_customerprofiles_segment_definition`
+* **New Resource:** `awscc_gamelift_container_fleet`
+* **New Resource:** `awscc_iotfleetwise_state_template`
+* **New Resource:** `awscc_ivs_ingest_configuration`
+* **New Resource:** `awscc_m2_deployment`
+* **New Resource:** `awscc_rbin_rule`
+* **New Resource:** `awscc_resourcegroups_tag_sync_task`
+* **New Resource:** `awscc_wisdom_message_template`
+* **New Resource:** `awscc_wisdom_message_template_version`
+* **New Resource:** `awscc_workspacesweb_data_protection_settings`
+
+## 1.20.0 (November  8, 2024)
+
+FEATURES:
+
+* **New Data Source:** `awscc_appsync_channel_namespace`
+* **New Data Source:** `awscc_bedrock_application_inference_profile`
+* **New Data Source:** `awscc_bedrock_application_inference_profiles`
+* **New Data Source:** `awscc_ec2_security_group_vpc_association`
+* **New Data Source:** `awscc_ec2_security_group_vpc_associations`
+* **New Data Source:** `awscc_rds_db_shard_group`
+* **New Data Source:** `awscc_rds_db_shard_groups`
+* **New Data Source:** `awscc_wisdom_ai_agent`
+* **New Data Source:** `awscc_wisdom_ai_agent_version`
+* **New Data Source:** `awscc_wisdom_ai_prompt_version`
+* **New Resource:** `awscc_appsync_channel_namespace`
+* **New Resource:** `awscc_bedrock_application_inference_profile`
+* **New Resource:** `awscc_ec2_security_group_vpc_association`
+* **New Resource:** `awscc_rds_db_shard_group`
+* **New Resource:** `awscc_wisdom_ai_agent`
+* **New Resource:** `awscc_wisdom_ai_agent_version`
+* **New Resource:** `awscc_wisdom_ai_prompt_version`
+
 ## 1.19.0 (October 31, 2024)
 
 FEATURES:

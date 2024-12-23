@@ -23,6 +23,7 @@ An example resource schema demonstrating some basic constructs and validation ru
 
 ### Optional
 
+- `deletion_protection_check` (String) On resource deletion this controls whether the Deletion Protection check should be applied, bypassed, or (the default) whether the behavior should be controlled by the account-level Deletion Protection setting. See https://docs.aws.amazon.com/appconfig/latest/userguide/deletion-protection.html
 - `description` (String) A description of the configuration profile.
 - `kms_key_identifier` (String) The AWS Key Management Service key identifier (key ID, key alias, or key ARN) provided when the resource was created or updated.
 - `retrieval_role_arn` (String) The ARN of an IAM role with permission to access the configuration at the specified LocationUri.

@@ -125,6 +125,34 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 		//	        "LaunchTemplateName": {
 		//	          "type": "string"
 		//	        },
+		//	        "Overrides": {
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "LaunchTemplateId": {
+		//	                "type": "string"
+		//	              },
+		//	              "LaunchTemplateName": {
+		//	                "type": "string"
+		//	              },
+		//	              "TargetInstanceTypes": {
+		//	                "insertionOrder": false,
+		//	                "items": {
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array",
+		//	                "uniqueItems": false
+		//	              },
+		//	              "Version": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        },
 		//	        "Version": {
 		//	          "type": "string"
 		//	        }
@@ -301,6 +329,53 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 							Computed: true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Overrides
+						"overrides": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: LaunchTemplateId
+									"launch_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: LaunchTemplateName
+									"launch_template_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: TargetInstanceTypes
+									"target_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											generic.Multiset(),
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Version
+									"version": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
+								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Version
@@ -660,6 +735,7 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 		"launch_template_name":           "LaunchTemplateName",
 		"maxv_cpus":                      "MaxvCpus",
 		"minv_cpus":                      "MinvCpus",
+		"overrides":                      "Overrides",
 		"placement_group":                "PlacementGroup",
 		"replace_compute_environment":    "ReplaceComputeEnvironment",
 		"security_group_ids":             "SecurityGroupIds",
@@ -668,6 +744,7 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 		"state":                          "State",
 		"subnets":                        "Subnets",
 		"tags":                           "Tags",
+		"target_instance_types":          "TargetInstanceTypes",
 		"terminate_jobs_on_update":       "TerminateJobsOnUpdate",
 		"type":                           "Type",
 		"unmanagedv_cpus":                "UnmanagedvCpus",

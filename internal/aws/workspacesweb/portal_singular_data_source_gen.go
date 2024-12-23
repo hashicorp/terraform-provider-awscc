@@ -104,6 +104,18 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"customer_managed_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: DataProtectionSettingsArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 2048,
+		//	  "minLength": 20,
+		//	  "pattern": "^arn:[\\w+=\\/,.@-]+:[a-zA-Z0-9\\-]+:[a-zA-Z0-9\\-]*:[a-zA-Z0-9]{1,12}:[a-zA-Z]+(\\/[a-fA-F0-9\\-]{36})+$",
+		//	  "type": "string"
+		//	}
+		"data_protection_settings_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: DisplayName
 		// CloudFormation resource type schema:
 		//
@@ -344,6 +356,7 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"browser_type":                     "BrowserType",
 		"creation_date":                    "CreationDate",
 		"customer_managed_key":             "CustomerManagedKey",
+		"data_protection_settings_arn":     "DataProtectionSettingsArn",
 		"display_name":                     "DisplayName",
 		"instance_type":                    "InstanceType",
 		"ip_access_settings_arn":           "IpAccessSettingsArn",

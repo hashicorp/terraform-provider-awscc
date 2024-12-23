@@ -37,6 +37,7 @@ Data Source schema for AWS::Transfer::Server
 - `s3_storage_options` (Attributes) (see [below for nested schema](#nestedatt--s3_storage_options))
 - `security_policy_name` (String)
 - `server_id` (String)
+- `state` (String)
 - `structured_log_destinations` (List of String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `workflow_details` (Attributes) (see [below for nested schema](#nestedatt--workflow_details))

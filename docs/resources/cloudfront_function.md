@@ -2,12 +2,20 @@
 page_title: "awscc_cloudfront_function Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource Type definition for AWS::CloudFront::Function
+  Creates a CF function.
+  To create a function, you provide the function code and some configuration information about the function. The response contains an Amazon Resource Name (ARN) that uniquely identifies the function, and the function?s stage.
+  By default, when you create a function, it?s in the DEVELOPMENT stage. In this stage, you can test the function https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/test-function.html in the CF console (or with TestFunction in the CF API).
+  When you?re ready to use your function with a CF distribution, publish the function to the LIVE stage. You can do this in the CF console, with PublishFunction in the CF API, or by updating the AWS::CloudFront::Function resource with the AutoPublish property set to true. When the function is published to the LIVE stage, you can attach it to a distribution?s cache behavior, using the function?s ARN.
+  To automatically publish the function to the LIVE stage when it?s created, set the AutoPublish property to true.
 ---
 
 # awscc_cloudfront_function (Resource)
 
-Resource Type definition for AWS::CloudFront::Function
+Creates a CF function.
+ To create a function, you provide the function code and some configuration information about the function. The response contains an Amazon Resource Name (ARN) that uniquely identifies the function, and the function?s stage.
+ By default, when you create a function, it?s in the ``DEVELOPMENT`` stage. In this stage, you can [test the function](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/test-function.html) in the CF console (or with ``TestFunction`` in the CF API).
+ When you?re ready to use your function with a CF distribution, publish the function to the ``LIVE`` stage. You can do this in the CF console, with ``PublishFunction`` in the CF API, or by updating the ``AWS::CloudFront::Function`` resource with the ``AutoPublish`` property set to ``true``. When the function is published to the ``LIVE`` stage, you can attach it to a distribution?s cache behavior, using the function?s ARN.
+ To automatically publish the function to the ``LIVE`` stage when it?s created, set the ``AutoPublish`` property to ``true``.
 
 ## Example Usage
 
@@ -52,14 +60,14 @@ variable "key_store_arn" {
 
 ### Required
 
-- `function_code` (String)
-- `function_config` (Attributes) (see [below for nested schema](#nestedatt--function_config))
-- `name` (String)
+- `function_code` (String) The function code. For more information about writing a CloudFront function, see [Writing function code for CloudFront Functions](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/writing-function-code.html) in the *Amazon CloudFront Developer Guide*.
+- `function_config` (Attributes) Contains configuration information about a CloudFront function. (see [below for nested schema](#nestedatt--function_config))
+- `name` (String) A name to identify the function.
 
 ### Optional
 
-- `auto_publish` (Boolean)
-- `function_metadata` (Attributes) (see [below for nested schema](#nestedatt--function_metadata))
+- `auto_publish` (Boolean) A flag that determines whether to automatically publish the function to the ``LIVE`` stage when it?s created. To automatically publish to the ``LIVE`` stage, set this property to ``true``.
+- `function_metadata` (Attributes) Contains metadata about a CloudFront function. (see [below for nested schema](#nestedatt--function_metadata))
 
 ### Read-Only
 
@@ -72,19 +80,19 @@ variable "key_store_arn" {
 
 Required:
 
-- `comment` (String)
-- `runtime` (String)
+- `comment` (String) A comment to describe the function.
+- `runtime` (String) The function's runtime environment version.
 
 Optional:
 
-- `key_value_store_associations` (Attributes List) (see [below for nested schema](#nestedatt--function_config--key_value_store_associations))
+- `key_value_store_associations` (Attributes List) The configuration for the key value store associations. (see [below for nested schema](#nestedatt--function_config--key_value_store_associations))
 
 <a id="nestedatt--function_config--key_value_store_associations"></a>
 ### Nested Schema for `function_config.key_value_store_associations`
 
 Optional:
 
-- `key_value_store_arn` (String)
+- `key_value_store_arn` (String) The Amazon Resource Name (ARN) of the key value store association.
 
 
 
@@ -93,7 +101,7 @@ Optional:
 
 Read-Only:
 
-- `function_arn` (String)
+- `function_arn` (String) The Amazon Resource Name (ARN) of the function. The ARN uniquely identifies the function.
 
 ## Import
 

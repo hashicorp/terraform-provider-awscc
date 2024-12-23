@@ -49,6 +49,23 @@ func slackChannelConfigurationDataSource(ctx context.Context) (datasource.DataSo
 			Description: "The name of the configuration",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: CustomizationResourceArns
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "ARNs of Custom Actions to associate with notifications in the provided chat channel.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "pattern": "^arn:aws:chatbot:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:custom-action/[a-zA-Z0-9_-]{1,64}$",
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"customization_resource_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "ARNs of Custom Actions to associate with notifications in the provided chat channel.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GuardrailPolicies
 		// CloudFormation resource type schema:
 		//
@@ -206,18 +223,19 @@ func slackChannelConfigurationDataSource(ctx context.Context) (datasource.DataSo
 	opts = opts.WithCloudFormationTypeName("AWS::Chatbot::SlackChannelConfiguration").WithTerraformTypeName("awscc_chatbot_slack_channel_configuration")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                "Arn",
-		"configuration_name": "ConfigurationName",
-		"guardrail_policies": "GuardrailPolicies",
-		"iam_role_arn":       "IamRoleArn",
-		"key":                "Key",
-		"logging_level":      "LoggingLevel",
-		"slack_channel_id":   "SlackChannelId",
-		"slack_workspace_id": "SlackWorkspaceId",
-		"sns_topic_arns":     "SnsTopicArns",
-		"tags":               "Tags",
-		"user_role_required": "UserRoleRequired",
-		"value":              "Value",
+		"arn":                         "Arn",
+		"configuration_name":          "ConfigurationName",
+		"customization_resource_arns": "CustomizationResourceArns",
+		"guardrail_policies":          "GuardrailPolicies",
+		"iam_role_arn":                "IamRoleArn",
+		"key":                         "Key",
+		"logging_level":               "LoggingLevel",
+		"slack_channel_id":            "SlackChannelId",
+		"slack_workspace_id":          "SlackWorkspaceId",
+		"sns_topic_arns":              "SnsTopicArns",
+		"tags":                        "Tags",
+		"user_role_required":          "UserRoleRequired",
+		"value":                       "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

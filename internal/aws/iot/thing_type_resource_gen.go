@@ -175,6 +175,42 @@ func thingTypeResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "Mqtt5Configuration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "PropagatingAttributes": {
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "ConnectionAttribute": {
+		//	                "enum": [
+		//	                  "iot:ClientId",
+		//	                  "iot:Thing.ThingName"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "ThingAttribute": {
+		//	                "maxLength": 128,
+		//	                "pattern": "[a-zA-Z0-9_.,@/:#-]+",
+		//	                "type": "string"
+		//	              },
+		//	              "UserPropertyKey": {
+		//	                "maxLength": 128,
+		//	                "pattern": "[a-zA-Z0-9:$.]+",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "UserPropertyKey"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "SearchableAttributes": {
 		//	      "insertionOrder": true,
 		//	      "items": {
@@ -196,6 +232,70 @@ func thingTypeResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"thing_type_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Mqtt5Configuration
+				"mqtt_5_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PropagatingAttributes
+						"propagating_attributes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ConnectionAttribute
+									"connection_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"iot:ClientId",
+												"iot:Thing.ThingName",
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: ThingAttribute
+									"thing_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthAtMost(128),
+											stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_.,@/:#-]+"), ""),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: UserPropertyKey
+									"user_property_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthAtMost(128),
+											stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9:$.]+"), ""),
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.UniqueValues(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: SearchableAttributes
 				"searchable_attributes": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
@@ -229,7 +329,6 @@ func thingTypeResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
@@ -255,14 +354,19 @@ func thingTypeResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                    "Arn",
+		"connection_attribute":   "ConnectionAttribute",
 		"deprecate_thing_type":   "DeprecateThingType",
 		"key":                    "Key",
+		"mqtt_5_configuration":   "Mqtt5Configuration",
+		"propagating_attributes": "PropagatingAttributes",
 		"searchable_attributes":  "SearchableAttributes",
 		"tags":                   "Tags",
+		"thing_attribute":        "ThingAttribute",
 		"thing_type_description": "ThingTypeDescription",
 		"thing_type_id":          "Id",
 		"thing_type_name":        "ThingTypeName",
 		"thing_type_properties":  "ThingTypeProperties",
+		"user_property_key":      "UserPropertyKey",
 		"value":                  "Value",
 	})
 

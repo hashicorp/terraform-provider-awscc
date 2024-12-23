@@ -488,6 +488,7 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 		//	              "description": "The Diffie-Hellmann group number.",
 		//	              "enum": [
 		//	                2,
+		//	                5,
 		//	                14,
 		//	                15,
 		//	                16,
@@ -852,6 +853,7 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 									Validators: []validator.Int64{ /*START VALIDATORS*/
 										int64validator.OneOf(
 											2,
+											5,
 											14,
 											15,
 											16,

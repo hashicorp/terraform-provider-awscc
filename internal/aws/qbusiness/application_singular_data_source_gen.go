@@ -119,7 +119,6 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "maxLength": 255,
 		//	    "minLength": 1,
@@ -233,7 +232,8 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "enum": [
 		//	    "AWS_IAM_IDP_SAML",
 		//	    "AWS_IAM_IDP_OIDC",
-		//	    "AWS_IAM_IDC"
+		//	    "AWS_IAM_IDC",
+		//	    "AWS_QUICKSIGHT_IDP"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -296,6 +296,33 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: QuickSightConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "ClientNamespace": {
+		//	      "maxLength": 64,
+		//	      "minLength": 1,
+		//	      "pattern": "^[a-zA-Z0-9._-]*$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "ClientNamespace"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"quick_sight_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ClientNamespace
+				"client_namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -328,7 +355,6 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
@@ -403,6 +429,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"auto_subscribe":                  "AutoSubscribe",
 		"auto_subscription_configuration": "AutoSubscriptionConfiguration",
 		"client_ids_for_oidc":             "ClientIdsForOIDC",
+		"client_namespace":                "ClientNamespace",
 		"created_at":                      "CreatedAt",
 		"default_subscription_type":       "DefaultSubscriptionType",
 		"description":                     "Description",
@@ -418,6 +445,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"personalization_control_mode":    "PersonalizationControlMode",
 		"q_apps_configuration":            "QAppsConfiguration",
 		"q_apps_control_mode":             "QAppsControlMode",
+		"quick_sight_configuration":       "QuickSightConfiguration",
 		"role_arn":                        "RoleArn",
 		"status":                          "Status",
 		"tags":                            "Tags",

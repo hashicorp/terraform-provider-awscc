@@ -26,21 +26,26 @@ func monitoringSubscriptionDataSource(ctx context.Context) (datasource.DataSourc
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The ID of the distribution that you are enabling metrics for.",
 		//	  "type": "string"
 		//	}
 		"distribution_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The ID of the distribution that you are enabling metrics for.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MonitoringSubscription
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "A subscription configuration for additional CloudWatch metrics.",
 		//	  "properties": {
 		//	    "RealtimeMetricsSubscriptionConfig": {
 		//	      "additionalProperties": false,
+		//	      "description": "A subscription configuration for additional CloudWatch metrics.",
 		//	      "properties": {
 		//	        "RealtimeMetricsSubscriptionStatus": {
+		//	          "description": "A flag that indicates whether additional CloudWatch metrics are enabled for a given CloudFront distribution.",
 		//	          "enum": [
 		//	            "Enabled",
 		//	            "Disabled"
@@ -63,13 +68,16 @@ func monitoringSubscriptionDataSource(ctx context.Context) (datasource.DataSourc
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: RealtimeMetricsSubscriptionStatus
 						"realtime_metrics_subscription_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "A flag that indicates whether additional CloudWatch metrics are enabled for a given CloudFront distribution.",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Computed: true,
+					Description: "A subscription configuration for additional CloudWatch metrics.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Computed: true,
+			Description: "A subscription configuration for additional CloudWatch metrics.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 

@@ -343,6 +343,7 @@ resource "awscc_rds_db_instance" "this" {
  If there's no DB subnet group, then the DB instance isn't a VPC DB instance.
  For more information about using Amazon RDS in a VPC, see [Amazon VPC and Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.html) in the *Amazon RDS User Guide*. 
  This setting doesn't apply to Amazon Aurora DB instances. The DB subnet group is managed by the DB cluster. If specified, the setting must match the DB cluster setting.
+- `db_system_id` (String) The Oracle system identifier (SID), which is the name of the Oracle database instance that manages your database files. In this context, the term "Oracle database instance" refers exclusively to the system global area (SGA) and Oracle background processes. If you don't specify a SID, the value defaults to ``RDSCDB``. The Oracle SID is also the name of your CDB.
 - `dedicated_log_volume` (Boolean) Indicates whether the DB instance has a dedicated log volume (DLV) enabled.
 - `delete_automated_backups` (Boolean) A value that indicates whether to remove automated backups immediately after the DB instance is deleted. This parameter isn't case-sensitive. The default is to remove automated backups immediately after the DB instance is deleted.
   *Amazon Aurora* 
@@ -674,7 +675,6 @@ resource "awscc_rds_db_instance" "this" {
 ### Read-Only
 
 - `db_instance_arn` (String)
-- `db_system_id` (String) The Oracle system identifier (SID), which is the name of the Oracle database instance that manages your database files. In this context, the term "Oracle database instance" refers exclusively to the system global area (SGA) and Oracle background processes. If you don't specify a SID, the value defaults to ``RDSCDB``. The Oracle SID is also the name of your CDB.
 - `dbi_resource_id` (String)
 - `id` (String) Uniquely identifies the resource.
 

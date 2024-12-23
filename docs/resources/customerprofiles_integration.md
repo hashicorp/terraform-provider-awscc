@@ -21,6 +21,7 @@ The resource schema for creating an Amazon Connect Customer Profiles Integration
 
 ### Optional
 
+- `event_trigger_names` (List of String) A list of unique names for active event triggers associated with the integration.
 - `flow_definition` (Attributes) (see [below for nested schema](#nestedatt--flow_definition))
 - `object_type_name` (String) The name of the ObjectType defined for the 3rd party data in Profile Service
 - `object_type_names` (Attributes List) The mapping between 3rd party event types and ObjectType names (see [below for nested schema](#nestedatt--object_type_names))

@@ -28,6 +28,7 @@ Resource Type definition for AWS::Connect::TaskTemplate.
 - `description` (String) The description of the task template.
 - `fields` (Attributes List) The list of task template's fields (see [below for nested schema](#nestedatt--fields))
 - `name` (String) The name of the task template.
+- `self_assign_contact_flow_arn` (String) The identifier of the contact flow.
 - `status` (String) The status of the task template
 - `tags` (Attributes Set) One or more tags. (see [below for nested schema](#nestedatt--tags))
 

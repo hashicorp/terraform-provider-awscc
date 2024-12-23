@@ -27,6 +27,7 @@ Data Source schema for AWS::Connect::Queue
 - `max_contacts` (Number) The maximum number of contacts that can be in the queue before it is considered full.
 - `name` (String) The name of the queue.
 - `outbound_caller_config` (Attributes) The outbound caller ID name, number, and outbound whisper flow. (see [below for nested schema](#nestedatt--outbound_caller_config))
+- `outbound_email_config` (Attributes) The outbound email address ID. (see [below for nested schema](#nestedatt--outbound_email_config))
 - `queue_arn` (String) The Amazon Resource Name (ARN) for the queue.
 - `quick_connect_arns` (List of String) The quick connects available to agents who are working the queue.
 - `status` (String) The status of the queue.
@@ -41,6 +42,14 @@ Read-Only:
 - `outbound_caller_id_name` (String) The caller ID name.
 - `outbound_caller_id_number_arn` (String) The caller ID number.
 - `outbound_flow_arn` (String) The outbound whisper flow to be used during an outbound call.
+
+
+<a id="nestedatt--outbound_email_config"></a>
+### Nested Schema for `outbound_email_config`
+
+Read-Only:
+
+- `outbound_email_address_id` (String) The email address connect resource ID.
 
 
 <a id="nestedatt--tags"></a>

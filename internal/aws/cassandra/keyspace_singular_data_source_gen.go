@@ -23,6 +23,17 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::Cassandra::Keyspace resource.
 func keyspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ClientSideTimestampsEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates whether client-side timestamps are enabled (true) or disabled (false) for all tables in the keyspace. To add a Region to a single-Region keyspace with at least one table, the value must be set to true. After you enabled client-side timestamps for a table, you can?t disable it again.",
+		//	  "type": "boolean"
+		//	}
+		"client_side_timestamps_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether client-side timestamps are enabled (true) or disabled (false) for all tables in the keyspace. To add a Region to a single-Region keyspace with at least one table, the value must be set to true. After you enabled client-side timestamps for a table, you can?t disable it again.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KeyspaceName
 		// CloudFormation resource type schema:
 		//
@@ -162,13 +173,14 @@ func keyspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Cassandra::Keyspace").WithTerraformTypeName("awscc_cassandra_keyspace")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"key":                       "Key",
-		"keyspace_name":             "KeyspaceName",
-		"region_list":               "RegionList",
-		"replication_specification": "ReplicationSpecification",
-		"replication_strategy":      "ReplicationStrategy",
-		"tags":                      "Tags",
-		"value":                     "Value",
+		"client_side_timestamps_enabled": "ClientSideTimestampsEnabled",
+		"key":                            "Key",
+		"keyspace_name":                  "KeyspaceName",
+		"region_list":                    "RegionList",
+		"replication_specification":      "ReplicationSpecification",
+		"replication_strategy":           "ReplicationStrategy",
+		"tags":                           "Tags",
+		"value":                          "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

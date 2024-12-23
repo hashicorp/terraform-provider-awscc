@@ -30,6 +30,12 @@ func configurationSetDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "additionalProperties": false,
 		//	  "description": "An object that defines the dedicated IP pool that is used to send emails that you send using the configuration set.",
 		//	  "properties": {
+		//	    "MaxDeliverySeconds": {
+		//	      "description": "Specifies the maximum time until which SES will retry sending emails",
+		//	      "maximum": 50400,
+		//	      "minimum": 300,
+		//	      "type": "number"
+		//	    },
 		//	    "SendingPoolName": {
 		//	      "description": "The name of the dedicated IP pool to associate with the configuration set.",
 		//	      "type": "string"
@@ -44,6 +50,11 @@ func configurationSetDataSource(ctx context.Context) (datasource.DataSource, err
 		//	}
 		"delivery_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaxDeliverySeconds
+				"max_delivery_seconds": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the maximum time until which SES will retry sending emails",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: SendingPoolName
 				"sending_pool_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The name of the dedicated IP pool to associate with the configuration set.",
@@ -270,6 +281,7 @@ func configurationSetDataSource(ctx context.Context) (datasource.DataSource, err
 		"delivery_options":           "DeliveryOptions",
 		"engagement_metrics":         "EngagementMetrics",
 		"guardian_options":           "GuardianOptions",
+		"max_delivery_seconds":       "MaxDeliverySeconds",
 		"name":                       "Name",
 		"optimized_shared_delivery":  "OptimizedSharedDelivery",
 		"reputation_metrics_enabled": "ReputationMetricsEnabled",

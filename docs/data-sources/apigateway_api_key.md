@@ -22,23 +22,23 @@ Data Source schema for AWS::ApiGateway::ApiKey
 ### Read-Only
 
 - `api_key_id` (String)
-- `customer_id` (String) An MKT customer identifier, when integrating with the AWS SaaS Marketplace.
-- `description` (String) The description of the ApiKey.
-- `enabled` (Boolean) Specifies whether the ApiKey can be used by callers.
-- `generate_distinct_id` (Boolean) Specifies whether (``true``) or not (``false``) the key identifier is distinct from the created API key value. This parameter is deprecated and should not be used.
+- `customer_id` (String)
+- `description` (String)
+- `enabled` (Boolean)
+- `generate_distinct_id` (Boolean)
 - `name` (String) A name for the API key. If you don't specify a name, CFN generates a unique physical ID and uses that ID for the API key name. For more information, see [Name Type](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html).
  If you specify a name, you cannot perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you must replace the resource, specify a new name.
-- `stage_keys` (Attributes List) DEPRECATED FOR USAGE PLANS - Specifies stages associated with the API key. (see [below for nested schema](#nestedatt--stage_keys))
-- `tags` (Attributes List) The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with ``aws:``. The tag value can be up to 256 characters. (see [below for nested schema](#nestedatt--tags))
-- `value` (String) Specifies a value of the API key.
+- `stage_keys` (Attributes List) (see [below for nested schema](#nestedatt--stage_keys))
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `value` (String)
 
 <a id="nestedatt--stage_keys"></a>
 ### Nested Schema for `stage_keys`
 
 Read-Only:
 
-- `rest_api_id` (String) The string identifier of the associated RestApi.
-- `stage_name` (String) The stage name associated with the stage key.
+- `rest_api_id` (String)
+- `stage_name` (String)
 
 
 <a id="nestedatt--tags"></a>

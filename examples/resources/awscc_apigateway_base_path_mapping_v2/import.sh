@@ -1,0 +1,1 @@
+$ terraform import awscc_apigateway_base_path_mapping_v2.example "base_path_mapping_arn"

@@ -26,11 +26,11 @@ func accountDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ARN of an Amazon CloudWatch role for the current Account.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"cloudwatch_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of an Amazon CloudWatch role for the current Account.",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Id

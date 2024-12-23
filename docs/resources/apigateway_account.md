@@ -17,7 +17,7 @@ The ``AWS::ApiGateway::Account`` resource specifies the IAM role that Amazon API
 
 ### Optional
 
-- `cloudwatch_role_arn` (String) The ARN of an Amazon CloudWatch role for the current Account.
+- `cloudwatch_role_arn` (String)
 
 ### Read-Only
 

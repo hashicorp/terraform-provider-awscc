@@ -21,6 +21,7 @@ Data Source schema for AWS::Logs::SubscriptionFilter
 
 ### Read-Only
 
+- `apply_on_transformed_logs` (Boolean)
 - `destination_arn` (String) The Amazon Resource Name (ARN) of the destination.
 - `distribution` (String) The method used to distribute log data to the destination, which can be either random or grouped by log stream.
 - `filter_name` (String) The name of the subscription filter.

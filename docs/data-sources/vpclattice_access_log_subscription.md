@@ -27,6 +27,7 @@ Data Source schema for AWS::VpcLattice::AccessLogSubscription
 - `resource_arn` (String)
 - `resource_id` (String)
 - `resource_identifier` (String)
+- `service_network_log_type` (String)
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>

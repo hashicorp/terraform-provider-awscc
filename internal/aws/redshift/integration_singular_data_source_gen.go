@@ -28,7 +28,7 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "An optional set of non-secret key?value pairs that contains additional contextual information about the data.",
+		//	  "description": "An optional set of non-secret key–value pairs that contains additional contextual information about the data.",
 		//	  "patternProperties": {
 		//	    "": {
 		//	      "maxLength": 131072,
@@ -41,7 +41,7 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"additional_encryption_context": // Pattern: ""
 		schema.MapAttribute{             /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "An optional set of non-secret key?value pairs that contains additional contextual information about the data.",
+			Description: "An optional set of non-secret key–value pairs that contains additional contextual information about the data.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreateTime
@@ -98,11 +98,11 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The Amazon Resource Name (ARN) of the database to use as the source for replication, for example, arn:aws:dynamodb:us-east-2:123412341234:table/dynamotable",
+		//	  "description": "The Amazon Resource Name (ARN) of the database to use as the source for replication",
 		//	  "type": "string"
 		//	}
 		"source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the database to use as the source for replication, for example, arn:aws:dynamodb:us-east-2:123412341234:table/dynamotable",
+			Description: "The Amazon Resource Name (ARN) of the database to use as the source for replication",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -159,11 +159,11 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The Amazon Resource Name (ARN) of the Redshift data warehouse to use as the target for replication, for example, arn:aws:redshift:us-east-2:123412341234:namespace:e43aab3e-10a3-4ec4-83d4-f227ff9bfbcf",
+		//	  "description": "The Amazon Resource Name (ARN) of the Redshift data warehouse to use as the target for replication",
 		//	  "type": "string"
 		//	}
 		"target_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the Redshift data warehouse to use as the target for replication, for example, arn:aws:redshift:us-east-2:123412341234:namespace:e43aab3e-10a3-4ec4-83d4-f227ff9bfbcf",
+			Description: "The Amazon Resource Name (ARN) of the Redshift data warehouse to use as the target for replication",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

@@ -68,7 +68,9 @@ func accountPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "Type of the policy.",
 		//	  "enum": [
 		//	    "DATA_PROTECTION_POLICY",
-		//	    "SUBSCRIPTION_FILTER_POLICY"
+		//	    "SUBSCRIPTION_FILTER_POLICY",
+		//	    "FIELD_INDEX_POLICY",
+		//	    "TRANSFORMER_POLICY"
 		//	  ],
 		//	  "type": "string"
 		//	}

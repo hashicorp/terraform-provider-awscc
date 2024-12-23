@@ -146,6 +146,10 @@ func fHIRDatastoreDataSource(ctx context.Context) (datasource.DataSource, error)
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "default": {
+		//	    "AuthorizationStrategy": "AWS_AUTH",
+		//	    "FineGrainedAuthorizationEnabled": false
+		//	  },
 		//	  "description": "The identity provider configuration for the datastore",
 		//	  "properties": {
 		//	    "AuthorizationStrategy": {
@@ -239,6 +243,11 @@ func fHIRDatastoreDataSource(ctx context.Context) (datasource.DataSource, error)
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "default": {
+		//	    "KmsEncryptionConfig": {
+		//	      "CmkType": "AWS_OWNED_KMS_KEY"
+		//	    }
+		//	  },
 		//	  "description": "The server-side encryption key configuration for a customer provided encryption key.",
 		//	  "properties": {
 		//	    "KmsEncryptionConfig": {

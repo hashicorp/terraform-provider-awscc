@@ -120,6 +120,42 @@ func thingTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "Mqtt5Configuration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "PropagatingAttributes": {
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "ConnectionAttribute": {
+		//	                "enum": [
+		//	                  "iot:ClientId",
+		//	                  "iot:Thing.ThingName"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "ThingAttribute": {
+		//	                "maxLength": 128,
+		//	                "pattern": "[a-zA-Z0-9_.,@/:#-]+",
+		//	                "type": "string"
+		//	              },
+		//	              "UserPropertyKey": {
+		//	                "maxLength": 128,
+		//	                "pattern": "[a-zA-Z0-9:$.]+",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "UserPropertyKey"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "SearchableAttributes": {
 		//	      "insertionOrder": true,
 		//	      "items": {
@@ -141,6 +177,32 @@ func thingTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"thing_type_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Mqtt5Configuration
+				"mqtt_5_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PropagatingAttributes
+						"propagating_attributes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ConnectionAttribute
+									"connection_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: ThingAttribute
+									"thing_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: UserPropertyKey
+									"user_property_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: SearchableAttributes
 				"searchable_attributes": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
@@ -171,14 +233,19 @@ func thingTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                    "Arn",
+		"connection_attribute":   "ConnectionAttribute",
 		"deprecate_thing_type":   "DeprecateThingType",
 		"key":                    "Key",
+		"mqtt_5_configuration":   "Mqtt5Configuration",
+		"propagating_attributes": "PropagatingAttributes",
 		"searchable_attributes":  "SearchableAttributes",
 		"tags":                   "Tags",
+		"thing_attribute":        "ThingAttribute",
 		"thing_type_description": "ThingTypeDescription",
 		"thing_type_id":          "Id",
 		"thing_type_name":        "ThingTypeName",
 		"thing_type_properties":  "ThingTypeProperties",
+		"user_property_key":      "UserPropertyKey",
 		"value":                  "Value",
 	})
 

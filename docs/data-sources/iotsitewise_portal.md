@@ -31,6 +31,8 @@ Data Source schema for AWS::IoTSiteWise::Portal
 - `portal_id` (String) The ID of the portal.
 - `portal_name` (String) A friendly name for the portal.
 - `portal_start_url` (String) The public root URL for the AWS IoT AWS IoT SiteWise Monitor application portal.
+- `portal_type` (String) The type of portal
+- `portal_type_configuration` (Attributes Map) Map to associate detail of configuration related with a PortalType. (see [below for nested schema](#nestedatt--portal_type_configuration))
 - `role_arn` (String) The ARN of a service role that allows the portal's users to access your AWS IoT SiteWise resources on your behalf.
 - `tags` (Attributes List) A list of key-value pairs that contain metadata for the portal. (see [below for nested schema](#nestedatt--tags))
 
@@ -41,6 +43,14 @@ Read-Only:
 
 - `alarm_role_arn` (String) The ARN of the IAM role that allows the alarm to perform actions and access AWS resources and services, such as AWS IoT Events.
 - `notification_lambda_arn` (String) The ARN of the AWS Lambda function that manages alarm notifications. For more information, see Managing alarm notifications in the AWS IoT Events Developer Guide.
+
+
+<a id="nestedatt--portal_type_configuration"></a>
+### Nested Schema for `portal_type_configuration`
+
+Read-Only:
+
+- `portal_tools` (List of String) List of enabled Tools for a certain portal.
 
 
 <a id="nestedatt--tags"></a>

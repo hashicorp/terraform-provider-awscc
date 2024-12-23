@@ -61,6 +61,8 @@ Read-Only:
 Read-Only:
 
 - `enable_ocsp_check` (Boolean)
+- `ocsp_authorized_responder_arn` (String)
+- `ocsp_lambda_arn` (String)
 
 
 <a id="nestedatt--server_certificates"></a>

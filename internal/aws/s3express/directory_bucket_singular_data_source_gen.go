@@ -37,14 +37,14 @@ func directoryBucketDataSource(ctx context.Context) (datasource.DataSource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Returns the code for the Availability Zone where the directory bucket was created.",
+		//	  "description": "Returns the code for the Availability Zone or Local Zone where the directory bucket was created. An example for the code of an Availability Zone is 'us-east-1f'.",
 		//	  "examples": [
 		//	    "us-east-1f"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"availability_zone_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Returns the code for the Availability Zone where the directory bucket was created.",
+			Description: "Returns the code for the Availability Zone or Local Zone where the directory bucket was created. An example for the code of an Availability Zone is 'us-east-1f'.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BucketEncryption
@@ -142,38 +142,161 @@ func directoryBucketDataSource(ctx context.Context) (datasource.DataSource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Specifies a name for the bucket. The bucket name must contain only lowercase letters, numbers, and hyphens (-). A directory bucket name must be unique in the chosen Availability Zone. The bucket name must also follow the format 'bucket_base_name--az_id--x-s3' (for example, 'DOC-EXAMPLE-BUCKET--usw2-az1--x-s3'). If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the bucket name.",
+		//	  "description": "Specifies a name for the bucket. The bucket name must contain only lowercase letters, numbers, and hyphens (-). A directory bucket name must be unique in the chosen Availability Zone or Local Zone. The bucket name must also follow the format 'bucket_base_name--zone_id--x-s3'. The zone_id can be the ID of an Availability Zone or a Local Zone. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the bucket name.",
 		//	  "maxLength": 63,
 		//	  "pattern": "^[a-z0-9][a-z0-9//.//-]*[a-z0-9]$",
 		//	  "type": "string"
 		//	}
 		"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies a name for the bucket. The bucket name must contain only lowercase letters, numbers, and hyphens (-). A directory bucket name must be unique in the chosen Availability Zone. The bucket name must also follow the format 'bucket_base_name--az_id--x-s3' (for example, 'DOC-EXAMPLE-BUCKET--usw2-az1--x-s3'). If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the bucket name.",
+			Description: "Specifies a name for the bucket. The bucket name must contain only lowercase letters, numbers, and hyphens (-). A directory bucket name must be unique in the chosen Availability Zone or Local Zone. The bucket name must also follow the format 'bucket_base_name--zone_id--x-s3'. The zone_id can be the ID of an Availability Zone or a Local Zone. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the bucket name.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DataRedundancy
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Specifies the number of Availability Zone that's used for redundancy for the bucket.",
+		//	  "description": "Specifies the number of Availability Zone or Local Zone that's used for redundancy for the bucket.",
 		//	  "enum": [
-		//	    "SingleAvailabilityZone"
+		//	    "SingleAvailabilityZone",
+		//	    "SingleLocalZone"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"data_redundancy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the number of Availability Zone that's used for redundancy for the bucket.",
+			Description: "Specifies the number of Availability Zone or Local Zone that's used for redundancy for the bucket.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: LifecycleConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Lifecycle rules that define how Amazon S3 Express manages objects during their lifetime.",
+		//	  "properties": {
+		//	    "Rules": {
+		//	      "description": "A lifecycle rule for individual objects in an Amazon S3 Express bucket.",
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "You must specify at least one of the following properties: AbortIncompleteMultipartUpload, or ExpirationInDays.",
+		//	        "properties": {
+		//	          "AbortIncompleteMultipartUpload": {
+		//	            "additionalProperties": false,
+		//	            "description": "Specifies the days since the initiation of an incomplete multipart upload that Amazon S3 will wait before permanently removing all parts of the upload.",
+		//	            "properties": {
+		//	              "DaysAfterInitiation": {
+		//	                "description": "Specifies the number of days after which Amazon S3 aborts an incomplete multipart upload.",
+		//	                "minimum": 0,
+		//	                "type": "integer"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "DaysAfterInitiation"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "ExpirationInDays": {
+		//	            "type": "integer"
+		//	          },
+		//	          "Id": {
+		//	            "maxLength": 255,
+		//	            "type": "string"
+		//	          },
+		//	          "ObjectSizeGreaterThan": {
+		//	            "maxLength": 20,
+		//	            "pattern": "[0-9]+",
+		//	            "type": "string"
+		//	          },
+		//	          "ObjectSizeLessThan": {
+		//	            "maxLength": 20,
+		//	            "pattern": "[0-9]+",
+		//	            "type": "string"
+		//	          },
+		//	          "Prefix": {
+		//	            "type": "string"
+		//	          },
+		//	          "Status": {
+		//	            "enum": [
+		//	              "Enabled",
+		//	              "Disabled"
+		//	            ],
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Status"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Rules"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"lifecycle_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Rules
+				"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AbortIncompleteMultipartUpload
+							"abort_incomplete_multipart_upload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: DaysAfterInitiation
+									"days_after_initiation": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "Specifies the number of days after which Amazon S3 aborts an incomplete multipart upload.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Specifies the days since the initiation of an incomplete multipart upload that Amazon S3 will wait before permanently removing all parts of the upload.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ExpirationInDays
+							"expiration_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Id
+							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: ObjectSizeGreaterThan
+							"object_size_greater_than": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: ObjectSizeLessThan
+							"object_size_less_than": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Prefix
+							"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Status
+							"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A lifecycle rule for individual objects in an Amazon S3 Express bucket.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Lifecycle rules that define how Amazon S3 Express manages objects during their lifetime.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LocationName
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Specifies the AZ ID of the Availability Zone where the directory bucket will be created. An example AZ ID value is 'use1-az5'.",
+		//	  "description": "Specifies the Zone ID of the Availability Zone or Local Zone where the directory bucket will be created. An example Availability Zone ID value is 'use1-az5'.",
 		//	  "type": "string"
 		//	}
 		"location_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the AZ ID of the Availability Zone where the directory bucket will be created. An example AZ ID value is 'use1-az5'.",
+			Description: "Specifies the Zone ID of the Availability Zone or Local Zone where the directory bucket will be created. An example Availability Zone ID value is 'use1-az5'.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
@@ -193,17 +316,27 @@ func directoryBucketDataSource(ctx context.Context) (datasource.DataSource, erro
 	opts = opts.WithCloudFormationTypeName("AWS::S3Express::DirectoryBucket").WithTerraformTypeName("awscc_s3express_directory_bucket")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"abort_incomplete_multipart_upload":    "AbortIncompleteMultipartUpload",
 		"arn":                                  "Arn",
 		"availability_zone_name":               "AvailabilityZoneName",
 		"bucket_encryption":                    "BucketEncryption",
 		"bucket_key_enabled":                   "BucketKeyEnabled",
 		"bucket_name":                          "BucketName",
 		"data_redundancy":                      "DataRedundancy",
+		"days_after_initiation":                "DaysAfterInitiation",
+		"expiration_in_days":                   "ExpirationInDays",
+		"id":                                   "Id",
 		"kms_master_key_id":                    "KMSMasterKeyID",
+		"lifecycle_configuration":              "LifecycleConfiguration",
 		"location_name":                        "LocationName",
+		"object_size_greater_than":             "ObjectSizeGreaterThan",
+		"object_size_less_than":                "ObjectSizeLessThan",
+		"prefix":                               "Prefix",
+		"rules":                                "Rules",
 		"server_side_encryption_by_default":    "ServerSideEncryptionByDefault",
 		"server_side_encryption_configuration": "ServerSideEncryptionConfiguration",
 		"sse_algorithm":                        "SSEAlgorithm",
+		"status":                               "Status",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

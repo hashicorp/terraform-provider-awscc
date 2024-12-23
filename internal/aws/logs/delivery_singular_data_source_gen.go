@@ -10,6 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -92,6 +93,61 @@ func deliveryDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The name of the delivery source that is associated with this delivery.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: FieldDelimiter
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The field delimiter to use between record fields when the final output format of a delivery is in Plain , W3C , or Raw format.",
+		//	  "maxLength": 5,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"field_delimiter": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The field delimiter to use between record fields when the final output format of a delivery is in Plain , W3C , or Raw format.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: RecordFields
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The list of record fields to be delivered to the destination, in order. If the delivery's log source has mandatory fields, they must be included in this list.",
+		//	  "items": {
+		//	    "description": "A single record field to be delivered to the destination.",
+		//	    "maxLength": 50,
+		//	    "minLength": 1,
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"record_fields": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The list of record fields to be delivered to the destination, in order. If the delivery's log source has mandatory fields, they must be included in this list.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: S3EnableHiveCompatiblePath
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "This parameter causes the S3 objects that contain delivered logs to use a prefix structure that allows for integration with Apache Hive.",
+		//	  "type": "boolean"
+		//	}
+		"s3_enable_hive_compatible_path": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "This parameter causes the S3 objects that contain delivered logs to use a prefix structure that allows for integration with Apache Hive.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: S3SuffixPath
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "This string allows re-configuring the S3 object prefix to contain either static or variable sections. The valid variables to use in the suffix path will vary by each log source. See ConfigurationTemplate$allowedSuffixPathFields for more info on what values are supported in the suffix path for each log source.",
+		//	  "maxLength": 256,
+		//	  "minLength": 0,
+		//	  "type": "string"
+		//	}
+		"s3_suffix_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "This string allows re-configuring the S3 object prefix to contain either static or variable sections. The valid variables to use in the suffix path will vary by each log source. See ConfigurationTemplate$allowedSuffixPathFields for more info on what values are supported in the suffix path for each log source.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -159,14 +215,18 @@ func deliveryDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Logs::Delivery").WithTerraformTypeName("awscc_logs_delivery")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                       "Arn",
-		"delivery_destination_arn":  "DeliveryDestinationArn",
-		"delivery_destination_type": "DeliveryDestinationType",
-		"delivery_id":               "DeliveryId",
-		"delivery_source_name":      "DeliverySourceName",
-		"key":                       "Key",
-		"tags":                      "Tags",
-		"value":                     "Value",
+		"arn":                            "Arn",
+		"delivery_destination_arn":       "DeliveryDestinationArn",
+		"delivery_destination_type":      "DeliveryDestinationType",
+		"delivery_id":                    "DeliveryId",
+		"delivery_source_name":           "DeliverySourceName",
+		"field_delimiter":                "FieldDelimiter",
+		"key":                            "Key",
+		"record_fields":                  "RecordFields",
+		"s3_enable_hive_compatible_path": "S3EnableHiveCompatiblePath",
+		"s3_suffix_path":                 "S3SuffixPath",
+		"tags":                           "Tags",
+		"value":                          "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

@@ -1,0 +1,1 @@
+$ terraform import awscc_cloudformation_guard_hook.example "hook_arn"

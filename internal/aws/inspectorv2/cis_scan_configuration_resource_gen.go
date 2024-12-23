@@ -455,7 +455,8 @@ func cisScanConfigurationResource(ctx context.Context) (resource.Resource, error
 		//	    }
 		//	  },
 		//	  "required": [
-		//	    "AccountIds"
+		//	    "AccountIds",
+		//	    "TargetResourceTags"
 		//	  ]
 		//	}
 		"targets": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -476,11 +477,7 @@ func cisScanConfigurationResource(ctx context.Context) (resource.Resource, error
 				"target_resource_tags": // Pattern: ""
 				schema.MapAttribute{    /*START ATTRIBUTE*/
 					ElementType: types.ListType{ElemType: types.StringType},
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-						mapplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					Required:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Required: true,

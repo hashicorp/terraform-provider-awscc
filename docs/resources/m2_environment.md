@@ -27,6 +27,7 @@ Represents a runtime environment that can run migrated mainframe applications.
 - `engine_version` (String) The version of the runtime engine for the environment.
 - `high_availability_config` (Attributes) Defines the details of a high availability configuration. (see [below for nested schema](#nestedatt--high_availability_config))
 - `kms_key_id` (String) The ID or the Amazon Resource Name (ARN) of the customer managed KMS Key used for encrypting environment-related resources.
+- `network_type` (String)
 - `preferred_maintenance_window` (String) Configures a desired maintenance window for the environment. If you do not provide a value, a random system-generated value will be assigned.
 - `publicly_accessible` (Boolean) Specifies whether the environment is publicly accessible.
 - `security_group_ids` (List of String) The list of security groups for the VPC associated with this environment.

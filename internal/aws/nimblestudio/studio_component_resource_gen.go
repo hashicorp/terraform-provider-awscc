@@ -7,10 +7,7 @@ package nimblestudio
 
 import (
 	"context"
-	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
-	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
@@ -18,7 +15,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
@@ -36,45 +32,31 @@ func studioComponentResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "\u003cp\u003eThe configuration of the studio component, based on component type.\u003c/p\u003e",
+		//	  "additionalProperties": false,
 		//	  "properties": {
 		//	    "ActiveDirectoryConfiguration": {
 		//	      "additionalProperties": false,
-		//	      "description": "\u003cp\u003eThe configuration for a Microsoft Active Directory (Microsoft AD) studio\n            resource.\u003c/p\u003e",
 		//	      "properties": {
 		//	        "ComputerAttributes": {
-		//	          "description": "\u003cp\u003eA collection of custom attributes for an Active Directory computer.\u003c/p\u003e",
 		//	          "items": {
 		//	            "additionalProperties": false,
-		//	            "description": "\u003cp\u003eAn LDAP attribute of an Active Directory computer account, in the form of a name:value\n            pair.\u003c/p\u003e",
 		//	            "properties": {
 		//	              "Name": {
-		//	                "description": "\u003cp\u003eThe name for the LDAP attribute.\u003c/p\u003e",
-		//	                "maxLength": 40,
-		//	                "minLength": 1,
 		//	                "type": "string"
 		//	              },
 		//	              "Value": {
-		//	                "description": "\u003cp\u003eThe value for the LDAP attribute.\u003c/p\u003e",
-		//	                "maxLength": 64,
-		//	                "minLength": 1,
 		//	                "type": "string"
 		//	              }
 		//	            },
 		//	            "type": "object"
 		//	          },
-		//	          "maxItems": 50,
-		//	          "minItems": 0,
-		//	          "type": "array"
+		//	          "type": "array",
+		//	          "uniqueItems": false
 		//	        },
 		//	        "DirectoryId": {
-		//	          "description": "\u003cp\u003eThe directory ID of the Directory Service for Microsoft Active Directory to access\n            using this studio component.\u003c/p\u003e",
 		//	          "type": "string"
 		//	        },
 		//	        "OrganizationalUnitDistinguishedName": {
-		//	          "description": "\u003cp\u003eThe distinguished name (DN) and organizational unit (OU) of an Active Directory\n            computer.\u003c/p\u003e",
-		//	          "maxLength": 2000,
-		//	          "minLength": 1,
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -82,14 +64,11 @@ func studioComponentResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "ComputeFarmConfiguration": {
 		//	      "additionalProperties": false,
-		//	      "description": "\u003cp\u003eThe configuration for a render farm that is associated with a studio resource.\u003c/p\u003e",
 		//	      "properties": {
 		//	        "ActiveDirectoryUser": {
-		//	          "description": "\u003cp\u003eThe name of an Active Directory user that is used on ComputeFarm worker\n            instances.\u003c/p\u003e",
 		//	          "type": "string"
 		//	        },
 		//	        "Endpoint": {
-		//	          "description": "\u003cp\u003eThe endpoint of the ComputeFarm that is accessed by the studio component\n            resource.\u003c/p\u003e",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -97,10 +76,8 @@ func studioComponentResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "LicenseServiceConfiguration": {
 		//	      "additionalProperties": false,
-		//	      "description": "\u003cp\u003eThe configuration for a license service that is associated with a studio\n            resource.\u003c/p\u003e",
 		//	      "properties": {
 		//	        "Endpoint": {
-		//	          "description": "\u003cp\u003eThe endpoint of the license service that is accessed by the studio component\n            resource.\u003c/p\u003e",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -108,30 +85,20 @@ func studioComponentResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "SharedFileSystemConfiguration": {
 		//	      "additionalProperties": false,
-		//	      "description": "\u003cp\u003eThe configuration for a shared file storage system that is associated with a studio\n            resource.\u003c/p\u003e",
 		//	      "properties": {
 		//	        "Endpoint": {
-		//	          "description": "\u003cp\u003eThe endpoint of the shared file system that is accessed by the studio component\n            resource.\u003c/p\u003e",
 		//	          "type": "string"
 		//	        },
 		//	        "FileSystemId": {
-		//	          "description": "\u003cp\u003eThe unique identifier for a file system.\u003c/p\u003e",
 		//	          "type": "string"
 		//	        },
 		//	        "LinuxMountPoint": {
-		//	          "description": "\u003cp\u003eThe mount location for a shared file system on a Linux virtual workstation.\u003c/p\u003e",
-		//	          "maxLength": 128,
-		//	          "minLength": 0,
-		//	          "pattern": "^(/?|(\\$HOME)?(/[^/\\n\\s\\\\]+)*)$",
 		//	          "type": "string"
 		//	        },
 		//	        "ShareName": {
-		//	          "description": "\u003cp\u003eThe name of the file share.\u003c/p\u003e",
 		//	          "type": "string"
 		//	        },
 		//	        "WindowsMountDrive": {
-		//	          "description": "\u003cp\u003eThe mount location for a shared file system on a Windows virtual workstation.\u003c/p\u003e",
-		//	          "pattern": "^[A-Z]$",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -151,65 +118,47 @@ func studioComponentResource(ctx context.Context) (resource.Resource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Name
 									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "<p>The name for the LDAP attribute.</p>",
-										Optional:    true,
-										Computed:    true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(1, 40),
-										}, /*END VALIDATORS*/
+										Optional: true,
+										Computed: true,
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: Value
 									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "<p>The value for the LDAP attribute.</p>",
-										Optional:    true,
-										Computed:    true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(1, 64),
-										}, /*END VALIDATORS*/
+										Optional: true,
+										Computed: true,
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							Description: "<p>A collection of custom attributes for an Active Directory computer.</p>",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.List{ /*START VALIDATORS*/
-								listvalidator.SizeBetween(0, 50),
-							}, /*END VALIDATORS*/
+							Optional: true,
+							Computed: true,
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: DirectoryId
 						"directory_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "<p>The directory ID of the Directory Service for Microsoft Active Directory to access\n            using this studio component.</p>",
-							Optional:    true,
-							Computed:    true,
+							Optional: true,
+							Computed: true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: OrganizationalUnitDistinguishedName
 						"organizational_unit_distinguished_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "<p>The distinguished name (DN) and organizational unit (OU) of an Active Directory\n            computer.</p>",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 2000),
-							}, /*END VALIDATORS*/
+							Optional: true,
+							Computed: true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "<p>The configuration for a Microsoft Active Directory (Microsoft AD) studio\n            resource.</p>",
-					Optional:    true,
-					Computed:    true,
+					Optional: true,
+					Computed: true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -219,26 +168,23 @@ func studioComponentResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: ActiveDirectoryUser
 						"active_directory_user": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "<p>The name of an Active Directory user that is used on ComputeFarm worker\n            instances.</p>",
-							Optional:    true,
-							Computed:    true,
+							Optional: true,
+							Computed: true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Endpoint
 						"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "<p>The endpoint of the ComputeFarm that is accessed by the studio component\n            resource.</p>",
-							Optional:    true,
-							Computed:    true,
+							Optional: true,
+							Computed: true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "<p>The configuration for a render farm that is associated with a studio resource.</p>",
-					Optional:    true,
-					Computed:    true,
+					Optional: true,
+					Computed: true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -248,17 +194,15 @@ func studioComponentResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Endpoint
 						"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "<p>The endpoint of the license service that is accessed by the studio component\n            resource.</p>",
-							Optional:    true,
-							Computed:    true,
+							Optional: true,
+							Computed: true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "<p>The configuration for a license service that is associated with a studio\n            resource.</p>",
-					Optional:    true,
-					Computed:    true,
+					Optional: true,
+					Computed: true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -268,68 +212,54 @@ func studioComponentResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Endpoint
 						"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "<p>The endpoint of the shared file system that is accessed by the studio component\n            resource.</p>",
-							Optional:    true,
-							Computed:    true,
+							Optional: true,
+							Computed: true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: FileSystemId
 						"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "<p>The unique identifier for a file system.</p>",
-							Optional:    true,
-							Computed:    true,
+							Optional: true,
+							Computed: true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: LinuxMountPoint
 						"linux_mount_point": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "<p>The mount location for a shared file system on a Linux virtual workstation.</p>",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(0, 128),
-								stringvalidator.RegexMatches(regexp.MustCompile("^(/?|(\\$HOME)?(/[^/\\n\\s\\\\]+)*)$"), ""),
-							}, /*END VALIDATORS*/
+							Optional: true,
+							Computed: true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: ShareName
 						"share_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "<p>The name of the file share.</p>",
-							Optional:    true,
-							Computed:    true,
+							Optional: true,
+							Computed: true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: WindowsMountDrive
 						"windows_mount_drive": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "<p>The mount location for a shared file system on a Windows virtual workstation.</p>",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.RegexMatches(regexp.MustCompile("^[A-Z]$"), ""),
-							}, /*END VALIDATORS*/
+							Optional: true,
+							Computed: true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "<p>The configuration for a shared file storage system that is associated with a studio\n            resource.</p>",
-					Optional:    true,
-					Computed:    true,
+					Optional: true,
+					Computed: true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "<p>The configuration of the studio component, based on component type.</p>",
-			Optional:    true,
-			Computed:    true,
+			Optional: true,
+			Computed: true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -338,18 +268,11 @@ func studioComponentResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "\u003cp\u003eThe description.\u003c/p\u003e",
-		//	  "maxLength": 256,
-		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "<p>The description.</p>",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 256),
-			}, /*END VALIDATORS*/
+			Optional: true,
+			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -358,22 +281,16 @@ func studioComponentResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "\u003cp\u003eThe EC2 security groups that control access to the studio component.\u003c/p\u003e",
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
-		//	  "maxItems": 30,
-		//	  "minItems": 0,
-		//	  "type": "array"
+		//	  "type": "array",
+		//	  "uniqueItems": false
 		//	}
 		"ec_2_security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "<p>The EC2 security groups that control access to the studio component.</p>",
 			Optional:    true,
 			Computed:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeBetween(0, 30),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -382,55 +299,34 @@ func studioComponentResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "\u003cp\u003eInitialization scripts for studio components.\u003c/p\u003e",
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "\u003cp\u003eInitialization scripts for studio components.\u003c/p\u003e",
 		//	    "properties": {
 		//	      "LaunchProfileProtocolVersion": {
-		//	        "description": "\u003cp\u003eThe version number of the protocol that is used by the launch profile. The only valid\n            version is \"2021-03-31\".\u003c/p\u003e",
-		//	        "maxLength": 10,
-		//	        "minLength": 0,
-		//	        "pattern": "^2021\\-03\\-31$",
 		//	        "type": "string"
 		//	      },
 		//	      "Platform": {
-		//	        "enum": [
-		//	          "LINUX",
-		//	          "WINDOWS"
-		//	        ],
 		//	        "type": "string"
 		//	      },
 		//	      "RunContext": {
-		//	        "enum": [
-		//	          "SYSTEM_INITIALIZATION",
-		//	          "USER_INITIALIZATION"
-		//	        ],
 		//	        "type": "string"
 		//	      },
 		//	      "Script": {
-		//	        "description": "\u003cp\u003eThe initialization script.\u003c/p\u003e",
-		//	        "maxLength": 5120,
-		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      }
 		//	    },
 		//	    "type": "object"
 		//	  },
-		//	  "type": "array"
+		//	  "type": "array",
+		//	  "uniqueItems": false
 		//	}
 		"initialization_scripts": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: LaunchProfileProtocolVersion
 					"launch_profile_protocol_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "<p>The version number of the protocol that is used by the launch profile. The only valid\n            version is \"2021-03-31\".</p>",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 10),
-							stringvalidator.RegexMatches(regexp.MustCompile("^2021\\-03\\-31$"), ""),
-						}, /*END VALIDATORS*/
+						Optional: true,
+						Computed: true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
@@ -439,12 +335,6 @@ func studioComponentResource(ctx context.Context) (resource.Resource, error) {
 					"platform": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Optional: true,
 						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.OneOf(
-								"LINUX",
-								"WINDOWS",
-							),
-						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
@@ -453,33 +343,22 @@ func studioComponentResource(ctx context.Context) (resource.Resource, error) {
 					"run_context": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Optional: true,
 						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.OneOf(
-								"SYSTEM_INITIALIZATION",
-								"USER_INITIALIZATION",
-							),
-						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Script
 					"script": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "<p>The initialization script.</p>",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 5120),
-						}, /*END VALIDATORS*/
+						Optional: true,
+						Computed: true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "<p>Initialization scripts for studio components.</p>",
-			Optional:    true,
-			Computed:    true,
+			Optional: true,
+			Computed: true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -488,121 +367,55 @@ func studioComponentResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "\u003cp\u003eThe name for the studio component.\u003c/p\u003e",
-		//	  "maxLength": 64,
-		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "<p>The name for the studio component.</p>",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 64),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
-		// Property: RuntimeRoleArn
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "maxLength": 2048,
-		//	  "minLength": 0,
-		//	  "type": "string"
-		//	}
-		"runtime_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 2048),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
+			Required: true,
 		}, /*END ATTRIBUTE*/
 		// Property: ScriptParameters
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "\u003cp\u003eParameters for the studio component scripts.\u003c/p\u003e",
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "\u003cp\u003eA parameter for a studio component script, in the form of a key:value pair.\u003c/p\u003e",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "\u003cp\u003eA script parameter key.\u003c/p\u003e",
-		//	        "maxLength": 64,
-		//	        "minLength": 1,
-		//	        "pattern": "^[a-zA-Z_][a-zA-Z0-9_]+$",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "\u003cp\u003eA script parameter value.\u003c/p\u003e",
-		//	        "maxLength": 256,
-		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      }
 		//	    },
 		//	    "type": "object"
 		//	  },
-		//	  "maxItems": 30,
-		//	  "minItems": 0,
-		//	  "type": "array"
+		//	  "type": "array",
+		//	  "uniqueItems": false
 		//	}
 		"script_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "<p>A script parameter key.</p>",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 64),
-							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z_][a-zA-Z0-9_]+$"), ""),
-						}, /*END VALIDATORS*/
+						Optional: true,
+						Computed: true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "<p>A script parameter value.</p>",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 256),
-						}, /*END VALIDATORS*/
+						Optional: true,
+						Computed: true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "<p>Parameters for the studio component scripts.</p>",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeBetween(0, 30),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
-		// Property: SecureInitializationRoleArn
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "maxLength": 2048,
-		//	  "minLength": 0,
-		//	  "type": "string"
-		//	}
-		"secure_initialization_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 2048),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: StudioComponentId
@@ -621,12 +434,10 @@ func studioComponentResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "\u003cp\u003eThe studio ID. \u003c/p\u003e",
 		//	  "type": "string"
 		//	}
 		"studio_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "<p>The studio ID. </p>",
-			Required:    true,
+			Required: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -635,25 +446,11 @@ func studioComponentResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "enum": [
-		//	    "AWS_MANAGED_MICROSOFT_AD",
-		//	    "AMAZON_FSX_FOR_WINDOWS",
-		//	    "AMAZON_FSX_FOR_LUSTRE",
-		//	    "CUSTOM"
-		//	  ],
 		//	  "type": "string"
 		//	}
 		"subtype": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"AWS_MANAGED_MICROSOFT_AD",
-					"AMAZON_FSX_FOR_WINDOWS",
-					"AMAZON_FSX_FOR_LUSTRE",
-					"CUSTOM",
-				),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
@@ -663,7 +460,6 @@ func studioComponentResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "additionalProperties": false,
 		//	  "patternProperties": {
 		//	    "": {
 		//	      "type": "string"
@@ -685,26 +481,10 @@ func studioComponentResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "enum": [
-		//	    "ACTIVE_DIRECTORY",
-		//	    "SHARED_FILE_SYSTEM",
-		//	    "COMPUTE_FARM",
-		//	    "LICENSE_SERVICE",
-		//	    "CUSTOM"
-		//	  ],
 		//	  "type": "string"
 		//	}
 		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"ACTIVE_DIRECTORY",
-					"SHARED_FILE_SYSTEM",
-					"COMPUTE_FARM",
-					"LICENSE_SERVICE",
-					"CUSTOM",
-				),
-			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -718,7 +498,7 @@ func studioComponentResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Represents a studio component that connects a non-Nimble Studio resource in your account to your studio",
+		Description: "Resource Type definition for AWS::NimbleStudio::StudioComponent",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -747,10 +527,8 @@ func studioComponentResource(ctx context.Context) (resource.Resource, error) {
 		"organizational_unit_distinguished_name": "OrganizationalUnitDistinguishedName",
 		"platform":                               "Platform",
 		"run_context":                            "RunContext",
-		"runtime_role_arn":                       "RuntimeRoleArn",
 		"script":                                 "Script",
 		"script_parameters":                      "ScriptParameters",
-		"secure_initialization_role_arn":         "SecureInitializationRoleArn",
 		"share_name":                             "ShareName",
 		"shared_file_system_configuration":       "SharedFileSystemConfiguration",
 		"studio_component_id":                    "StudioComponentId",

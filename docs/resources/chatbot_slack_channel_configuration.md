@@ -52,6 +52,7 @@ resource "awscc_iam_role" "example" {
 
 ### Optional
 
+- `customization_resource_arns` (List of String) ARNs of Custom Actions to associate with notifications in the provided chat channel.
 - `guardrail_policies` (List of String) The list of IAM policy ARNs that are applied as channel guardrails. The AWS managed 'AdministratorAccess' policy is applied as a default if this is not set.
 - `logging_level` (String) Specifies the logging level for this configuration:ERROR,INFO or NONE. This property affects the log entries pushed to Amazon CloudWatch logs
 - `sns_topic_arns` (List of String) ARNs of SNS topics which delivers notifications to AWS Chatbot, for example CloudWatch alarm notifications.

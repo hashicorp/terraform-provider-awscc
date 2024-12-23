@@ -1,1 +1,1 @@
-$ terraform import awscc_nimblestudio_launch_profile.example "launch_profile_id|studio_id"
+$ terraform import awscc_nimblestudio_launch_profile.example "launch_profile_id"

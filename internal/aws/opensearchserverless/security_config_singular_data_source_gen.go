@@ -35,6 +35,79 @@ func securityConfigDataSource(ctx context.Context) (datasource.DataSource, error
 			Description: "Security config description",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: IamIdentityCenterOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Describes IAM Identity Center options for an OpenSearch Serverless security configuration in the form of a key-value map",
+		//	  "properties": {
+		//	    "ApplicationArn": {
+		//	      "description": "The ARN of the IAM Identity Center application used to integrate with OpenSearch Serverless",
+		//	      "type": "string"
+		//	    },
+		//	    "ApplicationDescription": {
+		//	      "description": "The description of the IAM Identity Center application used to integrate with OpenSearch Serverless",
+		//	      "type": "string"
+		//	    },
+		//	    "ApplicationName": {
+		//	      "description": "The name of the IAM Identity Center application used to integrate with OpenSearch Serverless",
+		//	      "type": "string"
+		//	    },
+		//	    "GroupAttribute": {
+		//	      "description": "Group attribute for this IAM Identity Center integration",
+		//	      "type": "string"
+		//	    },
+		//	    "InstanceArn": {
+		//	      "description": "The ARN of the IAM Identity Center instance used to integrate with OpenSearch Serverless",
+		//	      "type": "string"
+		//	    },
+		//	    "UserAttribute": {
+		//	      "description": "User attribute for this IAM Identity Center integration",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "InstanceArn"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"iam_identity_center_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ApplicationArn
+				"application_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the IAM Identity Center application used to integrate with OpenSearch Serverless",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ApplicationDescription
+				"application_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The description of the IAM Identity Center application used to integrate with OpenSearch Serverless",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ApplicationName
+				"application_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the IAM Identity Center application used to integrate with OpenSearch Serverless",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: GroupAttribute
+				"group_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Group attribute for this IAM Identity Center integration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: InstanceArn
+				"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the IAM Identity Center instance used to integrate with OpenSearch Serverless",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UserAttribute
+				"user_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "User attribute for this IAM Identity Center integration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Describes IAM Identity Center options for an OpenSearch Serverless security configuration in the form of a key-value map",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -132,7 +205,8 @@ func securityConfigDataSource(ctx context.Context) (datasource.DataSource, error
 		//	{
 		//	  "description": "Config type for security config",
 		//	  "enum": [
-		//	    "saml"
+		//	    "saml",
+		//	    "iamidentitycenter"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -157,15 +231,20 @@ func securityConfigDataSource(ctx context.Context) (datasource.DataSource, error
 	opts = opts.WithCloudFormationTypeName("AWS::OpenSearchServerless::SecurityConfig").WithTerraformTypeName("awscc_opensearchserverless_security_config")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"description":        "Description",
-		"group_attribute":    "GroupAttribute",
-		"metadata":           "Metadata",
-		"name":               "Name",
-		"saml_options":       "SamlOptions",
-		"security_config_id": "Id",
-		"session_timeout":    "SessionTimeout",
-		"type":               "Type",
-		"user_attribute":     "UserAttribute",
+		"application_arn":             "ApplicationArn",
+		"application_description":     "ApplicationDescription",
+		"application_name":            "ApplicationName",
+		"description":                 "Description",
+		"group_attribute":             "GroupAttribute",
+		"iam_identity_center_options": "IamIdentityCenterOptions",
+		"instance_arn":                "InstanceArn",
+		"metadata":                    "Metadata",
+		"name":                        "Name",
+		"saml_options":                "SamlOptions",
+		"security_config_id":          "Id",
+		"session_timeout":             "SessionTimeout",
+		"type":                        "Type",
+		"user_attribute":              "UserAttribute",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)
