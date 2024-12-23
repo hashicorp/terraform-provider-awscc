@@ -302,7 +302,7 @@ Optional:
 <a id="nestedatt--user_agent"></a>
 ### Nested Schema for `user_agent`
 
-Required:
+Required: 
 
 - `product_name` (String) Product name. At least one of `product_name` or `comment` must be set.
 
