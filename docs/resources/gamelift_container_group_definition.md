@@ -17,47 +17,45 @@ The AWS::GameLift::ContainerGroupDefinition resource creates an Amazon GameLift 
 
 ### Required
 
-- `container_definitions` (Attributes Set) A collection of container definitions that define the containers in this group. (see [below for nested schema](#nestedatt--container_definitions))
 - `name` (String) A descriptive label for the container group definition.
 - `operating_system` (String) The operating system of the container group
-- `total_cpu_limit` (Number) The maximum number of CPU units reserved for this container group. The value is expressed as an integer amount of CPU units. (1 vCPU is equal to 1024 CPU units.)
-- `total_memory_limit` (Number) The maximum amount of memory (in MiB) to allocate for this container group.
+- `total_memory_limit_mebibytes` (Number) The total memory limit of container groups following this definition in MiB
+- `total_vcpu_limit` (Number) The total amount of virtual CPUs on the container group definition
 
 ### Optional
 
-- `scheduling_strategy` (String) Specifies whether the container group includes replica or daemon containers.
+- `container_group_type` (String) The scope of the container group
+- `game_server_container_definition` (Attributes) Specifies the information required to run game servers with this container group (see [below for nested schema](#nestedatt--game_server_container_definition))
+- `source_version_number` (Number) A specific ContainerGroupDefinition version to be updated
+- `support_container_definitions` (Attributes Set) A collection of support container definitions that define the containers in this group. (see [below for nested schema](#nestedatt--support_container_definitions))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `version_description` (String) The description of this version
 
 ### Read-Only
 
 - `container_group_definition_arn` (String) The Amazon Resource Name (ARN) that is assigned to a Amazon GameLift container group resource and uniquely identifies it across all AWS Regions.
 - `creation_time` (String) A time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (for example "1469498468.057").
 - `id` (String) Uniquely identifies the resource.
+- `status` (String) A string indicating ContainerGroupDefinition status.
+- `status_reason` (String) A string indicating the reason for ContainerGroupDefinition status.
+- `version_number` (Number) The version of this ContainerGroupDefinition
 
-<a id="nestedatt--container_definitions"></a>
-### Nested Schema for `container_definitions`
-
-Required:
-
-- `container_name` (String) A descriptive label for the container definition. Container definition names must be unique with a container group definition.
-- `image_uri` (String) Specifies the image URI of this container.
+<a id="nestedatt--game_server_container_definition"></a>
+### Nested Schema for `game_server_container_definition`
 
 Optional:
 
-- `command` (List of String) The command that's passed to the container.
-- `cpu` (Number) The maximum number of CPU units reserved for this container. The value is expressed as an integer amount of CPU units. 1 vCPU is equal to 1024 CPU units
-- `depends_on` (Attributes List) A list of container dependencies that determines when this container starts up and shuts down. For container groups with multiple containers, dependencies let you define a startup/shutdown sequence across the containers. (see [below for nested schema](#nestedatt--container_definitions--depends_on))
-- `entry_point` (List of String) The entry point that's passed to the container so that it will run as an executable. If there are multiple arguments, each argument is a string in the array.
-- `environment` (Attributes Set) The environment variables to pass to a container. (see [below for nested schema](#nestedatt--container_definitions--environment))
-- `essential` (Boolean) Specifies if the container is essential. If an essential container fails a health check, then all containers in the container group will be restarted. You must specify exactly 1 essential container in a container group.
-- `health_check` (Attributes) Specifies how the health of the containers will be checked. (see [below for nested schema](#nestedatt--container_definitions--health_check))
-- `memory_limits` (Attributes) Specifies how much memory is available to the container. You must specify at least this parameter or the TotalMemoryLimit parameter of the ContainerGroupDefinition. (see [below for nested schema](#nestedatt--container_definitions--memory_limits))
-- `port_configuration` (Attributes) Defines the ports on the container. (see [below for nested schema](#nestedatt--container_definitions--port_configuration))
+- `container_name` (String) A descriptive label for the container definition. Container definition names must be unique with a container group definition.
+- `depends_on` (Attributes List) A list of container dependencies that determines when this container starts up and shuts down. For container groups with multiple containers, dependencies let you define a startup/shutdown sequence across the containers. (see [below for nested schema](#nestedatt--game_server_container_definition--depends_on))
+- `environment_override` (Attributes Set) The environment variables to pass to a container. (see [below for nested schema](#nestedatt--game_server_container_definition--environment_override))
+- `image_uri` (String) Specifies the image URI of this container.
+- `mount_points` (Attributes Set) A list of mount point configurations to be used in a container. (see [below for nested schema](#nestedatt--game_server_container_definition--mount_points))
+- `port_configuration` (Attributes) Defines the ports on the container. (see [below for nested schema](#nestedatt--game_server_container_definition--port_configuration))
 - `resolved_image_digest` (String) The digest of the container image.
-- `working_directory` (String) The working directory to run commands inside the container in.
+- `server_sdk_version` (String) The version of the server SDK used in this container group
 
-<a id="nestedatt--container_definitions--depends_on"></a>
-### Nested Schema for `container_definitions.depends_on`
+<a id="nestedatt--game_server_container_definition--depends_on"></a>
+### Nested Schema for `game_server_container_definition.depends_on`
 
 Optional:
 
@@ -65,8 +63,8 @@ Optional:
 - `container_name` (String) A descriptive label for the container definition. The container being defined depends on this container's condition.
 
 
-<a id="nestedatt--container_definitions--environment"></a>
-### Nested Schema for `container_definitions.environment`
+<a id="nestedatt--game_server_container_definition--environment_override"></a>
+### Nested Schema for `game_server_container_definition.environment_override`
 
 Optional:
 
@@ -74,8 +72,72 @@ Optional:
 - `value` (String) The environment variable value.
 
 
-<a id="nestedatt--container_definitions--health_check"></a>
-### Nested Schema for `container_definitions.health_check`
+<a id="nestedatt--game_server_container_definition--mount_points"></a>
+### Nested Schema for `game_server_container_definition.mount_points`
+
+Optional:
+
+- `access_level` (String) The access permissions for the mounted path.
+- `container_path` (String) The path inside the container where the mount is accessible.
+- `instance_path` (String) The path on the host that will be mounted in the container.
+
+
+<a id="nestedatt--game_server_container_definition--port_configuration"></a>
+### Nested Schema for `game_server_container_definition.port_configuration`
+
+Optional:
+
+- `container_port_ranges` (Attributes Set) Specifies one or more ranges of ports on a container. (see [below for nested schema](#nestedatt--game_server_container_definition--port_configuration--container_port_ranges))
+
+<a id="nestedatt--game_server_container_definition--port_configuration--container_port_ranges"></a>
+### Nested Schema for `game_server_container_definition.port_configuration.container_port_ranges`
+
+Optional:
+
+- `from_port` (Number) A starting value for the range of allowed port numbers.
+- `protocol` (String) Defines the protocol of these ports.
+- `to_port` (Number) An ending value for the range of allowed port numbers. Port numbers are end-inclusive. This value must be equal to or greater than FromPort.
+
+
+
+
+<a id="nestedatt--support_container_definitions"></a>
+### Nested Schema for `support_container_definitions`
+
+Optional:
+
+- `container_name` (String) A descriptive label for the container definition.
+- `depends_on` (Attributes List) A list of container dependencies that determines when this container starts up and shuts down. For container groups with multiple containers, dependencies let you define a startup/shutdown sequence across the containers. (see [below for nested schema](#nestedatt--support_container_definitions--depends_on))
+- `environment_override` (Attributes Set) The environment variables to pass to a container. (see [below for nested schema](#nestedatt--support_container_definitions--environment_override))
+- `essential` (Boolean) Specifies if the container is essential. If an essential container fails a health check, then all containers in the container group will be restarted. You must specify exactly 1 essential container in a container group.
+- `health_check` (Attributes) Specifies how the health of the containers will be checked. (see [below for nested schema](#nestedatt--support_container_definitions--health_check))
+- `image_uri` (String) Specifies the image URI of this container.
+- `memory_hard_limit_mebibytes` (Number) The total memory limit of container groups following this definition in MiB
+- `mount_points` (Attributes Set) A list of mount point configurations to be used in a container. (see [below for nested schema](#nestedatt--support_container_definitions--mount_points))
+- `port_configuration` (Attributes) Defines the ports on the container. (see [below for nested schema](#nestedatt--support_container_definitions--port_configuration))
+- `resolved_image_digest` (String) The digest of the container image.
+- `vcpu` (Number) The number of virtual CPUs to give to the support group
+
+<a id="nestedatt--support_container_definitions--depends_on"></a>
+### Nested Schema for `support_container_definitions.depends_on`
+
+Optional:
+
+- `condition` (String) The type of dependency.
+- `container_name` (String) A descriptive label for the container definition. The container being defined depends on this container's condition.
+
+
+<a id="nestedatt--support_container_definitions--environment_override"></a>
+### Nested Schema for `support_container_definitions.environment_override`
+
+Optional:
+
+- `name` (String) The environment variable name.
+- `value` (String) The environment variable value.
+
+
+<a id="nestedatt--support_container_definitions--health_check"></a>
+### Nested Schema for `support_container_definitions.health_check`
 
 Optional:
 
@@ -86,24 +148,25 @@ Optional:
 - `timeout` (Number) How many seconds the process manager allows the command to run before canceling it.
 
 
-<a id="nestedatt--container_definitions--memory_limits"></a>
-### Nested Schema for `container_definitions.memory_limits`
+<a id="nestedatt--support_container_definitions--mount_points"></a>
+### Nested Schema for `support_container_definitions.mount_points`
 
 Optional:
 
-- `hard_limit` (Number) The hard limit of memory to reserve for the container.
-- `soft_limit` (Number) The amount of memory that is reserved for the container.
+- `access_level` (String) The access permissions for the mounted path.
+- `container_path` (String) The path inside the container where the mount is accessible.
+- `instance_path` (String) The path on the host that will be mounted in the container.
 
 
-<a id="nestedatt--container_definitions--port_configuration"></a>
-### Nested Schema for `container_definitions.port_configuration`
+<a id="nestedatt--support_container_definitions--port_configuration"></a>
+### Nested Schema for `support_container_definitions.port_configuration`
 
 Optional:
 
-- `container_port_ranges` (Attributes Set) Specifies one or more ranges of ports on a container. (see [below for nested schema](#nestedatt--container_definitions--port_configuration--container_port_ranges))
+- `container_port_ranges` (Attributes Set) Specifies one or more ranges of ports on a container. (see [below for nested schema](#nestedatt--support_container_definitions--port_configuration--container_port_ranges))
 
-<a id="nestedatt--container_definitions--port_configuration--container_port_ranges"></a>
-### Nested Schema for `container_definitions.port_configuration.container_port_ranges`
+<a id="nestedatt--support_container_definitions--port_configuration--container_port_ranges"></a>
+### Nested Schema for `support_container_definitions.port_configuration.container_port_ranges`
 
 Optional:
 
