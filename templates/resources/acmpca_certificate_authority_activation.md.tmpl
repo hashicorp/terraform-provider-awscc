@@ -12,6 +12,16 @@ description: |-
 
 ## Example Usage
 
+### Self-Signed Root Certificate Authority Certificate
+
+{{ tffile (printf "examples/resources/%s/self_signed_certificate_authority.tf" .Name)}}
+
+### Certificate for Subordinate Certificate Authority
+
+Creates a subordinate certificate authority issued by the root certificate authority using a signing request from the subordinate certificate authority.
+
+{{ tffile (printf "examples/resources/%s/subordinate_certificate.tf" .Name)}}
+
 ### Activate Root Certificate Authority
 
 This example demonstrates how to activate a Root Certificate Authority by importing the signed certificate and setting its status to ACTIVE.
