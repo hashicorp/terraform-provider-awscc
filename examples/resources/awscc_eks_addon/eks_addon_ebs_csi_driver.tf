@@ -1,8 +1,3 @@
-# AWS IAM expects the OIDC provider URL without the `https://` prefix in the condition block. This creates a local variable for it:
-# locals {
-#   oidc_provider = replace(awscc_eks_cluster.eks_cluster.open_id_connect_issuer_url, "https://", "")
-# }
-
 # Create custom policy for KMS support. It's optional, but recommended.
 resource "awscc_iam_managed_policy" "ebs_csi_kms_policy" {
   managed_policy_name = "AmazonEKS_EBS_CSI_KMS_Policy"
@@ -16,7 +11,7 @@ resource "awscc_iam_managed_policy" "ebs_csi_kms_policy" {
           "kms:ListGrants",
           "kms:RevokeGrant"
         ]
-        Resource = [var.kms_key_arn]
+        Resource = awscc_kms_key.example.arn
         Condition = {
           Bool = {
             "kms:GrantIsForAWSResource" = "true"
@@ -32,7 +27,7 @@ resource "awscc_iam_managed_policy" "ebs_csi_kms_policy" {
           "kms:GenerateDataKey*",
           "kms:DescribeKey"
         ]
-        Resource = [var.kms_key_arn]
+        Resource = awscc_kms_key.example.arn
       }
     ]
   })
@@ -66,12 +61,8 @@ resource "awscc_iam_role" "ebs_csi_role" {
 
 # Now that the IAM role is ready, create EBS CSI addon
 resource "awscc_eks_addon" "ebs_csi" {
-  cluster_name             = var.cluster_name
+  cluster_name             = awscc_eks_cluster.example.name
   addon_name               = "aws-ebs-csi-driver"
   service_account_role_arn = awscc_iam_role.ebs_csi_role.arn
   resolve_conflicts        = "OVERWRITE"
-}
-
-variable "cluster_name" {
-  type = string
 }
