@@ -22,6 +22,10 @@ To create a VPC Endpoint with Interface type
 To create a VPC Endpoint with Gateway LB
 {{ tffile (printf "examples/resources/%s/vpc_endpoint_gateway_type.tf" .Name)}}
 
+### Service Network Endpoint Type
+To create a VPC Endpoint with Service Network Type
+{{ tffile (printf "examples/resources/%s/vpc_endpoint_servicenetwork_type.tf" .Name)}}
+
 {{ .SchemaMarkdown | trimspace }}
 {{- if .HasImport }}
 
