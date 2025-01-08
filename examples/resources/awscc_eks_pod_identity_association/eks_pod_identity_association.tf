@@ -17,7 +17,8 @@ resource "awscc_iam_role" "pod_identity_role" {
       ]
     }]
   })
-  managed_policy_arns = var.managed_policy_arns
+  # Add policy ARNs as needed. Here is an example:  
+  managed_policy_arns = ["arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"]
 }
 
 # Associate the IAM role with a Service Account
@@ -38,10 +39,4 @@ variable "namespace" {
 
 variable "serviceaccount" {
   type = string
-}
-
-variable "managed_policy_arns" {
-  description = "List of IAM policy ARNs to attach"
-  type        = list(string)
-  default     = ["arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"]  # Change this as needed.
 }
