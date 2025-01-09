@@ -240,6 +240,11 @@
         "path": "./examples/resources/awscc_appconfig_configuration_profile/import.sh"
     },
     {
+        "resource": "awscc_appconfig_deployment",
+        "identifier": ["ApplicationId","EnvironmentId","DeploymentNumber"],
+        "path": "./examples/resources/awscc_appconfig_deployment/import.sh"
+    },
+    {
         "resource": "awscc_appconfig_deployment_strategy",
         "identifier": ["Id"],
         "path": "./examples/resources/awscc_appconfig_deployment_strategy/import.sh"
@@ -810,6 +815,11 @@
         "path": "./examples/resources/awscc_cloudformation_type_activation/import.sh"
     },
     {
+        "resource": "awscc_cloudfront_anycast_ip_list",
+        "identifier": ["Id"],
+        "path": "./examples/resources/awscc_cloudfront_anycast_ip_list/import.sh"
+    },
+    {
         "resource": "awscc_cloudfront_cache_policy",
         "identifier": ["Id"],
         "path": "./examples/resources/awscc_cloudfront_cache_policy/import.sh"
@@ -1253,6 +1263,11 @@
         "resource": "awscc_customerprofiles_event_stream",
         "identifier": ["DomainName","EventStreamName"],
         "path": "./examples/resources/awscc_customerprofiles_event_stream/import.sh"
+    },
+    {
+        "resource": "awscc_customerprofiles_event_trigger",
+        "identifier": ["DomainName","EventTriggerName"],
+        "path": "./examples/resources/awscc_customerprofiles_event_trigger/import.sh"
     },
     {
         "resource": "awscc_customerprofiles_integration",
@@ -4140,6 +4155,11 @@
         "path": "./examples/resources/awscc_quicksight_analysis/import.sh"
     },
     {
+        "resource": "awscc_quicksight_custom_permissions",
+        "identifier": ["AwsAccountId","CustomPermissionsName"],
+        "path": "./examples/resources/awscc_quicksight_custom_permissions/import.sh"
+    },
+    {
         "resource": "awscc_quicksight_dashboard",
         "identifier": ["AwsAccountId","DashboardId"],
         "path": "./examples/resources/awscc_quicksight_dashboard/import.sh"
@@ -4963,6 +4983,11 @@
         "resource": "awscc_sagemaker_monitoring_schedule",
         "identifier": ["MonitoringScheduleArn"],
         "path": "./examples/resources/awscc_sagemaker_monitoring_schedule/import.sh"
+    },
+    {
+        "resource": "awscc_sagemaker_partner_app",
+        "identifier": ["Arn"],
+        "path": "./examples/resources/awscc_sagemaker_partner_app/import.sh"
     },
     {
         "resource": "awscc_sagemaker_pipeline",
