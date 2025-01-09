@@ -179,7 +179,7 @@ func resourceConfigurationResource(ctx context.Context) (resource.Resource, erro
 		//	  "properties": {
 		//	    "ArnResource": {
 		//	      "maxLength": 1224,
-		//	      "pattern": "",
+		//	      "pattern": "^arn.*",
 		//	      "type": "string"
 		//	    },
 		//	    "DnsResource": {
@@ -221,6 +221,7 @@ func resourceConfigurationResource(ctx context.Context) (resource.Resource, erro
 					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthAtMost(1224),
+						stringvalidator.RegexMatches(regexp.MustCompile("^arn.*"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),

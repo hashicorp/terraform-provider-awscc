@@ -79,33 +79,6 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "description": "Specifies a raw data source location to ingest.",
-		//	  "oneOf": [
-		//	    {
-		//	      "required": [
-		//	        "S3Configuration"
-		//	      ]
-		//	    },
-		//	    {
-		//	      "required": [
-		//	        "ConfluenceConfiguration"
-		//	      ]
-		//	    },
-		//	    {
-		//	      "required": [
-		//	        "SalesforceConfiguration"
-		//	      ]
-		//	    },
-		//	    {
-		//	      "required": [
-		//	        "SharePointConfiguration"
-		//	      ]
-		//	    },
-		//	    {
-		//	      "required": [
-		//	        "WebConfiguration"
-		//	      ]
-		//	    }
-		//	  ],
 		//	  "properties": {
 		//	    "ConfluenceConfiguration": {
 		//	      "additionalProperties": false,
@@ -548,7 +521,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "CONFLUENCE",
 		//	        "SALESFORCE",
 		//	        "SHAREPOINT",
-		//	        "WEB"
+		//	        "WEB",
+		//	        "CUSTOM"
 		//	      ],
 		//	      "type": "string"
 		//	    },
@@ -1327,6 +1301,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							"SALESFORCE",
 							"SHAREPOINT",
 							"WEB",
+							"CUSTOM",
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1865,6 +1840,20 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "additionalProperties": false,
 		//	      "description": "Settings for parsing document contents",
 		//	      "properties": {
+		//	        "BedrockDataAutomationConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "Settings for a Bedrock Data Automation used to parse documents for a data source.",
+		//	          "properties": {
+		//	            "ParsingModality": {
+		//	              "description": "Determine how will parsed content be stored.",
+		//	              "enum": [
+		//	                "MULTIMODAL"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
 		//	        "BedrockFoundationModelConfiguration": {
 		//	          "additionalProperties": false,
 		//	          "description": "Settings for a foundation model used to parse documents for a data source.",
@@ -1874,6 +1863,13 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	              "maxLength": 2048,
 		//	              "minLength": 1,
 		//	              "pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}::foundation-model/([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2})|(arn:aws(|-us-gov|-cn|-iso|-iso-b):bedrock:(|[0-9a-z-]{1,20}):(|[0-9]{12}):(inference-profile|application-inference-profile)/[a-zA-Z0-9-:.]+)$",
+		//	              "type": "string"
+		//	            },
+		//	            "ParsingModality": {
+		//	              "description": "Determine how will parsed content be stored.",
+		//	              "enum": [
+		//	                "MULTIMODAL"
+		//	              ],
 		//	              "type": "string"
 		//	            },
 		//	            "ParsingPrompt": {
@@ -1901,7 +1897,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "ParsingStrategy": {
 		//	          "description": "The parsing strategy for the data source.",
 		//	          "enum": [
-		//	            "BEDROCK_FOUNDATION_MODEL"
+		//	            "BEDROCK_FOUNDATION_MODEL",
+		//	            "BEDROCK_DATA_AUTOMATION"
 		//	          ],
 		//	          "type": "string"
 		//	        }
@@ -2219,6 +2216,31 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 				// Property: ParsingConfiguration
 				"parsing_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: BedrockDataAutomationConfiguration
+						"bedrock_data_automation_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ParsingModality
+								"parsing_modality": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Determine how will parsed content be stored.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"MULTIMODAL",
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Settings for a Bedrock Data Automation used to parse documents for a data source.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: BedrockFoundationModelConfiguration
 						"bedrock_foundation_model_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -2231,6 +2253,20 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 										stringvalidator.LengthBetween(1, 2048),
 										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}::foundation-model/([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2})|(arn:aws(|-us-gov|-cn|-iso|-iso-b):bedrock:(|[0-9a-z-]{1,20}):(|[0-9]{12}):(inference-profile|application-inference-profile)/[a-zA-Z0-9-:.]+)$"), ""),
 										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ParsingModality
+								"parsing_modality": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Determine how will parsed content be stored.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"MULTIMODAL",
+										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -2276,6 +2312,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"BEDROCK_FOUNDATION_MODEL",
+									"BEDROCK_DATA_AUTOMATION",
 								),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -2323,6 +2360,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"auth_type":                              "AuthType",
+		"bedrock_data_automation_configuration":  "BedrockDataAutomationConfiguration",
 		"bedrock_foundation_model_configuration": "BedrockFoundationModelConfiguration",
 		"breakpoint_percentile_threshold":        "BreakpointPercentileThreshold",
 		"bucket_arn":                             "BucketArn",
@@ -2364,6 +2402,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"overlap_percentage":                     "OverlapPercentage",
 		"overlap_tokens":                         "OverlapTokens",
 		"parsing_configuration":                  "ParsingConfiguration",
+		"parsing_modality":                       "ParsingModality",
 		"parsing_prompt":                         "ParsingPrompt",
 		"parsing_prompt_text":                    "ParsingPromptText",
 		"parsing_strategy":                       "ParsingStrategy",

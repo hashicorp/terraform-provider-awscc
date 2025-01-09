@@ -53,6 +53,10 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "array",
 		//	      "uniqueItems": false
 		//	    },
+		//	    "AnycastIpListId": {
+		//	      "description": "",
+		//	      "type": "string"
+		//	    },
 		//	    "CNAMEs": {
 		//	      "description": "An alias for the CF distribution's domain name.\n  This property is legacy. We recommend that you use [Aliases](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-distribution-distributionconfig.html#cfn-cloudfront-distribution-distributionconfig-aliases) instead.",
 		//	      "items": {
@@ -187,9 +191,10 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		//	          },
 		//	          "GrpcConfig": {
 		//	            "additionalProperties": false,
-		//	            "description": "",
+		//	            "description": "The gRPC configuration for your cache behavior.",
 		//	            "properties": {
 		//	              "Enabled": {
+		//	                "description": "Enables your CloudFront distribution to receive gRPC requests and to proxy them directly to your origins.",
 		//	                "type": "boolean"
 		//	              }
 		//	            },
@@ -492,9 +497,10 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "GrpcConfig": {
 		//	          "additionalProperties": false,
-		//	          "description": "",
+		//	          "description": "The gRPC configuration for your cache behavior.",
 		//	          "properties": {
 		//	            "Enabled": {
+		//	              "description": "Enables your CloudFront distribution to receive gRPC requests and to proxy them directly to your origins.",
 		//	              "type": "boolean"
 		//	            }
 		//	          },
@@ -590,7 +596,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "DefaultRootObject": {
 		//	      "default": "",
-		//	      "description": "The object that you want CloudFront to request from your origin (for example, ``index.html``) when a viewer requests the root URL for your distribution (``https://www.example.com``) instead of an object in your distribution (``https://www.example.com/product-description.html``). Specifying a default root object avoids exposing the contents of your distribution.\n Specify only the object name, for example, ``index.html``. Don't add a ``/`` before the object name.\n If you don't want to specify a default root object when you create a distribution, include an empty ``DefaultRootObject`` element.\n To delete the default root object from an existing distribution, update the distribution configuration and include an empty ``DefaultRootObject`` element.\n To replace the default root object, update the distribution configuration and specify the new object.\n For more information about the default root object, see [Creating a Default Root Object](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DefaultRootObject.html) in the *Amazon CloudFront Developer Guide*.",
+		//	      "description": "When a viewer requests the root URL for your distribution, the default root object is the object that you want CloudFront to request from your origin. For example, if your root URL is ``https://www.example.com``, you can specify CloudFront to return the ``index.html`` file as the default root object. You can specify a default root object so that viewers see a specific file or object, instead of another object in your distribution (for example, ``https://www.example.com/product-description.html``). A default root object avoids exposing the contents of your distribution.\n You can specify the object name or a path to the object name (for example, ``index.html`` or ``exampleFolderName/index.html``). Your string can't begin with a forward slash (``/``). Only specify the object name or the path to the object.\n If you don't want to specify a default root object when you create a distribution, include an empty ``DefaultRootObject`` element.\n To delete the default root object from an existing distribution, update the distribution configuration and include an empty ``DefaultRootObject`` element.\n To replace the default root object, update the distribution configuration and specify the new object.\n For more information about the default root object, see [Specify a default root object](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DefaultRootObject.html) in the *Amazon CloudFront Developer Guide*.",
 		//	      "type": "string"
 		//	    },
 		//	    "Enabled": {
@@ -611,7 +617,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "A complex type that controls whether access logs are written for the distribution.\n For more information about logging, see [Access Logs](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html) in the *Amazon CloudFront Developer Guide*.",
 		//	      "properties": {
 		//	        "Bucket": {
-		//	          "description": "The Amazon S3 bucket to store the access logs in, for example, ``myawslogbucket.s3.amazonaws.com``.",
+		//	          "description": "The Amazon S3 bucket to store the access logs in, for example, ``amzn-s3-demo-bucket.s3.amazonaws.com``.",
 		//	          "type": "string"
 		//	        },
 		//	        "IncludeCookies": {
@@ -635,7 +641,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		//	          "description": "The items (origin groups) in a distribution.",
 		//	          "items": {
 		//	            "additionalProperties": false,
-		//	            "description": "An origin group includes two origins (a primary origin and a second origin to failover to) and a failover criteria that you specify. You create an origin group to support origin failover in CloudFront. When you create or update a distribution, you can specify the origin group instead of a single origin, and CloudFront will failover from the primary origin to the second origin under the failover conditions that you've chosen.",
+		//	            "description": "An origin group includes two origins (a primary origin and a secondary origin to failover to) and a failover criteria that you specify. You create an origin group to support origin failover in CloudFront. When you create or update a distribution, you can specify the origin group instead of a single origin, and CloudFront will failover from the primary origin to the secondary origin under the failover conditions that you've chosen.\n Optionally, you can choose selection criteria for your origin group to specify how your origins are selected when your distribution routes viewer requests.",
 		//	            "properties": {
 		//	              "FailoverCriteria": {
 		//	                "additionalProperties": false,
@@ -709,6 +715,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		//	                "type": "object"
 		//	              },
 		//	              "SelectionCriteria": {
+		//	                "description": "The selection criteria for the origin group. For more information, see [Create an origin group](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/high_availability_origin_failover.html#concept_origin_groups.creating) in the *Amazon CloudFront Developer Guide*.",
 		//	                "enum": [
 		//	                  "default",
 		//	                  "media-quality-based"
@@ -767,7 +774,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		//	              },
 		//	              "OriginKeepaliveTimeout": {
 		//	                "default": 5,
-		//	                "description": "Specifies how long, in seconds, CloudFront persists its connection to the origin. The minimum timeout is 1 second, the maximum is 60 seconds, and the default (if you don't specify otherwise) is 5 seconds.\n For more information, see [Origin Keep-alive Timeout](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginKeepaliveTimeout) in the *Amazon CloudFront Developer Guide*.",
+		//	                "description": "Specifies how long, in seconds, CloudFront persists its connection to the origin. The minimum timeout is 1 second, the maximum is 60 seconds, and the default (if you don't specify otherwise) is 5 seconds.\n For more information, see [Keep-alive timeout (custom origins only)](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginKeepaliveTimeout) in the *Amazon CloudFront Developer Guide*.",
 		//	                "type": "integer"
 		//	              },
 		//	              "OriginProtocolPolicy": {
@@ -776,7 +783,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		//	              },
 		//	              "OriginReadTimeout": {
 		//	                "default": 30,
-		//	                "description": "Specifies how long, in seconds, CloudFront waits for a response from the origin. This is also known as the *origin response timeout*. The minimum timeout is 1 second, the maximum is 60 seconds, and the default (if you don't specify otherwise) is 30 seconds.\n For more information, see [Origin Response Timeout](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginResponseTimeout) in the *Amazon CloudFront Developer Guide*.",
+		//	                "description": "Specifies how long, in seconds, CloudFront waits for a response from the origin. This is also known as the *origin response timeout*. The minimum timeout is 1 second, the maximum is 60 seconds, and the default (if you don't specify otherwise) is 30 seconds.\n For more information, see [Response timeout (custom origins only)](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginResponseTimeout) in the *Amazon CloudFront Developer Guide*.",
 		//	                "type": "integer"
 		//	              },
 		//	              "OriginSSLProtocols": {
@@ -994,6 +1001,15 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: AnycastIpListId
+				"anycast_ip_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: CNAMEs
 				"cnames": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
@@ -1190,8 +1206,9 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Enabled
 									"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-										Optional: true,
-										Computed: true,
+										Description: "Enables your CloudFront distribution to receive gRPC requests and to proxy them directly to your origins.",
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.Bool{ /*START VALIDATORS*/
 											fwvalidators.NotNullBool(),
 										}, /*END VALIDATORS*/
@@ -1200,7 +1217,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Description: "",
+								Description: "The gRPC configuration for your cache behavior.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1695,8 +1712,9 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Enabled
 								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "Enables your CloudFront distribution to receive gRPC requests and to proxy them directly to your origins.",
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.Bool{ /*START VALIDATORS*/
 										fwvalidators.NotNullBool(),
 									}, /*END VALIDATORS*/
@@ -1705,7 +1723,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "",
+							Description: "The gRPC configuration for your cache behavior.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1848,7 +1866,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: DefaultRootObject
 				"default_root_object": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The object that you want CloudFront to request from your origin (for example, ``index.html``) when a viewer requests the root URL for your distribution (``https://www.example.com``) instead of an object in your distribution (``https://www.example.com/product-description.html``). Specifying a default root object avoids exposing the contents of your distribution.\n Specify only the object name, for example, ``index.html``. Don't add a ``/`` before the object name.\n If you don't want to specify a default root object when you create a distribution, include an empty ``DefaultRootObject`` element.\n To delete the default root object from an existing distribution, update the distribution configuration and include an empty ``DefaultRootObject`` element.\n To replace the default root object, update the distribution configuration and specify the new object.\n For more information about the default root object, see [Creating a Default Root Object](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DefaultRootObject.html) in the *Amazon CloudFront Developer Guide*.",
+					Description: "When a viewer requests the root URL for your distribution, the default root object is the object that you want CloudFront to request from your origin. For example, if your root URL is ``https://www.example.com``, you can specify CloudFront to return the ``index.html`` file as the default root object. You can specify a default root object so that viewers see a specific file or object, instead of another object in your distribution (for example, ``https://www.example.com/product-description.html``). A default root object avoids exposing the contents of your distribution.\n You can specify the object name or a path to the object name (for example, ``index.html`` or ``exampleFolderName/index.html``). Your string can't begin with a forward slash (``/``). Only specify the object name or the path to the object.\n If you don't want to specify a default root object when you create a distribution, include an empty ``DefaultRootObject`` element.\n To delete the default root object from an existing distribution, update the distribution configuration and include an empty ``DefaultRootObject`` element.\n To replace the default root object, update the distribution configuration and specify the new object.\n For more information about the default root object, see [Specify a default root object](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DefaultRootObject.html) in the *Amazon CloudFront Developer Guide*.",
 					Optional:    true,
 					Computed:    true,
 					Default:     stringdefault.StaticString(""),
@@ -1885,7 +1903,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Bucket
 						"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The Amazon S3 bucket to store the access logs in, for example, ``myawslogbucket.s3.amazonaws.com``.",
+							Description: "The Amazon S3 bucket to store the access logs in, for example, ``amzn-s3-demo-bucket.s3.amazonaws.com``.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2048,8 +2066,9 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 									// Property: SelectionCriteria
 									"selection_criteria": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Optional: true,
-										Computed: true,
+										Description: "The selection criteria for the origin group. For more information, see [Create an origin group](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/high_availability_origin_failover.html#concept_origin_groups.creating) in the *Amazon CloudFront Developer Guide*.",
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"default",
@@ -2136,7 +2155,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 									// Property: OriginKeepaliveTimeout
 									"origin_keepalive_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "Specifies how long, in seconds, CloudFront persists its connection to the origin. The minimum timeout is 1 second, the maximum is 60 seconds, and the default (if you don't specify otherwise) is 5 seconds.\n For more information, see [Origin Keep-alive Timeout](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginKeepaliveTimeout) in the *Amazon CloudFront Developer Guide*.",
+										Description: "Specifies how long, in seconds, CloudFront persists its connection to the origin. The minimum timeout is 1 second, the maximum is 60 seconds, and the default (if you don't specify otherwise) is 5 seconds.\n For more information, see [Keep-alive timeout (custom origins only)](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginKeepaliveTimeout) in the *Amazon CloudFront Developer Guide*.",
 										Optional:    true,
 										Computed:    true,
 										Default:     int64default.StaticInt64(5),
@@ -2158,7 +2177,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 									// Property: OriginReadTimeout
 									"origin_read_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "Specifies how long, in seconds, CloudFront waits for a response from the origin. This is also known as the *origin response timeout*. The minimum timeout is 1 second, the maximum is 60 seconds, and the default (if you don't specify otherwise) is 30 seconds.\n For more information, see [Origin Response Timeout](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginResponseTimeout) in the *Amazon CloudFront Developer Guide*.",
+										Description: "Specifies how long, in seconds, CloudFront waits for a response from the origin. This is also known as the *origin response timeout*. The minimum timeout is 1 second, the maximum is 60 seconds, and the default (if you don't specify otherwise) is 30 seconds.\n For more information, see [Response timeout (custom origins only)](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginResponseTimeout) in the *Amazon CloudFront Developer Guide*.",
 										Optional:    true,
 										Computed:    true,
 										Default:     int64default.StaticInt64(30),
@@ -2621,6 +2640,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		"acm_certificate_arn":             "AcmCertificateArn",
 		"aliases":                         "Aliases",
 		"allowed_methods":                 "AllowedMethods",
+		"anycast_ip_list_id":              "AnycastIpListId",
 		"bucket":                          "Bucket",
 		"cache_behaviors":                 "CacheBehaviors",
 		"cache_policy_id":                 "CachePolicyId",

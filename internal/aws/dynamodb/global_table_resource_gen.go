@@ -738,6 +738,51 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 				setplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: PointInTimeRecoverySpecification
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "PointInTimeRecoveryEnabled": {
+		//	      "type": "boolean"
+		//	    },
+		//	    "RecoveryPeriodInDays": {
+		//	      "maximum": 35,
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"point_in_time_recovery_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PointInTimeRecoveryEnabled
+				"point_in_time_recovery_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: RecoveryPeriodInDays
+				"recovery_period_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.Between(1, 35),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Replicas
 		// CloudFormation resource type schema:
 		//
@@ -887,6 +932,11 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		//	        "properties": {
 		//	          "PointInTimeRecoveryEnabled": {
 		//	            "type": "boolean"
+		//	          },
+		//	          "RecoveryPeriodInDays": {
+		//	            "maximum": 35,
+		//	            "minimum": 1,
+		//	            "type": "integer"
 		//	          }
 		//	        },
 		//	        "type": "object"
@@ -1307,6 +1357,17 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 								Computed: true,
 								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 									boolplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: RecoveryPeriodInDays
+							"recovery_period_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.Int64{ /*START VALIDATORS*/
+									int64validator.Between(1, 35),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -2066,6 +2127,7 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		"read_on_demand_throughput_settings":   "ReadOnDemandThroughputSettings",
 		"read_provisioned_throughput_settings": "ReadProvisionedThroughputSettings",
 		"read_units_per_second":                "ReadUnitsPerSecond",
+		"recovery_period_in_days":              "RecoveryPeriodInDays",
 		"region":                               "Region",
 		"replica_stream_specification":         "ReplicaStreamSpecification",
 		"replicas":                             "Replicas",

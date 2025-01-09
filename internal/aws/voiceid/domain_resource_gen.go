@@ -49,7 +49,6 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
-			// Description is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: DomainId
 		// CloudFormation resource type schema:
@@ -81,7 +80,6 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.LengthBetween(1, 256),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9_-]*$"), ""),
 			}, /*END VALIDATORS*/
-			// Name is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: ServerSideEncryptionConfiguration
 		// CloudFormation resource type schema:
@@ -111,7 +109,6 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Required: true,
-			// ServerSideEncryptionConfiguration is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
@@ -217,11 +214,6 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"value":                                "Value",
 	})
 
-	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/Description",
-		"/properties/Name",
-		"/properties/ServerSideEncryptionConfiguration",
-	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

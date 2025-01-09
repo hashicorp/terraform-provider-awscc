@@ -231,7 +231,9 @@ func profileResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
+				boolplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
+			// RequireInstanceProperties is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: RoleArns
 		// CloudFormation resource type schema:
@@ -373,6 +375,9 @@ func profileResource(ctx context.Context) (resource.Resource, error) {
 		"value":                       "Value",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/RequireInstanceProperties",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

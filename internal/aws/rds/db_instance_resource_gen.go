@@ -522,6 +522,20 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: DatabaseInsightsMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"database_insights_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DbiResourceId
 		// CloudFormation resource type schema:
 		//
@@ -1620,6 +1634,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		"character_set_name":                       "CharacterSetName",
 		"copy_tags_to_snapshot":                    "CopyTagsToSnapshot",
 		"custom_iam_instance_profile":              "CustomIAMInstanceProfile",
+		"database_insights_mode":                   "DatabaseInsightsMode",
 		"db_cluster_identifier":                    "DBClusterIdentifier",
 		"db_cluster_snapshot_identifier":           "DBClusterSnapshotIdentifier",
 		"db_instance_arn":                          "DBInstanceArn",

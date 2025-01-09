@@ -259,7 +259,6 @@ func queueResource(ctx context.Context) (resource.Resource, error) {
 		//	    "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/transfer-destination/[-a-zA-Z0-9]*$",
 		//	    "type": "string"
 		//	  },
-		//	  "maxItems": 50,
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
@@ -269,7 +268,7 @@ func queueResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeBetween(1, 50),
+				listvalidator.SizeAtLeast(1),
 				listvalidator.ValueStringsAre(
 					stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/transfer-destination/[-a-zA-Z0-9]*$"), ""),
 				),
