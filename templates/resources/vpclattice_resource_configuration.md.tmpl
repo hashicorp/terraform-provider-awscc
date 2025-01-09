@@ -16,11 +16,12 @@ To use {{.Name}} on single AWS account:
 {{ tffile (printf "examples/resources/%s/awscc_vpclattice_resource_configuration_basic.tf" .Name)}}
 
 {{ .SchemaMarkdown | trimspace }}
+{{- if .HasImport }}
 
 ## Import
 
 Import is supported using the following syntax:
 
-```shell
-terraform import random_password.password securepassword
-```
+{{ codefile "shell" .ImportFile }}
+
+{{- end }}

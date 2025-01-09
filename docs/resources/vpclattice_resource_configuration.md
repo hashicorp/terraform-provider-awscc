@@ -83,5 +83,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-terraform import random_password.password securepassword
+$ terraform import awscc_vpclattice_resource_configuration.example "arn"
 ```
