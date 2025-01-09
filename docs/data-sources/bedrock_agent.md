@@ -102,6 +102,7 @@ Read-Only:
 - `description` (String) Description of function
 - `name` (String) Name for a resource.
 - `parameters` (Attributes Map) A map of parameter name and detail (see [below for nested schema](#nestedatt--action_groups--function_schema--functions--parameters))
+- `require_confirmation` (String) ENUM to check if action requires user confirmation
 
 <a id="nestedatt--action_groups--function_schema--functions--parameters"></a>
 ### Nested Schema for `action_groups.function_schema.functions.parameters`

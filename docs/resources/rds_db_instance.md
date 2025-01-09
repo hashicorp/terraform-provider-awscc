@@ -674,6 +674,7 @@ resource "awscc_rds_db_instance" "this" {
 
 ### Read-Only
 
+- `database_insights_mode` (String)
 - `db_instance_arn` (String)
 - `dbi_resource_id` (String)
 - `id` (String) Uniquely identifies the resource.

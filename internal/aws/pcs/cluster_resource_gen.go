@@ -580,7 +580,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"version":                         "Version",
 	})
 
-	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+	opts = opts.WithCreateTimeoutInMinutes(60).WithDeleteTimeoutInMinutes(60)
 
 	opts = opts.WithUpdateTimeoutInMinutes(60)
 

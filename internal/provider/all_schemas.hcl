@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1121 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1129 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -270,6 +270,11 @@ resource_schema "aws_appconfig_application" {
 
 resource_schema "aws_appconfig_configuration_profile" {
   cloudformation_type_name               = "AWS::AppConfig::ConfigurationProfile"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_appconfig_deployment" {
+  cloudformation_type_name               = "AWS::AppConfig::Deployment"
   suppress_plural_data_source_generation = true
 }
 
@@ -812,6 +817,10 @@ resource_schema "aws_cloudformation_type_activation" {
   cloudformation_type_name = "AWS::CloudFormation::TypeActivation"
 }
 
+resource_schema "aws_cloudfront_anycast_ip_list" {
+  cloudformation_type_name = "AWS::CloudFront::AnycastIpList"
+}
+
 resource_schema "aws_cloudfront_cache_policy" {
   cloudformation_type_name = "AWS::CloudFront::CachePolicy"
 }
@@ -1263,6 +1272,11 @@ resource_schema "aws_customerprofiles_domain" {
 
 resource_schema "aws_customerprofiles_event_stream" {
   cloudformation_type_name               = "AWS::CustomerProfiles::EventStream"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_customerprofiles_event_trigger" {
+  cloudformation_type_name               = "AWS::CustomerProfiles::EventTrigger"
   suppress_plural_data_source_generation = true
 }
 
@@ -2264,11 +2278,6 @@ resource_schema "aws_gamelift_container_fleet" {
 
 resource_schema "aws_gamelift_container_group_definition" {
   cloudformation_type_name = "AWS::GameLift::ContainerGroupDefinition"
-
-  # Latest schema updates are suppressed.
-  # git checkout internal/service/cloudformation/schemas/AWS_GameLift_ContainerGroupDefinition.json
-  # Suppression Reason: set of unknown type
-  # https://github.com/hashicorp/terraform-provider-awscc/issues/2069
 }
 
 resource_schema "aws_gamelift_fleet" {
@@ -3837,6 +3846,10 @@ resource_schema "aws_quicksight_analysis" {
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1531
 }
 
+resource_schema "aws_quicksight_custom_permissions" {
+  cloudformation_type_name = "AWS::QuickSight::CustomPermissions"
+}
+
 resource_schema "aws_quicksight_dashboard" {
   cloudformation_type_name               = "AWS::QuickSight::Dashboard"
   suppress_plural_data_source_generation = true
@@ -4557,6 +4570,10 @@ resource_schema "aws_sagemaker_model_quality_job_definition" {
 
 resource_schema "aws_sagemaker_monitoring_schedule" {
   cloudformation_type_name = "AWS::SageMaker::MonitoringSchedule"
+}
+
+resource_schema "aws_sagemaker_partner_app" {
+  cloudformation_type_name = "AWS::SageMaker::PartnerApp"
 }
 
 resource_schema "aws_sagemaker_pipeline" {

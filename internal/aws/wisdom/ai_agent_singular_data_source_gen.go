@@ -949,6 +949,15 @@ func aIAgentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: ModifiedTimeSeconds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "number"
+		//	}
+		"modified_time_seconds": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -1031,6 +1040,7 @@ func aIAgentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"knowledge_base_association_configuration_data": "KnowledgeBaseAssociationConfigurationData",
 		"manual_search_ai_agent_configuration":          "ManualSearchAIAgentConfiguration",
 		"max_results":                                   "MaxResults",
+		"modified_time_seconds":                         "ModifiedTimeSeconds",
 		"name":                                          "Name",
 		"or_conditions":                                 "OrConditions",
 		"override_knowledge_base_search_type":           "OverrideKnowledgeBaseSearchType",

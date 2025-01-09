@@ -746,6 +746,12 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "PointInTimeRecoveryEnabled": {
 		//	      "description": "Indicates whether point in time recovery is enabled (true) or disabled (false) on the table.",
 		//	      "type": "boolean"
+		//	    },
+		//	    "RecoveryPeriodInDays": {
+		//	      "description": "",
+		//	      "maximum": 35,
+		//	      "minimum": 1,
+		//	      "type": "integer"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -755,6 +761,11 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: PointInTimeRecoveryEnabled
 				"point_in_time_recovery_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "Indicates whether point in time recovery is enabled (true) or disabled (false) on the table.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RecoveryPeriodInDays
+				"recovery_period_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -1150,6 +1161,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"provisioned_throughput":               "ProvisionedThroughput",
 		"read_capacity_units":                  "ReadCapacityUnits",
 		"read_units_per_second":                "ReadUnitsPerSecond",
+		"recovery_period_in_days":              "RecoveryPeriodInDays",
 		"resource_policy":                      "ResourcePolicy",
 		"s3_bucket":                            "S3Bucket",
 		"s3_bucket_owner":                      "S3BucketOwner",

@@ -255,6 +255,36 @@ func membershipResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "MachineLearning": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "ModelInference": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "IsResponsible": {
+		//	              "type": "boolean"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "IsResponsible"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "ModelTraining": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "IsResponsible": {
+		//	              "type": "boolean"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "IsResponsible"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "QueryCompute": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -275,6 +305,58 @@ func membershipResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"payment_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MachineLearning
+				"machine_learning": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ModelInference
+						"model_inference": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IsResponsible
+								"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Bool{ /*START VALIDATORS*/
+										fwvalidators.NotNullBool(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ModelTraining
+						"model_training": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IsResponsible
+								"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Bool{ /*START VALIDATORS*/
+										fwvalidators.NotNullBool(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: QueryCompute
 				"query_compute": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -421,7 +503,10 @@ func membershipResource(ctx context.Context) (resource.Resource, error) {
 		"is_responsible":                   "IsResponsible",
 		"key":                              "Key",
 		"key_prefix":                       "KeyPrefix",
+		"machine_learning":                 "MachineLearning",
 		"membership_identifier":            "MembershipIdentifier",
+		"model_inference":                  "ModelInference",
+		"model_training":                   "ModelTraining",
 		"output_configuration":             "OutputConfiguration",
 		"payment_configuration":            "PaymentConfiguration",
 		"query_compute":                    "QueryCompute",

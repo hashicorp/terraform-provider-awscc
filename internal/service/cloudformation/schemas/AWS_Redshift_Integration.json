@@ -37,21 +37,7 @@
     },
     "KMSKeyId": {
       "type": "string",
-      "description": "An KMS key identifier for the key to use to encrypt the integration. If you don't specify an encryption key, the default AWS owned KMS key is used.",
-      "anyOf": [
-        {
-          "relationshipRef": {
-            "typeName": "AWS::KMS::Key",
-            "propertyPath": "/properties/Arn"
-          }
-        },
-        {
-          "relationshipRef": {
-            "typeName": "AWS::KMS::Key",
-            "propertyPath": "/properties/KeyId"
-          }
-        }
-      ]
+      "description": "An KMS key identifier for the key to use to encrypt the integration. If you don't specify an encryption key, the default AWS owned KMS key is used."
     },
     "AdditionalEncryptionContext": {
       "$ref": "#/definitions/EncryptionContextMap"
@@ -131,9 +117,10 @@
         "redshift:CreateTags",
         "redshift:DescribeTags",
         "redshift:DescribeClusters",
+        "redshift:CreateInboundIntegration",
+        "redshift-serverless:ListNamespaces",
         "kms:CreateGrant",
-        "kms:DescribeKey",
-        "redshift:CreateInboundIntegration"
+        "kms:DescribeKey"
       ]
     },
     "read": {
@@ -149,7 +136,8 @@
         "redshift:CreateTags",
         "redshift:DeleteTags",
         "redshift:DescribeClusters",
-        "redshift:DescribeTags"
+        "redshift:DescribeTags",
+        "redshift-serverless:ListNamespaces"
       ]
     },
     "delete": {

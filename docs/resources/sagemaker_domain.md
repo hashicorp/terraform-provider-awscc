@@ -235,9 +235,19 @@ Optional:
 Optional:
 
 - `efs_file_system_config` (Attributes) (see [below for nested schema](#nestedatt--default_user_settings--custom_file_system_configs--efs_file_system_config))
+- `fsx_lustre_file_system_config` (Attributes) (see [below for nested schema](#nestedatt--default_user_settings--custom_file_system_configs--fsx_lustre_file_system_config))
 
 <a id="nestedatt--default_user_settings--custom_file_system_configs--efs_file_system_config"></a>
 ### Nested Schema for `default_user_settings.custom_file_system_configs.efs_file_system_config`
+
+Optional:
+
+- `file_system_id` (String)
+- `file_system_path` (String)
+
+
+<a id="nestedatt--default_user_settings--custom_file_system_configs--fsx_lustre_file_system_config"></a>
+### Nested Schema for `default_user_settings.custom_file_system_configs.fsx_lustre_file_system_config`
 
 Optional:
 
@@ -462,9 +472,19 @@ Optional:
 Optional:
 
 - `efs_file_system_config` (Attributes) (see [below for nested schema](#nestedatt--default_space_settings--custom_file_system_configs--efs_file_system_config))
+- `fsx_lustre_file_system_config` (Attributes) (see [below for nested schema](#nestedatt--default_space_settings--custom_file_system_configs--fsx_lustre_file_system_config))
 
 <a id="nestedatt--default_space_settings--custom_file_system_configs--efs_file_system_config"></a>
 ### Nested Schema for `default_space_settings.custom_file_system_configs.efs_file_system_config`
+
+Optional:
+
+- `file_system_id` (String)
+- `file_system_path` (String)
+
+
+<a id="nestedatt--default_space_settings--custom_file_system_configs--fsx_lustre_file_system_config"></a>
+### Nested Schema for `default_space_settings.custom_file_system_configs.fsx_lustre_file_system_config`
 
 Optional:
 

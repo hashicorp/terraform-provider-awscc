@@ -246,6 +246,11 @@ func configurationSetResource(ctx context.Context) (resource.Resource, error) {
 		//	    "CustomRedirectDomain": {
 		//	      "description": "The domain to use for tracking open and click events.",
 		//	      "type": "string"
+		//	    },
+		//	    "HttpsPolicy": {
+		//	      "description": "The https policy to use for tracking open and click events.",
+		//	      "pattern": "REQUIRE|REQUIRE_OPEN_ONLY|OPTIONAL",
+		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -257,6 +262,18 @@ func configurationSetResource(ctx context.Context) (resource.Resource, error) {
 					Description: "The domain to use for tracking open and click events.",
 					Optional:    true,
 					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: HttpsPolicy
+				"https_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The https policy to use for tracking open and click events.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.RegexMatches(regexp.MustCompile("REQUIRE|REQUIRE_OPEN_ONLY|OPTIONAL"), ""),
+					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -394,6 +411,7 @@ func configurationSetResource(ctx context.Context) (resource.Resource, error) {
 		"delivery_options":           "DeliveryOptions",
 		"engagement_metrics":         "EngagementMetrics",
 		"guardian_options":           "GuardianOptions",
+		"https_policy":               "HttpsPolicy",
 		"max_delivery_seconds":       "MaxDeliverySeconds",
 		"name":                       "Name",
 		"optimized_shared_delivery":  "OptimizedSharedDelivery",

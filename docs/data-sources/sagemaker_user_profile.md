@@ -115,9 +115,19 @@ Read-Only:
 Read-Only:
 
 - `efs_file_system_config` (Attributes) (see [below for nested schema](#nestedatt--user_settings--custom_file_system_configs--efs_file_system_config))
+- `fsx_lustre_file_system_config` (Attributes) (see [below for nested schema](#nestedatt--user_settings--custom_file_system_configs--fsx_lustre_file_system_config))
 
 <a id="nestedatt--user_settings--custom_file_system_configs--efs_file_system_config"></a>
 ### Nested Schema for `user_settings.custom_file_system_configs.efs_file_system_config`
+
+Read-Only:
+
+- `file_system_id` (String)
+- `file_system_path` (String)
+
+
+<a id="nestedatt--user_settings--custom_file_system_configs--fsx_lustre_file_system_config"></a>
+### Nested Schema for `user_settings.custom_file_system_configs.fsx_lustre_file_system_config`
 
 Read-Only:
 

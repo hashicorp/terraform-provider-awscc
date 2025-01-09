@@ -428,8 +428,17 @@ Optional:
 
 Optional:
 
+- `bedrock_data_automation_configuration` (Attributes) Settings for a Bedrock Data Automation used to parse documents for a data source. (see [below for nested schema](#nestedatt--vector_ingestion_configuration--parsing_configuration--bedrock_data_automation_configuration))
 - `bedrock_foundation_model_configuration` (Attributes) Settings for a foundation model used to parse documents for a data source. (see [below for nested schema](#nestedatt--vector_ingestion_configuration--parsing_configuration--bedrock_foundation_model_configuration))
 - `parsing_strategy` (String) The parsing strategy for the data source.
+
+<a id="nestedatt--vector_ingestion_configuration--parsing_configuration--bedrock_data_automation_configuration"></a>
+### Nested Schema for `vector_ingestion_configuration.parsing_configuration.bedrock_data_automation_configuration`
+
+Optional:
+
+- `parsing_modality` (String) Determine how will parsed content be stored.
+
 
 <a id="nestedatt--vector_ingestion_configuration--parsing_configuration--bedrock_foundation_model_configuration"></a>
 ### Nested Schema for `vector_ingestion_configuration.parsing_configuration.bedrock_foundation_model_configuration`
@@ -437,6 +446,7 @@ Optional:
 Optional:
 
 - `model_arn` (String) The model's ARN.
+- `parsing_modality` (String) Determine how will parsed content be stored.
 - `parsing_prompt` (Attributes) Instructions for interpreting the contents of a document. (see [below for nested schema](#nestedatt--vector_ingestion_configuration--parsing_configuration--bedrock_foundation_model_configuration--parsing_prompt))
 
 <a id="nestedatt--vector_ingestion_configuration--parsing_configuration--bedrock_foundation_model_configuration--parsing_prompt"></a>

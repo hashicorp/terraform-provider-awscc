@@ -492,6 +492,17 @@ func bridgeResource(ctx context.Context) (resource.Resource, error) {
 		//	            "description": "The network source multicast IP.",
 		//	            "type": "string"
 		//	          },
+		//	          "MulticastSourceSettings": {
+		//	            "additionalProperties": false,
+		//	            "description": "The settings related to the multicast source.",
+		//	            "properties": {
+		//	              "MulticastSourceIp": {
+		//	                "description": "The IP address of the source for source-specific multicast (SSM).",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
 		//	          "Name": {
 		//	            "description": "The name of the network source.",
 		//	            "type": "string"
@@ -603,6 +614,26 @@ func bridgeResource(ctx context.Context) (resource.Resource, error) {
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
+							// Property: MulticastSourceSettings
+							"multicast_source_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: MulticastSourceIp
+									"multicast_source_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The IP address of the source for source-specific multicast (SSM).",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "The settings related to the multicast source.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: Name
 							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The name of the network source.",
@@ -706,6 +737,8 @@ func bridgeResource(ctx context.Context) (resource.Resource, error) {
 		"max_bitrate":                   "MaxBitrate",
 		"max_outputs":                   "MaxOutputs",
 		"multicast_ip":                  "MulticastIp",
+		"multicast_source_ip":           "MulticastSourceIp",
+		"multicast_source_settings":     "MulticastSourceSettings",
 		"name":                          "Name",
 		"network_name":                  "NetworkName",
 		"network_output":                "NetworkOutput",

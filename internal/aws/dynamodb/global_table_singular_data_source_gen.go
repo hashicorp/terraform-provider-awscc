@@ -500,6 +500,36 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 			}, /*END NESTED OBJECT*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: PointInTimeRecoverySpecification
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "PointInTimeRecoveryEnabled": {
+		//	      "type": "boolean"
+		//	    },
+		//	    "RecoveryPeriodInDays": {
+		//	      "maximum": 35,
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"point_in_time_recovery_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PointInTimeRecoveryEnabled
+				"point_in_time_recovery_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: RecoveryPeriodInDays
+				"recovery_period_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Replicas
 		// CloudFormation resource type schema:
 		//
@@ -649,6 +679,11 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "properties": {
 		//	          "PointInTimeRecoveryEnabled": {
 		//	            "type": "boolean"
+		//	          },
+		//	          "RecoveryPeriodInDays": {
+		//	            "maximum": 35,
+		//	            "minimum": 1,
+		//	            "type": "integer"
 		//	          }
 		//	        },
 		//	        "type": "object"
@@ -925,6 +960,10 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: PointInTimeRecoveryEnabled
 							"point_in_time_recovery_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: RecoveryPeriodInDays
+							"recovery_period_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
 								Computed: true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -1384,6 +1423,7 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"read_on_demand_throughput_settings":   "ReadOnDemandThroughputSettings",
 		"read_provisioned_throughput_settings": "ReadProvisionedThroughputSettings",
 		"read_units_per_second":                "ReadUnitsPerSecond",
+		"recovery_period_in_days":              "RecoveryPeriodInDays",
 		"region":                               "Region",
 		"replica_stream_specification":         "ReplicaStreamSpecification",
 		"replicas":                             "Replicas",

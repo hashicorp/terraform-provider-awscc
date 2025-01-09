@@ -1445,6 +1445,18 @@ func aIAgentResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ModifiedTimeSeconds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "number"
+		//	}
+		"modified_time_seconds": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Computed: true,
+			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+				float64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -1556,6 +1568,7 @@ func aIAgentResource(ctx context.Context) (resource.Resource, error) {
 		"knowledge_base_association_configuration_data": "KnowledgeBaseAssociationConfigurationData",
 		"manual_search_ai_agent_configuration":          "ManualSearchAIAgentConfiguration",
 		"max_results":                                   "MaxResults",
+		"modified_time_seconds":                         "ModifiedTimeSeconds",
 		"name":                                          "Name",
 		"or_conditions":                                 "OrConditions",
 		"override_knowledge_base_search_type":           "OverrideKnowledgeBaseSearchType",

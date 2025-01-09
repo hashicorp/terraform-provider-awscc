@@ -73,14 +73,14 @@ resource "awscc_backup_logically_air_gapped_backup_vault" "example" {
 - `access_policy` (String)
 - `backup_vault_tags` (Map of String)
 - `notifications` (Attributes) (see [below for nested schema](#nestedatt--notifications))
-- `vault_state` (String)
-- `vault_type` (String)
 
 ### Read-Only
 
 - `backup_vault_arn` (String)
 - `encryption_key_arn` (String)
 - `id` (String) Uniquely identifies the resource.
+- `vault_state` (String)
+- `vault_type` (String)
 
 <a id="nestedatt--notifications"></a>
 ### Nested Schema for `notifications`

@@ -135,6 +135,7 @@ Optional:
 
 Optional:
 
+- `ipv_6_allowed_for_dual_stack` (Boolean) Allow outbound IPv6 traffic on VPC canaries that are connected to dual-stack subnets if set to true
 - `security_group_ids` (List of String)
 - `subnet_ids` (List of String)
 - `vpc_id` (String)

@@ -36,16 +36,58 @@ Data Source schema for AWS::DMS::DataProvider
 
 Read-Only:
 
+- `doc_db_settings` (Attributes) DocDbSettings property identifier. (see [below for nested schema](#nestedatt--settings--doc_db_settings))
+- `maria_db_settings` (Attributes) MariaDbSettings property identifier. (see [below for nested schema](#nestedatt--settings--maria_db_settings))
 - `microsoft_sql_server_settings` (Attributes) MicrosoftSqlServerSettings property identifier. (see [below for nested schema](#nestedatt--settings--microsoft_sql_server_settings))
+- `mongo_db_settings` (Attributes) MongoDbSettings property identifier. (see [below for nested schema](#nestedatt--settings--mongo_db_settings))
 - `my_sql_settings` (Attributes) MySqlSettings property identifier. (see [below for nested schema](#nestedatt--settings--my_sql_settings))
 - `oracle_settings` (Attributes) OracleSettings property identifier. (see [below for nested schema](#nestedatt--settings--oracle_settings))
 - `postgre_sql_settings` (Attributes) PostgreSqlSettings property identifier. (see [below for nested schema](#nestedatt--settings--postgre_sql_settings))
+- `redshift_settings` (Attributes) RedshiftSettings property identifier. (see [below for nested schema](#nestedatt--settings--redshift_settings))
+
+<a id="nestedatt--settings--doc_db_settings"></a>
+### Nested Schema for `settings.doc_db_settings`
+
+Read-Only:
+
+- `certificate_arn` (String)
+- `database_name` (String)
+- `port` (Number)
+- `server_name` (String)
+- `ssl_mode` (String)
+
+
+<a id="nestedatt--settings--maria_db_settings"></a>
+### Nested Schema for `settings.maria_db_settings`
+
+Read-Only:
+
+- `certificate_arn` (String)
+- `port` (Number)
+- `server_name` (String)
+- `ssl_mode` (String)
+
 
 <a id="nestedatt--settings--microsoft_sql_server_settings"></a>
 ### Nested Schema for `settings.microsoft_sql_server_settings`
 
 Read-Only:
 
+- `certificate_arn` (String)
+- `database_name` (String)
+- `port` (Number)
+- `server_name` (String)
+- `ssl_mode` (String)
+
+
+<a id="nestedatt--settings--mongo_db_settings"></a>
+### Nested Schema for `settings.mongo_db_settings`
+
+Read-Only:
+
+- `auth_mechanism` (String)
+- `auth_source` (String)
+- `auth_type` (String)
 - `certificate_arn` (String)
 - `database_name` (String)
 - `port` (Number)
@@ -91,6 +133,16 @@ Read-Only:
 - `port` (Number)
 - `server_name` (String)
 - `ssl_mode` (String)
+
+
+<a id="nestedatt--settings--redshift_settings"></a>
+### Nested Schema for `settings.redshift_settings`
+
+Read-Only:
+
+- `database_name` (String)
+- `port` (Number)
+- `server_name` (String)
 
 
 

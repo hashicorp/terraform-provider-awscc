@@ -1,4 +1,19 @@
 ## 1.25.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_appconfig_deployment`
+* **New Data Source:** `awscc_cloudfront_anycast_ip_lists`
+* **New Data Source:** `awscc_customerprofiles_event_trigger`
+* **New Data Source:** `awscc_quicksight_custom_permissions`
+* **New Data Source:** `awscc_quicksight_custom_permissions_plural`
+* **New Data Source:** `awscc_sagemaker_partner_app`
+* **New Data Source:** `awscc_sagemaker_partner_apps`
+* **New Resource:** `awscc_appconfig_deployment`
+* **New Resource:** `awscc_customerprofiles_event_trigger`
+* **New Resource:** `awscc_quicksight_custom_permissions`
+* **New Resource:** `awscc_sagemaker_partner_app`
+
 ## 1.24.0 (December 19, 2024)
 
 FEATURES:

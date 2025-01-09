@@ -162,6 +162,42 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 		//	              ],
 		//	              "type": "object"
 		//	            },
+		//	            "DeliverToQBusiness": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "ActionFailurePolicy": {
+		//	                  "enum": [
+		//	                    "CONTINUE",
+		//	                    "DROP"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "ApplicationId": {
+		//	                  "maxLength": 36,
+		//	                  "minLength": 36,
+		//	                  "pattern": "^[a-z0-9-]+$",
+		//	                  "type": "string"
+		//	                },
+		//	                "IndexId": {
+		//	                  "maxLength": 36,
+		//	                  "minLength": 36,
+		//	                  "pattern": "^[a-z0-9-]+$",
+		//	                  "type": "string"
+		//	                },
+		//	                "RoleArn": {
+		//	                  "maxLength": 2048,
+		//	                  "minLength": 20,
+		//	                  "pattern": "^[a-zA-Z0-9:_/+=,@.#-]+$",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "ApplicationId",
+		//	                "IndexId",
+		//	                "RoleArn"
+		//	              ],
+		//	              "type": "object"
+		//	            },
 		//	            "Drop": {
 		//	              "additionalProperties": false,
 		//	              "type": "object"
@@ -928,6 +964,69 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthBetween(1, 2048),
 												stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9:_/+=,@.#-]+$"), ""),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: RoleArn
+										"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthBetween(20, 2048),
+												stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9:_/+=,@.#-]+$"), ""),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: DeliverToQBusiness
+								"deliver_to_q_business": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ActionFailurePolicy
+										"action_failure_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"CONTINUE",
+													"DROP",
+												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: ApplicationId
+										"application_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthBetween(36, 36),
+												stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9-]+$"), ""),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: IndexId
+										"index_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthBetween(36, 36),
+												stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9-]+$"), ""),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2161,16 +2260,19 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 		"add_header":            "AddHeader",
 		"analysis":              "Analysis",
 		"analyzer":              "Analyzer",
+		"application_id":        "ApplicationId",
 		"archive":               "Archive",
 		"attribute":             "Attribute",
 		"boolean_expression":    "BooleanExpression",
 		"conditions":            "Conditions",
 		"deliver_to_mailbox":    "DeliverToMailbox",
+		"deliver_to_q_business": "DeliverToQBusiness",
 		"dmarc_expression":      "DmarcExpression",
 		"drop":                  "Drop",
 		"evaluate":              "Evaluate",
 		"header_name":           "HeaderName",
 		"header_value":          "HeaderValue",
+		"index_id":              "IndexId",
 		"ip_expression":         "IpExpression",
 		"key":                   "Key",
 		"mail_from":             "MailFrom",

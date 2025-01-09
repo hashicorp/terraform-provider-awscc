@@ -33,6 +33,7 @@ Definition of AWS::Wisdom::AIAgent Resource Type
 - `ai_agent_id` (String)
 - `assistant_arn` (String)
 - `id` (String) Uniquely identifies the resource.
+- `modified_time_seconds` (Number)
 
 <a id="nestedatt--configuration"></a>
 ### Nested Schema for `configuration`

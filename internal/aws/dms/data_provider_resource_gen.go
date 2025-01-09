@@ -131,12 +131,16 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "description": "The property describes a data engine for the data provider.",
 		//	  "enum": [
-		//	    "postgres",
+		//	    "aurora",
+		//	    "aurora_postgresql",
 		//	    "mysql",
 		//	    "oracle",
+		//	    "postgres",
 		//	    "sqlserver",
-		//	    "aurora",
-		//	    "aurora_postgresql"
+		//	    "redshift",
+		//	    "mariadb",
+		//	    "mongodb",
+		//	    "docdb"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -145,12 +149,16 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
-					"postgres",
-					"mysql",
-					"oracle",
-					"sqlserver",
 					"aurora",
 					"aurora_postgresql",
+					"mysql",
+					"oracle",
+					"postgres",
+					"sqlserver",
+					"redshift",
+					"mariadb",
+					"mongodb",
+					"docdb",
 				),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -197,10 +205,92 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	      "required": [
 		//	        "MicrosoftSqlServerSettings"
 		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "RedshiftSettings"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "DocDbSettings"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "MariaDbSettings"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "MongoDbSettings"
+		//	      ]
 		//	    }
 		//	  ],
 		//	  "description": "The property identifies the exact type of settings for the data provider.",
 		//	  "properties": {
+		//	    "DocDbSettings": {
+		//	      "additionalProperties": false,
+		//	      "description": "DocDbSettings property identifier.",
+		//	      "properties": {
+		//	        "CertificateArn": {
+		//	          "type": "string"
+		//	        },
+		//	        "DatabaseName": {
+		//	          "type": "string"
+		//	        },
+		//	        "Port": {
+		//	          "type": "integer"
+		//	        },
+		//	        "ServerName": {
+		//	          "type": "string"
+		//	        },
+		//	        "SslMode": {
+		//	          "enum": [
+		//	            "none",
+		//	            "require",
+		//	            "verify-full"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ServerName",
+		//	        "Port",
+		//	        "DatabaseName"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "MariaDbSettings": {
+		//	      "additionalProperties": false,
+		//	      "description": "MariaDbSettings property identifier.",
+		//	      "properties": {
+		//	        "CertificateArn": {
+		//	          "type": "string"
+		//	        },
+		//	        "Port": {
+		//	          "type": "integer"
+		//	        },
+		//	        "ServerName": {
+		//	          "type": "string"
+		//	        },
+		//	        "SslMode": {
+		//	          "enum": [
+		//	            "none",
+		//	            "require",
+		//	            "verify-ca",
+		//	            "verify-full"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ServerName",
+		//	        "Port",
+		//	        "SslMode"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "MicrosoftSqlServerSettings": {
 		//	      "additionalProperties": false,
 		//	      "description": "MicrosoftSqlServerSettings property identifier.",
@@ -232,6 +322,55 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	        "Port",
 		//	        "SslMode",
 		//	        "DatabaseName"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "MongoDbSettings": {
+		//	      "additionalProperties": false,
+		//	      "description": "MongoDbSettings property identifier.",
+		//	      "properties": {
+		//	        "AuthMechanism": {
+		//	          "enum": [
+		//	            "default",
+		//	            "mongodb_cr",
+		//	            "scram_sha_1"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "AuthSource": {
+		//	          "type": "string"
+		//	        },
+		//	        "AuthType": {
+		//	          "enum": [
+		//	            "no",
+		//	            "password"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "CertificateArn": {
+		//	          "type": "string"
+		//	        },
+		//	        "DatabaseName": {
+		//	          "type": "string"
+		//	        },
+		//	        "Port": {
+		//	          "type": "integer"
+		//	        },
+		//	        "ServerName": {
+		//	          "type": "string"
+		//	        },
+		//	        "SslMode": {
+		//	          "enum": [
+		//	            "none",
+		//	            "require",
+		//	            "verify-full"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ServerName",
+		//	        "Port"
 		//	      ],
 		//	      "type": "object"
 		//	    },
@@ -347,12 +486,158 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	        "DatabaseName"
 		//	      ],
 		//	      "type": "object"
+		//	    },
+		//	    "RedshiftSettings": {
+		//	      "additionalProperties": false,
+		//	      "description": "RedshiftSettings property identifier.",
+		//	      "properties": {
+		//	        "DatabaseName": {
+		//	          "type": "string"
+		//	        },
+		//	        "Port": {
+		//	          "type": "integer"
+		//	        },
+		//	        "ServerName": {
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ServerName",
+		//	        "Port",
+		//	        "DatabaseName"
+		//	      ],
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
 		//	}
 		"settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DocDbSettings
+				"doc_db_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CertificateArn
+						"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: DatabaseName
+						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								fwvalidators.NotNullInt64(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ServerName
+						"server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SslMode
+						"ssl_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"none",
+									"require",
+									"verify-full",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "DocDbSettings property identifier.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MariaDbSettings
+				"maria_db_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CertificateArn
+						"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								fwvalidators.NotNullInt64(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ServerName
+						"server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SslMode
+						"ssl_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"none",
+									"require",
+									"verify-ca",
+									"verify-full",
+								),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "MariaDbSettings property identifier.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: MicrosoftSqlServerSettings
 				"microsoft_sql_server_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -416,6 +701,107 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "MicrosoftSqlServerSettings property identifier.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MongoDbSettings
+				"mongo_db_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AuthMechanism
+						"auth_mechanism": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"default",
+									"mongodb_cr",
+									"scram_sha_1",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: AuthSource
+						"auth_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: AuthType
+						"auth_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"no",
+									"password",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: CertificateArn
+						"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: DatabaseName
+						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								fwvalidators.NotNullInt64(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ServerName
+						"server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SslMode
+						"ssl_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"none",
+									"require",
+									"verify-full",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "MongoDbSettings property identifier.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -658,6 +1044,50 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: RedshiftSettings
+				"redshift_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DatabaseName
+						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								fwvalidators.NotNullInt64(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ServerName
+						"server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "RedshiftSettings property identifier.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The property identifies the exact type of settings for the data provider.",
 			Optional:    true,
@@ -759,6 +1189,9 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"asm_server":                    "AsmServer",
+		"auth_mechanism":                "AuthMechanism",
+		"auth_source":                   "AuthSource",
+		"auth_type":                     "AuthType",
 		"certificate_arn":               "CertificateArn",
 		"data_provider_arn":             "DataProviderArn",
 		"data_provider_creation_time":   "DataProviderCreationTime",
@@ -766,14 +1199,18 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 		"data_provider_name":            "DataProviderName",
 		"database_name":                 "DatabaseName",
 		"description":                   "Description",
+		"doc_db_settings":               "DocDbSettings",
 		"engine":                        "Engine",
 		"exact_settings":                "ExactSettings",
 		"key":                           "Key",
+		"maria_db_settings":             "MariaDbSettings",
 		"microsoft_sql_server_settings": "MicrosoftSqlServerSettings",
+		"mongo_db_settings":             "MongoDbSettings",
 		"my_sql_settings":               "MySqlSettings",
 		"oracle_settings":               "OracleSettings",
 		"port":                          "Port",
 		"postgre_sql_settings":          "PostgreSqlSettings",
+		"redshift_settings":             "RedshiftSettings",
 		"secrets_manager_oracle_asm_access_role_arn":             "SecretsManagerOracleAsmAccessRoleArn",
 		"secrets_manager_oracle_asm_secret_id":                   "SecretsManagerOracleAsmSecretId",
 		"secrets_manager_security_db_encryption_access_role_arn": "SecretsManagerSecurityDbEncryptionAccessRoleArn",

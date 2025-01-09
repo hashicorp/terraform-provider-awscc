@@ -113,7 +113,7 @@
       ]
     },
     "ArnResource": {
-      "pattern": "",
+      "pattern": "^arn.*",
       "type": "string",
       "maxLength": 1224
     },

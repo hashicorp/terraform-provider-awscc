@@ -21,7 +21,8 @@ Data Source schema for AWS::Logs::MetricFilter
 
 ### Read-Only
 
-- `apply_on_transformed_logs` (Boolean)
+- `apply_on_transformed_logs` (Boolean) This parameter is valid only for log groups that have an active log transformer. For more information about log transformers, see [PutTransformer](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutTransformer.html).
+ If this value is ``true``, the metric filter is applied on the transformed version of the log events instead of the original ingested log events.
 - `filter_name` (String) The name of the metric filter.
 - `filter_pattern` (String) A filter pattern for extracting metric data out of ingested log events. For more information, see [Filter and Pattern Syntax](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html).
 - `log_group_name` (String) The name of an existing log group that you want to associate with this metric filter.

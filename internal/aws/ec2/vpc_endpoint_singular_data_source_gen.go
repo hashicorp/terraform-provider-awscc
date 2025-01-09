@@ -257,6 +257,48 @@ func vPCEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The IDs of the subnets in which to create endpoint network interfaces. You must specify this property for an interface endpoint or a Gateway Load Balancer endpoint. You can't specify this property for a gateway endpoint. For a Gateway Load Balancer endpoint, you can specify only one subnet.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Value",
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcEndpointType
 		// CloudFormation resource type schema:
 		//
@@ -308,6 +350,7 @@ func vPCEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"dns_options":           "DnsOptions",
 		"dns_record_ip_type":    "DnsRecordIpType",
 		"ip_address_type":       "IpAddressType",
+		"key":                   "Key",
 		"network_interface_ids": "NetworkInterfaceIds",
 		"policy_document":       "PolicyDocument",
 		"private_dns_enabled":   "PrivateDnsEnabled",
@@ -318,6 +361,8 @@ func vPCEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"service_name":                                   "ServiceName",
 		"service_network_arn":                            "ServiceNetworkArn",
 		"subnet_ids":                                     "SubnetIds",
+		"tags":                                           "Tags",
+		"value":                                          "Value",
 		"vpc_endpoint_id":                                "Id",
 		"vpc_endpoint_type":                              "VpcEndpointType",
 		"vpc_id":                                         "VpcId",

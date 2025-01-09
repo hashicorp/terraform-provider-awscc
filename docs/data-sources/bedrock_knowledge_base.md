@@ -39,8 +39,17 @@ Data Source schema for AWS::Bedrock::KnowledgeBase
 
 Read-Only:
 
+- `kendra_knowledge_base_configuration` (Attributes) Configurations for a Kendra knowledge base (see [below for nested schema](#nestedatt--knowledge_base_configuration--kendra_knowledge_base_configuration))
 - `type` (String) The type of a knowledge base.
 - `vector_knowledge_base_configuration` (Attributes) Contains details about the model used to create vector embeddings for the knowledge base. (see [below for nested schema](#nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration))
+
+<a id="nestedatt--knowledge_base_configuration--kendra_knowledge_base_configuration"></a>
+### Nested Schema for `knowledge_base_configuration.kendra_knowledge_base_configuration`
+
+Read-Only:
+
+- `kendra_index_arn` (String) Arn of a Kendra index
+
 
 <a id="nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration"></a>
 ### Nested Schema for `knowledge_base_configuration.vector_knowledge_base_configuration`
@@ -49,6 +58,7 @@ Read-Only:
 
 - `embedding_model_arn` (String) The ARN of the model used to create vector embeddings for the knowledge base.
 - `embedding_model_configuration` (Attributes) The embeddings model configuration details for the vector model used in Knowledge Base. (see [below for nested schema](#nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration--embedding_model_configuration))
+- `supplemental_data_storage_configuration` (Attributes) Configurations for supplemental data storage. (see [below for nested schema](#nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration--supplemental_data_storage_configuration))
 
 <a id="nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration--embedding_model_configuration"></a>
 ### Nested Schema for `knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_configuration`
@@ -63,6 +73,31 @@ Read-Only:
 Read-Only:
 
 - `dimensions` (Number) The dimensions details for the vector configuration used on the Bedrock embeddings model.
+
+
+
+<a id="nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration--supplemental_data_storage_configuration"></a>
+### Nested Schema for `knowledge_base_configuration.vector_knowledge_base_configuration.supplemental_data_storage_configuration`
+
+Read-Only:
+
+- `supplemental_data_storage_locations` (Attributes List) List of supplemental data storage locations. (see [below for nested schema](#nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration--supplemental_data_storage_configuration--supplemental_data_storage_locations))
+
+<a id="nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration--supplemental_data_storage_configuration--supplemental_data_storage_locations"></a>
+### Nested Schema for `knowledge_base_configuration.vector_knowledge_base_configuration.supplemental_data_storage_configuration.supplemental_data_storage_locations`
+
+Read-Only:
+
+- `s3_location` (Attributes) An Amazon S3 location. (see [below for nested schema](#nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration--supplemental_data_storage_configuration--supplemental_data_storage_locations--s3_location))
+- `supplemental_data_storage_location_type` (String) Supplemental data storage location type.
+
+<a id="nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration--supplemental_data_storage_configuration--supplemental_data_storage_locations--s3_location"></a>
+### Nested Schema for `knowledge_base_configuration.vector_knowledge_base_configuration.supplemental_data_storage_configuration.supplemental_data_storage_locations.s3_location`
+
+Read-Only:
+
+- `uri` (String) The location's URI
+
 
 
 

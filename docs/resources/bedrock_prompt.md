@@ -78,11 +78,28 @@ resource "awscc_bedrock_prompt" "example" {
 
 Optional:
 
+- `gen_ai_resource` (Attributes) Target resource to invoke with Prompt (see [below for nested schema](#nestedatt--variants--gen_ai_resource))
 - `inference_configuration` (Attributes) Model inference configuration (see [below for nested schema](#nestedatt--variants--inference_configuration))
 - `model_id` (String) ARN or Id of a Bedrock Foundational Model or Inference Profile, or the ARN of a imported model, or a provisioned throughput ARN for custom models.
 - `name` (String) Name for a variant.
 - `template_configuration` (Attributes) Prompt template configuration (see [below for nested schema](#nestedatt--variants--template_configuration))
 - `template_type` (String) Prompt template type
+
+<a id="nestedatt--variants--gen_ai_resource"></a>
+### Nested Schema for `variants.gen_ai_resource`
+
+Optional:
+
+- `agent` (Attributes) Target Agent to invoke with Prompt (see [below for nested schema](#nestedatt--variants--gen_ai_resource--agent))
+
+<a id="nestedatt--variants--gen_ai_resource--agent"></a>
+### Nested Schema for `variants.gen_ai_resource.agent`
+
+Optional:
+
+- `agent_identifier` (String) Arn representation of the Agent Alias.
+
+
 
 <a id="nestedatt--variants--inference_configuration"></a>
 ### Nested Schema for `variants.inference_configuration`
@@ -108,7 +125,105 @@ Optional:
 
 Optional:
 
+- `chat` (Attributes) Configuration for chat prompt template (see [below for nested schema](#nestedatt--variants--template_configuration--chat))
 - `text` (Attributes) Configuration for text prompt template (see [below for nested schema](#nestedatt--variants--template_configuration--text))
+
+<a id="nestedatt--variants--template_configuration--chat"></a>
+### Nested Schema for `variants.template_configuration.chat`
+
+Optional:
+
+- `input_variables` (Attributes List) List of input variables (see [below for nested schema](#nestedatt--variants--template_configuration--chat--input_variables))
+- `messages` (Attributes List) List of messages for chat prompt template (see [below for nested schema](#nestedatt--variants--template_configuration--chat--messages))
+- `system` (Attributes List) Configuration for chat prompt template (see [below for nested schema](#nestedatt--variants--template_configuration--chat--system))
+- `tool_configuration` (Attributes) Tool configuration (see [below for nested schema](#nestedatt--variants--template_configuration--chat--tool_configuration))
+
+<a id="nestedatt--variants--template_configuration--chat--input_variables"></a>
+### Nested Schema for `variants.template_configuration.chat.input_variables`
+
+Optional:
+
+- `name` (String) Name for an input variable
+
+
+<a id="nestedatt--variants--template_configuration--chat--messages"></a>
+### Nested Schema for `variants.template_configuration.chat.messages`
+
+Optional:
+
+- `content` (Attributes List) List of Content Blocks (see [below for nested schema](#nestedatt--variants--template_configuration--chat--messages--content))
+- `role` (String) Conversation roles for the chat prompt
+
+<a id="nestedatt--variants--template_configuration--chat--messages--content"></a>
+### Nested Schema for `variants.template_configuration.chat.messages.content`
+
+Optional:
+
+- `text` (String) Configuration for chat prompt template
+
+
+
+<a id="nestedatt--variants--template_configuration--chat--system"></a>
+### Nested Schema for `variants.template_configuration.chat.system`
+
+Optional:
+
+- `text` (String) Configuration for chat prompt template
+
+
+<a id="nestedatt--variants--template_configuration--chat--tool_configuration"></a>
+### Nested Schema for `variants.template_configuration.chat.tool_configuration`
+
+Optional:
+
+- `tool_choice` (Attributes) Tool choice (see [below for nested schema](#nestedatt--variants--template_configuration--chat--tool_configuration--tool_choice))
+- `tools` (Attributes List) List of Tools (see [below for nested schema](#nestedatt--variants--template_configuration--chat--tool_configuration--tools))
+
+<a id="nestedatt--variants--template_configuration--chat--tool_configuration--tool_choice"></a>
+### Nested Schema for `variants.template_configuration.chat.tool_configuration.tool_choice`
+
+Optional:
+
+- `any` (String) Any Tool choice
+- `auto` (String) Auto Tool choice
+- `tool` (Attributes) Specific Tool choice (see [below for nested schema](#nestedatt--variants--template_configuration--chat--tool_configuration--tool_choice--tool))
+
+<a id="nestedatt--variants--template_configuration--chat--tool_configuration--tool_choice--tool"></a>
+### Nested Schema for `variants.template_configuration.chat.tool_configuration.tool_choice.tool`
+
+Optional:
+
+- `name` (String) Tool name
+
+
+
+<a id="nestedatt--variants--template_configuration--chat--tool_configuration--tools"></a>
+### Nested Schema for `variants.template_configuration.chat.tool_configuration.tools`
+
+Optional:
+
+- `tool_spec` (Attributes) Tool specification (see [below for nested schema](#nestedatt--variants--template_configuration--chat--tool_configuration--tools--tool_spec))
+
+<a id="nestedatt--variants--template_configuration--chat--tool_configuration--tools--tool_spec"></a>
+### Nested Schema for `variants.template_configuration.chat.tool_configuration.tools.tool_spec`
+
+Optional:
+
+- `description` (String)
+- `input_schema` (Attributes) Tool input schema (see [below for nested schema](#nestedatt--variants--template_configuration--chat--tool_configuration--tools--tool_spec--input_schema))
+- `name` (String) Tool name
+
+<a id="nestedatt--variants--template_configuration--chat--tool_configuration--tools--tool_spec--input_schema"></a>
+### Nested Schema for `variants.template_configuration.chat.tool_configuration.tools.tool_spec.input_schema`
+
+Optional:
+
+- `json` (String)
+
+
+
+
+
 
 <a id="nestedatt--variants--template_configuration--text"></a>
 ### Nested Schema for `variants.template_configuration.text`

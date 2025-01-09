@@ -1058,6 +1058,12 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		//	    "PointInTimeRecoveryEnabled": {
 		//	      "description": "Indicates whether point in time recovery is enabled (true) or disabled (false) on the table.",
 		//	      "type": "boolean"
+		//	    },
+		//	    "RecoveryPeriodInDays": {
+		//	      "description": "",
+		//	      "maximum": 35,
+		//	      "minimum": 1,
+		//	      "type": "integer"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -1071,6 +1077,18 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: RecoveryPeriodInDays
+				"recovery_period_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.Between(1, 35),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -1608,6 +1626,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		"provisioned_throughput":               "ProvisionedThroughput",
 		"read_capacity_units":                  "ReadCapacityUnits",
 		"read_units_per_second":                "ReadUnitsPerSecond",
+		"recovery_period_in_days":              "RecoveryPeriodInDays",
 		"resource_policy":                      "ResourcePolicy",
 		"s3_bucket":                            "S3Bucket",
 		"s3_bucket_owner":                      "S3BucketOwner",

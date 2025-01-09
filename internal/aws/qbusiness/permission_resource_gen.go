@@ -80,14 +80,14 @@ func permissionResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "maxLength": 1284,
 		//	  "minLength": 1,
-		//	  "pattern": "^arn:aws:iam::[0-9]{12}:role/.+",
+		//	  "pattern": "^arn:aws:iam::[0-9]{12}:role/[a-zA-Z0-9_/+=,.@-]+$",
 		//	  "type": "string"
 		//	}
 		"principal": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 1284),
-				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws:iam::[0-9]{12}:role/.+"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws:iam::[0-9]{12}:role/[a-zA-Z0-9_/+=,.@-]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),

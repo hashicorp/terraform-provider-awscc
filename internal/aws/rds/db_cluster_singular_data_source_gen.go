@@ -82,11 +82,11 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Specifies whether minor engine upgrades are applied automatically to the DB cluster during the maintenance window. By default, minor engine upgrades are applied automatically.\n Valid for Cluster Type: Multi-AZ DB clusters only",
+		//	  "description": "Specifies whether minor engine upgrades are applied automatically to the DB cluster during the maintenance window. By default, minor engine upgrades are applied automatically.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB cluster",
 		//	  "type": "boolean"
 		//	}
 		"auto_minor_version_upgrade": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether minor engine upgrades are applied automatically to the DB cluster during the maintenance window. By default, minor engine upgrades are applied automatically.\n Valid for Cluster Type: Multi-AZ DB clusters only",
+			Description: "Specifies whether minor engine upgrades are applied automatically to the DB cluster during the maintenance window. By default, minor engine upgrades are applied automatically.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB cluster",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityZones
@@ -243,6 +243,17 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Reserved for future use.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: DatabaseInsightsMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The mode of Database Insights to enable for the DB cluster.\n If you set this value to ``advanced``, you must also set the ``PerformanceInsightsEnabled`` parameter to ``true`` and the ``PerformanceInsightsRetentionPeriod`` parameter to 465.\n Valid for Cluster Type: Aurora DB clusters only",
+		//	  "type": "string"
+		//	}
+		"database_insights_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The mode of Database Insights to enable for the DB cluster.\n If you set this value to ``advanced``, you must also set the ``PerformanceInsightsEnabled`` parameter to ``true`` and the ``PerformanceInsightsRetentionPeriod`` parameter to 465.\n Valid for Cluster Type: Aurora DB clusters only",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DatabaseName
 		// CloudFormation resource type schema:
 		//
@@ -318,11 +329,11 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Specifies whether to enable the HTTP endpoint for the DB cluster. By default, the HTTP endpoint isn't enabled.\n When enabled, the HTTP endpoint provides a connectionless web service API (RDS Data API) for running SQL queries on the DB cluster. You can also query your database from inside the RDS console with the RDS query editor.\n RDS Data API is supported with the following DB clusters:\n  +  Aurora PostgreSQL Serverless v2 and provisioned\n  +  Aurora PostgreSQL and Aurora MySQL Serverless v1\n  \n For more information, see [Using RDS Data API](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html) in the *Amazon Aurora User Guide*.\n Valid for Cluster Type: Aurora DB clusters only",
+		//	  "description": "Specifies whether to enable the HTTP endpoint for the DB cluster. By default, the HTTP endpoint isn't enabled.\n When enabled, the HTTP endpoint provides a connectionless web service API (RDS Data API) for running SQL queries on the DB cluster. You can also query your database from inside the RDS console with the RDS query editor.\n For more information, see [Using RDS Data API](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html) in the *Amazon Aurora User Guide*.\n Valid for Cluster Type: Aurora DB clusters only",
 		//	  "type": "boolean"
 		//	}
 		"enable_http_endpoint": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether to enable the HTTP endpoint for the DB cluster. By default, the HTTP endpoint isn't enabled.\n When enabled, the HTTP endpoint provides a connectionless web service API (RDS Data API) for running SQL queries on the DB cluster. You can also query your database from inside the RDS console with the RDS query editor.\n RDS Data API is supported with the following DB clusters:\n  +  Aurora PostgreSQL Serverless v2 and provisioned\n  +  Aurora PostgreSQL and Aurora MySQL Serverless v1\n  \n For more information, see [Using RDS Data API](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html) in the *Amazon Aurora User Guide*.\n Valid for Cluster Type: Aurora DB clusters only",
+			Description: "Specifies whether to enable the HTTP endpoint for the DB cluster. By default, the HTTP endpoint isn't enabled.\n When enabled, the HTTP endpoint provides a connectionless web service API (RDS Data API) for running SQL queries on the DB cluster. You can also query your database from inside the RDS console with the RDS query editor.\n For more information, see [Using RDS Data API](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html) in the *Amazon Aurora User Guide*.\n Valid for Cluster Type: Aurora DB clusters only",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EnableIAMDatabaseAuthentication
@@ -488,7 +499,7 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The secret managed by RDS in AWS Secrets Manager for the master user password.\n For more information, see [Password management with Secrets Manager](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html) in the *Amazon RDS User Guide* and [Password management with Secrets Manager](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-secrets-manager.html) in the *Amazon Aurora User Guide.*",
+		//	  "description": "The secret managed by RDS in AWS Secrets Manager for the master user password.\n  When you restore a DB cluster from a snapshot, Amazon RDS generates a new secret instead of reusing the secret specified in the ``SecretArn`` property. This ensures that the restored DB cluster is securely managed with a dedicated secret. To maintain consistent integration with your application, you might need to update resource configurations to reference the newly created secret.\n  For more information, see [Password management with Secrets Manager](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html) in the *Amazon RDS User Guide* and [Password management with Secrets Manager](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-secrets-manager.html) in the *Amazon Aurora User Guide.*",
 		//	  "properties": {
 		//	    "KmsKeyId": {
 		//	      "description": "The AWS KMS key identifier that is used to encrypt the secret.",
@@ -514,7 +525,7 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The secret managed by RDS in AWS Secrets Manager for the master user password.\n For more information, see [Password management with Secrets Manager](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html) in the *Amazon RDS User Guide* and [Password management with Secrets Manager](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-secrets-manager.html) in the *Amazon Aurora User Guide.*",
+			Description: "The secret managed by RDS in AWS Secrets Manager for the master user password.\n  When you restore a DB cluster from a snapshot, Amazon RDS generates a new secret instead of reusing the secret specified in the ``SecretArn`` property. This ensures that the restored DB cluster is securely managed with a dedicated secret. To maintain consistent integration with your application, you might need to update resource configurations to reference the newly created secret.\n  For more information, see [Password management with Secrets Manager](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html) in the *Amazon RDS User Guide* and [Password management with Secrets Manager](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-secrets-manager.html) in the *Amazon Aurora User Guide.*",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MasterUsername
@@ -534,22 +545,22 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB cluster. To turn off collecting Enhanced Monitoring metrics, specify ``0``.\n If ``MonitoringRoleArn`` is specified, also set ``MonitoringInterval`` to a value other than ``0``.\n Valid for Cluster Type: Multi-AZ DB clusters only\n Valid Values: ``0 | 1 | 5 | 10 | 15 | 30 | 60`` \n Default: ``0``",
+		//	  "description": "The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB cluster. To turn off collecting Enhanced Monitoring metrics, specify ``0``.\n If ``MonitoringRoleArn`` is specified, also set ``MonitoringInterval`` to a value other than ``0``.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters\n Valid Values: ``0 | 1 | 5 | 10 | 15 | 30 | 60`` \n Default: ``0``",
 		//	  "type": "integer"
 		//	}
 		"monitoring_interval": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB cluster. To turn off collecting Enhanced Monitoring metrics, specify ``0``.\n If ``MonitoringRoleArn`` is specified, also set ``MonitoringInterval`` to a value other than ``0``.\n Valid for Cluster Type: Multi-AZ DB clusters only\n Valid Values: ``0 | 1 | 5 | 10 | 15 | 30 | 60`` \n Default: ``0``",
+			Description: "The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB cluster. To turn off collecting Enhanced Monitoring metrics, specify ``0``.\n If ``MonitoringRoleArn`` is specified, also set ``MonitoringInterval`` to a value other than ``0``.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters\n Valid Values: ``0 | 1 | 5 | 10 | 15 | 30 | 60`` \n Default: ``0``",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MonitoringRoleArn
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The Amazon Resource Name (ARN) for the IAM role that permits RDS to send Enhanced Monitoring metrics to Amazon CloudWatch Logs. An example is ``arn:aws:iam:123456789012:role/emaccess``. For information on creating a monitoring role, see [Setting up and enabling Enhanced Monitoring](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html#USER_Monitoring.OS.Enabling) in the *Amazon RDS User Guide*.\n If ``MonitoringInterval`` is set to a value other than ``0``, supply a ``MonitoringRoleArn`` value.\n Valid for Cluster Type: Multi-AZ DB clusters only",
+		//	  "description": "The Amazon Resource Name (ARN) for the IAM role that permits RDS to send Enhanced Monitoring metrics to Amazon CloudWatch Logs. An example is ``arn:aws:iam:123456789012:role/emaccess``. For information on creating a monitoring role, see [Setting up and enabling Enhanced Monitoring](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html#USER_Monitoring.OS.Enabling) in the *Amazon RDS User Guide*.\n If ``MonitoringInterval`` is set to a value other than ``0``, supply a ``MonitoringRoleArn`` value.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters",
 		//	  "type": "string"
 		//	}
 		"monitoring_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) for the IAM role that permits RDS to send Enhanced Monitoring metrics to Amazon CloudWatch Logs. An example is ``arn:aws:iam:123456789012:role/emaccess``. For information on creating a monitoring role, see [Setting up and enabling Enhanced Monitoring](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html#USER_Monitoring.OS.Enabling) in the *Amazon RDS User Guide*.\n If ``MonitoringInterval`` is set to a value other than ``0``, supply a ``MonitoringRoleArn`` value.\n Valid for Cluster Type: Multi-AZ DB clusters only",
+			Description: "The Amazon Resource Name (ARN) for the IAM role that permits RDS to send Enhanced Monitoring metrics to Amazon CloudWatch Logs. An example is ``arn:aws:iam:123456789012:role/emaccess``. For information on creating a monitoring role, see [Setting up and enabling Enhanced Monitoring](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html#USER_Monitoring.OS.Enabling) in the *Amazon RDS User Guide*.\n If ``MonitoringInterval`` is set to a value other than ``0``, supply a ``MonitoringRoleArn`` value.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NetworkType
@@ -567,33 +578,33 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Specifies whether to turn on Performance Insights for the DB cluster.\n For more information, see [Using Amazon Performance Insights](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html) in the *Amazon RDS User Guide*.\n Valid for Cluster Type: Multi-AZ DB clusters only",
+		//	  "description": "Specifies whether to turn on Performance Insights for the DB cluster.\n For more information, see [Using Amazon Performance Insights](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html) in the *Amazon RDS User Guide*.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters",
 		//	  "type": "boolean"
 		//	}
 		"performance_insights_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether to turn on Performance Insights for the DB cluster.\n For more information, see [Using Amazon Performance Insights](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html) in the *Amazon RDS User Guide*.\n Valid for Cluster Type: Multi-AZ DB clusters only",
+			Description: "Specifies whether to turn on Performance Insights for the DB cluster.\n For more information, see [Using Amazon Performance Insights](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html) in the *Amazon RDS User Guide*.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PerformanceInsightsKmsKeyId
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The AWS KMS key identifier for encryption of Performance Insights data.\n The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.\n If you don't specify a value for ``PerformanceInsightsKMSKeyId``, then Amazon RDS uses your default KMS key. There is a default KMS key for your AWS-account. Your AWS-account has a different default KMS key for each AWS-Region.\n Valid for Cluster Type: Multi-AZ DB clusters only",
+		//	  "description": "The AWS KMS key identifier for encryption of Performance Insights data.\n The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.\n If you don't specify a value for ``PerformanceInsightsKMSKeyId``, then Amazon RDS uses your default KMS key. There is a default KMS key for your AWS-account. Your AWS-account has a different default KMS key for each AWS-Region.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters",
 		//	  "type": "string"
 		//	}
 		"performance_insights_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AWS KMS key identifier for encryption of Performance Insights data.\n The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.\n If you don't specify a value for ``PerformanceInsightsKMSKeyId``, then Amazon RDS uses your default KMS key. There is a default KMS key for your AWS-account. Your AWS-account has a different default KMS key for each AWS-Region.\n Valid for Cluster Type: Multi-AZ DB clusters only",
+			Description: "The AWS KMS key identifier for encryption of Performance Insights data.\n The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.\n If you don't specify a value for ``PerformanceInsightsKMSKeyId``, then Amazon RDS uses your default KMS key. There is a default KMS key for your AWS-account. Your AWS-account has a different default KMS key for each AWS-Region.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PerformanceInsightsRetentionPeriod
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The number of days to retain Performance Insights data.\n Valid for Cluster Type: Multi-AZ DB clusters only\n Valid Values:\n  +   ``7`` \n  +   *month* * 31, where *month* is a number of months from 1-23. Examples: ``93`` (3 months * 31), ``341`` (11 months * 31), ``589`` (19 months * 31)\n  +   ``731`` \n  \n Default: ``7`` days\n If you specify a retention period that isn't valid, such as ``94``, Amazon RDS issues an error.",
+		//	  "description": "The number of days to retain Performance Insights data.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters\n Valid Values:\n  +   ``7`` \n  +   *month* * 31, where *month* is a number of months from 1-23. Examples: ``93`` (3 months * 31), ``341`` (11 months * 31), ``589`` (19 months * 31)\n  +   ``731`` \n  \n Default: ``7`` days\n If you specify a retention period that isn't valid, such as ``94``, Amazon RDS issues an error.",
 		//	  "type": "integer"
 		//	}
 		"performance_insights_retention_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of days to retain Performance Insights data.\n Valid for Cluster Type: Multi-AZ DB clusters only\n Valid Values:\n  +   ``7`` \n  +   *month* * 31, where *month* is a number of months from 1-23. Examples: ``93`` (3 months * 31), ``341`` (11 months * 31), ``589`` (19 months * 31)\n  +   ``731`` \n  \n Default: ``7`` days\n If you specify a retention period that isn't valid, such as ``94``, Amazon RDS issues an error.",
+			Description: "The number of days to retain Performance Insights data.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters\n Valid Values:\n  +   ``7`` \n  +   *month* * 31, where *month* is a number of months from 1-23. Examples: ``93`` (3 months * 31), ``341`` (11 months * 31), ``589`` (19 months * 31)\n  +   ``731`` \n  \n Default: ``7`` days\n If you specify a retention period that isn't valid, such as ``94``, Amazon RDS issues an error.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Port
@@ -784,7 +795,7 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "number"
 		//	    },
 		//	    "SecondsUntilAutoPause": {
-		//	      "description": "",
+		//	      "description": "Specifies the number of seconds an Aurora Serverless v2 DB instance must be idle before Aurora attempts to automatically pause it. \n Specify a value between 300 seconds (five minutes) and 86,400 seconds (one day). The default is 300 seconds.",
 		//	      "type": "integer"
 		//	    }
 		//	  },
@@ -804,7 +815,7 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: SecondsUntilAutoPause
 				"seconds_until_auto_pause": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "",
+					Description: "Specifies the number of seconds an Aurora Serverless v2 DB instance must be idle before Aurora attempts to automatically pause it. \n Specify a value between 300 seconds (five minutes) and 86,400 seconds (one day). The default is 300 seconds.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -981,6 +992,7 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"backup_retention_period":               "BackupRetentionPeriod",
 		"cluster_scalability_type":              "ClusterScalabilityType",
 		"copy_tags_to_snapshot":                 "CopyTagsToSnapshot",
+		"database_insights_mode":                "DatabaseInsightsMode",
 		"database_name":                         "DatabaseName",
 		"db_cluster_arn":                        "DBClusterArn",
 		"db_cluster_identifier":                 "DBClusterIdentifier",

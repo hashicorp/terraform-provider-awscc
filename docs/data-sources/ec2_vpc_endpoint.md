@@ -39,6 +39,7 @@ Data Source schema for AWS::EC2::VPCEndpoint
 - `service_name` (String) The name of the endpoint service.
 - `service_network_arn` (String)
 - `subnet_ids` (Set of String) The IDs of the subnets in which to create endpoint network interfaces. You must specify this property for an interface endpoint or a Gateway Load Balancer endpoint. You can't specify this property for a gateway endpoint. For a Gateway Load Balancer endpoint, you can specify only one subnet.
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `vpc_endpoint_id` (String)
 - `vpc_endpoint_type` (String) The type of endpoint.
  Default: Gateway
@@ -51,3 +52,12 @@ Read-Only:
 
 - `dns_record_ip_type` (String)
 - `private_dns_only_for_inbound_resolver_endpoint` (String)
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)

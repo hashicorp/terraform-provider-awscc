@@ -77,6 +77,7 @@ resource "awscc_wisdom_ai_prompt" "example" {
 - `ai_prompt_id` (String)
 - `assistant_arn` (String)
 - `id` (String) Uniquely identifies the resource.
+- `modified_time_seconds` (Number)
 
 <a id="nestedatt--template_configuration"></a>
 ### Nested Schema for `template_configuration`

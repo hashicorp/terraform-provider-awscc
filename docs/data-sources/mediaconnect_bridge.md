@@ -119,7 +119,15 @@ Read-Only:
 Read-Only:
 
 - `multicast_ip` (String) The network source multicast IP.
+- `multicast_source_settings` (Attributes) The settings related to the multicast source. (see [below for nested schema](#nestedatt--sources--network_source--multicast_source_settings))
 - `name` (String) The name of the network source.
 - `network_name` (String) The network source's gateway network name.
 - `port` (Number) The network source port.
 - `protocol` (String) The network source protocol.
+
+<a id="nestedatt--sources--network_source--multicast_source_settings"></a>
+### Nested Schema for `sources.network_source.multicast_source_settings`
+
+Read-Only:
+
+- `multicast_source_ip` (String) The IP address of the source for source-specific multicast (SSM).

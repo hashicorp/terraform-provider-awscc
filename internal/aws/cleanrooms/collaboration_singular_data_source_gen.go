@@ -70,6 +70,40 @@ func collaborationDataSource(ctx context.Context) (datasource.DataSource, error)
 		"creator_display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: CreatorMLMemberAbilities
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "CustomMLMemberAbilities": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "enum": [
+		//	          "CAN_RECEIVE_MODEL_OUTPUT",
+		//	          "CAN_RECEIVE_INFERENCE_OUTPUT"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "CustomMLMemberAbilities"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"creator_ml_member_abilities": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CustomMLMemberAbilities
+				"custom_ml_member_abilities": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatorMemberAbilities
 		// CloudFormation resource type schema:
 		//
@@ -95,6 +129,36 @@ func collaborationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "MachineLearning": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "ModelInference": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "IsResponsible": {
+		//	              "type": "boolean"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "IsResponsible"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "ModelTraining": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "IsResponsible": {
+		//	              "type": "boolean"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "IsResponsible"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "QueryCompute": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -115,6 +179,32 @@ func collaborationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	}
 		"creator_payment_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MachineLearning
+				"machine_learning": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ModelInference
+						"model_inference": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IsResponsible
+								"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ModelTraining
+						"model_training": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IsResponsible
+								"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: QueryCompute
 				"query_compute": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -208,6 +298,27 @@ func collaborationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	        "pattern": "",
 		//	        "type": "string"
 		//	      },
+		//	      "MLMemberAbilities": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "CustomMLMemberAbilities": {
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "enum": [
+		//	                "CAN_RECEIVE_MODEL_OUTPUT",
+		//	                "CAN_RECEIVE_INFERENCE_OUTPUT"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "CustomMLMemberAbilities"
+		//	        ],
+		//	        "type": "object"
+		//	      },
 		//	      "MemberAbilities": {
 		//	        "insertionOrder": false,
 		//	        "items": {
@@ -223,6 +334,36 @@ func collaborationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	      "PaymentConfiguration": {
 		//	        "additionalProperties": false,
 		//	        "properties": {
+		//	          "MachineLearning": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "ModelInference": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "IsResponsible": {
+		//	                    "type": "boolean"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "IsResponsible"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "ModelTraining": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "IsResponsible": {
+		//	                    "type": "boolean"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "IsResponsible"
+		//	                ],
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
 		//	          "QueryCompute": {
 		//	            "additionalProperties": false,
 		//	            "properties": {
@@ -264,6 +405,17 @@ func collaborationDataSource(ctx context.Context) (datasource.DataSource, error)
 					"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
 					}, /*END ATTRIBUTE*/
+					// Property: MLMemberAbilities
+					"ml_member_abilities": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CustomMLMemberAbilities
+							"custom_ml_member_abilities": schema.SetAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
 					// Property: MemberAbilities
 					"member_abilities": schema.SetAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
@@ -272,6 +424,32 @@ func collaborationDataSource(ctx context.Context) (datasource.DataSource, error)
 					// Property: PaymentConfiguration
 					"payment_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: MachineLearning
+							"machine_learning": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ModelInference
+									"model_inference": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: IsResponsible
+											"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: ModelTraining
+									"model_training": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: IsResponsible
+											"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
 							// Property: QueryCompute
 							"query_compute": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -385,14 +563,20 @@ func collaborationDataSource(ctx context.Context) (datasource.DataSource, error)
 		"collaboration_identifier":                    "CollaborationIdentifier",
 		"creator_display_name":                        "CreatorDisplayName",
 		"creator_member_abilities":                    "CreatorMemberAbilities",
+		"creator_ml_member_abilities":                 "CreatorMLMemberAbilities",
 		"creator_payment_configuration":               "CreatorPaymentConfiguration",
+		"custom_ml_member_abilities":                  "CustomMLMemberAbilities",
 		"data_encryption_metadata":                    "DataEncryptionMetadata",
 		"description":                                 "Description",
 		"display_name":                                "DisplayName",
 		"is_responsible":                              "IsResponsible",
 		"key":                                         "Key",
+		"machine_learning":                            "MachineLearning",
 		"member_abilities":                            "MemberAbilities",
 		"members":                                     "Members",
+		"ml_member_abilities":                         "MLMemberAbilities",
+		"model_inference":                             "ModelInference",
+		"model_training":                              "ModelTraining",
 		"name":                                        "Name",
 		"payment_configuration":                       "PaymentConfiguration",
 		"preserve_nulls":                              "PreserveNulls",

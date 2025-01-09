@@ -112,6 +112,7 @@ Optional:
 Optional:
 
 - `custom_redirect_domain` (String) The domain to use for tracking open and click events.
+- `https_policy` (String) The https policy to use for tracking open and click events.
 
 
 <a id="nestedatt--vdm_options"></a>
