@@ -2278,11 +2278,6 @@ resource_schema "aws_gamelift_container_fleet" {
 
 resource_schema "aws_gamelift_container_group_definition" {
   cloudformation_type_name = "AWS::GameLift::ContainerGroupDefinition"
-
-  # Latest schema updates are suppressed.
-  # git checkout internal/service/cloudformation/schemas/AWS_GameLift_ContainerGroupDefinition.json
-  # Suppression Reason: set of unknown type
-  # https://github.com/hashicorp/terraform-provider-awscc/issues/2069
 }
 
 resource_schema "aws_gamelift_fleet" {
