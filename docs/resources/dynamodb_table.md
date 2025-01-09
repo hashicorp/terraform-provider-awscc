@@ -405,6 +405,7 @@ Optional:
 Optional:
 
 - `point_in_time_recovery_enabled` (Boolean) Indicates whether point in time recovery is enabled (true) or disabled (false) on the table.
+- `recovery_period_in_days` (Number)
 
 
 <a id="nestedatt--provisioned_throughput"></a>

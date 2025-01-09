@@ -72,11 +72,11 @@ variable "kb_role_arn" {
 - `knowledge_base_configuration` (Attributes) Contains details about the embeddings model used for the knowledge base. (see [below for nested schema](#nestedatt--knowledge_base_configuration))
 - `name` (String) The name of the knowledge base.
 - `role_arn` (String) The ARN of the IAM role with permissions to invoke API operations on the knowledge base. The ARN must begin with AmazonBedrockExecutionRoleForKnowledgeBase_
-- `storage_configuration` (Attributes) The vector store service in which the knowledge base is stored. (see [below for nested schema](#nestedatt--storage_configuration))
 
 ### Optional
 
 - `description` (String) Description of the Resource.
+- `storage_configuration` (Attributes) The vector store service in which the knowledge base is stored. (see [below for nested schema](#nestedatt--storage_configuration))
 - `tags` (Map of String) A map of tag keys and values
 
 ### Read-Only
@@ -95,18 +95,28 @@ variable "kb_role_arn" {
 Required:
 
 - `type` (String) The type of a knowledge base.
+
+Optional:
+
+- `kendra_knowledge_base_configuration` (Attributes) Configurations for a Kendra knowledge base (see [below for nested schema](#nestedatt--knowledge_base_configuration--kendra_knowledge_base_configuration))
 - `vector_knowledge_base_configuration` (Attributes) Contains details about the model used to create vector embeddings for the knowledge base. (see [below for nested schema](#nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration))
+
+<a id="nestedatt--knowledge_base_configuration--kendra_knowledge_base_configuration"></a>
+### Nested Schema for `knowledge_base_configuration.kendra_knowledge_base_configuration`
+
+Optional:
+
+- `kendra_index_arn` (String) Arn of a Kendra index
+
 
 <a id="nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration"></a>
 ### Nested Schema for `knowledge_base_configuration.vector_knowledge_base_configuration`
 
-Required:
-
-- `embedding_model_arn` (String) The ARN of the model used to create vector embeddings for the knowledge base.
-
 Optional:
 
+- `embedding_model_arn` (String) The ARN of the model used to create vector embeddings for the knowledge base.
 - `embedding_model_configuration` (Attributes) The embeddings model configuration details for the vector model used in Knowledge Base. (see [below for nested schema](#nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration--embedding_model_configuration))
+- `supplemental_data_storage_configuration` (Attributes) Configurations for supplemental data storage. (see [below for nested schema](#nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration--supplemental_data_storage_configuration))
 
 <a id="nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration--embedding_model_configuration"></a>
 ### Nested Schema for `knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_configuration`
@@ -124,14 +134,35 @@ Optional:
 
 
 
+<a id="nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration--supplemental_data_storage_configuration"></a>
+### Nested Schema for `knowledge_base_configuration.vector_knowledge_base_configuration.supplemental_data_storage_configuration`
+
+Optional:
+
+- `supplemental_data_storage_locations` (Attributes List) List of supplemental data storage locations. (see [below for nested schema](#nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration--supplemental_data_storage_configuration--supplemental_data_storage_locations))
+
+<a id="nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration--supplemental_data_storage_configuration--supplemental_data_storage_locations"></a>
+### Nested Schema for `knowledge_base_configuration.vector_knowledge_base_configuration.supplemental_data_storage_configuration.supplemental_data_storage_locations`
+
+Optional:
+
+- `s3_location` (Attributes) An Amazon S3 location. (see [below for nested schema](#nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration--supplemental_data_storage_configuration--supplemental_data_storage_locations--s3_location))
+- `supplemental_data_storage_location_type` (String) Supplemental data storage location type.
+
+<a id="nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration--supplemental_data_storage_configuration--supplemental_data_storage_locations--s3_location"></a>
+### Nested Schema for `knowledge_base_configuration.vector_knowledge_base_configuration.supplemental_data_storage_configuration.supplemental_data_storage_locations.s3_location`
+
+Optional:
+
+- `uri` (String) The location's URI
+
+
+
+
 
 
 <a id="nestedatt--storage_configuration"></a>
 ### Nested Schema for `storage_configuration`
-
-Required:
-
-- `type` (String) The storage type of a knowledge base.
 
 Optional:
 
@@ -139,6 +170,7 @@ Optional:
 - `opensearch_serverless_configuration` (Attributes) Contains the storage configuration of the knowledge base in Amazon OpenSearch Service. (see [below for nested schema](#nestedatt--storage_configuration--opensearch_serverless_configuration))
 - `pinecone_configuration` (Attributes) Contains the storage configuration of the knowledge base in Pinecone. (see [below for nested schema](#nestedatt--storage_configuration--pinecone_configuration))
 - `rds_configuration` (Attributes) Contains details about the storage configuration of the knowledge base in Amazon RDS. For more information, see Create a vector index in Amazon RDS. (see [below for nested schema](#nestedatt--storage_configuration--rds_configuration))
+- `type` (String) The storage type of a knowledge base.
 
 <a id="nestedatt--storage_configuration--mongo_db_atlas_configuration"></a>
 ### Nested Schema for `storage_configuration.mongo_db_atlas_configuration`

@@ -79,9 +79,17 @@ Optional:
 Optional:
 
 - `multicast_ip` (String) The network source multicast IP.
+- `multicast_source_settings` (Attributes) The settings related to the multicast source. (see [below for nested schema](#nestedatt--network_source--multicast_source_settings))
 - `network_name` (String) The network source's gateway network name.
 - `port` (Number) The network source port.
 - `protocol` (String) The network source protocol.
+
+<a id="nestedatt--network_source--multicast_source_settings"></a>
+### Nested Schema for `network_source.multicast_source_settings`
+
+Optional:
+
+- `multicast_source_ip` (String) The IP address of the source for source-specific multicast (SSM).
 
 ## Import
 

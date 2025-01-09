@@ -27,6 +27,7 @@ Data Source schema for AWS::Wisdom::AIAgent
 - `assistant_id` (String)
 - `configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration))
 - `description` (String)
+- `modified_time_seconds` (Number)
 - `name` (String)
 - `tags` (Map of String)
 - `type` (String)

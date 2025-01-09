@@ -65,6 +65,7 @@ Optional:
 
 - `glue_run_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--glue_run_configuration))
 - `redshift_run_configuration` (Attributes) The configuration details of the Amazon Redshift data source. (see [below for nested schema](#nestedatt--configuration--redshift_run_configuration))
+- `sage_maker_run_configuration` (Attributes) The configuration details of the Amazon SageMaker data source. (see [below for nested schema](#nestedatt--configuration--sage_maker_run_configuration))
 
 <a id="nestedatt--configuration--glue_run_configuration"></a>
 ### Nested Schema for `configuration.glue_run_configuration`
@@ -156,6 +157,14 @@ Optional:
 - `type` (String) The search filter expression type.
 
 
+
+
+<a id="nestedatt--configuration--sage_maker_run_configuration"></a>
+### Nested Schema for `configuration.sage_maker_run_configuration`
+
+Optional:
+
+- `tracking_assets` (Map of List of String) The tracking assets of the Amazon SageMaker run.
 
 
 

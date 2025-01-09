@@ -94,9 +94,18 @@ Read-Only:
 Read-Only:
 
 - `efs_file_system` (Attributes) (see [below for nested schema](#nestedatt--space_settings--custom_file_systems--efs_file_system))
+- `fsx_lustre_file_system` (Attributes) (see [below for nested schema](#nestedatt--space_settings--custom_file_systems--fsx_lustre_file_system))
 
 <a id="nestedatt--space_settings--custom_file_systems--efs_file_system"></a>
 ### Nested Schema for `space_settings.custom_file_systems.efs_file_system`
+
+Read-Only:
+
+- `file_system_id` (String)
+
+
+<a id="nestedatt--space_settings--custom_file_systems--fsx_lustre_file_system"></a>
+### Nested Schema for `space_settings.custom_file_systems.fsx_lustre_file_system`
 
 Read-Only:
 

@@ -31,7 +31,8 @@ The ``AWS::Logs::SubscriptionFilter`` resource specifies a subscription filter a
 
 ### Optional
 
-- `apply_on_transformed_logs` (Boolean)
+- `apply_on_transformed_logs` (Boolean) This parameter is valid only for log groups that have an active log transformer. For more information about log transformers, see [PutTransformer](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutTransformer.html).
+ If this value is ``true``, the subscription filter is applied on the transformed version of the log events instead of the original ingested log events.
 - `distribution` (String) The method used to distribute log data to the destination, which can be either random or grouped by log stream.
 - `filter_name` (String) The name of the subscription filter.
 - `role_arn` (String) The ARN of an IAM role that grants CWL permissions to deliver ingested log events to the destination stream. You don't need to provide the ARN when you are working with a logical destination for cross-account delivery.

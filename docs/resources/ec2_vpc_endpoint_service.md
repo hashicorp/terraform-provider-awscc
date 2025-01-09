@@ -72,11 +72,20 @@ resource "awscc_ec2_vpc_endpoint_service" "example" {
 - `gateway_load_balancer_arns` (List of String)
 - `network_load_balancer_arns` (List of String)
 - `payer_responsibility` (String)
+- `tags` (Attributes List) The tags to add to the VPC endpoint service. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
 - `service_id` (String)
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String)
+- `value` (String)
 
 ## Import
 

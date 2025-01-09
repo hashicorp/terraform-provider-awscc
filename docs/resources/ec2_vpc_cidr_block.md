@@ -53,6 +53,7 @@ resource "awscc_ec2_vpc_cidr_block" "secondary_cidr" {
 - `ipv_4_ipam_pool_id` (String) The ID of the IPv4 IPAM pool to Associate a CIDR from to a VPC.
 - `ipv_4_netmask_length` (Number) The netmask length of the IPv4 CIDR you would like to associate from an Amazon VPC IP Address Manager (IPAM) pool.
 - `ipv_6_cidr_block` (String) An IPv6 CIDR block from the IPv6 address pool.
+- `ipv_6_cidr_block_network_border_group` (String) The name of the location from which we advertise the IPV6 CIDR block.
 - `ipv_6_ipam_pool_id` (String) The ID of the IPv6 IPAM pool to Associate a CIDR from to a VPC.
 - `ipv_6_netmask_length` (Number) The netmask length of the IPv6 CIDR you would like to associate from an Amazon VPC IP Address Manager (IPAM) pool.
 - `ipv_6_pool` (String) The ID of an IPv6 address pool from which to allocate the IPv6 CIDR block.

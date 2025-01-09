@@ -1,0 +1,1 @@
+$ terraform import awscc_appconfig_deployment.example "application_id|environment_id|deployment_number"

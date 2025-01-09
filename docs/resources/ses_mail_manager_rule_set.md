@@ -146,6 +146,7 @@ Optional:
 - `add_header` (Attributes) (see [below for nested schema](#nestedatt--rules--actions--add_header))
 - `archive` (Attributes) (see [below for nested schema](#nestedatt--rules--actions--archive))
 - `deliver_to_mailbox` (Attributes) (see [below for nested schema](#nestedatt--rules--actions--deliver_to_mailbox))
+- `deliver_to_q_business` (Attributes) (see [below for nested schema](#nestedatt--rules--actions--deliver_to_q_business))
 - `drop` (String)
 - `relay` (Attributes) (see [below for nested schema](#nestedatt--rules--actions--relay))
 - `replace_recipient` (Attributes) (see [below for nested schema](#nestedatt--rules--actions--replace_recipient))
@@ -177,6 +178,17 @@ Optional:
 
 - `action_failure_policy` (String)
 - `mailbox_arn` (String)
+- `role_arn` (String)
+
+
+<a id="nestedatt--rules--actions--deliver_to_q_business"></a>
+### Nested Schema for `rules.actions.deliver_to_q_business`
+
+Optional:
+
+- `action_failure_policy` (String)
+- `application_id` (String)
+- `index_id` (String)
 - `role_arn` (String)
 
 

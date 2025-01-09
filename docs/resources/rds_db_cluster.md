@@ -62,7 +62,7 @@ resource "awscc_rds_db_cluster" "example_db_cluster" {
 - `associated_roles` (Attributes List) Provides a list of the AWS Identity and Access Management (IAM) roles that are associated with the DB cluster. IAM roles that are associated with a DB cluster grant permission for the DB cluster to access other Amazon Web Services on your behalf.
  Valid for: Aurora DB clusters and Multi-AZ DB clusters (see [below for nested schema](#nestedatt--associated_roles))
 - `auto_minor_version_upgrade` (Boolean) Specifies whether minor engine upgrades are applied automatically to the DB cluster during the maintenance window. By default, minor engine upgrades are applied automatically.
- Valid for Cluster Type: Multi-AZ DB clusters only
+ Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB cluster
 - `availability_zones` (List of String) A list of Availability Zones (AZs) where instances in the DB cluster can be created. For information on AWS Regions and Availability Zones, see [Choosing the Regions and Availability Zones](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.RegionsAndAvailabilityZones.html) in the *Amazon Aurora User Guide*. 
  Valid for: Aurora DB clusters only
 - `backtrack_window` (Number) The target backtrack window, in seconds. To disable backtracking, set this value to ``0``.
@@ -79,6 +79,9 @@ resource "awscc_rds_db_cluster" "example_db_cluster" {
 - `cluster_scalability_type` (String) Specifies the scalability mode of the Aurora DB cluster. When set to ``limitless``, the cluster operates as an Aurora Limitless Database, allowing you to create a DB shard group for horizontal scaling (sharding) capabilities. When set to ``standard`` (the default), the cluster uses normal DB instance creation.
 - `copy_tags_to_snapshot` (Boolean) A value that indicates whether to copy all tags from the DB cluster to snapshots of the DB cluster. The default is not to copy them.
  Valid for: Aurora DB clusters and Multi-AZ DB clusters
+- `database_insights_mode` (String) The mode of Database Insights to enable for the DB cluster.
+ If you set this value to ``advanced``, you must also set the ``PerformanceInsightsEnabled`` parameter to ``true`` and the ``PerformanceInsightsRetentionPeriod`` parameter to 465.
+ Valid for Cluster Type: Aurora DB clusters only
 - `database_name` (String) The name of your database. If you don't provide a name, then Amazon RDS won't create a database in this DB cluster. For naming constraints, see [Naming Constraints](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_Limits.html#RDS_Limits.Constraints) in the *Amazon Aurora User Guide*. 
  Valid for: Aurora DB clusters and Multi-AZ DB clusters
 - `db_cluster_identifier` (String) The DB cluster identifier. This parameter is stored as a lowercase string.
@@ -129,10 +132,6 @@ resource "awscc_rds_db_cluster" "example_db_cluster" {
  Valid for Cluster Type: Aurora DB clusters only
 - `enable_http_endpoint` (Boolean) Specifies whether to enable the HTTP endpoint for the DB cluster. By default, the HTTP endpoint isn't enabled.
  When enabled, the HTTP endpoint provides a connectionless web service API (RDS Data API) for running SQL queries on the DB cluster. You can also query your database from inside the RDS console with the RDS query editor.
- RDS Data API is supported with the following DB clusters:
-  +  Aurora PostgreSQL Serverless v2 and provisioned
-  +  Aurora PostgreSQL and Aurora MySQL Serverless v1
-  
  For more information, see [Using RDS Data API](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html) in the *Amazon Aurora User Guide*.
  Valid for Cluster Type: Aurora DB clusters only
 - `enable_iam_database_authentication` (Boolean) A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts. By default, mapping is disabled.
@@ -207,18 +206,19 @@ resource "awscc_rds_db_cluster" "example_db_cluster" {
   If you specify the ``SourceDBClusterIdentifier``, ``SnapshotIdentifier``, or ``GlobalClusterIdentifier`` property, don't specify this property. The value is inherited from the source DB cluster, the snapshot, or the primary DB cluster for the global database cluster, respectively.
   Valid for: Aurora DB clusters and Multi-AZ DB clusters
 - `master_user_secret` (Attributes) The secret managed by RDS in AWS Secrets Manager for the master user password.
- For more information, see [Password management with Secrets Manager](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html) in the *Amazon RDS User Guide* and [Password management with Secrets Manager](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-secrets-manager.html) in the *Amazon Aurora User Guide.* (see [below for nested schema](#nestedatt--master_user_secret))
+  When you restore a DB cluster from a snapshot, Amazon RDS generates a new secret instead of reusing the secret specified in the ``SecretArn`` property. This ensures that the restored DB cluster is securely managed with a dedicated secret. To maintain consistent integration with your application, you might need to update resource configurations to reference the newly created secret.
+  For more information, see [Password management with Secrets Manager](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html) in the *Amazon RDS User Guide* and [Password management with Secrets Manager](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-secrets-manager.html) in the *Amazon Aurora User Guide.* (see [below for nested schema](#nestedatt--master_user_secret))
 - `master_username` (String) The name of the master user for the DB cluster.
   If you specify the ``SourceDBClusterIdentifier``, ``SnapshotIdentifier``, or ``GlobalClusterIdentifier`` property, don't specify this property. The value is inherited from the source DB cluster, the snapshot, or the primary DB cluster for the global database cluster, respectively.
   Valid for: Aurora DB clusters and Multi-AZ DB clusters
 - `monitoring_interval` (Number) The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB cluster. To turn off collecting Enhanced Monitoring metrics, specify ``0``.
  If ``MonitoringRoleArn`` is specified, also set ``MonitoringInterval`` to a value other than ``0``.
- Valid for Cluster Type: Multi-AZ DB clusters only
+ Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
  Valid Values: ``0 | 1 | 5 | 10 | 15 | 30 | 60`` 
  Default: ``0``
 - `monitoring_role_arn` (String) The Amazon Resource Name (ARN) for the IAM role that permits RDS to send Enhanced Monitoring metrics to Amazon CloudWatch Logs. An example is ``arn:aws:iam:123456789012:role/emaccess``. For information on creating a monitoring role, see [Setting up and enabling Enhanced Monitoring](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html#USER_Monitoring.OS.Enabling) in the *Amazon RDS User Guide*.
  If ``MonitoringInterval`` is set to a value other than ``0``, supply a ``MonitoringRoleArn`` value.
- Valid for Cluster Type: Multi-AZ DB clusters only
+ Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
 - `network_type` (String) The network type of the DB cluster.
  Valid values:
   +   ``IPV4`` 
@@ -229,13 +229,13 @@ resource "awscc_rds_db_cluster" "example_db_cluster" {
  Valid for: Aurora DB clusters only
 - `performance_insights_enabled` (Boolean) Specifies whether to turn on Performance Insights for the DB cluster.
  For more information, see [Using Amazon Performance Insights](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html) in the *Amazon RDS User Guide*.
- Valid for Cluster Type: Multi-AZ DB clusters only
+ Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
 - `performance_insights_kms_key_id` (String) The AWS KMS key identifier for encryption of Performance Insights data.
  The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.
  If you don't specify a value for ``PerformanceInsightsKMSKeyId``, then Amazon RDS uses your default KMS key. There is a default KMS key for your AWS-account. Your AWS-account has a different default KMS key for each AWS-Region.
- Valid for Cluster Type: Multi-AZ DB clusters only
+ Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
 - `performance_insights_retention_period` (Number) The number of days to retain Performance Insights data.
- Valid for Cluster Type: Multi-AZ DB clusters only
+ Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
  Valid Values:
   +   ``7`` 
   +   *month* * 31, where *month* is a number of months from 1-23. Examples: ``93`` (3 months * 31), ``341`` (11 months * 31), ``589`` (19 months * 31)
@@ -436,7 +436,8 @@ Optional:
  The maximum capacity must be higher than 0.5 ACUs. For more information, see [Choosing the maximum Aurora Serverless v2 capacity setting for a cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.setting-capacity.html#aurora-serverless-v2.max_capacity_considerations) in the *Amazon Aurora User Guide*.
  Aurora automatically sets certain parameters for Aurora Serverless V2 DB instances to values that depend on the maximum ACU value in the capacity range. When you update the maximum capacity value, the ``ParameterApplyStatus`` value for the DB instance changes to ``pending-reboot``. You can update the parameter values by rebooting the DB instance after changing the capacity range.
 - `min_capacity` (Number) The minimum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster. You can specify ACU values in half-step increments, such as 8, 8.5, 9, and so on. For Aurora versions that support the Aurora Serverless v2 auto-pause feature, the smallest value that you can use is 0. For versions that don't support Aurora Serverless v2 auto-pause, the smallest value that you can use is 0.5.
-- `seconds_until_auto_pause` (Number)
+- `seconds_until_auto_pause` (Number) Specifies the number of seconds an Aurora Serverless v2 DB instance must be idle before Aurora attempts to automatically pause it. 
+ Specify a value between 300 seconds (five minutes) and 86,400 seconds (one day). The default is 300 seconds.
 
 
 <a id="nestedatt--tags"></a>
