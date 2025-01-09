@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -304,6 +305,32 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "RelationalFilterConfigurations"
 		//	      ],
 		//	      "type": "object"
+		//	    },
+		//	    "SageMakerRunConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "The configuration details of the Amazon SageMaker data source.",
+		//	      "properties": {
+		//	        "TrackingAssets": {
+		//	          "additionalProperties": false,
+		//	          "description": "The tracking assets of the Amazon SageMaker run.",
+		//	          "patternProperties": {
+		//	            "": {
+		//	              "items": {
+		//	                "pattern": "^arn:aws[^:]*:sagemaker:[a-z]{2}-?(iso|gov)?-{1}[a-z]*-{1}[0-9]:\\d{12}:[\\w+=,.@-]{1,128}/[\\w+=,.@-]{1,256}$",
+		//	                "type": "string"
+		//	              },
+		//	              "maxItems": 500,
+		//	              "minItems": 0,
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "TrackingAssets"
+		//	      ],
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -453,6 +480,20 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The configuration details of the Amazon Redshift data source.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SageMakerRunConfiguration
+				"sage_maker_run_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: TrackingAssets
+						"tracking_assets":   // Pattern: ""
+						schema.MapAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.ListType{ElemType: types.StringType},
+							Description: "The tracking assets of the Amazon SageMaker run.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration details of the Amazon SageMaker data source.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -798,11 +839,13 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"redshift_serverless_source":        "RedshiftServerlessSource",
 		"redshift_storage":                  "RedshiftStorage",
 		"relational_filter_configurations":  "RelationalFilterConfigurations",
+		"sage_maker_run_configuration":      "SageMakerRunConfiguration",
 		"schedule":                          "Schedule",
 		"schema_name":                       "SchemaName",
 		"secret_manager_arn":                "SecretManagerArn",
 		"status":                            "Status",
 		"timezone":                          "Timezone",
+		"tracking_assets":                   "TrackingAssets",
 		"type":                              "Type",
 		"type_identifier":                   "TypeIdentifier",
 		"type_revision":                     "TypeRevision",

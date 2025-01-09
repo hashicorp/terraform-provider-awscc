@@ -117,7 +117,7 @@ func resourceConfigurationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "properties": {
 		//	    "ArnResource": {
 		//	      "maxLength": 1224,
-		//	      "pattern": "",
+		//	      "pattern": "^arn.*",
 		//	      "type": "string"
 		//	    },
 		//	    "DnsResource": {

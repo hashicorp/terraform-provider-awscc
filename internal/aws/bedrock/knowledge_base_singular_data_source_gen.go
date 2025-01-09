@@ -87,10 +87,26 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "additionalProperties": false,
 		//	  "description": "Contains details about the embeddings model used for the knowledge base.",
 		//	  "properties": {
+		//	    "KendraKnowledgeBaseConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Configurations for a Kendra knowledge base",
+		//	      "properties": {
+		//	        "KendraIndexArn": {
+		//	          "description": "Arn of a Kendra index",
+		//	          "pattern": "^arn:aws(|-cn|-us-gov):kendra:[a-z0-9-]{1,20}:([0-9]{12}|):index/([a-zA-Z0-9][a-zA-Z0-9-]{35}|[a-zA-Z0-9][a-zA-Z0-9-]{35}-[a-zA-Z0-9][a-zA-Z0-9-]{35})$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "KendraIndexArn"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "Type": {
 		//	      "description": "The type of a knowledge base.",
 		//	      "enum": [
-		//	        "VECTOR"
+		//	        "VECTOR",
+		//	        "KENDRA"
 		//	      ],
 		//	      "type": "string"
 		//	    },
@@ -124,6 +140,57 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	            }
 		//	          },
 		//	          "type": "object"
+		//	        },
+		//	        "SupplementalDataStorageConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configurations for supplemental data storage.",
+		//	          "properties": {
+		//	            "SupplementalDataStorageLocations": {
+		//	              "description": "List of supplemental data storage locations.",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "description": "Supplemental data storage location.",
+		//	                "properties": {
+		//	                  "S3Location": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "An Amazon S3 location.",
+		//	                    "properties": {
+		//	                      "URI": {
+		//	                        "description": "The location's URI",
+		//	                        "maxLength": 2048,
+		//	                        "minLength": 1,
+		//	                        "pattern": "^s3://.{1,128}$",
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "URI"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  },
+		//	                  "SupplementalDataStorageLocationType": {
+		//	                    "description": "Supplemental data storage location type.",
+		//	                    "enum": [
+		//	                      "S3"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "SupplementalDataStorageLocationType"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "maxItems": 1,
+		//	              "minItems": 1,
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "SupplementalDataStorageLocations"
+		//	          ],
+		//	          "type": "object"
 		//	        }
 		//	      },
 		//	      "required": [
@@ -133,13 +200,24 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	    }
 		//	  },
 		//	  "required": [
-		//	    "Type",
-		//	    "VectorKnowledgeBaseConfiguration"
+		//	    "Type"
 		//	  ],
 		//	  "type": "object"
 		//	}
 		"knowledge_base_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KendraKnowledgeBaseConfiguration
+				"kendra_knowledge_base_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: KendraIndexArn
+						"kendra_index_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Arn of a Kendra index",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configurations for a Kendra knowledge base",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: Type
 				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The type of a knowledge base.",
@@ -170,6 +248,39 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "The embeddings model configuration details for the vector model used in Knowledge Base.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SupplementalDataStorageConfiguration
+						"supplemental_data_storage_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: SupplementalDataStorageLocations
+								"supplemental_data_storage_locations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: S3Location
+											"s3_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: URI
+													"uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The location's URI",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "An Amazon S3 location.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: SupplementalDataStorageLocationType
+											"supplemental_data_storage_location_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Supplemental data storage location type.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "List of supplemental data storage locations.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configurations for supplemental data storage.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -352,7 +463,7 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	        "CollectionArn": {
 		//	          "description": "The ARN of the OpenSearch Service vector store.",
 		//	          "maxLength": 2048,
-		//	          "pattern": "^arn:aws:aoss:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:collection/[a-z0-9-]{3,32}$",
+		//	          "pattern": "^arn:aws(|-cn|-us-gov|-iso):aoss:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:collection/[a-z0-9-]{3,32}$",
 		//	          "type": "string"
 		//	        },
 		//	        "FieldMapping": {
@@ -793,44 +904,51 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 	opts = opts.WithCloudFormationTypeName("AWS::Bedrock::KnowledgeBase").WithTerraformTypeName("awscc_bedrock_knowledge_base")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"bedrock_embedding_model_configuration": "BedrockEmbeddingModelConfiguration",
-		"collection_arn":                        "CollectionArn",
-		"collection_name":                       "CollectionName",
-		"connection_string":                     "ConnectionString",
-		"created_at":                            "CreatedAt",
-		"credentials_secret_arn":                "CredentialsSecretArn",
-		"database_name":                         "DatabaseName",
-		"description":                           "Description",
-		"dimensions":                            "Dimensions",
-		"embedding_model_arn":                   "EmbeddingModelArn",
-		"embedding_model_configuration":         "EmbeddingModelConfiguration",
-		"endpoint":                              "Endpoint",
-		"endpoint_service_name":                 "EndpointServiceName",
-		"failure_reasons":                       "FailureReasons",
-		"field_mapping":                         "FieldMapping",
-		"knowledge_base_arn":                    "KnowledgeBaseArn",
-		"knowledge_base_configuration":          "KnowledgeBaseConfiguration",
-		"knowledge_base_id":                     "KnowledgeBaseId",
-		"metadata_field":                        "MetadataField",
-		"mongo_db_atlas_configuration":          "MongoDbAtlasConfiguration",
-		"name":                                  "Name",
-		"namespace":                             "Namespace",
-		"opensearch_serverless_configuration":   "OpensearchServerlessConfiguration",
-		"pinecone_configuration":                "PineconeConfiguration",
-		"primary_key_field":                     "PrimaryKeyField",
-		"rds_configuration":                     "RdsConfiguration",
-		"resource_arn":                          "ResourceArn",
-		"role_arn":                              "RoleArn",
-		"status":                                "Status",
-		"storage_configuration":                 "StorageConfiguration",
-		"table_name":                            "TableName",
-		"tags":                                  "Tags",
-		"text_field":                            "TextField",
-		"type":                                  "Type",
-		"updated_at":                            "UpdatedAt",
-		"vector_field":                          "VectorField",
-		"vector_index_name":                     "VectorIndexName",
-		"vector_knowledge_base_configuration":   "VectorKnowledgeBaseConfiguration",
+		"bedrock_embedding_model_configuration":   "BedrockEmbeddingModelConfiguration",
+		"collection_arn":                          "CollectionArn",
+		"collection_name":                         "CollectionName",
+		"connection_string":                       "ConnectionString",
+		"created_at":                              "CreatedAt",
+		"credentials_secret_arn":                  "CredentialsSecretArn",
+		"database_name":                           "DatabaseName",
+		"description":                             "Description",
+		"dimensions":                              "Dimensions",
+		"embedding_model_arn":                     "EmbeddingModelArn",
+		"embedding_model_configuration":           "EmbeddingModelConfiguration",
+		"endpoint":                                "Endpoint",
+		"endpoint_service_name":                   "EndpointServiceName",
+		"failure_reasons":                         "FailureReasons",
+		"field_mapping":                           "FieldMapping",
+		"kendra_index_arn":                        "KendraIndexArn",
+		"kendra_knowledge_base_configuration":     "KendraKnowledgeBaseConfiguration",
+		"knowledge_base_arn":                      "KnowledgeBaseArn",
+		"knowledge_base_configuration":            "KnowledgeBaseConfiguration",
+		"knowledge_base_id":                       "KnowledgeBaseId",
+		"metadata_field":                          "MetadataField",
+		"mongo_db_atlas_configuration":            "MongoDbAtlasConfiguration",
+		"name":                                    "Name",
+		"namespace":                               "Namespace",
+		"opensearch_serverless_configuration":     "OpensearchServerlessConfiguration",
+		"pinecone_configuration":                  "PineconeConfiguration",
+		"primary_key_field":                       "PrimaryKeyField",
+		"rds_configuration":                       "RdsConfiguration",
+		"resource_arn":                            "ResourceArn",
+		"role_arn":                                "RoleArn",
+		"s3_location":                             "S3Location",
+		"status":                                  "Status",
+		"storage_configuration":                   "StorageConfiguration",
+		"supplemental_data_storage_configuration": "SupplementalDataStorageConfiguration",
+		"supplemental_data_storage_location_type": "SupplementalDataStorageLocationType",
+		"supplemental_data_storage_locations":     "SupplementalDataStorageLocations",
+		"table_name":                              "TableName",
+		"tags":                                    "Tags",
+		"text_field":                              "TextField",
+		"type":                                    "Type",
+		"updated_at":                              "UpdatedAt",
+		"uri":                                     "URI",
+		"vector_field":                            "VectorField",
+		"vector_index_name":                       "VectorIndexName",
+		"vector_knowledge_base_configuration":     "VectorKnowledgeBaseConfiguration",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

@@ -55,33 +55,6 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "description": "Specifies a raw data source location to ingest.",
-		//	  "oneOf": [
-		//	    {
-		//	      "required": [
-		//	        "S3Configuration"
-		//	      ]
-		//	    },
-		//	    {
-		//	      "required": [
-		//	        "ConfluenceConfiguration"
-		//	      ]
-		//	    },
-		//	    {
-		//	      "required": [
-		//	        "SalesforceConfiguration"
-		//	      ]
-		//	    },
-		//	    {
-		//	      "required": [
-		//	        "SharePointConfiguration"
-		//	      ]
-		//	    },
-		//	    {
-		//	      "required": [
-		//	        "WebConfiguration"
-		//	      ]
-		//	    }
-		//	  ],
 		//	  "properties": {
 		//	    "ConfluenceConfiguration": {
 		//	      "additionalProperties": false,
@@ -524,7 +497,8 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "CONFLUENCE",
 		//	        "SALESFORCE",
 		//	        "SHAREPOINT",
-		//	        "WEB"
+		//	        "WEB",
+		//	        "CUSTOM"
 		//	      ],
 		//	      "type": "string"
 		//	    },
@@ -1341,6 +1315,20 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "additionalProperties": false,
 		//	      "description": "Settings for parsing document contents",
 		//	      "properties": {
+		//	        "BedrockDataAutomationConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "Settings for a Bedrock Data Automation used to parse documents for a data source.",
+		//	          "properties": {
+		//	            "ParsingModality": {
+		//	              "description": "Determine how will parsed content be stored.",
+		//	              "enum": [
+		//	                "MULTIMODAL"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
 		//	        "BedrockFoundationModelConfiguration": {
 		//	          "additionalProperties": false,
 		//	          "description": "Settings for a foundation model used to parse documents for a data source.",
@@ -1350,6 +1338,13 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "maxLength": 2048,
 		//	              "minLength": 1,
 		//	              "pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}::foundation-model/([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2})|(arn:aws(|-us-gov|-cn|-iso|-iso-b):bedrock:(|[0-9a-z-]{1,20}):(|[0-9]{12}):(inference-profile|application-inference-profile)/[a-zA-Z0-9-:.]+)$",
+		//	              "type": "string"
+		//	            },
+		//	            "ParsingModality": {
+		//	              "description": "Determine how will parsed content be stored.",
+		//	              "enum": [
+		//	                "MULTIMODAL"
+		//	              ],
 		//	              "type": "string"
 		//	            },
 		//	            "ParsingPrompt": {
@@ -1377,7 +1372,8 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "ParsingStrategy": {
 		//	          "description": "The parsing strategy for the data source.",
 		//	          "enum": [
-		//	            "BEDROCK_FOUNDATION_MODEL"
+		//	            "BEDROCK_FOUNDATION_MODEL",
+		//	            "BEDROCK_DATA_AUTOMATION"
 		//	          ],
 		//	          "type": "string"
 		//	        }
@@ -1531,12 +1527,29 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: ParsingConfiguration
 				"parsing_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: BedrockDataAutomationConfiguration
+						"bedrock_data_automation_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ParsingModality
+								"parsing_modality": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Determine how will parsed content be stored.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Settings for a Bedrock Data Automation used to parse documents for a data source.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
 						// Property: BedrockFoundationModelConfiguration
 						"bedrock_foundation_model_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: ModelArn
 								"model_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The model's ARN.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ParsingModality
+								"parsing_modality": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Determine how will parsed content be stored.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: ParsingPrompt
@@ -1586,6 +1599,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"auth_type":                              "AuthType",
+		"bedrock_data_automation_configuration":  "BedrockDataAutomationConfiguration",
 		"bedrock_foundation_model_configuration": "BedrockFoundationModelConfiguration",
 		"breakpoint_percentile_threshold":        "BreakpointPercentileThreshold",
 		"bucket_arn":                             "BucketArn",
@@ -1627,6 +1641,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"overlap_percentage":                     "OverlapPercentage",
 		"overlap_tokens":                         "OverlapTokens",
 		"parsing_configuration":                  "ParsingConfiguration",
+		"parsing_modality":                       "ParsingModality",
 		"parsing_prompt":                         "ParsingPrompt",
 		"parsing_prompt_text":                    "ParsingPromptText",
 		"parsing_strategy":                       "ParsingStrategy",

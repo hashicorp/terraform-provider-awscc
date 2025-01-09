@@ -26,11 +26,11 @@ func subscriptionFilterDataSource(ctx context.Context) (datasource.DataSource, e
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "This parameter is valid only for log groups that have an active log transformer. For more information about log transformers, see [PutTransformer](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutTransformer.html).\n If this value is ``true``, the subscription filter is applied on the transformed version of the log events instead of the original ingested log events.",
 		//	  "type": "boolean"
 		//	}
 		"apply_on_transformed_logs": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "This parameter is valid only for log groups that have an active log transformer. For more information about log transformers, see [PutTransformer](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutTransformer.html).\n If this value is ``true``, the subscription filter is applied on the transformed version of the log events instead of the original ingested log events.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DestinationArn

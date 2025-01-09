@@ -83,10 +83,6 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "anyOf": [
-		//	    {},
-		//	    {}
-		//	  ],
 		//	  "description": "An KMS key identifier for the key to use to encrypt the integration. If you don't specify an encryption key, the default AWS owned KMS key is used.",
 		//	  "type": "string"
 		//	}

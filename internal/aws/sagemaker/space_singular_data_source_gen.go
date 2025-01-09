@@ -254,6 +254,21 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "FileSystemId"
 		//	            ],
 		//	            "type": "object"
+		//	          },
+		//	          "FSxLustreFileSystem": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "FileSystemId": {
+		//	                "maxLength": 21,
+		//	                "minLength": 11,
+		//	                "pattern": "^(fs-[0-9a-f]{8,})$",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "FileSystemId"
+		//	            ],
+		//	            "type": "object"
 		//	          }
 		//	        },
 		//	        "type": "object"
@@ -761,6 +776,16 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 								}, /*END SCHEMA*/
 								Computed: true,
 							}, /*END ATTRIBUTE*/
+							// Property: FSxLustreFileSystem
+							"fsx_lustre_file_system": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: FileSystemId
+									"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Computed: true,
@@ -1069,6 +1094,7 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"ebs_volume_size_in_gb":        "EbsVolumeSizeInGb",
 		"efs_file_system":              "EFSFileSystem",
 		"file_system_id":               "FileSystemId",
+		"fsx_lustre_file_system":       "FSxLustreFileSystem",
 		"idle_settings":                "IdleSettings",
 		"idle_timeout_in_minutes":      "IdleTimeoutInMinutes",
 		"image_name":                   "ImageName",

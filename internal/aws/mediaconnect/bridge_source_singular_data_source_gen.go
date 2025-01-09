@@ -106,6 +106,17 @@ func bridgeSourceDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	      "description": "The network source multicast IP.",
 		//	      "type": "string"
 		//	    },
+		//	    "MulticastSourceSettings": {
+		//	      "additionalProperties": false,
+		//	      "description": "The settings related to the multicast source.",
+		//	      "properties": {
+		//	        "MulticastSourceIp": {
+		//	          "description": "The IP address of the source for source-specific multicast (SSM).",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "NetworkName": {
 		//	      "description": "The network source's gateway network name.",
 		//	      "type": "string"
@@ -137,6 +148,18 @@ func bridgeSourceDataSource(ctx context.Context) (datasource.DataSource, error) 
 				// Property: MulticastIp
 				"multicast_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The network source multicast IP.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MulticastSourceSettings
+				"multicast_source_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: MulticastSourceIp
+						"multicast_source_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The IP address of the source for source-specific multicast (SSM).",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The settings related to the multicast source.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: NetworkName
@@ -180,6 +203,8 @@ func bridgeSourceDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"flow_source":                   "FlowSource",
 		"flow_vpc_interface_attachment": "FlowVpcInterfaceAttachment",
 		"multicast_ip":                  "MulticastIp",
+		"multicast_source_ip":           "MulticastSourceIp",
+		"multicast_source_settings":     "MulticastSourceSettings",
 		"name":                          "Name",
 		"network_name":                  "NetworkName",
 		"network_source":                "NetworkSource",

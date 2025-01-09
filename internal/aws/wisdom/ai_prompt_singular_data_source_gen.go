@@ -99,6 +99,15 @@ func aIPromptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: ModifiedTimeSeconds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "number"
+		//	}
+		"modified_time_seconds": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -219,6 +228,7 @@ func aIPromptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"assistant_id":           "AssistantId",
 		"description":            "Description",
 		"model_id":               "ModelId",
+		"modified_time_seconds":  "ModifiedTimeSeconds",
 		"name":                   "Name",
 		"tags":                   "Tags",
 		"template_configuration": "TemplateConfiguration",

@@ -162,6 +162,14 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                    }
 		//	                  },
 		//	                  "type": "object"
+		//	                },
+		//	                "RequireConfirmation": {
+		//	                  "description": "ENUM to check if action requires user confirmation",
+		//	                  "enum": [
+		//	                    "ENABLED",
+		//	                    "DISABLED"
+		//	                  ],
+		//	                  "type": "string"
 		//	                }
 		//	              },
 		//	              "required": [
@@ -302,6 +310,11 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 												}, /*END SCHEMA*/
 											}, /*END NESTED OBJECT*/
 											Description: "A map of parameter name and detail",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: RequireConfirmation
+										"require_confirmation": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "ENUM to check if action requires user confirmation",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
@@ -976,6 +989,7 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"prompt_state":                         "PromptState",
 		"prompt_type":                          "PromptType",
 		"recommended_actions":                  "RecommendedActions",
+		"require_confirmation":                 "RequireConfirmation",
 		"required":                             "Required",
 		"s3":                                   "S3",
 		"s3_bucket_name":                       "S3BucketName",

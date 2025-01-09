@@ -358,6 +358,17 @@ func bridgeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "description": "The network source multicast IP.",
 		//	            "type": "string"
 		//	          },
+		//	          "MulticastSourceSettings": {
+		//	            "additionalProperties": false,
+		//	            "description": "The settings related to the multicast source.",
+		//	            "properties": {
+		//	              "MulticastSourceIp": {
+		//	                "description": "The IP address of the source for source-specific multicast (SSM).",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
 		//	          "Name": {
 		//	            "description": "The name of the network source.",
 		//	            "type": "string"
@@ -436,6 +447,18 @@ func bridgeDataSource(ctx context.Context) (datasource.DataSource, error) {
 								Description: "The network source multicast IP.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
+							// Property: MulticastSourceSettings
+							"multicast_source_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: MulticastSourceIp
+									"multicast_source_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The IP address of the source for source-specific multicast (SSM).",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "The settings related to the multicast source.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
 							// Property: Name
 							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The name of the network source.",
@@ -494,6 +517,8 @@ func bridgeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"max_bitrate":                   "MaxBitrate",
 		"max_outputs":                   "MaxOutputs",
 		"multicast_ip":                  "MulticastIp",
+		"multicast_source_ip":           "MulticastSourceIp",
+		"multicast_source_settings":     "MulticastSourceSettings",
 		"name":                          "Name",
 		"network_name":                  "NetworkName",
 		"network_output":                "NetworkOutput",

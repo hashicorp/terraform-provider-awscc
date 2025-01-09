@@ -57,7 +57,7 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "maxLength": 1284,
 		//	  "minLength": 1,
-		//	  "pattern": "^arn:aws:iam::[0-9]{12}:role/.+",
+		//	  "pattern": "^arn:aws:iam::[0-9]{12}:role/[a-zA-Z0-9_/+=,.@-]+$",
 		//	  "type": "string"
 		//	}
 		"principal": schema.StringAttribute{ /*START ATTRIBUTE*/
