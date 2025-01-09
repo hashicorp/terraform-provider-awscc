@@ -1,8 +1,14 @@
 {
   "tagging": {
-    "taggable": false,
-    "tagOnCreate": false,
-    "tagUpdatable": false,
+    "permissions": [
+      "ec2:CreateTags",
+      "ec2:DeleteTags",
+      "ec2:DescribeVpcEndpoints"
+    ],
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "tagProperty": "/properties/Tags",
     "cloudFormationSystemTags": false
   },
   "handlers": {
@@ -21,7 +27,9 @@
         "ec2:DescribeSubnets",
         "ec2:DescribeSecurityGroups",
         "vpc-lattice:CreateServiceNetworkVpcEndpointAssociation",
-        "vpc-lattice:DescribeServiceNetworkVpcEndpointAssociation"
+        "vpc-lattice:DescribeServiceNetworkVpcEndpointAssociation",
+        "ec2:CreateTags",
+        "ec2:DeleteTags"
       ],
       "timeoutInMinutes": 210
     },
@@ -32,7 +40,9 @@
         "ec2:DescribeSubnets",
         "ec2:DescribeSecurityGroups",
         "vpc-lattice:CreateServiceNetworkVpcEndpointAssociation",
-        "vpc-lattice:DescribeServiceNetworkVpcEndpointAssociation"
+        "vpc-lattice:DescribeServiceNetworkVpcEndpointAssociation",
+        "ec2:CreateTags",
+        "ec2:DeleteTags"
       ],
       "timeoutInMinutes": 210
     },
@@ -50,7 +60,9 @@
         "ec2:DescribeVpcEndpoints",
         "ec2:DescribeSubnets",
         "ec2:DescribeSecurityGroups",
-        "vpc-lattice:DescribeServiceNetworkVpcEndpointAssociation"
+        "vpc-lattice:DescribeServiceNetworkVpcEndpointAssociation",
+        "ec2:CreateTags",
+        "ec2:DeleteTags"
       ],
       "timeoutInMinutes": 210
     }
@@ -99,6 +111,23 @@
           ]
         }
       }
+    },
+    "Tag": {
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Value": {
+          "type": "string"
+        },
+        "Key": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Value",
+        "Key"
+      ]
     }
   },
   "properties": {
@@ -234,6 +263,15 @@
     "Id": {
       "description": "",
       "type": "string"
+    },
+    "Tags": {
+      "uniqueItems": false,
+      "description": "",
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
     }
   },
   "required": [
