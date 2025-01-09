@@ -1,4 +1,5 @@
-## 1.25.0 (Unreleased)
+## 1.26.0 (Unreleased)
+## 1.25.0 (January  9, 2025)
 
 FEATURES:
 
