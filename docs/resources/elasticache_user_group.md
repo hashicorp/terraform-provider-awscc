@@ -66,7 +66,7 @@ resource "awscc_elasticache_user" "example2" {
 
 ### Required
 
-- `engine` (String) Must be redis.
+- `engine` (String) The target cache engine for the user group.
 - `user_group_id` (String) The ID of the user group.
 - `user_ids` (Set of String) List of users associated to this user group.
 

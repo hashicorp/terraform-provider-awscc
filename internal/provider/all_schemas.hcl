@@ -3581,6 +3581,28 @@ resource_schema "aws_nimblestudio_studio_component" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_notifications_channel_association" {
+  cloudformation_type_name               = "AWS::Notifications::ChannelAssociation"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_notifications_event_rule" {
+  cloudformation_type_name               = "AWS::Notifications::EventRule"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_notifications_notification_configuration" {
+  cloudformation_type_name = "AWS::Notifications::NotificationConfiguration"
+}
+
+resource_schema "aws_notifications_notification_hub" {
+  cloudformation_type_name = "AWS::Notifications::NotificationHub"
+}
+
+resource_schema "aws_notificationscontacts_email_contact" {
+  cloudformation_type_name = "AWS::NotificationsContacts::EmailContact"
+}
+
 resource_schema "aws_osis_pipeline" {
   cloudformation_type_name = "AWS::OSIS::Pipeline"
 }

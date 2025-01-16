@@ -1,0 +1,1 @@
+$ terraform import awscc_notifications_notification_hub.example "region"

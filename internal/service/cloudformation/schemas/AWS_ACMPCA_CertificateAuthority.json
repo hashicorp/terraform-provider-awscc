@@ -402,7 +402,11 @@
     "tagOnCreate": true,
     "tagUpdatable": true,
     "cloudFormationSystemTags": false,
-    "tagProperty": "/properties/Tags"
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "acm-pca:TagCertificateAuthority",
+      "acm-pca:UntagCertificateAuthority"
+    ]
   },
   "additionalProperties": false,
   "required": [

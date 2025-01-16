@@ -588,6 +588,9 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_networkmanager_transit_gateway_route_table_attachments -cftype AWS::NetworkManager::TransitGatewayRouteTableAttachment -package networkmanager ../aws/networkmanager/transit_gateway_route_table_attachment_plural_data_source_gen.go ../aws/networkmanager/transit_gateway_route_table_attachment_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_networkmanager_vpc_attachments -cftype AWS::NetworkManager::VpcAttachment -package networkmanager ../aws/networkmanager/vpc_attachment_plural_data_source_gen.go ../aws/networkmanager/vpc_attachment_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_nimblestudio_studios -cftype AWS::NimbleStudio::Studio -package nimblestudio ../aws/nimblestudio/studio_plural_data_source_gen.go ../aws/nimblestudio/studio_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_notifications_notification_configurations -cftype AWS::Notifications::NotificationConfiguration -package notifications ../aws/notifications/notification_configuration_plural_data_source_gen.go ../aws/notifications/notification_configuration_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_notifications_notification_hubs -cftype AWS::Notifications::NotificationHub -package notifications ../aws/notifications/notification_hub_plural_data_source_gen.go ../aws/notifications/notification_hub_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_notificationscontacts_email_contacts -cftype AWS::NotificationsContacts::EmailContact -package notificationscontacts ../aws/notificationscontacts/email_contact_plural_data_source_gen.go ../aws/notificationscontacts/email_contact_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_osis_pipelines -cftype AWS::OSIS::Pipeline -package osis ../aws/osis/pipeline_plural_data_source_gen.go ../aws/osis/pipeline_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_oam_links -cftype AWS::Oam::Link -package oam ../aws/oam/link_plural_data_source_gen.go ../aws/oam/link_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_oam_sinks -cftype AWS::Oam::Sink -package oam ../aws/oam/sink_plural_data_source_gen.go ../aws/oam/sink_plural_data_source_gen_test.go
@@ -989,6 +992,8 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/networkfirewall"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/networkmanager"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/nimblestudio"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/notifications"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/notificationscontacts"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/oam"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/omics"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/opensearchserverless"

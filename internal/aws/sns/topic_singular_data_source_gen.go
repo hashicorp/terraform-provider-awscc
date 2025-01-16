@@ -139,6 +139,17 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The display name to use for an SNS topic with SMS subscriptions. The display name must be maximum 100 characters long, including hyphens (-), underscores (_), spaces, and tabs.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: FifoThroughputScope
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"fifo_throughput_scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FifoTopic
 		// CloudFormation resource type schema:
 		//
@@ -321,6 +332,7 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"display_name":                 "DisplayName",
 		"endpoint":                     "Endpoint",
 		"failure_feedback_role_arn":    "FailureFeedbackRoleArn",
+		"fifo_throughput_scope":        "FifoThroughputScope",
 		"fifo_topic":                   "FifoTopic",
 		"key":                          "Key",
 		"kms_master_key_id":            "KmsMasterKeyId",

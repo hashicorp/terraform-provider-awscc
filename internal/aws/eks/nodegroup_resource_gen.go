@@ -593,6 +593,10 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 		//	      "maximum": 100,
 		//	      "minimum": 1,
 		//	      "type": "number"
+		//	    },
+		//	    "UpdateStrategy": {
+		//	      "description": "The configuration for the behavior to follow during an node group version update of this managed node group. You choose between two possible strategies for replacing nodes during an UpdateNodegroupVersion action.",
+		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -621,6 +625,15 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 						float64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateStrategy
+				"update_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The configuration for the behavior to follow during an node group version update of this managed node group. You choose between two possible strategies for replacing nodes during an UpdateNodegroupVersion action.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -700,6 +713,7 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 		"tags":                       "Tags",
 		"taints":                     "Taints",
 		"update_config":              "UpdateConfig",
+		"update_strategy":            "UpdateStrategy",
 		"value":                      "Value",
 		"version":                    "Version",
 	})

@@ -1,4 +1,21 @@
 ## 1.26.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_notifications_channel_association`
+* **New Data Source:** `awscc_notifications_event_rule`
+* **New Data Source:** `awscc_notifications_notification_configuration`
+* **New Data Source:** `awscc_notifications_notification_configurations`
+* **New Data Source:** `awscc_notifications_notification_hub`
+* **New Data Source:** `awscc_notifications_notification_hubs`
+* **New Data Source:** `awscc_notificationscontacts_email_contact`
+* **New Data Source:** `awscc_notificationscontacts_email_contacts`
+* **New Resource:** `awscc_notifications_channel_association`
+* **New Resource:** `awscc_notifications_event_rule`
+* **New Resource:** `awscc_notifications_notification_configuration`
+* **New Resource:** `awscc_notifications_notification_hub`
+* **New Resource:** `awscc_notificationscontacts_email_contact`
+
 ## 1.25.0 (January  9, 2025)
 
 FEATURES:
