@@ -459,6 +459,7 @@
     "create": {
       "permissions": [
         "databrew:CreateDataset",
+        "databrew:DescribeDataset",
         "databrew:TagResource",
         "databrew:UntagResource",
         "glue:GetConnection",

@@ -128,7 +128,8 @@
         "SALESFORCE",
         "SHAREPOINT",
         "WEB",
-        "CUSTOM"
+        "CUSTOM",
+        "REDSHIFT_METADATA"
       ]
     },
     "DataDeletionPolicy": {
