@@ -131,11 +131,323 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "object"
 		//	    },
+		//	    "SqlKnowledgeBaseConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Configurations for a SQL knowledge base",
+		//	      "properties": {
+		//	        "RedshiftConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configurations for a Redshift knowledge base",
+		//	          "properties": {
+		//	            "QueryEngineConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "description": "Configurations for Redshift query engine",
+		//	              "properties": {
+		//	                "ProvisionedConfiguration": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "Configurations for provisioned Redshift query engine",
+		//	                  "properties": {
+		//	                    "AuthConfiguration": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "Configurations for Redshift query engine provisioned auth setup",
+		//	                      "properties": {
+		//	                        "DatabaseUser": {
+		//	                          "description": "Redshift database user",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "Type": {
+		//	                          "description": "Provisioned Redshift auth type",
+		//	                          "enum": [
+		//	                            "IAM",
+		//	                            "USERNAME_PASSWORD",
+		//	                            "USERNAME"
+		//	                          ],
+		//	                          "type": "string"
+		//	                        },
+		//	                        "UsernamePasswordSecretArn": {
+		//	                          "description": "Arn of a SecretsManager Secret",
+		//	                          "pattern": "^arn:aws(|-cn|-us-gov):secretsmanager:[a-z0-9-]{1,20}:([0-9]{12}|):secret:[a-zA-Z0-9!/_+=.@-]{1,512}$",
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "Type"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
+		//	                    "ClusterIdentifier": {
+		//	                      "description": "Redshift cluster identifier",
+		//	                      "maxLength": 63,
+		//	                      "minLength": 1,
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "ClusterIdentifier",
+		//	                    "AuthConfiguration"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "ServerlessConfiguration": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "Configurations for serverless Redshift query engine",
+		//	                  "properties": {
+		//	                    "AuthConfiguration": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "Configurations for Redshift query engine serverless auth setup",
+		//	                      "properties": {
+		//	                        "Type": {
+		//	                          "description": "Serverless Redshift auth type",
+		//	                          "enum": [
+		//	                            "IAM",
+		//	                            "USERNAME_PASSWORD"
+		//	                          ],
+		//	                          "type": "string"
+		//	                        },
+		//	                        "UsernamePasswordSecretArn": {
+		//	                          "description": "Arn of a SecretsManager Secret",
+		//	                          "pattern": "^arn:aws(|-cn|-us-gov):secretsmanager:[a-z0-9-]{1,20}:([0-9]{12}|):secret:[a-zA-Z0-9!/_+=.@-]{1,512}$",
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "Type"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
+		//	                    "WorkgroupArn": {
+		//	                      "description": "Workgroup arn",
+		//	                      "pattern": "^(arn:(aws(-[a-z]+)*):redshift-serverless:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:workgroup/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "WorkgroupArn",
+		//	                    "AuthConfiguration"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "Type": {
+		//	                  "description": "Redshift query engine type",
+		//	                  "enum": [
+		//	                    "SERVERLESS",
+		//	                    "PROVISIONED"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Type"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "QueryGenerationConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "description": "Configurations for generating Redshift engine queries",
+		//	              "properties": {
+		//	                "ExecutionTimeoutSeconds": {
+		//	                  "description": "Max query execution timeout",
+		//	                  "maximum": 200,
+		//	                  "minimum": 1,
+		//	                  "type": "integer"
+		//	                },
+		//	                "GenerationContext": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "Context used to improve query generation",
+		//	                  "properties": {
+		//	                    "CuratedQueries": {
+		//	                      "description": "List of example queries and results",
+		//	                      "insertionOrder": false,
+		//	                      "items": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "Curated query or question and answer pair",
+		//	                        "properties": {
+		//	                          "NaturalLanguage": {
+		//	                            "description": "Question for the curated query",
+		//	                            "maxLength": 1000,
+		//	                            "minLength": 1,
+		//	                            "type": "string"
+		//	                          },
+		//	                          "Sql": {
+		//	                            "description": "Answer for the curated query",
+		//	                            "maxLength": 1000,
+		//	                            "minLength": 1,
+		//	                            "type": "string"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "NaturalLanguage",
+		//	                          "Sql"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      },
+		//	                      "maxItems": 10,
+		//	                      "type": "array"
+		//	                    },
+		//	                    "Tables": {
+		//	                      "description": "List of tables used for Redshift query generation context",
+		//	                      "insertionOrder": false,
+		//	                      "items": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "Tables used for Redshift query generation context",
+		//	                        "properties": {
+		//	                          "Columns": {
+		//	                            "description": "List of Redshift query generation columns",
+		//	                            "insertionOrder": false,
+		//	                            "items": {
+		//	                              "additionalProperties": false,
+		//	                              "description": "Redshift query generation column",
+		//	                              "properties": {
+		//	                                "Description": {
+		//	                                  "description": "Description for the attached entity",
+		//	                                  "maxLength": 200,
+		//	                                  "minLength": 1,
+		//	                                  "type": "string"
+		//	                                },
+		//	                                "Inclusion": {
+		//	                                  "description": "Include or Exclude status for an entity",
+		//	                                  "enum": [
+		//	                                    "INCLUDE",
+		//	                                    "EXCLUDE"
+		//	                                  ],
+		//	                                  "type": "string"
+		//	                                },
+		//	                                "Name": {
+		//	                                  "description": "Query generation column name",
+		//	                                  "maxLength": 127,
+		//	                                  "minLength": 1,
+		//	                                  "type": "string"
+		//	                                }
+		//	                              },
+		//	                              "type": "object"
+		//	                            },
+		//	                            "type": "array"
+		//	                          },
+		//	                          "Description": {
+		//	                            "description": "Description for the attached entity",
+		//	                            "maxLength": 200,
+		//	                            "minLength": 1,
+		//	                            "type": "string"
+		//	                          },
+		//	                          "Inclusion": {
+		//	                            "description": "Include or Exclude status for an entity",
+		//	                            "enum": [
+		//	                              "INCLUDE",
+		//	                              "EXCLUDE"
+		//	                            ],
+		//	                            "type": "string"
+		//	                          },
+		//	                          "Name": {
+		//	                            "description": "Query generation table name. Must follow three-part notation",
+		//	                            "pattern": "^.*\\..*\\..*$",
+		//	                            "type": "string"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "Name"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      },
+		//	                      "maxItems": 50,
+		//	                      "type": "array"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "StorageConfigurations": {
+		//	              "description": "List of configurations for available Redshift query engine storage types",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "description": "Configurations for available Redshift query engine storage types",
+		//	                "properties": {
+		//	                  "AwsDataCatalogConfiguration": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "Configurations for Redshift query engine AWS Data Catalog backed storage",
+		//	                    "properties": {
+		//	                      "TableNames": {
+		//	                        "description": "List of table names in AWS Data Catalog. Must follow two part notation",
+		//	                        "insertionOrder": false,
+		//	                        "items": {
+		//	                          "description": "AWS Data Catalog table name",
+		//	                          "maxLength": 200,
+		//	                          "minLength": 1,
+		//	                          "pattern": "^.*\\.*$",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "maxItems": 1000,
+		//	                        "minItems": 1,
+		//	                        "type": "array"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "TableNames"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  },
+		//	                  "RedshiftConfiguration": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "Configurations for Redshift query engine Redshift backed storage",
+		//	                    "properties": {
+		//	                      "DatabaseName": {
+		//	                        "description": "Redshift database name",
+		//	                        "maxLength": 200,
+		//	                        "minLength": 1,
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "DatabaseName"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  },
+		//	                  "Type": {
+		//	                    "description": "Redshift query engine storage type",
+		//	                    "enum": [
+		//	                      "REDSHIFT",
+		//	                      "AWS_DATA_CATALOG"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Type"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "maxItems": 1,
+		//	              "minItems": 1,
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "StorageConfigurations",
+		//	            "QueryEngineConfiguration"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Type": {
+		//	          "description": "SQL query engine type",
+		//	          "enum": [
+		//	            "REDSHIFT"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Type"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "Type": {
 		//	      "description": "The type of a knowledge base.",
 		//	      "enum": [
 		//	        "VECTOR",
-		//	        "KENDRA"
+		//	        "KENDRA",
+		//	        "SQL"
 		//	      ],
 		//	      "type": "string"
 		//	    },
@@ -257,6 +569,494 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
+						objectplanmodifier.RequiresReplaceIfConfigured(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SqlKnowledgeBaseConfiguration
+				"sql_knowledge_base_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: RedshiftConfiguration
+						"redshift_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: QueryEngineConfiguration
+								"query_engine_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ProvisionedConfiguration
+										"provisioned_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: AuthConfiguration
+												"auth_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: DatabaseUser
+														"database_user": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "Redshift database user",
+															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: Type
+														"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "Provisioned Redshift auth type",
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.OneOf(
+																	"IAM",
+																	"USERNAME_PASSWORD",
+																	"USERNAME",
+																),
+																fwvalidators.NotNullString(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: UsernamePasswordSecretArn
+														"username_password_secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "Arn of a SecretsManager Secret",
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(|-cn|-us-gov):secretsmanager:[a-z0-9-]{1,20}:([0-9]{12}|):secret:[a-zA-Z0-9!/_+=.@-]{1,512}$"), ""),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "Configurations for Redshift query engine provisioned auth setup",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.Object{ /*START VALIDATORS*/
+														fwvalidators.NotNullObject(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+														objectplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: ClusterIdentifier
+												"cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Redshift cluster identifier",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.LengthBetween(1, 63),
+														fwvalidators.NotNullString(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "Configurations for provisioned Redshift query engine",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: ServerlessConfiguration
+										"serverless_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: AuthConfiguration
+												"auth_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Type
+														"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "Serverless Redshift auth type",
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.OneOf(
+																	"IAM",
+																	"USERNAME_PASSWORD",
+																),
+																fwvalidators.NotNullString(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: UsernamePasswordSecretArn
+														"username_password_secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "Arn of a SecretsManager Secret",
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(|-cn|-us-gov):secretsmanager:[a-z0-9-]{1,20}:([0-9]{12}|):secret:[a-zA-Z0-9!/_+=.@-]{1,512}$"), ""),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "Configurations for Redshift query engine serverless auth setup",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.Object{ /*START VALIDATORS*/
+														fwvalidators.NotNullObject(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+														objectplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: WorkgroupArn
+												"workgroup_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Workgroup arn",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.RegexMatches(regexp.MustCompile("^(arn:(aws(-[a-z]+)*):redshift-serverless:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:workgroup/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$"), ""),
+														fwvalidators.NotNullString(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "Configurations for serverless Redshift query engine",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Type
+										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Redshift query engine type",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"SERVERLESS",
+													"PROVISIONED",
+												),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Configurations for Redshift query engine",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Object{ /*START VALIDATORS*/
+										fwvalidators.NotNullObject(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+										objectplanmodifier.RequiresReplaceIfConfigured(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: QueryGenerationConfiguration
+								"query_generation_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ExecutionTimeoutSeconds
+										"execution_timeout_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "Max query execution timeout",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Int64{ /*START VALIDATORS*/
+												int64validator.Between(1, 200),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: GenerationContext
+										"generation_context": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: CuratedQueries
+												"curated_queries": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: NaturalLanguage
+															"natural_language": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "Question for the curated query",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.String{ /*START VALIDATORS*/
+																	stringvalidator.LengthBetween(1, 1000),
+																	fwvalidators.NotNullString(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: Sql
+															"sql": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "Answer for the curated query",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.String{ /*START VALIDATORS*/
+																	stringvalidator.LengthBetween(1, 1000),
+																	fwvalidators.NotNullString(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+													}, /*END NESTED OBJECT*/
+													Description: "List of example queries and results",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.List{ /*START VALIDATORS*/
+														listvalidator.SizeAtMost(10),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+														generic.Multiset(),
+														listplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: Tables
+												"tables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: Columns
+															"columns": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: Description
+																		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Description: "Description for the attached entity",
+																			Optional:    true,
+																			Computed:    true,
+																			Validators: []validator.String{ /*START VALIDATORS*/
+																				stringvalidator.LengthBetween(1, 200),
+																			}, /*END VALIDATORS*/
+																			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																				stringplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
+																		}, /*END ATTRIBUTE*/
+																		// Property: Inclusion
+																		"inclusion": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Description: "Include or Exclude status for an entity",
+																			Optional:    true,
+																			Computed:    true,
+																			Validators: []validator.String{ /*START VALIDATORS*/
+																				stringvalidator.OneOf(
+																					"INCLUDE",
+																					"EXCLUDE",
+																				),
+																			}, /*END VALIDATORS*/
+																			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																				stringplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
+																		}, /*END ATTRIBUTE*/
+																		// Property: Name
+																		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Description: "Query generation column name",
+																			Optional:    true,
+																			Computed:    true,
+																			Validators: []validator.String{ /*START VALIDATORS*/
+																				stringvalidator.LengthBetween(1, 127),
+																			}, /*END VALIDATORS*/
+																			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																				stringplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Description: "List of Redshift query generation columns",
+																Optional:    true,
+																Computed:    true,
+																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																	generic.Multiset(),
+																	listplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: Description
+															"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "Description for the attached entity",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.String{ /*START VALIDATORS*/
+																	stringvalidator.LengthBetween(1, 200),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: Inclusion
+															"inclusion": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "Include or Exclude status for an entity",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.String{ /*START VALIDATORS*/
+																	stringvalidator.OneOf(
+																		"INCLUDE",
+																		"EXCLUDE",
+																	),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: Name
+															"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "Query generation table name. Must follow three-part notation",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.String{ /*START VALIDATORS*/
+																	stringvalidator.RegexMatches(regexp.MustCompile("^.*\\..*\\..*$"), ""),
+																	fwvalidators.NotNullString(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+													}, /*END NESTED OBJECT*/
+													Description: "List of tables used for Redshift query generation context",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.List{ /*START VALIDATORS*/
+														listvalidator.SizeAtMost(50),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+														generic.Multiset(),
+														listplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "Context used to improve query generation",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Configurations for generating Redshift engine queries",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: StorageConfigurations
+								"storage_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: AwsDataCatalogConfiguration
+											"aws_data_catalog_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: TableNames
+													"table_names": schema.ListAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Description: "List of table names in AWS Data Catalog. Must follow two part notation",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.List{ /*START VALIDATORS*/
+															listvalidator.SizeBetween(1, 1000),
+															listvalidator.ValueStringsAre(
+																stringvalidator.LengthBetween(1, 200),
+																stringvalidator.RegexMatches(regexp.MustCompile("^.*\\.*$"), ""),
+															),
+															fwvalidators.NotNullList(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+															generic.Multiset(),
+															listplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "Configurations for Redshift query engine AWS Data Catalog backed storage",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: RedshiftConfiguration
+											"redshift_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: DatabaseName
+													"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Redshift database name",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.LengthBetween(1, 200),
+															fwvalidators.NotNullString(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "Configurations for Redshift query engine Redshift backed storage",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Type
+											"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Redshift query engine storage type",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.OneOf(
+														"REDSHIFT",
+														"AWS_DATA_CATALOG",
+													),
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "List of configurations for available Redshift query engine storage types",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.SizeBetween(1, 1),
+										fwvalidators.NotNullList(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										generic.Multiset(),
+										listplanmodifier.UseStateForUnknown(),
+										listplanmodifier.RequiresReplaceIfConfigured(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configurations for a Redshift knowledge base",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Type
+						"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "SQL query engine type",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"REDSHIFT",
+								),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configurations for a SQL knowledge base",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Type
@@ -267,8 +1067,12 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 						stringvalidator.OneOf(
 							"VECTOR",
 							"KENDRA",
+							"SQL",
 						),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.RequiresReplace(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: VectorKnowledgeBaseConfiguration
 				"vector_knowledge_base_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -396,14 +1200,12 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
+						objectplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Contains details about the embeddings model used for the knowledge base.",
 			Required:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: KnowledgeBaseId
 		// CloudFormation resource type schema:
@@ -1342,21 +2144,30 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Bedrock::KnowledgeBase").WithTerraformTypeName("awscc_bedrock_knowledge_base")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"auth_configuration":                      "AuthConfiguration",
+		"aws_data_catalog_configuration":          "AwsDataCatalogConfiguration",
 		"bedrock_embedding_model_configuration":   "BedrockEmbeddingModelConfiguration",
+		"cluster_identifier":                      "ClusterIdentifier",
 		"collection_arn":                          "CollectionArn",
 		"collection_name":                         "CollectionName",
+		"columns":                                 "Columns",
 		"connection_string":                       "ConnectionString",
 		"created_at":                              "CreatedAt",
 		"credentials_secret_arn":                  "CredentialsSecretArn",
+		"curated_queries":                         "CuratedQueries",
 		"database_name":                           "DatabaseName",
+		"database_user":                           "DatabaseUser",
 		"description":                             "Description",
 		"dimensions":                              "Dimensions",
 		"embedding_model_arn":                     "EmbeddingModelArn",
 		"embedding_model_configuration":           "EmbeddingModelConfiguration",
 		"endpoint":                                "Endpoint",
 		"endpoint_service_name":                   "EndpointServiceName",
+		"execution_timeout_seconds":               "ExecutionTimeoutSeconds",
 		"failure_reasons":                         "FailureReasons",
 		"field_mapping":                           "FieldMapping",
+		"generation_context":                      "GenerationContext",
+		"inclusion":                               "Inclusion",
 		"kendra_index_arn":                        "KendraIndexArn",
 		"kendra_knowledge_base_configuration":     "KendraKnowledgeBaseConfiguration",
 		"knowledge_base_arn":                      "KnowledgeBaseArn",
@@ -1366,27 +2177,40 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		"mongo_db_atlas_configuration":            "MongoDbAtlasConfiguration",
 		"name":                                    "Name",
 		"namespace":                               "Namespace",
+		"natural_language":                        "NaturalLanguage",
 		"opensearch_serverless_configuration":     "OpensearchServerlessConfiguration",
 		"pinecone_configuration":                  "PineconeConfiguration",
 		"primary_key_field":                       "PrimaryKeyField",
+		"provisioned_configuration":               "ProvisionedConfiguration",
+		"query_engine_configuration":              "QueryEngineConfiguration",
+		"query_generation_configuration":          "QueryGenerationConfiguration",
 		"rds_configuration":                       "RdsConfiguration",
+		"redshift_configuration":                  "RedshiftConfiguration",
 		"resource_arn":                            "ResourceArn",
 		"role_arn":                                "RoleArn",
 		"s3_location":                             "S3Location",
+		"serverless_configuration":                "ServerlessConfiguration",
+		"sql":                                     "Sql",
+		"sql_knowledge_base_configuration":        "SqlKnowledgeBaseConfiguration",
 		"status":                                  "Status",
 		"storage_configuration":                   "StorageConfiguration",
+		"storage_configurations":                  "StorageConfigurations",
 		"supplemental_data_storage_configuration": "SupplementalDataStorageConfiguration",
 		"supplemental_data_storage_location_type": "SupplementalDataStorageLocationType",
 		"supplemental_data_storage_locations":     "SupplementalDataStorageLocations",
 		"table_name":                              "TableName",
+		"table_names":                             "TableNames",
+		"tables":                                  "Tables",
 		"tags":                                    "Tags",
 		"text_field":                              "TextField",
 		"type":                                    "Type",
 		"updated_at":                              "UpdatedAt",
 		"uri":                                     "URI",
+		"username_password_secret_arn":            "UsernamePasswordSecretArn",
 		"vector_field":                            "VectorField",
 		"vector_index_name":                       "VectorIndexName",
 		"vector_knowledge_base_configuration":     "VectorKnowledgeBaseConfiguration",
+		"workgroup_arn":                           "WorkgroupArn",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

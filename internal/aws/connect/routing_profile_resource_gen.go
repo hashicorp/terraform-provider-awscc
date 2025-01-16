@@ -121,7 +121,8 @@ func routingProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	        "enum": [
 		//	          "VOICE",
 		//	          "CHAT",
-		//	          "TASK"
+		//	          "TASK",
+		//	          "EMAIL"
 		//	        ],
 		//	        "type": "string"
 		//	      },
@@ -170,6 +171,7 @@ func routingProfileResource(ctx context.Context) (resource.Resource, error) {
 								"VOICE",
 								"CHAT",
 								"TASK",
+								"EMAIL",
 							),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
@@ -263,7 +265,8 @@ func routingProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	            "enum": [
 		//	              "VOICE",
 		//	              "CHAT",
-		//	              "TASK"
+		//	              "TASK",
+		//	              "EMAIL"
 		//	            ],
 		//	            "type": "string"
 		//	          },
@@ -332,6 +335,7 @@ func routingProfileResource(ctx context.Context) (resource.Resource, error) {
 										"VOICE",
 										"CHAT",
 										"TASK",
+										"EMAIL",
 									),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/

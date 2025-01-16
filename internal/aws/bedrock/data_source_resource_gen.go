@@ -522,7 +522,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "SALESFORCE",
 		//	        "SHAREPOINT",
 		//	        "WEB",
-		//	        "CUSTOM"
+		//	        "CUSTOM",
+		//	        "REDSHIFT_METADATA"
 		//	      ],
 		//	      "type": "string"
 		//	    },
@@ -1302,6 +1303,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							"SHAREPOINT",
 							"WEB",
 							"CUSTOM",
+							"REDSHIFT_METADATA",
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
