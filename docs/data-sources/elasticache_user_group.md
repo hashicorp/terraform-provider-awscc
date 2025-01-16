@@ -22,7 +22,7 @@ Data Source schema for AWS::ElastiCache::UserGroup
 ### Read-Only
 
 - `arn` (String) The Amazon Resource Name (ARN) of the user account.
-- `engine` (String) Must be redis.
+- `engine` (String) The target cache engine for the user group.
 - `status` (String) Indicates user group status. Can be "creating", "active", "modifying", "deleting".
 - `tags` (Attributes Set) An array of key-value pairs to apply to this user. (see [below for nested schema](#nestedatt--tags))
 - `user_group_id` (String) The ID of the user group.

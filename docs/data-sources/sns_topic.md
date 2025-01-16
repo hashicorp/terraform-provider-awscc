@@ -39,6 +39,7 @@ Data Source schema for AWS::SNS::Topic
   
  Once configured, log entries are sent to Amazon CloudWatch Logs. (see [below for nested schema](#nestedatt--delivery_status_logging))
 - `display_name` (String) The display name to use for an SNS topic with SMS subscriptions. The display name must be maximum 100 characters long, including hyphens (-), underscores (_), spaces, and tabs.
+- `fifo_throughput_scope` (String)
 - `fifo_topic` (Boolean) Set to true to create a FIFO topic.
 - `kms_master_key_id` (String) The ID of an AWS managed customer master key (CMK) for SNS or a custom CMK. For more information, see [Key terms](https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms). For more examples, see ``KeyId`` in the *API Reference*.
  This property applies only to [server-side-encryption](https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html).

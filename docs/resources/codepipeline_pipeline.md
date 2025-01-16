@@ -281,6 +281,7 @@ Optional:
 
 Optional:
 
+- `commands` (List of String) The shell commands to run with your compute action in CodePipeline.
 - `configuration` (String) The rule's configuration. These are key-value pairs that specify input values for a rule.
 - `input_artifacts` (Attributes List) (see [below for nested schema](#nestedatt--stages--before_entry--conditions--rules--input_artifacts))
 - `name` (String) The rule declaration's name.
@@ -341,6 +342,7 @@ Optional:
 
 Optional:
 
+- `commands` (List of String) The shell commands to run with your compute action in CodePipeline.
 - `configuration` (String) The rule's configuration. These are key-value pairs that specify input values for a rule.
 - `input_artifacts` (Attributes List) (see [below for nested schema](#nestedatt--stages--on_failure--conditions--rules--input_artifacts))
 - `name` (String) The rule declaration's name.
@@ -398,6 +400,7 @@ Optional:
 
 Optional:
 
+- `commands` (List of String) The shell commands to run with your compute action in CodePipeline.
 - `configuration` (String) The rule's configuration. These are key-value pairs that specify input values for a rule.
 - `input_artifacts` (Attributes List) (see [below for nested schema](#nestedatt--stages--on_success--conditions--rules--input_artifacts))
 - `name` (String) The rule declaration's name.
