@@ -778,6 +778,11 @@
 //go:generate go run generators/resource/main.go -resource awscc_nimblestudio_streaming_image -cfschema ../service/cloudformation/schemas/AWS_NimbleStudio_StreamingImage.json -package nimblestudio -- ../aws/nimblestudio/streaming_image_resource_gen.go ../aws/nimblestudio/streaming_image_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_nimblestudio_studio -cfschema ../service/cloudformation/schemas/AWS_NimbleStudio_Studio.json -package nimblestudio -- ../aws/nimblestudio/studio_resource_gen.go ../aws/nimblestudio/studio_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_nimblestudio_studio_component -cfschema ../service/cloudformation/schemas/AWS_NimbleStudio_StudioComponent.json -package nimblestudio -- ../aws/nimblestudio/studio_component_resource_gen.go ../aws/nimblestudio/studio_component_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_notifications_channel_association -cfschema ../service/cloudformation/schemas/AWS_Notifications_ChannelAssociation.json -package notifications -- ../aws/notifications/channel_association_resource_gen.go ../aws/notifications/channel_association_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_notifications_event_rule -cfschema ../service/cloudformation/schemas/AWS_Notifications_EventRule.json -package notifications -- ../aws/notifications/event_rule_resource_gen.go ../aws/notifications/event_rule_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_notifications_notification_configuration -cfschema ../service/cloudformation/schemas/AWS_Notifications_NotificationConfiguration.json -package notifications -- ../aws/notifications/notification_configuration_resource_gen.go ../aws/notifications/notification_configuration_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_notifications_notification_hub -cfschema ../service/cloudformation/schemas/AWS_Notifications_NotificationHub.json -package notifications -- ../aws/notifications/notification_hub_resource_gen.go ../aws/notifications/notification_hub_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_notificationscontacts_email_contact -cfschema ../service/cloudformation/schemas/AWS_NotificationsContacts_EmailContact.json -package notificationscontacts -- ../aws/notificationscontacts/email_contact_resource_gen.go ../aws/notificationscontacts/email_contact_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_osis_pipeline -cfschema ../service/cloudformation/schemas/AWS_OSIS_Pipeline.json -package osis -- ../aws/osis/pipeline_resource_gen.go ../aws/osis/pipeline_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_oam_link -cfschema ../service/cloudformation/schemas/AWS_Oam_Link.json -package oam -- ../aws/oam/link_resource_gen.go ../aws/oam/link_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_oam_sink -cfschema ../service/cloudformation/schemas/AWS_Oam_Sink.json -package oam -- ../aws/oam/sink_resource_gen.go ../aws/oam/sink_resource_gen_test.go
@@ -1259,6 +1264,8 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/networkfirewall"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/networkmanager"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/nimblestudio"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/notifications"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/notificationscontacts"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/oam"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/omics"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/opensearchserverless"
