@@ -17,7 +17,7 @@ description: |-
 ### Create EBS CSI addon
 {{ tffile (printf "examples/resources/%s/eks_addon_ebs_csi_driver.tf" .Name)}}
 
-### Create VPC CNI addon:
+### Create VPC CNI addon
 {{ tffile (printf "examples/resources/%s/eks_addon_vpc_cni.tf" .Name)}}
 
 {{ .SchemaMarkdown | trimspace }}
