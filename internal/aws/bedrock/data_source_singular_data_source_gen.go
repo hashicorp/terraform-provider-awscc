@@ -498,7 +498,8 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "SALESFORCE",
 		//	        "SHAREPOINT",
 		//	        "WEB",
-		//	        "CUSTOM"
+		//	        "CUSTOM",
+		//	        "REDSHIFT_METADATA"
 		//	      ],
 		//	      "type": "string"
 		//	    },

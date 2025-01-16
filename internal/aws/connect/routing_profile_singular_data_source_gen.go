@@ -89,7 +89,8 @@ func routingProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	        "enum": [
 		//	          "VOICE",
 		//	          "CHAT",
-		//	          "TASK"
+		//	          "TASK",
+		//	          "EMAIL"
 		//	        ],
 		//	        "type": "string"
 		//	      },
@@ -200,7 +201,8 @@ func routingProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	            "enum": [
 		//	              "VOICE",
 		//	              "CHAT",
-		//	              "TASK"
+		//	              "TASK",
+		//	              "EMAIL"
 		//	            ],
 		//	            "type": "string"
 		//	          },

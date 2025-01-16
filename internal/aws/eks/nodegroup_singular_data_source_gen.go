@@ -412,6 +412,10 @@ func nodegroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "maximum": 100,
 		//	      "minimum": 1,
 		//	      "type": "number"
+		//	    },
+		//	    "UpdateStrategy": {
+		//	      "description": "The configuration for the behavior to follow during an node group version update of this managed node group. You choose between two possible strategies for replacing nodes during an UpdateNodegroupVersion action.",
+		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -426,6 +430,11 @@ func nodegroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: MaxUnavailablePercentage
 				"max_unavailable_percentage": schema.Float64Attribute{ /*START ATTRIBUTE*/
 					Description: "The maximum percentage of nodes unavailable during a version update. This percentage of nodes will be updated in parallel, up to 100 nodes at once. This value or maxUnavailable is required to have a value.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateStrategy
+				"update_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The configuration for the behavior to follow during an node group version update of this managed node group. You choose between two possible strategies for replacing nodes during an UpdateNodegroupVersion action.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -492,6 +501,7 @@ func nodegroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags":                       "Tags",
 		"taints":                     "Taints",
 		"update_config":              "UpdateConfig",
+		"update_strategy":            "UpdateStrategy",
 		"value":                      "Value",
 		"version":                    "Version",
 	})
