@@ -1,4 +1,5 @@
-## 1.26.0 (Unreleased)
+## 1.27.0 (Unreleased)
+## 1.26.0 (January 16, 2025)
 
 FEATURES:
 
