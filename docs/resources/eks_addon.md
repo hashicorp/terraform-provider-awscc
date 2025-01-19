@@ -102,7 +102,7 @@ resource "awscc_eks_addon" "ebs_csi" {
 }
 ```
 
-### Create VPC CNI addon:
+### Create VPC CNI addon
 ```terraform
 # AWS IAM expects the OIDC provider URL without the `https://` prefix in the condition block. 
 # This creates a local variable for it:
