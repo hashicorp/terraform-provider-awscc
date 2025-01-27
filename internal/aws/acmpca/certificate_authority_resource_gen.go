@@ -1213,7 +1213,6 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
-			// Tags is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
@@ -1338,7 +1337,6 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 		"/properties/Subject",
 		"/properties/Subject",
 		"/properties/CsrExtensions",
-		"/properties/Tags",
 		"/properties/RevocationConfiguration",
 		"/properties/KeyStorageSecurityStandard",
 	})

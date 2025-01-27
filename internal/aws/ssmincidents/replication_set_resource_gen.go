@@ -7,7 +7,6 @@ package ssmincidents
 
 import (
 	"context"
-	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -82,9 +81,8 @@ func replicationSetResource(ctx context.Context) (resource.Resource, error) {
 		//	        "description": "The ReplicationSet regional configuration.",
 		//	        "properties": {
 		//	          "SseKmsKeyId": {
-		//	            "description": "The ARN of the ReplicationSet.",
-		//	            "maxLength": 1000,
-		//	            "pattern": "^arn:aws(-(cn|us-gov|iso(-b)?))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
+		//	            "description": "The AWS Key Management Service key ID or Key Alias to use to encrypt your replication set.",
+		//	            "maxLength": 2048,
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -114,12 +112,11 @@ func replicationSetResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: SseKmsKeyId
 							"sse_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The ARN of the ReplicationSet.",
+								Description: "The AWS Key Management Service key ID or Key Alias to use to encrypt your replication set.",
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthAtMost(1000),
-									stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-(cn|us-gov|iso(-b)?))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$"), ""),
+									stringvalidator.LengthAtMost(2048),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

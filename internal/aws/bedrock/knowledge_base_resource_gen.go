@@ -475,6 +475,14 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "maximum": 4096,
 		//	                  "minimum": 0,
 		//	                  "type": "integer"
+		//	                },
+		//	                "EmbeddingDataType": {
+		//	                  "description": "The data type for the vectors when using a model to convert text into vector embeddings.",
+		//	                  "enum": [
+		//	                    "FLOAT32",
+		//	                    "BINARY"
+		//	                  ],
+		//	                  "type": "string"
 		//	                }
 		//	              },
 		//	              "type": "object"
@@ -1107,6 +1115,21 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: EmbeddingDataType
+										"embedding_data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The data type for the vectors when using a model to convert text into vector embeddings.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"FLOAT32",
+													"BINARY",
+												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
@@ -2159,6 +2182,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		"database_user":                           "DatabaseUser",
 		"description":                             "Description",
 		"dimensions":                              "Dimensions",
+		"embedding_data_type":                     "EmbeddingDataType",
 		"embedding_model_arn":                     "EmbeddingModelArn",
 		"embedding_model_configuration":           "EmbeddingModelConfiguration",
 		"endpoint":                                "Endpoint",

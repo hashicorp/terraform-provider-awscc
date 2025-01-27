@@ -177,7 +177,10 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		//	    "LINUX_CONTAINER",
 		//	    "LINUX_GPU_CONTAINER",
 		//	    "ARM_CONTAINER",
-		//	    "MAC_ARM"
+		//	    "MAC_ARM",
+		//	    "LINUX_EC2",
+		//	    "ARM_EC2",
+		//	    "WINDOWS_EC2"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -192,6 +195,9 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 					"LINUX_GPU_CONTAINER",
 					"ARM_CONTAINER",
 					"MAC_ARM",
+					"LINUX_EC2",
+					"ARM_EC2",
+					"WINDOWS_EC2",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

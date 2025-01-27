@@ -237,7 +237,6 @@ func computeNodeGroupResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The name that identifies the compute node group.",
-		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/

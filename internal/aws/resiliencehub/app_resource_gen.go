@@ -318,22 +318,6 @@ func appResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
-		// Property: RegulatoryPolicyArn
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "description": "Amazon Resource Name (ARN) of the Regulatory Policy.",
-		//	  "pattern": "",
-		//	  "type": "string"
-		//	}
-		"regulatory_policy_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Amazon Resource Name (ARN) of the Regulatory Policy.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
 		// Property: ResiliencyPolicyArn
 		// CloudFormation resource type schema:
 		//
@@ -571,7 +555,6 @@ func appResource(ctx context.Context) (resource.Resource, error) {
 		"name":                    "Name",
 		"permission_model":        "PermissionModel",
 		"physical_resource_id":    "PhysicalResourceId",
-		"regulatory_policy_arn":   "RegulatoryPolicyArn",
 		"resiliency_policy_arn":   "ResiliencyPolicyArn",
 		"resource_mappings":       "ResourceMappings",
 		"resource_name":           "ResourceName",

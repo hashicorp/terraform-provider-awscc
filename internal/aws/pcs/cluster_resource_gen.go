@@ -184,7 +184,6 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The name that identifies the cluster.",
-		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/

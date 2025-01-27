@@ -308,6 +308,29 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ResourceTagLogicalOperator
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "AND",
+		//	    "OR"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"resource_tag_logical_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"AND",
+					"OR",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceTags
 		// CloudFormation resource type schema:
 		//
@@ -1323,6 +1346,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		"protocol":                          "Protocol",
 		"remediation_enabled":               "RemediationEnabled",
 		"resource_set_ids":                  "ResourceSetIds",
+		"resource_tag_logical_operator":     "ResourceTagLogicalOperator",
 		"resource_tags":                     "ResourceTags",
 		"resource_type":                     "ResourceType",
 		"resource_type_list":                "ResourceTypeList",
