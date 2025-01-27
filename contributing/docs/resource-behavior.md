@@ -192,7 +192,7 @@ If the operation succeeds, the resource's current state document is used to popu
 
 ### Update
 
-The provider's [`Update`](https://developer.hashicorp.com/terraform/plugin/framework/resources/update) method is called from `terraform apply` when Terraform determines during planning that an existing resource must be updated in-place. The provider converts the resource's prior state and planned new state into JSON documents and generates a [JSON Patch](https://jsonpatch.com/) document listing the operations required to reach the desired state from the current state of the resource.
+The provider's [`Update`](https://developer.hashicorp.com/terraform/plugin/framework/resources/update) method is called from `terraform apply` when Terraform determines during planning that an existing resource must be updated in-place. The provider converts the resource's prior state and planned new state into JSON documents and generates a [JSON Patch](https://datatracker.ietf.org/doc/html/rfc6902) document listing the operations required to reach the desired state from the current state of the resource.
 
 The patch document and the CloudFormation resource type name are passed to the [`UpdateResource` API](https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_UpdateResource.html) and the provider then polls for completion of the operation.
 
