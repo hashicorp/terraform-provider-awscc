@@ -62,9 +62,8 @@ func replicationSetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	        "description": "The ReplicationSet regional configuration.",
 		//	        "properties": {
 		//	          "SseKmsKeyId": {
-		//	            "description": "The ARN of the ReplicationSet.",
-		//	            "maxLength": 1000,
-		//	            "pattern": "^arn:aws(-(cn|us-gov|iso(-b)?))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
+		//	            "description": "The AWS Key Management Service key ID or Key Alias to use to encrypt your replication set.",
+		//	            "maxLength": 2048,
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -94,7 +93,7 @@ func replicationSetDataSource(ctx context.Context) (datasource.DataSource, error
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: SseKmsKeyId
 							"sse_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The ARN of the ReplicationSet.",
+								Description: "The AWS Key Management Service key ID or Key Alias to use to encrypt your replication set.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/

@@ -110,6 +110,12 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "description": "Specifies whether to automatically import data quality metrics as part of the data source run.",
 		//	          "type": "boolean"
 		//	        },
+		//	        "CatalogName": {
+		//	          "description": "The catalog name in the AWS Glue run configuration.",
+		//	          "maxLength": 128,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
 		//	        "DataAccessRole": {
 		//	          "description": "The data access role included in the configuration details of the AWS Glue data source.",
 		//	          "pattern": "^arn:aws[^:]*:iam::\\d{12}:(role|role/service-role)/[\\w+=,.@-]{1,128}$",
@@ -300,8 +306,6 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        }
 		//	      },
 		//	      "required": [
-		//	        "RedshiftCredentialConfiguration",
-		//	        "RedshiftStorage",
 		//	        "RelationalFilterConfigurations"
 		//	      ],
 		//	      "type": "object"
@@ -343,6 +347,11 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 						// Property: AutoImportDataQualityResult
 						"auto_import_data_quality_result": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Description: "Specifies whether to automatically import data quality metrics as part of the data source run.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: CatalogName
+						"catalog_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The catalog name in the AWS Glue run configuration.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: DataAccessRole
@@ -500,6 +509,28 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Configuration of the data source. It can be set to either glueRunConfiguration or redshiftRunConfiguration.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ConnectionId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The unique identifier of a connection used to fetch relevant parameters from connection during Datasource run",
+		//	  "type": "string"
+		//	}
+		"connection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of a connection used to fetch relevant parameters from connection during Datasource run",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ConnectionIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The unique identifier of a connection used to fetch relevant parameters from connection during Datasource run",
+		//	  "type": "string"
+		//	}
+		"connection_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of a connection used to fetch relevant parameters from connection during Datasource run",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -569,7 +600,6 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The unique identifier of the Amazon DataZone environment to which the data source publishes assets.",
-		//	  "pattern": "^[a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
 		"environment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -807,8 +837,11 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"asset_forms_input":                 "AssetFormsInput",
 		"auto_import_data_quality_result":   "AutoImportDataQualityResult",
+		"catalog_name":                      "CatalogName",
 		"cluster_name":                      "ClusterName",
 		"configuration":                     "Configuration",
+		"connection_id":                     "ConnectionId",
+		"connection_identifier":             "ConnectionIdentifier",
 		"content":                           "Content",
 		"created_at":                        "CreatedAt",
 		"data_access_role":                  "DataAccessRole",

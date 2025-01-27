@@ -902,6 +902,44 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "The source monitoring config of the flow.",
 		//	  "properties": {
+		//	    "AudioMonitoringSettings": {
+		//	      "description": "Contains the settings for audio stream metrics monitoring.",
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "Specifies the configuration for audio stream metrics monitoring.",
+		//	        "properties": {
+		//	          "SilentAudio": {
+		//	            "additionalProperties": false,
+		//	            "description": "Configures settings for the SilentAudio metric.",
+		//	            "properties": {
+		//	              "State": {
+		//	                "description": "Indicates whether the SilentAudio metric is enabled or disabled.",
+		//	                "enum": [
+		//	                  "ENABLED",
+		//	                  "DISABLED"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "ThresholdSeconds": {
+		//	                "description": "Specifies the number of consecutive seconds of silence that triggers an event or alert.",
+		//	                "type": "integer"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array"
+		//	    },
+		//	    "ContentQualityAnalysisState": {
+		//	      "description": "Indicates whether content quality analysis is enabled or disabled.",
+		//	      "enum": [
+		//	        "ENABLED",
+		//	        "DISABLED"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "ThumbnailState": {
 		//	      "description": "The state of thumbnail monitoring.",
 		//	      "enum": [
@@ -909,18 +947,138 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "DISABLED"
 		//	      ],
 		//	      "type": "string"
+		//	    },
+		//	    "VideoMonitoringSettings": {
+		//	      "description": "Contains the settings for video stream metrics monitoring.",
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "Specifies the configuration for video stream metrics monitoring.",
+		//	        "properties": {
+		//	          "BlackFrames": {
+		//	            "additionalProperties": false,
+		//	            "description": "Configures settings for the BlackFrames metric.",
+		//	            "properties": {
+		//	              "State": {
+		//	                "description": "Indicates whether the BlackFrames metric is enabled or disabled.",
+		//	                "enum": [
+		//	                  "ENABLED",
+		//	                  "DISABLED"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "ThresholdSeconds": {
+		//	                "description": "Specifies the number of consecutive seconds of black frames that triggers an event or alert.",
+		//	                "type": "integer"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "FrozenFrames": {
+		//	            "additionalProperties": false,
+		//	            "description": "Configures settings for the FrozenFrames metric.",
+		//	            "properties": {
+		//	              "State": {
+		//	                "description": "Indicates whether the FrozenFrames metric is enabled or disabled.",
+		//	                "enum": [
+		//	                  "ENABLED",
+		//	                  "DISABLED"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "ThresholdSeconds": {
+		//	                "description": "Specifies the number of consecutive seconds of a static image that triggers an event or alert.",
+		//	                "type": "integer"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "ThumbnailState"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"source_monitoring_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AudioMonitoringSettings
+				"audio_monitoring_settings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: SilentAudio
+							"silent_audio": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: State
+									"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Indicates whether the SilentAudio metric is enabled or disabled.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: ThresholdSeconds
+									"threshold_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "Specifies the number of consecutive seconds of silence that triggers an event or alert.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Configures settings for the SilentAudio metric.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Contains the settings for audio stream metrics monitoring.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ContentQualityAnalysisState
+				"content_quality_analysis_state": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether content quality analysis is enabled or disabled.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: ThumbnailState
 				"thumbnail_state": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The state of thumbnail monitoring.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: VideoMonitoringSettings
+				"video_monitoring_settings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: BlackFrames
+							"black_frames": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: State
+									"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Indicates whether the BlackFrames metric is enabled or disabled.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: ThresholdSeconds
+									"threshold_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "Specifies the number of consecutive seconds of black frames that triggers an event or alert.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Configures settings for the BlackFrames metric.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: FrozenFrames
+							"frozen_frames": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: State
+									"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Indicates whether the FrozenFrames metric is enabled or disabled.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: ThresholdSeconds
+									"threshold_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "Specifies the number of consecutive seconds of a static image that triggers an event or alert.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Configures settings for the FrozenFrames metric.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Contains the settings for video stream metrics monitoring.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -1040,12 +1198,15 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"algorithm":                          "Algorithm",
 		"attributes":                         "Attributes",
+		"audio_monitoring_settings":          "AudioMonitoringSettings",
 		"availability_zone":                  "AvailabilityZone",
+		"black_frames":                       "BlackFrames",
 		"bridge_arn":                         "BridgeArn",
 		"channel_order":                      "ChannelOrder",
 		"clock_rate":                         "ClockRate",
 		"colorimetry":                        "Colorimetry",
 		"constant_initialization_vector":     "ConstantInitializationVector",
+		"content_quality_analysis_state":     "ContentQualityAnalysisState",
 		"decryption":                         "Decryption",
 		"description":                        "Description",
 		"device_id":                          "DeviceId",
@@ -1058,6 +1219,7 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"flow_availability_zone":             "FlowAvailabilityZone",
 		"fmt":                                "Fmt",
 		"fmtp":                               "Fmtp",
+		"frozen_frames":                      "FrozenFrames",
 		"gateway_bridge_source":              "GatewayBridgeSource",
 		"ingest_ip":                          "IngestIp",
 		"ingest_port":                        "IngestPort",
@@ -1094,6 +1256,7 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"security_group_ids":                 "SecurityGroupIds",
 		"sender_control_port":                "SenderControlPort",
 		"sender_ip_address":                  "SenderIpAddress",
+		"silent_audio":                       "SilentAudio",
 		"source":                             "Source",
 		"source_arn":                         "SourceArn",
 		"source_failover_config":             "SourceFailoverConfig",
@@ -1106,9 +1269,11 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"stream_id":                          "StreamId",
 		"subnet_id":                          "SubnetId",
 		"tcs":                                "Tcs",
+		"threshold_seconds":                  "ThresholdSeconds",
 		"thumbnail_state":                    "ThumbnailState",
 		"url":                                "Url",
 		"video_format":                       "VideoFormat",
+		"video_monitoring_settings":          "VideoMonitoringSettings",
 		"vpc_interface_attachment":           "VpcInterfaceAttachment",
 		"vpc_interface_name":                 "VpcInterfaceName",
 		"vpc_interfaces":                     "VpcInterfaces",

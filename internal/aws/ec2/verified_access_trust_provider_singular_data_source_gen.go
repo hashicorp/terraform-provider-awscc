@@ -100,6 +100,94 @@ func verifiedAccessTrustProviderDataSource(ctx context.Context) (datasource.Data
 			Description: "The last updated time.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: NativeApplicationOidcOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The OpenID Connect details for an oidc -type, user-identity based trust provider for L4.",
+		//	  "properties": {
+		//	    "AuthorizationEndpoint": {
+		//	      "description": "The OIDC authorization endpoint.",
+		//	      "type": "string"
+		//	    },
+		//	    "ClientId": {
+		//	      "description": "The client identifier.",
+		//	      "type": "string"
+		//	    },
+		//	    "ClientSecret": {
+		//	      "description": "The client secret.",
+		//	      "type": "string"
+		//	    },
+		//	    "Issuer": {
+		//	      "description": "The OIDC issuer.",
+		//	      "type": "string"
+		//	    },
+		//	    "PublicSigningKeyEndpoint": {
+		//	      "description": "The public signing key for endpoint",
+		//	      "type": "string"
+		//	    },
+		//	    "Scope": {
+		//	      "description": "OpenID Connect (OIDC) scopes are used by an application during authentication to authorize access to details of a user. Each scope returns a specific set of user attributes.",
+		//	      "type": "string"
+		//	    },
+		//	    "TokenEndpoint": {
+		//	      "description": "The OIDC token endpoint.",
+		//	      "type": "string"
+		//	    },
+		//	    "UserInfoEndpoint": {
+		//	      "description": "The OIDC user info endpoint.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"native_application_oidc_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AuthorizationEndpoint
+				"authorization_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The OIDC authorization endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ClientId
+				"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The client identifier.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ClientSecret
+				"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The client secret.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Issuer
+				"issuer": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The OIDC issuer.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PublicSigningKeyEndpoint
+				"public_signing_key_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The public signing key for endpoint",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Scope
+				"scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "OpenID Connect (OIDC) scopes are used by an application during authentication to authorize access to details of a user. Each scope returns a specific set of user attributes.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TokenEndpoint
+				"token_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The OIDC token endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UserInfoEndpoint
+				"user_info_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The OIDC user info endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The OpenID Connect details for an oidc -type, user-identity based trust provider for L4.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OidcOptions
 		// CloudFormation resource type schema:
 		//
@@ -336,8 +424,10 @@ func verifiedAccessTrustProviderDataSource(ctx context.Context) (datasource.Data
 		"key":                               "Key",
 		"kms_key_arn":                       "KmsKeyArn",
 		"last_updated_time":                 "LastUpdatedTime",
+		"native_application_oidc_options":   "NativeApplicationOidcOptions",
 		"oidc_options":                      "OidcOptions",
 		"policy_reference_name":             "PolicyReferenceName",
+		"public_signing_key_endpoint":       "PublicSigningKeyEndpoint",
 		"public_signing_key_url":            "PublicSigningKeyUrl",
 		"scope":                             "Scope",
 		"sse_specification":                 "SseSpecification",
