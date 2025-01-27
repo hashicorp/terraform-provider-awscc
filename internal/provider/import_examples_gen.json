@@ -885,6 +885,11 @@
         "path": "./examples/resources/awscc_cloudfront_response_headers_policy/import.sh"
     },
     {
+        "resource": "awscc_cloudfront_vpc_origin",
+        "identifier": ["Id"],
+        "path": "./examples/resources/awscc_cloudfront_vpc_origin/import.sh"
+    },
+    {
         "resource": "awscc_cloudtrail_channel",
         "identifier": ["ChannelArn"],
         "path": "./examples/resources/awscc_cloudtrail_channel/import.sh"
@@ -3888,6 +3893,16 @@
         "resource": "awscc_notifications_event_rule",
         "identifier": ["Arn"],
         "path": "./examples/resources/awscc_notifications_event_rule/import.sh"
+    },
+    {
+        "resource": "awscc_notifications_managed_notification_account_contact_association",
+        "identifier": ["ManagedNotificationConfigurationArn","ContactIdentifier"],
+        "path": "./examples/resources/awscc_notifications_managed_notification_account_contact_association/import.sh"
+    },
+    {
+        "resource": "awscc_notifications_managed_notification_additional_channel_association",
+        "identifier": ["ChannelArn","ManagedNotificationConfigurationArn"],
+        "path": "./examples/resources/awscc_notifications_managed_notification_additional_channel_association/import.sh"
     },
     {
         "resource": "awscc_notifications_notification_configuration",
