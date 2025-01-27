@@ -679,7 +679,8 @@
         "Comet",
         "DeepchecksLLMEvaluation",
         "Fiddler",
-        "LakeraGuard"
+        "LakeraGuard",
+        "PerformanceEvaluation"
       ]
     },
     "AppType": {

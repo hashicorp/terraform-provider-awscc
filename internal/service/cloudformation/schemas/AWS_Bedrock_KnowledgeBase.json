@@ -459,6 +459,14 @@
           "maximum": 4096,
           "minimum": 0,
           "description": "The dimensions details for the vector configuration used on the Bedrock embeddings model."
+        },
+        "EmbeddingDataType": {
+          "type": "string",
+          "description": "The data type for the vectors when using a model to convert text into vector embeddings.",
+          "enum": [
+            "FLOAT32",
+            "BINARY"
+          ]
         }
       },
       "additionalProperties": false

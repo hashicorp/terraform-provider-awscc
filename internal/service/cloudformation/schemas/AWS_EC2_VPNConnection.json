@@ -11,6 +11,34 @@
     "cloudFormationSystemTags": false
   },
   "$schema": "https://raw.githubusercontent.com/aws-cloudformation/cloudformation-resource-schema/blob/master/src/main/resources/schema/provider.definition.schema.v1.json",
+  "typeName": "AWS::EC2::VPNConnection",
+  "readOnlyProperties": [
+    "/properties/VpnConnectionId"
+  ],
+  "description": "Specifies a VPN connection between a virtual private gateway and a VPN customer gateway or a transit gateway and a VPN customer gateway.\n To specify a VPN connection between a transit gateway and customer gateway, use the ``TransitGatewayId`` and ``CustomerGatewayId`` properties.\n To specify a VPN connection between a virtual private gateway and customer gateway, use the ``VpnGatewayId`` and ``CustomerGatewayId`` properties.\n For more information, see [](https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html) in the *User Guide*.",
+  "createOnlyProperties": [
+    "/properties/Type",
+    "/properties/CustomerGatewayId",
+    "/properties/VpnGatewayId",
+    "/properties/TransitGatewayId",
+    "/properties/EnableAcceleration",
+    "/properties/LocalIpv4NetworkCidr",
+    "/properties/LocalIpv6NetworkCidr",
+    "/properties/OutsideIpAddressType",
+    "/properties/RemoteIpv4NetworkCidr",
+    "/properties/RemoteIpv6NetworkCidr",
+    "/properties/StaticRoutesOnly",
+    "/properties/TransportTransitGatewayAttachmentId",
+    "/properties/TunnelInsideIpVersion",
+    "/properties/VpnTunnelOptionsSpecifications"
+  ],
+  "primaryIdentifier": [
+    "/properties/VpnConnectionId"
+  ],
+  "required": [
+    "Type",
+    "CustomerGatewayId"
+  ],
   "handlers": {
     "read": {
       "permissions": [
@@ -43,31 +71,7 @@
       ]
     }
   },
-  "typeName": "AWS::EC2::VPNConnection",
-  "readOnlyProperties": [
-    "/properties/VpnConnectionId"
-  ],
-  "description": "Specifies a VPN connection between a virtual private gateway and a VPN customer gateway or a transit gateway and a VPN customer gateway.\n To specify a VPN connection between a transit gateway and customer gateway, use the ``TransitGatewayId`` and ``CustomerGatewayId`` properties.\n To specify a VPN connection between a virtual private gateway and customer gateway, use the ``VpnGatewayId`` and ``CustomerGatewayId`` properties.\n For more information, see [](https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html) in the *User Guide*.",
-  "createOnlyProperties": [
-    "/properties/Type",
-    "/properties/CustomerGatewayId",
-    "/properties/VpnGatewayId",
-    "/properties/TransitGatewayId",
-    "/properties/EnableAcceleration",
-    "/properties/LocalIpv4NetworkCidr",
-    "/properties/LocalIpv6NetworkCidr",
-    "/properties/OutsideIpAddressType",
-    "/properties/RemoteIpv4NetworkCidr",
-    "/properties/RemoteIpv6NetworkCidr",
-    "/properties/StaticRoutesOnly",
-    "/properties/TransportTransitGatewayAttachmentId",
-    "/properties/TunnelInsideIpVersion",
-    "/properties/VpnTunnelOptionsSpecifications"
-  ],
   "additionalProperties": false,
-  "primaryIdentifier": [
-    "/properties/VpnConnectionId"
-  ],
   "definitions": {
     "CloudwatchLogOptionsSpecification": {
       "description": "Options for sending VPN tunnel logs to CloudWatch.",
@@ -398,6 +402,7 @@
       }
     }
   },
+  "replacementStrategy": "delete_then_create",
   "properties": {
     "RemoteIpv6NetworkCidr": {
       "description": "The IPv6 CIDR on the AWS side of the VPN connection.\n Default: ``::/0``",
@@ -473,9 +478,5 @@
         "$ref": "#/definitions/Tag"
       }
     }
-  },
-  "required": [
-    "Type",
-    "CustomerGatewayId"
-  ]
+  }
 }
