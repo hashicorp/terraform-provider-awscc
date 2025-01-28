@@ -1,4 +1,13 @@
 ## 1.27.0 (Unreleased)
+
+* **New Data Source:** `awscc_cloudfront_vpc_origin`
+* **New Data Source:** `awscc_notifications_managed_notification_account_contact_association`
+* **New Data Source:** `awscc_notifications_managed_notification_account_contact_associations`
+* **New Data Source:** `awscc_notifications_managed_notification_additional_channel_association`
+* **New Resource:** `awscc_cloudfront_vpc_origin`
+* **New Resource:** `awscc_notifications_managed_notification_account_contact_association`
+* **New Resource:** `awscc_notifications_managed_notification_additional_channel_association`
+
 ## 1.26.0 (January 16, 2025)
 
 FEATURES:
