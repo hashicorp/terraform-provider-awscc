@@ -38,13 +38,14 @@ resource "awscc_ec2_capacity_reservation" "example-capacity-reservation-end-date
 
 ### Required
 
-- `availability_zone` (String)
 - `instance_count` (Number)
 - `instance_platform` (String)
 - `instance_type` (String)
 
 ### Optional
 
+- `availability_zone` (String)
+- `availability_zone_id` (String)
 - `ebs_optimized` (Boolean)
 - `end_date` (String)
 - `end_date_type` (String)

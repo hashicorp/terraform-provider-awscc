@@ -272,6 +272,7 @@ Optional:
 Optional:
 
 - `dimensions` (Number) The dimensions details for the vector configuration used on the Bedrock embeddings model.
+- `embedding_data_type` (String) The data type for the vectors when using a model to convert text into vector embeddings.
 
 
 

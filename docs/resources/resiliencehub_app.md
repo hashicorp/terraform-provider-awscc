@@ -27,7 +27,6 @@ Resource Type Definition for AWS::ResilienceHub::App.
 - `description` (String) App description.
 - `event_subscriptions` (Attributes List) The list of events you would like to subscribe and get notification for. (see [below for nested schema](#nestedatt--event_subscriptions))
 - `permission_model` (Attributes) Defines the roles and credentials that AWS Resilience Hub would use while creating the application, importing its resources, and running an assessment. (see [below for nested schema](#nestedatt--permission_model))
-- `regulatory_policy_arn` (String) Amazon Resource Name (ARN) of the Regulatory Policy.
 - `resiliency_policy_arn` (String) Amazon Resource Name (ARN) of the Resiliency Policy.
 - `tags` (Map of String)
 

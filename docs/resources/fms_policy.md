@@ -86,6 +86,7 @@ resource "awscc_fms_policy" "example" {
 - `include_map` (Attributes) An FMS includeMap or excludeMap. (see [below for nested schema](#nestedatt--include_map))
 - `policy_description` (String)
 - `resource_set_ids` (List of String)
+- `resource_tag_logical_operator` (String)
 - `resource_tags` (Attributes List) (see [below for nested schema](#nestedatt--resource_tags))
 - `resource_type` (String) An AWS resource type
 - `resource_type_list` (List of String)

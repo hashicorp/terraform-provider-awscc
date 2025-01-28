@@ -147,20 +147,22 @@ resource "awscc_ec2_verified_access_endpoint" "example" {
 
 ### Required
 
-- `application_domain` (String) The DNS name for users to reach your application.
 - `attachment_type` (String) The type of attachment used to provide connectivity between the AWS Verified Access endpoint and the application.
-- `domain_certificate_arn` (String) The ARN of a public TLS/SSL certificate imported into or created with ACM.
-- `endpoint_domain_prefix` (String) A custom identifier that gets prepended to a DNS name that is generated for the endpoint.
 - `endpoint_type` (String) The type of AWS Verified Access endpoint. Incoming application requests will be sent to an IP address, load balancer or a network interface depending on the endpoint type specified.The type of AWS Verified Access endpoint. Incoming application requests will be sent to an IP address, load balancer or a network interface depending on the endpoint type specified.
 - `verified_access_group_id` (String) The ID of the AWS Verified Access group.
 
 ### Optional
 
+- `application_domain` (String) The DNS name for users to reach your application.
+- `cidr_options` (Attributes) The options for cidr type endpoint. (see [below for nested schema](#nestedatt--cidr_options))
 - `description` (String) A description for the AWS Verified Access endpoint.
+- `domain_certificate_arn` (String) The ARN of a public TLS/SSL certificate imported into or created with ACM.
+- `endpoint_domain_prefix` (String) A custom identifier that gets prepended to a DNS name that is generated for the endpoint.
 - `load_balancer_options` (Attributes) The load balancer details if creating the AWS Verified Access endpoint as load-balancer type. (see [below for nested schema](#nestedatt--load_balancer_options))
 - `network_interface_options` (Attributes) The options for network-interface type endpoint. (see [below for nested schema](#nestedatt--network_interface_options))
 - `policy_document` (String) The AWS Verified Access policy document.
 - `policy_enabled` (Boolean) The status of the Verified Access policy.
+- `rds_options` (Attributes) The options for rds type endpoint. (see [below for nested schema](#nestedatt--rds_options))
 - `security_group_ids` (Set of String) The IDs of the security groups for the endpoint.
 - `sse_specification` (Attributes) The configuration options for customer provided KMS encryption. (see [below for nested schema](#nestedatt--sse_specification))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
@@ -176,6 +178,26 @@ resource "awscc_ec2_verified_access_endpoint" "example" {
 - `verified_access_endpoint_id` (String) The ID of the AWS Verified Access endpoint.
 - `verified_access_instance_id` (String) The ID of the AWS Verified Access instance.
 
+<a id="nestedatt--cidr_options"></a>
+### Nested Schema for `cidr_options`
+
+Optional:
+
+- `cidr` (String) The IP address range, in CIDR notation.
+- `port_ranges` (Attributes Set) The list of port range. (see [below for nested schema](#nestedatt--cidr_options--port_ranges))
+- `protocol` (String) The IP protocol.
+- `subnet_ids` (Set of String) The IDs of the subnets.
+
+<a id="nestedatt--cidr_options--port_ranges"></a>
+### Nested Schema for `cidr_options.port_ranges`
+
+Optional:
+
+- `from_port` (Number) The first port in the range.
+- `to_port` (Number) The last port in the range.
+
+
+
 <a id="nestedatt--load_balancer_options"></a>
 ### Nested Schema for `load_balancer_options`
 
@@ -183,8 +205,18 @@ Optional:
 
 - `load_balancer_arn` (String) The ARN of the load balancer.
 - `port` (Number) The IP port number.
+- `port_ranges` (Attributes Set) The list of port range. (see [below for nested schema](#nestedatt--load_balancer_options--port_ranges))
 - `protocol` (String) The IP protocol.
 - `subnet_ids` (Set of String) The IDs of the subnets.
+
+<a id="nestedatt--load_balancer_options--port_ranges"></a>
+### Nested Schema for `load_balancer_options.port_ranges`
+
+Optional:
+
+- `from_port` (Number) The first port in the range.
+- `to_port` (Number) The last port in the range.
+
 
 
 <a id="nestedatt--network_interface_options"></a>
@@ -194,7 +226,31 @@ Optional:
 
 - `network_interface_id` (String) The ID of the network interface.
 - `port` (Number) The IP port number.
+- `port_ranges` (Attributes Set) The list of port ranges. (see [below for nested schema](#nestedatt--network_interface_options--port_ranges))
 - `protocol` (String) The IP protocol.
+
+<a id="nestedatt--network_interface_options--port_ranges"></a>
+### Nested Schema for `network_interface_options.port_ranges`
+
+Optional:
+
+- `from_port` (Number) The first port in the range.
+- `to_port` (Number) The last port in the range.
+
+
+
+<a id="nestedatt--rds_options"></a>
+### Nested Schema for `rds_options`
+
+Optional:
+
+- `port` (Number) The IP port number.
+- `protocol` (String) The IP protocol.
+- `rds_db_cluster_arn` (String) The ARN of the RDS DB cluster.
+- `rds_db_instance_arn` (String) The ARN of the RDS DB instance.
+- `rds_db_proxy_arn` (String) The ARN of the RDS DB proxy.
+- `rds_endpoint` (String) The RDS endpoint.
+- `subnet_ids` (Set of String) The IDs of the subnets.
 
 
 <a id="nestedatt--sse_specification"></a>

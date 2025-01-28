@@ -101,6 +101,7 @@ data "aws_partition" "current" {}
 
 ### Optional
 
+- `browser_extension_configuration` (Attributes) (see [below for nested schema](#nestedatt--browser_extension_configuration))
 - `customization_configuration` (Attributes) (see [below for nested schema](#nestedatt--customization_configuration))
 - `identity_provider_configuration` (Attributes) (see [below for nested schema](#nestedatt--identity_provider_configuration))
 - `origins` (List of String)
@@ -120,6 +121,14 @@ data "aws_partition" "current" {}
 - `updated_at` (String)
 - `web_experience_arn` (String)
 - `web_experience_id` (String)
+
+<a id="nestedatt--browser_extension_configuration"></a>
+### Nested Schema for `browser_extension_configuration`
+
+Optional:
+
+- `enabled_browser_extensions` (Set of String)
+
 
 <a id="nestedatt--customization_configuration"></a>
 ### Nested Schema for `customization_configuration`

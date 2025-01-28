@@ -23,11 +23,21 @@ Data Source schema for AWS::QuickSight::Topic
 
 - `arn` (String)
 - `aws_account_id` (String)
+- `config_options` (Attributes) Model for configuration of a Topic (see [below for nested schema](#nestedatt--config_options))
 - `data_sets` (Attributes List) (see [below for nested schema](#nestedatt--data_sets))
 - `description` (String)
+- `folder_arns` (List of String)
 - `name` (String)
 - `topic_id` (String)
 - `user_experience_version` (String)
+
+<a id="nestedatt--config_options"></a>
+### Nested Schema for `config_options`
+
+Read-Only:
+
+- `q_business_insights_enabled` (Boolean)
+
 
 <a id="nestedatt--data_sets"></a>
 ### Nested Schema for `data_sets`
