@@ -11,12 +11,14 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -50,6 +52,60 @@ func webExperienceResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: BrowserExtensionConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "EnabledBrowserExtensions": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "enum": [
+		//	          "FIREFOX",
+		//	          "CHROME"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 2,
+		//	      "minItems": 0,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "EnabledBrowserExtensions"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"browser_extension_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EnabledBrowserExtensions
+				"enabled_browser_extensions": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Set{ /*START VALIDATORS*/
+						setvalidator.SizeBetween(0, 2),
+						setvalidator.ValueStringsAre(
+							stringvalidator.OneOf(
+								"FIREFOX",
+								"CHROME",
+							),
+						),
+						fwvalidators.NotNullSet(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						setplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
@@ -568,10 +624,12 @@ func webExperienceResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"application_id":                  "ApplicationId",
 		"authentication_url":              "AuthenticationUrl",
+		"browser_extension_configuration": "BrowserExtensionConfiguration",
 		"created_at":                      "CreatedAt",
 		"custom_css_url":                  "CustomCSSUrl",
 		"customization_configuration":     "CustomizationConfiguration",
 		"default_endpoint":                "DefaultEndpoint",
+		"enabled_browser_extensions":      "EnabledBrowserExtensions",
 		"favicon_url":                     "FaviconUrl",
 		"font_url":                        "FontUrl",
 		"identity_provider_configuration": "IdentityProviderConfiguration",

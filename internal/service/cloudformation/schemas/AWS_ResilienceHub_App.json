@@ -162,11 +162,6 @@
       "description": "Amazon Resource Name (ARN) of the Resiliency Policy.",
       "pattern": ""
     },
-    "RegulatoryPolicyArn": {
-      "type": "string",
-      "description": "Amazon Resource Name (ARN) of the Regulatory Policy.",
-      "pattern": ""
-    },
     "Tags": {
       "$ref": "#/definitions/TagMap"
     },

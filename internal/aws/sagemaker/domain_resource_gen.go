@@ -2640,7 +2640,8 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	              "Comet",
 		//	              "DeepchecksLLMEvaluation",
 		//	              "Fiddler",
-		//	              "LakeraGuard"
+		//	              "LakeraGuard",
+		//	              "PerformanceEvaluation"
 		//	            ],
 		//	            "type": "string"
 		//	          },
@@ -4178,6 +4179,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 										"DeepchecksLLMEvaluation",
 										"Fiddler",
 										"LakeraGuard",
+										"PerformanceEvaluation",
 									),
 								),
 							}, /*END VALIDATORS*/

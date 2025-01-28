@@ -160,6 +160,12 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	          "description": "Specifies whether to automatically import data quality metrics as part of the data source run.",
 		//	          "type": "boolean"
 		//	        },
+		//	        "CatalogName": {
+		//	          "description": "The catalog name in the AWS Glue run configuration.",
+		//	          "maxLength": 128,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
 		//	        "DataAccessRole": {
 		//	          "description": "The data access role included in the configuration details of the AWS Glue data source.",
 		//	          "pattern": "^arn:aws[^:]*:iam::\\d{12}:(role|role/service-role)/[\\w+=,.@-]{1,128}$",
@@ -350,8 +356,6 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        }
 		//	      },
 		//	      "required": [
-		//	        "RedshiftCredentialConfiguration",
-		//	        "RedshiftStorage",
 		//	        "RelationalFilterConfigurations"
 		//	      ],
 		//	      "type": "object"
@@ -397,6 +401,18 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							Computed:    true,
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: CatalogName
+						"catalog_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The catalog name in the AWS Glue run configuration.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 128),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: DataAccessRole
@@ -538,9 +554,6 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							Description: "The details of the credentials required to access an Amazon Redshift cluster.",
 							Optional:    true,
 							Computed:    true,
-							Validators: []validator.Object{ /*START VALIDATORS*/
-								fwvalidators.NotNullObject(),
-							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
@@ -602,9 +615,6 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							Description: "The details of the Amazon Redshift storage as part of the configuration of an Amazon Redshift data source run.",
 							Optional:    true,
 							Computed:    true,
-							Validators: []validator.Object{ /*START VALIDATORS*/
-								fwvalidators.NotNullObject(),
-							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
@@ -735,6 +745,37 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END PLAN MODIFIERS*/
 			// Configuration is a write-only property.
 		}, /*END ATTRIBUTE*/
+		// Property: ConnectionId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The unique identifier of a connection used to fetch relevant parameters from connection during Datasource run",
+		//	  "type": "string"
+		//	}
+		"connection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of a connection used to fetch relevant parameters from connection during Datasource run",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ConnectionIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The unique identifier of a connection used to fetch relevant parameters from connection during Datasource run",
+		//	  "type": "string"
+		//	}
+		"connection_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of a connection used to fetch relevant parameters from connection during Datasource run",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// ConnectionIdentifier is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -834,7 +875,6 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The unique identifier of the Amazon DataZone environment to which the data source publishes assets.",
-		//	  "pattern": "^[a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
 		"environment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -853,9 +893,11 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"environment_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The unique identifier of the Amazon DataZone environment to which the data source publishes assets.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// EnvironmentIdentifier is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -1146,8 +1188,11 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"asset_forms_input":                 "AssetFormsInput",
 		"auto_import_data_quality_result":   "AutoImportDataQualityResult",
+		"catalog_name":                      "CatalogName",
 		"cluster_name":                      "ClusterName",
 		"configuration":                     "Configuration",
+		"connection_id":                     "ConnectionId",
+		"connection_identifier":             "ConnectionIdentifier",
 		"content":                           "Content",
 		"created_at":                        "CreatedAt",
 		"data_access_role":                  "DataAccessRole",
@@ -1194,6 +1239,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/AssetFormsInput",
+		"/properties/ConnectionIdentifier",
 		"/properties/EnvironmentIdentifier",
 		"/properties/DomainIdentifier",
 		"/properties/Configuration",

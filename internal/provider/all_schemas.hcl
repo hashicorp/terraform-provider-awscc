@@ -874,6 +874,11 @@ resource_schema "aws_cloudfront_response_headers_policy" {
   cloudformation_type_name = "AWS::CloudFront::ResponseHeadersPolicy"
 }
 
+resource_schema "aws_cloudfront_vpc_origin" {
+  cloudformation_type_name               = "AWS::CloudFront::VpcOrigin"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_cloudtrail_channel" {
   cloudformation_type_name = "AWS::CloudTrail::Channel"
 }
@@ -3588,6 +3593,15 @@ resource_schema "aws_notifications_channel_association" {
 
 resource_schema "aws_notifications_event_rule" {
   cloudformation_type_name               = "AWS::Notifications::EventRule"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_notifications_managed_notification_account_contact_association" {
+  cloudformation_type_name = "AWS::Notifications::ManagedNotificationAccountContactAssociation"
+}
+
+resource_schema "aws_notifications_managed_notification_additional_channel_association" {
+  cloudformation_type_name               = "AWS::Notifications::ManagedNotificationAdditionalChannelAssociation"
   suppress_plural_data_source_generation = true
 }
 

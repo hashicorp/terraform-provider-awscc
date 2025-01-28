@@ -23,6 +23,7 @@ Data Source schema for AWS::EC2::VerifiedAccessEndpoint
 
 - `application_domain` (String) The DNS name for users to reach your application.
 - `attachment_type` (String) The type of attachment used to provide connectivity between the AWS Verified Access endpoint and the application.
+- `cidr_options` (Attributes) The options for cidr type endpoint. (see [below for nested schema](#nestedatt--cidr_options))
 - `creation_time` (String) The creation time.
 - `description` (String) A description for the AWS Verified Access endpoint.
 - `device_validation_domain` (String) Returned if endpoint has a device trust provider attached.
@@ -35,6 +36,7 @@ Data Source schema for AWS::EC2::VerifiedAccessEndpoint
 - `network_interface_options` (Attributes) The options for network-interface type endpoint. (see [below for nested schema](#nestedatt--network_interface_options))
 - `policy_document` (String) The AWS Verified Access policy document.
 - `policy_enabled` (Boolean) The status of the Verified Access policy.
+- `rds_options` (Attributes) The options for rds type endpoint. (see [below for nested schema](#nestedatt--rds_options))
 - `security_group_ids` (Set of String) The IDs of the security groups for the endpoint.
 - `sse_specification` (Attributes) The configuration options for customer provided KMS encryption. (see [below for nested schema](#nestedatt--sse_specification))
 - `status` (String) The endpoint status.
@@ -43,6 +45,26 @@ Data Source schema for AWS::EC2::VerifiedAccessEndpoint
 - `verified_access_group_id` (String) The ID of the AWS Verified Access group.
 - `verified_access_instance_id` (String) The ID of the AWS Verified Access instance.
 
+<a id="nestedatt--cidr_options"></a>
+### Nested Schema for `cidr_options`
+
+Read-Only:
+
+- `cidr` (String) The IP address range, in CIDR notation.
+- `port_ranges` (Attributes Set) The list of port range. (see [below for nested schema](#nestedatt--cidr_options--port_ranges))
+- `protocol` (String) The IP protocol.
+- `subnet_ids` (Set of String) The IDs of the subnets.
+
+<a id="nestedatt--cidr_options--port_ranges"></a>
+### Nested Schema for `cidr_options.port_ranges`
+
+Read-Only:
+
+- `from_port` (Number) The first port in the range.
+- `to_port` (Number) The last port in the range.
+
+
+
 <a id="nestedatt--load_balancer_options"></a>
 ### Nested Schema for `load_balancer_options`
 
@@ -50,8 +72,18 @@ Read-Only:
 
 - `load_balancer_arn` (String) The ARN of the load balancer.
 - `port` (Number) The IP port number.
+- `port_ranges` (Attributes Set) The list of port range. (see [below for nested schema](#nestedatt--load_balancer_options--port_ranges))
 - `protocol` (String) The IP protocol.
 - `subnet_ids` (Set of String) The IDs of the subnets.
+
+<a id="nestedatt--load_balancer_options--port_ranges"></a>
+### Nested Schema for `load_balancer_options.port_ranges`
+
+Read-Only:
+
+- `from_port` (Number) The first port in the range.
+- `to_port` (Number) The last port in the range.
+
 
 
 <a id="nestedatt--network_interface_options"></a>
@@ -61,7 +93,31 @@ Read-Only:
 
 - `network_interface_id` (String) The ID of the network interface.
 - `port` (Number) The IP port number.
+- `port_ranges` (Attributes Set) The list of port ranges. (see [below for nested schema](#nestedatt--network_interface_options--port_ranges))
 - `protocol` (String) The IP protocol.
+
+<a id="nestedatt--network_interface_options--port_ranges"></a>
+### Nested Schema for `network_interface_options.port_ranges`
+
+Read-Only:
+
+- `from_port` (Number) The first port in the range.
+- `to_port` (Number) The last port in the range.
+
+
+
+<a id="nestedatt--rds_options"></a>
+### Nested Schema for `rds_options`
+
+Read-Only:
+
+- `port` (Number) The IP port number.
+- `protocol` (String) The IP protocol.
+- `rds_db_cluster_arn` (String) The ARN of the RDS DB cluster.
+- `rds_db_instance_arn` (String) The ARN of the RDS DB instance.
+- `rds_db_proxy_arn` (String) The ARN of the RDS DB proxy.
+- `rds_endpoint` (String) The RDS endpoint.
+- `subnet_ids` (Set of String) The IDs of the subnets.
 
 
 <a id="nestedatt--sse_specification"></a>

@@ -70,6 +70,37 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ConfigOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Model for configuration of a Topic",
+		//	  "properties": {
+		//	    "QBusinessInsightsEnabled": {
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"config_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: QBusinessInsightsEnabled
+				"q_business_insights_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Model for configuration of a Topic",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DataSets
 		// CloudFormation resource type schema:
 		//
@@ -270,7 +301,9 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		//	                        "THOUSANDS",
 		//	                        "MILLIONS",
 		//	                        "BILLIONS",
-		//	                        "TRILLIONS"
+		//	                        "TRILLIONS",
+		//	                        "LAKHS",
+		//	                        "CRORES"
 		//	                      ],
 		//	                      "type": "string"
 		//	                    },
@@ -593,7 +626,9 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		//	                        "THOUSANDS",
 		//	                        "MILLIONS",
 		//	                        "BILLIONS",
-		//	                        "TRILLIONS"
+		//	                        "TRILLIONS",
+		//	                        "LAKHS",
+		//	                        "CRORES"
 		//	                      ],
 		//	                      "type": "string"
 		//	                    },
@@ -1525,6 +1560,8 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 															"MILLIONS",
 															"BILLIONS",
 															"TRILLIONS",
+															"LAKHS",
+															"CRORES",
 														),
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2094,6 +2131,8 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 															"MILLIONS",
 															"BILLIONS",
 															"TRILLIONS",
+															"LAKHS",
+															"CRORES",
 														),
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -3122,6 +3161,30 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: FolderArns
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "maxItems": 20,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"folder_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(0, 20),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+				listplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// FolderArns is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -3229,6 +3292,7 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		"column_synonyms":                  "ColumnSynonyms",
 		"columns":                          "Columns",
 		"comparative_order":                "ComparativeOrder",
+		"config_options":                   "ConfigOptions",
 		"constant":                         "Constant",
 		"constant_type":                    "ConstantType",
 		"currency_symbol":                  "CurrencySymbol",
@@ -3261,6 +3325,7 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		"filter_synonyms":                  "FilterSynonyms",
 		"filter_type":                      "FilterType",
 		"filters":                          "Filters",
+		"folder_arns":                      "FolderArns",
 		"fraction_digits":                  "FractionDigits",
 		"grouping_separator":               "GroupingSeparator",
 		"inclusive":                        "Inclusive",
@@ -3282,6 +3347,7 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		"property_name":                    "PropertyName",
 		"property_role":                    "PropertyRole",
 		"property_usage":                   "PropertyUsage",
+		"q_business_insights_enabled":      "QBusinessInsightsEnabled",
 		"range_constant":                   "RangeConstant",
 		"relative_date_filter":             "RelativeDateFilter",
 		"relative_date_filter_function":    "RelativeDateFilterFunction",
@@ -3307,6 +3373,9 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		"value_list":                       "ValueList",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/FolderArns",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

@@ -39,7 +39,7 @@ Read-Only:
 
 Read-Only:
 
-- `sse_kms_key_id` (String) The ARN of the ReplicationSet.
+- `sse_kms_key_id` (String) The AWS Key Management Service key ID or Key Alias to use to encrypt your replication set.
 
 
 

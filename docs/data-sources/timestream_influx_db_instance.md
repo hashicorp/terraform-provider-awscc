@@ -34,8 +34,10 @@ Data Source schema for AWS::Timestream::InfluxDBInstance
 - `influx_db_instance_id` (String) The service generated unique identifier for InfluxDB instance.
 - `log_delivery_configuration` (Attributes) Configuration for sending logs to customer account from the InfluxDB instance. (see [below for nested schema](#nestedatt--log_delivery_configuration))
 - `name` (String) The unique name that is associated with the InfluxDB instance.
+- `network_type` (String) Network type of the InfluxDB Instance.
 - `organization` (String) The organization for the InfluxDB instance.
 - `password` (String) The password for the InfluxDB instance.
+- `port` (Number) The port number on which InfluxDB accepts connections.
 - `publicly_accessible` (Boolean) Attach a public IP to the customer ENI.
 - `secondary_availability_zone` (String) The Secondary Availability Zone (AZ) where the InfluxDB instance is created, if DeploymentType is set as WITH_MULTIAZ_STANDBY.
 - `status` (String) Status of the InfluxDB Instance.

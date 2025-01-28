@@ -45,6 +45,100 @@ func verifiedAccessEndpointDataSource(ctx context.Context) (datasource.DataSourc
 			Description: "The type of attachment used to provide connectivity between the AWS Verified Access endpoint and the application.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: CidrOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The options for cidr type endpoint.",
+		//	  "properties": {
+		//	    "Cidr": {
+		//	      "description": "The IP address range, in CIDR notation.",
+		//	      "type": "string"
+		//	    },
+		//	    "PortRanges": {
+		//	      "description": "The list of port range.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "The IP port range.",
+		//	        "properties": {
+		//	          "FromPort": {
+		//	            "description": "The first port in the range.",
+		//	            "maximum": 65535,
+		//	            "minimum": 1,
+		//	            "type": "integer"
+		//	          },
+		//	          "ToPort": {
+		//	            "description": "The last port in the range.",
+		//	            "maximum": 65535,
+		//	            "minimum": 1,
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "Protocol": {
+		//	      "description": "The IP protocol.",
+		//	      "type": "string"
+		//	    },
+		//	    "SubnetIds": {
+		//	      "description": "The IDs of the subnets.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "description": "The IDs of the subnet.",
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"cidr_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Cidr
+				"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The IP address range, in CIDR notation.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PortRanges
+				"port_ranges": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: FromPort
+							"from_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The first port in the range.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ToPort
+							"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The last port in the range.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The list of port range.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Protocol
+				"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The IP protocol.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SubnetIds
+				"subnet_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The IDs of the subnets.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The options for cidr type endpoint.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -150,6 +244,31 @@ func verifiedAccessEndpointDataSource(ctx context.Context) (datasource.DataSourc
 		//	      "minimum": 1,
 		//	      "type": "integer"
 		//	    },
+		//	    "PortRanges": {
+		//	      "description": "The list of port range.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "The IP port range.",
+		//	        "properties": {
+		//	          "FromPort": {
+		//	            "description": "The first port in the range.",
+		//	            "maximum": 65535,
+		//	            "minimum": 1,
+		//	            "type": "integer"
+		//	          },
+		//	          "ToPort": {
+		//	            "description": "The last port in the range.",
+		//	            "maximum": 65535,
+		//	            "minimum": 1,
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
 		//	    "Protocol": {
 		//	      "description": "The IP protocol.",
 		//	      "type": "string"
@@ -177,6 +296,25 @@ func verifiedAccessEndpointDataSource(ctx context.Context) (datasource.DataSourc
 				// Property: Port
 				"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
 					Description: "The IP port number.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PortRanges
+				"port_ranges": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: FromPort
+							"from_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The first port in the range.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ToPort
+							"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The last port in the range.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The list of port range.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Protocol
@@ -211,6 +349,31 @@ func verifiedAccessEndpointDataSource(ctx context.Context) (datasource.DataSourc
 		//	      "minimum": 1,
 		//	      "type": "integer"
 		//	    },
+		//	    "PortRanges": {
+		//	      "description": "The list of port ranges.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "The IP port range.",
+		//	        "properties": {
+		//	          "FromPort": {
+		//	            "description": "The first port in the range.",
+		//	            "maximum": 65535,
+		//	            "minimum": 1,
+		//	            "type": "integer"
+		//	          },
+		//	          "ToPort": {
+		//	            "description": "The last port in the range.",
+		//	            "maximum": 65535,
+		//	            "minimum": 1,
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
 		//	    "Protocol": {
 		//	      "description": "The IP protocol.",
 		//	      "type": "string"
@@ -228,6 +391,25 @@ func verifiedAccessEndpointDataSource(ctx context.Context) (datasource.DataSourc
 				// Property: Port
 				"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
 					Description: "The IP port number.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PortRanges
+				"port_ranges": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: FromPort
+							"from_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The first port in the range.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ToPort
+							"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The last port in the range.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The list of port ranges.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Protocol
@@ -259,6 +441,94 @@ func verifiedAccessEndpointDataSource(ctx context.Context) (datasource.DataSourc
 		//	}
 		"policy_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "The status of the Verified Access policy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: RdsOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The options for rds type endpoint.",
+		//	  "properties": {
+		//	    "Port": {
+		//	      "description": "The IP port number.",
+		//	      "maximum": 65535,
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    },
+		//	    "Protocol": {
+		//	      "description": "The IP protocol.",
+		//	      "type": "string"
+		//	    },
+		//	    "RdsDbClusterArn": {
+		//	      "description": "The ARN of the RDS DB cluster.",
+		//	      "type": "string"
+		//	    },
+		//	    "RdsDbInstanceArn": {
+		//	      "description": "The ARN of the RDS DB instance.",
+		//	      "type": "string"
+		//	    },
+		//	    "RdsDbProxyArn": {
+		//	      "description": "The ARN of the RDS DB proxy.",
+		//	      "type": "string"
+		//	    },
+		//	    "RdsEndpoint": {
+		//	      "description": "The RDS endpoint.",
+		//	      "type": "string"
+		//	    },
+		//	    "SubnetIds": {
+		//	      "description": "The IDs of the subnets.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "description": "The IDs of the subnet.",
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"rds_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Port
+				"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The IP port number.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Protocol
+				"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The IP protocol.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RdsDbClusterArn
+				"rds_db_cluster_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the RDS DB cluster.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RdsDbInstanceArn
+				"rds_db_instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the RDS DB instance.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RdsDbProxyArn
+				"rds_db_proxy_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the RDS DB proxy.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RdsEndpoint
+				"rds_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The RDS endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SubnetIds
+				"subnet_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The IDs of the subnets.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The options for rds type endpoint.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SecurityGroupIds
@@ -426,6 +696,8 @@ func verifiedAccessEndpointDataSource(ctx context.Context) (datasource.DataSourc
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"application_domain":           "ApplicationDomain",
 		"attachment_type":              "AttachmentType",
+		"cidr":                         "Cidr",
+		"cidr_options":                 "CidrOptions",
 		"creation_time":                "CreationTime",
 		"customer_managed_key_enabled": "CustomerManagedKeyEnabled",
 		"description":                  "Description",
@@ -434,6 +706,7 @@ func verifiedAccessEndpointDataSource(ctx context.Context) (datasource.DataSourc
 		"endpoint_domain":              "EndpointDomain",
 		"endpoint_domain_prefix":       "EndpointDomainPrefix",
 		"endpoint_type":                "EndpointType",
+		"from_port":                    "FromPort",
 		"key":                          "Key",
 		"kms_key_arn":                  "KmsKeyArn",
 		"last_updated_time":            "LastUpdatedTime",
@@ -444,12 +717,19 @@ func verifiedAccessEndpointDataSource(ctx context.Context) (datasource.DataSourc
 		"policy_document":              "PolicyDocument",
 		"policy_enabled":               "PolicyEnabled",
 		"port":                         "Port",
+		"port_ranges":                  "PortRanges",
 		"protocol":                     "Protocol",
+		"rds_db_cluster_arn":           "RdsDbClusterArn",
+		"rds_db_instance_arn":          "RdsDbInstanceArn",
+		"rds_db_proxy_arn":             "RdsDbProxyArn",
+		"rds_endpoint":                 "RdsEndpoint",
+		"rds_options":                  "RdsOptions",
 		"security_group_ids":           "SecurityGroupIds",
 		"sse_specification":            "SseSpecification",
 		"status":                       "Status",
 		"subnet_ids":                   "SubnetIds",
 		"tags":                         "Tags",
+		"to_port":                      "ToPort",
 		"value":                        "Value",
 		"verified_access_endpoint_id":  "VerifiedAccessEndpointId",
 		"verified_access_group_id":     "VerifiedAccessGroupId",

@@ -113,8 +113,7 @@
     },
     "Name": {
       "type": "string",
-      "description": "The name that identifies the compute node group.",
-      "pattern": ""
+      "description": "The name that identifies the compute node group."
     },
     "PurchaseOption": {
       "type": "string",

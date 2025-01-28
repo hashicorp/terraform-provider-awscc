@@ -1099,7 +1099,8 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	              "Comet",
 		//	              "DeepchecksLLMEvaluation",
 		//	              "Fiddler",
-		//	              "LakeraGuard"
+		//	              "LakeraGuard",
+		//	              "PerformanceEvaluation"
 		//	            ],
 		//	            "type": "string"
 		//	          },
@@ -2445,6 +2446,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 										"DeepchecksLLMEvaluation",
 										"Fiddler",
 										"LakeraGuard",
+										"PerformanceEvaluation",
 									),
 								),
 							}, /*END VALIDATORS*/

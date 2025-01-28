@@ -116,7 +116,10 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "LINUX_CONTAINER",
 		//	    "LINUX_GPU_CONTAINER",
 		//	    "ARM_CONTAINER",
-		//	    "MAC_ARM"
+		//	    "MAC_ARM",
+		//	    "LINUX_EC2",
+		//	    "ARM_EC2",
+		//	    "WINDOWS_EC2"
 		//	  ],
 		//	  "type": "string"
 		//	}

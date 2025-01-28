@@ -135,7 +135,6 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The name that identifies the queue.",
-		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/

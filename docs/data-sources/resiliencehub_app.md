@@ -29,7 +29,6 @@ Data Source schema for AWS::ResilienceHub::App
 - `event_subscriptions` (Attributes List) The list of events you would like to subscribe and get notification for. (see [below for nested schema](#nestedatt--event_subscriptions))
 - `name` (String) Name of the app.
 - `permission_model` (Attributes) Defines the roles and credentials that AWS Resilience Hub would use while creating the application, importing its resources, and running an assessment. (see [below for nested schema](#nestedatt--permission_model))
-- `regulatory_policy_arn` (String) Amazon Resource Name (ARN) of the Regulatory Policy.
 - `resiliency_policy_arn` (String) Amazon Resource Name (ARN) of the Resiliency Policy.
 - `resource_mappings` (Attributes List) An array of ResourceMapping objects. (see [below for nested schema](#nestedatt--resource_mappings))
 - `tags` (Map of String)

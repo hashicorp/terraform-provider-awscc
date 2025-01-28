@@ -33,7 +33,7 @@ Data Source schema for AWS::ElasticLoadBalancingV2::LoadBalancer
 - `load_balancer_attributes` (Attributes Set) The load balancer attributes. (see [below for nested schema](#nestedatt--load_balancer_attributes))
 - `load_balancer_full_name` (String)
 - `load_balancer_name` (String)
-- `minimum_load_balancer_capacity` (Attributes) (see [below for nested schema](#nestedatt--minimum_load_balancer_capacity))
+- `minimum_load_balancer_capacity` (Attributes) The minimum capacity for a load balancer. (see [below for nested schema](#nestedatt--minimum_load_balancer_capacity))
 - `name` (String) The name of the load balancer. This name must be unique per region per account, can have a maximum of 32 characters, must contain only alphanumeric characters or hyphens, must not begin or end with a hyphen, and must not begin with "internal-".
  If you don't specify a name, AWS CloudFormation generates a unique physical ID for the load balancer. If you specify a name, you cannot perform updates that require replacement of this resource, but you can perform other updates. To replace the resource, specify a new name.
 - `scheme` (String) The nodes of an Internet-facing load balancer have public IP addresses. The DNS name of an Internet-facing load balancer is publicly resolvable to the public IP addresses of the nodes. Therefore, Internet-facing load balancers can route requests from clients over the internet.
@@ -70,6 +70,7 @@ Read-Only:
   +   ``access_logs.s3.bucket`` - The name of the S3 bucket for the access logs. This attribute is required if access logs are enabled. The bucket must exist in the same region as the load balancer and have a bucket policy that grants Elastic Load Balancing permissions to write to the bucket.
   +   ``access_logs.s3.prefix`` - The prefix for the location in the S3 bucket for the access logs.
   +   ``ipv6.deny_all_igw_traffic`` - Blocks internet gateway (IGW) access to the load balancer. It is set to ``false`` for internet-facing load balancers and ``true`` for internal load balancers, preventing unintended access to your internal load balancer through an internet gateway.
+  +   ``zonal_shift.config.enabled`` - Indicates whether zonal shift is enabled. The possible values are ``true`` and ``false``. The default is ``false``.
   
  The following attributes are supported by only Application Load Balancers:
   +   ``idle_timeout.timeout_seconds`` - The idle timeout value, in seconds. The valid range is 1-4000 seconds. The default is 60 seconds.
@@ -92,7 +93,6 @@ Read-Only:
   
  The following attributes are supported by only Network Load Balancers:
   +   ``dns_record.client_routing_policy`` - Indicates how traffic is distributed among the load balancer Availability Zones. The possible values are ``availability_zone_affinity`` with 100 percent zonal affinity, ``partial_availability_zone_affinity`` with 85 percent zonal affinity, and ``any_availability_zone`` with 0 percent zonal affinity.
-  +   ``zonal_shift.config.enabled`` - Indicates whether zonal shift is enabled. The possible values are ``true`` and ``false``. The default is ``false``.
 - `value` (String) The value of the attribute.
 
 
@@ -101,7 +101,7 @@ Read-Only:
 
 Read-Only:
 
-- `capacity_units` (Number)
+- `capacity_units` (Number) The number of capacity units.
 
 
 <a id="nestedatt--subnet_mappings"></a>

@@ -149,7 +149,6 @@ func influxDBInstanceResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: DbParameterGroupIdentifier
@@ -225,7 +224,6 @@ func influxDBInstanceResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Endpoint
@@ -366,7 +364,7 @@ func influxDBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The unique name that is associated with the InfluxDB instance.",
 		//	  "maxLength": 40,
 		//	  "minLength": 3,
-		//	  "pattern": "^[a-zA-z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$",
+		//	  "pattern": "^[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -375,7 +373,33 @@ func influxDBInstanceResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(3, 40),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: NetworkType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Network type of the InfluxDB Instance.",
+		//	  "enum": [
+		//	    "IPV4",
+		//	    "DUAL"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Network type of the InfluxDB Instance.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"IPV4",
+					"DUAL",
+				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -428,6 +452,26 @@ func influxDBInstanceResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END PLAN MODIFIERS*/
 			// Password is a write-only property.
 		}, /*END ATTRIBUTE*/
+		// Property: Port
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The port number on which InfluxDB accepts connections.",
+		//	  "maximum": 65535,
+		//	  "minimum": 1024,
+		//	  "type": "integer"
+		//	}
+		"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The port number on which InfluxDB accepts connections.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.Int64{ /*START VALIDATORS*/
+				int64validator.Between(1024, 65535),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PubliclyAccessible
 		// CloudFormation resource type schema:
 		//
@@ -471,6 +515,8 @@ func influxDBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		//	    "DELETING",
 		//	    "MODIFYING",
 		//	    "UPDATING",
+		//	    "UPDATING_DEPLOYMENT_TYPE",
+		//	    "UPDATING_INSTANCE_TYPE",
 		//	    "DELETED",
 		//	    "FAILED"
 		//	  ],
@@ -670,8 +716,10 @@ func influxDBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		"key":                               "Key",
 		"log_delivery_configuration":        "LogDeliveryConfiguration",
 		"name":                              "Name",
+		"network_type":                      "NetworkType",
 		"organization":                      "Organization",
 		"password":                          "Password",
+		"port":                              "Port",
 		"publicly_accessible":               "PubliclyAccessible",
 		"s3_configuration":                  "S3Configuration",
 		"secondary_availability_zone":       "SecondaryAvailabilityZone",

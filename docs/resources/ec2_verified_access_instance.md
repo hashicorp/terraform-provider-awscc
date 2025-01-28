@@ -60,6 +60,7 @@ resource "awscc_ec2_verified_access_instance" "example" {
 
 ### Optional
 
+- `cidr_endpoints_custom_sub_domain` (String) Introduce CidrEndpointsCustomSubDomain property to represent the domain (say, ava.my-company.com)
 - `description` (String) A description for the AWS Verified Access instance.
 - `fips_enabled` (Boolean) Indicates whether FIPS is enabled
 - `logging_configurations` (Attributes) The configuration options for AWS Verified Access instances. (see [below for nested schema](#nestedatt--logging_configurations))
@@ -69,6 +70,7 @@ resource "awscc_ec2_verified_access_instance" "example" {
 
 ### Read-Only
 
+- `cidr_endpoints_custom_sub_domain_name_servers` (List of String) Property to represent the name servers assoicated with the domain that AVA manages (say, ['ns1.amazonaws.com', 'ns2.amazonaws.com', 'ns3.amazonaws.com', 'ns4.amazonaws.com']).
 - `creation_time` (String) Time this Verified Access Instance was created.
 - `id` (String) Uniquely identifies the resource.
 - `last_updated_time` (String) Time this Verified Access Instance was last updated.

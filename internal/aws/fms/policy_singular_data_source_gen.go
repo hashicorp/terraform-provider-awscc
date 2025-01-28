@@ -214,6 +214,19 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 			ElementType: types.StringType,
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ResourceTagLogicalOperator
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "AND",
+		//	    "OR"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"resource_tag_logical_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceTags
 		// CloudFormation resource type schema:
 		//
@@ -909,6 +922,7 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"protocol":                          "Protocol",
 		"remediation_enabled":               "RemediationEnabled",
 		"resource_set_ids":                  "ResourceSetIds",
+		"resource_tag_logical_operator":     "ResourceTagLogicalOperator",
 		"resource_tags":                     "ResourceTags",
 		"resource_type":                     "ResourceType",
 		"resource_type_list":                "ResourceTypeList",

@@ -23,6 +23,34 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::EC2::VerifiedAccessInstance resource.
 func verifiedAccessInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: CidrEndpointsCustomSubDomain
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Introduce CidrEndpointsCustomSubDomain property to represent the domain (say, ava.my-company.com)",
+		//	  "type": "string"
+		//	}
+		"cidr_endpoints_custom_sub_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Introduce CidrEndpointsCustomSubDomain property to represent the domain (say, ava.my-company.com)",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: CidrEndpointsCustomSubDomainNameServers
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Property to represent the name servers assoicated with the domain that AVA manages (say, ['ns1.amazonaws.com', 'ns2.amazonaws.com', 'ns3.amazonaws.com', 'ns4.amazonaws.com']).",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "description": "The value of the name server",
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"cidr_endpoints_custom_sub_domain_name_servers": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Property to represent the name servers assoicated with the domain that AVA manages (say, ['ns1.amazonaws.com', 'ns2.amazonaws.com', 'ns3.amazonaws.com', 'ns4.amazonaws.com']).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -380,8 +408,10 @@ func verifiedAccessInstanceDataSource(ctx context.Context) (datasource.DataSourc
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::VerifiedAccessInstance").WithTerraformTypeName("awscc_ec2_verified_access_instance")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"bucket_name":                        "BucketName",
-		"bucket_owner":                       "BucketOwner",
+		"bucket_name":                      "BucketName",
+		"bucket_owner":                     "BucketOwner",
+		"cidr_endpoints_custom_sub_domain": "CidrEndpointsCustomSubDomain",
+		"cidr_endpoints_custom_sub_domain_name_servers": "CidrEndpointsCustomSubDomainNameServers",
 		"cloudwatch_logs":                    "CloudWatchLogs",
 		"creation_time":                      "CreationTime",
 		"delivery_stream":                    "DeliveryStream",

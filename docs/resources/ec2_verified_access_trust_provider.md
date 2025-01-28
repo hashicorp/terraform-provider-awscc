@@ -59,6 +59,7 @@ resource "awscc_ec2_verified_access_trust_provider" "example" {
 - `description` (String) A description for the Amazon Web Services Verified Access trust provider.
 - `device_options` (Attributes) The options for device identity based trust providers. (see [below for nested schema](#nestedatt--device_options))
 - `device_trust_provider_type` (String) The type of device-based trust provider. Possible values: jamf|crowdstrike
+- `native_application_oidc_options` (Attributes) The OpenID Connect details for an oidc -type, user-identity based trust provider for L4. (see [below for nested schema](#nestedatt--native_application_oidc_options))
 - `oidc_options` (Attributes) The OpenID Connect details for an oidc -type, user-identity based trust provider. (see [below for nested schema](#nestedatt--oidc_options))
 - `sse_specification` (Attributes) The configuration options for customer provided KMS encryption. (see [below for nested schema](#nestedatt--sse_specification))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
@@ -78,6 +79,21 @@ Optional:
 
 - `public_signing_key_url` (String) URL Verified Access will use to verify authenticity of the device tokens.
 - `tenant_id` (String) The ID of the tenant application with the device-identity provider.
+
+
+<a id="nestedatt--native_application_oidc_options"></a>
+### Nested Schema for `native_application_oidc_options`
+
+Optional:
+
+- `authorization_endpoint` (String) The OIDC authorization endpoint.
+- `client_id` (String) The client identifier.
+- `client_secret` (String) The client secret.
+- `issuer` (String) The OIDC issuer.
+- `public_signing_key_endpoint` (String) The public signing key for endpoint
+- `scope` (String) OpenID Connect (OIDC) scopes are used by an application during authentication to authorize access to details of a user. Each scope returns a specific set of user attributes.
+- `token_endpoint` (String) The OIDC token endpoint.
+- `user_info_endpoint` (String) The OIDC user info endpoint.
 
 
 <a id="nestedatt--oidc_options"></a>

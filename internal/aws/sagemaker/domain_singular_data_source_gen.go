@@ -2018,7 +2018,8 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "Comet",
 		//	              "DeepchecksLLMEvaluation",
 		//	              "Fiddler",
-		//	              "LakeraGuard"
+		//	              "LakeraGuard",
+		//	              "PerformanceEvaluation"
 		//	            ],
 		//	            "type": "string"
 		//	          },

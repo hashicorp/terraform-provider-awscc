@@ -163,8 +163,10 @@ resource "awscc_timestream_influx_db_instance" "example" {
 - `deployment_type` (String) Deployment type of the InfluxDB Instance.
 - `log_delivery_configuration` (Attributes) Configuration for sending logs to customer account from the InfluxDB instance. (see [below for nested schema](#nestedatt--log_delivery_configuration))
 - `name` (String) The unique name that is associated with the InfluxDB instance.
+- `network_type` (String) Network type of the InfluxDB Instance.
 - `organization` (String) The organization for the InfluxDB instance.
 - `password` (String) The password for the InfluxDB instance.
+- `port` (Number) The port number on which InfluxDB accepts connections.
 - `publicly_accessible` (Boolean) Attach a public IP to the customer ENI.
 - `tags` (Attributes Set) An arbitrary set of tags (key-value pairs) for this DB instance. (see [below for nested schema](#nestedatt--tags))
 - `username` (String) The username for the InfluxDB instance.

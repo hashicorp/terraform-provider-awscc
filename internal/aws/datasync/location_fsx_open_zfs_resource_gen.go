@@ -173,9 +173,6 @@ func locationFSxOpenZFSResource(ctx context.Context) (resource.Resource, error) 
 			}, /*END SCHEMA*/
 			Description: "Configuration settings for an NFS or SMB protocol, currently only support NFS",
 			Required:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: SecurityGroupArns
 		// CloudFormation resource type schema:
@@ -227,7 +224,6 @@ func locationFSxOpenZFSResource(ctx context.Context) (resource.Resource, error) 
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// Subdirectory is a write-only property.
 		}, /*END ATTRIBUTE*/

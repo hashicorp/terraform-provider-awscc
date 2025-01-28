@@ -446,6 +446,14 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                  "maximum": 4096,
 		//	                  "minimum": 0,
 		//	                  "type": "integer"
+		//	                },
+		//	                "EmbeddingDataType": {
+		//	                  "description": "The data type for the vectors when using a model to convert text into vector embeddings.",
+		//	                  "enum": [
+		//	                    "FLOAT32",
+		//	                    "BINARY"
+		//	                  ],
+		//	                  "type": "string"
 		//	                }
 		//	              },
 		//	              "type": "object"
@@ -771,6 +779,11 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 										// Property: Dimensions
 										"dimensions": schema.Int64Attribute{ /*START ATTRIBUTE*/
 											Description: "The dimensions details for the vector configuration used on the Bedrock embeddings model.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: EmbeddingDataType
+										"embedding_data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The data type for the vectors when using a model to convert text into vector embeddings.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
@@ -1450,6 +1463,7 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		"database_user":                           "DatabaseUser",
 		"description":                             "Description",
 		"dimensions":                              "Dimensions",
+		"embedding_data_type":                     "EmbeddingDataType",
 		"embedding_model_arn":                     "EmbeddingModelArn",
 		"embedding_model_configuration":           "EmbeddingModelConfiguration",
 		"endpoint":                                "Endpoint",

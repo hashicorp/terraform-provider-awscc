@@ -243,11 +243,26 @@ func influxDBInstanceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The unique name that is associated with the InfluxDB instance.",
 		//	  "maxLength": 40,
 		//	  "minLength": 3,
-		//	  "pattern": "^[a-zA-z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$",
+		//	  "pattern": "^[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The unique name that is associated with the InfluxDB instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: NetworkType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Network type of the InfluxDB Instance.",
+		//	  "enum": [
+		//	    "IPV4",
+		//	    "DUAL"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Network type of the InfluxDB Instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Organization
@@ -275,6 +290,19 @@ func influxDBInstanceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	}
 		"password": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The password for the InfluxDB instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Port
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The port number on which InfluxDB accepts connections.",
+		//	  "maximum": 65535,
+		//	  "minimum": 1024,
+		//	  "type": "integer"
+		//	}
+		"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The port number on which InfluxDB accepts connections.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PubliclyAccessible
@@ -311,6 +339,8 @@ func influxDBInstanceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	    "DELETING",
 		//	    "MODIFYING",
 		//	    "UPDATING",
+		//	    "UPDATING_DEPLOYMENT_TYPE",
+		//	    "UPDATING_INSTANCE_TYPE",
 		//	    "DELETED",
 		//	    "FAILED"
 		//	  ],
@@ -453,8 +483,10 @@ func influxDBInstanceDataSource(ctx context.Context) (datasource.DataSource, err
 		"key":                               "Key",
 		"log_delivery_configuration":        "LogDeliveryConfiguration",
 		"name":                              "Name",
+		"network_type":                      "NetworkType",
 		"organization":                      "Organization",
 		"password":                          "Password",
+		"port":                              "Port",
 		"publicly_accessible":               "PubliclyAccessible",
 		"s3_configuration":                  "S3Configuration",
 		"secondary_availability_zone":       "SecondaryAvailabilityZone",

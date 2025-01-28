@@ -18,7 +18,6 @@ A data source is used to import technical metadata of assets (data) from the sou
 ### Required
 
 - `domain_identifier` (String) The ID of the Amazon DataZone domain where the data source is created.
-- `environment_identifier` (String) The unique identifier of the Amazon DataZone environment to which the data source publishes assets.
 - `name` (String) The name of the data source.
 - `project_identifier` (String) The identifier of the Amazon DataZone project in which you want to add the data source.
 - `type` (String) The type of the data source.
@@ -27,14 +26,17 @@ A data source is used to import technical metadata of assets (data) from the sou
 
 - `asset_forms_input` (Attributes List) The metadata forms that are to be attached to the assets that this data source works with. (see [below for nested schema](#nestedatt--asset_forms_input))
 - `configuration` (Attributes) Configuration of the data source. It can be set to either glueRunConfiguration or redshiftRunConfiguration. (see [below for nested schema](#nestedatt--configuration))
+- `connection_identifier` (String) The unique identifier of a connection used to fetch relevant parameters from connection during Datasource run
 - `description` (String) The description of the data source.
 - `enable_setting` (String) Specifies whether the data source is enabled.
+- `environment_identifier` (String) The unique identifier of the Amazon DataZone environment to which the data source publishes assets.
 - `publish_on_import` (Boolean) Specifies whether the assets that this data source creates in the inventory are to be also automatically published to the catalog.
 - `recommendation` (Attributes) Specifies whether the business name generation is to be enabled for this data source. (see [below for nested schema](#nestedatt--recommendation))
 - `schedule` (Attributes) The schedule of the data source runs. (see [below for nested schema](#nestedatt--schedule))
 
 ### Read-Only
 
+- `connection_id` (String) The unique identifier of a connection used to fetch relevant parameters from connection during Datasource run
 - `created_at` (String) The timestamp of when the data source was created.
 - `data_source_id` (String) The unique identifier of the data source.
 - `domain_id` (String) The ID of the Amazon DataZone domain where the data source is created.
@@ -73,6 +75,7 @@ Optional:
 Optional:
 
 - `auto_import_data_quality_result` (Boolean) Specifies whether to automatically import data quality metrics as part of the data source run.
+- `catalog_name` (String) The catalog name in the AWS Glue run configuration.
 - `data_access_role` (String) The data access role included in the configuration details of the AWS Glue data source.
 - `relational_filter_configurations` (Attributes List) The relational filter configurations included in the configuration details of the AWS Glue data source. (see [below for nested schema](#nestedatt--configuration--glue_run_configuration--relational_filter_configurations))
 
