@@ -29,6 +29,7 @@ Data Source schema for AWS::IoTFleetWise::StateTemplate
 - `metadata_extra_dimensions` (List of String)
 - `name` (String)
 - `signal_catalog_arn` (String)
+- `state_template_id` (String)
 - `state_template_properties` (List of String)
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 

@@ -24,6 +24,7 @@ Resource Type definition for AWS::APS::Scraper
 ### Optional
 
 - `alias` (String) Scraper alias.
+- `role_configuration` (Attributes) Role configuration (see [below for nested schema](#nestedatt--role_configuration))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -73,6 +74,15 @@ Optional:
 - `security_group_ids` (List of String) List of security group IDs
 - `subnet_ids` (List of String) List of subnet IDs
 
+
+
+<a id="nestedatt--role_configuration"></a>
+### Nested Schema for `role_configuration`
+
+Optional:
+
+- `source_role_arn` (String) IAM Role in source account
+- `target_role_arn` (String) IAM Role in the target account
 
 
 <a id="nestedatt--tags"></a>

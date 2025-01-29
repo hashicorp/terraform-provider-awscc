@@ -25,6 +25,7 @@ Data Source schema for AWS::APS::Scraper
 - `arn` (String) Scraper ARN.
 - `destination` (Attributes) Scraper metrics destination (see [below for nested schema](#nestedatt--destination))
 - `role_arn` (String) IAM role ARN for the scraper.
+- `role_configuration` (Attributes) Role configuration (see [below for nested schema](#nestedatt--role_configuration))
 - `scrape_configuration` (Attributes) Scraper configuration (see [below for nested schema](#nestedatt--scrape_configuration))
 - `scraper_id` (String) Required to identify a specific scraper.
 - `source` (Attributes) Scraper metrics source (see [below for nested schema](#nestedatt--source))
@@ -44,6 +45,15 @@ Read-Only:
 
 - `workspace_arn` (String) ARN of an Amazon Managed Prometheus workspace
 
+
+
+<a id="nestedatt--role_configuration"></a>
+### Nested Schema for `role_configuration`
+
+Read-Only:
+
+- `source_role_arn` (String) IAM Role in source account
+- `target_role_arn` (String) IAM Role in the target account
 
 
 <a id="nestedatt--scrape_configuration"></a>

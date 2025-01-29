@@ -108,6 +108,7 @@ resource "awscc_iotfleetwise_state_template" "example" {
 - `creation_time` (String)
 - `id` (String) Uniquely identifies the resource.
 - `last_modification_time` (String)
+- `state_template_id` (String)
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

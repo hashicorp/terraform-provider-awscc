@@ -22,7 +22,7 @@ Enable a resource that has been published in the CloudFormation Registry.
 - `logging_config` (Attributes) Specifies logging configuration information for a type. (see [below for nested schema](#nestedatt--logging_config))
 - `major_version` (String) The Major Version of the type you want to enable
 - `public_type_arn` (String) The Amazon Resource Number (ARN) assigned to the public extension upon publication
-- `publisher_id` (String) The publisher id assigned by CloudFormation for publishing in this region.
+- `publisher_id` (String) The reserved publisher id for this type, or the publisher id assigned by CloudFormation for publishing in this region.
 - `type` (String) The kind of extension
 - `type_name` (String) The name of the type being registered.
 

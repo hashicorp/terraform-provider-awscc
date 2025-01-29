@@ -28,6 +28,7 @@ Data Source schema for AWS::KinesisFirehose::DeliveryStream
 - `delivery_stream_encryption_configuration_input` (Attributes) (see [below for nested schema](#nestedatt--delivery_stream_encryption_configuration_input))
 - `delivery_stream_name` (String)
 - `delivery_stream_type` (String)
+- `direct_put_source_configuration` (Attributes) (see [below for nested schema](#nestedatt--direct_put_source_configuration))
 - `elasticsearch_destination_configuration` (Attributes) (see [below for nested schema](#nestedatt--elasticsearch_destination_configuration))
 - `extended_s3_destination_configuration` (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration))
 - `http_endpoint_destination_configuration` (Attributes) (see [below for nested schema](#nestedatt--http_endpoint_destination_configuration))
@@ -396,6 +397,14 @@ Read-Only:
 
 - `key_arn` (String)
 - `key_type` (String)
+
+
+<a id="nestedatt--direct_put_source_configuration"></a>
+### Nested Schema for `direct_put_source_configuration`
+
+Read-Only:
+
+- `throughput_hint_in_m_bs` (Number)
 
 
 <a id="nestedatt--elasticsearch_destination_configuration"></a>
@@ -966,6 +975,7 @@ Read-Only:
 
 Read-Only:
 
+- `append_only` (Boolean)
 - `buffering_hints` (Attributes) (see [below for nested schema](#nestedatt--iceberg_destination_configuration--buffering_hints))
 - `catalog_configuration` (Attributes) (see [below for nested schema](#nestedatt--iceberg_destination_configuration--catalog_configuration))
 - `cloudwatch_logging_options` (Attributes) (see [below for nested schema](#nestedatt--iceberg_destination_configuration--cloudwatch_logging_options))
