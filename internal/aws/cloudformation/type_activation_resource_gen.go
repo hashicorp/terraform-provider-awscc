@@ -182,19 +182,19 @@ func typeActivationResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The publisher id assigned by CloudFormation for publishing in this region.",
+		//	  "description": "The reserved publisher id for this type, or the publisher id assigned by CloudFormation for publishing in this region.",
 		//	  "maxLength": 40,
 		//	  "minLength": 1,
-		//	  "pattern": "[0-9a-zA-Z-]{40}",
+		//	  "pattern": "[0-9a-zA-Z-]{1,40}",
 		//	  "type": "string"
 		//	}
 		"publisher_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The publisher id assigned by CloudFormation for publishing in this region.",
+			Description: "The reserved publisher id for this type, or the publisher id assigned by CloudFormation for publishing in this region.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 40),
-				stringvalidator.RegexMatches(regexp.MustCompile("[0-9a-zA-Z-]{40}"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("[0-9a-zA-Z-]{1,40}"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),

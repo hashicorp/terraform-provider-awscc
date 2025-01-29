@@ -1060,7 +1060,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "boolean"
 		//	    },
 		//	    "RecoveryPeriodInDays": {
-		//	      "description": "",
+		//	      "description": "The number of preceding days for which continuous backups are taken and maintained. Your table data is only recoverable to any point-in-time from within the configured recovery period. This parameter is optional. If no value is provided, the value will default to 35.",
 		//	      "maximum": 35,
 		//	      "minimum": 1,
 		//	      "type": "integer"
@@ -1081,7 +1081,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: RecoveryPeriodInDays
 				"recovery_period_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "",
+					Description: "The number of preceding days for which continuous backups are taken and maintained. Your table data is only recoverable to any point-in-time from within the configured recovery period. This parameter is optional. If no value is provided, the value will default to 35.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.Int64{ /*START VALIDATORS*/

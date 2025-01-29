@@ -2337,6 +2337,9 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	                    },
 		//	                    "ReadOnly": {
 		//	                      "type": "boolean"
+		//	                    },
+		//	                    "SubPath": {
+		//	                      "type": "string"
 		//	                    }
 		//	                  },
 		//	                  "type": "object"
@@ -2484,6 +2487,9 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	                    },
 		//	                    "ReadOnly": {
 		//	                      "type": "boolean"
+		//	                    },
+		//	                    "SubPath": {
+		//	                      "type": "string"
 		//	                    }
 		//	                  },
 		//	                  "type": "object"
@@ -2503,6 +2509,15 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	        "Metadata": {
 		//	          "additionalProperties": false,
 		//	          "properties": {
+		//	            "Annotations": {
+		//	              "additionalProperties": false,
+		//	              "patternProperties": {
+		//	                "": {
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
 		//	            "Labels": {
 		//	              "additionalProperties": false,
 		//	              "patternProperties": {
@@ -2511,6 +2526,9 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	                }
 		//	              },
 		//	              "type": "object"
+		//	            },
+		//	            "Namespace": {
+		//	              "type": "string"
 		//	            }
 		//	          },
 		//	          "type": "object"
@@ -2549,6 +2567,21 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	              },
 		//	              "Name": {
 		//	                "type": "string"
+		//	              },
+		//	              "PersistentVolumeClaim": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "ClaimName": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "ReadOnly": {
+		//	                    "type": "boolean"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "ClaimName"
+		//	                ],
+		//	                "type": "object"
 		//	              },
 		//	              "Secret": {
 		//	                "additionalProperties": false,
@@ -2780,6 +2813,14 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 														boolplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: SubPath
+												"sub_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Optional: true,
+													Computed: true,
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
@@ -3034,6 +3075,14 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 														boolplanmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
+												// Property: SubPath
+												"sub_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Optional: true,
+													Computed: true,
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
 										Optional: true,
@@ -3055,6 +3104,16 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 						// Property: Metadata
 						"metadata": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Annotations
+								"annotations":       // Pattern: ""
+								schema.MapAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+										mapplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
 								// Property: Labels
 								"labels":            // Pattern: ""
 								schema.MapAttribute{ /*START ATTRIBUTE*/
@@ -3063,6 +3122,14 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 									Computed:    true,
 									PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
 										mapplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Namespace
+								"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -3145,6 +3212,35 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: PersistentVolumeClaim
+									"persistent_volume_claim": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: ClaimName
+											"claim_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: ReadOnly
+											"read_only": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+													boolplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: Secret
@@ -4073,6 +4169,9 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	                              },
 		//	                              "ReadOnly": {
 		//	                                "type": "boolean"
+		//	                              },
+		//	                              "SubPath": {
+		//	                                "type": "string"
 		//	                              }
 		//	                            },
 		//	                            "type": "object"
@@ -4220,6 +4319,9 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	                              },
 		//	                              "ReadOnly": {
 		//	                                "type": "boolean"
+		//	                              },
+		//	                              "SubPath": {
+		//	                                "type": "string"
 		//	                              }
 		//	                            },
 		//	                            "type": "object"
@@ -4239,6 +4341,15 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "Metadata": {
 		//	                    "additionalProperties": false,
 		//	                    "properties": {
+		//	                      "Annotations": {
+		//	                        "additionalProperties": false,
+		//	                        "patternProperties": {
+		//	                          "": {
+		//	                            "type": "string"
+		//	                          }
+		//	                        },
+		//	                        "type": "object"
+		//	                      },
 		//	                      "Labels": {
 		//	                        "additionalProperties": false,
 		//	                        "patternProperties": {
@@ -4247,6 +4358,9 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	                          }
 		//	                        },
 		//	                        "type": "object"
+		//	                      },
+		//	                      "Namespace": {
+		//	                        "type": "string"
 		//	                      }
 		//	                    },
 		//	                    "type": "object"
@@ -4285,6 +4399,21 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	                        },
 		//	                        "Name": {
 		//	                          "type": "string"
+		//	                        },
+		//	                        "PersistentVolumeClaim": {
+		//	                          "additionalProperties": false,
+		//	                          "properties": {
+		//	                            "ClaimName": {
+		//	                              "type": "string"
+		//	                            },
+		//	                            "ReadOnly": {
+		//	                              "type": "boolean"
+		//	                            }
+		//	                          },
+		//	                          "required": [
+		//	                            "ClaimName"
+		//	                          ],
+		//	                          "type": "object"
 		//	                        },
 		//	                        "Secret": {
 		//	                          "additionalProperties": false,
@@ -5870,6 +5999,14 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 																			boolplanmodifier.UseStateForUnknown(),
 																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
+																	// Property: SubPath
+																	"sub_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Optional: true,
+																		Computed: true,
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 															}, /*END NESTED OBJECT*/
 															Optional: true,
@@ -6122,6 +6259,14 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 																			boolplanmodifier.UseStateForUnknown(),
 																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
+																	// Property: SubPath
+																	"sub_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Optional: true,
+																		Computed: true,
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 															}, /*END NESTED OBJECT*/
 															Optional: true,
@@ -6143,6 +6288,16 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Metadata
 											"metadata": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Annotations
+													"annotations":       // Pattern: ""
+													schema.MapAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+															mapplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
 													// Property: Labels
 													"labels":            // Pattern: ""
 													schema.MapAttribute{ /*START ATTRIBUTE*/
@@ -6151,6 +6306,14 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 														Computed:    true,
 														PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
 															mapplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: Namespace
+													"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Optional: true,
+														Computed: true,
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
 														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
@@ -6233,6 +6396,35 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 															}, /*END VALIDATORS*/
 															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: PersistentVolumeClaim
+														"persistent_volume_claim": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: ClaimName
+																"claim_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Optional: true,
+																	Computed: true,
+																	Validators: []validator.String{ /*START VALIDATORS*/
+																		fwvalidators.NotNullString(),
+																	}, /*END VALIDATORS*/
+																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																		stringplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
+																}, /*END ATTRIBUTE*/
+																// Property: ReadOnly
+																"read_only": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																	Optional: true,
+																	Computed: true,
+																	PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+																		boolplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Optional: true,
+															Computed: true,
+															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																objectplanmodifier.UseStateForUnknown(),
 															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 														// Property: Secret
@@ -6593,11 +6785,13 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		"access_point_id":                "AccessPointId",
 		"action":                         "Action",
 		"allow_privilege_escalation":     "AllowPrivilegeEscalation",
+		"annotations":                    "Annotations",
 		"args":                           "Args",
 		"assign_public_ip":               "AssignPublicIp",
 		"attempt_duration_seconds":       "AttemptDurationSeconds",
 		"attempts":                       "Attempts",
 		"authorization_config":           "AuthorizationConfig",
+		"claim_name":                     "ClaimName",
 		"command":                        "Command",
 		"condition":                      "Condition",
 		"container":                      "Container",
@@ -6651,6 +6845,7 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		"mount_path":                     "MountPath",
 		"mount_points":                   "MountPoints",
 		"name":                           "Name",
+		"namespace":                      "Namespace",
 		"network_configuration":          "NetworkConfiguration",
 		"node_properties":                "NodeProperties",
 		"node_range_properties":          "NodeRangeProperties",
@@ -6664,6 +6859,7 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		"parameters":                     "Parameters",
 		"path":                           "Path",
 		"permissions":                    "Permissions",
+		"persistent_volume_claim":        "PersistentVolumeClaim",
 		"pid_mode":                       "PidMode",
 		"platform_capabilities":          "PlatformCapabilities",
 		"platform_version":               "PlatformVersion",
@@ -6698,6 +6894,7 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		"soft_limit":                     "SoftLimit",
 		"source_path":                    "SourcePath",
 		"source_volume":                  "SourceVolume",
+		"sub_path":                       "SubPath",
 		"swappiness":                     "Swappiness",
 		"tags":                           "Tags",
 		"target_nodes":                   "TargetNodes",

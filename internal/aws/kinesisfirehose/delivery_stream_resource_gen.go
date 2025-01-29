@@ -2339,6 +2339,41 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: DirectPutSourceConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "ThroughputHintInMBs": {
+		//	      "maximum": 100,
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"direct_put_source_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ThroughputHintInMBs
+				"throughput_hint_in_m_bs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.Between(1, 100),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ElasticsearchDestinationConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -5438,6 +5473,9 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "AppendOnly": {
+		//	      "type": "boolean"
+		//	    },
 		//	    "BufferingHints": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -5729,6 +5767,14 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"iceberg_destination_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AppendOnly
+				"append_only": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: BufferingHints
 				"buffering_hints": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -9598,6 +9644,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		"account_url": "AccountUrl",
 		"amazon_open_search_serverless_destination_configuration": "AmazonOpenSearchServerlessDestinationConfiguration",
 		"amazonopensearchservice_destination_configuration":       "AmazonopensearchserviceDestinationConfiguration",
+		"append_only":                  "AppendOnly",
 		"arn":                          "Arn",
 		"attribute_name":               "AttributeName",
 		"attribute_value":              "AttributeValue",
@@ -9648,6 +9695,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		"destination_table_name":                         "DestinationTableName",
 		"dictionary_key_threshold":                       "DictionaryKeyThreshold",
 		"digest":                                         "Digest",
+		"direct_put_source_configuration":                "DirectPutSourceConfiguration",
 		"document_id_options":                            "DocumentIdOptions",
 		"domain_arn":                                     "DomainARN",
 		"duration_in_seconds":                            "DurationInSeconds",
@@ -9742,6 +9790,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		"table_name":                                     "TableName",
 		"tables":                                         "Tables",
 		"tags":                                           "Tags",
+		"throughput_hint_in_m_bs":                        "ThroughputHintInMBs",
 		"timestamp_formats":                              "TimestampFormats",
 		"topic_name":                                     "TopicName",
 		"type":                                           "Type",
