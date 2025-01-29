@@ -75,6 +75,18 @@ func stateTemplateDataSource(ctx context.Context) (datasource.DataSource, error)
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 26,
+		//	  "minLength": 26,
+		//	  "pattern": "^[A-Z0-9]+$",
+		//	  "type": "string"
+		//	}
+		"state_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastModificationTime
 		// CloudFormation resource type schema:
 		//
@@ -216,6 +228,7 @@ func stateTemplateDataSource(ctx context.Context) (datasource.DataSource, error)
 		"metadata_extra_dimensions": "MetadataExtraDimensions",
 		"name":                      "Name",
 		"signal_catalog_arn":        "SignalCatalogArn",
+		"state_template_id":         "Id",
 		"state_template_properties": "StateTemplateProperties",
 		"tags":                      "Tags",
 		"value":                     "Value",

@@ -8,6 +8,7 @@ package iotfleetwise
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -115,6 +116,114 @@ func vehicleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: StateTemplates
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Identifier": {
+		//	        "maxLength": 100,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "StateTemplateUpdateStrategy": {
+		//	        "properties": {
+		//	          "OnChange": {
+		//	            "additionalProperties": false,
+		//	            "type": "object"
+		//	          },
+		//	          "Periodic": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "StateTemplateUpdateRate": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "Unit": {
+		//	                    "enum": [
+		//	                      "MILLISECOND",
+		//	                      "SECOND",
+		//	                      "MINUTE",
+		//	                      "HOUR"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Value": {
+		//	                    "minimum": 1,
+		//	                    "type": "number"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Unit",
+		//	                  "Value"
+		//	                ],
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "StateTemplateUpdateRate"
+		//	            ],
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Identifier",
+		//	      "StateTemplateUpdateStrategy"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 20,
+		//	  "minItems": 0,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"state_templates": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Identifier
+					"identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: StateTemplateUpdateStrategy
+					"state_template_update_strategy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: OnChange
+							"on_change": schema.StringAttribute{ /*START ATTRIBUTE*/
+								CustomType: jsontypes.NormalizedType{},
+								Computed:   true,
+							}, /*END ATTRIBUTE*/
+							// Property: Periodic
+							"periodic": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: StateTemplateUpdateRate
+									"state_template_update_rate": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Unit
+											"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Value
+											"value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -177,17 +286,24 @@ func vehicleDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::IoTFleetWise::Vehicle").WithTerraformTypeName("awscc_iotfleetwise_vehicle")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                    "Arn",
-		"association_behavior":   "AssociationBehavior",
-		"attributes":             "Attributes",
-		"creation_time":          "CreationTime",
-		"decoder_manifest_arn":   "DecoderManifestArn",
-		"key":                    "Key",
-		"last_modification_time": "LastModificationTime",
-		"model_manifest_arn":     "ModelManifestArn",
-		"name":                   "Name",
-		"tags":                   "Tags",
-		"value":                  "Value",
+		"arn":                            "Arn",
+		"association_behavior":           "AssociationBehavior",
+		"attributes":                     "Attributes",
+		"creation_time":                  "CreationTime",
+		"decoder_manifest_arn":           "DecoderManifestArn",
+		"identifier":                     "Identifier",
+		"key":                            "Key",
+		"last_modification_time":         "LastModificationTime",
+		"model_manifest_arn":             "ModelManifestArn",
+		"name":                           "Name",
+		"on_change":                      "OnChange",
+		"periodic":                       "Periodic",
+		"state_template_update_rate":     "StateTemplateUpdateRate",
+		"state_template_update_strategy": "StateTemplateUpdateStrategy",
+		"state_templates":                "StateTemplates",
+		"tags":                           "Tags",
+		"unit":                           "Unit",
+		"value":                          "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

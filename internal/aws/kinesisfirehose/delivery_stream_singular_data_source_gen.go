@@ -1497,6 +1497,29 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		"delivery_stream_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: DirectPutSourceConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "ThroughputHintInMBs": {
+		//	      "maximum": 100,
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"direct_put_source_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ThroughputHintInMBs
+				"throughput_hint_in_m_bs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ElasticsearchDestinationConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -3532,6 +3555,9 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "AppendOnly": {
+		//	      "type": "boolean"
+		//	    },
 		//	    "BufferingHints": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -3823,6 +3849,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	}
 		"iceberg_destination_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AppendOnly
+				"append_only": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: BufferingHints
 				"buffering_hints": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -6229,6 +6259,7 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		"account_url": "AccountUrl",
 		"amazon_open_search_serverless_destination_configuration": "AmazonOpenSearchServerlessDestinationConfiguration",
 		"amazonopensearchservice_destination_configuration":       "AmazonopensearchserviceDestinationConfiguration",
+		"append_only":                  "AppendOnly",
 		"arn":                          "Arn",
 		"attribute_name":               "AttributeName",
 		"attribute_value":              "AttributeValue",
@@ -6279,6 +6310,7 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		"destination_table_name":                         "DestinationTableName",
 		"dictionary_key_threshold":                       "DictionaryKeyThreshold",
 		"digest":                                         "Digest",
+		"direct_put_source_configuration":                "DirectPutSourceConfiguration",
 		"document_id_options":                            "DocumentIdOptions",
 		"domain_arn":                                     "DomainARN",
 		"duration_in_seconds":                            "DurationInSeconds",
@@ -6373,6 +6405,7 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		"table_name":                                     "TableName",
 		"tables":                                         "Tables",
 		"tags":                                           "Tags",
+		"throughput_hint_in_m_bs":                        "ThroughputHintInMBs",
 		"timestamp_formats":                              "TimestampFormats",
 		"topic_name":                                     "TopicName",
 		"type":                                           "Type",
