@@ -1,4 +1,5 @@
-## 1.27.0 (Unreleased)
+## 1.28.0 (Unreleased)
+## 1.27.0 (January 30, 2025)
 
 * **New Data Source:** `awscc_cloudfront_vpc_origin`
 * **New Data Source:** `awscc_notifications_managed_notification_account_contact_association`
