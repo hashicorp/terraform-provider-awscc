@@ -547,6 +547,7 @@ Read-Only:
 - `mount_path` (String)
 - `name` (String)
 - `read_only` (Boolean)
+- `sub_path` (String)
 
 
 
@@ -612,6 +613,7 @@ Read-Only:
 - `mount_path` (String)
 - `name` (String)
 - `read_only` (Boolean)
+- `sub_path` (String)
 
 
 
@@ -620,7 +622,9 @@ Read-Only:
 
 Read-Only:
 
+- `annotations` (Map of String)
 - `labels` (Map of String)
+- `namespace` (String)
 
 
 <a id="nestedatt--eks_properties--pod_properties--volumes"></a>
@@ -631,6 +635,7 @@ Read-Only:
 - `empty_dir` (Attributes) (see [below for nested schema](#nestedatt--eks_properties--pod_properties--volumes--empty_dir))
 - `host_path` (Attributes) (see [below for nested schema](#nestedatt--eks_properties--pod_properties--volumes--host_path))
 - `name` (String)
+- `persistent_volume_claim` (Attributes) (see [below for nested schema](#nestedatt--eks_properties--pod_properties--volumes--persistent_volume_claim))
 - `secret` (Attributes) (see [below for nested schema](#nestedatt--eks_properties--pod_properties--volumes--secret))
 
 <a id="nestedatt--eks_properties--pod_properties--volumes--empty_dir"></a>
@@ -648,6 +653,15 @@ Read-Only:
 Read-Only:
 
 - `path` (String)
+
+
+<a id="nestedatt--eks_properties--pod_properties--volumes--persistent_volume_claim"></a>
+### Nested Schema for `eks_properties.pod_properties.volumes.persistent_volume_claim`
+
+Read-Only:
+
+- `claim_name` (String)
+- `read_only` (Boolean)
 
 
 <a id="nestedatt--eks_properties--pod_properties--volumes--secret"></a>
@@ -1148,6 +1162,7 @@ Read-Only:
 - `mount_path` (String)
 - `name` (String)
 - `read_only` (Boolean)
+- `sub_path` (String)
 
 
 
@@ -1213,6 +1228,7 @@ Read-Only:
 - `mount_path` (String)
 - `name` (String)
 - `read_only` (Boolean)
+- `sub_path` (String)
 
 
 
@@ -1221,7 +1237,9 @@ Read-Only:
 
 Read-Only:
 
+- `annotations` (Map of String)
 - `labels` (Map of String)
+- `namespace` (String)
 
 
 <a id="nestedatt--node_properties--node_range_properties--eks_properties--pod_properties--volumes"></a>
@@ -1232,6 +1250,7 @@ Read-Only:
 - `empty_dir` (Attributes) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--eks_properties--pod_properties--volumes--empty_dir))
 - `host_path` (Attributes) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--eks_properties--pod_properties--volumes--host_path))
 - `name` (String)
+- `persistent_volume_claim` (Attributes) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--eks_properties--pod_properties--volumes--persistent_volume_claim))
 - `secret` (Attributes) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--eks_properties--pod_properties--volumes--secret))
 
 <a id="nestedatt--node_properties--node_range_properties--eks_properties--pod_properties--volumes--empty_dir"></a>
@@ -1249,6 +1268,15 @@ Read-Only:
 Read-Only:
 
 - `path` (String)
+
+
+<a id="nestedatt--node_properties--node_range_properties--eks_properties--pod_properties--volumes--persistent_volume_claim"></a>
+### Nested Schema for `node_properties.node_range_properties.eks_properties.pod_properties.volumes.persistent_volume_claim`
+
+Read-Only:
+
+- `claim_name` (String)
+- `read_only` (Boolean)
 
 
 <a id="nestedatt--node_properties--node_range_properties--eks_properties--pod_properties--volumes--secret"></a>

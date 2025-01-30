@@ -398,14 +398,14 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "type": "string"
 		//	        },
 		//	        "SecurityGroups": {
-		//	          "description": "The IDs of the security groups associated with the task or service. If you don't specify a security group, the default security group for the VPC is used. There's a limit of 5 security groups that can be specified per ``awsvpcConfiguration``.\n  All specified security groups must be from the same VPC.",
+		//	          "description": "The IDs of the security groups associated with the task or service. If you don't specify a security group, the default security group for the VPC is used. There's a limit of 5 security groups that can be specified.\n  All specified security groups must be from the same VPC.",
 		//	          "items": {
 		//	            "type": "string"
 		//	          },
 		//	          "type": "array"
 		//	        },
 		//	        "Subnets": {
-		//	          "description": "The IDs of the subnets associated with the task or service. There's a limit of 16 subnets that can be specified per ``awsvpcConfiguration``.\n  All specified subnets must be from the same VPC.",
+		//	          "description": "The IDs of the subnets associated with the task or service. There's a limit of 16 subnets that can be specified.\n  All specified subnets must be from the same VPC.",
 		//	          "items": {
 		//	            "type": "string"
 		//	          },
@@ -430,13 +430,13 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 						// Property: SecurityGroups
 						"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
-							Description: "The IDs of the security groups associated with the task or service. If you don't specify a security group, the default security group for the VPC is used. There's a limit of 5 security groups that can be specified per ``awsvpcConfiguration``.\n  All specified security groups must be from the same VPC.",
+							Description: "The IDs of the security groups associated with the task or service. If you don't specify a security group, the default security group for the VPC is used. There's a limit of 5 security groups that can be specified.\n  All specified security groups must be from the same VPC.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Subnets
 						"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
-							Description: "The IDs of the subnets associated with the task or service. There's a limit of 16 subnets that can be specified per ``awsvpcConfiguration``.\n  All specified subnets must be from the same VPC.",
+							Description: "The IDs of the subnets associated with the task or service. There's a limit of 16 subnets that can be specified.\n  All specified subnets must be from the same VPC.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -1117,10 +1117,6 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "description": "The throughput to provision for a volume, in MiB/s, with a maximum of 1,000 MiB/s. This parameter maps 1:1 with the ``Throughput`` parameter of the [CreateVolume API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in the *Amazon EC2 API Reference*.\n  This parameter is only supported for the ``gp3`` volume type.",
 		//	            "type": "integer"
 		//	          },
-		//	          "VolumeInitializationRate": {
-		//	            "description": "",
-		//	            "type": "integer"
-		//	          },
 		//	          "VolumeType": {
 		//	            "description": "The volume type. This parameter maps 1:1 with the ``VolumeType`` parameter of the [CreateVolume API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in the *Amazon EC2 API Reference*. For more information, see [Amazon EBS volume types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html) in the *Amazon EC2 User Guide*.\n The following are the supported volume types.\n  +  General Purpose SSD: ``gp2``|``gp3`` \n  +  Provisioned IOPS SSD: ``io1``|``io2`` \n  +  Throughput Optimized HDD: ``st1`` \n  +  Cold HDD: ``sc1`` \n  +  Magnetic: ``standard`` \n  The magnetic volume type is not supported on Fargate.",
 		//	            "type": "string"
@@ -1225,11 +1221,6 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 							// Property: Throughput
 							"throughput": schema.Int64Attribute{ /*START ATTRIBUTE*/
 								Description: "The throughput to provision for a volume, in MiB/s, with a maximum of 1,000 MiB/s. This parameter maps 1:1 with the ``Throughput`` parameter of the [CreateVolume API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in the *Amazon EC2 API Reference*.\n  This parameter is only supported for the ``gp3`` volume type.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: VolumeInitializationRate
-							"volume_initialization_rate": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: VolumeType
@@ -1403,7 +1394,6 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"value":                             "Value",
 		"value_from":                        "ValueFrom",
 		"volume_configurations":             "VolumeConfigurations",
-		"volume_initialization_rate":        "VolumeInitializationRate",
 		"volume_type":                       "VolumeType",
 		"vpc_lattice_configurations":        "VpcLatticeConfigurations",
 		"weight":                            "Weight",

@@ -54,6 +54,7 @@ resource "awscc_iotsitewise_gateway" "example" {
 ### Optional
 
 - `gateway_capability_summaries` (Attributes List) A list of gateway capability summaries that each contain a namespace and status. (see [below for nested schema](#nestedatt--gateway_capability_summaries))
+- `gateway_version` (String) The version of the gateway you want to create.
 - `tags` (Attributes List) A list of key-value pairs that contain metadata for the gateway. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -66,23 +67,16 @@ resource "awscc_iotsitewise_gateway" "example" {
 
 Optional:
 
-- `greengrass` (Attributes) A gateway that runs on AWS IoT Greengrass V1. (see [below for nested schema](#nestedatt--gateway_platform--greengrass))
+- `greengrass` (String) A gateway that runs on AWS IoT Greengrass V1.
 - `greengrass_v2` (Attributes) A gateway that runs on AWS IoT Greengrass V2. (see [below for nested schema](#nestedatt--gateway_platform--greengrass_v2))
 - `siemens_ie` (Attributes) A gateway that runs on Siemens Industrial Edge. (see [below for nested schema](#nestedatt--gateway_platform--siemens_ie))
-
-<a id="nestedatt--gateway_platform--greengrass"></a>
-### Nested Schema for `gateway_platform.greengrass`
-
-Optional:
-
-- `group_arn` (String) The ARN of the Greengrass group.
-
 
 <a id="nestedatt--gateway_platform--greengrass_v2"></a>
 ### Nested Schema for `gateway_platform.greengrass_v2`
 
 Optional:
 
+- `core_device_operating_system` (String) The operating system of the core device in AWS IoT Greengrass V2.
 - `core_device_thing_name` (String) The name of the CoreDevice in GreenGrass V2.
 
 

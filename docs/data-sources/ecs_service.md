@@ -179,9 +179,9 @@ Read-Only:
 Read-Only:
 
 - `assign_public_ip` (String) Whether the task's elastic network interface receives a public IP address. The default value is ``ENABLED``.
-- `security_groups` (List of String) The IDs of the security groups associated with the task or service. If you don't specify a security group, the default security group for the VPC is used. There's a limit of 5 security groups that can be specified per ``awsvpcConfiguration``.
+- `security_groups` (List of String) The IDs of the security groups associated with the task or service. If you don't specify a security group, the default security group for the VPC is used. There's a limit of 5 security groups that can be specified.
   All specified security groups must be from the same VPC.
-- `subnets` (List of String) The IDs of the subnets associated with the task or service. There's a limit of 16 subnets that can be specified per ``awsvpcConfiguration``.
+- `subnets` (List of String) The IDs of the subnets associated with the task or service. There's a limit of 16 subnets that can be specified.
   All specified subnets must be from the same VPC.
 
 
@@ -378,7 +378,6 @@ Read-Only:
 - `tag_specifications` (Attributes List) The tags to apply to the volume. Amazon ECS applies service-managed tags by default. This parameter maps 1:1 with the ``TagSpecifications.N`` parameter of the [CreateVolume API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in the *Amazon EC2 API Reference*. (see [below for nested schema](#nestedatt--volume_configurations--managed_ebs_volume--tag_specifications))
 - `throughput` (Number) The throughput to provision for a volume, in MiB/s, with a maximum of 1,000 MiB/s. This parameter maps 1:1 with the ``Throughput`` parameter of the [CreateVolume API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in the *Amazon EC2 API Reference*.
   This parameter is only supported for the ``gp3`` volume type.
-- `volume_initialization_rate` (Number)
 - `volume_type` (String) The volume type. This parameter maps 1:1 with the ``VolumeType`` parameter of the [CreateVolume API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in the *Amazon EC2 API Reference*. For more information, see [Amazon EBS volume types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html) in the *Amazon EC2 User Guide*.
  The following are the supported volume types.
   +  General Purpose SSD: ``gp2``|``gp3`` 

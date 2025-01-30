@@ -149,6 +149,52 @@ func scraperResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: RoleConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Role configuration",
+		//	  "properties": {
+		//	    "SourceRoleArn": {
+		//	      "description": "IAM Role in source account",
+		//	      "type": "string"
+		//	    },
+		//	    "TargetRoleArn": {
+		//	      "description": "IAM Role in the target account",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"role_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SourceRoleArn
+				"source_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "IAM Role in source account",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: TargetRoleArn
+				"target_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "IAM Role in the target account",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Role configuration",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ScrapeConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -422,12 +468,15 @@ func scraperResource(ctx context.Context) (resource.Resource, error) {
 		"eks_configuration":    "EksConfiguration",
 		"key":                  "Key",
 		"role_arn":             "RoleArn",
+		"role_configuration":   "RoleConfiguration",
 		"scrape_configuration": "ScrapeConfiguration",
 		"scraper_id":           "ScraperId",
 		"security_group_ids":   "SecurityGroupIds",
 		"source":               "Source",
+		"source_role_arn":      "SourceRoleArn",
 		"subnet_ids":           "SubnetIds",
 		"tags":                 "Tags",
+		"target_role_arn":      "TargetRoleArn",
 		"value":                "Value",
 		"workspace_arn":        "WorkspaceArn",
 	})

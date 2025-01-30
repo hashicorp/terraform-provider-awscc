@@ -1,5 +1,4 @@
 {
-  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-IoTSiteWise.git",
   "tagging": {
     "permissions": [
       "iotsitewise:TagResource",
@@ -12,6 +11,26 @@
     "tagProperty": "/properties/Tags",
     "cloudFormationSystemTags": true
   },
+  "deprecatedProperties": [
+    "/properties/GatewayPlatform/Greengrass"
+  ],
+  "typeName": "AWS::IoTSiteWise::Gateway",
+  "readOnlyProperties": [
+    "/properties/GatewayId"
+  ],
+  "description": "Resource schema for AWS::IoTSiteWise::Gateway",
+  "createOnlyProperties": [
+    "/properties/GatewayPlatform",
+    "/properties/GatewayVersion"
+  ],
+  "primaryIdentifier": [
+    "/properties/GatewayId"
+  ],
+  "required": [
+    "GatewayName",
+    "GatewayPlatform"
+  ],
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-IoTSiteWise.git",
   "handlers": {
     "read": {
       "permissions": [
@@ -59,18 +78,7 @@
       ]
     }
   },
-  "typeName": "AWS::IoTSiteWise::Gateway",
-  "readOnlyProperties": [
-    "/properties/GatewayId"
-  ],
-  "description": "Resource schema for AWS::IoTSiteWise::Gateway",
-  "createOnlyProperties": [
-    "/properties/GatewayPlatform"
-  ],
   "additionalProperties": false,
-  "primaryIdentifier": [
-    "/properties/GatewayId"
-  ],
   "definitions": {
     "GatewayCapabilitySummary": {
       "description": "Contains a summary of a gateway capability configuration.",
@@ -96,6 +104,15 @@
         "CoreDeviceThingName": {
           "description": "The name of the CoreDevice in GreenGrass V2.",
           "type": "string"
+        },
+        "CoreDeviceOperatingSystem": {
+          "description": "The operating system of the core device in AWS IoT Greengrass V2.",
+          "type": "string",
+          "enum": [
+            "LINUX_AARCH64",
+            "LINUX_AMD64",
+            "WINDOWS_AMD64"
+          ]
         }
       },
       "required": [
@@ -105,20 +122,6 @@
     "CapabilityNamespace": {
       "description": "The namespace of the capability configuration.",
       "type": "string"
-    },
-    "Greengrass": {
-      "description": "Contains the ARN of AWS IoT Greengrass Group V1 that the gateway runs on.",
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "GroupArn": {
-          "description": "The ARN of the Greengrass group.",
-          "type": "string"
-        }
-      },
-      "required": [
-        "GroupArn"
-      ]
     },
     "CapabilityConfiguration": {
       "description": "The JSON document that defines the gateway capability's configuration.",
@@ -151,8 +154,7 @@
           "$ref": "#/definitions/GreengrassV2"
         },
         "Greengrass": {
-          "description": "A gateway that runs on AWS IoT Greengrass V1.",
-          "$ref": "#/definitions/Greengrass"
+          "description": "A gateway that runs on AWS IoT Greengrass V1."
         },
         "SiemensIE": {
           "description": "A gateway that runs on Siemens Industrial Edge.",
@@ -177,6 +179,10 @@
         "Value"
       ]
     },
+    "GatewayVersion": {
+      "description": "The version of the gateway you want to create.",
+      "type": "string"
+    },
     "SiemensIE": {
       "description": "Contains the IotCoreThingName of AWS IoT Thing that the gateway runs on.",
       "additionalProperties": false,
@@ -192,10 +198,6 @@
       ]
     }
   },
-  "required": [
-    "GatewayName",
-    "GatewayPlatform"
-  ],
   "properties": {
     "GatewayCapabilitySummaries": {
       "uniqueItems": true,
@@ -213,6 +215,10 @@
     "GatewayPlatform": {
       "description": "The gateway's platform. You can only specify one platform in a gateway.",
       "$ref": "#/definitions/GatewayPlatform"
+    },
+    "GatewayVersion": {
+      "description": "The version of the gateway you want to create.",
+      "type": "string"
     },
     "GatewayId": {
       "description": "The ID of the gateway device.",

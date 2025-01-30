@@ -27,7 +27,7 @@ Register as a publisher in the CloudFormation Registry.
 
 - `id` (String) Uniquely identifies the resource.
 - `identity_provider` (String) The type of account used as the identity provider when registering this publisher with CloudFormation.
-- `publisher_id` (String) The publisher id assigned by CloudFormation for publishing in this region.
+- `publisher_id` (String) The reserved publisher id for this type, or the publisher id assigned by CloudFormation for publishing in this region.
 - `publisher_profile` (String) The URL to the publisher's profile with the identity provider.
 - `publisher_status` (String) Whether the publisher is verified.
 

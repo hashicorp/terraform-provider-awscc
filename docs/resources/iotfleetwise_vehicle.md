@@ -70,6 +70,7 @@ resource "awscc_iotfleetwise_vehicle" "example" {
 
 - `association_behavior` (String)
 - `attributes` (Map of String)
+- `state_templates` (Attributes Set) (see [below for nested schema](#nestedatt--state_templates))
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -78,6 +79,41 @@ resource "awscc_iotfleetwise_vehicle" "example" {
 - `creation_time` (String)
 - `id` (String) Uniquely identifies the resource.
 - `last_modification_time` (String)
+
+<a id="nestedatt--state_templates"></a>
+### Nested Schema for `state_templates`
+
+Optional:
+
+- `identifier` (String)
+- `state_template_update_strategy` (Attributes) (see [below for nested schema](#nestedatt--state_templates--state_template_update_strategy))
+
+<a id="nestedatt--state_templates--state_template_update_strategy"></a>
+### Nested Schema for `state_templates.state_template_update_strategy`
+
+Optional:
+
+- `on_change` (String)
+- `periodic` (Attributes) (see [below for nested schema](#nestedatt--state_templates--state_template_update_strategy--periodic))
+
+<a id="nestedatt--state_templates--state_template_update_strategy--periodic"></a>
+### Nested Schema for `state_templates.state_template_update_strategy.periodic`
+
+Optional:
+
+- `state_template_update_rate` (Attributes) (see [below for nested schema](#nestedatt--state_templates--state_template_update_strategy--periodic--state_template_update_rate))
+
+<a id="nestedatt--state_templates--state_template_update_strategy--periodic--state_template_update_rate"></a>
+### Nested Schema for `state_templates.state_template_update_strategy.periodic.state_template_update_rate`
+
+Optional:
+
+- `unit` (String)
+- `value` (Number)
+
+
+
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
