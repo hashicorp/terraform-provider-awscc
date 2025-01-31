@@ -13,9 +13,7 @@ Resource Type definition for AWS::EC2::SecurityGroup
 
 ### Basic usage
 
-> [!WARNING]
-> NOTE on Egress rules:
-> By default, AWS creates an ALLOW ALL egress rule when creating a new Security Group inside of a VPC.
+~>NOTE on Egress rules: By default, AWS creates an ALLOW ALL egress rule when creating a new Security Group inside of a VPC.
 
 ```terraform
 resource "awscc_ec2_security_group" "example" {
