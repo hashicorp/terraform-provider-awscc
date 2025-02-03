@@ -600,7 +600,6 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
-			// Tags is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -657,9 +656,6 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/AdminUserPassword",
 		"/properties/FinalSnapshotName",
 		"/properties/FinalSnapshotRetentionPeriod",
-		"/properties/Tags",
-		"/properties/Tags/*/Key",
-		"/properties/Tags/*/Value",
 		"/properties/ManageAdminPassword",
 		"/properties/RedshiftIdcApplicationArn",
 	})

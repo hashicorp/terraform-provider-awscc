@@ -26,36 +26,45 @@ func publicKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"public_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PublicKeyConfig
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "Configuration information about a public key that you can use with [signed URLs and signed cookies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html), or with [field-level encryption](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html).",
 		//	  "properties": {
 		//	    "CallerReference": {
+		//	      "description": "A string included in the request to help make sure that the request can't be replayed.",
 		//	      "type": "string"
 		//	    },
 		//	    "Comment": {
+		//	      "description": "A comment to describe the public key. The comment cannot be longer than 128 characters.",
 		//	      "type": "string"
 		//	    },
 		//	    "EncodedKey": {
+		//	      "description": "The public key that you can use with [signed URLs and signed cookies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html), or with [field-level encryption](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html).",
 		//	      "type": "string"
 		//	    },
 		//	    "Name": {
+		//	      "description": "A name to help identify the public key.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -70,22 +79,27 @@ func publicKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: CallerReference
 				"caller_reference": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "A string included in the request to help make sure that the request can't be replayed.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Comment
 				"comment": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "A comment to describe the public key. The comment cannot be longer than 128 characters.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: EncodedKey
 				"encoded_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "The public key that you can use with [signed URLs and signed cookies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html), or with [field-level encryption](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html).",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Name
 				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "A name to help identify the public key.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Computed: true,
+			Description: "Configuration information about a public key that you can use with [signed URLs and signed cookies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html), or with [field-level encryption](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html).",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 

@@ -215,11 +215,14 @@ resource "awscc_kms_key" "main" {
 
 - `access_config` (Attributes) An object representing the Access Config to use for the cluster. (see [below for nested schema](#nestedatt--access_config))
 - `bootstrap_self_managed_addons` (Boolean) Set this value to false to avoid creating the default networking add-ons when the cluster is created.
+- `compute_config` (Attributes) Todo: add description (see [below for nested schema](#nestedatt--compute_config))
 - `encryption_config` (Attributes List) (see [below for nested schema](#nestedatt--encryption_config))
 - `kubernetes_network_config` (Attributes) The Kubernetes network configuration for the cluster. (see [below for nested schema](#nestedatt--kubernetes_network_config))
 - `logging` (Attributes) Enable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs based on log types. By default, cluster control plane logs aren't exported to CloudWatch Logs. (see [below for nested schema](#nestedatt--logging))
 - `name` (String) The unique name to give to your cluster.
 - `outpost_config` (Attributes) An object representing the Outpost configuration to use for AWS EKS outpost cluster. (see [below for nested schema](#nestedatt--outpost_config))
+- `remote_network_config` (Attributes) Configuration fields for specifying on-premises node and pod CIDRs that are external to the VPC passed during cluster creation. (see [below for nested schema](#nestedatt--remote_network_config))
+- `storage_config` (Attributes) Todo: add description (see [below for nested schema](#nestedatt--storage_config))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `upgrade_policy` (Attributes) An object representing the Upgrade Policy to use for the cluster. (see [below for nested schema](#nestedatt--upgrade_policy))
 - `version` (String) The desired Kubernetes version for your cluster. If you don't specify a value here, the latest version available in Amazon EKS is used.
@@ -260,6 +263,16 @@ Optional:
 - `bootstrap_cluster_creator_admin_permissions` (Boolean) Set this value to false to avoid creating a default cluster admin Access Entry using the IAM principal used to create the cluster.
 
 
+<a id="nestedatt--compute_config"></a>
+### Nested Schema for `compute_config`
+
+Optional:
+
+- `enabled` (Boolean) Todo: add description
+- `node_pools` (List of String) Todo: add description
+- `node_role_arn` (String) Todo: add description
+
+
 <a id="nestedatt--encryption_config"></a>
 ### Nested Schema for `encryption_config`
 
@@ -282,12 +295,21 @@ Optional:
 
 Optional:
 
+- `elastic_load_balancing` (Attributes) Todo: add description (see [below for nested schema](#nestedatt--kubernetes_network_config--elastic_load_balancing))
 - `ip_family` (String) Ipv4 or Ipv6. You can only specify ipv6 for 1.21 and later clusters that use version 1.10.1 or later of the Amazon VPC CNI add-on
 - `service_ipv_4_cidr` (String) The CIDR block to assign Kubernetes service IP addresses from. If you don't specify a block, Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. We recommend that you specify a block that does not overlap with resources in other networks that are peered or connected to your VPC.
 
 Read-Only:
 
 - `service_ipv_6_cidr` (String) The CIDR block to assign Kubernetes service IP addresses from.
+
+<a id="nestedatt--kubernetes_network_config--elastic_load_balancing"></a>
+### Nested Schema for `kubernetes_network_config.elastic_load_balancing`
+
+Optional:
+
+- `enabled` (Boolean) Todo: add description
+
 
 
 <a id="nestedatt--logging"></a>
@@ -329,6 +351,47 @@ Optional:
 Optional:
 
 - `group_name` (String) Specify the placement group name of the control place machines for your cluster.
+
+
+
+<a id="nestedatt--remote_network_config"></a>
+### Nested Schema for `remote_network_config`
+
+Optional:
+
+- `remote_node_networks` (Attributes List) Network configuration of nodes run on-premises with EKS Hybrid Nodes. (see [below for nested schema](#nestedatt--remote_network_config--remote_node_networks))
+- `remote_pod_networks` (Attributes List) Network configuration of pods run on-premises with EKS Hybrid Nodes. (see [below for nested schema](#nestedatt--remote_network_config--remote_pod_networks))
+
+<a id="nestedatt--remote_network_config--remote_node_networks"></a>
+### Nested Schema for `remote_network_config.remote_node_networks`
+
+Optional:
+
+- `cidrs` (List of String) Specifies the list of remote node CIDRs.
+
+
+<a id="nestedatt--remote_network_config--remote_pod_networks"></a>
+### Nested Schema for `remote_network_config.remote_pod_networks`
+
+Optional:
+
+- `cidrs` (List of String) Specifies the list of remote pod CIDRs.
+
+
+
+<a id="nestedatt--storage_config"></a>
+### Nested Schema for `storage_config`
+
+Optional:
+
+- `block_storage` (Attributes) Todo: add description (see [below for nested schema](#nestedatt--storage_config--block_storage))
+
+<a id="nestedatt--storage_config--block_storage"></a>
+### Nested Schema for `storage_config.block_storage`
+
+Optional:
+
+- `enabled` (Boolean) Todo: add description
 
 
 

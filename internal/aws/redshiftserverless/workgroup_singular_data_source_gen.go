@@ -124,6 +124,42 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The custom port to use when connecting to a workgroup. Valid port ranges are 5431-5455 and 8191-8215. The default is 5439.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: PricePerformanceTarget
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "A property that represents the price performance target settings for the workgroup.",
+		//	  "properties": {
+		//	    "Level": {
+		//	      "maximum": 100,
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    },
+		//	    "Status": {
+		//	      "enum": [
+		//	        "ENABLED",
+		//	        "DISABLED"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"price_performance_target": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Level
+				"level": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Status
+				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A property that represents the price performance target settings for the workgroup.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PubliclyAccessible
 		// CloudFormation resource type schema:
 		//
@@ -320,6 +356,24 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "pattern": "^[a-z0-9-]+$",
 		//	      "type": "string"
 		//	    },
+		//	    "PricePerformanceTarget": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Level": {
+		//	          "maximum": 100,
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        },
+		//	        "Status": {
+		//	          "enum": [
+		//	            "ENABLED",
+		//	            "DISABLED"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "PubliclyAccessible": {
 		//	      "type": "boolean"
 		//	    },
@@ -459,6 +513,20 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 				"namespace_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: PricePerformanceTarget
+				"price_performance_target": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Level
+						"level": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Status
+						"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: PubliclyAccessible
 				"publicly_accessible": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
@@ -524,36 +592,38 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::RedshiftServerless::Workgroup").WithTerraformTypeName("awscc_redshiftserverless_workgroup")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"address":              "Address",
-		"availability_zone":    "AvailabilityZone",
-		"base_capacity":        "BaseCapacity",
-		"config_parameters":    "ConfigParameters",
-		"creation_date":        "CreationDate",
-		"endpoint":             "Endpoint",
-		"enhanced_vpc_routing": "EnhancedVpcRouting",
-		"key":                  "Key",
-		"max_capacity":         "MaxCapacity",
-		"namespace_name":       "NamespaceName",
-		"network_interface_id": "NetworkInterfaceId",
-		"network_interfaces":   "NetworkInterfaces",
-		"parameter_key":        "ParameterKey",
-		"parameter_value":      "ParameterValue",
-		"port":                 "Port",
-		"private_ip_address":   "PrivateIpAddress",
-		"publicly_accessible":  "PubliclyAccessible",
-		"security_group_ids":   "SecurityGroupIds",
-		"status":               "Status",
-		"subnet_id":            "SubnetId",
-		"subnet_ids":           "SubnetIds",
-		"tags":                 "Tags",
-		"value":                "Value",
-		"vpc_endpoint_id":      "VpcEndpointId",
-		"vpc_endpoints":        "VpcEndpoints",
-		"vpc_id":               "VpcId",
-		"workgroup":            "Workgroup",
-		"workgroup_arn":        "WorkgroupArn",
-		"workgroup_id":         "WorkgroupId",
-		"workgroup_name":       "WorkgroupName",
+		"address":                  "Address",
+		"availability_zone":        "AvailabilityZone",
+		"base_capacity":            "BaseCapacity",
+		"config_parameters":        "ConfigParameters",
+		"creation_date":            "CreationDate",
+		"endpoint":                 "Endpoint",
+		"enhanced_vpc_routing":     "EnhancedVpcRouting",
+		"key":                      "Key",
+		"level":                    "Level",
+		"max_capacity":             "MaxCapacity",
+		"namespace_name":           "NamespaceName",
+		"network_interface_id":     "NetworkInterfaceId",
+		"network_interfaces":       "NetworkInterfaces",
+		"parameter_key":            "ParameterKey",
+		"parameter_value":          "ParameterValue",
+		"port":                     "Port",
+		"price_performance_target": "PricePerformanceTarget",
+		"private_ip_address":       "PrivateIpAddress",
+		"publicly_accessible":      "PubliclyAccessible",
+		"security_group_ids":       "SecurityGroupIds",
+		"status":                   "Status",
+		"subnet_id":                "SubnetId",
+		"subnet_ids":               "SubnetIds",
+		"tags":                     "Tags",
+		"value":                    "Value",
+		"vpc_endpoint_id":          "VpcEndpointId",
+		"vpc_endpoints":            "VpcEndpoints",
+		"vpc_id":                   "VpcId",
+		"workgroup":                "Workgroup",
+		"workgroup_arn":            "WorkgroupArn",
+		"workgroup_id":             "WorkgroupId",
+		"workgroup_name":           "WorkgroupName",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

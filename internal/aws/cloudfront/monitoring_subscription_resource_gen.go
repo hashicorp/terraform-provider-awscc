@@ -32,10 +32,12 @@ func monitoringSubscriptionResource(ctx context.Context) (resource.Resource, err
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The ID of the distribution that you are enabling metrics for.",
 		//	  "type": "string"
 		//	}
 		"distribution_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
+			Description: "The ID of the distribution that you are enabling metrics for.",
+			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -45,11 +47,14 @@ func monitoringSubscriptionResource(ctx context.Context) (resource.Resource, err
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "A subscription configuration for additional CloudWatch metrics.",
 		//	  "properties": {
 		//	    "RealtimeMetricsSubscriptionConfig": {
 		//	      "additionalProperties": false,
+		//	      "description": "A subscription configuration for additional CloudWatch metrics.",
 		//	      "properties": {
 		//	        "RealtimeMetricsSubscriptionStatus": {
+		//	          "description": "A flag that indicates whether additional CloudWatch metrics are enabled for a given CloudFront distribution.",
 		//	          "enum": [
 		//	            "Enabled",
 		//	            "Disabled"
@@ -72,8 +77,9 @@ func monitoringSubscriptionResource(ctx context.Context) (resource.Resource, err
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: RealtimeMetricsSubscriptionStatus
 						"realtime_metrics_subscription_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
+							Description: "A flag that indicates whether additional CloudWatch metrics are enabled for a given CloudFront distribution.",
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"Enabled",
@@ -86,14 +92,16 @@ func monitoringSubscriptionResource(ctx context.Context) (resource.Resource, err
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Optional: true,
-					Computed: true,
+					Description: "A subscription configuration for additional CloudWatch metrics.",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Required: true,
+			Description: "A subscription configuration for additional CloudWatch metrics.",
+			Required:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -107,7 +115,7 @@ func monitoringSubscriptionResource(ctx context.Context) (resource.Resource, err
 	}
 
 	schema := schema.Schema{
-		Description: "Resource Type definition for AWS::CloudFront::MonitoringSubscription",
+		Description: "A monitoring subscription. This structure contains information about whether additional CloudWatch metrics are enabled for a given CloudFront distribution.",
 		Version:     1,
 		Attributes:  attributes,
 	}

@@ -22,7 +22,9 @@ Data Source schema for AWS::QBusiness::WebExperience
 ### Read-Only
 
 - `application_id` (String)
+- `browser_extension_configuration` (Attributes) (see [below for nested schema](#nestedatt--browser_extension_configuration))
 - `created_at` (String)
+- `customization_configuration` (Attributes) (see [below for nested schema](#nestedatt--customization_configuration))
 - `default_endpoint` (String)
 - `identity_provider_configuration` (Attributes) (see [below for nested schema](#nestedatt--identity_provider_configuration))
 - `origins` (List of String)
@@ -36,6 +38,25 @@ Data Source schema for AWS::QBusiness::WebExperience
 - `web_experience_arn` (String)
 - `web_experience_id` (String)
 - `welcome_message` (String)
+
+<a id="nestedatt--browser_extension_configuration"></a>
+### Nested Schema for `browser_extension_configuration`
+
+Read-Only:
+
+- `enabled_browser_extensions` (Set of String)
+
+
+<a id="nestedatt--customization_configuration"></a>
+### Nested Schema for `customization_configuration`
+
+Read-Only:
+
+- `custom_css_url` (String)
+- `favicon_url` (String)
+- `font_url` (String)
+- `logo_url` (String)
+
 
 <a id="nestedatt--identity_provider_configuration"></a>
 ### Nested Schema for `identity_provider_configuration`

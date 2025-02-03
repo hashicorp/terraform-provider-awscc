@@ -8,13 +8,16 @@ package iotsitewise
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
@@ -198,6 +201,82 @@ func portalResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: PortalType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The type of portal",
+		//	  "enum": [
+		//	    "SITEWISE_PORTAL_V1",
+		//	    "SITEWISE_PORTAL_V2"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"portal_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of portal",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"SITEWISE_PORTAL_V1",
+					"SITEWISE_PORTAL_V2",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PortalTypeConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Map to associate detail of configuration related with a PortalType.",
+		//	  "patternProperties": {
+		//	    "": {
+		//	      "additionalProperties": false,
+		//	      "description": "Container associated a certain PortalType.",
+		//	      "properties": {
+		//	        "PortalTools": {
+		//	          "description": "List of enabled Tools for a certain portal.",
+		//	          "items": {
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "PortalTools"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"portal_type_configuration": // Pattern: ""
+		schema.MapNestedAttribute{   /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: PortalTools
+					"portal_tools": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "List of enabled Tools for a certain portal.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Map to associate detail of configuration related with a PortalType.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+				mapplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -269,7 +348,6 @@ func portalResource(ctx context.Context) (resource.Resource, error) {
 				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
-			// Tags is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -306,14 +384,14 @@ func portalResource(ctx context.Context) (resource.Resource, error) {
 		"portal_id":                 "PortalId",
 		"portal_name":               "PortalName",
 		"portal_start_url":          "PortalStartUrl",
+		"portal_tools":              "PortalTools",
+		"portal_type":               "PortalType",
+		"portal_type_configuration": "PortalTypeConfiguration",
 		"role_arn":                  "RoleArn",
 		"tags":                      "Tags",
 		"value":                     "Value",
 	})
 
-	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/Tags",
-	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

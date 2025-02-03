@@ -213,6 +213,21 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Name of the canary.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ProvisionedResourceCleanup
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Setting to control if provisioned resources created by Synthetics are deleted alongside the canary. Default is AUTOMATIC.",
+		//	  "enum": [
+		//	    "AUTOMATIC",
+		//	    "OFF"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"provisioned_resource_cleanup": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Setting to control if provisioned resources created by Synthetics are deleted alongside the canary. Default is AUTOMATIC.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourcesToReplicateTags
 		// CloudFormation resource type schema:
 		//
@@ -424,6 +439,10 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "Provide VPC Configuration if enabled.",
 		//	  "properties": {
+		//	    "Ipv6AllowedForDualStack": {
+		//	      "description": "Allow outbound IPv6 traffic on VPC canaries that are connected to dual-stack subnets if set to true",
+		//	      "type": "boolean"
+		//	    },
 		//	    "SecurityGroupIds": {
 		//	      "items": {
 		//	        "type": "string"
@@ -448,6 +467,11 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"vpc_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Ipv6AllowedForDualStack
+				"ipv_6_allowed_for_dual_stack": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Allow outbound IPv6 traffic on VPC canaries that are connected to dual-stack subnets if set to true",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: SecurityGroupIds
 				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
@@ -571,10 +595,12 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"failure_retention_period":                   "FailureRetentionPeriod",
 		"handler":                                    "Handler",
 		"ignore_coordinates":                         "IgnoreCoordinates",
+		"ipv_6_allowed_for_dual_stack":               "Ipv6AllowedForDualStack",
 		"key":                                        "Key",
 		"kms_key_arn":                                "KmsKeyArn",
 		"memory_in_mb":                               "MemoryInMB",
 		"name":                                       "Name",
+		"provisioned_resource_cleanup":               "ProvisionedResourceCleanup",
 		"resources_to_replicate_tags":                "ResourcesToReplicateTags",
 		"run_config":                                 "RunConfig",
 		"runtime_version":                            "RuntimeVersion",

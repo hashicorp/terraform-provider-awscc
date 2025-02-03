@@ -72,11 +72,11 @@ variable "kb_role_arn" {
 - `knowledge_base_configuration` (Attributes) Contains details about the embeddings model used for the knowledge base. (see [below for nested schema](#nestedatt--knowledge_base_configuration))
 - `name` (String) The name of the knowledge base.
 - `role_arn` (String) The ARN of the IAM role with permissions to invoke API operations on the knowledge base. The ARN must begin with AmazonBedrockExecutionRoleForKnowledgeBase_
-- `storage_configuration` (Attributes) The vector store service in which the knowledge base is stored. (see [below for nested schema](#nestedatt--storage_configuration))
 
 ### Optional
 
 - `description` (String) Description of the Resource.
+- `storage_configuration` (Attributes) The vector store service in which the knowledge base is stored. (see [below for nested schema](#nestedatt--storage_configuration))
 - `tags` (Map of String) A map of tag keys and values
 
 ### Read-Only
@@ -95,18 +95,169 @@ variable "kb_role_arn" {
 Required:
 
 - `type` (String) The type of a knowledge base.
+
+Optional:
+
+- `kendra_knowledge_base_configuration` (Attributes) Configurations for a Kendra knowledge base (see [below for nested schema](#nestedatt--knowledge_base_configuration--kendra_knowledge_base_configuration))
+- `sql_knowledge_base_configuration` (Attributes) Configurations for a SQL knowledge base (see [below for nested schema](#nestedatt--knowledge_base_configuration--sql_knowledge_base_configuration))
 - `vector_knowledge_base_configuration` (Attributes) Contains details about the model used to create vector embeddings for the knowledge base. (see [below for nested schema](#nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration))
+
+<a id="nestedatt--knowledge_base_configuration--kendra_knowledge_base_configuration"></a>
+### Nested Schema for `knowledge_base_configuration.kendra_knowledge_base_configuration`
+
+Optional:
+
+- `kendra_index_arn` (String) Arn of a Kendra index
+
+
+<a id="nestedatt--knowledge_base_configuration--sql_knowledge_base_configuration"></a>
+### Nested Schema for `knowledge_base_configuration.sql_knowledge_base_configuration`
+
+Optional:
+
+- `redshift_configuration` (Attributes) Configurations for a Redshift knowledge base (see [below for nested schema](#nestedatt--knowledge_base_configuration--sql_knowledge_base_configuration--redshift_configuration))
+- `type` (String) SQL query engine type
+
+<a id="nestedatt--knowledge_base_configuration--sql_knowledge_base_configuration--redshift_configuration"></a>
+### Nested Schema for `knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration`
+
+Optional:
+
+- `query_engine_configuration` (Attributes) Configurations for Redshift query engine (see [below for nested schema](#nestedatt--knowledge_base_configuration--sql_knowledge_base_configuration--redshift_configuration--query_engine_configuration))
+- `query_generation_configuration` (Attributes) Configurations for generating Redshift engine queries (see [below for nested schema](#nestedatt--knowledge_base_configuration--sql_knowledge_base_configuration--redshift_configuration--query_generation_configuration))
+- `storage_configurations` (Attributes List) List of configurations for available Redshift query engine storage types (see [below for nested schema](#nestedatt--knowledge_base_configuration--sql_knowledge_base_configuration--redshift_configuration--storage_configurations))
+
+<a id="nestedatt--knowledge_base_configuration--sql_knowledge_base_configuration--redshift_configuration--query_engine_configuration"></a>
+### Nested Schema for `knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.query_engine_configuration`
+
+Optional:
+
+- `provisioned_configuration` (Attributes) Configurations for provisioned Redshift query engine (see [below for nested schema](#nestedatt--knowledge_base_configuration--sql_knowledge_base_configuration--redshift_configuration--query_engine_configuration--provisioned_configuration))
+- `serverless_configuration` (Attributes) Configurations for serverless Redshift query engine (see [below for nested schema](#nestedatt--knowledge_base_configuration--sql_knowledge_base_configuration--redshift_configuration--query_engine_configuration--serverless_configuration))
+- `type` (String) Redshift query engine type
+
+<a id="nestedatt--knowledge_base_configuration--sql_knowledge_base_configuration--redshift_configuration--query_engine_configuration--provisioned_configuration"></a>
+### Nested Schema for `knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.query_engine_configuration.provisioned_configuration`
+
+Optional:
+
+- `auth_configuration` (Attributes) Configurations for Redshift query engine provisioned auth setup (see [below for nested schema](#nestedatt--knowledge_base_configuration--sql_knowledge_base_configuration--redshift_configuration--query_engine_configuration--provisioned_configuration--auth_configuration))
+- `cluster_identifier` (String) Redshift cluster identifier
+
+<a id="nestedatt--knowledge_base_configuration--sql_knowledge_base_configuration--redshift_configuration--query_engine_configuration--provisioned_configuration--auth_configuration"></a>
+### Nested Schema for `knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.query_engine_configuration.provisioned_configuration.auth_configuration`
+
+Optional:
+
+- `database_user` (String) Redshift database user
+- `type` (String) Provisioned Redshift auth type
+- `username_password_secret_arn` (String) Arn of a SecretsManager Secret
+
+
+
+<a id="nestedatt--knowledge_base_configuration--sql_knowledge_base_configuration--redshift_configuration--query_engine_configuration--serverless_configuration"></a>
+### Nested Schema for `knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.query_engine_configuration.serverless_configuration`
+
+Optional:
+
+- `auth_configuration` (Attributes) Configurations for Redshift query engine serverless auth setup (see [below for nested schema](#nestedatt--knowledge_base_configuration--sql_knowledge_base_configuration--redshift_configuration--query_engine_configuration--serverless_configuration--auth_configuration))
+- `workgroup_arn` (String) Workgroup arn
+
+<a id="nestedatt--knowledge_base_configuration--sql_knowledge_base_configuration--redshift_configuration--query_engine_configuration--serverless_configuration--auth_configuration"></a>
+### Nested Schema for `knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.query_engine_configuration.serverless_configuration.auth_configuration`
+
+Optional:
+
+- `type` (String) Serverless Redshift auth type
+- `username_password_secret_arn` (String) Arn of a SecretsManager Secret
+
+
+
+
+<a id="nestedatt--knowledge_base_configuration--sql_knowledge_base_configuration--redshift_configuration--query_generation_configuration"></a>
+### Nested Schema for `knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.query_generation_configuration`
+
+Optional:
+
+- `execution_timeout_seconds` (Number) Max query execution timeout
+- `generation_context` (Attributes) Context used to improve query generation (see [below for nested schema](#nestedatt--knowledge_base_configuration--sql_knowledge_base_configuration--redshift_configuration--query_generation_configuration--generation_context))
+
+<a id="nestedatt--knowledge_base_configuration--sql_knowledge_base_configuration--redshift_configuration--query_generation_configuration--generation_context"></a>
+### Nested Schema for `knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.query_generation_configuration.generation_context`
+
+Optional:
+
+- `curated_queries` (Attributes List) List of example queries and results (see [below for nested schema](#nestedatt--knowledge_base_configuration--sql_knowledge_base_configuration--redshift_configuration--query_generation_configuration--generation_context--curated_queries))
+- `tables` (Attributes List) List of tables used for Redshift query generation context (see [below for nested schema](#nestedatt--knowledge_base_configuration--sql_knowledge_base_configuration--redshift_configuration--query_generation_configuration--generation_context--tables))
+
+<a id="nestedatt--knowledge_base_configuration--sql_knowledge_base_configuration--redshift_configuration--query_generation_configuration--generation_context--curated_queries"></a>
+### Nested Schema for `knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.query_generation_configuration.generation_context.curated_queries`
+
+Optional:
+
+- `natural_language` (String) Question for the curated query
+- `sql` (String) Answer for the curated query
+
+
+<a id="nestedatt--knowledge_base_configuration--sql_knowledge_base_configuration--redshift_configuration--query_generation_configuration--generation_context--tables"></a>
+### Nested Schema for `knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.query_generation_configuration.generation_context.tables`
+
+Optional:
+
+- `columns` (Attributes List) List of Redshift query generation columns (see [below for nested schema](#nestedatt--knowledge_base_configuration--sql_knowledge_base_configuration--redshift_configuration--query_generation_configuration--generation_context--tables--columns))
+- `description` (String) Description for the attached entity
+- `inclusion` (String) Include or Exclude status for an entity
+- `name` (String) Query generation table name. Must follow three-part notation
+
+<a id="nestedatt--knowledge_base_configuration--sql_knowledge_base_configuration--redshift_configuration--query_generation_configuration--generation_context--tables--columns"></a>
+### Nested Schema for `knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.query_generation_configuration.generation_context.tables.columns`
+
+Optional:
+
+- `description` (String) Description for the attached entity
+- `inclusion` (String) Include or Exclude status for an entity
+- `name` (String) Query generation column name
+
+
+
+
+
+<a id="nestedatt--knowledge_base_configuration--sql_knowledge_base_configuration--redshift_configuration--storage_configurations"></a>
+### Nested Schema for `knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.storage_configurations`
+
+Optional:
+
+- `aws_data_catalog_configuration` (Attributes) Configurations for Redshift query engine AWS Data Catalog backed storage (see [below for nested schema](#nestedatt--knowledge_base_configuration--sql_knowledge_base_configuration--redshift_configuration--storage_configurations--aws_data_catalog_configuration))
+- `redshift_configuration` (Attributes) Configurations for Redshift query engine Redshift backed storage (see [below for nested schema](#nestedatt--knowledge_base_configuration--sql_knowledge_base_configuration--redshift_configuration--storage_configurations--redshift_configuration))
+- `type` (String) Redshift query engine storage type
+
+<a id="nestedatt--knowledge_base_configuration--sql_knowledge_base_configuration--redshift_configuration--storage_configurations--aws_data_catalog_configuration"></a>
+### Nested Schema for `knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.storage_configurations.aws_data_catalog_configuration`
+
+Optional:
+
+- `table_names` (List of String) List of table names in AWS Data Catalog. Must follow two part notation
+
+
+<a id="nestedatt--knowledge_base_configuration--sql_knowledge_base_configuration--redshift_configuration--storage_configurations--redshift_configuration"></a>
+### Nested Schema for `knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.storage_configurations.redshift_configuration`
+
+Optional:
+
+- `database_name` (String) Redshift database name
+
+
+
+
 
 <a id="nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration"></a>
 ### Nested Schema for `knowledge_base_configuration.vector_knowledge_base_configuration`
 
-Required:
-
-- `embedding_model_arn` (String) The ARN of the model used to create vector embeddings for the knowledge base.
-
 Optional:
 
+- `embedding_model_arn` (String) The ARN of the model used to create vector embeddings for the knowledge base.
 - `embedding_model_configuration` (Attributes) The embeddings model configuration details for the vector model used in Knowledge Base. (see [below for nested schema](#nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration--embedding_model_configuration))
+- `supplemental_data_storage_configuration` (Attributes) Configurations for supplemental data storage. (see [below for nested schema](#nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration--supplemental_data_storage_configuration))
 
 <a id="nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration--embedding_model_configuration"></a>
 ### Nested Schema for `knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_configuration`
@@ -121,6 +272,32 @@ Optional:
 Optional:
 
 - `dimensions` (Number) The dimensions details for the vector configuration used on the Bedrock embeddings model.
+- `embedding_data_type` (String) The data type for the vectors when using a model to convert text into vector embeddings.
+
+
+
+<a id="nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration--supplemental_data_storage_configuration"></a>
+### Nested Schema for `knowledge_base_configuration.vector_knowledge_base_configuration.supplemental_data_storage_configuration`
+
+Optional:
+
+- `supplemental_data_storage_locations` (Attributes List) List of supplemental data storage locations. (see [below for nested schema](#nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration--supplemental_data_storage_configuration--supplemental_data_storage_locations))
+
+<a id="nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration--supplemental_data_storage_configuration--supplemental_data_storage_locations"></a>
+### Nested Schema for `knowledge_base_configuration.vector_knowledge_base_configuration.supplemental_data_storage_configuration.supplemental_data_storage_locations`
+
+Optional:
+
+- `s3_location` (Attributes) An Amazon S3 location. (see [below for nested schema](#nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration--supplemental_data_storage_configuration--supplemental_data_storage_locations--s3_location))
+- `supplemental_data_storage_location_type` (String) Supplemental data storage location type.
+
+<a id="nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration--supplemental_data_storage_configuration--supplemental_data_storage_locations--s3_location"></a>
+### Nested Schema for `knowledge_base_configuration.vector_knowledge_base_configuration.supplemental_data_storage_configuration.supplemental_data_storage_locations.s3_location`
+
+Optional:
+
+- `uri` (String) The location's URI
+
 
 
 
@@ -129,16 +306,13 @@ Optional:
 <a id="nestedatt--storage_configuration"></a>
 ### Nested Schema for `storage_configuration`
 
-Required:
-
-- `type` (String) The storage type of a knowledge base.
-
 Optional:
 
 - `mongo_db_atlas_configuration` (Attributes) Contains the storage configuration of the knowledge base in MongoDb Atlas Cloud. (see [below for nested schema](#nestedatt--storage_configuration--mongo_db_atlas_configuration))
 - `opensearch_serverless_configuration` (Attributes) Contains the storage configuration of the knowledge base in Amazon OpenSearch Service. (see [below for nested schema](#nestedatt--storage_configuration--opensearch_serverless_configuration))
 - `pinecone_configuration` (Attributes) Contains the storage configuration of the knowledge base in Pinecone. (see [below for nested schema](#nestedatt--storage_configuration--pinecone_configuration))
 - `rds_configuration` (Attributes) Contains details about the storage configuration of the knowledge base in Amazon RDS. For more information, see Create a vector index in Amazon RDS. (see [below for nested schema](#nestedatt--storage_configuration--rds_configuration))
+- `type` (String) The storage type of a knowledge base.
 
 <a id="nestedatt--storage_configuration--mongo_db_atlas_configuration"></a>
 ### Nested Schema for `storage_configuration.mongo_db_atlas_configuration`

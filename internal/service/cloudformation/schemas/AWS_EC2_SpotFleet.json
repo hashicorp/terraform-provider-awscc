@@ -648,7 +648,8 @@
             "enum": [
               "intel",
               "amd",
-              "amazon-web-services"
+              "amazon-web-services",
+              "apple"
             ]
           }
         },
@@ -797,6 +798,9 @@
         },
         "AcceleratorTotalMemoryMiB": {
           "$ref": "#/definitions/AcceleratorTotalMemoryMiBRequest"
+        },
+        "BaselinePerformanceFactors": {
+          "$ref": "#/definitions/BaselinePerformanceFactorsRequest"
         }
       }
     },
@@ -905,6 +909,37 @@
         },
         "Max": {
           "type": "integer"
+        }
+      }
+    },
+    "BaselinePerformanceFactorsRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Cpu": {
+          "$ref": "#/definitions/CpuPerformanceFactorRequest"
+        }
+      }
+    },
+    "CpuPerformanceFactorRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "References": {
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "$ref": "#/definitions/PerformanceFactorReferenceRequest"
+          }
+        }
+      }
+    },
+    "PerformanceFactorReferenceRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "InstanceFamily": {
+          "type": "string"
         }
       }
     }

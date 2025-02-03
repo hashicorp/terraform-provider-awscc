@@ -78,6 +78,7 @@ EOF
 ### Optional
 
 - `log_group_names` (List of String) Optionally define specific log groups as part of your query definition
+- `query_language` (String) Query language of the query string. Possible values are CWLI, SQL, PPL, with CWLI being the default.
 
 ### Read-Only
 

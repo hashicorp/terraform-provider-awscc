@@ -31,6 +31,15 @@ func capacityReservationDataSource(ctx context.Context) (datasource.DataSource, 
 		"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: AvailabilityZoneId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"availability_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: AvailableInstanceCount
 		// CloudFormation resource type schema:
 		//
@@ -249,6 +258,7 @@ func capacityReservationDataSource(ctx context.Context) (datasource.DataSource, 
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"availability_zone":                   "AvailabilityZone",
+		"availability_zone_id":                "AvailabilityZoneId",
 		"available_instance_count":            "AvailableInstanceCount",
 		"capacity_reservation_id":             "Id",
 		"ebs_optimized":                       "EbsOptimized",

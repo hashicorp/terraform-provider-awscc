@@ -26,6 +26,7 @@ Data Source schema for AWS::CleanRooms::Collaboration
 - `collaboration_identifier` (String)
 - `creator_display_name` (String)
 - `creator_member_abilities` (Set of String)
+- `creator_ml_member_abilities` (Attributes) (see [below for nested schema](#nestedatt--creator_ml_member_abilities))
 - `creator_payment_configuration` (Attributes) (see [below for nested schema](#nestedatt--creator_payment_configuration))
 - `data_encryption_metadata` (Attributes) (see [below for nested schema](#nestedatt--data_encryption_metadata))
 - `description` (String)
@@ -34,12 +35,46 @@ Data Source schema for AWS::CleanRooms::Collaboration
 - `query_log_status` (String)
 - `tags` (Attributes Set) An arbitrary set of tags (key-value pairs) for this cleanrooms collaboration. (see [below for nested schema](#nestedatt--tags))
 
+<a id="nestedatt--creator_ml_member_abilities"></a>
+### Nested Schema for `creator_ml_member_abilities`
+
+Read-Only:
+
+- `custom_ml_member_abilities` (Set of String)
+
+
 <a id="nestedatt--creator_payment_configuration"></a>
 ### Nested Schema for `creator_payment_configuration`
 
 Read-Only:
 
+- `machine_learning` (Attributes) (see [below for nested schema](#nestedatt--creator_payment_configuration--machine_learning))
 - `query_compute` (Attributes) (see [below for nested schema](#nestedatt--creator_payment_configuration--query_compute))
+
+<a id="nestedatt--creator_payment_configuration--machine_learning"></a>
+### Nested Schema for `creator_payment_configuration.machine_learning`
+
+Read-Only:
+
+- `model_inference` (Attributes) (see [below for nested schema](#nestedatt--creator_payment_configuration--machine_learning--model_inference))
+- `model_training` (Attributes) (see [below for nested schema](#nestedatt--creator_payment_configuration--machine_learning--model_training))
+
+<a id="nestedatt--creator_payment_configuration--machine_learning--model_inference"></a>
+### Nested Schema for `creator_payment_configuration.machine_learning.model_inference`
+
+Read-Only:
+
+- `is_responsible` (Boolean)
+
+
+<a id="nestedatt--creator_payment_configuration--machine_learning--model_training"></a>
+### Nested Schema for `creator_payment_configuration.machine_learning.model_training`
+
+Read-Only:
+
+- `is_responsible` (Boolean)
+
+
 
 <a id="nestedatt--creator_payment_configuration--query_compute"></a>
 ### Nested Schema for `creator_payment_configuration.query_compute`
@@ -69,14 +104,49 @@ Read-Only:
 - `account_id` (String)
 - `display_name` (String)
 - `member_abilities` (Set of String)
+- `ml_member_abilities` (Attributes) (see [below for nested schema](#nestedatt--members--ml_member_abilities))
 - `payment_configuration` (Attributes) (see [below for nested schema](#nestedatt--members--payment_configuration))
+
+<a id="nestedatt--members--ml_member_abilities"></a>
+### Nested Schema for `members.ml_member_abilities`
+
+Read-Only:
+
+- `custom_ml_member_abilities` (Set of String)
+
 
 <a id="nestedatt--members--payment_configuration"></a>
 ### Nested Schema for `members.payment_configuration`
 
 Read-Only:
 
+- `machine_learning` (Attributes) (see [below for nested schema](#nestedatt--members--payment_configuration--machine_learning))
 - `query_compute` (Attributes) (see [below for nested schema](#nestedatt--members--payment_configuration--query_compute))
+
+<a id="nestedatt--members--payment_configuration--machine_learning"></a>
+### Nested Schema for `members.payment_configuration.machine_learning`
+
+Read-Only:
+
+- `model_inference` (Attributes) (see [below for nested schema](#nestedatt--members--payment_configuration--machine_learning--model_inference))
+- `model_training` (Attributes) (see [below for nested schema](#nestedatt--members--payment_configuration--machine_learning--model_training))
+
+<a id="nestedatt--members--payment_configuration--machine_learning--model_inference"></a>
+### Nested Schema for `members.payment_configuration.machine_learning.model_inference`
+
+Read-Only:
+
+- `is_responsible` (Boolean)
+
+
+<a id="nestedatt--members--payment_configuration--machine_learning--model_training"></a>
+### Nested Schema for `members.payment_configuration.machine_learning.model_training`
+
+Read-Only:
+
+- `is_responsible` (Boolean)
+
+
 
 <a id="nestedatt--members--payment_configuration--query_compute"></a>
 ### Nested Schema for `members.payment_configuration.query_compute`

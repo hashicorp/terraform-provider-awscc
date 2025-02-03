@@ -96,14 +96,15 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Must be redis.",
+		//	  "description": "The target cache engine for the user.",
 		//	  "enum": [
-		//	    "redis"
+		//	    "redis",
+		//	    "valkey"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"engine": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Must be redis.",
+			Description: "The target cache engine for the user.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NoPasswordRequired

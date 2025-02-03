@@ -2,12 +2,14 @@
 page_title: "awscc_cloudfront_key_group Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource Type definition for AWS::CloudFront::KeyGroup
+  A key group.
+  A key group contains a list of public keys that you can use with CloudFront signed URLs and signed cookies https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html.
 ---
 
 # awscc_cloudfront_key_group (Resource)
 
-Resource Type definition for AWS::CloudFront::KeyGroup
+A key group.
+ A key group contains a list of public keys that you can use with [CloudFront signed URLs and signed cookies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html).
 
 ## Example Usage
 
@@ -37,7 +39,7 @@ resource "awscc_cloudfront_public_key" "example" {
 
 ### Required
 
-- `key_group_config` (Attributes) (see [below for nested schema](#nestedatt--key_group_config))
+- `key_group_config` (Attributes) The key group configuration. (see [below for nested schema](#nestedatt--key_group_config))
 
 ### Read-Only
 
@@ -50,12 +52,12 @@ resource "awscc_cloudfront_public_key" "example" {
 
 Required:
 
-- `items` (List of String)
-- `name` (String)
+- `items` (List of String) A list of the identifiers of the public keys in the key group.
+- `name` (String) A name to identify the key group.
 
 Optional:
 
-- `comment` (String)
+- `comment` (String) A comment to describe the key group. The comment cannot be longer than 128 characters.
 
 ## Import
 

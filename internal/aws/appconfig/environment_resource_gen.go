@@ -49,6 +49,34 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: DeletionProtectionCheck
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "On resource deletion this controls whether the Deletion Protection check should be applied, bypassed, or (the default) whether the behavior should be controlled by the account-level Deletion Protection setting. See https://docs.aws.amazon.com/appconfig/latest/userguide/deletion-protection.html",
+		//	  "enum": [
+		//	    "ACCOUNT_DEFAULT",
+		//	    "APPLY",
+		//	    "BYPASS"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"deletion_protection_check": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "On resource deletion this controls whether the Deletion Protection check should be applied, bypassed, or (the default) whether the behavior should be controlled by the account-level Deletion Protection setting. See https://docs.aws.amazon.com/appconfig/latest/userguide/deletion-protection.html",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ACCOUNT_DEFAULT",
+					"APPLY",
+					"BYPASS",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// DeletionProtectionCheck is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -275,18 +303,22 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::AppConfig::Environment").WithTerraformTypeName("awscc_appconfig_environment")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"alarm_arn":      "AlarmArn",
-		"alarm_role_arn": "AlarmRoleArn",
-		"application_id": "ApplicationId",
-		"description":    "Description",
-		"environment_id": "EnvironmentId",
-		"key":            "Key",
-		"monitors":       "Monitors",
-		"name":           "Name",
-		"tags":           "Tags",
-		"value":          "Value",
+		"alarm_arn":                 "AlarmArn",
+		"alarm_role_arn":            "AlarmRoleArn",
+		"application_id":            "ApplicationId",
+		"deletion_protection_check": "DeletionProtectionCheck",
+		"description":               "Description",
+		"environment_id":            "EnvironmentId",
+		"key":                       "Key",
+		"monitors":                  "Monitors",
+		"name":                      "Name",
+		"tags":                      "Tags",
+		"value":                     "Value",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/DeletionProtectionCheck",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

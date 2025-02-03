@@ -78,6 +78,7 @@ variable "fis_role_arn" {
 
 - `actions` (Attributes Map) The actions for the experiment. (see [below for nested schema](#nestedatt--actions))
 - `experiment_options` (Attributes) (see [below for nested schema](#nestedatt--experiment_options))
+- `experiment_report_configuration` (Attributes) (see [below for nested schema](#nestedatt--experiment_report_configuration))
 - `log_configuration` (Attributes) (see [below for nested schema](#nestedatt--log_configuration))
 
 ### Read-Only
@@ -138,6 +139,50 @@ Optional:
 
 - `account_targeting` (String) The account targeting setting for the experiment template.
 - `empty_target_resolution_mode` (String) The target resolution failure mode for the experiment template.
+
+
+<a id="nestedatt--experiment_report_configuration"></a>
+### Nested Schema for `experiment_report_configuration`
+
+Optional:
+
+- `data_sources` (Attributes) (see [below for nested schema](#nestedatt--experiment_report_configuration--data_sources))
+- `outputs` (Attributes) (see [below for nested schema](#nestedatt--experiment_report_configuration--outputs))
+- `post_experiment_duration` (String)
+- `pre_experiment_duration` (String)
+
+<a id="nestedatt--experiment_report_configuration--data_sources"></a>
+### Nested Schema for `experiment_report_configuration.data_sources`
+
+Optional:
+
+- `cloudwatch_dashboards` (Attributes List) (see [below for nested schema](#nestedatt--experiment_report_configuration--data_sources--cloudwatch_dashboards))
+
+<a id="nestedatt--experiment_report_configuration--data_sources--cloudwatch_dashboards"></a>
+### Nested Schema for `experiment_report_configuration.data_sources.cloudwatch_dashboards`
+
+Optional:
+
+- `dashboard_identifier` (String)
+
+
+
+<a id="nestedatt--experiment_report_configuration--outputs"></a>
+### Nested Schema for `experiment_report_configuration.outputs`
+
+Optional:
+
+- `experiment_report_s3_configuration` (Attributes) (see [below for nested schema](#nestedatt--experiment_report_configuration--outputs--experiment_report_s3_configuration))
+
+<a id="nestedatt--experiment_report_configuration--outputs--experiment_report_s3_configuration"></a>
+### Nested Schema for `experiment_report_configuration.outputs.experiment_report_s3_configuration`
+
+Optional:
+
+- `bucket_name` (String)
+- `prefix` (String)
+
+
 
 
 <a id="nestedatt--log_configuration"></a>

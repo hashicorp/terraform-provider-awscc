@@ -36,7 +36,7 @@ func integrationResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "An optional set of non-secret key?value pairs that contains additional contextual information about the data.",
+		//	  "description": "An optional set of non-secret key–value pairs that contains additional contextual information about the data.",
 		//	  "patternProperties": {
 		//	    "": {
 		//	      "maxLength": 131072,
@@ -49,7 +49,7 @@ func integrationResource(ctx context.Context) (resource.Resource, error) {
 		"additional_encryption_context": // Pattern: ""
 		schema.MapAttribute{             /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "An optional set of non-secret key?value pairs that contains additional contextual information about the data.",
+			Description: "An optional set of non-secret key–value pairs that contains additional contextual information about the data.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
@@ -109,10 +109,6 @@ func integrationResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "anyOf": [
-		//	    {},
-		//	    {}
-		//	  ],
 		//	  "description": "An KMS key identifier for the key to use to encrypt the integration. If you don't specify an encryption key, the default AWS owned KMS key is used.",
 		//	  "type": "string"
 		//	}
@@ -129,11 +125,11 @@ func integrationResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The Amazon Resource Name (ARN) of the database to use as the source for replication, for example, arn:aws:dynamodb:us-east-2:123412341234:table/dynamotable",
+		//	  "description": "The Amazon Resource Name (ARN) of the database to use as the source for replication",
 		//	  "type": "string"
 		//	}
 		"source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the database to use as the source for replication, for example, arn:aws:dynamodb:us-east-2:123412341234:table/dynamotable",
+			Description: "The Amazon Resource Name (ARN) of the database to use as the source for replication",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -215,11 +211,11 @@ func integrationResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The Amazon Resource Name (ARN) of the Redshift data warehouse to use as the target for replication, for example, arn:aws:redshift:us-east-2:123412341234:namespace:e43aab3e-10a3-4ec4-83d4-f227ff9bfbcf",
+		//	  "description": "The Amazon Resource Name (ARN) of the Redshift data warehouse to use as the target for replication",
 		//	  "type": "string"
 		//	}
 		"target_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the Redshift data warehouse to use as the target for replication, for example, arn:aws:redshift:us-east-2:123412341234:namespace:e43aab3e-10a3-4ec4-83d4-f227ff9bfbcf",
+			Description: "The Amazon Resource Name (ARN) of the Redshift data warehouse to use as the target for replication",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),

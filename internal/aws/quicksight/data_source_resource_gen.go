@@ -496,10 +496,23 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "additionalProperties": false,
 		//	        "description": "\u003cp\u003eThe parameters for Snowflake.\u003c/p\u003e",
 		//	        "properties": {
+		//	          "AuthenticationType": {
+		//	            "enum": [
+		//	              "PASSWORD",
+		//	              "TOKEN",
+		//	              "X509"
+		//	            ],
+		//	            "type": "string"
+		//	          },
 		//	          "Database": {
 		//	            "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
 		//	            "maxLength": 128,
 		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "DatabaseAccessControlRole": {
+		//	            "maxLength": 128,
+		//	            "minLength": 0,
 		//	            "type": "string"
 		//	          },
 		//	          "Host": {
@@ -507,6 +520,44 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	            "maxLength": 256,
 		//	            "minLength": 1,
 		//	            "type": "string"
+		//	          },
+		//	          "OAuthParameters": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "IdentityProviderResourceUri": {
+		//	                "maxLength": 2048,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "IdentityProviderVpcConnectionProperties": {
+		//	                "additionalProperties": false,
+		//	                "description": "\u003cp\u003eVPC connection properties.\u003c/p\u003e",
+		//	                "properties": {
+		//	                  "VpcConnectionArn": {
+		//	                    "description": "\u003cp\u003eThe Amazon Resource Name (ARN) for the VPC connection.\u003c/p\u003e",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "VpcConnectionArn"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "OAuthScope": {
+		//	                "maxLength": 128,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "TokenProviderUrl": {
+		//	                "maxLength": 2048,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "TokenProviderUrl"
+		//	            ],
+		//	            "type": "object"
 		//	          },
 		//	          "Warehouse": {
 		//	            "description": "\u003cp\u003eWarehouse.\u003c/p\u003e",
@@ -581,8 +632,21 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "additionalProperties": false,
 		//	        "description": "\u003cp\u003eThe parameters that are required to connect to a Starburst data source.\u003c/p\u003e",
 		//	        "properties": {
+		//	          "AuthenticationType": {
+		//	            "enum": [
+		//	              "PASSWORD",
+		//	              "TOKEN",
+		//	              "X509"
+		//	            ],
+		//	            "type": "string"
+		//	          },
 		//	          "Catalog": {
 		//	            "description": "\u003cp\u003eThe catalog name for the Starburst data source.\u003c/p\u003e",
+		//	            "maxLength": 128,
+		//	            "minLength": 0,
+		//	            "type": "string"
+		//	          },
+		//	          "DatabaseAccessControlRole": {
 		//	            "maxLength": 128,
 		//	            "minLength": 0,
 		//	            "type": "string"
@@ -592,6 +656,44 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	            "maxLength": 256,
 		//	            "minLength": 1,
 		//	            "type": "string"
+		//	          },
+		//	          "OAuthParameters": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "IdentityProviderResourceUri": {
+		//	                "maxLength": 2048,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "IdentityProviderVpcConnectionProperties": {
+		//	                "additionalProperties": false,
+		//	                "description": "\u003cp\u003eVPC connection properties.\u003c/p\u003e",
+		//	                "properties": {
+		//	                  "VpcConnectionArn": {
+		//	                    "description": "\u003cp\u003eThe Amazon Resource Name (ARN) for the VPC connection.\u003c/p\u003e",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "VpcConnectionArn"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "OAuthScope": {
+		//	                "maxLength": 128,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "TokenProviderUrl": {
+		//	                "maxLength": 2048,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "TokenProviderUrl"
+		//	            ],
+		//	            "type": "object"
 		//	          },
 		//	          "Port": {
 		//	            "default": 0,
@@ -1416,6 +1518,21 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 					// Property: SnowflakeParameters
 					"snowflake_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AuthenticationType
+							"authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"PASSWORD",
+										"TOKEN",
+										"X509",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: Database
 							"database": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "<p>Database.</p>",
@@ -1424,6 +1541,17 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthBetween(1, 128),
 									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: DatabaseAccessControlRole
+							"database_access_control_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(0, 128),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -1440,6 +1568,73 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: OAuthParameters
+							"o_auth_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: IdentityProviderResourceUri
+									"identity_provider_resource_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 2048),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: IdentityProviderVpcConnectionProperties
+									"identity_provider_vpc_connection_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: VpcConnectionArn
+											"vpc_connection_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>The Amazon Resource Name (ARN) for the VPC connection.</p>",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>VPC connection properties.</p>",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: OAuthScope
+									"o_auth_scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 128),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: TokenProviderUrl
+									"token_provider_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 2048),
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Warehouse
@@ -1553,6 +1748,21 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 					// Property: StarburstParameters
 					"starburst_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AuthenticationType
+							"authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"PASSWORD",
+										"TOKEN",
+										"X509",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: Catalog
 							"catalog": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "<p>The catalog name for the Starburst data source.</p>",
@@ -1561,6 +1771,17 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthBetween(0, 128),
 									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: DatabaseAccessControlRole
+							"database_access_control_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(0, 128),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -1577,6 +1798,73 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: OAuthParameters
+							"o_auth_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: IdentityProviderResourceUri
+									"identity_provider_resource_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 2048),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: IdentityProviderVpcConnectionProperties
+									"identity_provider_vpc_connection_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: VpcConnectionArn
+											"vpc_connection_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>The Amazon Resource Name (ARN) for the VPC connection.</p>",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>VPC connection properties.</p>",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: OAuthScope
+									"o_auth_scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 128),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: TokenProviderUrl
+									"token_provider_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 2048),
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Port
@@ -2248,10 +2536,23 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                "additionalProperties": false,
 		//	                "description": "\u003cp\u003eThe parameters for Snowflake.\u003c/p\u003e",
 		//	                "properties": {
+		//	                  "AuthenticationType": {
+		//	                    "enum": [
+		//	                      "PASSWORD",
+		//	                      "TOKEN",
+		//	                      "X509"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
 		//	                  "Database": {
 		//	                    "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
 		//	                    "maxLength": 128,
 		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "DatabaseAccessControlRole": {
+		//	                    "maxLength": 128,
+		//	                    "minLength": 0,
 		//	                    "type": "string"
 		//	                  },
 		//	                  "Host": {
@@ -2259,6 +2560,44 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "maxLength": 256,
 		//	                    "minLength": 1,
 		//	                    "type": "string"
+		//	                  },
+		//	                  "OAuthParameters": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "IdentityProviderResourceUri": {
+		//	                        "maxLength": 2048,
+		//	                        "minLength": 1,
+		//	                        "type": "string"
+		//	                      },
+		//	                      "IdentityProviderVpcConnectionProperties": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "\u003cp\u003eVPC connection properties.\u003c/p\u003e",
+		//	                        "properties": {
+		//	                          "VpcConnectionArn": {
+		//	                            "description": "\u003cp\u003eThe Amazon Resource Name (ARN) for the VPC connection.\u003c/p\u003e",
+		//	                            "type": "string"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "VpcConnectionArn"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      },
+		//	                      "OAuthScope": {
+		//	                        "maxLength": 128,
+		//	                        "minLength": 1,
+		//	                        "type": "string"
+		//	                      },
+		//	                      "TokenProviderUrl": {
+		//	                        "maxLength": 2048,
+		//	                        "minLength": 1,
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "TokenProviderUrl"
+		//	                    ],
+		//	                    "type": "object"
 		//	                  },
 		//	                  "Warehouse": {
 		//	                    "description": "\u003cp\u003eWarehouse.\u003c/p\u003e",
@@ -2333,8 +2672,21 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                "additionalProperties": false,
 		//	                "description": "\u003cp\u003eThe parameters that are required to connect to a Starburst data source.\u003c/p\u003e",
 		//	                "properties": {
+		//	                  "AuthenticationType": {
+		//	                    "enum": [
+		//	                      "PASSWORD",
+		//	                      "TOKEN",
+		//	                      "X509"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
 		//	                  "Catalog": {
 		//	                    "description": "\u003cp\u003eThe catalog name for the Starburst data source.\u003c/p\u003e",
+		//	                    "maxLength": 128,
+		//	                    "minLength": 0,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "DatabaseAccessControlRole": {
 		//	                    "maxLength": 128,
 		//	                    "minLength": 0,
 		//	                    "type": "string"
@@ -2344,6 +2696,44 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "maxLength": 256,
 		//	                    "minLength": 1,
 		//	                    "type": "string"
+		//	                  },
+		//	                  "OAuthParameters": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "IdentityProviderResourceUri": {
+		//	                        "maxLength": 2048,
+		//	                        "minLength": 1,
+		//	                        "type": "string"
+		//	                      },
+		//	                      "IdentityProviderVpcConnectionProperties": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "\u003cp\u003eVPC connection properties.\u003c/p\u003e",
+		//	                        "properties": {
+		//	                          "VpcConnectionArn": {
+		//	                            "description": "\u003cp\u003eThe Amazon Resource Name (ARN) for the VPC connection.\u003c/p\u003e",
+		//	                            "type": "string"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "VpcConnectionArn"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      },
+		//	                      "OAuthScope": {
+		//	                        "maxLength": 128,
+		//	                        "minLength": 1,
+		//	                        "type": "string"
+		//	                      },
+		//	                      "TokenProviderUrl": {
+		//	                        "maxLength": 2048,
+		//	                        "minLength": 1,
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "TokenProviderUrl"
+		//	                    ],
+		//	                    "type": "object"
 		//	                  },
 		//	                  "Port": {
 		//	                    "default": 0,
@@ -3215,6 +3605,21 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 									// Property: SnowflakeParameters
 									"snowflake_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: AuthenticationType
+											"authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.OneOf(
+														"PASSWORD",
+														"TOKEN",
+														"X509",
+													),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
 											// Property: Database
 											"database": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>Database.</p>",
@@ -3223,6 +3628,17 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 128),
 													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: DatabaseAccessControlRole
+											"database_access_control_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(0, 128),
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 													stringplanmodifier.UseStateForUnknown(),
@@ -3239,6 +3655,73 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: OAuthParameters
+											"o_auth_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: IdentityProviderResourceUri
+													"identity_provider_resource_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Optional: true,
+														Computed: true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.LengthBetween(1, 2048),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: IdentityProviderVpcConnectionProperties
+													"identity_provider_vpc_connection_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: VpcConnectionArn
+															"vpc_connection_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "<p>The Amazon Resource Name (ARN) for the VPC connection.</p>",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.String{ /*START VALIDATORS*/
+																	fwvalidators.NotNullString(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "<p>VPC connection properties.</p>",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+															objectplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: OAuthScope
+													"o_auth_scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Optional: true,
+														Computed: true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.LengthBetween(1, 128),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: TokenProviderUrl
+													"token_provider_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Optional: true,
+														Computed: true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.LengthBetween(1, 2048),
+															fwvalidators.NotNullString(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: Warehouse
@@ -3352,6 +3835,21 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 									// Property: StarburstParameters
 									"starburst_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: AuthenticationType
+											"authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.OneOf(
+														"PASSWORD",
+														"TOKEN",
+														"X509",
+													),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
 											// Property: Catalog
 											"catalog": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>The catalog name for the Starburst data source.</p>",
@@ -3360,6 +3858,17 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(0, 128),
 													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: DatabaseAccessControlRole
+											"database_access_control_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(0, 128),
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 													stringplanmodifier.UseStateForUnknown(),
@@ -3376,6 +3885,73 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: OAuthParameters
+											"o_auth_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: IdentityProviderResourceUri
+													"identity_provider_resource_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Optional: true,
+														Computed: true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.LengthBetween(1, 2048),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: IdentityProviderVpcConnectionProperties
+													"identity_provider_vpc_connection_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: VpcConnectionArn
+															"vpc_connection_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "<p>The Amazon Resource Name (ARN) for the VPC connection.</p>",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.String{ /*START VALIDATORS*/
+																	fwvalidators.NotNullString(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "<p>VPC connection properties.</p>",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+															objectplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: OAuthScope
+													"o_auth_scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Optional: true,
+														Computed: true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.LengthBetween(1, 128),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: TokenProviderUrl
+													"token_provider_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Optional: true,
+														Computed: true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.LengthBetween(1, 2048),
+															fwvalidators.NotNullString(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: Port
@@ -4051,10 +4627,23 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "additionalProperties": false,
 		//	      "description": "\u003cp\u003eThe parameters for Snowflake.\u003c/p\u003e",
 		//	      "properties": {
+		//	        "AuthenticationType": {
+		//	          "enum": [
+		//	            "PASSWORD",
+		//	            "TOKEN",
+		//	            "X509"
+		//	          ],
+		//	          "type": "string"
+		//	        },
 		//	        "Database": {
 		//	          "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
 		//	          "maxLength": 128,
 		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "DatabaseAccessControlRole": {
+		//	          "maxLength": 128,
+		//	          "minLength": 0,
 		//	          "type": "string"
 		//	        },
 		//	        "Host": {
@@ -4062,6 +4651,44 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	          "maxLength": 256,
 		//	          "minLength": 1,
 		//	          "type": "string"
+		//	        },
+		//	        "OAuthParameters": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "IdentityProviderResourceUri": {
+		//	              "maxLength": 2048,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "IdentityProviderVpcConnectionProperties": {
+		//	              "additionalProperties": false,
+		//	              "description": "\u003cp\u003eVPC connection properties.\u003c/p\u003e",
+		//	              "properties": {
+		//	                "VpcConnectionArn": {
+		//	                  "description": "\u003cp\u003eThe Amazon Resource Name (ARN) for the VPC connection.\u003c/p\u003e",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "VpcConnectionArn"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "OAuthScope": {
+		//	              "maxLength": 128,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "TokenProviderUrl": {
+		//	              "maxLength": 2048,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "TokenProviderUrl"
+		//	          ],
+		//	          "type": "object"
 		//	        },
 		//	        "Warehouse": {
 		//	          "description": "\u003cp\u003eWarehouse.\u003c/p\u003e",
@@ -4136,8 +4763,21 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "additionalProperties": false,
 		//	      "description": "\u003cp\u003eThe parameters that are required to connect to a Starburst data source.\u003c/p\u003e",
 		//	      "properties": {
+		//	        "AuthenticationType": {
+		//	          "enum": [
+		//	            "PASSWORD",
+		//	            "TOKEN",
+		//	            "X509"
+		//	          ],
+		//	          "type": "string"
+		//	        },
 		//	        "Catalog": {
 		//	          "description": "\u003cp\u003eThe catalog name for the Starburst data source.\u003c/p\u003e",
+		//	          "maxLength": 128,
+		//	          "minLength": 0,
+		//	          "type": "string"
+		//	        },
+		//	        "DatabaseAccessControlRole": {
 		//	          "maxLength": 128,
 		//	          "minLength": 0,
 		//	          "type": "string"
@@ -4147,6 +4787,44 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	          "maxLength": 256,
 		//	          "minLength": 1,
 		//	          "type": "string"
+		//	        },
+		//	        "OAuthParameters": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "IdentityProviderResourceUri": {
+		//	              "maxLength": 2048,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "IdentityProviderVpcConnectionProperties": {
+		//	              "additionalProperties": false,
+		//	              "description": "\u003cp\u003eVPC connection properties.\u003c/p\u003e",
+		//	              "properties": {
+		//	                "VpcConnectionArn": {
+		//	                  "description": "\u003cp\u003eThe Amazon Resource Name (ARN) for the VPC connection.\u003c/p\u003e",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "VpcConnectionArn"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "OAuthScope": {
+		//	              "maxLength": 128,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "TokenProviderUrl": {
+		//	              "maxLength": 2048,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "TokenProviderUrl"
+		//	          ],
+		//	          "type": "object"
 		//	        },
 		//	        "Port": {
 		//	          "default": 0,
@@ -4966,6 +5644,21 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 				// Property: SnowflakeParameters
 				"snowflake_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AuthenticationType
+						"authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"PASSWORD",
+									"TOKEN",
+									"X509",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: Database
 						"database": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "<p>Database.</p>",
@@ -4974,6 +5667,17 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 128),
 								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: DatabaseAccessControlRole
+						"database_access_control_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(0, 128),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -4990,6 +5694,73 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: OAuthParameters
+						"o_auth_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IdentityProviderResourceUri
+								"identity_provider_resource_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 2048),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: IdentityProviderVpcConnectionProperties
+								"identity_provider_vpc_connection_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: VpcConnectionArn
+										"vpc_connection_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "<p>The Amazon Resource Name (ARN) for the VPC connection.</p>",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "<p>VPC connection properties.</p>",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: OAuthScope
+								"o_auth_scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 128),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: TokenProviderUrl
+								"token_provider_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 2048),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Warehouse
@@ -5103,6 +5874,21 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 				// Property: StarburstParameters
 				"starburst_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AuthenticationType
+						"authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"PASSWORD",
+									"TOKEN",
+									"X509",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: Catalog
 						"catalog": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "<p>The catalog name for the Starburst data source.</p>",
@@ -5111,6 +5897,17 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(0, 128),
 								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: DatabaseAccessControlRole
+						"database_access_control_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(0, 128),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -5127,6 +5924,73 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: OAuthParameters
+						"o_auth_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IdentityProviderResourceUri
+								"identity_provider_resource_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 2048),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: IdentityProviderVpcConnectionProperties
+								"identity_provider_vpc_connection_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: VpcConnectionArn
+										"vpc_connection_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "<p>The Amazon Resource Name (ARN) for the VPC connection.</p>",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "<p>VPC connection properties.</p>",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: OAuthScope
+								"o_auth_scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 128),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: TokenProviderUrl
+								"token_provider_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 2048),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Port
@@ -5777,6 +6641,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"athena_parameters":                "AthenaParameters",
 		"aurora_parameters":                "AuroraParameters",
 		"aurora_postgre_sql_parameters":    "AuroraPostgreSqlParameters",
+		"authentication_type":              "AuthenticationType",
 		"auto_create_database_user":        "AutoCreateDatabaseUser",
 		"aws_account_id":                   "AwsAccountId",
 		"bucket":                           "Bucket",
@@ -5789,6 +6654,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"data_source_id":                   "DataSourceId",
 		"data_source_parameters":           "DataSourceParameters",
 		"database":                         "Database",
+		"database_access_control_role":     "DatabaseAccessControlRole",
 		"database_groups":                  "DatabaseGroups",
 		"database_user":                    "DatabaseUser",
 		"databricks_parameters":            "DatabricksParameters",
@@ -5800,45 +6666,50 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"host":                             "Host",
 		"iam_parameters":                   "IAMParameters",
 		"identity_center_configuration":    "IdentityCenterConfiguration",
-		"instance_id":                      "InstanceId",
-		"key":                              "Key",
-		"last_updated_time":                "LastUpdatedTime",
-		"manifest_file_location":           "ManifestFileLocation",
-		"maria_db_parameters":              "MariaDbParameters",
-		"message":                          "Message",
-		"my_sql_parameters":                "MySqlParameters",
-		"name":                             "Name",
-		"oracle_parameters":                "OracleParameters",
-		"password":                         "Password",
-		"permissions":                      "Permissions",
-		"port":                             "Port",
-		"postgre_sql_parameters":           "PostgreSqlParameters",
-		"presto_parameters":                "PrestoParameters",
-		"principal":                        "Principal",
-		"product_type":                     "ProductType",
-		"rds_parameters":                   "RdsParameters",
-		"redshift_parameters":              "RedshiftParameters",
-		"resource":                         "Resource",
-		"role_arn":                         "RoleArn",
-		"s3_parameters":                    "S3Parameters",
-		"secret_arn":                       "SecretArn",
-		"snowflake_parameters":             "SnowflakeParameters",
-		"spark_parameters":                 "SparkParameters",
-		"sql_endpoint_path":                "SqlEndpointPath",
-		"sql_server_parameters":            "SqlServerParameters",
-		"ssl_properties":                   "SslProperties",
-		"starburst_parameters":             "StarburstParameters",
-		"status":                           "Status",
-		"tags":                             "Tags",
-		"teradata_parameters":              "TeradataParameters",
-		"trino_parameters":                 "TrinoParameters",
-		"type":                             "Type",
-		"username":                         "Username",
-		"value":                            "Value",
-		"vpc_connection_arn":               "VpcConnectionArn",
-		"vpc_connection_properties":        "VpcConnectionProperties",
-		"warehouse":                        "Warehouse",
-		"work_group":                       "WorkGroup",
+		"identity_provider_resource_uri":   "IdentityProviderResourceUri",
+		"identity_provider_vpc_connection_properties": "IdentityProviderVpcConnectionProperties",
+		"instance_id":               "InstanceId",
+		"key":                       "Key",
+		"last_updated_time":         "LastUpdatedTime",
+		"manifest_file_location":    "ManifestFileLocation",
+		"maria_db_parameters":       "MariaDbParameters",
+		"message":                   "Message",
+		"my_sql_parameters":         "MySqlParameters",
+		"name":                      "Name",
+		"o_auth_parameters":         "OAuthParameters",
+		"o_auth_scope":              "OAuthScope",
+		"oracle_parameters":         "OracleParameters",
+		"password":                  "Password",
+		"permissions":               "Permissions",
+		"port":                      "Port",
+		"postgre_sql_parameters":    "PostgreSqlParameters",
+		"presto_parameters":         "PrestoParameters",
+		"principal":                 "Principal",
+		"product_type":              "ProductType",
+		"rds_parameters":            "RdsParameters",
+		"redshift_parameters":       "RedshiftParameters",
+		"resource":                  "Resource",
+		"role_arn":                  "RoleArn",
+		"s3_parameters":             "S3Parameters",
+		"secret_arn":                "SecretArn",
+		"snowflake_parameters":      "SnowflakeParameters",
+		"spark_parameters":          "SparkParameters",
+		"sql_endpoint_path":         "SqlEndpointPath",
+		"sql_server_parameters":     "SqlServerParameters",
+		"ssl_properties":            "SslProperties",
+		"starburst_parameters":      "StarburstParameters",
+		"status":                    "Status",
+		"tags":                      "Tags",
+		"teradata_parameters":       "TeradataParameters",
+		"token_provider_url":        "TokenProviderUrl",
+		"trino_parameters":          "TrinoParameters",
+		"type":                      "Type",
+		"username":                  "Username",
+		"value":                     "Value",
+		"vpc_connection_arn":        "VpcConnectionArn",
+		"vpc_connection_properties": "VpcConnectionProperties",
+		"warehouse":                 "Warehouse",
+		"work_group":                "WorkGroup",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

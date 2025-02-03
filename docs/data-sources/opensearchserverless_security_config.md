@@ -22,10 +22,24 @@ Data Source schema for AWS::OpenSearchServerless::SecurityConfig
 ### Read-Only
 
 - `description` (String) Security config description
+- `iam_identity_center_options` (Attributes) Describes IAM Identity Center options for an OpenSearch Serverless security configuration in the form of a key-value map (see [below for nested schema](#nestedatt--iam_identity_center_options))
 - `name` (String) The friendly name of the security config
 - `saml_options` (Attributes) Describes saml options in form of key value map (see [below for nested schema](#nestedatt--saml_options))
 - `security_config_id` (String) The identifier of the security config
 - `type` (String) Config type for security config
+
+<a id="nestedatt--iam_identity_center_options"></a>
+### Nested Schema for `iam_identity_center_options`
+
+Read-Only:
+
+- `application_arn` (String) The ARN of the IAM Identity Center application used to integrate with OpenSearch Serverless
+- `application_description` (String) The description of the IAM Identity Center application used to integrate with OpenSearch Serverless
+- `application_name` (String) The name of the IAM Identity Center application used to integrate with OpenSearch Serverless
+- `group_attribute` (String) Group attribute for this IAM Identity Center integration
+- `instance_arn` (String) The ARN of the IAM Identity Center instance used to integrate with OpenSearch Serverless
+- `user_attribute` (String) User attribute for this IAM Identity Center integration
+
 
 <a id="nestedatt--saml_options"></a>
 ### Nested Schema for `saml_options`

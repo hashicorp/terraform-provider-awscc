@@ -83,14 +83,14 @@ func thingTypeResource(ctx context.Context) (resource.Resource, error) {
 		//	    "description": "A key-value pair to associate with a resource.",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		//	        "description": "Tag key (1-128 chars). No 'aws:' prefix. Allows: [A-Za-z0-9 _.:/=+-]",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
 		//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		//	        "description": "Tag value (1-256 chars). No 'aws:' prefix. Allows: [A-Za-z0-9 _.:/=+-]",
 		//	        "maxLength": 256,
 		//	        "minLength": 1,
 		//	        "type": "string"
@@ -111,7 +111,7 @@ func thingTypeResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Description: "Tag key (1-128 chars). No 'aws:' prefix. Allows: [A-Za-z0-9 _.:/=+-]",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -125,7 +125,7 @@ func thingTypeResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Description: "Tag value (1-256 chars). No 'aws:' prefix. Allows: [A-Za-z0-9 _.:/=+-]",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -175,6 +175,42 @@ func thingTypeResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "Mqtt5Configuration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "PropagatingAttributes": {
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "ConnectionAttribute": {
+		//	                "enum": [
+		//	                  "iot:ClientId",
+		//	                  "iot:Thing.ThingName"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "ThingAttribute": {
+		//	                "maxLength": 128,
+		//	                "pattern": "[a-zA-Z0-9_.,@/:#-]+",
+		//	                "type": "string"
+		//	              },
+		//	              "UserPropertyKey": {
+		//	                "maxLength": 128,
+		//	                "pattern": "[a-zA-Z0-9:$.]+",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "UserPropertyKey"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "SearchableAttributes": {
 		//	      "insertionOrder": true,
 		//	      "items": {
@@ -196,6 +232,70 @@ func thingTypeResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"thing_type_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Mqtt5Configuration
+				"mqtt_5_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PropagatingAttributes
+						"propagating_attributes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ConnectionAttribute
+									"connection_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"iot:ClientId",
+												"iot:Thing.ThingName",
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: ThingAttribute
+									"thing_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthAtMost(128),
+											stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_.,@/:#-]+"), ""),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: UserPropertyKey
+									"user_property_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthAtMost(128),
+											stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9:$.]+"), ""),
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.UniqueValues(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: SearchableAttributes
 				"searchable_attributes": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
@@ -229,7 +329,6 @@ func thingTypeResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
@@ -255,14 +354,19 @@ func thingTypeResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                    "Arn",
+		"connection_attribute":   "ConnectionAttribute",
 		"deprecate_thing_type":   "DeprecateThingType",
 		"key":                    "Key",
+		"mqtt_5_configuration":   "Mqtt5Configuration",
+		"propagating_attributes": "PropagatingAttributes",
 		"searchable_attributes":  "SearchableAttributes",
 		"tags":                   "Tags",
+		"thing_attribute":        "ThingAttribute",
 		"thing_type_description": "ThingTypeDescription",
 		"thing_type_id":          "Id",
 		"thing_type_name":        "ThingTypeName",
 		"thing_type_properties":  "ThingTypeProperties",
+		"user_property_key":      "UserPropertyKey",
 		"value":                  "Value",
 	})
 

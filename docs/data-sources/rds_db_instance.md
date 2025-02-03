@@ -114,6 +114,7 @@ Data Source schema for AWS::RDS::DBInstance
   +  The instance profile name and the associated IAM role name must start with the prefix ``AWSRDSCustom``.
   
  For the list of permissions required for the IAM role, see [Configure IAM and your VPC](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc) in the *Amazon RDS User Guide*.
+- `database_insights_mode` (String)
 - `db_cluster_identifier` (String) The identifier of the DB cluster that this DB instance will belong to.
  This setting doesn't apply to RDS Custom DB instances.
 - `db_cluster_snapshot_identifier` (String) The identifier for the Multi-AZ DB cluster snapshot to restore from.

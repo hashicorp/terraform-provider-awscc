@@ -23,6 +23,8 @@ Data Source schema for AWS::DataZone::DataSource
 
 - `asset_forms_input` (Attributes List) The metadata forms that are to be attached to the assets that this data source works with. (see [below for nested schema](#nestedatt--asset_forms_input))
 - `configuration` (Attributes) Configuration of the data source. It can be set to either glueRunConfiguration or redshiftRunConfiguration. (see [below for nested schema](#nestedatt--configuration))
+- `connection_id` (String) The unique identifier of a connection used to fetch relevant parameters from connection during Datasource run
+- `connection_identifier` (String) The unique identifier of a connection used to fetch relevant parameters from connection during Datasource run
 - `created_at` (String) The timestamp of when the data source was created.
 - `data_source_id` (String) The unique identifier of the data source.
 - `description` (String) The description of the data source.
@@ -62,6 +64,7 @@ Read-Only:
 
 - `glue_run_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--glue_run_configuration))
 - `redshift_run_configuration` (Attributes) The configuration details of the Amazon Redshift data source. (see [below for nested schema](#nestedatt--configuration--redshift_run_configuration))
+- `sage_maker_run_configuration` (Attributes) The configuration details of the Amazon SageMaker data source. (see [below for nested schema](#nestedatt--configuration--sage_maker_run_configuration))
 
 <a id="nestedatt--configuration--glue_run_configuration"></a>
 ### Nested Schema for `configuration.glue_run_configuration`
@@ -69,6 +72,7 @@ Read-Only:
 Read-Only:
 
 - `auto_import_data_quality_result` (Boolean) Specifies whether to automatically import data quality metrics as part of the data source run.
+- `catalog_name` (String) The catalog name in the AWS Glue run configuration.
 - `data_access_role` (String) The data access role included in the configuration details of the AWS Glue data source.
 - `relational_filter_configurations` (Attributes List) The relational filter configurations included in the configuration details of the AWS Glue data source. (see [below for nested schema](#nestedatt--configuration--glue_run_configuration--relational_filter_configurations))
 
@@ -153,6 +157,14 @@ Read-Only:
 - `type` (String) The search filter expression type.
 
 
+
+
+<a id="nestedatt--configuration--sage_maker_run_configuration"></a>
+### Nested Schema for `configuration.sage_maker_run_configuration`
+
+Read-Only:
+
+- `tracking_assets` (Map of List of String) The tracking assets of the Amazon SageMaker run.
 
 
 

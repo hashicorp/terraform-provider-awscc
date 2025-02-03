@@ -39,19 +39,52 @@ resource "awscc_codebuild_fleet" "example" {
 ### Optional
 
 - `base_capacity` (Number)
+- `compute_configuration` (Attributes) (see [below for nested schema](#nestedatt--compute_configuration))
 - `compute_type` (String)
 - `environment_type` (String)
+- `fleet_proxy_configuration` (Attributes) (see [below for nested schema](#nestedatt--fleet_proxy_configuration))
 - `fleet_service_role` (String)
 - `fleet_vpc_config` (Attributes) (see [below for nested schema](#nestedatt--fleet_vpc_config))
 - `image_id` (String)
 - `name` (String)
 - `overflow_behavior` (String)
+- `scaling_configuration` (Attributes) (see [below for nested schema](#nestedatt--scaling_configuration))
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `arn` (String)
 - `id` (String) Uniquely identifies the resource.
+
+<a id="nestedatt--compute_configuration"></a>
+### Nested Schema for `compute_configuration`
+
+Optional:
+
+- `disk` (Number)
+- `machine_type` (String)
+- `memory` (Number)
+- `v_cpu` (Number)
+
+
+<a id="nestedatt--fleet_proxy_configuration"></a>
+### Nested Schema for `fleet_proxy_configuration`
+
+Optional:
+
+- `default_behavior` (String)
+- `ordered_proxy_rules` (Attributes List) (see [below for nested schema](#nestedatt--fleet_proxy_configuration--ordered_proxy_rules))
+
+<a id="nestedatt--fleet_proxy_configuration--ordered_proxy_rules"></a>
+### Nested Schema for `fleet_proxy_configuration.ordered_proxy_rules`
+
+Optional:
+
+- `effect` (String)
+- `entities` (List of String)
+- `type` (String)
+
+
 
 <a id="nestedatt--fleet_vpc_config"></a>
 ### Nested Schema for `fleet_vpc_config`
@@ -61,6 +94,25 @@ Optional:
 - `security_group_ids` (List of String)
 - `subnets` (List of String)
 - `vpc_id` (String)
+
+
+<a id="nestedatt--scaling_configuration"></a>
+### Nested Schema for `scaling_configuration`
+
+Optional:
+
+- `max_capacity` (Number)
+- `scaling_type` (String)
+- `target_tracking_scaling_configs` (Attributes List) (see [below for nested schema](#nestedatt--scaling_configuration--target_tracking_scaling_configs))
+
+<a id="nestedatt--scaling_configuration--target_tracking_scaling_configs"></a>
+### Nested Schema for `scaling_configuration.target_tracking_scaling_configs`
+
+Optional:
+
+- `metric_type` (String)
+- `target_value` (Number)
+
 
 
 <a id="nestedatt--tags"></a>

@@ -174,7 +174,6 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "maxLength": 255,
 		//	    "minLength": 1,
@@ -194,7 +193,6 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
@@ -348,7 +346,8 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "enum": [
 		//	    "AWS_IAM_IDP_SAML",
 		//	    "AWS_IAM_IDP_OIDC",
-		//	    "AWS_IAM_IDC"
+		//	    "AWS_IAM_IDC",
+		//	    "AWS_QUICKSIGHT_IDP"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -360,6 +359,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 					"AWS_IAM_IDP_SAML",
 					"AWS_IAM_IDP_OIDC",
 					"AWS_IAM_IDC",
+					"AWS_QUICKSIGHT_IDP",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -453,6 +453,47 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: QuickSightConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "ClientNamespace": {
+		//	      "maxLength": 64,
+		//	      "minLength": 1,
+		//	      "pattern": "^[a-zA-Z0-9._-]*$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "ClientNamespace"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"quick_sight_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ClientNamespace
+				"client_namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 64),
+						stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9._-]*$"), ""),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -495,7 +536,6 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
@@ -555,7 +595,6 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 				listvalidator.SizeBetween(0, 200),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -602,6 +641,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"auto_subscribe":                  "AutoSubscribe",
 		"auto_subscription_configuration": "AutoSubscriptionConfiguration",
 		"client_ids_for_oidc":             "ClientIdsForOIDC",
+		"client_namespace":                "ClientNamespace",
 		"created_at":                      "CreatedAt",
 		"default_subscription_type":       "DefaultSubscriptionType",
 		"description":                     "Description",
@@ -617,6 +657,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"personalization_control_mode":    "PersonalizationControlMode",
 		"q_apps_configuration":            "QAppsConfiguration",
 		"q_apps_control_mode":             "QAppsControlMode",
+		"quick_sight_configuration":       "QuickSightConfiguration",
 		"role_arn":                        "RoleArn",
 		"status":                          "Status",
 		"tags":                            "Tags",

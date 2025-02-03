@@ -75,7 +75,7 @@ resource "awscc_elasticache_user" "example" {
 
 ### Required
 
-- `engine` (String) Must be redis.
+- `engine` (String) The target cache engine for the user.
 - `user_id` (String) The ID of the user.
 - `user_name` (String) The username of the user.
 

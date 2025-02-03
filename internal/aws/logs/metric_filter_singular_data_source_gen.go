@@ -22,6 +22,17 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::Logs::MetricFilter resource.
 func metricFilterDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ApplyOnTransformedLogs
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "This parameter is valid only for log groups that have an active log transformer. For more information about log transformers, see [PutTransformer](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutTransformer.html).\n If this value is ``true``, the metric filter is applied on the transformed version of the log events instead of the original ingested log events.",
+		//	  "type": "boolean"
+		//	}
+		"apply_on_transformed_logs": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "This parameter is valid only for log groups that have an active log transformer. For more information about log transformers, see [PutTransformer](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutTransformer.html).\n If this value is ``true``, the metric filter is applied on the transformed version of the log events instead of the original ingested log events.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FilterName
 		// CloudFormation resource type schema:
 		//
@@ -243,18 +254,19 @@ func metricFilterDataSource(ctx context.Context) (datasource.DataSource, error) 
 	opts = opts.WithCloudFormationTypeName("AWS::Logs::MetricFilter").WithTerraformTypeName("awscc_logs_metric_filter")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"default_value":          "DefaultValue",
-		"dimensions":             "Dimensions",
-		"filter_name":            "FilterName",
-		"filter_pattern":         "FilterPattern",
-		"key":                    "Key",
-		"log_group_name":         "LogGroupName",
-		"metric_name":            "MetricName",
-		"metric_namespace":       "MetricNamespace",
-		"metric_transformations": "MetricTransformations",
-		"metric_value":           "MetricValue",
-		"unit":                   "Unit",
-		"value":                  "Value",
+		"apply_on_transformed_logs": "ApplyOnTransformedLogs",
+		"default_value":             "DefaultValue",
+		"dimensions":                "Dimensions",
+		"filter_name":               "FilterName",
+		"filter_pattern":            "FilterPattern",
+		"key":                       "Key",
+		"log_group_name":            "LogGroupName",
+		"metric_name":               "MetricName",
+		"metric_namespace":          "MetricNamespace",
+		"metric_transformations":    "MetricTransformations",
+		"metric_value":              "MetricValue",
+		"unit":                      "Unit",
+		"value":                     "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

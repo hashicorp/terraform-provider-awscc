@@ -11,7 +11,7 @@ import (
 	"regexp"
 	{{- end}}
 
-	{{- range .FrameworkValidatorsPackages }}
+	{{ range .FrameworkValidatorsPackages }}
 	"github.com/hashicorp/terraform-plugin-framework-validators/{{ . }}"
 	{{- end}}
 	{{- if .ImportFrameworkValidator }}

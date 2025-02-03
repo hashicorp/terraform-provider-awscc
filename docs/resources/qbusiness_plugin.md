@@ -17,13 +17,13 @@ Definition of AWS::QBusiness::Plugin Resource Type
 
 ### Required
 
-- `application_id` (String)
 - `auth_configuration` (Attributes) (see [below for nested schema](#nestedatt--auth_configuration))
 - `display_name` (String)
 - `type` (String)
 
 ### Optional
 
+- `application_id` (String)
 - `custom_plugin_configuration` (Attributes) (see [below for nested schema](#nestedatt--custom_plugin_configuration))
 - `server_url` (String)
 - `state` (String)
@@ -61,8 +61,10 @@ Optional:
 
 Optional:
 
+- `authorization_url` (String)
 - `role_arn` (String)
 - `secret_arn` (String)
+- `token_url` (String)
 
 
 

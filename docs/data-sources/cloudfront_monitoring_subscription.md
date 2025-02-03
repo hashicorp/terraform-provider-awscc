@@ -21,19 +21,19 @@ Data Source schema for AWS::CloudFront::MonitoringSubscription
 
 ### Read-Only
 
-- `distribution_id` (String)
-- `monitoring_subscription` (Attributes) (see [below for nested schema](#nestedatt--monitoring_subscription))
+- `distribution_id` (String) The ID of the distribution that you are enabling metrics for.
+- `monitoring_subscription` (Attributes) A subscription configuration for additional CloudWatch metrics. (see [below for nested schema](#nestedatt--monitoring_subscription))
 
 <a id="nestedatt--monitoring_subscription"></a>
 ### Nested Schema for `monitoring_subscription`
 
 Read-Only:
 
-- `realtime_metrics_subscription_config` (Attributes) (see [below for nested schema](#nestedatt--monitoring_subscription--realtime_metrics_subscription_config))
+- `realtime_metrics_subscription_config` (Attributes) A subscription configuration for additional CloudWatch metrics. (see [below for nested schema](#nestedatt--monitoring_subscription--realtime_metrics_subscription_config))
 
 <a id="nestedatt--monitoring_subscription--realtime_metrics_subscription_config"></a>
 ### Nested Schema for `monitoring_subscription.realtime_metrics_subscription_config`
 
 Read-Only:
 
-- `realtime_metrics_subscription_status` (String)
+- `realtime_metrics_subscription_status` (String) A flag that indicates whether additional CloudWatch metrics are enabled for a given CloudFront distribution.

@@ -33,8 +33,8 @@ Data Source schema for AWS::IoT::ThingType
 
 Read-Only:
 
-- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- `value` (String) The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) Tag key (1-128 chars). No 'aws:' prefix. Allows: [A-Za-z0-9 _.:/=+-]
+- `value` (String) Tag value (1-256 chars). No 'aws:' prefix. Allows: [A-Za-z0-9 _.:/=+-]
 
 
 <a id="nestedatt--thing_type_properties"></a>
@@ -42,5 +42,22 @@ Read-Only:
 
 Read-Only:
 
+- `mqtt_5_configuration` (Attributes) (see [below for nested schema](#nestedatt--thing_type_properties--mqtt_5_configuration))
 - `searchable_attributes` (List of String)
 - `thing_type_description` (String)
+
+<a id="nestedatt--thing_type_properties--mqtt_5_configuration"></a>
+### Nested Schema for `thing_type_properties.mqtt_5_configuration`
+
+Read-Only:
+
+- `propagating_attributes` (Attributes List) (see [below for nested schema](#nestedatt--thing_type_properties--mqtt_5_configuration--propagating_attributes))
+
+<a id="nestedatt--thing_type_properties--mqtt_5_configuration--propagating_attributes"></a>
+### Nested Schema for `thing_type_properties.mqtt_5_configuration.propagating_attributes`
+
+Read-Only:
+
+- `connection_attribute` (String)
+- `thing_attribute` (String)
+- `user_property_key` (String)

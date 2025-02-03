@@ -166,6 +166,32 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "type": "object"
 		//	      },
+		//	      "WarmThroughput": {
+		//	        "additionalProperties": false,
+		//	        "anyOf": [
+		//	          {
+		//	            "required": [
+		//	              "ReadUnitsPerSecond"
+		//	            ]
+		//	          },
+		//	          {
+		//	            "required": [
+		//	              "WriteUnitsPerSecond"
+		//	            ]
+		//	          }
+		//	        ],
+		//	        "properties": {
+		//	          "ReadUnitsPerSecond": {
+		//	            "minimum": 1,
+		//	            "type": "integer"
+		//	          },
+		//	          "WriteUnitsPerSecond": {
+		//	            "minimum": 1,
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
 		//	      "WriteOnDemandThroughputSettings": {
 		//	        "additionalProperties": false,
 		//	        "properties": {
@@ -324,6 +350,38 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 						Validators: []validator.Object{ /*START VALIDATORS*/
 							fwvalidators.NotNullObject(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: WarmThroughput
+					"warm_throughput": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ReadUnitsPerSecond
+							"read_units_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.Int64{ /*START VALIDATORS*/
+									int64validator.AtLeast(1),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: WriteUnitsPerSecond
+							"write_units_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.Int64{ /*START VALIDATORS*/
+									int64validator.AtLeast(1),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Optional: true,
+						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
@@ -680,6 +738,51 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 				setplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: PointInTimeRecoverySpecification
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "PointInTimeRecoveryEnabled": {
+		//	      "type": "boolean"
+		//	    },
+		//	    "RecoveryPeriodInDays": {
+		//	      "maximum": 35,
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"point_in_time_recovery_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PointInTimeRecoveryEnabled
+				"point_in_time_recovery_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: RecoveryPeriodInDays
+				"recovery_period_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.Between(1, 35),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Replicas
 		// CloudFormation resource type schema:
 		//
@@ -829,6 +932,11 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		//	        "properties": {
 		//	          "PointInTimeRecoveryEnabled": {
 		//	            "type": "boolean"
+		//	          },
+		//	          "RecoveryPeriodInDays": {
+		//	            "maximum": 35,
+		//	            "minimum": 1,
+		//	            "type": "integer"
 		//	          }
 		//	        },
 		//	        "type": "object"
@@ -1249,6 +1357,17 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 								Computed: true,
 								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 									boolplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: RecoveryPeriodInDays
+							"recovery_period_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.Int64{ /*START VALIDATORS*/
+									int64validator.Between(1, 35),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -1695,6 +1814,66 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: WarmThroughput
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "anyOf": [
+		//	    {
+		//	      "required": [
+		//	        "ReadUnitsPerSecond"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "WriteUnitsPerSecond"
+		//	      ]
+		//	    }
+		//	  ],
+		//	  "properties": {
+		//	    "ReadUnitsPerSecond": {
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    },
+		//	    "WriteUnitsPerSecond": {
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"warm_throughput": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ReadUnitsPerSecond
+				"read_units_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.AtLeast(1),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: WriteUnitsPerSecond
+				"write_units_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.AtLeast(1),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: WriteOnDemandThroughputSettings
 		// CloudFormation resource type schema:
 		//
@@ -1947,6 +2126,8 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		"read_capacity_units":                  "ReadCapacityUnits",
 		"read_on_demand_throughput_settings":   "ReadOnDemandThroughputSettings",
 		"read_provisioned_throughput_settings": "ReadProvisionedThroughputSettings",
+		"read_units_per_second":                "ReadUnitsPerSecond",
+		"recovery_period_in_days":              "RecoveryPeriodInDays",
 		"region":                               "Region",
 		"replica_stream_specification":         "ReplicaStreamSpecification",
 		"replicas":                             "Replicas",
@@ -1968,9 +2149,11 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		"target_value":                          "TargetValue",
 		"time_to_live_specification":            "TimeToLiveSpecification",
 		"value":                                 "Value",
+		"warm_throughput":                       "WarmThroughput",
 		"write_capacity_auto_scaling_settings":  "WriteCapacityAutoScalingSettings",
 		"write_on_demand_throughput_settings":   "WriteOnDemandThroughputSettings",
 		"write_provisioned_throughput_settings": "WriteProvisionedThroughputSettings",
+		"write_units_per_second":                "WriteUnitsPerSecond",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

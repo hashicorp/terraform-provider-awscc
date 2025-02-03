@@ -61,6 +61,34 @@ func configurationProfileResource(ctx context.Context) (resource.Resource, error
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: DeletionProtectionCheck
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "On resource deletion this controls whether the Deletion Protection check should be applied, bypassed, or (the default) whether the behavior should be controlled by the account-level Deletion Protection setting. See https://docs.aws.amazon.com/appconfig/latest/userguide/deletion-protection.html",
+		//	  "enum": [
+		//	    "ACCOUNT_DEFAULT",
+		//	    "APPLY",
+		//	    "BYPASS"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"deletion_protection_check": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "On resource deletion this controls whether the Deletion Protection check should be applied, bypassed, or (the default) whether the behavior should be controlled by the account-level Deletion Protection setting. See https://docs.aws.amazon.com/appconfig/latest/userguide/deletion-protection.html",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ACCOUNT_DEFAULT",
+					"APPLY",
+					"BYPASS",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// DeletionProtectionCheck is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -345,22 +373,26 @@ func configurationProfileResource(ctx context.Context) (resource.Resource, error
 	opts = opts.WithCloudFormationTypeName("AWS::AppConfig::ConfigurationProfile").WithTerraformTypeName("awscc_appconfig_configuration_profile")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"application_id":           "ApplicationId",
-		"configuration_profile_id": "ConfigurationProfileId",
-		"content":                  "Content",
-		"description":              "Description",
-		"key":                      "Key",
-		"kms_key_arn":              "KmsKeyArn",
-		"kms_key_identifier":       "KmsKeyIdentifier",
-		"location_uri":             "LocationUri",
-		"name":                     "Name",
-		"retrieval_role_arn":       "RetrievalRoleArn",
-		"tags":                     "Tags",
-		"type":                     "Type",
-		"validators":               "Validators",
-		"value":                    "Value",
+		"application_id":            "ApplicationId",
+		"configuration_profile_id":  "ConfigurationProfileId",
+		"content":                   "Content",
+		"deletion_protection_check": "DeletionProtectionCheck",
+		"description":               "Description",
+		"key":                       "Key",
+		"kms_key_arn":               "KmsKeyArn",
+		"kms_key_identifier":        "KmsKeyIdentifier",
+		"location_uri":              "LocationUri",
+		"name":                      "Name",
+		"retrieval_role_arn":        "RetrievalRoleArn",
+		"tags":                      "Tags",
+		"type":                      "Type",
+		"validators":                "Validators",
+		"value":                     "Value",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/DeletionProtectionCheck",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

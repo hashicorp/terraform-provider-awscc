@@ -11,14 +11,16 @@
       "maxLength": 128
     },
     "Type": {
-      "description": "The type of policy to create. You can specify one of the following values: AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, SERVICE_CONTROL_POLICY, TAG_POLICY, CHATBOT_POLICY",
+      "description": "The type of policy to create. You can specify one of the following values: AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, SERVICE_CONTROL_POLICY, TAG_POLICY, CHATBOT_POLICY, RESOURCE_CONTROL_POLICY,DECLARATIVE_POLICY_EC2",
       "type": "string",
       "enum": [
         "SERVICE_CONTROL_POLICY",
         "AISERVICES_OPT_OUT_POLICY",
         "BACKUP_POLICY",
         "TAG_POLICY",
-        "CHATBOT_POLICY"
+        "CHATBOT_POLICY",
+        "RESOURCE_CONTROL_POLICY",
+        "DECLARATIVE_POLICY_EC2"
       ]
     },
     "Content": {
@@ -134,6 +136,7 @@
         "organizations:CreatePolicy",
         "organizations:DescribePolicy",
         "organizations:AttachPolicy",
+        "organizations:ListPolicies",
         "organizations:ListTagsForResource",
         "organizations:ListTargetsForPolicy",
         "organizations:TagResource"

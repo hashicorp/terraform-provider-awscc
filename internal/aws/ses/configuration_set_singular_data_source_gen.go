@@ -174,6 +174,11 @@ func configurationSetDataSource(ctx context.Context) (datasource.DataSource, err
 		//	    "CustomRedirectDomain": {
 		//	      "description": "The domain to use for tracking open and click events.",
 		//	      "type": "string"
+		//	    },
+		//	    "HttpsPolicy": {
+		//	      "description": "The https policy to use for tracking open and click events.",
+		//	      "pattern": "REQUIRE|REQUIRE_OPEN_ONLY|OPTIONAL",
+		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -183,6 +188,11 @@ func configurationSetDataSource(ctx context.Context) (datasource.DataSource, err
 				// Property: CustomRedirectDomain
 				"custom_redirect_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The domain to use for tracking open and click events.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: HttpsPolicy
+				"https_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The https policy to use for tracking open and click events.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -281,6 +291,7 @@ func configurationSetDataSource(ctx context.Context) (datasource.DataSource, err
 		"delivery_options":           "DeliveryOptions",
 		"engagement_metrics":         "EngagementMetrics",
 		"guardian_options":           "GuardianOptions",
+		"https_policy":               "HttpsPolicy",
 		"max_delivery_seconds":       "MaxDeliverySeconds",
 		"name":                       "Name",
 		"optimized_shared_delivery":  "OptimizedSharedDelivery",

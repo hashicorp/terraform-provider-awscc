@@ -24,7 +24,7 @@ Data Source schema for AWS::ElastiCache::User
 - `access_string` (String) Access permissions string used for this user account.
 - `arn` (String) The Amazon Resource Name (ARN) of the user account.
 - `authentication_mode` (Attributes) (see [below for nested schema](#nestedatt--authentication_mode))
-- `engine` (String) Must be redis.
+- `engine` (String) The target cache engine for the user.
 - `no_password_required` (Boolean) Indicates a password is not required for this user account.
 - `passwords` (List of String) Passwords used for this user account. You can create up to two passwords for each user.
 - `status` (String) Indicates the user status. Can be "active", "modifying" or "deleting".

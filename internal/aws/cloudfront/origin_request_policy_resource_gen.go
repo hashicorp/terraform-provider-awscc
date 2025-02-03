@@ -33,10 +33,12 @@ func originRequestPolicyResource(ctx context.Context) (resource.Resource, error)
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"origin_request_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -45,10 +47,12 @@ func originRequestPolicyResource(ctx context.Context) (resource.Resource, error)
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -58,18 +62,23 @@ func originRequestPolicyResource(ctx context.Context) (resource.Resource, error)
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "The origin request policy configuration.",
 		//	  "properties": {
 		//	    "Comment": {
+		//	      "description": "A comment to describe the origin request policy. The comment cannot be longer than 128 characters.",
 		//	      "type": "string"
 		//	    },
 		//	    "CookiesConfig": {
 		//	      "additionalProperties": false,
+		//	      "description": "The cookies from viewer requests to include in origin requests.",
 		//	      "properties": {
 		//	        "CookieBehavior": {
+		//	          "description": "Determines whether cookies in viewer requests are included in requests that CloudFront sends to the origin. Valid values are:\n  +   ``none`` ? No cookies in viewer requests are included in requests that CloudFront sends to the origin. Even when this field is set to ``none``, any cookies that are listed in a ``CachePolicy`` *are* included in origin requests.\n  +   ``whitelist`` ? Only the cookies in viewer requests that are listed in the ``CookieNames`` type are included in requests that CloudFront sends to the origin.\n  +   ``all`` ? All cookies in viewer requests are included in requests that CloudFront sends to the origin.\n  +   ``allExcept`` ? All cookies in viewer requests are included in requests that CloudFront sends to the origin, *except* for those listed in the ``CookieNames`` type, which are not included.",
 		//	          "pattern": "^(none|whitelist|all|allExcept)$",
 		//	          "type": "string"
 		//	        },
 		//	        "Cookies": {
+		//	          "description": "Contains a list of cookie names.",
 		//	          "items": {
 		//	            "type": "string"
 		//	          },
@@ -84,12 +93,15 @@ func originRequestPolicyResource(ctx context.Context) (resource.Resource, error)
 		//	    },
 		//	    "HeadersConfig": {
 		//	      "additionalProperties": false,
+		//	      "description": "The HTTP headers to include in origin requests. These can include headers from viewer requests and additional headers added by CloudFront.",
 		//	      "properties": {
 		//	        "HeaderBehavior": {
+		//	          "description": "Determines whether any HTTP headers are included in requests that CloudFront sends to the origin. Valid values are:\n  +   ``none`` ? No HTTP headers in viewer requests are included in requests that CloudFront sends to the origin. Even when this field is set to ``none``, any headers that are listed in a ``CachePolicy`` *are* included in origin requests.\n  +   ``whitelist`` ? Only the HTTP headers that are listed in the ``Headers`` type are included in requests that CloudFront sends to the origin.\n  +   ``allViewer`` ? All HTTP headers in viewer requests are included in requests that CloudFront sends to the origin.\n  +   ``allViewerAndWhitelistCloudFront`` ? All HTTP headers in viewer requests and the additional CloudFront headers that are listed in the ``Headers`` type are included in requests that CloudFront sends to the origin. The additional headers are added by CloudFront.\n  +   ``allExcept`` ? All HTTP headers in viewer requests are included in requests that CloudFront sends to the origin, *except* for those listed in the ``Headers`` type, which are not included.",
 		//	          "pattern": "^(none|whitelist|allViewer|allViewerAndWhitelistCloudFront|allExcept)$",
 		//	          "type": "string"
 		//	        },
 		//	        "Headers": {
+		//	          "description": "Contains a list of HTTP header names.",
 		//	          "items": {
 		//	            "type": "string"
 		//	          },
@@ -103,16 +115,20 @@ func originRequestPolicyResource(ctx context.Context) (resource.Resource, error)
 		//	      "type": "object"
 		//	    },
 		//	    "Name": {
+		//	      "description": "A unique name to identify the origin request policy.",
 		//	      "type": "string"
 		//	    },
 		//	    "QueryStringsConfig": {
 		//	      "additionalProperties": false,
+		//	      "description": "The URL query strings from viewer requests to include in origin requests.",
 		//	      "properties": {
 		//	        "QueryStringBehavior": {
+		//	          "description": "Determines whether any URL query strings in viewer requests are included in requests that CloudFront sends to the origin. Valid values are:\n  +   ``none`` ? No query strings in viewer requests are included in requests that CloudFront sends to the origin. Even when this field is set to ``none``, any query strings that are listed in a ``CachePolicy`` *are* included in origin requests.\n  +   ``whitelist`` ? Only the query strings in viewer requests that are listed in the ``QueryStringNames`` type are included in requests that CloudFront sends to the origin.\n  +   ``all`` ? All query strings in viewer requests are included in requests that CloudFront sends to the origin.\n  +   ``allExcept`` ? All query strings in viewer requests are included in requests that CloudFront sends to the origin, *except* for those listed in the ``QueryStringNames`` type, which are not included.",
 		//	          "pattern": "^(none|whitelist|all|allExcept)$",
 		//	          "type": "string"
 		//	        },
 		//	        "QueryStrings": {
+		//	          "description": "Contains a list of query string names.",
 		//	          "items": {
 		//	            "type": "string"
 		//	          },
@@ -138,8 +154,9 @@ func originRequestPolicyResource(ctx context.Context) (resource.Resource, error)
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Comment
 				"comment": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
+					Description: "A comment to describe the origin request policy. The comment cannot be longer than 128 characters.",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -149,7 +166,8 @@ func originRequestPolicyResource(ctx context.Context) (resource.Resource, error)
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: CookieBehavior
 						"cookie_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Description: "Determines whether cookies in viewer requests are included in requests that CloudFront sends to the origin. Valid values are:\n  +   ``none`` ? No cookies in viewer requests are included in requests that CloudFront sends to the origin. Even when this field is set to ``none``, any cookies that are listed in a ``CachePolicy`` *are* included in origin requests.\n  +   ``whitelist`` ? Only the cookies in viewer requests that are listed in the ``CookieNames`` type are included in requests that CloudFront sends to the origin.\n  +   ``all`` ? All cookies in viewer requests are included in requests that CloudFront sends to the origin.\n  +   ``allExcept`` ? All cookies in viewer requests are included in requests that CloudFront sends to the origin, *except* for those listed in the ``CookieNames`` type, which are not included.",
+							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("^(none|whitelist|all|allExcept)$"), ""),
 							}, /*END VALIDATORS*/
@@ -157,6 +175,7 @@ func originRequestPolicyResource(ctx context.Context) (resource.Resource, error)
 						// Property: Cookies
 						"cookies": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
+							Description: "Contains a list of cookie names.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -164,14 +183,16 @@ func originRequestPolicyResource(ctx context.Context) (resource.Resource, error)
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Required: true,
+					Description: "The cookies from viewer requests to include in origin requests.",
+					Required:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: HeadersConfig
 				"headers_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: HeaderBehavior
 						"header_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Description: "Determines whether any HTTP headers are included in requests that CloudFront sends to the origin. Valid values are:\n  +   ``none`` ? No HTTP headers in viewer requests are included in requests that CloudFront sends to the origin. Even when this field is set to ``none``, any headers that are listed in a ``CachePolicy`` *are* included in origin requests.\n  +   ``whitelist`` ? Only the HTTP headers that are listed in the ``Headers`` type are included in requests that CloudFront sends to the origin.\n  +   ``allViewer`` ? All HTTP headers in viewer requests are included in requests that CloudFront sends to the origin.\n  +   ``allViewerAndWhitelistCloudFront`` ? All HTTP headers in viewer requests and the additional CloudFront headers that are listed in the ``Headers`` type are included in requests that CloudFront sends to the origin. The additional headers are added by CloudFront.\n  +   ``allExcept`` ? All HTTP headers in viewer requests are included in requests that CloudFront sends to the origin, *except* for those listed in the ``Headers`` type, which are not included.",
+							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("^(none|whitelist|allViewer|allViewerAndWhitelistCloudFront|allExcept)$"), ""),
 							}, /*END VALIDATORS*/
@@ -179,6 +200,7 @@ func originRequestPolicyResource(ctx context.Context) (resource.Resource, error)
 						// Property: Headers
 						"headers": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
+							Description: "Contains a list of HTTP header names.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -186,18 +208,21 @@ func originRequestPolicyResource(ctx context.Context) (resource.Resource, error)
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Required: true,
+					Description: "The HTTP headers to include in origin requests. These can include headers from viewer requests and additional headers added by CloudFront.",
+					Required:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Name
 				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Description: "A unique name to identify the origin request policy.",
+					Required:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: QueryStringsConfig
 				"query_strings_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: QueryStringBehavior
 						"query_string_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Description: "Determines whether any URL query strings in viewer requests are included in requests that CloudFront sends to the origin. Valid values are:\n  +   ``none`` ? No query strings in viewer requests are included in requests that CloudFront sends to the origin. Even when this field is set to ``none``, any query strings that are listed in a ``CachePolicy`` *are* included in origin requests.\n  +   ``whitelist`` ? Only the query strings in viewer requests that are listed in the ``QueryStringNames`` type are included in requests that CloudFront sends to the origin.\n  +   ``all`` ? All query strings in viewer requests are included in requests that CloudFront sends to the origin.\n  +   ``allExcept`` ? All query strings in viewer requests are included in requests that CloudFront sends to the origin, *except* for those listed in the ``QueryStringNames`` type, which are not included.",
+							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("^(none|whitelist|all|allExcept)$"), ""),
 							}, /*END VALIDATORS*/
@@ -205,6 +230,7 @@ func originRequestPolicyResource(ctx context.Context) (resource.Resource, error)
 						// Property: QueryStrings
 						"query_strings": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
+							Description: "Contains a list of query string names.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -212,10 +238,12 @@ func originRequestPolicyResource(ctx context.Context) (resource.Resource, error)
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Required: true,
+					Description: "The URL query strings from viewer requests to include in origin requests.",
+					Required:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Required: true,
+			Description: "The origin request policy configuration.",
+			Required:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -229,7 +257,7 @@ func originRequestPolicyResource(ctx context.Context) (resource.Resource, error)
 	}
 
 	schema := schema.Schema{
-		Description: "Resource Type definition for AWS::CloudFront::OriginRequestPolicy",
+		Description: "An origin request policy.\n When it's attached to a cache behavior, the origin request policy determines the values that CloudFront includes in requests that it sends to the origin. Each request that CloudFront sends to the origin includes the following:\n  +  The request body and the URL path (without the domain name) from the viewer request.\n  +  The headers that CloudFront automatically includes in every origin request, including ``Host``, ``User-Agent``, and ``X-Amz-Cf-Id``.\n  +  All HTTP headers, cookies, and URL query strings that are specified in the cache policy or the origin request policy. These can include items from the viewer request and, in the case of headers, additional ones that are added by CloudFront.\n  \n CloudFront sends a request when it can't find an object in its cache that matches the request. If you want to send values to the origin and also include them in the cache key, use ``CachePolicy``.",
 		Version:     1,
 		Attributes:  attributes,
 	}

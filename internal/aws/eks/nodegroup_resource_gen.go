@@ -256,6 +256,39 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: NodeRepairConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The node auto repair configuration for node group.",
+		//	  "properties": {
+		//	    "Enabled": {
+		//	      "description": "Set this value to true to enable node auto repair for the node group.",
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"node_repair_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Enabled
+				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Set this value to true to enable node auto repair for the node group.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The node auto repair configuration for node group.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: NodeRole
 		// CloudFormation resource type schema:
 		//
@@ -560,6 +593,10 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 		//	      "maximum": 100,
 		//	      "minimum": 1,
 		//	      "type": "number"
+		//	    },
+		//	    "UpdateStrategy": {
+		//	      "description": "The configuration for the behavior to follow during an node group version update of this managed node group. You choose between two possible strategies for replacing nodes during an UpdateNodegroupVersion action.",
+		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -588,6 +625,15 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 						float64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateStrategy
+				"update_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The configuration for the behavior to follow during an node group version update of this managed node group. You choose between two possible strategies for replacing nodes during an UpdateNodegroupVersion action.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -643,6 +689,7 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 		"disk_size":                  "DiskSize",
 		"ec_2_ssh_key":               "Ec2SshKey",
 		"effect":                     "Effect",
+		"enabled":                    "Enabled",
 		"force_update_enabled":       "ForceUpdateEnabled",
 		"id":                         "Id",
 		"instance_types":             "InstanceTypes",
@@ -654,6 +701,7 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 		"max_unavailable_percentage": "MaxUnavailablePercentage",
 		"min_size":                   "MinSize",
 		"name":                       "Name",
+		"node_repair_config":         "NodeRepairConfig",
 		"node_role":                  "NodeRole",
 		"nodegroup_id":               "Id",
 		"nodegroup_name":             "NodegroupName",
@@ -665,6 +713,7 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 		"tags":                       "Tags",
 		"taints":                     "Taints",
 		"update_config":              "UpdateConfig",
+		"update_strategy":            "UpdateStrategy",
 		"value":                      "Value",
 		"version":                    "Version",
 	})

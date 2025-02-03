@@ -25,6 +25,7 @@ Data Source schema for AWS::IoTSiteWise::Gateway
 - `gateway_id` (String) The ID of the gateway device.
 - `gateway_name` (String) A unique, friendly name for the gateway.
 - `gateway_platform` (Attributes) The gateway's platform. You can only specify one platform in a gateway. (see [below for nested schema](#nestedatt--gateway_platform))
+- `gateway_version` (String) The version of the gateway you want to create.
 - `tags` (Attributes List) A list of key-value pairs that contain metadata for the gateway. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--gateway_capability_summaries"></a>
@@ -41,23 +42,16 @@ Read-Only:
 
 Read-Only:
 
-- `greengrass` (Attributes) A gateway that runs on AWS IoT Greengrass V1. (see [below for nested schema](#nestedatt--gateway_platform--greengrass))
+- `greengrass` (String) A gateway that runs on AWS IoT Greengrass V1.
 - `greengrass_v2` (Attributes) A gateway that runs on AWS IoT Greengrass V2. (see [below for nested schema](#nestedatt--gateway_platform--greengrass_v2))
 - `siemens_ie` (Attributes) A gateway that runs on Siemens Industrial Edge. (see [below for nested schema](#nestedatt--gateway_platform--siemens_ie))
-
-<a id="nestedatt--gateway_platform--greengrass"></a>
-### Nested Schema for `gateway_platform.greengrass`
-
-Read-Only:
-
-- `group_arn` (String) The ARN of the Greengrass group.
-
 
 <a id="nestedatt--gateway_platform--greengrass_v2"></a>
 ### Nested Schema for `gateway_platform.greengrass_v2`
 
 Read-Only:
 
+- `core_device_operating_system` (String) The operating system of the core device in AWS IoT Greengrass V2.
 - `core_device_thing_name` (String) The name of the CoreDevice in GreenGrass V2.
 
 

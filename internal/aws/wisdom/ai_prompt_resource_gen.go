@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -147,6 +148,18 @@ func aIPromptResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ModifiedTimeSeconds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "number"
+		//	}
+		"modified_time_seconds": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Computed: true,
+			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+				float64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -268,7 +281,9 @@ func aIPromptResource(ctx context.Context) (resource.Resource, error) {
 		//	  "enum": [
 		//	    "ANSWER_GENERATION",
 		//	    "INTENT_LABELING_GENERATION",
-		//	    "QUERY_REFORMULATION"
+		//	    "QUERY_REFORMULATION",
+		//	    "SELF_SERVICE_PRE_PROCESSING",
+		//	    "SELF_SERVICE_ANSWER_GENERATION"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -279,6 +294,8 @@ func aIPromptResource(ctx context.Context) (resource.Resource, error) {
 					"ANSWER_GENERATION",
 					"INTENT_LABELING_GENERATION",
 					"QUERY_REFORMULATION",
+					"SELF_SERVICE_PRE_PROCESSING",
+					"SELF_SERVICE_ANSWER_GENERATION",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -314,6 +331,7 @@ func aIPromptResource(ctx context.Context) (resource.Resource, error) {
 		"assistant_id":           "AssistantId",
 		"description":            "Description",
 		"model_id":               "ModelId",
+		"modified_time_seconds":  "ModifiedTimeSeconds",
 		"name":                   "Name",
 		"tags":                   "Tags",
 		"template_configuration": "TemplateConfiguration",

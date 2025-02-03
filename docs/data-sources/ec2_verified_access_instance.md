@@ -21,6 +21,8 @@ Data Source schema for AWS::EC2::VerifiedAccessInstance
 
 ### Read-Only
 
+- `cidr_endpoints_custom_sub_domain` (String) Introduce CidrEndpointsCustomSubDomain property to represent the domain (say, ava.my-company.com)
+- `cidr_endpoints_custom_sub_domain_name_servers` (List of String) Property to represent the name servers assoicated with the domain that AVA manages (say, ['ns1.amazonaws.com', 'ns2.amazonaws.com', 'ns3.amazonaws.com', 'ns4.amazonaws.com']).
 - `creation_time` (String) Time this Verified Access Instance was created.
 - `description` (String) A description for the AWS Verified Access instance.
 - `fips_enabled` (Boolean) Indicates whether FIPS is enabled

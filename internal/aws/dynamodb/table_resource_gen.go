@@ -289,6 +289,35 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		//	          "ReadCapacityUnits"
 		//	        ],
 		//	        "type": "object"
+		//	      },
+		//	      "WarmThroughput": {
+		//	        "additionalProperties": false,
+		//	        "anyOf": [
+		//	          {
+		//	            "required": [
+		//	              "ReadUnitsPerSecond"
+		//	            ]
+		//	          },
+		//	          {
+		//	            "required": [
+		//	              "WriteUnitsPerSecond"
+		//	            ]
+		//	          }
+		//	        ],
+		//	        "description": "Represents the warm throughput value (in read units per second and write units per second) for the specified secondary index. If you use this parameter, you must specify ``ReadUnitsPerSecond``, ``WriteUnitsPerSecond``, or both.",
+		//	        "properties": {
+		//	          "ReadUnitsPerSecond": {
+		//	            "description": "Represents the number of read operations your base table can instantaneously support.",
+		//	            "minimum": 1,
+		//	            "type": "integer"
+		//	          },
+		//	          "WriteUnitsPerSecond": {
+		//	            "description": "Represents the number of write operations your base table can instantaneously support.",
+		//	            "minimum": 1,
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "type": "object"
 		//	      }
 		//	    },
 		//	    "required": [
@@ -483,6 +512,41 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 							objectplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
+					// Property: WarmThroughput
+					"warm_throughput": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ReadUnitsPerSecond
+							"read_units_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "Represents the number of read operations your base table can instantaneously support.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.Int64{ /*START VALIDATORS*/
+									int64validator.AtLeast(1),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: WriteUnitsPerSecond
+							"write_units_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "Represents the number of write operations your base table can instantaneously support.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.Int64{ /*START VALIDATORS*/
+									int64validator.AtLeast(1),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Represents the warm throughput value (in read units per second and write units per second) for the specified secondary index. If you use this parameter, you must specify ``ReadUnitsPerSecond``, ``WriteUnitsPerSecond``, or both.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "Global secondary indexes to be created on the table. You can create up to 20 global secondary indexes.\n  If you update a table to include a new global secondary index, CFNlong initiates the index creation and then proceeds with the stack update. CFNlong doesn't wait for the index to complete creation because the backfilling phase can take a long time, depending on the size of the table. You can't use the index or update the table until the index's status is ``ACTIVE``. You can track its status by using the DynamoDB [DescribeTable](https://docs.aws.amazon.com/cli/latest/reference/dynamodb/describe-table.html) command.\n If you add or delete an index during an update, we recommend that you don't update any other resources. If your stack fails to update and is rolled back while adding a new index, you must manually delete the index. \n Updates are not supported. The following are exceptions:\n  +  If you update either the contributor insights specification or the provisioned throughput values of global secondary indexes, you can update the table without interruption.\n  +  You can delete or add one global secondary index without interruption. If you do both in the same update (for example, by changing the index's logical ID), the update fails.",
@@ -497,7 +561,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "Specifies the properties of data being imported from the S3 bucket source to the table.\n  If you specify the ``ImportSourceSpecification`` property, and also specify either the ``StreamSpecification``, the ``TableClass`` property, or the ``DeletionProtectionEnabled`` property, the IAM entity creating/updating stack must have ``UpdateTable`` permission.",
+		//	  "description": "Specifies the properties of data being imported from the S3 bucket source to the\" table.\n  If you specify the ``ImportSourceSpecification`` property, and also specify either the ``StreamSpecification``, the ``TableClass`` property, the ``DeletionProtectionEnabled`` property, or the ``WarmThroughput`` property, the IAM entity creating/updating stack must have ``UpdateTable`` permission.",
 		//	  "properties": {
 		//	    "InputCompressionType": {
 		//	      "description": "Type of compression to be used on the input coming from the imported table.",
@@ -678,7 +742,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "Specifies the properties of data being imported from the S3 bucket source to the table.\n  If you specify the ``ImportSourceSpecification`` property, and also specify either the ``StreamSpecification``, the ``TableClass`` property, or the ``DeletionProtectionEnabled`` property, the IAM entity creating/updating stack must have ``UpdateTable`` permission.",
+			Description: "Specifies the properties of data being imported from the S3 bucket source to the\" table.\n  If you specify the ``ImportSourceSpecification`` property, and also specify either the ``StreamSpecification``, the ``TableClass`` property, the ``DeletionProtectionEnabled`` property, or the ``WarmThroughput`` property, the IAM entity creating/updating stack must have ``UpdateTable`` permission.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -994,6 +1058,12 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		//	    "PointInTimeRecoveryEnabled": {
 		//	      "description": "Indicates whether point in time recovery is enabled (true) or disabled (false) on the table.",
 		//	      "type": "boolean"
+		//	    },
+		//	    "RecoveryPeriodInDays": {
+		//	      "description": "The number of preceding days for which continuous backups are taken and maintained. Your table data is only recoverable to any point-in-time from within the configured recovery period. This parameter is optional. If no value is provided, the value will default to 35.",
+		//	      "maximum": 35,
+		//	      "minimum": 1,
+		//	      "type": "integer"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -1007,6 +1077,18 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: RecoveryPeriodInDays
+				"recovery_period_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The number of preceding days for which continuous backups are taken and maintained. Your table data is only recoverable to any point-in-time from within the configured recovery period. This parameter is optional. If no value is provided, the value will default to 35.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.Between(1, 35),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -1420,6 +1502,72 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: WarmThroughput
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "anyOf": [
+		//	    {
+		//	      "required": [
+		//	        "ReadUnitsPerSecond"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "WriteUnitsPerSecond"
+		//	      ]
+		//	    }
+		//	  ],
+		//	  "description": "Represents the warm throughput (in read units per second and write units per second) for creating a table.",
+		//	  "properties": {
+		//	    "ReadUnitsPerSecond": {
+		//	      "description": "Represents the number of read operations your base table can instantaneously support.",
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    },
+		//	    "WriteUnitsPerSecond": {
+		//	      "description": "Represents the number of write operations your base table can instantaneously support.",
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"warm_throughput": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ReadUnitsPerSecond
+				"read_units_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Represents the number of read operations your base table can instantaneously support.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.AtLeast(1),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: WriteUnitsPerSecond
+				"write_units_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Represents the number of write operations your base table can instantaneously support.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.AtLeast(1),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Represents the warm throughput (in read units per second and write units per second) for creating a table.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -1432,7 +1580,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "The ``AWS::DynamoDB::Table`` resource creates a DDB table. For more information, see [CreateTable](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_CreateTable.html) in the *API Reference*.\n You should be aware of the following behaviors when working with DDB tables:\n  +   CFNlong typically creates DDB tables in parallel. However, if your template includes multiple DDB tables with indexes, you must declare dependencies so that the tables are created sequentially. DDBlong limits the number of tables with secondary indexes that are in the creating state. If you create multiple tables with indexes at the same time, DDB returns an error and the stack operation fails. For an example, see [DynamoDB Table with a DependsOn Attribute](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html#aws-resource-dynamodb-table--examples--DynamoDB_Table_with_a_DependsOn_Attribute).\n  \n   Our guidance is to use the latest schema documented here for your CFNlong templates. This schema supports the provisioning of all table settings below. When using this schema in your CFNlong templates, please ensure that your Identity and Access Management (IAM) policies are updated with appropriate permissions to allow for the authorization of these setting changes.",
+		Description: "The ``AWS::DynamoDB::Table`` resource creates a DDB table. For more information, see [CreateTable](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_CreateTable.html) in the *API Reference*.\n You should be aware of the following behaviors when working with DDB tables:\n  +   CFNlong typically creates DDB tables in parallel. However, if your template includes multiple DDB tables with indexes, you must declare dependencies so that the tables are created sequentially. DDBlong limits the number of tables with secondary indexes that are in the creating state. If you create multiple tables with indexes at the same time, DDB returns an error and the stack operation fails. For an example, see [DynamoDB Table with a DependsOn Attribute](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html#aws-resource-dynamodb-table--examples--DynamoDB_Table_with_a_DependsOn_Attribute).\n  \n   Our guidance is to use the latest schema documented for your CFNlong templates. This schema supports the provisioning of all table settings below. When using this schema in your CFNlong templates, please ensure that your Identity and Access Management (IAM) policies are updated with appropriate permissions to allow for the authorization of these setting changes.",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -1477,6 +1625,8 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		"projection_type":                      "ProjectionType",
 		"provisioned_throughput":               "ProvisionedThroughput",
 		"read_capacity_units":                  "ReadCapacityUnits",
+		"read_units_per_second":                "ReadUnitsPerSecond",
+		"recovery_period_in_days":              "RecoveryPeriodInDays",
 		"resource_policy":                      "ResourcePolicy",
 		"s3_bucket":                            "S3Bucket",
 		"s3_bucket_owner":                      "S3BucketOwner",
@@ -1493,7 +1643,9 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		"tags":                                 "Tags",
 		"time_to_live_specification":           "TimeToLiveSpecification",
 		"value":                                "Value",
+		"warm_throughput":                      "WarmThroughput",
 		"write_capacity_units":                 "WriteCapacityUnits",
+		"write_units_per_second":               "WriteUnitsPerSecond",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

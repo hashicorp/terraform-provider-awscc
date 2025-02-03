@@ -29,7 +29,43 @@ Data Source schema for AWS::IoTFleetWise::Vehicle
 - `last_modification_time` (String)
 - `model_manifest_arn` (String)
 - `name` (String)
+- `state_templates` (Attributes Set) (see [below for nested schema](#nestedatt--state_templates))
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--state_templates"></a>
+### Nested Schema for `state_templates`
+
+Read-Only:
+
+- `identifier` (String)
+- `state_template_update_strategy` (Attributes) (see [below for nested schema](#nestedatt--state_templates--state_template_update_strategy))
+
+<a id="nestedatt--state_templates--state_template_update_strategy"></a>
+### Nested Schema for `state_templates.state_template_update_strategy`
+
+Read-Only:
+
+- `on_change` (String)
+- `periodic` (Attributes) (see [below for nested schema](#nestedatt--state_templates--state_template_update_strategy--periodic))
+
+<a id="nestedatt--state_templates--state_template_update_strategy--periodic"></a>
+### Nested Schema for `state_templates.state_template_update_strategy.periodic`
+
+Read-Only:
+
+- `state_template_update_rate` (Attributes) (see [below for nested schema](#nestedatt--state_templates--state_template_update_strategy--periodic--state_template_update_rate))
+
+<a id="nestedatt--state_templates--state_template_update_strategy--periodic--state_template_update_rate"></a>
+### Nested Schema for `state_templates.state_template_update_strategy.periodic.state_template_update_rate`
+
+Read-Only:
+
+- `unit` (String)
+- `value` (Number)
+
+
+
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

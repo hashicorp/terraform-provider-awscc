@@ -351,6 +351,27 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "FileSystemId"
 		//	            ],
 		//	            "type": "object"
+		//	          },
+		//	          "FSxLustreFileSystemConfig": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "FileSystemId": {
+		//	                "maxLength": 21,
+		//	                "minLength": 11,
+		//	                "pattern": "^(fs-[0-9a-f]{8,})$",
+		//	                "type": "string"
+		//	              },
+		//	              "FileSystemPath": {
+		//	                "maxLength": 256,
+		//	                "minLength": 1,
+		//	                "pattern": "^\\/\\S*$",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "FileSystemId"
+		//	            ],
+		//	            "type": "object"
 		//	          }
 		//	        },
 		//	        "type": "object"
@@ -1004,7 +1025,13 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "InferenceRecommender",
 		//	              "Endpoints",
 		//	              "Projects",
-		//	              "InferenceOptimization"
+		//	              "InferenceOptimization",
+		//	              "HyperPodClusters",
+		//	              "Comet",
+		//	              "DeepchecksLLMEvaluation",
+		//	              "Fiddler",
+		//	              "LakeraGuard",
+		//	              "PerformanceEvaluation"
 		//	            ],
 		//	            "type": "string"
 		//	          },
@@ -1122,6 +1149,20 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: EFSFileSystemConfig
 							"efs_file_system_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: FileSystemId
+									"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: FileSystemPath
+									"file_system_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: FSxLustreFileSystemConfig
+							"fsx_lustre_file_system_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: FileSystemId
 									"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1506,6 +1547,7 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"execution_role":                   "ExecutionRole",
 		"file_system_id":                   "FileSystemId",
 		"file_system_path":                 "FileSystemPath",
+		"fsx_lustre_file_system_config":    "FSxLustreFileSystemConfig",
 		"gid":                              "Gid",
 		"hidden_app_types":                 "HiddenAppTypes",
 		"hidden_ml_tools":                  "HiddenMlTools",

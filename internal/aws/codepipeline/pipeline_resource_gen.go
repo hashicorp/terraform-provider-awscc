@@ -655,6 +655,14 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "additionalProperties": false,
 		//	                    "description": "Represents information about condition.",
 		//	                    "properties": {
+		//	                      "Commands": {
+		//	                        "description": "The shell commands to run with your compute action in CodePipeline.",
+		//	                        "items": {
+		//	                          "type": "string"
+		//	                        },
+		//	                        "type": "array",
+		//	                        "uniqueItems": false
+		//	                      },
 		//	                      "Configuration": {
 		//	                        "description": "The rule's configuration. These are key-value pairs that specify input values for a rule.",
 		//	                        "type": "object"
@@ -776,6 +784,14 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "additionalProperties": false,
 		//	                    "description": "Represents information about condition.",
 		//	                    "properties": {
+		//	                      "Commands": {
+		//	                        "description": "The shell commands to run with your compute action in CodePipeline.",
+		//	                        "items": {
+		//	                          "type": "string"
+		//	                        },
+		//	                        "type": "array",
+		//	                        "uniqueItems": false
+		//	                      },
 		//	                      "Configuration": {
 		//	                        "description": "The rule's configuration. These are key-value pairs that specify input values for a rule.",
 		//	                        "type": "object"
@@ -890,6 +906,14 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "additionalProperties": false,
 		//	                    "description": "Represents information about condition.",
 		//	                    "properties": {
+		//	                      "Commands": {
+		//	                        "description": "The shell commands to run with your compute action in CodePipeline.",
+		//	                        "items": {
+		//	                          "type": "string"
+		//	                        },
+		//	                        "type": "array",
+		//	                        "uniqueItems": false
+		//	                      },
 		//	                      "Configuration": {
 		//	                        "description": "The rule's configuration. These are key-value pairs that specify input values for a rule.",
 		//	                        "type": "object"
@@ -1198,6 +1222,16 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 										"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Commands
+													"commands": schema.ListAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Description: "The shell commands to run with your compute action in CodePipeline.",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+															listplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
 													// Property: Configuration
 													"configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
 														CustomType:  jsontypes.NormalizedType{},
@@ -1409,6 +1443,16 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 										"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Commands
+													"commands": schema.ListAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Description: "The shell commands to run with your compute action in CodePipeline.",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+															listplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
 													// Property: Configuration
 													"configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
 														CustomType:  jsontypes.NormalizedType{},
@@ -1614,6 +1658,16 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 										"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Commands
+													"commands": schema.ListAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Description: "The shell commands to run with your compute action in CodePipeline.",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+															listplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
 													// Property: Configuration
 													"configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
 														CustomType:  jsontypes.NormalizedType{},

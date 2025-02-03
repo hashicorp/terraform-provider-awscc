@@ -269,6 +269,12 @@ func datasetResource(ctx context.Context) (resource.Resource, error) {
 		//	            "Bucket": {
 		//	              "type": "string"
 		//	            },
+		//	            "BucketOwner": {
+		//	              "description": "Bucket owner",
+		//	              "maxLength": 12,
+		//	              "minLength": 12,
+		//	              "type": "string"
+		//	            },
 		//	            "Key": {
 		//	              "type": "string"
 		//	            }
@@ -303,6 +309,12 @@ func datasetResource(ctx context.Context) (resource.Resource, error) {
 		//	            "Bucket": {
 		//	              "type": "string"
 		//	            },
+		//	            "BucketOwner": {
+		//	              "description": "Bucket owner",
+		//	              "maxLength": 12,
+		//	              "minLength": 12,
+		//	              "type": "string"
+		//	            },
 		//	            "Key": {
 		//	              "type": "string"
 		//	            }
@@ -333,6 +345,12 @@ func datasetResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "Input location",
 		//	      "properties": {
 		//	        "Bucket": {
+		//	          "type": "string"
+		//	        },
+		//	        "BucketOwner": {
+		//	          "description": "Bucket owner",
+		//	          "maxLength": 12,
+		//	          "minLength": 12,
 		//	          "type": "string"
 		//	        },
 		//	        "Key": {
@@ -388,6 +406,18 @@ func datasetResource(ctx context.Context) (resource.Resource, error) {
 									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: BucketOwner
+								"bucket_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Bucket owner",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(12, 12),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -463,6 +493,18 @@ func datasetResource(ctx context.Context) (resource.Resource, error) {
 										stringplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
+								// Property: BucketOwner
+								"bucket_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Bucket owner",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(12, 12),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
 								// Property: Key
 								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Optional: true,
@@ -514,6 +556,18 @@ func datasetResource(ctx context.Context) (resource.Resource, error) {
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: BucketOwner
+						"bucket_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Bucket owner",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(12, 12),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -1080,6 +1134,33 @@ func datasetResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Source
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Source type of the dataset",
+		//	  "enum": [
+		//	    "S3",
+		//	    "DATA-CATALOG",
+		//	    "DATABASE"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"source": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Source type of the dataset",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"S3",
+					"DATA-CATALOG",
+					"DATABASE",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1169,6 +1250,7 @@ func datasetResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"bucket":                        "Bucket",
+		"bucket_owner":                  "BucketOwner",
 		"catalog_id":                    "CatalogId",
 		"create_column":                 "CreateColumn",
 		"csv":                           "Csv",
@@ -1205,6 +1287,7 @@ func datasetResource(ctx context.Context) (resource.Resource, error) {
 		"s3_input_definition":           "S3InputDefinition",
 		"sheet_indexes":                 "SheetIndexes",
 		"sheet_names":                   "SheetNames",
+		"source":                        "Source",
 		"source_arn":                    "SourceArn",
 		"table_name":                    "TableName",
 		"tags":                          "Tags",

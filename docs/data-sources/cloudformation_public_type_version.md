@@ -25,7 +25,7 @@ Data Source schema for AWS::CloudFormation::PublicTypeVersion
 - `log_delivery_bucket` (String) A url to the S3 bucket where logs for the testType run will be available
 - `public_type_arn` (String) The Amazon Resource Number (ARN) assigned to the public extension upon publication
 - `public_version_number` (String) The version number of a public third-party extension
-- `publisher_id` (String) The publisher id assigned by CloudFormation for publishing in this region.
+- `publisher_id` (String) The reserved publisher id for this type, or the publisher id assigned by CloudFormation for publishing in this region.
 - `type` (String) The kind of extension
 - `type_name` (String) The name of the type being registered.
 

@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -108,6 +109,12 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "AutoImportDataQualityResult": {
 		//	          "description": "Specifies whether to automatically import data quality metrics as part of the data source run.",
 		//	          "type": "boolean"
+		//	        },
+		//	        "CatalogName": {
+		//	          "description": "The catalog name in the AWS Glue run configuration.",
+		//	          "maxLength": 128,
+		//	          "minLength": 1,
+		//	          "type": "string"
 		//	        },
 		//	        "DataAccessRole": {
 		//	          "description": "The data access role included in the configuration details of the AWS Glue data source.",
@@ -299,9 +306,33 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        }
 		//	      },
 		//	      "required": [
-		//	        "RedshiftCredentialConfiguration",
-		//	        "RedshiftStorage",
 		//	        "RelationalFilterConfigurations"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "SageMakerRunConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "The configuration details of the Amazon SageMaker data source.",
+		//	      "properties": {
+		//	        "TrackingAssets": {
+		//	          "additionalProperties": false,
+		//	          "description": "The tracking assets of the Amazon SageMaker run.",
+		//	          "patternProperties": {
+		//	            "": {
+		//	              "items": {
+		//	                "pattern": "^arn:aws[^:]*:sagemaker:[a-z]{2}-?(iso|gov)?-{1}[a-z]*-{1}[0-9]:\\d{12}:[\\w+=,.@-]{1,128}/[\\w+=,.@-]{1,256}$",
+		//	                "type": "string"
+		//	              },
+		//	              "maxItems": 500,
+		//	              "minItems": 0,
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "TrackingAssets"
 		//	      ],
 		//	      "type": "object"
 		//	    }
@@ -316,6 +347,11 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 						// Property: AutoImportDataQualityResult
 						"auto_import_data_quality_result": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Description: "Specifies whether to automatically import data quality metrics as part of the data source run.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: CatalogName
+						"catalog_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The catalog name in the AWS Glue run configuration.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: DataAccessRole
@@ -455,8 +491,44 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Description: "The configuration details of the Amazon Redshift data source.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: SageMakerRunConfiguration
+				"sage_maker_run_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: TrackingAssets
+						"tracking_assets":   // Pattern: ""
+						schema.MapAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.ListType{ElemType: types.StringType},
+							Description: "The tracking assets of the Amazon SageMaker run.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration details of the Amazon SageMaker data source.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Configuration of the data source. It can be set to either glueRunConfiguration or redshiftRunConfiguration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ConnectionId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The unique identifier of a connection used to fetch relevant parameters from connection during Datasource run",
+		//	  "type": "string"
+		//	}
+		"connection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of a connection used to fetch relevant parameters from connection during Datasource run",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ConnectionIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The unique identifier of a connection used to fetch relevant parameters from connection during Datasource run",
+		//	  "type": "string"
+		//	}
+		"connection_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of a connection used to fetch relevant parameters from connection during Datasource run",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
@@ -528,7 +600,6 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The unique identifier of the Amazon DataZone environment to which the data source publishes assets.",
-		//	  "pattern": "^[a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
 		"environment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -766,8 +837,11 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"asset_forms_input":                 "AssetFormsInput",
 		"auto_import_data_quality_result":   "AutoImportDataQualityResult",
+		"catalog_name":                      "CatalogName",
 		"cluster_name":                      "ClusterName",
 		"configuration":                     "Configuration",
+		"connection_id":                     "ConnectionId",
+		"connection_identifier":             "ConnectionIdentifier",
 		"content":                           "Content",
 		"created_at":                        "CreatedAt",
 		"data_access_role":                  "DataAccessRole",
@@ -798,11 +872,13 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"redshift_serverless_source":        "RedshiftServerlessSource",
 		"redshift_storage":                  "RedshiftStorage",
 		"relational_filter_configurations":  "RelationalFilterConfigurations",
+		"sage_maker_run_configuration":      "SageMakerRunConfiguration",
 		"schedule":                          "Schedule",
 		"schema_name":                       "SchemaName",
 		"secret_manager_arn":                "SecretManagerArn",
 		"status":                            "Status",
 		"timezone":                          "Timezone",
+		"tracking_assets":                   "TrackingAssets",
 		"type":                              "Type",
 		"type_identifier":                   "TypeIdentifier",
 		"type_revision":                     "TypeRevision",

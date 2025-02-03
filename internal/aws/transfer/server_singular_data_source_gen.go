@@ -413,6 +413,23 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"server_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: State
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "OFFLINE",
+		//	    "ONLINE",
+		//	    "STARTING",
+		//	    "STOPPING",
+		//	    "START_FAILED",
+		//	    "STOP_FAILED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: StructuredLogDestinations
 		// CloudFormation resource type schema:
 		//
@@ -625,6 +642,7 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"server_id":                                "ServerId",
 		"set_stat_option":                          "SetStatOption",
 		"sftp_authentication_methods":              "SftpAuthenticationMethods",
+		"state":                                    "State",
 		"structured_log_destinations":              "StructuredLogDestinations",
 		"subnet_ids":                               "SubnetIds",
 		"tags":                                     "Tags",

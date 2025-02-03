@@ -7,6 +7,7 @@ package efs
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
@@ -178,7 +179,7 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Describes the protection on the file system.",
 		//	  "properties": {
 		//	    "ReplicationOverwriteProtection": {
-		//	      "description": "The status of the file system's replication overwrite protection.\n  +   ``ENABLED`` ? The file system cannot be used as the destination file system in a replication configuration. The file system is writeable. Replication overwrite protection is ``ENABLED`` by default. \n  +   ``DISABLED`` ? The file system can be used as the destination file system in a replication configuration. The file system is read-only and can only be modified by EFS replication.\n  +   ``REPLICATING`` ? The file system is being used as the destination file system in a replication configuration. The file system is read-only and is only modified only by EFS replication.\n  \n If the replication configuration is deleted, the file system's replication overwrite protection is re-enabled, the file system becomes writeable.",
+		//	      "description": "The status of the file system's replication overwrite protection.\n  +   ``ENABLED`` ? The file system cannot be used as the destination file system in a replication configuration. The file system is writeable. Replication overwrite protection is ``ENABLED`` by default. \n  +   ``DISABLED`` ? The file system can be used as the destination file system in a replication configuration. The file system is read-only and can only be modified by EFS replication.\n  +   ``REPLICATING`` ? The file system is being used as the destination file system in a replication configuration. The file system is read-only and is modified only by EFS replication.\n  \n If the replication configuration is deleted, the file system's replication overwrite protection is re-enabled, the file system becomes writeable.",
 		//	      "enum": [
 		//	        "DISABLED",
 		//	        "ENABLED"
@@ -192,7 +193,7 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: ReplicationOverwriteProtection
 				"replication_overwrite_protection": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The status of the file system's replication overwrite protection.\n  +   ``ENABLED`` ? The file system cannot be used as the destination file system in a replication configuration. The file system is writeable. Replication overwrite protection is ``ENABLED`` by default. \n  +   ``DISABLED`` ? The file system can be used as the destination file system in a replication configuration. The file system is read-only and can only be modified by EFS replication.\n  +   ``REPLICATING`` ? The file system is being used as the destination file system in a replication configuration. The file system is read-only and is only modified only by EFS replication.\n  \n If the replication configuration is deleted, the file system's replication overwrite protection is re-enabled, the file system becomes writeable.",
+					Description: "The status of the file system's replication overwrite protection.\n  +   ``ENABLED`` ? The file system cannot be used as the destination file system in a replication configuration. The file system is writeable. Replication overwrite protection is ``ENABLED`` by default. \n  +   ``DISABLED`` ? The file system can be used as the destination file system in a replication configuration. The file system is read-only and can only be modified by EFS replication.\n  +   ``REPLICATING`` ? The file system is being used as the destination file system in a replication configuration. The file system is read-only and is modified only by EFS replication.\n  \n If the replication configuration is deleted, the file system's replication overwrite protection is re-enabled, the file system becomes writeable.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -414,6 +415,7 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 		//	          },
 		//	          "FileSystemId": {
 		//	            "description": "The ID of the destination Amazon EFS file system.",
+		//	            "pattern": "^(arn:aws[-a-z]*:elasticfilesystem:[0-9a-z-:]+:file-system/fs-[0-9a-f]{8,40}|fs-[0-9a-f]{8,40})$",
 		//	            "type": "string"
 		//	          },
 		//	          "KmsKeyId": {
@@ -422,6 +424,18 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 		//	          },
 		//	          "Region": {
 		//	            "description": "The AWS-Region in which the destination file system is located.\n  For One Zone file systems, the replication configuration must specify the AWS-Region in which the destination file system is located.",
+		//	            "type": "string"
+		//	          },
+		//	          "RoleArn": {
+		//	            "description": "The Amazon Resource Name (ARN) of the current source file system in the replication configuration.",
+		//	            "type": "string"
+		//	          },
+		//	          "Status": {
+		//	            "description": "Describes the status of the replication configuration. For more information about replication status, see [Viewing replication details](https://docs.aws.amazon.com//efs/latest/ug/awsbackup.html#restoring-backup-efsmonitoring-replication-status.html) in the *Amazon EFS User Guide*.",
+		//	            "type": "string"
+		//	          },
+		//	          "StatusMessage": {
+		//	            "description": "Message that provides details about the ``PAUSED`` or ``ERRROR`` state of the replication destination configuration. For more information about replication status messages, see [Viewing replication details](https://docs.aws.amazon.com//efs/latest/ug/awsbackup.html#restoring-backup-efsmonitoring-replication-status.html) in the *Amazon EFS User Guide*.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -455,6 +469,9 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 								Description: "The ID of the destination Amazon EFS file system.",
 								Optional:    true,
 								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[-a-z]*:elasticfilesystem:[0-9a-z-:]+:file-system/fs-[0-9a-f]{8,40}|fs-[0-9a-f]{8,40})$"), ""),
+								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
@@ -471,6 +488,33 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Region
 							"region": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The AWS-Region in which the destination file system is located.\n  For One Zone file systems, the replication configuration must specify the AWS-Region in which the destination file system is located.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: RoleArn
+							"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The Amazon Resource Name (ARN) of the current source file system in the replication configuration.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Status
+							"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Describes the status of the replication configuration. For more information about replication status, see [Viewing replication details](https://docs.aws.amazon.com//efs/latest/ug/awsbackup.html#restoring-backup-efsmonitoring-replication-status.html) in the *Amazon EFS User Guide*.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: StatusMessage
+							"status_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Message that provides details about the ``PAUSED`` or ``ERRROR`` state of the replication destination configuration. For more information about replication status messages, see [Viewing replication details](https://docs.aws.amazon.com//efs/latest/ug/awsbackup.html#restoring-backup-efsmonitoring-replication-status.html) in the *Amazon EFS User Guide*.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -553,7 +597,9 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 		"region":                              "Region",
 		"replication_configuration":           "ReplicationConfiguration",
 		"replication_overwrite_protection":    "ReplicationOverwriteProtection",
+		"role_arn":                            "RoleArn",
 		"status":                              "Status",
+		"status_message":                      "StatusMessage",
 		"throughput_mode":                     "ThroughputMode",
 		"transition_to_archive":               "TransitionToArchive",
 		"transition_to_ia":                    "TransitionToIA",

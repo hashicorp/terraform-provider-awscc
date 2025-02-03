@@ -522,7 +522,7 @@ func (g *Generator) GenerateResourceImportExamples(packageName, filename string,
 	for _, v := range resources {
 		tmplData, err := shared.GenerateTemplateData(g.UI(), v.CloudFormationTypeSchemaFile, shared.ResourceType, v.TerraformResourceType, v.GeneratedCodePackageName)
 		if err != nil {
-			return err
+			return fmt.Errorf("%s: %w", v.CloudFormationTypeSchemaFile, err)
 		}
 
 		r := &ResourceImportData{

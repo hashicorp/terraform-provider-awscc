@@ -1,0 +1,1 @@
+$ terraform import awscc_customerprofiles_event_trigger.example "domain_name|event_trigger_name"

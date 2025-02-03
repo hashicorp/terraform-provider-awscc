@@ -31,6 +31,7 @@ Data Source schema for AWS::FMS::Policy
 - `policy_name` (String)
 - `remediation_enabled` (Boolean)
 - `resource_set_ids` (List of String)
+- `resource_tag_logical_operator` (String)
 - `resource_tags` (Attributes List) (see [below for nested schema](#nestedatt--resource_tags))
 - `resource_type` (String) An AWS resource type
 - `resource_type_list` (List of String)

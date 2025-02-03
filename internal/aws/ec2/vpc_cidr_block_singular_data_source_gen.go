@@ -110,6 +110,17 @@ func vPCCidrBlockDataSource(ctx context.Context) (datasource.DataSource, error) 
 			Description: "An IPv6 CIDR block from the IPv6 address pool.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Ipv6CidrBlockNetworkBorderGroup
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the location from which we advertise the IPV6 CIDR block.",
+		//	  "type": "string"
+		//	}
+		"ipv_6_cidr_block_network_border_group": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the location from which we advertise the IPV6 CIDR block.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Ipv6IpamPoolId
 		// CloudFormation resource type schema:
 		//
@@ -171,18 +182,19 @@ func vPCCidrBlockDataSource(ctx context.Context) (datasource.DataSource, error) 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::VPCCidrBlock").WithTerraformTypeName("awscc_ec2_vpc_cidr_block")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"amazon_provided_ipv_6_cidr_block": "AmazonProvidedIpv6CidrBlock",
-		"cidr_block":                       "CidrBlock",
-		"ip_source":                        "IpSource",
-		"ipv_4_ipam_pool_id":               "Ipv4IpamPoolId",
-		"ipv_4_netmask_length":             "Ipv4NetmaskLength",
-		"ipv_6_address_attribute":          "Ipv6AddressAttribute",
-		"ipv_6_cidr_block":                 "Ipv6CidrBlock",
-		"ipv_6_ipam_pool_id":               "Ipv6IpamPoolId",
-		"ipv_6_netmask_length":             "Ipv6NetmaskLength",
-		"ipv_6_pool":                       "Ipv6Pool",
-		"vpc_cidr_block_id":                "Id",
-		"vpc_id":                           "VpcId",
+		"amazon_provided_ipv_6_cidr_block":      "AmazonProvidedIpv6CidrBlock",
+		"cidr_block":                            "CidrBlock",
+		"ip_source":                             "IpSource",
+		"ipv_4_ipam_pool_id":                    "Ipv4IpamPoolId",
+		"ipv_4_netmask_length":                  "Ipv4NetmaskLength",
+		"ipv_6_address_attribute":               "Ipv6AddressAttribute",
+		"ipv_6_cidr_block":                      "Ipv6CidrBlock",
+		"ipv_6_cidr_block_network_border_group": "Ipv6CidrBlockNetworkBorderGroup",
+		"ipv_6_ipam_pool_id":                    "Ipv6IpamPoolId",
+		"ipv_6_netmask_length":                  "Ipv6NetmaskLength",
+		"ipv_6_pool":                            "Ipv6Pool",
+		"vpc_cidr_block_id":                     "Id",
+		"vpc_id":                                "VpcId",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

@@ -44,6 +44,29 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"aws_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: ConfigOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Model for configuration of a Topic",
+		//	  "properties": {
+		//	    "QBusinessInsightsEnabled": {
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"config_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: QBusinessInsightsEnabled
+				"q_business_insights_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Model for configuration of a Topic",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DataSets
 		// CloudFormation resource type schema:
 		//
@@ -244,7 +267,9 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                        "THOUSANDS",
 		//	                        "MILLIONS",
 		//	                        "BILLIONS",
-		//	                        "TRILLIONS"
+		//	                        "TRILLIONS",
+		//	                        "LAKHS",
+		//	                        "CRORES"
 		//	                      ],
 		//	                      "type": "string"
 		//	                    },
@@ -567,7 +592,9 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                        "THOUSANDS",
 		//	                        "MILLIONS",
 		//	                        "BILLIONS",
-		//	                        "TRILLIONS"
+		//	                        "TRILLIONS",
+		//	                        "LAKHS",
+		//	                        "CRORES"
 		//	                      ],
 		//	                      "type": "string"
 		//	                    },
@@ -1901,6 +1928,21 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: FolderArns
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "maxItems": 20,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"folder_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -1977,6 +2019,7 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"column_synonyms":                  "ColumnSynonyms",
 		"columns":                          "Columns",
 		"comparative_order":                "ComparativeOrder",
+		"config_options":                   "ConfigOptions",
 		"constant":                         "Constant",
 		"constant_type":                    "ConstantType",
 		"currency_symbol":                  "CurrencySymbol",
@@ -2009,6 +2052,7 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"filter_synonyms":                  "FilterSynonyms",
 		"filter_type":                      "FilterType",
 		"filters":                          "Filters",
+		"folder_arns":                      "FolderArns",
 		"fraction_digits":                  "FractionDigits",
 		"grouping_separator":               "GroupingSeparator",
 		"inclusive":                        "Inclusive",
@@ -2030,6 +2074,7 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"property_name":                    "PropertyName",
 		"property_role":                    "PropertyRole",
 		"property_usage":                   "PropertyUsage",
+		"q_business_insights_enabled":      "QBusinessInsightsEnabled",
 		"range_constant":                   "RangeConstant",
 		"relative_date_filter":             "RelativeDateFilter",
 		"relative_date_filter_function":    "RelativeDateFilterFunction",

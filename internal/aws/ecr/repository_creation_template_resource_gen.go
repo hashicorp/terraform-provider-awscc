@@ -128,12 +128,13 @@ func repositoryCreationTemplateResource(ctx context.Context) (resource.Resource,
 		//	      "description": "The encryption type to use.",
 		//	      "enum": [
 		//	        "AES256",
-		//	        "KMS"
+		//	        "KMS",
+		//	        "KMS_DSSE"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "KmsKey": {
-		//	      "description": "If you use the KMS encryption type, specify the CMK to use for encryption. The alias, key ID, or full ARN of the CMK can be specified. The key must exist in the same Region as the repository. If no key is specified, the default AWS managed CMK for Amazon ECR will be used.",
+		//	      "description": "If you use the KMS or KMS_DSSE encryption type, specify the CMK to use for encryption. The alias, key ID, or full ARN of the CMK can be specified. The key must exist in the same Region as the repository. If no key is specified, the default AWS managed CMK for Amazon ECR will be used.",
 		//	      "maxLength": 2048,
 		//	      "minLength": 1,
 		//	      "type": "string"
@@ -155,6 +156,7 @@ func repositoryCreationTemplateResource(ctx context.Context) (resource.Resource,
 						stringvalidator.OneOf(
 							"AES256",
 							"KMS",
+							"KMS_DSSE",
 						),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
@@ -164,7 +166,7 @@ func repositoryCreationTemplateResource(ctx context.Context) (resource.Resource,
 				}, /*END ATTRIBUTE*/
 				// Property: KmsKey
 				"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "If you use the KMS encryption type, specify the CMK to use for encryption. The alias, key ID, or full ARN of the CMK can be specified. The key must exist in the same Region as the repository. If no key is specified, the default AWS managed CMK for Amazon ECR will be used.",
+					Description: "If you use the KMS or KMS_DSSE encryption type, specify the CMK to use for encryption. The alias, key ID, or full ARN of the CMK can be specified. The key must exist in the same Region as the repository. If no key is specified, the default AWS managed CMK for Amazon ECR will be used.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/

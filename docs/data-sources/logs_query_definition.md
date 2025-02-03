@@ -24,4 +24,5 @@ Data Source schema for AWS::Logs::QueryDefinition
 - `log_group_names` (List of String) Optionally define specific log groups as part of your query definition
 - `name` (String) A name for the saved query definition
 - `query_definition_id` (String) Unique identifier of a query definition
+- `query_language` (String) Query language of the query string. Possible values are CWLI, SQL, PPL, with CWLI being the default.
 - `query_string` (String) The query string to use for this definition

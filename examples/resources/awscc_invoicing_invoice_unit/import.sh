@@ -1,0 +1,1 @@
+$ terraform import awscc_invoicing_invoice_unit.example "invoice_unit_arn"

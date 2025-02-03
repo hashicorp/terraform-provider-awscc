@@ -301,6 +301,21 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 		//	              "FileSystemId"
 		//	            ],
 		//	            "type": "object"
+		//	          },
+		//	          "FSxLustreFileSystem": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "FileSystemId": {
+		//	                "maxLength": 21,
+		//	                "minLength": 11,
+		//	                "pattern": "^(fs-[0-9a-f]{8,})$",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "FileSystemId"
+		//	            ],
+		//	            "type": "object"
 		//	          }
 		//	        },
 		//	        "type": "object"
@@ -933,6 +948,29 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: EFSFileSystem
 							"efs_file_system": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: FileSystemId
+									"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(11, 21),
+											stringvalidator.RegexMatches(regexp.MustCompile("^(fs-[0-9a-f]{8,})$"), ""),
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: FSxLustreFileSystem
+							"fsx_lustre_file_system": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: FileSystemId
 									"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1731,6 +1769,7 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 		"ebs_volume_size_in_gb":        "EbsVolumeSizeInGb",
 		"efs_file_system":              "EFSFileSystem",
 		"file_system_id":               "FileSystemId",
+		"fsx_lustre_file_system":       "FSxLustreFileSystem",
 		"idle_settings":                "IdleSettings",
 		"idle_timeout_in_minutes":      "IdleTimeoutInMinutes",
 		"image_name":                   "ImageName",

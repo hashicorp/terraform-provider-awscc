@@ -70,6 +70,12 @@ func pluginDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "OAuth2ClientCredentialConfiguration": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
+		//	        "AuthorizationUrl": {
+		//	          "maxLength": 2048,
+		//	          "minLength": 1,
+		//	          "pattern": "^(https?|ftp|file)://([^\\s]*)$",
+		//	          "type": "string"
+		//	        },
 		//	        "RoleArn": {
 		//	          "maxLength": 1284,
 		//	          "minLength": 0,
@@ -80,6 +86,12 @@ func pluginDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "maxLength": 1284,
 		//	          "minLength": 0,
 		//	          "pattern": "",
+		//	          "type": "string"
+		//	        },
+		//	        "TokenUrl": {
+		//	          "maxLength": 2048,
+		//	          "minLength": 1,
+		//	          "pattern": "^(https?|ftp|file)://([^\\s]*)$",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -116,12 +128,20 @@ func pluginDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: OAuth2ClientCredentialConfiguration
 				"o_auth_2_client_credential_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AuthorizationUrl
+						"authorization_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
 						// Property: RoleArn
 						"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
 						// Property: SecretArn
 						"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: TokenUrl
+						"token_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -315,7 +335,6 @@ func pluginDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
@@ -364,7 +383,19 @@ func pluginDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "SALESFORCE",
 		//	    "JIRA",
 		//	    "ZENDESK",
-		//	    "CUSTOM"
+		//	    "CUSTOM",
+		//	    "QUICKSIGHT",
+		//	    "SERVICENOW_NOW_PLATFORM",
+		//	    "JIRA_CLOUD",
+		//	    "SALESFORCE_CRM",
+		//	    "ZENDESK_SUITE",
+		//	    "ATLASSIAN_CONFLUENCE",
+		//	    "GOOGLE_CALENDAR",
+		//	    "MICROSOFT_TEAMS",
+		//	    "MICROSOFT_EXCHANGE",
+		//	    "PAGERDUTY_ADVANCE",
+		//	    "SMARTSHEET",
+		//	    "ASANA"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -403,6 +434,7 @@ func pluginDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"api_schema_type":             "ApiSchemaType",
 		"application_id":              "ApplicationId",
 		"auth_configuration":          "AuthConfiguration",
+		"authorization_url":           "AuthorizationUrl",
 		"basic_auth_configuration":    "BasicAuthConfiguration",
 		"bucket":                      "Bucket",
 		"build_status":                "BuildStatus",
@@ -422,6 +454,7 @@ func pluginDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"server_url": "ServerUrl",
 		"state":      "State",
 		"tags":       "Tags",
+		"token_url":  "TokenUrl",
 		"type":       "Type",
 		"updated_at": "UpdatedAt",
 		"value":      "Value",

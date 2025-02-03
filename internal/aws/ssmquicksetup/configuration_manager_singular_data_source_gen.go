@@ -241,7 +241,7 @@ func configurationManagerDataSource(ctx context.Context) (datasource.DataSource,
 		//	    "": {
 		//	      "maxLength": 256,
 		//	      "minLength": 1,
-		//	      "pattern": "^[A-Za-z0-9+=@_\\/:.-]+$",
+		//	      "pattern": "^[A-Za-z0-9 +=@_\\/:.-]+$",
 		//	      "type": "string"
 		//	    }
 		//	  },

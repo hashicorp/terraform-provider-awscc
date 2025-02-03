@@ -9,10 +9,12 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -85,7 +87,8 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		//	  "enum": [
 		//	    "EXTERNAL",
 		//	    "CUSTOM",
-		//	    "MESSAGE_TEMPLATES"
+		//	    "MESSAGE_TEMPLATES",
+		//	    "MANAGED"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -96,6 +99,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 					"EXTERNAL",
 					"CUSTOM",
 					"MESSAGE_TEMPLATES",
+					"MANAGED",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -192,14 +196,6 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "additionalProperties": false,
-		//	  "oneOf": [
-		//	    {
-		//	      "required": [
-		//	        "AppIntegrations"
-		//	      ]
-		//	    }
-		//	  ],
 		//	  "properties": {
 		//	    "AppIntegrations": {
 		//	      "additionalProperties": false,
@@ -225,6 +221,79 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		//	      "required": [
 		//	        "AppIntegrationArn"
 		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "ManagedSourceConfiguration": {
+		//	      "properties": {
+		//	        "WebCrawlerConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "CrawlerLimits": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "RateLimit": {
+		//	                  "maximum": 3000,
+		//	                  "minimum": 1,
+		//	                  "type": "number"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "ExclusionFilters": {
+		//	              "items": {
+		//	                "maxLength": 1000,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "maxItems": 25,
+		//	              "minItems": 1,
+		//	              "type": "array"
+		//	            },
+		//	            "InclusionFilters": {
+		//	              "items": {
+		//	                "maxLength": 1000,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "maxItems": 25,
+		//	              "minItems": 1,
+		//	              "type": "array"
+		//	            },
+		//	            "Scope": {
+		//	              "enum": [
+		//	                "HOST_ONLY",
+		//	                "SUBDOMAINS"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "UrlConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "SeedUrls": {
+		//	                  "items": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "Url": {
+		//	                        "pattern": "^https?://[A-Za-z0-9][^\\s]*$",
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  },
+		//	                  "maxItems": 100,
+		//	                  "minItems": 1,
+		//	                  "type": "array"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "UrlConfiguration"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
 		//	      "type": "object"
 		//	    }
 		//	  },
@@ -262,6 +331,130 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								generic.Multiset(),
 								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ManagedSourceConfiguration
+				"managed_source_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: WebCrawlerConfiguration
+						"web_crawler_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CrawlerLimits
+								"crawler_limits": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: RateLimit
+										"rate_limit": schema.Float64Attribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.Float64{ /*START VALIDATORS*/
+												float64validator.Between(1.000000, 3000.000000),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+												float64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ExclusionFilters
+								"exclusion_filters": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.SizeBetween(1, 25),
+										listvalidator.ValueStringsAre(
+											stringvalidator.LengthBetween(1, 1000),
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: InclusionFilters
+								"inclusion_filters": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.SizeBetween(1, 25),
+										listvalidator.ValueStringsAre(
+											stringvalidator.LengthBetween(1, 1000),
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Scope
+								"scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"HOST_ONLY",
+											"SUBDOMAINS",
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: UrlConfiguration
+								"url_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: SeedUrls
+										"seed_urls": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Url
+													"url": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Optional: true,
+														Computed: true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.RegexMatches(regexp.MustCompile("^https?://[A-Za-z0-9][^\\s]*$"), ""),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												listvalidator.SizeBetween(1, 100),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Object{ /*START VALIDATORS*/
+										fwvalidators.NotNullObject(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -344,6 +537,389 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 				setplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: VectorIngestionConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "ChunkingConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "ChunkingStrategy": {
+		//	          "enum": [
+		//	            "FIXED_SIZE",
+		//	            "NONE",
+		//	            "HIERARCHICAL",
+		//	            "SEMANTIC"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "FixedSizeChunkingConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "MaxTokens": {
+		//	              "minimum": 1,
+		//	              "type": "number"
+		//	            },
+		//	            "OverlapPercentage": {
+		//	              "maximum": 99,
+		//	              "minimum": 1,
+		//	              "type": "number"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "MaxTokens",
+		//	            "OverlapPercentage"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "HierarchicalChunkingConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "LevelConfigurations": {
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "MaxTokens": {
+		//	                    "maximum": 8192,
+		//	                    "minimum": 1,
+		//	                    "type": "number"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "MaxTokens"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "maxItems": 2,
+		//	              "minItems": 2,
+		//	              "type": "array"
+		//	            },
+		//	            "OverlapTokens": {
+		//	              "minimum": 1,
+		//	              "type": "number"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "LevelConfigurations",
+		//	            "OverlapTokens"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "SemanticChunkingConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "BreakpointPercentileThreshold": {
+		//	              "maximum": 99,
+		//	              "minimum": 50,
+		//	              "type": "number"
+		//	            },
+		//	            "BufferSize": {
+		//	              "maximum": 1,
+		//	              "minimum": 0,
+		//	              "type": "number"
+		//	            },
+		//	            "MaxTokens": {
+		//	              "minimum": 1,
+		//	              "type": "number"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "MaxTokens",
+		//	            "BufferSize",
+		//	            "BreakpointPercentileThreshold"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ChunkingStrategy"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "ParsingConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "BedrockFoundationModelConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "ModelArn": {
+		//	              "maxLength": 2048,
+		//	              "minLength": 1,
+		//	              "pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}::foundation-model\\/anthropic.claude-3-haiku-20240307-v1:0$",
+		//	              "type": "string"
+		//	            },
+		//	            "ParsingPrompt": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "ParsingPromptText": {
+		//	                  "maxLength": 10000,
+		//	                  "minLength": 1,
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "ParsingPromptText"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ModelArn"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "ParsingStrategy": {
+		//	          "enum": [
+		//	            "BEDROCK_FOUNDATION_MODEL"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ParsingStrategy"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"vector_ingestion_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ChunkingConfiguration
+				"chunking_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ChunkingStrategy
+						"chunking_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"FIXED_SIZE",
+									"NONE",
+									"HIERARCHICAL",
+									"SEMANTIC",
+								),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: FixedSizeChunkingConfiguration
+						"fixed_size_chunking_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: MaxTokens
+								"max_tokens": schema.Float64Attribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Float64{ /*START VALIDATORS*/
+										float64validator.AtLeast(1.000000),
+										fwvalidators.NotNullFloat64(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+										float64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: OverlapPercentage
+								"overlap_percentage": schema.Float64Attribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Float64{ /*START VALIDATORS*/
+										float64validator.Between(1.000000, 99.000000),
+										fwvalidators.NotNullFloat64(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+										float64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: HierarchicalChunkingConfiguration
+						"hierarchical_chunking_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: LevelConfigurations
+								"level_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: MaxTokens
+											"max_tokens": schema.Float64Attribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												Validators: []validator.Float64{ /*START VALIDATORS*/
+													float64validator.Between(1.000000, 8192.000000),
+													fwvalidators.NotNullFloat64(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+													float64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.SizeBetween(2, 2),
+										fwvalidators.NotNullList(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: OverlapTokens
+								"overlap_tokens": schema.Float64Attribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Float64{ /*START VALIDATORS*/
+										float64validator.AtLeast(1.000000),
+										fwvalidators.NotNullFloat64(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+										float64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SemanticChunkingConfiguration
+						"semantic_chunking_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: BreakpointPercentileThreshold
+								"breakpoint_percentile_threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Float64{ /*START VALIDATORS*/
+										float64validator.Between(50.000000, 99.000000),
+										fwvalidators.NotNullFloat64(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+										float64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: BufferSize
+								"buffer_size": schema.Float64Attribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Float64{ /*START VALIDATORS*/
+										float64validator.Between(0.000000, 1.000000),
+										fwvalidators.NotNullFloat64(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+										float64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: MaxTokens
+								"max_tokens": schema.Float64Attribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Float64{ /*START VALIDATORS*/
+										float64validator.AtLeast(1.000000),
+										fwvalidators.NotNullFloat64(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+										float64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ParsingConfiguration
+				"parsing_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: BedrockFoundationModelConfiguration
+						"bedrock_foundation_model_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ModelArn
+								"model_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 2048),
+										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}::foundation-model\\/anthropic.claude-3-haiku-20240307-v1:0$"), ""),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ParsingPrompt
+								"parsing_prompt": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ParsingPromptText
+										"parsing_prompt_text": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthBetween(1, 10000),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ParsingStrategy
+						"parsing_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"BEDROCK_FOUNDATION_MODEL",
+								),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -366,22 +942,50 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Wisdom::KnowledgeBase").WithTerraformTypeName("awscc_wisdom_knowledge_base")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"app_integration_arn":                  "AppIntegrationArn",
-		"app_integrations":                     "AppIntegrations",
-		"description":                          "Description",
-		"key":                                  "Key",
-		"kms_key_id":                           "KmsKeyId",
-		"knowledge_base_arn":                   "KnowledgeBaseArn",
-		"knowledge_base_id":                    "KnowledgeBaseId",
-		"knowledge_base_type":                  "KnowledgeBaseType",
-		"name":                                 "Name",
-		"object_fields":                        "ObjectFields",
-		"rendering_configuration":              "RenderingConfiguration",
-		"server_side_encryption_configuration": "ServerSideEncryptionConfiguration",
-		"source_configuration":                 "SourceConfiguration",
-		"tags":                                 "Tags",
-		"template_uri":                         "TemplateUri",
-		"value":                                "Value",
+		"app_integration_arn":                    "AppIntegrationArn",
+		"app_integrations":                       "AppIntegrations",
+		"bedrock_foundation_model_configuration": "BedrockFoundationModelConfiguration",
+		"breakpoint_percentile_threshold":        "BreakpointPercentileThreshold",
+		"buffer_size":                            "BufferSize",
+		"chunking_configuration":                 "ChunkingConfiguration",
+		"chunking_strategy":                      "ChunkingStrategy",
+		"crawler_limits":                         "CrawlerLimits",
+		"description":                            "Description",
+		"exclusion_filters":                      "ExclusionFilters",
+		"fixed_size_chunking_configuration":      "FixedSizeChunkingConfiguration",
+		"hierarchical_chunking_configuration":    "HierarchicalChunkingConfiguration",
+		"inclusion_filters":                      "InclusionFilters",
+		"key":                                    "Key",
+		"kms_key_id":                             "KmsKeyId",
+		"knowledge_base_arn":                     "KnowledgeBaseArn",
+		"knowledge_base_id":                      "KnowledgeBaseId",
+		"knowledge_base_type":                    "KnowledgeBaseType",
+		"level_configurations":                   "LevelConfigurations",
+		"managed_source_configuration":           "ManagedSourceConfiguration",
+		"max_tokens":                             "MaxTokens",
+		"model_arn":                              "ModelArn",
+		"name":                                   "Name",
+		"object_fields":                          "ObjectFields",
+		"overlap_percentage":                     "OverlapPercentage",
+		"overlap_tokens":                         "OverlapTokens",
+		"parsing_configuration":                  "ParsingConfiguration",
+		"parsing_prompt":                         "ParsingPrompt",
+		"parsing_prompt_text":                    "ParsingPromptText",
+		"parsing_strategy":                       "ParsingStrategy",
+		"rate_limit":                             "RateLimit",
+		"rendering_configuration":                "RenderingConfiguration",
+		"scope":                                  "Scope",
+		"seed_urls":                              "SeedUrls",
+		"semantic_chunking_configuration":        "SemanticChunkingConfiguration",
+		"server_side_encryption_configuration":   "ServerSideEncryptionConfiguration",
+		"source_configuration":                   "SourceConfiguration",
+		"tags":                                   "Tags",
+		"template_uri":                           "TemplateUri",
+		"url":                                    "Url",
+		"url_configuration":                      "UrlConfiguration",
+		"value":                                  "Value",
+		"vector_ingestion_configuration":         "VectorIngestionConfiguration",
+		"web_crawler_configuration":              "WebCrawlerConfiguration",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

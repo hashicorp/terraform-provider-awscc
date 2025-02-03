@@ -122,6 +122,7 @@ Read-Only:
 - `allowed_instance_types` (List of String)
 - `bare_metal` (String)
 - `baseline_ebs_bandwidth_mbps` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_specifications--instance_requirements--baseline_ebs_bandwidth_mbps))
+- `baseline_performance_factors` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_specifications--instance_requirements--baseline_performance_factors))
 - `burstable_performance` (String)
 - `cpu_manufacturers` (List of String)
 - `excluded_instance_types` (List of String)
@@ -164,6 +165,30 @@ Read-Only:
 
 - `max` (Number)
 - `min` (Number)
+
+
+<a id="nestedatt--spot_fleet_request_config_data--launch_specifications--instance_requirements--baseline_performance_factors"></a>
+### Nested Schema for `spot_fleet_request_config_data.launch_specifications.instance_requirements.baseline_performance_factors`
+
+Read-Only:
+
+- `cpu` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_specifications--instance_requirements--baseline_performance_factors--cpu))
+
+<a id="nestedatt--spot_fleet_request_config_data--launch_specifications--instance_requirements--baseline_performance_factors--cpu"></a>
+### Nested Schema for `spot_fleet_request_config_data.launch_specifications.instance_requirements.baseline_performance_factors.cpu`
+
+Read-Only:
+
+- `references` (Attributes List) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_specifications--instance_requirements--baseline_performance_factors--cpu--references))
+
+<a id="nestedatt--spot_fleet_request_config_data--launch_specifications--instance_requirements--baseline_performance_factors--cpu--references"></a>
+### Nested Schema for `spot_fleet_request_config_data.launch_specifications.instance_requirements.baseline_performance_factors.cpu.references`
+
+Read-Only:
+
+- `instance_family` (String)
+
+
 
 
 <a id="nestedatt--spot_fleet_request_config_data--launch_specifications--instance_requirements--memory_gi_b_per_v_cpu"></a>
@@ -345,6 +370,7 @@ Read-Only:
 - `allowed_instance_types` (List of String)
 - `bare_metal` (String)
 - `baseline_ebs_bandwidth_mbps` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_template_configs--overrides--instance_requirements--baseline_ebs_bandwidth_mbps))
+- `baseline_performance_factors` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_template_configs--overrides--instance_requirements--baseline_performance_factors))
 - `burstable_performance` (String)
 - `cpu_manufacturers` (List of String)
 - `excluded_instance_types` (List of String)
@@ -387,6 +413,30 @@ Read-Only:
 
 - `max` (Number)
 - `min` (Number)
+
+
+<a id="nestedatt--spot_fleet_request_config_data--launch_template_configs--overrides--instance_requirements--baseline_performance_factors"></a>
+### Nested Schema for `spot_fleet_request_config_data.launch_template_configs.overrides.instance_requirements.baseline_performance_factors`
+
+Read-Only:
+
+- `cpu` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_template_configs--overrides--instance_requirements--baseline_performance_factors--cpu))
+
+<a id="nestedatt--spot_fleet_request_config_data--launch_template_configs--overrides--instance_requirements--baseline_performance_factors--cpu"></a>
+### Nested Schema for `spot_fleet_request_config_data.launch_template_configs.overrides.instance_requirements.baseline_performance_factors.cpu`
+
+Read-Only:
+
+- `references` (Attributes List) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_template_configs--overrides--instance_requirements--baseline_performance_factors--cpu--references))
+
+<a id="nestedatt--spot_fleet_request_config_data--launch_template_configs--overrides--instance_requirements--baseline_performance_factors--cpu--references"></a>
+### Nested Schema for `spot_fleet_request_config_data.launch_template_configs.overrides.instance_requirements.baseline_performance_factors.cpu.references`
+
+Read-Only:
+
+- `instance_family` (String)
+
+
 
 
 <a id="nestedatt--spot_fleet_request_config_data--launch_template_configs--overrides--instance_requirements--memory_gi_b_per_v_cpu"></a>

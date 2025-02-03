@@ -27,10 +27,19 @@ If you specify the SourceDBClusterIdentifier property, don't specify this proper
 - `engine_lifecycle_support` (String) The life cycle type of the global cluster. You can use this setting to enroll your global cluster into Amazon RDS Extended Support.
 - `engine_version` (String) The version number of the database engine to use. If you specify the SourceDBClusterIdentifier property, don't specify this property. The value is inherited from the cluster.
 - `global_cluster_identifier` (String) The cluster identifier of the new global database cluster. This parameter is stored as a lowercase string.
+- `global_endpoint` (Attributes) (see [below for nested schema](#nestedatt--global_endpoint))
 - `source_db_cluster_identifier` (String) The Amazon Resource Name (ARN) to use as the primary cluster of the global database. This parameter is optional. This parameter is stored as a lowercase string.
 - `storage_encrypted` (Boolean) The storage encryption setting for the new global database cluster.
 If you specify the SourceDBClusterIdentifier property, don't specify this property. The value is inherited from the cluster.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--global_endpoint"></a>
+### Nested Schema for `global_endpoint`
+
+Read-Only:
+
+- `address` (String) The writer endpoint for the global database cluster. This endpoint always points to the writer DB instance in the current primary cluster.
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

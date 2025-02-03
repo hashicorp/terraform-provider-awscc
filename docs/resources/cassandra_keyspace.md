@@ -49,6 +49,7 @@ resource "awscc_cassandra_keyspace" "awscc_cassandra_example" {
 
 ### Optional
 
+- `client_side_timestamps_enabled` (Boolean) Indicates whether client-side timestamps are enabled (true) or disabled (false) for all tables in the keyspace. To add a Region to a single-Region keyspace with at least one table, the value must be set to true. After you enabled client-side timestamps for a table, you can?t disable it again.
 - `keyspace_name` (String) Name for Cassandra keyspace
 - `replication_specification` (Attributes) (see [below for nested schema](#nestedatt--replication_specification))
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))

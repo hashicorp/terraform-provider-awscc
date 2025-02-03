@@ -402,7 +402,11 @@
     "tagOnCreate": true,
     "tagUpdatable": true,
     "cloudFormationSystemTags": false,
-    "tagProperty": "/properties/Tags"
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "acm-pca:TagCertificateAuthority",
+      "acm-pca:UntagCertificateAuthority"
+    ]
   },
   "additionalProperties": false,
   "required": [
@@ -419,7 +423,6 @@
     "/properties/Subject",
     "/properties/Subject",
     "/properties/CsrExtensions",
-    "/properties/Tags",
     "/properties/RevocationConfiguration",
     "/properties/KeyStorageSecurityStandard"
   ],
@@ -452,7 +455,6 @@
     },
     "update": {
       "permissions": [
-        "acm-pca:ListTags",
         "acm-pca:TagCertificateAuthority",
         "acm-pca:UntagCertificateAuthority",
         "acm-pca:UpdateCertificateAuthority"

@@ -28,6 +28,7 @@ Data Source schema for AWS::Wisdom::AIPrompt
 - `assistant_id` (String)
 - `description` (String)
 - `model_id` (String)
+- `modified_time_seconds` (Number)
 - `name` (String)
 - `tags` (Map of String)
 - `template_configuration` (Attributes) (see [below for nested schema](#nestedatt--template_configuration))

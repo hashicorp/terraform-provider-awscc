@@ -176,6 +176,14 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 		//	                    }
 		//	                  },
 		//	                  "type": "object"
+		//	                },
+		//	                "RequireConfirmation": {
+		//	                  "description": "ENUM to check if action requires user confirmation",
+		//	                  "enum": [
+		//	                    "ENABLED",
+		//	                    "DISABLED"
+		//	                  ],
+		//	                  "type": "string"
 		//	                }
 		//	              },
 		//	              "required": [
@@ -433,6 +441,21 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 											Computed:    true,
 											PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
 												mapplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: RequireConfirmation
+										"require_confirmation": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "ENUM to check if action requires user confirmation",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"ENABLED",
+													"DISABLED",
+												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
@@ -1400,6 +1423,7 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 		"prompt_state":                         "PromptState",
 		"prompt_type":                          "PromptType",
 		"recommended_actions":                  "RecommendedActions",
+		"require_confirmation":                 "RequireConfirmation",
 		"required":                             "Required",
 		"s3":                                   "S3",
 		"s3_bucket_name":                       "S3BucketName",

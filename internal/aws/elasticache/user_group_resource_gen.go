@@ -49,23 +49,22 @@ func userGroupResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Must be redis.",
+		//	  "description": "The target cache engine for the user group.",
 		//	  "enum": [
-		//	    "redis"
+		//	    "redis",
+		//	    "valkey"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"engine": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Must be redis.",
+			Description: "The target cache engine for the user group.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"redis",
+					"valkey",
 				),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:

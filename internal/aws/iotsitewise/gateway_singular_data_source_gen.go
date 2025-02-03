@@ -8,6 +8,7 @@ package iotsitewise
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -114,23 +115,21 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "properties": {
 		//	    "Greengrass": {
-		//	      "additionalProperties": false,
-		//	      "description": "A gateway that runs on AWS IoT Greengrass V1.",
-		//	      "properties": {
-		//	        "GroupArn": {
-		//	          "description": "The ARN of the Greengrass group.",
-		//	          "type": "string"
-		//	        }
-		//	      },
-		//	      "required": [
-		//	        "GroupArn"
-		//	      ],
-		//	      "type": "object"
+		//	      "description": "A gateway that runs on AWS IoT Greengrass V1."
 		//	    },
 		//	    "GreengrassV2": {
 		//	      "additionalProperties": false,
 		//	      "description": "A gateway that runs on AWS IoT Greengrass V2.",
 		//	      "properties": {
+		//	        "CoreDeviceOperatingSystem": {
+		//	          "description": "The operating system of the core device in AWS IoT Greengrass V2.",
+		//	          "enum": [
+		//	            "LINUX_AARCH64",
+		//	            "LINUX_AMD64",
+		//	            "WINDOWS_AMD64"
+		//	          ],
+		//	          "type": "string"
+		//	        },
 		//	        "CoreDeviceThingName": {
 		//	          "description": "The name of the CoreDevice in GreenGrass V2.",
 		//	          "type": "string"
@@ -161,20 +160,19 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"gateway_platform": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Greengrass
-				"greengrass": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: GroupArn
-						"group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ARN of the Greengrass group.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
+				"greengrass": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType:  jsontypes.NormalizedType{},
 					Description: "A gateway that runs on AWS IoT Greengrass V1.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: GreengrassV2
 				"greengrass_v2": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CoreDeviceOperatingSystem
+						"core_device_operating_system": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The operating system of the core device in AWS IoT Greengrass V2.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
 						// Property: CoreDeviceThingName
 						"core_device_thing_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The name of the CoreDevice in GreenGrass V2.",
@@ -198,6 +196,17 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The gateway's platform. You can only specify one platform in a gateway.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: GatewayVersion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The version of the gateway you want to create.",
+		//	  "type": "string"
+		//	}
+		"gateway_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The version of the gateway you want to create.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -261,14 +270,15 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"capability_configuration":     "CapabilityConfiguration",
 		"capability_namespace":         "CapabilityNamespace",
+		"core_device_operating_system": "CoreDeviceOperatingSystem",
 		"core_device_thing_name":       "CoreDeviceThingName",
 		"gateway_capability_summaries": "GatewayCapabilitySummaries",
 		"gateway_id":                   "GatewayId",
 		"gateway_name":                 "GatewayName",
 		"gateway_platform":             "GatewayPlatform",
+		"gateway_version":              "GatewayVersion",
 		"greengrass":                   "Greengrass",
 		"greengrass_v2":                "GreengrassV2",
-		"group_arn":                    "GroupArn",
 		"iot_core_thing_name":          "IotCoreThingName",
 		"key":                          "Key",
 		"siemens_ie":                   "SiemensIE",

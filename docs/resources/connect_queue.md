@@ -46,6 +46,7 @@ resource "awscc_connect_queue" "example" {
 - `description` (String) The description of the queue.
 - `max_contacts` (Number) The maximum number of contacts that can be in the queue before it is considered full.
 - `outbound_caller_config` (Attributes) The outbound caller ID name, number, and outbound whisper flow. (see [below for nested schema](#nestedatt--outbound_caller_config))
+- `outbound_email_config` (Attributes) The outbound email address ID. (see [below for nested schema](#nestedatt--outbound_email_config))
 - `quick_connect_arns` (List of String) The quick connects available to agents who are working the queue.
 - `status` (String) The status of the queue.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
@@ -64,6 +65,14 @@ Optional:
 - `outbound_caller_id_name` (String) The caller ID name.
 - `outbound_caller_id_number_arn` (String) The caller ID number.
 - `outbound_flow_arn` (String) The outbound whisper flow to be used during an outbound call.
+
+
+<a id="nestedatt--outbound_email_config"></a>
+### Nested Schema for `outbound_email_config`
+
+Optional:
+
+- `outbound_email_address_id` (String) The email address connect resource ID.
 
 
 <a id="nestedatt--tags"></a>

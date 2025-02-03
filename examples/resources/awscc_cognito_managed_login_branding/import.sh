@@ -1,0 +1,1 @@
+$ terraform import awscc_cognito_managed_login_branding.example "user_pool_id|managed_login_branding_id"

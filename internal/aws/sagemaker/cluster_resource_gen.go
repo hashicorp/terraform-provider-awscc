@@ -226,6 +226,41 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "type": "array"
 		//	      },
+		//	      "OverrideVpcConfig": {
+		//	        "additionalProperties": false,
+		//	        "description": "Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs, hosted models, and compute resources have access to. You can control access to and from your resources by configuring a VPC.",
+		//	        "properties": {
+		//	          "SecurityGroupIds": {
+		//	            "description": "The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security groups for the VPC that is specified in the Subnets field.",
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "maxLength": 32,
+		//	              "pattern": "[-0-9a-zA-Z]+",
+		//	              "type": "string"
+		//	            },
+		//	            "maxItems": 5,
+		//	            "minItems": 1,
+		//	            "type": "array"
+		//	          },
+		//	          "Subnets": {
+		//	            "description": "The ID of the subnets in the VPC to which you want to connect your training job or model.",
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "maxLength": 32,
+		//	              "pattern": "[-0-9a-zA-Z]+",
+		//	              "type": "string"
+		//	            },
+		//	            "maxItems": 16,
+		//	            "minItems": 1,
+		//	            "type": "array"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "SecurityGroupIds",
+		//	          "Subnets"
+		//	        ],
+		//	        "type": "object"
+		//	      },
 		//	      "ThreadsPerCore": {
 		//	        "description": "The number you specified to TreadsPerCore in CreateCluster for enabling or disabling multithreading. For instance types that support multithreading, you can specify 1 for disabling multithreading and 2 for enabling multithreading.",
 		//	        "maximum": 2,
@@ -373,6 +408,55 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 							generic.Multiset(),
 							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: OverrideVpcConfig
+					"override_vpc_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: SecurityGroupIds
+							"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security groups for the VPC that is specified in the Subnets field.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									listvalidator.SizeBetween(1, 5),
+									listvalidator.ValueStringsAre(
+										stringvalidator.LengthAtMost(32),
+										stringvalidator.RegexMatches(regexp.MustCompile("[-0-9a-zA-Z]+"), ""),
+									),
+									fwvalidators.NotNullList(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									generic.Multiset(),
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Subnets
+							"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "The ID of the subnets in the VPC to which you want to connect your training job or model.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									listvalidator.SizeBetween(1, 16),
+									listvalidator.ValueStringsAre(
+										stringvalidator.LengthAtMost(32),
+										stringvalidator.RegexMatches(regexp.MustCompile("[-0-9a-zA-Z]+"), ""),
+									),
+									fwvalidators.NotNullList(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									generic.Multiset(),
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs, hosted models, and compute resources have access to. You can control access to and from your resources by configuring a VPC.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: ThreadsPerCore
@@ -694,6 +778,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"on_create":                   "OnCreate",
 		"on_start_deep_health_checks": "OnStartDeepHealthChecks",
 		"orchestrator":                "Orchestrator",
+		"override_vpc_config":         "OverrideVpcConfig",
 		"security_group_ids":          "SecurityGroupIds",
 		"source_s3_uri":               "SourceS3Uri",
 		"subnets":                     "Subnets",

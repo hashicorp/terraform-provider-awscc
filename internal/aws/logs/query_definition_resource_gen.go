@@ -15,6 +15,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -93,6 +94,35 @@ func queryDefinitionResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: QueryLanguage
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": "CWLI",
+		//	  "description": "Query language of the query string. Possible values are CWLI, SQL, PPL, with CWLI being the default.",
+		//	  "enum": [
+		//	    "CWLI",
+		//	    "SQL",
+		//	    "PPL"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"query_language": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Query language of the query string. Possible values are CWLI, SQL, PPL, with CWLI being the default.",
+			Optional:    true,
+			Computed:    true,
+			Default:     stringdefault.StaticString("CWLI"),
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"CWLI",
+					"SQL",
+					"PPL",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: QueryString
 		// CloudFormation resource type schema:
 		//
@@ -134,6 +164,7 @@ func queryDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		"log_group_names":     "LogGroupNames",
 		"name":                "Name",
 		"query_definition_id": "QueryDefinitionId",
+		"query_language":      "QueryLanguage",
 		"query_string":        "QueryString",
 	})
 

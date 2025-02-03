@@ -250,9 +250,31 @@ Read-Only:
 
 Read-Only:
 
+- `authentication_type` (String)
 - `database` (String) <p>Database.</p>
+- `database_access_control_role` (String)
 - `host` (String) <p>Host.</p>
+- `o_auth_parameters` (Attributes) (see [below for nested schema](#nestedatt--alternate_data_source_parameters--snowflake_parameters--o_auth_parameters))
 - `warehouse` (String) <p>Warehouse.</p>
+
+<a id="nestedatt--alternate_data_source_parameters--snowflake_parameters--o_auth_parameters"></a>
+### Nested Schema for `alternate_data_source_parameters.snowflake_parameters.o_auth_parameters`
+
+Read-Only:
+
+- `identity_provider_resource_uri` (String)
+- `identity_provider_vpc_connection_properties` (Attributes) <p>VPC connection properties.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--snowflake_parameters--o_auth_parameters--identity_provider_vpc_connection_properties))
+- `o_auth_scope` (String)
+- `token_provider_url` (String)
+
+<a id="nestedatt--alternate_data_source_parameters--snowflake_parameters--o_auth_parameters--identity_provider_vpc_connection_properties"></a>
+### Nested Schema for `alternate_data_source_parameters.snowflake_parameters.o_auth_parameters.identity_provider_vpc_connection_properties`
+
+Read-Only:
+
+- `vpc_connection_arn` (String) <p>The Amazon Resource Name (ARN) for the VPC connection.</p>
+
+
 
 
 <a id="nestedatt--alternate_data_source_parameters--spark_parameters"></a>
@@ -279,10 +301,32 @@ Read-Only:
 
 Read-Only:
 
+- `authentication_type` (String)
 - `catalog` (String) <p>The catalog name for the Starburst data source.</p>
+- `database_access_control_role` (String)
 - `host` (String) <p>The host name of the Starburst data source.</p>
+- `o_auth_parameters` (Attributes) (see [below for nested schema](#nestedatt--alternate_data_source_parameters--starburst_parameters--o_auth_parameters))
 - `port` (Number) <p>The port for the Starburst data source.</p>
 - `product_type` (String)
+
+<a id="nestedatt--alternate_data_source_parameters--starburst_parameters--o_auth_parameters"></a>
+### Nested Schema for `alternate_data_source_parameters.starburst_parameters.o_auth_parameters`
+
+Read-Only:
+
+- `identity_provider_resource_uri` (String)
+- `identity_provider_vpc_connection_properties` (Attributes) <p>VPC connection properties.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--starburst_parameters--o_auth_parameters--identity_provider_vpc_connection_properties))
+- `o_auth_scope` (String)
+- `token_provider_url` (String)
+
+<a id="nestedatt--alternate_data_source_parameters--starburst_parameters--o_auth_parameters--identity_provider_vpc_connection_properties"></a>
+### Nested Schema for `alternate_data_source_parameters.starburst_parameters.o_auth_parameters.identity_provider_vpc_connection_properties`
+
+Read-Only:
+
+- `vpc_connection_arn` (String) <p>The Amazon Resource Name (ARN) for the VPC connection.</p>
+
+
 
 
 <a id="nestedatt--alternate_data_source_parameters--teradata_parameters"></a>
@@ -534,9 +578,31 @@ Read-Only:
 
 Read-Only:
 
+- `authentication_type` (String)
 - `database` (String) <p>Database.</p>
+- `database_access_control_role` (String)
 - `host` (String) <p>Host.</p>
+- `o_auth_parameters` (Attributes) (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--snowflake_parameters--o_auth_parameters))
 - `warehouse` (String) <p>Warehouse.</p>
+
+<a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--snowflake_parameters--o_auth_parameters"></a>
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.snowflake_parameters.o_auth_parameters`
+
+Read-Only:
+
+- `identity_provider_resource_uri` (String)
+- `identity_provider_vpc_connection_properties` (Attributes) <p>VPC connection properties.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--snowflake_parameters--o_auth_parameters--identity_provider_vpc_connection_properties))
+- `o_auth_scope` (String)
+- `token_provider_url` (String)
+
+<a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--snowflake_parameters--o_auth_parameters--identity_provider_vpc_connection_properties"></a>
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.snowflake_parameters.o_auth_parameters.identity_provider_vpc_connection_properties`
+
+Read-Only:
+
+- `vpc_connection_arn` (String) <p>The Amazon Resource Name (ARN) for the VPC connection.</p>
+
+
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--spark_parameters"></a>
@@ -563,10 +629,32 @@ Read-Only:
 
 Read-Only:
 
+- `authentication_type` (String)
 - `catalog` (String) <p>The catalog name for the Starburst data source.</p>
+- `database_access_control_role` (String)
 - `host` (String) <p>The host name of the Starburst data source.</p>
+- `o_auth_parameters` (Attributes) (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--starburst_parameters--o_auth_parameters))
 - `port` (Number) <p>The port for the Starburst data source.</p>
 - `product_type` (String)
+
+<a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--starburst_parameters--o_auth_parameters"></a>
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.starburst_parameters.o_auth_parameters`
+
+Read-Only:
+
+- `identity_provider_resource_uri` (String)
+- `identity_provider_vpc_connection_properties` (Attributes) <p>VPC connection properties.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--starburst_parameters--o_auth_parameters--identity_provider_vpc_connection_properties))
+- `o_auth_scope` (String)
+- `token_provider_url` (String)
+
+<a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--starburst_parameters--o_auth_parameters--identity_provider_vpc_connection_properties"></a>
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.starburst_parameters.o_auth_parameters.identity_provider_vpc_connection_properties`
+
+Read-Only:
+
+- `vpc_connection_arn` (String) <p>The Amazon Resource Name (ARN) for the VPC connection.</p>
+
+
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--teradata_parameters"></a>
@@ -791,9 +879,31 @@ Read-Only:
 
 Read-Only:
 
+- `authentication_type` (String)
 - `database` (String) <p>Database.</p>
+- `database_access_control_role` (String)
 - `host` (String) <p>Host.</p>
+- `o_auth_parameters` (Attributes) (see [below for nested schema](#nestedatt--data_source_parameters--snowflake_parameters--o_auth_parameters))
 - `warehouse` (String) <p>Warehouse.</p>
+
+<a id="nestedatt--data_source_parameters--snowflake_parameters--o_auth_parameters"></a>
+### Nested Schema for `data_source_parameters.snowflake_parameters.o_auth_parameters`
+
+Read-Only:
+
+- `identity_provider_resource_uri` (String)
+- `identity_provider_vpc_connection_properties` (Attributes) <p>VPC connection properties.</p> (see [below for nested schema](#nestedatt--data_source_parameters--snowflake_parameters--o_auth_parameters--identity_provider_vpc_connection_properties))
+- `o_auth_scope` (String)
+- `token_provider_url` (String)
+
+<a id="nestedatt--data_source_parameters--snowflake_parameters--o_auth_parameters--identity_provider_vpc_connection_properties"></a>
+### Nested Schema for `data_source_parameters.snowflake_parameters.o_auth_parameters.identity_provider_vpc_connection_properties`
+
+Read-Only:
+
+- `vpc_connection_arn` (String) <p>The Amazon Resource Name (ARN) for the VPC connection.</p>
+
+
 
 
 <a id="nestedatt--data_source_parameters--spark_parameters"></a>
@@ -820,10 +930,32 @@ Read-Only:
 
 Read-Only:
 
+- `authentication_type` (String)
 - `catalog` (String) <p>The catalog name for the Starburst data source.</p>
+- `database_access_control_role` (String)
 - `host` (String) <p>The host name of the Starburst data source.</p>
+- `o_auth_parameters` (Attributes) (see [below for nested schema](#nestedatt--data_source_parameters--starburst_parameters--o_auth_parameters))
 - `port` (Number) <p>The port for the Starburst data source.</p>
 - `product_type` (String)
+
+<a id="nestedatt--data_source_parameters--starburst_parameters--o_auth_parameters"></a>
+### Nested Schema for `data_source_parameters.starburst_parameters.o_auth_parameters`
+
+Read-Only:
+
+- `identity_provider_resource_uri` (String)
+- `identity_provider_vpc_connection_properties` (Attributes) <p>VPC connection properties.</p> (see [below for nested schema](#nestedatt--data_source_parameters--starburst_parameters--o_auth_parameters--identity_provider_vpc_connection_properties))
+- `o_auth_scope` (String)
+- `token_provider_url` (String)
+
+<a id="nestedatt--data_source_parameters--starburst_parameters--o_auth_parameters--identity_provider_vpc_connection_properties"></a>
+### Nested Schema for `data_source_parameters.starburst_parameters.o_auth_parameters.identity_provider_vpc_connection_properties`
+
+Read-Only:
+
+- `vpc_connection_arn` (String) <p>The Amazon Resource Name (ARN) for the VPC connection.</p>
+
+
 
 
 <a id="nestedatt--data_source_parameters--teradata_parameters"></a>

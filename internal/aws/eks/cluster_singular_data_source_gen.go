@@ -106,6 +106,54 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The cluster security group that was created by Amazon EKS for the cluster. Managed node groups use this security group for control plane to data plane communication.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ComputeConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Todo: add description",
+		//	  "properties": {
+		//	    "Enabled": {
+		//	      "description": "Todo: add description",
+		//	      "type": "boolean"
+		//	    },
+		//	    "NodePools": {
+		//	      "description": "Todo: add description",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array"
+		//	    },
+		//	    "NodeRoleArn": {
+		//	      "description": "Todo: add description",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"compute_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Enabled
+				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Todo: add description",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: NodePools
+				"node_pools": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Todo: add description",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: NodeRoleArn
+				"node_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Todo: add description",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Todo: add description",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EncryptionConfig
 		// CloudFormation resource type schema:
 		//
@@ -204,6 +252,17 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "The Kubernetes network configuration for the cluster.",
 		//	  "properties": {
+		//	    "ElasticLoadBalancing": {
+		//	      "additionalProperties": false,
+		//	      "description": "Todo: add description",
+		//	      "properties": {
+		//	        "Enabled": {
+		//	          "description": "Todo: add description",
+		//	          "type": "boolean"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "IpFamily": {
 		//	      "description": "Ipv4 or Ipv6. You can only specify ipv6 for 1.21 and later clusters that use version 1.10.1 or later of the Amazon VPC CNI add-on",
 		//	      "enum": [
@@ -225,6 +284,18 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"kubernetes_network_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ElasticLoadBalancing
+				"elastic_load_balancing": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Todo: add description",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Todo: add description",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: IpFamily
 				"ip_family": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Ipv4 or Ipv6. You can only specify ipv6 for 1.21 and later clusters that use version 1.10.1 or later of the Amazon VPC CNI add-on",
@@ -403,6 +474,103 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "An object representing the Outpost configuration to use for AWS EKS outpost cluster.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: RemoteNetworkConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Configuration fields for specifying on-premises node and pod CIDRs that are external to the VPC passed during cluster creation.",
+		//	  "properties": {
+		//	    "RemoteNodeNetworks": {
+		//	      "description": "Network configuration of nodes run on-premises with EKS Hybrid Nodes.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "Network configuration of nodes run on-premises with EKS Hybrid Nodes.",
+		//	        "properties": {
+		//	          "Cidrs": {
+		//	            "description": "Specifies the list of remote node CIDRs.",
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "minItems": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Cidrs"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array"
+		//	    },
+		//	    "RemotePodNetworks": {
+		//	      "description": "Network configuration of pods run on-premises with EKS Hybrid Nodes.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "Network configuration of pods run on-premises with EKS Hybrid Nodes.",
+		//	        "properties": {
+		//	          "Cidrs": {
+		//	            "description": "Specifies the list of remote pod CIDRs.",
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "minItems": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Cidrs"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "RemoteNodeNetworks"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"remote_network_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: RemoteNodeNetworks
+				"remote_node_networks": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Cidrs
+							"cidrs": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "Specifies the list of remote node CIDRs.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Network configuration of nodes run on-premises with EKS Hybrid Nodes.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RemotePodNetworks
+				"remote_pod_networks": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Cidrs
+							"cidrs": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "Specifies the list of remote pod CIDRs.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Network configuration of pods run on-premises with EKS Hybrid Nodes.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration fields for specifying on-premises node and pod CIDRs that are external to the VPC passed during cluster creation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourcesVpcConfig
 		// CloudFormation resource type schema:
 		//
@@ -494,6 +662,45 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the IAM role that provides permissions for the Kubernetes control plane to make calls to AWS API operations on your behalf.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: StorageConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Todo: add description",
+		//	  "properties": {
+		//	    "BlockStorage": {
+		//	      "additionalProperties": false,
+		//	      "description": "Todo: add description",
+		//	      "properties": {
+		//	        "Enabled": {
+		//	          "description": "Todo: add description",
+		//	          "type": "boolean"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"storage_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BlockStorage
+				"block_storage": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Todo: add description",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Todo: add description",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Todo: add description",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -632,14 +839,18 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"access_config":       "AccessConfig",
 		"arn":                 "Arn",
 		"authentication_mode": "AuthenticationMode",
+		"block_storage":       "BlockStorage",
 		"bootstrap_cluster_creator_admin_permissions": "BootstrapClusterCreatorAdminPermissions",
 		"bootstrap_self_managed_addons":               "BootstrapSelfManagedAddons",
 		"certificate_authority_data":                  "CertificateAuthorityData",
+		"cidrs":                                       "Cidrs",
 		"cluster_id":                                  "Id",
 		"cluster_logging":                             "ClusterLogging",
 		"cluster_security_group_id":                   "ClusterSecurityGroupId",
+		"compute_config":                              "ComputeConfig",
 		"control_plane_instance_type":                 "ControlPlaneInstanceType",
 		"control_plane_placement":                     "ControlPlanePlacement",
+		"elastic_load_balancing":                      "ElasticLoadBalancing",
 		"enabled":                                     "Enabled",
 		"enabled_types":                               "EnabledTypes",
 		"encryption_config":                           "EncryptionConfig",
@@ -654,17 +865,23 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"kubernetes_network_config":                   "KubernetesNetworkConfig",
 		"logging":                                     "Logging",
 		"name":                                        "Name",
+		"node_pools":                                  "NodePools",
+		"node_role_arn":                               "NodeRoleArn",
 		"open_id_connect_issuer_url":                  "OpenIdConnectIssuerUrl",
 		"outpost_arns":                                "OutpostArns",
 		"outpost_config":                              "OutpostConfig",
 		"provider":                                    "Provider",
 		"public_access_cidrs":                         "PublicAccessCidrs",
+		"remote_network_config":                       "RemoteNetworkConfig",
+		"remote_node_networks":                        "RemoteNodeNetworks",
+		"remote_pod_networks":                         "RemotePodNetworks",
 		"resources":                                   "Resources",
 		"resources_vpc_config":                        "ResourcesVpcConfig",
 		"role_arn":                                    "RoleArn",
 		"security_group_ids":                          "SecurityGroupIds",
 		"service_ipv_4_cidr":                          "ServiceIpv4Cidr",
 		"service_ipv_6_cidr":                          "ServiceIpv6Cidr",
+		"storage_config":                              "StorageConfig",
 		"subnet_ids":                                  "SubnetIds",
 		"support_type":                                "SupportType",
 		"tags":                                        "Tags",

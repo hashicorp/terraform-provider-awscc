@@ -71,6 +71,1008 @@ func scalingPolicyResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The scaling policy type.\n The following policy types are supported: \n  ``TargetTrackingScaling``—Not supported for Amazon EMR\n  ``StepScaling``—Not supported for DynamoDB, Amazon Comprehend, Lambda, Amazon Keyspaces, Amazon MSK, Amazon ElastiCache, or Neptune.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: PredictiveScalingPolicyConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The predictive scaling policy configuration.",
+		//	  "properties": {
+		//	    "MaxCapacityBreachBehavior": {
+		//	      "description": "Defines the behavior that should be applied if the forecast capacity approaches or exceeds the maximum capacity. Defaults to ``HonorMaxCapacity`` if not specified.",
+		//	      "type": "string"
+		//	    },
+		//	    "MaxCapacityBuffer": {
+		//	      "description": "The size of the capacity buffer to use when the forecast capacity is close to or exceeds the maximum capacity. The value is specified as a percentage relative to the forecast capacity. For example, if the buffer is 10, this means a 10 percent buffer, such that if the forecast capacity is 50, and the maximum capacity is 40, then the effective maximum capacity is 55. \n Required if the ``MaxCapacityBreachBehavior`` property is set to ``IncreaseMaxCapacity``, and cannot be used otherwise.",
+		//	      "type": "integer"
+		//	    },
+		//	    "MetricSpecifications": {
+		//	      "description": "This structure includes the metrics and target utilization to use for predictive scaling. \n This is an array, but we currently only support a single metric specification. That is, you can specify a target value and a single metric pair, or a target value and one scaling metric and one load metric.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "This structure specifies the metrics and target utilization settings for a predictive scaling policy. \n You must specify either a metric pair, or a load metric and a scaling metric individually. Specifying a metric pair instead of individual metrics provides a simpler way to configure metrics for a scaling policy. You choose the metric pair, and the policy automatically knows the correct sum and average statistics to use for the load metric and the scaling metric.",
+		//	        "properties": {
+		//	          "CustomizedCapacityMetricSpecification": {
+		//	            "additionalProperties": false,
+		//	            "description": "The customized capacity metric specification.",
+		//	            "properties": {
+		//	              "MetricDataQueries": {
+		//	                "description": "One or more metric data queries to provide data points for a metric specification.",
+		//	                "insertionOrder": false,
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "The metric data to return. Also defines whether this call is returning data for one metric only, or whether it is performing a math expression on the values of returned metric statistics to create a new time series. A time series is a series of data points, each of which is associated with a timestamp.",
+		//	                  "properties": {
+		//	                    "Expression": {
+		//	                      "description": "The math expression to perform on the returned data, if this object is performing a math expression. This expression can use the ``Id`` of the other metrics to refer to those metrics, and can also use the ``Id`` of other expressions to use the result of those expressions. \n Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both.",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Id": {
+		//	                      "description": "A short name that identifies the object's results in the response. This name must be unique among all ``MetricDataQuery`` objects specified for a single scaling policy. If you are performing math expressions on this set of data, this name represents that data and can serve as a variable in the mathematical expression. The valid characters are letters, numbers, and underscores. The first character must be a lowercase letter.",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Label": {
+		//	                      "description": "A human-readable label for this metric or expression. This is especially useful if this is a math expression, so that you know what the value represents.",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "MetricStat": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "Information about the metric data to return. \n Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both.",
+		//	                      "properties": {
+		//	                        "Metric": {
+		//	                          "additionalProperties": false,
+		//	                          "description": "The CloudWatch metric to return, including the metric name, namespace, and dimensions. To get the exact metric name, namespace, and dimensions, inspect the [Metric](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html) object that is returned by a call to [ListMetrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html).",
+		//	                          "properties": {
+		//	                            "Dimensions": {
+		//	                              "description": "Describes the dimensions of the metric.",
+		//	                              "insertionOrder": false,
+		//	                              "items": {
+		//	                                "additionalProperties": false,
+		//	                                "description": "Describes the dimension of a metric.",
+		//	                                "properties": {
+		//	                                  "Name": {
+		//	                                    "description": "The name of the dimension.",
+		//	                                    "type": "string"
+		//	                                  },
+		//	                                  "Value": {
+		//	                                    "description": "The value of the dimension.",
+		//	                                    "type": "string"
+		//	                                  }
+		//	                                },
+		//	                                "type": "object"
+		//	                              },
+		//	                              "type": "array",
+		//	                              "uniqueItems": false
+		//	                            },
+		//	                            "MetricName": {
+		//	                              "description": "The name of the metric.",
+		//	                              "type": "string"
+		//	                            },
+		//	                            "Namespace": {
+		//	                              "description": "The namespace of the metric.",
+		//	                              "type": "string"
+		//	                            }
+		//	                          },
+		//	                          "type": "object"
+		//	                        },
+		//	                        "Stat": {
+		//	                          "description": "The statistic to return. It can include any CloudWatch statistic or extended statistic. For a list of valid values, see the table in [Statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic) in the *Amazon CloudWatch User Guide*. \n The most commonly used metrics for predictive scaling are ``Average`` and ``Sum``.",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "Unit": {
+		//	                          "description": "The unit to use for the returned data points. For a complete list of the units that CloudWatch supports, see the [MetricDatum](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html) data type in the *Amazon CloudWatch API Reference*.",
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "type": "object"
+		//	                    },
+		//	                    "ReturnData": {
+		//	                      "description": "Indicates whether to return the timestamps and raw data values of this metric. \n If you use any math expressions, specify ``true`` for this value for only the final math expression that the metric specification is based on. You must specify ``false`` for ``ReturnData`` for all the other metrics and expressions used in the metric specification.\n If you are only retrieving metrics and not performing any math expressions, do not specify anything for ``ReturnData``. This sets it to its default (``true``).",
+		//	                      "type": "boolean"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "type": "array",
+		//	                "uniqueItems": true
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "MetricDataQueries"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "CustomizedLoadMetricSpecification": {
+		//	            "additionalProperties": false,
+		//	            "description": "The customized load metric specification.",
+		//	            "properties": {
+		//	              "MetricDataQueries": {
+		//	                "description": "",
+		//	                "insertionOrder": false,
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "The metric data to return. Also defines whether this call is returning data for one metric only, or whether it is performing a math expression on the values of returned metric statistics to create a new time series. A time series is a series of data points, each of which is associated with a timestamp.",
+		//	                  "properties": {
+		//	                    "Expression": {
+		//	                      "description": "The math expression to perform on the returned data, if this object is performing a math expression. This expression can use the ``Id`` of the other metrics to refer to those metrics, and can also use the ``Id`` of other expressions to use the result of those expressions. \n Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both.",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Id": {
+		//	                      "description": "A short name that identifies the object's results in the response. This name must be unique among all ``MetricDataQuery`` objects specified for a single scaling policy. If you are performing math expressions on this set of data, this name represents that data and can serve as a variable in the mathematical expression. The valid characters are letters, numbers, and underscores. The first character must be a lowercase letter.",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Label": {
+		//	                      "description": "A human-readable label for this metric or expression. This is especially useful if this is a math expression, so that you know what the value represents.",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "MetricStat": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "Information about the metric data to return. \n Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both.",
+		//	                      "properties": {
+		//	                        "Metric": {
+		//	                          "additionalProperties": false,
+		//	                          "description": "The CloudWatch metric to return, including the metric name, namespace, and dimensions. To get the exact metric name, namespace, and dimensions, inspect the [Metric](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html) object that is returned by a call to [ListMetrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html).",
+		//	                          "properties": {
+		//	                            "Dimensions": {
+		//	                              "description": "Describes the dimensions of the metric.",
+		//	                              "insertionOrder": false,
+		//	                              "items": {
+		//	                                "additionalProperties": false,
+		//	                                "description": "Describes the dimension of a metric.",
+		//	                                "properties": {
+		//	                                  "Name": {
+		//	                                    "description": "The name of the dimension.",
+		//	                                    "type": "string"
+		//	                                  },
+		//	                                  "Value": {
+		//	                                    "description": "The value of the dimension.",
+		//	                                    "type": "string"
+		//	                                  }
+		//	                                },
+		//	                                "type": "object"
+		//	                              },
+		//	                              "type": "array",
+		//	                              "uniqueItems": false
+		//	                            },
+		//	                            "MetricName": {
+		//	                              "description": "The name of the metric.",
+		//	                              "type": "string"
+		//	                            },
+		//	                            "Namespace": {
+		//	                              "description": "The namespace of the metric.",
+		//	                              "type": "string"
+		//	                            }
+		//	                          },
+		//	                          "type": "object"
+		//	                        },
+		//	                        "Stat": {
+		//	                          "description": "The statistic to return. It can include any CloudWatch statistic or extended statistic. For a list of valid values, see the table in [Statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic) in the *Amazon CloudWatch User Guide*. \n The most commonly used metrics for predictive scaling are ``Average`` and ``Sum``.",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "Unit": {
+		//	                          "description": "The unit to use for the returned data points. For a complete list of the units that CloudWatch supports, see the [MetricDatum](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html) data type in the *Amazon CloudWatch API Reference*.",
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "type": "object"
+		//	                    },
+		//	                    "ReturnData": {
+		//	                      "description": "Indicates whether to return the timestamps and raw data values of this metric. \n If you use any math expressions, specify ``true`` for this value for only the final math expression that the metric specification is based on. You must specify ``false`` for ``ReturnData`` for all the other metrics and expressions used in the metric specification.\n If you are only retrieving metrics and not performing any math expressions, do not specify anything for ``ReturnData``. This sets it to its default (``true``).",
+		//	                      "type": "boolean"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "type": "array",
+		//	                "uniqueItems": true
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "MetricDataQueries"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "CustomizedScalingMetricSpecification": {
+		//	            "additionalProperties": false,
+		//	            "description": "The customized scaling metric specification.",
+		//	            "properties": {
+		//	              "MetricDataQueries": {
+		//	                "description": "One or more metric data queries to provide data points for a metric specification.",
+		//	                "insertionOrder": false,
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "The metric data to return. Also defines whether this call is returning data for one metric only, or whether it is performing a math expression on the values of returned metric statistics to create a new time series. A time series is a series of data points, each of which is associated with a timestamp.",
+		//	                  "properties": {
+		//	                    "Expression": {
+		//	                      "description": "The math expression to perform on the returned data, if this object is performing a math expression. This expression can use the ``Id`` of the other metrics to refer to those metrics, and can also use the ``Id`` of other expressions to use the result of those expressions. \n Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both.",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Id": {
+		//	                      "description": "A short name that identifies the object's results in the response. This name must be unique among all ``MetricDataQuery`` objects specified for a single scaling policy. If you are performing math expressions on this set of data, this name represents that data and can serve as a variable in the mathematical expression. The valid characters are letters, numbers, and underscores. The first character must be a lowercase letter.",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Label": {
+		//	                      "description": "A human-readable label for this metric or expression. This is especially useful if this is a math expression, so that you know what the value represents.",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "MetricStat": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "Information about the metric data to return. \n Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both.",
+		//	                      "properties": {
+		//	                        "Metric": {
+		//	                          "additionalProperties": false,
+		//	                          "description": "The CloudWatch metric to return, including the metric name, namespace, and dimensions. To get the exact metric name, namespace, and dimensions, inspect the [Metric](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html) object that is returned by a call to [ListMetrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html).",
+		//	                          "properties": {
+		//	                            "Dimensions": {
+		//	                              "description": "Describes the dimensions of the metric.",
+		//	                              "insertionOrder": false,
+		//	                              "items": {
+		//	                                "additionalProperties": false,
+		//	                                "description": "Describes the dimension of a metric.",
+		//	                                "properties": {
+		//	                                  "Name": {
+		//	                                    "description": "The name of the dimension.",
+		//	                                    "type": "string"
+		//	                                  },
+		//	                                  "Value": {
+		//	                                    "description": "The value of the dimension.",
+		//	                                    "type": "string"
+		//	                                  }
+		//	                                },
+		//	                                "type": "object"
+		//	                              },
+		//	                              "type": "array",
+		//	                              "uniqueItems": false
+		//	                            },
+		//	                            "MetricName": {
+		//	                              "description": "The name of the metric.",
+		//	                              "type": "string"
+		//	                            },
+		//	                            "Namespace": {
+		//	                              "description": "The namespace of the metric.",
+		//	                              "type": "string"
+		//	                            }
+		//	                          },
+		//	                          "type": "object"
+		//	                        },
+		//	                        "Stat": {
+		//	                          "description": "The statistic to return. It can include any CloudWatch statistic or extended statistic. For a list of valid values, see the table in [Statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic) in the *Amazon CloudWatch User Guide*. \n The most commonly used metrics for predictive scaling are ``Average`` and ``Sum``.",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "Unit": {
+		//	                          "description": "The unit to use for the returned data points. For a complete list of the units that CloudWatch supports, see the [MetricDatum](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html) data type in the *Amazon CloudWatch API Reference*.",
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "type": "object"
+		//	                    },
+		//	                    "ReturnData": {
+		//	                      "description": "Indicates whether to return the timestamps and raw data values of this metric. \n If you use any math expressions, specify ``true`` for this value for only the final math expression that the metric specification is based on. You must specify ``false`` for ``ReturnData`` for all the other metrics and expressions used in the metric specification.\n If you are only retrieving metrics and not performing any math expressions, do not specify anything for ``ReturnData``. This sets it to its default (``true``).",
+		//	                      "type": "boolean"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "type": "array",
+		//	                "uniqueItems": true
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "MetricDataQueries"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "PredefinedLoadMetricSpecification": {
+		//	            "additionalProperties": false,
+		//	            "description": "The predefined load metric specification.",
+		//	            "properties": {
+		//	              "PredefinedMetricType": {
+		//	                "description": "The metric type.",
+		//	                "type": "string"
+		//	              },
+		//	              "ResourceLabel": {
+		//	                "description": "A label that uniquely identifies a target group.",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "PredefinedMetricType"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "PredefinedMetricPairSpecification": {
+		//	            "additionalProperties": false,
+		//	            "description": "The predefined metric pair specification that determines the appropriate scaling metric and load metric to use.",
+		//	            "properties": {
+		//	              "PredefinedMetricType": {
+		//	                "description": "Indicates which metrics to use. There are two different types of metrics for each metric type: one is a load metric and one is a scaling metric.",
+		//	                "type": "string"
+		//	              },
+		//	              "ResourceLabel": {
+		//	                "description": "A label that uniquely identifies a specific target group from which to determine the total and average request count.",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "PredefinedMetricType"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "PredefinedScalingMetricSpecification": {
+		//	            "additionalProperties": false,
+		//	            "description": "The predefined scaling metric specification.",
+		//	            "properties": {
+		//	              "PredefinedMetricType": {
+		//	                "description": "The metric type.",
+		//	                "type": "string"
+		//	              },
+		//	              "ResourceLabel": {
+		//	                "description": "A label that uniquely identifies a specific target group from which to determine the average request count.",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "PredefinedMetricType"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "TargetValue": {
+		//	            "description": "Specifies the target utilization.",
+		//	            "type": "number"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "TargetValue"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "Mode": {
+		//	      "description": "The predictive scaling mode. Defaults to ``ForecastOnly`` if not specified.",
+		//	      "type": "string"
+		//	    },
+		//	    "SchedulingBufferTime": {
+		//	      "description": "The amount of time, in seconds, that the start time can be advanced. \n The value must be less than the forecast interval duration of 3600 seconds (60 minutes). Defaults to 300 seconds if not specified.",
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "MetricSpecifications"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"predictive_scaling_policy_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaxCapacityBreachBehavior
+				"max_capacity_breach_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Defines the behavior that should be applied if the forecast capacity approaches or exceeds the maximum capacity. Defaults to ``HonorMaxCapacity`` if not specified.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MaxCapacityBuffer
+				"max_capacity_buffer": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The size of the capacity buffer to use when the forecast capacity is close to or exceeds the maximum capacity. The value is specified as a percentage relative to the forecast capacity. For example, if the buffer is 10, this means a 10 percent buffer, such that if the forecast capacity is 50, and the maximum capacity is 40, then the effective maximum capacity is 55. \n Required if the ``MaxCapacityBreachBehavior`` property is set to ``IncreaseMaxCapacity``, and cannot be used otherwise.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MetricSpecifications
+				"metric_specifications": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CustomizedCapacityMetricSpecification
+							"customized_capacity_metric_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: MetricDataQueries
+									"metric_data_queries": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Expression
+												"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The math expression to perform on the returned data, if this object is performing a math expression. This expression can use the ``Id`` of the other metrics to refer to those metrics, and can also use the ``Id`` of other expressions to use the result of those expressions. \n Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: Id
+												"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "A short name that identifies the object's results in the response. This name must be unique among all ``MetricDataQuery`` objects specified for a single scaling policy. If you are performing math expressions on this set of data, this name represents that data and can serve as a variable in the mathematical expression. The valid characters are letters, numbers, and underscores. The first character must be a lowercase letter.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: Label
+												"label": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "A human-readable label for this metric or expression. This is especially useful if this is a math expression, so that you know what the value represents.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: MetricStat
+												"metric_stat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Metric
+														"metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Dimensions
+																"dimensions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																	NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Name
+																			"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The name of the dimension.",
+																				Optional:    true,
+																				Computed:    true,
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																			// Property: Value
+																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The value of the dimension.",
+																				Optional:    true,
+																				Computed:    true,
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																	}, /*END NESTED OBJECT*/
+																	Description: "Describes the dimensions of the metric.",
+																	Optional:    true,
+																	Computed:    true,
+																	PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																		generic.Multiset(),
+																		listplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
+																}, /*END ATTRIBUTE*/
+																// Property: MetricName
+																"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "The name of the metric.",
+																	Optional:    true,
+																	Computed:    true,
+																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																		stringplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
+																}, /*END ATTRIBUTE*/
+																// Property: Namespace
+																"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "The namespace of the metric.",
+																	Optional:    true,
+																	Computed:    true,
+																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																		stringplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Description: "The CloudWatch metric to return, including the metric name, namespace, and dimensions. To get the exact metric name, namespace, and dimensions, inspect the [Metric](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html) object that is returned by a call to [ListMetrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html).",
+															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																objectplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: Stat
+														"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The statistic to return. It can include any CloudWatch statistic or extended statistic. For a list of valid values, see the table in [Statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic) in the *Amazon CloudWatch User Guide*. \n The most commonly used metrics for predictive scaling are ``Average`` and ``Sum``.",
+															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: Unit
+														"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The unit to use for the returned data points. For a complete list of the units that CloudWatch supports, see the [MetricDatum](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html) data type in the *Amazon CloudWatch API Reference*.",
+															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "Information about the metric data to return. \n Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+														objectplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: ReturnData
+												"return_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Description: "Indicates whether to return the timestamps and raw data values of this metric. \n If you use any math expressions, specify ``true`` for this value for only the final math expression that the metric specification is based on. You must specify ``false`` for ``ReturnData`` for all the other metrics and expressions used in the metric specification.\n If you are only retrieving metrics and not performing any math expressions, do not specify anything for ``ReturnData``. This sets it to its default (``true``).",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+														boolplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Description: "One or more metric data queries to provide data points for a metric specification.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Set{ /*START VALIDATORS*/
+											fwvalidators.NotNullSet(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+											setplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "The customized capacity metric specification.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: CustomizedLoadMetricSpecification
+							"customized_load_metric_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: MetricDataQueries
+									"metric_data_queries": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Expression
+												"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The math expression to perform on the returned data, if this object is performing a math expression. This expression can use the ``Id`` of the other metrics to refer to those metrics, and can also use the ``Id`` of other expressions to use the result of those expressions. \n Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: Id
+												"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "A short name that identifies the object's results in the response. This name must be unique among all ``MetricDataQuery`` objects specified for a single scaling policy. If you are performing math expressions on this set of data, this name represents that data and can serve as a variable in the mathematical expression. The valid characters are letters, numbers, and underscores. The first character must be a lowercase letter.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: Label
+												"label": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "A human-readable label for this metric or expression. This is especially useful if this is a math expression, so that you know what the value represents.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: MetricStat
+												"metric_stat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Metric
+														"metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Dimensions
+																"dimensions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																	NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Name
+																			"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The name of the dimension.",
+																				Optional:    true,
+																				Computed:    true,
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																			// Property: Value
+																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The value of the dimension.",
+																				Optional:    true,
+																				Computed:    true,
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																	}, /*END NESTED OBJECT*/
+																	Description: "Describes the dimensions of the metric.",
+																	Optional:    true,
+																	Computed:    true,
+																	PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																		generic.Multiset(),
+																		listplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
+																}, /*END ATTRIBUTE*/
+																// Property: MetricName
+																"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "The name of the metric.",
+																	Optional:    true,
+																	Computed:    true,
+																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																		stringplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
+																}, /*END ATTRIBUTE*/
+																// Property: Namespace
+																"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "The namespace of the metric.",
+																	Optional:    true,
+																	Computed:    true,
+																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																		stringplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Description: "The CloudWatch metric to return, including the metric name, namespace, and dimensions. To get the exact metric name, namespace, and dimensions, inspect the [Metric](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html) object that is returned by a call to [ListMetrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html).",
+															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																objectplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: Stat
+														"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The statistic to return. It can include any CloudWatch statistic or extended statistic. For a list of valid values, see the table in [Statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic) in the *Amazon CloudWatch User Guide*. \n The most commonly used metrics for predictive scaling are ``Average`` and ``Sum``.",
+															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: Unit
+														"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The unit to use for the returned data points. For a complete list of the units that CloudWatch supports, see the [MetricDatum](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html) data type in the *Amazon CloudWatch API Reference*.",
+															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "Information about the metric data to return. \n Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+														objectplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: ReturnData
+												"return_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Description: "Indicates whether to return the timestamps and raw data values of this metric. \n If you use any math expressions, specify ``true`` for this value for only the final math expression that the metric specification is based on. You must specify ``false`` for ``ReturnData`` for all the other metrics and expressions used in the metric specification.\n If you are only retrieving metrics and not performing any math expressions, do not specify anything for ``ReturnData``. This sets it to its default (``true``).",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+														boolplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Description: "",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Set{ /*START VALIDATORS*/
+											fwvalidators.NotNullSet(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+											setplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "The customized load metric specification.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: CustomizedScalingMetricSpecification
+							"customized_scaling_metric_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: MetricDataQueries
+									"metric_data_queries": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Expression
+												"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The math expression to perform on the returned data, if this object is performing a math expression. This expression can use the ``Id`` of the other metrics to refer to those metrics, and can also use the ``Id`` of other expressions to use the result of those expressions. \n Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: Id
+												"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "A short name that identifies the object's results in the response. This name must be unique among all ``MetricDataQuery`` objects specified for a single scaling policy. If you are performing math expressions on this set of data, this name represents that data and can serve as a variable in the mathematical expression. The valid characters are letters, numbers, and underscores. The first character must be a lowercase letter.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: Label
+												"label": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "A human-readable label for this metric or expression. This is especially useful if this is a math expression, so that you know what the value represents.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: MetricStat
+												"metric_stat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Metric
+														"metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Dimensions
+																"dimensions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																	NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Name
+																			"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The name of the dimension.",
+																				Optional:    true,
+																				Computed:    true,
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																			// Property: Value
+																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The value of the dimension.",
+																				Optional:    true,
+																				Computed:    true,
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																	}, /*END NESTED OBJECT*/
+																	Description: "Describes the dimensions of the metric.",
+																	Optional:    true,
+																	Computed:    true,
+																	PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																		generic.Multiset(),
+																		listplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
+																}, /*END ATTRIBUTE*/
+																// Property: MetricName
+																"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "The name of the metric.",
+																	Optional:    true,
+																	Computed:    true,
+																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																		stringplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
+																}, /*END ATTRIBUTE*/
+																// Property: Namespace
+																"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "The namespace of the metric.",
+																	Optional:    true,
+																	Computed:    true,
+																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																		stringplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Description: "The CloudWatch metric to return, including the metric name, namespace, and dimensions. To get the exact metric name, namespace, and dimensions, inspect the [Metric](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html) object that is returned by a call to [ListMetrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html).",
+															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																objectplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: Stat
+														"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The statistic to return. It can include any CloudWatch statistic or extended statistic. For a list of valid values, see the table in [Statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic) in the *Amazon CloudWatch User Guide*. \n The most commonly used metrics for predictive scaling are ``Average`` and ``Sum``.",
+															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: Unit
+														"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The unit to use for the returned data points. For a complete list of the units that CloudWatch supports, see the [MetricDatum](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html) data type in the *Amazon CloudWatch API Reference*.",
+															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "Information about the metric data to return. \n Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+														objectplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: ReturnData
+												"return_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Description: "Indicates whether to return the timestamps and raw data values of this metric. \n If you use any math expressions, specify ``true`` for this value for only the final math expression that the metric specification is based on. You must specify ``false`` for ``ReturnData`` for all the other metrics and expressions used in the metric specification.\n If you are only retrieving metrics and not performing any math expressions, do not specify anything for ``ReturnData``. This sets it to its default (``true``).",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+														boolplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Description: "One or more metric data queries to provide data points for a metric specification.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Set{ /*START VALIDATORS*/
+											fwvalidators.NotNullSet(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+											setplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "The customized scaling metric specification.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: PredefinedLoadMetricSpecification
+							"predefined_load_metric_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: PredefinedMetricType
+									"predefined_metric_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The metric type.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: ResourceLabel
+									"resource_label": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "A label that uniquely identifies a target group.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "The predefined load metric specification.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: PredefinedMetricPairSpecification
+							"predefined_metric_pair_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: PredefinedMetricType
+									"predefined_metric_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Indicates which metrics to use. There are two different types of metrics for each metric type: one is a load metric and one is a scaling metric.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: ResourceLabel
+									"resource_label": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "A label that uniquely identifies a specific target group from which to determine the total and average request count.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "The predefined metric pair specification that determines the appropriate scaling metric and load metric to use.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: PredefinedScalingMetricSpecification
+							"predefined_scaling_metric_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: PredefinedMetricType
+									"predefined_metric_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The metric type.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: ResourceLabel
+									"resource_label": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "A label that uniquely identifies a specific target group from which to determine the average request count.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "The predefined scaling metric specification.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: TargetValue
+							"target_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "Specifies the target utilization.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.Float64{ /*START VALIDATORS*/
+									fwvalidators.NotNullFloat64(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+									float64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "This structure includes the metrics and target utilization to use for predictive scaling. \n This is an array, but we currently only support a single metric specification. That is, you can specify a target value and a single metric pair, or a target value and one scaling metric and one load metric.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Set{ /*START VALIDATORS*/
+						fwvalidators.NotNullSet(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						setplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Mode
+				"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The predictive scaling mode. Defaults to ``ForecastOnly`` if not specified.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SchedulingBufferTime
+				"scheduling_buffer_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The amount of time, in seconds, that the start time can be advanced. \n The value must be less than the forecast interval duration of 3600 seconds (60 minutes). Defaults to 300 seconds if not specified.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The predictive scaling policy configuration.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceId
 		// CloudFormation resource type schema:
 		//
@@ -783,29 +1785,41 @@ func scalingPolicyResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::ApplicationAutoScaling::ScalingPolicy").WithTerraformTypeName("awscc_applicationautoscaling_scaling_policy")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"adjustment_type":                   "AdjustmentType",
-		"arn":                               "Arn",
-		"cooldown":                          "Cooldown",
-		"customized_metric_specification":   "CustomizedMetricSpecification",
-		"dimensions":                        "Dimensions",
-		"disable_scale_in":                  "DisableScaleIn",
-		"expression":                        "Expression",
-		"id":                                "Id",
-		"label":                             "Label",
-		"metric":                            "Metric",
-		"metric_aggregation_type":           "MetricAggregationType",
-		"metric_interval_lower_bound":       "MetricIntervalLowerBound",
-		"metric_interval_upper_bound":       "MetricIntervalUpperBound",
-		"metric_name":                       "MetricName",
-		"metric_stat":                       "MetricStat",
-		"metrics":                           "Metrics",
-		"min_adjustment_magnitude":          "MinAdjustmentMagnitude",
-		"name":                              "Name",
-		"namespace":                         "Namespace",
-		"policy_name":                       "PolicyName",
-		"policy_type":                       "PolicyType",
-		"predefined_metric_specification":   "PredefinedMetricSpecification",
-		"predefined_metric_type":            "PredefinedMetricType",
+		"adjustment_type": "AdjustmentType",
+		"arn":             "Arn",
+		"cooldown":        "Cooldown",
+		"customized_capacity_metric_specification": "CustomizedCapacityMetricSpecification",
+		"customized_load_metric_specification":     "CustomizedLoadMetricSpecification",
+		"customized_metric_specification":          "CustomizedMetricSpecification",
+		"customized_scaling_metric_specification":  "CustomizedScalingMetricSpecification",
+		"dimensions":                           "Dimensions",
+		"disable_scale_in":                     "DisableScaleIn",
+		"expression":                           "Expression",
+		"id":                                   "Id",
+		"label":                                "Label",
+		"max_capacity_breach_behavior":         "MaxCapacityBreachBehavior",
+		"max_capacity_buffer":                  "MaxCapacityBuffer",
+		"metric":                               "Metric",
+		"metric_aggregation_type":              "MetricAggregationType",
+		"metric_data_queries":                  "MetricDataQueries",
+		"metric_interval_lower_bound":          "MetricIntervalLowerBound",
+		"metric_interval_upper_bound":          "MetricIntervalUpperBound",
+		"metric_name":                          "MetricName",
+		"metric_specifications":                "MetricSpecifications",
+		"metric_stat":                          "MetricStat",
+		"metrics":                              "Metrics",
+		"min_adjustment_magnitude":             "MinAdjustmentMagnitude",
+		"mode":                                 "Mode",
+		"name":                                 "Name",
+		"namespace":                            "Namespace",
+		"policy_name":                          "PolicyName",
+		"policy_type":                          "PolicyType",
+		"predefined_load_metric_specification": "PredefinedLoadMetricSpecification",
+		"predefined_metric_pair_specification": "PredefinedMetricPairSpecification",
+		"predefined_metric_specification":      "PredefinedMetricSpecification",
+		"predefined_metric_type":               "PredefinedMetricType",
+		"predefined_scaling_metric_specification": "PredefinedScalingMetricSpecification",
+		"predictive_scaling_policy_configuration": "PredictiveScalingPolicyConfiguration",
 		"resource_id":                       "ResourceId",
 		"resource_label":                    "ResourceLabel",
 		"return_data":                       "ReturnData",
@@ -814,6 +1828,7 @@ func scalingPolicyResource(ctx context.Context) (resource.Resource, error) {
 		"scale_out_cooldown":                "ScaleOutCooldown",
 		"scaling_adjustment":                "ScalingAdjustment",
 		"scaling_target_id":                 "ScalingTargetId",
+		"scheduling_buffer_time":            "SchedulingBufferTime",
 		"service_namespace":                 "ServiceNamespace",
 		"stat":                              "Stat",
 		"statistic":                         "Statistic",

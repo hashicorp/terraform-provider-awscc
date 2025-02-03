@@ -29,7 +29,7 @@ We recommend that type names adhere to the following pattern: company_or_organiz
 
 - `id` (String) Uniquely identifies the resource.
 - `public_type_arn` (String) The Amazon Resource Number (ARN) assigned to the public extension upon publication
-- `publisher_id` (String) The publisher id assigned by CloudFormation for publishing in this region.
+- `publisher_id` (String) The reserved publisher id for this type, or the publisher id assigned by CloudFormation for publishing in this region.
 - `type_version_arn` (String) The Amazon Resource Number (ARN) of the extension with the versionId.
 
 ## Import

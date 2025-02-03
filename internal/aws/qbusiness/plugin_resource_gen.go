@@ -43,13 +43,15 @@ func pluginResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"application_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
+			Optional: true,
+			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(36, 36),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9-]{35}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: AuthConfiguration
@@ -86,6 +88,12 @@ func pluginResource(ctx context.Context) (resource.Resource, error) {
 		//	    "OAuth2ClientCredentialConfiguration": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
+		//	        "AuthorizationUrl": {
+		//	          "maxLength": 2048,
+		//	          "minLength": 1,
+		//	          "pattern": "^(https?|ftp|file)://([^\\s]*)$",
+		//	          "type": "string"
+		//	        },
 		//	        "RoleArn": {
 		//	          "maxLength": 1284,
 		//	          "minLength": 0,
@@ -96,6 +104,12 @@ func pluginResource(ctx context.Context) (resource.Resource, error) {
 		//	          "maxLength": 1284,
 		//	          "minLength": 0,
 		//	          "pattern": "",
+		//	          "type": "string"
+		//	        },
+		//	        "TokenUrl": {
+		//	          "maxLength": 2048,
+		//	          "minLength": 1,
+		//	          "pattern": "^(https?|ftp|file)://([^\\s]*)$",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -156,6 +170,18 @@ func pluginResource(ctx context.Context) (resource.Resource, error) {
 				// Property: OAuth2ClientCredentialConfiguration
 				"o_auth_2_client_credential_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AuthorizationUrl
+						"authorization_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 2048),
+								stringvalidator.RegexMatches(regexp.MustCompile("^(https?|ftp|file)://([^\\s]*)$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: RoleArn
 						"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
@@ -175,6 +201,18 @@ func pluginResource(ctx context.Context) (resource.Resource, error) {
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(0, 1284),
 								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: TokenUrl
+						"token_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 2048),
+								stringvalidator.RegexMatches(regexp.MustCompile("^(https?|ftp|file)://([^\\s]*)$"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -463,7 +501,6 @@ func pluginResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
@@ -523,7 +560,6 @@ func pluginResource(ctx context.Context) (resource.Resource, error) {
 				listvalidator.SizeBetween(0, 200),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -536,7 +572,19 @@ func pluginResource(ctx context.Context) (resource.Resource, error) {
 		//	    "SALESFORCE",
 		//	    "JIRA",
 		//	    "ZENDESK",
-		//	    "CUSTOM"
+		//	    "CUSTOM",
+		//	    "QUICKSIGHT",
+		//	    "SERVICENOW_NOW_PLATFORM",
+		//	    "JIRA_CLOUD",
+		//	    "SALESFORCE_CRM",
+		//	    "ZENDESK_SUITE",
+		//	    "ATLASSIAN_CONFLUENCE",
+		//	    "GOOGLE_CALENDAR",
+		//	    "MICROSOFT_TEAMS",
+		//	    "MICROSOFT_EXCHANGE",
+		//	    "PAGERDUTY_ADVANCE",
+		//	    "SMARTSHEET",
+		//	    "ASANA"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -549,6 +597,18 @@ func pluginResource(ctx context.Context) (resource.Resource, error) {
 					"JIRA",
 					"ZENDESK",
 					"CUSTOM",
+					"QUICKSIGHT",
+					"SERVICENOW_NOW_PLATFORM",
+					"JIRA_CLOUD",
+					"SALESFORCE_CRM",
+					"ZENDESK_SUITE",
+					"ATLASSIAN_CONFLUENCE",
+					"GOOGLE_CALENDAR",
+					"MICROSOFT_TEAMS",
+					"MICROSOFT_EXCHANGE",
+					"PAGERDUTY_ADVANCE",
+					"SMARTSHEET",
+					"ASANA",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -595,6 +655,7 @@ func pluginResource(ctx context.Context) (resource.Resource, error) {
 		"api_schema_type":             "ApiSchemaType",
 		"application_id":              "ApplicationId",
 		"auth_configuration":          "AuthConfiguration",
+		"authorization_url":           "AuthorizationUrl",
 		"basic_auth_configuration":    "BasicAuthConfiguration",
 		"bucket":                      "Bucket",
 		"build_status":                "BuildStatus",
@@ -614,6 +675,7 @@ func pluginResource(ctx context.Context) (resource.Resource, error) {
 		"server_url": "ServerUrl",
 		"state":      "State",
 		"tags":       "Tags",
+		"token_url":  "TokenUrl",
 		"type":       "Type",
 		"updated_at": "UpdatedAt",
 		"value":      "Value",

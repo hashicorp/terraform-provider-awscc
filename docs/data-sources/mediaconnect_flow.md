@@ -193,7 +193,54 @@ Read-Only:
 
 Read-Only:
 
+- `audio_monitoring_settings` (Attributes List) Contains the settings for audio stream metrics monitoring. (see [below for nested schema](#nestedatt--source_monitoring_config--audio_monitoring_settings))
+- `content_quality_analysis_state` (String) Indicates whether content quality analysis is enabled or disabled.
 - `thumbnail_state` (String) The state of thumbnail monitoring.
+- `video_monitoring_settings` (Attributes List) Contains the settings for video stream metrics monitoring. (see [below for nested schema](#nestedatt--source_monitoring_config--video_monitoring_settings))
+
+<a id="nestedatt--source_monitoring_config--audio_monitoring_settings"></a>
+### Nested Schema for `source_monitoring_config.audio_monitoring_settings`
+
+Read-Only:
+
+- `silent_audio` (Attributes) Configures settings for the SilentAudio metric. (see [below for nested schema](#nestedatt--source_monitoring_config--audio_monitoring_settings--silent_audio))
+
+<a id="nestedatt--source_monitoring_config--audio_monitoring_settings--silent_audio"></a>
+### Nested Schema for `source_monitoring_config.audio_monitoring_settings.silent_audio`
+
+Read-Only:
+
+- `state` (String) Indicates whether the SilentAudio metric is enabled or disabled.
+- `threshold_seconds` (Number) Specifies the number of consecutive seconds of silence that triggers an event or alert.
+
+
+
+<a id="nestedatt--source_monitoring_config--video_monitoring_settings"></a>
+### Nested Schema for `source_monitoring_config.video_monitoring_settings`
+
+Read-Only:
+
+- `black_frames` (Attributes) Configures settings for the BlackFrames metric. (see [below for nested schema](#nestedatt--source_monitoring_config--video_monitoring_settings--black_frames))
+- `frozen_frames` (Attributes) Configures settings for the FrozenFrames metric. (see [below for nested schema](#nestedatt--source_monitoring_config--video_monitoring_settings--frozen_frames))
+
+<a id="nestedatt--source_monitoring_config--video_monitoring_settings--black_frames"></a>
+### Nested Schema for `source_monitoring_config.video_monitoring_settings.black_frames`
+
+Read-Only:
+
+- `state` (String) Indicates whether the BlackFrames metric is enabled or disabled.
+- `threshold_seconds` (Number) Specifies the number of consecutive seconds of black frames that triggers an event or alert.
+
+
+<a id="nestedatt--source_monitoring_config--video_monitoring_settings--frozen_frames"></a>
+### Nested Schema for `source_monitoring_config.video_monitoring_settings.frozen_frames`
+
+Read-Only:
+
+- `state` (String) Indicates whether the FrozenFrames metric is enabled or disabled.
+- `threshold_seconds` (Number) Specifies the number of consecutive seconds of a static image that triggers an event or alert.
+
+
 
 
 <a id="nestedatt--vpc_interfaces"></a>

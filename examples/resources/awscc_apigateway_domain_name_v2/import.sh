@@ -1,0 +1,1 @@
+$ terraform import awscc_apigateway_domain_name_v2.example "domain_name_arn"

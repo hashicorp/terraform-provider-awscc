@@ -195,7 +195,6 @@ func logicallyAirGappedBackupVaultResource(ctx context.Context) (resource.Resour
 		//	  "type": "string"
 		//	}
 		"vault_state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -208,7 +207,6 @@ func logicallyAirGappedBackupVaultResource(ctx context.Context) (resource.Resour
 		//	  "type": "string"
 		//	}
 		"vault_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),

@@ -1,0 +1,1 @@
+$ terraform import awscc_connect_email_address.example "email_address_arn"

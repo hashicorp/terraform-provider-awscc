@@ -23,6 +23,7 @@ Data Source schema for AWS::AppConfig::ConfigurationProfile
 
 - `application_id` (String) The application ID.
 - `configuration_profile_id` (String) The configuration profile ID
+- `deletion_protection_check` (String) On resource deletion this controls whether the Deletion Protection check should be applied, bypassed, or (the default) whether the behavior should be controlled by the account-level Deletion Protection setting. See https://docs.aws.amazon.com/appconfig/latest/userguide/deletion-protection.html
 - `description` (String) A description of the configuration profile.
 - `kms_key_arn` (String) The Amazon Resource Name of the AWS Key Management Service key to encrypt new configuration data versions in the AWS AppConfig hosted configuration store. This attribute is only used for hosted configuration types. To encrypt data managed in other configuration stores, see the documentation for how to specify an AWS KMS key for that particular service.
 - `kms_key_identifier` (String) The AWS Key Management Service key identifier (key ID, key alias, or key ARN) provided when the resource was created or updated.

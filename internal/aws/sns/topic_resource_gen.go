@@ -193,6 +193,21 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: FifoThroughputScope
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"fifo_throughput_scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: FifoTopic
 		// CloudFormation resource type schema:
 		//
@@ -443,6 +458,7 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		"display_name":                 "DisplayName",
 		"endpoint":                     "Endpoint",
 		"failure_feedback_role_arn":    "FailureFeedbackRoleArn",
+		"fifo_throughput_scope":        "FifoThroughputScope",
 		"fifo_topic":                   "FifoTopic",
 		"key":                          "Key",
 		"kms_master_key_id":            "KmsMasterKeyId",

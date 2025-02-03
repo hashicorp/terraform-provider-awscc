@@ -17,10 +17,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
@@ -157,6 +159,12 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "AutoImportDataQualityResult": {
 		//	          "description": "Specifies whether to automatically import data quality metrics as part of the data source run.",
 		//	          "type": "boolean"
+		//	        },
+		//	        "CatalogName": {
+		//	          "description": "The catalog name in the AWS Glue run configuration.",
+		//	          "maxLength": 128,
+		//	          "minLength": 1,
+		//	          "type": "string"
 		//	        },
 		//	        "DataAccessRole": {
 		//	          "description": "The data access role included in the configuration details of the AWS Glue data source.",
@@ -348,9 +356,33 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        }
 		//	      },
 		//	      "required": [
-		//	        "RedshiftCredentialConfiguration",
-		//	        "RedshiftStorage",
 		//	        "RelationalFilterConfigurations"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "SageMakerRunConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "The configuration details of the Amazon SageMaker data source.",
+		//	      "properties": {
+		//	        "TrackingAssets": {
+		//	          "additionalProperties": false,
+		//	          "description": "The tracking assets of the Amazon SageMaker run.",
+		//	          "patternProperties": {
+		//	            "": {
+		//	              "items": {
+		//	                "pattern": "^arn:aws[^:]*:sagemaker:[a-z]{2}-?(iso|gov)?-{1}[a-z]*-{1}[0-9]:\\d{12}:[\\w+=,.@-]{1,128}/[\\w+=,.@-]{1,256}$",
+		//	                "type": "string"
+		//	              },
+		//	              "maxItems": 500,
+		//	              "minItems": 0,
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "TrackingAssets"
 		//	      ],
 		//	      "type": "object"
 		//	    }
@@ -369,6 +401,18 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							Computed:    true,
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: CatalogName
+						"catalog_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The catalog name in the AWS Glue run configuration.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 128),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: DataAccessRole
@@ -510,9 +554,6 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							Description: "The details of the credentials required to access an Amazon Redshift cluster.",
 							Optional:    true,
 							Computed:    true,
-							Validators: []validator.Object{ /*START VALIDATORS*/
-								fwvalidators.NotNullObject(),
-							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
@@ -574,9 +615,6 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							Description: "The details of the Amazon Redshift storage as part of the configuration of an Amazon Redshift data source run.",
 							Optional:    true,
 							Computed:    true,
-							Validators: []validator.Object{ /*START VALIDATORS*/
-								fwvalidators.NotNullObject(),
-							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
@@ -673,6 +711,31 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: SageMakerRunConfiguration
+				"sage_maker_run_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: TrackingAssets
+						"tracking_assets":   // Pattern: ""
+						schema.MapAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.ListType{ElemType: types.StringType},
+							Description: "The tracking assets of the Amazon SageMaker run.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Map{ /*START VALIDATORS*/
+								fwvalidators.NotNullMap(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+								mapplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration details of the Amazon SageMaker data source.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Configuration of the data source. It can be set to either glueRunConfiguration or redshiftRunConfiguration.",
 			Optional:    true,
@@ -681,6 +744,37 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 			// Configuration is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: ConnectionId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The unique identifier of a connection used to fetch relevant parameters from connection during Datasource run",
+		//	  "type": "string"
+		//	}
+		"connection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of a connection used to fetch relevant parameters from connection during Datasource run",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ConnectionIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The unique identifier of a connection used to fetch relevant parameters from connection during Datasource run",
+		//	  "type": "string"
+		//	}
+		"connection_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of a connection used to fetch relevant parameters from connection during Datasource run",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// ConnectionIdentifier is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
@@ -781,7 +875,6 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The unique identifier of the Amazon DataZone environment to which the data source publishes assets.",
-		//	  "pattern": "^[a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
 		"environment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -800,9 +893,11 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"environment_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The unique identifier of the Amazon DataZone environment to which the data source publishes assets.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// EnvironmentIdentifier is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -1093,8 +1188,11 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"asset_forms_input":                 "AssetFormsInput",
 		"auto_import_data_quality_result":   "AutoImportDataQualityResult",
+		"catalog_name":                      "CatalogName",
 		"cluster_name":                      "ClusterName",
 		"configuration":                     "Configuration",
+		"connection_id":                     "ConnectionId",
+		"connection_identifier":             "ConnectionIdentifier",
 		"content":                           "Content",
 		"created_at":                        "CreatedAt",
 		"data_access_role":                  "DataAccessRole",
@@ -1125,11 +1223,13 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"redshift_serverless_source":        "RedshiftServerlessSource",
 		"redshift_storage":                  "RedshiftStorage",
 		"relational_filter_configurations":  "RelationalFilterConfigurations",
+		"sage_maker_run_configuration":      "SageMakerRunConfiguration",
 		"schedule":                          "Schedule",
 		"schema_name":                       "SchemaName",
 		"secret_manager_arn":                "SecretManagerArn",
 		"status":                            "Status",
 		"timezone":                          "Timezone",
+		"tracking_assets":                   "TrackingAssets",
 		"type":                              "Type",
 		"type_identifier":                   "TypeIdentifier",
 		"type_revision":                     "TypeRevision",
@@ -1139,6 +1239,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/AssetFormsInput",
+		"/properties/ConnectionIdentifier",
 		"/properties/EnvironmentIdentifier",
 		"/properties/DomainIdentifier",
 		"/properties/Configuration",

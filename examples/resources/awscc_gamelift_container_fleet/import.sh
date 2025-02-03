@@ -1,0 +1,1 @@
+$ terraform import awscc_gamelift_container_fleet.example "fleet_id"

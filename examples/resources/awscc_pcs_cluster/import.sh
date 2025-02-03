@@ -1,0 +1,1 @@
+$ terraform import awscc_pcs_cluster.example "arn"

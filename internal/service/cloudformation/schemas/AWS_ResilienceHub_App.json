@@ -216,7 +216,12 @@
     "tagOnCreate": true,
     "tagUpdatable": true,
     "cloudFormationSystemTags": true,
-    "tagProperty": "/properties/Tags"
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "resiliencehub:TagResource",
+      "resiliencehub:ListTagsForResource",
+      "resiliencehub:UntagResource"
+    ]
   },
   "additionalProperties": false,
   "required": [
@@ -256,7 +261,17 @@
         "sns:GetTopicAttributes",
         "route53:List*",
         "iam:PassRole",
-        "resiliencehub:*"
+        "resiliencehub:CreateApp",
+        "resiliencehub:DescribeApp",
+        "resiliencehub:DescribeAppVersionTemplate",
+        "resiliencehub:PutDraftAppVersionTemplate",
+        "resiliencehub:AddDraftAppVersionResourceMappings",
+        "resiliencehub:ListAppVersionResourceMappings",
+        "resiliencehub:ListAppVersions",
+        "resiliencehub:PublishAppVersion",
+        "resiliencehub:ListTagsForResource",
+        "resiliencehub:TagResource",
+        "resiliencehub:UntagResource"
       ]
     },
     "read": {
@@ -289,7 +304,18 @@
         "sns:GetTopicAttributes",
         "route53:List*",
         "iam:PassRole",
-        "resiliencehub:*"
+        "resiliencehub:UpdateApp",
+        "resiliencehub:DescribeApp",
+        "resiliencehub:DescribeAppVersionTemplate",
+        "resiliencehub:PutDraftAppVersionTemplate",
+        "resiliencehub:AddDraftAppVersionResourceMappings",
+        "resiliencehub:RemoveDraftAppVersionResourceMappings",
+        "resiliencehub:ListAppVersionResourceMappings",
+        "resiliencehub:ListAppVersions",
+        "resiliencehub:PublishAppVersion",
+        "resiliencehub:ListTagsForResource",
+        "resiliencehub:TagResource",
+        "resiliencehub:UntagResource"
       ]
     },
     "delete": {

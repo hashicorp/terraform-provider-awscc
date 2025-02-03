@@ -9,6 +9,7 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
@@ -213,6 +214,28 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 		//	    "additionalProperties": false,
 		//	    "description": "Prompt variant",
 		//	    "properties": {
+		//	      "GenAiResource": {
+		//	        "description": "Target resource to invoke with Prompt",
+		//	        "properties": {
+		//	          "Agent": {
+		//	            "additionalProperties": false,
+		//	            "description": "Target Agent to invoke with Prompt",
+		//	            "properties": {
+		//	              "AgentIdentifier": {
+		//	                "description": "Arn representation of the Agent Alias.",
+		//	                "maxLength": 2048,
+		//	                "pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:agent-alias/[0-9a-zA-Z]{10}/[0-9a-zA-Z]{10}$",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "AgentIdentifier"
+		//	            ],
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
 		//	      "InferenceConfiguration": {
 		//	        "description": "Model inference configuration",
 		//	        "properties": {
@@ -269,6 +292,180 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 		//	      "TemplateConfiguration": {
 		//	        "description": "Prompt template configuration",
 		//	        "properties": {
+		//	          "Chat": {
+		//	            "additionalProperties": false,
+		//	            "description": "Configuration for chat prompt template",
+		//	            "properties": {
+		//	              "InputVariables": {
+		//	                "description": "List of input variables",
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "Input variable",
+		//	                  "properties": {
+		//	                    "Name": {
+		//	                      "description": "Name for an input variable",
+		//	                      "pattern": "^([0-9a-zA-Z][_-]?){1,100}$",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "maxItems": 5,
+		//	                "minItems": 0,
+		//	                "type": "array"
+		//	              },
+		//	              "Messages": {
+		//	                "description": "List of messages for chat prompt template",
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "Chat prompt Message",
+		//	                  "properties": {
+		//	                    "Content": {
+		//	                      "description": "List of Content Blocks",
+		//	                      "insertionOrder": true,
+		//	                      "items": {
+		//	                        "description": "Configuration for chat prompt template",
+		//	                        "properties": {
+		//	                          "Text": {
+		//	                            "description": "Configuration for chat prompt template",
+		//	                            "minLength": 1,
+		//	                            "type": "string"
+		//	                          }
+		//	                        },
+		//	                        "type": "object"
+		//	                      },
+		//	                      "minItems": 1,
+		//	                      "type": "array"
+		//	                    },
+		//	                    "Role": {
+		//	                      "description": "Conversation roles for the chat prompt",
+		//	                      "enum": [
+		//	                        "user",
+		//	                        "assistant"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "Role",
+		//	                    "Content"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "minItems": 0,
+		//	                "type": "array"
+		//	              },
+		//	              "System": {
+		//	                "description": "Configuration for chat prompt template",
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "description": "Configuration for chat prompt template",
+		//	                  "properties": {
+		//	                    "Text": {
+		//	                      "description": "Configuration for chat prompt template",
+		//	                      "minLength": 1,
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "minItems": 0,
+		//	                "type": "array"
+		//	              },
+		//	              "ToolConfiguration": {
+		//	                "additionalProperties": false,
+		//	                "description": "Tool configuration",
+		//	                "properties": {
+		//	                  "ToolChoice": {
+		//	                    "description": "Tool choice",
+		//	                    "properties": {
+		//	                      "Any": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "Any Tool choice",
+		//	                        "type": "object"
+		//	                      },
+		//	                      "Auto": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "Auto Tool choice",
+		//	                        "type": "object"
+		//	                      },
+		//	                      "Tool": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "Specific Tool choice",
+		//	                        "properties": {
+		//	                          "Name": {
+		//	                            "description": "Tool name",
+		//	                            "maxLength": 64,
+		//	                            "minLength": 1,
+		//	                            "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
+		//	                            "type": "string"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "Name"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  },
+		//	                  "Tools": {
+		//	                    "description": "List of Tools",
+		//	                    "insertionOrder": true,
+		//	                    "items": {
+		//	                      "description": "Tool details",
+		//	                      "properties": {
+		//	                        "ToolSpec": {
+		//	                          "additionalProperties": false,
+		//	                          "description": "Tool specification",
+		//	                          "properties": {
+		//	                            "Description": {
+		//	                              "minLength": 1,
+		//	                              "type": "string"
+		//	                            },
+		//	                            "InputSchema": {
+		//	                              "description": "Tool input schema",
+		//	                              "properties": {
+		//	                                "Json": {
+		//	                                  "type": "object"
+		//	                                }
+		//	                              },
+		//	                              "type": "object"
+		//	                            },
+		//	                            "Name": {
+		//	                              "description": "Tool name",
+		//	                              "maxLength": 64,
+		//	                              "minLength": 1,
+		//	                              "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
+		//	                              "type": "string"
+		//	                            }
+		//	                          },
+		//	                          "required": [
+		//	                            "Name",
+		//	                            "InputSchema"
+		//	                          ],
+		//	                          "type": "object"
+		//	                        }
+		//	                      },
+		//	                      "type": "object"
+		//	                    },
+		//	                    "minItems": 1,
+		//	                    "type": "array"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Tools"
+		//	                ],
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Messages"
+		//	            ],
+		//	            "type": "object"
+		//	          },
 		//	          "Text": {
 		//	            "additionalProperties": false,
 		//	            "description": "Configuration for text prompt template",
@@ -337,7 +534,8 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 		//	      "TemplateType": {
 		//	        "description": "Prompt template type",
 		//	        "enum": [
-		//	          "TEXT"
+		//	          "TEXT",
+		//	          "CHAT"
 		//	        ],
 		//	        "type": "string"
 		//	      }
@@ -356,6 +554,42 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 		"variants": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: GenAiResource
+					"gen_ai_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Agent
+							"agent": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AgentIdentifier
+									"agent_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Arn representation of the Agent Alias.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthAtMost(2048),
+											stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:agent-alias/[0-9a-zA-Z]{10}/[0-9a-zA-Z]{10}$"), ""),
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Target Agent to invoke with Prompt",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Target resource to invoke with Prompt",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: InferenceConfiguration
 					"inference_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -456,6 +690,278 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 					// Property: TemplateConfiguration
 					"template_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Chat
+							"chat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: InputVariables
+									"input_variables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Name
+												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Name for an input variable",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.RegexMatches(regexp.MustCompile("^([0-9a-zA-Z][_-]?){1,100}$"), ""),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Description: "List of input variables",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.List{ /*START VALIDATORS*/
+											listvalidator.SizeBetween(0, 5),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Messages
+									"messages": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Content
+												"content": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: Text
+															"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "Configuration for chat prompt template",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.String{ /*START VALIDATORS*/
+																	stringvalidator.LengthAtLeast(1),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+													}, /*END NESTED OBJECT*/
+													Description: "List of Content Blocks",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.List{ /*START VALIDATORS*/
+														listvalidator.SizeAtLeast(1),
+														fwvalidators.NotNullList(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+														listplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: Role
+												"role": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Conversation roles for the chat prompt",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.OneOf(
+															"user",
+															"assistant",
+														),
+														fwvalidators.NotNullString(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Description: "List of messages for chat prompt template",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.List{ /*START VALIDATORS*/
+											listvalidator.SizeAtLeast(0),
+											fwvalidators.NotNullList(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: System
+									"system": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Text
+												"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Configuration for chat prompt template",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.LengthAtLeast(1),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Description: "Configuration for chat prompt template",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.List{ /*START VALIDATORS*/
+											listvalidator.SizeAtLeast(0),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: ToolConfiguration
+									"tool_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: ToolChoice
+											"tool_choice": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Any
+													"any": schema.StringAttribute{ /*START ATTRIBUTE*/
+														CustomType:  jsontypes.NormalizedType{},
+														Description: "Any Tool choice",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: Auto
+													"auto": schema.StringAttribute{ /*START ATTRIBUTE*/
+														CustomType:  jsontypes.NormalizedType{},
+														Description: "Auto Tool choice",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: Tool
+													"tool": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: Name
+															"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "Tool name",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.String{ /*START VALIDATORS*/
+																	stringvalidator.LengthBetween(1, 64),
+																	stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]*$"), ""),
+																	fwvalidators.NotNullString(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "Specific Tool choice",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+															objectplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "Tool choice",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Tools
+											"tools": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: ToolSpec
+														"tool_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Description
+																"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Optional: true,
+																	Computed: true,
+																	Validators: []validator.String{ /*START VALIDATORS*/
+																		stringvalidator.LengthAtLeast(1),
+																	}, /*END VALIDATORS*/
+																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																		stringplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
+																}, /*END ATTRIBUTE*/
+																// Property: InputSchema
+																"input_schema": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: Json
+																		"json": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			CustomType: jsontypes.NormalizedType{},
+																			Optional:   true,
+																			Computed:   true,
+																			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																				stringplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																	Description: "Tool input schema",
+																	Optional:    true,
+																	Computed:    true,
+																	Validators: []validator.Object{ /*START VALIDATORS*/
+																		fwvalidators.NotNullObject(),
+																	}, /*END VALIDATORS*/
+																	PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																		objectplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
+																}, /*END ATTRIBUTE*/
+																// Property: Name
+																"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "Tool name",
+																	Optional:    true,
+																	Computed:    true,
+																	Validators: []validator.String{ /*START VALIDATORS*/
+																		stringvalidator.LengthBetween(1, 64),
+																		stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]*$"), ""),
+																		fwvalidators.NotNullString(),
+																	}, /*END VALIDATORS*/
+																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																		stringplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Description: "Tool specification",
+															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																objectplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
+												Description: "List of Tools",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.List{ /*START VALIDATORS*/
+													listvalidator.SizeAtLeast(1),
+													fwvalidators.NotNullList(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													listplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Tool configuration",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Configuration for chat prompt template",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: Text
 							"text": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -576,6 +1082,7 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.OneOf(
 								"TEXT",
+								"CHAT",
 							),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -634,26 +1141,43 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Bedrock::Prompt").WithTerraformTypeName("awscc_bedrock_prompt")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"agent":                       "Agent",
+		"agent_identifier":            "AgentIdentifier",
+		"any":                         "Any",
 		"arn":                         "Arn",
+		"auto":                        "Auto",
 		"bucket":                      "Bucket",
+		"chat":                        "Chat",
+		"content":                     "Content",
 		"created_at":                  "CreatedAt",
 		"customer_encryption_key_arn": "CustomerEncryptionKeyArn",
 		"default_variant":             "DefaultVariant",
 		"description":                 "Description",
+		"gen_ai_resource":             "GenAiResource",
 		"inference_configuration":     "InferenceConfiguration",
+		"input_schema":                "InputSchema",
 		"input_variables":             "InputVariables",
+		"json":                        "Json",
 		"key":                         "Key",
 		"max_tokens":                  "MaxTokens",
+		"messages":                    "Messages",
 		"model_id":                    "ModelId",
 		"name":                        "Name",
 		"prompt_id":                   "Id",
+		"role":                        "Role",
 		"stop_sequences":              "StopSequences",
+		"system":                      "System",
 		"tags":                        "Tags",
 		"temperature":                 "Temperature",
 		"template_configuration":      "TemplateConfiguration",
 		"template_type":               "TemplateType",
 		"text":                        "Text",
 		"text_s3_location":            "TextS3Location",
+		"tool":                        "Tool",
+		"tool_choice":                 "ToolChoice",
+		"tool_configuration":          "ToolConfiguration",
+		"tool_spec":                   "ToolSpec",
+		"tools":                       "Tools",
 		"top_p":                       "TopP",
 		"updated_at":                  "UpdatedAt",
 		"variants":                    "Variants",

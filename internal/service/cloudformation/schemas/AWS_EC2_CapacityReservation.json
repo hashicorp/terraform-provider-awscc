@@ -58,6 +58,9 @@
     },
     "UnusedReservationBillingOwnerId": {
       "type": "string"
+    },
+    "AvailabilityZoneId": {
+      "type": "string"
     }
   },
   "definitions": {
@@ -97,7 +100,6 @@
   },
   "required": [
     "InstanceCount",
-    "AvailabilityZone",
     "InstancePlatform",
     "InstanceType"
   ],
@@ -110,7 +112,8 @@
     "/properties/OutPostArn",
     "/properties/EphemeralStorage",
     "/properties/EbsOptimized",
-    "/properties/PlacementGroupArn"
+    "/properties/PlacementGroupArn",
+    "/properties/AvailabilityZoneId"
   ],
   "primaryIdentifier": [
     "/properties/Id"
@@ -123,6 +126,17 @@
   "writeOnlyProperties": [
     "/properties/UnusedReservationBillingOwnerId"
   ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/TagSpecifications",
+    "permissions": [
+      "ec2:CreateTags",
+      "ec2:DeleteTags"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [

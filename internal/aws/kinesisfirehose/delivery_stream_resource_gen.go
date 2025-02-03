@@ -1705,6 +1705,526 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: DatabaseSourceConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Columns": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Exclude": {
+		//	          "items": {
+		//	            "maxLength": 194,
+		//	            "minLength": 1,
+		//	            "pattern": "",
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array"
+		//	        },
+		//	        "Include": {
+		//	          "items": {
+		//	            "maxLength": 194,
+		//	            "minLength": 1,
+		//	            "pattern": "",
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "DatabaseSourceAuthenticationConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "SecretsManagerConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Enabled": {
+		//	              "type": "boolean"
+		//	            },
+		//	            "RoleARN": {
+		//	              "maxLength": 512,
+		//	              "minLength": 1,
+		//	              "pattern": "arn:.*:iam::\\d{12}:role/[a-zA-Z_0-9+=,.@\\-_/]+",
+		//	              "relationshipRef": {
+		//	                "propertyPath": "/properties/Arn",
+		//	                "typeName": "AWS::IAM::Role"
+		//	              },
+		//	              "type": "string"
+		//	            },
+		//	            "SecretARN": {
+		//	              "maxLength": 2048,
+		//	              "minLength": 1,
+		//	              "pattern": "arn:.*:secretsmanager:[a-zA-Z0-9\\-]+:\\d{12}:secret:[a-zA-Z0-9\\-/_+=.@]+",
+		//	              "relationshipRef": {
+		//	                "propertyPath": "/properties/Arn",
+		//	                "typeName": "AWS::SecretsManager::Secret"
+		//	              },
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Enabled"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "SecretsManagerConfiguration"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "DatabaseSourceVPCConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "VpcEndpointServiceName": {
+		//	          "maxLength": 255,
+		//	          "minLength": 47,
+		//	          "pattern": "([a-zA-Z0-9\\-\\_]+\\.){2,3}vpce\\.[a-zA-Z0-9\\-]*\\.vpce-svc\\-[a-zA-Z0-9\\-]{17}$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "VpcEndpointServiceName"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "Databases": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Exclude": {
+		//	          "items": {
+		//	            "maxLength": 64,
+		//	            "minLength": 1,
+		//	            "pattern": "",
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array"
+		//	        },
+		//	        "Include": {
+		//	          "items": {
+		//	            "maxLength": 64,
+		//	            "minLength": 1,
+		//	            "pattern": "",
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "Digest": {
+		//	      "maxLength": 512,
+		//	      "minLength": 1,
+		//	      "pattern": ".*",
+		//	      "type": "string"
+		//	    },
+		//	    "Endpoint": {
+		//	      "maxLength": 255,
+		//	      "minLength": 1,
+		//	      "pattern": "",
+		//	      "type": "string"
+		//	    },
+		//	    "Port": {
+		//	      "maximum": 65535,
+		//	      "minimum": 0,
+		//	      "type": "integer"
+		//	    },
+		//	    "PublicCertificate": {
+		//	      "maxLength": 4096,
+		//	      "minLength": 1,
+		//	      "pattern": ".*",
+		//	      "type": "string"
+		//	    },
+		//	    "SSLMode": {
+		//	      "enum": [
+		//	        "Disabled",
+		//	        "Enabled"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "SnapshotWatermarkTable": {
+		//	      "maxLength": 129,
+		//	      "minLength": 1,
+		//	      "pattern": "",
+		//	      "type": "string"
+		//	    },
+		//	    "SurrogateKeys": {
+		//	      "items": {
+		//	        "maxLength": 1024,
+		//	        "minLength": 1,
+		//	        "pattern": "^\\S+$",
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array"
+		//	    },
+		//	    "Tables": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Exclude": {
+		//	          "items": {
+		//	            "maxLength": 129,
+		//	            "minLength": 1,
+		//	            "pattern": "",
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array"
+		//	        },
+		//	        "Include": {
+		//	          "items": {
+		//	            "maxLength": 129,
+		//	            "minLength": 1,
+		//	            "pattern": "",
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "Type": {
+		//	      "enum": [
+		//	        "MySQL",
+		//	        "PostgreSQL"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Type",
+		//	    "Endpoint",
+		//	    "Port",
+		//	    "Databases",
+		//	    "Tables",
+		//	    "SnapshotWatermarkTable",
+		//	    "DatabaseSourceAuthenticationConfiguration",
+		//	    "DatabaseSourceVPCConfiguration"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"database_source_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Columns
+				"columns": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Exclude
+						"exclude": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.ValueStringsAre(
+									stringvalidator.LengthBetween(1, 194),
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Include
+						"include": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.ValueStringsAre(
+									stringvalidator.LengthBetween(1, 194),
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: DatabaseSourceAuthenticationConfiguration
+				"database_source_authentication_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: SecretsManagerConfiguration
+						"secrets_manager_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Enabled
+								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Bool{ /*START VALIDATORS*/
+										fwvalidators.NotNullBool(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: RoleARN
+								"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 512),
+										stringvalidator.RegexMatches(regexp.MustCompile("arn:.*:iam::\\d{12}:role/[a-zA-Z_0-9+=,.@\\-_/]+"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SecretARN
+								"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 2048),
+										stringvalidator.RegexMatches(regexp.MustCompile("arn:.*:secretsmanager:[a-zA-Z0-9\\-]+:\\d{12}:secret:[a-zA-Z0-9\\-/_+=.@]+"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Object{ /*START VALIDATORS*/
+						fwvalidators.NotNullObject(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: DatabaseSourceVPCConfiguration
+				"database_source_vpc_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: VpcEndpointServiceName
+						"vpc_endpoint_service_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(47, 255),
+								stringvalidator.RegexMatches(regexp.MustCompile("([a-zA-Z0-9\\-\\_]+\\.){2,3}vpce\\.[a-zA-Z0-9\\-]*\\.vpce-svc\\-[a-zA-Z0-9\\-]{17}$"), ""),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Object{ /*START VALIDATORS*/
+						fwvalidators.NotNullObject(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Databases
+				"databases": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Exclude
+						"exclude": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.ValueStringsAre(
+									stringvalidator.LengthBetween(1, 64),
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Include
+						"include": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.ValueStringsAre(
+									stringvalidator.LengthBetween(1, 64),
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Object{ /*START VALIDATORS*/
+						fwvalidators.NotNullObject(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Digest
+				"digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 512),
+						stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Endpoint
+				"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 255),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Port
+				"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.Between(0, 65535),
+						fwvalidators.NotNullInt64(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: PublicCertificate
+				"public_certificate": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 4096),
+						stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SSLMode
+				"ssl_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"Disabled",
+							"Enabled",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SnapshotWatermarkTable
+				"snapshot_watermark_table": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 129),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SurrogateKeys
+				"surrogate_keys": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.ValueStringsAre(
+							stringvalidator.LengthBetween(1, 1024),
+							stringvalidator.RegexMatches(regexp.MustCompile("^\\S+$"), ""),
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Tables
+				"tables": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Exclude
+						"exclude": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.ValueStringsAre(
+									stringvalidator.LengthBetween(1, 129),
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Include
+						"include": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.ValueStringsAre(
+									stringvalidator.LengthBetween(1, 129),
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Object{ /*START VALIDATORS*/
+						fwvalidators.NotNullObject(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"MySQL",
+							"PostgreSQL",
+						),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DeliveryStreamEncryptionConfigurationInput
 		// CloudFormation resource type schema:
 		//
@@ -1796,6 +2316,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "enum": [
+		//	    "DatabaseAsSource",
 		//	    "DirectPut",
 		//	    "KinesisStreamAsSource",
 		//	    "MSKAsSource"
@@ -1807,6 +2328,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
+					"DatabaseAsSource",
 					"DirectPut",
 					"KinesisStreamAsSource",
 					"MSKAsSource",
@@ -1815,6 +2337,41 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DirectPutSourceConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "ThroughputHintInMBs": {
+		//	      "maximum": 100,
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"direct_put_source_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ThroughputHintInMBs
+				"throughput_hint_in_m_bs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.Between(1, 100),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ElasticsearchDestinationConfiguration
@@ -4346,7 +4903,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	        "RoleARN": {
 		//	          "maxLength": 512,
 		//	          "minLength": 1,
-		//	          "pattern": "arn:.*",
+		//	          "pattern": "arn:.*:iam::\\d{12}:role/[a-zA-Z_0-9+=,.@\\-_/]+",
 		//	          "relationshipRef": {
 		//	            "propertyPath": "/properties/Arn",
 		//	            "typeName": "AWS::IAM::Role"
@@ -4354,9 +4911,9 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "string"
 		//	        },
 		//	        "SecretARN": {
-		//	          "maxLength": 512,
+		//	          "maxLength": 2048,
 		//	          "minLength": 1,
-		//	          "pattern": "arn:.*",
+		//	          "pattern": "arn:.*:secretsmanager:[a-zA-Z0-9\\-]+:\\d{12}:secret:[a-zA-Z0-9\\-/_+=.@]+",
 		//	          "relationshipRef": {
 		//	            "propertyPath": "/properties/Arn",
 		//	            "typeName": "AWS::SecretsManager::Secret"
@@ -4878,7 +5435,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 512),
-								stringvalidator.RegexMatches(regexp.MustCompile("arn:.*"), ""),
+								stringvalidator.RegexMatches(regexp.MustCompile("arn:.*:iam::\\d{12}:role/[a-zA-Z_0-9+=,.@\\-_/]+"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -4889,8 +5446,8 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 512),
-								stringvalidator.RegexMatches(regexp.MustCompile("arn:.*"), ""),
+								stringvalidator.LengthBetween(1, 2048),
+								stringvalidator.RegexMatches(regexp.MustCompile("arn:.*:secretsmanager:[a-zA-Z0-9\\-]+:\\d{12}:secret:[a-zA-Z0-9\\-/_+=.@]+"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -4916,6 +5473,9 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "AppendOnly": {
+		//	      "type": "boolean"
+		//	    },
 		//	    "BufferingHints": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -5207,6 +5767,14 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"iceberg_destination_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AppendOnly
+				"append_only": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: BufferingHints
 				"buffering_hints": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -6274,7 +6842,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	        "RoleARN": {
 		//	          "maxLength": 512,
 		//	          "minLength": 1,
-		//	          "pattern": "arn:.*",
+		//	          "pattern": "arn:.*:iam::\\d{12}:role/[a-zA-Z_0-9+=,.@\\-_/]+",
 		//	          "relationshipRef": {
 		//	            "propertyPath": "/properties/Arn",
 		//	            "typeName": "AWS::IAM::Role"
@@ -6282,9 +6850,9 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "string"
 		//	        },
 		//	        "SecretARN": {
-		//	          "maxLength": 512,
+		//	          "maxLength": 2048,
 		//	          "minLength": 1,
-		//	          "pattern": "arn:.*",
+		//	          "pattern": "arn:.*:secretsmanager:[a-zA-Z0-9\\-]+:\\d{12}:secret:[a-zA-Z0-9\\-/_+=.@]+",
 		//	          "relationshipRef": {
 		//	            "propertyPath": "/properties/Arn",
 		//	            "typeName": "AWS::SecretsManager::Secret"
@@ -6932,7 +7500,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 512),
-								stringvalidator.RegexMatches(regexp.MustCompile("arn:.*"), ""),
+								stringvalidator.RegexMatches(regexp.MustCompile("arn:.*:iam::\\d{12}:role/[a-zA-Z_0-9+=,.@\\-_/]+"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -6943,8 +7511,8 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 512),
-								stringvalidator.RegexMatches(regexp.MustCompile("arn:.*"), ""),
+								stringvalidator.LengthBetween(1, 2048),
+								stringvalidator.RegexMatches(regexp.MustCompile("arn:.*:secretsmanager:[a-zA-Z0-9\\-]+:\\d{12}:secret:[a-zA-Z0-9\\-/_+=.@]+"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -7561,7 +8129,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	        "RoleARN": {
 		//	          "maxLength": 512,
 		//	          "minLength": 1,
-		//	          "pattern": "arn:.*",
+		//	          "pattern": "arn:.*:iam::\\d{12}:role/[a-zA-Z_0-9+=,.@\\-_/]+",
 		//	          "relationshipRef": {
 		//	            "propertyPath": "/properties/Arn",
 		//	            "typeName": "AWS::IAM::Role"
@@ -7569,9 +8137,9 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "string"
 		//	        },
 		//	        "SecretARN": {
-		//	          "maxLength": 512,
+		//	          "maxLength": 2048,
 		//	          "minLength": 1,
-		//	          "pattern": "arn:.*",
+		//	          "pattern": "arn:.*:secretsmanager:[a-zA-Z0-9\\-]+:\\d{12}:secret:[a-zA-Z0-9\\-/_+=.@]+",
 		//	          "relationshipRef": {
 		//	            "propertyPath": "/properties/Arn",
 		//	            "typeName": "AWS::SecretsManager::Secret"
@@ -8129,7 +8697,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 512),
-								stringvalidator.RegexMatches(regexp.MustCompile("arn:.*"), ""),
+								stringvalidator.RegexMatches(regexp.MustCompile("arn:.*:iam::\\d{12}:role/[a-zA-Z_0-9+=,.@\\-_/]+"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -8140,8 +8708,8 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 512),
-								stringvalidator.RegexMatches(regexp.MustCompile("arn:.*"), ""),
+								stringvalidator.LengthBetween(1, 2048),
+								stringvalidator.RegexMatches(regexp.MustCompile("arn:.*:secretsmanager:[a-zA-Z0-9\\-]+:\\d{12}:secret:[a-zA-Z0-9\\-/_+=.@]+"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -8492,7 +9060,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	        "RoleARN": {
 		//	          "maxLength": 512,
 		//	          "minLength": 1,
-		//	          "pattern": "arn:.*",
+		//	          "pattern": "arn:.*:iam::\\d{12}:role/[a-zA-Z_0-9+=,.@\\-_/]+",
 		//	          "relationshipRef": {
 		//	            "propertyPath": "/properties/Arn",
 		//	            "typeName": "AWS::IAM::Role"
@@ -8500,9 +9068,9 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "string"
 		//	        },
 		//	        "SecretARN": {
-		//	          "maxLength": 512,
+		//	          "maxLength": 2048,
 		//	          "minLength": 1,
-		//	          "pattern": "arn:.*",
+		//	          "pattern": "arn:.*:secretsmanager:[a-zA-Z0-9\\-]+:\\d{12}:secret:[a-zA-Z0-9\\-/_+=.@]+",
 		//	          "relationshipRef": {
 		//	            "propertyPath": "/properties/Arn",
 		//	            "typeName": "AWS::SecretsManager::Secret"
@@ -8951,7 +9519,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 512),
-								stringvalidator.RegexMatches(regexp.MustCompile("arn:.*"), ""),
+								stringvalidator.RegexMatches(regexp.MustCompile("arn:.*:iam::\\d{12}:role/[a-zA-Z_0-9+=,.@\\-_/]+"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -8962,8 +9530,8 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 512),
-								stringvalidator.RegexMatches(regexp.MustCompile("arn:.*"), ""),
+								stringvalidator.LengthBetween(1, 2048),
+								stringvalidator.RegexMatches(regexp.MustCompile("arn:.*:secretsmanager:[a-zA-Z0-9\\-]+:\\d{12}:secret:[a-zA-Z0-9\\-/_+=.@]+"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -9076,6 +9644,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		"account_url": "AccountUrl",
 		"amazon_open_search_serverless_destination_configuration": "AmazonOpenSearchServerlessDestinationConfiguration",
 		"amazonopensearchservice_destination_configuration":       "AmazonopensearchserviceDestinationConfiguration",
+		"append_only":                  "AppendOnly",
 		"arn":                          "Arn",
 		"attribute_name":               "AttributeName",
 		"attribute_value":              "AttributeValue",
@@ -9095,6 +9664,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		"cluster_jdbcurl":                          "ClusterJDBCURL",
 		"collection_endpoint":                      "CollectionEndpoint",
 		"column_to_json_key_mappings":              "ColumnToJsonKeyMappings",
+		"columns":                                  "Columns",
 		"common_attributes":                        "CommonAttributes",
 		"compression":                              "Compression",
 		"compression_format":                       "CompressionFormat",
@@ -9111,7 +9681,11 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		"data_table_name":                          "DataTableName",
 		"database":                                 "Database",
 		"database_name":                            "DatabaseName",
-		"default_document_id_format":               "DefaultDocumentIdFormat",
+		"database_source_authentication_configuration":   "DatabaseSourceAuthenticationConfiguration",
+		"database_source_configuration":                  "DatabaseSourceConfiguration",
+		"database_source_vpc_configuration":              "DatabaseSourceVPCConfiguration",
+		"databases":                                      "Databases",
+		"default_document_id_format":                     "DefaultDocumentIdFormat",
 		"delivery_stream_encryption_configuration_input": "DeliveryStreamEncryptionConfigurationInput",
 		"delivery_stream_name":                           "DeliveryStreamName",
 		"delivery_stream_type":                           "DeliveryStreamType",
@@ -9120,6 +9694,8 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		"destination_table_configuration_list":           "DestinationTableConfigurationList",
 		"destination_table_name":                         "DestinationTableName",
 		"dictionary_key_threshold":                       "DictionaryKeyThreshold",
+		"digest":                                         "Digest",
+		"direct_put_source_configuration":                "DirectPutSourceConfiguration",
 		"document_id_options":                            "DocumentIdOptions",
 		"domain_arn":                                     "DomainARN",
 		"duration_in_seconds":                            "DurationInSeconds",
@@ -9129,8 +9705,10 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		"enable_padding":                                 "EnablePadding",
 		"enabled":                                        "Enabled",
 		"encryption_configuration":                       "EncryptionConfiguration",
+		"endpoint":                                       "Endpoint",
 		"endpoint_configuration":                         "EndpointConfiguration",
 		"error_output_prefix":                            "ErrorOutputPrefix",
+		"exclude":                                        "Exclude",
 		"extended_s3_destination_configuration":          "ExtendedS3DestinationConfiguration",
 		"file_extension":                                 "FileExtension",
 		"format_version":                                 "FormatVersion",
@@ -9141,6 +9719,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		"hive_json_ser_de":                               "HiveJsonSerDe",
 		"http_endpoint_destination_configuration":        "HttpEndpointDestinationConfiguration",
 		"iceberg_destination_configuration":              "IcebergDestinationConfiguration",
+		"include":                                        "Include",
 		"index_name":                                     "IndexName",
 		"index_rotation_period":                          "IndexRotationPeriod",
 		"input_format_configuration":                     "InputFormatConfiguration",
@@ -9170,11 +9749,13 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		"parameters":                                     "Parameters",
 		"parquet_ser_de":                                 "ParquetSerDe",
 		"password":                                       "Password",
+		"port":                                           "Port",
 		"prefix":                                         "Prefix",
 		"private_key":                                    "PrivateKey",
 		"private_link_vpce_id":                           "PrivateLinkVpceId",
 		"processing_configuration":                       "ProcessingConfiguration",
 		"processors":                                     "Processors",
+		"public_certificate":                             "PublicCertificate",
 		"read_from_timestamp":                            "ReadFromTimestamp",
 		"redshift_destination_configuration":             "RedshiftDestinationConfiguration",
 		"region":                                         "Region",
@@ -9195,16 +9776,21 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		"security_group_ids":                             "SecurityGroupIds",
 		"serializer":                                     "Serializer",
 		"size_in_m_bs":                                   "SizeInMBs",
+		"snapshot_watermark_table":                       "SnapshotWatermarkTable",
 		"snowflake_destination_configuration":            "SnowflakeDestinationConfiguration",
 		"snowflake_role":                                 "SnowflakeRole",
 		"snowflake_role_configuration":                   "SnowflakeRoleConfiguration",
 		"snowflake_vpc_configuration":                    "SnowflakeVpcConfiguration",
 		"splunk_destination_configuration":               "SplunkDestinationConfiguration",
+		"ssl_mode":                                       "SSLMode",
 		"stripe_size_bytes":                              "StripeSizeBytes",
 		"subnet_ids":                                     "SubnetIds",
+		"surrogate_keys":                                 "SurrogateKeys",
 		"table":                                          "Table",
 		"table_name":                                     "TableName",
+		"tables":                                         "Tables",
 		"tags":                                           "Tags",
+		"throughput_hint_in_m_bs":                        "ThroughputHintInMBs",
 		"timestamp_formats":                              "TimestampFormats",
 		"topic_name":                                     "TopicName",
 		"type":                                           "Type",
@@ -9216,6 +9802,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		"value":                                          "Value",
 		"version_id":                                     "VersionId",
 		"vpc_configuration":                              "VpcConfiguration",
+		"vpc_endpoint_service_name":                      "VpcEndpointServiceName",
 		"writer_version":                                 "WriterVersion",
 	})
 

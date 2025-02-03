@@ -105,6 +105,58 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: CreatorMLMemberAbilities
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "CustomMLMemberAbilities": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "enum": [
+		//	          "CAN_RECEIVE_MODEL_OUTPUT",
+		//	          "CAN_RECEIVE_INFERENCE_OUTPUT"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "CustomMLMemberAbilities"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"creator_ml_member_abilities": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CustomMLMemberAbilities
+				"custom_ml_member_abilities": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Set{ /*START VALIDATORS*/
+						setvalidator.ValueStringsAre(
+							stringvalidator.OneOf(
+								"CAN_RECEIVE_MODEL_OUTPUT",
+								"CAN_RECEIVE_INFERENCE_OUTPUT",
+							),
+						),
+						fwvalidators.NotNullSet(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						setplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CreatorMemberAbilities
 		// CloudFormation resource type schema:
 		//
@@ -141,6 +193,36 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "MachineLearning": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "ModelInference": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "IsResponsible": {
+		//	              "type": "boolean"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "IsResponsible"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "ModelTraining": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "IsResponsible": {
+		//	              "type": "boolean"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "IsResponsible"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "QueryCompute": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -161,6 +243,58 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"creator_payment_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MachineLearning
+				"machine_learning": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ModelInference
+						"model_inference": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IsResponsible
+								"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Bool{ /*START VALIDATORS*/
+										fwvalidators.NotNullBool(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ModelTraining
+						"model_training": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IsResponsible
+								"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Bool{ /*START VALIDATORS*/
+										fwvalidators.NotNullBool(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: QueryCompute
 				"query_compute": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -309,6 +443,27 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 		//	        "pattern": "",
 		//	        "type": "string"
 		//	      },
+		//	      "MLMemberAbilities": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "CustomMLMemberAbilities": {
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "enum": [
+		//	                "CAN_RECEIVE_MODEL_OUTPUT",
+		//	                "CAN_RECEIVE_INFERENCE_OUTPUT"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "CustomMLMemberAbilities"
+		//	        ],
+		//	        "type": "object"
+		//	      },
 		//	      "MemberAbilities": {
 		//	        "insertionOrder": false,
 		//	        "items": {
@@ -324,6 +479,36 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 		//	      "PaymentConfiguration": {
 		//	        "additionalProperties": false,
 		//	        "properties": {
+		//	          "MachineLearning": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "ModelInference": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "IsResponsible": {
+		//	                    "type": "boolean"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "IsResponsible"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "ModelTraining": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "IsResponsible": {
+		//	                    "type": "boolean"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "IsResponsible"
+		//	                ],
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
 		//	          "QueryCompute": {
 		//	            "additionalProperties": false,
 		//	            "properties": {
@@ -372,6 +557,34 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 							stringvalidator.LengthBetween(1, 100),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
+					// Property: MLMemberAbilities
+					"ml_member_abilities": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CustomMLMemberAbilities
+							"custom_ml_member_abilities": schema.SetAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.Set{ /*START VALIDATORS*/
+									setvalidator.ValueStringsAre(
+										stringvalidator.OneOf(
+											"CAN_RECEIVE_MODEL_OUTPUT",
+											"CAN_RECEIVE_INFERENCE_OUTPUT",
+										),
+									),
+									fwvalidators.NotNullSet(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+									setplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: MemberAbilities
 					"member_abilities": schema.SetAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
@@ -388,6 +601,58 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 					// Property: PaymentConfiguration
 					"payment_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: MachineLearning
+							"machine_learning": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ModelInference
+									"model_inference": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: IsResponsible
+											"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												Validators: []validator.Bool{ /*START VALIDATORS*/
+													fwvalidators.NotNullBool(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+													boolplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: ModelTraining
+									"model_training": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: IsResponsible
+											"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												Validators: []validator.Bool{ /*START VALIDATORS*/
+													fwvalidators.NotNullBool(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+													boolplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: QueryCompute
 							"query_compute": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -563,14 +828,20 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 		"collaboration_identifier":                    "CollaborationIdentifier",
 		"creator_display_name":                        "CreatorDisplayName",
 		"creator_member_abilities":                    "CreatorMemberAbilities",
+		"creator_ml_member_abilities":                 "CreatorMLMemberAbilities",
 		"creator_payment_configuration":               "CreatorPaymentConfiguration",
+		"custom_ml_member_abilities":                  "CustomMLMemberAbilities",
 		"data_encryption_metadata":                    "DataEncryptionMetadata",
 		"description":                                 "Description",
 		"display_name":                                "DisplayName",
 		"is_responsible":                              "IsResponsible",
 		"key":                                         "Key",
+		"machine_learning":                            "MachineLearning",
 		"member_abilities":                            "MemberAbilities",
 		"members":                                     "Members",
+		"ml_member_abilities":                         "MLMemberAbilities",
+		"model_inference":                             "ModelInference",
+		"model_training":                              "ModelTraining",
 		"name":                                        "Name",
 		"payment_configuration":                       "PaymentConfiguration",
 		"preserve_nulls":                              "PreserveNulls",

@@ -60,7 +60,12 @@
     "tagOnCreate": true,
     "tagUpdatable": true,
     "cloudFormationSystemTags": true,
-    "tagProperty": "/properties/Tags"
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "securityhub:ListTagsForResource",
+      "securityhub:TagResource",
+      "securityhub:UntagResource"
+    ]
   },
   "handlers": {
     "create": {

@@ -61,14 +61,14 @@ func thingTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "description": "A key-value pair to associate with a resource.",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		//	        "description": "Tag key (1-128 chars). No 'aws:' prefix. Allows: [A-Za-z0-9 _.:/=+-]",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
 		//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		//	        "description": "Tag value (1-256 chars). No 'aws:' prefix. Allows: [A-Za-z0-9 _.:/=+-]",
 		//	        "maxLength": 256,
 		//	        "minLength": 1,
 		//	        "type": "string"
@@ -89,12 +89,12 @@ func thingTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Description: "Tag key (1-128 chars). No 'aws:' prefix. Allows: [A-Za-z0-9 _.:/=+-]",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Description: "Tag value (1-256 chars). No 'aws:' prefix. Allows: [A-Za-z0-9 _.:/=+-]",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -120,6 +120,42 @@ func thingTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "Mqtt5Configuration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "PropagatingAttributes": {
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "ConnectionAttribute": {
+		//	                "enum": [
+		//	                  "iot:ClientId",
+		//	                  "iot:Thing.ThingName"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "ThingAttribute": {
+		//	                "maxLength": 128,
+		//	                "pattern": "[a-zA-Z0-9_.,@/:#-]+",
+		//	                "type": "string"
+		//	              },
+		//	              "UserPropertyKey": {
+		//	                "maxLength": 128,
+		//	                "pattern": "[a-zA-Z0-9:$.]+",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "UserPropertyKey"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "SearchableAttributes": {
 		//	      "insertionOrder": true,
 		//	      "items": {
@@ -141,6 +177,32 @@ func thingTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"thing_type_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Mqtt5Configuration
+				"mqtt_5_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PropagatingAttributes
+						"propagating_attributes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ConnectionAttribute
+									"connection_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: ThingAttribute
+									"thing_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: UserPropertyKey
+									"user_property_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: SearchableAttributes
 				"searchable_attributes": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
@@ -171,14 +233,19 @@ func thingTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                    "Arn",
+		"connection_attribute":   "ConnectionAttribute",
 		"deprecate_thing_type":   "DeprecateThingType",
 		"key":                    "Key",
+		"mqtt_5_configuration":   "Mqtt5Configuration",
+		"propagating_attributes": "PropagatingAttributes",
 		"searchable_attributes":  "SearchableAttributes",
 		"tags":                   "Tags",
+		"thing_attribute":        "ThingAttribute",
 		"thing_type_description": "ThingTypeDescription",
 		"thing_type_id":          "Id",
 		"thing_type_name":        "ThingTypeName",
 		"thing_type_properties":  "ThingTypeProperties",
+		"user_property_key":      "UserPropertyKey",
 		"value":                  "Value",
 	})
 

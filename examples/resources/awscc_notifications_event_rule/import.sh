@@ -1,0 +1,1 @@
+$ terraform import awscc_notifications_event_rule.example "arn"

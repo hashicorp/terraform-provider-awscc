@@ -27,3 +27,12 @@ Data Source schema for AWS::EC2::VPCEndpointService
 - `network_load_balancer_arns` (List of String)
 - `payer_responsibility` (String)
 - `service_id` (String)
+- `tags` (Attributes List) The tags to add to the VPC endpoint service. (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)

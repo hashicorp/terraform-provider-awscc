@@ -113,6 +113,40 @@ func scraperDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "IAM role ARN for the scraper.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: RoleConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Role configuration",
+		//	  "properties": {
+		//	    "SourceRoleArn": {
+		//	      "description": "IAM Role in source account",
+		//	      "type": "string"
+		//	    },
+		//	    "TargetRoleArn": {
+		//	      "description": "IAM Role in the target account",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"role_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SourceRoleArn
+				"source_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "IAM Role in source account",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TargetRoleArn
+				"target_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "IAM Role in the target account",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Role configuration",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ScrapeConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -318,12 +352,15 @@ func scraperDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"eks_configuration":    "EksConfiguration",
 		"key":                  "Key",
 		"role_arn":             "RoleArn",
+		"role_configuration":   "RoleConfiguration",
 		"scrape_configuration": "ScrapeConfiguration",
 		"scraper_id":           "ScraperId",
 		"security_group_ids":   "SecurityGroupIds",
 		"source":               "Source",
+		"source_role_arn":      "SourceRoleArn",
 		"subnet_ids":           "SubnetIds",
 		"tags":                 "Tags",
+		"target_role_arn":      "TargetRoleArn",
 		"value":                "Value",
 		"workspace_arn":        "WorkspaceArn",
 	})

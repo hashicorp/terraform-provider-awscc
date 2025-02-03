@@ -36,6 +36,42 @@ func webExperienceDataSource(ctx context.Context) (datasource.DataSource, error)
 		"application_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: BrowserExtensionConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "EnabledBrowserExtensions": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "enum": [
+		//	          "FIREFOX",
+		//	          "CHROME"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 2,
+		//	      "minItems": 0,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "EnabledBrowserExtensions"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"browser_extension_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EnabledBrowserExtensions
+				"enabled_browser_extensions": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -46,6 +82,60 @@ func webExperienceDataSource(ctx context.Context) (datasource.DataSource, error)
 		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
 			CustomType: timetypes.RFC3339Type{},
 			Computed:   true,
+		}, /*END ATTRIBUTE*/
+		// Property: CustomizationConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "CustomCSSUrl": {
+		//	      "maxLength": 1284,
+		//	      "minLength": 0,
+		//	      "pattern": "^(https?://[a-zA-Z0-9-_.+%/]+\\.css)?$",
+		//	      "type": "string"
+		//	    },
+		//	    "FaviconUrl": {
+		//	      "maxLength": 1284,
+		//	      "minLength": 0,
+		//	      "pattern": "^(https?://[a-zA-Z0-9-_.+%/]+\\.(svg|ico))?$",
+		//	      "type": "string"
+		//	    },
+		//	    "FontUrl": {
+		//	      "maxLength": 1284,
+		//	      "minLength": 0,
+		//	      "pattern": "^(https?://[a-zA-Z0-9-_.+%/]+\\.(ttf|woff|woff2|otf))?$",
+		//	      "type": "string"
+		//	    },
+		//	    "LogoUrl": {
+		//	      "maxLength": 1284,
+		//	      "minLength": 0,
+		//	      "pattern": "^(https?://[a-zA-Z0-9-_.+%/]+\\.(svg|png))?$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"customization_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CustomCSSUrl
+				"custom_css_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: FaviconUrl
+				"favicon_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: FontUrl
+				"font_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: LogoUrl
+				"logo_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: DefaultEndpoint
 		// CloudFormation resource type schema:
@@ -326,10 +416,17 @@ func webExperienceDataSource(ctx context.Context) (datasource.DataSource, error)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"application_id":                  "ApplicationId",
 		"authentication_url":              "AuthenticationUrl",
+		"browser_extension_configuration": "BrowserExtensionConfiguration",
 		"created_at":                      "CreatedAt",
+		"custom_css_url":                  "CustomCSSUrl",
+		"customization_configuration":     "CustomizationConfiguration",
 		"default_endpoint":                "DefaultEndpoint",
+		"enabled_browser_extensions":      "EnabledBrowserExtensions",
+		"favicon_url":                     "FaviconUrl",
+		"font_url":                        "FontUrl",
 		"identity_provider_configuration": "IdentityProviderConfiguration",
 		"key":                             "Key",
+		"logo_url":                        "LogoUrl",
 		"open_id_connect_configuration":   "OpenIDConnectConfiguration",
 		"origins":                         "Origins",
 		"role_arn":                        "RoleArn",
