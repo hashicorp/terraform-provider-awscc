@@ -1,28 +1,40 @@
+# Get current AWS region
+data "aws_region" "current" {}
+
+# Get current AWS account ID
+data "aws_caller_identity" "current" {}
+
 resource "awscc_resiliencehub_resiliency_policy" "example" {
-  policy_name = "example_policy"
-  tier        = "MissionCritical"
+  policy_name        = "example_policy"
+  policy_description = "Example Resiliency Policy"
+  tier               = "MissionCritical"
+
   policy = {
-    software = {
-      rpo_in_secs = 900
-      rto_in_secs = 3600
+    az = {
+      rpo_in_secs = 300 # 5 minutes
+      rto_in_secs = 600 # 10 minutes
     }
     hardware = {
-      rpo_in_secs = 300
-      rto_in_secs = 300
+      rpo_in_secs = 600  # 10 minutes
+      rto_in_secs = 1200 # 20 minutes
+    }
+    software = {
+      rpo_in_secs = 300 # 5 minutes
+      rto_in_secs = 600 # 10 minutes
     }
     region = {
-      rpo_in_secs = 300
-      rto_in_secs = 300
-    }
-    az = {
-      rpo_in_secs = 300
-      rto_in_secs = 300
+      rpo_in_secs = 3600 # 1 hour
+      rto_in_secs = 7200 # 2 hours
     }
   }
-  policy_description       = "This is an example policy"
-  data_location_constraint = "SameContinent"
-  tags = {
+  
+  data_location_constraint = "AnyLocation"
+
+  tags = [{
     key   = "Modified By"
     value = "AWSCC"
-  }
+  }, {
+    key   = "Environment"
+    value = "example"
+  }]
 }
