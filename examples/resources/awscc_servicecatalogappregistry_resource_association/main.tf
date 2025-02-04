@@ -1,7 +1,3 @@
-# Get current region and account ID
-data "aws_region" "current" {}
-data "aws_caller_identity" "current" {}
-
 # Create an App Registry Application first
 resource "awscc_servicecatalogappregistry_application" "example" {
   name        = "my-example-app"
