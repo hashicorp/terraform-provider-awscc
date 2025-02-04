@@ -1,46 +1,57 @@
-resource "awscc_resiliencehub_app" "main" {
-  name        = "test-app"
-  description = "This is a test app."
-  app_template_body = jsonencode({
-    format_version = 2
-    resources = [{
-      name = "test-app"
-      type = "AWS::EC2::Instance"
-      parameters = {
-        tags = {
-          env = "dev"
+resource "awscc_resiliencehub_app" "example" {
+    name                  = "example-app"
+    description           = "This is a test application"
+    resiliency_policy_arn = awscc_resiliencehub_resiliency_policy.test.arn
+    app_template_body     = jsondecode({
+        resources = [{
+                type = "AWS::EKS::Deployment",
+                logicalResourceId = {
+                    eksSourceName  = "EKS-Cluster/Deployment-Store",
+                    identifier = "MyEKSCluster-store"
+                }
+                name = "eksdeployment",
+                parameters = {
+                     tags = {
+                     env = "dev"
+                    }
+                }
+            }],
+        appComponent = [{
+                id   = "AppComponent-EKSDeployment-Store",
+                name = "AppComponent-EKSDeployment-Store",
+                resourceNames = [
+                    "eksdeployment"
+                ],
+                type = "AWS::ResilienceHub::ComputeAppComponent"
+            }],
+        excludedResources = {
+            logicalResourceIds = []
+        },
+        version = 2.0
+})    
+    event_subscriptions = [{
+                eventType = "DriftDetected"
+                name = "test-app"
+                snsTopicArn = aws_sns_topic.test.arn
+            }]
+    app_assessment_schedule = "Daily"
+    permission_model = {
+        type              = "RoleBased"
+        invoker_role_name = "resilience-hub-test-app-role"
         }
-      }
-    }]
-  })
-  resiliency_policy_arn = awscc_resiliencehub_resiliency_policy.test.arn
-  resource_mappings = [{
-    physical_resource_id = {
-      identifier     = "s3://terraform-state-files/test-app.tfstate"
-      type           = "Native"
-      aws_region     = "us-west-2"
-      aws_account_id = "112223333444"
+    resource_mappings       = {
+            eks_source_name       = "EKS-Cluster/Deployment-Store"
+            mapping_type          = "EKS"
+            logical_resource_id   = "MyEKSCluster-store"
+            physical_resource_id  = {  
+                  aws_account_id  = "11222333344"
+                  aws_region      = "us-west-2"
+                  identifier      = "arn:aws:eks:us-west-2:11222333344:cluster/EKS-Cluster/Deployment-Store"
+                  type            = "Arn"
+        }
     }
-    mapping_type  = "Terraform"
-    resource_name = "test-app"
-    resource_type = "AWS::EC2::Instance"
-    logical_resource = {
-      logical_resource_name = "test-app"
-      resource_mapping_arn  = awscc_resiliencehub_app.app.arn
-    }
-
-  }]
-  event_subscriptions = [{
-    name          = "test-app"
-    sns_topic_arn = awscc_sns_topic.sns_example.arn
-  }]
-  app_assessment_schedule = "Daily"
-  permission_model = {
-    type              = "RoleBased"
-    invoker_role_name = "resilience-hub-test-app-role"
+    tags  = {
+          key   = "Modified By"
+          value = "AWSCC"
+        }
   }
-  tags = [{
-    key   = "Modified By"
-    value = "AWSCC"
-  }]
-}
