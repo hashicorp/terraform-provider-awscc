@@ -26,7 +26,7 @@ The ``AWS::Lambda::Function`` resource creates a Lambda function. To create a fu
 ### Basic example
 To create a AWS lambda function with basic details
 ```terraform
-resource "awscc_iam_role" "main" {
+resource "awscc_iam_role" "example" {
   description = "AWS IAM role for lambda function"
   assume_role_policy_document = jsonencode({
     Version = "2012-10-17"
@@ -43,126 +43,34 @@ resource "awscc_iam_role" "main" {
   })
 }
 
-data "archive_file" "main" {
+data "archive_file" "example" {
   type        = "zip"
-  source_file = "main.py"
+  source_file = "index.py"
   output_path = "lambda_function_payload.zip"
 }
 
-resource "awscc_lambda_function" "main" {
-  function_name = "lambda_function_name"
+resource "awscc_s3_bucket" "lambda_assets" {
+}
+
+resource "aws_s3_object" "zip" {
+  source = data.archive_file.example.output_path
+  bucket = awscc_s3_bucket.lambda_assets.id
+  key    = "index.zip"
+}
+
+resource "awscc_lambda_function" "example" {
+  function_name = "example"
   description   = "AWS Lambda function"
   code = {
-    zip_file = data.archive_file.main.output_path
+    s3_bucket = awscc_s3_bucket.lambda_assets.id
+    s3_key    = aws_s3_object.zip.key
   }
   package_type  = "Zip"
-  handler       = "main.lambda_handler"
+  handler       = "index.handler"
   runtime       = "python3.10"
   timeout       = "300"
   memory_size   = "128"
-  role          = awscc_iam_role.main.arn
-  architectures = ["arm64"]
-  environment = {
-    variables = {
-      MY_KEY_1 = "MY_VALUE_1"
-      MY_KEY_2 = "MY_VALUE_2"
-    }
-  }
-}
-```
-
-### Lambda Layer example
-To create a AWS lambda function using lambda layers
-```terraform
-resource "awscc_iam_role" "main" {
-  description = "AWS IAM role for lambda function"
-  assume_role_policy_document = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Action = "sts:AssumeRole"
-        Effect = "Allow"
-        Sid    = ""
-        Principal = {
-          Service = "lambda.amazonaws.com"
-        }
-      },
-    ]
-  })
-}
-
-data "archive_file" "main" {
-  type        = "zip"
-  source_file = "main.py"
-  output_path = "lambda_function_payload.zip"
-}
-
-resource "aws_lambda_layer_version" "lambda_layer" {
-  filename   = "lambda_layer_payload.zip"
-  layer_name = "lambda_layer_name"
-
-  compatible_runtimes = ["python3.10"]
-}
-
-resource "awscc_lambda_function" "main" {
-  function_name = "lambda_function_name"
-  description   = "AWS Lambda function"
-  code = {
-    zip_file = data.archive_file.main.output_path
-  }
-  handler       = "main.lambda_handler"
-  runtime       = "python3.10"
-  layers        = [aws_lambda_layer_version.lambda_layer.arn]
-  timeout       = "300"
-  memory_size   = "128"
-  role          = awscc_iam_role.main.arn
-  architectures = ["arm64"]
-  environment = {
-    variables = {
-      MY_KEY_1 = "MY_VALUE_1"
-      MY_KEY_2 = "MY_VALUE_2"
-    }
-  }
-}
-```
-
-### Ephemeral storage example
-To create a AWS lambda function using Ephemeral storage
-```terraform
-resource "awscc_iam_role" "main" {
-  description = "AWS IAM role for lambda function"
-  assume_role_policy_document = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Action = "sts:AssumeRole"
-        Effect = "Allow"
-        Sid    = ""
-        Principal = {
-          Service = "lambda.amazonaws.com"
-        }
-      },
-    ]
-  })
-}
-
-data "archive_file" "main" {
-  type        = "zip"
-  source_file = "main.py"
-  output_path = "lambda_function_payload.zip"
-}
-
-resource "awscc_lambda_function" "main" {
-  function_name = "lambda_function_name"
-  description   = "AWS Lambda function"
-  code = {
-    zip_file = data.archive_file.main.output_path
-  }
-  handler       = "main.lambda_handler"
-  runtime       = "python3.10"
-  timeout       = "300"
-  memory_size   = "128"
-  role          = awscc_iam_role.main.arn
+  role          = awscc_iam_role.example.arn
   architectures = ["arm64"]
   environment = {
     variables = {
@@ -171,7 +79,7 @@ resource "awscc_lambda_function" "main" {
     }
   }
   ephemeral_storage = {
-    size = 10240 # Min 512 MB and the Max 10240 MB
+    size = 512 # Min 512 MB and the Max 10240 MB
   }
 }
 ```
