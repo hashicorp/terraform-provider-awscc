@@ -104,7 +104,7 @@ resource "awscc_eks_addon" "ebs_csi" {
 
 ### Create EFS CSI addon
 ```terraform
-# AWS IAM expects the OIDC provider URL without the `https://` prefix in the condition block. This creates a local variable for it:
+# AWS IAM expects the OIDC provider URL without the `https://` prefix in the condition block.This creates a local variable for it:
 
 locals {
   oidc_provider = replace(awscc_eks_cluster.eks_cluster.open_id_connect_issuer_url, "https://", "")
