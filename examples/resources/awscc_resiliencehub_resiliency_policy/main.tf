@@ -1,9 +1,3 @@
-# Get current AWS region
-data "aws_region" "current" {}
-
-# Get current AWS account ID
-data "aws_caller_identity" "current" {}
-
 resource "awscc_resiliencehub_resiliency_policy" "example" {
   policy_name        = "example-policy"
   policy_description = "Example Resiliency Policy"
