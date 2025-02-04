@@ -51,6 +51,6 @@ resource "awscc_lambda_function" "example" {
     }
   }
   ephemeral_storage = {
-    size = 10240 # Min 512 MB and the Max 10240 MB
+    size = 512 # Min 512 MB and the Max 10240 MB
   }
 }
