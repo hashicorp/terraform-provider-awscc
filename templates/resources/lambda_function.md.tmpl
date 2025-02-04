@@ -15,14 +15,6 @@ description: |-
 To create a AWS lambda function with basic details
 {{ tffile (printf "examples/resources/%s/lambda_basic.tf" .Name)}}
 
-### Lambda Layer example
-To create a AWS lambda function using lambda layers
-{{ tffile (printf "examples/resources/%s/lambda_layer.tf" .Name)}}
-
-### Ephemeral storage example
-To create a AWS lambda function using Ephemeral storage
-{{ tffile (printf "examples/resources/%s/lambda_ephemeral_storage.tf" .Name)}}
-
 {{ .SchemaMarkdown | trimspace }}
 {{- if .HasImport }}
 
