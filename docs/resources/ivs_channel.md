@@ -44,8 +44,10 @@ resource "awscc_ivs_channel" "example" {
 ### Optional
 
 - `authorized` (Boolean) Whether the channel is authorized.
+- `container_format` (String) Indicates which content-packaging format is used (MPEG-TS or fMP4). If multitrackInputConfiguration is specified and enabled is true, then containerFormat is required and must be set to FRAGMENTED_MP4. Otherwise, containerFormat may be set to TS or FRAGMENTED_MP4. Default: TS.
 - `insecure_ingest` (Boolean) Whether the channel allows insecure ingest.
 - `latency_mode` (String) Channel latency mode.
+- `multitrack_input_configuration` (Attributes) (see [below for nested schema](#nestedatt--multitrack_input_configuration))
 - `name` (String) Channel
 - `preset` (String) Optional transcode preset for the channel. This is selectable only for ADVANCED_HD and ADVANCED_SD channel types. For those channel types, the default preset is HIGHER_BANDWIDTH_DELIVERY. For other channel types (BASIC and STANDARD), preset is the empty string ("").
 - `recording_configuration_arn` (String) Recording Configuration ARN. A value other than an empty string indicates that recording is enabled. Default: "" (recording is disabled).
@@ -59,13 +61,23 @@ resource "awscc_ivs_channel" "example" {
 - `ingest_endpoint` (String) Channel ingest endpoint, part of the definition of an ingest server, used when you set up streaming software.
 - `playback_url` (String) Channel Playback URL.
 
+<a id="nestedatt--multitrack_input_configuration"></a>
+### Nested Schema for `multitrack_input_configuration`
+
+Optional:
+
+- `enabled` (Boolean) Indicates whether multitrack input is enabled. Can be set to true only if channel type is STANDARD. Setting enabled to true with any other channel type will cause an exception. If true, then policy, maximumResolution, and containerFormat are required, and containerFormat must be set to FRAGMENTED_MP4. Default: false.
+- `maximum_resolution` (String) Maximum resolution for multitrack input. Required if enabled is true.
+- `policy` (String) Indicates whether multitrack input is allowed or required. Required if enabled is true.
+
+
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import
 

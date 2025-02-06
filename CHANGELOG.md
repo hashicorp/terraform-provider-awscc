@@ -1,4 +1,11 @@
-## 1.28.0 (Unreleased)
+## 1.29.0 (Unreleased)
+## 1.28.0 (February  6, 2025)
+
+* **New Data Source:** `awscc_deadline_limit`
+* **New Data Source:** `awscc_deadline_queue_limit_association`
+* **New Resource:** `awscc_deadline_limit`
+* **New Resource:** `awscc_deadline_queue_limit_association`
+
 ## 1.27.0 (January 30, 2025)
 
 * **New Data Source:** `awscc_cloudfront_vpc_origin`

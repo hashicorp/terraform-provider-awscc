@@ -1476,6 +1476,11 @@ resource_schema "aws_deadline_license_endpoint" {
   cloudformation_type_name = "AWS::Deadline::LicenseEndpoint"
 }
 
+resource_schema "aws_deadline_limit" {
+  cloudformation_type_name               = "AWS::Deadline::Limit"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_deadline_metered_product" {
   cloudformation_type_name               = "AWS::Deadline::MeteredProduct"
   suppress_plural_data_source_generation = true
@@ -1497,6 +1502,11 @@ resource_schema "aws_deadline_queue_environment" {
 
 resource_schema "aws_deadline_queue_fleet_association" {
   cloudformation_type_name               = "AWS::Deadline::QueueFleetAssociation"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_deadline_queue_limit_association" {
+  cloudformation_type_name               = "AWS::Deadline::QueueLimitAssociation"
   suppress_plural_data_source_generation = true
 }
 

@@ -142,6 +142,14 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	      "pattern": "^p-([0-9a-f]{17})$",
 		//	      "type": "string"
 		//	    },
+		//	    "PreserveContentType": {
+		//	      "description": "Specifies whether to use the AWS S3 object content-type as the content-type for the AS2 message.",
+		//	      "enum": [
+		//	        "ENABLED",
+		//	        "DISABLED"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "SigningAlgorithm": {
 		//	      "description": "Signing algorithm for this AS2 connector configuration.",
 		//	      "enum": [
@@ -270,6 +278,21 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthBetween(19, 19),
 						stringvalidator.RegexMatches(regexp.MustCompile("^p-([0-9a-f]{17})$"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: PreserveContentType
+				"preserve_content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether to use the AWS S3 object content-type as the content-type for the AS2 message.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"ENABLED",
+							"DISABLED",
+						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -575,6 +598,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		"mdn_signing_algorithm":               "MdnSigningAlgorithm",
 		"message_subject":                     "MessageSubject",
 		"partner_profile_id":                  "PartnerProfileId",
+		"preserve_content_type":               "PreserveContentType",
 		"security_policy_name":                "SecurityPolicyName",
 		"service_managed_egress_ip_addresses": "ServiceManagedEgressIpAddresses",
 		"sftp_config":                         "SftpConfig",

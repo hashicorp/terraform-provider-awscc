@@ -201,7 +201,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		//	        "insertionOrder": true,
 		//	        "items": {
 		//	          "additionalProperties": false,
-		//	          "description": "Specifies tags to use to identify a subset of objects for an Amazon S3 bucket.",
+		//	          "description": "Specifies tags to use to identify a subset of objects for an Amazon S3 bucket. For more information, see [Categorizing your storage using tags](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-tagging.html) in the *Amazon Simple Storage Service User Guide*.",
 		//	          "properties": {
 		//	            "Key": {
 		//	              "description": "The tag key.",
@@ -549,11 +549,11 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A name for the bucket. If you don't specify a name, AWS CloudFormation generates a unique ID and uses that ID for the bucket name. The bucket name must contain only lowercase letters, numbers, periods (.), and dashes (-) and must follow [Amazon S3 bucket restrictions and limitations](https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html). For more information, see [Rules for naming Amazon S3 buckets](https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html#bucketnamingrules) in the *Amazon S3 User Guide*. \n  If you specify a name, you can't perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you need to replace the resource, specify a new name.",
+		//	  "description": "A name for the bucket. If you don't specify a name, AWS CloudFormation generates a unique ID and uses that ID for the bucket name. The bucket name must contain only lowercase letters, numbers, periods (.), and dashes (-) and must follow [Amazon S3 bucket restrictions and limitations](https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html). For more information, see [Rules for naming Amazon S3 buckets](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html) in the *Amazon S3 User Guide*. \n  If you specify a name, you can't perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you need to replace the resource, specify a new name.",
 		//	  "type": "string"
 		//	}
 		"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A name for the bucket. If you don't specify a name, AWS CloudFormation generates a unique ID and uses that ID for the bucket name. The bucket name must contain only lowercase letters, numbers, periods (.), and dashes (-) and must follow [Amazon S3 bucket restrictions and limitations](https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html). For more information, see [Rules for naming Amazon S3 buckets](https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html#bucketnamingrules) in the *Amazon S3 User Guide*. \n  If you specify a name, you can't perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you need to replace the resource, specify a new name.",
+			Description: "A name for the bucket. If you don't specify a name, AWS CloudFormation generates a unique ID and uses that ID for the bucket name. The bucket name must contain only lowercase letters, numbers, periods (.), and dashes (-) and must follow [Amazon S3 bucket restrictions and limitations](https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html). For more information, see [Rules for naming Amazon S3 buckets](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html) in the *Amazon S3 User Guide*. \n  If you specify a name, you can't perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you need to replace the resource, specify a new name.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -823,7 +823,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		//	        "insertionOrder": true,
 		//	        "items": {
 		//	          "additionalProperties": false,
-		//	          "description": "Specifies tags to use to identify a subset of objects for an Amazon S3 bucket.",
+		//	          "description": "Specifies tags to use to identify a subset of objects for an Amazon S3 bucket. For more information, see [Categorizing your storage using tags](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-tagging.html) in the *Amazon Simple Storage Service User Guide*.",
 		//	          "properties": {
 		//	            "Key": {
 		//	              "description": "The tag key.",
@@ -1470,7 +1470,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		//	            "insertionOrder": true,
 		//	            "items": {
 		//	              "additionalProperties": false,
-		//	              "description": "Specifies tags to use to identify a subset of objects for an Amazon S3 bucket.",
+		//	              "description": "Specifies tags to use to identify a subset of objects for an Amazon S3 bucket. For more information, see [Categorizing your storage using tags](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-tagging.html) in the *Amazon Simple Storage Service User Guide*.",
 		//	              "properties": {
 		//	                "Key": {
 		//	                  "description": "The tag key.",
@@ -1513,7 +1513,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		//	                "type": "string"
 		//	              },
 		//	              "TransitionInDays": {
-		//	                "description": "Indicates the number of days after creation when objects are transitioned to the specified storage class. The value must be a positive integer.",
+		//	                "description": "Indicates the number of days after creation when objects are transitioned to the specified storage class. If the specified storage class is ``INTELLIGENT_TIERING``, ``GLACIER_IR``, ``GLACIER``, or ``DEEP_ARCHIVE``, valid values are ``0`` or positive integers. If the specified storage class is ``STANDARD_IA`` or ``ONEZONE_IA``, valid values are positive integers greater than ``30``. Be aware that some storage classes have a minimum storage duration and that you're charged for transitioning objects before their minimum storage duration. For more information, see [Constraints and considerations for transitions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-transition-general-considerations.html#lifecycle-configuration-constraints) in the *Amazon S3 User Guide*.",
 		//	                "type": "integer"
 		//	              }
 		//	            },
@@ -1548,7 +1548,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "type": "string"
 		//	                },
 		//	                "TransitionInDays": {
-		//	                  "description": "Indicates the number of days after creation when objects are transitioned to the specified storage class. The value must be a positive integer.",
+		//	                  "description": "Indicates the number of days after creation when objects are transitioned to the specified storage class. If the specified storage class is ``INTELLIGENT_TIERING``, ``GLACIER_IR``, ``GLACIER``, or ``DEEP_ARCHIVE``, valid values are ``0`` or positive integers. If the specified storage class is ``STANDARD_IA`` or ``ONEZONE_IA``, valid values are positive integers greater than ``30``. Be aware that some storage classes have a minimum storage duration and that you're charged for transitioning objects before their minimum storage duration. For more information, see [Constraints and considerations for transitions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-transition-general-considerations.html#lifecycle-configuration-constraints) in the *Amazon S3 User Guide*.",
 		//	                  "type": "integer"
 		//	                }
 		//	              },
@@ -1570,7 +1570,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "TransitionDefaultMinimumObjectSize": {
-		//	      "description": "",
+		//	      "description": "Indicates which default minimum object size behavior is applied to the lifecycle configuration.\n  This parameter applies to general purpose buckets only. It isn't supported for directory bucket lifecycle configurations.\n   +   ``all_storage_classes_128K`` - Objects smaller than 128 KB will not transition to any storage class by default.\n  +   ``varies_by_storage_class`` - Objects smaller than 128 KB will transition to Glacier Flexible Retrieval or Glacier Deep Archive storage classes. By default, all other storage classes will prevent transitions smaller than 128 KB. \n  \n To customize the minimum object size for any transition you can add a filter that specifies a custom ``ObjectSizeGreaterThan`` or ``ObjectSizeLessThan`` in the body of your transition rule. Custom filters always take precedence over the default transition behavior.",
 		//	      "enum": [
 		//	        "varies_by_storage_class",
 		//	        "all_storage_classes_128K"
@@ -1936,7 +1936,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 									// Property: TransitionInDays
 									"transition_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "Indicates the number of days after creation when objects are transitioned to the specified storage class. The value must be a positive integer.",
+										Description: "Indicates the number of days after creation when objects are transitioned to the specified storage class. If the specified storage class is ``INTELLIGENT_TIERING``, ``GLACIER_IR``, ``GLACIER``, or ``DEEP_ARCHIVE``, valid values are ``0`` or positive integers. If the specified storage class is ``STANDARD_IA`` or ``ONEZONE_IA``, valid values are positive integers greater than ``30``. Be aware that some storage classes have a minimum storage duration and that you're charged for transitioning objects before their minimum storage duration. For more information, see [Constraints and considerations for transitions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-transition-general-considerations.html#lifecycle-configuration-constraints) in the *Amazon S3 User Guide*.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1990,7 +1990,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END ATTRIBUTE*/
 										// Property: TransitionInDays
 										"transition_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "Indicates the number of days after creation when objects are transitioned to the specified storage class. The value must be a positive integer.",
+											Description: "Indicates the number of days after creation when objects are transitioned to the specified storage class. If the specified storage class is ``INTELLIGENT_TIERING``, ``GLACIER_IR``, ``GLACIER``, or ``DEEP_ARCHIVE``, valid values are ``0`` or positive integers. If the specified storage class is ``STANDARD_IA`` or ``ONEZONE_IA``, valid values are positive integers greater than ``30``. Be aware that some storage classes have a minimum storage duration and that you're charged for transitioning objects before their minimum storage duration. For more information, see [Constraints and considerations for transitions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-transition-general-considerations.html#lifecycle-configuration-constraints) in the *Amazon S3 User Guide*.",
 											Optional:    true,
 											Computed:    true,
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -2024,7 +2024,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: TransitionDefaultMinimumObjectSize
 				"transition_default_minimum_object_size": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "",
+					Description: "Indicates which default minimum object size behavior is applied to the lifecycle configuration.\n  This parameter applies to general purpose buckets only. It isn't supported for directory bucket lifecycle configurations.\n   +   ``all_storage_classes_128K`` - Objects smaller than 128 KB will not transition to any storage class by default.\n  +   ``varies_by_storage_class`` - Objects smaller than 128 KB will transition to Glacier Flexible Retrieval or Glacier Deep Archive storage classes. By default, all other storage classes will prevent transitions smaller than 128 KB. \n  \n To customize the minimum object size for any transition you can add a filter that specifies a custom ``ObjectSizeGreaterThan`` or ``ObjectSizeLessThan`` in the body of your transition rule. Custom filters always take precedence over the default transition behavior.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -2164,6 +2164,110 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: MetadataTableConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "",
+		//	  "properties": {
+		//	    "S3TablesDestination": {
+		//	      "additionalProperties": false,
+		//	      "description": "",
+		//	      "properties": {
+		//	        "TableArn": {
+		//	          "description": "The Amazon Resource Name (ARN) for the metadata table in the metadata table configuration. The specified metadata table name must be unique within the \u003ccode\u003eaws_s3_metadata\u003c/code\u003e namespace in the destination table bucket.",
+		//	          "type": "string"
+		//	        },
+		//	        "TableBucketArn": {
+		//	          "description": "The Amazon Resource Name (ARN) for the table bucket that's specified as the destination in the metadata table configuration. The destination table bucket must be in the same Region and AWS account as the general purpose bucket.",
+		//	          "type": "string"
+		//	        },
+		//	        "TableName": {
+		//	          "description": "The name for the metadata table in your metadata table configuration. The specified metadata table name must be unique within the \u003ccode\u003eaws_s3_metadata\u003c/code\u003e namespace in the destination table bucket.",
+		//	          "type": "string"
+		//	        },
+		//	        "TableNamespace": {
+		//	          "description": "The table bucket namespace for the metadata table in your metadata table configuration. This value is always \u003ccode\u003eaws_s3_metadata\u003c/code\u003e.",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "TableBucketArn",
+		//	        "TableName"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "S3TablesDestination"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"metadata_table_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: S3TablesDestination
+				"s3_tables_destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: TableArn
+						"table_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon Resource Name (ARN) for the metadata table in the metadata table configuration. The specified metadata table name must be unique within the <code>aws_s3_metadata</code> namespace in the destination table bucket.",
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: TableBucketArn
+						"table_bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon Resource Name (ARN) for the table bucket that's specified as the destination in the metadata table configuration. The destination table bucket must be in the same Region and AWS account as the general purpose bucket.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: TableName
+						"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name for the metadata table in your metadata table configuration. The specified metadata table name must be unique within the <code>aws_s3_metadata</code> namespace in the destination table bucket.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: TableNamespace
+						"table_namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The table bucket namespace for the metadata table in your metadata table configuration. This value is always <code>aws_s3_metadata</code>.",
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Object{ /*START VALIDATORS*/
+						fwvalidators.NotNullObject(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: MetricsConfigurations
 		// CloudFormation resource type schema:
 		//
@@ -2191,7 +2295,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		//	        "insertionOrder": true,
 		//	        "items": {
 		//	          "additionalProperties": false,
-		//	          "description": "Specifies tags to use to identify a subset of objects for an Amazon S3 bucket.",
+		//	          "description": "Specifies tags to use to identify a subset of objects for an Amazon S3 bucket. For more information, see [Categorizing your storage using tags](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-tagging.html) in the *Amazon Simple Storage Service User Guide*.",
 		//	          "properties": {
 		//	            "Key": {
 		//	              "description": "The tag key.",
@@ -2897,7 +3001,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "This operation is not supported by directory buckets.\n  Places an Object Lock configuration on the specified bucket. The rule specified in the Object Lock configuration will be applied by default to every new object placed in the specified bucket. For more information, see [Locking Objects](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html). \n   +  The ``DefaultRetention`` settings require both a mode and a period.\n  +  The ``DefaultRetention`` period can be either ``Days`` or ``Years`` but you must select one. You cannot specify ``Days`` and ``Years`` at the same time.\n  +  You can enable Object Lock for new or existing buckets. For more information, see [Configuring Object Lock](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-configure.html).",
+		//	  "description": "This operation is not supported for directory buckets.\n  Places an Object Lock configuration on the specified bucket. The rule specified in the Object Lock configuration will be applied by default to every new object placed in the specified bucket. For more information, see [Locking Objects](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html). \n   +  The ``DefaultRetention`` settings require both a mode and a period.\n  +  The ``DefaultRetention`` period can be either ``Days`` or ``Years`` but you must select one. You cannot specify ``Days`` and ``Years`` at the same time.\n  +  You can enable Object Lock for new or existing buckets. For more information, see [Configuring Object Lock](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-configure.html).",
 		//	  "properties": {
 		//	    "ObjectLockEnabled": {
 		//	      "description": "Indicates whether this bucket has an Object Lock configuration enabled. Enable ``ObjectLockEnabled`` when you apply ``ObjectLockConfiguration`` to a bucket.",
@@ -3003,7 +3107,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "This operation is not supported by directory buckets.\n  Places an Object Lock configuration on the specified bucket. The rule specified in the Object Lock configuration will be applied by default to every new object placed in the specified bucket. For more information, see [Locking Objects](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html). \n   +  The ``DefaultRetention`` settings require both a mode and a period.\n  +  The ``DefaultRetention`` period can be either ``Days`` or ``Years`` but you must select one. You cannot specify ``Days`` and ``Years`` at the same time.\n  +  You can enable Object Lock for new or existing buckets. For more information, see [Configuring Object Lock](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-configure.html).",
+			Description: "This operation is not supported for directory buckets.\n  Places an Object Lock configuration on the specified bucket. The rule specified in the Object Lock configuration will be applied by default to every new object placed in the specified bucket. For more information, see [Locking Objects](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html). \n   +  The ``DefaultRetention`` settings require both a mode and a period.\n  +  The ``DefaultRetention`` period can be either ``Days`` or ``Years`` but you must select one. You cannot specify ``Days`` and ``Years`` at the same time.\n  +  You can enable Object Lock for new or existing buckets. For more information, see [Configuring Object Lock](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-configure.html).",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -3367,7 +3471,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "insertionOrder": true,
 		//	                    "items": {
 		//	                      "additionalProperties": false,
-		//	                      "description": "Specifies tags to use to identify a subset of objects for an Amazon S3 bucket.",
+		//	                      "description": "Specifies tags to use to identify a subset of objects for an Amazon S3 bucket. For more information, see [Categorizing your storage using tags](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-tagging.html) in the *Amazon Simple Storage Service User Guide*.",
 		//	                      "properties": {
 		//	                        "Key": {
 		//	                          "description": "The tag key.",
@@ -4493,6 +4597,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		"log_file_prefix":                        "LogFilePrefix",
 		"logging_configuration":                  "LoggingConfiguration",
 		"max_age":                                "MaxAge",
+		"metadata_table_configuration":           "MetadataTableConfiguration",
 		"metrics":                                "Metrics",
 		"metrics_configurations":                 "MetricsConfigurations",
 		"minutes":                                "Minutes",
@@ -4538,6 +4643,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		"rule":                                   "Rule",
 		"rules":                                  "Rules",
 		"s3_key":                                 "S3Key",
+		"s3_tables_destination":                  "S3TablesDestination",
 		"schedule_frequency":                     "ScheduleFrequency",
 		"server_side_encryption_by_default":      "ServerSideEncryptionByDefault",
 		"server_side_encryption_configuration":   "ServerSideEncryptionConfiguration",
@@ -4548,6 +4654,10 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		"status":                                 "Status",
 		"storage_class":                          "StorageClass",
 		"storage_class_analysis":                 "StorageClassAnalysis",
+		"table_arn":                              "TableArn",
+		"table_bucket_arn":                       "TableBucketArn",
+		"table_name":                             "TableName",
+		"table_namespace":                        "TableNamespace",
 		"tag_filter":                             "TagFilter",
 		"tag_filters":                            "TagFilters",
 		"tags":                                   "Tags",

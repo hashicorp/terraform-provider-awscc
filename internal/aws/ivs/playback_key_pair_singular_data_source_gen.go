@@ -65,11 +65,11 @@ func playbackKeyPairDataSource(ctx context.Context) (datasource.DataSource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The public portion of a customer-generated key pair.",
+		//	  "description": "The public portion of a customer-generated key pair. This field is required to create the AWS::IVS::PlaybackKeyPair resource.",
 		//	  "type": "string"
 		//	}
 		"public_key_material": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The public portion of a customer-generated key pair.",
+			Description: "The public portion of a customer-generated key pair. This field is required to create the AWS::IVS::PlaybackKeyPair resource.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags

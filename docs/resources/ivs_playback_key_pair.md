@@ -18,7 +18,7 @@ Resource Type definition for AWS::IVS::PlaybackKeyPair
 ### Optional
 
 - `name` (String) An arbitrary string (a nickname) assigned to a playback key pair that helps the customer identify that resource. The value does not need to be unique.
-- `public_key_material` (String) The public portion of a customer-generated key pair.
+- `public_key_material` (String) The public portion of a customer-generated key pair. This field is required to create the AWS::IVS::PlaybackKeyPair resource.
 - `tags` (Attributes Set) A list of key-value pairs that contain metadata for the asset model. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
