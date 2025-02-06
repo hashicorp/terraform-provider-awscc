@@ -84,7 +84,7 @@ prereq-go: # If $(GO_VER) is not installed, install it
 		echo "make: $(GO_VER) ready" ; \
 	fi
 
-prereq-goimports: 
+prereq-goimports: # If the goimports cannot be found, notify the user with how to fix
 	@if ! type "goimports" > /dev/null 2>&1 ; then \
 	    echo 'WARNING: GOPATH/bin missing from PATH. HINT: "export PATH=PATH:$$($(GO_VER) env GOPATH)/bin"' ; \
 		which goimports; \
