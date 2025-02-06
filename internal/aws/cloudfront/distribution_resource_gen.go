@@ -871,6 +871,27 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		//	              }
 		//	            },
 		//	            "type": "object"
+		//	          },
+		//	          "VpcOriginConfig": {
+		//	            "additionalProperties": false,
+		//	            "description": "",
+		//	            "properties": {
+		//	              "OriginKeepaliveTimeout": {
+		//	                "default": 5,
+		//	                "type": "integer"
+		//	              },
+		//	              "OriginReadTimeout": {
+		//	                "default": 30,
+		//	                "type": "integer"
+		//	              },
+		//	              "VpcOriginId": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "VpcOriginId"
+		//	            ],
+		//	            "type": "object"
 		//	          }
 		//	        },
 		//	        "required": [
@@ -2337,6 +2358,46 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									objectplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
+							// Property: VpcOriginConfig
+							"vpc_origin_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: OriginKeepaliveTimeout
+									"origin_keepalive_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Default:  int64default.StaticInt64(5),
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: OriginReadTimeout
+									"origin_read_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Default:  int64default.StaticInt64(30),
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: VpcOriginId
+									"vpc_origin_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "A complex type that contains information about origins for this distribution.\n Specify a value for either the ``Origins`` or ``OriginGroups`` property.",
@@ -2736,6 +2797,8 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		"value":                           "Value",
 		"viewer_certificate":              "ViewerCertificate",
 		"viewer_protocol_policy":          "ViewerProtocolPolicy",
+		"vpc_origin_config":               "VpcOriginConfig",
+		"vpc_origin_id":                   "VpcOriginId",
 		"web_acl_id":                      "WebACLId",
 		"whitelisted_names":               "WhitelistedNames",
 	})

@@ -41,7 +41,7 @@ resource "awscc_ivs_public_key" "example" {
 ### Optional
 
 - `name` (String) Name of the public key to be imported. The value does not need to be unique.
-- `public_key_material` (String) The public portion of a customer-generated key pair.
+- `public_key_material` (String) The public portion of a customer-generated key pair. This field is required to create the AWS::IVS::PublicKey resource.
 - `tags` (Attributes Set) A list of key-value pairs that contain metadata for the asset model. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
