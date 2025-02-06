@@ -21,22 +21,22 @@ plural-data-sources: prereq-go ## Generate plural data sources
 	rm -f internal/*/*/*_plural_data_source_gen.go
 	rm -f internal/*/*/*_plural_data_source_gen_test.go
 	$(GO_VER) generate internal/provider/plural_data_sources.go
-	goimports -w internal/*/*/*_plural_data_source_gen.go
-	goimports -w internal/*/*/*_plural_data_source_gen_test.go
+	@goimports -w internal/*/*/*_plural_data_source_gen.go
+	@goimports -w internal/*/*/*_plural_data_source_gen_test.go
 
 singular-data-sources: prereq-go ## Generate singular data sources
 	rm -f internal/*/*/*_singular_data_source_gen.go
 	rm -f internal/*/*/*_singular_data_source_gen_test.go
 	$(GO_VER) generate internal/provider/singular_data_sources.go
-	goimports -w internal/*/*/*_singular_data_source_gen.go
-	goimports -w internal/*/*/*_singular_data_source_gen_test.go
+	@goimports -w internal/*/*/*_singular_data_source_gen.go
+	@goimports -w internal/*/*/*_singular_data_source_gen_test.go
 
 resources: prereq-go ## Generate resources
 	rm -f internal/*/*/*_resource_gen.go
 	rm -f internal/*/*/*_resource_gen_test.go
 	$(GO_VER) generate internal/provider/resources.go
-	goimports -w internal/*/*/*_resource_gen.go
-	goimports -w internal/*/*/*_resource_gen_test.go
+	@goimports -w internal/*/*/*_resource_gen.go
+	@goimports -w internal/*/*/*_resource_gen_test.go
 
 schemas: prereq-go ## Generate schemas
 	$(GO_VER) generate internal/provider/schemas.go
