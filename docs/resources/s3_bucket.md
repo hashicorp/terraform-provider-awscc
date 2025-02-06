@@ -361,16 +361,17 @@ resource "awscc_s3_bucket" "example" {
   The majority of access control configurations can be successfully and more easily achieved with bucket policies. For more information, see [AWS::S3::BucketPolicy](https://docs.aws.amazon.com//AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html). For examples of common policy configurations, including S3 Server Access Logs buckets and more, see [Bucket policy examples](https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.html) in the *Amazon S3 User Guide*.
 - `analytics_configurations` (Attributes List) Specifies the configuration and any analyses for the analytics filter of an Amazon S3 bucket. (see [below for nested schema](#nestedatt--analytics_configurations))
 - `bucket_encryption` (Attributes) Specifies default encryption for a bucket using server-side encryption with Amazon S3-managed keys (SSE-S3), AWS KMS-managed keys (SSE-KMS), or dual-layer server-side encryption with KMS-managed keys (DSSE-KMS). For information about the Amazon S3 default encryption feature, see [Amazon S3 Default Encryption for S3 Buckets](https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html) in the *Amazon S3 User Guide*. (see [below for nested schema](#nestedatt--bucket_encryption))
-- `bucket_name` (String) A name for the bucket. If you don't specify a name, AWS CloudFormation generates a unique ID and uses that ID for the bucket name. The bucket name must contain only lowercase letters, numbers, periods (.), and dashes (-) and must follow [Amazon S3 bucket restrictions and limitations](https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html). For more information, see [Rules for naming Amazon S3 buckets](https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html#bucketnamingrules) in the *Amazon S3 User Guide*. 
+- `bucket_name` (String) A name for the bucket. If you don't specify a name, AWS CloudFormation generates a unique ID and uses that ID for the bucket name. The bucket name must contain only lowercase letters, numbers, periods (.), and dashes (-) and must follow [Amazon S3 bucket restrictions and limitations](https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html). For more information, see [Rules for naming Amazon S3 buckets](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html) in the *Amazon S3 User Guide*. 
   If you specify a name, you can't perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you need to replace the resource, specify a new name.
 - `cors_configuration` (Attributes) Describes the cross-origin access configuration for objects in an Amazon S3 bucket. For more information, see [Enabling Cross-Origin Resource Sharing](https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html) in the *Amazon S3 User Guide*. (see [below for nested schema](#nestedatt--cors_configuration))
 - `intelligent_tiering_configurations` (Attributes List) Defines how Amazon S3 handles Intelligent-Tiering storage. (see [below for nested schema](#nestedatt--intelligent_tiering_configurations))
 - `inventory_configurations` (Attributes List) Specifies the inventory configuration for an Amazon S3 bucket. For more information, see [GET Bucket inventory](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETInventoryConfig.html) in the *Amazon S3 API Reference*. (see [below for nested schema](#nestedatt--inventory_configurations))
 - `lifecycle_configuration` (Attributes) Specifies the lifecycle configuration for objects in an Amazon S3 bucket. For more information, see [Object Lifecycle Management](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html) in the *Amazon S3 User Guide*. (see [below for nested schema](#nestedatt--lifecycle_configuration))
 - `logging_configuration` (Attributes) Settings that define where logs are stored. (see [below for nested schema](#nestedatt--logging_configuration))
+- `metadata_table_configuration` (Attributes) (see [below for nested schema](#nestedatt--metadata_table_configuration))
 - `metrics_configurations` (Attributes List) Specifies a metrics configuration for the CloudWatch request metrics (specified by the metrics configuration ID) from an Amazon S3 bucket. If you're updating an existing metrics configuration, note that this is a full replacement of the existing metrics configuration. If you don't include the elements you want to keep, they are erased. For more information, see [PutBucketMetricsConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTMetricConfiguration.html). (see [below for nested schema](#nestedatt--metrics_configurations))
 - `notification_configuration` (Attributes) Configuration that defines how Amazon S3 handles bucket notifications. (see [below for nested schema](#nestedatt--notification_configuration))
-- `object_lock_configuration` (Attributes) This operation is not supported by directory buckets.
+- `object_lock_configuration` (Attributes) This operation is not supported for directory buckets.
   Places an Object Lock configuration on the specified bucket. The rule specified in the Object Lock configuration will be applied by default to every new object placed in the specified bucket. For more information, see [Locking Objects](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html). 
    +  The ``DefaultRetention`` settings require both a mode and a period.
   +  The ``DefaultRetention`` period can be either ``Days`` or ``Years`` but you must select one. You cannot specify ``Days`` and ``Years`` at the same time.
@@ -580,7 +581,12 @@ Optional:
 Optional:
 
 - `rules` (Attributes List) A lifecycle rule for individual objects in an Amazon S3 bucket. (see [below for nested schema](#nestedatt--lifecycle_configuration--rules))
-- `transition_default_minimum_object_size` (String)
+- `transition_default_minimum_object_size` (String) Indicates which default minimum object size behavior is applied to the lifecycle configuration.
+  This parameter applies to general purpose buckets only. It isn't supported for directory bucket lifecycle configurations.
+   +   ``all_storage_classes_128K`` - Objects smaller than 128 KB will not transition to any storage class by default.
+  +   ``varies_by_storage_class`` - Objects smaller than 128 KB will transition to Glacier Flexible Retrieval or Glacier Deep Archive storage classes. By default, all other storage classes will prevent transitions smaller than 128 KB. 
+  
+ To customize the minimum object size for any transition you can add a filter that specifies a custom ``ObjectSizeGreaterThan`` or ``ObjectSizeLessThan`` in the body of your transition rule. Custom filters always take precedence over the default transition behavior.
 
 <a id="nestedatt--lifecycle_configuration--rules"></a>
 ### Nested Schema for `lifecycle_configuration.rules`
@@ -658,7 +664,7 @@ Optional:
 
 - `storage_class` (String) The storage class to which you want the object to transition.
 - `transition_date` (String) Indicates when objects are transitioned to the specified storage class. The date value must be in ISO 8601 format. The time is always midnight UTC.
-- `transition_in_days` (Number) Indicates the number of days after creation when objects are transitioned to the specified storage class. The value must be a positive integer.
+- `transition_in_days` (Number) Indicates the number of days after creation when objects are transitioned to the specified storage class. If the specified storage class is ``INTELLIGENT_TIERING``, ``GLACIER_IR``, ``GLACIER``, or ``DEEP_ARCHIVE``, valid values are ``0`` or positive integers. If the specified storage class is ``STANDARD_IA`` or ``ONEZONE_IA``, valid values are positive integers greater than ``30``. Be aware that some storage classes have a minimum storage duration and that you're charged for transitioning objects before their minimum storage duration. For more information, see [Constraints and considerations for transitions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-transition-general-considerations.html#lifecycle-configuration-constraints) in the *Amazon S3 User Guide*.
 
 
 <a id="nestedatt--lifecycle_configuration--rules--transitions"></a>
@@ -668,7 +674,7 @@ Optional:
 
 - `storage_class` (String) The storage class to which you want the object to transition.
 - `transition_date` (String) Indicates when objects are transitioned to the specified storage class. The date value must be in ISO 8601 format. The time is always midnight UTC.
-- `transition_in_days` (Number) Indicates the number of days after creation when objects are transitioned to the specified storage class. The value must be a positive integer.
+- `transition_in_days` (Number) Indicates the number of days after creation when objects are transitioned to the specified storage class. If the specified storage class is ``INTELLIGENT_TIERING``, ``GLACIER_IR``, ``GLACIER``, or ``DEEP_ARCHIVE``, valid values are ``0`` or positive integers. If the specified storage class is ``STANDARD_IA`` or ``ONEZONE_IA``, valid values are positive integers greater than ``30``. Be aware that some storage classes have a minimum storage duration and that you're charged for transitioning objects before their minimum storage duration. For more information, see [Constraints and considerations for transitions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-transition-general-considerations.html#lifecycle-configuration-constraints) in the *Amazon S3 User Guide*.
 
 
 
@@ -701,6 +707,28 @@ Optional:
  For ``DeliveryTime``, the time in the log file names corresponds to the delivery time for the log files. 
   For ``EventTime``, The logs delivered are for a specific day only. The year, month, and day correspond to the day on which the event occurred, and the hour, minutes and seconds are set to 00 in the key.
 
+
+
+
+<a id="nestedatt--metadata_table_configuration"></a>
+### Nested Schema for `metadata_table_configuration`
+
+Optional:
+
+- `s3_tables_destination` (Attributes) (see [below for nested schema](#nestedatt--metadata_table_configuration--s3_tables_destination))
+
+<a id="nestedatt--metadata_table_configuration--s3_tables_destination"></a>
+### Nested Schema for `metadata_table_configuration.s3_tables_destination`
+
+Optional:
+
+- `table_bucket_arn` (String) The Amazon Resource Name (ARN) for the table bucket that's specified as the destination in the metadata table configuration. The destination table bucket must be in the same Region and AWS account as the general purpose bucket.
+- `table_name` (String) The name for the metadata table in your metadata table configuration. The specified metadata table name must be unique within the <code>aws_s3_metadata</code> namespace in the destination table bucket.
+
+Read-Only:
+
+- `table_arn` (String) The Amazon Resource Name (ARN) for the metadata table in the metadata table configuration. The specified metadata table name must be unique within the <code>aws_s3_metadata</code> namespace in the destination table bucket.
+- `table_namespace` (String) The table bucket namespace for the metadata table in your metadata table configuration. This value is always <code>aws_s3_metadata</code>.
 
 
 

@@ -45,6 +45,7 @@ Read-Only:
 - `mdn_signing_algorithm` (String) MDN Signing algorithm for this AS2 connector configuration.
 - `message_subject` (String) The message subject for this AS2 connector configuration.
 - `partner_profile_id` (String) A unique identifier for the partner profile.
+- `preserve_content_type` (String) Specifies whether to use the AWS S3 object content-type as the content-type for the AS2 message.
 - `signing_algorithm` (String) Signing algorithm for this AS2 connector configuration.
 
 
