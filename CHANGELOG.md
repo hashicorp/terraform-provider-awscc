@@ -1,4 +1,5 @@
-## 1.28.0 (Unreleased)
+## 1.29.0 (Unreleased)
+## 1.28.0 (February  6, 2025)
 
 * **New Data Source:** `awscc_deadline_limit`
 * **New Data Source:** `awscc_deadline_queue_limit_association`
