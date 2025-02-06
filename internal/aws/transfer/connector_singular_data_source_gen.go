@@ -124,6 +124,14 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "pattern": "^p-([0-9a-f]{17})$",
 		//	      "type": "string"
 		//	    },
+		//	    "PreserveContentType": {
+		//	      "description": "Specifies whether to use the AWS S3 object content-type as the content-type for the AS2 message.",
+		//	      "enum": [
+		//	        "ENABLED",
+		//	        "DISABLED"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "SigningAlgorithm": {
 		//	      "description": "Signing algorithm for this AS2 connector configuration.",
 		//	      "enum": [
@@ -178,6 +186,11 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: PartnerProfileId
 				"partner_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "A unique identifier for the partner profile.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PreserveContentType
+				"preserve_content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether to use the AWS S3 object content-type as the content-type for the AS2 message.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: SigningAlgorithm
@@ -387,6 +400,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"mdn_signing_algorithm":               "MdnSigningAlgorithm",
 		"message_subject":                     "MessageSubject",
 		"partner_profile_id":                  "PartnerProfileId",
+		"preserve_content_type":               "PreserveContentType",
 		"security_policy_name":                "SecurityPolicyName",
 		"service_managed_egress_ip_addresses": "ServiceManagedEgressIpAddresses",
 		"sftp_config":                         "SftpConfig",
