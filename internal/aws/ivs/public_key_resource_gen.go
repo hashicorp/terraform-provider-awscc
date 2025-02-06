@@ -88,12 +88,12 @@ func publicKeyResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The public portion of a customer-generated key pair.",
+		//	  "description": "The public portion of a customer-generated key pair. This field is required to create the AWS::IVS::PublicKey resource.",
 		//	  "pattern": "-----BEGIN PUBLIC KEY-----\\r?\\n([a-zA-Z0-9+/=\\r\\n]+)\\r?\\n-----END PUBLIC KEY-----(\\r?\\n)?",
 		//	  "type": "string"
 		//	}
 		"public_key_material": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The public portion of a customer-generated key pair.",
+			Description: "The public portion of a customer-generated key pair. This field is required to create the AWS::IVS::PublicKey resource.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/

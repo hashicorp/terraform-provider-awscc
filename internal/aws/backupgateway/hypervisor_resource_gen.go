@@ -214,7 +214,6 @@ func hypervisorResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
-			// Tags is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Username
 		// CloudFormation resource type schema:
@@ -276,7 +275,6 @@ func hypervisorResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/LogGroupArn",
 		"/properties/Name",
 		"/properties/Password",
-		"/properties/Tags",
 		"/properties/Username",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

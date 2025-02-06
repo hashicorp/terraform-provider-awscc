@@ -197,7 +197,8 @@ func fHIRDatastoreResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "Type of Authorization Strategy. The two types of supported Authorization strategies are SMART_ON_FHIR_V1 and AWS_AUTH.",
 		//	      "enum": [
 		//	        "SMART_ON_FHIR_V1",
-		//	        "AWS_AUTH"
+		//	        "AWS_AUTH",
+		//	        "SMART_ON_FHIR"
 		//	      ],
 		//	      "type": "string"
 		//	    },
@@ -233,6 +234,7 @@ func fHIRDatastoreResource(ctx context.Context) (resource.Resource, error) {
 						stringvalidator.OneOf(
 							"SMART_ON_FHIR_V1",
 							"AWS_AUTH",
+							"SMART_ON_FHIR",
 						),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
