@@ -1485,6 +1485,11 @@
         "path": "./examples/resources/awscc_deadline_license_endpoint/import.sh"
     },
     {
+        "resource": "awscc_deadline_limit",
+        "identifier": ["FarmId","LimitId"],
+        "path": "./examples/resources/awscc_deadline_limit/import.sh"
+    },
+    {
         "resource": "awscc_deadline_metered_product",
         "identifier": ["Arn"],
         "path": "./examples/resources/awscc_deadline_metered_product/import.sh"
@@ -1508,6 +1513,11 @@
         "resource": "awscc_deadline_queue_fleet_association",
         "identifier": ["FarmId","FleetId","QueueId"],
         "path": "./examples/resources/awscc_deadline_queue_fleet_association/import.sh"
+    },
+    {
+        "resource": "awscc_deadline_queue_limit_association",
+        "identifier": ["FarmId","LimitId","QueueId"],
+        "path": "./examples/resources/awscc_deadline_queue_limit_association/import.sh"
     },
     {
         "resource": "awscc_deadline_storage_profile",
