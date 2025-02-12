@@ -139,6 +139,6 @@ resource_schema %[1]q {
   cloudformation_type_name = %[2]q
 }`, tfTypeName, cfTypeName)
 		}
-		g.Infof(block) //nolint:govet
+		g.Infof(block)
 	}
 }
