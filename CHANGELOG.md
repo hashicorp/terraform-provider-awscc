@@ -1,4 +1,15 @@
-## 1.29.0 (Unreleased)
+## 1.30.0 (Unreleased)
+
+## 1.29.0 (February 14, 2025)
+
+* **New Data Source:** `awscc_cognito_user_pool_domain`
+* **New Data Source:** `awscc_connect_contact_flow_version`
+* **New Data Source:** `awscc_transfer_web_apps`
+* **New Data Source:** `awscc_transfer_web_app`
+* **New Resource:** `awscc_cognito_user_pool_domain`
+* **New Resource:** `awscc_connect_contact_flow_version`
+* **New Resource:** `awscc_transfer_web_app`
+
 ## 1.28.0 (February  6, 2025)
 
 * **New Data Source:** `awscc_deadline_limit`
