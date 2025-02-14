@@ -1,6 +1,4 @@
-## 1.30.0 (Unreleased)
-
-## 1.29.0 (February 14, 2025)
+## 1.29.0 (Unreleased)
 
 * **New Data Source:** `awscc_cognito_user_pool_domain`
 * **New Data Source:** `awscc_connect_contact_flow_version`
