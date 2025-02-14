@@ -40,6 +40,7 @@ resource "awscc_ec2_ipam_resource_discovery" "example" {
 
 - `description` (String)
 - `operating_regions` (Attributes Set) The regions Resource Discovery is enabled for. Allows resource discoveries to be created in these regions, as well as enabling monitoring (see [below for nested schema](#nestedatt--operating_regions))
+- `organizational_unit_exclusions` (Attributes Set) A set of organizational unit (OU) exclusions for this resource. (see [below for nested schema](#nestedatt--organizational_unit_exclusions))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -58,6 +59,14 @@ resource "awscc_ec2_ipam_resource_discovery" "example" {
 Optional:
 
 - `region_name` (String) The name of the region.
+
+
+<a id="nestedatt--organizational_unit_exclusions"></a>
+### Nested Schema for `organizational_unit_exclusions`
+
+Optional:
+
+- `organizations_entity_path` (String) An AWS Organizations entity path. Build the path for the OU(s) using AWS Organizations IDs separated by a '/'. Include all child OUs by ending the path with '/*'.
 
 
 <a id="nestedatt--tags"></a>

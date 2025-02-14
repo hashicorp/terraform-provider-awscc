@@ -100,7 +100,6 @@ resource "awscc_dynamodb_global_table" "example" {
 - `billing_mode` (String)
 - `global_secondary_indexes` (Attributes Set) (see [below for nested schema](#nestedatt--global_secondary_indexes))
 - `local_secondary_indexes` (Attributes Set) (see [below for nested schema](#nestedatt--local_secondary_indexes))
-- `point_in_time_recovery_specification` (Attributes) (see [below for nested schema](#nestedatt--point_in_time_recovery_specification))
 - `sse_specification` (Attributes) (see [below for nested schema](#nestedatt--sse_specification))
 - `stream_specification` (Attributes) (see [below for nested schema](#nestedatt--stream_specification))
 - `table_name` (String)
@@ -425,15 +424,6 @@ Optional:
 - `non_key_attributes` (Set of String)
 - `projection_type` (String)
 
-
-
-<a id="nestedatt--point_in_time_recovery_specification"></a>
-### Nested Schema for `point_in_time_recovery_specification`
-
-Optional:
-
-- `point_in_time_recovery_enabled` (Boolean)
-- `recovery_period_in_days` (Number)
 
 
 <a id="nestedatt--sse_specification"></a>

@@ -131,6 +131,8 @@ resource "awscc_transfer_agreement" "example" {
 ### Optional
 
 - `description` (String) A textual description for the agreement.
+- `enforce_message_signing` (String) Specifies whether to enforce an AS2 message is signed for this agreement.
+- `preserve_filename` (String) Specifies whether to preserve the filename received for this agreement.
 - `status` (String) Specifies the status of the agreement.
 - `tags` (Attributes Set) Key-value pairs that can be used to group and search for agreements. Tags are metadata attached to agreements for any purpose. (see [below for nested schema](#nestedatt--tags))
 

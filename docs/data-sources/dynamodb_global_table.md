@@ -27,7 +27,6 @@ Data Source schema for AWS::DynamoDB::GlobalTable
 - `global_secondary_indexes` (Attributes Set) (see [below for nested schema](#nestedatt--global_secondary_indexes))
 - `key_schema` (Attributes List) (see [below for nested schema](#nestedatt--key_schema))
 - `local_secondary_indexes` (Attributes Set) (see [below for nested schema](#nestedatt--local_secondary_indexes))
-- `point_in_time_recovery_specification` (Attributes) (see [below for nested schema](#nestedatt--point_in_time_recovery_specification))
 - `replicas` (Attributes Set) (see [below for nested schema](#nestedatt--replicas))
 - `sse_specification` (Attributes) (see [below for nested schema](#nestedatt--sse_specification))
 - `stream_arn` (String)
@@ -161,15 +160,6 @@ Read-Only:
 - `non_key_attributes` (Set of String)
 - `projection_type` (String)
 
-
-
-<a id="nestedatt--point_in_time_recovery_specification"></a>
-### Nested Schema for `point_in_time_recovery_specification`
-
-Read-Only:
-
-- `point_in_time_recovery_enabled` (Boolean)
-- `recovery_period_in_days` (Number)
 
 
 <a id="nestedatt--replicas"></a>

@@ -27,6 +27,7 @@ Data Source schema for AWS::EC2::IPAMResourceDiscovery
 - `ipam_resource_discovery_region` (String) The region the resource discovery is setup in.
 - `is_default` (Boolean) Determines whether or not address space from this pool is publicly advertised. Must be set if and only if the pool is IPv6.
 - `operating_regions` (Attributes Set) The regions Resource Discovery is enabled for. Allows resource discoveries to be created in these regions, as well as enabling monitoring (see [below for nested schema](#nestedatt--operating_regions))
+- `organizational_unit_exclusions` (Attributes Set) A set of organizational unit (OU) exclusions for this resource. (see [below for nested schema](#nestedatt--organizational_unit_exclusions))
 - `owner_id` (String) Owner Account ID of the Resource Discovery
 - `state` (String) The state of this Resource Discovery.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
@@ -37,6 +38,14 @@ Data Source schema for AWS::EC2::IPAMResourceDiscovery
 Read-Only:
 
 - `region_name` (String) The name of the region.
+
+
+<a id="nestedatt--organizational_unit_exclusions"></a>
+### Nested Schema for `organizational_unit_exclusions`
+
+Read-Only:
+
+- `organizations_entity_path` (String) An AWS Organizations entity path. Build the path for the OU(s) using AWS Organizations IDs separated by a '/'. Include all child OUs by ending the path with '/*'.
 
 
 <a id="nestedatt--tags"></a>

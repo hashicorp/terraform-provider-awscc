@@ -78,6 +78,7 @@ Read-Only:
 - `catalog_targets` (Attributes List) Specifies AWS Glue Data Catalog targets. (see [below for nested schema](#nestedatt--targets--catalog_targets))
 - `delta_targets` (Attributes List) Specifies an array of Delta data store targets. (see [below for nested schema](#nestedatt--targets--delta_targets))
 - `dynamo_db_targets` (Attributes List) Specifies Amazon DynamoDB targets. (see [below for nested schema](#nestedatt--targets--dynamo_db_targets))
+- `hudi_targets` (Attributes List) Specifies Apache Hudi data store targets. (see [below for nested schema](#nestedatt--targets--hudi_targets))
 - `iceberg_targets` (Attributes List) Specifies Apache Iceberg data store targets. (see [below for nested schema](#nestedatt--targets--iceberg_targets))
 - `jdbc_targets` (Attributes List) Specifies JDBC targets. (see [below for nested schema](#nestedatt--targets--jdbc_targets))
 - `mongo_db_targets` (Attributes List) A list of Mongo DB targets. (see [below for nested schema](#nestedatt--targets--mongo_db_targets))
@@ -112,6 +113,17 @@ Read-Only:
 Read-Only:
 
 - `path` (String) The name of the DynamoDB table to crawl.
+
+
+<a id="nestedatt--targets--hudi_targets"></a>
+### Nested Schema for `targets.hudi_targets`
+
+Read-Only:
+
+- `connection_name` (String) The name of the connection to use to connect to the Hudi target.
+- `exclusions` (List of String) A list of global patterns used to exclude from the crawl.
+- `maximum_traversal_depth` (Number) The maximum depth of Amazon S3 paths that the crawler can traverse to discover the Hudi metadata folder in your Amazon S3 path. Used to limit the crawler run time.
+- `paths` (List of String) One or more Amazon S3 paths that contains Hudi metadata folders as s3://bucket/prefix .
 
 
 <a id="nestedatt--targets--iceberg_targets"></a>
