@@ -298,7 +298,7 @@ func mlflowTrackingServerResource(ctx context.Context) (resource.Resource, error
 		"weekly_maintenance_window_start": "WeeklyMaintenanceWindowStart",
 	})
 
-	opts = opts.WithCreateTimeoutInMinutes(65).WithDeleteTimeoutInMinutes(65)
+	opts = opts.WithCreateTimeoutInMinutes(95).WithDeleteTimeoutInMinutes(95)
 
 	opts = opts.WithUpdateTimeoutInMinutes(65)
 

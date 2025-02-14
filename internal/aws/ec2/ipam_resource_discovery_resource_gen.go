@@ -145,6 +145,55 @@ func iPAMResourceDiscoveryResource(ctx context.Context) (resource.Resource, erro
 				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: OrganizationalUnitExclusions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A set of organizational unit (OU) exclusions for this resource.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "If your IPAM is integrated with AWS Organizations and you add an organizational unit (OU) exclusion, IPAM will not manage the IP addresses in accounts in that OU exclusion.",
+		//	    "properties": {
+		//	      "OrganizationsEntityPath": {
+		//	        "description": "An AWS Organizations entity path. Build the path for the OU(s) using AWS Organizations IDs separated by a '/'. Include all child OUs by ending the path with '/*'.",
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "OrganizationsEntityPath"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"organizational_unit_exclusions": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: OrganizationsEntityPath
+					"organizations_entity_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "An AWS Organizations entity path. Build the path for the OU(s) using AWS Organizations IDs separated by a '/'. Include all child OUs by ending the path with '/*'.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthAtLeast(1),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A set of organizational unit (OU) exclusions for this resource.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: OwnerId
 		// CloudFormation resource type schema:
 		//
@@ -272,6 +321,8 @@ func iPAMResourceDiscoveryResource(ctx context.Context) (resource.Resource, erro
 		"is_default":                     "IsDefault",
 		"key":                            "Key",
 		"operating_regions":              "OperatingRegions",
+		"organizational_unit_exclusions": "OrganizationalUnitExclusions",
+		"organizations_entity_path":      "OrganizationsEntityPath",
 		"owner_id":                       "OwnerId",
 		"region_name":                    "RegionName",
 		"state":                          "State",

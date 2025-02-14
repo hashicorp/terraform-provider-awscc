@@ -418,6 +418,42 @@ func crawlerResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "array",
 		//	      "uniqueItems": false
 		//	    },
+		//	    "HudiTargets": {
+		//	      "description": "Specifies Apache Hudi data store targets.",
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "Specifies Apache Hudi data store targets.",
+		//	        "properties": {
+		//	          "ConnectionName": {
+		//	            "description": "The name of the connection to use to connect to the Hudi target.",
+		//	            "type": "string"
+		//	          },
+		//	          "Exclusions": {
+		//	            "description": "A list of global patterns used to exclude from the crawl.",
+		//	            "items": {
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": false
+		//	          },
+		//	          "MaximumTraversalDepth": {
+		//	            "description": "The maximum depth of Amazon S3 paths that the crawler can traverse to discover the Hudi metadata folder in your Amazon S3 path. Used to limit the crawler run time.",
+		//	            "type": "integer"
+		//	          },
+		//	          "Paths": {
+		//	            "description": "One or more Amazon S3 paths that contains Hudi metadata folders as s3://bucket/prefix .",
+		//	            "items": {
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": false
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": false
+		//	    },
 		//	    "IcebergTargets": {
 		//	      "description": "Specifies Apache Iceberg data store targets.",
 		//	      "items": {
@@ -686,6 +722,57 @@ func crawlerResource(ctx context.Context) (resource.Resource, error) {
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: HudiTargets
+				"hudi_targets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ConnectionName
+							"connection_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the connection to use to connect to the Hudi target.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Exclusions
+							"exclusions": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "A list of global patterns used to exclude from the crawl.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: MaximumTraversalDepth
+							"maximum_traversal_depth": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The maximum depth of Amazon S3 paths that the crawler can traverse to discover the Hudi metadata folder in your Amazon S3 path. Used to limit the crawler run time.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Paths
+							"paths": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "One or more Amazon S3 paths that contains Hudi metadata folders as s3://bucket/prefix .",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Specifies Apache Hudi data store targets.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: IcebergTargets
 				"iceberg_targets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -930,6 +1017,7 @@ func crawlerResource(ctx context.Context) (resource.Resource, error) {
 		"enable_additional_metadata":     "EnableAdditionalMetadata",
 		"event_queue_arn":                "EventQueueArn",
 		"exclusions":                     "Exclusions",
+		"hudi_targets":                   "HudiTargets",
 		"iceberg_targets":                "IcebergTargets",
 		"jdbc_targets":                   "JdbcTargets",
 		"lake_formation_configuration":   "LakeFormationConfiguration",

@@ -100,13 +100,13 @@ func partnershipResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "ApplicationReceiverCode": {
 		//	                      "maxLength": 15,
 		//	                      "minLength": 2,
-		//	                      "pattern": "^[a-zA-Z0-9]*$",
+		//	                      "pattern": "^[a-zA-Z0-9 ]*$",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "ApplicationSenderCode": {
 		//	                      "maxLength": 15,
 		//	                      "minLength": 2,
-		//	                      "pattern": "^[a-zA-Z0-9]*$",
+		//	                      "pattern": "^[a-zA-Z0-9 ]*$",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "ResponsibleAgencyCode": {
@@ -130,7 +130,7 @@ func partnershipResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "ReceiverId": {
 		//	                      "maxLength": 15,
 		//	                      "minLength": 15,
-		//	                      "pattern": "^[a-zA-Z0-9]*$",
+		//	                      "pattern": "^[a-zA-Z0-9 ]*$",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "ReceiverIdQualifier": {
@@ -147,7 +147,7 @@ func partnershipResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "SenderId": {
 		//	                      "maxLength": 15,
 		//	                      "minLength": 15,
-		//	                      "pattern": "^[a-zA-Z0-9]*$",
+		//	                      "pattern": "^[a-zA-Z0-9 ]*$",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "SenderIdQualifier": {
@@ -246,7 +246,7 @@ func partnershipResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(2, 15),
-														stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]*$"), ""),
+														stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9 ]*$"), ""),
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 														stringplanmodifier.UseStateForUnknown(),
@@ -258,7 +258,7 @@ func partnershipResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(2, 15),
-														stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]*$"), ""),
+														stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9 ]*$"), ""),
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 														stringplanmodifier.UseStateForUnknown(),
@@ -304,7 +304,7 @@ func partnershipResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(15, 15),
-														stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]*$"), ""),
+														stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9 ]*$"), ""),
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 														stringplanmodifier.UseStateForUnknown(),
@@ -339,7 +339,7 @@ func partnershipResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(15, 15),
-														stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]*$"), ""),
+														stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9 ]*$"), ""),
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 														stringplanmodifier.UseStateForUnknown(),

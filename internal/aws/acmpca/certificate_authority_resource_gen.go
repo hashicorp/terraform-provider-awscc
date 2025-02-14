@@ -760,7 +760,13 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 		//	          ],
 		//	          "type": "object"
 		//	        },
+		//	        "CrlType": {
+		//	          "type": "string"
+		//	        },
 		//	        "CustomCname": {
+		//	          "type": "string"
+		//	        },
+		//	        "CustomPath": {
 		//	          "type": "string"
 		//	        },
 		//	        "Enabled": {
@@ -827,8 +833,24 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
+						// Property: CrlType
+						"crl_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: CustomCname
 						"custom_cname": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: CustomPath
+						"custom_path": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
 							Computed: true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1276,10 +1298,12 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 		"crl_configuration":           "CrlConfiguration",
 		"crl_distribution_point_extension_configuration": "CrlDistributionPointExtensionConfiguration",
 		"crl_sign":                      "CRLSign",
+		"crl_type":                      "CrlType",
 		"csr_extensions":                "CsrExtensions",
 		"custom_attributes":             "CustomAttributes",
 		"custom_cname":                  "CustomCname",
 		"custom_object_identifier":      "CustomObjectIdentifier",
+		"custom_path":                   "CustomPath",
 		"data_encipherment":             "DataEncipherment",
 		"decipher_only":                 "DecipherOnly",
 		"digital_signature":             "DigitalSignature",

@@ -172,6 +172,28 @@ func virtualClusterResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: SecurityConfigurationId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the security configuration.",
+		//	  "maxLength": 64,
+		//	  "minLength": 1,
+		//	  "pattern": "[0-9a-z]+",
+		//	  "type": "string"
+		//	}
+		"security_configuration_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the security configuration.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 64),
+				stringvalidator.RegexMatches(regexp.MustCompile("[0-9a-z]+"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -258,18 +280,19 @@ func virtualClusterResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::EMRContainers::VirtualCluster").WithTerraformTypeName("awscc_emrcontainers_virtual_cluster")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                "Arn",
-		"container_provider": "ContainerProvider",
-		"eks_info":           "EksInfo",
-		"id":                 "Id",
-		"info":               "Info",
-		"key":                "Key",
-		"name":               "Name",
-		"namespace":          "Namespace",
-		"tags":               "Tags",
-		"type":               "Type",
-		"value":              "Value",
-		"virtual_cluster_id": "Id",
+		"arn":                       "Arn",
+		"container_provider":        "ContainerProvider",
+		"eks_info":                  "EksInfo",
+		"id":                        "Id",
+		"info":                      "Info",
+		"key":                       "Key",
+		"name":                      "Name",
+		"namespace":                 "Namespace",
+		"security_configuration_id": "SecurityConfigurationId",
+		"tags":                      "Tags",
+		"type":                      "Type",
+		"value":                     "Value",
+		"virtual_cluster_id":        "Id",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
