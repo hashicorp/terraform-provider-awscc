@@ -38,6 +38,9 @@
         },
         "GenAiResource": {
           "$ref": "#/definitions/PromptGenAiResource"
+        },
+        "AdditionalModelRequestFields": {
+          "$ref": "#/definitions/AdditionalModelRequestFields"
         }
       },
       "required": [
@@ -66,6 +69,9 @@
           "minItems": 0,
           "description": "List of input variables",
           "insertionOrder": true
+        },
+        "CachePoint": {
+          "$ref": "#/definitions/CachePointBlock"
         }
       },
       "required": [
@@ -170,6 +176,19 @@
             "Text"
           ],
           "additionalProperties": false
+        },
+        {
+          "title": "CachePoint",
+          "type": "object",
+          "properties": {
+            "CachePoint": {
+              "$ref": "#/definitions/CachePointBlock"
+            }
+          },
+          "required": [
+            "CachePoint"
+          ],
+          "additionalProperties": false
         }
       ]
     },
@@ -188,6 +207,19 @@
           },
           "required": [
             "Text"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "title": "CachePoint",
+          "type": "object",
+          "properties": {
+            "CachePoint": {
+              "$ref": "#/definitions/CachePointBlock"
+            }
+          },
+          "required": [
+            "CachePoint"
           ],
           "additionalProperties": false
         }
@@ -273,6 +305,19 @@
           },
           "required": [
             "ToolSpec"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "title": "CachePoint",
+          "type": "object",
+          "properties": {
+            "CachePoint": {
+              "$ref": "#/definitions/CachePointBlock"
+            }
+          },
+          "required": [
+            "CachePoint"
           ],
           "additionalProperties": false
         }
@@ -483,6 +528,30 @@
           "additionalProperties": false
         }
       ]
+    },
+    "CachePointBlock": {
+      "description": "CachePointBlock",
+      "type": "object",
+      "properties": {
+        "Type": {
+          "$ref": "#/definitions/CachePointType"
+        }
+      },
+      "required": [
+        "Type"
+      ],
+      "additionalProperties": false
+    },
+    "CachePointType": {
+      "description": "CachePoint types for CachePointBlock",
+      "type": "string",
+      "enum": [
+        "default"
+      ]
+    },
+    "AdditionalModelRequestFields": {
+      "type": "object",
+      "description": "Contains model-specific configurations"
     }
   },
   "properties": {

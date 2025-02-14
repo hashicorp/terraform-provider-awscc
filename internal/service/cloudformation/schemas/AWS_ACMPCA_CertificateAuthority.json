@@ -132,6 +132,12 @@
         },
         "CrlDistributionPointExtensionConfiguration": {
           "$ref": "#/definitions/CrlDistributionPointExtensionConfiguration"
+        },
+        "CrlType": {
+          "type": "string"
+        },
+        "CustomPath": {
+          "type": "string"
         }
       },
       "required": [
