@@ -88,7 +88,7 @@ func playbackKeyPairDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	      },
 		//	      "Value": {
 		//	        "maxLength": 256,
-		//	        "minLength": 1,
+		//	        "minLength": 0,
 		//	        "type": "string"
 		//	      }
 		//	    },

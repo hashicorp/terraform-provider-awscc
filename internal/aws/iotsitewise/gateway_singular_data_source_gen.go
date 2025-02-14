@@ -99,11 +99,6 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "oneOf": [
 		//	    {
 		//	      "required": [
-		//	        "Greengrass"
-		//	      ]
-		//	    },
-		//	    {
-		//	      "required": [
 		//	        "GreengrassV2"
 		//	      ]
 		//	    },

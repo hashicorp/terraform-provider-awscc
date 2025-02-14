@@ -339,6 +339,42 @@ func crawlerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "array",
 		//	      "uniqueItems": false
 		//	    },
+		//	    "HudiTargets": {
+		//	      "description": "Specifies Apache Hudi data store targets.",
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "Specifies Apache Hudi data store targets.",
+		//	        "properties": {
+		//	          "ConnectionName": {
+		//	            "description": "The name of the connection to use to connect to the Hudi target.",
+		//	            "type": "string"
+		//	          },
+		//	          "Exclusions": {
+		//	            "description": "A list of global patterns used to exclude from the crawl.",
+		//	            "items": {
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": false
+		//	          },
+		//	          "MaximumTraversalDepth": {
+		//	            "description": "The maximum depth of Amazon S3 paths that the crawler can traverse to discover the Hudi metadata folder in your Amazon S3 path. Used to limit the crawler run time.",
+		//	            "type": "integer"
+		//	          },
+		//	          "Paths": {
+		//	            "description": "One or more Amazon S3 paths that contains Hudi metadata folders as s3://bucket/prefix .",
+		//	            "items": {
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": false
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": false
+		//	    },
 		//	    "IcebergTargets": {
 		//	      "description": "Specifies Apache Iceberg data store targets.",
 		//	      "items": {
@@ -555,6 +591,37 @@ func crawlerDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Description: "Specifies Amazon DynamoDB targets.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: HudiTargets
+				"hudi_targets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ConnectionName
+							"connection_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the connection to use to connect to the Hudi target.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Exclusions
+							"exclusions": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "A list of global patterns used to exclude from the crawl.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: MaximumTraversalDepth
+							"maximum_traversal_depth": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The maximum depth of Amazon S3 paths that the crawler can traverse to discover the Hudi metadata folder in your Amazon S3 path. Used to limit the crawler run time.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Paths
+							"paths": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "One or more Amazon S3 paths that contains Hudi metadata folders as s3://bucket/prefix .",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Specifies Apache Hudi data store targets.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: IcebergTargets
 				"iceberg_targets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -714,6 +781,7 @@ func crawlerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"enable_additional_metadata":     "EnableAdditionalMetadata",
 		"event_queue_arn":                "EventQueueArn",
 		"exclusions":                     "Exclusions",
+		"hudi_targets":                   "HudiTargets",
 		"iceberg_targets":                "IcebergTargets",
 		"jdbc_targets":                   "JdbcTargets",
 		"lake_formation_configuration":   "LakeFormationConfiguration",
