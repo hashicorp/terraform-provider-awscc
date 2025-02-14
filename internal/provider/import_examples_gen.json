@@ -1040,6 +1040,11 @@
         "path": "./examples/resources/awscc_cognito_user_pool_client/import.sh"
     },
     {
+        "resource": "awscc_cognito_user_pool_domain",
+        "identifier": ["UserPoolId","Domain"],
+        "path": "./examples/resources/awscc_cognito_user_pool_domain/import.sh"
+    },
+    {
         "resource": "awscc_cognito_user_pool_group",
         "identifier": ["UserPoolId","GroupName"],
         "path": "./examples/resources/awscc_cognito_user_pool_group/import.sh"
@@ -1133,6 +1138,11 @@
         "resource": "awscc_connect_contact_flow_module",
         "identifier": ["ContactFlowModuleArn"],
         "path": "./examples/resources/awscc_connect_contact_flow_module/import.sh"
+    },
+    {
+        "resource": "awscc_connect_contact_flow_version",
+        "identifier": ["ContactFlowVersionARN"],
+        "path": "./examples/resources/awscc_connect_contact_flow_version/import.sh"
     },
     {
         "resource": "awscc_connect_email_address",
@@ -5318,6 +5328,11 @@
         "resource": "awscc_transfer_server",
         "identifier": ["Arn"],
         "path": "./examples/resources/awscc_transfer_server/import.sh"
+    },
+    {
+        "resource": "awscc_transfer_web_app",
+        "identifier": ["Arn"],
+        "path": "./examples/resources/awscc_transfer_web_app/import.sh"
     },
     {
         "resource": "awscc_transfer_workflow",

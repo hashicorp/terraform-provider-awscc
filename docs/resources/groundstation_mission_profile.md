@@ -52,6 +52,7 @@ Optional:
 Optional:
 
 - `kms_alias_arn` (String)
+- `kms_alias_name` (String)
 - `kms_key_arn` (String)
 
 

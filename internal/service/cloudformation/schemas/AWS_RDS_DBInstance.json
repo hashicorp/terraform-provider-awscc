@@ -478,6 +478,10 @@
         "type": "string"
       },
       "description": "A list of the VPC security group IDs to assign to the DB instance. The list can include both the physical IDs of existing VPC security groups and references to [AWS::EC2::SecurityGroup](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html) resources created in the template.\n If you plan to update the resource, don't specify VPC security groups in a shared VPC.\n  If you set ``VPCSecurityGroups``, you must not set [DBSecurityGroups](https://docs.aws.amazon.com//AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-dbsecuritygroups), and vice versa.\n  You can migrate a DB instance in your stack from an RDS DB security group to a VPC security group, but keep the following in mind:\n  +  You can't revert to using an RDS security group after you establish a VPC security group membership.\n  +  When you migrate your DB instance to VPC security groups, if your stack update rolls back because the DB instance update fails or because an update fails in another AWS CloudFormation resource, the rollback fails because it can't revert to an RDS security group.\n  +  To use the properties that are available when you use a VPC security group, you must recreate the DB instance. If you don't, AWS CloudFormation submits only the property values that are listed in the [DBSecurityGroups](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-dbsecuritygroups) property.\n  \n  To avoid this situation, migrate your DB instance to using VPC security groups only when that is the only change in your stack template. \n  *Amazon Aurora* \n Not applicable. The associated list of EC2 VPC security groups is managed by the DB cluster. If specified, the setting must match the DB cluster setting."
+    },
+    "ApplyImmediately": {
+      "type": "boolean",
+      "description": ""
     }
   },
   "additionalProperties": false,
@@ -554,7 +558,8 @@
     "/properties/SourceRegion",
     "/properties/TdeCredentialPassword",
     "/properties/UseDefaultProcessorFeatures",
-    "/properties/UseLatestRestorableTime"
+    "/properties/UseLatestRestorableTime",
+    "/properties/ApplyImmediately"
   ],
   "readOnlyProperties": [
     "/properties/Endpoint/Address",

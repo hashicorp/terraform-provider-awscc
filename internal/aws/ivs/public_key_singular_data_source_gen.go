@@ -89,7 +89,7 @@ func publicKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "Value": {
 		//	        "maxLength": 256,
-		//	        "minLength": 1,
+		//	        "minLength": 0,
 		//	        "type": "string"
 		//	      }
 		//	    },

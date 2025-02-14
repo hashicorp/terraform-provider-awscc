@@ -91,6 +91,21 @@ func agreementDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "A textual description for the agreement.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: EnforceMessageSigning
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies whether to enforce an AS2 message is signed for this agreement.",
+		//	  "enum": [
+		//	    "ENABLED",
+		//	    "DISABLED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"enforce_message_signing": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether to enforce an AS2 message is signed for this agreement.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LocalProfileId
 		// CloudFormation resource type schema:
 		//
@@ -117,6 +132,21 @@ func agreementDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"partner_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A unique identifier for the partner profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: PreserveFilename
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies whether to preserve the filename received for this agreement.",
+		//	  "enum": [
+		//	    "ENABLED",
+		//	    "DISABLED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"preserve_filename": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether to preserve the filename received for this agreement.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ServerId
@@ -216,18 +246,20 @@ func agreementDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Transfer::Agreement").WithTerraformTypeName("awscc_transfer_agreement")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"access_role":        "AccessRole",
-		"agreement_id":       "AgreementId",
-		"arn":                "Arn",
-		"base_directory":     "BaseDirectory",
-		"description":        "Description",
-		"key":                "Key",
-		"local_profile_id":   "LocalProfileId",
-		"partner_profile_id": "PartnerProfileId",
-		"server_id":          "ServerId",
-		"status":             "Status",
-		"tags":               "Tags",
-		"value":              "Value",
+		"access_role":             "AccessRole",
+		"agreement_id":            "AgreementId",
+		"arn":                     "Arn",
+		"base_directory":          "BaseDirectory",
+		"description":             "Description",
+		"enforce_message_signing": "EnforceMessageSigning",
+		"key":                     "Key",
+		"local_profile_id":        "LocalProfileId",
+		"partner_profile_id":      "PartnerProfileId",
+		"preserve_filename":       "PreserveFilename",
+		"server_id":               "ServerId",
+		"status":                  "Status",
+		"tags":                    "Tags",
+		"value":                   "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

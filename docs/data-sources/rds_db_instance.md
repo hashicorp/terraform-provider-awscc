@@ -69,6 +69,7 @@ Data Source schema for AWS::RDS::DBInstance
   +  Web and Express editions: Must be an integer from 20 to 1024.
 - `allow_major_version_upgrade` (Boolean) A value that indicates whether major version upgrades are allowed. Changing this parameter doesn't result in an outage and the change is asynchronously applied as soon as possible.
  Constraints: Major version upgrades must be allowed when specifying a value for the ``EngineVersion`` parameter that is a different major version than the DB instance's current version.
+- `apply_immediately` (Boolean)
 - `associated_roles` (Attributes List) The IAMlong (IAM) roles associated with the DB instance. 
   *Amazon Aurora* 
  Not applicable. The associated roles are managed by the DB cluster. (see [below for nested schema](#nestedatt--associated_roles))

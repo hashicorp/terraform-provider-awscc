@@ -213,6 +213,13 @@ func securityConfigResource(ctx context.Context) (resource.Resource, error) {
 		//	      "pattern": "",
 		//	      "type": "string"
 		//	    },
+		//	    "OpenSearchServerlessEntityId": {
+		//	      "description": "Custom entity id attribute to override default entity id for this saml integration",
+		//	      "maxLength": 1024,
+		//	      "minLength": 1,
+		//	      "pattern": "^aws:opensearch:[0-9]{12}:*",
+		//	      "type": "string"
+		//	    },
 		//	    "SessionTimeout": {
 		//	      "description": "Defines the session timeout in minutes",
 		//	      "type": "integer"
@@ -253,6 +260,19 @@ func securityConfigResource(ctx context.Context) (resource.Resource, error) {
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthBetween(1, 51200),
 						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: OpenSearchServerlessEntityId
+				"open_search_serverless_entity_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Custom entity id attribute to override default entity id for this saml integration",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 1024),
+						stringvalidator.RegexMatches(regexp.MustCompile("^aws:opensearch:[0-9]{12}:*"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -336,20 +356,21 @@ func securityConfigResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::OpenSearchServerless::SecurityConfig").WithTerraformTypeName("awscc_opensearchserverless_security_config")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"application_arn":             "ApplicationArn",
-		"application_description":     "ApplicationDescription",
-		"application_name":            "ApplicationName",
-		"description":                 "Description",
-		"group_attribute":             "GroupAttribute",
-		"iam_identity_center_options": "IamIdentityCenterOptions",
-		"instance_arn":                "InstanceArn",
-		"metadata":                    "Metadata",
-		"name":                        "Name",
-		"saml_options":                "SamlOptions",
-		"security_config_id":          "Id",
-		"session_timeout":             "SessionTimeout",
-		"type":                        "Type",
-		"user_attribute":              "UserAttribute",
+		"application_arn":                  "ApplicationArn",
+		"application_description":          "ApplicationDescription",
+		"application_name":                 "ApplicationName",
+		"description":                      "Description",
+		"group_attribute":                  "GroupAttribute",
+		"iam_identity_center_options":      "IamIdentityCenterOptions",
+		"instance_arn":                     "InstanceArn",
+		"metadata":                         "Metadata",
+		"name":                             "Name",
+		"open_search_serverless_entity_id": "OpenSearchServerlessEntityId",
+		"saml_options":                     "SamlOptions",
+		"security_config_id":               "Id",
+		"session_timeout":                  "SessionTimeout",
+		"type":                             "Type",
+		"user_attribute":                   "UserAttribute",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

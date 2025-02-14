@@ -1,0 +1,1 @@
+$ terraform import awscc_connect_contact_flow_version.example "contact_flow_version_arn"

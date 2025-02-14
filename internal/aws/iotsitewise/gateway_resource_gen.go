@@ -128,11 +128,6 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		//	  "oneOf": [
 		//	    {
 		//	      "required": [
-		//	        "Greengrass"
-		//	      ]
-		//	    },
-		//	    {
-		//	      "required": [
 		//	        "GreengrassV2"
 		//	      ]
 		//	    },

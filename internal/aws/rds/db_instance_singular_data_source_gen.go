@@ -47,6 +47,17 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "A value that indicates whether major version upgrades are allowed. Changing this parameter doesn't result in an outage and the change is asynchronously applied as soon as possible.\n Constraints: Major version upgrades must be allowed when specifying a value for the ``EngineVersion`` parameter that is a different major version than the DB instance's current version.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ApplyImmediately
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "boolean"
+		//	}
+		"apply_immediately": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssociatedRoles
 		// CloudFormation resource type schema:
 		//
@@ -1160,6 +1171,7 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"address":                                  "Address",
 		"allocated_storage":                        "AllocatedStorage",
 		"allow_major_version_upgrade":              "AllowMajorVersionUpgrade",
+		"apply_immediately":                        "ApplyImmediately",
 		"associated_roles":                         "AssociatedRoles",
 		"auto_minor_version_upgrade":               "AutoMinorVersionUpgrade",
 		"automatic_backup_replication_kms_key_id":  "AutomaticBackupReplicationKmsKeyId",

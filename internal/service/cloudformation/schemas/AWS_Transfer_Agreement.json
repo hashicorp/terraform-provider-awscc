@@ -100,6 +100,22 @@
       "pattern": "arn:.*",
       "minLength": 20,
       "maxLength": 1600
+    },
+    "PreserveFilename": {
+      "description": "Specifies whether to preserve the filename received for this agreement.",
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "EnforceMessageSigning": {
+      "description": "Specifies whether to enforce an AS2 message is signed for this agreement.",
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
     }
   },
   "additionalProperties": false,
@@ -126,7 +142,12 @@
     "tagOnCreate": true,
     "tagUpdatable": true,
     "cloudFormationSystemTags": true,
-    "tagProperty": "/properties/Tags"
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "transfer:ListTagsForResource",
+      "transfer:UnTagResource",
+      "transfer:TagResource"
+    ]
   },
   "handlers": {
     "create": {

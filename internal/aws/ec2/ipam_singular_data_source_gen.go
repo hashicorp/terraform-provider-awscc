@@ -55,6 +55,43 @@ func iPAMDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The Id of the default resource discovery, created with this IPAM.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: DefaultResourceDiscoveryOrganizationalUnitExclusions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A set of organizational unit (OU) exclusions for the default resource discovery, created with this IPAM.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "If your IPAM is integrated with AWS Organizations and you add an organizational unit (OU) exclusion, IPAM will not manage the IP addresses in accounts in that OU exclusion.",
+		//	    "properties": {
+		//	      "OrganizationsEntityPath": {
+		//	        "description": "An AWS Organizations entity path. Build the path for the OU(s) using AWS Organizations IDs separated by a '/'. Include all child OUs by ending the path with '/*'.",
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "OrganizationsEntityPath"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"default_resource_discovery_organizational_unit_exclusions": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: OrganizationsEntityPath
+					"organizations_entity_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "An AWS Organizations entity path. Build the path for the OU(s) using AWS Organizations IDs separated by a '/'. Include all child OUs by ending the path with '/*'.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A set of organizational unit (OU) exclusions for the default resource discovery, created with this IPAM.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -250,21 +287,23 @@ func iPAMDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn": "Arn",
-		"default_resource_discovery_association_id": "DefaultResourceDiscoveryAssociationId",
-		"default_resource_discovery_id":             "DefaultResourceDiscoveryId",
-		"description":                               "Description",
-		"enable_private_gua":                        "EnablePrivateGua",
-		"ipam_id":                                   "IpamId",
-		"key":                                       "Key",
-		"operating_regions":                         "OperatingRegions",
-		"private_default_scope_id":                  "PrivateDefaultScopeId",
-		"public_default_scope_id":                   "PublicDefaultScopeId",
-		"region_name":                               "RegionName",
-		"resource_discovery_association_count":      "ResourceDiscoveryAssociationCount",
-		"scope_count":                               "ScopeCount",
-		"tags":                                      "Tags",
-		"tier":                                      "Tier",
-		"value":                                     "Value",
+		"default_resource_discovery_association_id":                 "DefaultResourceDiscoveryAssociationId",
+		"default_resource_discovery_id":                             "DefaultResourceDiscoveryId",
+		"default_resource_discovery_organizational_unit_exclusions": "DefaultResourceDiscoveryOrganizationalUnitExclusions",
+		"description":                          "Description",
+		"enable_private_gua":                   "EnablePrivateGua",
+		"ipam_id":                              "IpamId",
+		"key":                                  "Key",
+		"operating_regions":                    "OperatingRegions",
+		"organizations_entity_path":            "OrganizationsEntityPath",
+		"private_default_scope_id":             "PrivateDefaultScopeId",
+		"public_default_scope_id":              "PublicDefaultScopeId",
+		"region_name":                          "RegionName",
+		"resource_discovery_association_count": "ResourceDiscoveryAssociationCount",
+		"scope_count":                          "ScopeCount",
+		"tags":                                 "Tags",
+		"tier":                                 "Tier",
+		"value":                                "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

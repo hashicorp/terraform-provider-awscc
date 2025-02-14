@@ -84,13 +84,13 @@ func partnershipDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                    "ApplicationReceiverCode": {
 		//	                      "maxLength": 15,
 		//	                      "minLength": 2,
-		//	                      "pattern": "^[a-zA-Z0-9]*$",
+		//	                      "pattern": "^[a-zA-Z0-9 ]*$",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "ApplicationSenderCode": {
 		//	                      "maxLength": 15,
 		//	                      "minLength": 2,
-		//	                      "pattern": "^[a-zA-Z0-9]*$",
+		//	                      "pattern": "^[a-zA-Z0-9 ]*$",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "ResponsibleAgencyCode": {
@@ -114,7 +114,7 @@ func partnershipDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                    "ReceiverId": {
 		//	                      "maxLength": 15,
 		//	                      "minLength": 15,
-		//	                      "pattern": "^[a-zA-Z0-9]*$",
+		//	                      "pattern": "^[a-zA-Z0-9 ]*$",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "ReceiverIdQualifier": {
@@ -131,7 +131,7 @@ func partnershipDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                    "SenderId": {
 		//	                      "maxLength": 15,
 		//	                      "minLength": 15,
-		//	                      "pattern": "^[a-zA-Z0-9]*$",
+		//	                      "pattern": "^[a-zA-Z0-9 ]*$",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "SenderIdQualifier": {

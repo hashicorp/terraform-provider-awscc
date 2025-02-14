@@ -131,11 +131,6 @@
       "oneOf": [
         {
           "required": [
-            "Greengrass"
-          ]
-        },
-        {
-          "required": [
             "GreengrassV2"
           ]
         },

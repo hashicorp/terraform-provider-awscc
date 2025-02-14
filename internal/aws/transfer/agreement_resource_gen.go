@@ -120,6 +120,31 @@ func agreementResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: EnforceMessageSigning
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies whether to enforce an AS2 message is signed for this agreement.",
+		//	  "enum": [
+		//	    "ENABLED",
+		//	    "DISABLED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"enforce_message_signing": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether to enforce an AS2 message is signed for this agreement.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ENABLED",
+					"DISABLED",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LocalProfileId
 		// CloudFormation resource type schema:
 		//
@@ -155,6 +180,31 @@ func agreementResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.LengthBetween(19, 19),
 				stringvalidator.RegexMatches(regexp.MustCompile("^p-([0-9a-f]{17})$"), ""),
 			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PreserveFilename
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies whether to preserve the filename received for this agreement.",
+		//	  "enum": [
+		//	    "ENABLED",
+		//	    "DISABLED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"preserve_filename": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether to preserve the filename received for this agreement.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ENABLED",
+					"DISABLED",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ServerId
 		// CloudFormation resource type schema:
@@ -298,18 +348,20 @@ func agreementResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Transfer::Agreement").WithTerraformTypeName("awscc_transfer_agreement")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"access_role":        "AccessRole",
-		"agreement_id":       "AgreementId",
-		"arn":                "Arn",
-		"base_directory":     "BaseDirectory",
-		"description":        "Description",
-		"key":                "Key",
-		"local_profile_id":   "LocalProfileId",
-		"partner_profile_id": "PartnerProfileId",
-		"server_id":          "ServerId",
-		"status":             "Status",
-		"tags":               "Tags",
-		"value":              "Value",
+		"access_role":             "AccessRole",
+		"agreement_id":            "AgreementId",
+		"arn":                     "Arn",
+		"base_directory":          "BaseDirectory",
+		"description":             "Description",
+		"enforce_message_signing": "EnforceMessageSigning",
+		"key":                     "Key",
+		"local_profile_id":        "LocalProfileId",
+		"partner_profile_id":      "PartnerProfileId",
+		"preserve_filename":       "PreserveFilename",
+		"server_id":               "ServerId",
+		"status":                  "Status",
+		"tags":                    "Tags",
+		"value":                   "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

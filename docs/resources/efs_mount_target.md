@@ -54,7 +54,7 @@ resource "awscc_ec2_subnet" "main" {
 ### Required
 
 - `file_system_id` (String) The ID of the file system for which to create the mount target.
-- `security_groups` (Set of String) Up to five VPC security group IDs, of the form ``sg-xxxxxxxx``. These must be for the same VPC as subnet specified.
+- `security_groups` (Set of String) VPC security group IDs, of the form ``sg-xxxxxxxx``. These must be for the same VPC as the subnet specified. The maximum number of security groups depends on account quota. For more information, see [Amazon VPC Quotas](https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html) in the *Amazon VPC User Guide* (see the *Security Groups* table).
 - `subnet_id` (String) The ID of the subnet to add the mount target in. For One Zone file systems, use the subnet that is associated with the file system's Availability Zone.
 
 ### Optional

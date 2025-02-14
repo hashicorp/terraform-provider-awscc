@@ -51,6 +51,7 @@ resource "awscc_ec2_ipam" "example" {
 
 ### Optional
 
+- `default_resource_discovery_organizational_unit_exclusions` (Attributes Set) A set of organizational unit (OU) exclusions for the default resource discovery, created with this IPAM. (see [below for nested schema](#nestedatt--default_resource_discovery_organizational_unit_exclusions))
 - `description` (String)
 - `enable_private_gua` (Boolean) Enable provisioning of GUA space in private pools.
 - `operating_regions` (Attributes Set) The regions IPAM is enabled for. Allows pools to be created in these regions, as well as enabling monitoring (see [below for nested schema](#nestedatt--operating_regions))
@@ -68,6 +69,14 @@ resource "awscc_ec2_ipam" "example" {
 - `public_default_scope_id` (String) The Id of the default scope for publicly routable IP space, created with this IPAM.
 - `resource_discovery_association_count` (Number) The count of resource discoveries associated with this IPAM.
 - `scope_count` (Number) The number of scopes that currently exist in this IPAM.
+
+<a id="nestedatt--default_resource_discovery_organizational_unit_exclusions"></a>
+### Nested Schema for `default_resource_discovery_organizational_unit_exclusions`
+
+Optional:
+
+- `organizations_entity_path` (String) An AWS Organizations entity path. Build the path for the OU(s) using AWS Organizations IDs separated by a '/'. Include all child OUs by ending the path with '/*'.
+
 
 <a id="nestedatt--operating_regions"></a>
 ### Nested Schema for `operating_regions`

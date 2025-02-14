@@ -14,6 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
@@ -64,6 +65,62 @@ func locationSMBResource(ctx context.Context) (resource.Resource, error) {
 				generic.Multiset(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: AuthenticationType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The authentication mode used to determine identity of user.",
+		//	  "enum": [
+		//	    "NTLM",
+		//	    "KERBEROS"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The authentication mode used to determine identity of user.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"NTLM",
+					"KERBEROS",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DnsIpAddresses
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies the IPv4 addresses for the DNS servers that your SMB file server belongs to. This parameter applies only if AuthenticationType is set to KERBEROS. If you have multiple domains in your environment, configuring this parameter makes sure that DataSync connects to the right SMB file server.",
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "maxLength": 15,
+		//	    "minLength": 7,
+		//	    "pattern": "\\A(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(\\.(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}\\z",
+		//	    "type": "string"
+		//	  },
+		//	  "maxItems": 2,
+		//	  "type": "array"
+		//	}
+		"dns_ip_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Specifies the IPv4 addresses for the DNS servers that your SMB file server belongs to. This parameter applies only if AuthenticationType is set to KERBEROS. If you have multiple domains in your environment, configuring this parameter makes sure that DataSync connects to the right SMB file server.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeAtMost(2),
+				listvalidator.ValueStringsAre(
+					stringvalidator.LengthBetween(7, 15),
+					stringvalidator.RegexMatches(regexp.MustCompile("\\A(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(\\.(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}\\z"), ""),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Domain
 		// CloudFormation resource type schema:
 		//
@@ -80,6 +137,68 @@ func locationSMBResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtMost(253),
 				stringvalidator.RegexMatches(regexp.MustCompile("^([A-Za-z0-9]+[A-Za-z0-9-.]*)*[A-Za-z0-9-]*[A-Za-z0-9]$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: KerberosKeytab
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Base64 string representation of the Keytab file. Specifies your Kerberos key table (keytab) file, which includes mappings between your service principal name (SPN) and encryption keys. To avoid task execution errors, make sure that the SPN in the keytab file matches exactly what you specify for KerberosPrincipal and in your krb5.conf file.",
+		//	  "maxLength": 87384,
+		//	  "type": "string"
+		//	}
+		"kerberos_keytab": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Base64 string representation of the Keytab file. Specifies your Kerberos key table (keytab) file, which includes mappings between your service principal name (SPN) and encryption keys. To avoid task execution errors, make sure that the SPN in the keytab file matches exactly what you specify for KerberosPrincipal and in your krb5.conf file.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(87384),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// KerberosKeytab is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: KerberosKrb5Conf
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The string representation of the Krb5Conf file, or the presigned URL to access the Krb5.conf file within an S3 bucket. Specifies a Kerberos configuration file (krb5.conf) that defines your Kerberos realm configuration. To avoid task execution errors, make sure that the service principal name (SPN) in the krb5.conf file matches exactly what you specify for KerberosPrincipal and in your keytab file.",
+		//	  "maxLength": 174764,
+		//	  "type": "string"
+		//	}
+		"kerberos_krb_5_conf": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The string representation of the Krb5Conf file, or the presigned URL to access the Krb5.conf file within an S3 bucket. Specifies a Kerberos configuration file (krb5.conf) that defines your Kerberos realm configuration. To avoid task execution errors, make sure that the service principal name (SPN) in the krb5.conf file matches exactly what you specify for KerberosPrincipal and in your keytab file.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(174764),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// KerberosKrb5Conf is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: KerberosPrincipal
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies a service principal name (SPN), which is an identity in your Kerberos realm that has permission to access the files, folders, and file metadata in your SMB file server. SPNs are case sensitive and must include a prepended cifs/. For example, an SPN might look like cifs/kerberosuser@EXAMPLE.COM. Your task execution will fail if the SPN that you provide for this parameter doesn't match exactly what's in your keytab or krb5.conf files.",
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "pattern": "^.+$",
+		//	  "type": "string"
+		//	}
+		"kerberos_principal": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies a service principal name (SPN), which is an identity in your Kerberos realm that has permission to access the files, folders, and file metadata in your SMB file server. SPNs are case sensitive and must include a prepended cifs/. For example, an SPN might look like cifs/kerberosuser@EXAMPLE.COM. Your task execution will fail if the SPN that you provide for this parameter doesn't match exactly what's in your keytab or krb5.conf files.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.RegexMatches(regexp.MustCompile("^.+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -213,7 +332,6 @@ func locationSMBResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// ServerHostname is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -328,11 +446,15 @@ func locationSMBResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"user": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The user who can mount the share, has the permissions to access files and folders in the SMB share.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtMost(104),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[^\\x5B\\x5D\\\\/:;|=,+*?]{1,104}$"), ""),
 			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -356,25 +478,32 @@ func locationSMBResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationSMB").WithTerraformTypeName("awscc_datasync_location_smb")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"agent_arns":      "AgentArns",
-		"domain":          "Domain",
-		"key":             "Key",
-		"location_arn":    "LocationArn",
-		"location_uri":    "LocationUri",
-		"mount_options":   "MountOptions",
-		"password":        "Password",
-		"server_hostname": "ServerHostname",
-		"subdirectory":    "Subdirectory",
-		"tags":            "Tags",
-		"user":            "User",
-		"value":           "Value",
-		"version":         "Version",
+		"agent_arns":          "AgentArns",
+		"authentication_type": "AuthenticationType",
+		"dns_ip_addresses":    "DnsIpAddresses",
+		"domain":              "Domain",
+		"kerberos_keytab":     "KerberosKeytab",
+		"kerberos_krb_5_conf": "KerberosKrb5Conf",
+		"kerberos_principal":  "KerberosPrincipal",
+		"key":                 "Key",
+		"location_arn":        "LocationArn",
+		"location_uri":        "LocationUri",
+		"mount_options":       "MountOptions",
+		"password":            "Password",
+		"server_hostname":     "ServerHostname",
+		"subdirectory":        "Subdirectory",
+		"tags":                "Tags",
+		"user":                "User",
+		"value":               "Value",
+		"version":             "Version",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Password",
 		"/properties/Subdirectory",
 		"/properties/ServerHostname",
+		"/properties/KerberosKeytab",
+		"/properties/KerberosKrb5Conf",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

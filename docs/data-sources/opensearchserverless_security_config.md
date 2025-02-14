@@ -48,5 +48,6 @@ Read-Only:
 
 - `group_attribute` (String) Group attribute for this saml integration
 - `metadata` (String) The XML saml provider metadata document that you want to use
+- `open_search_serverless_entity_id` (String) Custom entity id attribute to override default entity id for this saml integration
 - `session_timeout` (Number) Defines the session timeout in minutes
 - `user_attribute` (String) Custom attribute for this saml integration

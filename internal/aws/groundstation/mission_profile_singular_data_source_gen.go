@@ -147,11 +147,20 @@ func missionProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      "required": [
 		//	        "KmsAliasArn"
 		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "KmsAliasName"
+		//	      ]
 		//	    }
 		//	  ],
 		//	  "properties": {
 		//	    "KmsAliasArn": {
 		//	      "pattern": "^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$",
+		//	      "type": "string"
+		//	    },
+		//	    "KmsAliasName": {
+		//	      "pattern": "^alias/[a-zA-Z0-9:/_-]+$",
 		//	      "type": "string"
 		//	    },
 		//	    "KmsKeyArn": {
@@ -165,6 +174,10 @@ func missionProfileDataSource(ctx context.Context) (datasource.DataSource, error
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: KmsAliasArn
 				"kms_alias_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: KmsAliasName
+				"kms_alias_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: KmsKeyArn
@@ -259,6 +272,7 @@ func missionProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		"destination":                        "Destination",
 		"key":                                "Key",
 		"kms_alias_arn":                      "KmsAliasArn",
+		"kms_alias_name":                     "KmsAliasName",
 		"kms_key_arn":                        "KmsKeyArn",
 		"minimum_viable_contact_duration_seconds": "MinimumViableContactDurationSeconds",
 		"mission_profile_id":                      "Id",

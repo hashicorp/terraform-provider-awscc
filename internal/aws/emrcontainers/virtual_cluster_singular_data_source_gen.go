@@ -140,6 +140,20 @@ func virtualClusterDataSource(ctx context.Context) (datasource.DataSource, error
 			Description: "Name of the virtual cluster.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: SecurityConfigurationId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the security configuration.",
+		//	  "maxLength": 64,
+		//	  "minLength": 1,
+		//	  "pattern": "[0-9a-z]+",
+		//	  "type": "string"
+		//	}
+		"security_configuration_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the security configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -203,18 +217,19 @@ func virtualClusterDataSource(ctx context.Context) (datasource.DataSource, error
 	opts = opts.WithCloudFormationTypeName("AWS::EMRContainers::VirtualCluster").WithTerraformTypeName("awscc_emrcontainers_virtual_cluster")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                "Arn",
-		"container_provider": "ContainerProvider",
-		"eks_info":           "EksInfo",
-		"id":                 "Id",
-		"info":               "Info",
-		"key":                "Key",
-		"name":               "Name",
-		"namespace":          "Namespace",
-		"tags":               "Tags",
-		"type":               "Type",
-		"value":              "Value",
-		"virtual_cluster_id": "Id",
+		"arn":                       "Arn",
+		"container_provider":        "ContainerProvider",
+		"eks_info":                  "EksInfo",
+		"id":                        "Id",
+		"info":                      "Info",
+		"key":                       "Key",
+		"name":                      "Name",
+		"namespace":                 "Namespace",
+		"security_configuration_id": "SecurityConfigurationId",
+		"tags":                      "Tags",
+		"type":                      "Type",
+		"value":                     "Value",
+		"virtual_cluster_id":        "Id",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

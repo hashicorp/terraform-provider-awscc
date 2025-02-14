@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1129 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1133 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -1016,6 +1016,11 @@ resource_schema "aws_cognito_user_pool_client" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_cognito_user_pool_domain" {
+  cloudformation_type_name               = "AWS::Cognito::UserPoolDomain"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_cognito_user_pool_group" {
   cloudformation_type_name               = "AWS::Cognito::UserPoolGroup"
   suppress_plural_data_source_generation = true
@@ -1100,6 +1105,11 @@ resource_schema "aws_connect_contact_flow" {
 
 resource_schema "aws_connect_contact_flow_module" {
   cloudformation_type_name               = "AWS::Connect::ContactFlowModule"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_connect_contact_flow_version" {
+  cloudformation_type_name               = "AWS::Connect::ContactFlowVersion"
   suppress_plural_data_source_generation = true
 }
 
@@ -4898,6 +4908,10 @@ resource_schema "aws_transfer_user" {
   # Ref: https://github.com/hashicorp/terraform-provider-awscc/issues/2095
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+}
+
+resource_schema "aws_transfer_web_app" {
+  cloudformation_type_name = "AWS::Transfer::WebApp"
 }
 
 resource_schema "aws_transfer_workflow" {

@@ -71,6 +71,22 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END PLAN MODIFIERS*/
 			// AllowMajorVersionUpgrade is a write-only property.
 		}, /*END ATTRIBUTE*/
+		// Property: ApplyImmediately
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "boolean"
+		//	}
+		"apply_immediately": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// ApplyImmediately is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: AssociatedRoles
 		// CloudFormation resource type schema:
 		//
@@ -1621,6 +1637,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		"address":                                  "Address",
 		"allocated_storage":                        "AllocatedStorage",
 		"allow_major_version_upgrade":              "AllowMajorVersionUpgrade",
+		"apply_immediately":                        "ApplyImmediately",
 		"associated_roles":                         "AssociatedRoles",
 		"auto_minor_version_upgrade":               "AutoMinorVersionUpgrade",
 		"automatic_backup_replication_kms_key_id":  "AutomaticBackupReplicationKmsKeyId",
@@ -1727,6 +1744,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/TdeCredentialPassword",
 		"/properties/UseDefaultProcessorFeatures",
 		"/properties/UseLatestRestorableTime",
+		"/properties/ApplyImmediately",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(2160).WithDeleteTimeoutInMinutes(2160)
 

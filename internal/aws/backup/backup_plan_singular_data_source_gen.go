@@ -97,6 +97,25 @@ func backupPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "EnableContinuousBackup": {
 		//	            "type": "boolean"
 		//	          },
+		//	          "IndexActions": {
+		//	            "insertionOrder": true,
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "ResourceTypes": {
+		//	                  "insertionOrder": true,
+		//	                  "items": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array",
+		//	                  "uniqueItems": true
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": false
+		//	          },
 		//	          "Lifecycle": {
 		//	            "additionalProperties": false,
 		//	            "properties": {
@@ -216,6 +235,19 @@ func backupPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: EnableContinuousBackup
 							"enable_continuous_backup": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: IndexActions
+							"index_actions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ResourceTypes
+										"resource_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
 								Computed: true,
 							}, /*END ATTRIBUTE*/
 							// Property: Lifecycle
@@ -343,11 +375,13 @@ func backupPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"delete_after_days":                         "DeleteAfterDays",
 		"destination_backup_vault_arn":              "DestinationBackupVaultArn",
 		"enable_continuous_backup":                  "EnableContinuousBackup",
+		"index_actions":                             "IndexActions",
 		"lifecycle":                                 "Lifecycle",
 		"move_to_cold_storage_after_days":           "MoveToColdStorageAfterDays",
 		"opt_in_to_archive_for_supported_resources": "OptInToArchiveForSupportedResources",
 		"recovery_point_tags":                       "RecoveryPointTags",
 		"resource_type":                             "ResourceType",
+		"resource_types":                            "ResourceTypes",
 		"rule_name":                                 "RuleName",
 		"schedule_expression":                       "ScheduleExpression",
 		"schedule_expression_timezone":              "ScheduleExpressionTimezone",
