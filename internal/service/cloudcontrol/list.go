@@ -27,23 +27,14 @@ func ListResourcesByTypeName(ctx context.Context, conn *cloudcontrol.Client, rol
 		input.RoleArn = aws.String(roleARN)
 	}
 
-	for {
-		output, err := conn.ListResources(ctx, input)
+	paginator := cloudcontrol.NewListResourcesPaginator(conn, input)
+	for paginator.HasMorePages() {
+		page, err := paginator.NextPage(ctx)
 		if err != nil {
 			return nil, err
 		}
 
-		if output == nil {
-			break
-		}
-
-		resourceDescriptions = append(resourceDescriptions, output.ResourceDescriptions...)
-
-		if output.NextToken == nil {
-			break
-		}
-
-		input.NextToken = output.NextToken
+		resourceDescriptions = append(resourceDescriptions, page.ResourceDescriptions...)
 	}
 
 	if len(resourceDescriptions) == 0 {
