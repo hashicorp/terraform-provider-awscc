@@ -18,6 +18,7 @@ func ListResourcesByTypeName(ctx context.Context, conn *cloudcontrol.Client, rol
 		"cfTypeName": typeName,
 	})
 
+	var resourceDescriptions []types.ResourceDescription
 	input := &cloudcontrol.ListResourcesInput{
 		TypeName: aws.String(typeName),
 	}
@@ -26,15 +27,19 @@ func ListResourcesByTypeName(ctx context.Context, conn *cloudcontrol.Client, rol
 		input.RoleArn = aws.String(roleARN)
 	}
 
-	output, err := conn.ListResources(ctx, input)
+	paginator := cloudcontrol.NewListResourcesPaginator(conn, input)
+	for paginator.HasMorePages() {
+		page, err := paginator.NextPage(ctx)
+		if err != nil {
+			return nil, err
+		}
 
-	if err != nil {
-		return nil, err
+		resourceDescriptions = append(resourceDescriptions, page.ResourceDescriptions...)
 	}
 
-	if output == nil {
+	if len(resourceDescriptions) == 0 {
 		return nil, &tfresource.NotFoundError{Message: "Empty result"}
 	}
 
-	return output.ResourceDescriptions, nil
+	return resourceDescriptions, nil
 }
