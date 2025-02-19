@@ -1,4 +1,9 @@
 ## 1.30.0 (Unreleased)
+
+FEATURES:
+
+* provider: Updated resource schemas
+
 ## 1.29.0 (February 14, 2025)
 
 * **New Data Source:** `awscc_cognito_user_pool_domain`
