@@ -215,7 +215,7 @@ func experimentTemplateDataSource(ctx context.Context) (datasource.DataSource, e
 		//	              "type": "string"
 		//	            },
 		//	            "Prefix": {
-		//	              "maxLength": 1024,
+		//	              "maxLength": 256,
 		//	              "minLength": 1,
 		//	              "type": "string"
 		//	            }
@@ -336,7 +336,7 @@ func experimentTemplateDataSource(ctx context.Context) (datasource.DataSource, e
 		//	          "type": "string"
 		//	        },
 		//	        "Prefix": {
-		//	          "maxLength": 1024,
+		//	          "maxLength": 700,
 		//	          "minLength": 1,
 		//	          "type": "string"
 		//	        }

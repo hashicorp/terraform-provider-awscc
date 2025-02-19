@@ -354,6 +354,105 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Arn representation of the Agent.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: AgentCollaboration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Agent collaboration state",
+		//	  "enum": [
+		//	    "DISABLED",
+		//	    "SUPERVISOR",
+		//	    "SUPERVISOR_ROUTER"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"agent_collaboration": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Agent collaboration state",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: AgentCollaborators
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "List of Agent Collaborators",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Agent Collaborator",
+		//	    "properties": {
+		//	      "AgentDescriptor": {
+		//	        "additionalProperties": false,
+		//	        "description": "Agent descriptor for agent collaborator",
+		//	        "properties": {
+		//	          "AliasArn": {
+		//	            "description": "Alias ARN for agent descriptor",
+		//	            "pattern": "^arn:aws(|-cn|-us-gov):bedrock:[a-z0-9-]{1,20}:[0-9]{12}:agent-alias/[0-9a-zA-Z]{10}/[0-9a-zA-Z]{10}$",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "CollaborationInstruction": {
+		//	        "description": "Agent collaborator instruction",
+		//	        "type": "string"
+		//	      },
+		//	      "CollaboratorName": {
+		//	        "description": "Agent collaborator name",
+		//	        "type": "string"
+		//	      },
+		//	      "RelayConversationHistory": {
+		//	        "description": "Relay conversation history state",
+		//	        "enum": [
+		//	          "TO_COLLABORATOR",
+		//	          "DISABLED"
+		//	        ],
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "AgentDescriptor",
+		//	      "CollaborationInstruction",
+		//	      "CollaboratorName"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"agent_collaborators": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AgentDescriptor
+					"agent_descriptor": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AliasArn
+							"alias_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Alias ARN for agent descriptor",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Agent descriptor for agent collaborator",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: CollaborationInstruction
+					"collaboration_instruction": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Agent collaborator instruction",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: CollaboratorName
+					"collaborator_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Agent collaborator name",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: RelayConversationHistory
+					"relay_conversation_history": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Relay conversation history state",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of Agent Collaborators",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AgentId
 		// CloudFormation resource type schema:
 		//
@@ -448,6 +547,50 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
 			CustomType:  timetypes.RFC3339Type{},
 			Description: "Time Stamp.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: CustomOrchestration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Structure for custom orchestration",
+		//	  "properties": {
+		//	    "Executor": {
+		//	      "additionalProperties": false,
+		//	      "description": "Types of executors for custom orchestration strategy",
+		//	      "properties": {
+		//	        "Lambda": {
+		//	          "description": "ARN of a Lambda.",
+		//	          "maxLength": 2048,
+		//	          "pattern": "^arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_\\.]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Lambda"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"custom_orchestration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Executor
+				"executor": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Lambda
+						"lambda": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "ARN of a Lambda.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Types of executors for custom orchestration strategy",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Structure for custom orchestration",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CustomerEncryptionKeyArn
@@ -633,6 +776,87 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "List of Agent Knowledge Bases",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: MemoryConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Configuration for memory storage",
+		//	  "properties": {
+		//	    "EnabledMemoryTypes": {
+		//	      "description": "Types of session storage persisted in memory",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "description": "Memory type",
+		//	        "enum": [
+		//	          "SESSION_SUMMARY"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array"
+		//	    },
+		//	    "SessionSummaryConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Configuration for Session Summarization",
+		//	      "properties": {
+		//	        "MaxRecentSessions": {
+		//	          "description": "Maximum number of Sessions to Summarize",
+		//	          "type": "number"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "StorageDays": {
+		//	      "description": "Maximum number of days to store session details",
+		//	      "type": "number"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"memory_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EnabledMemoryTypes
+				"enabled_memory_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Types of session storage persisted in memory",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SessionSummaryConfiguration
+				"session_summary_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: MaxRecentSessions
+						"max_recent_sessions": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "Maximum number of Sessions to Summarize",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration for Session Summarization",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: StorageDays
+				"storage_days": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "Maximum number of days to store session details",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration for memory storage",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: OrchestrationType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Types of orchestration strategy for agents",
+		//	  "enum": [
+		//	    "DEFAULT",
+		//	    "CUSTOM_ORCHESTRATION"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"orchestration_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Types of orchestration strategy for agents",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PreparedAt
 		// CloudFormation resource type schema:
 		//
@@ -670,6 +894,13 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "description": "Base Prompt Template.",
 		//	            "maxLength": 100000,
 		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "FoundationModel": {
+		//	            "description": "ARN or name of a Bedrock model.",
+		//	            "maxLength": 2048,
+		//	            "minLength": 1,
+		//	            "pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}(([:][a-z0-9-]{1,63}){0,2})?/[a-z0-9]{12})|(:foundation-model/([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2}))|([0-9]{12}:(inference-profile|application-inference-profile)/[a-zA-Z0-9-:.]+))|(([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2}))|(([0-9a-zA-Z][_-]?)+)$",
 		//	            "type": "string"
 		//	          },
 		//	          "InferenceConfiguration": {
@@ -743,6 +974,8 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "PRE_PROCESSING",
 		//	              "ORCHESTRATION",
 		//	              "POST_PROCESSING",
+		//	              "ROUTING_CLASSIFIER",
+		//	              "MEMORY_SUMMARIZATION",
 		//	              "KNOWLEDGE_BASE_RESPONSE_GENERATION"
 		//	            ],
 		//	            "type": "string"
@@ -773,6 +1006,11 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 							// Property: BasePromptTemplate
 							"base_prompt_template": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Base Prompt Template.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: FoundationModel
+							"foundation_model": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "ARN or name of a Bedrock model.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: InferenceConfiguration
@@ -949,18 +1187,27 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"action_group_state":                   "ActionGroupState",
 		"action_groups":                        "ActionGroups",
 		"agent_arn":                            "AgentArn",
+		"agent_collaboration":                  "AgentCollaboration",
+		"agent_collaborators":                  "AgentCollaborators",
+		"agent_descriptor":                     "AgentDescriptor",
 		"agent_id":                             "AgentId",
 		"agent_name":                           "AgentName",
 		"agent_resource_role_arn":              "AgentResourceRoleArn",
 		"agent_status":                         "AgentStatus",
 		"agent_version":                        "AgentVersion",
+		"alias_arn":                            "AliasArn",
 		"api_schema":                           "ApiSchema",
 		"auto_prepare":                         "AutoPrepare",
 		"base_prompt_template":                 "BasePromptTemplate",
+		"collaboration_instruction":            "CollaborationInstruction",
+		"collaborator_name":                    "CollaboratorName",
 		"created_at":                           "CreatedAt",
 		"custom_control":                       "CustomControl",
+		"custom_orchestration":                 "CustomOrchestration",
 		"customer_encryption_key_arn":          "CustomerEncryptionKeyArn",
 		"description":                          "Description",
+		"enabled_memory_types":                 "EnabledMemoryTypes",
+		"executor":                             "Executor",
 		"failure_reasons":                      "FailureReasons",
 		"foundation_model":                     "FoundationModel",
 		"function_schema":                      "FunctionSchema",
@@ -975,8 +1222,11 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"knowledge_base_state":                 "KnowledgeBaseState",
 		"knowledge_bases":                      "KnowledgeBases",
 		"lambda":                               "Lambda",
+		"max_recent_sessions":                  "MaxRecentSessions",
 		"maximum_length":                       "MaximumLength",
+		"memory_configuration":                 "MemoryConfiguration",
 		"name":                                 "Name",
+		"orchestration_type":                   "OrchestrationType",
 		"override_lambda":                      "OverrideLambda",
 		"parameters":                           "Parameters",
 		"parent_action_group_signature":        "ParentActionGroupSignature",
@@ -989,13 +1239,16 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"prompt_state":                         "PromptState",
 		"prompt_type":                          "PromptType",
 		"recommended_actions":                  "RecommendedActions",
+		"relay_conversation_history":           "RelayConversationHistory",
 		"require_confirmation":                 "RequireConfirmation",
 		"required":                             "Required",
 		"s3":                                   "S3",
 		"s3_bucket_name":                       "S3BucketName",
 		"s3_object_key":                        "S3ObjectKey",
+		"session_summary_configuration":        "SessionSummaryConfiguration",
 		"skip_resource_in_use_check_on_delete": "SkipResourceInUseCheckOnDelete",
 		"stop_sequences":                       "StopSequences",
+		"storage_days":                         "StorageDays",
 		"tags":                                 "Tags",
 		"temperature":                          "Temperature",
 		"test_alias_tags":                      "TestAliasTags",
