@@ -3590,20 +3590,36 @@ resource_schema "aws_networkmanager_vpc_attachment" {
 resource_schema "aws_nimblestudio_launch_profile" {
   cloudformation_type_name               = "AWS::NimbleStudio::LaunchProfile"
   suppress_plural_data_source_generation = true
+
+  # Latest schema updates are suppressed.
+  # git checkout internal/service/cloudformation/schemas/AWS_NimbleStudio_LaunchProfile.json
+  # TypeNotFoundException during schema refresh
 }
 
 resource_schema "aws_nimblestudio_streaming_image" {
   cloudformation_type_name               = "AWS::NimbleStudio::StreamingImage"
   suppress_plural_data_source_generation = true
+
+  # Latest schema updates are suppressed.
+  # git checkout internal/service/cloudformation/schemas/AWS_NimbleStudio_StreamingImage.json
+  # TypeNotFoundException during schema refresh
 }
 
 resource_schema "aws_nimblestudio_studio" {
   cloudformation_type_name = "AWS::NimbleStudio::Studio"
+
+  # Latest schema updates are suppressed.
+  # git checkout internal/service/cloudformation/schemas/AWS_NimbleStudio_Studio.json
+  # TypeNotFoundException during schema refresh
 }
 
 resource_schema "aws_nimblestudio_studio_component" {
   cloudformation_type_name               = "AWS::NimbleStudio::StudioComponent"
   suppress_plural_data_source_generation = true
+
+  # Latest schema updates are suppressed.
+  # git checkout internal/service/cloudformation/schemas/AWS_NimbleStudio_StudioComponent.json
+  # TypeNotFoundException during schema refresh
 }
 
 resource_schema "aws_notifications_channel_association" {

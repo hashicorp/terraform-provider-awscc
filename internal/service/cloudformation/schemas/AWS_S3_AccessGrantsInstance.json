@@ -64,9 +64,6 @@
   "createOnlyProperties": [
     "/properties/Tags"
   ],
-  "writeOnlyProperties": [
-    "/properties/Tags"
-  ],
   "primaryIdentifier": [
     "/properties/AccessGrantsInstanceArn"
   ],
