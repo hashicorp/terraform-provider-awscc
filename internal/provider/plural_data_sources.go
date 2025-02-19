@@ -587,6 +587,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_networkmanager_transit_gateway_peerings -cftype AWS::NetworkManager::TransitGatewayPeering -package networkmanager ../aws/networkmanager/transit_gateway_peering_plural_data_source_gen.go ../aws/networkmanager/transit_gateway_peering_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_networkmanager_transit_gateway_route_table_attachments -cftype AWS::NetworkManager::TransitGatewayRouteTableAttachment -package networkmanager ../aws/networkmanager/transit_gateway_route_table_attachment_plural_data_source_gen.go ../aws/networkmanager/transit_gateway_route_table_attachment_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_networkmanager_vpc_attachments -cftype AWS::NetworkManager::VpcAttachment -package networkmanager ../aws/networkmanager/vpc_attachment_plural_data_source_gen.go ../aws/networkmanager/vpc_attachment_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_nimblestudio_studios -cftype AWS::NimbleStudio::Studio -package nimblestudio ../aws/nimblestudio/studio_plural_data_source_gen.go ../aws/nimblestudio/studio_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_notifications_managed_notification_account_contact_associations -cftype AWS::Notifications::ManagedNotificationAccountContactAssociation -package notifications ../aws/notifications/managed_notification_account_contact_association_plural_data_source_gen.go ../aws/notifications/managed_notification_account_contact_association_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_notifications_notification_configurations -cftype AWS::Notifications::NotificationConfiguration -package notifications ../aws/notifications/notification_configuration_plural_data_source_gen.go ../aws/notifications/notification_configuration_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_notifications_notification_hubs -cftype AWS::Notifications::NotificationHub -package notifications ../aws/notifications/notification_hub_plural_data_source_gen.go ../aws/notifications/notification_hub_plural_data_source_gen_test.go
@@ -992,6 +993,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/neptunegraph"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/networkfirewall"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/networkmanager"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/nimblestudio"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/notifications"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/notificationscontacts"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/oam"
