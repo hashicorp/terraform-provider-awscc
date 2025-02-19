@@ -86,8 +86,11 @@ variable "lambda_arn" {
 ### Optional
 
 - `action_groups` (Attributes List) List of ActionGroups (see [below for nested schema](#nestedatt--action_groups))
+- `agent_collaboration` (String) Agent collaboration state
+- `agent_collaborators` (Attributes List) List of Agent Collaborators (see [below for nested schema](#nestedatt--agent_collaborators))
 - `agent_resource_role_arn` (String) ARN of a IAM role.
 - `auto_prepare` (Boolean) Specifies whether to automatically prepare after creating or updating the agent.
+- `custom_orchestration` (Attributes) Structure for custom orchestration (see [below for nested schema](#nestedatt--custom_orchestration))
 - `customer_encryption_key_arn` (String) A KMS key ARN
 - `description` (String) Description of the Resource.
 - `foundation_model` (String) ARN or name of a Bedrock model.
@@ -95,6 +98,8 @@ variable "lambda_arn" {
 - `idle_session_ttl_in_seconds` (Number) Max Session Time.
 - `instruction` (String) Instruction for the agent.
 - `knowledge_bases` (Attributes List) List of Agent Knowledge Bases (see [below for nested schema](#nestedatt--knowledge_bases))
+- `memory_configuration` (Attributes) Configuration for memory storage (see [below for nested schema](#nestedatt--memory_configuration))
+- `orchestration_type` (String) Types of orchestration strategy for agents
 - `prompt_override_configuration` (Attributes) Configuration for prompt override. (see [below for nested schema](#nestedatt--prompt_override_configuration))
 - `skip_resource_in_use_check_on_delete` (Boolean) Specifies whether to allow deleting agent while it is in use.
 - `tags` (Map of String) A map of tag keys and values
@@ -184,6 +189,41 @@ Optional:
 
 
 
+<a id="nestedatt--agent_collaborators"></a>
+### Nested Schema for `agent_collaborators`
+
+Optional:
+
+- `agent_descriptor` (Attributes) Agent descriptor for agent collaborator (see [below for nested schema](#nestedatt--agent_collaborators--agent_descriptor))
+- `collaboration_instruction` (String) Agent collaborator instruction
+- `collaborator_name` (String) Agent collaborator name
+- `relay_conversation_history` (String) Relay conversation history state
+
+<a id="nestedatt--agent_collaborators--agent_descriptor"></a>
+### Nested Schema for `agent_collaborators.agent_descriptor`
+
+Optional:
+
+- `alias_arn` (String) Alias ARN for agent descriptor
+
+
+
+<a id="nestedatt--custom_orchestration"></a>
+### Nested Schema for `custom_orchestration`
+
+Optional:
+
+- `executor` (Attributes) Types of executors for custom orchestration strategy (see [below for nested schema](#nestedatt--custom_orchestration--executor))
+
+<a id="nestedatt--custom_orchestration--executor"></a>
+### Nested Schema for `custom_orchestration.executor`
+
+Optional:
+
+- `lambda` (String) ARN of a Lambda.
+
+
+
 <a id="nestedatt--guardrail_configuration"></a>
 ### Nested Schema for `guardrail_configuration`
 
@@ -203,6 +243,24 @@ Optional:
 - `knowledge_base_state` (String) State of the knowledge base; whether it is enabled or disabled
 
 
+<a id="nestedatt--memory_configuration"></a>
+### Nested Schema for `memory_configuration`
+
+Optional:
+
+- `enabled_memory_types` (List of String) Types of session storage persisted in memory
+- `session_summary_configuration` (Attributes) Configuration for Session Summarization (see [below for nested schema](#nestedatt--memory_configuration--session_summary_configuration))
+- `storage_days` (Number) Maximum number of days to store session details
+
+<a id="nestedatt--memory_configuration--session_summary_configuration"></a>
+### Nested Schema for `memory_configuration.session_summary_configuration`
+
+Optional:
+
+- `max_recent_sessions` (Number) Maximum number of Sessions to Summarize
+
+
+
 <a id="nestedatt--prompt_override_configuration"></a>
 ### Nested Schema for `prompt_override_configuration`
 
@@ -217,6 +275,7 @@ Optional:
 Optional:
 
 - `base_prompt_template` (String) Base Prompt Template.
+- `foundation_model` (String) ARN or name of a Bedrock model.
 - `inference_configuration` (Attributes) Configuration for inference in prompt configuration (see [below for nested schema](#nestedatt--prompt_override_configuration--prompt_configurations--inference_configuration))
 - `parser_mode` (String) Creation Mode for Prompt Configuration.
 - `prompt_creation_mode` (String) Creation Mode for Prompt Configuration.
