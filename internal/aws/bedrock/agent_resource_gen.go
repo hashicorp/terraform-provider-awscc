@@ -530,6 +530,159 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: AgentCollaboration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Agent collaboration state",
+		//	  "enum": [
+		//	    "DISABLED",
+		//	    "SUPERVISOR",
+		//	    "SUPERVISOR_ROUTER"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"agent_collaboration": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Agent collaboration state",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"DISABLED",
+					"SUPERVISOR",
+					"SUPERVISOR_ROUTER",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AgentCollaborators
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "List of Agent Collaborators",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Agent Collaborator",
+		//	    "properties": {
+		//	      "AgentDescriptor": {
+		//	        "additionalProperties": false,
+		//	        "description": "Agent descriptor for agent collaborator",
+		//	        "properties": {
+		//	          "AliasArn": {
+		//	            "description": "Alias ARN for agent descriptor",
+		//	            "pattern": "^arn:aws(|-cn|-us-gov):bedrock:[a-z0-9-]{1,20}:[0-9]{12}:agent-alias/[0-9a-zA-Z]{10}/[0-9a-zA-Z]{10}$",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "CollaborationInstruction": {
+		//	        "description": "Agent collaborator instruction",
+		//	        "type": "string"
+		//	      },
+		//	      "CollaboratorName": {
+		//	        "description": "Agent collaborator name",
+		//	        "type": "string"
+		//	      },
+		//	      "RelayConversationHistory": {
+		//	        "description": "Relay conversation history state",
+		//	        "enum": [
+		//	          "TO_COLLABORATOR",
+		//	          "DISABLED"
+		//	        ],
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "AgentDescriptor",
+		//	      "CollaborationInstruction",
+		//	      "CollaboratorName"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"agent_collaborators": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AgentDescriptor
+					"agent_descriptor": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AliasArn
+							"alias_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Alias ARN for agent descriptor",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(|-cn|-us-gov):bedrock:[a-z0-9-]{1,20}:[0-9]{12}:agent-alias/[0-9a-zA-Z]{10}/[0-9a-zA-Z]{10}$"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Agent descriptor for agent collaborator",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.Object{ /*START VALIDATORS*/
+							fwvalidators.NotNullObject(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: CollaborationInstruction
+					"collaboration_instruction": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Agent collaborator instruction",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: CollaboratorName
+					"collaborator_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Agent collaborator name",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: RelayConversationHistory
+					"relay_conversation_history": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Relay conversation history state",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"TO_COLLABORATOR",
+								"DISABLED",
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of Agent Collaborators",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AgentId
 		// CloudFormation resource type schema:
 		//
@@ -652,6 +805,67 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: CustomOrchestration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Structure for custom orchestration",
+		//	  "properties": {
+		//	    "Executor": {
+		//	      "additionalProperties": false,
+		//	      "description": "Types of executors for custom orchestration strategy",
+		//	      "properties": {
+		//	        "Lambda": {
+		//	          "description": "ARN of a Lambda.",
+		//	          "maxLength": 2048,
+		//	          "pattern": "^arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_\\.]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Lambda"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"custom_orchestration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Executor
+				"executor": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Lambda
+						"lambda": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "ARN of a Lambda.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthAtMost(2048),
+								stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_\\.]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?$"), ""),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Types of executors for custom orchestration strategy",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Structure for custom orchestration",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: CustomerEncryptionKeyArn
@@ -928,6 +1142,125 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: MemoryConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Configuration for memory storage",
+		//	  "properties": {
+		//	    "EnabledMemoryTypes": {
+		//	      "description": "Types of session storage persisted in memory",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "description": "Memory type",
+		//	        "enum": [
+		//	          "SESSION_SUMMARY"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array"
+		//	    },
+		//	    "SessionSummaryConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Configuration for Session Summarization",
+		//	      "properties": {
+		//	        "MaxRecentSessions": {
+		//	          "description": "Maximum number of Sessions to Summarize",
+		//	          "type": "number"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "StorageDays": {
+		//	      "description": "Maximum number of days to store session details",
+		//	      "type": "number"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"memory_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EnabledMemoryTypes
+				"enabled_memory_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Types of session storage persisted in memory",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.ValueStringsAre(
+							stringvalidator.OneOf(
+								"SESSION_SUMMARY",
+							),
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SessionSummaryConfiguration
+				"session_summary_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: MaxRecentSessions
+						"max_recent_sessions": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "Maximum number of Sessions to Summarize",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+								float64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration for Session Summarization",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: StorageDays
+				"storage_days": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "Maximum number of days to store session details",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+						float64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration for memory storage",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: OrchestrationType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Types of orchestration strategy for agents",
+		//	  "enum": [
+		//	    "DEFAULT",
+		//	    "CUSTOM_ORCHESTRATION"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"orchestration_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Types of orchestration strategy for agents",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"DEFAULT",
+					"CUSTOM_ORCHESTRATION",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PreparedAt
 		// CloudFormation resource type schema:
 		//
@@ -968,6 +1301,13 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 		//	            "description": "Base Prompt Template.",
 		//	            "maxLength": 100000,
 		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "FoundationModel": {
+		//	            "description": "ARN or name of a Bedrock model.",
+		//	            "maxLength": 2048,
+		//	            "minLength": 1,
+		//	            "pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}(([:][a-z0-9-]{1,63}){0,2})?/[a-z0-9]{12})|(:foundation-model/([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2}))|([0-9]{12}:(inference-profile|application-inference-profile)/[a-zA-Z0-9-:.]+))|(([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2}))|(([0-9a-zA-Z][_-]?)+)$",
 		//	            "type": "string"
 		//	          },
 		//	          "InferenceConfiguration": {
@@ -1041,6 +1381,8 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 		//	              "PRE_PROCESSING",
 		//	              "ORCHESTRATION",
 		//	              "POST_PROCESSING",
+		//	              "ROUTING_CLASSIFIER",
+		//	              "MEMORY_SUMMARIZATION",
 		//	              "KNOWLEDGE_BASE_RESPONSE_GENERATION"
 		//	            ],
 		//	            "type": "string"
@@ -1083,6 +1425,19 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthBetween(1, 100000),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: FoundationModel
+							"foundation_model": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "ARN or name of a Bedrock model.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 2048),
+									stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}(([:][a-z0-9-]{1,63}){0,2})?/[a-z0-9]{12})|(:foundation-model/([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2}))|([0-9]{12}:(inference-profile|application-inference-profile)/[a-zA-Z0-9-:.]+))|(([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2}))|(([0-9a-zA-Z][_-]?)+)$"), ""),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -1216,6 +1571,8 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 										"PRE_PROCESSING",
 										"ORCHESTRATION",
 										"POST_PROCESSING",
+										"ROUTING_CLASSIFIER",
+										"MEMORY_SUMMARIZATION",
 										"KNOWLEDGE_BASE_RESPONSE_GENERATION",
 									),
 								}, /*END VALIDATORS*/
@@ -1383,18 +1740,27 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 		"action_group_state":                   "ActionGroupState",
 		"action_groups":                        "ActionGroups",
 		"agent_arn":                            "AgentArn",
+		"agent_collaboration":                  "AgentCollaboration",
+		"agent_collaborators":                  "AgentCollaborators",
+		"agent_descriptor":                     "AgentDescriptor",
 		"agent_id":                             "AgentId",
 		"agent_name":                           "AgentName",
 		"agent_resource_role_arn":              "AgentResourceRoleArn",
 		"agent_status":                         "AgentStatus",
 		"agent_version":                        "AgentVersion",
+		"alias_arn":                            "AliasArn",
 		"api_schema":                           "ApiSchema",
 		"auto_prepare":                         "AutoPrepare",
 		"base_prompt_template":                 "BasePromptTemplate",
+		"collaboration_instruction":            "CollaborationInstruction",
+		"collaborator_name":                    "CollaboratorName",
 		"created_at":                           "CreatedAt",
 		"custom_control":                       "CustomControl",
+		"custom_orchestration":                 "CustomOrchestration",
 		"customer_encryption_key_arn":          "CustomerEncryptionKeyArn",
 		"description":                          "Description",
+		"enabled_memory_types":                 "EnabledMemoryTypes",
+		"executor":                             "Executor",
 		"failure_reasons":                      "FailureReasons",
 		"foundation_model":                     "FoundationModel",
 		"function_schema":                      "FunctionSchema",
@@ -1409,8 +1775,11 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 		"knowledge_base_state":                 "KnowledgeBaseState",
 		"knowledge_bases":                      "KnowledgeBases",
 		"lambda":                               "Lambda",
+		"max_recent_sessions":                  "MaxRecentSessions",
 		"maximum_length":                       "MaximumLength",
+		"memory_configuration":                 "MemoryConfiguration",
 		"name":                                 "Name",
+		"orchestration_type":                   "OrchestrationType",
 		"override_lambda":                      "OverrideLambda",
 		"parameters":                           "Parameters",
 		"parent_action_group_signature":        "ParentActionGroupSignature",
@@ -1423,13 +1792,16 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 		"prompt_state":                         "PromptState",
 		"prompt_type":                          "PromptType",
 		"recommended_actions":                  "RecommendedActions",
+		"relay_conversation_history":           "RelayConversationHistory",
 		"require_confirmation":                 "RequireConfirmation",
 		"required":                             "Required",
 		"s3":                                   "S3",
 		"s3_bucket_name":                       "S3BucketName",
 		"s3_object_key":                        "S3ObjectKey",
+		"session_summary_configuration":        "SessionSummaryConfiguration",
 		"skip_resource_in_use_check_on_delete": "SkipResourceInUseCheckOnDelete",
 		"stop_sequences":                       "StopSequences",
+		"storage_days":                         "StorageDays",
 		"tags":                                 "Tags",
 		"temperature":                          "Temperature",
 		"test_alias_tags":                      "TestAliasTags",

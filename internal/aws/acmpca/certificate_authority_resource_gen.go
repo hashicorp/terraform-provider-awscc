@@ -1359,7 +1359,6 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Subject",
-		"/properties/Subject",
 		"/properties/CsrExtensions",
 		"/properties/RevocationConfiguration",
 		"/properties/KeyStorageSecurityStandard",

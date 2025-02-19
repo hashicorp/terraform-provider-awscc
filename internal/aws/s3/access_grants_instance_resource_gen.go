@@ -127,7 +127,6 @@ func accessGrantsInstanceResource(ctx context.Context) (resource.Resource, error
 				setplanmodifier.UseStateForUnknown(),
 				setplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
-			// Tags is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -159,9 +158,6 @@ func accessGrantsInstanceResource(ctx context.Context) (resource.Resource, error
 		"value":                      "Value",
 	})
 
-	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/Tags",
-	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
