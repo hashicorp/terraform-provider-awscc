@@ -138,6 +138,31 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "<p>The list of ingest endpoints.</p>",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: InputSwitchConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "\u003cp\u003eThe configuration for input switching based on the media quality confidence score (MQCS) as provided from AWS Elemental MediaLive.\u003c/p\u003e",
+		//	  "properties": {
+		//	    "MQCSInputSwitching": {
+		//	      "description": "\u003cp\u003eWhen true, AWS Elemental MediaPackage performs input switching based on the MQCS. Default is true. This setting is valid only when \u003ccode\u003eInputType\u003c/code\u003e is \u003ccode\u003eCMAF\u003c/code\u003e.\u003c/p\u003e",
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"input_switch_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MQCSInputSwitching
+				"mqcs_input_switching": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "<p>When true, AWS Elemental MediaPackage performs input switching based on the MQCS. Default is true. This setting is valid only when <code>InputType</code> is <code>CMAF</code>.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "<p>The configuration for input switching based on the media quality confidence score (MQCS) as provided from AWS Elemental MediaLive.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InputType
 		// CloudFormation resource type schema:
 		//
@@ -162,6 +187,31 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"modified_at": schema.StringAttribute{ /*START ATTRIBUTE*/
 			CustomType:  timetypes.RFC3339Type{},
 			Description: "<p>The date and time the channel was modified.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: OutputHeaderConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "\u003cp\u003eThe settings for what common media server data (CMSD) headers AWS Elemental MediaPackage includes in responses to the CDN.\u003c/p\u003e",
+		//	  "properties": {
+		//	    "PublishMQCS": {
+		//	      "description": "\u003cp\u003eWhen true, AWS Elemental MediaPackage includes the MQCS in responses to the CDN. This setting is valid only when \u003ccode\u003eInputType\u003c/code\u003e is \u003ccode\u003eCMAF\u003c/code\u003e.\u003c/p\u003e",
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"output_header_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PublishMQCS
+				"publish_mqcs": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "<p>When true, AWS Elemental MediaPackage includes the MQCS in responses to the CDN. This setting is valid only when <code>InputType</code> is <code>CMAF</code>.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "<p>The settings for what common media server data (CMSD) headers AWS Elemental MediaPackage includes in responses to the CDN.</p>",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -215,20 +265,24 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::MediaPackageV2::Channel").WithTerraformTypeName("awscc_mediapackagev2_channel")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                  "Arn",
-		"channel_group_name":   "ChannelGroupName",
-		"channel_name":         "ChannelName",
-		"created_at":           "CreatedAt",
-		"description":          "Description",
-		"id":                   "Id",
-		"ingest_endpoint_urls": "IngestEndpointUrls",
-		"ingest_endpoints":     "IngestEndpoints",
-		"input_type":           "InputType",
-		"key":                  "Key",
-		"modified_at":          "ModifiedAt",
-		"tags":                 "Tags",
-		"url":                  "Url",
-		"value":                "Value",
+		"arn":                         "Arn",
+		"channel_group_name":          "ChannelGroupName",
+		"channel_name":                "ChannelName",
+		"created_at":                  "CreatedAt",
+		"description":                 "Description",
+		"id":                          "Id",
+		"ingest_endpoint_urls":        "IngestEndpointUrls",
+		"ingest_endpoints":            "IngestEndpoints",
+		"input_switch_configuration":  "InputSwitchConfiguration",
+		"input_type":                  "InputType",
+		"key":                         "Key",
+		"modified_at":                 "ModifiedAt",
+		"mqcs_input_switching":        "MQCSInputSwitching",
+		"output_header_configuration": "OutputHeaderConfiguration",
+		"publish_mqcs":                "PublishMQCS",
+		"tags":                        "Tags",
+		"url":                         "Url",
+		"value":                       "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

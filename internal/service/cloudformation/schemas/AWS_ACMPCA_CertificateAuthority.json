@@ -427,7 +427,6 @@
   ],
   "writeOnlyProperties": [
     "/properties/Subject",
-    "/properties/Subject",
     "/properties/CsrExtensions",
     "/properties/RevocationConfiguration",
     "/properties/KeyStorageSecurityStandard"
@@ -449,7 +448,8 @@
       "permissions": [
         "acm-pca:CreateCertificateAuthority",
         "acm-pca:DescribeCertificateAuthority",
-        "acm-pca:GetCertificateAuthorityCsr"
+        "acm-pca:GetCertificateAuthorityCsr",
+        "acm-pca:TagCertificateAuthority"
       ]
     },
     "read": {

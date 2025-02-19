@@ -289,7 +289,7 @@ func experimentTemplateResource(ctx context.Context) (resource.Resource, error) 
 		//	              "type": "string"
 		//	            },
 		//	            "Prefix": {
-		//	              "maxLength": 1024,
+		//	              "maxLength": 256,
 		//	              "minLength": 1,
 		//	              "type": "string"
 		//	            }
@@ -376,7 +376,7 @@ func experimentTemplateResource(ctx context.Context) (resource.Resource, error) 
 									Optional: true,
 									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 1024),
+										stringvalidator.LengthBetween(1, 256),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -470,7 +470,7 @@ func experimentTemplateResource(ctx context.Context) (resource.Resource, error) 
 		//	          "type": "string"
 		//	        },
 		//	        "Prefix": {
-		//	          "maxLength": 1024,
+		//	          "maxLength": 700,
 		//	          "minLength": 1,
 		//	          "type": "string"
 		//	        }
@@ -542,7 +542,7 @@ func experimentTemplateResource(ctx context.Context) (resource.Resource, error) 
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 1024),
+								stringvalidator.LengthBetween(1, 700),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
