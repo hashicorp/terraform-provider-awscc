@@ -1,4 +1,3 @@
-
 ---
 page_title: "awscc_databrew_project Resource - terraform-provider-awscc"
 subcategory: ""
