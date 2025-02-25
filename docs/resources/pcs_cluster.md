@@ -112,7 +112,7 @@ resource "awscc_pcs_cluster" "example" {
 
   scheduler = {
     type    = "SLURM"
-    version = "22.05.8"
+    version = "23.11"
   }
 
   size = "SMALL"
