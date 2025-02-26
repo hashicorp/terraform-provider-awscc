@@ -140,7 +140,7 @@ func flowVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        ],
 		//	        "type": "object"
 		//	      },
-		//	      "maxItems": 20,
+		//	      "maxItems": 100,
 		//	      "type": "array"
 		//	    },
 		//	    "Nodes": {
@@ -406,7 +406,7 @@ func flowVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                                      },
 		//	                                      "type": "object"
 		//	                                    },
-		//	                                    "maxItems": 5,
+		//	                                    "maxItems": 20,
 		//	                                    "minItems": 0,
 		//	                                    "type": "array"
 		//	                                  },
@@ -632,7 +632,7 @@ func flowVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        ],
 		//	        "type": "object"
 		//	      },
-		//	      "maxItems": 20,
+		//	      "maxItems": 40,
 		//	      "type": "array"
 		//	    }
 		//	  },

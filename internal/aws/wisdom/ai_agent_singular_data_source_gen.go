@@ -224,6 +224,10 @@ func aIAgentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$",
 		//	          "type": "string"
 		//	        },
+		//	        "Locale": {
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
 		//	        "QueryReformulationAIPromptId": {
 		//	          "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$",
 		//	          "type": "string"
@@ -382,6 +386,10 @@ func aIAgentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "type": "object"
 		//	          },
 		//	          "type": "array"
+		//	        },
+		//	        "Locale": {
+		//	          "minLength": 1,
+		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -675,6 +683,10 @@ func aIAgentDataSource(ctx context.Context) (datasource.DataSource, error) {
 						"intent_labeling_generation_ai_prompt_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
+						// Property: Locale
+						"locale": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
 						// Property: QueryReformulationAIPromptId
 						"query_reformulation_ai_prompt_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
@@ -801,6 +813,10 @@ func aIAgentDataSource(ctx context.Context) (datasource.DataSource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Locale
+						"locale": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -1038,21 +1054,22 @@ func aIAgentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"intent_labeling_generation_ai_prompt_id":      "IntentLabelingGenerationAIPromptId",
 		"key": "Key",
 		"knowledge_base_association_configuration_data": "KnowledgeBaseAssociationConfigurationData",
-		"manual_search_ai_agent_configuration":          "ManualSearchAIAgentConfiguration",
-		"max_results":                                   "MaxResults",
-		"modified_time_seconds":                         "ModifiedTimeSeconds",
-		"name":                                          "Name",
-		"or_conditions":                                 "OrConditions",
-		"override_knowledge_base_search_type":           "OverrideKnowledgeBaseSearchType",
-		"query_reformulation_ai_prompt_id":              "QueryReformulationAIPromptId",
-		"self_service_ai_agent_configuration":           "SelfServiceAIAgentConfiguration",
-		"self_service_ai_guardrail_id":                  "SelfServiceAIGuardrailId",
-		"self_service_answer_generation_ai_prompt_id":   "SelfServiceAnswerGenerationAIPromptId",
-		"self_service_pre_processing_ai_prompt_id":      "SelfServicePreProcessingAIPromptId",
-		"tag_condition":                                 "TagCondition",
-		"tags":                                          "Tags",
-		"type":                                          "Type",
-		"value":                                         "Value",
+		"locale":                                      "Locale",
+		"manual_search_ai_agent_configuration":        "ManualSearchAIAgentConfiguration",
+		"max_results":                                 "MaxResults",
+		"modified_time_seconds":                       "ModifiedTimeSeconds",
+		"name":                                        "Name",
+		"or_conditions":                               "OrConditions",
+		"override_knowledge_base_search_type":         "OverrideKnowledgeBaseSearchType",
+		"query_reformulation_ai_prompt_id":            "QueryReformulationAIPromptId",
+		"self_service_ai_agent_configuration":         "SelfServiceAIAgentConfiguration",
+		"self_service_ai_guardrail_id":                "SelfServiceAIGuardrailId",
+		"self_service_answer_generation_ai_prompt_id": "SelfServiceAnswerGenerationAIPromptId",
+		"self_service_pre_processing_ai_prompt_id":    "SelfServicePreProcessingAIPromptId",
+		"tag_condition":                               "TagCondition",
+		"tags":                                        "Tags",
+		"type":                                        "Type",
+		"value":                                       "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

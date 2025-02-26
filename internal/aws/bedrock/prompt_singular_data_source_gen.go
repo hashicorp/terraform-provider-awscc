@@ -228,6 +228,38 @@ func promptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        },
 		//	        "type": "object"
 		//	      },
+		//	      "Metadata": {
+		//	        "description": "List of metadata to associate with the prompt variant.",
+		//	        "insertionOrder": true,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "description": "Contains a key-value pair that defines a metadata tag and value to attach to a prompt variant.",
+		//	          "properties": {
+		//	            "Key": {
+		//	              "description": "The key of a metadata tag for a prompt variant.",
+		//	              "maxLength": 128,
+		//	              "minLength": 1,
+		//	              "pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$",
+		//	              "type": "string"
+		//	            },
+		//	            "Value": {
+		//	              "description": "The value of a metadata tag for a prompt variant.",
+		//	              "maxLength": 1024,
+		//	              "minLength": 1,
+		//	              "pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Key",
+		//	            "Value"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "maxItems": 50,
+		//	        "minItems": 0,
+		//	        "type": "array"
+		//	      },
 		//	      "ModelId": {
 		//	        "description": "ARN or Id of a Bedrock Foundational Model or Inference Profile, or the ARN of a imported model, or a provisioned throughput ARN for custom models.",
 		//	        "maxLength": 2048,
@@ -262,7 +294,7 @@ func promptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                  },
 		//	                  "type": "object"
 		//	                },
-		//	                "maxItems": 5,
+		//	                "maxItems": 20,
 		//	                "minItems": 0,
 		//	                "type": "array"
 		//	              },
@@ -504,7 +536,7 @@ func promptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                  },
 		//	                  "type": "object"
 		//	                },
-		//	                "maxItems": 5,
+		//	                "maxItems": 20,
 		//	                "minItems": 0,
 		//	                "type": "array"
 		//	              },
@@ -631,6 +663,25 @@ func promptDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "Model inference configuration",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Metadata
+					"metadata": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Key
+								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The key of a metadata tag for a prompt variant.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Value
+								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The value of a metadata tag for a prompt variant.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "List of metadata to associate with the prompt variant.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ModelId
@@ -947,6 +998,7 @@ func promptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"key":                             "Key",
 		"max_tokens":                      "MaxTokens",
 		"messages":                        "Messages",
+		"metadata":                        "Metadata",
 		"model_id":                        "ModelId",
 		"name":                            "Name",
 		"prompt_id":                       "Id",
@@ -967,6 +1019,7 @@ func promptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"top_p":                           "TopP",
 		"type":                            "Type",
 		"updated_at":                      "UpdatedAt",
+		"value":                           "Value",
 		"variants":                        "Variants",
 		"version":                         "Version",
 	})
