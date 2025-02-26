@@ -83,6 +83,7 @@ resource "awscc_workspacesweb_user_settings" "example" {
 - `disconnect_timeout_in_minutes` (Number)
 - `idle_disconnect_timeout_in_minutes` (Number)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `toolbar_configuration` (Attributes) (see [below for nested schema](#nestedatt--toolbar_configuration))
 
 ### Read-Only
 
@@ -126,6 +127,17 @@ Optional:
 
 - `key` (String)
 - `value` (String)
+
+
+<a id="nestedatt--toolbar_configuration"></a>
+### Nested Schema for `toolbar_configuration`
+
+Optional:
+
+- `hidden_toolbar_items` (List of String)
+- `max_display_resolution` (String)
+- `toolbar_type` (String)
+- `visual_mode` (String)
 
 ## Import
 

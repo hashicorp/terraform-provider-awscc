@@ -21,19 +21,17 @@ Data Source schema for AWS::ECR::RepositoryCreationTemplate
 
 ### Read-Only
 
-- `applied_for` (Set of String) A list of enumerable Strings representing the repository creation scenarios that the template will apply towards.
-- `created_at` (String) Create timestamp of the template.
-- `custom_role_arn` (String) The ARN of the role to be assumed by ECR. This role must be in the same account as the registry that you are configuring.
-- `description` (String) The description of the template.
-- `encryption_configuration` (Attributes) The encryption configuration for the repository. This determines how the contents of your repository are encrypted at rest. By default, when no encryption configuration is set or the AES256 encryption type is used, Amazon ECR uses server-side encryption with Amazon S3-managed encryption keys which encrypts your data at rest using an AES-256 encryption algorithm. This does not require any action on your part.
-
-For more information, see https://docs.aws.amazon.com/AmazonECR/latest/userguide/encryption-at-rest.html (see [below for nested schema](#nestedatt--encryption_configuration))
-- `image_tag_mutability` (String) The image tag mutability setting for the repository.
-- `lifecycle_policy` (String) The JSON lifecycle policy text to apply to the repository. For information about lifecycle policy syntax, see https://docs.aws.amazon.com/AmazonECR/latest/userguide/LifecyclePolicies.html
-- `prefix` (String) The prefix use to match the repository name and apply the template.
-- `repository_policy` (String) The JSON repository policy text to apply to the repository. For more information, see https://docs.aws.amazon.com/AmazonECR/latest/userguide/RepositoryPolicyExamples.html
-- `resource_tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--resource_tags))
-- `updated_at` (String) Update timestamp of the template.
+- `applied_for` (Set of String) A list of enumerable Strings representing the repository creation scenarios that this template will apply towards. The two supported scenarios are PULL_THROUGH_CACHE and REPLICATION
+- `created_at` (String)
+- `custom_role_arn` (String) The ARN of the role to be assumed by Amazon ECR. Amazon ECR will assume your supplied role when the customRoleArn is specified. When this field isn't specified, Amazon ECR will use the service-linked role for the repository creation template.
+- `description` (String) The description associated with the repository creation template.
+- `encryption_configuration` (Attributes) The encryption configuration associated with the repository creation template. (see [below for nested schema](#nestedatt--encryption_configuration))
+- `image_tag_mutability` (String) The tag mutability setting for the repository. If this parameter is omitted, the default setting of MUTABLE will be used which will allow image tags to be overwritten. If IMMUTABLE is specified, all image tags within the repository will be immutable which will prevent them from being overwritten.
+- `lifecycle_policy` (String) The lifecycle policy to use for repositories created using the template.
+- `prefix` (String) The repository namespace prefix associated with the repository creation template.
+- `repository_policy` (String) he repository policy to apply to repositories created using the template. A repository policy is a permissions policy associated with a repository to control access permissions.
+- `resource_tags` (Attributes Set) The metadata to apply to the repository to help you categorize and organize. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters. (see [below for nested schema](#nestedatt--resource_tags))
+- `updated_at` (String)
 
 <a id="nestedatt--encryption_configuration"></a>
 ### Nested Schema for `encryption_configuration`
@@ -41,7 +39,11 @@ For more information, see https://docs.aws.amazon.com/AmazonECR/latest/userguide
 Read-Only:
 
 - `encryption_type` (String) The encryption type to use.
-- `kms_key` (String) If you use the KMS or KMS_DSSE encryption type, specify the CMK to use for encryption. The alias, key ID, or full ARN of the CMK can be specified. The key must exist in the same Region as the repository. If no key is specified, the default AWS managed CMK for Amazon ECR will be used.
+ If you use the ``KMS`` encryption type, the contents of the repository will be encrypted using server-side encryption with KMSlong key stored in KMS. When you use KMS to encrypt your data, you can either use the default AWS managed KMS key for Amazon ECR, or specify your own KMS key, which you already created.
+ If you use the ``KMS_DSSE`` encryption type, the contents of the repository will be encrypted with two layers of encryption using server-side encryption with the KMS Management Service key stored in KMS. Similar to the ``KMS`` encryption type, you can either use the default AWS managed KMS key for Amazon ECR, or specify your own KMS key, which you've already created. 
+ If you use the ``AES256`` encryption type, Amazon ECR uses server-side encryption with Amazon S3-managed encryption keys which encrypts the images in the repository using an AES256 encryption algorithm.
+ For more information, see [Amazon ECR encryption at rest](https://docs.aws.amazon.com/AmazonECR/latest/userguide/encryption-at-rest.html) in the *Amazon Elastic Container Registry User Guide*.
+- `kms_key` (String) If you use the ``KMS`` encryption type, specify the KMS key to use for encryption. The alias, key ID, or full ARN of the KMS key can be specified. The key must exist in the same Region as the repository. If no key is specified, the default AWS managed KMS key for Amazon ECR will be used.
 
 
 <a id="nestedatt--resource_tags"></a>
@@ -49,5 +51,5 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) One part of a key-value pair that make up a tag. A ``key`` is a general label that acts like a category for more specific tag values.
+- `value` (String) A ``value`` acts as a descriptor within a tag category (key).

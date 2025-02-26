@@ -26,11 +26,13 @@ Data Source schema for AWS::DataZone::Domain
 - `description` (String) The description of the Amazon DataZone domain.
 - `domain_execution_role` (String) The domain execution role that is created when an Amazon DataZone domain is created. The domain execution role is created in the AWS account that houses the Amazon DataZone domain.
 - `domain_id` (String) The id of the Amazon DataZone domain.
+- `domain_version` (String) The version of the domain.
 - `kms_key_identifier` (String) The identifier of the AWS Key Management Service (KMS) key that is used to encrypt the Amazon DataZone domain, metadata, and reporting data.
 - `last_updated_at` (String) The timestamp of when the Amazon DataZone domain was last updated.
 - `managed_account_id` (String) The identifier of the AWS account that manages the domain.
 - `name` (String) The name of the Amazon DataZone domain.
 - `portal_url` (String) The URL of the data portal for this Amazon DataZone domain.
+- `service_role` (String) The service role of the domain that is created.
 - `single_sign_on` (Attributes) The single-sign on configuration of the Amazon DataZone domain. (see [below for nested schema](#nestedatt--single_sign_on))
 - `status` (String) The status of the Amazon DataZone domain.
 - `tags` (Attributes Set) The tags specified for the Amazon DataZone domain. (see [below for nested schema](#nestedatt--tags))
