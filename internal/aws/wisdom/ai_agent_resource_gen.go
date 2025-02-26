@@ -250,6 +250,10 @@ func aIAgentResource(ctx context.Context) (resource.Resource, error) {
 		//	          "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$",
 		//	          "type": "string"
 		//	        },
+		//	        "Locale": {
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
 		//	        "QueryReformulationAIPromptId": {
 		//	          "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$",
 		//	          "type": "string"
@@ -408,6 +412,10 @@ func aIAgentResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "object"
 		//	          },
 		//	          "type": "array"
+		//	        },
+		//	        "Locale": {
+		//	          "minLength": 1,
+		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -851,6 +859,17 @@ func aIAgentResource(ctx context.Context) (resource.Resource, error) {
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
+						// Property: Locale
+						"locale": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthAtLeast(1),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: QueryReformulationAIPromptId
 						"query_reformulation_ai_prompt_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
@@ -1131,6 +1150,17 @@ func aIAgentResource(ctx context.Context) (resource.Resource, error) {
 							Computed: true,
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Locale
+						"locale": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthAtLeast(1),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -1566,21 +1596,22 @@ func aIAgentResource(ctx context.Context) (resource.Resource, error) {
 		"intent_labeling_generation_ai_prompt_id":      "IntentLabelingGenerationAIPromptId",
 		"key": "Key",
 		"knowledge_base_association_configuration_data": "KnowledgeBaseAssociationConfigurationData",
-		"manual_search_ai_agent_configuration":          "ManualSearchAIAgentConfiguration",
-		"max_results":                                   "MaxResults",
-		"modified_time_seconds":                         "ModifiedTimeSeconds",
-		"name":                                          "Name",
-		"or_conditions":                                 "OrConditions",
-		"override_knowledge_base_search_type":           "OverrideKnowledgeBaseSearchType",
-		"query_reformulation_ai_prompt_id":              "QueryReformulationAIPromptId",
-		"self_service_ai_agent_configuration":           "SelfServiceAIAgentConfiguration",
-		"self_service_ai_guardrail_id":                  "SelfServiceAIGuardrailId",
-		"self_service_answer_generation_ai_prompt_id":   "SelfServiceAnswerGenerationAIPromptId",
-		"self_service_pre_processing_ai_prompt_id":      "SelfServicePreProcessingAIPromptId",
-		"tag_condition":                                 "TagCondition",
-		"tags":                                          "Tags",
-		"type":                                          "Type",
-		"value":                                         "Value",
+		"locale":                                      "Locale",
+		"manual_search_ai_agent_configuration":        "ManualSearchAIAgentConfiguration",
+		"max_results":                                 "MaxResults",
+		"modified_time_seconds":                       "ModifiedTimeSeconds",
+		"name":                                        "Name",
+		"or_conditions":                               "OrConditions",
+		"override_knowledge_base_search_type":         "OverrideKnowledgeBaseSearchType",
+		"query_reformulation_ai_prompt_id":            "QueryReformulationAIPromptId",
+		"self_service_ai_agent_configuration":         "SelfServiceAIAgentConfiguration",
+		"self_service_ai_guardrail_id":                "SelfServiceAIGuardrailId",
+		"self_service_answer_generation_ai_prompt_id": "SelfServiceAnswerGenerationAIPromptId",
+		"self_service_pre_processing_ai_prompt_id":    "SelfServicePreProcessingAIPromptId",
+		"tag_condition":                               "TagCondition",
+		"tags":                                        "Tags",
+		"type":                                        "Type",
+		"value":                                       "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

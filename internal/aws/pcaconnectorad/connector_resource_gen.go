@@ -37,14 +37,14 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "maxLength": 200,
 		//	  "minLength": 5,
-		//	  "pattern": "^arn:[\\w-]+:acm-pca:[\\w-]+:[0-9]+:certificate-authority(\\/[\\w-]+)$",
+		//	  "pattern": "^arn:[\\w-]+:acm-pca:[\\w-]+:[0-9]+:certificate-authority\\/[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
 		"certificate_authority_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(5, 200),
-				stringvalidator.RegexMatches(regexp.MustCompile("^arn:[\\w-]+:acm-pca:[\\w-]+:[0-9]+:certificate-authority(\\/[\\w-]+)$"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:[\\w-]+:acm-pca:[\\w-]+:[0-9]+:certificate-authority\\/[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -56,7 +56,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "maxLength": 200,
 		//	  "minLength": 5,
-		//	  "pattern": "^arn:[\\w-]+:pca-connector-ad:[\\w-]+:[0-9]+:connector(\\/[\\w-]+)$",
+		//	  "pattern": "^arn:[\\w-]+:pca-connector-ad:[\\w-]+:[0-9]+:connector\\/[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
 		"connector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -108,6 +108,13 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "IpAddressType": {
+		//	      "enum": [
+		//	        "IPV4",
+		//	        "DUALSTACK"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "SecurityGroupIds": {
 		//	      "items": {
 		//	        "maxLength": 20,
@@ -128,6 +135,20 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"vpc_information": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: IpAddressType
+				"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"IPV4",
+							"DUALSTACK",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: SecurityGroupIds
 				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
@@ -159,7 +180,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Definition of AWS::PCAConnectorAD::Connector Resource Type",
+		Description: "Represents a Connector that connects AWS PrivateCA and your directory",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -172,6 +193,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		"certificate_authority_arn": "CertificateAuthorityArn",
 		"connector_arn":             "ConnectorArn",
 		"directory_id":              "DirectoryId",
+		"ip_address_type":           "IpAddressType",
 		"security_group_ids":        "SecurityGroupIds",
 		"tags":                      "Tags",
 		"vpc_information":           "VpcInformation",
