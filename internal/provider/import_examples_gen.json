@@ -555,6 +555,11 @@
         "path": "./examples/resources/awscc_batch_compute_environment/import.sh"
     },
     {
+        "resource": "awscc_batch_consumable_resource",
+        "identifier": ["ConsumableResourceArn"],
+        "path": "./examples/resources/awscc_batch_consumable_resource/import.sh"
+    },
+    {
         "resource": "awscc_batch_job_definition",
         "identifier": ["JobDefinitionName"],
         "path": "./examples/resources/awscc_batch_job_definition/import.sh"
@@ -2578,6 +2583,11 @@
         "resource": "awscc_guardduty_member",
         "identifier": ["DetectorId","MemberId"],
         "path": "./examples/resources/awscc_guardduty_member/import.sh"
+    },
+    {
+        "resource": "awscc_guardduty_publishing_destination",
+        "identifier": ["DetectorId","Id"],
+        "path": "./examples/resources/awscc_guardduty_publishing_destination/import.sh"
     },
     {
         "resource": "awscc_guardduty_threat_intel_set",
