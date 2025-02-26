@@ -40,6 +40,9 @@
         },
         "AdditionalModelRequestFields": {
           "$ref": "#/definitions/AdditionalModelRequestFields"
+        },
+        "Metadata": {
+          "$ref": "#/definitions/PromptMetadataList"
         }
       },
       "required": [
@@ -67,7 +70,7 @@
           "items": {
             "$ref": "#/definitions/PromptInputVariable"
           },
-          "maxItems": 5,
+          "maxItems": 20,
           "minItems": 0,
           "description": "List of input variables",
           "insertionOrder": true
@@ -109,7 +112,7 @@
           "items": {
             "$ref": "#/definitions/PromptInputVariable"
           },
-          "maxItems": 5,
+          "maxItems": 20,
           "minItems": 0,
           "description": "List of input variables",
           "insertionOrder": true
@@ -582,6 +585,47 @@
     "AdditionalModelRequestFields": {
       "type": "object",
       "description": "Contains model-specific configurations"
+    },
+    "PromptMetadataList": {
+      "type": "array",
+      "description": "List of metadata to associate with the prompt variant.",
+      "items": {
+        "$ref": "#/definitions/PromptMetadataEntry"
+      },
+      "maxItems": 50,
+      "minItems": 0,
+      "insertionOrder": true
+    },
+    "PromptMetadataEntry": {
+      "type": "object",
+      "description": "Contains a key-value pair that defines a metadata tag and value to attach to a prompt variant.",
+      "properties": {
+        "Key": {
+          "$ref": "#/definitions/PromptMetadataKey"
+        },
+        "Value": {
+          "$ref": "#/definitions/PromptMetadataValue"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "PromptMetadataKey": {
+      "type": "string",
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9\\s._:\/=+@-]*$",
+      "description": "The key of a metadata tag for a prompt variant."
+    },
+    "PromptMetadataValue": {
+      "type": "string",
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9\\s._:\/=+@-]*$",
+      "description": "The value of a metadata tag for a prompt variant."
     }
   },
   "properties": {
