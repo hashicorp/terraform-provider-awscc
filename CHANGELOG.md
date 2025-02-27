@@ -3,12 +3,12 @@
 
 FEATURES:
 
-**New Data Source:** `awscc_batch_consumable_resource`
-**New Data Source:** `awscc_batch_consumable_resources`
-**New Data Source:** `awscc_guardduty_publishing_destination`
-**New Data Source:** `awscc_guardduty_publishing_destinations`
-**New Resource:** `awscc_batch_consumable_resource`
-**New Resource:** `awscc_guardduty_publishing_destination`
+* **New Data Source:** `awscc_batch_consumable_resource`
+* **New Data Source:** `awscc_batch_consumable_resources`
+* **New Data Source:** `awscc_guardduty_publishing_destination`
+* **New Data Source:** `awscc_guardduty_publishing_destinations`
+* **New Resource:** `awscc_batch_consumable_resource`
+* **New Resource:** `awscc_guardduty_publishing_destination`
 
 ## 1.30.0 (February 20, 2025)
 
