@@ -156,7 +156,7 @@ func carrierGatewayResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "An example resource schema demonstrating some basic constructs and validation rules.",
+		Description: "Resource Type definition for Carrier Gateway which describes the Carrier Gateway resource",
 		Version:     1,
 		Attributes:  attributes,
 	}

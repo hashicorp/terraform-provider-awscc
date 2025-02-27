@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_carrier_gateway Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  An example resource schema demonstrating some basic constructs and validation rules.
+  Resource Type definition for Carrier Gateway which describes the Carrier Gateway resource
 ---
 
 # awscc_ec2_carrier_gateway (Resource)
 
-An example resource schema demonstrating some basic constructs and validation rules.
+Resource Type definition for Carrier Gateway which describes the Carrier Gateway resource
 
 ## Example Usage
 

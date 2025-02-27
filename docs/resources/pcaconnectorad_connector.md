@@ -3,12 +3,12 @@
 page_title: "awscc_pcaconnectorad_connector Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Definition of AWS::PCAConnectorAD::Connector Resource Type
+  Represents a Connector that connects AWS PrivateCA and your directory
 ---
 
 # awscc_pcaconnectorad_connector (Resource)
 
-Definition of AWS::PCAConnectorAD::Connector Resource Type
+Represents a Connector that connects AWS PrivateCA and your directory
 
 ## Example Usage
 
@@ -152,6 +152,10 @@ resource "awscc_pcaconnectorad_connector" "example" {
 Required:
 
 - `security_group_ids` (List of String)
+
+Optional:
+
+- `ip_address_type` (String)
 
 ## Import
 

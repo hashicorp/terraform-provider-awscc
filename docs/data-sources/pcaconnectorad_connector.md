@@ -32,4 +32,5 @@ Data Source schema for AWS::PCAConnectorAD::Connector
 
 Read-Only:
 
+- `ip_address_type` (String)
 - `security_group_ids` (List of String)

@@ -29,7 +29,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "maxLength": 200,
 		//	  "minLength": 5,
-		//	  "pattern": "^arn:[\\w-]+:acm-pca:[\\w-]+:[0-9]+:certificate-authority(\\/[\\w-]+)$",
+		//	  "pattern": "^arn:[\\w-]+:acm-pca:[\\w-]+:[0-9]+:certificate-authority\\/[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
 		"certificate_authority_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -41,7 +41,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "maxLength": 200,
 		//	  "minLength": 5,
-		//	  "pattern": "^arn:[\\w-]+:pca-connector-ad:[\\w-]+:[0-9]+:connector(\\/[\\w-]+)$",
+		//	  "pattern": "^arn:[\\w-]+:pca-connector-ad:[\\w-]+:[0-9]+:connector\\/[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
 		"connector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -80,6 +80,13 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "IpAddressType": {
+		//	      "enum": [
+		//	        "IPV4",
+		//	        "DUALSTACK"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "SecurityGroupIds": {
 		//	      "items": {
 		//	        "maxLength": 20,
@@ -100,6 +107,10 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"vpc_information": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: IpAddressType
+				"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: SecurityGroupIds
 				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
@@ -128,6 +139,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"certificate_authority_arn": "CertificateAuthorityArn",
 		"connector_arn":             "ConnectorArn",
 		"directory_id":              "DirectoryId",
+		"ip_address_type":           "IpAddressType",
 		"security_group_ids":        "SecurityGroupIds",
 		"tags":                      "Tags",
 		"vpc_information":           "VpcInformation",

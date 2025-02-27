@@ -8,7 +8,6 @@ package iotsitewise
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -109,9 +108,6 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    }
 		//	  ],
 		//	  "properties": {
-		//	    "Greengrass": {
-		//	      "description": "A gateway that runs on AWS IoT Greengrass V1."
-		//	    },
 		//	    "GreengrassV2": {
 		//	      "additionalProperties": false,
 		//	      "description": "A gateway that runs on AWS IoT Greengrass V2.",
@@ -154,12 +150,6 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"gateway_platform": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Greengrass
-				"greengrass": schema.StringAttribute{ /*START ATTRIBUTE*/
-					CustomType:  jsontypes.NormalizedType{},
-					Description: "A gateway that runs on AWS IoT Greengrass V1.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
 				// Property: GreengrassV2
 				"greengrass_v2": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -272,7 +262,6 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"gateway_name":                 "GatewayName",
 		"gateway_platform":             "GatewayPlatform",
 		"gateway_version":              "GatewayVersion",
-		"greengrass":                   "Greengrass",
 		"greengrass_v2":                "GreengrassV2",
 		"iot_core_thing_name":          "IotCoreThingName",
 		"key":                          "Key",

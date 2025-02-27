@@ -91,6 +91,7 @@ resource "awscc_batch_job_definition" "example" {
 
 ### Optional
 
+- `consumable_resource_properties` (Attributes) (see [below for nested schema](#nestedatt--consumable_resource_properties))
 - `container_properties` (Attributes) (see [below for nested schema](#nestedatt--container_properties))
 - `ecs_properties` (Attributes) (see [below for nested schema](#nestedatt--ecs_properties))
 - `eks_properties` (Attributes) (see [below for nested schema](#nestedatt--eks_properties))
@@ -107,6 +108,23 @@ resource "awscc_batch_job_definition" "example" {
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
+
+<a id="nestedatt--consumable_resource_properties"></a>
+### Nested Schema for `consumable_resource_properties`
+
+Optional:
+
+- `consumable_resource_list` (Attributes List) (see [below for nested schema](#nestedatt--consumable_resource_properties--consumable_resource_list))
+
+<a id="nestedatt--consumable_resource_properties--consumable_resource_list"></a>
+### Nested Schema for `consumable_resource_properties.consumable_resource_list`
+
+Optional:
+
+- `consumable_resource` (String) The ARN of the consumable resource the job definition should consume.
+- `quantity` (Number)
+
+
 
 <a id="nestedatt--container_properties"></a>
 ### Nested Schema for `container_properties`
@@ -763,11 +781,29 @@ Optional:
 
 Optional:
 
+- `consumable_resource_properties` (Attributes) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--consumable_resource_properties))
 - `container` (Attributes) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--container))
 - `ecs_properties` (Attributes) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--ecs_properties))
 - `eks_properties` (Attributes) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--eks_properties))
 - `instance_types` (List of String)
 - `target_nodes` (String)
+
+<a id="nestedatt--node_properties--node_range_properties--consumable_resource_properties"></a>
+### Nested Schema for `node_properties.node_range_properties.consumable_resource_properties`
+
+Optional:
+
+- `consumable_resource_list` (Attributes List) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--consumable_resource_properties--consumable_resource_list))
+
+<a id="nestedatt--node_properties--node_range_properties--consumable_resource_properties--consumable_resource_list"></a>
+### Nested Schema for `node_properties.node_range_properties.consumable_resource_properties.consumable_resource_list`
+
+Optional:
+
+- `consumable_resource` (String) The ARN of the consumable resource the job definition should consume.
+- `quantity` (Number)
+
+
 
 <a id="nestedatt--node_properties--node_range_properties--container"></a>
 ### Nested Schema for `node_properties.node_range_properties.container`

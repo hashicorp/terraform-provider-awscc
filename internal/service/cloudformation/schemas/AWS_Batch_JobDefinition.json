@@ -105,6 +105,9 @@
         },
         "EksProperties": {
           "$ref": "#/definitions/EksProperties"
+        },
+        "ConsumableResourceProperties": {
+          "$ref": "#/definitions/ConsumableResourceProperties"
         }
       },
       "required": [
@@ -877,6 +880,23 @@
         }
       }
     },
+    "ConsumableResourceProperties": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "ConsumableResourceList": {
+          "uniqueItems": true,
+          "insertionOrder": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConsumableResourceRequirement"
+          }
+        }
+      },
+      "required": [
+        "ConsumableResourceList"
+      ]
+    },
     "MultiNodeContainerProperties": {
       "additionalProperties": false,
       "type": "object",
@@ -1038,6 +1058,25 @@
           "type": "string"
         }
       }
+    },
+    "ConsumableResourceRequirement": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "ConsumableResource": {
+          "pattern": "",
+          "description": "The ARN of the consumable resource the job definition should consume.",
+          "type": "string"
+        },
+        "Quantity": {
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "ConsumableResource",
+        "Quantity"
+      ]
     },
     "Environment": {
       "additionalProperties": false,
@@ -1232,6 +1271,9 @@
     },
     "EksProperties": {
       "$ref": "#/definitions/EksProperties"
+    },
+    "ConsumableResourceProperties": {
+      "$ref": "#/definitions/ConsumableResourceProperties"
     },
     "Type": {
       "type": "string"

@@ -577,6 +577,10 @@ resource_schema "aws_batch_compute_environment" {
   cloudformation_type_name = "AWS::Batch::ComputeEnvironment"
 }
 
+resource_schema "aws_batch_consumable_resource" {
+  cloudformation_type_name = "AWS::Batch::ConsumableResource"
+}
+
 resource_schema "aws_batch_job_definition" {
   cloudformation_type_name = "AWS::Batch::JobDefinition"
 }
@@ -2440,6 +2444,10 @@ resource_schema "aws_guardduty_master" {
 
 resource_schema "aws_guardduty_member" {
   cloudformation_type_name = "AWS::GuardDuty::Member"
+}
+
+resource_schema "aws_guardduty_publishing_destination" {
+  cloudformation_type_name = "AWS::GuardDuty::PublishingDestination"
 }
 
 resource_schema "aws_guardduty_threat_intel_set" {

@@ -1,0 +1,1 @@
+$ terraform import awscc_batch_consumable_resource.example "consumable_resource_arn"

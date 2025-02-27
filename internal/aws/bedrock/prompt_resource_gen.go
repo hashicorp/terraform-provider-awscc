@@ -281,6 +281,38 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "type": "object"
 		//	      },
+		//	      "Metadata": {
+		//	        "description": "List of metadata to associate with the prompt variant.",
+		//	        "insertionOrder": true,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "description": "Contains a key-value pair that defines a metadata tag and value to attach to a prompt variant.",
+		//	          "properties": {
+		//	            "Key": {
+		//	              "description": "The key of a metadata tag for a prompt variant.",
+		//	              "maxLength": 128,
+		//	              "minLength": 1,
+		//	              "pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$",
+		//	              "type": "string"
+		//	            },
+		//	            "Value": {
+		//	              "description": "The value of a metadata tag for a prompt variant.",
+		//	              "maxLength": 1024,
+		//	              "minLength": 1,
+		//	              "pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Key",
+		//	            "Value"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "maxItems": 50,
+		//	        "minItems": 0,
+		//	        "type": "array"
+		//	      },
 		//	      "ModelId": {
 		//	        "description": "ARN or Id of a Bedrock Foundational Model or Inference Profile, or the ARN of a imported model, or a provisioned throughput ARN for custom models.",
 		//	        "maxLength": 2048,
@@ -315,7 +347,7 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 		//	                  },
 		//	                  "type": "object"
 		//	                },
-		//	                "maxItems": 5,
+		//	                "maxItems": 20,
 		//	                "minItems": 0,
 		//	                "type": "array"
 		//	              },
@@ -557,7 +589,7 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 		//	                  },
 		//	                  "type": "object"
 		//	                },
-		//	                "maxItems": 5,
+		//	                "maxItems": 20,
 		//	                "minItems": 0,
 		//	                "type": "array"
 		//	              },
@@ -743,6 +775,50 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 							objectplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
+					// Property: Metadata
+					"metadata": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Key
+								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The key of a metadata tag for a prompt variant.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 128),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\s._:/=+@-]*$"), ""),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Value
+								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The value of a metadata tag for a prompt variant.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 1024),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\s._:/=+@-]*$"), ""),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "List of metadata to associate with the prompt variant.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.List{ /*START VALIDATORS*/
+							listvalidator.SizeBetween(0, 50),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: ModelId
 					"model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "ARN or Id of a Bedrock Foundational Model or Inference Profile, or the ARN of a imported model, or a provisioned throughput ARN for custom models.",
@@ -797,7 +873,7 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.List{ /*START VALIDATORS*/
-											listvalidator.SizeBetween(0, 5),
+											listvalidator.SizeBetween(0, 20),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
@@ -1173,7 +1249,7 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.List{ /*START VALIDATORS*/
-											listvalidator.SizeBetween(0, 5),
+											listvalidator.SizeBetween(0, 20),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
@@ -1349,6 +1425,7 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 		"key":                             "Key",
 		"max_tokens":                      "MaxTokens",
 		"messages":                        "Messages",
+		"metadata":                        "Metadata",
 		"model_id":                        "ModelId",
 		"name":                            "Name",
 		"prompt_id":                       "Id",
@@ -1369,6 +1446,7 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 		"top_p":                           "TopP",
 		"type":                            "Type",
 		"updated_at":                      "UpdatedAt",
+		"value":                           "Value",
 		"variants":                        "Variants",
 		"version":                         "Version",
 	})

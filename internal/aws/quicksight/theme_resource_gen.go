@@ -82,7 +82,6 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.LengthBetween(1, 512),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[\\w\\-]+$"), ""),
 			}, /*END VALIDATORS*/
-			// BaseThemeId is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Configuration
 		// CloudFormation resource type schema:
@@ -676,7 +675,6 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END SCHEMA*/
 			Description: "<p>The theme configuration. This configuration contains all of the display properties for\n            a theme.</p>",
 			Required:    true,
-			// Configuration is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
@@ -1445,7 +1443,6 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
-			// VersionDescription is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -1524,11 +1521,6 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 		"warning_foreground":   "WarningForeground",
 	})
 
-	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/BaseThemeId",
-		"/properties/Configuration",
-		"/properties/VersionDescription",
-	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

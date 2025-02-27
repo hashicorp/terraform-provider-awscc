@@ -42,7 +42,6 @@ Read-Only:
 
 Read-Only:
 
-- `greengrass` (String) A gateway that runs on AWS IoT Greengrass V1.
 - `greengrass_v2` (Attributes) A gateway that runs on AWS IoT Greengrass V2. (see [below for nested schema](#nestedatt--gateway_platform--greengrass_v2))
 - `siemens_ie` (Attributes) A gateway that runs on Siemens Industrial Edge. (see [below for nested schema](#nestedatt--gateway_platform--siemens_ie))
 
