@@ -60,8 +60,8 @@ resource "awscc_iam_role" "efs_csi_role" {
     }]
     Version = "2012-10-17"
   })
-  
-managed_policy_arns = [
+
+  managed_policy_arns = [
     awscc_iam_managed_policy.efs_csi_kms_policy.arn,
     "arn:aws:iam::aws:policy/service-role/AmazonEFSCSIDriverPolicy"
   ]
@@ -72,7 +72,7 @@ managed_policy_arns = [
 resource "awscc_eks_addon" "efs_csi" {
   cluster_name             = awscc_eks_cluster.cluster_name
   addon_name               = "aws-efs-csi-driver"
-  addon_version            = "v2.1.4-eksbuild.1"    #Change version to required
+  addon_version            = "v2.1.4-eksbuild.1" #Change version to required
   service_account_role_arn = awscc_iam_role.efs_csi_role.arn
   resolve_conflicts        = "OVERWRITE"
   tags = [{
