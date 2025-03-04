@@ -88,11 +88,11 @@ func playbackKeyPairResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The public portion of a customer-generated key pair.",
+		//	  "description": "The public portion of a customer-generated key pair. This field is required to create the AWS::IVS::PlaybackKeyPair resource.",
 		//	  "type": "string"
 		//	}
 		"public_key_material": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The public portion of a customer-generated key pair.",
+			Description: "The public portion of a customer-generated key pair. This field is required to create the AWS::IVS::PlaybackKeyPair resource.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -117,7 +117,7 @@ func playbackKeyPairResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "Value": {
 		//	        "maxLength": 256,
-		//	        "minLength": 1,
+		//	        "minLength": 0,
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -151,7 +151,7 @@ func playbackKeyPairResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 256),
+							stringvalidator.LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

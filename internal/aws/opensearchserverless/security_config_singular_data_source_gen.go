@@ -156,6 +156,13 @@ func securityConfigDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      "pattern": "",
 		//	      "type": "string"
 		//	    },
+		//	    "OpenSearchServerlessEntityId": {
+		//	      "description": "Custom entity id attribute to override default entity id for this saml integration",
+		//	      "maxLength": 1024,
+		//	      "minLength": 1,
+		//	      "pattern": "^aws:opensearch:[0-9]{12}:*",
+		//	      "type": "string"
+		//	    },
 		//	    "SessionTimeout": {
 		//	      "description": "Defines the session timeout in minutes",
 		//	      "type": "integer"
@@ -183,6 +190,11 @@ func securityConfigDataSource(ctx context.Context) (datasource.DataSource, error
 				// Property: Metadata
 				"metadata": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The XML saml provider metadata document that you want to use",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: OpenSearchServerlessEntityId
+				"open_search_serverless_entity_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Custom entity id attribute to override default entity id for this saml integration",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: SessionTimeout
@@ -231,20 +243,21 @@ func securityConfigDataSource(ctx context.Context) (datasource.DataSource, error
 	opts = opts.WithCloudFormationTypeName("AWS::OpenSearchServerless::SecurityConfig").WithTerraformTypeName("awscc_opensearchserverless_security_config")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"application_arn":             "ApplicationArn",
-		"application_description":     "ApplicationDescription",
-		"application_name":            "ApplicationName",
-		"description":                 "Description",
-		"group_attribute":             "GroupAttribute",
-		"iam_identity_center_options": "IamIdentityCenterOptions",
-		"instance_arn":                "InstanceArn",
-		"metadata":                    "Metadata",
-		"name":                        "Name",
-		"saml_options":                "SamlOptions",
-		"security_config_id":          "Id",
-		"session_timeout":             "SessionTimeout",
-		"type":                        "Type",
-		"user_attribute":              "UserAttribute",
+		"application_arn":                  "ApplicationArn",
+		"application_description":          "ApplicationDescription",
+		"application_name":                 "ApplicationName",
+		"description":                      "Description",
+		"group_attribute":                  "GroupAttribute",
+		"iam_identity_center_options":      "IamIdentityCenterOptions",
+		"instance_arn":                     "InstanceArn",
+		"metadata":                         "Metadata",
+		"name":                             "Name",
+		"open_search_serverless_entity_id": "OpenSearchServerlessEntityId",
+		"saml_options":                     "SamlOptions",
+		"security_config_id":               "Id",
+		"session_timeout":                  "SessionTimeout",
+		"type":                             "Type",
+		"user_attribute":                   "UserAttribute",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

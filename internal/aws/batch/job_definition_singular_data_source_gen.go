@@ -23,6 +23,64 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::Batch::JobDefinition resource.
 func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ConsumableResourceProperties
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "ConsumableResourceList": {
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "ConsumableResource": {
+		//	            "description": "The ARN of the consumable resource the job definition should consume.",
+		//	            "pattern": "",
+		//	            "type": "string"
+		//	          },
+		//	          "Quantity": {
+		//	            "format": "int64",
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "ConsumableResource",
+		//	          "Quantity"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "ConsumableResourceList"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"consumable_resource_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ConsumableResourceList
+				"consumable_resource_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ConsumableResource
+							"consumable_resource": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The ARN of the consumable resource the job definition should consume.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Quantity
+							"quantity": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ContainerProperties
 		// CloudFormation resource type schema:
 		//
@@ -2296,6 +2354,39 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	      "items": {
 		//	        "additionalProperties": false,
 		//	        "properties": {
+		//	          "ConsumableResourceProperties": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "ConsumableResourceList": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "ConsumableResource": {
+		//	                      "description": "The ARN of the consumable resource the job definition should consume.",
+		//	                      "pattern": "",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Quantity": {
+		//	                      "format": "int64",
+		//	                      "type": "integer"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "ConsumableResource",
+		//	                    "Quantity"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "type": "array",
+		//	                "uniqueItems": true
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "ConsumableResourceList"
+		//	            ],
+		//	            "type": "object"
+		//	          },
 		//	          "Container": {
 		//	            "additionalProperties": false,
 		//	            "properties": {
@@ -3455,6 +3546,29 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 				"node_range_properties": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ConsumableResourceProperties
+							"consumable_resource_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ConsumableResourceList
+									"consumable_resource_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: ConsumableResource
+												"consumable_resource": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The ARN of the consumable resource the job definition should consume.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Quantity
+												"quantity": schema.Int64Attribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
 							// Property: Container
 							"container": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -4694,6 +4808,9 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		"claim_name":                     "ClaimName",
 		"command":                        "Command",
 		"condition":                      "Condition",
+		"consumable_resource":            "ConsumableResource",
+		"consumable_resource_list":       "ConsumableResourceList",
+		"consumable_resource_properties": "ConsumableResourceProperties",
 		"container":                      "Container",
 		"container_name":                 "ContainerName",
 		"container_path":                 "ContainerPath",
@@ -4766,6 +4883,7 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		"pod_properties":                 "PodProperties",
 		"privileged":                     "Privileged",
 		"propagate_tags":                 "PropagateTags",
+		"quantity":                       "Quantity",
 		"read_only":                      "ReadOnly",
 		"read_only_root_filesystem":      "ReadOnlyRootFilesystem",
 		"readonly_root_filesystem":       "ReadonlyRootFilesystem",

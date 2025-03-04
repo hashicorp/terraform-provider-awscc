@@ -326,6 +326,77 @@ func userSettingsDataSource(ctx context.Context) (datasource.DataSource, error) 
 			}, /*END NESTED OBJECT*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: ToolbarConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "HiddenToolbarItems": {
+		//	      "items": {
+		//	        "enum": [
+		//	          "Windows",
+		//	          "DualMonitor",
+		//	          "FullScreen",
+		//	          "Webcam",
+		//	          "Microphone"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array"
+		//	    },
+		//	    "MaxDisplayResolution": {
+		//	      "enum": [
+		//	        "size4096X2160",
+		//	        "size3840X2160",
+		//	        "size3440X1440",
+		//	        "size2560X1440",
+		//	        "size1920X1080",
+		//	        "size1280X720",
+		//	        "size1024X768",
+		//	        "size800X600"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ToolbarType": {
+		//	      "enum": [
+		//	        "Floating",
+		//	        "Docked"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "VisualMode": {
+		//	      "enum": [
+		//	        "Dark",
+		//	        "Light"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"toolbar_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: HiddenToolbarItems
+				"hidden_toolbar_items": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MaxDisplayResolution
+				"max_display_resolution": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ToolbarType
+				"toolbar_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: VisualMode
+				"visual_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: UploadAllowed
 		// CloudFormation resource type schema:
 		//
@@ -379,16 +450,21 @@ func userSettingsDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"disconnect_timeout_in_minutes":        "DisconnectTimeoutInMinutes",
 		"domain":                               "Domain",
 		"download_allowed":                     "DownloadAllowed",
+		"hidden_toolbar_items":                 "HiddenToolbarItems",
 		"idle_disconnect_timeout_in_minutes":   "IdleDisconnectTimeoutInMinutes",
 		"key":                                  "Key",
+		"max_display_resolution":               "MaxDisplayResolution",
 		"name":                                 "Name",
 		"paste_allowed":                        "PasteAllowed",
 		"path":                                 "Path",
 		"print_allowed":                        "PrintAllowed",
 		"tags":                                 "Tags",
+		"toolbar_configuration":                "ToolbarConfiguration",
+		"toolbar_type":                         "ToolbarType",
 		"upload_allowed":                       "UploadAllowed",
 		"user_settings_arn":                    "UserSettingsArn",
 		"value":                                "Value",
+		"visual_mode":                          "VisualMode",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

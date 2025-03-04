@@ -1,5 +1,45 @@
-## 1.28.0 (Unreleased)
+## 1.32.0 (Unreleased)
+## 1.31.0 (February 27, 2025)
+
+FEATURES:
+
+* **New Data Source:** `awscc_batch_consumable_resource`
+* **New Data Source:** `awscc_batch_consumable_resources`
+* **New Data Source:** `awscc_guardduty_publishing_destination`
+* **New Data Source:** `awscc_guardduty_publishing_destinations`
+* **New Resource:** `awscc_batch_consumable_resource`
+* **New Resource:** `awscc_guardduty_publishing_destination`
+
+## 1.30.0 (February 20, 2025)
+
+FEATURES:
+
+* provider: Updated resource schemas
+
+## 1.29.0 (February 14, 2025)
+
+FEATURES:
+
+* **New Data Source:** `awscc_cognito_user_pool_domain`
+* **New Data Source:** `awscc_connect_contact_flow_version`
+* **New Data Source:** `awscc_transfer_web_apps`
+* **New Data Source:** `awscc_transfer_web_app`
+* **New Resource:** `awscc_cognito_user_pool_domain`
+* **New Resource:** `awscc_connect_contact_flow_version`
+* **New Resource:** `awscc_transfer_web_app`
+
+## 1.28.0 (February  6, 2025)
+
+FEATURES:
+
+* **New Data Source:** `awscc_deadline_limit`
+* **New Data Source:** `awscc_deadline_queue_limit_association`
+* **New Resource:** `awscc_deadline_limit`
+* **New Resource:** `awscc_deadline_queue_limit_association`
+
 ## 1.27.0 (January 30, 2025)
+
+FEATURES:
 
 * **New Data Source:** `awscc_cloudfront_vpc_origin`
 * **New Data Source:** `awscc_notifications_managed_notification_account_contact_association`

@@ -24,6 +24,7 @@ Data Source schema for AWS::EC2::IPAM
 - `arn` (String) The Amazon Resource Name (ARN) of the IPAM.
 - `default_resource_discovery_association_id` (String) The Id of the default association to the default resource discovery, created with this IPAM.
 - `default_resource_discovery_id` (String) The Id of the default resource discovery, created with this IPAM.
+- `default_resource_discovery_organizational_unit_exclusions` (Attributes Set) A set of organizational unit (OU) exclusions for the default resource discovery, created with this IPAM. (see [below for nested schema](#nestedatt--default_resource_discovery_organizational_unit_exclusions))
 - `description` (String)
 - `enable_private_gua` (Boolean) Enable provisioning of GUA space in private pools.
 - `ipam_id` (String) Id of the IPAM.
@@ -34,6 +35,14 @@ Data Source schema for AWS::EC2::IPAM
 - `scope_count` (Number) The number of scopes that currently exist in this IPAM.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `tier` (String) The tier of the IPAM.
+
+<a id="nestedatt--default_resource_discovery_organizational_unit_exclusions"></a>
+### Nested Schema for `default_resource_discovery_organizational_unit_exclusions`
+
+Read-Only:
+
+- `organizations_entity_path` (String) An AWS Organizations entity path. Build the path for the OU(s) using AWS Organizations IDs separated by a '/'. Include all child OUs by ending the path with '/*'.
+
 
 <a id="nestedatt--operating_regions"></a>
 ### Nested Schema for `operating_regions`

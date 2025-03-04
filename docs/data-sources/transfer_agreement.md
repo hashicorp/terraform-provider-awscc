@@ -26,8 +26,10 @@ Data Source schema for AWS::Transfer::Agreement
 - `arn` (String) Specifies the unique Amazon Resource Name (ARN) for the agreement.
 - `base_directory` (String) Specifies the base directory for the agreement.
 - `description` (String) A textual description for the agreement.
+- `enforce_message_signing` (String) Specifies whether to enforce an AS2 message is signed for this agreement.
 - `local_profile_id` (String) A unique identifier for the local profile.
 - `partner_profile_id` (String) A unique identifier for the partner profile.
+- `preserve_filename` (String) Specifies whether to preserve the filename received for this agreement.
 - `server_id` (String) A unique identifier for the server.
 - `status` (String) Specifies the status of the agreement.
 - `tags` (Attributes Set) Key-value pairs that can be used to group and search for agreements. Tags are metadata attached to agreements for any purpose. (see [below for nested schema](#nestedatt--tags))

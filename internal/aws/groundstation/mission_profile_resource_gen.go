@@ -188,11 +188,20 @@ func missionProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	      "required": [
 		//	        "KmsAliasArn"
 		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "KmsAliasName"
+		//	      ]
 		//	    }
 		//	  ],
 		//	  "properties": {
 		//	    "KmsAliasArn": {
 		//	      "pattern": "^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$",
+		//	      "type": "string"
+		//	    },
+		//	    "KmsAliasName": {
+		//	      "pattern": "^alias/[a-zA-Z0-9:/_-]+$",
 		//	      "type": "string"
 		//	    },
 		//	    "KmsKeyArn": {
@@ -210,6 +219,17 @@ func missionProfileResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.RegexMatches(regexp.MustCompile("^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: KmsAliasName
+				"kms_alias_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.RegexMatches(regexp.MustCompile("^alias/[a-zA-Z0-9:/_-]+$"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -350,6 +370,7 @@ func missionProfileResource(ctx context.Context) (resource.Resource, error) {
 		"destination":                        "Destination",
 		"key":                                "Key",
 		"kms_alias_arn":                      "KmsAliasArn",
+		"kms_alias_name":                     "KmsAliasName",
 		"kms_key_arn":                        "KmsKeyArn",
 		"minimum_viable_contact_duration_seconds": "MinimumViableContactDurationSeconds",
 		"mission_profile_id":                      "Id",

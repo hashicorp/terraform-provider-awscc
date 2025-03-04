@@ -524,7 +524,13 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		//	          ],
 		//	          "type": "object"
 		//	        },
+		//	        "CrlType": {
+		//	          "type": "string"
+		//	        },
 		//	        "CustomCname": {
+		//	          "type": "string"
+		//	        },
+		//	        "CustomPath": {
 		//	          "type": "string"
 		//	        },
 		//	        "Enabled": {
@@ -580,8 +586,16 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 							Description: "Configures the default behavior of the CRL Distribution Point extension for certificates issued by your certificate authority",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
+						// Property: CrlType
+						"crl_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
 						// Property: CustomCname
 						"custom_cname": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: CustomPath
+						"custom_path": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
 						// Property: Enabled
@@ -873,10 +887,12 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		"crl_configuration":           "CrlConfiguration",
 		"crl_distribution_point_extension_configuration": "CrlDistributionPointExtensionConfiguration",
 		"crl_sign":                      "CRLSign",
+		"crl_type":                      "CrlType",
 		"csr_extensions":                "CsrExtensions",
 		"custom_attributes":             "CustomAttributes",
 		"custom_cname":                  "CustomCname",
 		"custom_object_identifier":      "CustomObjectIdentifier",
+		"custom_path":                   "CustomPath",
 		"data_encipherment":             "DataEncipherment",
 		"decipher_only":                 "DecipherOnly",
 		"digital_signature":             "DigitalSignature",

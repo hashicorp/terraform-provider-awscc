@@ -71,7 +71,9 @@ variable "source_account_id" {
 ### Optional
 
 - `description` (String) The description of the Amazon DataZone domain.
+- `domain_version` (String) The version of the domain.
 - `kms_key_identifier` (String) The identifier of the AWS Key Management Service (KMS) key that is used to encrypt the Amazon DataZone domain, metadata, and reporting data.
+- `service_role` (String) The service role of the domain that is created.
 - `single_sign_on` (Attributes) The single-sign on configuration of the Amazon DataZone domain. (see [below for nested schema](#nestedatt--single_sign_on))
 - `tags` (Attributes Set) The tags specified for the Amazon DataZone domain. (see [below for nested schema](#nestedatt--tags))
 

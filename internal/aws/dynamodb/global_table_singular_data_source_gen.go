@@ -500,36 +500,6 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 			}, /*END NESTED OBJECT*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
-		// Property: PointInTimeRecoverySpecification
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "additionalProperties": false,
-		//	  "properties": {
-		//	    "PointInTimeRecoveryEnabled": {
-		//	      "type": "boolean"
-		//	    },
-		//	    "RecoveryPeriodInDays": {
-		//	      "maximum": 35,
-		//	      "minimum": 1,
-		//	      "type": "integer"
-		//	    }
-		//	  },
-		//	  "type": "object"
-		//	}
-		"point_in_time_recovery_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: PointInTimeRecoveryEnabled
-				"point_in_time_recovery_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: RecoveryPeriodInDays
-				"recovery_period_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
 		// Property: Replicas
 		// CloudFormation resource type schema:
 		//

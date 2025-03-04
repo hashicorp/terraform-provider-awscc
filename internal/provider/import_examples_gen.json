@@ -555,6 +555,11 @@
         "path": "./examples/resources/awscc_batch_compute_environment/import.sh"
     },
     {
+        "resource": "awscc_batch_consumable_resource",
+        "identifier": ["ConsumableResourceArn"],
+        "path": "./examples/resources/awscc_batch_consumable_resource/import.sh"
+    },
+    {
         "resource": "awscc_batch_job_definition",
         "identifier": ["JobDefinitionName"],
         "path": "./examples/resources/awscc_batch_job_definition/import.sh"
@@ -1040,6 +1045,11 @@
         "path": "./examples/resources/awscc_cognito_user_pool_client/import.sh"
     },
     {
+        "resource": "awscc_cognito_user_pool_domain",
+        "identifier": ["UserPoolId","Domain"],
+        "path": "./examples/resources/awscc_cognito_user_pool_domain/import.sh"
+    },
+    {
         "resource": "awscc_cognito_user_pool_group",
         "identifier": ["UserPoolId","GroupName"],
         "path": "./examples/resources/awscc_cognito_user_pool_group/import.sh"
@@ -1133,6 +1143,11 @@
         "resource": "awscc_connect_contact_flow_module",
         "identifier": ["ContactFlowModuleArn"],
         "path": "./examples/resources/awscc_connect_contact_flow_module/import.sh"
+    },
+    {
+        "resource": "awscc_connect_contact_flow_version",
+        "identifier": ["ContactFlowVersionARN"],
+        "path": "./examples/resources/awscc_connect_contact_flow_version/import.sh"
     },
     {
         "resource": "awscc_connect_email_address",
@@ -1485,6 +1500,11 @@
         "path": "./examples/resources/awscc_deadline_license_endpoint/import.sh"
     },
     {
+        "resource": "awscc_deadline_limit",
+        "identifier": ["FarmId","LimitId"],
+        "path": "./examples/resources/awscc_deadline_limit/import.sh"
+    },
+    {
         "resource": "awscc_deadline_metered_product",
         "identifier": ["Arn"],
         "path": "./examples/resources/awscc_deadline_metered_product/import.sh"
@@ -1508,6 +1528,11 @@
         "resource": "awscc_deadline_queue_fleet_association",
         "identifier": ["FarmId","FleetId","QueueId"],
         "path": "./examples/resources/awscc_deadline_queue_fleet_association/import.sh"
+    },
+    {
+        "resource": "awscc_deadline_queue_limit_association",
+        "identifier": ["FarmId","LimitId","QueueId"],
+        "path": "./examples/resources/awscc_deadline_queue_limit_association/import.sh"
     },
     {
         "resource": "awscc_deadline_storage_profile",
@@ -2558,6 +2583,11 @@
         "resource": "awscc_guardduty_member",
         "identifier": ["DetectorId","MemberId"],
         "path": "./examples/resources/awscc_guardduty_member/import.sh"
+    },
+    {
+        "resource": "awscc_guardduty_publishing_destination",
+        "identifier": ["DetectorId","Id"],
+        "path": "./examples/resources/awscc_guardduty_publishing_destination/import.sh"
     },
     {
         "resource": "awscc_guardduty_threat_intel_set",
@@ -5308,6 +5338,11 @@
         "resource": "awscc_transfer_server",
         "identifier": ["Arn"],
         "path": "./examples/resources/awscc_transfer_server/import.sh"
+    },
+    {
+        "resource": "awscc_transfer_web_app",
+        "identifier": ["Arn"],
+        "path": "./examples/resources/awscc_transfer_web_app/import.sh"
     },
     {
         "resource": "awscc_transfer_workflow",

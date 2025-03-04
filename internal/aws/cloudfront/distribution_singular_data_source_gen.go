@@ -856,6 +856,27 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	              }
 		//	            },
 		//	            "type": "object"
+		//	          },
+		//	          "VpcOriginConfig": {
+		//	            "additionalProperties": false,
+		//	            "description": "",
+		//	            "properties": {
+		//	              "OriginKeepaliveTimeout": {
+		//	                "default": 5,
+		//	                "type": "integer"
+		//	              },
+		//	              "OriginReadTimeout": {
+		//	                "default": 30,
+		//	                "type": "integer"
+		//	              },
+		//	              "VpcOriginId": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "VpcOriginId"
+		//	            ],
+		//	            "type": "object"
 		//	          }
 		//	        },
 		//	        "required": [
@@ -1692,6 +1713,25 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 								Description: "Use this type to specify an origin that is an Amazon S3 bucket that is not configured with static website hosting. To specify any other type of origin, including an Amazon S3 bucket that is configured with static website hosting, use the ``CustomOriginConfig`` type instead.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
+							// Property: VpcOriginConfig
+							"vpc_origin_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: OriginKeepaliveTimeout
+									"origin_keepalive_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: OriginReadTimeout
+									"origin_read_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: VpcOriginId
+									"vpc_origin_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "A complex type that contains information about origins for this distribution.\n Specify a value for either the ``Origins`` or ``OriginGroups`` property.",
@@ -1973,6 +2013,8 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"value":                           "Value",
 		"viewer_certificate":              "ViewerCertificate",
 		"viewer_protocol_policy":          "ViewerProtocolPolicy",
+		"vpc_origin_config":               "VpcOriginConfig",
+		"vpc_origin_id":                   "VpcOriginId",
 		"web_acl_id":                      "WebACLId",
 		"whitelisted_names":               "WhitelistedNames",
 	})

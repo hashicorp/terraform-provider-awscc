@@ -33,6 +33,7 @@ Data Source schema for AWS::WorkSpacesWeb::UserSettings
 - `paste_allowed` (String)
 - `print_allowed` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `toolbar_configuration` (Attributes) (see [below for nested schema](#nestedatt--toolbar_configuration))
 - `upload_allowed` (String)
 - `user_settings_arn` (String)
 
@@ -72,3 +73,14 @@ Read-Only:
 
 - `key` (String)
 - `value` (String)
+
+
+<a id="nestedatt--toolbar_configuration"></a>
+### Nested Schema for `toolbar_configuration`
+
+Read-Only:
+
+- `hidden_toolbar_items` (List of String)
+- `max_display_resolution` (String)
+- `toolbar_type` (String)
+- `visual_mode` (String)

@@ -13,7 +13,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -177,6 +179,39 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: InputSwitchConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "\u003cp\u003eThe configuration for input switching based on the media quality confidence score (MQCS) as provided from AWS Elemental MediaLive.\u003c/p\u003e",
+		//	  "properties": {
+		//	    "MQCSInputSwitching": {
+		//	      "description": "\u003cp\u003eWhen true, AWS Elemental MediaPackage performs input switching based on the MQCS. Default is true. This setting is valid only when \u003ccode\u003eInputType\u003c/code\u003e is \u003ccode\u003eCMAF\u003c/code\u003e.\u003c/p\u003e",
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"input_switch_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MQCSInputSwitching
+				"mqcs_input_switching": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "<p>When true, AWS Elemental MediaPackage performs input switching based on the MQCS. Default is true. This setting is valid only when <code>InputType</code> is <code>CMAF</code>.</p>",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "<p>The configuration for input switching based on the media quality confidence score (MQCS) as provided from AWS Elemental MediaLive.</p>",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: InputType
 		// CloudFormation resource type schema:
 		//
@@ -215,6 +250,39 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: OutputHeaderConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "\u003cp\u003eThe settings for what common media server data (CMSD) headers AWS Elemental MediaPackage includes in responses to the CDN.\u003c/p\u003e",
+		//	  "properties": {
+		//	    "PublishMQCS": {
+		//	      "description": "\u003cp\u003eWhen true, AWS Elemental MediaPackage includes the MQCS in responses to the CDN. This setting is valid only when \u003ccode\u003eInputType\u003c/code\u003e is \u003ccode\u003eCMAF\u003c/code\u003e.\u003c/p\u003e",
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"output_header_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PublishMQCS
+				"publish_mqcs": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "<p>When true, AWS Elemental MediaPackage includes the MQCS in responses to the CDN. This setting is valid only when <code>InputType</code> is <code>CMAF</code>.</p>",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "<p>The settings for what common media server data (CMSD) headers AWS Elemental MediaPackage includes in responses to the CDN.</p>",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -286,20 +354,24 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::MediaPackageV2::Channel").WithTerraformTypeName("awscc_mediapackagev2_channel")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                  "Arn",
-		"channel_group_name":   "ChannelGroupName",
-		"channel_name":         "ChannelName",
-		"created_at":           "CreatedAt",
-		"description":          "Description",
-		"id":                   "Id",
-		"ingest_endpoint_urls": "IngestEndpointUrls",
-		"ingest_endpoints":     "IngestEndpoints",
-		"input_type":           "InputType",
-		"key":                  "Key",
-		"modified_at":          "ModifiedAt",
-		"tags":                 "Tags",
-		"url":                  "Url",
-		"value":                "Value",
+		"arn":                         "Arn",
+		"channel_group_name":          "ChannelGroupName",
+		"channel_name":                "ChannelName",
+		"created_at":                  "CreatedAt",
+		"description":                 "Description",
+		"id":                          "Id",
+		"ingest_endpoint_urls":        "IngestEndpointUrls",
+		"ingest_endpoints":            "IngestEndpoints",
+		"input_switch_configuration":  "InputSwitchConfiguration",
+		"input_type":                  "InputType",
+		"key":                         "Key",
+		"modified_at":                 "ModifiedAt",
+		"mqcs_input_switching":        "MQCSInputSwitching",
+		"output_header_configuration": "OutputHeaderConfiguration",
+		"publish_mqcs":                "PublishMQCS",
+		"tags":                        "Tags",
+		"url":                         "Url",
+		"value":                       "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

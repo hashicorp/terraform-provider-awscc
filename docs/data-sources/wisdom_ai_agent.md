@@ -50,6 +50,7 @@ Read-Only:
 - `answer_generation_ai_prompt_id` (String)
 - `association_configurations` (Attributes List) (see [below for nested schema](#nestedatt--configuration--answer_recommendation_ai_agent_configuration--association_configurations))
 - `intent_labeling_generation_ai_prompt_id` (String)
+- `locale` (String)
 - `query_reformulation_ai_prompt_id` (String)
 
 <a id="nestedatt--configuration--answer_recommendation_ai_agent_configuration--association_configurations"></a>
@@ -144,6 +145,7 @@ Read-Only:
 - `answer_generation_ai_guardrail_id` (String)
 - `answer_generation_ai_prompt_id` (String)
 - `association_configurations` (Attributes List) (see [below for nested schema](#nestedatt--configuration--manual_search_ai_agent_configuration--association_configurations))
+- `locale` (String)
 
 <a id="nestedatt--configuration--manual_search_ai_agent_configuration--association_configurations"></a>
 ### Nested Schema for `configuration.manual_search_ai_agent_configuration.association_configurations`

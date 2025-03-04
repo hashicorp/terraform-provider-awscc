@@ -1,0 +1,1 @@
+$ terraform import awscc_deadline_limit.example "farm_id|limit_id"

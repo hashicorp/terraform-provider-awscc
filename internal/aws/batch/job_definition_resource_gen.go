@@ -8,6 +8,7 @@ package batch
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -33,6 +34,90 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::Batch::JobDefinition resource.
 func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ConsumableResourceProperties
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "ConsumableResourceList": {
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "ConsumableResource": {
+		//	            "description": "The ARN of the consumable resource the job definition should consume.",
+		//	            "pattern": "",
+		//	            "type": "string"
+		//	          },
+		//	          "Quantity": {
+		//	            "format": "int64",
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "ConsumableResource",
+		//	          "Quantity"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "ConsumableResourceList"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"consumable_resource_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ConsumableResourceList
+				"consumable_resource_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ConsumableResource
+							"consumable_resource": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The ARN of the consumable resource the job definition should consume.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Quantity
+							"quantity": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.Int64{ /*START VALIDATORS*/
+									fwvalidators.NotNullInt64(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.UniqueValues(),
+						fwvalidators.NotNullList(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ContainerProperties
 		// CloudFormation resource type schema:
 		//
@@ -3327,6 +3412,39 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	      "items": {
 		//	        "additionalProperties": false,
 		//	        "properties": {
+		//	          "ConsumableResourceProperties": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "ConsumableResourceList": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "ConsumableResource": {
+		//	                      "description": "The ARN of the consumable resource the job definition should consume.",
+		//	                      "pattern": "",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Quantity": {
+		//	                      "format": "int64",
+		//	                      "type": "integer"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "ConsumableResource",
+		//	                    "Quantity"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "type": "array",
+		//	                "uniqueItems": true
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "ConsumableResourceList"
+		//	            ],
+		//	            "type": "object"
+		//	          },
 		//	          "Container": {
 		//	            "additionalProperties": false,
 		//	            "properties": {
@@ -4493,6 +4611,55 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 				"node_range_properties": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ConsumableResourceProperties
+							"consumable_resource_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ConsumableResourceList
+									"consumable_resource_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: ConsumableResource
+												"consumable_resource": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The ARN of the consumable resource the job definition should consume.",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														fwvalidators.NotNullString(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: Quantity
+												"quantity": schema.Int64Attribute{ /*START ATTRIBUTE*/
+													Optional: true,
+													Computed: true,
+													Validators: []validator.Int64{ /*START VALIDATORS*/
+														fwvalidators.NotNullInt64(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+														int64planmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.List{ /*START VALIDATORS*/
+											listvalidator.UniqueValues(),
+											fwvalidators.NotNullList(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: Container
 							"container": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -6794,6 +6961,9 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		"claim_name":                     "ClaimName",
 		"command":                        "Command",
 		"condition":                      "Condition",
+		"consumable_resource":            "ConsumableResource",
+		"consumable_resource_list":       "ConsumableResourceList",
+		"consumable_resource_properties": "ConsumableResourceProperties",
 		"container":                      "Container",
 		"container_name":                 "ContainerName",
 		"container_path":                 "ContainerPath",
@@ -6866,6 +7036,7 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		"pod_properties":                 "PodProperties",
 		"privileged":                     "Privileged",
 		"propagate_tags":                 "PropagateTags",
+		"quantity":                       "Quantity",
 		"read_only":                      "ReadOnly",
 		"read_only_root_filesystem":      "ReadOnlyRootFilesystem",
 		"readonly_root_filesystem":       "ReadonlyRootFilesystem",

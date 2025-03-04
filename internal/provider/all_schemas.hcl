@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1129 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1133 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -577,6 +577,10 @@ resource_schema "aws_batch_compute_environment" {
   cloudformation_type_name = "AWS::Batch::ComputeEnvironment"
 }
 
+resource_schema "aws_batch_consumable_resource" {
+  cloudformation_type_name = "AWS::Batch::ConsumableResource"
+}
+
 resource_schema "aws_batch_job_definition" {
   cloudformation_type_name = "AWS::Batch::JobDefinition"
 }
@@ -1016,6 +1020,11 @@ resource_schema "aws_cognito_user_pool_client" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_cognito_user_pool_domain" {
+  cloudformation_type_name               = "AWS::Cognito::UserPoolDomain"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_cognito_user_pool_group" {
   cloudformation_type_name               = "AWS::Cognito::UserPoolGroup"
   suppress_plural_data_source_generation = true
@@ -1100,6 +1109,11 @@ resource_schema "aws_connect_contact_flow" {
 
 resource_schema "aws_connect_contact_flow_module" {
   cloudformation_type_name               = "AWS::Connect::ContactFlowModule"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_connect_contact_flow_version" {
+  cloudformation_type_name               = "AWS::Connect::ContactFlowVersion"
   suppress_plural_data_source_generation = true
 }
 
@@ -1476,6 +1490,11 @@ resource_schema "aws_deadline_license_endpoint" {
   cloudformation_type_name = "AWS::Deadline::LicenseEndpoint"
 }
 
+resource_schema "aws_deadline_limit" {
+  cloudformation_type_name               = "AWS::Deadline::Limit"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_deadline_metered_product" {
   cloudformation_type_name               = "AWS::Deadline::MeteredProduct"
   suppress_plural_data_source_generation = true
@@ -1497,6 +1516,11 @@ resource_schema "aws_deadline_queue_environment" {
 
 resource_schema "aws_deadline_queue_fleet_association" {
   cloudformation_type_name               = "AWS::Deadline::QueueFleetAssociation"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_deadline_queue_limit_association" {
+  cloudformation_type_name               = "AWS::Deadline::QueueLimitAssociation"
   suppress_plural_data_source_generation = true
 }
 
@@ -2420,6 +2444,10 @@ resource_schema "aws_guardduty_master" {
 
 resource_schema "aws_guardduty_member" {
   cloudformation_type_name = "AWS::GuardDuty::Member"
+}
+
+resource_schema "aws_guardduty_publishing_destination" {
+  cloudformation_type_name = "AWS::GuardDuty::PublishingDestination"
 }
 
 resource_schema "aws_guardduty_threat_intel_set" {
@@ -3570,20 +3598,36 @@ resource_schema "aws_networkmanager_vpc_attachment" {
 resource_schema "aws_nimblestudio_launch_profile" {
   cloudformation_type_name               = "AWS::NimbleStudio::LaunchProfile"
   suppress_plural_data_source_generation = true
+
+  # Latest schema updates are suppressed.
+  # git checkout internal/service/cloudformation/schemas/AWS_NimbleStudio_LaunchProfile.json
+  # TypeNotFoundException during schema refresh
 }
 
 resource_schema "aws_nimblestudio_streaming_image" {
   cloudformation_type_name               = "AWS::NimbleStudio::StreamingImage"
   suppress_plural_data_source_generation = true
+
+  # Latest schema updates are suppressed.
+  # git checkout internal/service/cloudformation/schemas/AWS_NimbleStudio_StreamingImage.json
+  # TypeNotFoundException during schema refresh
 }
 
 resource_schema "aws_nimblestudio_studio" {
   cloudformation_type_name = "AWS::NimbleStudio::Studio"
+
+  # Latest schema updates are suppressed.
+  # git checkout internal/service/cloudformation/schemas/AWS_NimbleStudio_Studio.json
+  # TypeNotFoundException during schema refresh
 }
 
 resource_schema "aws_nimblestudio_studio_component" {
   cloudformation_type_name               = "AWS::NimbleStudio::StudioComponent"
   suppress_plural_data_source_generation = true
+
+  # Latest schema updates are suppressed.
+  # git checkout internal/service/cloudformation/schemas/AWS_NimbleStudio_StudioComponent.json
+  # TypeNotFoundException during schema refresh
 }
 
 resource_schema "aws_notifications_channel_association" {
@@ -4888,6 +4932,10 @@ resource_schema "aws_transfer_user" {
   # Ref: https://github.com/hashicorp/terraform-provider-awscc/issues/2095
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+}
+
+resource_schema "aws_transfer_web_app" {
+  cloudformation_type_name = "AWS::Transfer::WebApp"
 }
 
 resource_schema "aws_transfer_workflow" {

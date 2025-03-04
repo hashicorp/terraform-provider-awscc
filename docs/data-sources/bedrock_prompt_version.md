@@ -39,8 +39,10 @@ Data Source schema for AWS::Bedrock::PromptVersion
 
 Read-Only:
 
+- `additional_model_request_fields` (String) Contains model-specific configurations
 - `gen_ai_resource` (Attributes) Target resource to invoke with Prompt (see [below for nested schema](#nestedatt--variants--gen_ai_resource))
 - `inference_configuration` (Attributes) Model inference configuration (see [below for nested schema](#nestedatt--variants--inference_configuration))
+- `metadata` (Attributes List) List of metadata to associate with the prompt variant. (see [below for nested schema](#nestedatt--variants--metadata))
 - `model_id` (String) ARN or Id of a Bedrock Foundational Model or Inference Profile, or the ARN of a imported model, or a provisioned throughput ARN for custom models.
 - `name` (String) Name for a variant.
 - `template_configuration` (Attributes) Prompt template configuration (see [below for nested schema](#nestedatt--variants--template_configuration))
@@ -79,6 +81,15 @@ Read-Only:
 - `temperature` (Number) Controls randomness, higher values increase diversity
 - `top_p` (Number) Cumulative probability cutoff for token selection
 
+
+
+<a id="nestedatt--variants--metadata"></a>
+### Nested Schema for `variants.metadata`
+
+Read-Only:
+
+- `key` (String) The key of a metadata tag for a prompt variant.
+- `value` (String) The value of a metadata tag for a prompt variant.
 
 
 <a id="nestedatt--variants--template_configuration"></a>
@@ -120,7 +131,16 @@ Read-Only:
 
 Read-Only:
 
+- `cache_point` (Attributes) CachePointBlock (see [below for nested schema](#nestedatt--variants--template_configuration--chat--messages--content--cache_point))
 - `text` (String) Configuration for chat prompt template
+
+<a id="nestedatt--variants--template_configuration--chat--messages--content--cache_point"></a>
+### Nested Schema for `variants.template_configuration.chat.messages.content.cache_point`
+
+Read-Only:
+
+- `type` (String) CachePoint types for CachePointBlock
+
 
 
 
@@ -129,7 +149,16 @@ Read-Only:
 
 Read-Only:
 
+- `cache_point` (Attributes) CachePointBlock (see [below for nested schema](#nestedatt--variants--template_configuration--chat--system--cache_point))
 - `text` (String) Configuration for chat prompt template
+
+<a id="nestedatt--variants--template_configuration--chat--system--cache_point"></a>
+### Nested Schema for `variants.template_configuration.chat.system.cache_point`
+
+Read-Only:
+
+- `type` (String) CachePoint types for CachePointBlock
+
 
 
 <a id="nestedatt--variants--template_configuration--chat--tool_configuration"></a>
@@ -163,7 +192,16 @@ Read-Only:
 
 Read-Only:
 
+- `cache_point` (Attributes) CachePointBlock (see [below for nested schema](#nestedatt--variants--template_configuration--chat--tool_configuration--tools--cache_point))
 - `tool_spec` (Attributes) Tool specification (see [below for nested schema](#nestedatt--variants--template_configuration--chat--tool_configuration--tools--tool_spec))
+
+<a id="nestedatt--variants--template_configuration--chat--tool_configuration--tools--cache_point"></a>
+### Nested Schema for `variants.template_configuration.chat.tool_configuration.tools.cache_point`
+
+Read-Only:
+
+- `type` (String) CachePoint types for CachePointBlock
+
 
 <a id="nestedatt--variants--template_configuration--chat--tool_configuration--tools--tool_spec"></a>
 ### Nested Schema for `variants.template_configuration.chat.tool_configuration.tools.tool_spec`
@@ -191,8 +229,17 @@ Read-Only:
 
 Read-Only:
 
+- `cache_point` (Attributes) CachePointBlock (see [below for nested schema](#nestedatt--variants--template_configuration--text--cache_point))
 - `input_variables` (Attributes List) List of input variables (see [below for nested schema](#nestedatt--variants--template_configuration--text--input_variables))
 - `text` (String) Prompt content for String prompt template
+
+<a id="nestedatt--variants--template_configuration--text--cache_point"></a>
+### Nested Schema for `variants.template_configuration.text.cache_point`
+
+Read-Only:
+
+- `type` (String) CachePoint types for CachePointBlock
+
 
 <a id="nestedatt--variants--template_configuration--text--input_variables"></a>
 ### Nested Schema for `variants.template_configuration.text.input_variables`

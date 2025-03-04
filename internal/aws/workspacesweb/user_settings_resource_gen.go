@@ -497,6 +497,132 @@ func userSettingsResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ToolbarConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "HiddenToolbarItems": {
+		//	      "items": {
+		//	        "enum": [
+		//	          "Windows",
+		//	          "DualMonitor",
+		//	          "FullScreen",
+		//	          "Webcam",
+		//	          "Microphone"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array"
+		//	    },
+		//	    "MaxDisplayResolution": {
+		//	      "enum": [
+		//	        "size4096X2160",
+		//	        "size3840X2160",
+		//	        "size3440X1440",
+		//	        "size2560X1440",
+		//	        "size1920X1080",
+		//	        "size1280X720",
+		//	        "size1024X768",
+		//	        "size800X600"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ToolbarType": {
+		//	      "enum": [
+		//	        "Floating",
+		//	        "Docked"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "VisualMode": {
+		//	      "enum": [
+		//	        "Dark",
+		//	        "Light"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"toolbar_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: HiddenToolbarItems
+				"hidden_toolbar_items": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.ValueStringsAre(
+							stringvalidator.OneOf(
+								"Windows",
+								"DualMonitor",
+								"FullScreen",
+								"Webcam",
+								"Microphone",
+							),
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MaxDisplayResolution
+				"max_display_resolution": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"size4096X2160",
+							"size3840X2160",
+							"size3440X1440",
+							"size2560X1440",
+							"size1920X1080",
+							"size1280X720",
+							"size1024X768",
+							"size800X600",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ToolbarType
+				"toolbar_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"Floating",
+							"Docked",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: VisualMode
+				"visual_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"Dark",
+							"Light",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: UploadAllowed
 		// CloudFormation resource type schema:
 		//
@@ -564,16 +690,21 @@ func userSettingsResource(ctx context.Context) (resource.Resource, error) {
 		"disconnect_timeout_in_minutes":        "DisconnectTimeoutInMinutes",
 		"domain":                               "Domain",
 		"download_allowed":                     "DownloadAllowed",
+		"hidden_toolbar_items":                 "HiddenToolbarItems",
 		"idle_disconnect_timeout_in_minutes":   "IdleDisconnectTimeoutInMinutes",
 		"key":                                  "Key",
+		"max_display_resolution":               "MaxDisplayResolution",
 		"name":                                 "Name",
 		"paste_allowed":                        "PasteAllowed",
 		"path":                                 "Path",
 		"print_allowed":                        "PrintAllowed",
 		"tags":                                 "Tags",
+		"toolbar_configuration":                "ToolbarConfiguration",
+		"toolbar_type":                         "ToolbarType",
 		"upload_allowed":                       "UploadAllowed",
 		"user_settings_arn":                    "UserSettingsArn",
 		"value":                                "Value",
+		"visual_mode":                          "VisualMode",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

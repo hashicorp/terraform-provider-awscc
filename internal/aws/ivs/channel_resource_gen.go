@@ -15,6 +15,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
@@ -65,6 +66,33 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 			Default:     booldefault.StaticBool(false),
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ContainerFormat
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": "TS",
+		//	  "description": "Indicates which content-packaging format is used (MPEG-TS or fMP4). If multitrackInputConfiguration is specified and enabled is true, then containerFormat is required and must be set to FRAGMENTED_MP4. Otherwise, containerFormat may be set to TS or FRAGMENTED_MP4. Default: TS.",
+		//	  "enum": [
+		//	    "TS",
+		//	    "FRAGMENTED_MP4"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"container_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates which content-packaging format is used (MPEG-TS or fMP4). If multitrackInputConfiguration is specified and enabled is true, then containerFormat is required and must be set to FRAGMENTED_MP4. Otherwise, containerFormat may be set to TS or FRAGMENTED_MP4. Default: TS.",
+			Optional:    true,
+			Computed:    true,
+			Default:     stringdefault.StaticString("TS"),
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"TS",
+					"FRAGMENTED_MP4",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: IngestEndpoint
@@ -123,6 +151,87 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: MultitrackInputConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Enabled": {
+		//	      "default": false,
+		//	      "description": "Indicates whether multitrack input is enabled. Can be set to true only if channel type is STANDARD. Setting enabled to true with any other channel type will cause an exception. If true, then policy, maximumResolution, and containerFormat are required, and containerFormat must be set to FRAGMENTED_MP4. Default: false.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "MaximumResolution": {
+		//	      "description": "Maximum resolution for multitrack input. Required if enabled is true.",
+		//	      "enum": [
+		//	        "SD",
+		//	        "HD",
+		//	        "FULL_HD"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "Policy": {
+		//	      "description": "Indicates whether multitrack input is allowed or required. Required if enabled is true.",
+		//	      "enum": [
+		//	        "ALLOW",
+		//	        "REQUIRE"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"multitrack_input_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Enabled
+				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether multitrack input is enabled. Can be set to true only if channel type is STANDARD. Setting enabled to true with any other channel type will cause an exception. If true, then policy, maximumResolution, and containerFormat are required, and containerFormat must be set to FRAGMENTED_MP4. Default: false.",
+					Optional:    true,
+					Computed:    true,
+					Default:     booldefault.StaticBool(false),
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MaximumResolution
+				"maximum_resolution": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Maximum resolution for multitrack input. Required if enabled is true.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"SD",
+							"HD",
+							"FULL_HD",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Policy
+				"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether multitrack input is allowed or required. Required if enabled is true.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"ALLOW",
+							"REQUIRE",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Name
@@ -224,13 +333,15 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 		//	    "additionalProperties": false,
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 		//	        "maxLength": 256,
-		//	        "minLength": 1,
+		//	        "minLength": 0,
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -249,8 +360,9 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
@@ -261,10 +373,11 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 256),
+							stringvalidator.LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -336,19 +449,24 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::IVS::Channel").WithTerraformTypeName("awscc_ivs_channel")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                         "Arn",
-		"authorized":                  "Authorized",
-		"ingest_endpoint":             "IngestEndpoint",
-		"insecure_ingest":             "InsecureIngest",
-		"key":                         "Key",
-		"latency_mode":                "LatencyMode",
-		"name":                        "Name",
-		"playback_url":                "PlaybackUrl",
-		"preset":                      "Preset",
-		"recording_configuration_arn": "RecordingConfigurationArn",
-		"tags":                        "Tags",
-		"type":                        "Type",
-		"value":                       "Value",
+		"arn":                            "Arn",
+		"authorized":                     "Authorized",
+		"container_format":               "ContainerFormat",
+		"enabled":                        "Enabled",
+		"ingest_endpoint":                "IngestEndpoint",
+		"insecure_ingest":                "InsecureIngest",
+		"key":                            "Key",
+		"latency_mode":                   "LatencyMode",
+		"maximum_resolution":             "MaximumResolution",
+		"multitrack_input_configuration": "MultitrackInputConfiguration",
+		"name":                           "Name",
+		"playback_url":                   "PlaybackUrl",
+		"policy":                         "Policy",
+		"preset":                         "Preset",
+		"recording_configuration_arn":    "RecordingConfigurationArn",
+		"tags":                           "Tags",
+		"type":                           "Type",
+		"value":                          "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

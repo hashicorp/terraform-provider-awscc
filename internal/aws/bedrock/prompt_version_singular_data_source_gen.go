@@ -175,6 +175,10 @@ func promptVersionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	    "additionalProperties": false,
 		//	    "description": "Prompt variant",
 		//	    "properties": {
+		//	      "AdditionalModelRequestFields": {
+		//	        "description": "Contains model-specific configurations",
+		//	        "type": "object"
+		//	      },
 		//	      "GenAiResource": {
 		//	        "description": "Target resource to invoke with Prompt",
 		//	        "properties": {
@@ -238,6 +242,38 @@ func promptVersionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	        },
 		//	        "type": "object"
 		//	      },
+		//	      "Metadata": {
+		//	        "description": "List of metadata to associate with the prompt variant.",
+		//	        "insertionOrder": true,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "description": "Contains a key-value pair that defines a metadata tag and value to attach to a prompt variant.",
+		//	          "properties": {
+		//	            "Key": {
+		//	              "description": "The key of a metadata tag for a prompt variant.",
+		//	              "maxLength": 128,
+		//	              "minLength": 1,
+		//	              "pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$",
+		//	              "type": "string"
+		//	            },
+		//	            "Value": {
+		//	              "description": "The value of a metadata tag for a prompt variant.",
+		//	              "maxLength": 1024,
+		//	              "minLength": 1,
+		//	              "pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Key",
+		//	            "Value"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "maxItems": 50,
+		//	        "minItems": 0,
+		//	        "type": "array"
+		//	      },
 		//	      "ModelId": {
 		//	        "description": "ARN or Id of a Bedrock Foundational Model or Inference Profile, or the ARN of a imported model, or a provisioned throughput ARN for custom models.",
 		//	        "maxLength": 2048,
@@ -272,7 +308,7 @@ func promptVersionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                  },
 		//	                  "type": "object"
 		//	                },
-		//	                "maxItems": 5,
+		//	                "maxItems": 20,
 		//	                "minItems": 0,
 		//	                "type": "array"
 		//	              },
@@ -289,6 +325,23 @@ func promptVersionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                      "items": {
 		//	                        "description": "Configuration for chat prompt template",
 		//	                        "properties": {
+		//	                          "CachePoint": {
+		//	                            "additionalProperties": false,
+		//	                            "description": "CachePointBlock",
+		//	                            "properties": {
+		//	                              "Type": {
+		//	                                "description": "CachePoint types for CachePointBlock",
+		//	                                "enum": [
+		//	                                  "default"
+		//	                                ],
+		//	                                "type": "string"
+		//	                              }
+		//	                            },
+		//	                            "required": [
+		//	                              "Type"
+		//	                            ],
+		//	                            "type": "object"
+		//	                          },
 		//	                          "Text": {
 		//	                            "description": "Configuration for chat prompt template",
 		//	                            "minLength": 1,
@@ -324,6 +377,23 @@ func promptVersionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                "items": {
 		//	                  "description": "Configuration for chat prompt template",
 		//	                  "properties": {
+		//	                    "CachePoint": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "CachePointBlock",
+		//	                      "properties": {
+		//	                        "Type": {
+		//	                          "description": "CachePoint types for CachePointBlock",
+		//	                          "enum": [
+		//	                            "default"
+		//	                          ],
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "Type"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
 		//	                    "Text": {
 		//	                      "description": "Configuration for chat prompt template",
 		//	                      "minLength": 1,
@@ -378,6 +448,23 @@ func promptVersionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                    "items": {
 		//	                      "description": "Tool details",
 		//	                      "properties": {
+		//	                        "CachePoint": {
+		//	                          "additionalProperties": false,
+		//	                          "description": "CachePointBlock",
+		//	                          "properties": {
+		//	                            "Type": {
+		//	                              "description": "CachePoint types for CachePointBlock",
+		//	                              "enum": [
+		//	                                "default"
+		//	                              ],
+		//	                              "type": "string"
+		//	                            }
+		//	                          },
+		//	                          "required": [
+		//	                            "Type"
+		//	                          ],
+		//	                          "type": "object"
+		//	                        },
 		//	                        "ToolSpec": {
 		//	                          "additionalProperties": false,
 		//	                          "description": "Tool specification",
@@ -431,6 +518,23 @@ func promptVersionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	            "additionalProperties": false,
 		//	            "description": "Configuration for text prompt template",
 		//	            "properties": {
+		//	              "CachePoint": {
+		//	                "additionalProperties": false,
+		//	                "description": "CachePointBlock",
+		//	                "properties": {
+		//	                  "Type": {
+		//	                    "description": "CachePoint types for CachePointBlock",
+		//	                    "enum": [
+		//	                      "default"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Type"
+		//	                ],
+		//	                "type": "object"
+		//	              },
 		//	              "InputVariables": {
 		//	                "description": "List of input variables",
 		//	                "insertionOrder": true,
@@ -446,7 +550,7 @@ func promptVersionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                  },
 		//	                  "type": "object"
 		//	                },
-		//	                "maxItems": 5,
+		//	                "maxItems": 20,
 		//	                "minItems": 0,
 		//	                "type": "array"
 		//	              },
@@ -488,6 +592,12 @@ func promptVersionDataSource(ctx context.Context) (datasource.DataSource, error)
 		"variants": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AdditionalModelRequestFields
+					"additional_model_request_fields": schema.StringAttribute{ /*START ATTRIBUTE*/
+						CustomType:  jsontypes.NormalizedType{},
+						Description: "Contains model-specific configurations",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 					// Property: GenAiResource
 					"gen_ai_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -542,6 +652,25 @@ func promptVersionDataSource(ctx context.Context) (datasource.DataSource, error)
 						Description: "Model inference configuration",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
+					// Property: Metadata
+					"metadata": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Key
+								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The key of a metadata tag for a prompt variant.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Value
+								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The value of a metadata tag for a prompt variant.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "List of metadata to associate with the prompt variant.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 					// Property: ModelId
 					"model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "ARN or Id of a Bedrock Foundational Model or Inference Profile, or the ARN of a imported model, or a provisioned throughput ARN for custom models.",
@@ -580,6 +709,18 @@ func promptVersionDataSource(ctx context.Context) (datasource.DataSource, error)
 												"content": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: CachePoint
+															"cache_point": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Type
+																	"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "CachePoint types for CachePointBlock",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "CachePointBlock",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
 															// Property: Text
 															"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 																Description: "Configuration for chat prompt template",
@@ -604,6 +745,18 @@ func promptVersionDataSource(ctx context.Context) (datasource.DataSource, error)
 									"system": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: CachePoint
+												"cache_point": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Type
+														"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "CachePoint types for CachePointBlock",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "CachePointBlock",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
 												// Property: Text
 												"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "Configuration for chat prompt template",
@@ -652,6 +805,18 @@ func promptVersionDataSource(ctx context.Context) (datasource.DataSource, error)
 											"tools": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: CachePoint
+														"cache_point": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Type
+																"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "CachePoint types for CachePointBlock",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Description: "CachePointBlock",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
 														// Property: ToolSpec
 														"tool_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -696,6 +861,18 @@ func promptVersionDataSource(ctx context.Context) (datasource.DataSource, error)
 							// Property: Text
 							"text": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: CachePoint
+									"cache_point": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Type
+											"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "CachePoint types for CachePointBlock",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "CachePointBlock",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
 									// Property: InputVariables
 									"input_variables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -764,45 +941,51 @@ func promptVersionDataSource(ctx context.Context) (datasource.DataSource, error)
 	opts = opts.WithCloudFormationTypeName("AWS::Bedrock::PromptVersion").WithTerraformTypeName("awscc_bedrock_prompt_version")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"agent":                       "Agent",
-		"agent_identifier":            "AgentIdentifier",
-		"any":                         "Any",
-		"arn":                         "Arn",
-		"auto":                        "Auto",
-		"chat":                        "Chat",
-		"content":                     "Content",
-		"created_at":                  "CreatedAt",
-		"customer_encryption_key_arn": "CustomerEncryptionKeyArn",
-		"default_variant":             "DefaultVariant",
-		"description":                 "Description",
-		"gen_ai_resource":             "GenAiResource",
-		"inference_configuration":     "InferenceConfiguration",
-		"input_schema":                "InputSchema",
-		"input_variables":             "InputVariables",
-		"json":                        "Json",
-		"max_tokens":                  "MaxTokens",
-		"messages":                    "Messages",
-		"model_id":                    "ModelId",
-		"name":                        "Name",
-		"prompt_arn":                  "PromptArn",
-		"prompt_id":                   "PromptId",
-		"role":                        "Role",
-		"stop_sequences":              "StopSequences",
-		"system":                      "System",
-		"tags":                        "Tags",
-		"temperature":                 "Temperature",
-		"template_configuration":      "TemplateConfiguration",
-		"template_type":               "TemplateType",
-		"text":                        "Text",
-		"tool":                        "Tool",
-		"tool_choice":                 "ToolChoice",
-		"tool_configuration":          "ToolConfiguration",
-		"tool_spec":                   "ToolSpec",
-		"tools":                       "Tools",
-		"top_p":                       "TopP",
-		"updated_at":                  "UpdatedAt",
-		"variants":                    "Variants",
-		"version":                     "Version",
+		"additional_model_request_fields": "AdditionalModelRequestFields",
+		"agent":                           "Agent",
+		"agent_identifier":                "AgentIdentifier",
+		"any":                             "Any",
+		"arn":                             "Arn",
+		"auto":                            "Auto",
+		"cache_point":                     "CachePoint",
+		"chat":                            "Chat",
+		"content":                         "Content",
+		"created_at":                      "CreatedAt",
+		"customer_encryption_key_arn":     "CustomerEncryptionKeyArn",
+		"default_variant":                 "DefaultVariant",
+		"description":                     "Description",
+		"gen_ai_resource":                 "GenAiResource",
+		"inference_configuration":         "InferenceConfiguration",
+		"input_schema":                    "InputSchema",
+		"input_variables":                 "InputVariables",
+		"json":                            "Json",
+		"key":                             "Key",
+		"max_tokens":                      "MaxTokens",
+		"messages":                        "Messages",
+		"metadata":                        "Metadata",
+		"model_id":                        "ModelId",
+		"name":                            "Name",
+		"prompt_arn":                      "PromptArn",
+		"prompt_id":                       "PromptId",
+		"role":                            "Role",
+		"stop_sequences":                  "StopSequences",
+		"system":                          "System",
+		"tags":                            "Tags",
+		"temperature":                     "Temperature",
+		"template_configuration":          "TemplateConfiguration",
+		"template_type":                   "TemplateType",
+		"text":                            "Text",
+		"tool":                            "Tool",
+		"tool_choice":                     "ToolChoice",
+		"tool_configuration":              "ToolConfiguration",
+		"tool_spec":                       "ToolSpec",
+		"tools":                           "Tools",
+		"top_p":                           "TopP",
+		"type":                            "Type",
+		"updated_at":                      "UpdatedAt",
+		"value":                           "Value",
+		"variants":                        "Variants",
+		"version":                         "Version",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

@@ -10,7 +10,6 @@ linters:
   enable:
     - asciicheck
     - errcheck
-    - exportloopref
     - gocritic
     - gofmt
     - gosimple

@@ -28,8 +28,10 @@ Data Source schema for AWS::MediaPackageV2::Channel
 - `description` (String) <p>Enter any descriptive text that helps you to identify the channel.</p>
 - `ingest_endpoint_urls` (List of String)
 - `ingest_endpoints` (Attributes List) <p>The list of ingest endpoints.</p> (see [below for nested schema](#nestedatt--ingest_endpoints))
+- `input_switch_configuration` (Attributes) <p>The configuration for input switching based on the media quality confidence score (MQCS) as provided from AWS Elemental MediaLive.</p> (see [below for nested schema](#nestedatt--input_switch_configuration))
 - `input_type` (String)
 - `modified_at` (String) <p>The date and time the channel was modified.</p>
+- `output_header_configuration` (Attributes) <p>The settings for what common media server data (CMSD) headers AWS Elemental MediaPackage includes in responses to the CDN.</p> (see [below for nested schema](#nestedatt--output_header_configuration))
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--ingest_endpoints"></a>
@@ -39,6 +41,22 @@ Read-Only:
 
 - `id` (String) <p>The system-generated unique identifier for the IngestEndpoint.</p>
 - `url` (String) <p>The ingest domain URL where the source stream should be sent.</p>
+
+
+<a id="nestedatt--input_switch_configuration"></a>
+### Nested Schema for `input_switch_configuration`
+
+Read-Only:
+
+- `mqcs_input_switching` (Boolean) <p>When true, AWS Elemental MediaPackage performs input switching based on the MQCS. Default is true. This setting is valid only when <code>InputType</code> is <code>CMAF</code>.</p>
+
+
+<a id="nestedatt--output_header_configuration"></a>
+### Nested Schema for `output_header_configuration`
+
+Read-Only:
+
+- `publish_mqcs` (Boolean) <p>When true, AWS Elemental MediaPackage includes the MQCS in responses to the CDN. This setting is valid only when <code>InputType</code> is <code>CMAF</code>.</p>
 
 
 <a id="nestedatt--tags"></a>

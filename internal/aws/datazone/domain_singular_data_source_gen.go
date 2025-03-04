@@ -71,6 +71,21 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The domain execution role that is created when an Amazon DataZone domain is created. The domain execution role is created in the AWS account that houses the Amazon DataZone domain.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: DomainVersion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The version of the domain.",
+		//	  "enum": [
+		//	    "V1",
+		//	    "V2"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"domain_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The version of the domain.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -141,6 +156,18 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"portal_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The URL of the data portal for this Amazon DataZone domain.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ServiceRole
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The service role of the domain that is created.",
+		//	  "pattern": "^arn:aws[^:]*:iam::\\d{12}:(role|role/service-role)/[\\w+=,.@-]*$",
+		//	  "type": "string"
+		//	}
+		"service_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The service role of the domain that is created.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SingleSignOn
@@ -276,12 +303,14 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description":           "Description",
 		"domain_execution_role": "DomainExecutionRole",
 		"domain_id":             "Id",
+		"domain_version":        "DomainVersion",
 		"key":                   "Key",
 		"kms_key_identifier":    "KmsKeyIdentifier",
 		"last_updated_at":       "LastUpdatedAt",
 		"managed_account_id":    "ManagedAccountId",
 		"name":                  "Name",
 		"portal_url":            "PortalUrl",
+		"service_role":          "ServiceRole",
 		"single_sign_on":        "SingleSignOn",
 		"status":                "Status",
 		"tags":                  "Tags",

@@ -40,7 +40,9 @@ resource "awscc_ecs_cluster" "this" {
  To use a FARGATElong capacity provider, specify either the ``FARGATE`` or ``FARGATE_SPOT`` capacity providers. The FARGATElong capacity providers are available to all accounts and only need to be associated with a cluster to be used.
  The [PutCapacityProvider](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutCapacityProvider.html) API operation is used to update the list of available capacity providers for a cluster after the cluster is created.
 - `cluster_name` (String) A user-generated string that you use to identify your cluster. If you don't specify a name, CFNlong generates a unique physical ID for the name.
-- `cluster_settings` (Attributes List) The settings to use when creating a cluster. This parameter is used to turn on CloudWatch Container Insights for a cluster. (see [below for nested schema](#nestedatt--cluster_settings))
+- `cluster_settings` (Attributes List) The settings to use when creating a cluster. This parameter is used to turn on CloudWatch Container Insights with enhanced observability or CloudWatch Container Insights for a cluster.
+ Container Insights with enhanced observability provides all the Container Insights metrics, plus additional task and container metrics. This version supports enhanced observability for Amazon ECS clusters using the Amazon EC2 and Fargate launch types. After you configure Container Insights with enhanced observability on Amazon ECS, Container Insights auto-collects detailed infrastructure telemetry from the cluster level down to the container level in your environment and displays these critical performance data in curated dashboards removing the heavy lifting in observability set-up. 
+ For more information, see [Monitor Amazon ECS containers using Container Insights with enhanced observability](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cloudwatch-container-insights.html) in the *Amazon Elastic Container Service Developer Guide*. (see [below for nested schema](#nestedatt--cluster_settings))
 - `configuration` (Attributes) The execute command and managed storage configuration for the cluster. (see [below for nested schema](#nestedatt--configuration))
 - `default_capacity_provider_strategy` (Attributes List) The default capacity provider strategy for the cluster. When services or tasks are run in the cluster with no launch type or capacity provider strategy specified, the default capacity provider strategy is used. (see [below for nested schema](#nestedatt--default_capacity_provider_strategy))
 - `service_connect_defaults` (Attributes) Use this parameter to set a default Service Connect namespace. After you set a default Service Connect namespace, any new services with Service Connect turned on that are created in the cluster are added as client services in the namespace. This setting only applies to new services that set the ``enabled`` parameter to ``true`` in the ``ServiceConnectConfiguration``. You can set the namespace of each service individually in the ``ServiceConnectConfiguration`` to override this default parameter.
@@ -66,8 +68,10 @@ resource "awscc_ecs_cluster" "this" {
 Optional:
 
 - `name` (String) The name of the cluster setting. The value is ``containerInsights`` .
-- `value` (String) The value to set for the cluster setting. The supported values are ``enabled`` and ``disabled``. 
- If you set ``name`` to ``containerInsights`` and ``value`` to ``enabled``, CloudWatch Container Insights will be on for the cluster, otherwise it will be off unless the ``containerInsights`` account setting is turned on. If a cluster value is specified, it will override the ``containerInsights`` value set with [PutAccountSetting](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSetting.html) or [PutAccountSettingDefault](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSettingDefault.html).
+- `value` (String) The value to set for the cluster setting. The supported values are ``enhanced``, ``enabled``, and ``disabled``. 
+ To use Container Insights with enhanced observability, set the ``containerInsights`` account setting to ``enhanced``.
+ To use Container Insights, set the ``containerInsights`` account setting to ``enabled``.
+ If a cluster value is specified, it will override the ``containerInsights`` value set with [PutAccountSetting](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSetting.html) or [PutAccountSettingDefault](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSettingDefault.html).
 
 
 <a id="nestedatt--configuration"></a>
@@ -111,7 +115,9 @@ Optional:
 Optional:
 
 - `fargate_ephemeral_storage_kms_key_id` (String) Specify the KMSlong key ID for the Fargate ephemeral storage.
+ The key must be a single Region key.
 - `kms_key_id` (String) Specify a KMSlong key ID to encrypt the managed storage.
+ The key must be a single Region key.
 
 
 
@@ -132,7 +138,7 @@ Optional:
 
 Optional:
 
-- `namespace` (String) The namespace name or full Amazon Resource Name (ARN) of the CMAPlong namespace that's used when you create a service and don't specify a Service Connect configuration. The namespace name can include up to 1024 characters. The name is case-sensitive. The name can't include hyphens (-), tilde (~), greater than (>), less than (<), or slash (/).
+- `namespace` (String) The namespace name or full Amazon Resource Name (ARN) of the CMAPlong namespace that's used when you create a service and don't specify a Service Connect configuration. The namespace name can include up to 1024 characters. The name is case-sensitive. The name can't include greater than (>), less than (<), double quotation marks ("), or slash (/).
  If you enter an existing namespace name or ARN, then that namespace will be used. Any namespace type is supported. The namespace must be in this account and this AWS Region.
  If you enter a new name, a CMAPlong namespace will be created. Amazon ECS creates a CMAP namespace with the "API calls" method of instance discovery only. This instance discovery method is the "HTTP" namespace type in the CLIlong. Other types of instance discovery aren't used by Service Connect.
  If you update the cluster with an empty string ``""`` for the namespace name, the cluster configuration for Service Connect is removed. Note that the namespace will remain in CMAP and must be deleted separately.

@@ -1,0 +1,1 @@
+$ terraform import awscc_cognito_user_pool_domain.example "user_pool_id|domain"

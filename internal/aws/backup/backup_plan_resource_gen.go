@@ -9,6 +9,7 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
@@ -105,6 +106,25 @@ func backupPlanResource(ctx context.Context) (resource.Resource, error) {
 		//	          },
 		//	          "EnableContinuousBackup": {
 		//	            "type": "boolean"
+		//	          },
+		//	          "IndexActions": {
+		//	            "insertionOrder": true,
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "ResourceTypes": {
+		//	                  "insertionOrder": true,
+		//	                  "items": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array",
+		//	                  "uniqueItems": true
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": false
 		//	          },
 		//	          "Lifecycle": {
 		//	            "additionalProperties": false,
@@ -278,6 +298,30 @@ func backupPlanResource(ctx context.Context) (resource.Resource, error) {
 								Computed: true,
 								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 									boolplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: IndexActions
+							"index_actions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ResourceTypes
+										"resource_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												listvalidator.UniqueValues(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									listplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Lifecycle
@@ -455,11 +499,13 @@ func backupPlanResource(ctx context.Context) (resource.Resource, error) {
 		"delete_after_days":                         "DeleteAfterDays",
 		"destination_backup_vault_arn":              "DestinationBackupVaultArn",
 		"enable_continuous_backup":                  "EnableContinuousBackup",
+		"index_actions":                             "IndexActions",
 		"lifecycle":                                 "Lifecycle",
 		"move_to_cold_storage_after_days":           "MoveToColdStorageAfterDays",
 		"opt_in_to_archive_for_supported_resources": "OptInToArchiveForSupportedResources",
 		"recovery_point_tags":                       "RecoveryPointTags",
 		"resource_type":                             "ResourceType",
+		"resource_types":                            "ResourceTypes",
 		"rule_name":                                 "RuleName",
 		"schedule_expression":                       "ScheduleExpression",
 		"schedule_expression_timezone":              "ScheduleExpressionTimezone",

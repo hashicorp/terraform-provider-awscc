@@ -92,6 +92,32 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[^:]*:iam::\\d{12}:(role|role/service-role)/[\\w+=,.@-]*$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
+		// Property: DomainVersion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The version of the domain.",
+		//	  "enum": [
+		//	    "V1",
+		//	    "V2"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"domain_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The version of the domain.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"V1",
+					"V2",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -181,6 +207,25 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"portal_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The URL of the data portal for this Amazon DataZone domain.",
 			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ServiceRole
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The service role of the domain that is created.",
+		//	  "pattern": "^arn:aws[^:]*:iam::\\d{12}:(role|role/service-role)/[\\w+=,.@-]*$",
+		//	  "type": "string"
+		//	}
+		"service_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The service role of the domain that is created.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[^:]*:iam::\\d{12}:(role|role/service-role)/[\\w+=,.@-]*$"), ""),
+			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -370,12 +415,14 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"description":           "Description",
 		"domain_execution_role": "DomainExecutionRole",
 		"domain_id":             "Id",
+		"domain_version":        "DomainVersion",
 		"key":                   "Key",
 		"kms_key_identifier":    "KmsKeyIdentifier",
 		"last_updated_at":       "LastUpdatedAt",
 		"managed_account_id":    "ManagedAccountId",
 		"name":                  "Name",
 		"portal_url":            "PortalUrl",
+		"service_role":          "ServiceRole",
 		"single_sign_on":        "SingleSignOn",
 		"status":                "Status",
 		"tags":                  "Tags",
