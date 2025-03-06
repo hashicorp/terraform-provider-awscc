@@ -126,7 +126,9 @@ func linkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "AWS::Logs::LogGroup",
 		//	      "AWS::XRay::Trace",
 		//	      "AWS::ApplicationInsights::Application",
-		//	      "AWS::InternetMonitor::Monitor"
+		//	      "AWS::InternetMonitor::Monitor",
+		//	      "AWS::ApplicationSignals::Service",
+		//	      "AWS::ApplicationSignals::ServiceLevelObjective"
 		//	    ],
 		//	    "type": "string"
 		//	  },

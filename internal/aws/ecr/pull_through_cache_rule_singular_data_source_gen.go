@@ -26,50 +26,50 @@ func pullThroughCacheRuleDataSource(ctx context.Context) (datasource.DataSource,
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The Amazon Resource Name (ARN) of the AWS Secrets Manager secret that identifies the credentials to authenticate to the upstream registry.",
+		//	  "description": "The ARN of the Secrets Manager secret associated with the pull through cache rule.",
 		//	  "maxLength": 612,
 		//	  "minLength": 50,
 		//	  "pattern": "^arn:aws:secretsmanager:[a-zA-Z0-9-:]+:secret:ecr\\-pullthroughcache\\/[a-zA-Z0-9\\/_+=.@-]+$",
 		//	  "type": "string"
 		//	}
 		"credential_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the AWS Secrets Manager secret that identifies the credentials to authenticate to the upstream registry.",
+			Description: "The ARN of the Secrets Manager secret associated with the pull through cache rule.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EcrRepositoryPrefix
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ECRRepositoryPrefix is a custom alias for upstream registry url.",
+		//	  "description": "The Amazon ECR repository prefix associated with the pull through cache rule.",
 		//	  "maxLength": 30,
 		//	  "minLength": 2,
 		//	  "pattern": "(?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*",
 		//	  "type": "string"
 		//	}
 		"ecr_repository_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ECRRepositoryPrefix is a custom alias for upstream registry url.",
+			Description: "The Amazon ECR repository prefix associated with the pull through cache rule.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpstreamRegistry
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The name of the upstream registry.",
+		//	  "description": "The name of the upstream source registry associated with the pull through cache rule.",
 		//	  "type": "string"
 		//	}
 		"upstream_registry": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the upstream registry.",
+			Description: "The name of the upstream source registry associated with the pull through cache rule.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpstreamRegistryUrl
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The upstreamRegistryUrl is the endpoint of upstream registry url of the public repository to be cached",
+		//	  "description": "The upstream registry URL associated with the pull through cache rule.",
 		//	  "type": "string"
 		//	}
 		"upstream_registry_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The upstreamRegistryUrl is the endpoint of upstream registry url of the public repository to be cached",
+			Description: "The upstream registry URL associated with the pull through cache rule.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

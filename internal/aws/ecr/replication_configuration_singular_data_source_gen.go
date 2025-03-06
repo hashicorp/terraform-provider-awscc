@@ -26,11 +26,11 @@ func replicationConfigurationDataSource(ctx context.Context) (datasource.DataSou
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The RegistryId associated with the aws account.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"registry_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The RegistryId associated with the aws account.",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ReplicationConfiguration
@@ -38,27 +38,27 @@ func replicationConfigurationDataSource(ctx context.Context) (datasource.DataSou
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "An object representing the replication configuration for a registry.",
+		//	  "description": "The replication configuration for a registry.",
 		//	  "properties": {
 		//	    "Rules": {
-		//	      "description": "An array of objects representing the replication rules for a replication configuration. A replication configuration may contain a maximum of 10 rules.",
+		//	      "description": "An array of objects representing the replication destinations and repository filters for a replication configuration.",
 		//	      "items": {
 		//	        "additionalProperties": false,
-		//	        "description": "An array of objects representing the details of a replication destination.",
+		//	        "description": "An array of objects representing the replication destinations and repository filters for a replication configuration.",
 		//	        "properties": {
 		//	          "Destinations": {
-		//	            "description": "An array of objects representing the details of a replication destination.",
+		//	            "description": "An array of objects representing the destination for a replication rule.",
 		//	            "items": {
 		//	              "additionalProperties": false,
-		//	              "description": "An array of objects representing the details of a replication destination.",
+		//	              "description": "An array of objects representing the destination for a replication rule.",
 		//	              "properties": {
 		//	                "Region": {
-		//	                  "description": "A Region to replicate to.",
+		//	                  "description": "The Region to replicate to.",
 		//	                  "pattern": "[0-9a-z-]{2,25}",
 		//	                  "type": "string"
 		//	                },
 		//	                "RegistryId": {
-		//	                  "description": "The account ID of the destination registry to replicate to.",
+		//	                  "description": "The AWS account ID of the Amazon ECR private registry to replicate to. When configuring cross-Region replication within your own registry, specify your own account ID.",
 		//	                  "pattern": "^[0-9]{12}$",
 		//	                  "type": "string"
 		//	                }
@@ -74,18 +74,18 @@ func replicationConfigurationDataSource(ctx context.Context) (datasource.DataSou
 		//	            "type": "array"
 		//	          },
 		//	          "RepositoryFilters": {
-		//	            "description": "An array of objects representing the details of a repository filter.",
+		//	            "description": "An array of objects representing the filters for a replication rule. Specifying a repository filter for a replication rule provides a method for controlling which repositories in a private registry are replicated.",
 		//	            "items": {
 		//	              "additionalProperties": false,
-		//	              "description": "An array of objects representing the details of a repository filter.",
+		//	              "description": "The filter settings used with image replication. Specifying a repository filter to a replication rule provides a method for controlling which repositories in a private registry are replicated. If no filters are added, the contents of all repositories are replicated.",
 		//	              "properties": {
 		//	                "Filter": {
-		//	                  "description": "The repository filter to be applied for replication.",
+		//	                  "description": "The repository filter details. When the ``PREFIX_MATCH`` filter type is specified, this value is required and should be the repository name prefix to configure replication for.",
 		//	                  "pattern": "^(?:[a-z0-9]+(?:[._-][a-z0-9]*)*/)*[a-z0-9]*(?:[._-][a-z0-9]*)*$",
 		//	                  "type": "string"
 		//	                },
 		//	                "FilterType": {
-		//	                  "description": "Type of repository filter",
+		//	                  "description": "The repository filter type. The only supported value is ``PREFIX_MATCH``, which is a repository name prefix specified with the ``filter`` parameter.",
 		//	                  "enum": [
 		//	                    "PREFIX_MATCH"
 		//	                  ],
@@ -130,17 +130,17 @@ func replicationConfigurationDataSource(ctx context.Context) (datasource.DataSou
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Region
 										"region": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "A Region to replicate to.",
+											Description: "The Region to replicate to.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: RegistryId
 										"registry_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The account ID of the destination registry to replicate to.",
+											Description: "The AWS account ID of the Amazon ECR private registry to replicate to. When configuring cross-Region replication within your own registry, specify your own account ID.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								Description: "An array of objects representing the details of a replication destination.",
+								Description: "An array of objects representing the destination for a replication rule.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: RepositoryFilters
@@ -149,26 +149,26 @@ func replicationConfigurationDataSource(ctx context.Context) (datasource.DataSou
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Filter
 										"filter": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The repository filter to be applied for replication.",
+											Description: "The repository filter details. When the ``PREFIX_MATCH`` filter type is specified, this value is required and should be the repository name prefix to configure replication for.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: FilterType
 										"filter_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "Type of repository filter",
+											Description: "The repository filter type. The only supported value is ``PREFIX_MATCH``, which is a repository name prefix specified with the ``filter`` parameter.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								Description: "An array of objects representing the details of a repository filter.",
+								Description: "An array of objects representing the filters for a replication rule. Specifying a repository filter for a replication rule provides a method for controlling which repositories in a private registry are replicated.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "An array of objects representing the replication rules for a replication configuration. A replication configuration may contain a maximum of 10 rules.",
+					Description: "An array of objects representing the replication destinations and repository filters for a replication configuration.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "An object representing the replication configuration for a registry.",
+			Description: "The replication configuration for a registry.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

@@ -102,7 +102,9 @@ func dataProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	    "redshift",
 		//	    "mariadb",
 		//	    "mongodb",
-		//	    "docdb"
+		//	    "docdb",
+		//	    "db2",
+		//	    "db2_zos"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -167,6 +169,16 @@ func dataProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	      "required": [
 		//	        "MongoDbSettings"
 		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "IbmDb2LuwSettings"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "IbmDb2zOsSettings"
+		//	      ]
 		//	    }
 		//	  ],
 		//	  "description": "The property identifies the exact type of settings for the data provider.",
@@ -199,6 +211,70 @@ func dataProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	      "required": [
 		//	        "ServerName",
 		//	        "Port",
+		//	        "DatabaseName"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "IbmDb2LuwSettings": {
+		//	      "additionalProperties": false,
+		//	      "description": "IbmDb2LuwSettings property identifier.",
+		//	      "properties": {
+		//	        "CertificateArn": {
+		//	          "type": "string"
+		//	        },
+		//	        "DatabaseName": {
+		//	          "type": "string"
+		//	        },
+		//	        "Port": {
+		//	          "type": "integer"
+		//	        },
+		//	        "ServerName": {
+		//	          "type": "string"
+		//	        },
+		//	        "SslMode": {
+		//	          "enum": [
+		//	            "none",
+		//	            "verify-ca"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ServerName",
+		//	        "Port",
+		//	        "SslMode",
+		//	        "DatabaseName"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "IbmDb2zOsSettings": {
+		//	      "additionalProperties": false,
+		//	      "description": "IbmDb2zOsSettings property identifier.",
+		//	      "properties": {
+		//	        "CertificateArn": {
+		//	          "type": "string"
+		//	        },
+		//	        "DatabaseName": {
+		//	          "type": "string"
+		//	        },
+		//	        "Port": {
+		//	          "type": "integer"
+		//	        },
+		//	        "ServerName": {
+		//	          "type": "string"
+		//	        },
+		//	        "SslMode": {
+		//	          "enum": [
+		//	            "none",
+		//	            "verify-ca"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ServerName",
+		//	        "Port",
+		//	        "SslMode",
 		//	        "DatabaseName"
 		//	      ],
 		//	      "type": "object"
@@ -480,6 +556,60 @@ func dataProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "DocDbSettings property identifier.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IbmDb2LuwSettings
+				"ibm_db_2_luw_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CertificateArn
+						"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: DatabaseName
+						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ServerName
+						"server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SslMode
+						"ssl_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "IbmDb2LuwSettings property identifier.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IbmDb2zOsSettings
+				"ibm_db_2_z_os_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CertificateArn
+						"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: DatabaseName
+						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ServerName
+						"server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SslMode
+						"ssl_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "IbmDb2zOsSettings property identifier.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: MariaDbSettings
@@ -772,6 +902,8 @@ func dataProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"doc_db_settings":               "DocDbSettings",
 		"engine":                        "Engine",
 		"exact_settings":                "ExactSettings",
+		"ibm_db_2_luw_settings":         "IbmDb2LuwSettings",
+		"ibm_db_2_z_os_settings":        "IbmDb2zOsSettings",
 		"key":                           "Key",
 		"maria_db_settings":             "MariaDbSettings",
 		"microsoft_sql_server_settings": "MicrosoftSqlServerSettings",
