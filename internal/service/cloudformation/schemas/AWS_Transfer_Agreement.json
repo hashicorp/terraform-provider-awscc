@@ -116,6 +116,45 @@
         "ENABLED",
         "DISABLED"
       ]
+    },
+    "CustomDirectories": {
+      "description": "Specifies a separate directory for each type of file to store for an AS2 message.",
+      "type": "object",
+      "properties": {
+        "FailedFilesDirectory": {
+          "type": "string",
+          "description": "Specifies a location to store the failed files for an AS2 message.",
+          "pattern": "(|/.*)"
+        },
+        "MdnFilesDirectory": {
+          "type": "string",
+          "description": "Specifies a location to store the MDN file for an AS2 message.",
+          "pattern": "(|/.*)"
+        },
+        "PayloadFilesDirectory": {
+          "type": "string",
+          "description": "Specifies a location to store the payload file for an AS2 message.",
+          "pattern": "(|/.*)"
+        },
+        "StatusFilesDirectory": {
+          "type": "string",
+          "description": "Specifies a location to store the status file for an AS2 message.",
+          "pattern": "(|/.*)"
+        },
+        "TemporaryFilesDirectory": {
+          "type": "string",
+          "description": "Specifies a location to store the temporary processing file for an AS2 message.",
+          "pattern": "(|/.*)"
+        }
+      },
+      "required": [
+        "FailedFilesDirectory",
+        "MdnFilesDirectory",
+        "PayloadFilesDirectory",
+        "StatusFilesDirectory",
+        "TemporaryFilesDirectory"
+      ],
+      "additionalProperties": false
     }
   },
   "additionalProperties": false,
@@ -123,7 +162,6 @@
     "ServerId",
     "LocalProfileId",
     "PartnerProfileId",
-    "BaseDirectory",
     "AccessRole"
   ],
   "readOnlyProperties": [

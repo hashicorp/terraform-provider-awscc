@@ -3,12 +3,14 @@
 page_title: "awscc_ecr_replication_configuration Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  The AWS::ECR::ReplicationConfiguration resource configures the replication destinations for an Amazon Elastic Container Registry (Amazon Private ECR). For more information, see https://docs.aws.amazon.com/AmazonECR/latest/userguide/replication.html
+  The AWS::ECR::ReplicationConfiguration resource creates or updates the replication configuration for a private registry. The first time a replication configuration is applied to a private registry, a service-linked IAM role is created in your account for the replication process. For more information, see Using Service-Linked Roles for Amazon ECR https://docs.aws.amazon.com/AmazonECR/latest/userguide/using-service-linked-roles.html in the Amazon Elastic Container Registry User Guide.
+  When configuring cross-account replication, the destination account must grant the source account permission to replicate. This permission is controlled using a private registry permissions policy. For more information, see AWS::ECR::RegistryPolicy.
 ---
 
 # awscc_ecr_replication_configuration (Resource)
 
-The AWS::ECR::ReplicationConfiguration resource configures the replication destinations for an Amazon Elastic Container Registry (Amazon Private ECR). For more information, see https://docs.aws.amazon.com/AmazonECR/latest/userguide/replication.html
+The ``AWS::ECR::ReplicationConfiguration`` resource creates or updates the replication configuration for a private registry. The first time a replication configuration is applied to a private registry, a service-linked IAM role is created in your account for the replication process. For more information, see [Using Service-Linked Roles for Amazon ECR](https://docs.aws.amazon.com/AmazonECR/latest/userguide/using-service-linked-roles.html) in the *Amazon Elastic Container Registry User Guide*.
+  When configuring cross-account replication, the destination account must grant the source account permission to replicate. This permission is controlled using a private registry permissions policy. For more information, see ``AWS::ECR::RegistryPolicy``.
 
 ## Example Usage
 
@@ -55,38 +57,38 @@ resource "awscc_ecr_replication_configuration" "example" {
 
 ### Required
 
-- `replication_configuration` (Attributes) An object representing the replication configuration for a registry. (see [below for nested schema](#nestedatt--replication_configuration))
+- `replication_configuration` (Attributes) The replication configuration for a registry. (see [below for nested schema](#nestedatt--replication_configuration))
 
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
-- `registry_id` (String) The RegistryId associated with the aws account.
+- `registry_id` (String)
 
 <a id="nestedatt--replication_configuration"></a>
 ### Nested Schema for `replication_configuration`
 
 Required:
 
-- `rules` (Attributes List) An array of objects representing the replication rules for a replication configuration. A replication configuration may contain a maximum of 10 rules. (see [below for nested schema](#nestedatt--replication_configuration--rules))
+- `rules` (Attributes List) An array of objects representing the replication destinations and repository filters for a replication configuration. (see [below for nested schema](#nestedatt--replication_configuration--rules))
 
 <a id="nestedatt--replication_configuration--rules"></a>
 ### Nested Schema for `replication_configuration.rules`
 
 Required:
 
-- `destinations` (Attributes List) An array of objects representing the details of a replication destination. (see [below for nested schema](#nestedatt--replication_configuration--rules--destinations))
+- `destinations` (Attributes List) An array of objects representing the destination for a replication rule. (see [below for nested schema](#nestedatt--replication_configuration--rules--destinations))
 
 Optional:
 
-- `repository_filters` (Attributes List) An array of objects representing the details of a repository filter. (see [below for nested schema](#nestedatt--replication_configuration--rules--repository_filters))
+- `repository_filters` (Attributes List) An array of objects representing the filters for a replication rule. Specifying a repository filter for a replication rule provides a method for controlling which repositories in a private registry are replicated. (see [below for nested schema](#nestedatt--replication_configuration--rules--repository_filters))
 
 <a id="nestedatt--replication_configuration--rules--destinations"></a>
 ### Nested Schema for `replication_configuration.rules.destinations`
 
 Required:
 
-- `region` (String) A Region to replicate to.
-- `registry_id` (String) The account ID of the destination registry to replicate to.
+- `region` (String) The Region to replicate to.
+- `registry_id` (String) The AWS account ID of the Amazon ECR private registry to replicate to. When configuring cross-Region replication within your own registry, specify your own account ID.
 
 
 <a id="nestedatt--replication_configuration--rules--repository_filters"></a>
@@ -94,8 +96,8 @@ Required:
 
 Optional:
 
-- `filter` (String) The repository filter to be applied for replication.
-- `filter_type` (String) Type of repository filter
+- `filter` (String) The repository filter details. When the ``PREFIX_MATCH`` filter type is specified, this value is required and should be the repository name prefix to configure replication for.
+- `filter_type` (String) The repository filter type. The only supported value is ``PREFIX_MATCH``, which is a repository name prefix specified with the ``filter`` parameter.
 
 ## Import
 

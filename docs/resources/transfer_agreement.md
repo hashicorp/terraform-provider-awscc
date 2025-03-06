@@ -123,13 +123,14 @@ resource "awscc_transfer_agreement" "example" {
 ### Required
 
 - `access_role` (String) Specifies the access role for the agreement.
-- `base_directory` (String) Specifies the base directory for the agreement.
 - `local_profile_id` (String) A unique identifier for the local profile.
 - `partner_profile_id` (String) A unique identifier for the partner profile.
 - `server_id` (String) A unique identifier for the server.
 
 ### Optional
 
+- `base_directory` (String) Specifies the base directory for the agreement.
+- `custom_directories` (Attributes) Specifies a separate directory for each type of file to store for an AS2 message. (see [below for nested schema](#nestedatt--custom_directories))
 - `description` (String) A textual description for the agreement.
 - `enforce_message_signing` (String) Specifies whether to enforce an AS2 message is signed for this agreement.
 - `preserve_filename` (String) Specifies whether to preserve the filename received for this agreement.
@@ -141,6 +142,18 @@ resource "awscc_transfer_agreement" "example" {
 - `agreement_id` (String) A unique identifier for the agreement.
 - `arn` (String) Specifies the unique Amazon Resource Name (ARN) for the agreement.
 - `id` (String) Uniquely identifies the resource.
+
+<a id="nestedatt--custom_directories"></a>
+### Nested Schema for `custom_directories`
+
+Optional:
+
+- `failed_files_directory` (String) Specifies a location to store the failed files for an AS2 message.
+- `mdn_files_directory` (String) Specifies a location to store the MDN file for an AS2 message.
+- `payload_files_directory` (String) Specifies a location to store the payload file for an AS2 message.
+- `status_files_directory` (String) Specifies a location to store the status file for an AS2 message.
+- `temporary_files_directory` (String) Specifies a location to store the temporary processing file for an AS2 message.
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

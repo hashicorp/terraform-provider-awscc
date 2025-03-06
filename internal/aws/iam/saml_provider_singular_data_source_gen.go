@@ -8,6 +8,7 @@ package iam
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -22,6 +23,20 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::IAM::SAMLProvider resource.
 func sAMLProviderDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AddPrivateKey
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The private key from your external identity provider",
+		//	  "maxLength": 16384,
+		//	  "minLength": 1,
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"add_private_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The private key from your external identity provider",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -33,6 +48,21 @@ func sAMLProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Amazon Resource Name (ARN) of the SAML provider",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: AssertionEncryptionMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The encryption setting for the SAML provider",
+		//	  "enum": [
+		//	    "Allowed",
+		//	    "Required"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"assertion_encryption_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The encryption setting for the SAML provider",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
@@ -47,6 +77,69 @@ func sAMLProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: PrivateKeyList
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "The private key metadata for the SAML provider",
+		//	    "properties": {
+		//	      "KeyId": {
+		//	        "description": "The unique identifier for the SAML private key.",
+		//	        "maxLength": 64,
+		//	        "minLength": 22,
+		//	        "pattern": "[A-Z0-9]+",
+		//	        "type": "string"
+		//	      },
+		//	      "Timestamp": {
+		//	        "description": "The date and time, in \u003ca href=\\\"http://www.iso.org/iso/iso8601\\\"\u003eISO 8601 date-time \u003c/a\u003e format, when the private key was uploaded.",
+		//	        "format": "date-time",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "KeyId",
+		//	      "Timestamp"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 2,
+		//	  "type": "array"
+		//	}
+		"private_key_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: KeyId
+					"key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The unique identifier for the SAML private key.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Timestamp
+					"timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
+						CustomType:  timetypes.RFC3339Type{},
+						Description: "The date and time, in <a href=\\\"http://www.iso.org/iso/iso8601\\\">ISO 8601 date-time </a> format, when the private key was uploaded.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: RemovePrivateKey
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Key ID of the private key to remove",
+		//	  "maxLength": 64,
+		//	  "minLength": 22,
+		//	  "pattern": "[A-Z0-9]+",
+		//	  "type": "string"
+		//	}
+		"remove_private_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Key ID of the private key to remove",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SamlMetadataDocument
 		// CloudFormation resource type schema:
 		//
@@ -57,6 +150,20 @@ func sAMLProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	}
 		"saml_metadata_document": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: SamlProviderUUID
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The unique identifier assigned to the SAML provider",
+		//	  "maxLength": 64,
+		//	  "minLength": 22,
+		//	  "pattern": "[A-Z0-9]+",
+		//	  "type": "string"
+		//	}
+		"saml_provider_uuid": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier assigned to the SAML provider",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
@@ -123,12 +230,19 @@ func sAMLProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 	opts = opts.WithCloudFormationTypeName("AWS::IAM::SAMLProvider").WithTerraformTypeName("awscc_iam_saml_provider")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                    "Arn",
-		"key":                    "Key",
-		"name":                   "Name",
-		"saml_metadata_document": "SamlMetadataDocument",
-		"tags":                   "Tags",
-		"value":                  "Value",
+		"add_private_key":           "AddPrivateKey",
+		"arn":                       "Arn",
+		"assertion_encryption_mode": "AssertionEncryptionMode",
+		"key":                       "Key",
+		"key_id":                    "KeyId",
+		"name":                      "Name",
+		"private_key_list":          "PrivateKeyList",
+		"remove_private_key":        "RemovePrivateKey",
+		"saml_metadata_document":    "SamlMetadataDocument",
+		"saml_provider_uuid":        "SamlProviderUUID",
+		"tags":                      "Tags",
+		"timestamp":                 "Timestamp",
+		"value":                     "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

@@ -1,4 +1,14 @@
 ## 1.32.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_bedrock_blueprint`
+* **New Data Source:** `awscc_bedrock_blueprints`
+* **New Data Source:** `awscc_bedrock_data_automation_project`
+* **New Data Source:** `awscc_bedrock_data_automation_projects`
+* **New Resource:** `awscc_bedrock_blueprint`
+* **New Resource:** `awscc_bedrock_data_automation_project`
+
 ## 1.31.0 (February 27, 2025)
 
 FEATURES:

@@ -149,7 +149,7 @@ func signalMapResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "description": "Error message associated with a failed creation or failed update attempt of a signal map.",
 		//	  "maxLength": 2048,
-		//	  "minLength": 1,
+		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"error_message": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -228,7 +228,7 @@ func signalMapResource(ctx context.Context) (resource.Resource, error) {
 		//	              "Name": {
 		//	                "description": "The logical name of an AWS media resource.",
 		//	                "maxLength": 256,
-		//	                "minLength": 1,
+		//	                "minLength": 0,
 		//	                "type": "string"
 		//	              }
 		//	            },
@@ -242,7 +242,7 @@ func signalMapResource(ctx context.Context) (resource.Resource, error) {
 		//	        "Name": {
 		//	          "description": "The logical name of an AWS media resource.",
 		//	          "maxLength": 256,
-		//	          "minLength": 1,
+		//	          "minLength": 0,
 		//	          "type": "string"
 		//	        },
 		//	        "Sources": {
@@ -260,7 +260,7 @@ func signalMapResource(ctx context.Context) (resource.Resource, error) {
 		//	              "Name": {
 		//	                "description": "The logical name of an AWS media resource.",
 		//	                "maxLength": 256,
-		//	                "minLength": 1,
+		//	                "minLength": 0,
 		//	                "type": "string"
 		//	              }
 		//	            },
@@ -401,7 +401,7 @@ func signalMapResource(ctx context.Context) (resource.Resource, error) {
 		//	    "DetailsUri": {
 		//	      "description": "URI associated with a signal map's monitor deployment.",
 		//	      "maxLength": 2048,
-		//	      "minLength": 1,
+		//	      "minLength": 0,
 		//	      "type": "string"
 		//	    },
 		//	    "Status": {
@@ -472,7 +472,7 @@ func signalMapResource(ctx context.Context) (resource.Resource, error) {
 		//	              "Name": {
 		//	                "description": "The logical name of an AWS media resource.",
 		//	                "maxLength": 256,
-		//	                "minLength": 1,
+		//	                "minLength": 0,
 		//	                "type": "string"
 		//	              }
 		//	            },
@@ -486,7 +486,7 @@ func signalMapResource(ctx context.Context) (resource.Resource, error) {
 		//	        "Name": {
 		//	          "description": "The logical name of an AWS media resource.",
 		//	          "maxLength": 256,
-		//	          "minLength": 1,
+		//	          "minLength": 0,
 		//	          "type": "string"
 		//	        },
 		//	        "Sources": {
@@ -504,7 +504,7 @@ func signalMapResource(ctx context.Context) (resource.Resource, error) {
 		//	              "Name": {
 		//	                "description": "The logical name of an AWS media resource.",
 		//	                "maxLength": 256,
-		//	                "minLength": 1,
+		//	                "minLength": 0,
 		//	                "type": "string"
 		//	              }
 		//	            },
@@ -614,13 +614,13 @@ func signalMapResource(ctx context.Context) (resource.Resource, error) {
 		//	    "DetailsUri": {
 		//	      "description": "URI associated with a signal map's monitor deployment.",
 		//	      "maxLength": 2048,
-		//	      "minLength": 1,
+		//	      "minLength": 0,
 		//	      "type": "string"
 		//	    },
 		//	    "ErrorMessage": {
 		//	      "description": "Error message associated with a failed monitor deployment of a signal map.",
 		//	      "maxLength": 2048,
-		//	      "minLength": 1,
+		//	      "minLength": 0,
 		//	      "type": "string"
 		//	    },
 		//	    "Status": {

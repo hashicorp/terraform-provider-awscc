@@ -18,13 +18,13 @@ Definition of AWS::MediaLive::EventBridgeRuleTemplate Resource Type
 ### Required
 
 - `event_type` (String) The type of event to match with the rule.
-- `group_identifier` (String) An eventbridge rule template group's identifier. Can be either be its id or current name.
 - `name` (String) A resource's name. Names must be unique within the scope of a resource type in a specific region.
 
 ### Optional
 
 - `description` (String) A resource's optional description.
 - `event_targets` (Attributes List) Placeholder documentation for __listOfEventBridgeRuleTemplateTarget (see [below for nested schema](#nestedatt--event_targets))
+- `group_identifier` (String) An eventbridge rule template group's identifier. Can be either be its id or current name.
 - `tags` (Map of String) Represents the tags associated with a resource.
 
 ### Read-Only

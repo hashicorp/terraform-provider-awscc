@@ -28,3 +28,12 @@ Data Source schema for AWS::CE::CostCategory
 - `rule_version` (String)
 - `rules` (String) JSON array format of Expression in Billing and Cost Management API
 - `split_charge_rules` (String) Json array format of CostCategorySplitChargeRule in Billing and Cost Management API
+- `tags` (Attributes List) Tags to assign to the cost category. (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String) The key name for the tag.
+- `value` (String) The value for the tag.

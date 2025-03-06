@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -93,11 +94,132 @@ func agreementResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"base_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Specifies the base directory for the agreement.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtMost(1024),
 				stringvalidator.RegexMatches(regexp.MustCompile("^(|/.*)$"), ""),
 			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: CustomDirectories
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Specifies a separate directory for each type of file to store for an AS2 message.",
+		//	  "properties": {
+		//	    "FailedFilesDirectory": {
+		//	      "description": "Specifies a location to store the failed files for an AS2 message.",
+		//	      "pattern": "(|/.*)",
+		//	      "type": "string"
+		//	    },
+		//	    "MdnFilesDirectory": {
+		//	      "description": "Specifies a location to store the MDN file for an AS2 message.",
+		//	      "pattern": "(|/.*)",
+		//	      "type": "string"
+		//	    },
+		//	    "PayloadFilesDirectory": {
+		//	      "description": "Specifies a location to store the payload file for an AS2 message.",
+		//	      "pattern": "(|/.*)",
+		//	      "type": "string"
+		//	    },
+		//	    "StatusFilesDirectory": {
+		//	      "description": "Specifies a location to store the status file for an AS2 message.",
+		//	      "pattern": "(|/.*)",
+		//	      "type": "string"
+		//	    },
+		//	    "TemporaryFilesDirectory": {
+		//	      "description": "Specifies a location to store the temporary processing file for an AS2 message.",
+		//	      "pattern": "(|/.*)",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "FailedFilesDirectory",
+		//	    "MdnFilesDirectory",
+		//	    "PayloadFilesDirectory",
+		//	    "StatusFilesDirectory",
+		//	    "TemporaryFilesDirectory"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"custom_directories": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FailedFilesDirectory
+				"failed_files_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies a location to store the failed files for an AS2 message.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.RegexMatches(regexp.MustCompile("(|/.*)"), ""),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MdnFilesDirectory
+				"mdn_files_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies a location to store the MDN file for an AS2 message.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.RegexMatches(regexp.MustCompile("(|/.*)"), ""),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: PayloadFilesDirectory
+				"payload_files_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies a location to store the payload file for an AS2 message.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.RegexMatches(regexp.MustCompile("(|/.*)"), ""),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: StatusFilesDirectory
+				"status_files_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies a location to store the status file for an AS2 message.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.RegexMatches(regexp.MustCompile("(|/.*)"), ""),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: TemporaryFilesDirectory
+				"temporary_files_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies a location to store the temporary processing file for an AS2 message.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.RegexMatches(regexp.MustCompile("(|/.*)"), ""),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies a separate directory for each type of file to store for an AS2 message.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
@@ -348,20 +470,26 @@ func agreementResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Transfer::Agreement").WithTerraformTypeName("awscc_transfer_agreement")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"access_role":             "AccessRole",
-		"agreement_id":            "AgreementId",
-		"arn":                     "Arn",
-		"base_directory":          "BaseDirectory",
-		"description":             "Description",
-		"enforce_message_signing": "EnforceMessageSigning",
-		"key":                     "Key",
-		"local_profile_id":        "LocalProfileId",
-		"partner_profile_id":      "PartnerProfileId",
-		"preserve_filename":       "PreserveFilename",
-		"server_id":               "ServerId",
-		"status":                  "Status",
-		"tags":                    "Tags",
-		"value":                   "Value",
+		"access_role":               "AccessRole",
+		"agreement_id":              "AgreementId",
+		"arn":                       "Arn",
+		"base_directory":            "BaseDirectory",
+		"custom_directories":        "CustomDirectories",
+		"description":               "Description",
+		"enforce_message_signing":   "EnforceMessageSigning",
+		"failed_files_directory":    "FailedFilesDirectory",
+		"key":                       "Key",
+		"local_profile_id":          "LocalProfileId",
+		"mdn_files_directory":       "MdnFilesDirectory",
+		"partner_profile_id":        "PartnerProfileId",
+		"payload_files_directory":   "PayloadFilesDirectory",
+		"preserve_filename":         "PreserveFilename",
+		"server_id":                 "ServerId",
+		"status":                    "Status",
+		"status_files_directory":    "StatusFilesDirectory",
+		"tags":                      "Tags",
+		"temporary_files_directory": "TemporaryFilesDirectory",
+		"value":                     "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

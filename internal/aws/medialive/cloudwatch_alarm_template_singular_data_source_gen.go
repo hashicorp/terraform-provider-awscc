@@ -254,6 +254,7 @@ func cloudWatchAlarmTemplateDataSource(ctx context.Context) (datasource.DataSour
 		//	    "MEDIAPACKAGE_CHANNEL",
 		//	    "MEDIAPACKAGE_ORIGIN_ENDPOINT",
 		//	    "MEDIACONNECT_FLOW",
+		//	    "MEDIATAILOR_PLAYBACK_CONFIGURATION",
 		//	    "S3_BUCKET"
 		//	  ],
 		//	  "type": "string"

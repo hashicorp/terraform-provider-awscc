@@ -301,6 +301,18 @@
     "/properties/OauthToken",
     "/properties/AutoBranchCreationConfig"
   ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "amplify:TagResource",
+      "amplify:ListTagsForResource",
+      "amplify:UntagResource"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [

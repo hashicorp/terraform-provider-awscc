@@ -9,6 +9,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -29,6 +31,29 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::IAM::SAMLProvider resource.
 func sAMLProviderResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AddPrivateKey
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The private key from your external identity provider",
+		//	  "maxLength": 16384,
+		//	  "minLength": 1,
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"add_private_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The private key from your external identity provider",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 16384),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// AddPrivateKey is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -41,6 +66,31 @@ func sAMLProviderResource(ctx context.Context) (resource.Resource, error) {
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Amazon Resource Name (ARN) of the SAML provider",
 			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AssertionEncryptionMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The encryption setting for the SAML provider",
+		//	  "enum": [
+		//	    "Allowed",
+		//	    "Required"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"assertion_encryption_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The encryption setting for the SAML provider",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"Allowed",
+					"Required",
+				),
+			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -66,6 +116,103 @@ func sAMLProviderResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: PrivateKeyList
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "The private key metadata for the SAML provider",
+		//	    "properties": {
+		//	      "KeyId": {
+		//	        "description": "The unique identifier for the SAML private key.",
+		//	        "maxLength": 64,
+		//	        "minLength": 22,
+		//	        "pattern": "[A-Z0-9]+",
+		//	        "type": "string"
+		//	      },
+		//	      "Timestamp": {
+		//	        "description": "The date and time, in \u003ca href=\\\"http://www.iso.org/iso/iso8601\\\"\u003eISO 8601 date-time \u003c/a\u003e format, when the private key was uploaded.",
+		//	        "format": "date-time",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "KeyId",
+		//	      "Timestamp"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 2,
+		//	  "type": "array"
+		//	}
+		"private_key_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: KeyId
+					"key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The unique identifier for the SAML private key.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(22, 64),
+							stringvalidator.RegexMatches(regexp.MustCompile("[A-Z0-9]+"), ""),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Timestamp
+					"timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
+						CustomType:  timetypes.RFC3339Type{},
+						Description: "The date and time, in <a href=\\\"http://www.iso.org/iso/iso8601\\\">ISO 8601 date-time </a> format, when the private key was uploaded.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeAtMost(2),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RemovePrivateKey
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Key ID of the private key to remove",
+		//	  "maxLength": 64,
+		//	  "minLength": 22,
+		//	  "pattern": "[A-Z0-9]+",
+		//	  "type": "string"
+		//	}
+		"remove_private_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Key ID of the private key to remove",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(22, 64),
+				stringvalidator.RegexMatches(regexp.MustCompile("[A-Z0-9]+"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// RemovePrivateKey is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: SamlMetadataDocument
 		// CloudFormation resource type schema:
 		//
@@ -75,10 +222,31 @@ func sAMLProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"saml_metadata_document": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
+			Optional: true,
+			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1000, 10000000),
 			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SamlProviderUUID
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The unique identifier assigned to the SAML provider",
+		//	  "maxLength": 64,
+		//	  "minLength": 22,
+		//	  "pattern": "[A-Z0-9]+",
+		//	  "type": "string"
+		//	}
+		"saml_provider_uuid": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier assigned to the SAML provider",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
@@ -171,14 +339,25 @@ func sAMLProviderResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::IAM::SAMLProvider").WithTerraformTypeName("awscc_iam_saml_provider")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                    "Arn",
-		"key":                    "Key",
-		"name":                   "Name",
-		"saml_metadata_document": "SamlMetadataDocument",
-		"tags":                   "Tags",
-		"value":                  "Value",
+		"add_private_key":           "AddPrivateKey",
+		"arn":                       "Arn",
+		"assertion_encryption_mode": "AssertionEncryptionMode",
+		"key":                       "Key",
+		"key_id":                    "KeyId",
+		"name":                      "Name",
+		"private_key_list":          "PrivateKeyList",
+		"remove_private_key":        "RemovePrivateKey",
+		"saml_metadata_document":    "SamlMetadataDocument",
+		"saml_provider_uuid":        "SamlProviderUUID",
+		"tags":                      "Tags",
+		"timestamp":                 "Timestamp",
+		"value":                     "Value",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/AddPrivateKey",
+		"/properties/RemovePrivateKey",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

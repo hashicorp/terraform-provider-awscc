@@ -77,6 +77,79 @@ func agreementDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Specifies the base directory for the agreement.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: CustomDirectories
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Specifies a separate directory for each type of file to store for an AS2 message.",
+		//	  "properties": {
+		//	    "FailedFilesDirectory": {
+		//	      "description": "Specifies a location to store the failed files for an AS2 message.",
+		//	      "pattern": "(|/.*)",
+		//	      "type": "string"
+		//	    },
+		//	    "MdnFilesDirectory": {
+		//	      "description": "Specifies a location to store the MDN file for an AS2 message.",
+		//	      "pattern": "(|/.*)",
+		//	      "type": "string"
+		//	    },
+		//	    "PayloadFilesDirectory": {
+		//	      "description": "Specifies a location to store the payload file for an AS2 message.",
+		//	      "pattern": "(|/.*)",
+		//	      "type": "string"
+		//	    },
+		//	    "StatusFilesDirectory": {
+		//	      "description": "Specifies a location to store the status file for an AS2 message.",
+		//	      "pattern": "(|/.*)",
+		//	      "type": "string"
+		//	    },
+		//	    "TemporaryFilesDirectory": {
+		//	      "description": "Specifies a location to store the temporary processing file for an AS2 message.",
+		//	      "pattern": "(|/.*)",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "FailedFilesDirectory",
+		//	    "MdnFilesDirectory",
+		//	    "PayloadFilesDirectory",
+		//	    "StatusFilesDirectory",
+		//	    "TemporaryFilesDirectory"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"custom_directories": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FailedFilesDirectory
+				"failed_files_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies a location to store the failed files for an AS2 message.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MdnFilesDirectory
+				"mdn_files_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies a location to store the MDN file for an AS2 message.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PayloadFilesDirectory
+				"payload_files_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies a location to store the payload file for an AS2 message.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: StatusFilesDirectory
+				"status_files_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies a location to store the status file for an AS2 message.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TemporaryFilesDirectory
+				"temporary_files_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies a location to store the temporary processing file for an AS2 message.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies a separate directory for each type of file to store for an AS2 message.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -246,20 +319,26 @@ func agreementDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Transfer::Agreement").WithTerraformTypeName("awscc_transfer_agreement")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"access_role":             "AccessRole",
-		"agreement_id":            "AgreementId",
-		"arn":                     "Arn",
-		"base_directory":          "BaseDirectory",
-		"description":             "Description",
-		"enforce_message_signing": "EnforceMessageSigning",
-		"key":                     "Key",
-		"local_profile_id":        "LocalProfileId",
-		"partner_profile_id":      "PartnerProfileId",
-		"preserve_filename":       "PreserveFilename",
-		"server_id":               "ServerId",
-		"status":                  "Status",
-		"tags":                    "Tags",
-		"value":                   "Value",
+		"access_role":               "AccessRole",
+		"agreement_id":              "AgreementId",
+		"arn":                       "Arn",
+		"base_directory":            "BaseDirectory",
+		"custom_directories":        "CustomDirectories",
+		"description":               "Description",
+		"enforce_message_signing":   "EnforceMessageSigning",
+		"failed_files_directory":    "FailedFilesDirectory",
+		"key":                       "Key",
+		"local_profile_id":          "LocalProfileId",
+		"mdn_files_directory":       "MdnFilesDirectory",
+		"partner_profile_id":        "PartnerProfileId",
+		"payload_files_directory":   "PayloadFilesDirectory",
+		"preserve_filename":         "PreserveFilename",
+		"server_id":                 "ServerId",
+		"status":                    "Status",
+		"status_files_directory":    "StatusFilesDirectory",
+		"tags":                      "Tags",
+		"temporary_files_directory": "TemporaryFilesDirectory",
+		"value":                     "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

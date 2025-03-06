@@ -3,12 +3,12 @@
 page_title: "awscc_ce_cost_category Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Cost Category enables you to map your cost and usage into meaningful categories. You can use Cost Category to organize your costs using a rule-based engine.
+  Resource Type definition for AWS::CE::CostCategory. Cost Category enables you to map your cost and usage into meaningful categories. You can use Cost Category to organize your costs using a rule-based engine.
 ---
 
 # awscc_ce_cost_category (Resource)
 
-Cost Category enables you to map your cost and usage into meaningful categories. You can use Cost Category to organize your costs using a rule-based engine.
+Resource Type definition for AWS::CE::CostCategory. Cost Category enables you to map your cost and usage into meaningful categories. You can use Cost Category to organize your costs using a rule-based engine.
 
 ## Example Usage
 
@@ -79,12 +79,21 @@ resource "awscc_ce_cost_category" "example" {
 
 - `default_value` (String) The default value for the cost category
 - `split_charge_rules` (String) Json array format of CostCategorySplitChargeRule in Billing and Cost Management API
+- `tags` (Attributes List) Tags to assign to the cost category. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `arn` (String) Cost category ARN
 - `effective_start` (String) ISO 8601 date time with offset format
 - `id` (String) Uniquely identifies the resource.
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String) The key name for the tag.
+- `value` (String) The value for the tag.
 
 ## Import
 

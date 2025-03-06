@@ -185,10 +185,8 @@
         "iotsitewise:UpdateGatewayCapabilityConfiguration",
         "iam:PassRole",
         "iam:GetRole",
-        "greengrass:GetCoreDevice",
         "iotsitewise:ListTagsForResource",
-        "iotsitewise:TagResource",
-        "iot:DescribeThing"
+        "iotsitewise:TagResource"
       ]
     },
     "read": {

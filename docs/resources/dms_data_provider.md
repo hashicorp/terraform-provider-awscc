@@ -69,6 +69,8 @@ resource "awscc_dms_data_provider" "example" {
 Optional:
 
 - `doc_db_settings` (Attributes) DocDbSettings property identifier. (see [below for nested schema](#nestedatt--settings--doc_db_settings))
+- `ibm_db_2_luw_settings` (Attributes) IbmDb2LuwSettings property identifier. (see [below for nested schema](#nestedatt--settings--ibm_db_2_luw_settings))
+- `ibm_db_2_z_os_settings` (Attributes) IbmDb2zOsSettings property identifier. (see [below for nested schema](#nestedatt--settings--ibm_db_2_z_os_settings))
 - `maria_db_settings` (Attributes) MariaDbSettings property identifier. (see [below for nested schema](#nestedatt--settings--maria_db_settings))
 - `microsoft_sql_server_settings` (Attributes) MicrosoftSqlServerSettings property identifier. (see [below for nested schema](#nestedatt--settings--microsoft_sql_server_settings))
 - `mongo_db_settings` (Attributes) MongoDbSettings property identifier. (see [below for nested schema](#nestedatt--settings--mongo_db_settings))
@@ -79,6 +81,30 @@ Optional:
 
 <a id="nestedatt--settings--doc_db_settings"></a>
 ### Nested Schema for `settings.doc_db_settings`
+
+Optional:
+
+- `certificate_arn` (String)
+- `database_name` (String)
+- `port` (Number)
+- `server_name` (String)
+- `ssl_mode` (String)
+
+
+<a id="nestedatt--settings--ibm_db_2_luw_settings"></a>
+### Nested Schema for `settings.ibm_db_2_luw_settings`
+
+Optional:
+
+- `certificate_arn` (String)
+- `database_name` (String)
+- `port` (Number)
+- `server_name` (String)
+- `ssl_mode` (String)
+
+
+<a id="nestedatt--settings--ibm_db_2_z_os_settings"></a>
+### Nested Schema for `settings.ibm_db_2_z_os_settings`
 
 Optional:
 

@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_local_gateway_route_table Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Describes a route table for a local gateway.
+  Resource Type definition for Local Gateway Route Table which describes a route table for a local gateway.
 ---
 
 # awscc_ec2_local_gateway_route_table (Resource)
 
-Describes a route table for a local gateway.
+Resource Type definition for Local Gateway Route Table which describes a route table for a local gateway.
 
 
 

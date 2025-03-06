@@ -98,10 +98,47 @@ func accountAuditConfigurationResource(ctx context.Context) (resource.Resource, 
 		//	      },
 		//	      "type": "object"
 		//	    },
+		//	    "DeviceCertificateAgeCheck": {
+		//	      "additionalProperties": false,
+		//	      "description": "A structure containing the configName and corresponding configValue for configuring DeviceCertAgeCheck.",
+		//	      "properties": {
+		//	        "Configuration": {
+		//	          "additionalProperties": false,
+		//	          "description": "A structure containing the configName and corresponding configValue for configuring audit checks.",
+		//	          "properties": {
+		//	            "CertAgeThresholdInDays": {
+		//	              "description": "The configValue for configuring audit checks.",
+		//	              "maxLength": 64,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "Enabled": {
+		//	          "description": "True if the check is enabled.",
+		//	          "type": "boolean"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "DeviceCertificateExpiringCheck": {
 		//	      "additionalProperties": false,
-		//	      "description": "The configuration for a specific audit check.",
+		//	      "description": "A structure containing the configName and corresponding configValue for configuring DeviceCertExpirationCheck.",
 		//	      "properties": {
+		//	        "Configuration": {
+		//	          "additionalProperties": false,
+		//	          "description": "A structure containing the configName and corresponding configValue for configuring audit checks.",
+		//	          "properties": {
+		//	            "CertExpirationThresholdInDays": {
+		//	              "description": "The configValue for configuring audit checks.",
+		//	              "maxLength": 64,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
 		//	        "Enabled": {
 		//	          "description": "True if the check is enabled.",
 		//	          "type": "boolean"
@@ -315,9 +352,32 @@ func accountAuditConfigurationResource(ctx context.Context) (resource.Resource, 
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
-				// Property: DeviceCertificateExpiringCheck
-				"device_certificate_expiring_check": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+				// Property: DeviceCertificateAgeCheck
+				"device_certificate_age_check": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Configuration
+						"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CertAgeThresholdInDays
+								"cert_age_threshold_in_days": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The configValue for configuring audit checks.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 64),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A structure containing the configName and corresponding configValue for configuring audit checks.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: Enabled
 						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Description: "True if the check is enabled.",
@@ -328,7 +388,50 @@ func accountAuditConfigurationResource(ctx context.Context) (resource.Resource, 
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "The configuration for a specific audit check.",
+					Description: "A structure containing the configName and corresponding configValue for configuring DeviceCertAgeCheck.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: DeviceCertificateExpiringCheck
+				"device_certificate_expiring_check": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Configuration
+						"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CertExpirationThresholdInDays
+								"cert_expiration_threshold_in_days": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The configValue for configuring audit checks.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 64),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A structure containing the configName and corresponding configValue for configuring audit checks.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "True if the check is enabled.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "A structure containing the configName and corresponding configValue for configuring DeviceCertExpirationCheck.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -687,7 +790,11 @@ func accountAuditConfigurationResource(ctx context.Context) (resource.Resource, 
 		"authenticated_cognito_role_overly_permissive_check":           "AuthenticatedCognitoRoleOverlyPermissiveCheck",
 		"ca_certificate_expiring_check":                                "CaCertificateExpiringCheck",
 		"ca_certificate_key_quality_check":                             "CaCertificateKeyQualityCheck",
+		"cert_age_threshold_in_days":                                   "CertAgeThresholdInDays",
+		"cert_expiration_threshold_in_days":                            "CertExpirationThresholdInDays",
+		"configuration":                                                "Configuration",
 		"conflicting_client_ids_check":                                 "ConflictingClientIdsCheck",
+		"device_certificate_age_check":                                 "DeviceCertificateAgeCheck",
 		"device_certificate_expiring_check":                            "DeviceCertificateExpiringCheck",
 		"device_certificate_key_quality_check":                         "DeviceCertificateKeyQualityCheck",
 		"device_certificate_shared_check":                              "DeviceCertificateSharedCheck",
