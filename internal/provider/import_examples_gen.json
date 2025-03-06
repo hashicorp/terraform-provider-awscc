@@ -590,9 +590,19 @@
         "path": "./examples/resources/awscc_bedrock_application_inference_profile/import.sh"
     },
     {
+        "resource": "awscc_bedrock_blueprint",
+        "identifier": ["BlueprintArn"],
+        "path": "./examples/resources/awscc_bedrock_blueprint/import.sh"
+    },
+    {
         "resource": "awscc_bedrock_data_source",
         "identifier": ["KnowledgeBaseId","DataSourceId"],
         "path": "./examples/resources/awscc_bedrock_data_source/import.sh"
+    },
+    {
+        "resource": "awscc_bedrock_data_automation_project",
+        "identifier": ["ProjectArn"],
+        "path": "./examples/resources/awscc_bedrock_data_automation_project/import.sh"
     },
     {
         "resource": "awscc_bedrock_flow_alias",

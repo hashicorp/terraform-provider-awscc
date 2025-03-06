@@ -606,9 +606,17 @@ resource_schema "aws_bedrock_application_inference_profile" {
   cloudformation_type_name = "AWS::Bedrock::ApplicationInferenceProfile"
 }
 
+resource_schema "aws_bedrock_blueprint" {
+  cloudformation_type_name = "AWS::Bedrock::Blueprint"
+}
+
 resource_schema "aws_bedrock_data_source" {
   cloudformation_type_name               = "AWS::Bedrock::DataSource"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_bedrock_data_automation_project" {
+  cloudformation_type_name = "AWS::Bedrock::DataAutomationProject"
 }
 
 resource_schema "aws_bedrock_flow" {
@@ -3720,6 +3728,16 @@ resource_schema "aws_opensearchserverless_lifecycle_policy" {
 resource_schema "aws_opensearchserverless_security_config" {
   cloudformation_type_name               = "AWS::OpenSearchServerless::SecurityConfig"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_opensearchserverless_index" {
+  cloudformation_type_name               = "AWS::OpenSearchServerless::Index"
+
+  # Suppression Reason:
+# Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/95
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_opensearchserverless_security_policy" {
