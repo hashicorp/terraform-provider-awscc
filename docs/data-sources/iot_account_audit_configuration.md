@@ -35,7 +35,8 @@ Read-Only:
 - `ca_certificate_expiring_check` (Attributes) The configuration for a specific audit check. (see [below for nested schema](#nestedatt--audit_check_configurations--ca_certificate_expiring_check))
 - `ca_certificate_key_quality_check` (Attributes) The configuration for a specific audit check. (see [below for nested schema](#nestedatt--audit_check_configurations--ca_certificate_key_quality_check))
 - `conflicting_client_ids_check` (Attributes) The configuration for a specific audit check. (see [below for nested schema](#nestedatt--audit_check_configurations--conflicting_client_ids_check))
-- `device_certificate_expiring_check` (Attributes) The configuration for a specific audit check. (see [below for nested schema](#nestedatt--audit_check_configurations--device_certificate_expiring_check))
+- `device_certificate_age_check` (Attributes) A structure containing the configName and corresponding configValue for configuring DeviceCertAgeCheck. (see [below for nested schema](#nestedatt--audit_check_configurations--device_certificate_age_check))
+- `device_certificate_expiring_check` (Attributes) A structure containing the configName and corresponding configValue for configuring DeviceCertExpirationCheck. (see [below for nested schema](#nestedatt--audit_check_configurations--device_certificate_expiring_check))
 - `device_certificate_key_quality_check` (Attributes) The configuration for a specific audit check. (see [below for nested schema](#nestedatt--audit_check_configurations--device_certificate_key_quality_check))
 - `device_certificate_shared_check` (Attributes) The configuration for a specific audit check. (see [below for nested schema](#nestedatt--audit_check_configurations--device_certificate_shared_check))
 - `intermediate_ca_revoked_for_active_device_certificates_check` (Attributes) The configuration for a specific audit check. (see [below for nested schema](#nestedatt--audit_check_configurations--intermediate_ca_revoked_for_active_device_certificates_check))
@@ -80,12 +81,38 @@ Read-Only:
 - `enabled` (Boolean) True if the check is enabled.
 
 
+<a id="nestedatt--audit_check_configurations--device_certificate_age_check"></a>
+### Nested Schema for `audit_check_configurations.device_certificate_age_check`
+
+Read-Only:
+
+- `configuration` (Attributes) A structure containing the configName and corresponding configValue for configuring audit checks. (see [below for nested schema](#nestedatt--audit_check_configurations--device_certificate_age_check--configuration))
+- `enabled` (Boolean) True if the check is enabled.
+
+<a id="nestedatt--audit_check_configurations--device_certificate_age_check--configuration"></a>
+### Nested Schema for `audit_check_configurations.device_certificate_age_check.configuration`
+
+Read-Only:
+
+- `cert_age_threshold_in_days` (String) The configValue for configuring audit checks.
+
+
+
 <a id="nestedatt--audit_check_configurations--device_certificate_expiring_check"></a>
 ### Nested Schema for `audit_check_configurations.device_certificate_expiring_check`
 
 Read-Only:
 
+- `configuration` (Attributes) A structure containing the configName and corresponding configValue for configuring audit checks. (see [below for nested schema](#nestedatt--audit_check_configurations--device_certificate_expiring_check--configuration))
 - `enabled` (Boolean) True if the check is enabled.
+
+<a id="nestedatt--audit_check_configurations--device_certificate_expiring_check--configuration"></a>
+### Nested Schema for `audit_check_configurations.device_certificate_expiring_check.configuration`
+
+Read-Only:
+
+- `cert_expiration_threshold_in_days` (String) The configValue for configuring audit checks.
+
 
 
 <a id="nestedatt--audit_check_configurations--device_certificate_key_quality_check"></a>

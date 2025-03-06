@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_local_gateway_route_table_virtual_interface_group_association Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Describes a local gateway route table virtual interface group association for a local gateway.
+  Resource Type definition for Local Gateway Route Table Virtual Interface Group Association which describes a local gateway route table virtual interface group association for a local gateway.
 ---
 
 # awscc_ec2_local_gateway_route_table_virtual_interface_group_association (Resource)
 
-Describes a local gateway route table virtual interface group association for a local gateway.
+Resource Type definition for Local Gateway Route Table Virtual Interface Group Association which describes a local gateway route table virtual interface group association for a local gateway.
 
 
 

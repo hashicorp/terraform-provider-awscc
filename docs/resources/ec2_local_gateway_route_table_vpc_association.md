@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_local_gateway_route_table_vpc_association Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Describes an association between a local gateway route table and a VPC.
+  Resource Type definition for Local Gateway Route Table VPC Association which describes an association between a local gateway route table and a VPC.
 ---
 
 # awscc_ec2_local_gateway_route_table_vpc_association (Resource)
 
-Describes an association between a local gateway route table and a VPC.
+Resource Type definition for Local Gateway Route Table VPC Association which describes an association between a local gateway route table and a VPC.
 
 
 

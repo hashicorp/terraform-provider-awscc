@@ -63,7 +63,6 @@ resource "awscc_medialive_cloudwatch_alarm_template" "example" {
 ### Required
 
 - `comparison_operator` (String) The comparison operator used to compare the specified statistic and the threshold.
-- `group_identifier` (String) A cloudwatch alarm template group's identifier. Can be either be its id or current name.
 - `metric_name` (String) The name of the metric associated with the alarm. Must be compatible with targetResourceType.
 - `name` (String) A resource's name. Names must be unique within the scope of a resource type in a specific region.
 - `statistic` (String) The statistic to apply to the alarm's metric data.
@@ -75,6 +74,7 @@ resource "awscc_medialive_cloudwatch_alarm_template" "example" {
 - `datapoints_to_alarm` (Number) The number of datapoints within the evaluation period that must be breaching to trigger the alarm.
 - `description` (String) A resource's optional description.
 - `evaluation_periods` (Number) The number of periods over which data is compared to the specified threshold.
+- `group_identifier` (String) A cloudwatch alarm template group's identifier. Can be either be its id or current name.
 - `period` (Number) The period, in seconds, over which the specified statistic is applied.
 - `tags` (Map of String) Represents the tags associated with a resource.
 - `threshold` (Number) The threshold value to compare with the specified statistic.
