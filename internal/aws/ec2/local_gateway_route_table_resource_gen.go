@@ -200,7 +200,7 @@ func localGatewayRouteTableResource(ctx context.Context) (resource.Resource, err
 	}
 
 	schema := schema.Schema{
-		Description: "Describes a route table for a local gateway.",
+		Description: "Resource Type definition for Local Gateway Route Table which describes a route table for a local gateway.",
 		Version:     1,
 		Attributes:  attributes,
 	}

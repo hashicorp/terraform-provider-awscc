@@ -176,10 +176,14 @@ func cloudWatchAlarmTemplateResource(ctx context.Context) (resource.Resource, er
 		//	}
 		"group_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A cloudwatch alarm template group's identifier. Can be either be its id or current name.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.RegexMatches(regexp.MustCompile("^[^\\s]+$"), ""),
 			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 			// GroupIdentifier is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Id
@@ -345,6 +349,7 @@ func cloudWatchAlarmTemplateResource(ctx context.Context) (resource.Resource, er
 		//	    "MEDIAPACKAGE_CHANNEL",
 		//	    "MEDIAPACKAGE_ORIGIN_ENDPOINT",
 		//	    "MEDIACONNECT_FLOW",
+		//	    "MEDIATAILOR_PLAYBACK_CONFIGURATION",
 		//	    "S3_BUCKET"
 		//	  ],
 		//	  "type": "string"
@@ -361,6 +366,7 @@ func cloudWatchAlarmTemplateResource(ctx context.Context) (resource.Resource, er
 					"MEDIAPACKAGE_CHANNEL",
 					"MEDIAPACKAGE_ORIGIN_ENDPOINT",
 					"MEDIACONNECT_FLOW",
+					"MEDIATAILOR_PLAYBACK_CONFIGURATION",
 					"S3_BUCKET",
 				),
 			}, /*END VALIDATORS*/

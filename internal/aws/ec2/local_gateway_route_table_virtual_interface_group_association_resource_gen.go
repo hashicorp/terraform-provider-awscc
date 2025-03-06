@@ -198,7 +198,7 @@ func localGatewayRouteTableVirtualInterfaceGroupAssociationResource(ctx context.
 	}
 
 	schema := schema.Schema{
-		Description: "Describes a local gateway route table virtual interface group association for a local gateway.",
+		Description: "Resource Type definition for Local Gateway Route Table Virtual Interface Group Association which describes a local gateway route table virtual interface group association for a local gateway.",
 		Version:     1,
 		Attributes:  attributes,
 	}

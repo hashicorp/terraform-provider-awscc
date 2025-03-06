@@ -170,7 +170,7 @@ func localGatewayRouteTableVPCAssociationResource(ctx context.Context) (resource
 	}
 
 	schema := schema.Schema{
-		Description: "Describes an association between a local gateway route table and a VPC.",
+		Description: "Resource Type definition for Local Gateway Route Table VPC Association which describes an association between a local gateway route table and a VPC.",
 		Version:     1,
 		Attributes:  attributes,
 	}
