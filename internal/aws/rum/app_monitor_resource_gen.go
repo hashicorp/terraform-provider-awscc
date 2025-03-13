@@ -618,6 +618,63 @@ func appMonitorResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ResourcePolicy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "A structure that defines resource policy attached to your app monitor.",
+		//	  "properties": {
+		//	    "PolicyDocument": {
+		//	      "description": "The JSON to use as the resource policy. The document can be up to 4 KB in size. ",
+		//	      "type": "string"
+		//	    },
+		//	    "PolicyRevisionId": {
+		//	      "description": "A string value that you can use to conditionally update your policy. You can provide the revision ID of your existing policy to make mutating requests against that policy. \n\n When you assign a policy revision ID, then later requests about that policy will be rejected with an InvalidPolicyRevisionIdException error if they don't provide the correct current revision ID.",
+		//	      "maxLength": 255,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "PolicyDocument"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"resource_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PolicyDocument
+				"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The JSON to use as the resource policy. The document can be up to 4 KB in size. ",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: PolicyRevisionId
+				"policy_revision_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A string value that you can use to conditionally update your policy. You can provide the revision ID of your existing policy to make mutating requests against that policy. \n\n When you assign a policy revision ID, then later requests about that policy will be rejected with an InvalidPolicyRevisionIdException error if they don't provide the correct current revision ID.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 255),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A structure that defines resource policy attached to your app monitor.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -733,6 +790,9 @@ func appMonitorResource(ctx context.Context) (resource.Resource, error) {
 		"metric_destinations":       "MetricDestinations",
 		"name":                      "Name",
 		"namespace":                 "Namespace",
+		"policy_document":           "PolicyDocument",
+		"policy_revision_id":        "PolicyRevisionId",
+		"resource_policy":           "ResourcePolicy",
 		"session_sample_rate":       "SessionSampleRate",
 		"status":                    "Status",
 		"tags":                      "Tags",

@@ -8,6 +8,8 @@ package ec2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
@@ -121,6 +123,40 @@ func vPCEndpointServiceResource(ctx context.Context) (resource.Resource, error) 
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: SupportedIpAddressTypes
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specify which Ip Address types are supported for VPC endpoint service.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "enum": [
+		//	      "ipv4",
+		//	      "ipv6"
+		//	    ],
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"supported_ip_address_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Specify which Ip Address types are supported for VPC endpoint service.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.ValueStringsAre(
+					stringvalidator.OneOf(
+						"ipv4",
+						"ipv6",
+					),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -210,6 +246,7 @@ func vPCEndpointServiceResource(ctx context.Context) (resource.Resource, error) 
 		"network_load_balancer_arns":   "NetworkLoadBalancerArns",
 		"payer_responsibility":         "PayerResponsibility",
 		"service_id":                   "ServiceId",
+		"supported_ip_address_types":   "SupportedIpAddressTypes",
 		"tags":                         "Tags",
 		"value":                        "Value",
 	})

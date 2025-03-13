@@ -273,6 +273,28 @@ func microsoftTeamsChannelConfigurationResource(ctx context.Context) (resource.R
 				stringvalidator.RegexMatches(regexp.MustCompile("^([a-zA-Z0-9-_=+/.,])*%3[aA]([a-zA-Z0-9-_=+/.,])*%40([a-zA-Z0-9-_=+/.,])*$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
+		// Property: TeamsChannelName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the Microsoft Teams channel",
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "pattern": "^(.*)$",
+		//	  "type": "string"
+		//	}
+		"teams_channel_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the Microsoft Teams channel",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.RegexMatches(regexp.MustCompile("^(.*)$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TeamsTenantId
 		// CloudFormation resource type schema:
 		//
@@ -344,6 +366,7 @@ func microsoftTeamsChannelConfigurationResource(ctx context.Context) (resource.R
 		"tags":                        "Tags",
 		"team_id":                     "TeamId",
 		"teams_channel_id":            "TeamsChannelId",
+		"teams_channel_name":          "TeamsChannelName",
 		"teams_tenant_id":             "TeamsTenantId",
 		"user_role_required":          "UserRoleRequired",
 		"value":                       "Value",

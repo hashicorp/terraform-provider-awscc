@@ -51,6 +51,27 @@ func pullThroughCacheRuleResource(ctx context.Context) (resource.Resource, error
 			}, /*END PLAN MODIFIERS*/
 			// CredentialArn is a write-only property.
 		}, /*END ATTRIBUTE*/
+		// Property: CustomRoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the IAM role to be assumed by Amazon ECR to authenticate to ECR upstream registry. This role must be in the same account as the registry that you are configuring.",
+		//	  "maxLength": 2048,
+		//	  "type": "string"
+		//	}
+		"custom_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the IAM role to be assumed by Amazon ECR to authenticate to ECR upstream registry. This role must be in the same account as the registry that you are configuring.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(2048),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// CustomRoleArn is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: EcrRepositoryPrefix
 		// CloudFormation resource type schema:
 		//
@@ -58,7 +79,7 @@ func pullThroughCacheRuleResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "The Amazon ECR repository prefix associated with the pull through cache rule.",
 		//	  "maxLength": 30,
 		//	  "minLength": 2,
-		//	  "pattern": "(?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*",
+		//	  "pattern": "^((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*/?|ROOT)$",
 		//	  "type": "string"
 		//	}
 		"ecr_repository_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -67,7 +88,7 @@ func pullThroughCacheRuleResource(ctx context.Context) (resource.Resource, error
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(2, 30),
-				stringvalidator.RegexMatches(regexp.MustCompile("(?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("^((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*/?|ROOT)$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -107,6 +128,29 @@ func pullThroughCacheRuleResource(ctx context.Context) (resource.Resource, error
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: UpstreamRepositoryPrefix
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The repository name prefix of upstream registry to match with the upstream repository name. When this field isn't specified, Amazon ECR will use the `ROOT`.",
+		//	  "maxLength": 30,
+		//	  "minLength": 2,
+		//	  "pattern": "^((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*/?|ROOT)$",
+		//	  "type": "string"
+		//	}
+		"upstream_repository_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The repository name prefix of upstream registry to match with the upstream repository name. When this field isn't specified, Amazon ECR will use the `ROOT`.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(2, 30),
+				stringvalidator.RegexMatches(regexp.MustCompile("^((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*/?|ROOT)$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -129,10 +173,12 @@ func pullThroughCacheRuleResource(ctx context.Context) (resource.Resource, error
 	opts = opts.WithCloudFormationTypeName("AWS::ECR::PullThroughCacheRule").WithTerraformTypeName("awscc_ecr_pull_through_cache_rule")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"credential_arn":        "CredentialArn",
-		"ecr_repository_prefix": "EcrRepositoryPrefix",
-		"upstream_registry":     "UpstreamRegistry",
-		"upstream_registry_url": "UpstreamRegistryUrl",
+		"credential_arn":             "CredentialArn",
+		"custom_role_arn":            "CustomRoleArn",
+		"ecr_repository_prefix":      "EcrRepositoryPrefix",
+		"upstream_registry":          "UpstreamRegistry",
+		"upstream_registry_url":      "UpstreamRegistryUrl",
+		"upstream_repository_prefix": "UpstreamRepositoryPrefix",
 	})
 
 	opts = opts.IsImmutableType(true)
@@ -140,6 +186,7 @@ func pullThroughCacheRuleResource(ctx context.Context) (resource.Resource, error
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/CredentialArn",
 		"/properties/UpstreamRegistry",
+		"/properties/CustomRoleArn",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

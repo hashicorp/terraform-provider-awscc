@@ -49,6 +49,264 @@ func inferenceComponentResource(ctx context.Context) (resource.Resource, error) 
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: DeploymentConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The deployment config for the inference component",
+		//	  "properties": {
+		//	    "AutoRollbackConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Alarms": {
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "AlarmName": {
+		//	                "maxLength": 255,
+		//	                "minLength": 1,
+		//	                "pattern": "",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "AlarmName"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 10,
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Alarms"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "RollingUpdatePolicy": {
+		//	      "additionalProperties": false,
+		//	      "description": "The rolling update policy for the inference component",
+		//	      "properties": {
+		//	        "MaximumBatchSize": {
+		//	          "additionalProperties": false,
+		//	          "description": "Capacity size configuration for the inference component",
+		//	          "properties": {
+		//	            "Type": {
+		//	              "enum": [
+		//	                "COPY_COUNT",
+		//	                "CAPACITY_PERCENT"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "Value": {
+		//	              "description": "The number of copies for the inference component",
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Type",
+		//	            "Value"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "MaximumExecutionTimeoutInSeconds": {
+		//	          "maximum": 28800,
+		//	          "minimum": 600,
+		//	          "type": "integer"
+		//	        },
+		//	        "RollbackMaximumBatchSize": {
+		//	          "additionalProperties": false,
+		//	          "description": "Capacity size configuration for the inference component",
+		//	          "properties": {
+		//	            "Type": {
+		//	              "enum": [
+		//	                "COPY_COUNT",
+		//	                "CAPACITY_PERCENT"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "Value": {
+		//	              "description": "The number of copies for the inference component",
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Type",
+		//	            "Value"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "WaitIntervalInSeconds": {
+		//	          "maximum": 3600,
+		//	          "minimum": 0,
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"deployment_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AutoRollbackConfiguration
+				"auto_rollback_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Alarms
+						"alarms": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AlarmName
+									"alarm_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 255),
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(1, 10),
+								fwvalidators.NotNullList(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: RollingUpdatePolicy
+				"rolling_update_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: MaximumBatchSize
+						"maximum_batch_size": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Type
+								"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"COPY_COUNT",
+											"CAPACITY_PERCENT",
+										),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Value
+								"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The number of copies for the inference component",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Int64{ /*START VALIDATORS*/
+										fwvalidators.NotNullInt64(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Capacity size configuration for the inference component",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MaximumExecutionTimeoutInSeconds
+						"maximum_execution_timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.Between(600, 28800),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: RollbackMaximumBatchSize
+						"rollback_maximum_batch_size": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Type
+								"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"COPY_COUNT",
+											"CAPACITY_PERCENT",
+										),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Value
+								"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The number of copies for the inference component",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Int64{ /*START VALIDATORS*/
+										fwvalidators.NotNullInt64(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Capacity size configuration for the inference component",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: WaitIntervalInSeconds
+						"wait_interval_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.Between(0, 3600),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The rolling update policy for the inference component",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The deployment config for the inference component",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// DeploymentConfig is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: EndpointArn
 		// CloudFormation resource type schema:
 		//
@@ -654,7 +912,10 @@ func inferenceComponentResource(ctx context.Context) (resource.Resource, error) 
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::InferenceComponent").WithTerraformTypeName("awscc_sagemaker_inference_component")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"alarm_name":                    "AlarmName",
+		"alarms":                        "Alarms",
 		"artifact_url":                  "ArtifactUrl",
+		"auto_rollback_configuration":   "AutoRollbackConfiguration",
 		"base_inference_component_name": "BaseInferenceComponentName",
 		"compute_resource_requirements": "ComputeResourceRequirements",
 		"container":                     "Container",
@@ -663,6 +924,7 @@ func inferenceComponentResource(ctx context.Context) (resource.Resource, error) 
 		"creation_time":                          "CreationTime",
 		"current_copy_count":                     "CurrentCopyCount",
 		"deployed_image":                         "DeployedImage",
+		"deployment_config":                      "DeploymentConfig",
 		"desired_copy_count":                     "DesiredCopyCount",
 		"endpoint_arn":                           "EndpointArn",
 		"endpoint_name":                          "EndpointName",
@@ -675,6 +937,8 @@ func inferenceComponentResource(ctx context.Context) (resource.Resource, error) 
 		"key":                                    "Key",
 		"last_modified_time":                     "LastModifiedTime",
 		"max_memory_required_in_mb":              "MaxMemoryRequiredInMb",
+		"maximum_batch_size":                     "MaximumBatchSize",
+		"maximum_execution_timeout_in_seconds":   "MaximumExecutionTimeoutInSeconds",
 		"min_memory_required_in_mb":              "MinMemoryRequiredInMb",
 		"model_data_download_timeout_in_seconds": "ModelDataDownloadTimeoutInSeconds",
 		"model_name":                             "ModelName",
@@ -682,18 +946,23 @@ func inferenceComponentResource(ctx context.Context) (resource.Resource, error) 
 		"number_of_cpu_cores_required":           "NumberOfCpuCoresRequired",
 		"resolution_time":                        "ResolutionTime",
 		"resolved_image":                         "ResolvedImage",
+		"rollback_maximum_batch_size":            "RollbackMaximumBatchSize",
+		"rolling_update_policy":                  "RollingUpdatePolicy",
 		"runtime_config":                         "RuntimeConfig",
 		"specification":                          "Specification",
 		"specified_image":                        "SpecifiedImage",
 		"startup_parameters":                     "StartupParameters",
 		"tags":                                   "Tags",
+		"type":                                   "Type",
 		"value":                                  "Value",
 		"variant_name":                           "VariantName",
+		"wait_interval_in_seconds":               "WaitIntervalInSeconds",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Specification/Container/Image",
 		"/properties/RuntimeConfig/CopyCount",
+		"/properties/DeploymentConfig",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

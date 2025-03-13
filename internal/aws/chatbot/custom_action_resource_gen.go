@@ -257,7 +257,7 @@ func customActionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "additionalProperties": false,
 		//	  "properties": {
 		//	    "CommandText": {
-		//	      "maxLength": 100,
+		//	      "maxLength": 5000,
 		//	      "minLength": 1,
 		//	      "type": "string"
 		//	    }
@@ -273,7 +273,7 @@ func customActionResource(ctx context.Context) (resource.Resource, error) {
 				"command_text": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Required: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 100),
+						stringvalidator.LengthBetween(1, 5000),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/

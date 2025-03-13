@@ -30,6 +30,21 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::Athena::DataCatalog resource.
 func dataCatalogResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ConnectionType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The type of connection for a FEDERATED data catalog",
+		//	  "type": "string"
+		//	}
+		"connection_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of connection for a FEDERATED data catalog",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -46,6 +61,21 @@ func dataCatalogResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 1024),
 			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Error
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Text of the error that occurred during data catalog creation or deletion.",
+		//	  "type": "string"
+		//	}
+		"error": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Text of the error that occurred during data catalog creation or deletion.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -91,6 +121,45 @@ func dataCatalogResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
 				mapplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Status
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The status of the creation or deletion of the data catalog. LAMBDA, GLUE, and HIVE data catalog types are created synchronously. Their status is either CREATE_COMPLETE or CREATE_FAILED. The FEDERATED data catalog type is created asynchronously.",
+		//	  "enum": [
+		//	    "CREATE_IN_PROGRESS",
+		//	    "CREATE_COMPLETE",
+		//	    "CREATE_FAILED",
+		//	    "CREATE_FAILED_CLEANUP_IN_PROGRESS",
+		//	    "CREATE_FAILED_CLEANUP_COMPLETE",
+		//	    "CREATE_FAILED_CLEANUP_FAILED",
+		//	    "DELETE_IN_PROGRESS",
+		//	    "DELETE_COMPLETE",
+		//	    "DELETE_FAILED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the creation or deletion of the data catalog. LAMBDA, GLUE, and HIVE data catalog types are created synchronously. Their status is either CREATE_COMPLETE or CREATE_FAILED. The FEDERATED data catalog type is created asynchronously.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"CREATE_IN_PROGRESS",
+					"CREATE_COMPLETE",
+					"CREATE_FAILED",
+					"CREATE_FAILED_CLEANUP_IN_PROGRESS",
+					"CREATE_FAILED_CLEANUP_COMPLETE",
+					"CREATE_FAILED_CLEANUP_FAILED",
+					"DELETE_IN_PROGRESS",
+					"DELETE_COMPLETE",
+					"DELETE_FAILED",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -162,22 +231,24 @@ func dataCatalogResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The type of data catalog to create: LAMBDA for a federated catalog, GLUE for AWS Glue Catalog, or HIVE for an external hive metastore. ",
+		//	  "description": "The type of data catalog to create: LAMBDA for a federated catalog, GLUE for AWS Glue Catalog, or HIVE for an external hive metastore. FEDERATED is a federated catalog for which Athena creates the connection and the Lambda function for you based on the parameters that you pass.",
 		//	  "enum": [
 		//	    "LAMBDA",
 		//	    "GLUE",
-		//	    "HIVE"
+		//	    "HIVE",
+		//	    "FEDERATED"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of data catalog to create: LAMBDA for a federated catalog, GLUE for AWS Glue Catalog, or HIVE for an external hive metastore. ",
+			Description: "The type of data catalog to create: LAMBDA for a federated catalog, GLUE for AWS Glue Catalog, or HIVE for an external hive metastore. FEDERATED is a federated catalog for which Athena creates the connection and the Lambda function for you based on the parameters that you pass.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"LAMBDA",
 					"GLUE",
 					"HIVE",
+					"FEDERATED",
 				),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -203,13 +274,16 @@ func dataCatalogResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Athena::DataCatalog").WithTerraformTypeName("awscc_athena_data_catalog")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"description": "Description",
-		"key":         "Key",
-		"name":        "Name",
-		"parameters":  "Parameters",
-		"tags":        "Tags",
-		"type":        "Type",
-		"value":       "Value",
+		"connection_type": "ConnectionType",
+		"description":     "Description",
+		"error":           "Error",
+		"key":             "Key",
+		"name":            "Name",
+		"parameters":      "Parameters",
+		"status":          "Status",
+		"tags":            "Tags",
+		"type":            "Type",
+		"value":           "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
