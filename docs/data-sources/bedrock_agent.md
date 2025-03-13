@@ -207,6 +207,7 @@ Read-Only:
 
 Read-Only:
 
+- `additional_model_request_fields` (String) Additional Model Request Fields for Prompt Configuration
 - `base_prompt_template` (String) Base Prompt Template.
 - `foundation_model` (String) ARN or name of a Bedrock model.
 - `inference_configuration` (Attributes) Configuration for inference in prompt configuration (see [below for nested schema](#nestedatt--prompt_override_configuration--prompt_configurations--inference_configuration))

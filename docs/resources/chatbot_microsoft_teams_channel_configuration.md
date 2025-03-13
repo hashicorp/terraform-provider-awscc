@@ -30,6 +30,7 @@ Resource schema for AWS::Chatbot::MicrosoftTeamsChannelConfiguration.
 - `logging_level` (String) Specifies the logging level for this configuration:ERROR,INFO or NONE. This property affects the log entries pushed to Amazon CloudWatch logs
 - `sns_topic_arns` (List of String) ARNs of SNS topics which delivers notifications to AWS Chatbot, for example CloudWatch alarm notifications.
 - `tags` (Attributes List) The tags to add to the configuration (see [below for nested schema](#nestedatt--tags))
+- `teams_channel_name` (String) The name of the Microsoft Teams channel
 - `user_role_required` (Boolean) Enables use of a user role requirement in your chat configuration
 
 ### Read-Only

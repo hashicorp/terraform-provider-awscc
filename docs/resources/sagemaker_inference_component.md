@@ -22,6 +22,7 @@ Resource Type definition for AWS::SageMaker::InferenceComponent
 
 ### Optional
 
+- `deployment_config` (Attributes) The deployment config for the inference component (see [below for nested schema](#nestedatt--deployment_config))
 - `endpoint_arn` (String) The Amazon Resource Name (ARN) of the endpoint the inference component is associated with
 - `inference_component_name` (String) The name of the inference component
 - `runtime_config` (Attributes) The runtime config for the inference component (see [below for nested schema](#nestedatt--runtime_config))
@@ -90,6 +91,60 @@ Optional:
 
 - `container_startup_health_check_timeout_in_seconds` (Number)
 - `model_data_download_timeout_in_seconds` (Number)
+
+
+
+<a id="nestedatt--deployment_config"></a>
+### Nested Schema for `deployment_config`
+
+Optional:
+
+- `auto_rollback_configuration` (Attributes) (see [below for nested schema](#nestedatt--deployment_config--auto_rollback_configuration))
+- `rolling_update_policy` (Attributes) The rolling update policy for the inference component (see [below for nested schema](#nestedatt--deployment_config--rolling_update_policy))
+
+<a id="nestedatt--deployment_config--auto_rollback_configuration"></a>
+### Nested Schema for `deployment_config.auto_rollback_configuration`
+
+Optional:
+
+- `alarms` (Attributes List) (see [below for nested schema](#nestedatt--deployment_config--auto_rollback_configuration--alarms))
+
+<a id="nestedatt--deployment_config--auto_rollback_configuration--alarms"></a>
+### Nested Schema for `deployment_config.auto_rollback_configuration.alarms`
+
+Optional:
+
+- `alarm_name` (String)
+
+
+
+<a id="nestedatt--deployment_config--rolling_update_policy"></a>
+### Nested Schema for `deployment_config.rolling_update_policy`
+
+Optional:
+
+- `maximum_batch_size` (Attributes) Capacity size configuration for the inference component (see [below for nested schema](#nestedatt--deployment_config--rolling_update_policy--maximum_batch_size))
+- `maximum_execution_timeout_in_seconds` (Number)
+- `rollback_maximum_batch_size` (Attributes) Capacity size configuration for the inference component (see [below for nested schema](#nestedatt--deployment_config--rolling_update_policy--rollback_maximum_batch_size))
+- `wait_interval_in_seconds` (Number)
+
+<a id="nestedatt--deployment_config--rolling_update_policy--maximum_batch_size"></a>
+### Nested Schema for `deployment_config.rolling_update_policy.maximum_batch_size`
+
+Optional:
+
+- `type` (String)
+- `value` (Number) The number of copies for the inference component
+
+
+<a id="nestedatt--deployment_config--rolling_update_policy--rollback_maximum_batch_size"></a>
+### Nested Schema for `deployment_config.rolling_update_policy.rollback_maximum_batch_size`
+
+Optional:
+
+- `type` (String)
+- `value` (Number) The number of copies for the inference component
+
 
 
 

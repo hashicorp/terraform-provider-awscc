@@ -108,6 +108,7 @@ resource "awscc_batch_job_definition" "example" {
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
+- `job_definition_arn` (String)
 
 <a id="nestedatt--consumable_resource_properties"></a>
 ### Nested Schema for `consumable_resource_properties`

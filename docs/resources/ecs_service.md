@@ -73,7 +73,7 @@ resource "awscc_ecs_service" "nginx" {
  For more information, see [Balancing an Amazon ECS service across Availability Zones](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-rebalancing.html) in the *Amazon Elastic Container Service Developer Guide*.
 - `capacity_provider_strategy` (Attributes List) The capacity provider strategy to use for the service.
  If a ``capacityProviderStrategy`` is specified, the ``launchType`` parameter must be omitted. If no ``capacityProviderStrategy`` or ``launchType`` is specified, the ``defaultCapacityProviderStrategy`` for the cluster is used.
- A capacity provider strategy may contain a maximum of 6 capacity providers.
+ A capacity provider strategy can contain a maximum of 20 capacity providers.
   To remove this property from your service resource, specify an empty ``CapacityProviderStrategyItem`` array. (see [below for nested schema](#nestedatt--capacity_provider_strategy))
 - `cluster` (String) The short name or full Amazon Resource Name (ARN) of the cluster that you run your service on. If you do not specify a cluster, the default cluster is assumed.
 - `deployment_configuration` (Attributes) Optional deployment parameters that control how many tasks run during the deployment and the ordering of stopping and starting tasks. (see [below for nested schema](#nestedatt--deployment_configuration))
@@ -236,7 +236,11 @@ Optional:
 
 Optional:
 
-- `assign_public_ip` (String) Whether the task's elastic network interface receives a public IP address. The default value is ``ENABLED``.
+- `assign_public_ip` (String) Whether the task's elastic network interface receives a public IP address. 
+ Consider the following when you set this value:
+  +  When you use ``create-service`` or ``update-service``, the default is ``DISABLED``. 
+  +  When the service ``deploymentController`` is ``ECS``, the value must be ``DISABLED``. 
+  +  When you use ``create-service`` or ``update-service``, the default is ``ENABLED``.
 - `security_groups` (List of String) The IDs of the security groups associated with the task or service. If you don't specify a security group, the default security group for the VPC is used. There's a limit of 5 security groups that can be specified.
   All specified security groups must be from the same VPC.
 - `subnets` (List of String) The IDs of the subnets associated with the task or service. There's a limit of 16 subnets that can be specified.
