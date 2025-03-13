@@ -247,11 +247,11 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The mode of Database Insights to enable for the DB cluster.\n If you set this value to ``advanced``, you must also set the ``PerformanceInsightsEnabled`` parameter to ``true`` and the ``PerformanceInsightsRetentionPeriod`` parameter to 465.\n Valid for Cluster Type: Aurora DB clusters only",
+		//	  "description": "The mode of Database Insights to enable for the DB cluster.\n If you set this value to ``advanced``, you must also set the ``PerformanceInsightsEnabled`` parameter to ``true`` and the ``PerformanceInsightsRetentionPeriod`` parameter to 465.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters",
 		//	  "type": "string"
 		//	}
 		"database_insights_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The mode of Database Insights to enable for the DB cluster.\n If you set this value to ``advanced``, you must also set the ``PerformanceInsightsEnabled`` parameter to ``true`` and the ``PerformanceInsightsRetentionPeriod`` parameter to 465.\n Valid for Cluster Type: Aurora DB clusters only",
+			Description: "The mode of Database Insights to enable for the DB cluster.\n If you set this value to ``advanced``, you must also set the ``PerformanceInsightsEnabled`` parameter to ``true`` and the ``PerformanceInsightsRetentionPeriod`` parameter to 465.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DatabaseName

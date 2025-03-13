@@ -36,6 +36,18 @@ func pullThroughCacheRuleDataSource(ctx context.Context) (datasource.DataSource,
 			Description: "The ARN of the Secrets Manager secret associated with the pull through cache rule.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: CustomRoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the IAM role to be assumed by Amazon ECR to authenticate to ECR upstream registry. This role must be in the same account as the registry that you are configuring.",
+		//	  "maxLength": 2048,
+		//	  "type": "string"
+		//	}
+		"custom_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the IAM role to be assumed by Amazon ECR to authenticate to ECR upstream registry. This role must be in the same account as the registry that you are configuring.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EcrRepositoryPrefix
 		// CloudFormation resource type schema:
 		//
@@ -43,7 +55,7 @@ func pullThroughCacheRuleDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The Amazon ECR repository prefix associated with the pull through cache rule.",
 		//	  "maxLength": 30,
 		//	  "minLength": 2,
-		//	  "pattern": "(?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*",
+		//	  "pattern": "^((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*/?|ROOT)$",
 		//	  "type": "string"
 		//	}
 		"ecr_repository_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -72,6 +84,20 @@ func pullThroughCacheRuleDataSource(ctx context.Context) (datasource.DataSource,
 			Description: "The upstream registry URL associated with the pull through cache rule.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: UpstreamRepositoryPrefix
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The repository name prefix of upstream registry to match with the upstream repository name. When this field isn't specified, Amazon ECR will use the `ROOT`.",
+		//	  "maxLength": 30,
+		//	  "minLength": 2,
+		//	  "pattern": "^((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*/?|ROOT)$",
+		//	  "type": "string"
+		//	}
+		"upstream_repository_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The repository name prefix of upstream registry to match with the upstream repository name. When this field isn't specified, Amazon ECR will use the `ROOT`.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -89,10 +115,12 @@ func pullThroughCacheRuleDataSource(ctx context.Context) (datasource.DataSource,
 	opts = opts.WithCloudFormationTypeName("AWS::ECR::PullThroughCacheRule").WithTerraformTypeName("awscc_ecr_pull_through_cache_rule")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"credential_arn":        "CredentialArn",
-		"ecr_repository_prefix": "EcrRepositoryPrefix",
-		"upstream_registry":     "UpstreamRegistry",
-		"upstream_registry_url": "UpstreamRegistryUrl",
+		"credential_arn":             "CredentialArn",
+		"custom_role_arn":            "CustomRoleArn",
+		"ecr_repository_prefix":      "EcrRepositoryPrefix",
+		"upstream_registry":          "UpstreamRegistry",
+		"upstream_registry_url":      "UpstreamRegistryUrl",
+		"upstream_repository_prefix": "UpstreamRepositoryPrefix",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

@@ -23,6 +23,17 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::Athena::DataCatalog resource.
 func dataCatalogDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ConnectionType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The type of connection for a FEDERATED data catalog",
+		//	  "type": "string"
+		//	}
+		"connection_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of connection for a FEDERATED data catalog",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -34,6 +45,17 @@ func dataCatalogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A description of the data catalog to be created. ",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Error
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Text of the error that occurred during data catalog creation or deletion.",
+		//	  "type": "string"
+		//	}
+		"error": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Text of the error that occurred during data catalog creation or deletion.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
@@ -67,6 +89,28 @@ func dataCatalogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		schema.MapAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
 			Description: "Specifies the Lambda function or functions to use for creating the data catalog. This is a mapping whose values depend on the catalog type. ",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Status
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The status of the creation or deletion of the data catalog. LAMBDA, GLUE, and HIVE data catalog types are created synchronously. Their status is either CREATE_COMPLETE or CREATE_FAILED. The FEDERATED data catalog type is created asynchronously.",
+		//	  "enum": [
+		//	    "CREATE_IN_PROGRESS",
+		//	    "CREATE_COMPLETE",
+		//	    "CREATE_FAILED",
+		//	    "CREATE_FAILED_CLEANUP_IN_PROGRESS",
+		//	    "CREATE_FAILED_CLEANUP_COMPLETE",
+		//	    "CREATE_FAILED_CLEANUP_FAILED",
+		//	    "DELETE_IN_PROGRESS",
+		//	    "DELETE_COMPLETE",
+		//	    "DELETE_FAILED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the creation or deletion of the data catalog. LAMBDA, GLUE, and HIVE data catalog types are created synchronously. Their status is either CREATE_COMPLETE or CREATE_FAILED. The FEDERATED data catalog type is created asynchronously.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -117,16 +161,17 @@ func dataCatalogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The type of data catalog to create: LAMBDA for a federated catalog, GLUE for AWS Glue Catalog, or HIVE for an external hive metastore. ",
+		//	  "description": "The type of data catalog to create: LAMBDA for a federated catalog, GLUE for AWS Glue Catalog, or HIVE for an external hive metastore. FEDERATED is a federated catalog for which Athena creates the connection and the Lambda function for you based on the parameters that you pass.",
 		//	  "enum": [
 		//	    "LAMBDA",
 		//	    "GLUE",
-		//	    "HIVE"
+		//	    "HIVE",
+		//	    "FEDERATED"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of data catalog to create: LAMBDA for a federated catalog, GLUE for AWS Glue Catalog, or HIVE for an external hive metastore. ",
+			Description: "The type of data catalog to create: LAMBDA for a federated catalog, GLUE for AWS Glue Catalog, or HIVE for an external hive metastore. FEDERATED is a federated catalog for which Athena creates the connection and the Lambda function for you based on the parameters that you pass.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
@@ -146,13 +191,16 @@ func dataCatalogDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Athena::DataCatalog").WithTerraformTypeName("awscc_athena_data_catalog")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"description": "Description",
-		"key":         "Key",
-		"name":        "Name",
-		"parameters":  "Parameters",
-		"tags":        "Tags",
-		"type":        "Type",
-		"value":       "Value",
+		"connection_type": "ConnectionType",
+		"description":     "Description",
+		"error":           "Error",
+		"key":             "Key",
+		"name":            "Name",
+		"parameters":      "Parameters",
+		"status":          "Status",
+		"tags":            "Tags",
+		"type":            "Type",
+		"value":           "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

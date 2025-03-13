@@ -2330,6 +2330,15 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: JobDefinitionArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"job_definition_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: JobDefinitionName
 		// CloudFormation resource type schema:
 		//
@@ -4846,6 +4855,7 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		"instance_type":                  "InstanceType",
 		"instance_types":                 "InstanceTypes",
 		"ipc_mode":                       "IpcMode",
+		"job_definition_arn":             "JobDefinitionArn",
 		"job_definition_name":            "JobDefinitionName",
 		"job_role_arn":                   "JobRoleArn",
 		"labels":                         "Labels",

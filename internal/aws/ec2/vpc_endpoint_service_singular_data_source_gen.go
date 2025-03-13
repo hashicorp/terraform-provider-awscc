@@ -91,6 +91,27 @@ func vPCEndpointServiceDataSource(ctx context.Context) (datasource.DataSource, e
 		"service_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: SupportedIpAddressTypes
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specify which Ip Address types are supported for VPC endpoint service.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "enum": [
+		//	      "ipv4",
+		//	      "ipv6"
+		//	    ],
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"supported_ip_address_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Specify which Ip Address types are supported for VPC endpoint service.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -156,6 +177,7 @@ func vPCEndpointServiceDataSource(ctx context.Context) (datasource.DataSource, e
 		"network_load_balancer_arns":   "NetworkLoadBalancerArns",
 		"payer_responsibility":         "PayerResponsibility",
 		"service_id":                   "ServiceId",
+		"supported_ip_address_types":   "SupportedIpAddressTypes",
 		"tags":                         "Tags",
 		"value":                        "Value",
 	})
