@@ -18,6 +18,13 @@
         "Value",
         "Key"
       ]
+    },
+    "IpAddressType": {
+      "type": "string",
+      "enum": [
+        "ipv4",
+        "ipv6"
+      ]
     }
   },
   "properties": {
@@ -58,6 +65,15 @@
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Tag"
+      }
+    },
+    "SupportedIpAddressTypes": {
+      "type": "array",
+      "description": "Specify which Ip Address types are supported for VPC endpoint service.",
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/IpAddressType"
       }
     }
   },

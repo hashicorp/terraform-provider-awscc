@@ -22,6 +22,12 @@
         },
         "UpstreamRegistry": {
           "$ref": "#/definitions/UpstreamRegistry"
+        },
+        "CustomRoleArn": {
+          "$ref": "#/definitions/CustomRoleArn"
+        },
+        "UpstreamRepositoryPrefix": {
+          "$ref": "#/definitions/UpstreamRepositoryPrefix"
         }
       },
       "required": [
@@ -41,7 +47,7 @@
       "description": "The ECRRepositoryPrefix is a custom alias for upstream registry url.",
       "minLength": 2,
       "maxLength": 30,
-      "pattern": "(?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*"
+      "pattern": "^((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*/?|ROOT)$"
     },
     "UpstreamRegistryUrl": {
       "type": "string",
@@ -57,30 +63,44 @@
     "UpstreamRegistry": {
       "type": "string",
       "description": "The name of the upstream registry."
+    },
+    "CustomRoleArn": {
+      "type": "string",
+      "description": "The ARN of the IAM role to be assumed by Amazon ECR to authenticate to ECR upstream registry. This role must be in the same account as the registry that you are configuring.",
+      "maxLength": 2048
+    },
+    "UpstreamRepositoryPrefix": {
+      "type": "string",
+      "description": "The repository name prefix of upstream registry to match with the upstream repository name. When this field isn't specified, Amazon ECR will use the `ROOT`.",
+      "minLength": 2,
+      "maxLength": 30,
+      "pattern": "^((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*/?|ROOT)$"
     }
   },
   "properties": {
     "EcrRepositoryPrefix": {
-      "type": "string",
-      "description": "The Amazon ECR repository prefix associated with the pull through cache rule.",
-      "minLength": 2,
-      "maxLength": 30,
-      "pattern": "(?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*"
+      "$ref": "#/definitions/EcrRepositoryPrefix",
+      "description": "The Amazon ECR repository prefix associated with the pull through cache rule."
     },
     "UpstreamRegistryUrl": {
-      "type": "string",
+      "$ref": "#/definitions/UpstreamRegistryUrl",
       "description": "The upstream registry URL associated with the pull through cache rule."
     },
     "CredentialArn": {
-      "type": "string",
-      "description": "The ARN of the Secrets Manager secret associated with the pull through cache rule.",
-      "minLength": 50,
-      "maxLength": 612,
-      "pattern": "^arn:aws:secretsmanager:[a-zA-Z0-9-:]+:secret:ecr\\-pullthroughcache\\/[a-zA-Z0-9\\/_+=.@-]+$"
+      "$ref": "#/definitions/CredentialArn",
+      "description": "The ARN of the Secrets Manager secret associated with the pull through cache rule."
     },
     "UpstreamRegistry": {
-      "type": "string",
+      "$ref": "#/definitions/UpstreamRegistry",
       "description": "The name of the upstream source registry associated with the pull through cache rule."
+    },
+    "CustomRoleArn": {
+      "$ref": "#/definitions/CustomRoleArn",
+      "description": ""
+    },
+    "UpstreamRepositoryPrefix": {
+      "$ref": "#/definitions/UpstreamRepositoryPrefix",
+      "description": ""
     }
   },
   "tagging": {
@@ -93,11 +113,14 @@
     "/properties/EcrRepositoryPrefix",
     "/properties/UpstreamRegistryUrl",
     "/properties/CredentialArn",
-    "/properties/UpstreamRegistry"
+    "/properties/UpstreamRegistry",
+    "/properties/CustomRoleArn",
+    "/properties/UpstreamRepositoryPrefix"
   ],
   "writeOnlyProperties": [
     "/properties/CredentialArn",
-    "/properties/UpstreamRegistry"
+    "/properties/UpstreamRegistry",
+    "/properties/CustomRoleArn"
   ],
   "handlers": {
     "create": {
@@ -106,7 +129,8 @@
         "ecr:CreatePullThroughCacheRule",
         "ecr:DeletePullThroughCacheRule",
         "iam:CreateServiceLinkedRole",
-        "secretsmanager:GetSecretValue"
+        "secretsmanager:GetSecretValue",
+        "iam:PassRole"
       ]
     },
     "read": {
@@ -120,7 +144,8 @@
         "ecr:CreatePullThroughCacheRule",
         "ecr:DeletePullThroughCacheRule",
         "iam:CreateServiceLinkedRole",
-        "secretsmanager:GetSecretValue"
+        "secretsmanager:GetSecretValue",
+        "iam:PassRole"
       ]
     },
     "delete": {

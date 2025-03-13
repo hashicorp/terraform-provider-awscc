@@ -94,9 +94,6 @@
     "/properties/CreationTime",
     "/properties/SequenceStoreId"
   ],
-  "writeOnlyProperties": [
-    "/properties/Tags"
-  ],
   "createOnlyProperties": [
     "/properties/Description",
     "/properties/Name",
