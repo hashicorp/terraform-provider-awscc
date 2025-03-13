@@ -24,12 +24,12 @@ Resource Type definition for AWS::MSK::Replicator
 
 ### Optional
 
-- `current_version` (String) The current version of the MSK replicator.
 - `description` (String) A summary description of the replicator.
 - `tags` (Attributes Set) A collection of tags associated with a resource (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
+- `current_version` (String) The current version of the MSK replicator.
 - `id` (String) Uniquely identifies the resource.
 - `replicator_arn` (String) Amazon Resource Name for the created replicator.
 

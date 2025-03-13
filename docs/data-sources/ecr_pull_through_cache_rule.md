@@ -22,6 +22,8 @@ Data Source schema for AWS::ECR::PullThroughCacheRule
 ### Read-Only
 
 - `credential_arn` (String) The ARN of the Secrets Manager secret associated with the pull through cache rule.
+- `custom_role_arn` (String) The ARN of the IAM role to be assumed by Amazon ECR to authenticate to ECR upstream registry. This role must be in the same account as the registry that you are configuring.
 - `ecr_repository_prefix` (String) The Amazon ECR repository prefix associated with the pull through cache rule.
 - `upstream_registry` (String) The name of the upstream source registry associated with the pull through cache rule.
 - `upstream_registry_url` (String) The upstream registry URL associated with the pull through cache rule.
+- `upstream_repository_prefix` (String) The repository name prefix of upstream registry to match with the upstream repository name. When this field isn't specified, Amazon ECR will use the `ROOT`.

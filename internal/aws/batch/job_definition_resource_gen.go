@@ -3380,6 +3380,18 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: JobDefinitionArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"job_definition_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: JobDefinitionName
 		// CloudFormation resource type schema:
 		//
@@ -6999,6 +7011,7 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		"instance_type":                  "InstanceType",
 		"instance_types":                 "InstanceTypes",
 		"ipc_mode":                       "IpcMode",
+		"job_definition_arn":             "JobDefinitionArn",
 		"job_definition_name":            "JobDefinitionName",
 		"job_role_arn":                   "JobRoleArn",
 		"labels":                         "Labels",

@@ -84,6 +84,10 @@
         "DISABLED"
       ]
     },
+    "AdditionalModelRequestFields": {
+      "type": "object",
+      "description": "Additional Model Request Fields for Prompt Configuration"
+    },
     "AgentActionGroup": {
       "type": "object",
       "description": "Contains the information of an Agent Action Group",
@@ -481,6 +485,9 @@
         },
         "FoundationModel": {
           "$ref": "#/definitions/FoundationModel"
+        },
+        "AdditionalModelRequestFields": {
+          "$ref": "#/definitions/AdditionalModelRequestFields"
         }
       },
       "additionalProperties": false

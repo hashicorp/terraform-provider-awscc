@@ -194,6 +194,20 @@ func microsoftTeamsChannelConfigurationDataSource(ctx context.Context) (datasour
 			Description: "The id of the Microsoft Teams channel",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: TeamsChannelName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the Microsoft Teams channel",
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "pattern": "^(.*)$",
+		//	  "type": "string"
+		//	}
+		"teams_channel_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the Microsoft Teams channel",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TeamsTenantId
 		// CloudFormation resource type schema:
 		//
@@ -248,6 +262,7 @@ func microsoftTeamsChannelConfigurationDataSource(ctx context.Context) (datasour
 		"tags":                        "Tags",
 		"team_id":                     "TeamId",
 		"teams_channel_id":            "TeamsChannelId",
+		"teams_channel_name":          "TeamsChannelName",
 		"teams_tenant_id":             "TeamsTenantId",
 		"user_role_required":          "UserRoleRequired",
 		"value":                       "Value",

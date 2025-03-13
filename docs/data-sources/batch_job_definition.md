@@ -25,6 +25,7 @@ Data Source schema for AWS::Batch::JobDefinition
 - `container_properties` (Attributes) (see [below for nested schema](#nestedatt--container_properties))
 - `ecs_properties` (Attributes) (see [below for nested schema](#nestedatt--ecs_properties))
 - `eks_properties` (Attributes) (see [below for nested schema](#nestedatt--eks_properties))
+- `job_definition_arn` (String)
 - `job_definition_name` (String)
 - `node_properties` (Attributes) (see [below for nested schema](#nestedatt--node_properties))
 - `parameters` (Map of String)

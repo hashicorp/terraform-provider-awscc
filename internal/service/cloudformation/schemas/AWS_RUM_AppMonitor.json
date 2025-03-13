@@ -233,6 +233,26 @@
         "Name"
       ]
     },
+    "ResourcePolicy": {
+      "description": "A structure that defines resource policy attached to your app monitor.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "PolicyDocument": {
+          "type": "string",
+          "description": "The JSON to use as the resource policy. The document can be up to 4 KB in size. "
+        },
+        "PolicyRevisionId": {
+          "type": "string",
+          "description": "A string value that you can use to conditionally update your policy. You can provide the revision ID of your existing policy to make mutating requests against that policy. \n\n When you assign a policy revision ID, then later requests about that policy will be rejected with an InvalidPolicyRevisionIdException error if they don't provide the correct current revision ID.",
+          "minLength": 1,
+          "maxLength": 255
+        }
+      },
+      "required": [
+        "PolicyDocument"
+      ]
+    },
     "CustomEventsStatus": {
       "type": "string",
       "enum": [
@@ -286,6 +306,9 @@
     },
     "CustomEvents": {
       "$ref": "#/definitions/CustomEvents"
+    },
+    "ResourcePolicy": {
+      "$ref": "#/definitions/ResourcePolicy"
     }
   },
   "additionalProperties": false,
@@ -347,7 +370,9 @@
         "rum:PutRumMetricsDestination",
         "rum:BatchCreateRumMetricDefinitions",
         "rum:ListRumMetricsDestinations",
-        "rum:BatchGetRumMetricDefinitions"
+        "rum:BatchGetRumMetricDefinitions",
+        "rum:GetResourcePolicy",
+        "rum:PutResourcePolicy"
       ]
     },
     "read": {
@@ -359,7 +384,8 @@
         "s3:GetObjectAcl",
         "rum:ListTagsForResource",
         "rum:ListRumMetricsDestinations",
-        "rum:BatchGetRumMetricDefinitions"
+        "rum:BatchGetRumMetricDefinitions",
+        "rum:GetResourcePolicy"
       ]
     },
     "update": {
@@ -394,7 +420,10 @@
         "rum:BatchCreateRumMetricDefinitions",
         "rum:BatchDeleteRumMetricDefinitions",
         "rum:BatchGetRumMetricDefinitions",
-        "rum:UpdateRumMetricDefinition"
+        "rum:UpdateRumMetricDefinition",
+        "rum:GetResourcePolicy",
+        "rum:PutResourcePolicy",
+        "rum:DeleteResourcePolicy"
       ]
     },
     "delete": {
@@ -411,7 +440,10 @@
         "rum:DeleteRumMetricsDestination",
         "rum:BatchDeleteRumMetricDefinitions",
         "rum:ListRumMetricsDestinations",
-        "rum:BatchGetRumMetricDefinitions"
+        "rum:BatchGetRumMetricDefinitions",
+        "rum:GetResourcePolicy",
+        "rum:PutResourcePolicy",
+        "rum:DeleteResourcePolicy"
       ]
     },
     "list": {

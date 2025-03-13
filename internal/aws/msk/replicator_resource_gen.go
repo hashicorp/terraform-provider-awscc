@@ -42,7 +42,6 @@ func replicatorResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"current_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The current version of the MSK replicator.",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),

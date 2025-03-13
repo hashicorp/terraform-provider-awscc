@@ -1,0 +1,1 @@
+$ terraform import awscc_xray_transaction_search_config.example "account_id"

@@ -60,11 +60,11 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Indicates whether to evaluate inbound security group rules for traffic sent to a Network Load Balancer through privatelink.",
+		//	  "description": "Indicates whether to evaluate inbound security group rules for traffic sent to a Network Load Balancer through privatelink. The default is ``on``.",
 		//	  "type": "string"
 		//	}
 		"enforce_security_group_inbound_rules_on_private_link_traffic": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether to evaluate inbound security group rules for traffic sent to a Network Load Balancer through privatelink.",
+			Description: "Indicates whether to evaluate inbound security group rules for traffic sent to a Network Load Balancer through privatelink. The default is ``on``.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: IpAddressType
@@ -76,6 +76,17 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	}
 		"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The IP address type. Internal load balancers must use ``ipv4``.\n [Application Load Balancers] The possible values are ``ipv4`` (IPv4 addresses), ``dualstack`` (IPv4 and IPv6 addresses), and ``dualstack-without-public-ipv4`` (public IPv6 addresses and private IPv4 and IPv6 addresses).\n Application Load Balancer authentication supports IPv4 addresses only when connecting to an Identity Provider (IdP) or Amazon Cognito endpoint. Without a public IPv4 address the load balancer can't complete the authentication process, resulting in HTTP 500 errors.\n [Network Load Balancers and Gateway Load Balancers] The possible values are ``ipv4`` (IPv4 addresses) and ``dualstack`` (IPv4 and IPv6 addresses).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Ipv4IpamPoolId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"ipv_4_ipam_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LoadBalancerArn
@@ -391,6 +402,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"enforce_security_group_inbound_rules_on_private_link_traffic": "EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic",
 		"i_pv_6_address":                 "IPv6Address",
 		"ip_address_type":                "IpAddressType",
+		"ipv_4_ipam_pool_id":             "Ipv4IpamPoolId",
 		"key":                            "Key",
 		"load_balancer_arn":              "LoadBalancerArn",
 		"load_balancer_attributes":       "LoadBalancerAttributes",

@@ -98,7 +98,11 @@
     },
     "EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic": {
       "type": "string",
-      "description": "Indicates whether to evaluate inbound security group rules for traffic sent to a Network Load Balancer through privatelink."
+      "description": "Indicates whether to evaluate inbound security group rules for traffic sent to a Network Load Balancer through privatelink. The default is ``on``."
+    },
+    "Ipv4IpamPoolId": {
+      "type": "string",
+      "description": ""
     }
   },
   "definitions": {
@@ -213,7 +217,8 @@
         "elasticloadbalancing:CreateLoadBalancer",
         "elasticloadbalancing:DescribeLoadBalancers",
         "elasticloadbalancing:ModifyLoadBalancerAttributes",
-        "elasticloadbalancing:AddTags"
+        "elasticloadbalancing:AddTags",
+        "ec2:DescribeIpamPools"
       ],
       "timeoutInMinutes": 30
     },
@@ -242,6 +247,7 @@
         "elasticloadbalancing:ModifyCapacityReservation",
         "elasticloadbalancing:SetSubnets",
         "elasticloadbalancing:SetIpAddressType",
+        "elasticloadbalancing:ModifyIpPools",
         "elasticloadbalancing:SetSecurityGroups",
         "elasticloadbalancing:AddTags",
         "elasticloadbalancing:RemoveTags"

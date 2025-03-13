@@ -23,6 +23,73 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::IoT::SoftwarePackageVersion resource.
 func softwarePackageVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Artifact
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The artifact location of the package version",
+		//	  "properties": {
+		//	    "S3Location": {
+		//	      "additionalProperties": false,
+		//	      "description": "The Amazon S3 location",
+		//	      "properties": {
+		//	        "Bucket": {
+		//	          "description": "The S3 bucket",
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Key": {
+		//	          "description": "The S3 key",
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Version": {
+		//	          "description": "The S3 version",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Bucket",
+		//	        "Key",
+		//	        "Version"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "S3Location"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"artifact": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: S3Location
+				"s3_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Bucket
+						"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The S3 bucket",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Key
+						"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The S3 key",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Version
+						"version": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The S3 version",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The Amazon S3 location",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The artifact location of the package version",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Attributes
 		// CloudFormation resource type schema:
 		//
@@ -84,6 +151,101 @@ func softwarePackageVersionDataSource(ctx context.Context) (datasource.DataSourc
 		//	}
 		"package_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: Recipe
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The inline json job document associated with a software package version",
+		//	  "type": "string"
+		//	}
+		"recipe": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The inline json job document associated with a software package version",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Sbom
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The sbom zip archive location of the package version",
+		//	  "properties": {
+		//	    "S3Location": {
+		//	      "additionalProperties": false,
+		//	      "description": "The Amazon S3 location",
+		//	      "properties": {
+		//	        "Bucket": {
+		//	          "description": "The S3 bucket",
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Key": {
+		//	          "description": "The S3 key",
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Version": {
+		//	          "description": "The S3 version",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Bucket",
+		//	        "Key",
+		//	        "Version"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "S3Location"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"sbom": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: S3Location
+				"s3_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Bucket
+						"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The S3 bucket",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Key
+						"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The S3 key",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Version
+						"version": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The S3 version",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The Amazon S3 location",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The sbom zip archive location of the package version",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: SbomValidationStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The validation status of the Sbom file",
+		//	  "enum": [
+		//	    "IN_PROGRESS",
+		//	    "FAILED",
+		//	    "SUCCEEDED",
+		//	    ""
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"sbom_validation_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The validation status of the Sbom file",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
@@ -180,16 +342,23 @@ func softwarePackageVersionDataSource(ctx context.Context) (datasource.DataSourc
 	opts = opts.WithCloudFormationTypeName("AWS::IoT::SoftwarePackageVersion").WithTerraformTypeName("awscc_iot_software_package_version")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"attributes":          "Attributes",
-		"description":         "Description",
-		"error_reason":        "ErrorReason",
-		"key":                 "Key",
-		"package_name":        "PackageName",
-		"package_version_arn": "PackageVersionArn",
-		"status":              "Status",
-		"tags":                "Tags",
-		"value":               "Value",
-		"version_name":        "VersionName",
+		"artifact":               "Artifact",
+		"attributes":             "Attributes",
+		"bucket":                 "Bucket",
+		"description":            "Description",
+		"error_reason":           "ErrorReason",
+		"key":                    "Key",
+		"package_name":           "PackageName",
+		"package_version_arn":    "PackageVersionArn",
+		"recipe":                 "Recipe",
+		"s3_location":            "S3Location",
+		"sbom":                   "Sbom",
+		"sbom_validation_status": "SbomValidationStatus",
+		"status":                 "Status",
+		"tags":                   "Tags",
+		"value":                  "Value",
+		"version":                "Version",
+		"version_name":           "VersionName",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

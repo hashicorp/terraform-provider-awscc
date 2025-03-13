@@ -14,6 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -32,6 +33,107 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::IoT::SoftwarePackageVersion resource.
 func softwarePackageVersionResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Artifact
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The artifact location of the package version",
+		//	  "properties": {
+		//	    "S3Location": {
+		//	      "additionalProperties": false,
+		//	      "description": "The Amazon S3 location",
+		//	      "properties": {
+		//	        "Bucket": {
+		//	          "description": "The S3 bucket",
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Key": {
+		//	          "description": "The S3 key",
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Version": {
+		//	          "description": "The S3 version",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Bucket",
+		//	        "Key",
+		//	        "Version"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "S3Location"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"artifact": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: S3Location
+				"s3_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Bucket
+						"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The S3 bucket",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthAtLeast(1),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Key
+						"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The S3 key",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthAtLeast(1),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Version
+						"version": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The S3 version",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The Amazon S3 location",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Object{ /*START VALIDATORS*/
+						fwvalidators.NotNullObject(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The artifact location of the package version",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Attributes
 		// CloudFormation resource type schema:
 		//
@@ -115,6 +217,142 @@ func softwarePackageVersionResource(ctx context.Context) (resource.Resource, err
 		//	}
 		"package_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Recipe
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The inline json job document associated with a software package version",
+		//	  "type": "string"
+		//	}
+		"recipe": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The inline json job document associated with a software package version",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Sbom
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The sbom zip archive location of the package version",
+		//	  "properties": {
+		//	    "S3Location": {
+		//	      "additionalProperties": false,
+		//	      "description": "The Amazon S3 location",
+		//	      "properties": {
+		//	        "Bucket": {
+		//	          "description": "The S3 bucket",
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Key": {
+		//	          "description": "The S3 key",
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Version": {
+		//	          "description": "The S3 version",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Bucket",
+		//	        "Key",
+		//	        "Version"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "S3Location"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"sbom": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: S3Location
+				"s3_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Bucket
+						"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The S3 bucket",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthAtLeast(1),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Key
+						"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The S3 key",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthAtLeast(1),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Version
+						"version": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The S3 version",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The Amazon S3 location",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Object{ /*START VALIDATORS*/
+						fwvalidators.NotNullObject(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The sbom zip archive location of the package version",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SbomValidationStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The validation status of the Sbom file",
+		//	  "enum": [
+		//	    "IN_PROGRESS",
+		//	    "FAILED",
+		//	    "SUCCEEDED",
+		//	    ""
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"sbom_validation_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The validation status of the Sbom file",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -255,16 +493,23 @@ func softwarePackageVersionResource(ctx context.Context) (resource.Resource, err
 	opts = opts.WithCloudFormationTypeName("AWS::IoT::SoftwarePackageVersion").WithTerraformTypeName("awscc_iot_software_package_version")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"attributes":          "Attributes",
-		"description":         "Description",
-		"error_reason":        "ErrorReason",
-		"key":                 "Key",
-		"package_name":        "PackageName",
-		"package_version_arn": "PackageVersionArn",
-		"status":              "Status",
-		"tags":                "Tags",
-		"value":               "Value",
-		"version_name":        "VersionName",
+		"artifact":               "Artifact",
+		"attributes":             "Attributes",
+		"bucket":                 "Bucket",
+		"description":            "Description",
+		"error_reason":           "ErrorReason",
+		"key":                    "Key",
+		"package_name":           "PackageName",
+		"package_version_arn":    "PackageVersionArn",
+		"recipe":                 "Recipe",
+		"s3_location":            "S3Location",
+		"sbom":                   "Sbom",
+		"sbom_validation_status": "SbomValidationStatus",
+		"status":                 "Status",
+		"tags":                   "Tags",
+		"value":                  "Value",
+		"version":                "Version",
+		"version_name":           "VersionName",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

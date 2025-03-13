@@ -425,6 +425,11 @@
         "path": "./examples/resources/awscc_applicationsignals_service_level_objective/import.sh"
     },
     {
+        "resource": "awscc_applicationsignals_discovery",
+        "identifier": ["AccountId"],
+        "path": "./examples/resources/awscc_applicationsignals_discovery/import.sh"
+    },
+    {
         "resource": "awscc_athena_capacity_reservation",
         "identifier": ["Arn"],
         "path": "./examples/resources/awscc_athena_capacity_reservation/import.sh"
@@ -5598,5 +5603,10 @@
         "resource": "awscc_xray_sampling_rule",
         "identifier": ["RuleARN"],
         "path": "./examples/resources/awscc_xray_sampling_rule/import.sh"
+    },
+    {
+        "resource": "awscc_xray_transaction_search_config",
+        "identifier": ["AccountId"],
+        "path": "./examples/resources/awscc_xray_transaction_search_config/import.sh"
     }
 ]

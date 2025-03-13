@@ -172,7 +172,7 @@ func customActionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "additionalProperties": false,
 		//	  "properties": {
 		//	    "CommandText": {
-		//	      "maxLength": 100,
+		//	      "maxLength": 5000,
 		//	      "minLength": 1,
 		//	      "type": "string"
 		//	    }

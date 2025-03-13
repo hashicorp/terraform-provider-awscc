@@ -22,6 +22,7 @@ Data Source schema for AWS::SageMaker::InferenceComponent
 ### Read-Only
 
 - `creation_time` (String)
+- `deployment_config` (Attributes) The deployment config for the inference component (see [below for nested schema](#nestedatt--deployment_config))
 - `endpoint_arn` (String) The Amazon Resource Name (ARN) of the endpoint the inference component is associated with
 - `endpoint_name` (String) The name of the endpoint the inference component is associated with
 - `failure_reason` (String) The failure reason if the inference component is in a failed state
@@ -33,6 +34,60 @@ Data Source schema for AWS::SageMaker::InferenceComponent
 - `specification` (Attributes) The specification for the inference component (see [below for nested schema](#nestedatt--specification))
 - `tags` (Attributes List) An array of tags to apply to the resource (see [below for nested schema](#nestedatt--tags))
 - `variant_name` (String) The name of the endpoint variant the inference component is associated with
+
+<a id="nestedatt--deployment_config"></a>
+### Nested Schema for `deployment_config`
+
+Read-Only:
+
+- `auto_rollback_configuration` (Attributes) (see [below for nested schema](#nestedatt--deployment_config--auto_rollback_configuration))
+- `rolling_update_policy` (Attributes) The rolling update policy for the inference component (see [below for nested schema](#nestedatt--deployment_config--rolling_update_policy))
+
+<a id="nestedatt--deployment_config--auto_rollback_configuration"></a>
+### Nested Schema for `deployment_config.auto_rollback_configuration`
+
+Read-Only:
+
+- `alarms` (Attributes List) (see [below for nested schema](#nestedatt--deployment_config--auto_rollback_configuration--alarms))
+
+<a id="nestedatt--deployment_config--auto_rollback_configuration--alarms"></a>
+### Nested Schema for `deployment_config.auto_rollback_configuration.alarms`
+
+Read-Only:
+
+- `alarm_name` (String)
+
+
+
+<a id="nestedatt--deployment_config--rolling_update_policy"></a>
+### Nested Schema for `deployment_config.rolling_update_policy`
+
+Read-Only:
+
+- `maximum_batch_size` (Attributes) Capacity size configuration for the inference component (see [below for nested schema](#nestedatt--deployment_config--rolling_update_policy--maximum_batch_size))
+- `maximum_execution_timeout_in_seconds` (Number)
+- `rollback_maximum_batch_size` (Attributes) Capacity size configuration for the inference component (see [below for nested schema](#nestedatt--deployment_config--rolling_update_policy--rollback_maximum_batch_size))
+- `wait_interval_in_seconds` (Number)
+
+<a id="nestedatt--deployment_config--rolling_update_policy--maximum_batch_size"></a>
+### Nested Schema for `deployment_config.rolling_update_policy.maximum_batch_size`
+
+Read-Only:
+
+- `type` (String)
+- `value` (Number) The number of copies for the inference component
+
+
+<a id="nestedatt--deployment_config--rolling_update_policy--rollback_maximum_batch_size"></a>
+### Nested Schema for `deployment_config.rolling_update_policy.rollback_maximum_batch_size`
+
+Read-Only:
+
+- `type` (String)
+- `value` (Number) The number of copies for the inference component
+
+
+
 
 <a id="nestedatt--runtime_config"></a>
 ### Nested Schema for `runtime_config`

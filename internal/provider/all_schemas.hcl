@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1133 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1149 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -459,6 +459,10 @@ resource_schema "aws_applicationinsights_application" {
 
 resource_schema "aws_applicationsignals_service_level_objective" {
   cloudformation_type_name = "AWS::ApplicationSignals::ServiceLevelObjective"
+}
+
+resource_schema "aws_applicationsignals_discovery" {
+  cloudformation_type_name = "AWS::ApplicationSignals::Discovery"
 }
 
 resource_schema "aws_athena_capacity_reservation" {
@@ -5192,4 +5196,8 @@ resource_schema "aws_xray_resource_policy" {
 
 resource_schema "aws_xray_sampling_rule" {
   cloudformation_type_name = "AWS::XRay::SamplingRule"
+}
+
+resource_schema "aws_xray_transaction_search_config" {
+  cloudformation_type_name = "AWS::XRay::TransactionSearchConfig"
 }

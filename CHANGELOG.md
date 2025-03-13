@@ -1,4 +1,14 @@
 ## 1.33.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_applicationsignals_discoveries`
+* **New Data Source:** `awscc_applicationsignals_discovery`
+* **New Data Source:** `awscc_xray_transaction_search_config`
+* **New Data Source:** `awscc_xray_transaction_search_configs`
+* **New Resource:** `awscc_applicationsignals_discovery`
+* **New Resource:** `awscc_xray_transaction_search_config`
+
 ## 1.32.0 (March  6, 2025)
 
 FEATURES:

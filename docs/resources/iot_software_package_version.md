@@ -21,8 +21,11 @@ resource definition
 
 ### Optional
 
+- `artifact` (Attributes) The artifact location of the package version (see [below for nested schema](#nestedatt--artifact))
 - `attributes` (Map of String)
 - `description` (String)
+- `recipe` (String) The inline json job document associated with a software package version
+- `sbom` (Attributes) The sbom zip archive location of the package version (see [below for nested schema](#nestedatt--sbom))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `version_name` (String)
 
@@ -31,7 +34,44 @@ resource definition
 - `error_reason` (String)
 - `id` (String) Uniquely identifies the resource.
 - `package_version_arn` (String)
+- `sbom_validation_status` (String) The validation status of the Sbom file
 - `status` (String)
+
+<a id="nestedatt--artifact"></a>
+### Nested Schema for `artifact`
+
+Optional:
+
+- `s3_location` (Attributes) The Amazon S3 location (see [below for nested schema](#nestedatt--artifact--s3_location))
+
+<a id="nestedatt--artifact--s3_location"></a>
+### Nested Schema for `artifact.s3_location`
+
+Optional:
+
+- `bucket` (String) The S3 bucket
+- `key` (String) The S3 key
+- `version` (String) The S3 version
+
+
+
+<a id="nestedatt--sbom"></a>
+### Nested Schema for `sbom`
+
+Optional:
+
+- `s3_location` (Attributes) The Amazon S3 location (see [below for nested schema](#nestedatt--sbom--s3_location))
+
+<a id="nestedatt--sbom--s3_location"></a>
+### Nested Schema for `sbom.s3_location`
+
+Optional:
+
+- `bucket` (String) The S3 bucket
+- `key` (String) The S3 key
+- `version` (String) The S3 version
+
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

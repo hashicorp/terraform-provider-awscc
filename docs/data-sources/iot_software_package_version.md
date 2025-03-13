@@ -21,14 +21,54 @@ Data Source schema for AWS::IoT::SoftwarePackageVersion
 
 ### Read-Only
 
+- `artifact` (Attributes) The artifact location of the package version (see [below for nested schema](#nestedatt--artifact))
 - `attributes` (Map of String)
 - `description` (String)
 - `error_reason` (String)
 - `package_name` (String)
 - `package_version_arn` (String)
+- `recipe` (String) The inline json job document associated with a software package version
+- `sbom` (Attributes) The sbom zip archive location of the package version (see [below for nested schema](#nestedatt--sbom))
+- `sbom_validation_status` (String) The validation status of the Sbom file
 - `status` (String)
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `version_name` (String)
+
+<a id="nestedatt--artifact"></a>
+### Nested Schema for `artifact`
+
+Read-Only:
+
+- `s3_location` (Attributes) The Amazon S3 location (see [below for nested schema](#nestedatt--artifact--s3_location))
+
+<a id="nestedatt--artifact--s3_location"></a>
+### Nested Schema for `artifact.s3_location`
+
+Read-Only:
+
+- `bucket` (String) The S3 bucket
+- `key` (String) The S3 key
+- `version` (String) The S3 version
+
+
+
+<a id="nestedatt--sbom"></a>
+### Nested Schema for `sbom`
+
+Read-Only:
+
+- `s3_location` (Attributes) The Amazon S3 location (see [below for nested schema](#nestedatt--sbom--s3_location))
+
+<a id="nestedatt--sbom--s3_location"></a>
+### Nested Schema for `sbom.s3_location`
+
+Read-Only:
+
+- `bucket` (String) The S3 bucket
+- `key` (String) The S3 key
+- `version` (String) The S3 version
+
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

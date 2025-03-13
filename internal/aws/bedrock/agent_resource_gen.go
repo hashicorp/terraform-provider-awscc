@@ -9,6 +9,7 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
@@ -1297,6 +1298,10 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 		//	        "additionalProperties": false,
 		//	        "description": "BasePromptConfiguration per Prompt Type.",
 		//	        "properties": {
+		//	          "AdditionalModelRequestFields": {
+		//	            "description": "Additional Model Request Fields for Prompt Configuration",
+		//	            "type": "object"
+		//	          },
 		//	          "BasePromptTemplate": {
 		//	            "description": "Base Prompt Template.",
 		//	            "maxLength": 100000,
@@ -1418,6 +1423,16 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 				"prompt_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AdditionalModelRequestFields
+							"additional_model_request_fields": schema.StringAttribute{ /*START ATTRIBUTE*/
+								CustomType:  jsontypes.NormalizedType{},
+								Description: "Additional Model Request Fields for Prompt Configuration",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: BasePromptTemplate
 							"base_prompt_template": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Base Prompt Template.",
@@ -1739,6 +1754,7 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 		"action_group_name":                    "ActionGroupName",
 		"action_group_state":                   "ActionGroupState",
 		"action_groups":                        "ActionGroups",
+		"additional_model_request_fields":      "AdditionalModelRequestFields",
 		"agent_arn":                            "AgentArn",
 		"agent_collaboration":                  "AgentCollaboration",
 		"agent_collaborators":                  "AgentCollaborators",

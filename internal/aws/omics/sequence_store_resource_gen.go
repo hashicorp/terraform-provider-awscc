@@ -232,7 +232,6 @@ func sequenceStoreResource(ctx context.Context) (resource.Resource, error) {
 				mapplanmodifier.UseStateForUnknown(),
 				mapplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
-			// Tags is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -268,9 +267,6 @@ func sequenceStoreResource(ctx context.Context) (resource.Resource, error) {
 		"type":              "Type",
 	})
 
-	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/Tags",
-	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

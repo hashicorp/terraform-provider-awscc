@@ -23,8 +23,7 @@ Data Source schema for AWS::ECS::TaskDefinition
 
 - `container_definitions` (Attributes Set) A list of container definitions in JSON format that describe the different containers that make up your task. For more information about container definition parameters and defaults, see [Amazon ECS Task Definitions](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html) in the *Amazon Elastic Container Service Developer Guide*. (see [below for nested schema](#nestedatt--container_definitions))
 - `cpu` (String) The number of ``cpu`` units used by the task. If you use the EC2 launch type, this field is optional. Any value can be used. If you use the Fargate launch type, this field is required. You must use one of the following values. The value that you choose determines your range of valid values for the ``memory`` parameter.
- If you use the EC2 launch type, this field is optional. Supported values are between ``128`` CPU units (``0.125`` vCPUs) and ``10240`` CPU units (``10`` vCPUs).
- The CPU units cannot be less than 1 vCPU when you use Windows containers on Fargate.
+ If you're using the EC2 launch type or the external launch type, this field is optional. Supported values are between ``128`` CPU units (``0.125`` vCPUs) and ``196608`` CPU units (``192`` vCPUs). The CPU units cannot be less than 1 vCPU when you use Windows containers on Fargate.
   +  256 (.25 vCPU) - Available ``memory`` values: 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB)
   +  512 (.5 vCPU) - Available ``memory`` values: 1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB)
   +  1024 (1 vCPU) - Available ``memory`` values: 2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB)
@@ -294,11 +293,11 @@ Read-Only:
  You don't include the double quotes and brackets when you use the AWS Management Console.
   ``CMD-SHELL, curl -f http://localhost/ || exit 1`` 
  An exit code of 0 indicates success, and non-zero exit code indicates failure. For more information, see ``HealthCheck`` in the docker container create command.
-- `interval` (Number) The time period in seconds between each health check execution. You may specify between 5 and 300 seconds. The default value is 30 seconds.
-- `retries` (Number) The number of times to retry a failed health check before the container is considered unhealthy. You may specify between 1 and 10 retries. The default value is 3.
-- `start_period` (Number) The optional grace period to provide containers time to bootstrap before failed health checks count towards the maximum number of retries. You can specify between 0 and 300 seconds. By default, the ``startPeriod`` is off.
+- `interval` (Number) The time period in seconds between each health check execution. You may specify between 5 and 300 seconds. The default value is 30 seconds. This value applies only when you specify a ``command``.
+- `retries` (Number) The number of times to retry a failed health check before the container is considered unhealthy. You may specify between 1 and 10 retries. The default value is 3. This value applies only when you specify a ``command``.
+- `start_period` (Number) The optional grace period to provide containers time to bootstrap before failed health checks count towards the maximum number of retries. You can specify between 0 and 300 seconds. By default, the ``startPeriod`` is off. This value applies only when you specify a ``command``. 
   If a health check succeeds within the ``startPeriod``, then the container is considered healthy and any subsequent failures count toward the maximum number of retries.
-- `timeout` (Number) The time period in seconds to wait for a health check to succeed before it is considered a failure. You may specify between 2 and 60 seconds. The default value is 5.
+- `timeout` (Number) The time period in seconds to wait for a health check to succeed before it is considered a failure. You may specify between 2 and 60 seconds. The default value is 5. This value applies only when you specify a ``command``.
 
 
 <a id="nestedatt--container_definitions--linux_parameters"></a>
