@@ -64,7 +64,7 @@ func computeNodeGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "additionalProperties": false,
 		//	  "description": "An Amazon EC2 launch template AWS PCS uses to launch compute nodes.",
 		//	  "properties": {
-		//	    "Id": {
+		//	    "TemplateId": {
 		//	      "description": "The ID of the EC2 launch template to use to provision instances.",
 		//	      "type": "string"
 		//	    },
@@ -74,15 +74,14 @@ func computeNodeGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	    }
 		//	  },
 		//	  "required": [
-		//	    "Id",
 		//	    "Version"
 		//	  ],
 		//	  "type": "object"
 		//	}
 		"custom_launch_template": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Id
-				"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+				// Property: TemplateId
+				"template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The ID of the EC2 launch template to use to provision instances.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
@@ -427,7 +426,6 @@ func computeNodeGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		"custom_launch_template":   "CustomLaunchTemplate",
 		"error_info":               "ErrorInfo",
 		"iam_instance_profile_arn": "IamInstanceProfileArn",
-		"id":                       "Id",
 		"instance_configs":         "InstanceConfigs",
 		"instance_type":            "InstanceType",
 		"max_instance_count":       "MaxInstanceCount",
@@ -444,6 +442,7 @@ func computeNodeGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		"status":                   "Status",
 		"subnet_ids":               "SubnetIds",
 		"tags":                     "Tags",
+		"template_id":              "TemplateId",
 		"version":                  "Version",
 	})
 
