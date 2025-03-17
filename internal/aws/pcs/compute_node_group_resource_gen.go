@@ -87,7 +87,7 @@ func computeNodeGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "An Amazon EC2 launch template AWS PCS uses to launch compute nodes.",
 		//	  "properties": {
-		//	    "Id": {
+		//	    "TemplateId": {
 		//	      "description": "The ID of the EC2 launch template to use to provision instances.",
 		//	      "type": "string"
 		//	    },
@@ -97,17 +97,20 @@ func computeNodeGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	    }
 		//	  },
 		//	  "required": [
-		//	    "Id",
 		//	    "Version"
 		//	  ],
 		//	  "type": "object"
 		//	}
 		"custom_launch_template": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Id
-				"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+				// Property: TemplateId
+				"template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The ID of the EC2 launch template to use to provision instances.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Version
 				"version": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -542,7 +545,6 @@ func computeNodeGroupResource(ctx context.Context) (resource.Resource, error) {
 		"custom_launch_template":   "CustomLaunchTemplate",
 		"error_info":               "ErrorInfo",
 		"iam_instance_profile_arn": "IamInstanceProfileArn",
-		"id":                       "Id",
 		"instance_configs":         "InstanceConfigs",
 		"instance_type":            "InstanceType",
 		"max_instance_count":       "MaxInstanceCount",
@@ -559,6 +561,7 @@ func computeNodeGroupResource(ctx context.Context) (resource.Resource, error) {
 		"status":                   "Status",
 		"subnet_ids":               "SubnetIds",
 		"tags":                     "Tags",
+		"template_id":              "TemplateId",
 		"version":                  "Version",
 	})
 
