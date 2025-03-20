@@ -1445,6 +1445,11 @@
         "path": "./examples/resources/awscc_datasync_task/import.sh"
     },
     {
+        "resource": "awscc_datazone_connection",
+        "identifier": ["DomainId","ConnectionId"],
+        "path": "./examples/resources/awscc_datazone_connection/import.sh"
+    },
+    {
         "resource": "awscc_datazone_data_source",
         "identifier": ["DomainId","Id"],
         "path": "./examples/resources/awscc_datazone_data_source/import.sh"
