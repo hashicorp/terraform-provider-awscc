@@ -29,33 +29,41 @@ func anycastIpListDataSource(ctx context.Context) (datasource.DataSource, error)
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "An Anycast static IP list. For more information, see [Request Anycast static IPs to use for allowlisting](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/request-static-ips.html) in the *Amazon CloudFront Developer Guide*.",
 		//	  "properties": {
 		//	    "AnycastIps": {
+		//	      "description": "The static IP addresses that are allocated to the Anycast static IP list.",
 		//	      "items": {
 		//	        "type": "string"
 		//	      },
 		//	      "type": "array"
 		//	    },
 		//	    "Arn": {
+		//	      "description": "The Amazon Resource Name (ARN) of the Anycast static IP list.",
 		//	      "type": "string"
 		//	    },
 		//	    "Id": {
+		//	      "description": "The ID of the Anycast static IP list.",
 		//	      "type": "string"
 		//	    },
 		//	    "IpCount": {
+		//	      "description": "The number of IP addresses in the Anycast static IP list.",
 		//	      "type": "integer"
 		//	    },
 		//	    "LastModifiedTime": {
+		//	      "description": "The last time the Anycast static IP list was modified.",
 		//	      "format": "date-time",
 		//	      "type": "string"
 		//	    },
 		//	    "Name": {
+		//	      "description": "The name of the Anycast static IP list.",
 		//	      "maxLength": 64,
 		//	      "minLength": 1,
 		//	      "pattern": "^[a-zA-Z0-9-_]{1,64}$",
 		//	      "type": "string"
 		//	    },
 		//	    "Status": {
+		//	      "description": "The status of the Anycast static IP list. Valid values: ``Deployed``, ``Deploying``, or ``Failed``.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -75,92 +83,113 @@ func anycastIpListDataSource(ctx context.Context) (datasource.DataSource, error)
 				// Property: AnycastIps
 				"anycast_ips": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
+					Description: "The static IP addresses that are allocated to the Anycast static IP list.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Arn
 				"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "The Amazon Resource Name (ARN) of the Anycast static IP list.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Id
 				"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "The ID of the Anycast static IP list.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: IpCount
 				"ip_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "The number of IP addresses in the Anycast static IP list.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: LastModifiedTime
 				"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-					CustomType: timetypes.RFC3339Type{},
-					Computed:   true,
+					CustomType:  timetypes.RFC3339Type{},
+					Description: "The last time the Anycast static IP list was modified.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Name
 				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "The name of the Anycast static IP list.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Status
 				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "The status of the Anycast static IP list. Valid values: ``Deployed``, ``Deploying``, or ``Failed``.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Computed: true,
+			Description: "An Anycast static IP list. For more information, see [Request Anycast static IPs to use for allowlisting](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/request-static-ips.html) in the *Amazon CloudFront Developer Guide*.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ETag
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"e_tag": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"anycast_ip_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: IpCount
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The number of IP addresses in the Anycast static IP list.",
 		//	  "type": "integer"
 		//	}
 		"ip_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The number of IP addresses in the Anycast static IP list.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The name of the Anycast static IP list.",
 		//	  "maxLength": 64,
 		//	  "minLength": 1,
 		//	  "pattern": "^[a-zA-Z0-9-_]{1,64}$",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The name of the Anycast static IP list.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "A complex type that contains zero or more ``Tag`` elements.",
 		//	  "properties": {
 		//	    "Items": {
+		//	      "description": "A complex type that contains ``Tag`` elements.",
 		//	      "items": {
 		//	        "additionalProperties": false,
+		//	        "description": "A complex type that contains ``Tag`` key and ``Tag`` value.",
 		//	        "properties": {
 		//	          "Key": {
+		//	            "description": "A string that contains ``Tag`` key.\n The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
 		//	            "maxLength": 128,
 		//	            "minLength": 1,
 		//	            "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
 		//	            "type": "string"
 		//	          },
 		//	          "Value": {
+		//	            "description": "A string that contains an optional ``Tag`` value.\n The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
 		//	            "maxLength": 256,
 		//	            "minLength": 0,
 		//	            "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
@@ -185,18 +214,22 @@ func anycastIpListDataSource(ctx context.Context) (datasource.DataSource, error)
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Key
 							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
+								Description: "A string that contains ``Tag`` key.\n The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
+								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
+								Description: "A string that contains an optional ``Tag`` value.\n The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
+								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Computed: true,
+					Description: "A complex type that contains ``Tag`` elements.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Computed: true,
+			Description: "A complex type that contains zero or more ``Tag`` elements.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 

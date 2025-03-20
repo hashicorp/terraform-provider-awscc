@@ -435,7 +435,8 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "AuthType": {
 		//	              "description": "The supported authentication type to authenticate and connect to your SharePoint site/sites.",
 		//	              "enum": [
-		//	                "OAUTH2_CLIENT_CREDENTIALS"
+		//	                "OAUTH2_CLIENT_CREDENTIALS",
+		//	                "OAUTH2_SHAREPOINT_APP_ONLY_CLIENT_CREDENTIALS"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -515,6 +516,11 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "additionalProperties": false,
 		//	              "description": "Limit settings for the web crawler.",
 		//	              "properties": {
+		//	                "MaxPages": {
+		//	                  "description": "Maximum number of pages the crawler can crawl.",
+		//	                  "minimum": 1,
+		//	                  "type": "integer"
+		//	                },
 		//	                "RateLimit": {
 		//	                  "description": "Rate of web URLs retrieved per minute.",
 		//	                  "maximum": 300,
@@ -554,6 +560,18 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "HOST_ONLY",
 		//	                "SUBDOMAINS"
 		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "UserAgent": {
+		//	              "description": "The suffix that will be included in the user agent header.",
+		//	              "maxLength": 40,
+		//	              "minLength": 15,
+		//	              "type": "string"
+		//	            },
+		//	            "UserAgentHeader": {
+		//	              "description": "The full user agent header, including UUID and suffix.",
+		//	              "maxLength": 86,
+		//	              "minLength": 61,
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -916,6 +934,11 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 								// Property: CrawlerLimits
 								"crawler_limits": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: MaxPages
+										"max_pages": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "Maximum number of pages the crawler can crawl.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
 										// Property: RateLimit
 										"rate_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
 											Description: "Rate of web URLs retrieved per minute.",
@@ -940,6 +963,16 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 								// Property: Scope
 								"scope": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The scope that a web crawl job will be restricted to.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: UserAgent
+								"user_agent": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The suffix that will be included in the user agent header.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: UserAgentHeader
+								"user_agent_header": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The full user agent header, including UUID and suffix.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -1222,6 +1255,58 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      ],
 		//	      "type": "object"
 		//	    },
+		//	    "ContextEnrichmentConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Additional Enrichment Configuration for example when using GraphRag.",
+		//	      "properties": {
+		//	        "BedrockFoundationModelConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "Bedrock Foundation Model configuration to be used for Context Enrichment.",
+		//	          "properties": {
+		//	            "EnrichmentStrategyConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "description": "Strategy to be used when using Bedrock Foundation Model for Context Enrichment.",
+		//	              "properties": {
+		//	                "Method": {
+		//	                  "description": "Enrichment Strategy method.",
+		//	                  "enum": [
+		//	                    "CHUNK_ENTITY_EXTRACTION"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Method"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "ModelArn": {
+		//	              "description": "The model's ARN.",
+		//	              "maxLength": 2048,
+		//	              "minLength": 1,
+		//	              "pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}::foundation-model/([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2})|(arn:aws(|-us-gov|-cn|-iso|-iso-b):bedrock:(|[0-9a-z-]{1,20}):(|[0-9]{12}):(inference-profile|application-inference-profile)/[a-zA-Z0-9-:.]+)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "EnrichmentStrategyConfiguration",
+		//	            "ModelArn"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Type": {
+		//	          "description": "Enrichment type to be used for the vector database.",
+		//	          "enum": [
+		//	            "BEDROCK_FOUNDATION_MODEL"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Type"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "CustomTransformationConfiguration": {
 		//	      "additionalProperties": false,
 		//	      "description": "Settings for customizing steps in the data source content ingestion pipeline.",
@@ -1466,6 +1551,42 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Description: "Details about how to chunk the documents in the data source. A chunk refers to an excerpt from a data source that is returned when the knowledge base that it belongs to is queried.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: ContextEnrichmentConfiguration
+				"context_enrichment_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: BedrockFoundationModelConfiguration
+						"bedrock_foundation_model_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: EnrichmentStrategyConfiguration
+								"enrichment_strategy_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Method
+										"method": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Enrichment Strategy method.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Strategy to be used when using Bedrock Foundation Model for Context Enrichment.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ModelArn
+								"model_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The model's ARN.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Bedrock Foundation Model configuration to be used for Context Enrichment.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Type
+						"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Enrichment type to be used for the vector database.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Additional Enrichment Configuration for example when using GraphRag.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: CustomTransformationConfiguration
 				"custom_transformation_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1609,6 +1730,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"chunking_configuration":                 "ChunkingConfiguration",
 		"chunking_strategy":                      "ChunkingStrategy",
 		"confluence_configuration":               "ConfluenceConfiguration",
+		"context_enrichment_configuration":       "ContextEnrichmentConfiguration",
 		"crawler_configuration":                  "CrawlerConfiguration",
 		"crawler_limits":                         "CrawlerLimits",
 		"created_at":                             "CreatedAt",
@@ -1620,6 +1742,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"data_source_status":                     "DataSourceStatus",
 		"description":                            "Description",
 		"domain":                                 "Domain",
+		"enrichment_strategy_configuration":      "EnrichmentStrategyConfiguration",
 		"exclusion_filters":                      "ExclusionFilters",
 		"failure_reasons":                        "FailureReasons",
 		"filter_configuration":                   "FilterConfiguration",
@@ -1635,7 +1758,9 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"knowledge_base_id":                      "KnowledgeBaseId",
 		"lambda_arn":                             "LambdaArn",
 		"level_configurations":                   "LevelConfigurations",
+		"max_pages":                              "MaxPages",
 		"max_tokens":                             "MaxTokens",
+		"method":                                 "Method",
 		"model_arn":                              "ModelArn",
 		"name":                                   "Name",
 		"object_type":                            "ObjectType",
@@ -1668,6 +1793,8 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"uri":                                    "URI",
 		"url":                                    "Url",
 		"url_configuration":                      "UrlConfiguration",
+		"user_agent":                             "UserAgent",
+		"user_agent_header":                      "UserAgentHeader",
 		"vector_ingestion_configuration":         "VectorIngestionConfiguration",
 		"web_configuration":                      "WebConfiguration",
 	})

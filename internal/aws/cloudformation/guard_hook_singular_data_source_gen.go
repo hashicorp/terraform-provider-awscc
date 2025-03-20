@@ -214,7 +214,7 @@ func guardHookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "items": {
 		//	            "description": "CloudFormation Stack name",
 		//	            "maxLength": 128,
-		//	            "pattern": "^[a-zA-Z][-a-zA-Z0-9]*$",
+		//	            "pattern": "^[a-zA-Z*?][-a-zA-Z0-9*?]*$",
 		//	            "type": "string"
 		//	          },
 		//	          "maxItems": 50,
@@ -228,7 +228,7 @@ func guardHookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "items": {
 		//	            "description": "CloudFormation Stack name",
 		//	            "maxLength": 128,
-		//	            "pattern": "^[a-zA-Z][-a-zA-Z0-9]*$",
+		//	            "pattern": "^[a-zA-Z*?][-a-zA-Z0-9*?]*$",
 		//	            "type": "string"
 		//	          },
 		//	          "maxItems": 50,
@@ -247,9 +247,12 @@ func guardHookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "description": "List of stack roles that the hook is going to be excluded from",
 		//	          "insertionOrder": false,
 		//	          "items": {
-		//	            "description": "IAM Role ARN",
+		//	            "anyOf": [
+		//	              {},
+		//	              {}
+		//	            ],
+		//	            "description": "IAM Stack Role ARN filter",
 		//	            "maxLength": 256,
-		//	            "pattern": "arn:.+:iam::[0-9]{12}:role/.+",
 		//	            "type": "string"
 		//	          },
 		//	          "maxItems": 50,
@@ -261,9 +264,12 @@ func guardHookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "description": "List of stack roles that the hook is going to target",
 		//	          "insertionOrder": false,
 		//	          "items": {
-		//	            "description": "IAM Role ARN",
+		//	            "anyOf": [
+		//	              {},
+		//	              {}
+		//	            ],
+		//	            "description": "IAM Stack Role ARN filter",
 		//	            "maxLength": 256,
-		//	            "pattern": "arn:.+:iam::[0-9]{12}:role/.+",
 		//	            "type": "string"
 		//	          },
 		//	          "maxItems": 50,

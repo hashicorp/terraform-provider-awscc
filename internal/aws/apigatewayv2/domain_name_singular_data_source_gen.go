@@ -34,6 +34,17 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The custom domain name for your API in Amazon API Gateway. Uppercase letters and the underscore (``_``) character are not supported.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: DomainNameArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"domain_name_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainNameConfigurations
 		// CloudFormation resource type schema:
 		//
@@ -197,6 +208,7 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"certificate_arn":                        "CertificateArn",
 		"certificate_name":                       "CertificateName",
 		"domain_name":                            "DomainName",
+		"domain_name_arn":                        "DomainNameArn",
 		"domain_name_configurations":             "DomainNameConfigurations",
 		"endpoint_type":                          "EndpointType",
 		"mutual_tls_authentication":              "MutualTlsAuthentication",
