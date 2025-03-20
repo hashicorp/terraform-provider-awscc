@@ -25,4 +25,14 @@ Data Source schema for AWS::AppSync::DomainName
 - `certificate_arn` (String)
 - `description` (String)
 - `domain_name` (String)
+- `domain_name_arn` (String) The Amazon Resource Name (ARN) for the Domain Name.
 - `hosted_zone_id` (String)
+- `tags` (Attributes Set) An arbitrary set of tags (key-value pairs) for this Domain Name. (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String) A string used to identify this tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) A string containing the value for this tag. You can specify a maximum of 256 characters for a tag value.

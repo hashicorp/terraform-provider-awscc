@@ -116,6 +116,127 @@ func serviceLevelObjectiveDataSource(ctx context.Context) (datasource.DataSource
 			Description: "Displays whether this is a period-based SLO or a request-based SLO.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ExclusionWindows
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Each object in this array defines a time exclusion window for this SLO. The time exclusion window is used to exclude breaching data points from affecting attainment rate, error budget, and burn rate metrics.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "This object defines a time exclusion window for this SLO. The time exclusion window is used to exclude breaching data points from affecting attainment rate, error budget, and burn rate metrics.",
+		//	    "properties": {
+		//	      "Reason": {
+		//	        "default": "No reason",
+		//	        "description": "An optional reason for scheduling this time exclusion window. Default is 'No reason'.",
+		//	        "maxLength": 1024,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "RecurrenceRule": {
+		//	        "additionalProperties": false,
+		//	        "description": "This object defines how often to repeat a time exclusion window.",
+		//	        "properties": {
+		//	          "Expression": {
+		//	            "description": "A cron or rate expression denoting how often to repeat this exclusion window.",
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Expression"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "StartTime": {
+		//	        "description": "The time you want the exclusion window to start at. Note that time exclusion windows can only be scheduled in the future, not the past.",
+		//	        "type": "string"
+		//	      },
+		//	      "Window": {
+		//	        "additionalProperties": false,
+		//	        "description": "This object defines the length of time an exclusion window should span.",
+		//	        "properties": {
+		//	          "Duration": {
+		//	            "description": "Specifies the duration of each interval. For example, if `Duration` is 1 and `DurationUnit` is `MONTH`, each interval is one month, aligned with the calendar.",
+		//	            "minimum": 1,
+		//	            "type": "integer"
+		//	          },
+		//	          "DurationUnit": {
+		//	            "description": "Specifies the interval unit.",
+		//	            "enum": [
+		//	              "MINUTE",
+		//	              "HOUR",
+		//	              "DAY",
+		//	              "MONTH"
+		//	            ],
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "DurationUnit",
+		//	          "Duration"
+		//	        ],
+		//	        "type": "object"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Window"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 10,
+		//	  "minItems": 0,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"exclusion_windows": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Reason
+					"reason": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "An optional reason for scheduling this time exclusion window. Default is 'No reason'.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: RecurrenceRule
+					"recurrence_rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Expression
+							"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A cron or rate expression denoting how often to repeat this exclusion window.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "This object defines how often to repeat a time exclusion window.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: StartTime
+					"start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The time you want the exclusion window to start at. Note that time exclusion windows can only be scheduled in the future, not the past.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Window
+					"window": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Duration
+							"duration": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "Specifies the duration of each interval. For example, if `Duration` is 1 and `DurationUnit` is `MONTH`, each interval is one month, aligned with the calendar.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: DurationUnit
+							"duration_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies the interval unit.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "This object defines the length of time an exclusion window should span.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Each object in this array defines a time exclusion window for this SLO. The time exclusion window is used to exclude breaching data points from affecting attainment rate, error budget, and burn rate metrics.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Goal
 		// CloudFormation resource type schema:
 		//
@@ -136,13 +257,15 @@ func serviceLevelObjectiveDataSource(ctx context.Context) (datasource.DataSource
 		//	          "description": "If the interval for this service level objective is a calendar interval, this structure contains the interval specifications.",
 		//	          "properties": {
 		//	            "Duration": {
-		//	              "description": "Specifies the duration of each calendar interval. For example, if `Duration` is 1 and `DurationUnit` is `MONTH`, each interval is one month, aligned with the calendar.",
+		//	              "description": "Specifies the duration of each interval. For example, if `Duration` is 1 and `DurationUnit` is `MONTH`, each interval is one month, aligned with the calendar.",
 		//	              "minimum": 1,
 		//	              "type": "integer"
 		//	            },
 		//	            "DurationUnit": {
-		//	              "description": "Specifies the calendar interval unit.",
+		//	              "description": "Specifies the interval unit.",
 		//	              "enum": [
+		//	                "MINUTE",
+		//	                "HOUR",
 		//	                "DAY",
 		//	                "MONTH"
 		//	              ],
@@ -166,13 +289,15 @@ func serviceLevelObjectiveDataSource(ctx context.Context) (datasource.DataSource
 		//	          "description": "If the interval is a calendar interval, this structure contains the interval specifications.",
 		//	          "properties": {
 		//	            "Duration": {
-		//	              "description": "Specifies the duration of each calendar interval. For example, if `Duration` is 1 and `DurationUnit` is `MONTH`, each interval is one month, aligned with the calendar.",
+		//	              "description": "Specifies the duration of each interval. For example, if `Duration` is 1 and `DurationUnit` is `MONTH`, each interval is one month, aligned with the calendar.",
 		//	              "minimum": 1,
 		//	              "type": "integer"
 		//	            },
 		//	            "DurationUnit": {
-		//	              "description": "Specifies the calendar interval unit.",
+		//	              "description": "Specifies the interval unit.",
 		//	              "enum": [
+		//	                "MINUTE",
+		//	                "HOUR",
 		//	                "DAY",
 		//	                "MONTH"
 		//	              ],
@@ -210,12 +335,12 @@ func serviceLevelObjectiveDataSource(ctx context.Context) (datasource.DataSource
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Duration
 								"duration": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "Specifies the duration of each calendar interval. For example, if `Duration` is 1 and `DurationUnit` is `MONTH`, each interval is one month, aligned with the calendar.",
+									Description: "Specifies the duration of each interval. For example, if `Duration` is 1 and `DurationUnit` is `MONTH`, each interval is one month, aligned with the calendar.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: DurationUnit
 								"duration_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Specifies the calendar interval unit.",
+									Description: "Specifies the interval unit.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: StartTime
@@ -232,12 +357,12 @@ func serviceLevelObjectiveDataSource(ctx context.Context) (datasource.DataSource
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Duration
 								"duration": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "Specifies the duration of each calendar interval. For example, if `Duration` is 1 and `DurationUnit` is `MONTH`, each interval is one month, aligned with the calendar.",
+									Description: "Specifies the duration of each interval. For example, if `Duration` is 1 and `DurationUnit` is `MONTH`, each interval is one month, aligned with the calendar.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: DurationUnit
 								"duration_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Specifies the calendar interval unit.",
+									Description: "Specifies the interval unit.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -1327,6 +1452,7 @@ func serviceLevelObjectiveDataSource(ctx context.Context) (datasource.DataSource
 		"duration":                       "Duration",
 		"duration_unit":                  "DurationUnit",
 		"evaluation_type":                "EvaluationType",
+		"exclusion_windows":              "ExclusionWindows",
 		"expression":                     "Expression",
 		"goal":                           "Goal",
 		"good_count_metric":              "GoodCountMetric",
@@ -1348,6 +1474,8 @@ func serviceLevelObjectiveDataSource(ctx context.Context) (datasource.DataSource
 		"operation_name":                 "OperationName",
 		"period":                         "Period",
 		"period_seconds":                 "PeriodSeconds",
+		"reason":                         "Reason",
+		"recurrence_rule":                "RecurrenceRule",
 		"request_based_sli":              "RequestBasedSli",
 		"request_based_sli_metric":       "RequestBasedSliMetric",
 		"return_data":                    "ReturnData",
@@ -1362,6 +1490,7 @@ func serviceLevelObjectiveDataSource(ctx context.Context) (datasource.DataSource
 		"unit":                           "Unit",
 		"value":                          "Value",
 		"warning_threshold":              "WarningThreshold",
+		"window":                         "Window",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

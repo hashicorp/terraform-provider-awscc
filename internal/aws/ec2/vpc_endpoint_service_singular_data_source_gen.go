@@ -112,6 +112,23 @@ func vPCEndpointServiceDataSource(ctx context.Context) (datasource.DataSource, e
 			Description: "Specify which Ip Address types are supported for VPC endpoint service.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: SupportedRegions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Regions from which service consumers can access the service.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"supported_regions": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The Regions from which service consumers can access the service.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -178,6 +195,7 @@ func vPCEndpointServiceDataSource(ctx context.Context) (datasource.DataSource, e
 		"payer_responsibility":         "PayerResponsibility",
 		"service_id":                   "ServiceId",
 		"supported_ip_address_types":   "SupportedIpAddressTypes",
+		"supported_regions":            "SupportedRegions",
 		"tags":                         "Tags",
 		"value":                        "Value",
 	})

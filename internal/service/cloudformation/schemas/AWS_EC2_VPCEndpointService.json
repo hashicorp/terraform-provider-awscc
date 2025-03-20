@@ -75,6 +75,15 @@
       "items": {
         "$ref": "#/definitions/IpAddressType"
       }
+    },
+    "SupportedRegions": {
+      "type": "array",
+      "description": "The Regions from which service consumers can access the service.",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      }
     }
   },
   "primaryIdentifier": [
@@ -106,6 +115,7 @@
         "cloudwatch:DeleteInsightRules",
         "cloudwatch:PutManagedInsightRules",
         "ec2:DescribeVpcEndpointServiceConfigurations",
+        "vpce:AllowMultiRegion",
         "ec2:CreateTags"
       ]
     },
@@ -118,7 +128,8 @@
         "cloudwatch:DeleteInsightRules",
         "cloudwatch:PutManagedInsightRules",
         "ec2:CreateTags",
-        "ec2:DeleteTags"
+        "ec2:DeleteTags",
+        "vpce:AllowMultiRegion"
       ]
     },
     "read": {
@@ -133,7 +144,8 @@
         "ec2:DescribeVpcEndpointServiceConfigurations",
         "cloudwatch:ListManagedInsightRules",
         "cloudwatch:DeleteInsightRules",
-        "ec2:DeleteTags"
+        "ec2:DeleteTags",
+        "vpce:AllowMultiRegion"
       ]
     },
     "list": {

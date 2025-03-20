@@ -1240,7 +1240,6 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 				listplanmodifier.UseStateForUnknown(),
 				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
-			// Tags is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -1321,9 +1320,6 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/EndpointName",
-		"/properties/Tags",
-		"/properties/Tags/*/Key",
-		"/properties/Tags/*/Value",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

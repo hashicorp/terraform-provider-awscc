@@ -260,6 +260,18 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The map of the key-value pairs used to tag the workgroup.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: TrackName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "pattern": "^[a-zA-Z0-9_]+$",
+		//	  "type": "string"
+		//	}
+		"track_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Workgroup
 		// CloudFormation resource type schema:
 		//
@@ -406,6 +418,12 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "type": "array"
 		//	    },
+		//	    "TrackName": {
+		//	      "maxLength": 256,
+		//	      "minLength": 1,
+		//	      "pattern": "^[a-zA-Z0-9_]+$",
+		//	      "type": "string"
+		//	    },
 		//	    "WorkgroupArn": {
 		//	      "type": "string"
 		//	    },
@@ -545,6 +563,10 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 					ElementType: types.StringType,
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: TrackName
+				"track_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: WorkgroupArn
 				"workgroup_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
@@ -616,6 +638,7 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"subnet_id":                "SubnetId",
 		"subnet_ids":               "SubnetIds",
 		"tags":                     "Tags",
+		"track_name":               "TrackName",
 		"value":                    "Value",
 		"vpc_endpoint_id":          "VpcEndpointId",
 		"vpc_endpoints":            "VpcEndpoints",

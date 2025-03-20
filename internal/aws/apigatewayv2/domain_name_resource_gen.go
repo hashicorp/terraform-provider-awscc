@@ -42,6 +42,20 @@ func domainNameResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: DomainNameArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"domain_name_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DomainNameConfigurations
 		// CloudFormation resource type schema:
 		//
@@ -256,6 +270,7 @@ func domainNameResource(ctx context.Context) (resource.Resource, error) {
 		"certificate_arn":                        "CertificateArn",
 		"certificate_name":                       "CertificateName",
 		"domain_name":                            "DomainName",
+		"domain_name_arn":                        "DomainNameArn",
 		"domain_name_configurations":             "DomainNameConfigurations",
 		"endpoint_type":                          "EndpointType",
 		"mutual_tls_authentication":              "MutualTlsAuthentication",

@@ -400,6 +400,26 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: TrackName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "pattern": "^[a-zA-Z0-9_]+$",
+		//	  "type": "string"
+		//	}
+		"track_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_]+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Workgroup
 		// CloudFormation resource type schema:
 		//
@@ -546,6 +566,12 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "type": "array"
 		//	    },
+		//	    "TrackName": {
+		//	      "maxLength": 256,
+		//	      "minLength": 1,
+		//	      "pattern": "^[a-zA-Z0-9_]+$",
+		//	      "type": "string"
+		//	    },
 		//	    "WorkgroupArn": {
 		//	      "type": "string"
 		//	    },
@@ -565,7 +591,11 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: BaseCapacity
 				"base_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Optional: true,
 					Computed: true,
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: ConfigParameters
 				"config_parameters": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
@@ -573,19 +603,40 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: ParameterKey
 							"parameter_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
 								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(0, 255),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: ParameterValue
 							"parameter_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
 								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(0, 15000),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
+					Optional: true,
 					Computed: true,
+					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						setplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: CreationDate
 				"creation_date": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Endpoint
 				"endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -593,10 +644,16 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 						// Property: Address
 						"address": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Port
 						"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Computed: true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: VpcEndpoints
 						"vpc_endpoints": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -608,74 +665,140 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 												// Property: AvailabilityZone
 												"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Optional: true,
 													Computed: true,
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: NetworkInterfaceId
 												"network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Optional: true,
 													Computed: true,
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: PrivateIpAddress
 												"private_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Optional: true,
 													Computed: true,
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: SubnetId
 												"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Optional: true,
 													Computed: true,
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
+										Optional: true,
 										Computed: true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											generic.Multiset(),
+											listplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: VpcEndpointId
 									"vpc_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
 										Computed: true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: VpcId
 									"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
 										Computed: true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
+							Optional: true,
 							Computed: true,
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								generic.Multiset(),
+								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
+					Optional: true,
 					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: EnhancedVpcRouting
 				"enhanced_vpc_routing": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: MaxCapacity
 				"max_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Optional: true,
 					Computed: true,
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: NamespaceName
 				"namespace_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: PricePerformanceTarget
 				"price_performance_target": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Level
 						"level": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
 							Computed: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.Between(1, 100),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Status
 						"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
 							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"ENABLED",
+									"DISABLED",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
+					Optional: true,
 					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: PubliclyAccessible
 				"publicly_accessible": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: SecurityGroupIds
 				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -683,11 +806,15 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Status
 				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: SubnetIds
 				"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -695,22 +822,40 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: TrackName
+				"track_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: WorkgroupArn
 				"workgroup_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: WorkgroupId
 				"workgroup_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: WorkgroupName
 				"workgroup_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Definition for workgroup resource",
+			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
@@ -782,6 +927,7 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 		"subnet_id":                "SubnetId",
 		"subnet_ids":               "SubnetIds",
 		"tags":                     "Tags",
+		"track_name":               "TrackName",
 		"value":                    "Value",
 		"vpc_endpoint_id":          "VpcEndpointId",
 		"vpc_endpoints":            "VpcEndpoints",

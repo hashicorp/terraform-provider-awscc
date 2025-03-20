@@ -309,6 +309,7 @@ Optional:
 Optional:
 
 - `mongo_db_atlas_configuration` (Attributes) Contains the storage configuration of the knowledge base in MongoDb Atlas Cloud. (see [below for nested schema](#nestedatt--storage_configuration--mongo_db_atlas_configuration))
+- `neptune_analytics_configuration` (Attributes) Contains the configurations to use Neptune Analytics as Vector Store. (see [below for nested schema](#nestedatt--storage_configuration--neptune_analytics_configuration))
 - `opensearch_serverless_configuration` (Attributes) Contains the storage configuration of the knowledge base in Amazon OpenSearch Service. (see [below for nested schema](#nestedatt--storage_configuration--opensearch_serverless_configuration))
 - `pinecone_configuration` (Attributes) Contains the storage configuration of the knowledge base in Pinecone. (see [below for nested schema](#nestedatt--storage_configuration--pinecone_configuration))
 - `rds_configuration` (Attributes) Contains details about the storage configuration of the knowledge base in Amazon RDS. For more information, see Create a vector index in Amazon RDS. (see [below for nested schema](#nestedatt--storage_configuration--rds_configuration))
@@ -335,6 +336,24 @@ Optional:
 - `metadata_field` (String) The name of the field in which Amazon Bedrock stores metadata about the vector store.
 - `text_field` (String) The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
 - `vector_field` (String) The name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.
+
+
+
+<a id="nestedatt--storage_configuration--neptune_analytics_configuration"></a>
+### Nested Schema for `storage_configuration.neptune_analytics_configuration`
+
+Optional:
+
+- `field_mapping` (Attributes) A mapping of Bedrock Knowledge Base fields to Neptune Analytics fields. (see [below for nested schema](#nestedatt--storage_configuration--neptune_analytics_configuration--field_mapping))
+- `graph_arn` (String) ARN for Neptune Analytics graph database.
+
+<a id="nestedatt--storage_configuration--neptune_analytics_configuration--field_mapping"></a>
+### Nested Schema for `storage_configuration.neptune_analytics_configuration.field_mapping`
+
+Optional:
+
+- `metadata_field` (String) The name of the field in which Amazon Bedrock stores metadata about the vector store.
+- `text_field` (String) The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
 
 
 

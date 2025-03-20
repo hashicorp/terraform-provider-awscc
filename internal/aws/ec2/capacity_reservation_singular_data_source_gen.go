@@ -49,6 +49,105 @@ func capacityReservationDataSource(ctx context.Context) (datasource.DataSource, 
 		"available_instance_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: CapacityAllocationSet
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "AllocationType": {
+		//	        "type": "string"
+		//	      },
+		//	      "Count": {
+		//	        "type": "integer"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"capacity_allocation_set": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AllocationType
+					"allocation_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Count
+					"count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: CapacityReservationArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"capacity_reservation_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: CapacityReservationFleetId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"capacity_reservation_fleet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: CommitmentInfo
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "CommitmentEndDate": {
+		//	      "type": "string"
+		//	    },
+		//	    "CommittedInstanceCount": {
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"commitment_info": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CommitmentEndDate
+				"commitment_end_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CommittedInstanceCount
+				"committed_instance_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: CreateDate
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"create_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: DeliveryPreference
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"delivery_preference": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: EbsOptimized
 		// CloudFormation resource type schema:
 		//
@@ -139,6 +238,15 @@ func capacityReservationDataSource(ctx context.Context) (datasource.DataSource, 
 		"out_post_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: OwnerId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: PlacementGroupArn
 		// CloudFormation resource type schema:
 		//
@@ -146,6 +254,33 @@ func capacityReservationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "type": "string"
 		//	}
 		"placement_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: ReservationType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"reservation_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: StartDate
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"start_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: State
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: TagSpecifications
@@ -257,10 +392,20 @@ func capacityReservationDataSource(ctx context.Context) (datasource.DataSource, 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::CapacityReservation").WithTerraformTypeName("awscc_ec2_capacity_reservation")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"allocation_type":                     "AllocationType",
 		"availability_zone":                   "AvailabilityZone",
 		"availability_zone_id":                "AvailabilityZoneId",
 		"available_instance_count":            "AvailableInstanceCount",
+		"capacity_allocation_set":             "CapacityAllocationSet",
+		"capacity_reservation_arn":            "CapacityReservationArn",
+		"capacity_reservation_fleet_id":       "CapacityReservationFleetId",
 		"capacity_reservation_id":             "Id",
+		"commitment_end_date":                 "CommitmentEndDate",
+		"commitment_info":                     "CommitmentInfo",
+		"committed_instance_count":            "CommittedInstanceCount",
+		"count":                               "Count",
+		"create_date":                         "CreateDate",
+		"delivery_preference":                 "DeliveryPreference",
 		"ebs_optimized":                       "EbsOptimized",
 		"end_date":                            "EndDate",
 		"end_date_type":                       "EndDateType",
@@ -271,8 +416,12 @@ func capacityReservationDataSource(ctx context.Context) (datasource.DataSource, 
 		"instance_type":                       "InstanceType",
 		"key":                                 "Key",
 		"out_post_arn":                        "OutPostArn",
+		"owner_id":                            "OwnerId",
 		"placement_group_arn":                 "PlacementGroupArn",
+		"reservation_type":                    "ReservationType",
 		"resource_type":                       "ResourceType",
+		"start_date":                          "StartDate",
+		"state":                               "State",
 		"tag_specifications":                  "TagSpecifications",
 		"tags":                                "Tags",
 		"tenancy":                             "Tenancy",

@@ -15,6 +15,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -157,6 +158,27 @@ func vPCEndpointServiceResource(ctx context.Context) (resource.Resource, error) 
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: SupportedRegions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Regions from which service consumers can access the service.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"supported_regions": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The Regions from which service consumers can access the service.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -247,6 +269,7 @@ func vPCEndpointServiceResource(ctx context.Context) (resource.Resource, error) 
 		"payer_responsibility":         "PayerResponsibility",
 		"service_id":                   "ServiceId",
 		"supported_ip_address_types":   "SupportedIpAddressTypes",
+		"supported_regions":            "SupportedRegions",
 		"tags":                         "Tags",
 		"value":                        "Value",
 	})

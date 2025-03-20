@@ -86,6 +86,7 @@ variable "source_account_id" {
 - `last_updated_at` (String) The timestamp of when the Amazon DataZone domain was last updated.
 - `managed_account_id` (String) The identifier of the AWS account that manages the domain.
 - `portal_url` (String) The URL of the data portal for this Amazon DataZone domain.
+- `root_domain_unit_id` (String) The ID of the root domain in Amazon Datazone.
 - `status` (String) The status of the Amazon DataZone domain.
 
 <a id="nestedatt--single_sign_on"></a>

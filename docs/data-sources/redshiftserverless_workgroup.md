@@ -32,6 +32,7 @@ Data Source schema for AWS::RedshiftServerless::Workgroup
 - `security_group_ids` (List of String) A list of security group IDs to associate with the workgroup.
 - `subnet_ids` (List of String) A list of subnet IDs the workgroup is associated with.
 - `tags` (Attributes List) The map of the key-value pairs used to tag the workgroup. (see [below for nested schema](#nestedatt--tags))
+- `track_name` (String)
 - `workgroup` (Attributes) Definition for workgroup resource (see [below for nested schema](#nestedatt--workgroup))
 - `workgroup_name` (String) The name of the workgroup.
 
@@ -79,6 +80,7 @@ Read-Only:
 - `security_group_ids` (List of String)
 - `status` (String)
 - `subnet_ids` (List of String)
+- `track_name` (String)
 - `workgroup_arn` (String)
 - `workgroup_id` (String)
 - `workgroup_name` (String)

@@ -915,6 +915,11 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	    },
 		//	    {
 		//	      "required": [
+		//	        "NeptuneAnalyticsConfiguration"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
 		//	        "MongoDbAtlasConfiguration"
 		//	      ]
 		//	    }
@@ -996,6 +1001,47 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	        "DatabaseName",
 		//	        "CollectionName",
 		//	        "VectorIndexName",
+		//	        "FieldMapping"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "NeptuneAnalyticsConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Contains the configurations to use Neptune Analytics as Vector Store.",
+		//	      "properties": {
+		//	        "FieldMapping": {
+		//	          "additionalProperties": false,
+		//	          "description": "A mapping of Bedrock Knowledge Base fields to Neptune Analytics fields.",
+		//	          "properties": {
+		//	            "MetadataField": {
+		//	              "description": "The name of the field in which Amazon Bedrock stores metadata about the vector store.",
+		//	              "maxLength": 2048,
+		//	              "pattern": "^.*$",
+		//	              "type": "string"
+		//	            },
+		//	            "TextField": {
+		//	              "description": "The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.",
+		//	              "maxLength": 2048,
+		//	              "pattern": "^.*$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "TextField",
+		//	            "MetadataField"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "GraphArn": {
+		//	          "description": "ARN for Neptune Analytics graph database.",
+		//	          "maxLength": 255,
+		//	          "minLength": 1,
+		//	          "pattern": "^arn:aws(|-cn|-us-gov):neptune-graph:[a-zA-Z0-9-]*:[0-9]{12}:graph\\/g-[a-zA-Z0-9]{10}$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "GraphArn",
 		//	        "FieldMapping"
 		//	      ],
 		//	      "type": "object"
@@ -1185,7 +1231,8 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	        "OPENSEARCH_SERVERLESS",
 		//	        "PINECONE",
 		//	        "RDS",
-		//	        "MONGO_DB_ATLAS"
+		//	        "MONGO_DB_ATLAS",
+		//	        "NEPTUNE_ANALYTICS"
 		//	      ],
 		//	      "type": "string"
 		//	    }
@@ -1254,6 +1301,35 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Contains the storage configuration of the knowledge base in MongoDb Atlas Cloud.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: NeptuneAnalyticsConfiguration
+				"neptune_analytics_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: FieldMapping
+						"field_mapping": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: MetadataField
+								"metadata_field": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the field in which Amazon Bedrock stores metadata about the vector store.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: TextField
+								"text_field": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A mapping of Bedrock Knowledge Base fields to Neptune Analytics fields.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: GraphArn
+						"graph_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "ARN for Neptune Analytics graph database.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Contains the configurations to use Neptune Analytics as Vector Store.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: OpensearchServerlessConfiguration
@@ -1472,6 +1548,7 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		"failure_reasons":                         "FailureReasons",
 		"field_mapping":                           "FieldMapping",
 		"generation_context":                      "GenerationContext",
+		"graph_arn":                               "GraphArn",
 		"inclusion":                               "Inclusion",
 		"kendra_index_arn":                        "KendraIndexArn",
 		"kendra_knowledge_base_configuration":     "KendraKnowledgeBaseConfiguration",
@@ -1483,6 +1560,7 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		"name":                                    "Name",
 		"namespace":                               "Namespace",
 		"natural_language":                        "NaturalLanguage",
+		"neptune_analytics_configuration":         "NeptuneAnalyticsConfiguration",
 		"opensearch_serverless_configuration":     "OpensearchServerlessConfiguration",
 		"pinecone_configuration":                  "PineconeConfiguration",
 		"primary_key_field":                       "PrimaryKeyField",

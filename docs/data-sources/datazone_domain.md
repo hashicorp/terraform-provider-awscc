@@ -32,6 +32,7 @@ Data Source schema for AWS::DataZone::Domain
 - `managed_account_id` (String) The identifier of the AWS account that manages the domain.
 - `name` (String) The name of the Amazon DataZone domain.
 - `portal_url` (String) The URL of the data portal for this Amazon DataZone domain.
+- `root_domain_unit_id` (String) The ID of the root domain in Amazon Datazone.
 - `service_role` (String) The service role of the domain that is created.
 - `single_sign_on` (Attributes) The single-sign on configuration of the Amazon DataZone domain. (see [below for nested schema](#nestedatt--single_sign_on))
 - `status` (String) The status of the Amazon DataZone domain.

@@ -66,6 +66,17 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: DomainNameArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) for the Domain Name.",
+		//	  "type": "string"
+		//	}
+		"domain_name_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) for the Domain Name.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HostedZoneId
 		// CloudFormation resource type schema:
 		//
@@ -74,6 +85,58 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"hosted_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An arbitrary set of tags (key-value pairs) for this Domain Name.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "An arbitrary set of tags (key-value pairs) for this Domain Name.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "A string used to identify this tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "pattern": "",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "A string containing the value for this tag. You can specify a maximum of 256 characters for a tag value.",
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "pattern": "^[\\s\\w+-=\\.:/@]*$",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A string used to identify this tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A string containing the value for this tag. You can specify a maximum of 256 characters for a tag value.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An arbitrary set of tags (key-value pairs) for this Domain Name.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -96,7 +159,11 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"certificate_arn":      "CertificateArn",
 		"description":          "Description",
 		"domain_name":          "DomainName",
+		"domain_name_arn":      "DomainNameArn",
 		"hosted_zone_id":       "HostedZoneId",
+		"key":                  "Key",
+		"tags":                 "Tags",
+		"value":                "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

@@ -60,8 +60,18 @@ resource "awscc_ec2_capacity_reservation" "example-capacity-reservation-end-date
 ### Read-Only
 
 - `available_instance_count` (Number)
+- `capacity_allocation_set` (Attributes List) (see [below for nested schema](#nestedatt--capacity_allocation_set))
+- `capacity_reservation_arn` (String)
+- `capacity_reservation_fleet_id` (String)
 - `capacity_reservation_id` (String)
+- `commitment_info` (Attributes) (see [below for nested schema](#nestedatt--commitment_info))
+- `create_date` (String)
+- `delivery_preference` (String)
 - `id` (String) Uniquely identifies the resource.
+- `owner_id` (String)
+- `reservation_type` (String)
+- `start_date` (String)
+- `state` (String)
 - `total_instance_count` (Number)
 
 <a id="nestedatt--tag_specifications"></a>
@@ -79,6 +89,25 @@ Optional:
 
 - `key` (String)
 - `value` (String)
+
+
+
+<a id="nestedatt--capacity_allocation_set"></a>
+### Nested Schema for `capacity_allocation_set`
+
+Read-Only:
+
+- `allocation_type` (String)
+- `count` (Number)
+
+
+<a id="nestedatt--commitment_info"></a>
+### Nested Schema for `commitment_info`
+
+Read-Only:
+
+- `commitment_end_date` (String)
+- `committed_instance_count` (Number)
 
 ## Import
 

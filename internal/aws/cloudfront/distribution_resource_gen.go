@@ -54,7 +54,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		//	      "uniqueItems": false
 		//	    },
 		//	    "AnycastIpListId": {
-		//	      "description": "",
+		//	      "description": "ID of the Anycast static IP list that is associated with the distribution.",
 		//	      "type": "string"
 		//	    },
 		//	    "CNAMEs": {
@@ -748,7 +748,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "additionalProperties": false,
-		//	        "description": "An origin.\n An origin is the location where content is stored, and from which CloudFront gets content to serve to viewers. To specify an origin:\n  +  Use ``S3OriginConfig`` to specify an Amazon S3 bucket that is not configured with static website hosting.\n  +  Use ``CustomOriginConfig`` to specify all other kinds of origins, including:\n  +  An Amazon S3 bucket that is configured with static website hosting\n  +  An Elastic Load Balancing load balancer\n  +  An EMPlong endpoint\n  +  An EMSlong container\n  +  Any other HTTP server, running on an Amazon EC2 instance or any other kind of host\n  \n  \n For the current maximum number of origins that you can specify per distribution, see [General Quotas on Web Distributions](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html#limits-web-distributions) in the *Amazon CloudFront Developer Guide* (quotas were formerly referred to as limits).",
+		//	        "description": "An origin.\n An origin is the location where content is stored, and from which CloudFront gets content to serve to viewers. To specify an origin:\n  +  Use ``S3OriginConfig`` to specify an Amazon S3 bucket that is not configured with static website hosting.\n  +  Use ``VpcOriginConfig`` to specify a VPC origin.\n  +  Use ``CustomOriginConfig`` to specify all other kinds of origins, including:\n  +  An Amazon S3 bucket that is configured with static website hosting\n  +  An Elastic Load Balancing load balancer\n  +  An EMPlong endpoint\n  +  An EMSlong container\n  +  Any other HTTP server, running on an Amazon EC2 instance or any other kind of host\n  \n  \n For the current maximum number of origins that you can specify per distribution, see [General Quotas on Web Distributions](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html#limits-web-distributions) in the *Amazon CloudFront Developer Guide* (quotas were formerly referred to as limits).",
 		//	        "properties": {
 		//	          "ConnectionAttempts": {
 		//	            "description": "The number of times that CloudFront attempts to connect to the origin. The minimum number is 1, the maximum is 3, and the default (if you don't specify otherwise) is 3.\n For a custom origin (including an Amazon S3 bucket that's configured with static website hosting), this value also specifies the number of times that CloudFront attempts to get a response from the origin, in the case of an [Origin Response Timeout](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginResponseTimeout).\n For more information, see [Origin Connection Attempts](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#origin-connection-attempts) in the *Amazon CloudFront Developer Guide*.",
@@ -874,17 +874,20 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		//	          },
 		//	          "VpcOriginConfig": {
 		//	            "additionalProperties": false,
-		//	            "description": "",
+		//	            "description": "The VPC origin configuration.",
 		//	            "properties": {
 		//	              "OriginKeepaliveTimeout": {
 		//	                "default": 5,
+		//	                "description": "Specifies how long, in seconds, CloudFront persists its connection to the origin. The minimum timeout is 1 second, the maximum is 60 seconds, and the default (if you don't specify otherwise) is 5 seconds.\n For more information, see [Keep-alive timeout (custom origins only)](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginKeepaliveTimeout) in the *Amazon CloudFront Developer Guide*.",
 		//	                "type": "integer"
 		//	              },
 		//	              "OriginReadTimeout": {
 		//	                "default": 30,
+		//	                "description": "Specifies how long, in seconds, CloudFront waits for a response from the origin. This is also known as the *origin response timeout*. The minimum timeout is 1 second, the maximum is 60 seconds, and the default (if you don't specify otherwise) is 30 seconds.\n For more information, see [Response timeout (custom origins only)](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginResponseTimeout) in the *Amazon CloudFront Developer Guide*.",
 		//	                "type": "integer"
 		//	              },
 		//	              "VpcOriginId": {
+		//	                "description": "The VPC origin ID.",
 		//	                "type": "string"
 		//	              }
 		//	            },
@@ -1024,7 +1027,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: AnycastIpListId
 				"anycast_ip_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "",
+					Description: "ID of the Anycast static IP list that is associated with the distribution.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2363,26 +2366,29 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: OriginKeepaliveTimeout
 									"origin_keepalive_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Optional: true,
-										Computed: true,
-										Default:  int64default.StaticInt64(5),
+										Description: "Specifies how long, in seconds, CloudFront persists its connection to the origin. The minimum timeout is 1 second, the maximum is 60 seconds, and the default (if you don't specify otherwise) is 5 seconds.\n For more information, see [Keep-alive timeout (custom origins only)](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginKeepaliveTimeout) in the *Amazon CloudFront Developer Guide*.",
+										Optional:    true,
+										Computed:    true,
+										Default:     int64default.StaticInt64(5),
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 											int64planmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: OriginReadTimeout
 									"origin_read_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Optional: true,
-										Computed: true,
-										Default:  int64default.StaticInt64(30),
+										Description: "Specifies how long, in seconds, CloudFront waits for a response from the origin. This is also known as the *origin response timeout*. The minimum timeout is 1 second, the maximum is 60 seconds, and the default (if you don't specify otherwise) is 30 seconds.\n For more information, see [Response timeout (custom origins only)](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginResponseTimeout) in the *Amazon CloudFront Developer Guide*.",
+										Optional:    true,
+										Computed:    true,
+										Default:     int64default.StaticInt64(30),
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 											int64planmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: VpcOriginId
 									"vpc_origin_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Optional: true,
-										Computed: true,
+										Description: "The VPC origin ID.",
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
@@ -2391,7 +2397,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Description: "",
+								Description: "The VPC origin configuration.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/

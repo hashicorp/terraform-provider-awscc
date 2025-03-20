@@ -2169,26 +2169,26 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "",
+		//	  "description": "The metadata table configuration of an S3 general purpose bucket. For more information, see [Accelerating data discovery with S3 Metadata](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-overview.html) and [Setting up permissions for configuring metadata tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html).",
 		//	  "properties": {
 		//	    "S3TablesDestination": {
 		//	      "additionalProperties": false,
-		//	      "description": "",
+		//	      "description": "The destination information for the metadata table configuration. The destination table bucket must be in the same Region and AWS-account as the general purpose bucket. The specified metadata table name must be unique within the ``aws_s3_metadata`` namespace in the destination table bucket.",
 		//	      "properties": {
 		//	        "TableArn": {
-		//	          "description": "The Amazon Resource Name (ARN) for the metadata table in the metadata table configuration. The specified metadata table name must be unique within the \u003ccode\u003eaws_s3_metadata\u003c/code\u003e namespace in the destination table bucket.",
+		//	          "description": "The Amazon Resource Name (ARN) for the metadata table in the metadata table configuration. The specified metadata table name must be unique within the ``aws_s3_metadata`` namespace in the destination table bucket.",
 		//	          "type": "string"
 		//	        },
 		//	        "TableBucketArn": {
-		//	          "description": "The Amazon Resource Name (ARN) for the table bucket that's specified as the destination in the metadata table configuration. The destination table bucket must be in the same Region and AWS account as the general purpose bucket.",
+		//	          "description": "The Amazon Resource Name (ARN) for the table bucket that's specified as the destination in the metadata table configuration. The destination table bucket must be in the same Region and AWS-account as the general purpose bucket.",
 		//	          "type": "string"
 		//	        },
 		//	        "TableName": {
-		//	          "description": "The name for the metadata table in your metadata table configuration. The specified metadata table name must be unique within the \u003ccode\u003eaws_s3_metadata\u003c/code\u003e namespace in the destination table bucket.",
+		//	          "description": "The name for the metadata table in your metadata table configuration. The specified metadata table name must be unique within the ``aws_s3_metadata`` namespace in the destination table bucket.",
 		//	          "type": "string"
 		//	        },
 		//	        "TableNamespace": {
-		//	          "description": "The table bucket namespace for the metadata table in your metadata table configuration. This value is always \u003ccode\u003eaws_s3_metadata\u003c/code\u003e.",
+		//	          "description": "The table bucket namespace for the metadata table in your metadata table configuration. This value is always ``aws_s3_metadata``.",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -2211,7 +2211,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: TableArn
 						"table_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The Amazon Resource Name (ARN) for the metadata table in the metadata table configuration. The specified metadata table name must be unique within the <code>aws_s3_metadata</code> namespace in the destination table bucket.",
+							Description: "The Amazon Resource Name (ARN) for the metadata table in the metadata table configuration. The specified metadata table name must be unique within the ``aws_s3_metadata`` namespace in the destination table bucket.",
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -2219,7 +2219,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: TableBucketArn
 						"table_bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The Amazon Resource Name (ARN) for the table bucket that's specified as the destination in the metadata table configuration. The destination table bucket must be in the same Region and AWS account as the general purpose bucket.",
+							Description: "The Amazon Resource Name (ARN) for the table bucket that's specified as the destination in the metadata table configuration. The destination table bucket must be in the same Region and AWS-account as the general purpose bucket.",
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
@@ -2231,7 +2231,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: TableName
 						"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The name for the metadata table in your metadata table configuration. The specified metadata table name must be unique within the <code>aws_s3_metadata</code> namespace in the destination table bucket.",
+							Description: "The name for the metadata table in your metadata table configuration. The specified metadata table name must be unique within the ``aws_s3_metadata`` namespace in the destination table bucket.",
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
@@ -2243,14 +2243,14 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: TableNamespace
 						"table_namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The table bucket namespace for the metadata table in your metadata table configuration. This value is always <code>aws_s3_metadata</code>.",
+							Description: "The table bucket namespace for the metadata table in your metadata table configuration. This value is always ``aws_s3_metadata``.",
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "",
+					Description: "The destination information for the metadata table configuration. The destination table bucket must be in the same Region and AWS-account as the general purpose bucket. The specified metadata table name must be unique within the ``aws_s3_metadata`` namespace in the destination table bucket.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.Object{ /*START VALIDATORS*/
@@ -2261,7 +2261,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "",
+			Description: "The metadata table configuration of an S3 general purpose bucket. For more information, see [Accelerating data discovery with S3 Metadata](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-overview.html) and [Setting up permissions for configuring metadata tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html).",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/

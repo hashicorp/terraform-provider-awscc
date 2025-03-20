@@ -211,6 +211,23 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: RootDomainUnitId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the root domain in Amazon Datazone.",
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "pattern": "^[a-z0-9_\\-]+$",
+		//	  "type": "string"
+		//	}
+		"root_domain_unit_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the root domain in Amazon Datazone.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ServiceRole
 		// CloudFormation resource type schema:
 		//
@@ -422,6 +439,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"managed_account_id":    "ManagedAccountId",
 		"name":                  "Name",
 		"portal_url":            "PortalUrl",
+		"root_domain_unit_id":   "RootDomainUnitId",
 		"service_role":          "ServiceRole",
 		"single_sign_on":        "SingleSignOn",
 		"status":                "Status",

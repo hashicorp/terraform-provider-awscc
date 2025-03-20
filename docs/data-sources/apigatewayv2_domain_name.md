@@ -22,6 +22,7 @@ Data Source schema for AWS::ApiGatewayV2::DomainName
 ### Read-Only
 
 - `domain_name` (String) The custom domain name for your API in Amazon API Gateway. Uppercase letters and the underscore (``_``) character are not supported.
+- `domain_name_arn` (String)
 - `domain_name_configurations` (Attributes List) The domain name configurations. (see [below for nested schema](#nestedatt--domain_name_configurations))
 - `mutual_tls_authentication` (Attributes) The mutual TLS authentication configuration for a custom domain name. (see [below for nested schema](#nestedatt--mutual_tls_authentication))
 - `regional_domain_name` (String)

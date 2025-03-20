@@ -2,7 +2,9 @@
 
 FEATURES:
 
+* **New Resource:** `awscc_datazone_connection`
 * **New Resource:** `awscc_pcs_compute_node_group`
+* **New Data Source:** `awscc_datazone_connection`
 * **New Data Source:** `awscc_pcs_compute_node_group`
 
 ## 1.33.0 (March 13, 2025)
