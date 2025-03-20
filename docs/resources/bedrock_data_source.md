@@ -273,12 +273,18 @@ Optional:
 - `exclusion_filters` (List of String) A set of regular expression filter patterns for a type of object.
 - `inclusion_filters` (List of String) A set of regular expression filter patterns for a type of object.
 - `scope` (String) The scope that a web crawl job will be restricted to.
+- `user_agent` (String) The suffix that will be included in the user agent header.
+
+Read-Only:
+
+- `user_agent_header` (String) The full user agent header, including UUID and suffix.
 
 <a id="nestedatt--data_source_configuration--web_configuration--crawler_configuration--crawler_limits"></a>
 ### Nested Schema for `data_source_configuration.web_configuration.crawler_configuration.crawler_limits`
 
 Optional:
 
+- `max_pages` (Number) Maximum number of pages the crawler can crawl.
 - `rate_limit` (Number) Rate of web URLs retrieved per minute.
 
 
@@ -323,6 +329,7 @@ Optional:
 Optional:
 
 - `chunking_configuration` (Attributes) Details about how to chunk the documents in the data source. A chunk refers to an excerpt from a data source that is returned when the knowledge base that it belongs to is queried. (see [below for nested schema](#nestedatt--vector_ingestion_configuration--chunking_configuration))
+- `context_enrichment_configuration` (Attributes) Additional Enrichment Configuration for example when using GraphRag. (see [below for nested schema](#nestedatt--vector_ingestion_configuration--context_enrichment_configuration))
 - `custom_transformation_configuration` (Attributes) Settings for customizing steps in the data source content ingestion pipeline. (see [below for nested schema](#nestedatt--vector_ingestion_configuration--custom_transformation_configuration))
 - `parsing_configuration` (Attributes) Settings for parsing document contents (see [below for nested schema](#nestedatt--vector_ingestion_configuration--parsing_configuration))
 
@@ -370,6 +377,32 @@ Optional:
 - `breakpoint_percentile_threshold` (Number) The dissimilarity threshold for splitting chunks.
 - `buffer_size` (Number) The buffer size.
 - `max_tokens` (Number) The maximum number of tokens that a chunk can contain.
+
+
+
+<a id="nestedatt--vector_ingestion_configuration--context_enrichment_configuration"></a>
+### Nested Schema for `vector_ingestion_configuration.context_enrichment_configuration`
+
+Optional:
+
+- `bedrock_foundation_model_configuration` (Attributes) Bedrock Foundation Model configuration to be used for Context Enrichment. (see [below for nested schema](#nestedatt--vector_ingestion_configuration--context_enrichment_configuration--bedrock_foundation_model_configuration))
+- `type` (String) Enrichment type to be used for the vector database.
+
+<a id="nestedatt--vector_ingestion_configuration--context_enrichment_configuration--bedrock_foundation_model_configuration"></a>
+### Nested Schema for `vector_ingestion_configuration.context_enrichment_configuration.bedrock_foundation_model_configuration`
+
+Optional:
+
+- `enrichment_strategy_configuration` (Attributes) Strategy to be used when using Bedrock Foundation Model for Context Enrichment. (see [below for nested schema](#nestedatt--vector_ingestion_configuration--context_enrichment_configuration--bedrock_foundation_model_configuration--enrichment_strategy_configuration))
+- `model_arn` (String) The model's ARN.
+
+<a id="nestedatt--vector_ingestion_configuration--context_enrichment_configuration--bedrock_foundation_model_configuration--enrichment_strategy_configuration"></a>
+### Nested Schema for `vector_ingestion_configuration.context_enrichment_configuration.bedrock_foundation_model_configuration.enrichment_strategy_configuration`
+
+Optional:
+
+- `method` (String) Enrichment Strategy method.
+
 
 
 

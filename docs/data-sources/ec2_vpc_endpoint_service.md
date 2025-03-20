@@ -28,6 +28,7 @@ Data Source schema for AWS::EC2::VPCEndpointService
 - `payer_responsibility` (String)
 - `service_id` (String)
 - `supported_ip_address_types` (List of String) Specify which Ip Address types are supported for VPC endpoint service.
+- `supported_regions` (Set of String) The Regions from which service consumers can access the service.
 - `tags` (Attributes List) The tags to add to the VPC endpoint service. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>

@@ -25,7 +25,9 @@ Data Source schema for AWS::RUM::AppMonitor
 - `app_monitor_id` (String) The unique ID of the new app monitor.
 - `custom_events` (Attributes) AppMonitor custom events configuration (see [below for nested schema](#nestedatt--custom_events))
 - `cw_log_enabled` (Boolean) Data collected by RUM is kept by RUM for 30 days and then deleted. This parameter specifies whether RUM sends a copy of this telemetry data to CWLlong in your account. This enables you to keep the telemetry data for more than 30 days, but it does incur CWLlong charges. If you omit this parameter, the default is false
-- `domain` (String) The top-level internet domain name for which your application has administrative authority.
+- `deobfuscation_configuration` (Attributes) A structure that contains the configuration for how an app monitor can deobfuscate stack traces. (see [below for nested schema](#nestedatt--deobfuscation_configuration))
+- `domain` (String) The top-level internet domain name for which your application has administrative authority. The CreateAppMonitor requires either the domain or the domain list.
+- `domain_list` (List of String) The top-level internet domain names for which your application has administrative authority. The CreateAppMonitor requires either the domain or the domain list.
 - `name` (String) A name for the app monitor
 - `resource_policy` (Attributes) A structure that defines resource policy attached to your app monitor. (see [below for nested schema](#nestedatt--resource_policy))
 - `tags` (Attributes Set) Assigns one or more tags (key-value pairs) to the app monitor. Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values. Tags don't have any semantic meaning to AWS and are interpreted strictly as strings of characters.You can associate as many as 50 tags with an app monitor. (see [below for nested schema](#nestedatt--tags))
@@ -133,6 +135,23 @@ If this metric is sent to Evidently, this field will be passed to Evidently raw 
 Read-Only:
 
 - `status` (String) Indicates whether AppMonitor accepts custom events.
+
+
+<a id="nestedatt--deobfuscation_configuration"></a>
+### Nested Schema for `deobfuscation_configuration`
+
+Read-Only:
+
+- `java_script_source_maps` (Attributes) A structure that contains the configuration for how an app monitor can unminify JavaScript error stack traces using source maps. (see [below for nested schema](#nestedatt--deobfuscation_configuration--java_script_source_maps))
+
+<a id="nestedatt--deobfuscation_configuration--java_script_source_maps"></a>
+### Nested Schema for `deobfuscation_configuration.java_script_source_maps`
+
+Read-Only:
+
+- `s3_uri` (String) The S3Uri of the bucket or folder that stores the source map files. It is required if status is ENABLED.
+- `status` (String) Specifies whether JavaScript error stack traces should be unminified for this app monitor. The default is for JavaScript error stack trace unminification to be DISABLED
+
 
 
 <a id="nestedatt--resource_policy"></a>

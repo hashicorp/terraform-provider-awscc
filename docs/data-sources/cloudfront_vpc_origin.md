@@ -25,8 +25,8 @@ Data Source schema for AWS::CloudFront::VpcOrigin
 - `created_time` (String)
 - `last_modified_time` (String)
 - `status` (String)
-- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
-- `vpc_origin_endpoint_config` (Attributes) (see [below for nested schema](#nestedatt--vpc_origin_endpoint_config))
+- `tags` (Attributes List) A complex type that contains zero or more ``Tag`` elements. (see [below for nested schema](#nestedatt--tags))
+- `vpc_origin_endpoint_config` (Attributes) The VPC origin endpoint configuration. (see [below for nested schema](#nestedatt--vpc_origin_endpoint_config))
 - `vpc_origin_id` (String)
 
 <a id="nestedatt--tags"></a>
@@ -34,8 +34,10 @@ Data Source schema for AWS::CloudFront::VpcOrigin
 
 Read-Only:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) A string that contains ``Tag`` key.
+ The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.
+- `value` (String) A string that contains an optional ``Tag`` value.
+ The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.
 
 
 <a id="nestedatt--vpc_origin_endpoint_config"></a>
@@ -43,9 +45,9 @@ Read-Only:
 
 Read-Only:
 
-- `arn` (String)
-- `http_port` (Number)
-- `https_port` (Number)
-- `name` (String)
-- `origin_protocol_policy` (String)
+- `arn` (String) The ARN of the CloudFront VPC origin endpoint configuration.
+- `http_port` (Number) The HTTP port for the CloudFront VPC origin endpoint configuration. The default value is ``80``.
+- `https_port` (Number) The HTTPS port of the CloudFront VPC origin endpoint configuration. The default value is ``443``.
+- `name` (String) The name of the CloudFront VPC origin endpoint configuration.
+- `origin_protocol_policy` (String) The origin protocol policy for the CloudFront VPC origin endpoint configuration.
 - `origin_ssl_protocols` (List of String)

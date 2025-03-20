@@ -100,6 +100,7 @@ resource "awscc_applicationsignals_service_level_objective" "example" {
 
 - `burn_rate_configurations` (Attributes Set) Each object in this array defines the length of the look-back window used to calculate one burn rate metric for this SLO. The burn rate measures how fast the service is consuming the error budget, relative to the attainment goal of the SLO. (see [below for nested schema](#nestedatt--burn_rate_configurations))
 - `description` (String) An optional description for this SLO. Default is 'No description'
+- `exclusion_windows` (Attributes Set) Each object in this array defines a time exclusion window for this SLO. The time exclusion window is used to exclude breaching data points from affecting attainment rate, error budget, and burn rate metrics. (see [below for nested schema](#nestedatt--exclusion_windows))
 - `goal` (Attributes) A structure that contains the attributes that determine the goal of the SLO. This includes the time period for evaluation and the attainment threshold. (see [below for nested schema](#nestedatt--goal))
 - `request_based_sli` (Attributes) This structure contains information about the performance metric that a request-based SLO monitors. (see [below for nested schema](#nestedatt--request_based_sli))
 - `sli` (Attributes) This structure contains information about the performance metric that an SLO monitors. (see [below for nested schema](#nestedatt--sli))
@@ -119,6 +120,34 @@ resource "awscc_applicationsignals_service_level_objective" "example" {
 Optional:
 
 - `look_back_window_minutes` (Number) The number of minutes to use as the look-back window.
+
+
+<a id="nestedatt--exclusion_windows"></a>
+### Nested Schema for `exclusion_windows`
+
+Optional:
+
+- `reason` (String) An optional reason for scheduling this time exclusion window. Default is 'No reason'.
+- `recurrence_rule` (Attributes) This object defines how often to repeat a time exclusion window. (see [below for nested schema](#nestedatt--exclusion_windows--recurrence_rule))
+- `start_time` (String) The time you want the exclusion window to start at. Note that time exclusion windows can only be scheduled in the future, not the past.
+- `window` (Attributes) This object defines the length of time an exclusion window should span. (see [below for nested schema](#nestedatt--exclusion_windows--window))
+
+<a id="nestedatt--exclusion_windows--recurrence_rule"></a>
+### Nested Schema for `exclusion_windows.recurrence_rule`
+
+Optional:
+
+- `expression` (String) A cron or rate expression denoting how often to repeat this exclusion window.
+
+
+<a id="nestedatt--exclusion_windows--window"></a>
+### Nested Schema for `exclusion_windows.window`
+
+Optional:
+
+- `duration` (Number) Specifies the duration of each interval. For example, if `Duration` is 1 and `DurationUnit` is `MONTH`, each interval is one month, aligned with the calendar.
+- `duration_unit` (String) Specifies the interval unit.
+
 
 
 <a id="nestedatt--goal"></a>
@@ -145,8 +174,8 @@ Optional:
 
 Optional:
 
-- `duration` (Number) Specifies the duration of each calendar interval. For example, if `Duration` is 1 and `DurationUnit` is `MONTH`, each interval is one month, aligned with the calendar.
-- `duration_unit` (String) Specifies the calendar interval unit.
+- `duration` (Number) Specifies the duration of each interval. For example, if `Duration` is 1 and `DurationUnit` is `MONTH`, each interval is one month, aligned with the calendar.
+- `duration_unit` (String) Specifies the interval unit.
 - `start_time` (Number) Epoch time in seconds you want the first interval to start. Be sure to choose a time that configures the intervals the way that you want. For example, if you want weekly intervals starting on Mondays at 6 a.m., be sure to specify a start time that is a Monday at 6 a.m.
 As soon as one calendar interval ends, another automatically begins.
 
@@ -156,8 +185,8 @@ As soon as one calendar interval ends, another automatically begins.
 
 Optional:
 
-- `duration` (Number) Specifies the duration of each calendar interval. For example, if `Duration` is 1 and `DurationUnit` is `MONTH`, each interval is one month, aligned with the calendar.
-- `duration_unit` (String) Specifies the calendar interval unit.
+- `duration` (Number) Specifies the duration of each interval. For example, if `Duration` is 1 and `DurationUnit` is `MONTH`, each interval is one month, aligned with the calendar.
+- `duration_unit` (String) Specifies the interval unit.
 
 
 

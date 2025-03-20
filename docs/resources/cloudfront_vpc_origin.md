@@ -3,12 +3,12 @@
 page_title: "awscc_cloudfront_vpc_origin Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource Type definition for AWS::CloudFront::VpcOrigin
+  An Amazon CloudFront VPC origin.
 ---
 
 # awscc_cloudfront_vpc_origin (Resource)
 
-Resource Type definition for AWS::CloudFront::VpcOrigin
+An Amazon CloudFront VPC origin.
 
 ## Example Usage
 
@@ -155,11 +155,11 @@ resource "awscc_cloudfront_vpc_origin" "example" {
 
 ### Required
 
-- `vpc_origin_endpoint_config` (Attributes) (see [below for nested schema](#nestedatt--vpc_origin_endpoint_config))
+- `vpc_origin_endpoint_config` (Attributes) The VPC origin endpoint configuration. (see [below for nested schema](#nestedatt--vpc_origin_endpoint_config))
 
 ### Optional
 
-- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes List) A complex type that contains zero or more ``Tag`` elements. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -175,14 +175,14 @@ resource "awscc_cloudfront_vpc_origin" "example" {
 
 Required:
 
-- `arn` (String)
-- `name` (String)
+- `arn` (String) The ARN of the CloudFront VPC origin endpoint configuration.
+- `name` (String) The name of the CloudFront VPC origin endpoint configuration.
 
 Optional:
 
-- `http_port` (Number)
-- `https_port` (Number)
-- `origin_protocol_policy` (String)
+- `http_port` (Number) The HTTP port for the CloudFront VPC origin endpoint configuration. The default value is ``80``.
+- `https_port` (Number) The HTTPS port of the CloudFront VPC origin endpoint configuration. The default value is ``443``.
+- `origin_protocol_policy` (String) The origin protocol policy for the CloudFront VPC origin endpoint configuration.
 - `origin_ssl_protocols` (List of String)
 
 
@@ -191,8 +191,10 @@ Optional:
 
 Optional:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) A string that contains ``Tag`` key.
+ The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.
+- `value` (String) A string that contains an optional ``Tag`` value.
+ The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.
 
 ## Import
 

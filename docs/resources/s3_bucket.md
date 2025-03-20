@@ -368,7 +368,7 @@ resource "awscc_s3_bucket" "example" {
 - `inventory_configurations` (Attributes List) Specifies the inventory configuration for an Amazon S3 bucket. For more information, see [GET Bucket inventory](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETInventoryConfig.html) in the *Amazon S3 API Reference*. (see [below for nested schema](#nestedatt--inventory_configurations))
 - `lifecycle_configuration` (Attributes) Specifies the lifecycle configuration for objects in an Amazon S3 bucket. For more information, see [Object Lifecycle Management](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html) in the *Amazon S3 User Guide*. (see [below for nested schema](#nestedatt--lifecycle_configuration))
 - `logging_configuration` (Attributes) Settings that define where logs are stored. (see [below for nested schema](#nestedatt--logging_configuration))
-- `metadata_table_configuration` (Attributes) (see [below for nested schema](#nestedatt--metadata_table_configuration))
+- `metadata_table_configuration` (Attributes) The metadata table configuration of an S3 general purpose bucket. For more information, see [Accelerating data discovery with S3 Metadata](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-overview.html) and [Setting up permissions for configuring metadata tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html). (see [below for nested schema](#nestedatt--metadata_table_configuration))
 - `metrics_configurations` (Attributes List) Specifies a metrics configuration for the CloudWatch request metrics (specified by the metrics configuration ID) from an Amazon S3 bucket. If you're updating an existing metrics configuration, note that this is a full replacement of the existing metrics configuration. If you don't include the elements you want to keep, they are erased. For more information, see [PutBucketMetricsConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTMetricConfiguration.html). (see [below for nested schema](#nestedatt--metrics_configurations))
 - `notification_configuration` (Attributes) Configuration that defines how Amazon S3 handles bucket notifications. (see [below for nested schema](#nestedatt--notification_configuration))
 - `object_lock_configuration` (Attributes) This operation is not supported for directory buckets.
@@ -715,20 +715,20 @@ Optional:
 
 Optional:
 
-- `s3_tables_destination` (Attributes) (see [below for nested schema](#nestedatt--metadata_table_configuration--s3_tables_destination))
+- `s3_tables_destination` (Attributes) The destination information for the metadata table configuration. The destination table bucket must be in the same Region and AWS-account as the general purpose bucket. The specified metadata table name must be unique within the ``aws_s3_metadata`` namespace in the destination table bucket. (see [below for nested schema](#nestedatt--metadata_table_configuration--s3_tables_destination))
 
 <a id="nestedatt--metadata_table_configuration--s3_tables_destination"></a>
 ### Nested Schema for `metadata_table_configuration.s3_tables_destination`
 
 Optional:
 
-- `table_bucket_arn` (String) The Amazon Resource Name (ARN) for the table bucket that's specified as the destination in the metadata table configuration. The destination table bucket must be in the same Region and AWS account as the general purpose bucket.
-- `table_name` (String) The name for the metadata table in your metadata table configuration. The specified metadata table name must be unique within the <code>aws_s3_metadata</code> namespace in the destination table bucket.
+- `table_bucket_arn` (String) The Amazon Resource Name (ARN) for the table bucket that's specified as the destination in the metadata table configuration. The destination table bucket must be in the same Region and AWS-account as the general purpose bucket.
+- `table_name` (String) The name for the metadata table in your metadata table configuration. The specified metadata table name must be unique within the ``aws_s3_metadata`` namespace in the destination table bucket.
 
 Read-Only:
 
-- `table_arn` (String) The Amazon Resource Name (ARN) for the metadata table in the metadata table configuration. The specified metadata table name must be unique within the <code>aws_s3_metadata</code> namespace in the destination table bucket.
-- `table_namespace` (String) The table bucket namespace for the metadata table in your metadata table configuration. This value is always <code>aws_s3_metadata</code>.
+- `table_arn` (String) The Amazon Resource Name (ARN) for the metadata table in the metadata table configuration. The specified metadata table name must be unique within the ``aws_s3_metadata`` namespace in the destination table bucket.
+- `table_namespace` (String) The table bucket namespace for the metadata table in your metadata table configuration. This value is always ``aws_s3_metadata``.
 
 
 

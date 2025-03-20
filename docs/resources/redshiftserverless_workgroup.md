@@ -76,11 +76,12 @@ resource "awscc_redshiftserverless_workgroup" "example" {
 - `security_group_ids` (List of String) A list of security group IDs to associate with the workgroup.
 - `subnet_ids` (List of String) A list of subnet IDs the workgroup is associated with.
 - `tags` (Attributes List) The map of the key-value pairs used to tag the workgroup. (see [below for nested schema](#nestedatt--tags))
+- `track_name` (String)
+- `workgroup` (Attributes) Definition for workgroup resource (see [below for nested schema](#nestedatt--workgroup))
 
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
-- `workgroup` (Attributes) Definition for workgroup resource (see [below for nested schema](#nestedatt--workgroup))
 
 <a id="nestedatt--config_parameters"></a>
 ### Nested Schema for `config_parameters`
@@ -112,20 +113,24 @@ Optional:
 <a id="nestedatt--workgroup"></a>
 ### Nested Schema for `workgroup`
 
-Read-Only:
+Optional:
 
 - `base_capacity` (Number)
 - `config_parameters` (Attributes Set) (see [below for nested schema](#nestedatt--workgroup--config_parameters))
-- `creation_date` (String)
 - `endpoint` (Attributes) (see [below for nested schema](#nestedatt--workgroup--endpoint))
-- `enhanced_vpc_routing` (Boolean)
 - `max_capacity` (Number)
-- `namespace_name` (String)
 - `price_performance_target` (Attributes) (see [below for nested schema](#nestedatt--workgroup--price_performance_target))
+
+Read-Only:
+
+- `creation_date` (String)
+- `enhanced_vpc_routing` (Boolean)
+- `namespace_name` (String)
 - `publicly_accessible` (Boolean)
 - `security_group_ids` (List of String)
 - `status` (String)
 - `subnet_ids` (List of String)
+- `track_name` (String)
 - `workgroup_arn` (String)
 - `workgroup_id` (String)
 - `workgroup_name` (String)
@@ -133,7 +138,7 @@ Read-Only:
 <a id="nestedatt--workgroup--config_parameters"></a>
 ### Nested Schema for `workgroup.config_parameters`
 
-Read-Only:
+Optional:
 
 - `parameter_key` (String)
 - `parameter_value` (String)
@@ -142,16 +147,19 @@ Read-Only:
 <a id="nestedatt--workgroup--endpoint"></a>
 ### Nested Schema for `workgroup.endpoint`
 
+Optional:
+
+- `vpc_endpoints` (Attributes List) (see [below for nested schema](#nestedatt--workgroup--endpoint--vpc_endpoints))
+
 Read-Only:
 
 - `address` (String)
 - `port` (Number)
-- `vpc_endpoints` (Attributes List) (see [below for nested schema](#nestedatt--workgroup--endpoint--vpc_endpoints))
 
 <a id="nestedatt--workgroup--endpoint--vpc_endpoints"></a>
 ### Nested Schema for `workgroup.endpoint.vpc_endpoints`
 
-Read-Only:
+Optional:
 
 - `network_interfaces` (Attributes List) (see [below for nested schema](#nestedatt--workgroup--endpoint--vpc_endpoints--network_interfaces))
 - `vpc_endpoint_id` (String)
@@ -160,7 +168,7 @@ Read-Only:
 <a id="nestedatt--workgroup--endpoint--vpc_endpoints--network_interfaces"></a>
 ### Nested Schema for `workgroup.endpoint.vpc_endpoints.network_interfaces`
 
-Read-Only:
+Optional:
 
 - `availability_zone` (String)
 - `network_interface_id` (String)
@@ -173,7 +181,7 @@ Read-Only:
 <a id="nestedatt--workgroup--price_performance_target"></a>
 ### Nested Schema for `workgroup.price_performance_target`
 
-Read-Only:
+Optional:
 
 - `level` (Number)
 - `status` (String)

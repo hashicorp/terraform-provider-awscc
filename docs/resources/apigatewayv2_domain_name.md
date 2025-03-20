@@ -41,6 +41,7 @@ resource "awscc_apigatewayv2_domain_name" "example" {
 
 ### Read-Only
 
+- `domain_name_arn` (String)
 - `id` (String) Uniquely identifies the resource.
 - `regional_domain_name` (String)
 - `regional_hosted_zone_id` (String)

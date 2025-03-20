@@ -24,7 +24,13 @@ Data Source schema for AWS::EC2::CapacityReservation
 - `availability_zone` (String)
 - `availability_zone_id` (String)
 - `available_instance_count` (Number)
+- `capacity_allocation_set` (Attributes List) (see [below for nested schema](#nestedatt--capacity_allocation_set))
+- `capacity_reservation_arn` (String)
+- `capacity_reservation_fleet_id` (String)
 - `capacity_reservation_id` (String)
+- `commitment_info` (Attributes) (see [below for nested schema](#nestedatt--commitment_info))
+- `create_date` (String)
+- `delivery_preference` (String)
 - `ebs_optimized` (Boolean)
 - `end_date` (String)
 - `end_date_type` (String)
@@ -34,11 +40,33 @@ Data Source schema for AWS::EC2::CapacityReservation
 - `instance_platform` (String)
 - `instance_type` (String)
 - `out_post_arn` (String)
+- `owner_id` (String)
 - `placement_group_arn` (String)
+- `reservation_type` (String)
+- `start_date` (String)
+- `state` (String)
 - `tag_specifications` (Attributes List) (see [below for nested schema](#nestedatt--tag_specifications))
 - `tenancy` (String)
 - `total_instance_count` (Number)
 - `unused_reservation_billing_owner_id` (String)
+
+<a id="nestedatt--capacity_allocation_set"></a>
+### Nested Schema for `capacity_allocation_set`
+
+Read-Only:
+
+- `allocation_type` (String)
+- `count` (Number)
+
+
+<a id="nestedatt--commitment_info"></a>
+### Nested Schema for `commitment_info`
+
+Read-Only:
+
+- `commitment_end_date` (String)
+- `committed_instance_count` (Number)
+
 
 <a id="nestedatt--tag_specifications"></a>
 ### Nested Schema for `tag_specifications`
