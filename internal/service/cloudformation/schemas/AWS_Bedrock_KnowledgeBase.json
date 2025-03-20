@@ -43,7 +43,8 @@
         "OPENSEARCH_SERVERLESS",
         "PINECONE",
         "RDS",
-        "MONGO_DB_ATLAS"
+        "MONGO_DB_ATLAS",
+        "NEPTUNE_ANALYTICS"
       ]
     },
     "KnowledgeBaseType": {
@@ -389,6 +390,50 @@
       ],
       "additionalProperties": false
     },
+    "NeptuneAnalyticsFieldMapping": {
+      "type": "object",
+      "description": "A mapping of Bedrock Knowledge Base fields to Neptune Analytics fields.",
+      "properties": {
+        "TextField": {
+          "type": "string",
+          "maxLength": 2048,
+          "pattern": "^.*$",
+          "description": "The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose."
+        },
+        "MetadataField": {
+          "type": "string",
+          "maxLength": 2048,
+          "pattern": "^.*$",
+          "description": "The name of the field in which Amazon Bedrock stores metadata about the vector store."
+        }
+      },
+      "required": [
+        "TextField",
+        "MetadataField"
+      ],
+      "additionalProperties": false
+    },
+    "NeptuneAnalyticsConfiguration": {
+      "type": "object",
+      "description": "Contains the configurations to use Neptune Analytics as Vector Store.",
+      "properties": {
+        "GraphArn": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255,
+          "pattern": "^arn:aws(|-cn|-us-gov):neptune-graph:[a-zA-Z0-9-]*:[0-9]{12}:graph\\/g-[a-zA-Z0-9]{10}$",
+          "description": "ARN for Neptune Analytics graph database."
+        },
+        "FieldMapping": {
+          "$ref": "#/definitions/NeptuneAnalyticsFieldMapping"
+        }
+      },
+      "required": [
+        "GraphArn",
+        "FieldMapping"
+      ],
+      "additionalProperties": false
+    },
     "StorageConfiguration": {
       "type": "object",
       "description": "The vector store service in which the knowledge base is stored.",
@@ -407,6 +452,9 @@
         },
         "MongoDbAtlasConfiguration": {
           "$ref": "#/definitions/MongoDbAtlasConfiguration"
+        },
+        "NeptuneAnalyticsConfiguration": {
+          "$ref": "#/definitions/NeptuneAnalyticsConfiguration"
         }
       },
       "required": [
@@ -426,6 +474,11 @@
         {
           "required": [
             "RdsConfiguration"
+          ]
+        },
+        {
+          "required": [
+            "NeptuneAnalyticsConfiguration"
           ]
         },
         {
@@ -1128,7 +1181,12 @@
     "tagOnCreate": true,
     "tagProperty": "/properties/Tags",
     "tagUpdatable": true,
-    "taggable": true
+    "taggable": true,
+    "permissions": [
+      "bedrock:TagResource",
+      "bedrock:UntagResource",
+      "bedrock:ListTagsForResource"
+    ]
   },
   "additionalProperties": false
 }

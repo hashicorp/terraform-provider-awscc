@@ -61,6 +61,50 @@
     },
     "AvailabilityZoneId": {
       "type": "string"
+    },
+    "StartDate": {
+      "type": "string"
+    },
+    "CapacityReservationArn": {
+      "type": "string"
+    },
+    "CreateDate": {
+      "type": "string"
+    },
+    "State": {
+      "type": "string"
+    },
+    "OwnerId": {
+      "type": "string"
+    },
+    "DeliveryPreference": {
+      "type": "string"
+    },
+    "CapacityReservationFleetId": {
+      "type": "string"
+    },
+    "ReservationType": {
+      "type": "string"
+    },
+    "CapacityAllocationSet": {
+      "type": "array",
+      "insertionOrder": false,
+      "uniqueItems": false,
+      "items": {
+        "$ref": "#/definitions/CapacityAllocation"
+      }
+    },
+    "CommitmentInfo": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "CommitmentEndDate": {
+          "type": "string"
+        },
+        "CommittedInstanceCount": {
+          "type": "integer"
+        }
+      }
     }
   },
   "definitions": {
@@ -96,6 +140,18 @@
           }
         }
       }
+    },
+    "CapacityAllocation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "AllocationType": {
+          "type": "string"
+        },
+        "Count": {
+          "type": "integer"
+        }
+      }
     }
   },
   "required": [
@@ -121,7 +177,17 @@
   "readOnlyProperties": [
     "/properties/Id",
     "/properties/AvailableInstanceCount",
-    "/properties/TotalInstanceCount"
+    "/properties/TotalInstanceCount",
+    "/properties/StartDate",
+    "/properties/CapacityReservationArn",
+    "/properties/CreateDate",
+    "/properties/State",
+    "/properties/OwnerId",
+    "/properties/ReservationType",
+    "/properties/CapacityAllocationSet",
+    "/properties/CommitmentInfo",
+    "/properties/DeliveryPreference",
+    "/properties/CapacityReservationFleetId"
   ],
   "writeOnlyProperties": [
     "/properties/UnusedReservationBillingOwnerId"

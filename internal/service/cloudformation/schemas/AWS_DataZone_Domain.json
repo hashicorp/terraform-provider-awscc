@@ -68,6 +68,13 @@
     }
   },
   "properties": {
+    "RootDomainUnitId": {
+      "type": "string",
+      "description": "The ID of the root domain in Amazon Datazone.",
+      "pattern": "^[a-z0-9_\\-]+$",
+      "minLength": 1,
+      "maxLength": 256
+    },
     "Arn": {
       "type": "string",
       "description": "The ARN of the Amazon DataZone domain.",
@@ -152,6 +159,7 @@
     "Name"
   ],
   "readOnlyProperties": [
+    "/properties/RootDomainUnitId",
     "/properties/Arn",
     "/properties/CreatedAt",
     "/properties/Id",

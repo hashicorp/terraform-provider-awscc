@@ -90,6 +90,28 @@
         "EVALUATE_AS_STRING"
       ]
     },
+    "DataProtect": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Field": {
+          "$ref": "#/definitions/FieldToProtect"
+        },
+        "Action": {
+          "$ref": "#/definitions/DataProtectionAction"
+        },
+        "ExcludeRateBasedDetails": {
+          "type": "boolean"
+        },
+        "ExcludeRuleMatchDetails": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "Field",
+        "Action"
+      ]
+    },
     "ResponseStatusCode": {
       "description": "Custom response code.",
       "maximum": 599,
@@ -1058,6 +1080,13 @@
         }
       }
     },
+    "DataProtectionAction": {
+      "type": "string",
+      "enum": [
+        "SUBSTITUTION",
+        "HASH"
+      ]
+    },
     "Label": {
       "additionalProperties": false,
       "type": "object",
@@ -1068,6 +1097,18 @@
       },
       "required": [
         "Name"
+      ]
+    },
+    "DataProtectionConfig": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "DataProtections": {
+          "$ref": "#/definitions/DataProtections"
+        }
+      },
+      "required": [
+        "DataProtections"
       ]
     },
     "ResponseInspectionJson": {
@@ -1108,6 +1149,34 @@
         "Identifier",
         "SuccessValues",
         "FailureValues"
+      ]
+    },
+    "FieldToProtect": {
+      "description": "Field in log to protect.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "FieldKeys": {
+          "description": "List of field keys to protect",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FieldToProtectKeyName"
+          }
+        },
+        "FieldType": {
+          "description": "Field type to protect",
+          "type": "string",
+          "enum": [
+            "SINGLE_HEADER",
+            "SINGLE_COOKIE",
+            "SINGLE_QUERY_ARGUMENT",
+            "QUERY_STRING",
+            "BODY"
+          ]
+        }
+      },
+      "required": [
+        "FieldType"
       ]
     },
     "ManagedRuleGroupConfig": {
@@ -1332,6 +1401,12 @@
         }
       }
     },
+    "FieldToProtectKeyName": {
+      "minLength": 1,
+      "description": "Key of the field to protect.",
+      "type": "string",
+      "maxLength": 64
+    },
     "CountAction": {
       "description": "Allow traffic towards application.",
       "additionalProperties": false,
@@ -1398,6 +1473,13 @@
       "required": [
         "InsertHeaders"
       ]
+    },
+    "DataProtections": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/DataProtect"
+      }
     },
     "OverrideAction": {
       "description": "Override a RuleGroup or ManagedRuleGroup behavior. This can only be applied to Rule that has RuleGroupReferenceStatement or ManagedRuleGroupReferenceStatement.",
@@ -2012,6 +2094,10 @@
     },
     "ChallengeConfig": {
       "$ref": "#/definitions/ChallengeConfig"
+    },
+    "DataProtectionConfig": {
+      "description": "Collection of dataProtects.",
+      "$ref": "#/definitions/DataProtectionConfig"
     },
     "Rules": {
       "description": "Collection of Rules.",
