@@ -563,22 +563,139 @@ func appMonitorResource(ctx context.Context) (resource.Resource, error) {
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: DeobfuscationConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "A structure that contains the configuration for how an app monitor can deobfuscate stack traces.",
+		//	  "properties": {
+		//	    "JavaScriptSourceMaps": {
+		//	      "additionalProperties": false,
+		//	      "description": "A structure that contains the configuration for how an app monitor can unminify JavaScript error stack traces using source maps.",
+		//	      "properties": {
+		//	        "S3Uri": {
+		//	          "description": "The S3Uri of the bucket or folder that stores the source map files. It is required if status is ENABLED.",
+		//	          "pattern": "^s3://[a-z0-9][-.a-z0-9]{1,61}(?:/[-!_*'().a-z0-9A-Z]+(?:/[-!_*'().a-z0-9A-Z]+)*)?/?$",
+		//	          "type": "string"
+		//	        },
+		//	        "Status": {
+		//	          "description": "Specifies whether JavaScript error stack traces should be unminified for this app monitor. The default is for JavaScript error stack trace unminification to be DISABLED",
+		//	          "enum": [
+		//	            "ENABLED",
+		//	            "DISABLED"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Status"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"deobfuscation_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: JavaScriptSourceMaps
+				"java_script_source_maps": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: S3Uri
+						"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The S3Uri of the bucket or folder that stores the source map files. It is required if status is ENABLED.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^s3://[a-z0-9][-.a-z0-9]{1,61}(?:/[-!_*'().a-z0-9A-Z]+(?:/[-!_*'().a-z0-9A-Z]+)*)?/?$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Status
+						"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Specifies whether JavaScript error stack traces should be unminified for this app monitor. The default is for JavaScript error stack trace unminification to be DISABLED",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"ENABLED",
+									"DISABLED",
+								),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "A structure that contains the configuration for how an app monitor can unminify JavaScript error stack traces using source maps.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A structure that contains the configuration for how an app monitor can deobfuscate stack traces.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Domain
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The top-level internet domain name for which your application has administrative authority.",
+		//	  "description": "The top-level internet domain name for which your application has administrative authority. The CreateAppMonitor requires either the domain or the domain list.",
 		//	  "maxLength": 253,
 		//	  "minLength": 1,
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
 		"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The top-level internet domain name for which your application has administrative authority.",
-			Required:    true,
+			Description: "The top-level internet domain name for which your application has administrative authority. The CreateAppMonitor requires either the domain or the domain list.",
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 253),
 			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DomainList
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The top-level internet domain names for which your application has administrative authority. The CreateAppMonitor requires either the domain or the domain list.",
+		//	  "items": {
+		//	    "description": "The top-level internet domain name for which your application has administrative authority. The CreateAppMonitor requires either the domain or the domain list.",
+		//	    "maxLength": 253,
+		//	    "minLength": 1,
+		//	    "pattern": "",
+		//	    "type": "string"
+		//	  },
+		//	  "maxItems": 5,
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"domain_list": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The top-level internet domain names for which your application has administrative authority. The CreateAppMonitor requires either the domain or the domain list.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(1, 5),
+				listvalidator.ValueStringsAre(
+					stringvalidator.LengthBetween(1, 253),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
@@ -768,38 +885,42 @@ func appMonitorResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::RUM::AppMonitor").WithTerraformTypeName("awscc_rum_app_monitor")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"allow_cookies":             "AllowCookies",
-		"app_monitor_configuration": "AppMonitorConfiguration",
-		"app_monitor_id":            "Id",
-		"custom_events":             "CustomEvents",
-		"cw_log_enabled":            "CwLogEnabled",
-		"destination":               "Destination",
-		"destination_arn":           "DestinationArn",
-		"dimension_keys":            "DimensionKeys",
-		"domain":                    "Domain",
-		"enable_x_ray":              "EnableXRay",
-		"event_pattern":             "EventPattern",
-		"excluded_pages":            "ExcludedPages",
-		"favorite_pages":            "FavoritePages",
-		"guest_role_arn":            "GuestRoleArn",
-		"iam_role_arn":              "IamRoleArn",
-		"identity_pool_id":          "IdentityPoolId",
-		"included_pages":            "IncludedPages",
-		"key":                       "Key",
-		"metric_definitions":        "MetricDefinitions",
-		"metric_destinations":       "MetricDestinations",
-		"name":                      "Name",
-		"namespace":                 "Namespace",
-		"policy_document":           "PolicyDocument",
-		"policy_revision_id":        "PolicyRevisionId",
-		"resource_policy":           "ResourcePolicy",
-		"session_sample_rate":       "SessionSampleRate",
-		"status":                    "Status",
-		"tags":                      "Tags",
-		"telemetries":               "Telemetries",
-		"unit_label":                "UnitLabel",
-		"value":                     "Value",
-		"value_key":                 "ValueKey",
+		"allow_cookies":               "AllowCookies",
+		"app_monitor_configuration":   "AppMonitorConfiguration",
+		"app_monitor_id":              "Id",
+		"custom_events":               "CustomEvents",
+		"cw_log_enabled":              "CwLogEnabled",
+		"deobfuscation_configuration": "DeobfuscationConfiguration",
+		"destination":                 "Destination",
+		"destination_arn":             "DestinationArn",
+		"dimension_keys":              "DimensionKeys",
+		"domain":                      "Domain",
+		"domain_list":                 "DomainList",
+		"enable_x_ray":                "EnableXRay",
+		"event_pattern":               "EventPattern",
+		"excluded_pages":              "ExcludedPages",
+		"favorite_pages":              "FavoritePages",
+		"guest_role_arn":              "GuestRoleArn",
+		"iam_role_arn":                "IamRoleArn",
+		"identity_pool_id":            "IdentityPoolId",
+		"included_pages":              "IncludedPages",
+		"java_script_source_maps":     "JavaScriptSourceMaps",
+		"key":                         "Key",
+		"metric_definitions":          "MetricDefinitions",
+		"metric_destinations":         "MetricDestinations",
+		"name":                        "Name",
+		"namespace":                   "Namespace",
+		"policy_document":             "PolicyDocument",
+		"policy_revision_id":          "PolicyRevisionId",
+		"resource_policy":             "ResourcePolicy",
+		"s3_uri":                      "S3Uri",
+		"session_sample_rate":         "SessionSampleRate",
+		"status":                      "Status",
+		"tags":                        "Tags",
+		"telemetries":                 "Telemetries",
+		"unit_label":                  "UnitLabel",
+		"value":                       "Value",
+		"value_key":                   "ValueKey",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

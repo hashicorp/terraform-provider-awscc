@@ -70,7 +70,8 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 		//	        "RSA_3072",
 		//	        "RSA_4096",
 		//	        "ECC_NIST_P256",
-		//	        "ECC_NIST_P384"
+		//	        "ECC_NIST_P384",
+		//	        "ECC_NIST_P521"
 		//	      ],
 		//	      "type": "string"
 		//	    },
@@ -179,6 +180,7 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 							"RSA_4096",
 							"ECC_NIST_P256",
 							"ECC_NIST_P384",
+							"ECC_NIST_P521",
 						),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/

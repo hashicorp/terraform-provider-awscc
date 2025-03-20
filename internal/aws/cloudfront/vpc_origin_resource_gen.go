@@ -36,10 +36,12 @@ func vpcOriginResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -48,10 +50,12 @@ func vpcOriginResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -60,10 +64,12 @@ func vpcOriginResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"vpc_origin_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -72,10 +78,12 @@ func vpcOriginResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -84,10 +92,12 @@ func vpcOriginResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -96,13 +106,17 @@ func vpcOriginResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "A complex type that contains zero or more ``Tag`` elements.",
 		//	  "items": {
 		//	    "additionalProperties": false,
+		//	    "description": "A complex type that contains ``Tag`` key and ``Tag`` value.",
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "A string that contains ``Tag`` key.\n The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "A string that contains an optional ``Tag`` value.\n The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -120,8 +134,9 @@ func vpcOriginResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "A string that contains ``Tag`` key.\n The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -131,8 +146,9 @@ func vpcOriginResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "A string that contains an optional ``Tag`` value.\n The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -142,8 +158,9 @@ func vpcOriginResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Optional: true,
-			Computed: true,
+			Description: "A complex type that contains zero or more ``Tag`` elements.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -153,23 +170,29 @@ func vpcOriginResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "The VPC origin endpoint configuration.",
 		//	  "properties": {
 		//	    "Arn": {
+		//	      "description": "The ARN of the CloudFront VPC origin endpoint configuration.",
 		//	      "type": "string"
 		//	    },
 		//	    "HTTPPort": {
 		//	      "default": 80,
+		//	      "description": "The HTTP port for the CloudFront VPC origin endpoint configuration. The default value is ``80``.",
 		//	      "type": "integer"
 		//	    },
 		//	    "HTTPSPort": {
 		//	      "default": 443,
+		//	      "description": "The HTTPS port of the CloudFront VPC origin endpoint configuration. The default value is ``443``.",
 		//	      "type": "integer"
 		//	    },
 		//	    "Name": {
+		//	      "description": "The name of the CloudFront VPC origin endpoint configuration.",
 		//	      "type": "string"
 		//	    },
 		//	    "OriginProtocolPolicy": {
 		//	      "default": "match-viewer",
+		//	      "description": "The origin protocol policy for the CloudFront VPC origin endpoint configuration.",
 		//	      "type": "string"
 		//	    },
 		//	    "OriginSSLProtocols": {
@@ -177,6 +200,7 @@ func vpcOriginResource(ctx context.Context) (resource.Resource, error) {
 		//	        "TLSv1",
 		//	        "SSLv3"
 		//	      ],
+		//	      "description": "",
 		//	      "items": {
 		//	        "type": "string"
 		//	      },
@@ -194,35 +218,40 @@ func vpcOriginResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Arn
 				"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Description: "The ARN of the CloudFront VPC origin endpoint configuration.",
+					Required:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: HTTPPort
 				"http_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
-					Default:  int64default.StaticInt64(80),
+					Description: "The HTTP port for the CloudFront VPC origin endpoint configuration. The default value is ``80``.",
+					Optional:    true,
+					Computed:    true,
+					Default:     int64default.StaticInt64(80),
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: HTTPSPort
 				"https_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
-					Default:  int64default.StaticInt64(443),
+					Description: "The HTTPS port of the CloudFront VPC origin endpoint configuration. The default value is ``443``.",
+					Optional:    true,
+					Computed:    true,
+					Default:     int64default.StaticInt64(443),
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Name
 				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Description: "The name of the CloudFront VPC origin endpoint configuration.",
+					Required:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: OriginProtocolPolicy
 				"origin_protocol_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
-					Default:  stringdefault.StaticString("match-viewer"),
+					Description: "The origin protocol policy for the CloudFront VPC origin endpoint configuration.",
+					Optional:    true,
+					Computed:    true,
+					Default:     stringdefault.StaticString("match-viewer"),
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -230,6 +259,7 @@ func vpcOriginResource(ctx context.Context) (resource.Resource, error) {
 				// Property: OriginSSLProtocols
 				"origin_ssl_protocols": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
+					Description: "",
 					Optional:    true,
 					Computed:    true,
 					Default: defaults.StaticListOfString(
@@ -241,7 +271,8 @@ func vpcOriginResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Required: true,
+			Description: "The VPC origin endpoint configuration.",
+			Required:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -255,7 +286,7 @@ func vpcOriginResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Resource Type definition for AWS::CloudFront::VpcOrigin",
+		Description: "An Amazon CloudFront VPC origin.",
 		Version:     1,
 		Attributes:  attributes,
 	}

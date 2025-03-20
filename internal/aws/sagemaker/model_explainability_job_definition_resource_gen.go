@@ -1197,7 +1197,6 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 				listplanmodifier.UseStateForUnknown(),
 				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
-			// Tags is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -1276,9 +1275,6 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/EndpointName",
-		"/properties/Tags",
-		"/properties/Tags/*/Key",
-		"/properties/Tags/*/Value",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

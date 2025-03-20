@@ -174,7 +174,7 @@ func lambdaHookResource(ctx context.Context) (resource.Resource, error) {
 		//	          "items": {
 		//	            "description": "CloudFormation Stack name",
 		//	            "maxLength": 128,
-		//	            "pattern": "^[a-zA-Z][-a-zA-Z0-9]*$",
+		//	            "pattern": "^[a-zA-Z*?][-a-zA-Z0-9*?]*$",
 		//	            "type": "string"
 		//	          },
 		//	          "maxItems": 50,
@@ -188,7 +188,7 @@ func lambdaHookResource(ctx context.Context) (resource.Resource, error) {
 		//	          "items": {
 		//	            "description": "CloudFormation Stack name",
 		//	            "maxLength": 128,
-		//	            "pattern": "^[a-zA-Z][-a-zA-Z0-9]*$",
+		//	            "pattern": "^[a-zA-Z*?][-a-zA-Z0-9*?]*$",
 		//	            "type": "string"
 		//	          },
 		//	          "maxItems": 50,
@@ -207,9 +207,12 @@ func lambdaHookResource(ctx context.Context) (resource.Resource, error) {
 		//	          "description": "List of stack roles that the hook is going to be excluded from",
 		//	          "insertionOrder": false,
 		//	          "items": {
-		//	            "description": "IAM Role ARN",
+		//	            "anyOf": [
+		//	              {},
+		//	              {}
+		//	            ],
+		//	            "description": "IAM Stack Role ARN filter",
 		//	            "maxLength": 256,
-		//	            "pattern": "arn:.+:iam::[0-9]{12}:role/.+",
 		//	            "type": "string"
 		//	          },
 		//	          "maxItems": 50,
@@ -221,9 +224,12 @@ func lambdaHookResource(ctx context.Context) (resource.Resource, error) {
 		//	          "description": "List of stack roles that the hook is going to target",
 		//	          "insertionOrder": false,
 		//	          "items": {
-		//	            "description": "IAM Role ARN",
+		//	            "anyOf": [
+		//	              {},
+		//	              {}
+		//	            ],
+		//	            "description": "IAM Stack Role ARN filter",
 		//	            "maxLength": 256,
-		//	            "pattern": "arn:.+:iam::[0-9]{12}:role/.+",
 		//	            "type": "string"
 		//	          },
 		//	          "maxItems": 50,
@@ -271,7 +277,7 @@ func lambdaHookResource(ctx context.Context) (resource.Resource, error) {
 								setvalidator.SizeBetween(1, 50),
 								setvalidator.ValueStringsAre(
 									stringvalidator.LengthAtMost(128),
-									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][-a-zA-Z0-9]*$"), ""),
+									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z*?][-a-zA-Z0-9*?]*$"), ""),
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -288,7 +294,7 @@ func lambdaHookResource(ctx context.Context) (resource.Resource, error) {
 								setvalidator.SizeBetween(1, 50),
 								setvalidator.ValueStringsAre(
 									stringvalidator.LengthAtMost(128),
-									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][-a-zA-Z0-9]*$"), ""),
+									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z*?][-a-zA-Z0-9*?]*$"), ""),
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -316,7 +322,6 @@ func lambdaHookResource(ctx context.Context) (resource.Resource, error) {
 								setvalidator.SizeBetween(1, 50),
 								setvalidator.ValueStringsAre(
 									stringvalidator.LengthAtMost(256),
-									stringvalidator.RegexMatches(regexp.MustCompile("arn:.+:iam::[0-9]{12}:role/.+"), ""),
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -333,7 +338,6 @@ func lambdaHookResource(ctx context.Context) (resource.Resource, error) {
 								setvalidator.SizeBetween(1, 50),
 								setvalidator.ValueStringsAre(
 									stringvalidator.LengthAtMost(256),
-									stringvalidator.RegexMatches(regexp.MustCompile("arn:.+:iam::[0-9]{12}:role/.+"), ""),
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
