@@ -351,8 +351,6 @@
     "/properties/Workgroup/CreationDate"
   ],
   "writeOnlyProperties": [
-    "/properties/BaseCapacity",
-    "/properties/MaxCapacity",
     "/properties/ConfigParameters",
     "/properties/SecurityGroupIds",
     "/properties/SubnetIds"

@@ -440,13 +440,12 @@
     "/properties/Name"
   ],
   "createOnlyProperties": [
-    "/properties/Name",
-    "/properties/Tags"
+    "/properties/Name"
   ],
   "tagging": {
     "taggable": true,
     "tagOnCreate": true,
-    "tagUpdatable": false,
+    "tagUpdatable": true,
     "cloudFormationSystemTags": true,
     "tagProperty": "/properties/Tags",
     "permissions": [
@@ -470,13 +469,14 @@
     "read": {
       "permissions": [
         "databrew:DescribeDataset",
-        "databrew:ListTagsForResource",
         "iam:ListRoles"
       ]
     },
     "update": {
       "permissions": [
         "databrew:UpdateDataset",
+        "databrew:TagResource",
+        "databrew:UntagResource",
         "glue:GetConnection",
         "glue:GetTable"
       ]
