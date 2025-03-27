@@ -445,7 +445,6 @@ func appMonitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "description": "The top-level internet domain names for which your application has administrative authority. The CreateAppMonitor requires either the domain or the domain list.",
 		//	  "items": {
-		//	    "description": "The top-level internet domain name for which your application has administrative authority. The CreateAppMonitor requires either the domain or the domain list.",
 		//	    "maxLength": 253,
 		//	    "minLength": 1,
 		//	    "pattern": "",

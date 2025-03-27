@@ -234,6 +234,18 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The endpoint for your Kubernetes API server, such as https://5E1D0CEXAMPLEA591B746AFC5AB30262.yl4.us-west-2.eks.amazonaws.com.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Force
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": false,
+		//	  "description": "Force cluster version update",
+		//	  "type": "boolean"
+		//	}
+		"force": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Force cluster version update",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -858,6 +870,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"endpoint":                                    "Endpoint",
 		"endpoint_private_access":                     "EndpointPrivateAccess",
 		"endpoint_public_access":                      "EndpointPublicAccess",
+		"force":                                       "Force",
 		"group_name":                                  "GroupName",
 		"ip_family":                                   "IpFamily",
 		"key":                                         "Key",

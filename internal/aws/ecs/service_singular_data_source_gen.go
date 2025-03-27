@@ -390,7 +390,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "description": "The VPC subnets and security groups that are associated with a task.\n  All specified subnets and security groups must be from the same VPC.",
 		//	      "properties": {
 		//	        "AssignPublicIp": {
-		//	          "description": "Whether the task's elastic network interface receives a public IP address. \n Consider the following when you set this value:\n  +  When you use ``create-service`` or ``update-service``, the default is ``DISABLED``. \n  +  When the service ``deploymentController`` is ``ECS``, the value must be ``DISABLED``. \n  +  When you use ``create-service`` or ``update-service``, the default is ``ENABLED``.",
+		//	          "description": "Whether the task's elastic network interface receives a public IP address. \n Consider the following when you set this value:\n  +  When you use ``create-service`` or ``update-service``, the default is ``DISABLED``. \n  +  When the service ``deploymentController`` is ``ECS``, the value must be ``DISABLED``.",
 		//	          "enum": [
 		//	            "DISABLED",
 		//	            "ENABLED"
@@ -424,7 +424,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: AssignPublicIp
 						"assign_public_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Whether the task's elastic network interface receives a public IP address. \n Consider the following when you set this value:\n  +  When you use ``create-service`` or ``update-service``, the default is ``DISABLED``. \n  +  When the service ``deploymentController`` is ``ECS``, the value must be ``DISABLED``. \n  +  When you use ``create-service`` or ``update-service``, the default is ``ENABLED``.",
+							Description: "Whether the task's elastic network interface receives a public IP address. \n Consider the following when you set this value:\n  +  When you use ``create-service`` or ``update-service``, the default is ``DISABLED``. \n  +  When the service ``deploymentController`` is ``ECS``, the value must be ``DISABLED``.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: SecurityGroups
