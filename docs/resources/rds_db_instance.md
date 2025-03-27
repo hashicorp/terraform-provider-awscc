@@ -202,6 +202,7 @@ resource "awscc_rds_db_instance" "this" {
 - `auto_minor_version_upgrade` (Boolean) A value that indicates whether minor engine upgrades are applied automatically to the DB instance during the maintenance window. By default, minor engine upgrades are applied automatically.
 - `automatic_backup_replication_kms_key_id` (String) The AWS KMS key identifier for encryption of the replicated automated backups. The KMS key ID is the Amazon Resource Name (ARN) for the KMS encryption key in the destination AWS-Region, for example, ``arn:aws:kms:us-east-1:123456789012:key/AKIAIOSFODNN7EXAMPLE``.
 - `automatic_backup_replication_region` (String) The AWS-Region associated with the automated backup.
+- `automatic_backup_replication_retention_period` (Number)
 - `availability_zone` (String) The Availability Zone (AZ) where the database will be created. For information on AWS-Regions and Availability Zones, see [Regions and Availability Zones](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html).
  For Amazon Aurora, each Aurora DB cluster hosts copies of its storage in three separate Availability Zones. Specify one of these Availability Zones. Aurora automatically chooses an appropriate Availability Zone if you don't specify one.
  Default: A random, system-chosen Availability Zone in the endpoint's AWS-Region.
@@ -219,7 +220,6 @@ resource "awscc_rds_db_instance" "this" {
   +  Can't be set to 0 if the DB instance is a source to read replicas
 - `ca_certificate_identifier` (String) The identifier of the CA certificate for this DB instance.
  For more information, see [Using SSL/TLS to encrypt a connection to a DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html) in the *Amazon RDS User Guide* and [Using SSL/TLS to encrypt a connection to a DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html) in the *Amazon Aurora User Guide*.
-- `certificate_details` (Attributes) The details of the DB instance's server certificate. (see [below for nested schema](#nestedatt--certificate_details))
 - `certificate_rotation_restart` (Boolean) Specifies whether the DB instance is restarted when you rotate your SSL/TLS certificate.
  By default, the DB instance is restarted when you rotate your SSL/TLS certificate. The certificate is not updated until the DB instance is restarted.
   Set this parameter only if you are *not* using SSL/TLS to connect to the DB instance.
@@ -398,8 +398,6 @@ resource "awscc_rds_db_instance" "this" {
  Not applicable. Mapping AWS IAM accounts to database accounts is managed by the DB cluster.
 - `enable_performance_insights` (Boolean) Specifies whether to enable Performance Insights for the DB instance. For more information, see [Using Amazon Performance Insights](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html) in the *Amazon RDS User Guide*.
  This setting doesn't apply to RDS Custom DB instances.
-- `endpoint` (Attributes) The connection endpoint for the DB instance.
-  The endpoint might not be shown for instances with the status of ``creating``. (see [below for nested schema](#nestedatt--endpoint))
 - `engine` (String) The name of the database engine to use for this DB instance. Not every database engine is available in every AWS Region.
  This property is required when creating a DB instance.
   You can convert an Oracle database from the non-CDB architecture to the container database (CDB) architecture by updating the ``Engine`` value in your templates from ``oracle-ee`` to ``oracle-ee-cdb`` or from ``oracle-se2`` to ``oracle-se2-cdb``. Converting to the CDB architecture requires an interruption.
@@ -565,7 +563,7 @@ resource "awscc_rds_db_instance" "this" {
  The KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.
  If you do not specify a value for ``PerformanceInsightsKMSKeyId``, then Amazon RDS uses your default KMS key. There is a default KMS key for your AWS account. Your AWS account has a different default KMS key for each AWS Region.
  For information about enabling Performance Insights, see [EnablePerformanceInsights](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-enableperformanceinsights).
-- `performance_insights_retention_period` (Number) The number of days to retain Performance Insights data.
+- `performance_insights_retention_period` (Number) The number of days to retain Performance Insights data. When creating a DB instance without enabling Performance Insights, you can't specify the parameter ``PerformanceInsightsRetentionPeriod``.
  This setting doesn't apply to RDS Custom DB instances.
  Valid Values:
   +   ``7`` 
@@ -677,9 +675,12 @@ resource "awscc_rds_db_instance" "this" {
 
 ### Read-Only
 
+- `certificate_details` (Attributes) The details of the DB instance's server certificate. (see [below for nested schema](#nestedatt--certificate_details))
 - `database_insights_mode` (String)
 - `db_instance_arn` (String)
 - `dbi_resource_id` (String)
+- `endpoint` (Attributes) The connection endpoint for the DB instance.
+  The endpoint might not be shown for instances with the status of ``creating``. (see [below for nested schema](#nestedatt--endpoint))
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--associated_roles"></a>
@@ -689,25 +690,6 @@ Optional:
 
 - `feature_name` (String) The name of the feature associated with the AWS Identity and Access Management (IAM) role. IAM roles that are associated with a DB instance grant permission for the DB instance to access other AWS services on your behalf. For the list of supported feature names, see the ``SupportedFeatureNames`` description in [DBEngineVersion](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DBEngineVersion.html) in the *Amazon RDS API Reference*.
 - `role_arn` (String) The Amazon Resource Name (ARN) of the IAM role that is associated with the DB instance.
-
-
-<a id="nestedatt--certificate_details"></a>
-### Nested Schema for `certificate_details`
-
-Read-Only:
-
-- `ca_identifier` (String) The CA identifier of the CA certificate used for the DB instance's server certificate.
-- `valid_till` (String) The expiration date of the DB instance?s server certificate.
-
-
-<a id="nestedatt--endpoint"></a>
-### Nested Schema for `endpoint`
-
-Read-Only:
-
-- `address` (String) Specifies the DNS address of the DB instance.
-- `hosted_zone_id` (String) Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.
-- `port` (String) Specifies the port that the database engine is listening on.
 
 
 <a id="nestedatt--master_user_secret"></a>
@@ -738,6 +720,25 @@ Optional:
 
 - `key` (String) A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$").
 - `value` (String) A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$").
+
+
+<a id="nestedatt--certificate_details"></a>
+### Nested Schema for `certificate_details`
+
+Read-Only:
+
+- `ca_identifier` (String) The CA identifier of the CA certificate used for the DB instance's server certificate.
+- `valid_till` (String) The expiration date of the DB instance?s server certificate.
+
+
+<a id="nestedatt--endpoint"></a>
+### Nested Schema for `endpoint`
+
+Read-Only:
+
+- `address` (String) Specifies the DNS address of the DB instance.
+- `hosted_zone_id` (String) Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.
+- `port` (String) Specifies the port that the database engine is listening on.
 
 ## Import
 

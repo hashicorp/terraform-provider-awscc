@@ -22,6 +22,7 @@ Resource schema for AWS::SystemsManagerSAP::Application
 
 ### Optional
 
+- `components_info` (Attributes List) This is an optional parameter for component details to which the SAP ABAP application is attached, such as Web Dispatcher. (see [below for nested schema](#nestedatt--components_info))
 - `credentials` (Attributes List) (see [below for nested schema](#nestedatt--credentials))
 - `database_arn` (String) The ARN of the SAP HANA database
 - `instances` (List of String)
@@ -33,6 +34,16 @@ Resource schema for AWS::SystemsManagerSAP::Application
 
 - `arn` (String) The ARN of the SSM-SAP application
 - `id` (String) Uniquely identifies the resource.
+
+<a id="nestedatt--components_info"></a>
+### Nested Schema for `components_info`
+
+Optional:
+
+- `component_type` (String)
+- `ec_2_instance_id` (String)
+- `sid` (String)
+
 
 <a id="nestedatt--credentials"></a>
 ### Nested Schema for `credentials`

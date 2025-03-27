@@ -30,6 +30,8 @@ Data Source schema for AWS::MediaConnect::FlowOutput
 - `media_stream_output_configurations` (Attributes List) The definition for each media stream that is associated with the output. (see [below for nested schema](#nestedatt--media_stream_output_configurations))
 - `min_latency` (Number) The minimum latency in milliseconds.
 - `name` (String) The name of the output. This value must be unique within the current flow.
+- `ndi_program_name` (String) A suffix for the names of the NDI sources that the flow creates. If a custom name isn't specified, MediaConnect uses the output name.
+- `ndi_speed_hq_quality` (Number) A quality setting for the NDI Speed HQ encoder.
 - `output_arn` (String) The ARN of the output.
 - `output_status` (String) An indication of whether the output should transmit data or not.
 - `port` (Number) The port to use when content is distributed to this output.
