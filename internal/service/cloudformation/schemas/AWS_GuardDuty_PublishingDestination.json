@@ -1,6 +1,6 @@
 {
   "typeName": "AWS::GuardDuty::PublishingDestination",
-  "description": "Resource Type definition for AWS::GuardDuty::PublishingDestination",
+  "description": "Resource Type definition for AWS::GuardDuty::PublishingDestination.",
   "additionalProperties": false,
   "tagging": {
     "taggable": true,

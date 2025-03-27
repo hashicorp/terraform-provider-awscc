@@ -3,12 +3,12 @@
 page_title: "awscc_guardduty_publishing_destination Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource Type definition for AWS::GuardDuty::PublishingDestination
+  Resource Type definition for AWS::GuardDuty::PublishingDestination.
 ---
 
 # awscc_guardduty_publishing_destination (Resource)
 
-Resource Type definition for AWS::GuardDuty::PublishingDestination
+Resource Type definition for AWS::GuardDuty::PublishingDestination.
 
 
 

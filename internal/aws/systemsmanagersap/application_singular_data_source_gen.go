@@ -58,6 +58,61 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The ARN of the SSM-SAP application",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ComponentsInfo
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "This is an optional parameter for component details to which the SAP ABAP application is attached, such as Web Dispatcher.",
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "properties": {
+		//	      "ComponentType": {
+		//	        "enum": [
+		//	          "HANA",
+		//	          "HANA_NODE",
+		//	          "ABAP",
+		//	          "ASCS",
+		//	          "DIALOG",
+		//	          "WEBDISP",
+		//	          "WD",
+		//	          "ERS"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "Ec2InstanceId": {
+		//	        "pattern": "^i-[\\w\\d]{8}$|^i-[\\w\\d]{17}$",
+		//	        "type": "string"
+		//	      },
+		//	      "Sid": {
+		//	        "pattern": "[A-Z][A-Z0-9]{2}",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"components_info": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ComponentType
+					"component_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Ec2InstanceId
+					"ec_2_instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Sid
+					"sid": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "This is an optional parameter for component details to which the SAP ABAP application is attached, such as Web Dispatcher.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Credentials
 		// CloudFormation resource type schema:
 		//
@@ -222,10 +277,13 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"application_id":      "ApplicationId",
 		"application_type":    "ApplicationType",
 		"arn":                 "Arn",
+		"component_type":      "ComponentType",
+		"components_info":     "ComponentsInfo",
 		"credential_type":     "CredentialType",
 		"credentials":         "Credentials",
 		"database_arn":        "DatabaseArn",
 		"database_name":       "DatabaseName",
+		"ec_2_instance_id":    "Ec2InstanceId",
 		"instances":           "Instances",
 		"key":                 "Key",
 		"sap_instance_number": "SapInstanceNumber",

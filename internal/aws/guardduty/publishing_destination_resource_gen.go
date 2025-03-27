@@ -215,7 +215,7 @@ func publishingDestinationResource(ctx context.Context) (resource.Resource, erro
 	}
 
 	schema := schema.Schema{
-		Description: "Resource Type definition for AWS::GuardDuty::PublishingDestination",
+		Description: "Resource Type definition for AWS::GuardDuty::PublishingDestination.",
 		Version:     1,
 		Attributes:  attributes,
 	}

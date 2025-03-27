@@ -31,6 +31,7 @@ Data Source schema for AWS::EKS::Cluster
 - `encryption_config` (Attributes List) (see [below for nested schema](#nestedatt--encryption_config))
 - `encryption_config_key_arn` (String) Amazon Resource Name (ARN) or alias of the customer master key (CMK).
 - `endpoint` (String) The endpoint for your Kubernetes API server, such as https://5E1D0CEXAMPLEA591B746AFC5AB30262.yl4.us-west-2.eks.amazonaws.com.
+- `force` (Boolean) Force cluster version update
 - `kubernetes_network_config` (Attributes) The Kubernetes network configuration for the cluster. (see [below for nested schema](#nestedatt--kubernetes_network_config))
 - `logging` (Attributes) Enable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs based on log types. By default, cluster control plane logs aren't exported to CloudWatch Logs. (see [below for nested schema](#nestedatt--logging))
 - `name` (String) The unique name to give to your cluster.

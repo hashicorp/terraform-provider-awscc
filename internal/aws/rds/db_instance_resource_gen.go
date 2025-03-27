@@ -195,6 +195,26 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: AutomaticBackupReplicationRetentionPeriod
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "maximum": 35,
+		//	  "minimum": 1,
+		//	  "type": "integer"
+		//	}
+		"automatic_backup_replication_retention_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.Int64{ /*START VALIDATORS*/
+				int64validator.Between(1, 35),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityZone
 		// CloudFormation resource type schema:
 		//
@@ -215,6 +235,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The number of days for which automated backups are retained. Setting this parameter to a positive number enables backups. Setting this parameter to 0 disables automated backups.\n  *Amazon Aurora* \n Not applicable. The retention period for automated backups is managed by the DB cluster.\n Default: 1\n Constraints:\n  +  Must be a value from 0 to 35\n  +  Can't be set to 0 if the DB instance is a source to read replicas",
+		//	  "maximum": 35,
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
@@ -223,7 +244,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.Int64{ /*START VALIDATORS*/
-				int64validator.AtLeast(0),
+				int64validator.Between(0, 35),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -269,22 +290,15 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 				"ca_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The CA identifier of the CA certificate used for the DB instance's server certificate.",
 					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: ValidTill
 				"valid_till": schema.StringAttribute{ /*START ATTRIBUTE*/
 					CustomType:  timetypes.RFC3339Type{},
 					Description: "The expiration date of the DB instance?s server certificate.",
 					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The details of the DB instance's server certificate.",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
@@ -783,29 +797,19 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 				"address": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Specifies the DNS address of the DB instance.",
 					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: HostedZoneId
 				"hosted_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.",
 					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Port
 				"port": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Specifies the port that the database engine is listening on.",
 					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The connection endpoint for the DB instance.\n  The endpoint might not be shown for instances with the status of ``creating``.",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
@@ -1126,11 +1130,11 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The number of days to retain Performance Insights data.\n This setting doesn't apply to RDS Custom DB instances.\n Valid Values:\n  +   ``7`` \n  +   *month* * 31, where *month* is a number of months from 1-23. Examples: ``93`` (3 months * 31), ``341`` (11 months * 31), ``589`` (19 months * 31)\n  +   ``731`` \n  \n Default: ``7`` days\n If you specify a retention period that isn't valid, such as ``94``, Amazon RDS returns an error.",
+		//	  "description": "The number of days to retain Performance Insights data. When creating a DB instance without enabling Performance Insights, you can't specify the parameter ``PerformanceInsightsRetentionPeriod``.\n This setting doesn't apply to RDS Custom DB instances.\n Valid Values:\n  +   ``7`` \n  +   *month* * 31, where *month* is a number of months from 1-23. Examples: ``93`` (3 months * 31), ``341`` (11 months * 31), ``589`` (19 months * 31)\n  +   ``731`` \n  \n Default: ``7`` days\n If you specify a retention period that isn't valid, such as ``94``, Amazon RDS returns an error.",
 		//	  "type": "integer"
 		//	}
 		"performance_insights_retention_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of days to retain Performance Insights data.\n This setting doesn't apply to RDS Custom DB instances.\n Valid Values:\n  +   ``7`` \n  +   *month* * 31, where *month* is a number of months from 1-23. Examples: ``93`` (3 months * 31), ``341`` (11 months * 31), ``589`` (19 months * 31)\n  +   ``731`` \n  \n Default: ``7`` days\n If you specify a retention period that isn't valid, such as ``94``, Amazon RDS returns an error.",
+			Description: "The number of days to retain Performance Insights data. When creating a DB instance without enabling Performance Insights, you can't specify the parameter ``PerformanceInsightsRetentionPeriod``.\n This setting doesn't apply to RDS Custom DB instances.\n Valid Values:\n  +   ``7`` \n  +   *month* * 31, where *month* is a number of months from 1-23. Examples: ``93`` (3 months * 31), ``341`` (11 months * 31), ``589`` (19 months * 31)\n  +   ``731`` \n  \n Default: ``7`` days\n If you specify a retention period that isn't valid, such as ``94``, Amazon RDS returns an error.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1634,99 +1638,100 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::RDS::DBInstance").WithTerraformTypeName("awscc_rds_db_instance")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"address":                                  "Address",
-		"allocated_storage":                        "AllocatedStorage",
-		"allow_major_version_upgrade":              "AllowMajorVersionUpgrade",
-		"apply_immediately":                        "ApplyImmediately",
-		"associated_roles":                         "AssociatedRoles",
-		"auto_minor_version_upgrade":               "AutoMinorVersionUpgrade",
-		"automatic_backup_replication_kms_key_id":  "AutomaticBackupReplicationKmsKeyId",
-		"automatic_backup_replication_region":      "AutomaticBackupReplicationRegion",
-		"availability_zone":                        "AvailabilityZone",
-		"backup_retention_period":                  "BackupRetentionPeriod",
-		"ca_certificate_identifier":                "CACertificateIdentifier",
-		"ca_identifier":                            "CAIdentifier",
-		"certificate_details":                      "CertificateDetails",
-		"certificate_rotation_restart":             "CertificateRotationRestart",
-		"character_set_name":                       "CharacterSetName",
-		"copy_tags_to_snapshot":                    "CopyTagsToSnapshot",
-		"custom_iam_instance_profile":              "CustomIAMInstanceProfile",
-		"database_insights_mode":                   "DatabaseInsightsMode",
-		"db_cluster_identifier":                    "DBClusterIdentifier",
-		"db_cluster_snapshot_identifier":           "DBClusterSnapshotIdentifier",
-		"db_instance_arn":                          "DBInstanceArn",
-		"db_instance_class":                        "DBInstanceClass",
-		"db_instance_identifier":                   "DBInstanceIdentifier",
-		"db_name":                                  "DBName",
-		"db_parameter_group_name":                  "DBParameterGroupName",
-		"db_security_groups":                       "DBSecurityGroups",
-		"db_snapshot_identifier":                   "DBSnapshotIdentifier",
-		"db_subnet_group_name":                     "DBSubnetGroupName",
-		"db_system_id":                             "DBSystemId",
-		"dbi_resource_id":                          "DbiResourceId",
-		"dedicated_log_volume":                     "DedicatedLogVolume",
-		"delete_automated_backups":                 "DeleteAutomatedBackups",
-		"deletion_protection":                      "DeletionProtection",
-		"domain":                                   "Domain",
-		"domain_auth_secret_arn":                   "DomainAuthSecretArn",
-		"domain_dns_ips":                           "DomainDnsIps",
-		"domain_fqdn":                              "DomainFqdn",
-		"domain_iam_role_name":                     "DomainIAMRoleName",
-		"domain_ou":                                "DomainOu",
-		"enable_cloudwatch_logs_exports":           "EnableCloudwatchLogsExports",
-		"enable_iam_database_authentication":       "EnableIAMDatabaseAuthentication",
-		"enable_performance_insights":              "EnablePerformanceInsights",
-		"endpoint":                                 "Endpoint",
-		"engine":                                   "Engine",
-		"engine_lifecycle_support":                 "EngineLifecycleSupport",
-		"engine_version":                           "EngineVersion",
-		"feature_name":                             "FeatureName",
-		"hosted_zone_id":                           "HostedZoneId",
-		"iops":                                     "Iops",
-		"key":                                      "Key",
-		"kms_key_id":                               "KmsKeyId",
-		"license_model":                            "LicenseModel",
-		"manage_master_user_password":              "ManageMasterUserPassword",
-		"master_user_password":                     "MasterUserPassword",
-		"master_user_secret":                       "MasterUserSecret",
-		"master_username":                          "MasterUsername",
-		"max_allocated_storage":                    "MaxAllocatedStorage",
-		"monitoring_interval":                      "MonitoringInterval",
-		"monitoring_role_arn":                      "MonitoringRoleArn",
-		"multi_az":                                 "MultiAZ",
-		"name":                                     "Name",
-		"nchar_character_set_name":                 "NcharCharacterSetName",
-		"network_type":                             "NetworkType",
-		"option_group_name":                        "OptionGroupName",
-		"performance_insights_kms_key_id":          "PerformanceInsightsKMSKeyId",
-		"performance_insights_retention_period":    "PerformanceInsightsRetentionPeriod",
-		"port":                                     "Port",
-		"preferred_backup_window":                  "PreferredBackupWindow",
-		"preferred_maintenance_window":             "PreferredMaintenanceWindow",
-		"processor_features":                       "ProcessorFeatures",
-		"promotion_tier":                           "PromotionTier",
-		"publicly_accessible":                      "PubliclyAccessible",
-		"replica_mode":                             "ReplicaMode",
-		"restore_time":                             "RestoreTime",
-		"role_arn":                                 "RoleArn",
-		"secret_arn":                               "SecretArn",
-		"source_db_cluster_identifier":             "SourceDBClusterIdentifier",
-		"source_db_instance_automated_backups_arn": "SourceDBInstanceAutomatedBackupsArn",
-		"source_db_instance_identifier":            "SourceDBInstanceIdentifier",
-		"source_dbi_resource_id":                   "SourceDbiResourceId",
-		"source_region":                            "SourceRegion",
-		"storage_encrypted":                        "StorageEncrypted",
-		"storage_throughput":                       "StorageThroughput",
-		"storage_type":                             "StorageType",
-		"tags":                                     "Tags",
-		"tde_credential_arn":                       "TdeCredentialArn",
-		"tde_credential_password":                  "TdeCredentialPassword",
-		"timezone":                                 "Timezone",
-		"use_default_processor_features":           "UseDefaultProcessorFeatures",
-		"use_latest_restorable_time":               "UseLatestRestorableTime",
-		"valid_till":                               "ValidTill",
-		"value":                                    "Value",
-		"vpc_security_groups":                      "VPCSecurityGroups",
+		"address":                                       "Address",
+		"allocated_storage":                             "AllocatedStorage",
+		"allow_major_version_upgrade":                   "AllowMajorVersionUpgrade",
+		"apply_immediately":                             "ApplyImmediately",
+		"associated_roles":                              "AssociatedRoles",
+		"auto_minor_version_upgrade":                    "AutoMinorVersionUpgrade",
+		"automatic_backup_replication_kms_key_id":       "AutomaticBackupReplicationKmsKeyId",
+		"automatic_backup_replication_region":           "AutomaticBackupReplicationRegion",
+		"automatic_backup_replication_retention_period": "AutomaticBackupReplicationRetentionPeriod",
+		"availability_zone":                             "AvailabilityZone",
+		"backup_retention_period":                       "BackupRetentionPeriod",
+		"ca_certificate_identifier":                     "CACertificateIdentifier",
+		"ca_identifier":                                 "CAIdentifier",
+		"certificate_details":                           "CertificateDetails",
+		"certificate_rotation_restart":                  "CertificateRotationRestart",
+		"character_set_name":                            "CharacterSetName",
+		"copy_tags_to_snapshot":                         "CopyTagsToSnapshot",
+		"custom_iam_instance_profile":                   "CustomIAMInstanceProfile",
+		"database_insights_mode":                        "DatabaseInsightsMode",
+		"db_cluster_identifier":                         "DBClusterIdentifier",
+		"db_cluster_snapshot_identifier":                "DBClusterSnapshotIdentifier",
+		"db_instance_arn":                               "DBInstanceArn",
+		"db_instance_class":                             "DBInstanceClass",
+		"db_instance_identifier":                        "DBInstanceIdentifier",
+		"db_name":                                       "DBName",
+		"db_parameter_group_name":                       "DBParameterGroupName",
+		"db_security_groups":                            "DBSecurityGroups",
+		"db_snapshot_identifier":                        "DBSnapshotIdentifier",
+		"db_subnet_group_name":                          "DBSubnetGroupName",
+		"db_system_id":                                  "DBSystemId",
+		"dbi_resource_id":                               "DbiResourceId",
+		"dedicated_log_volume":                          "DedicatedLogVolume",
+		"delete_automated_backups":                      "DeleteAutomatedBackups",
+		"deletion_protection":                           "DeletionProtection",
+		"domain":                                        "Domain",
+		"domain_auth_secret_arn":                        "DomainAuthSecretArn",
+		"domain_dns_ips":                                "DomainDnsIps",
+		"domain_fqdn":                                   "DomainFqdn",
+		"domain_iam_role_name":                          "DomainIAMRoleName",
+		"domain_ou":                                     "DomainOu",
+		"enable_cloudwatch_logs_exports":                "EnableCloudwatchLogsExports",
+		"enable_iam_database_authentication":            "EnableIAMDatabaseAuthentication",
+		"enable_performance_insights":                   "EnablePerformanceInsights",
+		"endpoint":                                      "Endpoint",
+		"engine":                                        "Engine",
+		"engine_lifecycle_support":                      "EngineLifecycleSupport",
+		"engine_version":                                "EngineVersion",
+		"feature_name":                                  "FeatureName",
+		"hosted_zone_id":                                "HostedZoneId",
+		"iops":                                          "Iops",
+		"key":                                           "Key",
+		"kms_key_id":                                    "KmsKeyId",
+		"license_model":                                 "LicenseModel",
+		"manage_master_user_password":                   "ManageMasterUserPassword",
+		"master_user_password":                          "MasterUserPassword",
+		"master_user_secret":                            "MasterUserSecret",
+		"master_username":                               "MasterUsername",
+		"max_allocated_storage":                         "MaxAllocatedStorage",
+		"monitoring_interval":                           "MonitoringInterval",
+		"monitoring_role_arn":                           "MonitoringRoleArn",
+		"multi_az":                                      "MultiAZ",
+		"name":                                          "Name",
+		"nchar_character_set_name":                      "NcharCharacterSetName",
+		"network_type":                                  "NetworkType",
+		"option_group_name":                             "OptionGroupName",
+		"performance_insights_kms_key_id":               "PerformanceInsightsKMSKeyId",
+		"performance_insights_retention_period":         "PerformanceInsightsRetentionPeriod",
+		"port":                                          "Port",
+		"preferred_backup_window":                       "PreferredBackupWindow",
+		"preferred_maintenance_window":                  "PreferredMaintenanceWindow",
+		"processor_features":                            "ProcessorFeatures",
+		"promotion_tier":                                "PromotionTier",
+		"publicly_accessible":                           "PubliclyAccessible",
+		"replica_mode":                                  "ReplicaMode",
+		"restore_time":                                  "RestoreTime",
+		"role_arn":                                      "RoleArn",
+		"secret_arn":                                    "SecretArn",
+		"source_db_cluster_identifier":                  "SourceDBClusterIdentifier",
+		"source_db_instance_automated_backups_arn":      "SourceDBInstanceAutomatedBackupsArn",
+		"source_db_instance_identifier":                 "SourceDBInstanceIdentifier",
+		"source_dbi_resource_id":                        "SourceDbiResourceId",
+		"source_region":                                 "SourceRegion",
+		"storage_encrypted":                             "StorageEncrypted",
+		"storage_throughput":                            "StorageThroughput",
+		"storage_type":                                  "StorageType",
+		"tags":                                          "Tags",
+		"tde_credential_arn":                            "TdeCredentialArn",
+		"tde_credential_password":                       "TdeCredentialPassword",
+		"timezone":                                      "Timezone",
+		"use_default_processor_features":                "UseDefaultProcessorFeatures",
+		"use_latest_restorable_time":                    "UseLatestRestorableTime",
+		"valid_till":                                    "ValidTill",
+		"value":                                         "Value",
+		"vpc_security_groups":                           "VPCSecurityGroups",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

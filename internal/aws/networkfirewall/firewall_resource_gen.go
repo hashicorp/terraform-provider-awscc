@@ -9,6 +9,7 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -63,6 +64,40 @@ func firewallResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EnabledAnalysisTypes
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The types of analysis to enable for the firewall. Can be TLS_SNI, HTTP_HOST, or both.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "description": "An analysis type.",
+		//	    "enum": [
+		//	      "TLS_SNI",
+		//	      "HTTP_HOST"
+		//	    ],
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"enabled_analysis_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The types of analysis to enable for the firewall. Can be TLS_SNI, HTTP_HOST, or both.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.ValueStringsAre(
+					stringvalidator.OneOf(
+						"TLS_SNI",
+						"HTTP_HOST",
+					),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: EndpointIds
@@ -335,6 +370,7 @@ func firewallResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"delete_protection":                 "DeleteProtection",
 		"description":                       "Description",
+		"enabled_analysis_types":            "EnabledAnalysisTypes",
 		"endpoint_ids":                      "EndpointIds",
 		"firewall_arn":                      "FirewallArn",
 		"firewall_id":                       "FirewallId",

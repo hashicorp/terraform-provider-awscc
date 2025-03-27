@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
@@ -321,6 +322,24 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Force
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": false,
+		//	  "description": "Force cluster version update",
+		//	  "type": "boolean"
+		//	}
+		"force": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Force cluster version update",
+			Optional:    true,
+			Computed:    true,
+			Default:     booldefault.StaticBool(false),
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// Force is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
@@ -1170,6 +1189,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"endpoint":                                    "Endpoint",
 		"endpoint_private_access":                     "EndpointPrivateAccess",
 		"endpoint_public_access":                      "EndpointPublicAccess",
+		"force":                                       "Force",
 		"group_name":                                  "GroupName",
 		"ip_family":                                   "IpFamily",
 		"key":                                         "Key",
@@ -1207,6 +1227,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/AccessConfig/BootstrapClusterCreatorAdminPermissions",
 		"/properties/BootstrapSelfManagedAddons",
+		"/properties/Force",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

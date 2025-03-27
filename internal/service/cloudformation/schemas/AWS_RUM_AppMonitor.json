@@ -330,7 +330,10 @@
       "minItems": 1,
       "maxItems": 5,
       "items": {
-        "$ref": "#/properties/Domain"
+        "type": "string",
+        "pattern": "",
+        "minLength": 1,
+        "maxLength": 253
       }
     },
     "CwLogEnabled": {

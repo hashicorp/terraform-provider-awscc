@@ -3,12 +3,12 @@
 page_title: "awscc_iot_job_template Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Job templates enable you to preconfigure jobs so that you can deploy them to multiple sets of target devices.
+  Resource Type definition for AWS::IoT::JobTemplate. Job templates enable you to preconfigure jobs so that you can deploy them to multiple sets of target devices.
 ---
 
 # awscc_iot_job_template (Resource)
 
-Job templates enable you to preconfigure jobs so that you can deploy them to multiple sets of target devices.
+Resource Type definition for AWS::IoT::JobTemplate. Job templates enable you to preconfigure jobs so that you can deploy them to multiple sets of target devices.
 
 ## Example Usage
 

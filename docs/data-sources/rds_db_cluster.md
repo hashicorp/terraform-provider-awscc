@@ -202,7 +202,7 @@ Data Source schema for AWS::RDS::DBCluster
  The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.
  If you don't specify a value for ``PerformanceInsightsKMSKeyId``, then Amazon RDS uses your default KMS key. There is a default KMS key for your AWS-account. Your AWS-account has a different default KMS key for each AWS-Region.
  Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
-- `performance_insights_retention_period` (Number) The number of days to retain Performance Insights data.
+- `performance_insights_retention_period` (Number) The number of days to retain Performance Insights data. When creating a DB cluster without enabling Performance Insights, you can't specify the parameter ``PerformanceInsightsRetentionPeriod``.
  Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
  Valid Values:
   +   ``7`` 

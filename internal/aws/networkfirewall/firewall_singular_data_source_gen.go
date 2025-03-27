@@ -43,6 +43,27 @@ func firewallDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: EnabledAnalysisTypes
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The types of analysis to enable for the firewall. Can be TLS_SNI, HTTP_HOST, or both.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "description": "An analysis type.",
+		//	    "enum": [
+		//	      "TLS_SNI",
+		//	      "HTTP_HOST"
+		//	    ],
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"enabled_analysis_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The types of analysis to enable for the firewall. Can be TLS_SNI, HTTP_HOST, or both.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EndpointIds
 		// CloudFormation resource type schema:
 		//
@@ -245,6 +266,7 @@ func firewallDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"delete_protection":                 "DeleteProtection",
 		"description":                       "Description",
+		"enabled_analysis_types":            "EnabledAnalysisTypes",
 		"endpoint_ids":                      "EndpointIds",
 		"firewall_arn":                      "FirewallArn",
 		"firewall_id":                       "FirewallId",

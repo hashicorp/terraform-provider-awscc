@@ -8,6 +8,7 @@ package omics
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -24,6 +25,18 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::Omics::SequenceStore resource.
 func sequenceStoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AccessLogLocation
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Location of the access logs.",
+		//	  "pattern": "^$|^s3://([a-z0-9][a-z0-9-.]{1,61}[a-z0-9])/?((.{1,800})/)?$",
+		//	  "type": "string"
+		//	}
+		"access_log_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Location of the access logs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -65,17 +78,31 @@ func sequenceStoreDataSource(ctx context.Context) (datasource.DataSource, error)
 			Description: "A description for the store.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ETagAlgorithmFamily
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "MD5up",
+		//	    "SHA256up",
+		//	    "SHA512up"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"e_tag_algorithm_family": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: FallbackLocation
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "An S3 URI representing the bucket and folder to store failed read set uploads.",
-		//	  "minLength": 1,
+		//	  "description": "An S3 location that is used to store files that have failed a direct upload.",
+		//	  "minLength": 0,
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
 		"fallback_location": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "An S3 URI representing the bucket and folder to store failed read set uploads.",
+			Description: "An S3 location that is used to store files that have failed a direct upload.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
@@ -90,6 +117,63 @@ func sequenceStoreDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A name for the store.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: PropagatedSetLevelTags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The tags keys to propagate to the S3 objects associated with read sets in the sequence store.",
+		//	  "items": {
+		//	    "maxLength": 128,
+		//	    "minLength": 1,
+		//	    "type": "string"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"propagated_set_level_tags": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The tags keys to propagate to the S3 objects associated with read sets in the sequence store.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: S3AccessPointArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "This is ARN of the access point associated with the S3 bucket storing read sets.",
+		//	  "maxLength": 1024,
+		//	  "minLength": 1,
+		//	  "pattern": "^arn:[^:]*:s3:[^:]*:[^:]*:accesspoint/.*$",
+		//	  "type": "string"
+		//	}
+		"s3_access_point_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "This is ARN of the access point associated with the S3 bucket storing read sets.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: S3AccessPolicy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The resource policy that controls S3 access on the store",
+		//	  "type": "object"
+		//	}
+		"s3_access_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
+			Description: "The resource policy that controls S3 access on the store",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: S3Uri
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The S3 URI of the sequence store.",
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The S3 URI of the sequence store.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SequenceStoreId
@@ -145,6 +229,36 @@ func sequenceStoreDataSource(ctx context.Context) (datasource.DataSource, error)
 			Description: "Server-side encryption (SSE) settings for a store.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Status
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "CREATING",
+		//	    "ACTIVE",
+		//	    "UPDATING",
+		//	    "DELETING",
+		//	    "FAILED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: StatusMessage
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The status message of the sequence store.",
+		//	  "maxLength": 127,
+		//	  "minLength": 1,
+		//	  "pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$",
+		//	  "type": "string"
+		//	}
+		"status_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status message of the sequence store.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -164,6 +278,19 @@ func sequenceStoreDataSource(ctx context.Context) (datasource.DataSource, error)
 			ElementType: types.StringType,
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: UpdateTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The last-updated time of the sequence store.",
+		//	  "format": "date-time",
+		//	  "type": "string"
+		//	}
+		"update_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The last-updated time of the sequence store.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -181,16 +308,25 @@ func sequenceStoreDataSource(ctx context.Context) (datasource.DataSource, error)
 	opts = opts.WithCloudFormationTypeName("AWS::Omics::SequenceStore").WithTerraformTypeName("awscc_omics_sequence_store")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":               "Arn",
-		"creation_time":     "CreationTime",
-		"description":       "Description",
-		"fallback_location": "FallbackLocation",
-		"key_arn":           "KeyArn",
-		"name":              "Name",
-		"sequence_store_id": "SequenceStoreId",
-		"sse_config":        "SseConfig",
-		"tags":              "Tags",
-		"type":              "Type",
+		"access_log_location":       "AccessLogLocation",
+		"arn":                       "Arn",
+		"creation_time":             "CreationTime",
+		"description":               "Description",
+		"e_tag_algorithm_family":    "ETagAlgorithmFamily",
+		"fallback_location":         "FallbackLocation",
+		"key_arn":                   "KeyArn",
+		"name":                      "Name",
+		"propagated_set_level_tags": "PropagatedSetLevelTags",
+		"s3_access_point_arn":       "S3AccessPointArn",
+		"s3_access_policy":          "S3AccessPolicy",
+		"s3_uri":                    "S3Uri",
+		"sequence_store_id":         "SequenceStoreId",
+		"sse_config":                "SseConfig",
+		"status":                    "Status",
+		"status_message":            "StatusMessage",
+		"tags":                      "Tags",
+		"type":                      "Type",
+		"update_time":               "UpdateTime",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

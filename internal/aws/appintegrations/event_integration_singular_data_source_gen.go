@@ -60,7 +60,7 @@ func eventIntegrationDataSource(ctx context.Context) (datasource.DataSource, err
 		//	      "description": "The source of the events.",
 		//	      "maxLength": 256,
 		//	      "minLength": 1,
-		//	      "pattern": "^aws\\.partner\\/.*$",
+		//	      "pattern": "^aws\\.(partner\\/.*|cases)$",
 		//	      "type": "string"
 		//	    }
 		//	  },

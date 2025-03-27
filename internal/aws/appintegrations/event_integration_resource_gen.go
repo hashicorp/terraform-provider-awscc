@@ -83,7 +83,7 @@ func eventIntegrationResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "The source of the events.",
 		//	      "maxLength": 256,
 		//	      "minLength": 1,
-		//	      "pattern": "^aws\\.partner\\/.*$",
+		//	      "pattern": "^aws\\.(partner\\/.*|cases)$",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -100,7 +100,7 @@ func eventIntegrationResource(ctx context.Context) (resource.Resource, error) {
 					Required:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthBetween(1, 256),
-						stringvalidator.RegexMatches(regexp.MustCompile("^aws\\.partner\\/.*$"), ""),
+						stringvalidator.RegexMatches(regexp.MustCompile("^aws\\.(partner\\/.*|cases)$"), ""),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/

@@ -217,6 +217,7 @@ resource "awscc_kms_key" "main" {
 - `bootstrap_self_managed_addons` (Boolean) Set this value to false to avoid creating the default networking add-ons when the cluster is created.
 - `compute_config` (Attributes) Todo: add description (see [below for nested schema](#nestedatt--compute_config))
 - `encryption_config` (Attributes List) (see [below for nested schema](#nestedatt--encryption_config))
+- `force` (Boolean) Force cluster version update
 - `kubernetes_network_config` (Attributes) The Kubernetes network configuration for the cluster. (see [below for nested schema](#nestedatt--kubernetes_network_config))
 - `logging` (Attributes) Enable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs based on log types. By default, cluster control plane logs aren't exported to CloudWatch Logs. (see [below for nested schema](#nestedatt--logging))
 - `name` (String) The unique name to give to your cluster.

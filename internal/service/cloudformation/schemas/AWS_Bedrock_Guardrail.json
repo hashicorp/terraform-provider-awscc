@@ -656,7 +656,12 @@
     "tagOnCreate": true,
     "tagProperty": "/properties/Tags",
     "tagUpdatable": true,
-    "taggable": true
+    "taggable": true,
+    "permissions": [
+      "bedrock:ListTagsForResource",
+      "bedrock:TagResource",
+      "bedrock:UntagResource"
+    ]
   },
   "additionalProperties": false
 }

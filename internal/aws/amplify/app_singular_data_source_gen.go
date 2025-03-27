@@ -319,6 +319,18 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: ComputeRoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 1000,
+		//	  "minLength": 0,
+		//	  "pattern": "(?s).*",
+		//	  "type": "string"
+		//	}
+		"compute_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CustomHeaders
 		// CloudFormation resource type schema:
 		//
@@ -597,6 +609,7 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"basic_auth_config":             "BasicAuthConfig",
 		"build_spec":                    "BuildSpec",
 		"cache_config":                  "CacheConfig",
+		"compute_role_arn":              "ComputeRoleArn",
 		"condition":                     "Condition",
 		"custom_headers":                "CustomHeaders",
 		"custom_rules":                  "CustomRules",

@@ -24,6 +24,7 @@ Data Source schema for AWS::Route53RecoveryControl::Cluster
 - `cluster_arn` (String) The Amazon Resource Name (ARN) of the cluster.
 - `cluster_endpoints` (Attributes List) Endpoints for the cluster. (see [below for nested schema](#nestedatt--cluster_endpoints))
 - `name` (String) Name of a Cluster. You can use any non-white space character in the name
+- `network_type` (String) Cluster supports IPv4 endpoints and Dual-stack IPv4 and IPv6 endpoints. NetworkType can be IPV4 or DUALSTACK.
 - `status` (String) Deployment status of a resource. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.
 - `tags` (Attributes List) A collection of tags associated with a resource (see [below for nested schema](#nestedatt--tags))
 

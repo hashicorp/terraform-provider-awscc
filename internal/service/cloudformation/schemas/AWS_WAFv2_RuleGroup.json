@@ -120,6 +120,9 @@
         },
         "JA4Fingerprint": {
           "$ref": "#/definitions/JA4Fingerprint"
+        },
+        "UriFragment": {
+          "$ref": "#/definitions/UriFragment"
         }
       },
       "additionalProperties": false
@@ -1389,6 +1392,20 @@
       "required": [
         "FallbackBehavior"
       ],
+      "additionalProperties": false
+    },
+    "UriFragment": {
+      "description": "The path component of the URI Fragment. This is the part of a web request that identifies a fragment uri, for example, /abcd#introduction",
+      "type": "object",
+      "properties": {
+        "FallbackBehavior": {
+          "type": "string",
+          "enum": [
+            "MATCH",
+            "NO_MATCH"
+          ]
+        }
+      },
       "additionalProperties": false
     }
   },

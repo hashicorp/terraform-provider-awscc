@@ -135,6 +135,18 @@ func branchDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"build_spec": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: ComputeRoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 1000,
+		//	  "minLength": 0,
+		//	  "pattern": "(?s).*",
+		//	  "type": "string"
+		//	}
+		"compute_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -171,6 +183,15 @@ func branchDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "boolean"
 		//	}
 		"enable_pull_request_preview": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: EnableSkewProtection
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "boolean"
+		//	}
+		"enable_skew_protection": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: EnvironmentVariables
@@ -321,11 +342,13 @@ func branchDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"basic_auth_config":             "BasicAuthConfig",
 		"branch_name":                   "BranchName",
 		"build_spec":                    "BuildSpec",
+		"compute_role_arn":              "ComputeRoleArn",
 		"description":                   "Description",
 		"enable_auto_build":             "EnableAutoBuild",
 		"enable_basic_auth":             "EnableBasicAuth",
 		"enable_performance_mode":       "EnablePerformanceMode",
 		"enable_pull_request_preview":   "EnablePullRequestPreview",
+		"enable_skew_protection":        "EnableSkewProtection",
 		"environment_variables":         "EnvironmentVariables",
 		"framework":                     "Framework",
 		"key":                           "Key",
