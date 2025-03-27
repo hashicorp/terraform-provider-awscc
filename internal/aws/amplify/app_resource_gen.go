@@ -501,6 +501,26 @@ func appResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ComputeRoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 1000,
+		//	  "minLength": 0,
+		//	  "pattern": "(?s).*",
+		//	  "type": "string"
+		//	}
+		"compute_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(0, 1000),
+				stringvalidator.RegexMatches(regexp.MustCompile("(?s).*"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CustomHeaders
 		// CloudFormation resource type schema:
 		//
@@ -926,6 +946,7 @@ func appResource(ctx context.Context) (resource.Resource, error) {
 		"basic_auth_config":             "BasicAuthConfig",
 		"build_spec":                    "BuildSpec",
 		"cache_config":                  "CacheConfig",
+		"compute_role_arn":              "ComputeRoleArn",
 		"condition":                     "Condition",
 		"custom_headers":                "CustomHeaders",
 		"custom_rules":                  "CustomRules",

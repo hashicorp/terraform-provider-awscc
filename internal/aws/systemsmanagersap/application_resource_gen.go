@@ -78,6 +78,100 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ComponentsInfo
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "This is an optional parameter for component details to which the SAP ABAP application is attached, such as Web Dispatcher.",
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "properties": {
+		//	      "ComponentType": {
+		//	        "enum": [
+		//	          "HANA",
+		//	          "HANA_NODE",
+		//	          "ABAP",
+		//	          "ASCS",
+		//	          "DIALOG",
+		//	          "WEBDISP",
+		//	          "WD",
+		//	          "ERS"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "Ec2InstanceId": {
+		//	        "pattern": "^i-[\\w\\d]{8}$|^i-[\\w\\d]{17}$",
+		//	        "type": "string"
+		//	      },
+		//	      "Sid": {
+		//	        "pattern": "[A-Z][A-Z0-9]{2}",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"components_info": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ComponentType
+					"component_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"HANA",
+								"HANA_NODE",
+								"ABAP",
+								"ASCS",
+								"DIALOG",
+								"WEBDISP",
+								"WD",
+								"ERS",
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Ec2InstanceId
+					"ec_2_instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.RegexMatches(regexp.MustCompile("^i-[\\w\\d]{8}$|^i-[\\w\\d]{17}$"), ""),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Sid
+					"sid": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.RegexMatches(regexp.MustCompile("[A-Z][A-Z0-9]{2}"), ""),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "This is an optional parameter for component details to which the SAP ABAP application is attached, such as Web Dispatcher.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeAtLeast(1),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+				listplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// ComponentsInfo is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: Credentials
 		// CloudFormation resource type schema:
 		//
@@ -332,10 +426,13 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"application_id":      "ApplicationId",
 		"application_type":    "ApplicationType",
 		"arn":                 "Arn",
+		"component_type":      "ComponentType",
+		"components_info":     "ComponentsInfo",
 		"credential_type":     "CredentialType",
 		"credentials":         "Credentials",
 		"database_arn":        "DatabaseArn",
 		"database_name":       "DatabaseName",
+		"ec_2_instance_id":    "Ec2InstanceId",
 		"instances":           "Instances",
 		"key":                 "Key",
 		"sap_instance_number": "SapInstanceNumber",
@@ -351,6 +448,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/SapInstanceNumber",
 		"/properties/Sid",
 		"/properties/DatabaseArn",
+		"/properties/ComponentsInfo",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

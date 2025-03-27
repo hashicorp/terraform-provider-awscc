@@ -205,6 +205,26 @@ func branchResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ComputeRoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 1000,
+		//	  "minLength": 0,
+		//	  "pattern": "(?s).*",
+		//	  "type": "string"
+		//	}
+		"compute_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(0, 1000),
+				stringvalidator.RegexMatches(regexp.MustCompile("(?s).*"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -257,6 +277,19 @@ func branchResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "boolean"
 		//	}
 		"enable_pull_request_preview": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EnableSkewProtection
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "boolean"
+		//	}
+		"enable_skew_protection": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -488,11 +521,13 @@ func branchResource(ctx context.Context) (resource.Resource, error) {
 		"basic_auth_config":             "BasicAuthConfig",
 		"branch_name":                   "BranchName",
 		"build_spec":                    "BuildSpec",
+		"compute_role_arn":              "ComputeRoleArn",
 		"description":                   "Description",
 		"enable_auto_build":             "EnableAutoBuild",
 		"enable_basic_auth":             "EnableBasicAuth",
 		"enable_performance_mode":       "EnablePerformanceMode",
 		"enable_pull_request_preview":   "EnablePullRequestPreview",
+		"enable_skew_protection":        "EnableSkewProtection",
 		"environment_variables":         "EnvironmentVariables",
 		"framework":                     "Framework",
 		"key":                           "Key",
