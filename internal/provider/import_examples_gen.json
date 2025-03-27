@@ -3070,6 +3070,11 @@
         "path": "./examples/resources/awscc_iotsitewise_dashboard/import.sh"
     },
     {
+        "resource": "awscc_iotsitewise_dataset",
+        "identifier": ["DatasetId"],
+        "path": "./examples/resources/awscc_iotsitewise_dataset/import.sh"
+    },
+    {
         "resource": "awscc_iotsitewise_gateway",
         "identifier": ["GatewayId"],
         "path": "./examples/resources/awscc_iotsitewise_gateway/import.sh"
