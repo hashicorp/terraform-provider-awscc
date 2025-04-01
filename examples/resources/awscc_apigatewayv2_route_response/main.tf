@@ -1,6 +1,3 @@
-data "aws_region" "current" {}
-data "aws_caller_identity" "current" {}
-
 # Create WebSocket API
 resource "awscc_apigatewayv2_api" "example" {
   name                       = "websocket-example"

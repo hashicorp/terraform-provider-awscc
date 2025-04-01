@@ -1,9 +1,3 @@
-# Current AWS account ID
-data "aws_caller_identity" "current" {}
-
-# Current AWS region
-data "aws_region" "current" {}
-
 # Get the ARN for Secrets Manager secret
 data "aws_secretsmanager_secret" "salesforce_credentials_arn" {
   depends_on = [awscc_secretsmanager_secret.salesforce_credentials]

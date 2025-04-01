@@ -1,7 +1,3 @@
-# Get current account and region information
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Create the AppSync API first
 resource "aws_appsync_graphql_api" "example" {
   name                = "example-channel-namespace-api"

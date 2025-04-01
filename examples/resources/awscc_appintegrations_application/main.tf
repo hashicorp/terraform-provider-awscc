@@ -1,7 +1,3 @@
-# Get AWS account ID and region
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Example App Integrations Application
 resource "awscc_appintegrations_application" "example" {
   name        = "example-app"

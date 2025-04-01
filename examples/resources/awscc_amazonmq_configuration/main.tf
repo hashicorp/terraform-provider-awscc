@@ -1,9 +1,3 @@
-# Get current AWS region
-data "aws_region" "current" {}
-
-# Get current AWS account ID
-data "aws_caller_identity" "current" {}
-
 # Example ActiveMQ configuration with basic settings
 resource "awscc_amazonmq_configuration" "example" {
   name           = "example-mq-config"
