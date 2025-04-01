@@ -1,7 +1,3 @@
-# Data sources for region and caller identity
-data "aws_region" "current" {}
-data "aws_caller_identity" "current" {}
-
 # Custom Action resource
 resource "awscc_chatbot_custom_action" "example" {
   action_name = "example-custom-action"

@@ -1,9 +1,3 @@
-# Get current AWS region
-data "aws_region" "current" {}
-
-# Get current AWS account ID
-data "aws_caller_identity" "current" {}
-
 # Cost Category for tagging EC2 instances
 resource "awscc_ce_cost_category" "example" {
   name          = "EC2-Environment-Categories"

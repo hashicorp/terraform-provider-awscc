@@ -1,5 +1,4 @@
 data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
 
 # Create an S3 bucket for CloudFront origin
 resource "aws_s3_bucket" "example" {

@@ -1,6 +1,5 @@
-# Get current AWS account ID and region
+# Get current AWS account ID
 data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
 
 # Create a CodeArtifact domain first
 resource "awscc_codeartifact_domain" "example" {
