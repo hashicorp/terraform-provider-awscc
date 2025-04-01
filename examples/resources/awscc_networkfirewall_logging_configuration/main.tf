@@ -1,4 +1,3 @@
-
 # Get the current AWS region
 data "aws_region" "current" {}
 

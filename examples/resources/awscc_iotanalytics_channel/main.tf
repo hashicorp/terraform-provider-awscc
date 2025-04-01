@@ -1,5 +1,4 @@
 data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
 
 # Create an S3 bucket for the channel storage
 resource "awscc_s3_bucket" "channel_storage" {

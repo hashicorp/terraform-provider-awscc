@@ -1,9 +1,3 @@
-# Get current region
-data "aws_region" "current" {}
-
-# Get current account ID
-data "aws_caller_identity" "current" {}
-
 # Example Global Cluster
 resource "awscc_rds_global_cluster" "example" {
   global_cluster_identifier = "global-cluster-example"

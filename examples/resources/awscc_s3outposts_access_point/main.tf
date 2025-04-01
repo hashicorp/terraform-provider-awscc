@@ -1,4 +1,3 @@
-
 # Data source for AWS Account ID
 data "aws_caller_identity" "current" {}
 

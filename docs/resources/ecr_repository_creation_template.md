@@ -20,7 +20,6 @@ Creates an ECR repository creation template with a 'demo' prefix configured for 
 
 ```terraform
 data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
 
 data "aws_iam_policy_document" "ecr_template_policy" {
   statement {

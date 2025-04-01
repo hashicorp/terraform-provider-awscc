@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Pinpoint In-App Template
 resource "awscc_pinpoint_in_app_template" "example" {
   template_name        = "example-template"

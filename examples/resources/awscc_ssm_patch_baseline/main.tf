@@ -1,7 +1,3 @@
-# Data sources for AWS account and region
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Create a patch baseline for Windows Server
 resource "awscc_ssm_patch_baseline" "windows_baseline" {
   name        = "WindowsServerPatchBaseline"

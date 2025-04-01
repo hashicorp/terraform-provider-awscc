@@ -1,5 +1,4 @@
-# Get current AWS account ID and region
-data "aws_caller_identity" "current" {}
+# Get current AWS region
 data "aws_region" "current" {}
 
 # Create VPC Resources
@@ -24,7 +23,7 @@ resource "awscc_ec2_subnet" "example" {
 # IAM roles and policies
 data "aws_iam_policy_document" "assume_role" {
   statement {
-    effect = "Allow"
+    effect  = "Allow"
     actions = ["sts:AssumeRole"]
     principals {
       type = "Service"

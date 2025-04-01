@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # First create a channel group
 resource "awscc_mediapackagev2_channel_group" "example" {
   channel_group_name = "example-channel-group"

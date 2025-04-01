@@ -1,9 +1,3 @@
-# Get the current AWS region
-data "aws_region" "current" {}
-
-# Get the current AWS account ID
-data "aws_caller_identity" "current" {}
-
 # Create a RAM resource share
 resource "awscc_ram_resource_share" "example" {
   name                      = "test-ram-share"

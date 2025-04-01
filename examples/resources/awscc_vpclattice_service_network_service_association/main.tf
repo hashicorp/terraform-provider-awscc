@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Create a VPC Lattice service network
 resource "awscc_vpclattice_service_network" "example" {
   name      = "example-service-network"

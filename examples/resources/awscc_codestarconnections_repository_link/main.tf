@@ -1,7 +1,3 @@
-# Get current AWS account ID and region
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Create the CodeStar Connection first
 resource "awscc_codestarconnections_connection" "example" {
   connection_name = "example-connection"

@@ -1,9 +1,5 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
-# IAM Identity Center instance from us-east-1
+# IAM Identity Center instance
 data "aws_ssoadmin_instances" "example" {
-  provider = aws.primary_region
 }
 
 resource "awscc_s3_access_grants_instance" "example" {

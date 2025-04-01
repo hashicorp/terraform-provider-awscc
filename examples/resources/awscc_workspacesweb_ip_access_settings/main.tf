@@ -1,9 +1,3 @@
-# Get current region
-data "aws_region" "current" {}
-
-# Get current account ID
-data "aws_caller_identity" "current" {}
-
 # Create the IP access settings
 resource "awscc_workspacesweb_ip_access_settings" "example" {
   display_name = "example-ip-access-settings"
@@ -24,13 +18,4 @@ resource "awscc_workspacesweb_ip_access_settings" "example" {
     key   = "Modified By"
     value = "AWSCC"
   }]
-}
-
-# Output the IP access settings ID and ARN
-output "ip_access_settings_id" {
-  value = awscc_workspacesweb_ip_access_settings.example.id
-}
-
-output "ip_access_settings_arn" {
-  value = awscc_workspacesweb_ip_access_settings.example.ip_access_settings_arn
 }

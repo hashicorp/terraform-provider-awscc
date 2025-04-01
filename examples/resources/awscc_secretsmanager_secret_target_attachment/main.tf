@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Create Secret
 resource "awscc_secretsmanager_secret" "example" {
   name = "example-secret"

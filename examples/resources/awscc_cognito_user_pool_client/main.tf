@@ -1,9 +1,3 @@
-# Get current AWS region
-data "aws_region" "current" {}
-
-# Get current AWS account ID
-data "aws_caller_identity" "current" {}
-
 # Create a Cognito User Pool
 resource "aws_cognito_user_pool" "example" {
   name = "example-user-pool"

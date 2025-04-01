@@ -1,7 +1,5 @@
-# Get current AWS region and account details
+# Get current AWS region
 data "aws_region" "current" {}
-
-data "aws_caller_identity" "current" {}
 
 # Task execution role and policy
 resource "awscc_iam_role" "execution_role" {

@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 resource "awscc_sagemaker_studio_lifecycle_config" "example" {
   studio_lifecycle_config_name     = "example-studio-lc-config"
   studio_lifecycle_config_app_type = "JupyterServer"

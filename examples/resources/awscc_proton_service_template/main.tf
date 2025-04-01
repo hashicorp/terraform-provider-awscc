@@ -1,7 +1,3 @@
-# Data sources for AWS account ID and region
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Create a service template
 resource "awscc_proton_service_template" "example" {
   name         = "example-service-template"

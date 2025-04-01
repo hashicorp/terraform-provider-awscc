@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Create an EventBridge connection
 resource "awscc_events_connection" "example" {
   name               = "example-connection"

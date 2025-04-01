@@ -1,9 +1,3 @@
-# Get current region
-data "aws_region" "current" {}
-
-# Get current account ID
-data "aws_caller_identity" "current" {}
-
 # IAM Role for IoT SiteWise Portal
 resource "awscc_iam_role" "portal" {
   role_name = "AWSIoTSiteWiseMonitorPortalAccess"

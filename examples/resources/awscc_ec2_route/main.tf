@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Create VPC
 resource "awscc_ec2_vpc" "example" {
   cidr_block           = "10.0.0.0/16"

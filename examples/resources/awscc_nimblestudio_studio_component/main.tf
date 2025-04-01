@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Studio role setup
 data "aws_iam_policy_document" "studio_role" {
   statement {

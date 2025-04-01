@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # We need to use aws provider for Transit Gateway since AWSCC doesn't support multicast_support option
 resource "aws_ec2_transit_gateway" "example" {
   description       = "Example Transit Gateway for Multicast Domain"

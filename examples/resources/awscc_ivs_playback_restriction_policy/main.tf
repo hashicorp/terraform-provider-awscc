@@ -1,6 +1,3 @@
-# Get current AWS region
-data "aws_region" "current" {}
-
 # Example IVS Playback Restriction Policy
 resource "awscc_ivs_playback_restriction_policy" "example" {
   name = "example-restriction-policy"
@@ -22,9 +19,4 @@ resource "awscc_ivs_playback_restriction_policy" "example" {
     key   = "Modified By"
     value = "AWSCC"
   }]
-}
-
-# Output the ARN of the created policy
-output "playback_restriction_policy_arn" {
-  value = awscc_ivs_playback_restriction_policy.example.arn
 }

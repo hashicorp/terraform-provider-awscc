@@ -22,9 +22,6 @@ Creates an AWS Audit Manager assessment using the Security Best Practices framew
 # Get current AWS account details
 data "aws_caller_identity" "current" {}
 
-# Get current region
-data "aws_region" "current" {}
-
 # IAM role for Audit Manager service
 data "aws_iam_policy_document" "audit_manager_trust" {
   statement {

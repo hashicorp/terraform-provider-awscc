@@ -1,8 +1,3 @@
-# Get current AWS account ID and region
-data "aws_caller_identity" "current" {}
-
-data "aws_region" "current" {}
-
 # IAM role for Transfer server to access S3
 data "aws_iam_policy_document" "transfer_assume_role" {
   statement {
@@ -88,7 +83,7 @@ resource "awscc_transfer_agreement" "example" {
   partner_profile_id = awscc_transfer_profile.partner.profile_id
   server_id          = awscc_transfer_server.sftp.server_id
 
-  status             = "ACTIVE"
+  status = "ACTIVE"
   tags = [{
     key   = "Modified By"
     value = "AWSCC"

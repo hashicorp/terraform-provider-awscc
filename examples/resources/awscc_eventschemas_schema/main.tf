@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Create the schema registry first
 resource "awscc_eventschemas_registry" "example" {
   registry_name = "example-registry"

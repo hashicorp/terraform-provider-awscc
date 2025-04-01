@@ -1,8 +1,3 @@
-# Get current AWS region and account details
-data "aws_region" "current" {}
-
-data "aws_caller_identity" "current" {}
-
 # Create Cognito Identity Pool
 resource "awscc_cognito_identity_pool" "example" {
   identity_pool_name               = "example_identity_pool"

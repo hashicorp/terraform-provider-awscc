@@ -1,6 +1,5 @@
-# Get current AWS account ID and region
+# Get current AWS account ID
 data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
 
 # Create KMS key for datastore encryption
 resource "aws_kms_key" "healthimaging" {

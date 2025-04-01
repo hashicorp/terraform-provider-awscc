@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # This creates a recycle bin rule for EBS snapshots
 resource "awscc_rbin_rule" "example" {
   description   = "Retain EBS snapshots for 7 days"

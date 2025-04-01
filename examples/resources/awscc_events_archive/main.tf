@@ -1,9 +1,3 @@
-# Get current account ID
-data "aws_caller_identity" "current" {}
-
-# Get current region
-data "aws_region" "current" {}
-
 # Create an EventBridge bus first
 resource "awscc_events_event_bus" "example" {
   name = "example-bus"

@@ -1,7 +1,3 @@
-
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # CloudWatch Log Group for Transfer Server
 resource "aws_cloudwatch_log_group" "transfer" {
   name              = "/aws/transfer/server"

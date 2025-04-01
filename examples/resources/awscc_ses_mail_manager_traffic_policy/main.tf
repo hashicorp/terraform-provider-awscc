@@ -1,9 +1,3 @@
-# Get current AWS region
-data "aws_region" "current" {}
-
-# Get current AWS account ID
-data "aws_caller_identity" "current" {}
-
 # Create the mail manager traffic policy
 resource "awscc_ses_mail_manager_traffic_policy" "example" {
   traffic_policy_name    = "example-traffic-policy"

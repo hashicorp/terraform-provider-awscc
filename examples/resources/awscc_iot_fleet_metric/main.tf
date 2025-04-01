@@ -1,8 +1,3 @@
-
-
-# Get current AWS region
-data "aws_region" "current" {}
-
 # Enable IoT Fleet Indexing
 resource "aws_iot_indexing_configuration" "example" {
   thing_indexing_configuration {

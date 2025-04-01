@@ -1,9 +1,6 @@
 # Get current region
 data "aws_region" "current" {}
 
-# Get current account ID
-data "aws_caller_identity" "current" {}
-
 # Create VPC for SimpleAD
 resource "aws_vpc" "simple_ad_vpc" {
   cidr_block = "10.0.0.0/16"

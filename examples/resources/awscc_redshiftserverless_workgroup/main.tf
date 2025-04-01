@@ -1,7 +1,3 @@
-# Get current AWS account information
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Create namespace
 resource "awscc_redshiftserverless_namespace" "example" {
   namespace_name = "example-namespace"

@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Create IAM role for sync job
 data "aws_iam_policy_document" "assume_role" {
   statement {

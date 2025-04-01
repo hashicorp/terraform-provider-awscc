@@ -1,7 +1,5 @@
 data "aws_caller_identity" "current" {}
 
-data "aws_region" "current" {}
-
 # Create an AWS Chatbot Slack channel configuration first
 resource "awscc_chatbot_slack_channel_configuration" "example" {
   configuration_name = "example-channel"

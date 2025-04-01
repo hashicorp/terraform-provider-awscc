@@ -1,7 +1,3 @@
-data "aws_caller_identity" "current" {}
-
-data "aws_region" "current" {}
-
 resource "awscc_entityresolution_schema_mapping" "example" {
   schema_name = "example-schema-mapping"
   description = "Example schema mapping for customer data"

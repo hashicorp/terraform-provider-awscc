@@ -1,9 +1,3 @@
-# Get current AWS region
-data "aws_region" "current" {}
-
-# Get current AWS account ID
-data "aws_caller_identity" "current" {}
-
 # Data source for the SSO Instance
 data "aws_ssoadmin_instances" "example" {}
 

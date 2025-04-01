@@ -1,6 +1,5 @@
 # Required data sources for dynamic values
 data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
 
 # IAM policy for component access
 data "aws_iam_policy_document" "component_policy" {
