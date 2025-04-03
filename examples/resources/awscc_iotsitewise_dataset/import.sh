@@ -1,0 +1,1 @@
+$ terraform import awscc_iotsitewise_dataset.example "dataset_id"

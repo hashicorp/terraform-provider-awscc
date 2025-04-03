@@ -328,6 +328,28 @@ func flowOutputDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The name of the output. This value must be unique within the current flow.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: NdiProgramName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A suffix for the names of the NDI sources that the flow creates. If a custom name isn't specified, MediaConnect uses the output name.",
+		//	  "type": "string"
+		//	}
+		"ndi_program_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A suffix for the names of the NDI sources that the flow creates. If a custom name isn't specified, MediaConnect uses the output name.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: NdiSpeedHqQuality
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A quality setting for the NDI Speed HQ encoder.",
+		//	  "type": "integer"
+		//	}
+		"ndi_speed_hq_quality": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "A quality setting for the NDI Speed HQ encoder.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OutputArn
 		// CloudFormation resource type schema:
 		//
@@ -380,7 +402,8 @@ func flowOutputDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "srt-listener",
 		//	    "srt-caller",
 		//	    "st2110-jpegxs",
-		//	    "cdi"
+		//	    "cdi",
+		//	    "ndi-speed-hq"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -483,6 +506,8 @@ func flowOutputDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"media_stream_output_configurations": "MediaStreamOutputConfigurations",
 		"min_latency":                        "MinLatency",
 		"name":                               "Name",
+		"ndi_program_name":                   "NdiProgramName",
+		"ndi_speed_hq_quality":               "NdiSpeedHqQuality",
 		"output_arn":                         "OutputArn",
 		"output_status":                      "OutputStatus",
 		"port":                               "Port",

@@ -23,6 +23,7 @@ Data Source schema for AWS::NetworkFirewall::Firewall
 
 - `delete_protection` (Boolean)
 - `description` (String)
+- `enabled_analysis_types` (List of String) The types of analysis to enable for the firewall. Can be TLS_SNI, HTTP_HOST, or both.
 - `endpoint_ids` (List of String)
 - `firewall_arn` (String) A resource ARN.
 - `firewall_id` (String)

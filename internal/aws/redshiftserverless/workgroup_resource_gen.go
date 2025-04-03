@@ -52,7 +52,6 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
-			// BaseCapacity is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: ConfigParameters
 		// CloudFormation resource type schema:
@@ -149,7 +148,6 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
-			// MaxCapacity is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: NamespaceName
 		// CloudFormation resource type schema:
@@ -939,8 +937,6 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/BaseCapacity",
-		"/properties/MaxCapacity",
 		"/properties/ConfigParameters",
 		"/properties/SecurityGroupIds",
 		"/properties/SubnetIds",

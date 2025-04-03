@@ -2,12 +2,12 @@
 page_title: "awscc_omics_sequence_store Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Definition of AWS::Omics::SequenceStore Resource Type
+  Resource Type definition for AWS::Omics::SequenceStore
 ---
 
 # awscc_omics_sequence_store (Resource)
 
-Definition of AWS::Omics::SequenceStore Resource Type
+Resource Type definition for AWS::Omics::SequenceStore
 
 ## Example Usage
 
@@ -58,8 +58,12 @@ resource "awscc_omics_sequence_store" "example" {
 
 ### Optional
 
+- `access_log_location` (String) Location of the access logs.
 - `description` (String) A description for the store.
-- `fallback_location` (String) An S3 URI representing the bucket and folder to store failed read set uploads.
+- `e_tag_algorithm_family` (String)
+- `fallback_location` (String) An S3 location that is used to store files that have failed a direct upload.
+- `propagated_set_level_tags` (List of String) The tags keys to propagate to the S3 objects associated with read sets in the sequence store.
+- `s3_access_policy` (String) The resource policy that controls S3 access on the store
 - `sse_config` (Attributes) Server-side encryption (SSE) settings for a store. (see [below for nested schema](#nestedatt--sse_config))
 - `tags` (Map of String)
 
@@ -68,7 +72,12 @@ resource "awscc_omics_sequence_store" "example" {
 - `arn` (String) The store's ARN.
 - `creation_time` (String) When the store was created.
 - `id` (String) Uniquely identifies the resource.
+- `s3_access_point_arn` (String) This is ARN of the access point associated with the S3 bucket storing read sets.
+- `s3_uri` (String) The S3 URI of the sequence store.
 - `sequence_store_id` (String)
+- `status` (String)
+- `status_message` (String) The status message of the sequence store.
+- `update_time` (String) The last-updated time of the sequence store.
 
 <a id="nestedatt--sse_config"></a>
 ### Nested Schema for `sse_config`

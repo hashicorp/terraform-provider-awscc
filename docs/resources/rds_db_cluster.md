@@ -234,7 +234,7 @@ resource "awscc_rds_db_cluster" "example_db_cluster" {
  The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.
  If you don't specify a value for ``PerformanceInsightsKMSKeyId``, then Amazon RDS uses your default KMS key. There is a default KMS key for your AWS-account. Your AWS-account has a different default KMS key for each AWS-Region.
  Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
-- `performance_insights_retention_period` (Number) The number of days to retain Performance Insights data.
+- `performance_insights_retention_period` (Number) The number of days to retain Performance Insights data. When creating a DB cluster without enabling Performance Insights, you can't specify the parameter ``PerformanceInsightsRetentionPeriod``.
  Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
  Valid Values:
   +   ``7`` 
@@ -279,12 +279,6 @@ resource "awscc_rds_db_cluster" "example_db_cluster" {
  If ``DBSubnetGroupName`` is specified, and ``PubliclyAccessible`` isn't specified, the following applies:
   +  If the subnets are part of a VPC that doesn?t have an internet gateway attached to it, the DB cluster is private.
   +  If the subnets are part of a VPC that has an internet gateway attached to it, the DB cluster is public.
-- `read_endpoint` (Attributes) This data type represents the information you need to connect to an Amazon RDS DB instance. This data type is used as a response element in the following actions:
-  +   ``CreateDBInstance`` 
-  +   ``DescribeDBInstances`` 
-  +   ``DeleteDBInstance`` 
-  
- For the data structure that represents Amazon Aurora DB cluster endpoints, see ``DBClusterEndpoint``. (see [below for nested schema](#nestedatt--read_endpoint))
 - `replication_source_identifier` (String) The Amazon Resource Name (ARN) of the source DB instance or DB cluster if this DB cluster is created as a read replica.
  Valid for: Aurora DB clusters only
 - `restore_to_time` (String) The date and time to restore the DB cluster to.
@@ -370,6 +364,12 @@ resource "awscc_rds_db_cluster" "example_db_cluster" {
 - `db_cluster_resource_id` (String)
 - `endpoint` (Attributes) The ``Endpoint`` return value specifies the connection endpoint for the primary instance of the DB cluster. (see [below for nested schema](#nestedatt--endpoint))
 - `id` (String) Uniquely identifies the resource.
+- `read_endpoint` (Attributes) This data type represents the information you need to connect to an Amazon RDS DB instance. This data type is used as a response element in the following actions:
+  +   ``CreateDBInstance`` 
+  +   ``DescribeDBInstances`` 
+  +   ``DeleteDBInstance`` 
+  
+ For the data structure that represents Amazon Aurora DB cluster endpoints, see ``DBClusterEndpoint``. (see [below for nested schema](#nestedatt--read_endpoint))
 - `storage_throughput` (Number)
 
 <a id="nestedatt--associated_roles"></a>
@@ -391,14 +391,6 @@ Optional:
 Read-Only:
 
 - `secret_arn` (String) The Amazon Resource Name (ARN) of the secret. This parameter is a return value that you can retrieve using the ``Fn::GetAtt`` intrinsic function. For more information, see [Return values](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html#aws-resource-rds-dbcluster-return-values).
-
-
-<a id="nestedatt--read_endpoint"></a>
-### Nested Schema for `read_endpoint`
-
-Read-Only:
-
-- `address` (String) The host address of the reader endpoint.
 
 
 <a id="nestedatt--scaling_configuration"></a>
@@ -456,6 +448,14 @@ Read-Only:
 
 - `address` (String) Specifies the connection endpoint for the primary instance of the DB cluster.
 - `port` (String) Specifies the port that the database engine is listening on.
+
+
+<a id="nestedatt--read_endpoint"></a>
+### Nested Schema for `read_endpoint`
+
+Read-Only:
+
+- `address` (String) The host address of the reader endpoint.
 
 ## Import
 

@@ -842,11 +842,11 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The number of days to retain Performance Insights data.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters\n Valid Values:\n  +   ``7`` \n  +   *month* * 31, where *month* is a number of months from 1-23. Examples: ``93`` (3 months * 31), ``341`` (11 months * 31), ``589`` (19 months * 31)\n  +   ``731`` \n  \n Default: ``7`` days\n If you specify a retention period that isn't valid, such as ``94``, Amazon RDS issues an error.",
+		//	  "description": "The number of days to retain Performance Insights data. When creating a DB cluster without enabling Performance Insights, you can't specify the parameter ``PerformanceInsightsRetentionPeriod``.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters\n Valid Values:\n  +   ``7`` \n  +   *month* * 31, where *month* is a number of months from 1-23. Examples: ``93`` (3 months * 31), ``341`` (11 months * 31), ``589`` (19 months * 31)\n  +   ``731`` \n  \n Default: ``7`` days\n If you specify a retention period that isn't valid, such as ``94``, Amazon RDS issues an error.",
 		//	  "type": "integer"
 		//	}
 		"performance_insights_retention_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of days to retain Performance Insights data.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters\n Valid Values:\n  +   ``7`` \n  +   *month* * 31, where *month* is a number of months from 1-23. Examples: ``93`` (3 months * 31), ``341`` (11 months * 31), ``589`` (19 months * 31)\n  +   ``731`` \n  \n Default: ``7`` days\n If you specify a retention period that isn't valid, such as ``94``, Amazon RDS issues an error.",
+			Description: "The number of days to retain Performance Insights data. When creating a DB cluster without enabling Performance Insights, you can't specify the parameter ``PerformanceInsightsRetentionPeriod``.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters\n Valid Values:\n  +   ``7`` \n  +   *month* * 31, where *month* is a number of months from 1-23. Examples: ``93`` (3 months * 31), ``341`` (11 months * 31), ``589`` (19 months * 31)\n  +   ``731`` \n  \n Default: ``7`` days\n If you specify a retention period that isn't valid, such as ``94``, Amazon RDS issues an error.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -934,13 +934,9 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 				"address": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The host address of the reader endpoint.",
 					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "This data type represents the information you need to connect to an Amazon RDS DB instance. This data type is used as a response element in the following actions:\n  +   ``CreateDBInstance`` \n  +   ``DescribeDBInstances`` \n  +   ``DeleteDBInstance`` \n  \n For the data structure that represents Amazon Aurora DB cluster endpoints, see ``DBClusterEndpoint``.",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),

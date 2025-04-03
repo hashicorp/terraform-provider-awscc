@@ -330,11 +330,10 @@ func stackDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "type": "object"
+		//	  "type": "string"
 		//	}
 		"template_body": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: jsontypes.NormalizedType{},
-			Computed:   true,
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: TemplateURL
 		// CloudFormation resource type schema:

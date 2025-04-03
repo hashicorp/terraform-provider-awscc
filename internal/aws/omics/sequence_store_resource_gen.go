@@ -9,10 +9,13 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -32,6 +35,25 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::Omics::SequenceStore resource.
 func sequenceStoreResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AccessLogLocation
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Location of the access logs.",
+		//	  "pattern": "^$|^s3://([a-z0-9][a-z0-9-.]{1,61}[a-z0-9])/?((.{1,800})/)?$",
+		//	  "type": "string"
+		//	}
+		"access_log_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Location of the access logs.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^$|^s3://([a-z0-9][a-z0-9-.]{1,61}[a-z0-9])/?((.{1,800})/)?$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -85,6 +107,31 @@ func sequenceStoreResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ETagAlgorithmFamily
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "MD5up",
+		//	    "SHA256up",
+		//	    "SHA512up"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"e_tag_algorithm_family": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"MD5up",
+					"SHA256up",
+					"SHA512up",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -92,21 +139,20 @@ func sequenceStoreResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "An S3 URI representing the bucket and folder to store failed read set uploads.",
-		//	  "minLength": 1,
+		//	  "description": "An S3 location that is used to store files that have failed a direct upload.",
+		//	  "minLength": 0,
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
 		"fallback_location": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "An S3 URI representing the bucket and folder to store failed read set uploads.",
+			Description: "An S3 location that is used to store files that have failed a direct upload.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtLeast(1),
+				stringvalidator.LengthAtLeast(0),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Name
@@ -126,8 +172,82 @@ func sequenceStoreResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.LengthBetween(1, 127),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"), ""),
 			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PropagatedSetLevelTags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The tags keys to propagate to the S3 objects associated with read sets in the sequence store.",
+		//	  "items": {
+		//	    "maxLength": 128,
+		//	    "minLength": 1,
+		//	    "type": "string"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"propagated_set_level_tags": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The tags keys to propagate to the S3 objects associated with read sets in the sequence store.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(0, 50),
+				listvalidator.ValueStringsAre(
+					stringvalidator.LengthBetween(1, 128),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: S3AccessPointArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "This is ARN of the access point associated with the S3 bucket storing read sets.",
+		//	  "maxLength": 1024,
+		//	  "minLength": 1,
+		//	  "pattern": "^arn:[^:]*:s3:[^:]*:[^:]*:accesspoint/.*$",
+		//	  "type": "string"
+		//	}
+		"s3_access_point_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "This is ARN of the access point associated with the S3 bucket storing read sets.",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: S3AccessPolicy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The resource policy that controls S3 access on the store",
+		//	  "type": "object"
+		//	}
+		"s3_access_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
+			Description: "The resource policy that controls S3 access on the store",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: S3Uri
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The S3 URI of the sequence store.",
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The S3 URI of the sequence store.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: SequenceStoreId
@@ -209,6 +329,42 @@ func sequenceStoreResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Status
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "CREATING",
+		//	    "ACTIVE",
+		//	    "UPDATING",
+		//	    "DELETING",
+		//	    "FAILED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: StatusMessage
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The status message of the sequence store.",
+		//	  "maxLength": 127,
+		//	  "minLength": 1,
+		//	  "pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$",
+		//	  "type": "string"
+		//	}
+		"status_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status message of the sequence store.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -230,7 +386,22 @@ func sequenceStoreResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
 				mapplanmodifier.UseStateForUnknown(),
-				mapplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: UpdateTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The last-updated time of the sequence store.",
+		//	  "format": "date-time",
+		//	  "type": "string"
+		//	}
+		"update_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The last-updated time of the sequence store.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
@@ -245,7 +416,7 @@ func sequenceStoreResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Definition of AWS::Omics::SequenceStore Resource Type",
+		Description: "Resource Type definition for AWS::Omics::SequenceStore",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -255,16 +426,25 @@ func sequenceStoreResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Omics::SequenceStore").WithTerraformTypeName("awscc_omics_sequence_store")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":               "Arn",
-		"creation_time":     "CreationTime",
-		"description":       "Description",
-		"fallback_location": "FallbackLocation",
-		"key_arn":           "KeyArn",
-		"name":              "Name",
-		"sequence_store_id": "SequenceStoreId",
-		"sse_config":        "SseConfig",
-		"tags":              "Tags",
-		"type":              "Type",
+		"access_log_location":       "AccessLogLocation",
+		"arn":                       "Arn",
+		"creation_time":             "CreationTime",
+		"description":               "Description",
+		"e_tag_algorithm_family":    "ETagAlgorithmFamily",
+		"fallback_location":         "FallbackLocation",
+		"key_arn":                   "KeyArn",
+		"name":                      "Name",
+		"propagated_set_level_tags": "PropagatedSetLevelTags",
+		"s3_access_point_arn":       "S3AccessPointArn",
+		"s3_access_policy":          "S3AccessPolicy",
+		"s3_uri":                    "S3Uri",
+		"sequence_store_id":         "SequenceStoreId",
+		"sse_config":                "SseConfig",
+		"status":                    "Status",
+		"status_message":            "StatusMessage",
+		"tags":                      "Tags",
+		"type":                      "Type",
+		"update_time":               "UpdateTime",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

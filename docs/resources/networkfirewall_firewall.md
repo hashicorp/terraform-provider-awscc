@@ -26,6 +26,7 @@ Resource type definition for AWS::NetworkFirewall::Firewall
 
 - `delete_protection` (Boolean)
 - `description` (String)
+- `enabled_analysis_types` (List of String) The types of analysis to enable for the firewall. Can be TLS_SNI, HTTP_HOST, or both.
 - `firewall_policy_change_protection` (Boolean)
 - `subnet_change_protection` (Boolean)
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))

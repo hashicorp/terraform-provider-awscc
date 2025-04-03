@@ -108,6 +108,31 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: NetworkType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Cluster supports IPv4 endpoints and Dual-stack IPv4 and IPv6 endpoints. NetworkType can be IPV4 or DUALSTACK.",
+		//	  "enum": [
+		//	    "IPV4",
+		//	    "DUALSTACK"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Cluster supports IPv4 endpoints and Dual-stack IPv4 and IPv6 endpoints. NetworkType can be IPV4 or DUALSTACK.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"IPV4",
+					"DUALSTACK",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -219,6 +244,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"endpoint":          "Endpoint",
 		"key":               "Key",
 		"name":              "Name",
+		"network_type":      "NetworkType",
 		"region":            "Region",
 		"status":            "Status",
 		"tags":              "Tags",

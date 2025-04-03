@@ -89,6 +89,21 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Name of a Cluster. You can use any non-white space character in the name",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: NetworkType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Cluster supports IPv4 endpoints and Dual-stack IPv4 and IPv6 endpoints. NetworkType can be IPV4 or DUALSTACK.",
+		//	  "enum": [
+		//	    "IPV4",
+		//	    "DUALSTACK"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Cluster supports IPv4 endpoints and Dual-stack IPv4 and IPv6 endpoints. NetworkType can be IPV4 or DUALSTACK.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -170,6 +185,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"endpoint":          "Endpoint",
 		"key":               "Key",
 		"name":              "Name",
+		"network_type":      "NetworkType",
 		"region":            "Region",
 		"status":            "Status",
 		"tags":              "Tags",

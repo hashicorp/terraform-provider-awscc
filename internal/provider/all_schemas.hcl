@@ -2876,6 +2876,10 @@ resource_schema "aws_iotsitewise_dashboard" {
   cloudformation_type_name = "AWS::IoTSiteWise::Dashboard"
 }
 
+resource_schema "aws_iotsitewise_dataset" {
+  cloudformation_type_name = "AWS::IoTSiteWise::Dataset"
+}
+
 resource_schema "aws_iotsitewise_gateway" {
   cloudformation_type_name = "AWS::IoTSiteWise::Gateway"
 }
@@ -3764,10 +3768,10 @@ resource_schema "aws_opensearchserverless_security_config" {
 }
 
 resource_schema "aws_opensearchserverless_index" {
-  cloudformation_type_name               = "AWS::OpenSearchServerless::Index"
+  cloudformation_type_name = "AWS::OpenSearchServerless::Index"
 
   # Suppression Reason:
-# Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/95
+  # Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/95
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
@@ -5230,3 +5234,4 @@ resource_schema "aws_xray_sampling_rule" {
 resource_schema "aws_xray_transaction_search_config" {
   cloudformation_type_name = "AWS::XRay::TransactionSearchConfig"
 }
+

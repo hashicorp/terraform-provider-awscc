@@ -758,7 +758,6 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 				setplanmodifier.UseStateForUnknown(),
 				setplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
-			// Tags is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: TimeoutConfig
 		// CloudFormation resource type schema:
@@ -816,7 +815,7 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Job templates enable you to preconfigure jobs so that you can deploy them to multiple sets of target devices.",
+		Description: "Resource Type definition for AWS::IoT::JobTemplate. Job templates enable you to preconfigure jobs so that you can deploy them to multiple sets of target devices.",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -865,7 +864,6 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/JobArn",
-		"/properties/Tags",
 		"/properties/Document",
 		"/properties/DocumentSource",
 		"/properties/TimeoutConfig",

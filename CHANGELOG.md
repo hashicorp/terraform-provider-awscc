@@ -1,4 +1,13 @@
-## 1.34.0 (Unreleased)
+## 1.36.0 (Unreleased)
+## 1.35.0 (March 27, 2025)
+
+FEATURES:
+
+* **New Resource:** `awscc_iotsitewise_dataset`
+* **New Data Source:** `awscc_iotsitewise_dataset`
+* **New Data Source:** `awscc_iotsitewise_datasets`
+
+## 1.34.0 (March 20, 2025)
 
 FEATURES:
 

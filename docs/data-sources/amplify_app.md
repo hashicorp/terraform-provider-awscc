@@ -29,6 +29,7 @@ Data Source schema for AWS::Amplify::App
 - `basic_auth_config` (Attributes) (see [below for nested schema](#nestedatt--basic_auth_config))
 - `build_spec` (String)
 - `cache_config` (Attributes) (see [below for nested schema](#nestedatt--cache_config))
+- `compute_role_arn` (String)
 - `custom_headers` (String)
 - `custom_rules` (Attributes List) (see [below for nested schema](#nestedatt--custom_rules))
 - `default_domain` (String)

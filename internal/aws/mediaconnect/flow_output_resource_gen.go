@@ -480,6 +480,36 @@ func flowOutputResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: NdiProgramName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A suffix for the names of the NDI sources that the flow creates. If a custom name isn't specified, MediaConnect uses the output name.",
+		//	  "type": "string"
+		//	}
+		"ndi_program_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A suffix for the names of the NDI sources that the flow creates. If a custom name isn't specified, MediaConnect uses the output name.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: NdiSpeedHqQuality
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A quality setting for the NDI Speed HQ encoder.",
+		//	  "type": "integer"
+		//	}
+		"ndi_speed_hq_quality": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "A quality setting for the NDI Speed HQ encoder.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: OutputArn
 		// CloudFormation resource type schema:
 		//
@@ -549,7 +579,8 @@ func flowOutputResource(ctx context.Context) (resource.Resource, error) {
 		//	    "srt-listener",
 		//	    "srt-caller",
 		//	    "st2110-jpegxs",
-		//	    "cdi"
+		//	    "cdi",
+		//	    "ndi-speed-hq"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -568,6 +599,7 @@ func flowOutputResource(ctx context.Context) (resource.Resource, error) {
 					"srt-caller",
 					"st2110-jpegxs",
 					"cdi",
+					"ndi-speed-hq",
 				),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -691,6 +723,8 @@ func flowOutputResource(ctx context.Context) (resource.Resource, error) {
 		"media_stream_output_configurations": "MediaStreamOutputConfigurations",
 		"min_latency":                        "MinLatency",
 		"name":                               "Name",
+		"ndi_program_name":                   "NdiProgramName",
+		"ndi_speed_hq_quality":               "NdiSpeedHqQuality",
 		"output_arn":                         "OutputArn",
 		"output_status":                      "OutputStatus",
 		"port":                               "Port",

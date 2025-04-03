@@ -24,12 +24,23 @@ Data Source schema for AWS::SystemsManagerSAP::Application
 - `application_id` (String)
 - `application_type` (String)
 - `arn` (String) The ARN of the SSM-SAP application
+- `components_info` (Attributes List) This is an optional parameter for component details to which the SAP ABAP application is attached, such as Web Dispatcher. (see [below for nested schema](#nestedatt--components_info))
 - `credentials` (Attributes List) (see [below for nested schema](#nestedatt--credentials))
 - `database_arn` (String) The ARN of the SAP HANA database
 - `instances` (List of String)
 - `sap_instance_number` (String)
 - `sid` (String)
 - `tags` (Attributes List) The tags of a SystemsManagerSAP application. (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--components_info"></a>
+### Nested Schema for `components_info`
+
+Read-Only:
+
+- `component_type` (String)
+- `ec_2_instance_id` (String)
+- `sid` (String)
+
 
 <a id="nestedatt--credentials"></a>
 ### Nested Schema for `credentials`

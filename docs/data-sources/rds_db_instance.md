@@ -78,6 +78,7 @@ Data Source schema for AWS::RDS::DBInstance
 - `auto_minor_version_upgrade` (Boolean) A value that indicates whether minor engine upgrades are applied automatically to the DB instance during the maintenance window. By default, minor engine upgrades are applied automatically.
 - `automatic_backup_replication_kms_key_id` (String) The AWS KMS key identifier for encryption of the replicated automated backups. The KMS key ID is the Amazon Resource Name (ARN) for the KMS encryption key in the destination AWS-Region, for example, ``arn:aws:kms:us-east-1:123456789012:key/AKIAIOSFODNN7EXAMPLE``.
 - `automatic_backup_replication_region` (String) The AWS-Region associated with the automated backup.
+- `automatic_backup_replication_retention_period` (Number)
 - `availability_zone` (String) The Availability Zone (AZ) where the database will be created. For information on AWS-Regions and Availability Zones, see [Regions and Availability Zones](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html).
  For Amazon Aurora, each Aurora DB cluster hosts copies of its storage in three separate Availability Zones. Specify one of these Availability Zones. Aurora automatically chooses an appropriate Availability Zone if you don't specify one.
  Default: A random, system-chosen Availability Zone in the endpoint's AWS-Region.
@@ -444,7 +445,7 @@ Data Source schema for AWS::RDS::DBInstance
  The KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.
  If you do not specify a value for ``PerformanceInsightsKMSKeyId``, then Amazon RDS uses your default KMS key. There is a default KMS key for your AWS account. Your AWS account has a different default KMS key for each AWS Region.
  For information about enabling Performance Insights, see [EnablePerformanceInsights](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-enableperformanceinsights).
-- `performance_insights_retention_period` (Number) The number of days to retain Performance Insights data.
+- `performance_insights_retention_period` (Number) The number of days to retain Performance Insights data. When creating a DB instance without enabling Performance Insights, you can't specify the parameter ``PerformanceInsightsRetentionPeriod``.
  This setting doesn't apply to RDS Custom DB instances.
  Valid Values:
   +   ``7`` 

@@ -49,6 +49,7 @@ output "cluster_endpoints" {
 
 ### Optional
 
+- `network_type` (String) Cluster supports IPv4 endpoints and Dual-stack IPv4 and IPv6 endpoints. NetworkType can be IPV4 or DUALSTACK.
 - `tags` (Attributes List) A collection of tags associated with a resource (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
