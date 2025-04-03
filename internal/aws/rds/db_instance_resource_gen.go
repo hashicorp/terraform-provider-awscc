@@ -200,7 +200,6 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "",
-		//	  "maximum": 35,
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
@@ -209,7 +208,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.Int64{ /*START VALIDATORS*/
-				int64validator.Between(1, 35),
+				int64validator.AtLeast(1),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -235,7 +234,6 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The number of days for which automated backups are retained. Setting this parameter to a positive number enables backups. Setting this parameter to 0 disables automated backups.\n  *Amazon Aurora* \n Not applicable. The retention period for automated backups is managed by the DB cluster.\n Default: 1\n Constraints:\n  +  Must be a value from 0 to 35\n  +  Can't be set to 0 if the DB instance is a source to read replicas",
-		//	  "maximum": 35,
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
@@ -244,7 +242,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.Int64{ /*START VALIDATORS*/
-				int64validator.Between(0, 35),
+				int64validator.AtLeast(0),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),

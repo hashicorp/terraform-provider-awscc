@@ -260,6 +260,22 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: RecoveryPointId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The recovery point id to restore from.",
+		//	  "type": "string"
+		//	}
+		"recovery_point_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The recovery point id to restore from.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// RecoveryPointId is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: SecurityGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -293,6 +309,54 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 			// SecurityGroupIds is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: SnapshotArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the snapshot to restore from.",
+		//	  "type": "string"
+		//	}
+		"snapshot_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the snapshot to restore from.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// SnapshotArn is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: SnapshotName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The snapshot name to restore from.",
+		//	  "type": "string"
+		//	}
+		"snapshot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The snapshot name to restore from.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// SnapshotName is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: SnapshotOwnerAccount
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Web Services account that owns the snapshot.",
+		//	  "type": "string"
+		//	}
+		"snapshot_owner_account": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Web Services account that owns the snapshot.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// SnapshotOwnerAccount is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: SubnetIds
 		// CloudFormation resource type schema:
@@ -920,7 +984,11 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 		"price_performance_target": "PricePerformanceTarget",
 		"private_ip_address":       "PrivateIpAddress",
 		"publicly_accessible":      "PubliclyAccessible",
+		"recovery_point_id":        "RecoveryPointId",
 		"security_group_ids":       "SecurityGroupIds",
+		"snapshot_arn":             "SnapshotArn",
+		"snapshot_name":            "SnapshotName",
+		"snapshot_owner_account":   "SnapshotOwnerAccount",
 		"status":                   "Status",
 		"subnet_id":                "SubnetId",
 		"subnet_ids":               "SubnetIds",
@@ -940,6 +1008,10 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/ConfigParameters",
 		"/properties/SecurityGroupIds",
 		"/properties/SubnetIds",
+		"/properties/SnapshotArn",
+		"/properties/SnapshotName",
+		"/properties/SnapshotOwnerAccount",
+		"/properties/RecoveryPointId",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

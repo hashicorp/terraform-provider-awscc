@@ -223,6 +223,28 @@ func partnerAppResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: KmsKeyId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AWS KMS customer managed key used to encrypt the data associated with the PartnerApp.",
+		//	  "maxLength": 2048,
+		//	  "pattern": ".*",
+		//	  "type": "string"
+		//	}
+		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS KMS customer managed key used to encrypt the data associated with the PartnerApp.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(2048),
+				stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: MaintenanceConfig
 		// CloudFormation resource type schema:
 		//
@@ -434,6 +456,7 @@ func partnerAppResource(ctx context.Context) (resource.Resource, error) {
 		"enable_iam_session_based_identity": "EnableIamSessionBasedIdentity",
 		"execution_role_arn":                "ExecutionRoleArn",
 		"key":                               "Key",
+		"kms_key_id":                        "KmsKeyId",
 		"maintenance_config":                "MaintenanceConfig",
 		"maintenance_window_start":          "MaintenanceWindowStart",
 		"name":                              "Name",

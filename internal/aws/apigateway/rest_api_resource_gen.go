@@ -216,6 +216,10 @@ func restApiResource(ctx context.Context) (resource.Resource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "A list of the endpoint types of the API. Use this property when creating an API. When importing an existing API, specify the endpoint configuration types using the ``Parameters`` property.",
 		//	  "properties": {
+		//	    "IpAddressType": {
+		//	      "description": "",
+		//	      "type": "string"
+		//	    },
 		//	    "Types": {
 		//	      "description": "",
 		//	      "items": {
@@ -241,6 +245,15 @@ func restApiResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"endpoint_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: IpAddressType
+				"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: Types
 				"types": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
@@ -494,6 +507,7 @@ func restApiResource(ctx context.Context) (resource.Resource, error) {
 		"e_tag":                        "ETag",
 		"endpoint_configuration":       "EndpointConfiguration",
 		"fail_on_warnings":             "FailOnWarnings",
+		"ip_address_type":              "IpAddressType",
 		"key":                          "Key",
 		"minimum_compression_size":     "MinimumCompressionSize",
 		"mode":                         "Mode",

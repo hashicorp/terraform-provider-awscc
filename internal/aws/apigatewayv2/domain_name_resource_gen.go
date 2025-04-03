@@ -77,6 +77,10 @@ func domainNameResource(ctx context.Context) (resource.Resource, error) {
 		//	        "description": "The endpoint type.",
 		//	        "type": "string"
 		//	      },
+		//	      "IpAddressType": {
+		//	        "description": "",
+		//	        "type": "string"
+		//	      },
 		//	      "OwnershipVerificationCertificateArn": {
 		//	        "description": "The Amazon resource name (ARN) for the public certificate issued by ACMlong. This ARN is used to validate custom domain ownership. It's required only if you configure mutual TLS and use either an ACM-imported or a private CA certificate ARN as the regionalCertificateArn.",
 		//	        "type": "string"
@@ -115,6 +119,15 @@ func domainNameResource(ctx context.Context) (resource.Resource, error) {
 					// Property: EndpointType
 					"endpoint_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The endpoint type.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: IpAddressType
+					"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -273,6 +286,7 @@ func domainNameResource(ctx context.Context) (resource.Resource, error) {
 		"domain_name_arn":                        "DomainNameArn",
 		"domain_name_configurations":             "DomainNameConfigurations",
 		"endpoint_type":                          "EndpointType",
+		"ip_address_type":                        "IpAddressType",
 		"mutual_tls_authentication":              "MutualTlsAuthentication",
 		"ownership_verification_certificate_arn": "OwnershipVerificationCertificateArn",
 		"regional_domain_name":                   "RegionalDomainName",
