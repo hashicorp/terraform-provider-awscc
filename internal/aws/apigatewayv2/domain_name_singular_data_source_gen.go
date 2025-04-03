@@ -66,6 +66,10 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "description": "The endpoint type.",
 		//	        "type": "string"
 		//	      },
+		//	      "IpAddressType": {
+		//	        "description": "",
+		//	        "type": "string"
+		//	      },
 		//	      "OwnershipVerificationCertificateArn": {
 		//	        "description": "The Amazon resource name (ARN) for the public certificate issued by ACMlong. This ARN is used to validate custom domain ownership. It's required only if you configure mutual TLS and use either an ACM-imported or a private CA certificate ARN as the regionalCertificateArn.",
 		//	        "type": "string"
@@ -96,6 +100,11 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 					// Property: EndpointType
 					"endpoint_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The endpoint type.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: IpAddressType
+					"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: OwnershipVerificationCertificateArn
@@ -211,6 +220,7 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"domain_name_arn":                        "DomainNameArn",
 		"domain_name_configurations":             "DomainNameConfigurations",
 		"endpoint_type":                          "EndpointType",
+		"ip_address_type":                        "IpAddressType",
 		"mutual_tls_authentication":              "MutualTlsAuthentication",
 		"ownership_verification_certificate_arn": "OwnershipVerificationCertificateArn",
 		"regional_domain_name":                   "RegionalDomainName",

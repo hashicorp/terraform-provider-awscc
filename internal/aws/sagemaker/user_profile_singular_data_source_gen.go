@@ -212,7 +212,7 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            ],
 		//	            "type": "object"
 		//	          },
-		//	          "maxItems": 30,
+		//	          "maxItems": 200,
 		//	          "minItems": 0,
 		//	          "type": "array",
 		//	          "uniqueItems": false
@@ -507,7 +507,7 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            ],
 		//	            "type": "object"
 		//	          },
-		//	          "maxItems": 30,
+		//	          "maxItems": 200,
 		//	          "minItems": 0,
 		//	          "type": "array",
 		//	          "uniqueItems": false

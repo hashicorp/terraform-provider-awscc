@@ -431,6 +431,32 @@ func serviceLevelObjectiveDataSource(ctx context.Context) (datasource.DataSource
 		//	      "additionalProperties": false,
 		//	      "description": "This structure contains the information about the metric that is used for a request-based SLO.",
 		//	      "properties": {
+		//	        "DependencyConfig": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configuration for identifying a dependency and its operation",
+		//	          "properties": {
+		//	            "DependencyKeyAttributes": {
+		//	              "additionalProperties": false,
+		//	              "description": "If this SLO is related to a metric collected by Application Signals, you must use this field to specify which dependency the SLO metric is related to.",
+		//	              "patternProperties": {
+		//	                "": {
+		//	                  "type": "string"
+		//	                }
+		//	              }
+		//	            },
+		//	            "DependencyOperationName": {
+		//	              "description": "When the SLO monitors a specific operation of the dependency, this field specifies the name of that operation in the dependency.",
+		//	              "maxLength": 255,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "DependencyKeyAttributes",
+		//	            "DependencyOperationName"
+		//	          ],
+		//	          "type": "object"
+		//	        },
 		//	        "KeyAttributes": {
 		//	          "additionalProperties": false,
 		//	          "description": "This is a string-to-string map that contains information about the type of object that this SLO is related to.",
@@ -773,6 +799,25 @@ func serviceLevelObjectiveDataSource(ctx context.Context) (datasource.DataSource
 				// Property: RequestBasedSliMetric
 				"request_based_sli_metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DependencyConfig
+						"dependency_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: DependencyKeyAttributes
+								"dependency_key_attributes": // Pattern: ""
+								schema.MapAttribute{         /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "If this SLO is related to a metric collected by Application Signals, you must use this field to specify which dependency the SLO metric is related to.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: DependencyOperationName
+								"dependency_operation_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "When the SLO monitors a specific operation of the dependency, this field specifies the name of that operation in the dependency.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration for identifying a dependency and its operation",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
 						// Property: KeyAttributes
 						"key_attributes":    // Pattern: ""
 						schema.MapAttribute{ /*START ATTRIBUTE*/
@@ -1091,6 +1136,32 @@ func serviceLevelObjectiveDataSource(ctx context.Context) (datasource.DataSource
 		//	      "additionalProperties": false,
 		//	      "description": "A structure that contains information about the metric that the SLO monitors.",
 		//	      "properties": {
+		//	        "DependencyConfig": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configuration for identifying a dependency and its operation",
+		//	          "properties": {
+		//	            "DependencyKeyAttributes": {
+		//	              "additionalProperties": false,
+		//	              "description": "If this SLO is related to a metric collected by Application Signals, you must use this field to specify which dependency the SLO metric is related to.",
+		//	              "patternProperties": {
+		//	                "": {
+		//	                  "type": "string"
+		//	                }
+		//	              }
+		//	            },
+		//	            "DependencyOperationName": {
+		//	              "description": "When the SLO monitors a specific operation of the dependency, this field specifies the name of that operation in the dependency.",
+		//	              "maxLength": 255,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "DependencyKeyAttributes",
+		//	            "DependencyOperationName"
+		//	          ],
+		//	          "type": "object"
+		//	        },
 		//	        "KeyAttributes": {
 		//	          "additionalProperties": false,
 		//	          "description": "This is a string-to-string map that contains information about the type of object that this SLO is related to.",
@@ -1248,6 +1319,25 @@ func serviceLevelObjectiveDataSource(ctx context.Context) (datasource.DataSource
 				// Property: SliMetric
 				"sli_metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DependencyConfig
+						"dependency_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: DependencyKeyAttributes
+								"dependency_key_attributes": // Pattern: ""
+								schema.MapAttribute{         /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "If this SLO is related to a metric collected by Application Signals, you must use this field to specify which dependency the SLO metric is related to.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: DependencyOperationName
+								"dependency_operation_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "When the SLO monitors a specific operation of the dependency, this field specifies the name of that operation in the dependency.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration for identifying a dependency and its operation",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
 						// Property: KeyAttributes
 						"key_attributes":    // Pattern: ""
 						schema.MapAttribute{ /*START ATTRIBUTE*/
@@ -1447,6 +1537,9 @@ func serviceLevelObjectiveDataSource(ctx context.Context) (datasource.DataSource
 		"calendar_interval":              "CalendarInterval",
 		"comparison_operator":            "ComparisonOperator",
 		"created_time":                   "CreatedTime",
+		"dependency_config":              "DependencyConfig",
+		"dependency_key_attributes":      "DependencyKeyAttributes",
+		"dependency_operation_name":      "DependencyOperationName",
 		"description":                    "Description",
 		"dimensions":                     "Dimensions",
 		"duration":                       "Duration",

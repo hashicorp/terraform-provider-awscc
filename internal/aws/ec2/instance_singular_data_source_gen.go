@@ -672,6 +672,28 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "description": "The position of the network interface in the attachment order. A primary network interface has a device index of 0.",
 		//	        "type": "string"
 		//	      },
+		//	      "EnaSrdSpecification": {
+		//	        "additionalProperties": false,
+		//	        "description": "Specifies the ENA Express settings for the network interface that's attached to the instance.",
+		//	        "properties": {
+		//	          "EnaSrdEnabled": {
+		//	            "description": "Specifies whether ENA Express is enabled for the network interface when you launch an instance.",
+		//	            "type": "boolean"
+		//	          },
+		//	          "EnaSrdUdpSpecification": {
+		//	            "additionalProperties": false,
+		//	            "description": "Contains ENA Express settings for UDP network traffic for the network interface that's attached to the instance.",
+		//	            "properties": {
+		//	              "EnaSrdUdpEnabled": {
+		//	                "description": "Indicates whether UDP traffic uses ENA Express for your instance.",
+		//	                "type": "boolean"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
 		//	      "GroupSet": {
 		//	        "description": "The IDs of the security groups for the network interface.",
 		//	        "insertionOrder": false,
@@ -779,6 +801,30 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					// Property: DeviceIndex
 					"device_index": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The position of the network interface in the attachment order. A primary network interface has a device index of 0.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: EnaSrdSpecification
+					"ena_srd_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: EnaSrdEnabled
+							"ena_srd_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies whether ENA Express is enabled for the network interface when you launch an instance.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: EnaSrdUdpSpecification
+							"ena_srd_udp_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: EnaSrdUdpEnabled
+									"ena_srd_udp_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "Indicates whether UDP traffic uses ENA Express for your instance.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Contains ENA Express settings for UDP network traffic for the network interface that's attached to the instance.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Specifies the ENA Express settings for the network interface that's attached to the instance.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: GroupSet
@@ -1320,6 +1366,10 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"ebs_optimized":                        "EbsOptimized",
 		"elastic_gpu_specifications":           "ElasticGpuSpecifications",
 		"elastic_inference_accelerators":       "ElasticInferenceAccelerators",
+		"ena_srd_enabled":                      "EnaSrdEnabled",
+		"ena_srd_specification":                "EnaSrdSpecification",
+		"ena_srd_udp_enabled":                  "EnaSrdUdpEnabled",
+		"ena_srd_udp_specification":            "EnaSrdUdpSpecification",
 		"enable_resource_name_dns_a_record":    "EnableResourceNameDnsARecord",
 		"enable_resource_name_dns_aaaa_record": "EnableResourceNameDnsAAAARecord",
 		"enabled":                              "Enabled",
