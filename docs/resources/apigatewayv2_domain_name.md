@@ -54,6 +54,7 @@ Optional:
 - `certificate_arn` (String) An AWS-managed certificate that will be used by the edge-optimized endpoint for this domain name. AWS Certificate Manager is the only supported source.
 - `certificate_name` (String) The user-friendly name of the certificate that will be used by the edge-optimized endpoint for this domain name.
 - `endpoint_type` (String) The endpoint type.
+- `ip_address_type` (String)
 - `ownership_verification_certificate_arn` (String) The Amazon resource name (ARN) for the public certificate issued by ACMlong. This ARN is used to validate custom domain ownership. It's required only if you configure mutual TLS and use either an ACM-imported or a private CA certificate ARN as the regionalCertificateArn.
 - `security_policy` (String) The Transport Layer Security (TLS) version of the security policy for this domain name. The valid values are ``TLS_1_0`` and ``TLS_1_2``.
 

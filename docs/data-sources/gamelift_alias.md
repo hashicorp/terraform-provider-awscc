@@ -21,10 +21,12 @@ Data Source schema for AWS::GameLift::Alias
 
 ### Read-Only
 
+- `alias_arn` (String) The Amazon Resource Name (ARN) that is assigned to a Amazon GameLift Alias resource and uniquely identifies it. ARNs are unique across all Regions. In a GameLift Alias ARN, the resource ID matches the AliasId value.
 - `alias_id` (String) Unique alias ID
 - `description` (String) A human-readable description of the alias.
 - `name` (String) A descriptive label that is associated with an alias. Alias names do not need to be unique.
 - `routing_strategy` (Attributes) A routing configuration that specifies where traffic is directed for this alias, such as to a fleet or to a message. (see [below for nested schema](#nestedatt--routing_strategy))
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--routing_strategy"></a>
 ### Nested Schema for `routing_strategy`
@@ -34,3 +36,12 @@ Read-Only:
 - `fleet_id` (String) A unique identifier for a fleet that the alias points to. If you specify SIMPLE for the Type property, you must specify this property.
 - `message` (String) The message text to be used with a terminal routing strategy. If you specify TERMINAL for the Type property, you must specify this property.
 - `type` (String) Simple routing strategy. The alias resolves to one specific fleet. Use this type when routing to active fleets.
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length.

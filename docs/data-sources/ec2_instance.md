@@ -180,6 +180,7 @@ Read-Only:
 - `delete_on_termination` (Boolean) If set to true, the interface is deleted when the instance is terminated.
 - `description` (String) The description of the network interface.
 - `device_index` (String) The position of the network interface in the attachment order. A primary network interface has a device index of 0.
+- `ena_srd_specification` (Attributes) Specifies the ENA Express settings for the network interface that's attached to the instance. (see [below for nested schema](#nestedatt--network_interfaces--ena_srd_specification))
 - `group_set` (List of String) The IDs of the security groups for the network interface.
 - `ipv_6_address_count` (Number) A number of IPv6 addresses to assign to the network interface.
 - `ipv_6_addresses` (Attributes List) The IPv6 addresses associated with the network interface. (see [below for nested schema](#nestedatt--network_interfaces--ipv_6_addresses))
@@ -188,6 +189,23 @@ Read-Only:
 - `private_ip_addresses` (Attributes List) One or more private IPv4 addresses to assign to the network interface. (see [below for nested schema](#nestedatt--network_interfaces--private_ip_addresses))
 - `secondary_private_ip_address_count` (Number) The number of secondary private IPv4 addresses.
 - `subnet_id` (String) The ID of the subnet.
+
+<a id="nestedatt--network_interfaces--ena_srd_specification"></a>
+### Nested Schema for `network_interfaces.ena_srd_specification`
+
+Read-Only:
+
+- `ena_srd_enabled` (Boolean) Specifies whether ENA Express is enabled for the network interface when you launch an instance.
+- `ena_srd_udp_specification` (Attributes) Contains ENA Express settings for UDP network traffic for the network interface that's attached to the instance. (see [below for nested schema](#nestedatt--network_interfaces--ena_srd_specification--ena_srd_udp_specification))
+
+<a id="nestedatt--network_interfaces--ena_srd_specification--ena_srd_udp_specification"></a>
+### Nested Schema for `network_interfaces.ena_srd_specification.ena_srd_udp_specification`
+
+Read-Only:
+
+- `ena_srd_udp_enabled` (Boolean) Indicates whether UDP traffic uses ENA Express for your instance.
+
+
 
 <a id="nestedatt--network_interfaces--ipv_6_addresses"></a>
 ### Nested Schema for `network_interfaces.ipv_6_addresses`

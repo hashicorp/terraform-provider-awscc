@@ -145,6 +145,7 @@ Optional:
 
 Optional:
 
+- `ip_address_type` (String)
 - `types` (List of String)
 - `vpc_endpoint_ids` (List of String)
 

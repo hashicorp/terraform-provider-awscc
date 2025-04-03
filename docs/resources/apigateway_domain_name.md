@@ -59,6 +59,7 @@ resource "awscc_apigateway_domain_name" "example" {
 
 Optional:
 
+- `ip_address_type` (String)
 - `types` (List of String)
 
 

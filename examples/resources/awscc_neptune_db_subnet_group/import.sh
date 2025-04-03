@@ -1,0 +1,1 @@
+$ terraform import awscc_neptune_db_subnet_group.example "db_subnet_group_name"

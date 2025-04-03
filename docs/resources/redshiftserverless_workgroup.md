@@ -73,7 +73,11 @@ resource "awscc_redshiftserverless_workgroup" "example" {
 - `port` (Number) The custom port to use when connecting to a workgroup. Valid port ranges are 5431-5455 and 8191-8215. The default is 5439.
 - `price_performance_target` (Attributes) A property that represents the price performance target settings for the workgroup. (see [below for nested schema](#nestedatt--price_performance_target))
 - `publicly_accessible` (Boolean) A value that specifies whether the workgroup can be accessible from a public network.
+- `recovery_point_id` (String) The recovery point id to restore from.
 - `security_group_ids` (List of String) A list of security group IDs to associate with the workgroup.
+- `snapshot_arn` (String) The Amazon Resource Name (ARN) of the snapshot to restore from.
+- `snapshot_name` (String) The snapshot name to restore from.
+- `snapshot_owner_account` (String) The Amazon Web Services account that owns the snapshot.
 - `subnet_ids` (List of String) A list of subnet IDs the workgroup is associated with.
 - `tags` (Attributes List) The map of the key-value pairs used to tag the workgroup. (see [below for nested schema](#nestedatt--tags))
 - `track_name` (String)

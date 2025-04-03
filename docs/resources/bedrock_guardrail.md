@@ -260,7 +260,9 @@ Optional:
 
 Optional:
 
+- `input_modalities` (List of String) List of modalities
 - `input_strength` (String) Strength for filters
+- `output_modalities` (List of String) List of modalities
 - `output_strength` (String) Strength for filters
 - `type` (String) Type of filter in content policy
 
