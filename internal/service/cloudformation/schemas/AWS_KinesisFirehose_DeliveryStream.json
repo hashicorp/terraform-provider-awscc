@@ -1928,7 +1928,7 @@
     "/properties/KinesisStreamSourceConfiguration",
     "/properties/DirectPutSourceConfiguration",
     "/properties/MSKSourceConfiguration",
-    "/properties/IcebergDestinationConfiguration",
+    "/properties/IcebergDestinationConfiguration/CatalogConfiguration",
     "/properties/SnowflakeDestinationConfiguration/SnowflakeVpcConfiguration"
   ],
   "primaryIdentifier": [
