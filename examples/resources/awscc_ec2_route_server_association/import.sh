@@ -1,0 +1,1 @@
+$ terraform import awscc_ec2_route_server_association.example "route_server_id|vpc_id"

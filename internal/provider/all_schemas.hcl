@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1150 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1157 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -1762,6 +1762,26 @@ resource_schema "aws_ec2_prefix_list" {
 resource_schema "aws_ec2_route" {
   cloudformation_type_name               = "AWS::EC2::Route"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_ec2_route_server" {
+  cloudformation_type_name = "AWS::EC2::RouteServer"
+}
+
+resource_schema "aws_ec2_route_server_association" {
+  cloudformation_type_name = "AWS::EC2::RouteServerAssociation"
+}
+
+resource_schema "aws_ec2_route_server_endpoint" {
+  cloudformation_type_name = "AWS::EC2::RouteServerEndpoint"
+}
+
+resource_schema "aws_ec2_route_server_peer" {
+  cloudformation_type_name = "AWS::EC2::RouteServerPeer"
+}
+
+resource_schema "aws_ec2_route_server_propagation" {
+  cloudformation_type_name = "AWS::EC2::RouteServerPropagation"
 }
 
 resource_schema "aws_ec2_route_table" {
@@ -3520,6 +3540,10 @@ resource_schema "aws_memorydb_user" {
 
 resource_schema "aws_neptune_db_cluster" {
   cloudformation_type_name = "AWS::Neptune::DBCluster"
+}
+
+resource_schema "aws_neptune_db_subnet_group" {
+  cloudformation_type_name = "AWS::Neptune::DBSubnetGroup"
 }
 
 resource_schema "aws_neptunegraph_graph" {

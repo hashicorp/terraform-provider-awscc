@@ -380,6 +380,21 @@ func apiResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END PLAN MODIFIERS*/
 			// FailOnWarnings is a write-only property.
 		}, /*END ATTRIBUTE*/
+		// Property: IpAddressType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -537,6 +552,7 @@ func apiResource(ctx context.Context) (resource.Resource, error) {
 		"etag":                         "Etag",
 		"expose_headers":               "ExposeHeaders",
 		"fail_on_warnings":             "FailOnWarnings",
+		"ip_address_type":              "IpAddressType",
 		"key":                          "Key",
 		"max_age":                      "MaxAge",
 		"name":                         "Name",

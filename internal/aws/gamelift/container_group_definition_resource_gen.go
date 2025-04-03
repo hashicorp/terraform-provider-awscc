@@ -638,6 +638,7 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// SourceVersionNumber is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
@@ -1534,6 +1535,9 @@ func containerGroupDefinitionResource(ctx context.Context) (resource.Resource, e
 		"version_number":                   "VersionNumber",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/SourceVersionNumber",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

@@ -50,9 +50,11 @@ resource "awscc_gamelift_alias" "example" {
 ### Optional
 
 - `description` (String) A human-readable description of the alias.
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
+- `alias_arn` (String) The Amazon Resource Name (ARN) that is assigned to a Amazon GameLift Alias resource and uniquely identifies it. ARNs are unique across all Regions. In a GameLift Alias ARN, the resource ID matches the AliasId value.
 - `alias_id` (String) Unique alias ID
 - `id` (String) Uniquely identifies the resource.
 
@@ -67,6 +69,15 @@ Optional:
 
 - `fleet_id` (String) A unique identifier for a fleet that the alias points to. If you specify SIMPLE for the Type property, you must specify this property.
 - `message` (String) The message text to be used with a terminal routing strategy. If you specify TERMINAL for the Type property, you must specify this property.
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length.
 
 ## Import
 

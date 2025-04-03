@@ -28,6 +28,7 @@ Resource Type definition for AWS::SageMaker::PartnerApp
 - `application_config` (Attributes) A collection of settings that specify the maintenance schedule for the PartnerApp. (see [below for nested schema](#nestedatt--application_config))
 - `client_token` (String) The client token for the PartnerApp.
 - `enable_iam_session_based_identity` (Boolean) Enables IAM Session based Identity for PartnerApp.
+- `kms_key_id` (String) The AWS KMS customer managed key used to encrypt the data associated with the PartnerApp.
 - `maintenance_config` (Attributes) A collection of settings that specify the maintenance schedule for the PartnerApp. (see [below for nested schema](#nestedatt--maintenance_config))
 - `tags` (Attributes List) A list of tags to apply to the PartnerApp. (see [below for nested schema](#nestedatt--tags))
 

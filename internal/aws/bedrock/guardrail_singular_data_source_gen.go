@@ -63,6 +63,19 @@ func guardrailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "additionalProperties": false,
 		//	        "description": "Content filter config in content policy.",
 		//	        "properties": {
+		//	          "InputModalities": {
+		//	            "description": "List of modalities",
+		//	            "items": {
+		//	              "description": "Modality for filters",
+		//	              "enum": [
+		//	                "TEXT",
+		//	                "IMAGE"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "minItems": 1,
+		//	            "type": "array"
+		//	          },
 		//	          "InputStrength": {
 		//	            "description": "Strength for filters",
 		//	            "enum": [
@@ -72,6 +85,19 @@ func guardrailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "HIGH"
 		//	            ],
 		//	            "type": "string"
+		//	          },
+		//	          "OutputModalities": {
+		//	            "description": "List of modalities",
+		//	            "items": {
+		//	              "description": "Modality for filters",
+		//	              "enum": [
+		//	                "TEXT",
+		//	                "IMAGE"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "minItems": 1,
+		//	            "type": "array"
 		//	          },
 		//	          "OutputStrength": {
 		//	            "description": "Strength for filters",
@@ -119,9 +145,21 @@ func guardrailDataSource(ctx context.Context) (datasource.DataSource, error) {
 				"filters_config": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: InputModalities
+							"input_modalities": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "List of modalities",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
 							// Property: InputStrength
 							"input_strength": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Strength for filters",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: OutputModalities
+							"output_modalities": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "List of modalities",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: OutputStrength
@@ -804,11 +842,13 @@ func guardrailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"filters_config":                      "FiltersConfig",
 		"guardrail_arn":                       "GuardrailArn",
 		"guardrail_id":                        "GuardrailId",
+		"input_modalities":                    "InputModalities",
 		"input_strength":                      "InputStrength",
 		"key":                                 "Key",
 		"kms_key_arn":                         "KmsKeyArn",
 		"managed_word_lists_config":           "ManagedWordListsConfig",
 		"name":                                "Name",
+		"output_modalities":                   "OutputModalities",
 		"output_strength":                     "OutputStrength",
 		"pattern":                             "Pattern",
 		"pii_entities_config":                 "PiiEntitiesConfig",

@@ -1815,6 +1815,31 @@
         "path": "./examples/resources/awscc_ec2_route/import.sh"
     },
     {
+        "resource": "awscc_ec2_route_server",
+        "identifier": ["Id"],
+        "path": "./examples/resources/awscc_ec2_route_server/import.sh"
+    },
+    {
+        "resource": "awscc_ec2_route_server_association",
+        "identifier": ["RouteServerId","VpcId"],
+        "path": "./examples/resources/awscc_ec2_route_server_association/import.sh"
+    },
+    {
+        "resource": "awscc_ec2_route_server_endpoint",
+        "identifier": ["Id"],
+        "path": "./examples/resources/awscc_ec2_route_server_endpoint/import.sh"
+    },
+    {
+        "resource": "awscc_ec2_route_server_peer",
+        "identifier": ["Id"],
+        "path": "./examples/resources/awscc_ec2_route_server_peer/import.sh"
+    },
+    {
+        "resource": "awscc_ec2_route_server_propagation",
+        "identifier": ["RouteServerId","RouteTableId"],
+        "path": "./examples/resources/awscc_ec2_route_server_propagation/import.sh"
+    },
+    {
         "resource": "awscc_ec2_route_table",
         "identifier": ["RouteTableId"],
         "path": "./examples/resources/awscc_ec2_route_table/import.sh"
@@ -3808,6 +3833,11 @@
         "resource": "awscc_neptune_db_cluster",
         "identifier": ["DBClusterIdentifier"],
         "path": "./examples/resources/awscc_neptune_db_cluster/import.sh"
+    },
+    {
+        "resource": "awscc_neptune_db_subnet_group",
+        "identifier": ["DBSubnetGroupName"],
+        "path": "./examples/resources/awscc_neptune_db_subnet_group/import.sh"
     },
     {
         "resource": "awscc_neptunegraph_graph",

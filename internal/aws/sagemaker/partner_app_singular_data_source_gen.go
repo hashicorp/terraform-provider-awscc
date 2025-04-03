@@ -158,6 +158,19 @@ func partnerAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The execution role for the user.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: KmsKeyId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AWS KMS customer managed key used to encrypt the data associated with the PartnerApp.",
+		//	  "maxLength": 2048,
+		//	  "pattern": ".*",
+		//	  "type": "string"
+		//	}
+		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS KMS customer managed key used to encrypt the data associated with the PartnerApp.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaintenanceConfig
 		// CloudFormation resource type schema:
 		//
@@ -306,6 +319,7 @@ func partnerAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"enable_iam_session_based_identity": "EnableIamSessionBasedIdentity",
 		"execution_role_arn":                "ExecutionRoleArn",
 		"key":                               "Key",
+		"kms_key_id":                        "KmsKeyId",
 		"maintenance_config":                "MaintenanceConfig",
 		"maintenance_window_start":          "MaintenanceWindowStart",
 		"name":                              "Name",

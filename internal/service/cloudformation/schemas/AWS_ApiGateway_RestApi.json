@@ -75,6 +75,10 @@
       "additionalProperties": false,
       "type": "object",
       "properties": {
+        "IpAddressType": {
+          "description": "",
+          "type": "string"
+        },
         "Types": {
           "uniqueItems": true,
           "description": "",

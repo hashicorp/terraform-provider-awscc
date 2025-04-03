@@ -621,6 +621,32 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 		//	      "additionalProperties": false,
 		//	      "description": "This structure contains the information about the metric that is used for a request-based SLO.",
 		//	      "properties": {
+		//	        "DependencyConfig": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configuration for identifying a dependency and its operation",
+		//	          "properties": {
+		//	            "DependencyKeyAttributes": {
+		//	              "additionalProperties": false,
+		//	              "description": "If this SLO is related to a metric collected by Application Signals, you must use this field to specify which dependency the SLO metric is related to.",
+		//	              "patternProperties": {
+		//	                "": {
+		//	                  "type": "string"
+		//	                }
+		//	              }
+		//	            },
+		//	            "DependencyOperationName": {
+		//	              "description": "When the SLO monitors a specific operation of the dependency, this field specifies the name of that operation in the dependency.",
+		//	              "maxLength": 255,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "DependencyKeyAttributes",
+		//	            "DependencyOperationName"
+		//	          ],
+		//	          "type": "object"
+		//	        },
 		//	        "KeyAttributes": {
 		//	          "additionalProperties": false,
 		//	          "description": "This is a string-to-string map that contains information about the type of object that this SLO is related to.",
@@ -979,6 +1005,44 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 				// Property: RequestBasedSliMetric
 				"request_based_sli_metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DependencyConfig
+						"dependency_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: DependencyKeyAttributes
+								"dependency_key_attributes": // Pattern: ""
+								schema.MapAttribute{         /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "If this SLO is related to a metric collected by Application Signals, you must use this field to specify which dependency the SLO metric is related to.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Map{ /*START VALIDATORS*/
+										fwvalidators.NotNullMap(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+										mapplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: DependencyOperationName
+								"dependency_operation_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "When the SLO monitors a specific operation of the dependency, this field specifies the name of that operation in the dependency.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 255),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration for identifying a dependency and its operation",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: KeyAttributes
 						"key_attributes":    // Pattern: ""
 						schema.MapAttribute{ /*START ATTRIBUTE*/
@@ -1570,6 +1634,32 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 		//	      "additionalProperties": false,
 		//	      "description": "A structure that contains information about the metric that the SLO monitors.",
 		//	      "properties": {
+		//	        "DependencyConfig": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configuration for identifying a dependency and its operation",
+		//	          "properties": {
+		//	            "DependencyKeyAttributes": {
+		//	              "additionalProperties": false,
+		//	              "description": "If this SLO is related to a metric collected by Application Signals, you must use this field to specify which dependency the SLO metric is related to.",
+		//	              "patternProperties": {
+		//	                "": {
+		//	                  "type": "string"
+		//	                }
+		//	              }
+		//	            },
+		//	            "DependencyOperationName": {
+		//	              "description": "When the SLO monitors a specific operation of the dependency, this field specifies the name of that operation in the dependency.",
+		//	              "maxLength": 255,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "DependencyKeyAttributes",
+		//	            "DependencyOperationName"
+		//	          ],
+		//	          "type": "object"
+		//	        },
 		//	        "KeyAttributes": {
 		//	          "additionalProperties": false,
 		//	          "description": "This is a string-to-string map that contains information about the type of object that this SLO is related to.",
@@ -1747,6 +1837,44 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 				// Property: SliMetric
 				"sli_metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DependencyConfig
+						"dependency_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: DependencyKeyAttributes
+								"dependency_key_attributes": // Pattern: ""
+								schema.MapAttribute{         /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "If this SLO is related to a metric collected by Application Signals, you must use this field to specify which dependency the SLO metric is related to.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Map{ /*START VALIDATORS*/
+										fwvalidators.NotNullMap(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+										mapplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: DependencyOperationName
+								"dependency_operation_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "When the SLO monitors a specific operation of the dependency, this field specifies the name of that operation in the dependency.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 255),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration for identifying a dependency and its operation",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: KeyAttributes
 						"key_attributes":    // Pattern: ""
 						schema.MapAttribute{ /*START ATTRIBUTE*/
@@ -2099,6 +2227,9 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 		"calendar_interval":              "CalendarInterval",
 		"comparison_operator":            "ComparisonOperator",
 		"created_time":                   "CreatedTime",
+		"dependency_config":              "DependencyConfig",
+		"dependency_key_attributes":      "DependencyKeyAttributes",
+		"dependency_operation_name":      "DependencyOperationName",
 		"description":                    "Description",
 		"dimensions":                     "Dimensions",
 		"duration":                       "Duration",

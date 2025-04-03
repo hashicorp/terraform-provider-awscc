@@ -277,6 +277,17 @@ func apiDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Specifies whether to rollback the API creation when a warning is encountered. By default, API creation continues if a warning is encountered.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: IpAddressType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -398,6 +409,7 @@ func apiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"etag":                         "Etag",
 		"expose_headers":               "ExposeHeaders",
 		"fail_on_warnings":             "FailOnWarnings",
+		"ip_address_type":              "IpAddressType",
 		"key":                          "Key",
 		"max_age":                      "MaxAge",
 		"name":                         "Name",

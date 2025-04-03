@@ -517,8 +517,7 @@
     "/properties/AccessConfig/BootstrapClusterCreatorAdminPermissions",
     "/properties/Name",
     "/properties/RoleArn",
-    "/properties/BootstrapSelfManagedAddons",
-    "/properties/RemoteNetworkConfig"
+    "/properties/BootstrapSelfManagedAddons"
   ],
   "readOnlyProperties": [
     "/properties/Id",

@@ -1,4 +1,26 @@
 ## 1.36.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_ec2_route_server`
+* **New Data Source:** `awscc_ec2_route_server_association`
+* **New Data Source:** `awscc_ec2_route_server_associations`
+* **New Data Source:** `awscc_ec2_route_server_endpoint`
+* **New Data Source:** `awscc_ec2_route_server_endpoints`
+* **New Data Source:** `awscc_ec2_route_server_peer`
+* **New Data Source:** `awscc_ec2_route_server_peers`
+* **New Data Source:** `awscc_ec2_route_server_propagation`
+* **New Data Source:** `awscc_ec2_route_server_propagations`
+* **New Data Source:** `awscc_ec2_route_servers`
+* **New Data Source:** `awscc_neptune_db_subnet_group`
+* **New Data Source:** `awscc_neptune_db_subnet_groups`
+* **New Resource:** `awscc_ec2_route_server`
+* **New Resource:** `awscc_ec2_route_server_association`
+* **New Resource:** `awscc_ec2_route_server_endpoint`
+* **New Resource:** `awscc_ec2_route_server_peer`
+* **New Resource:** `awscc_ec2_route_server_propagation`
+* **New Resource:** `awscc_neptune_db_subnet_group`
+
 ## 1.35.0 (March 27, 2025)
 
 FEATURES:

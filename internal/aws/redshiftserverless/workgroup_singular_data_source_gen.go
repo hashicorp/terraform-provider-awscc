@@ -172,6 +172,17 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "A value that specifies whether the workgroup can be accessible from a public network.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: RecoveryPointId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The recovery point id to restore from.",
+		//	  "type": "string"
+		//	}
+		"recovery_point_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The recovery point id to restore from.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SecurityGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -191,6 +202,39 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
 			Description: "A list of security group IDs to associate with the workgroup.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: SnapshotArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the snapshot to restore from.",
+		//	  "type": "string"
+		//	}
+		"snapshot_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the snapshot to restore from.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: SnapshotName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The snapshot name to restore from.",
+		//	  "type": "string"
+		//	}
+		"snapshot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The snapshot name to restore from.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: SnapshotOwnerAccount
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Web Services account that owns the snapshot.",
+		//	  "type": "string"
+		//	}
+		"snapshot_owner_account": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Web Services account that owns the snapshot.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SubnetIds
@@ -633,7 +677,11 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"price_performance_target": "PricePerformanceTarget",
 		"private_ip_address":       "PrivateIpAddress",
 		"publicly_accessible":      "PubliclyAccessible",
+		"recovery_point_id":        "RecoveryPointId",
 		"security_group_ids":       "SecurityGroupIds",
+		"snapshot_arn":             "SnapshotArn",
+		"snapshot_name":            "SnapshotName",
+		"snapshot_owner_account":   "SnapshotOwnerAccount",
 		"status":                   "Status",
 		"subnet_id":                "SubnetId",
 		"subnet_ids":               "SubnetIds",
