@@ -1,7 +1,3 @@
-# Data sources for AWS account and region
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # B2BI Transformer example
 resource "awscc_b2bi_transformer" "example" {
   name   = "example-transformer"

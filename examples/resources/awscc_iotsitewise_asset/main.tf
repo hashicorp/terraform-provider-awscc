@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # First, let's create an asset model
 resource "awscc_iotsitewise_asset_model" "example" {
   asset_model_name        = "Example Asset Model"

@@ -1,7 +1,3 @@
-# Get current region and account ID
-data "aws_region" "current" {}
-data "aws_caller_identity" "current" {}
-
 # IAM role for the task definition
 data "aws_iam_policy_document" "assume_role" {
   statement {

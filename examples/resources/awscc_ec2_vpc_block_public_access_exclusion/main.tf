@@ -1,9 +1,3 @@
-# Get current AWS account ID
-data "aws_caller_identity" "current" {}
-
-# Get current region
-data "aws_region" "current" {}
-
 # Create a VPC for testing
 resource "awscc_ec2_vpc" "example" {
   cidr_block = "10.0.0.0/16"

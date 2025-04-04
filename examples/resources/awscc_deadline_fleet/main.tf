@@ -1,7 +1,3 @@
-# Data sources for current AWS account and region
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Data source for assume role policy document
 data "aws_iam_policy_document" "fleet_assume_role" {
   statement {

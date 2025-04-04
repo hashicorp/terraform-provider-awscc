@@ -20,7 +20,6 @@ Creates a CodeArtifact domain with a permissions policy that allows the AWS acco
 
 ```terraform
 data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
 
 data "aws_iam_policy_document" "codeartifact_domain_policy" {
   statement {

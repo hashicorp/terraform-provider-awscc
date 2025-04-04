@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Create IoT Thing for Greengrass V2 Core Device
 resource "awscc_iot_thing" "greengrass_core" {
   thing_name = "sitewise-gateway-core-example-2024"

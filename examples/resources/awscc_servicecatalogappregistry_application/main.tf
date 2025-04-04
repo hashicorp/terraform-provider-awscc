@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Example of App Registry Application
 resource "awscc_servicecatalogappregistry_application" "example" {
   name        = "demo-application"
@@ -9,10 +6,10 @@ resource "awscc_servicecatalogappregistry_application" "example" {
   tags = [{
     key   = "Environment"
     value = "Production"
-  }, {
+    }, {
     key   = "Department"
     value = "Engineering"
-  }, {
+    }, {
     key   = "Modified By"
     value = "AWSCC"
   }]

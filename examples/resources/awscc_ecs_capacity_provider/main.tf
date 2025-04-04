@@ -1,8 +1,3 @@
-
-# Get AWS account and region information
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Find the most recent ECS-optimized AMI
 data "aws_ami" "ecs_ami" {
   most_recent = true

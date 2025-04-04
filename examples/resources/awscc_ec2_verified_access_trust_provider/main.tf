@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Create an OpenID Connect provider example
 resource "awscc_ec2_verified_access_trust_provider" "example" {
   trust_provider_type      = "user"

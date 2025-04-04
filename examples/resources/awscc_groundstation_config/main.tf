@@ -1,5 +1,4 @@
-# Get the current AWS region and account ID
-data "aws_region" "current" {}
+# Get the current AWS account ID
 data "aws_caller_identity" "current" {}
 
 # Create an S3 bucket for recording

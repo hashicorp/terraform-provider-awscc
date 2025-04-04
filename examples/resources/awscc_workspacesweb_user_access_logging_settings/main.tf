@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Kinesis stream for logging
 resource "aws_kinesis_stream" "logging" {
   name             = "amazon-workspaces-web-logging"

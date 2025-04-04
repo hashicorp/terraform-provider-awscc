@@ -20,7 +20,6 @@ Creates an EC2 Image Builder recipe based on Amazon Linux 2023 that includes Clo
 
 ```terraform
 # Data sources
-data "aws_caller_identity" "current" {}
 data "aws_region" "current" {}
 
 # Create an Image Recipe

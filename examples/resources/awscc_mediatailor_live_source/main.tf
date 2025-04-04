@@ -1,9 +1,3 @@
-# Get AWS account ID
-data "aws_caller_identity" "current" {}
-
-# Get AWS region
-data "aws_region" "current" {}
-
 # Create source location first
 resource "awscc_mediatailor_source_location" "example" {
   source_location_name = "example-source-location"

@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Example SLO for API Latency
 resource "awscc_applicationsignals_service_level_objective" "example" {
   name        = "example-api-latency-slo"

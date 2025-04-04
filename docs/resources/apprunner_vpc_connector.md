@@ -20,7 +20,6 @@ To create an App Runner VPC connector that enables private networking capabiliti
 
 ```terraform
 data "aws_region" "current" {}
-data "aws_caller_identity" "current" {}
 
 # VPC Resources
 resource "aws_vpc" "main" {

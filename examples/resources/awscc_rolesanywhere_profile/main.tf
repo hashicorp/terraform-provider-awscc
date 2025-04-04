@@ -1,8 +1,3 @@
-# Get AWS region and account info
-data "aws_region" "current" {}
-
-data "aws_caller_identity" "current" {}
-
 # Create IAM Role for RolesAnywhere to assume
 data "aws_iam_policy_document" "trust" {
   statement {

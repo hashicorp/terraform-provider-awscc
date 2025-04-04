@@ -1,9 +1,5 @@
-
 # Get current AWS region
 data "aws_region" "current" {}
-
-# Get current AWS account ID
-data "aws_caller_identity" "current" {}
 
 # Create SageMaker Model Package Group
 resource "awscc_sagemaker_model_package_group" "example" {

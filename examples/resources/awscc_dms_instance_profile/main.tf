@@ -1,7 +1,3 @@
-# Get current AWS region and account
-data "aws_region" "current" {}
-data "aws_caller_identity" "current" {}
-
 # Create the DMS service-linked role
 resource "awscc_iam_service_linked_role" "dms" {
   aws_service_name = "dms.amazonaws.com"

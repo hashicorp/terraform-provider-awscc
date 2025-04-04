@@ -1,9 +1,3 @@
-# Get current AWS region
-data "aws_region" "current" {}
-
-# Get current AWS account ID
-data "aws_caller_identity" "current" {}
-
 # Create a MemoryDB user
 resource "awscc_memorydb_user" "example" {
   user_name     = "example-user"

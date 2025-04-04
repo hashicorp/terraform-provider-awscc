@@ -1,5 +1,4 @@
 data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
 
 # Create the custom line item
 resource "awscc_billingconductor_custom_line_item" "example" {

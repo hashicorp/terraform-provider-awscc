@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Create a SageMaker Device
 resource "awscc_sagemaker_device" "example" {
   device_fleet_name = "my-device-fleet"

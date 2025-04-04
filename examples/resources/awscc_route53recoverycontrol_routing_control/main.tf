@@ -1,5 +1,3 @@
-
-
 # First create a cluster
 resource "awscc_route53recoverycontrol_cluster" "example" {
   name = "example-cluster"

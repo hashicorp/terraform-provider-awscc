@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Create an Amazon Connect instance first
 resource "awscc_connect_instance" "example" {
   attributes = {

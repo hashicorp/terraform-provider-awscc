@@ -1,6 +1,3 @@
-# Get current account info
-data "aws_caller_identity" "current" {}
-
 # Get current region name
 data "aws_region" "current" {}
 

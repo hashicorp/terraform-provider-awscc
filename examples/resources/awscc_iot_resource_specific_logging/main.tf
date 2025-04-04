@@ -1,7 +1,3 @@
-# Data source to get AWS account ID and region
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Create IAM role for IoT logging
 resource "awscc_iam_role" "iot_logging" {
   role_name = "iot-logging-role"

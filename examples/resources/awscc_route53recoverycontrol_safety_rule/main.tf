@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Create a cluster first
 resource "awscc_route53recoverycontrol_cluster" "example" {
   name = "example-cluster"

@@ -1,6 +1,3 @@
-# Get the current AWS region
-data "aws_region" "current" {}
-
 # Get current account ID
 data "aws_caller_identity" "current" {}
 

@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # First, we need a Connect instance
 resource "awscc_connect_instance" "example" {
   identity_management_type = "CONNECT_MANAGED"

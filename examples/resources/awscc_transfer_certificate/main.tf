@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Generate a self-signed certificate for testing
 resource "tls_private_key" "test" {
   algorithm = "RSA"

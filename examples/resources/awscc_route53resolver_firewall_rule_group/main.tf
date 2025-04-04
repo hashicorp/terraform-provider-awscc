@@ -1,9 +1,3 @@
-# Get current AWS region
-data "aws_region" "current" {}
-
-# Get current AWS account ID
-data "aws_caller_identity" "current" {}
-
 # Create a domain list first since it's required for the rules
 resource "awscc_route53resolver_firewall_domain_list" "example" {
   name = "example-domain-list"

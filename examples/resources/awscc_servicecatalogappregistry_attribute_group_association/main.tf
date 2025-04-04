@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Create the application
 resource "awscc_servicecatalogappregistry_application" "example" {
   name        = "example-application"

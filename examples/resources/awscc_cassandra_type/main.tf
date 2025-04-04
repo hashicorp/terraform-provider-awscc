@@ -1,4 +1,3 @@
-
 # Create a keyspace first
 resource "awscc_cassandra_keyspace" "example" {
   keyspace_name = "example_keyspace"

@@ -1,8 +1,3 @@
-# Get current region
-data "aws_region" "current" {}
-
-data "aws_caller_identity" "current" {}
-
 # Create a MemoryDB parameter group
 resource "awscc_memorydb_parameter_group" "example" {
   family               = "memorydb_redis7"

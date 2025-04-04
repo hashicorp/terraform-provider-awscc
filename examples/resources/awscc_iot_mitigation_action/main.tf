@@ -1,7 +1,3 @@
-# Get current AWS account ID and region
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Create IAM role for IoT mitigation action using awscc provider
 resource "awscc_iam_role" "iot_mitigation_role" {
   role_name = "iot-mitigation-action-role"

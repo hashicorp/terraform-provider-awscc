@@ -1,7 +1,3 @@
-# Data sources for AWS account ID and region
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Create Route53 Health Check
 resource "aws_route53_health_check" "example" {
   fqdn              = "example.com"

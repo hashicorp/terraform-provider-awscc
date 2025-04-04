@@ -22,9 +22,6 @@ Creates an AWS Clean Rooms membership with query logging enabled and configures 
 # Get current AWS account ID
 data "aws_caller_identity" "current" {}
 
-# Get current AWS region
-data "aws_region" "current" {}
-
 # First, we need to create a cleanrooms collaboration
 resource "awscc_cleanrooms_collaboration" "example" {
   name                 = "example-collaboration"

@@ -1,7 +1,3 @@
-# Get current AWS account ID and region
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Variable for rules package ARN
 variable "rules_package_arn" {
   description = "The ARN of the Inspector rules package to use for the assessment"

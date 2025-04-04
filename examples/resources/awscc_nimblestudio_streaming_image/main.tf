@@ -1,7 +1,3 @@
-
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Create a studio first
 resource "awscc_nimblestudio_studio" "example" {
   admin_role_arn = aws_iam_role.nimble_admin_role.arn

@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 resource "awscc_servicecatalogappregistry_attribute_group" "example" {
   name        = "example-attribute-group"
   description = "Example attribute group created via AWSCC provider"
@@ -14,7 +11,7 @@ resource "awscc_servicecatalogappregistry_attribute_group" "example" {
   tags = [{
     key   = "ModifiedBy"
     value = "AWSCC"
-  }, {
+    }, {
     key   = "Environment"
     value = "Example"
   }]

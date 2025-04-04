@@ -1,7 +1,3 @@
-# Data sources for AWS account and region
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Main IoT Thing Group
 resource "awscc_iot_thing_group" "example" {
   thing_group_name = "example-thing-group"

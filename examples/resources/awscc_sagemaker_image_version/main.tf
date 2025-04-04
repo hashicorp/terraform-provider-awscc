@@ -1,5 +1,4 @@
-# Data sources to get AWS account ID and region
-data "aws_caller_identity" "current" {}
+# Data sources to get AWS region
 data "aws_region" "current" {}
 
 # Create IAM role for SageMaker using AWSCC

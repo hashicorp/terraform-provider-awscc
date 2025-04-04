@@ -20,7 +20,6 @@ Creates a daily scheduled IoT audit that performs security checks including Cogn
 
 ```terraform
 data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
 
 # First, set up the IoT audit configuration
 resource "awscc_iot_account_audit_configuration" "config" {

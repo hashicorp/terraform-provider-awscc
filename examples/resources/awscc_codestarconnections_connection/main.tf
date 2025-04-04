@@ -1,7 +1,3 @@
-# Configure required data sources
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Create the CodeStar connection
 resource "awscc_codestarconnections_connection" "example" {
   connection_name = "github-connection-example"

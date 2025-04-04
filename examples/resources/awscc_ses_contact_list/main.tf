@@ -1,7 +1,3 @@
-# Get current region and account ID
-data "aws_region" "current" {}
-data "aws_caller_identity" "current" {}
-
 # Create a simple contact list with tags and topics
 resource "awscc_ses_contact_list" "example" {
   contact_list_name = "my-contact-list"

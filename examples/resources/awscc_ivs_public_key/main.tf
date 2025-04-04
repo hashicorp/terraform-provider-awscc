@@ -1,7 +1,3 @@
-# Data sources for dynamic values
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Create IVS Public Key resource
 resource "awscc_ivs_public_key" "example" {
   name = "example-ivs-public-key"

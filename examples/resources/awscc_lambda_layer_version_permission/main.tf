@@ -1,7 +1,3 @@
-# Data sources for region and account details
-data "aws_region" "current" {}
-data "aws_caller_identity" "current" {}
-
 resource "random_string" "suffix" {
   length  = 8
   special = false

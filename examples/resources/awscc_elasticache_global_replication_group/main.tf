@@ -1,5 +1,4 @@
-# Data sources for AWS region and account ID
-data "aws_caller_identity" "current" {}
+# Data sources for AWS region
 data "aws_region" "current" {}
 
 # Create a primary replication group in one region

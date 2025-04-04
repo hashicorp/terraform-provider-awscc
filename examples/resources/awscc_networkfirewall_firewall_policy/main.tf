@@ -1,7 +1,3 @@
-# Data sources for AWS account and region
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Network Firewall Policy
 resource "awscc_networkfirewall_firewall_policy" "example" {
   firewall_policy_name = "example-policy"
