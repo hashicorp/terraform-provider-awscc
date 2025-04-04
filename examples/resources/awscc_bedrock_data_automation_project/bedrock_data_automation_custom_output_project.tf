@@ -4,11 +4,11 @@ resource "awscc_bedrock_data_automation_project" "example" {
   standard_output_configuration = {
     document = {
       output_format = {
-          text_format = {
-              types = ["PLAIN_TEXT"]
-          }
-          additional_file_format = {
-              state = "DISABLED"
+        text_format = {
+          types = ["PLAIN_TEXT"]
+        }
+        additional_file_format = {
+          state = "DISABLED"
         }
       }
     }

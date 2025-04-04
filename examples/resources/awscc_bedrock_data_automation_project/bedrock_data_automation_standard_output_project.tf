@@ -4,22 +4,22 @@ resource "awscc_bedrock_data_automation_project" "example" {
   standard_output_configuration = {
     document = {
       extraction = {
-          granularity = {
-              types = ["DOCUMENT"]
-          }
-          bounding_box = {
-              state = "ENABLED"
-          }
+        granularity = {
+          types = ["DOCUMENT"]
+        }
+        bounding_box = {
+          state = "ENABLED"
+        }
       }
       generative_field = {
-          state = "DISABLED"
+        state = "DISABLED"
       }
       output_format = {
-          text_format = {
-              types = ["PLAIN_TEXT"]
-          }
-          additional_file_format = {
-              state = "DISABLED"
+        text_format = {
+          types = ["PLAIN_TEXT"]
+        }
+        additional_file_format = {
+          state = "DISABLED"
         }
       }
     }
