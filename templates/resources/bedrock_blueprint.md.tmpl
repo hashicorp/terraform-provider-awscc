@@ -13,7 +13,7 @@ description: |-
 
 ### Custom Blueprints for documents
 Create a custom blueprint for intelligent document processing with Bedrock Data Automation
-{{ tffile (printf "examples/resources/%s/first_example.tf" .Name)}}
+{{ tffile (printf "examples/resources/%s/bedrock_document_blueprint.tf" .Name)}}
 
 {{ .SchemaMarkdown | trimspace }}
 {{- if .HasImport }}
