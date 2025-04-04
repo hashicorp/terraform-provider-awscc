@@ -15,10 +15,6 @@ description: |-
 Create a custom blueprint for intelligent document processing with Bedrock Data Automation
 {{ tffile (printf "examples/resources/%s/first_example.tf" .Name)}}
 
-### Custom Blueprints for images
-Create a custom blueprint to define specific fields to identify from images with Bedrock Data Automation
-{{ tffile (printf "examples/resources/%s/second_example.tf" .Name)}}
-
 {{ .SchemaMarkdown | trimspace }}
 {{- if .HasImport }}
 
