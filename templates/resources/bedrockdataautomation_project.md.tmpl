@@ -12,11 +12,11 @@ description: |-
 ## Example Usage
 
 ### Standard output
-Create a Bedrock Data Automation project using standard outputs
+Create a Bedrock Data Automation project using standard outputs using the document modality
 {{ tffile (printf "examples/resources/%s/standard_output_project.tf" .Name)}}
 
 ### Custom output
-Create a Bedrock Data Automation project using custom outputs
+Create a Bedrock Data Automation project using custom outputs using the document modality
 {{ tffile (printf "examples/resources/%s/custom_output_project.tf" .Name)}}
 
 {{ .SchemaMarkdown | trimspace }}
