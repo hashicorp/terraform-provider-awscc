@@ -1335,7 +1335,7 @@ func stringValidators(path []string, property *cfschema.Property) (Features, []s
 		fprintf(w, "stringvalidator.OneOf(\n")
 		for _, enum := range property.Enum {
 			fprintf(w, "\"")
-			fprintf(w, enum.(string))
+			fprintf(w, "%s", enum.(string))
 			fprintf(w, "\",\n")
 		}
 		fprintf(w, ")")
