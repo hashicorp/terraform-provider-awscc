@@ -1,9 +1,6 @@
 # Get current AWS account ID
 data "aws_caller_identity" "current" {}
 
-# Get current AWS region
-data "aws_region" "current" {}
-
 # S3 bucket for the crawler target
 resource "aws_s3_bucket" "crawler_target" {
   bucket = "glue-crawler-example-${data.aws_caller_identity.current.account_id}"

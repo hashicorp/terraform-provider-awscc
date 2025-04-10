@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Use data source to get default VPC
 data "aws_vpc" "default" {
   default = true

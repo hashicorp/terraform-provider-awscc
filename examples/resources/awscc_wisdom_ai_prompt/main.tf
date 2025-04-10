@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # First we need to create a Wisdom Assistant
 resource "awscc_wisdom_assistant" "example" {
   name        = "ExampleAssistant"

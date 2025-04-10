@@ -1,6 +1,3 @@
-# Get current AWS region
-data "aws_region" "current" {}
-
 # Example AppConfig Deployment Strategy
 resource "awscc_appconfig_deployment_strategy" "example" {
   name                           = "example-deployment-strategy"

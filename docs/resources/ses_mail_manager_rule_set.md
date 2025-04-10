@@ -20,7 +20,6 @@ Creates an SES Mail Manager rule set that archives incoming emails from @example
 
 ```terraform
 data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
 
 # S3 bucket for email archival
 resource "awscc_s3_bucket" "email_archive" {

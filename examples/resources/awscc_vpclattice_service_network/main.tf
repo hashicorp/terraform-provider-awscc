@@ -1,9 +1,3 @@
-# Get current AWS account info
-data "aws_caller_identity" "current" {}
-
-# Get current region
-data "aws_region" "current" {}
-
 # Create a VPC Lattice Service Network
 resource "awscc_vpclattice_service_network" "example" {
   name      = "example-service-network"

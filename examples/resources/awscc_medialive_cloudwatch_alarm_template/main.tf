@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 resource "awscc_medialive_cloudwatch_alarm_template_group" "example" {
   name        = "TEST_GROUP"
   description = "Test alarm template group"

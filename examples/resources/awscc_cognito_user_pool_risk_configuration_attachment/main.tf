@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Create a Cognito User Pool
 resource "aws_cognito_user_pool" "example" {
   name = "example-user-pool"

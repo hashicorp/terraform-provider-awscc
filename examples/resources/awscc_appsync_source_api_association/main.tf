@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # IAM role for AppSync merged API
 resource "awscc_iam_role" "appsync_merged" {
   role_name = "appsync-merged-api-role"

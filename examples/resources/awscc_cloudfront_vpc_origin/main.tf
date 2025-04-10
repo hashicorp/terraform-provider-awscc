@@ -1,6 +1,5 @@
 # Get AWS region and account details
 data "aws_region" "current" {}
-data "aws_caller_identity" "current" {}
 
 # Create VPC for the ALB
 resource "awscc_ec2_vpc" "example" {

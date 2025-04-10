@@ -1,8 +1,3 @@
-# Example of AWS Batch Scheduling Policy
-
-data "aws_region" "current" {}
-data "aws_caller_identity" "current" {}
-
 resource "awscc_batch_scheduling_policy" "example" {
   name = "example-scheduling-policy"
 

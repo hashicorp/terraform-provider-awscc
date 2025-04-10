@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Event buses for routing configuration
 resource "awscc_events_event_bus" "primary" {
   name = "primary-event-bus"

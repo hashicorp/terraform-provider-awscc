@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Use existing GuardDuty detector
 data "aws_guardduty_detector" "main" {}
 

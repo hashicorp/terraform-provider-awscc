@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Create VPC
 resource "awscc_ec2_vpc" "example" {
   cidr_block = "10.0.0.0/16"
@@ -46,7 +43,7 @@ resource "awscc_ec2_subnet" "example_2" {
 # Create Security Group
 resource "awscc_ec2_security_group" "example" {
   group_description = "Security group for Workspaces Web Network Settings"
-  vpc_id           = awscc_ec2_vpc.example.id
+  vpc_id            = awscc_ec2_vpc.example.id
   tags = [{
     key   = "Name"
     value = "workspaces-web-example"

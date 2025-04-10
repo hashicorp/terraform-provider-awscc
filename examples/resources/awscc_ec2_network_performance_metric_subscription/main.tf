@@ -1,6 +1,3 @@
-data "aws_region" "current" {}
-data "aws_caller_identity" "current" {}
-
 resource "awscc_ec2_network_performance_metric_subscription" "example" {
   source      = "us-east-1" # Source region
   destination = "us-west-2" # Destination region (must be different from source)

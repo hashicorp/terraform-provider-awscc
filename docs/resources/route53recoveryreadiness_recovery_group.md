@@ -22,9 +22,6 @@ Creates a Route53 Recovery Readiness Recovery Group that includes a cell resourc
 # Get current account information
 data "aws_caller_identity" "current" {}
 
-# Get current region information
-data "aws_region" "current" {}
-
 # First create a cell that we'll reference in the recovery group
 resource "awscc_route53recoveryreadiness_cell" "example" {
   cell_name = "example-cell-${data.aws_caller_identity.current.account_id}"

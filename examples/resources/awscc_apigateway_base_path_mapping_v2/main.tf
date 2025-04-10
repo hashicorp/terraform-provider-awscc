@@ -1,7 +1,3 @@
-# Get current AWS region and account details
-data "aws_region" "current" {}
-data "aws_caller_identity" "current" {}
-
 # Create ACM certificate for the domain
 resource "aws_acm_certificate" "example" {
   domain_name       = "example.com"
@@ -48,7 +44,7 @@ resource "aws_api_gateway_integration" "example" {
 
 # API Gateway Deployment using AWS provider
 resource "aws_api_gateway_deployment" "example" {
-  
+
   rest_api_id = awscc_apigateway_rest_api.example.id
 
   # Make sure we have method and integration before deploying

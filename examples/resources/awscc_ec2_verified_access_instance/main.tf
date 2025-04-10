@@ -1,7 +1,3 @@
-data "aws_caller_identity" "current" {}
-
-data "aws_region" "current" {}
-
 # Define a log group for CloudWatch Logs
 resource "awscc_logs_log_group" "vac_logs" {
   log_group_name    = "/aws/verified-access/instance-logs"

@@ -1,6 +1,5 @@
-# Get current AWS region and account ID
+# Get current AWS region
 data "aws_region" "current" {}
-data "aws_caller_identity" "current" {}
 
 # Create VPC
 resource "awscc_ec2_vpc" "example" {

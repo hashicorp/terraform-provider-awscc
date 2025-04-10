@@ -1,6 +1,5 @@
-# Get current AWS account ID and region
+# Get current AWS account ID
 data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
 
 # Create KMS key for FinSpace environment
 resource "awscc_kms_key" "finspace" {

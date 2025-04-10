@@ -1,8 +1,3 @@
-
-# Get current AWS account ID and region
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Create a user settings configuration
 resource "awscc_workspacesweb_user_settings" "example" {
   # Required settings

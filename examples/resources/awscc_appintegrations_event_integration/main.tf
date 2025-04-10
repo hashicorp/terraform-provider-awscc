@@ -1,10 +1,3 @@
-
-# Get current AWS region
-data "aws_region" "current" {}
-
-# Get current AWS account ID
-data "aws_caller_identity" "current" {}
-
 # Example of awscc_appintegrations_event_integration resource
 resource "awscc_appintegrations_event_integration" "example" {
   name             = "example-event-integration"

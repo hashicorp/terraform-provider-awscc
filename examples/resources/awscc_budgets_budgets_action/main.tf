@@ -1,5 +1,4 @@
 data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
 
 # Create a budget first
 resource "aws_budgets_budget" "example" {

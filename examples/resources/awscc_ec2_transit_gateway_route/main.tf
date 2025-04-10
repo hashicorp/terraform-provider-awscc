@@ -1,7 +1,3 @@
-# Get current AWS region and account details
-data "aws_region" "current" {}
-data "aws_caller_identity" "current" {}
-
 # Create Transit Gateway
 resource "awscc_ec2_transit_gateway" "example" {
   description = "Example Transit Gateway for Route Testing"

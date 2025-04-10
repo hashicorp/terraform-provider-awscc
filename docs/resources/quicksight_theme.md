@@ -22,9 +22,6 @@ Creates a QuickSight theme with customized color palettes, typography, and sheet
 # Get current account ID
 data "aws_caller_identity" "current" {}
 
-# Get current region
-data "aws_region" "current" {}
-
 # Create QuickSight theme
 resource "awscc_quicksight_theme" "example" {
   aws_account_id = data.aws_caller_identity.current.account_id

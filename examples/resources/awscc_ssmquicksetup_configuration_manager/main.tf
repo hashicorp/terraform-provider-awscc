@@ -1,9 +1,6 @@
 # Get current AWS account ID
 data "aws_caller_identity" "current" {}
 
-# Get current AWS region
-data "aws_region" "current" {}
-
 # Data source for SSM policy document
 data "aws_iam_policy_document" "ssm_managed_instance" {
   statement {
@@ -58,9 +55,9 @@ resource "awscc_ssmquicksetup_configuration_manager" "example" {
   configuration_definitions = [{
     name = "SSM-Managed-Instance"
     parameters = {
-      "TargetAccounts"      = jsonencode([data.aws_caller_identity.current.account_id])
-      "SsmRole"             = "service-role/AWSSystemsManagerFullAccess"
-      "ScheduleExpression"  = "rate(1 hour)"
+      "TargetAccounts"     = jsonencode([data.aws_caller_identity.current.account_id])
+      "SsmRole"            = "service-role/AWSSystemsManagerFullAccess"
+      "ScheduleExpression" = "rate(1 hour)"
     }
     type = "SSM"
   }]

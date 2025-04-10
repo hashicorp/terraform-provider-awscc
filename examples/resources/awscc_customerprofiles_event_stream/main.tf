@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Create a Kinesis stream as the destination
 resource "aws_kinesis_stream" "profile_events" {
   name             = "customer-profile-events"

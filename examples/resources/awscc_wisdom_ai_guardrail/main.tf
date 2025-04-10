@@ -1,7 +1,3 @@
-# Get current AWS region and account ID
-data "aws_region" "current" {}
-data "aws_caller_identity" "current" {}
-
 # Create a Wisdom Assistant first (required for AI Guardrail)
 resource "awscc_wisdom_assistant" "example" {
   name        = "example-assistant-${formatdate("YYYYMMDD-hhmmss", timestamp())}"

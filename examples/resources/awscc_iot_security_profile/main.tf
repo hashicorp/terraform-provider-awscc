@@ -1,9 +1,3 @@
-# Get current AWS region
-data "aws_region" "current" {}
-
-# Get current AWS account ID
-data "aws_caller_identity" "current" {}
-
 # SNS Topic for alerts
 resource "awscc_sns_topic" "iot_alerts" {
   topic_name = "iot-security-alerts"

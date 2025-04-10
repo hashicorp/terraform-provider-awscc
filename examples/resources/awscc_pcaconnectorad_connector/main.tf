@@ -1,6 +1,5 @@
-# Get current region and account ID
+# Get current region
 data "aws_region" "current" {}
-data "aws_caller_identity" "current" {}
 
 # Create VPC for Directory Service
 resource "awscc_ec2_vpc" "main" {
@@ -99,9 +98,9 @@ resource "awscc_pcaconnectorad_connector" "example" {
   tags = [{
     key   = "Environment"
     value = "test"
-  },
-  {
-    key   = "Project"
-    value = "pca-connector-example"
+    },
+    {
+      key   = "Project"
+      value = "pca-connector-example"
   }]
 }

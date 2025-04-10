@@ -1,9 +1,6 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Create CloudWatch Log Group as destination
 resource "awscc_logs_log_group" "resolver_query_logs" {
-  log_group_name = "/aws/route53resolver/query-logs"
+  log_group_name    = "/aws/route53resolver/query-logs"
   retention_in_days = 14
 
   tags = [{

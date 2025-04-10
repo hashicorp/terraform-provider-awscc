@@ -1,7 +1,3 @@
-# Get data about current account and region
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Create IAM role for FUOTA task
 data "aws_iam_policy_document" "fuota_assume_role" {
   statement {

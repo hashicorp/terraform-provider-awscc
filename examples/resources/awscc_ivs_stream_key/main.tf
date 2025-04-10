@@ -1,7 +1,3 @@
-# Get current AWS region and account details
-data "aws_region" "current" {}
-data "aws_caller_identity" "current" {}
-
 # First create an IVS Channel
 resource "awscc_ivs_channel" "example" {
   name = "example-channel"

@@ -20,7 +20,6 @@ Creates a custom line item with a flat fee of $100.00 to be applied to a specifi
 
 ```terraform
 data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
 
 # Create the custom line item
 resource "awscc_billingconductor_custom_line_item" "example" {

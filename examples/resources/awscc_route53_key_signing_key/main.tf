@@ -1,5 +1,4 @@
 data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
 
 # Create a hosted zone
 resource "awscc_route53_hosted_zone" "example" {

@@ -1,9 +1,6 @@
 # Get current AWS account ID
 data "aws_caller_identity" "current" {}
 
-# Get current AWS region
-data "aws_region" "current" {}
-
 # KMS key for SES Mail Manager Archive
 resource "awscc_kms_key" "ses_archive" {
   description = "KMS key for SES Mail Manager Archive"

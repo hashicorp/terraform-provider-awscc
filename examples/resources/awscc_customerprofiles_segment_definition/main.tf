@@ -1,7 +1,3 @@
-# Data sources for AWS account ID and region
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Create a Customer Profiles Domain first (required for the segment definition)
 resource "awscc_customerprofiles_domain" "example" {
   domain_name             = "example-domain"

@@ -22,9 +22,6 @@ Creates a SageMaker Model Package in a Model Package Group with TensorFlow infer
 # Get current AWS region
 data "aws_region" "current" {}
 
-# Get current AWS account ID
-data "aws_caller_identity" "current" {}
-
 # Create SageMaker Model Package Group
 resource "awscc_sagemaker_model_package_group" "example" {
   model_package_group_name        = "example-model-package-group"

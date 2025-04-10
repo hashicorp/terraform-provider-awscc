@@ -1,5 +1,4 @@
 data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
 
 # Create ACM certificate for the endpoint
 resource "aws_acm_certificate" "cert" {

@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Create CloudWatch Log Group for IVS Chat logging
 resource "aws_cloudwatch_log_group" "ivs_chat_logs" {
   name              = "/aws/ivschat/example-logs"

@@ -22,9 +22,6 @@ Creates an AWS Invoice Unit with specified name, description, and invoice receiv
 # Get current AWS account ID
 data "aws_caller_identity" "current" {}
 
-# Get current AWS region
-data "aws_region" "current" {}
-
 # Example Invoice Unit
 resource "awscc_invoicing_invoice_unit" "example" {
   name             = "example-invoice-unit"

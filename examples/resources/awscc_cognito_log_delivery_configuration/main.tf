@@ -1,6 +1,3 @@
-data "aws_region" "current" {}
-data "aws_caller_identity" "current" {}
-
 # Create a Cognito User Pool (using AWS provider as AWSCC version not available)
 resource "aws_cognito_user_pool" "example" {
   name = "example-user-pool"

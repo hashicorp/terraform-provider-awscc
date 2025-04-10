@@ -22,9 +22,6 @@ Creates a MediaTailor VOD (Video on Demand) source with HLS package configuratio
 # Get current region
 data "aws_region" "current" {}
 
-# Get current account ID
-data "aws_caller_identity" "current" {}
-
 # Create the MediaTailor source location first (required parent resource)
 resource "awscc_mediatailor_source_location" "example" {
   source_location_name = "example-source-location"

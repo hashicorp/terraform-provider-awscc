@@ -1,7 +1,3 @@
-# Get current AWS account ID and region
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Create the Signer signing profile
 resource "awscc_signer_signing_profile" "example" {
   platform_id = "AWSLambda-SHA384-ECDSA"

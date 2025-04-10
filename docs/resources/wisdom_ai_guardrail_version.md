@@ -21,8 +21,6 @@ To create a Wisdom AI Guardrail Version, first create a Wisdom Assistant and AI 
 ```terraform
 data "aws_caller_identity" "current" {}
 
-data "aws_region" "current" {}
-
 # First create a Wisdom Assistant
 resource "awscc_wisdom_assistant" "example" {
   name = "example-assistant-${data.aws_caller_identity.current.account_id}"

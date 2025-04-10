@@ -1,4 +1,3 @@
-data "aws_caller_identity" "current" {}
 data "aws_region" "current" {}
 
 # VPC and networking components
@@ -39,7 +38,7 @@ resource "awscc_ec2_subnet" "pcs" {
 
 resource "awscc_ec2_route_table" "pcs" {
   vpc_id = awscc_ec2_vpc.pcs.id
-  
+
   tags = [{
     key   = "Name"
     value = "pcs-cluster-rt"
@@ -49,7 +48,7 @@ resource "awscc_ec2_route_table" "pcs" {
 resource "awscc_ec2_route" "internet" {
   route_table_id         = awscc_ec2_route_table.pcs.id
   destination_cidr_block = "0.0.0.0/0"
-  gateway_id            = awscc_ec2_internet_gateway.pcs.id
+  gateway_id             = awscc_ec2_internet_gateway.pcs.id
 }
 
 resource "awscc_ec2_subnet_route_table_association" "pcs" {
@@ -59,7 +58,7 @@ resource "awscc_ec2_subnet_route_table_association" "pcs" {
 
 resource "awscc_ec2_security_group" "pcs" {
   group_description = "Security group for PCS cluster"
-  vpc_id           = awscc_ec2_vpc.pcs.id
+  vpc_id            = awscc_ec2_vpc.pcs.id
 
   security_group_ingress = [{
     ip_protocol = "tcp"

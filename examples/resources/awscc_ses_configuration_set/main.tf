@@ -1,7 +1,3 @@
-# Get current account and region info
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Create SES configuration set
 resource "awscc_ses_configuration_set" "example" {
   name = "example-config-set"

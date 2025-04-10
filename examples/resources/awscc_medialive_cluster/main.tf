@@ -1,9 +1,3 @@
-# Get current AWS account ID
-data "aws_caller_identity" "current" {}
-
-# Get current AWS region
-data "aws_region" "current" {}
-
 # Create IAM role for MediaLive Cluster
 data "aws_iam_policy_document" "assume_role" {
   statement {

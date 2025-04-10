@@ -20,7 +20,6 @@ Creates a Route53 DNSSEC key signing key (KSK) with an associated KMS key, enabl
 
 ```terraform
 data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
 
 # Create a hosted zone
 resource "awscc_route53_hosted_zone" "example" {

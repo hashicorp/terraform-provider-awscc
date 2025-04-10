@@ -1,9 +1,6 @@
 # Current AWS account data source
 data "aws_caller_identity" "current" {}
 
-# Current AWS region data source
-data "aws_region" "current" {}
-
 # Set up Lake Formation resources
 resource "aws_lakeformation_data_lake_settings" "example" {
   admins = [data.aws_caller_identity.current.arn]

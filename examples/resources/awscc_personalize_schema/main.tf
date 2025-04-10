@@ -1,7 +1,3 @@
-data "aws_caller_identity" "current" {}
-
-data "aws_region" "current" {}
-
 # Example Personalize Schema for user interactions
 resource "awscc_personalize_schema" "example" {
   name = "example-user-interactions-schema"

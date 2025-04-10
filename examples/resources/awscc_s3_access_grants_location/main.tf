@@ -1,11 +1,10 @@
-# Get current AWS account ID and region
+# Get current AWS account ID
 data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
 
 # Create S3 bucket for access grants location
 resource "awscc_s3_bucket" "example" {
   bucket_name = "example-access-grants-bucket-${data.aws_caller_identity.current.account_id}"
-  
+
   tags = [{
     key   = "Modified By"
     value = "AWSCC"

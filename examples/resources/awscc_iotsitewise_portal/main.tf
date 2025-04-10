@@ -1,9 +1,3 @@
-# Get current AWS account ID
-data "aws_caller_identity" "current" {}
-
-# Get current AWS region
-data "aws_region" "current" {}
-
 # Create IAM role for the portal
 data "aws_iam_policy_document" "portal_assume_role" {
   statement {

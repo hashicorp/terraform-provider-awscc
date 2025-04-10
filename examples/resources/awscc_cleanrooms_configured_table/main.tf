@@ -1,5 +1,4 @@
 data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
 
 # First create a Glue database and table for the example
 resource "awscc_glue_database" "example" {

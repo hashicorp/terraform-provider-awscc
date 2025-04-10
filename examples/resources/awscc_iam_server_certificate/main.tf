@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Generate a private key for demonstration
 resource "tls_private_key" "example" {
   algorithm = "RSA"

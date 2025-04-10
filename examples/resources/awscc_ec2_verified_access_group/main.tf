@@ -1,9 +1,3 @@
-# Get current AWS account ID
-data "aws_caller_identity" "current" {}
-
-# Get current AWS region
-data "aws_region" "current" {}
-
 # Create Verified Access Instance first (required for the group)
 resource "awscc_ec2_verified_access_instance" "example" {
   description = "Example Verified Access Instance"

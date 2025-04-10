@@ -1,9 +1,3 @@
-# Get the current region
-data "aws_region" "current" {}
-
-# Get the current account ID
-data "aws_caller_identity" "current" {}
-
 # Create the IAM role for MediaPackage SPEKE
 data "aws_iam_policy_document" "mediapackage_speke_assume_role" {
   statement {
