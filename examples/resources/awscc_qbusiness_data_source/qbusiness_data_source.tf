@@ -67,7 +67,7 @@ resource "awscc_iam_role" "example" {
 
 resource "awscc_iam_role_policy" "example" {
   policy_name = "sample_iam_role_policy"
-  role_name   = awscc_iam_role.ds.id
+  role_name   = awscc_iam_role.example.id
 
   policy_document = jsonencode({
     Version = "2012-10-17"
