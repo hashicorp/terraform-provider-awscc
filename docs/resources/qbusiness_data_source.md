@@ -14,11 +14,11 @@ Definition of AWS::QBusiness::DataSource Resource Type
 ### QBusiness data source of type S3 with the IAM role specifications for S3 access.
 
 ```terraform
-resource "awscc_qbusiness_data_source" "exaple" {
+resource "awscc_qbusiness_data_source" "example" {
   application_id = awscc_qbusiness_application.example.application_id
   display_name   = "example_q_data_source"
   index_id       = awscc_qbusiness_index.example.index_id
-  role_arn       = awscc_iam_role.ds.arn
+  role_arn       = awscc_iam_role.example.arn
   configuration = jsonencode(
     {
       type     = "S3"
