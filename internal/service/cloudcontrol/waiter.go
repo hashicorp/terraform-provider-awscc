@@ -12,6 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
+	"github.com/google/uuid"
 )
 
 // RetryGetResourceRequestStatus returns a custom retryable function for the GetResourceRequestStatus operation.
@@ -35,7 +36,7 @@ func RetryGetResourceRequestStatus(pProgressEvent **types.ProgressEvent, cfClien
 
 				// Attempt to retrieve hook results
 				hookResultsMsg := ""
-				if progressEvent.StatusMessage != nil {
+				if isHookFailure(progressEvent.StatusMessage) {
 					hookResults, hookErr := fetchHookResults(ctx, cfClient, aws.ToString(progressEvent.StatusMessage))
 					if hookErr == nil && hookResults != "" {
 						hookResultsMsg = fmt.Sprintf(" Hook results: \n%s", hookResults)
@@ -48,6 +49,11 @@ func RetryGetResourceRequestStatus(pProgressEvent **types.ProgressEvent, cfClien
 		}
 		return true, err
 	}
+}
+
+func isHookFailure(statusMessage *string) bool {
+	err := uuid.Validate(*statusMessage)
+	return err == nil
 }
 
 func fetchHookResults(ctx context.Context, cfClient *cloudformation.Client, hookRequestToken string) (string, error) {
