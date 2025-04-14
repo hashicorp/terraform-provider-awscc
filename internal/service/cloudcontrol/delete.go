@@ -41,7 +41,7 @@ func DeleteResource(ctx context.Context, conn *cloudcontrol.Client, roleARN, typ
 	}
 
 	waiter := cloudcontrol.NewResourceRequestSuccessWaiter(conn, func(o *cloudcontrol.ResourceRequestSuccessWaiterOptions) {
-		o.Retryable = RetryGetResourceRequestStatus(nil)
+		o.Retryable = RetryGetResourceRequestStatus(nil, nil)
 	})
 
 	err = waiter.Wait(ctx, &cloudcontrol.GetResourceRequestStatusInput{RequestToken: output.ProgressEvent.RequestToken}, maxWaitTime)

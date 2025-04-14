@@ -345,7 +345,7 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 	traceEntry(ctx, "Resource.Create")
 
 	conn := r.provider.CloudControlAPIClient(ctx)
-
+	cfClient := r.provider.CloudFormationClient(ctx)
 	tflog.Debug(ctx, "Request.Plan.Raw", map[string]interface{}{
 		"value": hclog.Fmt("%v", request.Plan.Raw),
 	})
@@ -389,7 +389,7 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 
 	var progressEvent *cctypes.ProgressEvent
 	waiter := cloudcontrol.NewResourceRequestSuccessWaiter(conn, func(o *cloudcontrol.ResourceRequestSuccessWaiterOptions) {
-		o.Retryable = tfcloudcontrol.RetryGetResourceRequestStatus(&progressEvent)
+		o.Retryable = tfcloudcontrol.RetryGetResourceRequestStatus(&progressEvent, cfClient)
 	})
 
 	err = waiter.Wait(ctx, &cloudcontrol.GetResourceRequestStatusInput{RequestToken: output.ProgressEvent.RequestToken}, r.createTimeout)
@@ -516,6 +516,7 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 	traceEntry(ctx, "Resource.Update")
 
 	conn := r.provider.CloudControlAPIClient(ctx)
+	cfClient := r.provider.CloudFormationClient(ctx)
 
 	currentState := &request.State
 	id, err := r.getId(ctx, currentState)
@@ -613,7 +614,7 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 	}
 
 	waiter := cloudcontrol.NewResourceRequestSuccessWaiter(conn, func(o *cloudcontrol.ResourceRequestSuccessWaiterOptions) {
-		o.Retryable = tfcloudcontrol.RetryGetResourceRequestStatus(nil)
+		o.Retryable = tfcloudcontrol.RetryGetResourceRequestStatus(nil, cfClient)
 	})
 
 	err = waiter.Wait(ctx, &cloudcontrol.GetResourceRequestStatusInput{RequestToken: output.ProgressEvent.RequestToken}, r.updateTimeout)

@@ -7,6 +7,7 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
 )
 
 // Provider is the interface implemented by AWS Cloud Control API client providers.
@@ -14,6 +15,9 @@ import (
 type Provider interface {
 	// CloudControlApiClient returns an AWS Cloud Control API client.
 	CloudControlAPIClient(context.Context) *cloudcontrol.Client
+
+	// CloudControlApiClient returns an AWS Cloud Formation client.
+	CloudFormationClient(context.Context) *cloudformation.Client
 
 	// Region returns an AWS Cloud Control API client's region
 	Region(ctx context.Context) string
