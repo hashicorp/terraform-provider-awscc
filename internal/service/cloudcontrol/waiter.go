@@ -32,21 +32,22 @@ func RetryGetResourceRequestStatus(pProgressEvent **types.ProgressEvent) func(co
 					return false, nil
 				}
 
+				statusMessage := aws.ToString(progressEvent.StatusMessage)
+
 				// Attempt to retrieve hook results
-				hookResultsMsg := ""
 				if output.HooksProgressEvent != nil {
 					var details []string
 					for _, hook := range output.HooksProgressEvent {
-						details = append(details, fmt.Sprintf("StatusReason: %s", aws.ToString(hook.HookStatusMessage)))
+						if *hook.HookStatus == "HOOK_COMPLETE_FAILED" {
+							details = append(details, fmt.Sprintf("Reason: %s", aws.ToString(hook.HookStatusMessage)))
+						}
 					}
 					hookResults := strings.Join(details, "\n")
 					if hookResults != "" {
-						hookResultsMsg = fmt.Sprintf(" Hook results: \n%s", hookResults)
+						statusMessage = fmt.Sprintf("Hook invocation failed: \n%s", hookResults)
 					}
-					return false, fmt.Errorf("%s", hookResultsMsg)
 				}
-
-				return false, fmt.Errorf("waiter state transitioned to %s. StatusMessage: %s. ErrorCode: %s", value, aws.ToString(progressEvent.StatusMessage), progressEvent.ErrorCode)
+				return false, fmt.Errorf("waiter state transitioned to %s. StatusMessage: %s. ErrorCode: %s", value, statusMessage, progressEvent.ErrorCode)
 			}
 		}
 		return true, err
