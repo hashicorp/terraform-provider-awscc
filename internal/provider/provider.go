@@ -10,7 +10,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
-	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
 	awsbase "github.com/hashicorp/aws-sdk-go-base/v2"
 	basediag "github.com/hashicorp/aws-sdk-go-base/v2/diag"
 	baselogging "github.com/hashicorp/aws-sdk-go-base/v2/logging"
@@ -37,7 +36,6 @@ const (
 // is passed to each resource and data source in their Configure methods.
 type providerData struct {
 	ccAPIClient *cloudcontrol.Client
-	cfClient    *cloudformation.Client
 	logger      baselogging.Logger
 	region      string
 	roleARN     string
@@ -45,10 +43,6 @@ type providerData struct {
 
 func (p *providerData) CloudControlAPIClient(_ context.Context) *cloudcontrol.Client {
 	return p.ccAPIClient
-}
-
-func (p *providerData) CloudFormationClient(_ context.Context) *cloudformation.Client {
-	return p.cfClient
 }
 
 func (p *providerData) Region(_ context.Context) string {
@@ -563,11 +557,8 @@ func newProviderData(ctx context.Context, c *configModel) (*providerData, diag.D
 		}
 	})
 
-	cfClient := cloudformation.NewFromConfig(cfg)
-
 	providerData := &providerData{
 		ccAPIClient: ccAPIClient,
-		cfClient:    cfClient,
 		logger:      logger,
 		region:      cfg.Region,
 		roleARN:     c.RoleARN.ValueString(),
