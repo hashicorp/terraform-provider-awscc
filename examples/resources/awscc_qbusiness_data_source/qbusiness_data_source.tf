@@ -1,8 +1,8 @@
-resource "awscc_qbusiness_data_source" "exaple" {
+resource "awscc_qbusiness_data_source" "example" {
   application_id = awscc_qbusiness_application.example.application_id
   display_name   = "example_q_data_source"
   index_id       = awscc_qbusiness_index.example.index_id
-  role_arn       = awscc_iam_role.ds.arn
+  role_arn       = awscc_iam_role.example.arn
   configuration = jsonencode(
     {
       type     = "S3"
@@ -67,7 +67,7 @@ resource "awscc_iam_role" "example" {
 
 resource "awscc_iam_role_policy" "example" {
   policy_name = "sample_iam_role_policy"
-  role_name   = awscc_iam_role.ds.id
+  role_name   = awscc_iam_role.example.id
 
   policy_document = jsonencode({
     Version = "2012-10-17"

@@ -15,6 +15,10 @@ description: |-
 
 {{ tffile (printf "examples/resources/%s/qbusiness_data_source.tf" .Name)}}
 
+### QBusiness data source of type WebCrawler
+
+{{ tffile (printf "examples/resources/%s/qbusiness_data_source_webcrawl.tf" .Name)}}
+
 {{ .SchemaMarkdown | trimspace }}
 {{- if .HasImport }}
 
