@@ -9,10 +9,6 @@ data "aws_ami" "amazon_linux" {
   }
 }
 
-# Get current region and account ID
-data "aws_region" "current" {}
-data "aws_caller_identity" "current" {}
-
 # Create a VPC and subnet for the spot fleet instances
 resource "awscc_ec2_vpc" "example" {
   cidr_block           = "10.0.0.0/16"

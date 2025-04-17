@@ -1,9 +1,3 @@
-# Get current AWS Account ID
-data "aws_caller_identity" "current" {}
-
-# Get current AWS Region
-data "aws_region" "current" {}
-
 # Create MediaConnect Gateway
 resource "awscc_mediaconnect_gateway" "example" {
   name = "example-gateway"

@@ -1,7 +1,3 @@
-# Get current account ID and region
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Create the location tracker first
 resource "awscc_location_tracker" "example" {
   tracker_name = "example-tracker"

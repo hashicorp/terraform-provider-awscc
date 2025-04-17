@@ -29,7 +29,7 @@ resource "awscc_ce_anomaly_monitor" "cost_monitor" {
     }
   })
 
-  tags = [{
+  resource_tags = [{
     key   = "Modified By"
     value = "AWSCC"
   }]

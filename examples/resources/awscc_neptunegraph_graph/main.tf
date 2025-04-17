@@ -1,7 +1,3 @@
-# Data sources for AWS account and region
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Create Neptune Graph
 resource "awscc_neptunegraph_graph" "example" {
   graph_name           = "example-graph-test-20250102"

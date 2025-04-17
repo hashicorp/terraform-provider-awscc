@@ -1,6 +1,5 @@
-# Data sources for account and region
+# Data sources for account
 data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
 
 # Get existing detector
 data "aws_guardduty_detector" "existing" {}

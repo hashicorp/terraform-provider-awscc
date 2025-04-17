@@ -1,9 +1,3 @@
-# Get current region
-data "aws_region" "current" {}
-
-# Get current account ID
-data "aws_caller_identity" "current" {}
-
 # Create an Evidently Project first since it's required for the experiment
 resource "awscc_evidently_project" "example" {
   name        = "example-project"

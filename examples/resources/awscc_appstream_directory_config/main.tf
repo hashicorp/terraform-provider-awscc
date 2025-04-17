@@ -1,8 +1,3 @@
-
-# Get current AWS account ID and region
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # IAM Service Role for AppStream Directory Config
 data "aws_iam_policy_document" "assume_role" {
   statement {
@@ -16,7 +11,7 @@ data "aws_iam_policy_document" "assume_role" {
 
 # Service Role for AppStream Directory Config
 resource "awscc_iam_role" "appstream_directory" {
-  role_name         = "appstream-directory-config-role"
+  role_name                   = "appstream-directory-config-role"
   assume_role_policy_document = data.aws_iam_policy_document.assume_role.json
 
   tags = [{
@@ -40,8 +35,8 @@ data "aws_iam_policy_document" "directory_policy" {
 
 # Attach policy to the role
 resource "awscc_iam_role_policy" "directory_policy" {
-  policy_name = "directory-access-policy"
-  role_name   = awscc_iam_role.appstream_directory.role_name
+  policy_name     = "directory-access-policy"
+  role_name       = awscc_iam_role.appstream_directory.role_name
   policy_document = data.aws_iam_policy_document.directory_policy.json
 }
 

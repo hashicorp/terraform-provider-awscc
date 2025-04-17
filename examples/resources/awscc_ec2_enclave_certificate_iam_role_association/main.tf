@@ -1,7 +1,3 @@
-data "aws_caller_identity" "current" {}
-
-data "aws_region" "current" {}
-
 # Create an IAM role that can be associated with the ACM certificate
 data "aws_iam_policy_document" "ec2_nitro_enclaves_assume_role" {
   statement {

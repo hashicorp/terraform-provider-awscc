@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # IAM role for MediaPackage Asset to access S3
 data "aws_iam_policy_document" "mediapackage_assume_role" {
   statement {

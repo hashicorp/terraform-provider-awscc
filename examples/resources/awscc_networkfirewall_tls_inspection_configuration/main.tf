@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Access existing ACM PCA for example
 data "aws_acmpca_certificate_authority" "example" {
   arn = "arn:aws:acm-pca:us-west-2:XXXXXXXXX:certificate-authority/XXXXXXXXX" # Replace with valid ARN

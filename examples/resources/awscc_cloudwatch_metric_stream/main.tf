@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # IAM role for Kinesis Firehose
 resource "awscc_iam_role" "firehose" {
   role_name = "metrics-firehose-role"

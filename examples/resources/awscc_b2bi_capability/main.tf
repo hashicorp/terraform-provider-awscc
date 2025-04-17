@@ -1,6 +1,3 @@
-# Reference to current AWS region
-data "aws_region" "current" {}
-
 # Reference to current AWS account
 data "aws_caller_identity" "current" {}
 
@@ -12,7 +9,7 @@ resource "awscc_b2bi_capability" "example" {
   configuration = {
     edi = {
       capability_direction = "INBOUND"
-      transformer_id      = "example-transformer-id"
+      transformer_id       = "example-transformer-id"
 
       input_location = {
         bucket_name = awscc_s3_bucket.input.id
@@ -27,7 +24,7 @@ resource "awscc_b2bi_capability" "example" {
       type = {
         x12_details = {
           transaction_set = "X12_850"
-          version        = "VERSION_4010"
+          version         = "VERSION_4010"
         }
       }
     }

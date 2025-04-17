@@ -1,7 +1,3 @@
-# Get current AWS account ID and region
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Create an IAM user first for testing
 resource "awscc_iam_user" "example" {
   user_name = "example-mfa-user"

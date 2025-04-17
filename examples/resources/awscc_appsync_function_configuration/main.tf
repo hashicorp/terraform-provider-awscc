@@ -1,5 +1,4 @@
-# Get current AWS account ID and region
-data "aws_caller_identity" "current" {}
+# Get current AWS region
 data "aws_region" "current" {}
 
 # Create AppSync API (no AWSCC equivalent yet)
@@ -33,7 +32,7 @@ resource "awscc_dynamodb_table" "example" {
   key_schema = [
     {
       attribute_name = "id"
-      key_type      = "HASH"
+      key_type       = "HASH"
     }
   ]
   table_name   = "example-table"
@@ -90,7 +89,7 @@ resource "awscc_iam_role_policy" "appsync_dynamodb_policy" {
   })
 }
 
-# Create AppSync datasource (no AWSCC equivalent yet)
+# Create AppSync datasource
 resource "aws_appsync_datasource" "example" {
   api_id = aws_appsync_graphql_api.example.id
   name   = "example_datasource"

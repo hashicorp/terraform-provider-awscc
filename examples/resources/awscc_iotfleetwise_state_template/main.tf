@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # First create a signal catalog as it's required for state template
 resource "awscc_iotfleetwise_signal_catalog" "example" {
   name        = "example-signal-catalog"

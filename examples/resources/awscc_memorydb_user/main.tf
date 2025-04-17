@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 resource "awscc_memorydb_user" "example" {
   user_name     = "sample-user"
   access_string = "on ~* +@all" # Full access to all commands and keys

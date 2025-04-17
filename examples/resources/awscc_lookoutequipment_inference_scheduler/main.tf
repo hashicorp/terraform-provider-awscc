@@ -1,6 +1,4 @@
-
 data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
 
 # S3 bucket for input data
 resource "awscc_s3_bucket" "input_bucket" {

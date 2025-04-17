@@ -1,7 +1,3 @@
-# Data sources for AWS account ID and region
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Create a global network first
 resource "awscc_networkmanager_global_network" "example" {
   description = "Example Global Network for Device"

@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # First, create a dataset group
 resource "awscc_personalize_dataset_group" "example" {
   name = "example-dataset-group"

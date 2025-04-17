@@ -1,8 +1,3 @@
-# Get the current region and account
-data "aws_region" "current" {}
-
-data "aws_caller_identity" "current" {}
-
 # Redshift cluster parameter group
 resource "awscc_redshift_cluster_parameter_group" "example" {
   parameter_group_name   = "example-paramgroup"

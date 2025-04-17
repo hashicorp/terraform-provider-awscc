@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Generate a SSL certificate for the domain
 resource "aws_acm_certificate" "example" {
   domain_name       = "api.example.com"

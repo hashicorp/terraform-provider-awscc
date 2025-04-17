@@ -1,9 +1,3 @@
-# Get current AWS region
-data "aws_region" "current" {}
-
-# Get current AWS account ID
-data "aws_caller_identity" "current" {}
-
 # Example MediaLive Network
 resource "awscc_medialive_network" "example" {
   name = "example-network"

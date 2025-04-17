@@ -2,8 +2,6 @@
 # but the actual creation might require using the AWS CLI or SDK to create the AI Prompt first
 # due to current limitations with the AWSCC provider's handling of the template_configuration.
 
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
 
 # Create the Wisdom Assistant
 resource "awscc_wisdom_assistant" "example" {

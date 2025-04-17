@@ -1,6 +1,5 @@
-# Get current AWS account ID and region
+# Get current AWS account ID
 data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
 
 # Create CloudWatch log group for APS workspace logging
 resource "awscc_logs_log_group" "aps_logs" {

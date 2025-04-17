@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Create the AppSync API
 resource "awscc_appsync_graph_ql_api" "example" {
   name                = "example-api"

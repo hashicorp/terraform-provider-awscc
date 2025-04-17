@@ -1,5 +1,4 @@
-# Use data sources for account and region
-data "aws_caller_identity" "current" {}
+# Use data source for region
 data "aws_region" "current" {}
 
 # IAM role for Config Aggregator

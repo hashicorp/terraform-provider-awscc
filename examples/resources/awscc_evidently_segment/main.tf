@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 resource "awscc_evidently_segment" "example" {
   name        = "example-segment"
   description = "Example segment created using AWSCC provider"

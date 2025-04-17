@@ -31,7 +31,7 @@ resource "awscc_ec2_vpc" "quicksight_vpc" {
   tags = [{
     key   = "Name"
     value = "quicksight-vpc"
-  }, {
+    }, {
     key   = "Modified By"
     value = "AWSCC"
   }]
@@ -45,7 +45,7 @@ resource "awscc_ec2_subnet" "quicksight_subnet_1" {
   tags = [{
     key   = "Name"
     value = "quicksight-subnet-1"
-  }, {
+    }, {
     key   = "Modified By"
     value = "AWSCC"
   }]
@@ -58,7 +58,7 @@ resource "awscc_ec2_subnet" "quicksight_subnet_2" {
   tags = [{
     key   = "Name"
     value = "quicksight-subnet-2"
-  }, {
+    }, {
     key   = "Modified By"
     value = "AWSCC"
   }]
@@ -67,8 +67,8 @@ resource "awscc_ec2_subnet" "quicksight_subnet_2" {
 # Create security group
 resource "awscc_ec2_security_group" "quicksight_sg" {
   group_description = "Security group for QuickSight VPC connection"
-  vpc_id           = awscc_ec2_vpc.quicksight_vpc.id
-  group_name       = "quicksight-vpc-sg"
+  vpc_id            = awscc_ec2_vpc.quicksight_vpc.id
+  group_name        = "quicksight-vpc-sg"
   security_group_ingress = [{
     ip_protocol = "-1"
     from_port   = 0
@@ -78,7 +78,7 @@ resource "awscc_ec2_security_group" "quicksight_sg" {
   tags = [{
     key   = "Name"
     value = "quicksight-sg"
-  }, {
+    }, {
     key   = "Modified By"
     value = "AWSCC"
   }]
@@ -130,7 +130,7 @@ resource "awscc_quicksight_vpc_connection" "example" {
   aws_account_id     = data.aws_caller_identity.current.account_id
   vpc_connection_id  = "example-vpc-connection"
   name               = "Example VPC Connection"
-  role_arn          = aws_iam_role.quicksight_vpc_role.arn
+  role_arn           = aws_iam_role.quicksight_vpc_role.arn
   security_group_ids = [awscc_ec2_security_group.quicksight_sg.id]
   subnet_ids         = [awscc_ec2_subnet.quicksight_subnet_1.id, awscc_ec2_subnet.quicksight_subnet_2.id]
   tags = [{

@@ -1,6 +1,5 @@
-# Get current AWS account ID and region
+# Get current AWS account ID
 data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
 
 # Example of HTTP URL destination
 resource "awscc_iot_topic_rule_destination" "http_destination" {

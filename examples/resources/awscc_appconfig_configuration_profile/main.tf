@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # AppConfig Application is required before creating a configuration profile
 resource "awscc_appconfig_application" "example" {
   name        = "example-app"

@@ -20,7 +20,6 @@ Creates a configured table in AWS Clean Rooms for analyzing sales data with spec
 
 ```terraform
 data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
 
 # First create a Glue database and table for the example
 resource "awscc_glue_database" "example" {

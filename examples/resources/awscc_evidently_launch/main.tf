@@ -1,7 +1,3 @@
-# Get current AWS account ID and region
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Create the Evidently Project first
 resource "awscc_evidently_project" "example" {
   name        = "example-project"

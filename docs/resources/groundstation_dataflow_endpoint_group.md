@@ -22,9 +22,6 @@ Creates an AWS Ground Station dataflow endpoint group with a VPC infrastructure,
 # Get current AWS region
 data "aws_region" "current" {}
 
-# Get current AWS account ID
-data "aws_caller_identity" "current" {}
-
 # Create a VPC for the Ground Station
 resource "aws_vpc" "ground_station" {
   cidr_block = "10.0.0.0/16"

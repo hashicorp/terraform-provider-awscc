@@ -1,9 +1,3 @@
-# Get current region
-data "aws_region" "current" {}
-
-# Get current account ID
-data "aws_caller_identity" "current" {}
-
 # Create IVS Encoder Configuration
 resource "awscc_ivs_encoder_configuration" "example" {
   name = "example-encoder-config"

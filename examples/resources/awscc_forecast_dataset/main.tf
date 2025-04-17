@@ -1,7 +1,3 @@
-# Data sources
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Example Forecast Dataset
 resource "awscc_forecast_dataset" "example" {
   dataset_name   = "exampleForecastDataset"

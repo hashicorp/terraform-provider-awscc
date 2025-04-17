@@ -24,9 +24,6 @@ Creates an AWS Firewall Manager security policy that applies WAF rules to Applic
 # 2. AWS Firewall Manager must be enabled in your organization
 # 3. AWS Firewall Manager administrator account must be designated
 
-# Get current AWS region
-data "aws_region" "current" {}
-
 # Get current AWS account ID
 data "aws_caller_identity" "current" {}
 

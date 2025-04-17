@@ -20,7 +20,6 @@ Creates an AWS Lookout for Equipment inference scheduler with 5-minute data uplo
 
 ```terraform
 data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
 
 # S3 bucket for input data
 resource "awscc_s3_bucket" "input_bucket" {

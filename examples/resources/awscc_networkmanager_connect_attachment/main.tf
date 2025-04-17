@@ -1,4 +1,3 @@
-data "aws_caller_identity" "current" {}
 data "aws_region" "current" {}
 
 # Example Connect Attachment - This is an example template, not intended for direct use

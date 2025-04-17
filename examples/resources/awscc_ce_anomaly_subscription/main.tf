@@ -1,9 +1,3 @@
-# Get AWS Account ID
-data "aws_caller_identity" "current" {}
-
-# Get current AWS Region
-data "aws_region" "current" {}
-
 # Create a Cost anomaly monitor first
 resource "awscc_ce_anomaly_monitor" "example" {
   monitor_name      = "example-monitor"

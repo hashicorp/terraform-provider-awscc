@@ -1,6 +1,5 @@
-# Get current region and account details
+# Get current region details
 data "aws_region" "current" {}
-data "aws_caller_identity" "current" {}
 
 # Create a Transit Gateway
 resource "awscc_ec2_transit_gateway" "example" {

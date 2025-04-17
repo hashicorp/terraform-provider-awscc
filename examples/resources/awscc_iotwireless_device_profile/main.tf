@@ -1,7 +1,3 @@
-# Data sources for AWS account ID and region
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Create an IoT Wireless Device Profile
 resource "awscc_iotwireless_device_profile" "example" {
   name = "example-device-profile"

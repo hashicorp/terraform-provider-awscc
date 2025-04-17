@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Kinesis stream to receive the logs
 resource "awscc_kinesis_stream" "example" {
   name                   = "cloudfront-realtime-logs"

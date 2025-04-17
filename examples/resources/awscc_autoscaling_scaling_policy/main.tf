@@ -1,7 +1,3 @@
-# Get AWS account ID and region for dynamic configuration
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 # Create a Launch Template first
 resource "awscc_ec2_launch_template" "example" {
   launch_template_data = {

@@ -1,7 +1,3 @@
-data "aws_caller_identity" "current" {}
-
-data "aws_region" "current" {}
-
 resource "awscc_networkfirewall_rule_group" "example" {
   capacity        = 100
   rule_group_name = "example-stateful-rule-group"

@@ -1,6 +1,5 @@
-# Get current AWS account ID and region
+# Get current AWS account ID
 data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
 
 # Create an SNS topic for FMS notifications
 resource "awscc_sns_topic" "fms_notifications" {
