@@ -205,7 +205,6 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_devopsguru_resource_collections -cftype AWS::DevOpsGuru::ResourceCollection -package devopsguru ../aws/devopsguru/resource_collection_plural_data_source_gen.go ../aws/devopsguru/resource_collection_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_directoryservice_simple_ads -cftype AWS::DirectoryService::SimpleAD -package directoryservice ../aws/directoryservice/simple_ad_plural_data_source_gen.go ../aws/directoryservice/simple_ad_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_docdbelastic_clusters -cftype AWS::DocDBElastic::Cluster -package docdbelastic ../aws/docdbelastic/cluster_plural_data_source_gen.go ../aws/docdbelastic/cluster_plural_data_source_gen_test.go
-//go:generate go run generators/plural-data-source/main.go -data-source awscc_dsql_clusters -cftype AWS::DSQL::Cluster -package dsql ../aws/dsql/cluster_plural_data_source_gen.go ../aws/dsql/cluster_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_dynamodb_global_tables -cftype AWS::DynamoDB::GlobalTable -package dynamodb ../aws/dynamodb/global_table_plural_data_source_gen.go ../aws/dynamodb/global_table_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_dynamodb_tables -cftype AWS::DynamoDB::Table -package dynamodb ../aws/dynamodb/table_plural_data_source_gen.go ../aws/dynamodb/table_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_capacity_reservations -cftype AWS::EC2::CapacityReservation -package ec2 ../aws/ec2/capacity_reservation_plural_data_source_gen.go ../aws/ec2/capacity_reservation_plural_data_source_gen_test.go
@@ -928,7 +927,6 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/directoryservice"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/dms"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/docdbelastic"
-	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/dsql"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/dynamodb"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ec2"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ecr"
