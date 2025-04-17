@@ -205,6 +205,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_devopsguru_resource_collections -cftype AWS::DevOpsGuru::ResourceCollection -package devopsguru ../aws/devopsguru/resource_collection_plural_data_source_gen.go ../aws/devopsguru/resource_collection_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_directoryservice_simple_ads -cftype AWS::DirectoryService::SimpleAD -package directoryservice ../aws/directoryservice/simple_ad_plural_data_source_gen.go ../aws/directoryservice/simple_ad_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_docdbelastic_clusters -cftype AWS::DocDBElastic::Cluster -package docdbelastic ../aws/docdbelastic/cluster_plural_data_source_gen.go ../aws/docdbelastic/cluster_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_dsql_clusters -cftype AWS::DSQL::Cluster -package dsql ../aws/dsql/cluster_plural_data_source_gen.go ../aws/dsql/cluster_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_dynamodb_global_tables -cftype AWS::DynamoDB::GlobalTable -package dynamodb ../aws/dynamodb/global_table_plural_data_source_gen.go ../aws/dynamodb/global_table_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_dynamodb_tables -cftype AWS::DynamoDB::Table -package dynamodb ../aws/dynamodb/table_plural_data_source_gen.go ../aws/dynamodb/table_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_capacity_reservations -cftype AWS::EC2::CapacityReservation -package ec2 ../aws/ec2/capacity_reservation_plural_data_source_gen.go ../aws/ec2/capacity_reservation_plural_data_source_gen_test.go
@@ -582,6 +583,8 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_memorydb_subnet_groups -cftype AWS::MemoryDB::SubnetGroup -package memorydb ../aws/memorydb/subnet_group_plural_data_source_gen.go ../aws/memorydb/subnet_group_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_memorydb_users -cftype AWS::MemoryDB::User -package memorydb ../aws/memorydb/user_plural_data_source_gen.go ../aws/memorydb/user_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_neptune_db_clusters -cftype AWS::Neptune::DBCluster -package neptune ../aws/neptune/db_cluster_plural_data_source_gen.go ../aws/neptune/db_cluster_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_neptune_db_cluster_parameter_groups -cftype AWS::Neptune::DBClusterParameterGroup -package neptune ../aws/neptune/db_cluster_parameter_group_plural_data_source_gen.go ../aws/neptune/db_cluster_parameter_group_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_neptune_db_parameter_groups -cftype AWS::Neptune::DBParameterGroup -package neptune ../aws/neptune/db_parameter_group_plural_data_source_gen.go ../aws/neptune/db_parameter_group_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_neptune_db_subnet_groups -cftype AWS::Neptune::DBSubnetGroup -package neptune ../aws/neptune/db_subnet_group_plural_data_source_gen.go ../aws/neptune/db_subnet_group_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_neptunegraph_graphs -cftype AWS::NeptuneGraph::Graph -package neptunegraph ../aws/neptunegraph/graph_plural_data_source_gen.go ../aws/neptunegraph/graph_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_neptunegraph_private_graph_endpoints -cftype AWS::NeptuneGraph::PrivateGraphEndpoint -package neptunegraph ../aws/neptunegraph/private_graph_endpoint_plural_data_source_gen.go ../aws/neptunegraph/private_graph_endpoint_plural_data_source_gen_test.go
@@ -925,6 +928,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/directoryservice"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/dms"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/docdbelastic"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/dsql"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/dynamodb"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ec2"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ecr"
