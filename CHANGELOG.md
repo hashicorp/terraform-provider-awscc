@@ -1,4 +1,5 @@
-## 1.37.0 (Unreleased)
+## 1.38.0 (Unreleased)
+## 1.37.0 (April 17, 2025)
 
 FEATURES:
 
