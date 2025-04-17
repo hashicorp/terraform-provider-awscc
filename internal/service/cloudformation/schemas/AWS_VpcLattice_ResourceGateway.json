@@ -9,7 +9,7 @@
     "tagOnCreate": true,
     "tagUpdatable": true,
     "tagProperty": "/properties/Tags",
-    "cloudFormationSystemTags": false
+    "cloudFormationSystemTags": true
   },
   "handlers": {
     "read": {
@@ -49,7 +49,8 @@
     "delete": {
       "permissions": [
         "vpc-lattice:DeleteResourceGateway",
-        "vpc-lattice:GetResourceGateway"
+        "vpc-lattice:GetResourceGateway",
+        "vpc-lattice:UntagResource"
       ]
     }
   },
@@ -179,5 +180,10 @@
       "type": "string",
       "maxLength": 40
     }
-  }
+  },
+  "required": [
+    "Name",
+    "VpcIdentifier",
+    "SubnetIds"
+  ]
 }

@@ -9,7 +9,7 @@
     "tagOnCreate": true,
     "tagUpdatable": true,
     "tagProperty": "/properties/Tags",
-    "cloudFormationSystemTags": false
+    "cloudFormationSystemTags": true
   },
   "handlers": {
     "read": {
@@ -29,7 +29,8 @@
         "vpc-lattice:CreateServiceNetworkVpcEndpointAssociation",
         "vpc-lattice:DescribeServiceNetworkVpcEndpointAssociation",
         "ec2:CreateTags",
-        "ec2:DeleteTags"
+        "ec2:DeleteTags",
+        "vpce:AllowMultiRegion"
       ],
       "timeoutInMinutes": 210
     },
@@ -42,7 +43,8 @@
         "vpc-lattice:CreateServiceNetworkVpcEndpointAssociation",
         "vpc-lattice:DescribeServiceNetworkVpcEndpointAssociation",
         "ec2:CreateTags",
-        "ec2:DeleteTags"
+        "ec2:DeleteTags",
+        "vpce:AllowMultiRegion"
       ],
       "timeoutInMinutes": 210
     },
@@ -62,7 +64,8 @@
         "ec2:DescribeSecurityGroups",
         "vpc-lattice:DescribeServiceNetworkVpcEndpointAssociation",
         "ec2:CreateTags",
-        "ec2:DeleteTags"
+        "ec2:DeleteTags",
+        "vpce:AllowMultiRegion"
       ],
       "timeoutInMinutes": 210
     }
@@ -80,7 +83,8 @@
     "/properties/VpcEndpointType",
     "/properties/VpcId",
     "/properties/ServiceNetworkArn",
-    "/properties/ResourceConfigurationArn"
+    "/properties/ResourceConfigurationArn",
+    "/properties/ServiceRegion"
   ],
   "additionalProperties": false,
   "primaryIdentifier": [
@@ -88,11 +92,12 @@
   ],
   "definitions": {
     "DnsOptionsSpecification": {
-      "description": "",
+      "description": "Describes the DNS options for an endpoint.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "PrivateDnsOnlyForInboundResolverEndpoint": {
+          "description": "Indicates whether to enable private DNS only for inbound endpoints. This option is available only for services that support both gateway and interface endpoints. It routes traffic that originates from the VPC to the gateway endpoint and traffic that originates from on-premises to the interface endpoint.",
           "type": "string",
           "enum": [
             "OnlyInboundResolver",
@@ -101,6 +106,7 @@
           ]
         },
         "DnsRecordIpType": {
+          "description": "The DNS records created for the endpoint.",
           "type": "string",
           "enum": [
             "ipv4",
@@ -113,14 +119,16 @@
       }
     },
     "Tag": {
-      "description": "",
+      "description": "Describes a tag.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "Value": {
+          "description": "The value of the tag.\n Constraints: Tag values are case-sensitive and accept a maximum of 256 Unicode characters.",
           "type": "string"
         },
         "Key": {
+          "description": "The key of the tag.\n Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with ``aws:``.",
           "type": "string"
         }
       },
@@ -136,7 +144,7 @@
       "type": "boolean"
     },
     "IpAddressType": {
-      "description": "",
+      "description": "The supported IP address types.",
       "type": "string",
       "enum": [
         "ipv4",
@@ -145,12 +153,16 @@
         "not-specified"
       ]
     },
+    "ServiceRegion": {
+      "description": "",
+      "type": "string"
+    },
     "CreationTimestamp": {
       "description": "",
       "type": "string"
     },
     "DnsOptions": {
-      "description": "",
+      "description": "Describes the DNS options for an endpoint.",
       "$ref": "#/definitions/DnsOptionsSpecification"
     },
     "NetworkInterfaceIds": {
@@ -172,7 +184,7 @@
       }
     },
     "ResourceConfigurationArn": {
-      "description": "",
+      "description": "The Amazon Resource Name (ARN) of the resource configuration.",
       "type": "string"
     },
     "SecurityGroupIds": {
@@ -218,7 +230,7 @@
       }
     },
     "ServiceNetworkArn": {
-      "description": "",
+      "description": "The Amazon Resource Name (ARN) of the service network.",
       "type": "string"
     },
     "VpcId": {
@@ -266,7 +278,7 @@
     },
     "Tags": {
       "uniqueItems": false,
-      "description": "",
+      "description": "The tags to associate with the endpoint.",
       "insertionOrder": false,
       "type": "array",
       "items": {
