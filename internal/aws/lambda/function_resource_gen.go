@@ -205,7 +205,6 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END SCHEMA*/
 			Description: "The code for the function. You can define your function code in multiple ways:\n  +  For .zip deployment packages, you can specify the S3 location of the .zip file in the ``S3Bucket``, ``S3Key``, and ``S3ObjectVersion`` properties.\n  +  For .zip deployment packages, you can alternatively define the function code inline in the ``ZipFile`` property. This method works only for Node.js and Python functions.\n  +  For container images, specify the URI of your container image in the ECR registry in the ``ImageUri`` property.",
 			Required:    true,
-			// Code is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: CodeSigningConfigArn
 		// CloudFormation resource type schema:
@@ -1277,7 +1276,6 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/SnapStart",
 		"/properties/SnapStart/ApplyOn",
-		"/properties/Code",
 		"/properties/Code/ImageUri",
 		"/properties/Code/S3Bucket",
 		"/properties/Code/S3Key",

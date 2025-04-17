@@ -90,6 +90,24 @@ func archiveResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: KmsKeyIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 2048,
+		//	  "minLength": 0,
+		//	  "type": "string"
+		//	}
+		"kms_key_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(0, 2048),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: RetentionDays
 		// CloudFormation resource type schema:
 		//
@@ -137,12 +155,13 @@ func archiveResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Events::Archive").WithTerraformTypeName("awscc_events_archive")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"archive_name":   "ArchiveName",
-		"arn":            "Arn",
-		"description":    "Description",
-		"event_pattern":  "EventPattern",
-		"retention_days": "RetentionDays",
-		"source_arn":     "SourceArn",
+		"archive_name":       "ArchiveName",
+		"arn":                "Arn",
+		"description":        "Description",
+		"event_pattern":      "EventPattern",
+		"kms_key_identifier": "KmsKeyIdentifier",
+		"retention_days":     "RetentionDays",
+		"source_arn":         "SourceArn",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

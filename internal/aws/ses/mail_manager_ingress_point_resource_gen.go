@@ -9,6 +9,7 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -138,6 +139,96 @@ func mailManagerIngressPointResource(ctx context.Context) (resource.Resource, er
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: NetworkConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "properties": {
+		//	    "PrivateNetworkConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "VpcEndpointId": {
+		//	          "pattern": "^vpce-[a-zA-Z0-9]{17}$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "VpcEndpointId"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "PublicNetworkConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "IpType": {
+		//	          "allOf": [
+		//	            {},
+		//	            {}
+		//	          ]
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "IpType"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"network_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PrivateNetworkConfiguration
+				"private_network_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: VpcEndpointId
+						"vpc_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^vpce-[a-zA-Z0-9]{17}$"), ""),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: PublicNetworkConfiguration
+				"public_network_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IpType
+						"ip_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType: jsontypes.NormalizedType{},
+							Optional:   true,
+							Computed:   true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: RuleSetId
@@ -325,21 +416,26 @@ func mailManagerIngressPointResource(ctx context.Context) (resource.Resource, er
 	opts = opts.WithCloudFormationTypeName("AWS::SES::MailManagerIngressPoint").WithTerraformTypeName("awscc_ses_mail_manager_ingress_point")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"a_record":                    "ARecord",
-		"ingress_point_arn":           "IngressPointArn",
-		"ingress_point_configuration": "IngressPointConfiguration",
-		"ingress_point_id":            "IngressPointId",
-		"ingress_point_name":          "IngressPointName",
-		"key":                         "Key",
-		"rule_set_id":                 "RuleSetId",
-		"secret_arn":                  "SecretArn",
-		"smtp_password":               "SmtpPassword",
-		"status":                      "Status",
-		"status_to_update":            "StatusToUpdate",
-		"tags":                        "Tags",
-		"traffic_policy_id":           "TrafficPolicyId",
-		"type":                        "Type",
-		"value":                       "Value",
+		"a_record":                      "ARecord",
+		"ingress_point_arn":             "IngressPointArn",
+		"ingress_point_configuration":   "IngressPointConfiguration",
+		"ingress_point_id":              "IngressPointId",
+		"ingress_point_name":            "IngressPointName",
+		"ip_type":                       "IpType",
+		"key":                           "Key",
+		"network_configuration":         "NetworkConfiguration",
+		"private_network_configuration": "PrivateNetworkConfiguration",
+		"public_network_configuration":  "PublicNetworkConfiguration",
+		"rule_set_id":                   "RuleSetId",
+		"secret_arn":                    "SecretArn",
+		"smtp_password":                 "SmtpPassword",
+		"status":                        "Status",
+		"status_to_update":              "StatusToUpdate",
+		"tags":                          "Tags",
+		"traffic_policy_id":             "TrafficPolicyId",
+		"type":                          "Type",
+		"value":                         "Value",
+		"vpc_endpoint_id":               "VpcEndpointId",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

@@ -31,6 +31,63 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::PaymentCryptography::Key resource.
 func keyResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: DeriveKeyUsage
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "TR31_B0_BASE_DERIVATION_KEY",
+		//	    "TR31_C0_CARD_VERIFICATION_KEY",
+		//	    "TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY",
+		//	    "TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS",
+		//	    "TR31_E1_EMV_MKEY_CONFIDENTIALITY",
+		//	    "TR31_E2_EMV_MKEY_INTEGRITY",
+		//	    "TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS",
+		//	    "TR31_E5_EMV_MKEY_CARD_PERSONALIZATION",
+		//	    "TR31_E6_EMV_MKEY_OTHER",
+		//	    "TR31_K0_KEY_ENCRYPTION_KEY",
+		//	    "TR31_K1_KEY_BLOCK_PROTECTION_KEY",
+		//	    "TR31_M3_ISO_9797_3_MAC_KEY",
+		//	    "TR31_M1_ISO_9797_1_MAC_KEY",
+		//	    "TR31_M6_ISO_9797_5_CMAC_KEY",
+		//	    "TR31_M7_HMAC_KEY",
+		//	    "TR31_P0_PIN_ENCRYPTION_KEY",
+		//	    "TR31_P1_PIN_GENERATION_KEY",
+		//	    "TR31_V1_IBM3624_PIN_VERIFICATION_KEY",
+		//	    "TR31_V2_VISA_PIN_VERIFICATION_KEY"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"derive_key_usage": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"TR31_B0_BASE_DERIVATION_KEY",
+					"TR31_C0_CARD_VERIFICATION_KEY",
+					"TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY",
+					"TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS",
+					"TR31_E1_EMV_MKEY_CONFIDENTIALITY",
+					"TR31_E2_EMV_MKEY_INTEGRITY",
+					"TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS",
+					"TR31_E5_EMV_MKEY_CARD_PERSONALIZATION",
+					"TR31_E6_EMV_MKEY_OTHER",
+					"TR31_K0_KEY_ENCRYPTION_KEY",
+					"TR31_K1_KEY_BLOCK_PROTECTION_KEY",
+					"TR31_M3_ISO_9797_3_MAC_KEY",
+					"TR31_M1_ISO_9797_1_MAC_KEY",
+					"TR31_M6_ISO_9797_5_CMAC_KEY",
+					"TR31_M7_HMAC_KEY",
+					"TR31_P0_PIN_ENCRYPTION_KEY",
+					"TR31_P1_PIN_GENERATION_KEY",
+					"TR31_V1_IBM3624_PIN_VERIFICATION_KEY",
+					"TR31_V2_VISA_PIN_VERIFICATION_KEY",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Enabled
 		// CloudFormation resource type schema:
 		//
@@ -331,7 +388,8 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "enum": [
 		//	    "CMAC",
-		//	    "ANSI_X9_24"
+		//	    "ANSI_X9_24",
+		//	    "HMAC"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -342,6 +400,7 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.OneOf(
 					"CMAC",
 					"ANSI_X9_24",
+					"HMAC",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -493,6 +552,7 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"decrypt":                   "Decrypt",
 		"derive_key":                "DeriveKey",
+		"derive_key_usage":          "DeriveKeyUsage",
 		"enabled":                   "Enabled",
 		"encrypt":                   "Encrypt",
 		"exportable":                "Exportable",

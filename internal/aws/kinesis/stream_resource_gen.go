@@ -11,6 +11,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -18,8 +19,10 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/defaults"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
@@ -46,6 +49,55 @@ func streamResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DesiredShardLevelMetrics
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The final list of shard-level metrics",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Value of an enhanced metric",
+		//	    "enum": [
+		//	      "IncomingBytes",
+		//	      "IncomingRecords",
+		//	      "OutgoingBytes",
+		//	      "OutgoingRecords",
+		//	      "WriteProvisionedThroughputExceeded",
+		//	      "ReadProvisionedThroughputExceeded",
+		//	      "IteratorAgeMilliseconds",
+		//	      "ALL"
+		//	    ],
+		//	    "type": "string"
+		//	  },
+		//	  "maxItems": 7,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"desired_shard_level_metrics": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The final list of shard-level metrics",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.Set{ /*START VALIDATORS*/
+				setvalidator.SizeAtMost(7),
+				setvalidator.ValueStringsAre(
+					stringvalidator.OneOf(
+						"IncomingBytes",
+						"IncomingRecords",
+						"OutgoingBytes",
+						"OutgoingRecords",
+						"WriteProvisionedThroughputExceeded",
+						"ReadProvisionedThroughputExceeded",
+						"IteratorAgeMilliseconds",
+						"ALL",
+					),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Name
@@ -328,18 +380,19 @@ func streamResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Kinesis::Stream").WithTerraformTypeName("awscc_kinesis_stream")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                    "Arn",
-		"encryption_type":        "EncryptionType",
-		"key":                    "Key",
-		"key_id":                 "KeyId",
-		"name":                   "Name",
-		"retention_period_hours": "RetentionPeriodHours",
-		"shard_count":            "ShardCount",
-		"stream_encryption":      "StreamEncryption",
-		"stream_mode":            "StreamMode",
-		"stream_mode_details":    "StreamModeDetails",
-		"tags":                   "Tags",
-		"value":                  "Value",
+		"arn":                         "Arn",
+		"desired_shard_level_metrics": "DesiredShardLevelMetrics",
+		"encryption_type":             "EncryptionType",
+		"key":                         "Key",
+		"key_id":                      "KeyId",
+		"name":                        "Name",
+		"retention_period_hours":      "RetentionPeriodHours",
+		"shard_count":                 "ShardCount",
+		"stream_encryption":           "StreamEncryption",
+		"stream_mode":                 "StreamMode",
+		"stream_mode_details":         "StreamModeDetails",
+		"tags":                        "Tags",
+		"value":                       "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

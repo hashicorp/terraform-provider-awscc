@@ -202,7 +202,7 @@ func schedulingPolicyResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Resource Type schema for AWS::Batch::SchedulingPolicy",
+		Description: "Resource Type definition for AWS::Batch::SchedulingPolicy",
 		Version:     1,
 		Attributes:  attributes,
 	}

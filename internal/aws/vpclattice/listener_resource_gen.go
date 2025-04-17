@@ -86,7 +86,7 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		//	              },
 		//	              "Weight": {
 		//	                "maximum": 999,
-		//	                "minimum": 1,
+		//	                "minimum": 0,
 		//	                "type": "integer"
 		//	              }
 		//	            },
@@ -157,7 +157,7 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 										Optional: true,
 										Computed: true,
 										Validators: []validator.Int64{ /*START VALIDATORS*/
-											int64validator.Between(1, 999),
+											int64validator.Between(0, 999),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 											int64planmodifier.UseStateForUnknown(),

@@ -95,6 +95,26 @@ func subnetGroupResource(ctx context.Context) (resource.Resource, error) {
 			Description: "A list of VPC subnet IDs for the subnet group.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: SupportedNetworkTypes
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Supported network types would be a list of network types supported by subnet group and can be either [ipv4] or [ipv4, dual_stack] or [ipv6].",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"supported_network_types": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Supported network types would be a list of network types supported by subnet group and can be either [ipv4] or [ipv4, dual_stack] or [ipv6].",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -193,13 +213,14 @@ func subnetGroupResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::MemoryDB::SubnetGroup").WithTerraformTypeName("awscc_memorydb_subnet_group")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":               "ARN",
-		"description":       "Description",
-		"key":               "Key",
-		"subnet_group_name": "SubnetGroupName",
-		"subnet_ids":        "SubnetIds",
-		"tags":              "Tags",
-		"value":             "Value",
+		"arn":                     "ARN",
+		"description":             "Description",
+		"key":                     "Key",
+		"subnet_group_name":       "SubnetGroupName",
+		"subnet_ids":              "SubnetIds",
+		"supported_network_types": "SupportedNetworkTypes",
+		"tags":                    "Tags",
+		"value":                   "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

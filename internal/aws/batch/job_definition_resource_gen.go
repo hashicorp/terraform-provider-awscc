@@ -132,6 +132,9 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "array",
 		//	      "uniqueItems": false
 		//	    },
+		//	    "EnableExecuteCommand": {
+		//	      "type": "boolean"
+		//	    },
 		//	    "Environment": {
 		//	      "insertionOrder": true,
 		//	      "items": {
@@ -495,6 +498,14 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: EnableExecuteCommand
+				"enable_execute_command": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Environment
@@ -1217,6 +1228,27 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	                "Essential": {
 		//	                  "type": "boolean"
 		//	                },
+		//	                "FirelensConfiguration": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "Options": {
+		//	                      "additionalProperties": false,
+		//	                      "patternProperties": {
+		//	                        "": {
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "type": "object"
+		//	                    },
+		//	                    "Type": {
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "Type"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
 		//	                "Image": {
 		//	                  "type": "string"
 		//	                },
@@ -1450,6 +1482,9 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "array",
 		//	            "uniqueItems": false
 		//	          },
+		//	          "EnableExecuteCommand": {
+		//	            "type": "boolean"
+		//	          },
 		//	          "EphemeralStorage": {
 		//	            "additionalProperties": false,
 		//	            "properties": {
@@ -1654,6 +1689,37 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 												boolplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: FirelensConfiguration
+										"firelens_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Options
+												"options":           // Pattern: ""
+												schema.MapAttribute{ /*START ATTRIBUTE*/
+													ElementType: types.StringType,
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+														mapplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: Type
+												"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Optional: true,
+													Computed: true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														fwvalidators.NotNullString(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: Image
@@ -2066,6 +2132,14 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 									generic.Multiset(),
 									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: EnableExecuteCommand
+							"enable_execute_command": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+									boolplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: EphemeralStorage
@@ -3468,6 +3542,9 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	                "type": "array",
 		//	                "uniqueItems": false
 		//	              },
+		//	              "EnableExecuteCommand": {
+		//	                "type": "boolean"
+		//	              },
 		//	              "Environment": {
 		//	                "insertionOrder": true,
 		//	                "items": {
@@ -3869,6 +3946,27 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	                          "Essential": {
 		//	                            "type": "boolean"
 		//	                          },
+		//	                          "FirelensConfiguration": {
+		//	                            "additionalProperties": false,
+		//	                            "properties": {
+		//	                              "Options": {
+		//	                                "additionalProperties": false,
+		//	                                "patternProperties": {
+		//	                                  "": {
+		//	                                    "type": "string"
+		//	                                  }
+		//	                                },
+		//	                                "type": "object"
+		//	                              },
+		//	                              "Type": {
+		//	                                "type": "string"
+		//	                              }
+		//	                            },
+		//	                            "required": [
+		//	                              "Type"
+		//	                            ],
+		//	                            "type": "object"
+		//	                          },
 		//	                          "Image": {
 		//	                            "type": "string"
 		//	                          },
@@ -4101,6 +4199,9 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	                      },
 		//	                      "type": "array",
 		//	                      "uniqueItems": false
+		//	                    },
+		//	                    "EnableExecuteCommand": {
+		//	                      "type": "boolean"
 		//	                    },
 		//	                    "ExecutionRoleArn": {
 		//	                      "type": "string"
@@ -4682,6 +4783,14 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: EnableExecuteCommand
+									"enable_execute_command": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+											boolplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: Environment
@@ -5402,6 +5511,37 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 																	boolplanmodifier.UseStateForUnknown(),
 																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
+															// Property: FirelensConfiguration
+															"firelens_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Options
+																	"options":           // Pattern: ""
+																	schema.MapAttribute{ /*START ATTRIBUTE*/
+																		ElementType: types.StringType,
+																		Optional:    true,
+																		Computed:    true,
+																		PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+																			mapplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																	// Property: Type
+																	"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Optional: true,
+																		Computed: true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			fwvalidators.NotNullString(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Optional: true,
+																Computed: true,
+																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																	objectplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
 															// Property: Image
 															"image": schema.StringAttribute{ /*START ATTRIBUTE*/
 																Optional: true,
@@ -5812,6 +5952,14 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 														generic.Multiset(),
 														listplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: EnableExecuteCommand
+												"enable_execute_command": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Optional: true,
+													Computed: true,
+													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+														boolplanmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: ExecutionRoleArn
@@ -6990,6 +7138,7 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		"efs_volume_configuration":       "EfsVolumeConfiguration",
 		"eks_properties":                 "EksProperties",
 		"empty_dir":                      "EmptyDir",
+		"enable_execute_command":         "EnableExecuteCommand",
 		"env":                            "Env",
 		"environment":                    "Environment",
 		"ephemeral_storage":              "EphemeralStorage",
@@ -6998,6 +7147,7 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		"execution_role_arn":             "ExecutionRoleArn",
 		"fargate_platform_configuration": "FargatePlatformConfiguration",
 		"file_system_id":                 "FileSystemId",
+		"firelens_configuration":         "FirelensConfiguration",
 		"hard_limit":                     "HardLimit",
 		"host":                           "Host",
 		"host_network":                   "HostNetwork",

@@ -163,7 +163,7 @@ func cidrCollectionResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Resource schema for AWS::Route53::CidrCollection.",
+		Description: "Resource Type definition for AWS::Route53::CidrCollection.",
 		Version:     1,
 		Attributes:  attributes,
 	}

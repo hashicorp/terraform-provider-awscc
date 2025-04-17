@@ -228,6 +228,31 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END PLAN MODIFIERS*/
 			// FinalSnapshotName is a write-only property.
 		}, /*END ATTRIBUTE*/
+		// Property: IpDiscovery
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "For clusters wth dual stack NetworkType, IpDiscovery controls the Ip protocol (ipv4 or ipv6) returned by the engine commands such as `cluster info` and `cluster nodes` which are used by clients to connect to the nodes in the cluster.",
+		//	  "enum": [
+		//	    "ipv4",
+		//	    "ipv6"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"ip_discovery": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "For clusters wth dual stack NetworkType, IpDiscovery controls the Ip protocol (ipv4 or ipv6) returned by the engine commands such as `cluster info` and `cluster nodes` which are used by clients to connect to the nodes in the cluster.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ipv4",
+					"ipv6",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -275,6 +300,34 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// MultiRegionClusterName is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: NetworkType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Must be either ipv4 | ipv6 | dual_stack.",
+		//	  "enum": [
+		//	    "ipv4",
+		//	    "ipv6",
+		//	    "dual_stack"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Must be either ipv4 | ipv6 | dual_stack.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ipv4",
+					"ipv6",
+					"dual_stack",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: NodeType
 		// CloudFormation resource type schema:
@@ -640,10 +693,12 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"engine":                     "Engine",
 		"engine_version":             "EngineVersion",
 		"final_snapshot_name":        "FinalSnapshotName",
+		"ip_discovery":               "IpDiscovery",
 		"key":                        "Key",
 		"kms_key_id":                 "KmsKeyId",
 		"maintenance_window":         "MaintenanceWindow",
 		"multi_region_cluster_name":  "MultiRegionClusterName",
+		"network_type":               "NetworkType",
 		"node_type":                  "NodeType",
 		"num_replicas_per_shard":     "NumReplicasPerShard",
 		"num_shards":                 "NumShards",
@@ -670,7 +725,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/MultiRegionClusterName",
 		"/properties/FinalSnapshotName",
 	})
-	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+	opts = opts.WithCreateTimeoutInMinutes(720).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(2160)
 

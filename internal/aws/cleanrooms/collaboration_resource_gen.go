@@ -165,6 +165,7 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "items": {
 		//	    "enum": [
 		//	      "CAN_QUERY",
+		//	      "CAN_RUN_JOB",
 		//	      "CAN_RECEIVE_RESULTS"
 		//	    ],
 		//	    "type": "string"
@@ -179,6 +180,7 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 				setvalidator.ValueStringsAre(
 					stringvalidator.OneOf(
 						"CAN_QUERY",
+						"CAN_RUN_JOB",
 						"CAN_RECEIVE_RESULTS",
 					),
 				),
@@ -193,6 +195,18 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "JobCompute": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "IsResponsible": {
+		//	          "type": "boolean"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "IsResponsible"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "MachineLearning": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -243,6 +257,27 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"creator_payment_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: JobCompute
+				"job_compute": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IsResponsible
+						"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Bool{ /*START VALIDATORS*/
+								fwvalidators.NotNullBool(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: MachineLearning
 				"machine_learning": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -423,6 +458,30 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.LengthBetween(1, 255),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
+		// Property: JobLogStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "ENABLED",
+		//	    "DISABLED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"job_log_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ENABLED",
+					"DISABLED",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Members
 		// CloudFormation resource type schema:
 		//
@@ -469,6 +528,7 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 		//	        "items": {
 		//	          "enum": [
 		//	            "CAN_QUERY",
+		//	            "CAN_RUN_JOB",
 		//	            "CAN_RECEIVE_RESULTS"
 		//	          ],
 		//	          "type": "string"
@@ -479,6 +539,18 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 		//	      "PaymentConfiguration": {
 		//	        "additionalProperties": false,
 		//	        "properties": {
+		//	          "JobCompute": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "IsResponsible": {
+		//	                "type": "boolean"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "IsResponsible"
+		//	            ],
+		//	            "type": "object"
+		//	          },
 		//	          "MachineLearning": {
 		//	            "additionalProperties": false,
 		//	            "properties": {
@@ -593,6 +665,7 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 							setvalidator.ValueStringsAre(
 								stringvalidator.OneOf(
 									"CAN_QUERY",
+									"CAN_RUN_JOB",
 									"CAN_RECEIVE_RESULTS",
 								),
 							),
@@ -601,6 +674,27 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 					// Property: PaymentConfiguration
 					"payment_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: JobCompute
+							"job_compute": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: IsResponsible
+									"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.Bool{ /*START VALIDATORS*/
+											fwvalidators.NotNullBool(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+											boolplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: MachineLearning
 							"machine_learning": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -835,6 +929,8 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 		"description":                                 "Description",
 		"display_name":                                "DisplayName",
 		"is_responsible":                              "IsResponsible",
+		"job_compute":                                 "JobCompute",
+		"job_log_status":                              "JobLogStatus",
 		"key":                                         "Key",
 		"machine_learning":                            "MachineLearning",
 		"member_abilities":                            "MemberAbilities",
