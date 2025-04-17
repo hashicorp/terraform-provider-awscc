@@ -30,6 +30,7 @@ Data Source schema for AWS::CleanRooms::Collaboration
 - `creator_payment_configuration` (Attributes) (see [below for nested schema](#nestedatt--creator_payment_configuration))
 - `data_encryption_metadata` (Attributes) (see [below for nested schema](#nestedatt--data_encryption_metadata))
 - `description` (String)
+- `job_log_status` (String)
 - `members` (Attributes List) (see [below for nested schema](#nestedatt--members))
 - `name` (String)
 - `query_log_status` (String)
@@ -48,8 +49,17 @@ Read-Only:
 
 Read-Only:
 
+- `job_compute` (Attributes) (see [below for nested schema](#nestedatt--creator_payment_configuration--job_compute))
 - `machine_learning` (Attributes) (see [below for nested schema](#nestedatt--creator_payment_configuration--machine_learning))
 - `query_compute` (Attributes) (see [below for nested schema](#nestedatt--creator_payment_configuration--query_compute))
+
+<a id="nestedatt--creator_payment_configuration--job_compute"></a>
+### Nested Schema for `creator_payment_configuration.job_compute`
+
+Read-Only:
+
+- `is_responsible` (Boolean)
+
 
 <a id="nestedatt--creator_payment_configuration--machine_learning"></a>
 ### Nested Schema for `creator_payment_configuration.machine_learning`
@@ -120,8 +130,17 @@ Read-Only:
 
 Read-Only:
 
+- `job_compute` (Attributes) (see [below for nested schema](#nestedatt--members--payment_configuration--job_compute))
 - `machine_learning` (Attributes) (see [below for nested schema](#nestedatt--members--payment_configuration--machine_learning))
 - `query_compute` (Attributes) (see [below for nested schema](#nestedatt--members--payment_configuration--query_compute))
+
+<a id="nestedatt--members--payment_configuration--job_compute"></a>
+### Nested Schema for `members.payment_configuration.job_compute`
+
+Read-Only:
+
+- `is_responsible` (Boolean)
+
 
 <a id="nestedatt--members--payment_configuration--machine_learning"></a>
 ### Nested Schema for `members.payment_configuration.machine_learning`

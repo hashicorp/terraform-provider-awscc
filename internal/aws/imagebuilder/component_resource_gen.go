@@ -167,7 +167,6 @@ func componentResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
-			// Platform is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: SupportedOsVersions
 		// CloudFormation resource type schema:
@@ -306,7 +305,6 @@ func componentResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Data",
 		"/properties/Uri",
-		"/properties/Platform",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

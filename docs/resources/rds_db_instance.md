@@ -202,7 +202,8 @@ resource "awscc_rds_db_instance" "this" {
 - `auto_minor_version_upgrade` (Boolean) A value that indicates whether minor engine upgrades are applied automatically to the DB instance during the maintenance window. By default, minor engine upgrades are applied automatically.
 - `automatic_backup_replication_kms_key_id` (String) The AWS KMS key identifier for encryption of the replicated automated backups. The KMS key ID is the Amazon Resource Name (ARN) for the KMS encryption key in the destination AWS-Region, for example, ``arn:aws:kms:us-east-1:123456789012:key/AKIAIOSFODNN7EXAMPLE``.
 - `automatic_backup_replication_region` (String) The AWS-Region associated with the automated backup.
-- `automatic_backup_replication_retention_period` (Number)
+- `automatic_backup_replication_retention_period` (Number) The retention period for automated backups in a different AWS Region. Use this parameter to set a unique retention period that only applies to cross-Region automated backups. To enable automated backups in a different Region, specify a positive value for the ``AutomaticBackupReplicationRegion`` parameter. 
+ If not specified, this parameter defaults to the value of the ``BackupRetentionPeriod`` parameter. The maximum allowed value is 35.
 - `availability_zone` (String) The Availability Zone (AZ) where the database will be created. For information on AWS-Regions and Availability Zones, see [Regions and Availability Zones](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html).
  For Amazon Aurora, each Aurora DB cluster hosts copies of its storage in three separate Availability Zones. Specify one of these Availability Zones. Aurora automatically chooses an appropriate Availability Zone if you don't specify one.
  Default: A random, system-chosen Availability Zone in the endpoint's AWS-Region.
@@ -241,6 +242,7 @@ resource "awscc_rds_db_instance" "this" {
   +  The instance profile name and the associated IAM role name must start with the prefix ``AWSRDSCustom``.
   
  For the list of permissions required for the IAM role, see [Configure IAM and your VPC](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc) in the *Amazon RDS User Guide*.
+- `database_insights_mode` (String)
 - `db_cluster_identifier` (String) The identifier of the DB cluster that this DB instance will belong to.
  This setting doesn't apply to RDS Custom DB instances.
 - `db_cluster_snapshot_identifier` (String) The identifier for the Multi-AZ DB cluster snapshot to restore from.
@@ -675,12 +677,16 @@ resource "awscc_rds_db_instance" "this" {
 
 ### Read-Only
 
-- `certificate_details` (Attributes) The details of the DB instance's server certificate. (see [below for nested schema](#nestedatt--certificate_details))
-- `database_insights_mode` (String)
+- `certificate_details` (Attributes) The details of the DB instance?s server certificate.
+ For more information, see [Using SSL/TLS to encrypt a connection to a DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html) in the *Amazon RDS User Guide* and [Using SSL/TLS to encrypt a connection to a DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html) in the *Amazon Aurora User Guide*. (see [below for nested schema](#nestedatt--certificate_details))
 - `db_instance_arn` (String)
 - `dbi_resource_id` (String)
-- `endpoint` (Attributes) The connection endpoint for the DB instance.
-  The endpoint might not be shown for instances with the status of ``creating``. (see [below for nested schema](#nestedatt--endpoint))
+- `endpoint` (Attributes) This data type represents the information you need to connect to an Amazon RDS DB instance. This data type is used as a response element in the following actions:
+  +   ``CreateDBInstance`` 
+  +   ``DescribeDBInstances`` 
+  +   ``DeleteDBInstance`` 
+  
+ For the data structure that represents Amazon Aurora DB cluster endpoints, see ``DBClusterEndpoint``. (see [below for nested schema](#nestedatt--endpoint))
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--associated_roles"></a>

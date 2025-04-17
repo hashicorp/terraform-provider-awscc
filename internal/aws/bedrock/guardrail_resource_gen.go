@@ -15,6 +15,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
@@ -80,6 +81,16 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 		//	        "additionalProperties": false,
 		//	        "description": "Content filter config in content policy.",
 		//	        "properties": {
+		//	          "InputAction": {
+		//	            "enum": [
+		//	              "BLOCK",
+		//	              "NONE"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "InputEnabled": {
+		//	            "type": "boolean"
+		//	          },
 		//	          "InputModalities": {
 		//	            "description": "List of modalities",
 		//	            "items": {
@@ -102,6 +113,16 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 		//	              "HIGH"
 		//	            ],
 		//	            "type": "string"
+		//	          },
+		//	          "OutputAction": {
+		//	            "enum": [
+		//	              "BLOCK",
+		//	              "NONE"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "OutputEnabled": {
+		//	            "type": "boolean"
 		//	          },
 		//	          "OutputModalities": {
 		//	            "description": "List of modalities",
@@ -162,6 +183,28 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 				"filters_config": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: InputAction
+							"input_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"BLOCK",
+										"NONE",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: InputEnabled
+							"input_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+									boolplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: InputModalities
 							"input_modalities": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
@@ -197,6 +240,28 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: OutputAction
+							"output_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"BLOCK",
+										"NONE",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: OutputEnabled
+							"output_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+									boolplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: OutputModalities
@@ -290,6 +355,16 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 		//	        "additionalProperties": false,
 		//	        "description": "A config for grounding filter.",
 		//	        "properties": {
+		//	          "Action": {
+		//	            "enum": [
+		//	              "BLOCK",
+		//	              "NONE"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Enabled": {
+		//	            "type": "boolean"
+		//	          },
 		//	          "Threshold": {
 		//	            "description": "The threshold for this filter.",
 		//	            "minimum": 0,
@@ -325,6 +400,28 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 				"filters_config": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Action
+							"action": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"BLOCK",
+										"NONE",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Enabled
+							"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+									boolplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: Threshold
 							"threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
 								Description: "The threshold for this filter.",
@@ -522,9 +619,34 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 		//	            "description": "Options for sensitive information action.",
 		//	            "enum": [
 		//	              "BLOCK",
-		//	              "ANONYMIZE"
+		//	              "ANONYMIZE",
+		//	              "NONE"
 		//	            ],
 		//	            "type": "string"
+		//	          },
+		//	          "InputAction": {
+		//	            "description": "Options for sensitive information action.",
+		//	            "enum": [
+		//	              "BLOCK",
+		//	              "ANONYMIZE",
+		//	              "NONE"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "InputEnabled": {
+		//	            "type": "boolean"
+		//	          },
+		//	          "OutputAction": {
+		//	            "description": "Options for sensitive information action.",
+		//	            "enum": [
+		//	              "BLOCK",
+		//	              "ANONYMIZE",
+		//	              "NONE"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "OutputEnabled": {
+		//	            "type": "boolean"
 		//	          },
 		//	          "Type": {
 		//	            "description": "The currently supported PII entities",
@@ -584,7 +706,8 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 		//	            "description": "Options for sensitive information action.",
 		//	            "enum": [
 		//	              "BLOCK",
-		//	              "ANONYMIZE"
+		//	              "ANONYMIZE",
+		//	              "NONE"
 		//	            ],
 		//	            "type": "string"
 		//	          },
@@ -594,11 +717,35 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 		//	            "minLength": 1,
 		//	            "type": "string"
 		//	          },
+		//	          "InputAction": {
+		//	            "description": "Options for sensitive information action.",
+		//	            "enum": [
+		//	              "BLOCK",
+		//	              "ANONYMIZE",
+		//	              "NONE"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "InputEnabled": {
+		//	            "type": "boolean"
+		//	          },
 		//	          "Name": {
 		//	            "description": "The regex name.",
 		//	            "maxLength": 100,
 		//	            "minLength": 1,
 		//	            "type": "string"
+		//	          },
+		//	          "OutputAction": {
+		//	            "description": "Options for sensitive information action.",
+		//	            "enum": [
+		//	              "BLOCK",
+		//	              "ANONYMIZE",
+		//	              "NONE"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "OutputEnabled": {
+		//	            "type": "boolean"
 		//	          },
 		//	          "Pattern": {
 		//	            "description": "The regex pattern.",
@@ -634,11 +781,60 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 									stringvalidator.OneOf(
 										"BLOCK",
 										"ANONYMIZE",
+										"NONE",
 									),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: InputAction
+							"input_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Options for sensitive information action.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"BLOCK",
+										"ANONYMIZE",
+										"NONE",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: InputEnabled
+							"input_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+									boolplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: OutputAction
+							"output_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Options for sensitive information action.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"BLOCK",
+										"ANONYMIZE",
+										"NONE",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: OutputEnabled
+							"output_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+									boolplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Type
@@ -712,6 +908,7 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 									stringvalidator.OneOf(
 										"BLOCK",
 										"ANONYMIZE",
+										"NONE",
 									),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
@@ -731,6 +928,30 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
+							// Property: InputAction
+							"input_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Options for sensitive information action.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"BLOCK",
+										"ANONYMIZE",
+										"NONE",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: InputEnabled
+							"input_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+									boolplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: Name
 							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The regex name.",
@@ -742,6 +963,30 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: OutputAction
+							"output_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Options for sensitive information action.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"BLOCK",
+										"ANONYMIZE",
+										"NONE",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: OutputEnabled
+							"output_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+									boolplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Pattern
@@ -928,12 +1173,32 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 		//	            "minItems": 0,
 		//	            "type": "array"
 		//	          },
+		//	          "InputAction": {
+		//	            "enum": [
+		//	              "BLOCK",
+		//	              "NONE"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "InputEnabled": {
+		//	            "type": "boolean"
+		//	          },
 		//	          "Name": {
 		//	            "description": "Name of topic in topic policy",
 		//	            "maxLength": 100,
 		//	            "minLength": 1,
 		//	            "pattern": "^[0-9a-zA-Z-_ !?.]+$",
 		//	            "type": "string"
+		//	          },
+		//	          "OutputAction": {
+		//	            "enum": [
+		//	              "BLOCK",
+		//	              "NONE"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "OutputEnabled": {
+		//	            "type": "boolean"
 		//	          },
 		//	          "Type": {
 		//	            "description": "Type of topic in a policy",
@@ -994,6 +1259,28 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 									listplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
+							// Property: InputAction
+							"input_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"BLOCK",
+										"NONE",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: InputEnabled
+							"input_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+									boolplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: Name
 							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Name of topic in topic policy",
@@ -1006,6 +1293,28 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: OutputAction
+							"output_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"BLOCK",
+										"NONE",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: OutputEnabled
+							"output_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+									boolplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Type
@@ -1088,6 +1397,26 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 		//	        "additionalProperties": false,
 		//	        "description": "A managed words config.",
 		//	        "properties": {
+		//	          "InputAction": {
+		//	            "enum": [
+		//	              "BLOCK",
+		//	              "NONE"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "InputEnabled": {
+		//	            "type": "boolean"
+		//	          },
+		//	          "OutputAction": {
+		//	            "enum": [
+		//	              "BLOCK",
+		//	              "NONE"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "OutputEnabled": {
+		//	            "type": "boolean"
+		//	          },
 		//	          "Type": {
 		//	            "description": "Options for managed words.",
 		//	            "enum": [
@@ -1109,6 +1438,26 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 		//	        "additionalProperties": false,
 		//	        "description": "A custom word config.",
 		//	        "properties": {
+		//	          "InputAction": {
+		//	            "enum": [
+		//	              "BLOCK",
+		//	              "NONE"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "InputEnabled": {
+		//	            "type": "boolean"
+		//	          },
+		//	          "OutputAction": {
+		//	            "enum": [
+		//	              "BLOCK",
+		//	              "NONE"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "OutputEnabled": {
+		//	            "type": "boolean"
+		//	          },
 		//	          "Text": {
 		//	            "description": "The custom word text.",
 		//	            "minLength": 1,
@@ -1132,6 +1481,50 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 				"managed_word_lists_config": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: InputAction
+							"input_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"BLOCK",
+										"NONE",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: InputEnabled
+							"input_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+									boolplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: OutputAction
+							"output_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"BLOCK",
+										"NONE",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: OutputEnabled
+							"output_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+									boolplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: Type
 							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Options for managed words.",
@@ -1160,6 +1553,50 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 				"words_config": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: InputAction
+							"input_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"BLOCK",
+										"NONE",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: InputEnabled
+							"input_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+									boolplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: OutputAction
+							"output_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"BLOCK",
+										"NONE",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: OutputEnabled
+							"output_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+									boolplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: Text
 							"text": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The custom word text.",
@@ -1223,17 +1660,22 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 		"created_at":                          "CreatedAt",
 		"definition":                          "Definition",
 		"description":                         "Description",
+		"enabled":                             "Enabled",
 		"examples":                            "Examples",
 		"failure_recommendations":             "FailureRecommendations",
 		"filters_config":                      "FiltersConfig",
 		"guardrail_arn":                       "GuardrailArn",
 		"guardrail_id":                        "GuardrailId",
+		"input_action":                        "InputAction",
+		"input_enabled":                       "InputEnabled",
 		"input_modalities":                    "InputModalities",
 		"input_strength":                      "InputStrength",
 		"key":                                 "Key",
 		"kms_key_arn":                         "KmsKeyArn",
 		"managed_word_lists_config":           "ManagedWordListsConfig",
 		"name":                                "Name",
+		"output_action":                       "OutputAction",
+		"output_enabled":                      "OutputEnabled",
 		"output_modalities":                   "OutputModalities",
 		"output_strength":                     "OutputStrength",
 		"pattern":                             "Pattern",

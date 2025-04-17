@@ -3,12 +3,12 @@
 page_title: "awscc_route53_cidr_collection Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource schema for AWS::Route53::CidrCollection.
+  Resource Type definition for AWS::Route53::CidrCollection.
 ---
 
 # awscc_route53_cidr_collection (Resource)
 
-Resource schema for AWS::Route53::CidrCollection.
+Resource Type definition for AWS::Route53::CidrCollection.
 
 ## Example Usage
 

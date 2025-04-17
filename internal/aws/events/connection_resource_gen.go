@@ -47,6 +47,21 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ArnForPolicy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The arn of the connection resource to be used in IAM policies.",
+		//	  "pattern": "^arn:aws([a-z]|\\-)*:events:([a-z]|\\d|\\-)*:([0-9]{12})?:connection\\/[\\.\\-_A-Za-z0-9]+$",
+		//	  "type": "string"
+		//	}
+		"arn_for_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The arn of the connection resource to be used in IAM policies.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AuthParameters
 		// CloudFormation resource type schema:
 		//
@@ -932,6 +947,25 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: KmsKeyIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 2048,
+		//	  "pattern": "^[a-zA-Z0-9_\\-/:]*$",
+		//	  "type": "string"
+		//	}
+		"kms_key_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(2048),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_\\-/:]*$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -996,6 +1030,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		"api_key_name":                       "ApiKeyName",
 		"api_key_value":                      "ApiKeyValue",
 		"arn":                                "Arn",
+		"arn_for_policy":                     "ArnForPolicy",
 		"auth_parameters":                    "AuthParameters",
 		"authorization_endpoint":             "AuthorizationEndpoint",
 		"authorization_type":                 "AuthorizationType",
@@ -1012,6 +1047,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		"invocation_http_parameters":         "InvocationHttpParameters",
 		"is_value_secret":                    "IsValueSecret",
 		"key":                                "Key",
+		"kms_key_identifier":                 "KmsKeyIdentifier",
 		"name":                               "Name",
 		"o_auth_http_parameters":             "OAuthHttpParameters",
 		"o_auth_parameters":                  "OAuthParameters",

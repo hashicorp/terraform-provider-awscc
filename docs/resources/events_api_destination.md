@@ -61,6 +61,7 @@ resource "awscc_events_api_destination" "example" {
 ### Read-Only
 
 - `arn` (String) The arn of the api destination.
+- `arn_for_policy` (String) The arn of the api destination to be used in IAM policies.
 - `id` (String) Uniquely identifies the resource.
 
 ## Import

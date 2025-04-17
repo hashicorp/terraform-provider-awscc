@@ -29,6 +29,62 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::S3Tables::TableBucket resource.
 func tableBucketResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: EncryptionConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Specifies encryption settings for the table bucket",
+		//	  "properties": {
+		//	    "KMSKeyArn": {
+		//	      "description": "ARN of the KMS key to use for encryption",
+		//	      "type": "string"
+		//	    },
+		//	    "SSEAlgorithm": {
+		//	      "description": "Server-side encryption algorithm",
+		//	      "enum": [
+		//	        "AES256",
+		//	        "aws:kms"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KMSKeyArn
+				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "ARN of the KMS key to use for encryption",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SSEAlgorithm
+				"sse_algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Server-side encryption algorithm",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"AES256",
+							"aws:kms",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies encryption settings for the table bucket",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TableBucketARN
 		// CloudFormation resource type schema:
 		//
@@ -164,7 +220,10 @@ func tableBucketResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::S3Tables::TableBucket").WithTerraformTypeName("awscc_s3tables_table_bucket")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"encryption_configuration":  "EncryptionConfiguration",
+		"kms_key_arn":               "KMSKeyArn",
 		"noncurrent_days":           "NoncurrentDays",
+		"sse_algorithm":             "SSEAlgorithm",
 		"status":                    "Status",
 		"table_bucket_arn":          "TableBucketARN",
 		"table_bucket_name":         "TableBucketName",

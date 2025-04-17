@@ -69,7 +69,9 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "enum": [
-		//	    "DIRECT_QUERY"
+		//	    "DIRECT_QUERY",
+		//	    "DIRECT_JOB",
+		//	    "MULTIPLE"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -78,11 +80,10 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"DIRECT_QUERY",
+					"DIRECT_JOB",
+					"MULTIPLE",
 				),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: AnalysisRules
 		// CloudFormation resource type schema:
@@ -274,7 +275,7 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "items": {
 		//	                      "maxLength": 200,
 		//	                      "minLength": 0,
-		//	                      "pattern": "(ANY_QUERY|arn:[\\w]{3}:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:[\\d]{12}:membership/[\\d\\w-]+/analysistemplate/[\\d\\w-]+)",
+		//	                      "pattern": "(ANY_QUERY|ANY_JOB|arn:[\\w]{3}:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:[\\d]{12}:membership/[\\d\\w-]+/analysistemplate/[\\d\\w-]+)",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "minItems": 0,
@@ -690,7 +691,7 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 													listvalidator.SizeAtLeast(0),
 													listvalidator.ValueStringsAre(
 														stringvalidator.LengthBetween(0, 200),
-														stringvalidator.RegexMatches(regexp.MustCompile("(ANY_QUERY|arn:[\\w]{3}:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:[\\d]{12}:membership/[\\d\\w-]+/analysistemplate/[\\d\\w-]+)"), ""),
+														stringvalidator.RegexMatches(regexp.MustCompile("(ANY_QUERY|ANY_JOB|arn:[\\w]{3}:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:[\\d]{12}:membership/[\\d\\w-]+/analysistemplate/[\\d\\w-]+)"), ""),
 													),
 													fwvalidators.NotNullList(),
 												}, /*END VALIDATORS*/
@@ -965,6 +966,37 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 100),
 			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SelectedAnalysisMethods
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "enum": [
+		//	      "DIRECT_QUERY",
+		//	      "DIRECT_JOB"
+		//	    ],
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"selected_analysis_methods": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.ValueStringsAre(
+					stringvalidator.OneOf(
+						"DIRECT_QUERY",
+						"DIRECT_JOB",
+					),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: TableReference
 		// CloudFormation resource type schema:
@@ -1439,6 +1471,7 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 		"scalar_functions":            "ScalarFunctions",
 		"schema_name":                 "SchemaName",
 		"secret_arn":                  "SecretArn",
+		"selected_analysis_methods":   "SelectedAnalysisMethods",
 		"snowflake":                   "Snowflake",
 		"table_name":                  "TableName",
 		"table_reference":             "TableReference",

@@ -22,6 +22,44 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::S3Tables::TableBucket resource.
 func tableBucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: EncryptionConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Specifies encryption settings for the table bucket",
+		//	  "properties": {
+		//	    "KMSKeyArn": {
+		//	      "description": "ARN of the KMS key to use for encryption",
+		//	      "type": "string"
+		//	    },
+		//	    "SSEAlgorithm": {
+		//	      "description": "Server-side encryption algorithm",
+		//	      "enum": [
+		//	        "AES256",
+		//	        "aws:kms"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KMSKeyArn
+				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "ARN of the KMS key to use for encryption",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SSEAlgorithm
+				"sse_algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Server-side encryption algorithm",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies encryption settings for the table bucket",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TableBucketARN
 		// CloudFormation resource type schema:
 		//
@@ -115,7 +153,10 @@ func tableBucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::S3Tables::TableBucket").WithTerraformTypeName("awscc_s3tables_table_bucket")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"encryption_configuration":  "EncryptionConfiguration",
+		"kms_key_arn":               "KMSKeyArn",
 		"noncurrent_days":           "NoncurrentDays",
+		"sse_algorithm":             "SSEAlgorithm",
 		"status":                    "Status",
 		"table_bucket_arn":          "TableBucketARN",
 		"table_bucket_name":         "TableBucketName",

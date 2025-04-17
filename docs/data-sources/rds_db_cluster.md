@@ -247,12 +247,10 @@ Data Source schema for AWS::RDS::DBCluster
  If ``DBSubnetGroupName`` is specified, and ``PubliclyAccessible`` isn't specified, the following applies:
   +  If the subnets are part of a VPC that doesn?t have an internet gateway attached to it, the DB cluster is private.
   +  If the subnets are part of a VPC that has an internet gateway attached to it, the DB cluster is public.
-- `read_endpoint` (Attributes) This data type represents the information you need to connect to an Amazon RDS DB instance. This data type is used as a response element in the following actions:
-  +   ``CreateDBInstance`` 
-  +   ``DescribeDBInstances`` 
-  +   ``DeleteDBInstance`` 
-  
- For the data structure that represents Amazon Aurora DB cluster endpoints, see ``DBClusterEndpoint``. (see [below for nested schema](#nestedatt--read_endpoint))
+- `read_endpoint` (Attributes) The ``ReadEndpoint`` return value specifies the reader endpoint for the DB cluster.
+ The reader endpoint for a DB cluster load-balances connections across the Aurora Replicas that are available in a DB cluster. As clients request new connections to the reader endpoint, Aurora distributes the connection requests among the Aurora Replicas in the DB cluster. This functionality can help balance your read workload across multiple Aurora Replicas in your DB cluster.
+ If a failover occurs, and the Aurora Replica that you are connected to is promoted to be the primary instance, your connection is dropped. To continue sending your read workload to other Aurora Replicas in the cluster, you can then reconnect to the reader endpoint.
+ For more information about Aurora endpoints, see [Amazon Aurora connection management](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Overview.Endpoints.html) in the *Amazon Aurora User Guide*. (see [below for nested schema](#nestedatt--read_endpoint))
 - `replication_source_identifier` (String) The Amazon Resource Name (ARN) of the source DB instance or DB cluster if this DB cluster is created as a read replica.
  Valid for: Aurora DB clusters only
 - `restore_to_time` (String) The date and time to restore the DB cluster to.

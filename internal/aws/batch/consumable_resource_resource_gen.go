@@ -175,7 +175,7 @@ func consumableResourceResource(ctx context.Context) (resource.Resource, error) 
 	}
 
 	schema := schema.Schema{
-		Description: "Resource Type schema for AWS::Batch::ConsumableResource",
+		Description: "Resource Type definition for AWS::Batch::ConsumableResource",
 		Version:     1,
 		Attributes:  attributes,
 	}

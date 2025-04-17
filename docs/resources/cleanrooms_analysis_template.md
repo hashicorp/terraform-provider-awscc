@@ -26,6 +26,8 @@ Represents a stored analysis within a collaboration
 
 - `analysis_parameters` (Attributes List) The member who can query can provide this placeholder for a literal data value in an analysis template (see [below for nested schema](#nestedatt--analysis_parameters))
 - `description` (String)
+- `schema` (Attributes) (see [below for nested schema](#nestedatt--schema))
+- `source_metadata` (Attributes) (see [below for nested schema](#nestedatt--source_metadata))
 - `tags` (Attributes List) An arbitrary set of tags (key-value pairs) for this cleanrooms analysis template. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -36,14 +38,58 @@ Represents a stored analysis within a collaboration
 - `collaboration_identifier` (String)
 - `id` (String) Uniquely identifies the resource.
 - `membership_arn` (String)
-- `schema` (Attributes) (see [below for nested schema](#nestedatt--schema))
 
 <a id="nestedatt--source"></a>
 ### Nested Schema for `source`
 
-Required:
+Optional:
 
+- `artifacts` (Attributes) (see [below for nested schema](#nestedatt--source--artifacts))
 - `text` (String)
+
+<a id="nestedatt--source--artifacts"></a>
+### Nested Schema for `source.artifacts`
+
+Optional:
+
+- `additional_artifacts` (Attributes List) (see [below for nested schema](#nestedatt--source--artifacts--additional_artifacts))
+- `entry_point` (Attributes) (see [below for nested schema](#nestedatt--source--artifacts--entry_point))
+- `role_arn` (String)
+
+<a id="nestedatt--source--artifacts--additional_artifacts"></a>
+### Nested Schema for `source.artifacts.additional_artifacts`
+
+Optional:
+
+- `location` (Attributes) (see [below for nested schema](#nestedatt--source--artifacts--additional_artifacts--location))
+
+<a id="nestedatt--source--artifacts--additional_artifacts--location"></a>
+### Nested Schema for `source.artifacts.additional_artifacts.location`
+
+Optional:
+
+- `bucket` (String)
+- `key` (String)
+
+
+
+<a id="nestedatt--source--artifacts--entry_point"></a>
+### Nested Schema for `source.artifacts.entry_point`
+
+Optional:
+
+- `location` (Attributes) (see [below for nested schema](#nestedatt--source--artifacts--entry_point--location))
+
+<a id="nestedatt--source--artifacts--entry_point--location"></a>
+### Nested Schema for `source.artifacts.entry_point.location`
+
+Optional:
+
+- `bucket` (String)
+- `key` (String)
+
+
+
 
 
 <a id="nestedatt--analysis_parameters"></a>
@@ -56,6 +102,47 @@ Optional:
 - `type` (String)
 
 
+<a id="nestedatt--schema"></a>
+### Nested Schema for `schema`
+
+Optional:
+
+- `referenced_tables` (List of String)
+
+
+<a id="nestedatt--source_metadata"></a>
+### Nested Schema for `source_metadata`
+
+Optional:
+
+- `artifacts` (Attributes) (see [below for nested schema](#nestedatt--source_metadata--artifacts))
+
+<a id="nestedatt--source_metadata--artifacts"></a>
+### Nested Schema for `source_metadata.artifacts`
+
+Optional:
+
+- `additional_artifact_hashes` (Attributes List) (see [below for nested schema](#nestedatt--source_metadata--artifacts--additional_artifact_hashes))
+- `entry_point_hash` (Attributes) (see [below for nested schema](#nestedatt--source_metadata--artifacts--entry_point_hash))
+
+<a id="nestedatt--source_metadata--artifacts--additional_artifact_hashes"></a>
+### Nested Schema for `source_metadata.artifacts.additional_artifact_hashes`
+
+Optional:
+
+- `sha_256` (String)
+
+
+<a id="nestedatt--source_metadata--artifacts--entry_point_hash"></a>
+### Nested Schema for `source_metadata.artifacts.entry_point_hash`
+
+Optional:
+
+- `sha_256` (String)
+
+
+
+
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
@@ -63,14 +150,6 @@ Optional:
 
 - `key` (String)
 - `value` (String)
-
-
-<a id="nestedatt--schema"></a>
-### Nested Schema for `schema`
-
-Read-Only:
-
-- `referenced_tables` (List of String)
 
 ## Import
 

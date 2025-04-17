@@ -19,11 +19,11 @@ Definition of AWS::LaunchWizard::Deployment Resource Type
 
 - `deployment_pattern_name` (String) Workload deployment pattern name
 - `name` (String) Name of LaunchWizard deployment
-- `specifications` (Map of String) LaunchWizard deployment specifications
 - `workload_name` (String) Workload Name for LaunchWizard deployment
 
 ### Optional
 
+- `specifications` (Map of String) LaunchWizard deployment specifications
 - `tags` (Attributes List) Tags for LaunchWizard deployment (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

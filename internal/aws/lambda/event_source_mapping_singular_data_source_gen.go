@@ -68,11 +68,11 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "(Kinesis and DynamoDB Streams only) If the function returns an error, split the batch in two and retry. The default value is false.",
+		//	  "description": "(Kinesis and DynamoDB Streams only) If the function returns an error, split the batch in two and retry. The default value is false.\n  When using ``BisectBatchOnFunctionError``, check the ``BatchSize`` parameter in the ``OnFailure`` destination message's metadata. The ``BatchSize`` could be greater than 1 since LAM consolidates failed messages metadata when writing to the ``OnFailure`` destination.",
 		//	  "type": "boolean"
 		//	}
 		"bisect_batch_on_function_error": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "(Kinesis and DynamoDB Streams only) If the function returns an error, split the batch in two and retry. The default value is false.",
+			Description: "(Kinesis and DynamoDB Streams only) If the function returns an error, split the batch in two and retry. The default value is false.\n  When using ``BisectBatchOnFunctionError``, check the ``BatchSize`` parameter in the ``OnFailure`` destination message's metadata. The ``BatchSize`` could be greater than 1 since LAM consolidates failed messages metadata when writing to the ``OnFailure`` destination.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DestinationConfig

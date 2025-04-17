@@ -139,12 +139,12 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The retention period for automated backups in a different AWS Region. Use this parameter to set a unique retention period that only applies to cross-Region automated backups. To enable automated backups in a different Region, specify a positive value for the ``AutomaticBackupReplicationRegion`` parameter. \n If not specified, this parameter defaults to the value of the ``BackupRetentionPeriod`` parameter. The maximum allowed value is 35.",
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
 		"automatic_backup_replication_retention_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "The retention period for automated backups in a different AWS Region. Use this parameter to set a unique retention period that only applies to cross-Region automated backups. To enable automated backups in a different Region, specify a positive value for the ``AutomaticBackupReplicationRegion`` parameter. \n If not specified, this parameter defaults to the value of the ``BackupRetentionPeriod`` parameter. The maximum allowed value is 35.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityZone
@@ -186,7 +186,7 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The details of the DB instance's server certificate.",
+		//	  "description": "The details of the DB instance?s server certificate.\n For more information, see [Using SSL/TLS to encrypt a connection to a DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html) in the *Amazon RDS User Guide* and [Using SSL/TLS to encrypt a connection to a DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html) in the *Amazon Aurora User Guide*.",
 		//	  "properties": {
 		//	    "CAIdentifier": {
 		//	      "description": "The CA identifier of the CA certificate used for the DB instance's server certificate.",
@@ -214,7 +214,7 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The details of the DB instance's server certificate.",
+			Description: "The details of the DB instance?s server certificate.\n For more information, see [Using SSL/TLS to encrypt a connection to a DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html) in the *Amazon RDS User Guide* and [Using SSL/TLS to encrypt a connection to a DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html) in the *Amazon Aurora User Guide*.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CertificateRotationRestart
@@ -557,7 +557,7 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The connection endpoint for the DB instance.\n  The endpoint might not be shown for instances with the status of ``creating``.",
+		//	  "description": "This data type represents the information you need to connect to an Amazon RDS DB instance. This data type is used as a response element in the following actions:\n  +   ``CreateDBInstance`` \n  +   ``DescribeDBInstances`` \n  +   ``DeleteDBInstance`` \n  \n For the data structure that represents Amazon Aurora DB cluster endpoints, see ``DBClusterEndpoint``.",
 		//	  "properties": {
 		//	    "Address": {
 		//	      "description": "Specifies the DNS address of the DB instance.",
@@ -592,7 +592,7 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The connection endpoint for the DB instance.\n  The endpoint might not be shown for instances with the status of ``creating``.",
+			Description: "This data type represents the information you need to connect to an Amazon RDS DB instance. This data type is used as a response element in the following actions:\n  +   ``CreateDBInstance`` \n  +   ``DescribeDBInstances`` \n  +   ``DeleteDBInstance`` \n  \n For the data structure that represents Amazon Aurora DB cluster endpoints, see ``DBClusterEndpoint``.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Engine

@@ -34,6 +34,18 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The arn of the connection resource.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ArnForPolicy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The arn of the connection resource to be used in IAM policies.",
+		//	  "pattern": "^arn:aws([a-z]|\\-)*:events:([a-z]|\\d|\\-)*:([0-9]{12})?:connection\\/[\\.\\-_A-Za-z0-9]+$",
+		//	  "type": "string"
+		//	}
+		"arn_for_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The arn of the connection resource to be used in IAM policies.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AuthParameters
 		// CloudFormation resource type schema:
 		//
@@ -610,6 +622,17 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The private resource the HTTP request will be sent to.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: KmsKeyIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 2048,
+		//	  "pattern": "^[a-zA-Z0-9_\\-/:]*$",
+		//	  "type": "string"
+		//	}
+		"kms_key_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -657,6 +680,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"api_key_name":                       "ApiKeyName",
 		"api_key_value":                      "ApiKeyValue",
 		"arn":                                "Arn",
+		"arn_for_policy":                     "ArnForPolicy",
 		"auth_parameters":                    "AuthParameters",
 		"authorization_endpoint":             "AuthorizationEndpoint",
 		"authorization_type":                 "AuthorizationType",
@@ -673,6 +697,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"invocation_http_parameters":         "InvocationHttpParameters",
 		"is_value_secret":                    "IsValueSecret",
 		"key":                                "Key",
+		"kms_key_identifier":                 "KmsKeyIdentifier",
 		"name":                               "Name",
 		"o_auth_http_parameters":             "OAuthHttpParameters",
 		"o_auth_parameters":                  "OAuthParameters",

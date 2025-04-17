@@ -21,6 +21,7 @@ Data Source schema for AWS::Macie::Session
 
 ### Read-Only
 
+- `automated_discovery_status` (String) The status of automated sensitive data discovery for the Macie session.
 - `aws_account_id` (String) AWS account ID of customer
 - `finding_publishing_frequency` (String) A enumeration value that specifies how frequently finding updates are published.
 - `service_role` (String) Service role used by Macie

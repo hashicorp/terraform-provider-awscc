@@ -24,7 +24,6 @@ Definition of AWS::Backup::RestoreTestingPlan Resource Type
 ### Optional
 
 - `schedule_expression_timezone` (String)
-- `schedule_status` (String)
 - `start_window_hours` (Number)
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 

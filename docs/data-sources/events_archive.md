@@ -25,5 +25,6 @@ Data Source schema for AWS::Events::Archive
 - `arn` (String)
 - `description` (String)
 - `event_pattern` (String)
+- `kms_key_identifier` (String)
 - `retention_days` (Number)
 - `source_arn` (String)

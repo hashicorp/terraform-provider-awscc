@@ -167,7 +167,8 @@ func analysisTemplateDataSource(ctx context.Context) (datasource.DataSource, err
 		//
 		//	{
 		//	  "enum": [
-		//	    "SQL"
+		//	    "SQL",
+		//	    "PYSPARK_1_0"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -243,23 +244,218 @@ func analysisTemplateDataSource(ctx context.Context) (datasource.DataSource, err
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "Artifacts": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "AdditionalArtifacts": {
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Location": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "Bucket": {
+		//	                    "maxLength": 63,
+		//	                    "minLength": 3,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Key": {
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Bucket",
+		//	                  "Key"
+		//	                ],
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Location"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 1,
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        },
+		//	        "EntryPoint": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Location": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Bucket": {
+		//	                  "maxLength": 63,
+		//	                  "minLength": 3,
+		//	                  "type": "string"
+		//	                },
+		//	                "Key": {
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Bucket",
+		//	                "Key"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Location"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "RoleArn": {
+		//	          "maxLength": 512,
+		//	          "minLength": 32,
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "EntryPoint",
+		//	        "RoleArn"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "Text": {
-		//	      "maxLength": 15000,
+		//	      "maxLength": 90000,
 		//	      "minLength": 0,
 		//	      "type": "string"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "Text"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Artifacts
+				"artifacts": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AdditionalArtifacts
+						"additional_artifacts": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Location
+									"location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Bucket
+											"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Key
+											"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: EntryPoint
+						"entry_point": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Location
+								"location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Bucket
+										"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Key
+										"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: RoleArn
+						"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: Text
 				"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: SourceMetadata
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "properties": {
+		//	    "Artifacts": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "AdditionalArtifactHashes": {
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Sha256": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array"
+		//	        },
+		//	        "EntryPointHash": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Sha256": {
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "EntryPointHash"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"source_metadata": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Artifacts
+				"artifacts": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AdditionalArtifactHashes
+						"additional_artifact_hashes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Sha256
+									"sha_256": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: EntryPointHash
+						"entry_point_hash": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Sha256
+								"sha_256": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -326,21 +522,31 @@ func analysisTemplateDataSource(ctx context.Context) (datasource.DataSource, err
 	opts = opts.WithCloudFormationTypeName("AWS::CleanRooms::AnalysisTemplate").WithTerraformTypeName("awscc_cleanrooms_analysis_template")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"additional_artifact_hashes":   "AdditionalArtifactHashes",
+		"additional_artifacts":         "AdditionalArtifacts",
 		"analysis_parameters":          "AnalysisParameters",
 		"analysis_template_identifier": "AnalysisTemplateIdentifier",
 		"arn":                          "Arn",
+		"artifacts":                    "Artifacts",
+		"bucket":                       "Bucket",
 		"collaboration_arn":            "CollaborationArn",
 		"collaboration_identifier":     "CollaborationIdentifier",
 		"default_value":                "DefaultValue",
 		"description":                  "Description",
+		"entry_point":                  "EntryPoint",
+		"entry_point_hash":             "EntryPointHash",
 		"format":                       "Format",
 		"key":                          "Key",
+		"location":                     "Location",
 		"membership_arn":               "MembershipArn",
 		"membership_identifier":        "MembershipIdentifier",
 		"name":                         "Name",
 		"referenced_tables":            "ReferencedTables",
+		"role_arn":                     "RoleArn",
 		"schema":                       "Schema",
+		"sha_256":                      "Sha256",
 		"source":                       "Source",
+		"source_metadata":              "SourceMetadata",
 		"tags":                         "Tags",
 		"text":                         "Text",
 		"type":                         "Type",

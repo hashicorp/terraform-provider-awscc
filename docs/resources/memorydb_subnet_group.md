@@ -94,6 +94,7 @@ resource "awscc_memorydb_subnet_group" "example" {
 
 - `arn` (String) The Amazon Resource Name (ARN) of the subnet group.
 - `id` (String) Uniquely identifies the resource.
+- `supported_network_types` (Set of String) Supported network types would be a list of network types supported by subnet group and can be either [ipv4] or [ipv4, dual_stack] or [ipv6].
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

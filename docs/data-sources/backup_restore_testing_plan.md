@@ -26,7 +26,6 @@ Data Source schema for AWS::Backup::RestoreTestingPlan
 - `restore_testing_plan_name` (String)
 - `schedule_expression` (String)
 - `schedule_expression_timezone` (String)
-- `schedule_status` (String)
 - `start_window_hours` (Number)
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 

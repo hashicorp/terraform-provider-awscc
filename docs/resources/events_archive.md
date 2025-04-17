@@ -53,6 +53,7 @@ resource "awscc_events_archive" "example" {
 - `archive_name` (String)
 - `description` (String)
 - `event_pattern` (String)
+- `kms_key_identifier` (String)
 - `retention_days` (Number)
 
 ### Read-Only

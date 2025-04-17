@@ -252,6 +252,7 @@ Read-Only:
 
 - `mongo_db_atlas_configuration` (Attributes) Contains the storage configuration of the knowledge base in MongoDb Atlas Cloud. (see [below for nested schema](#nestedatt--storage_configuration--mongo_db_atlas_configuration))
 - `neptune_analytics_configuration` (Attributes) Contains the configurations to use Neptune Analytics as Vector Store. (see [below for nested schema](#nestedatt--storage_configuration--neptune_analytics_configuration))
+- `opensearch_managed_cluster_configuration` (Attributes) Contains the storage configuration of the knowledge base in Amazon OpenSearch Service. (see [below for nested schema](#nestedatt--storage_configuration--opensearch_managed_cluster_configuration))
 - `opensearch_serverless_configuration` (Attributes) Contains the storage configuration of the knowledge base in Amazon OpenSearch Service. (see [below for nested schema](#nestedatt--storage_configuration--opensearch_serverless_configuration))
 - `pinecone_configuration` (Attributes) Contains the storage configuration of the knowledge base in Pinecone. (see [below for nested schema](#nestedatt--storage_configuration--pinecone_configuration))
 - `rds_configuration` (Attributes) Contains details about the storage configuration of the knowledge base in Amazon RDS. For more information, see Create a vector index in Amazon RDS. (see [below for nested schema](#nestedatt--storage_configuration--rds_configuration))
@@ -268,6 +269,7 @@ Read-Only:
 - `endpoint` (String) MongoDB Atlas endpoint.
 - `endpoint_service_name` (String) MongoDB Atlas endpoint service name.
 - `field_mapping` (Attributes) Contains the names of the fields to which to map information about the vector store. (see [below for nested schema](#nestedatt--storage_configuration--mongo_db_atlas_configuration--field_mapping))
+- `text_index_name` (String) Name of a MongoDB Atlas text index.
 - `vector_index_name` (String) Name of a MongoDB Atlas index.
 
 <a id="nestedatt--storage_configuration--mongo_db_atlas_configuration--field_mapping"></a>
@@ -296,6 +298,27 @@ Read-Only:
 
 - `metadata_field` (String) The name of the field in which Amazon Bedrock stores metadata about the vector store.
 - `text_field` (String) The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
+
+
+
+<a id="nestedatt--storage_configuration--opensearch_managed_cluster_configuration"></a>
+### Nested Schema for `storage_configuration.opensearch_managed_cluster_configuration`
+
+Read-Only:
+
+- `domain_arn` (String) The Amazon Resource Name (ARN) of the OpenSearch domain.
+- `domain_endpoint` (String) The endpoint URL the OpenSearch domain.
+- `field_mapping` (Attributes) A mapping of Bedrock Knowledge Base fields to OpenSearch Managed Cluster field names (see [below for nested schema](#nestedatt--storage_configuration--opensearch_managed_cluster_configuration--field_mapping))
+- `vector_index_name` (String) The name of the vector store.
+
+<a id="nestedatt--storage_configuration--opensearch_managed_cluster_configuration--field_mapping"></a>
+### Nested Schema for `storage_configuration.opensearch_managed_cluster_configuration.field_mapping`
+
+Read-Only:
+
+- `metadata_field` (String) The name of the field in which Amazon Bedrock stores metadata about the vector store.
+- `text_field` (String) The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
+- `vector_field` (String) The name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.
 
 
 
@@ -355,6 +378,7 @@ Read-Only:
 
 Read-Only:
 
+- `custom_metadata_field` (String) The name of the field in which Amazon Bedrock stores custom metadata about the vector store.
 - `metadata_field` (String) The name of the field in which Amazon Bedrock stores metadata about the vector store.
 - `primary_key_field` (String) The name of the field in which Amazon Bedrock stores the ID for each entry.
 - `text_field` (String) The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.

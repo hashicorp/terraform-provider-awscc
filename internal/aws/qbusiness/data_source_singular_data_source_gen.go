@@ -618,6 +618,22 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "AudioExtractionConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "AudioExtractionStatus": {
+		//	          "enum": [
+		//	            "ENABLED",
+		//	            "DISABLED"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "AudioExtractionStatus"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "ImageExtractionConfiguration": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -633,17 +649,53 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "ImageExtractionStatus"
 		//	      ],
 		//	      "type": "object"
+		//	    },
+		//	    "VideoExtractionConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "VideoExtractionStatus": {
+		//	          "enum": [
+		//	            "ENABLED",
+		//	            "DISABLED"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "VideoExtractionStatus"
+		//	      ],
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
 		//	}
 		"media_extraction_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AudioExtractionConfiguration
+				"audio_extraction_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AudioExtractionStatus
+						"audio_extraction_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: ImageExtractionConfiguration
 				"image_extraction_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: ImageExtractionStatus
 						"image_extraction_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: VideoExtractionConfiguration
+				"video_extraction_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: VideoExtractionStatus
+						"video_extraction_status": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -827,6 +879,8 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"application_id":                     "ApplicationId",
 		"attribute_value_operator":           "AttributeValueOperator",
+		"audio_extraction_configuration":     "AudioExtractionConfiguration",
+		"audio_extraction_status":            "AudioExtractionStatus",
 		"condition":                          "Condition",
 		"configuration":                      "Configuration",
 		"created_at":                         "CreatedAt",
@@ -862,6 +916,8 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"type":                               "Type",
 		"updated_at":                         "UpdatedAt",
 		"value":                              "Value",
+		"video_extraction_configuration":     "VideoExtractionConfiguration",
+		"video_extraction_status":            "VideoExtractionStatus",
 		"vpc_configuration":                  "VpcConfiguration",
 	})
 

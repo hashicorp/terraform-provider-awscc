@@ -121,6 +121,7 @@ resource "awscc_paymentcryptography_key" "example" {
 
 ### Optional
 
+- `derive_key_usage` (String)
 - `enabled` (Boolean)
 - `key_check_value_algorithm` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))

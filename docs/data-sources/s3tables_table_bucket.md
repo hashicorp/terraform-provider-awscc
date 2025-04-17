@@ -21,9 +21,19 @@ Data Source schema for AWS::S3Tables::TableBucket
 
 ### Read-Only
 
+- `encryption_configuration` (Attributes) Specifies encryption settings for the table bucket (see [below for nested schema](#nestedatt--encryption_configuration))
 - `table_bucket_arn` (String) The Amazon Resource Name (ARN) of the specified table bucket.
 - `table_bucket_name` (String) A name for the table bucket.
 - `unreferenced_file_removal` (Attributes) Settings governing the Unreferenced File Removal maintenance action. Unreferenced file removal identifies and deletes all objects that are not referenced by any table snapshots. (see [below for nested schema](#nestedatt--unreferenced_file_removal))
+
+<a id="nestedatt--encryption_configuration"></a>
+### Nested Schema for `encryption_configuration`
+
+Read-Only:
+
+- `kms_key_arn` (String) ARN of the KMS key to use for encryption
+- `sse_algorithm` (String) Server-side encryption algorithm
+
 
 <a id="nestedatt--unreferenced_file_removal"></a>
 ### Nested Schema for `unreferenced_file_removal`

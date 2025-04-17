@@ -1578,6 +1578,16 @@ resource_schema "aws_docdbelastic_cluster" {
   cloudformation_type_name = "AWS::DocDBElastic::Cluster"
 }
 
+resource_schema "aws_dsql_cluster" {
+  cloudformation_type_name = "AWS::DSQL::Cluster"
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+
+  # Suppression Reason: Tags is of unsupported type: list of
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/2272
+}
+
 resource_schema "aws_dynamodb_global_table" {
   cloudformation_type_name = "AWS::DynamoDB::GlobalTable"
 }
@@ -3540,6 +3550,14 @@ resource_schema "aws_memorydb_user" {
 
 resource_schema "aws_neptune_db_cluster" {
   cloudformation_type_name = "AWS::Neptune::DBCluster"
+}
+
+resource_schema "aws_neptune_db_cluster_parameter_group" {
+  cloudformation_type_name = "AWS::Neptune::DBClusterParameterGroup"
+}
+
+resource_schema "aws_neptune_db_parameter_group" {
+  cloudformation_type_name = "AWS::Neptune::DBParameterGroup"
 }
 
 resource_schema "aws_neptune_db_subnet_group" {

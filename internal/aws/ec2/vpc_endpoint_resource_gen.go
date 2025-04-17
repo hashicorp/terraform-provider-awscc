@@ -72,9 +72,10 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "",
+		//	  "description": "Describes the DNS options for an endpoint.",
 		//	  "properties": {
 		//	    "DnsRecordIpType": {
+		//	      "description": "The DNS records created for the endpoint.",
 		//	      "enum": [
 		//	        "ipv4",
 		//	        "ipv6",
@@ -85,6 +86,7 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "PrivateDnsOnlyForInboundResolverEndpoint": {
+		//	      "description": "Indicates whether to enable private DNS only for inbound endpoints. This option is available only for services that support both gateway and interface endpoints. It routes traffic that originates from the VPC to the gateway endpoint and traffic that originates from on-premises to the interface endpoint.",
 		//	      "enum": [
 		//	        "OnlyInboundResolver",
 		//	        "AllResolvers",
@@ -99,8 +101,9 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: DnsRecordIpType
 				"dns_record_ip_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
+					Description: "The DNS records created for the endpoint.",
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"ipv4",
@@ -116,8 +119,9 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: PrivateDnsOnlyForInboundResolverEndpoint
 				"private_dns_only_for_inbound_resolver_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
+					Description: "Indicates whether to enable private DNS only for inbound endpoints. This option is available only for services that support both gateway and interface endpoints. It routes traffic that originates from the VPC to the gateway endpoint and traffic that originates from on-premises to the interface endpoint.",
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"OnlyInboundResolver",
@@ -130,7 +134,7 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "",
+			Description: "Describes the DNS options for an endpoint.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -155,7 +159,7 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The supported IP address types.",
 		//	  "enum": [
 		//	    "ipv4",
 		//	    "ipv6",
@@ -165,7 +169,7 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "The supported IP address types.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -235,11 +239,11 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The Amazon Resource Name (ARN) of the resource configuration.",
 		//	  "type": "string"
 		//	}
 		"resource_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "The Amazon Resource Name (ARN) of the resource configuration.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -318,10 +322,26 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The Amazon Resource Name (ARN) of the service network.",
 		//	  "type": "string"
 		//	}
 		"service_network_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the service network.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ServiceRegion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"service_region": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "",
 			Optional:    true,
 			Computed:    true,
@@ -359,16 +379,18 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The tags to associate with the endpoint.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "",
+		//	    "description": "Describes a tag.",
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "The key of the tag.\n Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with ``aws:``.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "The value of the tag.\n Constraints: Tag values are case-sensitive and accept a maximum of 256 Unicode characters.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -386,8 +408,9 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "The key of the tag.\n Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with ``aws:``.",
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -397,8 +420,9 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "The value of the tag.\n Constraints: Tag values are case-sensitive and accept a maximum of 256 Unicode characters.",
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -408,7 +432,7 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "",
+			Description: "The tags to associate with the endpoint.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -499,6 +523,7 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 		"security_group_ids":                             "SecurityGroupIds",
 		"service_name":                                   "ServiceName",
 		"service_network_arn":                            "ServiceNetworkArn",
+		"service_region":                                 "ServiceRegion",
 		"subnet_ids":                                     "SubnetIds",
 		"tags":                                           "Tags",
 		"value":                                          "Value",

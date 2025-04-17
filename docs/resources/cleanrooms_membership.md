@@ -130,7 +130,9 @@ resource "awscc_cleanrooms_membership" "example" {
 
 ### Optional
 
+- `default_job_result_configuration` (Attributes) (see [below for nested schema](#nestedatt--default_job_result_configuration))
 - `default_result_configuration` (Attributes) (see [below for nested schema](#nestedatt--default_result_configuration))
+- `job_log_status` (String)
 - `payment_configuration` (Attributes) (see [below for nested schema](#nestedatt--payment_configuration))
 - `tags` (Attributes Set) An arbitrary set of tags (key-value pairs) for this cleanrooms membership. (see [below for nested schema](#nestedatt--tags))
 
@@ -141,6 +143,32 @@ resource "awscc_cleanrooms_membership" "example" {
 - `collaboration_creator_account_id` (String)
 - `id` (String) Uniquely identifies the resource.
 - `membership_identifier` (String)
+
+<a id="nestedatt--default_job_result_configuration"></a>
+### Nested Schema for `default_job_result_configuration`
+
+Optional:
+
+- `output_configuration` (Attributes) (see [below for nested schema](#nestedatt--default_job_result_configuration--output_configuration))
+- `role_arn` (String)
+
+<a id="nestedatt--default_job_result_configuration--output_configuration"></a>
+### Nested Schema for `default_job_result_configuration.output_configuration`
+
+Optional:
+
+- `s3` (Attributes) (see [below for nested schema](#nestedatt--default_job_result_configuration--output_configuration--s3))
+
+<a id="nestedatt--default_job_result_configuration--output_configuration--s3"></a>
+### Nested Schema for `default_job_result_configuration.output_configuration.s3`
+
+Optional:
+
+- `bucket` (String)
+- `key_prefix` (String)
+
+
+
 
 <a id="nestedatt--default_result_configuration"></a>
 ### Nested Schema for `default_result_configuration`
@@ -175,8 +203,17 @@ Optional:
 
 Optional:
 
+- `job_compute` (Attributes) (see [below for nested schema](#nestedatt--payment_configuration--job_compute))
 - `machine_learning` (Attributes) (see [below for nested schema](#nestedatt--payment_configuration--machine_learning))
 - `query_compute` (Attributes) (see [below for nested schema](#nestedatt--payment_configuration--query_compute))
+
+<a id="nestedatt--payment_configuration--job_compute"></a>
+### Nested Schema for `payment_configuration.job_compute`
+
+Optional:
+
+- `is_responsible` (Boolean)
+
 
 <a id="nestedatt--payment_configuration--machine_learning"></a>
 ### Nested Schema for `payment_configuration.machine_learning`

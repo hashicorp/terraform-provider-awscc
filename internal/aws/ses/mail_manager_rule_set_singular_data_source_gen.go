@@ -303,6 +303,26 @@ func mailManagerRuleSetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	              "properties": {
 		//	                "Evaluate": {
 		//	                  "properties": {
+		//	                    "Analysis": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "Analyzer": {
+		//	                          "pattern": "^[a-zA-Z0-9:_/+=,@.#-]+$",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "ResultField": {
+		//	                          "maxLength": 256,
+		//	                          "minLength": 1,
+		//	                          "pattern": "^(addon\\.)?[\\sa-zA-Z0-9_]+$",
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "Analyzer",
+		//	                        "ResultField"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
 		//	                    "Attribute": {
 		//	                      "enum": [
 		//	                        "READ_RECEIPT_REQUESTED",
@@ -381,9 +401,9 @@ func mailManagerRuleSetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	                },
 		//	                "Values": {
 		//	                  "items": {
-		//	                    "maxLength": 18,
+		//	                    "maxLength": 43,
 		//	                    "minLength": 1,
-		//	                    "pattern": "^(([0-9]|.|/)*)$",
+		//	                    "pattern": "^(([0-9]|.|:|/)*)$",
 		//	                    "type": "string"
 		//	                  },
 		//	                  "maxItems": 10,
@@ -439,6 +459,26 @@ func mailManagerRuleSetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	              "properties": {
 		//	                "Evaluate": {
 		//	                  "properties": {
+		//	                    "Analysis": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "Analyzer": {
+		//	                          "pattern": "^[a-zA-Z0-9:_/+=,@.#-]+$",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "ResultField": {
+		//	                          "maxLength": 256,
+		//	                          "minLength": 1,
+		//	                          "pattern": "^(addon\\.)?[\\sa-zA-Z0-9_]+$",
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "Analyzer",
+		//	                        "ResultField"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
 		//	                    "Attribute": {
 		//	                      "enum": [
 		//	                        "MAIL_FROM",
@@ -502,7 +542,7 @@ func mailManagerRuleSetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	                        "ResultField": {
 		//	                          "maxLength": 256,
 		//	                          "minLength": 1,
-		//	                          "pattern": "^[\\sa-zA-Z0-9_]+$",
+		//	                          "pattern": "^(addon\\.)?[\\sa-zA-Z0-9_]+$",
 		//	                          "type": "string"
 		//	                        }
 		//	                      },
@@ -572,6 +612,26 @@ func mailManagerRuleSetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	              "properties": {
 		//	                "Evaluate": {
 		//	                  "properties": {
+		//	                    "Analysis": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "Analyzer": {
+		//	                          "pattern": "^[a-zA-Z0-9:_/+=,@.#-]+$",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "ResultField": {
+		//	                          "maxLength": 256,
+		//	                          "minLength": 1,
+		//	                          "pattern": "^(addon\\.)?[\\sa-zA-Z0-9_]+$",
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "Analyzer",
+		//	                        "ResultField"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
 		//	                    "Attribute": {
 		//	                      "enum": [
 		//	                        "READ_RECEIPT_REQUESTED",
@@ -650,9 +710,9 @@ func mailManagerRuleSetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	                },
 		//	                "Values": {
 		//	                  "items": {
-		//	                    "maxLength": 18,
+		//	                    "maxLength": 43,
 		//	                    "minLength": 1,
-		//	                    "pattern": "^(([0-9]|.|/)*)$",
+		//	                    "pattern": "^(([0-9]|.|:|/)*)$",
 		//	                    "type": "string"
 		//	                  },
 		//	                  "maxItems": 10,
@@ -708,6 +768,26 @@ func mailManagerRuleSetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	              "properties": {
 		//	                "Evaluate": {
 		//	                  "properties": {
+		//	                    "Analysis": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "Analyzer": {
+		//	                          "pattern": "^[a-zA-Z0-9:_/+=,@.#-]+$",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "ResultField": {
+		//	                          "maxLength": 256,
+		//	                          "minLength": 1,
+		//	                          "pattern": "^(addon\\.)?[\\sa-zA-Z0-9_]+$",
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "Analyzer",
+		//	                        "ResultField"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
 		//	                    "Attribute": {
 		//	                      "enum": [
 		//	                        "MAIL_FROM",
@@ -771,7 +851,7 @@ func mailManagerRuleSetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	                        "ResultField": {
 		//	                          "maxLength": 256,
 		//	                          "minLength": 1,
-		//	                          "pattern": "^[\\sa-zA-Z0-9_]+$",
+		//	                          "pattern": "^(addon\\.)?[\\sa-zA-Z0-9_]+$",
 		//	                          "type": "string"
 		//	                        }
 		//	                      },
@@ -1000,6 +1080,20 @@ func mailManagerRuleSetDataSource(ctx context.Context) (datasource.DataSource, e
 										// Property: Evaluate
 										"evaluate": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Analysis
+												"analysis": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Analyzer
+														"analyzer": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: ResultField
+														"result_field": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
 												// Property: Attribute
 												"attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Computed: true,
@@ -1084,6 +1178,20 @@ func mailManagerRuleSetDataSource(ctx context.Context) (datasource.DataSource, e
 										// Property: Evaluate
 										"evaluate": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Analysis
+												"analysis": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Analyzer
+														"analyzer": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: ResultField
+														"result_field": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
 												// Property: Attribute
 												"attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Computed: true,
@@ -1164,6 +1272,20 @@ func mailManagerRuleSetDataSource(ctx context.Context) (datasource.DataSource, e
 										// Property: Evaluate
 										"evaluate": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Analysis
+												"analysis": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Analyzer
+														"analyzer": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: ResultField
+														"result_field": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
 												// Property: Attribute
 												"attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Computed: true,
@@ -1248,6 +1370,20 @@ func mailManagerRuleSetDataSource(ctx context.Context) (datasource.DataSource, e
 										// Property: Evaluate
 										"evaluate": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Analysis
+												"analysis": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Analyzer
+														"analyzer": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: ResultField
+														"result_field": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
 												// Property: Attribute
 												"attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Computed: true,

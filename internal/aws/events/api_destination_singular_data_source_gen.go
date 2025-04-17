@@ -34,6 +34,18 @@ func apiDestinationDataSource(ctx context.Context) (datasource.DataSource, error
 			Description: "The arn of the api destination.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ArnForPolicy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The arn of the api destination to be used in IAM policies.",
+		//	  "pattern": "^arn:aws([a-z]|\\-)*:events:([a-z]|\\d|\\-)*:([0-9]{12})?:api-destination/[\\.\\-_A-Za-z0-9]+$",
+		//	  "type": "string"
+		//	}
+		"arn_for_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The arn of the api destination to be used in IAM policies.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConnectionArn
 		// CloudFormation resource type schema:
 		//
@@ -128,6 +140,7 @@ func apiDestinationDataSource(ctx context.Context) (datasource.DataSource, error
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                              "Arn",
+		"arn_for_policy":                   "ArnForPolicy",
 		"connection_arn":                   "ConnectionArn",
 		"description":                      "Description",
 		"http_method":                      "HttpMethod",

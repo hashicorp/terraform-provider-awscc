@@ -29,7 +29,7 @@ Data Source schema for AWS::AppConfig::ExtensionAssociation
 - `parameters` (Map of String)
 - `resource_arn` (String)
 - `resource_identifier` (String)
-- `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

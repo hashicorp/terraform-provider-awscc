@@ -8,6 +8,7 @@ package ses
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -92,6 +93,68 @@ func mailManagerIngressPointDataSource(ctx context.Context) (datasource.DataSour
 		//	  "type": "string"
 		//	}
 		"ingress_point_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: NetworkConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "properties": {
+		//	    "PrivateNetworkConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "VpcEndpointId": {
+		//	          "pattern": "^vpce-[a-zA-Z0-9]{17}$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "VpcEndpointId"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "PublicNetworkConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "IpType": {
+		//	          "allOf": [
+		//	            {},
+		//	            {}
+		//	          ]
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "IpType"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"network_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PrivateNetworkConfiguration
+				"private_network_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: VpcEndpointId
+						"vpc_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: PublicNetworkConfiguration
+				"public_network_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IpType
+						"ip_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType: jsontypes.NormalizedType{},
+							Computed:   true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: RuleSetId
@@ -221,21 +284,26 @@ func mailManagerIngressPointDataSource(ctx context.Context) (datasource.DataSour
 	opts = opts.WithCloudFormationTypeName("AWS::SES::MailManagerIngressPoint").WithTerraformTypeName("awscc_ses_mail_manager_ingress_point")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"a_record":                    "ARecord",
-		"ingress_point_arn":           "IngressPointArn",
-		"ingress_point_configuration": "IngressPointConfiguration",
-		"ingress_point_id":            "IngressPointId",
-		"ingress_point_name":          "IngressPointName",
-		"key":                         "Key",
-		"rule_set_id":                 "RuleSetId",
-		"secret_arn":                  "SecretArn",
-		"smtp_password":               "SmtpPassword",
-		"status":                      "Status",
-		"status_to_update":            "StatusToUpdate",
-		"tags":                        "Tags",
-		"traffic_policy_id":           "TrafficPolicyId",
-		"type":                        "Type",
-		"value":                       "Value",
+		"a_record":                      "ARecord",
+		"ingress_point_arn":             "IngressPointArn",
+		"ingress_point_configuration":   "IngressPointConfiguration",
+		"ingress_point_id":              "IngressPointId",
+		"ingress_point_name":            "IngressPointName",
+		"ip_type":                       "IpType",
+		"key":                           "Key",
+		"network_configuration":         "NetworkConfiguration",
+		"private_network_configuration": "PrivateNetworkConfiguration",
+		"public_network_configuration":  "PublicNetworkConfiguration",
+		"rule_set_id":                   "RuleSetId",
+		"secret_arn":                    "SecretArn",
+		"smtp_password":                 "SmtpPassword",
+		"status":                        "Status",
+		"status_to_update":              "StatusToUpdate",
+		"tags":                          "Tags",
+		"traffic_policy_id":             "TrafficPolicyId",
+		"type":                          "Type",
+		"value":                         "Value",
+		"vpc_endpoint_id":               "VpcEndpointId",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

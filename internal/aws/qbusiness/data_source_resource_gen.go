@@ -971,6 +971,22 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "AudioExtractionConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "AudioExtractionStatus": {
+		//	          "enum": [
+		//	            "ENABLED",
+		//	            "DISABLED"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "AudioExtractionStatus"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "ImageExtractionConfiguration": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -986,17 +1002,83 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "ImageExtractionStatus"
 		//	      ],
 		//	      "type": "object"
+		//	    },
+		//	    "VideoExtractionConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "VideoExtractionStatus": {
+		//	          "enum": [
+		//	            "ENABLED",
+		//	            "DISABLED"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "VideoExtractionStatus"
+		//	      ],
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
 		//	}
 		"media_extraction_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AudioExtractionConfiguration
+				"audio_extraction_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AudioExtractionStatus
+						"audio_extraction_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"ENABLED",
+									"DISABLED",
+								),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: ImageExtractionConfiguration
 				"image_extraction_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: ImageExtractionStatus
 						"image_extraction_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"ENABLED",
+									"DISABLED",
+								),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: VideoExtractionConfiguration
+				"video_extraction_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: VideoExtractionStatus
+						"video_extraction_status": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
@@ -1281,6 +1363,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"application_id":                     "ApplicationId",
 		"attribute_value_operator":           "AttributeValueOperator",
+		"audio_extraction_configuration":     "AudioExtractionConfiguration",
+		"audio_extraction_status":            "AudioExtractionStatus",
 		"condition":                          "Condition",
 		"configuration":                      "Configuration",
 		"created_at":                         "CreatedAt",
@@ -1316,6 +1400,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"type":                               "Type",
 		"updated_at":                         "UpdatedAt",
 		"value":                              "Value",
+		"video_extraction_configuration":     "VideoExtractionConfiguration",
+		"video_extraction_status":            "VideoExtractionStatus",
 		"vpc_configuration":                  "VpcConfiguration",
 	})
 

@@ -1,4 +1,14 @@
 ## 1.37.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_neptune_db_cluster_parameter_group`
+* **New Data Source:** `awscc_neptune_db_cluster_parameter_groups`
+* **New Data Source:** `awscc_neptune_db_parameter_group`
+* **New Data Source:** `awscc_neptune_db_parameter_groups`
+* **New Resource:** `awscc_neptune_db_cluster_parameter_group`
+* **New Resource:** `awscc_neptune_db_parameter_group`
+
 ## 1.36.0 (April  3, 2025)
 
 FEATURES:

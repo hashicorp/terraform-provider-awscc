@@ -327,6 +327,26 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 		//	              "properties": {
 		//	                "Evaluate": {
 		//	                  "properties": {
+		//	                    "Analysis": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "Analyzer": {
+		//	                          "pattern": "^[a-zA-Z0-9:_/+=,@.#-]+$",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "ResultField": {
+		//	                          "maxLength": 256,
+		//	                          "minLength": 1,
+		//	                          "pattern": "^(addon\\.)?[\\sa-zA-Z0-9_]+$",
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "Analyzer",
+		//	                        "ResultField"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
 		//	                    "Attribute": {
 		//	                      "enum": [
 		//	                        "READ_RECEIPT_REQUESTED",
@@ -405,9 +425,9 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 		//	                },
 		//	                "Values": {
 		//	                  "items": {
-		//	                    "maxLength": 18,
+		//	                    "maxLength": 43,
 		//	                    "minLength": 1,
-		//	                    "pattern": "^(([0-9]|.|/)*)$",
+		//	                    "pattern": "^(([0-9]|.|:|/)*)$",
 		//	                    "type": "string"
 		//	                  },
 		//	                  "maxItems": 10,
@@ -463,6 +483,26 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 		//	              "properties": {
 		//	                "Evaluate": {
 		//	                  "properties": {
+		//	                    "Analysis": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "Analyzer": {
+		//	                          "pattern": "^[a-zA-Z0-9:_/+=,@.#-]+$",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "ResultField": {
+		//	                          "maxLength": 256,
+		//	                          "minLength": 1,
+		//	                          "pattern": "^(addon\\.)?[\\sa-zA-Z0-9_]+$",
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "Analyzer",
+		//	                        "ResultField"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
 		//	                    "Attribute": {
 		//	                      "enum": [
 		//	                        "MAIL_FROM",
@@ -526,7 +566,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 		//	                        "ResultField": {
 		//	                          "maxLength": 256,
 		//	                          "minLength": 1,
-		//	                          "pattern": "^[\\sa-zA-Z0-9_]+$",
+		//	                          "pattern": "^(addon\\.)?[\\sa-zA-Z0-9_]+$",
 		//	                          "type": "string"
 		//	                        }
 		//	                      },
@@ -596,6 +636,26 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 		//	              "properties": {
 		//	                "Evaluate": {
 		//	                  "properties": {
+		//	                    "Analysis": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "Analyzer": {
+		//	                          "pattern": "^[a-zA-Z0-9:_/+=,@.#-]+$",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "ResultField": {
+		//	                          "maxLength": 256,
+		//	                          "minLength": 1,
+		//	                          "pattern": "^(addon\\.)?[\\sa-zA-Z0-9_]+$",
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "Analyzer",
+		//	                        "ResultField"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
 		//	                    "Attribute": {
 		//	                      "enum": [
 		//	                        "READ_RECEIPT_REQUESTED",
@@ -674,9 +734,9 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 		//	                },
 		//	                "Values": {
 		//	                  "items": {
-		//	                    "maxLength": 18,
+		//	                    "maxLength": 43,
 		//	                    "minLength": 1,
-		//	                    "pattern": "^(([0-9]|.|/)*)$",
+		//	                    "pattern": "^(([0-9]|.|:|/)*)$",
 		//	                    "type": "string"
 		//	                  },
 		//	                  "maxItems": 10,
@@ -732,6 +792,26 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 		//	              "properties": {
 		//	                "Evaluate": {
 		//	                  "properties": {
+		//	                    "Analysis": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "Analyzer": {
+		//	                          "pattern": "^[a-zA-Z0-9:_/+=,@.#-]+$",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "ResultField": {
+		//	                          "maxLength": 256,
+		//	                          "minLength": 1,
+		//	                          "pattern": "^(addon\\.)?[\\sa-zA-Z0-9_]+$",
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "Analyzer",
+		//	                        "ResultField"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
 		//	                    "Attribute": {
 		//	                      "enum": [
 		//	                        "MAIL_FROM",
@@ -795,7 +875,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 		//	                        "ResultField": {
 		//	                          "maxLength": 256,
 		//	                          "minLength": 1,
-		//	                          "pattern": "^[\\sa-zA-Z0-9_]+$",
+		//	                          "pattern": "^(addon\\.)?[\\sa-zA-Z0-9_]+$",
 		//	                          "type": "string"
 		//	                        }
 		//	                      },
@@ -1268,6 +1348,41 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 										// Property: Evaluate
 										"evaluate": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Analysis
+												"analysis": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Analyzer
+														"analyzer": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Optional: true,
+															Computed: true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9:_/+=,@.#-]+$"), ""),
+																fwvalidators.NotNullString(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: ResultField
+														"result_field": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Optional: true,
+															Computed: true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.LengthBetween(1, 256),
+																stringvalidator.RegexMatches(regexp.MustCompile("^(addon\\.)?[\\sa-zA-Z0-9_]+$"), ""),
+																fwvalidators.NotNullString(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Optional: true,
+													Computed: true,
+													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+														objectplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
 												// Property: Attribute
 												"attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Optional: true,
@@ -1412,8 +1527,8 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 											Validators: []validator.List{ /*START VALIDATORS*/
 												listvalidator.SizeBetween(1, 10),
 												listvalidator.ValueStringsAre(
-													stringvalidator.LengthBetween(1, 18),
-													stringvalidator.RegexMatches(regexp.MustCompile("^(([0-9]|.|/)*)$"), ""),
+													stringvalidator.LengthBetween(1, 43),
+													stringvalidator.RegexMatches(regexp.MustCompile("^(([0-9]|.|:|/)*)$"), ""),
 												),
 												fwvalidators.NotNullList(),
 											}, /*END VALIDATORS*/
@@ -1500,6 +1615,41 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 										// Property: Evaluate
 										"evaluate": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Analysis
+												"analysis": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Analyzer
+														"analyzer": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Optional: true,
+															Computed: true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9:_/+=,@.#-]+$"), ""),
+																fwvalidators.NotNullString(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: ResultField
+														"result_field": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Optional: true,
+															Computed: true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.LengthBetween(1, 256),
+																stringvalidator.RegexMatches(regexp.MustCompile("^(addon\\.)?[\\sa-zA-Z0-9_]+$"), ""),
+																fwvalidators.NotNullString(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Optional: true,
+													Computed: true,
+													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+														objectplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
 												// Property: Attribute
 												"attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Optional: true,
@@ -1609,7 +1759,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 															Computed: true,
 															Validators: []validator.String{ /*START VALIDATORS*/
 																stringvalidator.LengthBetween(1, 256),
-																stringvalidator.RegexMatches(regexp.MustCompile("^[\\sa-zA-Z0-9_]+$"), ""),
+																stringvalidator.RegexMatches(regexp.MustCompile("^(addon\\.)?[\\sa-zA-Z0-9_]+$"), ""),
 																fwvalidators.NotNullString(),
 															}, /*END VALIDATORS*/
 															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1723,6 +1873,41 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 										// Property: Evaluate
 										"evaluate": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Analysis
+												"analysis": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Analyzer
+														"analyzer": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Optional: true,
+															Computed: true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9:_/+=,@.#-]+$"), ""),
+																fwvalidators.NotNullString(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: ResultField
+														"result_field": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Optional: true,
+															Computed: true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.LengthBetween(1, 256),
+																stringvalidator.RegexMatches(regexp.MustCompile("^(addon\\.)?[\\sa-zA-Z0-9_]+$"), ""),
+																fwvalidators.NotNullString(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Optional: true,
+													Computed: true,
+													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+														objectplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
 												// Property: Attribute
 												"attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Optional: true,
@@ -1867,8 +2052,8 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 											Validators: []validator.List{ /*START VALIDATORS*/
 												listvalidator.SizeBetween(1, 10),
 												listvalidator.ValueStringsAre(
-													stringvalidator.LengthBetween(1, 18),
-													stringvalidator.RegexMatches(regexp.MustCompile("^(([0-9]|.|/)*)$"), ""),
+													stringvalidator.LengthBetween(1, 43),
+													stringvalidator.RegexMatches(regexp.MustCompile("^(([0-9]|.|:|/)*)$"), ""),
 												),
 												fwvalidators.NotNullList(),
 											}, /*END VALIDATORS*/
@@ -1955,6 +2140,41 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 										// Property: Evaluate
 										"evaluate": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Analysis
+												"analysis": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Analyzer
+														"analyzer": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Optional: true,
+															Computed: true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9:_/+=,@.#-]+$"), ""),
+																fwvalidators.NotNullString(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: ResultField
+														"result_field": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Optional: true,
+															Computed: true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.LengthBetween(1, 256),
+																stringvalidator.RegexMatches(regexp.MustCompile("^(addon\\.)?[\\sa-zA-Z0-9_]+$"), ""),
+																fwvalidators.NotNullString(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Optional: true,
+													Computed: true,
+													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+														objectplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
 												// Property: Attribute
 												"attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Optional: true,
@@ -2064,7 +2284,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 															Computed: true,
 															Validators: []validator.String{ /*START VALIDATORS*/
 																stringvalidator.LengthBetween(1, 256),
-																stringvalidator.RegexMatches(regexp.MustCompile("^[\\sa-zA-Z0-9_]+$"), ""),
+																stringvalidator.RegexMatches(regexp.MustCompile("^(addon\\.)?[\\sa-zA-Z0-9_]+$"), ""),
 																fwvalidators.NotNullString(),
 															}, /*END VALIDATORS*/
 															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

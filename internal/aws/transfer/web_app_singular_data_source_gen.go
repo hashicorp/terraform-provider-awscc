@@ -192,6 +192,19 @@ func webAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: WebAppEndpointPolicy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "STANDARD",
+		//	    "FIPS"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"web_app_endpoint_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: WebAppId
 		// CloudFormation resource type schema:
 		//
@@ -258,6 +271,7 @@ func webAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"title":                     "Title",
 		"value":                     "Value",
 		"web_app_customization":     "WebAppCustomization",
+		"web_app_endpoint_policy":   "WebAppEndpointPolicy",
 		"web_app_id":                "WebAppId",
 		"web_app_units":             "WebAppUnits",
 	})

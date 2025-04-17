@@ -36,6 +36,7 @@ resource "awscc_macie_session" "example" {
 
 ### Read-Only
 
+- `automated_discovery_status` (String) The status of automated sensitive data discovery for the Macie session.
 - `aws_account_id` (String) AWS account ID of customer
 - `id` (String) Uniquely identifies the resource.
 - `service_role` (String) Service role used by Macie

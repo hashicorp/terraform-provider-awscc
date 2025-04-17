@@ -91,6 +91,117 @@ func membershipResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: DefaultJobResultConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "OutputConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "S3": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Bucket": {
+		//	              "maxLength": 63,
+		//	              "minLength": 3,
+		//	              "type": "string"
+		//	            },
+		//	            "KeyPrefix": {
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Bucket"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "S3"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "RoleArn": {
+		//	      "maxLength": 512,
+		//	      "minLength": 32,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "OutputConfiguration",
+		//	    "RoleArn"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"default_job_result_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: OutputConfiguration
+				"output_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: S3
+						"s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Bucket
+								"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(3, 63),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: KeyPrefix
+								"key_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Object{ /*START VALIDATORS*/
+						fwvalidators.NotNullObject(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: RoleArn
+				"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(32, 512),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DefaultResultConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -234,6 +345,29 @@ func membershipResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: JobLogStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "ENABLED",
+		//	    "DISABLED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"job_log_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ENABLED",
+					"DISABLED",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: MembershipIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -255,6 +389,18 @@ func membershipResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "JobCompute": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "IsResponsible": {
+		//	          "type": "boolean"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "IsResponsible"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "MachineLearning": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -305,6 +451,27 @@ func membershipResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"payment_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: JobCompute
+				"job_compute": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IsResponsible
+						"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Bool{ /*START VALIDATORS*/
+								fwvalidators.NotNullBool(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: MachineLearning
 				"machine_learning": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -499,8 +666,11 @@ func membershipResource(ctx context.Context) (resource.Resource, error) {
 		"collaboration_arn":                "CollaborationArn",
 		"collaboration_creator_account_id": "CollaborationCreatorAccountId",
 		"collaboration_identifier":         "CollaborationIdentifier",
+		"default_job_result_configuration": "DefaultJobResultConfiguration",
 		"default_result_configuration":     "DefaultResultConfiguration",
 		"is_responsible":                   "IsResponsible",
+		"job_compute":                      "JobCompute",
+		"job_log_status":                   "JobLogStatus",
 		"key":                              "Key",
 		"key_prefix":                       "KeyPrefix",
 		"machine_learning":                 "MachineLearning",

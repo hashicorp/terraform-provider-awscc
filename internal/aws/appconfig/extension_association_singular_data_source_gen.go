@@ -133,9 +133,9 @@ func extensionAssociationDataSource(ctx context.Context) (datasource.DataSource,
 		//	    "type": "object"
 		//	  },
 		//	  "type": "array",
-		//	  "uniqueItems": false
+		//	  "uniqueItems": true
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key

@@ -56,9 +56,10 @@ func vPCEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "",
+		//	  "description": "Describes the DNS options for an endpoint.",
 		//	  "properties": {
 		//	    "DnsRecordIpType": {
+		//	      "description": "The DNS records created for the endpoint.",
 		//	      "enum": [
 		//	        "ipv4",
 		//	        "ipv6",
@@ -69,6 +70,7 @@ func vPCEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "PrivateDnsOnlyForInboundResolverEndpoint": {
+		//	      "description": "Indicates whether to enable private DNS only for inbound endpoints. This option is available only for services that support both gateway and interface endpoints. It routes traffic that originates from the VPC to the gateway endpoint and traffic that originates from on-premises to the interface endpoint.",
 		//	      "enum": [
 		//	        "OnlyInboundResolver",
 		//	        "AllResolvers",
@@ -83,14 +85,16 @@ func vPCEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: DnsRecordIpType
 				"dns_record_ip_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "The DNS records created for the endpoint.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: PrivateDnsOnlyForInboundResolverEndpoint
 				"private_dns_only_for_inbound_resolver_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "Indicates whether to enable private DNS only for inbound endpoints. This option is available only for services that support both gateway and interface endpoints. It routes traffic that originates from the VPC to the gateway endpoint and traffic that originates from on-premises to the interface endpoint.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "",
+			Description: "Describes the DNS options for an endpoint.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Id
@@ -108,7 +112,7 @@ func vPCEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The supported IP address types.",
 		//	  "enum": [
 		//	    "ipv4",
 		//	    "ipv6",
@@ -118,7 +122,7 @@ func vPCEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "The supported IP address types.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NetworkInterfaceIds
@@ -164,11 +168,11 @@ func vPCEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The Amazon Resource Name (ARN) of the resource configuration.",
 		//	  "type": "string"
 		//	}
 		"resource_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "The Amazon Resource Name (ARN) of the resource configuration.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RouteTableIds
@@ -229,10 +233,21 @@ func vPCEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The Amazon Resource Name (ARN) of the service network.",
 		//	  "type": "string"
 		//	}
 		"service_network_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the service network.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ServiceRegion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"service_region": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -261,16 +276,18 @@ func vPCEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The tags to associate with the endpoint.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "",
+		//	    "description": "Describes a tag.",
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "The key of the tag.\n Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with ``aws:``.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "The value of the tag.\n Constraints: Tag values are case-sensitive and accept a maximum of 256 Unicode characters.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -288,15 +305,17 @@ func vPCEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "The key of the tag.\n Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with ``aws:``.",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "The value of the tag.\n Constraints: Tag values are case-sensitive and accept a maximum of 256 Unicode characters.",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "",
+			Description: "The tags to associate with the endpoint.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VpcEndpointType
@@ -360,6 +379,7 @@ func vPCEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"security_group_ids":                             "SecurityGroupIds",
 		"service_name":                                   "ServiceName",
 		"service_network_arn":                            "ServiceNetworkArn",
+		"service_region":                                 "ServiceRegion",
 		"subnet_ids":                                     "SubnetIds",
 		"tags":                                           "Tags",
 		"value":                                          "Value",

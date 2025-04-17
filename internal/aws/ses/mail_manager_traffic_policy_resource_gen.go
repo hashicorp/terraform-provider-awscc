@@ -102,7 +102,7 @@ func mailManagerTrafficPolicyResource(ctx context.Context) (resource.Resource, e
 		//	                        "ResultField": {
 		//	                          "maxLength": 256,
 		//	                          "minLength": 1,
-		//	                          "pattern": "^[\\sa-zA-Z0-9_]+$",
+		//	                          "pattern": "^(addon\\.)?[\\sa-zA-Z0-9_]+$",
 		//	                          "type": "string"
 		//	                        }
 		//	                      },
@@ -165,11 +165,68 @@ func mailManagerTrafficPolicyResource(ctx context.Context) (resource.Resource, e
 		//	              ],
 		//	              "type": "object"
 		//	            },
+		//	            "Ipv6Expression": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Evaluate": {
+		//	                  "properties": {
+		//	                    "Attribute": {
+		//	                      "enum": [
+		//	                        "SENDER_IPV6"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "Operator": {
+		//	                  "enum": [
+		//	                    "CIDR_MATCHES",
+		//	                    "NOT_CIDR_MATCHES"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "Values": {
+		//	                  "items": {
+		//	                    "maxLength": 49,
+		//	                    "pattern": "^(([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:))\\/(12[0-8]|1[0-1][0-9]|[1-9][0-9]|[0-9])$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Evaluate",
+		//	                "Operator",
+		//	                "Values"
+		//	              ],
+		//	              "type": "object"
+		//	            },
 		//	            "StringExpression": {
 		//	              "additionalProperties": false,
 		//	              "properties": {
 		//	                "Evaluate": {
 		//	                  "properties": {
+		//	                    "Analysis": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "Analyzer": {
+		//	                          "pattern": "^[a-zA-Z0-9:_/+=,@.#-]+$",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "ResultField": {
+		//	                          "maxLength": 256,
+		//	                          "minLength": 1,
+		//	                          "pattern": "^(addon\\.)?[\\sa-zA-Z0-9_]+$",
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "Analyzer",
+		//	                        "ResultField"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
 		//	                    "Attribute": {
 		//	                      "enum": [
 		//	                        "RECIPIENT"
@@ -298,7 +355,7 @@ func mailManagerTrafficPolicyResource(ctx context.Context) (resource.Resource, e
 															Computed: true,
 															Validators: []validator.String{ /*START VALIDATORS*/
 																stringvalidator.LengthBetween(1, 256),
-																stringvalidator.RegexMatches(regexp.MustCompile("^[\\sa-zA-Z0-9_]+$"), ""),
+																stringvalidator.RegexMatches(regexp.MustCompile("^(addon\\.)?[\\sa-zA-Z0-9_]+$"), ""),
 																fwvalidators.NotNullString(),
 															}, /*END VALIDATORS*/
 															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -410,12 +467,114 @@ func mailManagerTrafficPolicyResource(ctx context.Context) (resource.Resource, e
 										objectplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
+								// Property: Ipv6Expression
+								"ipv_6_expression": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Evaluate
+										"evaluate": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Attribute
+												"attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Optional: true,
+													Computed: true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.OneOf(
+															"SENDER_IPV6",
+														),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.Object{ /*START VALIDATORS*/
+												fwvalidators.NotNullObject(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Operator
+										"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"CIDR_MATCHES",
+													"NOT_CIDR_MATCHES",
+												),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Values
+										"values": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												listvalidator.ValueStringsAre(
+													stringvalidator.LengthAtMost(49),
+													stringvalidator.RegexMatches(regexp.MustCompile("^(([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:))\\/(12[0-8]|1[0-1][0-9]|[1-9][0-9]|[0-9])$"), ""),
+												),
+												fwvalidators.NotNullList(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
 								// Property: StringExpression
 								"string_expression": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Evaluate
 										"evaluate": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Analysis
+												"analysis": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Analyzer
+														"analyzer": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Optional: true,
+															Computed: true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9:_/+=,@.#-]+$"), ""),
+																fwvalidators.NotNullString(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: ResultField
+														"result_field": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Optional: true,
+															Computed: true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.LengthBetween(1, 256),
+																stringvalidator.RegexMatches(regexp.MustCompile("^(addon\\.)?[\\sa-zA-Z0-9_]+$"), ""),
+																fwvalidators.NotNullString(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Optional: true,
+													Computed: true,
+													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+														objectplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
 												// Property: Attribute
 												"attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Optional: true,
@@ -700,6 +859,7 @@ func mailManagerTrafficPolicyResource(ctx context.Context) (resource.Resource, e
 		"default_action":         "DefaultAction",
 		"evaluate":               "Evaluate",
 		"ip_expression":          "IpExpression",
+		"ipv_6_expression":       "Ipv6Expression",
 		"key":                    "Key",
 		"max_message_size_bytes": "MaxMessageSizeBytes",
 		"operator":               "Operator",

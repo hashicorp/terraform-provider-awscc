@@ -3835,6 +3835,16 @@
         "path": "./examples/resources/awscc_neptune_db_cluster/import.sh"
     },
     {
+        "resource": "awscc_neptune_db_cluster_parameter_group",
+        "identifier": ["Name"],
+        "path": "./examples/resources/awscc_neptune_db_cluster_parameter_group/import.sh"
+    },
+    {
+        "resource": "awscc_neptune_db_parameter_group",
+        "identifier": ["Name"],
+        "path": "./examples/resources/awscc_neptune_db_parameter_group/import.sh"
+    },
+    {
         "resource": "awscc_neptune_db_subnet_group",
         "identifier": ["DBSubnetGroupName"],
         "path": "./examples/resources/awscc_neptune_db_subnet_group/import.sh"

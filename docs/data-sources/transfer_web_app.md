@@ -26,6 +26,7 @@ Data Source schema for AWS::Transfer::WebApp
 - `identity_provider_details` (Attributes) You can provide a structure that contains the details for the identity provider to use with your web app. (see [below for nested schema](#nestedatt--identity_provider_details))
 - `tags` (Attributes List) Key-value pairs that can be used to group and search for web apps. (see [below for nested schema](#nestedatt--tags))
 - `web_app_customization` (Attributes) (see [below for nested schema](#nestedatt--web_app_customization))
+- `web_app_endpoint_policy` (String)
 - `web_app_id` (String) A unique identifier for the web app.
 - `web_app_units` (Attributes) (see [below for nested schema](#nestedatt--web_app_units))
 

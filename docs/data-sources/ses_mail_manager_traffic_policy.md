@@ -44,6 +44,7 @@ Read-Only:
 
 - `boolean_expression` (Attributes) (see [below for nested schema](#nestedatt--policy_statements--conditions--boolean_expression))
 - `ip_expression` (Attributes) (see [below for nested schema](#nestedatt--policy_statements--conditions--ip_expression))
+- `ipv_6_expression` (Attributes) (see [below for nested schema](#nestedatt--policy_statements--conditions--ipv_6_expression))
 - `string_expression` (Attributes) (see [below for nested schema](#nestedatt--policy_statements--conditions--string_expression))
 - `tls_expression` (Attributes) (see [below for nested schema](#nestedatt--policy_statements--conditions--tls_expression))
 
@@ -91,6 +92,24 @@ Read-Only:
 
 
 
+<a id="nestedatt--policy_statements--conditions--ipv_6_expression"></a>
+### Nested Schema for `policy_statements.conditions.ipv_6_expression`
+
+Read-Only:
+
+- `evaluate` (Attributes) (see [below for nested schema](#nestedatt--policy_statements--conditions--ipv_6_expression--evaluate))
+- `operator` (String)
+- `values` (List of String)
+
+<a id="nestedatt--policy_statements--conditions--ipv_6_expression--evaluate"></a>
+### Nested Schema for `policy_statements.conditions.ipv_6_expression.evaluate`
+
+Read-Only:
+
+- `attribute` (String)
+
+
+
 <a id="nestedatt--policy_statements--conditions--string_expression"></a>
 ### Nested Schema for `policy_statements.conditions.string_expression`
 
@@ -105,7 +124,17 @@ Read-Only:
 
 Read-Only:
 
+- `analysis` (Attributes) (see [below for nested schema](#nestedatt--policy_statements--conditions--string_expression--evaluate--analysis))
 - `attribute` (String)
+
+<a id="nestedatt--policy_statements--conditions--string_expression--evaluate--analysis"></a>
+### Nested Schema for `policy_statements.conditions.string_expression.evaluate.analysis`
+
+Read-Only:
+
+- `analyzer` (String)
+- `result_field` (String)
+
 
 
 
