@@ -70,7 +70,7 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              },
 		//	              "Weight": {
 		//	                "maximum": 999,
-		//	                "minimum": 1,
+		//	                "minimum": 0,
 		//	                "type": "integer"
 		//	              }
 		//	            },

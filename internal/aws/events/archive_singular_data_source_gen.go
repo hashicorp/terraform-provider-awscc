@@ -64,6 +64,17 @@ func archiveDataSource(ctx context.Context) (datasource.DataSource, error) {
 			CustomType: jsontypes.NormalizedType{},
 			Computed:   true,
 		}, /*END ATTRIBUTE*/
+		// Property: KmsKeyIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 2048,
+		//	  "minLength": 0,
+		//	  "type": "string"
+		//	}
+		"kms_key_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: RetentionDays
 		// CloudFormation resource type schema:
 		//
@@ -99,12 +110,13 @@ func archiveDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Events::Archive").WithTerraformTypeName("awscc_events_archive")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"archive_name":   "ArchiveName",
-		"arn":            "Arn",
-		"description":    "Description",
-		"event_pattern":  "EventPattern",
-		"retention_days": "RetentionDays",
-		"source_arn":     "SourceArn",
+		"archive_name":       "ArchiveName",
+		"arn":                "Arn",
+		"description":        "Description",
+		"event_pattern":      "EventPattern",
+		"kms_key_identifier": "KmsKeyIdentifier",
+		"retention_days":     "RetentionDays",
+		"source_arn":         "SourceArn",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

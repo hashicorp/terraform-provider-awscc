@@ -10,6 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -31,6 +32,36 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon resource name (ARN) of the Kinesis stream",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: DesiredShardLevelMetrics
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The final list of shard-level metrics",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Value of an enhanced metric",
+		//	    "enum": [
+		//	      "IncomingBytes",
+		//	      "IncomingRecords",
+		//	      "OutgoingBytes",
+		//	      "OutgoingRecords",
+		//	      "WriteProvisionedThroughputExceeded",
+		//	      "ReadProvisionedThroughputExceeded",
+		//	      "IteratorAgeMilliseconds",
+		//	      "ALL"
+		//	    ],
+		//	    "type": "string"
+		//	  },
+		//	  "maxItems": 7,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"desired_shard_level_metrics": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The final list of shard-level metrics",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
@@ -221,18 +252,19 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Kinesis::Stream").WithTerraformTypeName("awscc_kinesis_stream")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                    "Arn",
-		"encryption_type":        "EncryptionType",
-		"key":                    "Key",
-		"key_id":                 "KeyId",
-		"name":                   "Name",
-		"retention_period_hours": "RetentionPeriodHours",
-		"shard_count":            "ShardCount",
-		"stream_encryption":      "StreamEncryption",
-		"stream_mode":            "StreamMode",
-		"stream_mode_details":    "StreamModeDetails",
-		"tags":                   "Tags",
-		"value":                  "Value",
+		"arn":                         "Arn",
+		"desired_shard_level_metrics": "DesiredShardLevelMetrics",
+		"encryption_type":             "EncryptionType",
+		"key":                         "Key",
+		"key_id":                      "KeyId",
+		"name":                        "Name",
+		"retention_period_hours":      "RetentionPeriodHours",
+		"shard_count":                 "ShardCount",
+		"stream_encryption":           "StreamEncryption",
+		"stream_mode":                 "StreamMode",
+		"stream_mode_details":         "StreamModeDetails",
+		"tags":                        "Tags",
+		"value":                       "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

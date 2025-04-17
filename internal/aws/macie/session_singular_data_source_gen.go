@@ -22,6 +22,21 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::Macie::Session resource.
 func sessionDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AutomatedDiscoveryStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The status of automated sensitive data discovery for the Macie session.",
+		//	  "enum": [
+		//	    "ENABLED",
+		//	    "DISABLED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"automated_discovery_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of automated sensitive data discovery for the Macie session.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AwsAccountId
 		// CloudFormation resource type schema:
 		//
@@ -94,6 +109,7 @@ func sessionDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Macie::Session").WithTerraformTypeName("awscc_macie_session")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"automated_discovery_status":   "AutomatedDiscoveryStatus",
 		"aws_account_id":               "AwsAccountId",
 		"finding_publishing_frequency": "FindingPublishingFrequency",
 		"service_role":                 "ServiceRole",

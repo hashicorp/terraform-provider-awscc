@@ -136,19 +136,6 @@ func restoreTestingPlanDataSource(ctx context.Context) (datasource.DataSource, e
 		"schedule_expression_timezone": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
-		// Property: ScheduleStatus
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "enum": [
-		//	    "ACTIVE",
-		//	    "SUSPENDED"
-		//	  ],
-		//	  "type": "string"
-		//	}
-		"schedule_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
 		// Property: StartWindowHours
 		// CloudFormation resource type schema:
 		//
@@ -232,7 +219,6 @@ func restoreTestingPlanDataSource(ctx context.Context) (datasource.DataSource, e
 		"restore_testing_plan_name":    "RestoreTestingPlanName",
 		"schedule_expression":          "ScheduleExpression",
 		"schedule_expression_timezone": "ScheduleExpressionTimezone",
-		"schedule_status":              "ScheduleStatus",
 		"selection_window_days":        "SelectionWindowDays",
 		"start_window_hours":           "StartWindowHours",
 		"tags":                         "Tags",

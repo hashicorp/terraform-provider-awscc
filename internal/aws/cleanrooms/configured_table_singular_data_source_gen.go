@@ -46,7 +46,9 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 		//
 		//	{
 		//	  "enum": [
-		//	    "DIRECT_QUERY"
+		//	    "DIRECT_QUERY",
+		//	    "DIRECT_JOB",
+		//	    "MULTIPLE"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -243,7 +245,7 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	                    "items": {
 		//	                      "maxLength": 200,
 		//	                      "minLength": 0,
-		//	                      "pattern": "(ANY_QUERY|arn:[\\w]{3}:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:[\\d]{12}:membership/[\\d\\w-]+/analysistemplate/[\\d\\w-]+)",
+		//	                      "pattern": "(ANY_QUERY|ANY_JOB|arn:[\\w]{3}:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:[\\d]{12}:membership/[\\d\\w-]+/analysistemplate/[\\d\\w-]+)",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "minItems": 0,
@@ -589,6 +591,24 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: SelectedAnalysisMethods
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "enum": [
+		//	      "DIRECT_QUERY",
+		//	      "DIRECT_JOB"
+		//	    ],
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"selected_analysis_methods": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TableReference
 		// CloudFormation resource type schema:
 		//
@@ -902,6 +922,7 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 		"scalar_functions":            "ScalarFunctions",
 		"schema_name":                 "SchemaName",
 		"secret_arn":                  "SecretArn",
+		"selected_analysis_methods":   "SelectedAnalysisMethods",
 		"snowflake":                   "Snowflake",
 		"table_name":                  "TableName",
 		"table_reference":             "TableReference",

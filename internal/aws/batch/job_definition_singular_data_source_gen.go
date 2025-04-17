@@ -95,6 +95,9 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	      "type": "array",
 		//	      "uniqueItems": false
 		//	    },
+		//	    "EnableExecuteCommand": {
+		//	      "type": "boolean"
+		//	    },
 		//	    "Environment": {
 		//	      "insertionOrder": true,
 		//	      "items": {
@@ -455,6 +458,10 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 				"command": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
 					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EnableExecuteCommand
+				"enable_execute_command": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: Environment
 				"environment": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -852,6 +859,27 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                "Essential": {
 		//	                  "type": "boolean"
 		//	                },
+		//	                "FirelensConfiguration": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "Options": {
+		//	                      "additionalProperties": false,
+		//	                      "patternProperties": {
+		//	                        "": {
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "type": "object"
+		//	                    },
+		//	                    "Type": {
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "Type"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
 		//	                "Image": {
 		//	                  "type": "string"
 		//	                },
@@ -1085,6 +1113,9 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	            "type": "array",
 		//	            "uniqueItems": false
 		//	          },
+		//	          "EnableExecuteCommand": {
+		//	            "type": "boolean"
+		//	          },
 		//	          "EphemeralStorage": {
 		//	            "additionalProperties": false,
 		//	            "properties": {
@@ -1250,6 +1281,22 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 										}, /*END ATTRIBUTE*/
 										// Property: Essential
 										"essential": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: FirelensConfiguration
+										"firelens_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Options
+												"options":           // Pattern: ""
+												schema.MapAttribute{ /*START ATTRIBUTE*/
+													ElementType: types.StringType,
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Type
+												"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
 											Computed: true,
 										}, /*END ATTRIBUTE*/
 										// Property: Image
@@ -1452,6 +1499,10 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: EnableExecuteCommand
+							"enable_execute_command": schema.BoolAttribute{ /*START ATTRIBUTE*/
 								Computed: true,
 							}, /*END ATTRIBUTE*/
 							// Property: EphemeralStorage
@@ -2407,6 +2458,9 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                "type": "array",
 		//	                "uniqueItems": false
 		//	              },
+		//	              "EnableExecuteCommand": {
+		//	                "type": "boolean"
+		//	              },
 		//	              "Environment": {
 		//	                "insertionOrder": true,
 		//	                "items": {
@@ -2808,6 +2862,27 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                          "Essential": {
 		//	                            "type": "boolean"
 		//	                          },
+		//	                          "FirelensConfiguration": {
+		//	                            "additionalProperties": false,
+		//	                            "properties": {
+		//	                              "Options": {
+		//	                                "additionalProperties": false,
+		//	                                "patternProperties": {
+		//	                                  "": {
+		//	                                    "type": "string"
+		//	                                  }
+		//	                                },
+		//	                                "type": "object"
+		//	                              },
+		//	                              "Type": {
+		//	                                "type": "string"
+		//	                              }
+		//	                            },
+		//	                            "required": [
+		//	                              "Type"
+		//	                            ],
+		//	                            "type": "object"
+		//	                          },
 		//	                          "Image": {
 		//	                            "type": "string"
 		//	                          },
@@ -3040,6 +3115,9 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                      },
 		//	                      "type": "array",
 		//	                      "uniqueItems": false
+		//	                    },
+		//	                    "EnableExecuteCommand": {
+		//	                      "type": "boolean"
 		//	                    },
 		//	                    "ExecutionRoleArn": {
 		//	                      "type": "string"
@@ -3586,6 +3664,10 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 										ElementType: types.StringType,
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
+									// Property: EnableExecuteCommand
+									"enable_execute_command": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
 									// Property: Environment
 									"environment": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -3953,6 +4035,22 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 															"essential": schema.BoolAttribute{ /*START ATTRIBUTE*/
 																Computed: true,
 															}, /*END ATTRIBUTE*/
+															// Property: FirelensConfiguration
+															"firelens_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Options
+																	"options":           // Pattern: ""
+																	schema.MapAttribute{ /*START ATTRIBUTE*/
+																		ElementType: types.StringType,
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Type
+																	"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
 															// Property: Image
 															"image": schema.StringAttribute{ /*START ATTRIBUTE*/
 																Computed: true,
@@ -4153,6 +4251,10 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: EnableExecuteCommand
+												"enable_execute_command": schema.BoolAttribute{ /*START ATTRIBUTE*/
 													Computed: true,
 												}, /*END ATTRIBUTE*/
 												// Property: ExecutionRoleArn
@@ -4834,6 +4936,7 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		"efs_volume_configuration":       "EfsVolumeConfiguration",
 		"eks_properties":                 "EksProperties",
 		"empty_dir":                      "EmptyDir",
+		"enable_execute_command":         "EnableExecuteCommand",
 		"env":                            "Env",
 		"environment":                    "Environment",
 		"ephemeral_storage":              "EphemeralStorage",
@@ -4842,6 +4945,7 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		"execution_role_arn":             "ExecutionRoleArn",
 		"fargate_platform_configuration": "FargatePlatformConfiguration",
 		"file_system_id":                 "FileSystemId",
+		"firelens_configuration":         "FirelensConfiguration",
 		"hard_limit":                     "HardLimit",
 		"host":                           "Host",
 		"host_network":                   "HostNetwork",

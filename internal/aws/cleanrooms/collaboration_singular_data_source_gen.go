@@ -112,6 +112,7 @@ func collaborationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "items": {
 		//	    "enum": [
 		//	      "CAN_QUERY",
+		//	      "CAN_RUN_JOB",
 		//	      "CAN_RECEIVE_RESULTS"
 		//	    ],
 		//	    "type": "string"
@@ -129,6 +130,18 @@ func collaborationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "JobCompute": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "IsResponsible": {
+		//	          "type": "boolean"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "IsResponsible"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "MachineLearning": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -179,6 +192,16 @@ func collaborationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	}
 		"creator_payment_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: JobCompute
+				"job_compute": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IsResponsible
+						"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: MachineLearning
 				"machine_learning": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -278,6 +301,19 @@ func collaborationDataSource(ctx context.Context) (datasource.DataSource, error)
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: JobLogStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "ENABLED",
+		//	    "DISABLED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"job_log_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Members
 		// CloudFormation resource type schema:
 		//
@@ -324,6 +360,7 @@ func collaborationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	        "items": {
 		//	          "enum": [
 		//	            "CAN_QUERY",
+		//	            "CAN_RUN_JOB",
 		//	            "CAN_RECEIVE_RESULTS"
 		//	          ],
 		//	          "type": "string"
@@ -334,6 +371,18 @@ func collaborationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	      "PaymentConfiguration": {
 		//	        "additionalProperties": false,
 		//	        "properties": {
+		//	          "JobCompute": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "IsResponsible": {
+		//	                "type": "boolean"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "IsResponsible"
+		//	            ],
+		//	            "type": "object"
+		//	          },
 		//	          "MachineLearning": {
 		//	            "additionalProperties": false,
 		//	            "properties": {
@@ -424,6 +473,16 @@ func collaborationDataSource(ctx context.Context) (datasource.DataSource, error)
 					// Property: PaymentConfiguration
 					"payment_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: JobCompute
+							"job_compute": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: IsResponsible
+									"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
 							// Property: MachineLearning
 							"machine_learning": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -570,6 +629,8 @@ func collaborationDataSource(ctx context.Context) (datasource.DataSource, error)
 		"description":                                 "Description",
 		"display_name":                                "DisplayName",
 		"is_responsible":                              "IsResponsible",
+		"job_compute":                                 "JobCompute",
+		"job_log_status":                              "JobLogStatus",
 		"key":                                         "Key",
 		"machine_learning":                            "MachineLearning",
 		"member_abilities":                            "MemberAbilities",
