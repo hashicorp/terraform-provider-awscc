@@ -78,7 +78,8 @@ Data Source schema for AWS::RDS::DBInstance
 - `auto_minor_version_upgrade` (Boolean) A value that indicates whether minor engine upgrades are applied automatically to the DB instance during the maintenance window. By default, minor engine upgrades are applied automatically.
 - `automatic_backup_replication_kms_key_id` (String) The AWS KMS key identifier for encryption of the replicated automated backups. The KMS key ID is the Amazon Resource Name (ARN) for the KMS encryption key in the destination AWS-Region, for example, ``arn:aws:kms:us-east-1:123456789012:key/AKIAIOSFODNN7EXAMPLE``.
 - `automatic_backup_replication_region` (String) The AWS-Region associated with the automated backup.
-- `automatic_backup_replication_retention_period` (Number)
+- `automatic_backup_replication_retention_period` (Number) The retention period for automated backups in a different AWS Region. Use this parameter to set a unique retention period that only applies to cross-Region automated backups. To enable automated backups in a different Region, specify a positive value for the ``AutomaticBackupReplicationRegion`` parameter. 
+ If not specified, this parameter defaults to the value of the ``BackupRetentionPeriod`` parameter. The maximum allowed value is 35.
 - `availability_zone` (String) The Availability Zone (AZ) where the database will be created. For information on AWS-Regions and Availability Zones, see [Regions and Availability Zones](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html).
  For Amazon Aurora, each Aurora DB cluster hosts copies of its storage in three separate Availability Zones. Specify one of these Availability Zones. Aurora automatically chooses an appropriate Availability Zone if you don't specify one.
  Default: A random, system-chosen Availability Zone in the endpoint's AWS-Region.
@@ -96,7 +97,8 @@ Data Source schema for AWS::RDS::DBInstance
   +  Can't be set to 0 if the DB instance is a source to read replicas
 - `ca_certificate_identifier` (String) The identifier of the CA certificate for this DB instance.
  For more information, see [Using SSL/TLS to encrypt a connection to a DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html) in the *Amazon RDS User Guide* and [Using SSL/TLS to encrypt a connection to a DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html) in the *Amazon Aurora User Guide*.
-- `certificate_details` (Attributes) The details of the DB instance's server certificate. (see [below for nested schema](#nestedatt--certificate_details))
+- `certificate_details` (Attributes) The details of the DB instance?s server certificate.
+ For more information, see [Using SSL/TLS to encrypt a connection to a DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html) in the *Amazon RDS User Guide* and [Using SSL/TLS to encrypt a connection to a DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html) in the *Amazon Aurora User Guide*. (see [below for nested schema](#nestedatt--certificate_details))
 - `certificate_rotation_restart` (Boolean) Specifies whether the DB instance is restarted when you rotate your SSL/TLS certificate.
  By default, the DB instance is restarted when you rotate your SSL/TLS certificate. The certificate is not updated until the DB instance is restarted.
   Set this parameter only if you are *not* using SSL/TLS to connect to the DB instance.
@@ -278,8 +280,12 @@ Data Source schema for AWS::RDS::DBInstance
  Not applicable. Mapping AWS IAM accounts to database accounts is managed by the DB cluster.
 - `enable_performance_insights` (Boolean) Specifies whether to enable Performance Insights for the DB instance. For more information, see [Using Amazon Performance Insights](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html) in the *Amazon RDS User Guide*.
  This setting doesn't apply to RDS Custom DB instances.
-- `endpoint` (Attributes) The connection endpoint for the DB instance.
-  The endpoint might not be shown for instances with the status of ``creating``. (see [below for nested schema](#nestedatt--endpoint))
+- `endpoint` (Attributes) This data type represents the information you need to connect to an Amazon RDS DB instance. This data type is used as a response element in the following actions:
+  +   ``CreateDBInstance`` 
+  +   ``DescribeDBInstances`` 
+  +   ``DeleteDBInstance`` 
+  
+ For the data structure that represents Amazon Aurora DB cluster endpoints, see ``DBClusterEndpoint``. (see [below for nested schema](#nestedatt--endpoint))
 - `engine` (String) The name of the database engine to use for this DB instance. Not every database engine is available in every AWS Region.
  This property is required when creating a DB instance.
   You can convert an Oracle database from the non-CDB architecture to the container database (CDB) architecture by updating the ``Engine`` value in your templates from ``oracle-ee`` to ``oracle-ee-cdb`` or from ``oracle-se2`` to ``oracle-se2-cdb``. Converting to the CDB architecture requires an interruption.

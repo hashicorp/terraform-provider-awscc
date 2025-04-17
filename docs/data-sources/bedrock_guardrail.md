@@ -53,8 +53,12 @@ Read-Only:
 
 Read-Only:
 
+- `input_action` (String)
+- `input_enabled` (Boolean)
 - `input_modalities` (List of String) List of modalities
 - `input_strength` (String) Strength for filters
+- `output_action` (String)
+- `output_enabled` (Boolean)
 - `output_modalities` (List of String) List of modalities
 - `output_strength` (String) Strength for filters
 - `type` (String) Type of filter in content policy
@@ -73,6 +77,8 @@ Read-Only:
 
 Read-Only:
 
+- `action` (String)
+- `enabled` (Boolean)
 - `threshold` (Number) The threshold for this filter.
 - `type` (String) Type of contextual grounding filter
 
@@ -92,6 +98,10 @@ Read-Only:
 Read-Only:
 
 - `action` (String) Options for sensitive information action.
+- `input_action` (String) Options for sensitive information action.
+- `input_enabled` (Boolean)
+- `output_action` (String) Options for sensitive information action.
+- `output_enabled` (Boolean)
 - `type` (String) The currently supported PII entities
 
 
@@ -102,7 +112,11 @@ Read-Only:
 
 - `action` (String) Options for sensitive information action.
 - `description` (String) The regex description.
+- `input_action` (String) Options for sensitive information action.
+- `input_enabled` (Boolean)
 - `name` (String) The regex name.
+- `output_action` (String) Options for sensitive information action.
+- `output_enabled` (Boolean)
 - `pattern` (String) The regex pattern.
 
 
@@ -130,7 +144,11 @@ Read-Only:
 
 - `definition` (String) Definition of topic in topic policy
 - `examples` (List of String) List of text examples
+- `input_action` (String)
+- `input_enabled` (Boolean)
 - `name` (String) Name of topic in topic policy
+- `output_action` (String)
+- `output_enabled` (Boolean)
 - `type` (String) Type of topic in a policy
 
 
@@ -148,6 +166,10 @@ Read-Only:
 
 Read-Only:
 
+- `input_action` (String)
+- `input_enabled` (Boolean)
+- `output_action` (String)
+- `output_enabled` (Boolean)
 - `type` (String) Options for managed words.
 
 
@@ -156,4 +178,8 @@ Read-Only:
 
 Read-Only:
 
+- `input_action` (String)
+- `input_enabled` (Boolean)
+- `output_action` (String)
+- `output_enabled` (Boolean)
 - `text` (String) The custom word text.

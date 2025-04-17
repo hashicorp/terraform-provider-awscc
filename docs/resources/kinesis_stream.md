@@ -77,6 +77,7 @@ resource "awscc_kinesis_stream" "example" {
 
 ### Optional
 
+- `desired_shard_level_metrics` (Set of String) The final list of shard-level metrics
 - `name` (String) The name of the Kinesis stream.
 - `retention_period_hours` (Number) The number of hours for the data records that are stored in shards to remain accessible.
 - `shard_count` (Number) The number of shards that the stream uses. Required when StreamMode = PROVISIONED is passed.

@@ -33,6 +33,7 @@ Data Source schema for AWS::CleanRooms::AnalysisTemplate
 - `name` (String)
 - `schema` (Attributes) (see [below for nested schema](#nestedatt--schema))
 - `source` (Attributes) (see [below for nested schema](#nestedatt--source))
+- `source_metadata` (Attributes) (see [below for nested schema](#nestedatt--source_metadata))
 - `tags` (Attributes List) An arbitrary set of tags (key-value pairs) for this cleanrooms analysis template. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--analysis_parameters"></a>
@@ -58,7 +59,85 @@ Read-Only:
 
 Read-Only:
 
+- `artifacts` (Attributes) (see [below for nested schema](#nestedatt--source--artifacts))
 - `text` (String)
+
+<a id="nestedatt--source--artifacts"></a>
+### Nested Schema for `source.artifacts`
+
+Read-Only:
+
+- `additional_artifacts` (Attributes List) (see [below for nested schema](#nestedatt--source--artifacts--additional_artifacts))
+- `entry_point` (Attributes) (see [below for nested schema](#nestedatt--source--artifacts--entry_point))
+- `role_arn` (String)
+
+<a id="nestedatt--source--artifacts--additional_artifacts"></a>
+### Nested Schema for `source.artifacts.additional_artifacts`
+
+Read-Only:
+
+- `location` (Attributes) (see [below for nested schema](#nestedatt--source--artifacts--additional_artifacts--location))
+
+<a id="nestedatt--source--artifacts--additional_artifacts--location"></a>
+### Nested Schema for `source.artifacts.additional_artifacts.location`
+
+Read-Only:
+
+- `bucket` (String)
+- `key` (String)
+
+
+
+<a id="nestedatt--source--artifacts--entry_point"></a>
+### Nested Schema for `source.artifacts.entry_point`
+
+Read-Only:
+
+- `location` (Attributes) (see [below for nested schema](#nestedatt--source--artifacts--entry_point--location))
+
+<a id="nestedatt--source--artifacts--entry_point--location"></a>
+### Nested Schema for `source.artifacts.entry_point.location`
+
+Read-Only:
+
+- `bucket` (String)
+- `key` (String)
+
+
+
+
+
+<a id="nestedatt--source_metadata"></a>
+### Nested Schema for `source_metadata`
+
+Read-Only:
+
+- `artifacts` (Attributes) (see [below for nested schema](#nestedatt--source_metadata--artifacts))
+
+<a id="nestedatt--source_metadata--artifacts"></a>
+### Nested Schema for `source_metadata.artifacts`
+
+Read-Only:
+
+- `additional_artifact_hashes` (Attributes List) (see [below for nested schema](#nestedatt--source_metadata--artifacts--additional_artifact_hashes))
+- `entry_point_hash` (Attributes) (see [below for nested schema](#nestedatt--source_metadata--artifacts--entry_point_hash))
+
+<a id="nestedatt--source_metadata--artifacts--additional_artifact_hashes"></a>
+### Nested Schema for `source_metadata.artifacts.additional_artifact_hashes`
+
+Read-Only:
+
+- `sha_256` (String)
+
+
+<a id="nestedatt--source_metadata--artifacts--entry_point_hash"></a>
+### Nested Schema for `source_metadata.artifacts.entry_point_hash`
+
+Read-Only:
+
+- `sha_256` (String)
+
+
 
 
 <a id="nestedatt--tags"></a>

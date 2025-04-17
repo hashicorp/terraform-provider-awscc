@@ -3,12 +3,12 @@
 page_title: "awscc_batch_scheduling_policy Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource Type schema for AWS::Batch::SchedulingPolicy
+  Resource Type definition for AWS::Batch::SchedulingPolicy
 ---
 
 # awscc_batch_scheduling_policy (Resource)
 
-Resource Type schema for AWS::Batch::SchedulingPolicy
+Resource Type definition for AWS::Batch::SchedulingPolicy
 
 ## Example Usage
 

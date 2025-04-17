@@ -3,12 +3,12 @@
 page_title: "awscc_batch_consumable_resource Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource Type schema for AWS::Batch::ConsumableResource
+  Resource Type definition for AWS::Batch::ConsumableResource
 ---
 
 # awscc_batch_consumable_resource (Resource)
 
-Resource Type schema for AWS::Batch::ConsumableResource
+Resource Type definition for AWS::Batch::ConsumableResource
 
 
 

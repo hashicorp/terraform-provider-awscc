@@ -62,6 +62,7 @@ resource "awscc_cleanrooms_collaboration" "example" {
 - `creator_ml_member_abilities` (Attributes) (see [below for nested schema](#nestedatt--creator_ml_member_abilities))
 - `creator_payment_configuration` (Attributes) (see [below for nested schema](#nestedatt--creator_payment_configuration))
 - `data_encryption_metadata` (Attributes) (see [below for nested schema](#nestedatt--data_encryption_metadata))
+- `job_log_status` (String)
 - `tags` (Attributes Set) An arbitrary set of tags (key-value pairs) for this cleanrooms collaboration. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -97,8 +98,17 @@ Optional:
 
 Optional:
 
+- `job_compute` (Attributes) (see [below for nested schema](#nestedatt--members--payment_configuration--job_compute))
 - `machine_learning` (Attributes) (see [below for nested schema](#nestedatt--members--payment_configuration--machine_learning))
 - `query_compute` (Attributes) (see [below for nested schema](#nestedatt--members--payment_configuration--query_compute))
+
+<a id="nestedatt--members--payment_configuration--job_compute"></a>
+### Nested Schema for `members.payment_configuration.job_compute`
+
+Optional:
+
+- `is_responsible` (Boolean)
+
 
 <a id="nestedatt--members--payment_configuration--machine_learning"></a>
 ### Nested Schema for `members.payment_configuration.machine_learning`
@@ -148,8 +158,17 @@ Optional:
 
 Optional:
 
+- `job_compute` (Attributes) (see [below for nested schema](#nestedatt--creator_payment_configuration--job_compute))
 - `machine_learning` (Attributes) (see [below for nested schema](#nestedatt--creator_payment_configuration--machine_learning))
 - `query_compute` (Attributes) (see [below for nested schema](#nestedatt--creator_payment_configuration--query_compute))
+
+<a id="nestedatt--creator_payment_configuration--job_compute"></a>
+### Nested Schema for `creator_payment_configuration.job_compute`
+
+Optional:
+
+- `is_responsible` (Boolean)
+
 
 <a id="nestedatt--creator_payment_configuration--machine_learning"></a>
 ### Nested Schema for `creator_payment_configuration.machine_learning`

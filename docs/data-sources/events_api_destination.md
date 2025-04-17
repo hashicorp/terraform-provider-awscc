@@ -22,6 +22,7 @@ Data Source schema for AWS::Events::ApiDestination
 ### Read-Only
 
 - `arn` (String) The arn of the api destination.
+- `arn_for_policy` (String) The arn of the api destination to be used in IAM policies.
 - `connection_arn` (String) The arn of the connection.
 - `description` (String)
 - `http_method` (String)

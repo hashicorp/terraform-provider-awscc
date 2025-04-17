@@ -60,6 +60,7 @@ Read-Only:
 Read-Only:
 
 - `command` (List of String)
+- `enable_execute_command` (Boolean)
 - `environment` (Attributes List) (see [below for nested schema](#nestedatt--container_properties--environment))
 - `ephemeral_storage` (Attributes) (see [below for nested schema](#nestedatt--container_properties--ephemeral_storage))
 - `execution_role_arn` (String)
@@ -275,6 +276,7 @@ Read-Only:
 Read-Only:
 
 - `containers` (Attributes List) (see [below for nested schema](#nestedatt--ecs_properties--task_properties--containers))
+- `enable_execute_command` (Boolean)
 - `ephemeral_storage` (Attributes) (see [below for nested schema](#nestedatt--ecs_properties--task_properties--ephemeral_storage))
 - `execution_role_arn` (String)
 - `ipc_mode` (String)
@@ -294,6 +296,7 @@ Read-Only:
 - `depends_on` (Attributes List) (see [below for nested schema](#nestedatt--ecs_properties--task_properties--containers--depends_on))
 - `environment` (Attributes List) (see [below for nested schema](#nestedatt--ecs_properties--task_properties--containers--environment))
 - `essential` (Boolean)
+- `firelens_configuration` (Attributes) (see [below for nested schema](#nestedatt--ecs_properties--task_properties--containers--firelens_configuration))
 - `image` (String)
 - `linux_parameters` (Attributes) (see [below for nested schema](#nestedatt--ecs_properties--task_properties--containers--linux_parameters))
 - `log_configuration` (Attributes) (see [below for nested schema](#nestedatt--ecs_properties--task_properties--containers--log_configuration))
@@ -323,6 +326,15 @@ Read-Only:
 
 - `name` (String)
 - `value` (String)
+
+
+<a id="nestedatt--ecs_properties--task_properties--containers--firelens_configuration"></a>
+### Nested Schema for `ecs_properties.task_properties.containers.firelens_configuration`
+
+Read-Only:
+
+- `options` (Map of String)
+- `type` (String)
 
 
 <a id="nestedatt--ecs_properties--task_properties--containers--linux_parameters"></a>
@@ -739,6 +751,7 @@ Read-Only:
 Read-Only:
 
 - `command` (List of String)
+- `enable_execute_command` (Boolean)
 - `environment` (Attributes List) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--container--environment))
 - `ephemeral_storage` (Attributes) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--container--ephemeral_storage))
 - `execution_role_arn` (String)
@@ -937,6 +950,7 @@ Read-Only:
 Read-Only:
 
 - `containers` (Attributes List) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--containers))
+- `enable_execute_command` (Boolean)
 - `execution_role_arn` (String)
 - `ipc_mode` (String)
 - `pid_mode` (String)
@@ -952,6 +966,7 @@ Read-Only:
 - `depends_on` (Attributes List) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--containers--depends_on))
 - `environment` (Attributes List) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--containers--environment))
 - `essential` (Boolean)
+- `firelens_configuration` (Attributes) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--containers--firelens_configuration))
 - `image` (String)
 - `linux_parameters` (Attributes) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--containers--linux_parameters))
 - `log_configuration` (Attributes) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--containers--log_configuration))
@@ -981,6 +996,15 @@ Read-Only:
 
 - `name` (String)
 - `value` (String)
+
+
+<a id="nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--containers--firelens_configuration"></a>
+### Nested Schema for `node_properties.node_range_properties.ecs_properties.task_properties.containers.firelens_configuration`
+
+Read-Only:
+
+- `options` (Map of String)
+- `type` (String)
 
 
 <a id="nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--containers--linux_parameters"></a>

@@ -28,6 +28,7 @@ Data Source schema for AWS::CleanRooms::ConfiguredTable
 - `configured_table_identifier` (String)
 - `description` (String)
 - `name` (String)
+- `selected_analysis_methods` (List of String)
 - `table_reference` (Attributes) (see [below for nested schema](#nestedatt--table_reference))
 - `tags` (Attributes Set) An arbitrary set of tags (key-value pairs) for this cleanrooms collaboration. (see [below for nested schema](#nestedatt--tags))
 

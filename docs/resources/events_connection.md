@@ -76,11 +76,13 @@ resource "awscc_events_connection" "auth0_connection" {
 - `authorization_type` (String)
 - `description` (String) Description of the connection.
 - `invocation_connectivity_parameters` (Attributes) The private resource the HTTP request will be sent to. (see [below for nested schema](#nestedatt--invocation_connectivity_parameters))
+- `kms_key_identifier` (String)
 - `name` (String) Name of the connection.
 
 ### Read-Only
 
 - `arn` (String) The arn of the connection resource.
+- `arn_for_policy` (String) The arn of the connection resource to be used in IAM policies.
 - `id` (String) Uniquely identifies the resource.
 - `secret_arn` (String) The arn of the secrets manager secret created in the customer account.
 

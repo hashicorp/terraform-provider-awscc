@@ -140,6 +140,7 @@ resource "awscc_cleanrooms_configured_table" "example" {
 
 - `analysis_rules` (Attributes List) (see [below for nested schema](#nestedatt--analysis_rules))
 - `description` (String)
+- `selected_analysis_methods` (List of String)
 - `tags` (Attributes Set) An arbitrary set of tags (key-value pairs) for this cleanrooms collaboration. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

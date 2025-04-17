@@ -25,6 +25,7 @@ Definition of AWS::SES::MailManagerIngressPoint Resource Type
 
 - `ingress_point_configuration` (Attributes) (see [below for nested schema](#nestedatt--ingress_point_configuration))
 - `ingress_point_name` (String)
+- `network_configuration` (Attributes) (see [below for nested schema](#nestedatt--network_configuration))
 - `status_to_update` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
@@ -43,6 +44,31 @@ Optional:
 
 - `secret_arn` (String)
 - `smtp_password` (String)
+
+
+<a id="nestedatt--network_configuration"></a>
+### Nested Schema for `network_configuration`
+
+Optional:
+
+- `private_network_configuration` (Attributes) (see [below for nested schema](#nestedatt--network_configuration--private_network_configuration))
+- `public_network_configuration` (Attributes) (see [below for nested schema](#nestedatt--network_configuration--public_network_configuration))
+
+<a id="nestedatt--network_configuration--private_network_configuration"></a>
+### Nested Schema for `network_configuration.private_network_configuration`
+
+Optional:
+
+- `vpc_endpoint_id` (String)
+
+
+<a id="nestedatt--network_configuration--public_network_configuration"></a>
+### Nested Schema for `network_configuration.public_network_configuration`
+
+Optional:
+
+- `ip_type` (String)
+
 
 
 <a id="nestedatt--tags"></a>

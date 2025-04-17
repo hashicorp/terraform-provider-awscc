@@ -98,6 +98,7 @@ Optional:
 
 - `boolean_expression` (Attributes) (see [below for nested schema](#nestedatt--policy_statements--conditions--boolean_expression))
 - `ip_expression` (Attributes) (see [below for nested schema](#nestedatt--policy_statements--conditions--ip_expression))
+- `ipv_6_expression` (Attributes) (see [below for nested schema](#nestedatt--policy_statements--conditions--ipv_6_expression))
 - `string_expression` (Attributes) (see [below for nested schema](#nestedatt--policy_statements--conditions--string_expression))
 - `tls_expression` (Attributes) (see [below for nested schema](#nestedatt--policy_statements--conditions--tls_expression))
 
@@ -145,6 +146,24 @@ Optional:
 
 
 
+<a id="nestedatt--policy_statements--conditions--ipv_6_expression"></a>
+### Nested Schema for `policy_statements.conditions.ipv_6_expression`
+
+Optional:
+
+- `evaluate` (Attributes) (see [below for nested schema](#nestedatt--policy_statements--conditions--ipv_6_expression--evaluate))
+- `operator` (String)
+- `values` (List of String)
+
+<a id="nestedatt--policy_statements--conditions--ipv_6_expression--evaluate"></a>
+### Nested Schema for `policy_statements.conditions.ipv_6_expression.evaluate`
+
+Optional:
+
+- `attribute` (String)
+
+
+
 <a id="nestedatt--policy_statements--conditions--string_expression"></a>
 ### Nested Schema for `policy_statements.conditions.string_expression`
 
@@ -159,7 +178,17 @@ Optional:
 
 Optional:
 
+- `analysis` (Attributes) (see [below for nested schema](#nestedatt--policy_statements--conditions--string_expression--evaluate--analysis))
 - `attribute` (String)
+
+<a id="nestedatt--policy_statements--conditions--string_expression--evaluate--analysis"></a>
+### Nested Schema for `policy_statements.conditions.string_expression.evaluate.analysis`
+
+Optional:
+
+- `analyzer` (String)
+- `result_field` (String)
+
 
 
 

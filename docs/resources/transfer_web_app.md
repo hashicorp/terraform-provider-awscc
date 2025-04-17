@@ -24,6 +24,7 @@ Resource Type definition for AWS::Transfer::WebApp
 - `access_endpoint` (String) The AccessEndpoint is the URL that you provide to your users for them to interact with the Transfer Family web app. You can specify a custom URL or use the default value.
 - `tags` (Attributes List) Key-value pairs that can be used to group and search for web apps. (see [below for nested schema](#nestedatt--tags))
 - `web_app_customization` (Attributes) (see [below for nested schema](#nestedatt--web_app_customization))
+- `web_app_endpoint_policy` (String)
 - `web_app_units` (Attributes) (see [below for nested schema](#nestedatt--web_app_units))
 
 ### Read-Only

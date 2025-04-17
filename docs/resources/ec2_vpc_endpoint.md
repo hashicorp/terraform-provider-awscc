@@ -127,8 +127,8 @@ resource "awscc_ec2_vpc_endpoint" "example" {
 
 ### Optional
 
-- `dns_options` (Attributes) (see [below for nested schema](#nestedatt--dns_options))
-- `ip_address_type` (String)
+- `dns_options` (Attributes) Describes the DNS options for an endpoint. (see [below for nested schema](#nestedatt--dns_options))
+- `ip_address_type` (String) The supported IP address types.
 - `policy_document` (String) An endpoint policy, which controls access to the service from the VPC. The default endpoint policy allows full access to the service. Endpoint policies are supported only for gateway and interface endpoints.
  For CloudFormation templates in YAML, you can provide the policy in JSON or YAML format. For example, if you have a JSON policy, you can convert it to YAML before including it in the YAML template, and CFNlong converts the policy to JSON format before calling the API actions for privatelink. Alternatively, you can include the JSON directly in the YAML, as shown in the following ``Properties`` section:
  ``Properties: VpcEndpointType: 'Interface' ServiceName: !Sub 'com.amazonaws.${AWS::Region}.logs' PolicyDocument: '{ "Version":"2012-10-17", "Statement": [{ "Effect":"Allow", "Principal":"*", "Action":["logs:Describe*","logs:Get*","logs:List*","logs:FilterLogEvents"], "Resource":"*" }] }'``
@@ -136,13 +136,14 @@ resource "awscc_ec2_vpc_endpoint" "example" {
  To use a private hosted zone, you must set the following VPC attributes to ``true``: ``enableDnsHostnames`` and ``enableDnsSupport``.
  This property is supported only for interface endpoints.
  Default: ``false``
-- `resource_configuration_arn` (String)
+- `resource_configuration_arn` (String) The Amazon Resource Name (ARN) of the resource configuration.
 - `route_table_ids` (Set of String) The IDs of the route tables. Routing is supported only for gateway endpoints.
 - `security_group_ids` (Set of String) The IDs of the security groups to associate with the endpoint network interfaces. If this parameter is not specified, we use the default security group for the VPC. Security groups are supported only for interface endpoints.
 - `service_name` (String) The name of the endpoint service.
-- `service_network_arn` (String)
+- `service_network_arn` (String) The Amazon Resource Name (ARN) of the service network.
+- `service_region` (String)
 - `subnet_ids` (Set of String) The IDs of the subnets in which to create endpoint network interfaces. You must specify this property for an interface endpoint or a Gateway Load Balancer endpoint. You can't specify this property for a gateway endpoint. For a Gateway Load Balancer endpoint, you can specify only one subnet.
-- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes List) The tags to associate with the endpoint. (see [below for nested schema](#nestedatt--tags))
 - `vpc_endpoint_type` (String) The type of endpoint.
  Default: Gateway
 
@@ -159,8 +160,8 @@ resource "awscc_ec2_vpc_endpoint" "example" {
 
 Optional:
 
-- `dns_record_ip_type` (String)
-- `private_dns_only_for_inbound_resolver_endpoint` (String)
+- `dns_record_ip_type` (String) The DNS records created for the endpoint.
+- `private_dns_only_for_inbound_resolver_endpoint` (String) Indicates whether to enable private DNS only for inbound endpoints. This option is available only for services that support both gateway and interface endpoints. It routes traffic that originates from the VPC to the gateway endpoint and traffic that originates from on-premises to the interface endpoint.
 
 
 <a id="nestedatt--tags"></a>
@@ -168,8 +169,10 @@ Optional:
 
 Optional:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) The key of the tag.
+ Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with ``aws:``.
+- `value` (String) The value of the tag.
+ Constraints: Tag values are case-sensitive and accept a maximum of 256 Unicode characters.
 
 ## Import
 

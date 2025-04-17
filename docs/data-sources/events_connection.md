@@ -22,10 +22,12 @@ Data Source schema for AWS::Events::Connection
 ### Read-Only
 
 - `arn` (String) The arn of the connection resource.
+- `arn_for_policy` (String) The arn of the connection resource to be used in IAM policies.
 - `auth_parameters` (Attributes) (see [below for nested schema](#nestedatt--auth_parameters))
 - `authorization_type` (String)
 - `description` (String) Description of the connection.
 - `invocation_connectivity_parameters` (Attributes) The private resource the HTTP request will be sent to. (see [below for nested schema](#nestedatt--invocation_connectivity_parameters))
+- `kms_key_identifier` (String)
 - `name` (String) Name of the connection.
 - `secret_arn` (String) The arn of the secrets manager secret created in the customer account.
 

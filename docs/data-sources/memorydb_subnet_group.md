@@ -25,6 +25,7 @@ Data Source schema for AWS::MemoryDB::SubnetGroup
 - `description` (String) An optional description of the subnet group.
 - `subnet_group_name` (String) The name of the subnet group. This value must be unique as it also serves as the subnet group identifier.
 - `subnet_ids` (Set of String) A list of VPC subnet IDs for the subnet group.
+- `supported_network_types` (Set of String) Supported network types would be a list of network types supported by subnet group and can be either [ipv4] or [ipv4, dual_stack] or [ipv6].
 - `tags` (Attributes Set) An array of key-value pairs to apply to this subnet group. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>

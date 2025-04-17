@@ -21,6 +21,7 @@ Data Source schema for AWS::PaymentCryptography::Key
 
 ### Read-Only
 
+- `derive_key_usage` (String)
 - `enabled` (Boolean)
 - `exportable` (Boolean)
 - `key_attributes` (Attributes) (see [below for nested schema](#nestedatt--key_attributes))

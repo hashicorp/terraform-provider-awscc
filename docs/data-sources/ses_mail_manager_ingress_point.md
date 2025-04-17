@@ -26,6 +26,7 @@ Data Source schema for AWS::SES::MailManagerIngressPoint
 - `ingress_point_configuration` (Attributes) (see [below for nested schema](#nestedatt--ingress_point_configuration))
 - `ingress_point_id` (String)
 - `ingress_point_name` (String)
+- `network_configuration` (Attributes) (see [below for nested schema](#nestedatt--network_configuration))
 - `rule_set_id` (String)
 - `status` (String)
 - `status_to_update` (String)
@@ -40,6 +41,31 @@ Read-Only:
 
 - `secret_arn` (String)
 - `smtp_password` (String)
+
+
+<a id="nestedatt--network_configuration"></a>
+### Nested Schema for `network_configuration`
+
+Read-Only:
+
+- `private_network_configuration` (Attributes) (see [below for nested schema](#nestedatt--network_configuration--private_network_configuration))
+- `public_network_configuration` (Attributes) (see [below for nested schema](#nestedatt--network_configuration--public_network_configuration))
+
+<a id="nestedatt--network_configuration--private_network_configuration"></a>
+### Nested Schema for `network_configuration.private_network_configuration`
+
+Read-Only:
+
+- `vpc_endpoint_id` (String)
+
+
+<a id="nestedatt--network_configuration--public_network_configuration"></a>
+### Nested Schema for `network_configuration.public_network_configuration`
+
+Read-Only:
+
+- `ip_type` (String)
+
 
 
 <a id="nestedatt--tags"></a>

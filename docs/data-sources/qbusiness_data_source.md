@@ -170,7 +170,17 @@ Read-Only:
 
 Read-Only:
 
+- `audio_extraction_configuration` (Attributes) (see [below for nested schema](#nestedatt--media_extraction_configuration--audio_extraction_configuration))
 - `image_extraction_configuration` (Attributes) (see [below for nested schema](#nestedatt--media_extraction_configuration--image_extraction_configuration))
+- `video_extraction_configuration` (Attributes) (see [below for nested schema](#nestedatt--media_extraction_configuration--video_extraction_configuration))
+
+<a id="nestedatt--media_extraction_configuration--audio_extraction_configuration"></a>
+### Nested Schema for `media_extraction_configuration.audio_extraction_configuration`
+
+Read-Only:
+
+- `audio_extraction_status` (String)
+
 
 <a id="nestedatt--media_extraction_configuration--image_extraction_configuration"></a>
 ### Nested Schema for `media_extraction_configuration.image_extraction_configuration`
@@ -178,6 +188,14 @@ Read-Only:
 Read-Only:
 
 - `image_extraction_status` (String)
+
+
+<a id="nestedatt--media_extraction_configuration--video_extraction_configuration"></a>
+### Nested Schema for `media_extraction_configuration.video_extraction_configuration`
+
+Read-Only:
+
+- `video_extraction_status` (String)
 
 
 

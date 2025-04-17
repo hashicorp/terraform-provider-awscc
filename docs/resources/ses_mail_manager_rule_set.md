@@ -256,7 +256,17 @@ Optional:
 
 Optional:
 
+- `analysis` (Attributes) (see [below for nested schema](#nestedatt--rules--conditions--boolean_expression--evaluate--analysis))
 - `attribute` (String)
+
+<a id="nestedatt--rules--conditions--boolean_expression--evaluate--analysis"></a>
+### Nested Schema for `rules.conditions.boolean_expression.evaluate.analysis`
+
+Optional:
+
+- `analyzer` (String)
+- `result_field` (String)
+
 
 
 
@@ -319,8 +329,18 @@ Optional:
 
 Optional:
 
+- `analysis` (Attributes) (see [below for nested schema](#nestedatt--rules--conditions--string_expression--evaluate--analysis))
 - `attribute` (String)
 - `mime_header_attribute` (String)
+
+<a id="nestedatt--rules--conditions--string_expression--evaluate--analysis"></a>
+### Nested Schema for `rules.conditions.string_expression.evaluate.analysis`
+
+Optional:
+
+- `analyzer` (String)
+- `result_field` (String)
+
 
 
 
@@ -378,7 +398,17 @@ Optional:
 
 Optional:
 
+- `analysis` (Attributes) (see [below for nested schema](#nestedatt--rules--unless--boolean_expression--evaluate--analysis))
 - `attribute` (String)
+
+<a id="nestedatt--rules--unless--boolean_expression--evaluate--analysis"></a>
+### Nested Schema for `rules.unless.boolean_expression.evaluate.analysis`
+
+Optional:
+
+- `analyzer` (String)
+- `result_field` (String)
+
 
 
 
@@ -441,8 +471,18 @@ Optional:
 
 Optional:
 
+- `analysis` (Attributes) (see [below for nested schema](#nestedatt--rules--unless--string_expression--evaluate--analysis))
 - `attribute` (String)
 - `mime_header_attribute` (String)
+
+<a id="nestedatt--rules--unless--string_expression--evaluate--analysis"></a>
+### Nested Schema for `rules.unless.string_expression.evaluate.analysis`
+
+Optional:
+
+- `analyzer` (String)
+- `result_field` (String)
+
 
 
 
