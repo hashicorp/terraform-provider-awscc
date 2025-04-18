@@ -36,6 +36,10 @@ resource "awscc_bedrock_blueprint" "example" {
       }
     }
   })
+  tags = [{
+      key   = "ModifiedBy"
+      value = "AWSCC"
+    }] 
 }
 ```
 
