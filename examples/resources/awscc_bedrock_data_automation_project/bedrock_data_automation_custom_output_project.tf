@@ -16,7 +16,7 @@ resource "awscc_bedrock_data_automation_project" "example" {
   custom_output_configuration = {
     blueprints = [
       {
-        blueprint_arn = "arn:aws:bedrock:us-west-2:<AWS_ACCOUNT_ID>:blueprint/<BLUEPRINT_ID>"
+        blueprint_arn = awscc_bedrock_blueprint.example.blueprint_arn
       }
     ]
   }
