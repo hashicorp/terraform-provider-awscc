@@ -1,6 +1,6 @@
 {
   "tagging": {
-    "taggable": true
+    "taggable": false
   },
   "typeName": "AWS::Redshift::EventSubscription",
   "readOnlyProperties": [

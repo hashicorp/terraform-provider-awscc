@@ -116,9 +116,6 @@
     "/properties/LastUpdatedDate",
     "/properties/DimensionalValueCount"
   ],
-  "writeOnlyProperties": [
-    "/properties/ResourceTags"
-  ],
   "primaryIdentifier": [
     "/properties/MonitorArn"
   ],
@@ -131,7 +128,8 @@
     },
     "read": {
       "permissions": [
-        "ce:GetAnomalyMonitors"
+        "ce:GetAnomalyMonitors",
+        "ce:ListTagsForResource"
       ]
     },
     "update": {
@@ -149,5 +147,15 @@
         "ce:GetAnomalyMonitors"
       ]
     }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/ResourceTags",
+    "permissions": [
+      "ce:ListTagsForResource"
+    ]
   }
 }

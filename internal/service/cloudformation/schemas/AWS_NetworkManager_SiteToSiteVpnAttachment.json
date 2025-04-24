@@ -197,7 +197,7 @@
         "ec2:DescribeRegions",
         "networkmanager:TagResource"
       ],
-      "timeoutInMinutes": 40
+      "timeoutInMinutes": 120
     },
     "read": {
       "permissions": [
