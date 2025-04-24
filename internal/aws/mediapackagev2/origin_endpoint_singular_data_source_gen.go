@@ -367,7 +367,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "\u003cp\u003eThe failover settings for the endpoint.\u003c/p\u003e",
 		//	  "properties": {
 		//	    "EndpointErrorConditions": {
-		//	      "description": "\u003cp\u003eThe failover settings for the endpoint. The options are:\u003c/p\u003e\n         \u003cul\u003e\n            \u003cli\u003e\n               \u003cp\u003e\n                  \u003ccode\u003eSTALE_MANIFEST\u003c/code\u003e - The manifest stalled and there a no new segments or parts.\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n               \u003cp\u003e\n                  \u003ccode\u003eINCOMPLETE_MANIFEST\u003c/code\u003e - There is a gap in the manifest.\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n               \u003cp\u003e\n                  \u003ccode\u003eMISSING_DRM_KEY\u003c/code\u003e - Key rotation is enabled but we're unable to fetch the key for the current key period.\u003c/p\u003e\n            \u003c/li\u003e\n         \u003c/ul\u003e",
+		//	      "description": "\u003cp\u003eThe failover conditions for the endpoint. The options are:\u003c/p\u003e\n         \u003cul\u003e\n            \u003cli\u003e\n               \u003cp\u003e\n                  \u003ccode\u003eSTALE_MANIFEST\u003c/code\u003e - The manifest stalled and there are no new segments or parts.\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n               \u003cp\u003e\n                  \u003ccode\u003eINCOMPLETE_MANIFEST\u003c/code\u003e - There is a gap in the manifest.\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n               \u003cp\u003e\n                  \u003ccode\u003eMISSING_DRM_KEY\u003c/code\u003e - Key rotation is enabled but we're unable to fetch the key for the current key period.\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n               \u003cp\u003e\n                  \u003ccode\u003eSLATE_INPUT\u003c/code\u003e - The segments which contain slate content are considered to be missing content.\u003c/p\u003e\n            \u003c/li\u003e\n         \u003c/ul\u003e",
 		//	      "items": {
 		//	        "enum": [
 		//	          "STALE_MANIFEST",
@@ -387,7 +387,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 				// Property: EndpointErrorConditions
 				"endpoint_error_conditions": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "<p>The failover settings for the endpoint. The options are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>STALE_MANIFEST</code> - The manifest stalled and there a no new segments or parts.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INCOMPLETE_MANIFEST</code> - There is a gap in the manifest.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MISSING_DRM_KEY</code> - Key rotation is enabled but we're unable to fetch the key for the current key period.</p>\n            </li>\n         </ul>",
+					Description: "<p>The failover conditions for the endpoint. The options are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>STALE_MANIFEST</code> - The manifest stalled and there are no new segments or parts.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INCOMPLETE_MANIFEST</code> - There is a gap in the manifest.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MISSING_DRM_KEY</code> - Key rotation is enabled but we're unable to fetch the key for the current key period.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SLATE_INPUT</code> - The segments which contain slate content are considered to be missing content.</p>\n            </li>\n         </ul>",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -469,7 +469,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	        "type": "integer"
 		//	      },
 		//	      "ProgramDateTimeIntervalSeconds": {
-		//	        "description": "\u003cp\u003eInserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval, \n         EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest. \n         The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player. \n         ID3Timed metadata messages generate every 5 seconds whenever the content is ingested.\u003c/p\u003e\n         \u003cp\u003eIrrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.\u003c/p\u003e",
+		//	        "description": "\u003cp\u003eInserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval,\n         EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest.\n         The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player.\u003c/p\u003e\n         \u003cp\u003eIrrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.\u003c/p\u003e",
 		//	        "type": "integer"
 		//	      },
 		//	      "ScteHls": {
@@ -506,6 +506,10 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      "Url": {
 		//	        "description": "\u003cp\u003eThe egress domain URL for stream delivery from MediaPackage.\u003c/p\u003e",
 		//	        "type": "string"
+		//	      },
+		//	      "UrlEncodeChildManifest": {
+		//	        "description": "\u003cp\u003eWhen enabled, MediaPackage URL-encodes the query string for API requests for HLS child manifests to comply with Amazon Web Services Signature Version 4 (SigV4) signature signing protocol.\n         For more information, see \u003ca href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html\"\u003eAmazon Web Services Signature Version 4 for API requests\u003c/a\u003e in \u003ci\u003eIdentity and Access Management User Guide\u003c/i\u003e.\u003c/p\u003e",
+		//	        "type": "boolean"
 		//	      }
 		//	    },
 		//	    "required": [
@@ -570,7 +574,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 					}, /*END ATTRIBUTE*/
 					// Property: ProgramDateTimeIntervalSeconds
 					"program_date_time_interval_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "<p>Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval, \n         EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest. \n         The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player. \n         ID3Timed metadata messages generate every 5 seconds whenever the content is ingested.</p>\n         <p>Irrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.</p>",
+						Description: "<p>Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval,\n         EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest.\n         The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player.</p>\n         <p>Irrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.</p>",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ScteHls
@@ -604,6 +608,11 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 					// Property: Url
 					"url": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "<p>The egress domain URL for stream delivery from MediaPackage.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: UrlEncodeChildManifest
+					"url_encode_child_manifest": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "<p>When enabled, MediaPackage URL-encodes the query string for API requests for HLS child manifests to comply with Amazon Web Services Signature Version 4 (SigV4) signature signing protocol.\n         For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html\">Amazon Web Services Signature Version 4 for API requests</a> in <i>Identity and Access Management User Guide</i>.</p>",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -686,7 +695,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	        "type": "integer"
 		//	      },
 		//	      "ProgramDateTimeIntervalSeconds": {
-		//	        "description": "\u003cp\u003eInserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval, \n         EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest. \n         The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player. \n         ID3Timed metadata messages generate every 5 seconds whenever the content is ingested.\u003c/p\u003e\n         \u003cp\u003eIrrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.\u003c/p\u003e",
+		//	        "description": "\u003cp\u003eInserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval,\n         EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest.\n         The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player.\u003c/p\u003e\n         \u003cp\u003eIrrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.\u003c/p\u003e",
 		//	        "type": "integer"
 		//	      },
 		//	      "ScteHls": {
@@ -723,6 +732,10 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      "Url": {
 		//	        "description": "\u003cp\u003eThe egress domain URL for stream delivery from MediaPackage.\u003c/p\u003e",
 		//	        "type": "string"
+		//	      },
+		//	      "UrlEncodeChildManifest": {
+		//	        "description": "\u003cp\u003eWhen enabled, MediaPackage URL-encodes the query string for API requests for LL-HLS child manifests to comply with Amazon Web Services Signature Version 4 (SigV4) signature signing protocol.\n         For more information, see \u003ca href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html\"\u003eAmazon Web Services Signature Version 4 for API requests\u003c/a\u003e in \u003ci\u003eIdentity and Access Management User Guide\u003c/i\u003e.\u003c/p\u003e",
+		//	        "type": "boolean"
 		//	      }
 		//	    },
 		//	    "required": [
@@ -787,7 +800,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 					}, /*END ATTRIBUTE*/
 					// Property: ProgramDateTimeIntervalSeconds
 					"program_date_time_interval_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "<p>Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval, \n         EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest. \n         The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player. \n         ID3Timed metadata messages generate every 5 seconds whenever the content is ingested.</p>\n         <p>Irrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.</p>",
+						Description: "<p>Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval,\n         EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest.\n         The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player.</p>\n         <p>Irrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.</p>",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ScteHls
@@ -821,6 +834,11 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 					// Property: Url
 					"url": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "<p>The egress domain URL for stream delivery from MediaPackage.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: UrlEncodeChildManifest
+					"url_encode_child_manifest": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "<p>When enabled, MediaPackage URL-encodes the query string for API requests for LL-HLS child manifests to comply with Amazon Web Services Signature Version 4 (SigV4) signature signing protocol.\n         For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html\">Amazon Web Services Signature Version 4 for API requests</a> in <i>Identity and Access Management User Guide</i>.</p>",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -1294,6 +1312,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		"ts_include_dvb_subtitles":             "TsIncludeDvbSubtitles",
 		"ts_use_audio_rendition_group":         "TsUseAudioRenditionGroup",
 		"url":                                  "Url",
+		"url_encode_child_manifest":            "UrlEncodeChildManifest",
 		"utc_timing":                           "UtcTiming",
 		"value":                                "Value",
 	})

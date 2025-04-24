@@ -49,7 +49,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "AttributeType": {
-		//	        "description": "The data type for the attribute, where:\n  +   ``S`` - the attribute is of type String\n  +   ``N`` - the attribute is of type Number\n  +   ``B`` - the attribute is of type Binary",
+		//	        "description": "The data type for the attribute, where:\n  +  ``S`` - the attribute is of type String\n  +  ``N`` - the attribute is of type Number\n  +  ``B`` - the attribute is of type Binary",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -72,7 +72,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: AttributeType
 					"attribute_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The data type for the attribute, where:\n  +   ``S`` - the attribute is of type String\n  +   ``N`` - the attribute is of type Number\n  +   ``B`` - the attribute is of type Binary",
+						Description: "The data type for the attribute, where:\n  +  ``S`` - the attribute is of type String\n  +  ``N`` - the attribute is of type Number\n  +  ``B`` - the attribute is of type Binary",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -84,11 +84,11 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Specify how you are charged for read and write throughput and how you manage capacity.\n Valid values include:\n  +   ``PAY_PER_REQUEST`` - We recommend using ``PAY_PER_REQUEST`` for most DynamoDB workloads. ``PAY_PER_REQUEST`` sets the billing mode to [On-demand capacity mode](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/on-demand-capacity-mode.html). \n  +   ``PROVISIONED`` - We recommend using ``PROVISIONED`` for steady workloads with predictable growth where capacity requirements can be reliably forecasted. ``PROVISIONED`` sets the billing mode to [Provisioned capacity mode](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html).\n  \n If not specified, the default is ``PROVISIONED``.",
+		//	  "description": "Specify how you are charged for read and write throughput and how you manage capacity.\n Valid values include:\n  +  ``PAY_PER_REQUEST`` - We recommend using ``PAY_PER_REQUEST`` for most DynamoDB workloads. ``PAY_PER_REQUEST`` sets the billing mode to [On-demand capacity mode](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/on-demand-capacity-mode.html). \n  +  ``PROVISIONED`` - We recommend using ``PROVISIONED`` for steady workloads with predictable growth where capacity requirements can be reliably forecasted. ``PROVISIONED`` sets the billing mode to [Provisioned capacity mode](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html).\n  \n If not specified, the default is ``PROVISIONED``.",
 		//	  "type": "string"
 		//	}
 		"billing_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specify how you are charged for read and write throughput and how you manage capacity.\n Valid values include:\n  +   ``PAY_PER_REQUEST`` - We recommend using ``PAY_PER_REQUEST`` for most DynamoDB workloads. ``PAY_PER_REQUEST`` sets the billing mode to [On-demand capacity mode](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/on-demand-capacity-mode.html). \n  +   ``PROVISIONED`` - We recommend using ``PROVISIONED`` for steady workloads with predictable growth where capacity requirements can be reliably forecasted. ``PROVISIONED`` sets the billing mode to [Provisioned capacity mode](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html).\n  \n If not specified, the default is ``PROVISIONED``.",
+			Description: "Specify how you are charged for read and write throughput and how you manage capacity.\n Valid values include:\n  +  ``PAY_PER_REQUEST`` - We recommend using ``PAY_PER_REQUEST`` for most DynamoDB workloads. ``PAY_PER_REQUEST`` sets the billing mode to [On-demand capacity mode](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/on-demand-capacity-mode.html). \n  +  ``PROVISIONED`` - We recommend using ``PROVISIONED`` for steady workloads with predictable growth where capacity requirements can be reliably forecasted. ``PROVISIONED`` sets the billing mode to [Provisioned capacity mode](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html).\n  \n If not specified, the default is ``PROVISIONED``.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ContributorInsightsSpecification
@@ -158,7 +158,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "KeySchema": {
-		//	        "description": "The complete key schema for a global secondary index, which consists of one or more pairs of attribute names and key types:\n  +   ``HASH`` - partition key\n  +   ``RANGE`` - sort key\n  \n  The partition key of an item is also known as its *hash attribute*. The term \"hash attribute\" derives from DynamoDB's usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values.\n The sort key of an item is also known as its *range attribute*. The term \"range attribute\" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value.",
+		//	        "description": "The complete key schema for a global secondary index, which consists of one or more pairs of attribute names and key types:\n  +  ``HASH`` - partition key\n  +  ``RANGE`` - sort key\n  \n  The partition key of an item is also known as its *hash attribute*. The term \"hash attribute\" derives from DynamoDB's usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values.\n The sort key of an item is also known as its *range attribute*. The term \"range attribute\" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value.",
 		//	        "items": {
 		//	          "additionalProperties": false,
 		//	          "description": "Represents *a single element* of a key schema. A key schema specifies the attributes that make up the primary key of a table, or the key attributes of an index.\n A ``KeySchemaElement`` represents exactly one attribute of the primary key. For example, a simple primary key would be represented by one ``KeySchemaElement`` (for the partition key). A composite primary key would require one ``KeySchemaElement`` for the partition key, and another ``KeySchemaElement`` for the sort key.\n A ``KeySchemaElement`` must be a scalar, top-level attribute (not a nested attribute). The data type must be one of String, Number, or Binary. The attribute cannot be nested within a List or a Map.",
@@ -168,7 +168,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "type": "string"
 		//	            },
 		//	            "KeyType": {
-		//	              "description": "The role that this key attribute will assume:\n  +   ``HASH`` - partition key\n  +   ``RANGE`` - sort key\n  \n  The partition key of an item is also known as its *hash attribute*. The term \"hash attribute\" derives from DynamoDB's usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values.\n The sort key of an item is also known as its *range attribute*. The term \"range attribute\" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value.",
+		//	              "description": "The role that this key attribute will assume:\n  +  ``HASH`` - partition key\n  +  ``RANGE`` - sort key\n  \n  The partition key of an item is also known as its *hash attribute*. The term \"hash attribute\" derives from DynamoDB's usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values.\n The sort key of an item is also known as its *range attribute*. The term \"range attribute\" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value.",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -211,7 +211,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "uniqueItems": false
 		//	          },
 		//	          "ProjectionType": {
-		//	            "description": "The set of attributes that are projected into the index:\n  +   ``KEYS_ONLY`` - Only the index and primary keys are projected into the index.\n  +   ``INCLUDE`` - In addition to the attributes described in ``KEYS_ONLY``, the secondary index will include other non-key attributes that you specify.\n  +   ``ALL`` - All of the table attributes are projected into the index.\n  \n When using the DynamoDB console, ``ALL`` is selected by default.",
+		//	            "description": "The set of attributes that are projected into the index:\n  +  ``KEYS_ONLY`` - Only the index and primary keys are projected into the index.\n  +  ``INCLUDE`` - In addition to the attributes described in ``KEYS_ONLY``, the secondary index will include other non-key attributes that you specify.\n  +  ``ALL`` - All of the table attributes are projected into the index.\n  \n When using the DynamoDB console, ``ALL`` is selected by default.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -307,12 +307,12 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: KeyType
 								"key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The role that this key attribute will assume:\n  +   ``HASH`` - partition key\n  +   ``RANGE`` - sort key\n  \n  The partition key of an item is also known as its *hash attribute*. The term \"hash attribute\" derives from DynamoDB's usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values.\n The sort key of an item is also known as its *range attribute*. The term \"range attribute\" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value.",
+									Description: "The role that this key attribute will assume:\n  +  ``HASH`` - partition key\n  +  ``RANGE`` - sort key\n  \n  The partition key of an item is also known as its *hash attribute*. The term \"hash attribute\" derives from DynamoDB's usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values.\n The sort key of an item is also known as its *range attribute*. The term \"range attribute\" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "The complete key schema for a global secondary index, which consists of one or more pairs of attribute names and key types:\n  +   ``HASH`` - partition key\n  +   ``RANGE`` - sort key\n  \n  The partition key of an item is also known as its *hash attribute*. The term \"hash attribute\" derives from DynamoDB's usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values.\n The sort key of an item is also known as its *range attribute*. The term \"range attribute\" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value.",
+						Description: "The complete key schema for a global secondary index, which consists of one or more pairs of attribute names and key types:\n  +  ``HASH`` - partition key\n  +  ``RANGE`` - sort key\n  \n  The partition key of an item is also known as its *hash attribute*. The term \"hash attribute\" derives from DynamoDB's usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values.\n The sort key of an item is also known as its *range attribute*. The term \"range attribute\" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: OnDemandThroughput
@@ -343,7 +343,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: ProjectionType
 							"projection_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The set of attributes that are projected into the index:\n  +   ``KEYS_ONLY`` - Only the index and primary keys are projected into the index.\n  +   ``INCLUDE`` - In addition to the attributes described in ``KEYS_ONLY``, the secondary index will include other non-key attributes that you specify.\n  +   ``ALL`` - All of the table attributes are projected into the index.\n  \n When using the DynamoDB console, ``ALL`` is selected by default.",
+								Description: "The set of attributes that are projected into the index:\n  +  ``KEYS_ONLY`` - Only the index and primary keys are projected into the index.\n  +  ``INCLUDE`` - In addition to the attributes described in ``KEYS_ONLY``, the secondary index will include other non-key attributes that you specify.\n  +  ``ALL`` - All of the table attributes are projected into the index.\n  \n When using the DynamoDB console, ``ALL`` is selected by default.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -597,7 +597,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "KeySchema": {
-		//	        "description": "The complete key schema for the local secondary index, consisting of one or more pairs of attribute names and key types:\n  +   ``HASH`` - partition key\n  +   ``RANGE`` - sort key\n  \n  The partition key of an item is also known as its *hash attribute*. The term \"hash attribute\" derives from DynamoDB's usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values.\n The sort key of an item is also known as its *range attribute*. The term \"range attribute\" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value.",
+		//	        "description": "The complete key schema for the local secondary index, consisting of one or more pairs of attribute names and key types:\n  +  ``HASH`` - partition key\n  +  ``RANGE`` - sort key\n  \n  The partition key of an item is also known as its *hash attribute*. The term \"hash attribute\" derives from DynamoDB's usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values.\n The sort key of an item is also known as its *range attribute*. The term \"range attribute\" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value.",
 		//	        "items": {
 		//	          "additionalProperties": false,
 		//	          "description": "Represents *a single element* of a key schema. A key schema specifies the attributes that make up the primary key of a table, or the key attributes of an index.\n A ``KeySchemaElement`` represents exactly one attribute of the primary key. For example, a simple primary key would be represented by one ``KeySchemaElement`` (for the partition key). A composite primary key would require one ``KeySchemaElement`` for the partition key, and another ``KeySchemaElement`` for the sort key.\n A ``KeySchemaElement`` must be a scalar, top-level attribute (not a nested attribute). The data type must be one of String, Number, or Binary. The attribute cannot be nested within a List or a Map.",
@@ -607,7 +607,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "type": "string"
 		//	            },
 		//	            "KeyType": {
-		//	              "description": "The role that this key attribute will assume:\n  +   ``HASH`` - partition key\n  +   ``RANGE`` - sort key\n  \n  The partition key of an item is also known as its *hash attribute*. The term \"hash attribute\" derives from DynamoDB's usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values.\n The sort key of an item is also known as its *range attribute*. The term \"range attribute\" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value.",
+		//	              "description": "The role that this key attribute will assume:\n  +  ``HASH`` - partition key\n  +  ``RANGE`` - sort key\n  \n  The partition key of an item is also known as its *hash attribute*. The term \"hash attribute\" derives from DynamoDB's usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values.\n The sort key of an item is also known as its *range attribute*. The term \"range attribute\" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value.",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -633,7 +633,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "uniqueItems": false
 		//	          },
 		//	          "ProjectionType": {
-		//	            "description": "The set of attributes that are projected into the index:\n  +   ``KEYS_ONLY`` - Only the index and primary keys are projected into the index.\n  +   ``INCLUDE`` - In addition to the attributes described in ``KEYS_ONLY``, the secondary index will include other non-key attributes that you specify.\n  +   ``ALL`` - All of the table attributes are projected into the index.\n  \n When using the DynamoDB console, ``ALL`` is selected by default.",
+		//	            "description": "The set of attributes that are projected into the index:\n  +  ``KEYS_ONLY`` - Only the index and primary keys are projected into the index.\n  +  ``INCLUDE`` - In addition to the attributes described in ``KEYS_ONLY``, the secondary index will include other non-key attributes that you specify.\n  +  ``ALL`` - All of the table attributes are projected into the index.\n  \n When using the DynamoDB console, ``ALL`` is selected by default.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -669,12 +669,12 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: KeyType
 								"key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The role that this key attribute will assume:\n  +   ``HASH`` - partition key\n  +   ``RANGE`` - sort key\n  \n  The partition key of an item is also known as its *hash attribute*. The term \"hash attribute\" derives from DynamoDB's usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values.\n The sort key of an item is also known as its *range attribute*. The term \"range attribute\" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value.",
+									Description: "The role that this key attribute will assume:\n  +  ``HASH`` - partition key\n  +  ``RANGE`` - sort key\n  \n  The partition key of an item is also known as its *hash attribute*. The term \"hash attribute\" derives from DynamoDB's usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values.\n The sort key of an item is also known as its *range attribute*. The term \"range attribute\" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "The complete key schema for the local secondary index, consisting of one or more pairs of attribute names and key types:\n  +   ``HASH`` - partition key\n  +   ``RANGE`` - sort key\n  \n  The partition key of an item is also known as its *hash attribute*. The term \"hash attribute\" derives from DynamoDB's usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values.\n The sort key of an item is also known as its *range attribute*. The term \"range attribute\" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value.",
+						Description: "The complete key schema for the local secondary index, consisting of one or more pairs of attribute names and key types:\n  +  ``HASH`` - partition key\n  +  ``RANGE`` - sort key\n  \n  The partition key of an item is also known as its *hash attribute*. The term \"hash attribute\" derives from DynamoDB's usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values.\n The sort key of an item is also known as its *range attribute*. The term \"range attribute\" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Projection
@@ -688,7 +688,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: ProjectionType
 							"projection_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The set of attributes that are projected into the index:\n  +   ``KEYS_ONLY`` - Only the index and primary keys are projected into the index.\n  +   ``INCLUDE`` - In addition to the attributes described in ``KEYS_ONLY``, the secondary index will include other non-key attributes that you specify.\n  +   ``ALL`` - All of the table attributes are projected into the index.\n  \n When using the DynamoDB console, ``ALL`` is selected by default.",
+								Description: "The set of attributes that are projected into the index:\n  +  ``KEYS_ONLY`` - Only the index and primary keys are projected into the index.\n  +  ``INCLUDE`` - In addition to the attributes described in ``KEYS_ONLY``, the secondary index will include other non-key attributes that you specify.\n  +  ``ALL`` - All of the table attributes are projected into the index.\n  \n When using the DynamoDB console, ``ALL`` is selected by default.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -860,7 +860,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "boolean"
 		//	    },
 		//	    "SSEType": {
-		//	      "description": "Server-side encryption type. The only supported value is:\n  +   ``KMS`` - Server-side encryption that uses KMSlong. The key is stored in your account and is managed by KMS (KMS charges apply).",
+		//	      "description": "Server-side encryption type. The only supported value is:\n  +  ``KMS`` - Server-side encryption that uses KMSlong. The key is stored in your account and is managed by KMS (KMS charges apply).",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -883,7 +883,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: SSEType
 				"sse_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Server-side encryption type. The only supported value is:\n  +   ``KMS`` - Server-side encryption that uses KMSlong. The key is stored in your account and is managed by KMS (KMS charges apply).",
+					Description: "Server-side encryption type. The only supported value is:\n  +  ``KMS`` - Server-side encryption that uses KMSlong. The key is stored in your account and is managed by KMS (KMS charges apply).",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -923,7 +923,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "StreamViewType": {
-		//	      "description": "When an item in the table is modified, ``StreamViewType`` determines what information is written to the stream for this table. Valid values for ``StreamViewType`` are:\n  +   ``KEYS_ONLY`` - Only the key attributes of the modified item are written to the stream.\n  +   ``NEW_IMAGE`` - The entire item, as it appears after it was modified, is written to the stream.\n  +   ``OLD_IMAGE`` - The entire item, as it appeared before it was modified, is written to the stream.\n  +   ``NEW_AND_OLD_IMAGES`` - Both the new and the old item images of the item are written to the stream.",
+		//	      "description": "When an item in the table is modified, ``StreamViewType`` determines what information is written to the stream for this table. Valid values for ``StreamViewType`` are:\n  +  ``KEYS_ONLY`` - Only the key attributes of the modified item are written to the stream.\n  +  ``NEW_IMAGE`` - The entire item, as it appears after it was modified, is written to the stream.\n  +  ``OLD_IMAGE`` - The entire item, as it appeared before it was modified, is written to the stream.\n  +  ``NEW_AND_OLD_IMAGES`` - Both the new and the old item images of the item are written to the stream.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -949,7 +949,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: StreamViewType
 				"stream_view_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "When an item in the table is modified, ``StreamViewType`` determines what information is written to the stream for this table. Valid values for ``StreamViewType`` are:\n  +   ``KEYS_ONLY`` - Only the key attributes of the modified item are written to the stream.\n  +   ``NEW_IMAGE`` - The entire item, as it appears after it was modified, is written to the stream.\n  +   ``OLD_IMAGE`` - The entire item, as it appeared before it was modified, is written to the stream.\n  +   ``NEW_AND_OLD_IMAGES`` - Both the new and the old item images of the item are written to the stream.",
+					Description: "When an item in the table is modified, ``StreamViewType`` determines what information is written to the stream for this table. Valid values for ``StreamViewType`` are:\n  +  ``KEYS_ONLY`` - Only the key attributes of the modified item are written to the stream.\n  +  ``NEW_IMAGE`` - The entire item, as it appears after it was modified, is written to the stream.\n  +  ``OLD_IMAGE`` - The entire item, as it appeared before it was modified, is written to the stream.\n  +  ``NEW_AND_OLD_IMAGES`` - Both the new and the old item images of the item are written to the stream.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -985,7 +985,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "An array of key-value pairs to apply to this resource.\n For more information, see [Tag](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html).",
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "Describes a tag. A tag is a key-value pair. You can add up to 50 tags to a single DynamoDB table. \n  AWS-assigned tag names and values are automatically assigned the ``aws:`` prefix, which the user cannot assign. AWS-assigned tag names do not count towards the tag limit of 50. User-assigned tag names have the prefix ``user:`` in the Cost Allocation Report. You cannot backdate the application of a tag.\n For an overview on tagging DynamoDB resources, see [Tagging for DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html) in the *Amazon DynamoDB Developer Guide*.",
+		//	    "description": "Describes a tag. A tag is a key-value pair. You can add up to 50 tags to a single DynamoDB table. \n AWS-assigned tag names and values are automatically assigned the ``aws:`` prefix, which the user cannot assign. AWS-assigned tag names do not count towards the tag limit of 50. User-assigned tag names have the prefix ``user:`` in the Cost Allocation Report. You cannot backdate the application of a tag.\n For an overview on tagging DynamoDB resources, see [Tagging for DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html) in the *Amazon DynamoDB Developer Guide*.",
 		//	    "properties": {
 		//	      "Key": {
 		//	        "description": "The key of the tag. Tag keys are case sensitive. Each DynamoDB table can only have up to one tag with the same key. If you try to add an existing tag (same key), the existing tag value will be updated to the new value.",

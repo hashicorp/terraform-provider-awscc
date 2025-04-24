@@ -74,7 +74,7 @@ func customActionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	              "type": "string"
 		//	            },
 		//	            "Value": {
-		//	              "maxLength": 50,
+		//	              "maxLength": 1024,
 		//	              "minLength": 0,
 		//	              "type": "string"
 		//	            },

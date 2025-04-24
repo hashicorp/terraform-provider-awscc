@@ -64,6 +64,7 @@ func keyspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "enum": [
+		//	          "af-south-1",
 		//	          "ap-northeast-1",
 		//	          "ap-northeast-2",
 		//	          "ap-south-1",

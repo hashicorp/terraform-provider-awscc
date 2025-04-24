@@ -49,7 +49,9 @@ func aIPromptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "enum": [
 		//	    "ANTHROPIC_CLAUDE_MESSAGES",
-		//	    "ANTHROPIC_CLAUDE_TEXT_COMPLETIONS"
+		//	    "ANTHROPIC_CLAUDE_TEXT_COMPLETIONS",
+		//	    "MESSAGES",
+		//	    "TEXT_COMPLETIONS"
 		//	  ],
 		//	  "type": "string"
 		//	}

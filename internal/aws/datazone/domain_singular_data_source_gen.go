@@ -191,6 +191,13 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "The single-sign on configuration of the Amazon DataZone domain.",
 		//	  "properties": {
+		//	    "IdcInstanceArn": {
+		//	      "description": "The ARN of the AWS Identity Center instance.",
+		//	      "maxLength": 1224,
+		//	      "minLength": 10,
+		//	      "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}",
+		//	      "type": "string"
+		//	    },
 		//	    "Type": {
 		//	      "description": "The type of single sign-on in Amazon DataZone.",
 		//	      "enum": [
@@ -212,6 +219,11 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"single_sign_on": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: IdcInstanceArn
+				"idc_instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the AWS Identity Center instance.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: Type
 				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The type of single sign-on in Amazon DataZone.",
@@ -318,6 +330,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"domain_execution_role": "DomainExecutionRole",
 		"domain_id":             "Id",
 		"domain_version":        "DomainVersion",
+		"idc_instance_arn":      "IdcInstanceArn",
 		"key":                   "Key",
 		"kms_key_identifier":    "KmsKeyIdentifier",
 		"last_updated_at":       "LastUpdatedAt",
