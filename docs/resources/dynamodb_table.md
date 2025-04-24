@@ -13,7 +13,7 @@ description: |-
 
 The ``AWS::DynamoDB::Table`` resource creates a DDB table. For more information, see [CreateTable](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_CreateTable.html) in the *API Reference*.
  You should be aware of the following behaviors when working with DDB tables:
-  +   CFNlong typically creates DDB tables in parallel. However, if your template includes multiple DDB tables with indexes, you must declare dependencies so that the tables are created sequentially. DDBlong limits the number of tables with secondary indexes that are in the creating state. If you create multiple tables with indexes at the same time, DDB returns an error and the stack operation fails. For an example, see [DynamoDB Table with a DependsOn Attribute](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html#aws-resource-dynamodb-table--examples--DynamoDB_Table_with_a_DependsOn_Attribute).
+  +  CFNlong typically creates DDB tables in parallel. However, if your template includes multiple DDB tables with indexes, you must declare dependencies so that the tables are created sequentially. DDBlong limits the number of tables with secondary indexes that are in the creating state. If you create multiple tables with indexes at the same time, DDB returns an error and the stack operation fails. For an example, see [DynamoDB Table with a DependsOn Attribute](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html#aws-resource-dynamodb-table--examples--DynamoDB_Table_with_a_DependsOn_Attribute).
   
    Our guidance is to use the latest schema documented for your CFNlong templates. This schema supports the provisioning of all table settings below. When using this schema in your CFNlong templates, please ensure that your Identity and Access Management (IAM) policies are updated with appropriate permissions to allow for the authorization of these setting changes.
 
@@ -149,8 +149,8 @@ resource "awscc_dynamodb_table" "example" {
  Update requires: [Some interruptions](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-some-interrupt). Replacement if you edit an existing AttributeDefinition. (see [below for nested schema](#nestedatt--attribute_definitions))
 - `billing_mode` (String) Specify how you are charged for read and write throughput and how you manage capacity.
  Valid values include:
-  +   ``PAY_PER_REQUEST`` - We recommend using ``PAY_PER_REQUEST`` for most DynamoDB workloads. ``PAY_PER_REQUEST`` sets the billing mode to [On-demand capacity mode](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/on-demand-capacity-mode.html). 
-  +   ``PROVISIONED`` - We recommend using ``PROVISIONED`` for steady workloads with predictable growth where capacity requirements can be reliably forecasted. ``PROVISIONED`` sets the billing mode to [Provisioned capacity mode](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html).
+  +  ``PAY_PER_REQUEST`` - We recommend using ``PAY_PER_REQUEST`` for most DynamoDB workloads. ``PAY_PER_REQUEST`` sets the billing mode to [On-demand capacity mode](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/on-demand-capacity-mode.html). 
+  +  ``PROVISIONED`` - We recommend using ``PROVISIONED`` for steady workloads with predictable growth where capacity requirements can be reliably forecasted. ``PROVISIONED`` sets the billing mode to [Provisioned capacity mode](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html).
   
  If not specified, the default is ``PROVISIONED``.
 - `contributor_insights_specification` (Attributes) The settings used to enable or disable CloudWatch Contributor Insights for the specified table. (see [below for nested schema](#nestedatt--contributor_insights_specification))
@@ -195,9 +195,9 @@ Optional:
 
 - `attribute_name` (String) A name for the attribute.
 - `attribute_type` (String) The data type for the attribute, where:
-  +   ``S`` - the attribute is of type String
-  +   ``N`` - the attribute is of type Number
-  +   ``B`` - the attribute is of type Binary
+  +  ``S`` - the attribute is of type String
+  +  ``N`` - the attribute is of type Number
+  +  ``B`` - the attribute is of type Binary
 
 
 <a id="nestedatt--contributor_insights_specification"></a>
@@ -216,8 +216,8 @@ Optional:
 - `contributor_insights_specification` (Attributes) The settings used to enable or disable CloudWatch Contributor Insights for the specified global secondary index. (see [below for nested schema](#nestedatt--global_secondary_indexes--contributor_insights_specification))
 - `index_name` (String) The name of the global secondary index. The name must be unique among all other indexes on this table.
 - `key_schema` (Attributes List) The complete key schema for a global secondary index, which consists of one or more pairs of attribute names and key types:
-  +   ``HASH`` - partition key
-  +   ``RANGE`` - sort key
+  +  ``HASH`` - partition key
+  +  ``RANGE`` - sort key
   
   The partition key of an item is also known as its *hash attribute*. The term "hash attribute" derives from DynamoDB's usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values.
  The sort key of an item is also known as its *range attribute*. The term "range attribute" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value. (see [below for nested schema](#nestedatt--global_secondary_indexes--key_schema))
@@ -242,8 +242,8 @@ Optional:
 
 - `attribute_name` (String) The name of a key attribute.
 - `key_type` (String) The role that this key attribute will assume:
-  +   ``HASH`` - partition key
-  +   ``RANGE`` - sort key
+  +  ``HASH`` - partition key
+  +  ``RANGE`` - sort key
   
   The partition key of an item is also known as its *hash attribute*. The term "hash attribute" derives from DynamoDB's usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values.
  The sort key of an item is also known as its *range attribute*. The term "range attribute" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value.
@@ -268,9 +268,9 @@ Optional:
 - `non_key_attributes` (List of String) Represents the non-key attribute names which will be projected into the index.
  For global and local secondary indexes, the total count of ``NonKeyAttributes`` summed across all of the secondary indexes, must not exceed 100. If you project the same attribute into two different indexes, this counts as two distinct attributes when determining the total. This limit only applies when you specify the ProjectionType of ``INCLUDE``. You still can specify the ProjectionType of ``ALL`` to project all attributes from the source table, even if the table has more than 100 attributes.
 - `projection_type` (String) The set of attributes that are projected into the index:
-  +   ``KEYS_ONLY`` - Only the index and primary keys are projected into the index.
-  +   ``INCLUDE`` - In addition to the attributes described in ``KEYS_ONLY``, the secondary index will include other non-key attributes that you specify.
-  +   ``ALL`` - All of the table attributes are projected into the index.
+  +  ``KEYS_ONLY`` - Only the index and primary keys are projected into the index.
+  +  ``INCLUDE`` - In addition to the attributes described in ``KEYS_ONLY``, the secondary index will include other non-key attributes that you specify.
+  +  ``ALL`` - All of the table attributes are projected into the index.
   
  When using the DynamoDB console, ``ALL`` is selected by default.
 
@@ -351,8 +351,8 @@ Optional:
 
 - `index_name` (String) The name of the local secondary index. The name must be unique among all other indexes on this table.
 - `key_schema` (Attributes List) The complete key schema for the local secondary index, consisting of one or more pairs of attribute names and key types:
-  +   ``HASH`` - partition key
-  +   ``RANGE`` - sort key
+  +  ``HASH`` - partition key
+  +  ``RANGE`` - sort key
   
   The partition key of an item is also known as its *hash attribute*. The term "hash attribute" derives from DynamoDB's usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values.
  The sort key of an item is also known as its *range attribute*. The term "range attribute" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value. (see [below for nested schema](#nestedatt--local_secondary_indexes--key_schema))
@@ -365,8 +365,8 @@ Optional:
 
 - `attribute_name` (String) The name of a key attribute.
 - `key_type` (String) The role that this key attribute will assume:
-  +   ``HASH`` - partition key
-  +   ``RANGE`` - sort key
+  +  ``HASH`` - partition key
+  +  ``RANGE`` - sort key
   
   The partition key of an item is also known as its *hash attribute*. The term "hash attribute" derives from DynamoDB's usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values.
  The sort key of an item is also known as its *range attribute*. The term "range attribute" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value.
@@ -380,9 +380,9 @@ Optional:
 - `non_key_attributes` (List of String) Represents the non-key attribute names which will be projected into the index.
  For global and local secondary indexes, the total count of ``NonKeyAttributes`` summed across all of the secondary indexes, must not exceed 100. If you project the same attribute into two different indexes, this counts as two distinct attributes when determining the total. This limit only applies when you specify the ProjectionType of ``INCLUDE``. You still can specify the ProjectionType of ``ALL`` to project all attributes from the source table, even if the table has more than 100 attributes.
 - `projection_type` (String) The set of attributes that are projected into the index:
-  +   ``KEYS_ONLY`` - Only the index and primary keys are projected into the index.
-  +   ``INCLUDE`` - In addition to the attributes described in ``KEYS_ONLY``, the secondary index will include other non-key attributes that you specify.
-  +   ``ALL`` - All of the table attributes are projected into the index.
+  +  ``KEYS_ONLY`` - Only the index and primary keys are projected into the index.
+  +  ``INCLUDE`` - In addition to the attributes described in ``KEYS_ONLY``, the secondary index will include other non-key attributes that you specify.
+  +  ``ALL`` - All of the table attributes are projected into the index.
   
  When using the DynamoDB console, ``ALL`` is selected by default.
 
@@ -435,7 +435,7 @@ Optional:
 - `kms_master_key_id` (String) The KMS key that should be used for the KMS encryption. To specify a key, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. Note that you should only provide this parameter if the key is different from the default DynamoDB key ``alias/aws/dynamodb``.
 - `sse_enabled` (Boolean) Indicates whether server-side encryption is done using an AWS managed key or an AWS owned key. If enabled (true), server-side encryption type is set to ``KMS`` and an AWS managed key is used (KMS charges apply). If disabled (false) or not specified, server-side encryption is set to AWS owned key.
 - `sse_type` (String) Server-side encryption type. The only supported value is:
-  +   ``KMS`` - Server-side encryption that uses KMSlong. The key is stored in your account and is managed by KMS (KMS charges apply).
+  +  ``KMS`` - Server-side encryption that uses KMSlong. The key is stored in your account and is managed by KMS (KMS charges apply).
 
 
 <a id="nestedatt--stream_specification"></a>
@@ -446,10 +446,10 @@ Optional:
 - `resource_policy` (Attributes) Creates or updates a resource-based policy document that contains the permissions for DDB resources, such as a table's streams. Resource-based policies let you define access permissions by specifying who has access to each resource, and the actions they are allowed to perform on each resource.
  In a CFNshort template, you can provide the policy in JSON or YAML format because CFNshort converts YAML to JSON before submitting it to DDB. For more information about resource-based policies, see [Using resource-based policies for](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/access-control-resource-based.html) and [Resource-based policy examples](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-examples.html). (see [below for nested schema](#nestedatt--stream_specification--resource_policy))
 - `stream_view_type` (String) When an item in the table is modified, ``StreamViewType`` determines what information is written to the stream for this table. Valid values for ``StreamViewType`` are:
-  +   ``KEYS_ONLY`` - Only the key attributes of the modified item are written to the stream.
-  +   ``NEW_IMAGE`` - The entire item, as it appears after it was modified, is written to the stream.
-  +   ``OLD_IMAGE`` - The entire item, as it appeared before it was modified, is written to the stream.
-  +   ``NEW_AND_OLD_IMAGES`` - Both the new and the old item images of the item are written to the stream.
+  +  ``KEYS_ONLY`` - Only the key attributes of the modified item are written to the stream.
+  +  ``NEW_IMAGE`` - The entire item, as it appears after it was modified, is written to the stream.
+  +  ``OLD_IMAGE`` - The entire item, as it appeared before it was modified, is written to the stream.
+  +  ``NEW_AND_OLD_IMAGES`` - Both the new and the old item images of the item are written to the stream.
 
 <a id="nestedatt--stream_specification--resource_policy"></a>
 ### Nested Schema for `stream_specification.resource_policy`

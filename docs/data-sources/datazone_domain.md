@@ -43,6 +43,7 @@ Data Source schema for AWS::DataZone::Domain
 
 Read-Only:
 
+- `idc_instance_arn` (String) The ARN of the AWS Identity Center instance.
 - `type` (String) The type of single sign-on in Amazon DataZone.
 - `user_assignment` (String) The single sign-on user assignment in Amazon DataZone.
 

@@ -93,11 +93,11 @@ Read-Only:
 
 Read-Only:
 
-- `endpoint_error_conditions` (List of String) <p>The failover settings for the endpoint. The options are:</p>
+- `endpoint_error_conditions` (List of String) <p>The failover conditions for the endpoint. The options are:</p>
          <ul>
             <li>
                <p>
-                  <code>STALE_MANIFEST</code> - The manifest stalled and there a no new segments or parts.</p>
+                  <code>STALE_MANIFEST</code> - The manifest stalled and there are no new segments or parts.</p>
             </li>
             <li>
                <p>
@@ -106,6 +106,10 @@ Read-Only:
             <li>
                <p>
                   <code>MISSING_DRM_KEY</code> - Key rotation is enabled but we're unable to fetch the key for the current key period.</p>
+            </li>
+            <li>
+               <p>
+                  <code>SLATE_INPUT</code> - The segments which contain slate content are considered to be missing content.</p>
             </li>
          </ul>
 
@@ -119,14 +123,15 @@ Read-Only:
 - `filter_configuration` (Attributes) <p>Filter configuration includes settings for manifest filtering, start and end times, and time delay that apply to all of your egress requests for this manifest. </p> (see [below for nested schema](#nestedatt--hls_manifests--filter_configuration))
 - `manifest_name` (String) <p>A short short string that's appended to the endpoint URL. The manifest name creates a unique path to this endpoint. If you don't enter a value, MediaPackage uses the default manifest name, index. MediaPackage automatically inserts the format extension, such as .m3u8. You can't use the same manifest name if you use HLS manifest and low-latency HLS manifest. The manifestName on the HLSManifest object overrides the manifestName you provided on the originEndpoint object.</p>
 - `manifest_window_seconds` (Number) <p>The total duration (in seconds) of the manifest's content.</p>
-- `program_date_time_interval_seconds` (Number) <p>Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval, 
-         EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest. 
-         The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player. 
-         ID3Timed metadata messages generate every 5 seconds whenever the content is ingested.</p>
+- `program_date_time_interval_seconds` (Number) <p>Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval,
+         EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest.
+         The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player.</p>
          <p>Irrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.</p>
 - `scte_hls` (Attributes) <p>The SCTE configuration.</p> (see [below for nested schema](#nestedatt--hls_manifests--scte_hls))
 - `start_tag` (Attributes) <p>To insert an EXT-X-START tag in your HLS playlist, specify a StartTag configuration object with a valid TimeOffset. When you do, you can also optionally specify whether to include a PRECISE value in the EXT-X-START tag.</p> (see [below for nested schema](#nestedatt--hls_manifests--start_tag))
 - `url` (String) <p>The egress domain URL for stream delivery from MediaPackage.</p>
+- `url_encode_child_manifest` (Boolean) <p>When enabled, MediaPackage URL-encodes the query string for API requests for HLS child manifests to comply with Amazon Web Services Signature Version 4 (SigV4) signature signing protocol.
+         For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html">Amazon Web Services Signature Version 4 for API requests</a> in <i>Identity and Access Management User Guide</i>.</p>
 
 <a id="nestedatt--hls_manifests--filter_configuration"></a>
 ### Nested Schema for `hls_manifests.filter_configuration`
@@ -167,14 +172,15 @@ Read-Only:
 - `filter_configuration` (Attributes) <p>Filter configuration includes settings for manifest filtering, start and end times, and time delay that apply to all of your egress requests for this manifest. </p> (see [below for nested schema](#nestedatt--low_latency_hls_manifests--filter_configuration))
 - `manifest_name` (String) <p>A short short string that's appended to the endpoint URL. The manifest name creates a unique path to this endpoint. If you don't enter a value, MediaPackage uses the default manifest name, index. MediaPackage automatically inserts the format extension, such as .m3u8. You can't use the same manifest name if you use HLS manifest and low-latency HLS manifest. The manifestName on the HLSManifest object overrides the manifestName you provided on the originEndpoint object.</p>
 - `manifest_window_seconds` (Number) <p>The total duration (in seconds) of the manifest's content.</p>
-- `program_date_time_interval_seconds` (Number) <p>Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval, 
-         EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest. 
-         The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player. 
-         ID3Timed metadata messages generate every 5 seconds whenever the content is ingested.</p>
+- `program_date_time_interval_seconds` (Number) <p>Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval,
+         EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest.
+         The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player.</p>
          <p>Irrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.</p>
 - `scte_hls` (Attributes) <p>The SCTE configuration.</p> (see [below for nested schema](#nestedatt--low_latency_hls_manifests--scte_hls))
 - `start_tag` (Attributes) <p>To insert an EXT-X-START tag in your HLS playlist, specify a StartTag configuration object with a valid TimeOffset. When you do, you can also optionally specify whether to include a PRECISE value in the EXT-X-START tag.</p> (see [below for nested schema](#nestedatt--low_latency_hls_manifests--start_tag))
 - `url` (String) <p>The egress domain URL for stream delivery from MediaPackage.</p>
+- `url_encode_child_manifest` (Boolean) <p>When enabled, MediaPackage URL-encodes the query string for API requests for LL-HLS child manifests to comply with Amazon Web Services Signature Version 4 (SigV4) signature signing protocol.
+         For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html">Amazon Web Services Signature Version 4 for API requests</a> in <i>Identity and Access Management User Guide</i>.</p>
 
 <a id="nestedatt--low_latency_hls_manifests--filter_configuration"></a>
 ### Nested Schema for `low_latency_hls_manifests.filter_configuration`

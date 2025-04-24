@@ -115,16 +115,16 @@ Optional:
 
 Optional:
 
-- `base_capacity` (Number)
 - `config_parameters` (Attributes Set) (see [below for nested schema](#nestedatt--workgroup--config_parameters))
 - `endpoint` (Attributes) (see [below for nested schema](#nestedatt--workgroup--endpoint))
-- `max_capacity` (Number)
 - `price_performance_target` (Attributes) (see [below for nested schema](#nestedatt--workgroup--price_performance_target))
 
 Read-Only:
 
+- `base_capacity` (Number)
 - `creation_date` (String)
 - `enhanced_vpc_routing` (Boolean)
+- `max_capacity` (Number)
 - `namespace_name` (String)
 - `publicly_accessible` (Boolean)
 - `security_group_ids` (List of String)

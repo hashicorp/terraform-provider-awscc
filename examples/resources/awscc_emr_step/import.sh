@@ -1,0 +1,1 @@
+$ terraform import awscc_emr_step.example "id"

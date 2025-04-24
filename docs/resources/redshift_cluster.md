@@ -20,7 +20,7 @@ An example resource schema demonstrating some basic constructs and validation ru
 - `cluster_type` (String) The type of the cluster. When cluster type is specified as single-node, the NumberOfNodes parameter is not required and if multi-node, the NumberOfNodes parameter is required
 - `db_name` (String) The name of the first database to be created when the cluster is created. To create additional databases after the cluster is created, connect to the cluster with a SQL client and use SQL commands to create a database.
 - `master_username` (String) The user name associated with the master user account for the cluster that is being created. The user name can't be PUBLIC and first character must be a letter.
-- `node_type` (String) The node type to be provisioned for the cluster.Valid Values: ds2.xlarge | ds2.8xlarge | dc1.large | dc1.8xlarge | dc2.large | dc2.8xlarge | ra3.4xlarge | ra3.16xlarge
+- `node_type` (String) The node type to be provisioned for the cluster.Valid Values: ds2.xlarge | ds2.8xlarge | dc1.large | dc1.8xlarge | dc2.large | dc2.8xlarge | ra3.large | ra3.4xlarge | ra3.16xlarge
 
 ### Optional
 
