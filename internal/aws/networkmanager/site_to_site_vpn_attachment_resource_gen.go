@@ -549,7 +549,7 @@ func siteToSiteVpnAttachmentResource(ctx context.Context) (resource.Resource, er
 		"vpn_connection_arn":                     "VpnConnectionArn",
 	})
 
-	opts = opts.WithCreateTimeoutInMinutes(40).WithDeleteTimeoutInMinutes(720)
+	opts = opts.WithCreateTimeoutInMinutes(120).WithDeleteTimeoutInMinutes(720)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 

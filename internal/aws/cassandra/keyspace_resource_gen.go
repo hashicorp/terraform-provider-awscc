@@ -88,6 +88,7 @@ func keyspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "enum": [
+		//	          "af-south-1",
 		//	          "ap-northeast-1",
 		//	          "ap-northeast-2",
 		//	          "ap-south-1",
@@ -133,6 +134,7 @@ func keyspaceResource(ctx context.Context) (resource.Resource, error) {
 						setvalidator.SizeBetween(2, 6),
 						setvalidator.ValueStringsAre(
 							stringvalidator.OneOf(
+								"af-south-1",
 								"ap-northeast-1",
 								"ap-northeast-2",
 								"ap-south-1",

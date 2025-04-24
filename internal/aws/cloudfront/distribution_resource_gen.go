@@ -298,6 +298,13 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "A comment to describe the distribution. The comment cannot be longer than 128 characters.",
 		//	      "type": "string"
 		//	    },
+		//	    "ConnectionMode": {
+		//	      "enum": [
+		//	        "direct",
+		//	        "tenant-only"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "ContinuousDeploymentPolicyId": {
 		//	      "description": "The identifier of a continuous deployment policy. For more information, see ``CreateContinuousDeploymentPolicy``.",
 		//	      "type": "string"
@@ -971,6 +978,54 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "A Boolean that indicates whether this is a staging distribution. When this value is ``true``, this is a staging distribution. When this value is ``false``, this is not a staging distribution.",
 		//	      "type": "boolean"
 		//	    },
+		//	    "TenantConfig": {
+		//	      "additionalProperties": false,
+		//	      "description": "",
+		//	      "properties": {
+		//	        "ParameterDefinitions": {
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "description": "",
+		//	            "properties": {
+		//	              "Definition": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "StringSchema": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "Comment": {
+		//	                        "type": "string"
+		//	                      },
+		//	                      "DefaultValue": {
+		//	                        "type": "string"
+		//	                      },
+		//	                      "Required": {
+		//	                        "type": "boolean"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "Required"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
+		//	              "Name": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Name",
+		//	              "Definition"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "ViewerCertificate": {
 		//	      "additionalProperties": false,
 		//	      "default": {
@@ -1416,6 +1471,20 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Default:     stringdefault.StaticString(""),
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ConnectionMode
+				"connection_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"direct",
+							"tenant-only",
+						),
+					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -2518,6 +2587,90 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 						boolplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: TenantConfig
+				"tenant_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ParameterDefinitions
+						"parameter_definitions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Definition
+									"definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: StringSchema
+											"string_schema": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Comment
+													"comment": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Optional: true,
+														Computed: true,
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: DefaultValue
+													"default_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Optional: true,
+														Computed: true,
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: Required
+													"required": schema.BoolAttribute{ /*START ATTRIBUTE*/
+														Optional: true,
+														Computed: true,
+														Validators: []validator.Bool{ /*START VALIDATORS*/
+															fwvalidators.NotNullBool(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+															boolplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.Object{ /*START VALIDATORS*/
+											fwvalidators.NotNullObject(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Name
+									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: ViewerCertificate
 				"viewer_certificate": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -2717,6 +2870,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		"comment":                         "Comment",
 		"compress":                        "Compress",
 		"connection_attempts":             "ConnectionAttempts",
+		"connection_mode":                 "ConnectionMode",
 		"connection_timeout":              "ConnectionTimeout",
 		"continuous_deployment_policy_id": "ContinuousDeploymentPolicyId",
 		"cookies":                         "Cookies",
@@ -2726,6 +2880,8 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		"default_cache_behavior":          "DefaultCacheBehavior",
 		"default_root_object":             "DefaultRootObject",
 		"default_ttl":                     "DefaultTTL",
+		"default_value":                   "DefaultValue",
+		"definition":                      "Definition",
 		"distribution_config":             "DistributionConfig",
 		"distribution_id":                 "Id",
 		"dns_name":                        "DNSName",
@@ -2763,6 +2919,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		"members":                         "Members",
 		"min_ttl":                         "MinTTL",
 		"minimum_protocol_version":        "MinimumProtocolVersion",
+		"name":                            "Name",
 		"origin_access_control_id":        "OriginAccessControlId",
 		"origin_access_identity":          "OriginAccessIdentity",
 		"origin_custom_headers":           "OriginCustomHeaders",
@@ -2777,6 +2934,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		"origin_shield_region":            "OriginShieldRegion",
 		"origin_ssl_protocols":            "OriginSSLProtocols",
 		"origins":                         "Origins",
+		"parameter_definitions":           "ParameterDefinitions",
 		"path_pattern":                    "PathPattern",
 		"prefix":                          "Prefix",
 		"price_class":                     "PriceClass",
@@ -2784,6 +2942,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		"query_string":                    "QueryString",
 		"query_string_cache_keys":         "QueryStringCacheKeys",
 		"realtime_log_config_arn":         "RealtimeLogConfigArn",
+		"required":                        "Required",
 		"response_code":                   "ResponseCode",
 		"response_headers_policy_id":      "ResponseHeadersPolicyId",
 		"response_page_path":              "ResponsePagePath",
@@ -2796,8 +2955,10 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		"ssl_support_method":              "SslSupportMethod",
 		"staging":                         "Staging",
 		"status_codes":                    "StatusCodes",
+		"string_schema":                   "StringSchema",
 		"tags":                            "Tags",
 		"target_origin_id":                "TargetOriginId",
+		"tenant_config":                   "TenantConfig",
 		"trusted_key_groups":              "TrustedKeyGroups",
 		"trusted_signers":                 "TrustedSigners",
 		"value":                           "Value",
