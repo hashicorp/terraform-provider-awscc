@@ -7,7 +7,9 @@
       "type": "string",
       "enum": [
         "ANTHROPIC_CLAUDE_MESSAGES",
-        "ANTHROPIC_CLAUDE_TEXT_COMPLETIONS"
+        "ANTHROPIC_CLAUDE_TEXT_COMPLETIONS",
+        "MESSAGES",
+        "TEXT_COMPLETIONS"
       ]
     },
     "AIPromptTemplateConfiguration": {

@@ -127,7 +127,7 @@
     },
     "delete": {
       "permissions": [
-        "mq:DescribeConfiguration"
+        "mq:DeleteConfiguration"
       ]
     },
     "list": {

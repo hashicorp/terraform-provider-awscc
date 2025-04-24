@@ -42,6 +42,26 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: DelegationRecord
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name server domain for queries to be delegated to if a query matches the delegation record.",
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"delegation_record": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name server domain for queries to be delegated to if a query matches the delegation record.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 256),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DomainName
 		// CloudFormation resource type schema:
 		//
@@ -350,6 +370,7 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                    "Arn",
+		"delegation_record":      "DelegationRecord",
 		"domain_name":            "DomainName",
 		"ip":                     "Ip",
 		"ipv_6":                  "Ipv6",

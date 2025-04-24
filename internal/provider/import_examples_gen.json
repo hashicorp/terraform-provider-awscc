@@ -850,6 +850,11 @@
         "path": "./examples/resources/awscc_cloudfront_cloudfront_origin_access_identity/import.sh"
     },
     {
+        "resource": "awscc_cloudfront_connection_group",
+        "identifier": ["Id"],
+        "path": "./examples/resources/awscc_cloudfront_connection_group/import.sh"
+    },
+    {
         "resource": "awscc_cloudfront_continuous_deployment_policy",
         "identifier": ["Id"],
         "path": "./examples/resources/awscc_cloudfront_continuous_deployment_policy/import.sh"
@@ -858,6 +863,11 @@
         "resource": "awscc_cloudfront_distribution",
         "identifier": ["Id"],
         "path": "./examples/resources/awscc_cloudfront_distribution/import.sh"
+    },
+    {
+        "resource": "awscc_cloudfront_distribution_tenant",
+        "identifier": ["Id"],
+        "path": "./examples/resources/awscc_cloudfront_distribution_tenant/import.sh"
     },
     {
         "resource": "awscc_cloudfront_function",
@@ -2178,6 +2188,11 @@
         "resource": "awscc_emr_security_configuration",
         "identifier": ["Name"],
         "path": "./examples/resources/awscc_emr_security_configuration/import.sh"
+    },
+    {
+        "resource": "awscc_emr_step",
+        "identifier": ["Id"],
+        "path": "./examples/resources/awscc_emr_step/import.sh"
     },
     {
         "resource": "awscc_emr_studio",

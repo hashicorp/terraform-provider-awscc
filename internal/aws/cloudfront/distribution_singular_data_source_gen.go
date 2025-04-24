@@ -283,6 +283,13 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	      "description": "A comment to describe the distribution. The comment cannot be longer than 128 characters.",
 		//	      "type": "string"
 		//	    },
+		//	    "ConnectionMode": {
+		//	      "enum": [
+		//	        "direct",
+		//	        "tenant-only"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "ContinuousDeploymentPolicyId": {
 		//	      "description": "The identifier of a continuous deployment policy. For more information, see ``CreateContinuousDeploymentPolicy``.",
 		//	      "type": "string"
@@ -956,6 +963,54 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	      "description": "A Boolean that indicates whether this is a staging distribution. When this value is ``true``, this is a staging distribution. When this value is ``false``, this is not a staging distribution.",
 		//	      "type": "boolean"
 		//	    },
+		//	    "TenantConfig": {
+		//	      "additionalProperties": false,
+		//	      "description": "",
+		//	      "properties": {
+		//	        "ParameterDefinitions": {
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "description": "",
+		//	            "properties": {
+		//	              "Definition": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "StringSchema": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "Comment": {
+		//	                        "type": "string"
+		//	                      },
+		//	                      "DefaultValue": {
+		//	                        "type": "string"
+		//	                      },
+		//	                      "Required": {
+		//	                        "type": "boolean"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "Required"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
+		//	              "Name": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Name",
+		//	              "Definition"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "ViewerCertificate": {
 		//	      "additionalProperties": false,
 		//	      "default": {
@@ -1216,6 +1271,10 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 				"comment": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "A comment to describe the distribution. The comment cannot be longer than 128 characters.",
 					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ConnectionMode
+				"connection_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: ContinuousDeploymentPolicyId
 				"continuous_deployment_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1795,6 +1854,49 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 					Description: "A Boolean that indicates whether this is a staging distribution. When this value is ``true``, this is a staging distribution. When this value is ``false``, this is not a staging distribution.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: TenantConfig
+				"tenant_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ParameterDefinitions
+						"parameter_definitions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Definition
+									"definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: StringSchema
+											"string_schema": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Comment
+													"comment": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: DefaultValue
+													"default_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: Required
+													"required": schema.BoolAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Name
+									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: ViewerCertificate
 				"viewer_certificate": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1933,6 +2035,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"comment":                         "Comment",
 		"compress":                        "Compress",
 		"connection_attempts":             "ConnectionAttempts",
+		"connection_mode":                 "ConnectionMode",
 		"connection_timeout":              "ConnectionTimeout",
 		"continuous_deployment_policy_id": "ContinuousDeploymentPolicyId",
 		"cookies":                         "Cookies",
@@ -1942,6 +2045,8 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"default_cache_behavior":          "DefaultCacheBehavior",
 		"default_root_object":             "DefaultRootObject",
 		"default_ttl":                     "DefaultTTL",
+		"default_value":                   "DefaultValue",
+		"definition":                      "Definition",
 		"distribution_config":             "DistributionConfig",
 		"distribution_id":                 "Id",
 		"dns_name":                        "DNSName",
@@ -1979,6 +2084,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"members":                         "Members",
 		"min_ttl":                         "MinTTL",
 		"minimum_protocol_version":        "MinimumProtocolVersion",
+		"name":                            "Name",
 		"origin_access_control_id":        "OriginAccessControlId",
 		"origin_access_identity":          "OriginAccessIdentity",
 		"origin_custom_headers":           "OriginCustomHeaders",
@@ -1993,6 +2099,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"origin_shield_region":            "OriginShieldRegion",
 		"origin_ssl_protocols":            "OriginSSLProtocols",
 		"origins":                         "Origins",
+		"parameter_definitions":           "ParameterDefinitions",
 		"path_pattern":                    "PathPattern",
 		"prefix":                          "Prefix",
 		"price_class":                     "PriceClass",
@@ -2000,6 +2107,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"query_string":                    "QueryString",
 		"query_string_cache_keys":         "QueryStringCacheKeys",
 		"realtime_log_config_arn":         "RealtimeLogConfigArn",
+		"required":                        "Required",
 		"response_code":                   "ResponseCode",
 		"response_headers_policy_id":      "ResponseHeadersPolicyId",
 		"response_page_path":              "ResponsePagePath",
@@ -2012,8 +2120,10 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"ssl_support_method":              "SslSupportMethod",
 		"staging":                         "Staging",
 		"status_codes":                    "StatusCodes",
+		"string_schema":                   "StringSchema",
 		"tags":                            "Tags",
 		"target_origin_id":                "TargetOriginId",
+		"tenant_config":                   "TenantConfig",
 		"trusted_key_groups":              "TrustedKeyGroups",
 		"trusted_signers":                 "TrustedSigners",
 		"value":                           "Value",

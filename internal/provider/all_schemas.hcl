@@ -845,12 +845,20 @@ resource_schema "aws_cloudfront_cloudfront_origin_access_identity" {
   cloudformation_type_name = "AWS::CloudFront::CloudFrontOriginAccessIdentity"
 }
 
+resource_schema "aws_cloudfront_connection_group" {
+  cloudformation_type_name = "AWS::CloudFront::ConnectionGroup"
+}
+
 resource_schema "aws_cloudfront_continuous_deployment_policy" {
   cloudformation_type_name = "AWS::CloudFront::ContinuousDeploymentPolicy"
 }
 
 resource_schema "aws_cloudfront_distribution" {
   cloudformation_type_name = "AWS::CloudFront::Distribution"
+}
+
+resource_schema "aws_cloudfront_distribution_tenant" {
+  cloudformation_type_name = "AWS::CloudFront::DistributionTenant"
 }
 
 resource_schema "aws_cloudfront_function" {
@@ -2078,6 +2086,11 @@ resource_schema "aws_eks_pod_identity_association" {
 
 resource_schema "aws_emr_security_configuration" {
   cloudformation_type_name = "AWS::EMR::SecurityConfiguration"
+}
+
+resource_schema "aws_emr_step" {
+  cloudformation_type_name = "AWS::EMR::Step"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_emr_studio" {

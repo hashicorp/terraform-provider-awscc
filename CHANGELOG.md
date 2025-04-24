@@ -1,4 +1,16 @@
 ## 1.38.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_cloudfront_connection_group`
+* **New Data Source:** `awscc_cloudfront_connection_groups`
+* **New Data Source:** `awscc_cloudfront_distribution_tenant`
+* **New Data Source:** `awscc_cloudfront_distribution_tenants`
+* **New Data Source:** `awscc_emr_step`
+* **New Resource:** `awscc_cloudfront_connection_group`
+* **New Resource:** `awscc_cloudfront_distribution_tenant`
+* **New Resource:** `awscc_emr_step`
+
 ## 1.37.0 (April 17, 2025)
 
 FEATURES:

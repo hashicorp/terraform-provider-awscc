@@ -9,9 +9,12 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
@@ -227,6 +230,188 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: WorkspaceConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Workspace configuration",
+		//	  "properties": {
+		//	    "LimitsPerLabelSets": {
+		//	      "description": "An array of label set and associated limits",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "Label set and its associated limits",
+		//	        "properties": {
+		//	          "LabelSet": {
+		//	            "description": "An array of series labels",
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "description": "Series label",
+		//	              "properties": {
+		//	                "Name": {
+		//	                  "description": "Name of the label",
+		//	                  "minLength": 1,
+		//	                  "pattern": "^[a-zA-Z_][a-zA-Z0-9_]*$",
+		//	                  "type": "string"
+		//	                },
+		//	                "Value": {
+		//	                  "description": "Value of the label",
+		//	                  "minLength": 1,
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Name",
+		//	                "Value"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "minItems": 0,
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          },
+		//	          "Limits": {
+		//	            "additionalProperties": false,
+		//	            "description": "Limits that can be applied to a label set",
+		//	            "properties": {
+		//	              "MaxSeries": {
+		//	                "description": "The maximum number of active series that can be ingested for this label set",
+		//	                "minimum": 0,
+		//	                "type": "integer"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Limits",
+		//	          "LabelSet"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "minItems": 0,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "RetentionPeriodInDays": {
+		//	      "description": "How many days that metrics are retained in the workspace",
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"workspace_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: LimitsPerLabelSets
+				"limits_per_label_sets": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: LabelSet
+							"label_set": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Name
+										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Name of the label",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthAtLeast(1),
+												stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z_][a-zA-Z0-9_]*$"), ""),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Value
+										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Value of the label",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthAtLeast(1),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "An array of series labels",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.Set{ /*START VALIDATORS*/
+									setvalidator.SizeAtLeast(0),
+									fwvalidators.NotNullSet(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+									setplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Limits
+							"limits": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: MaxSeries
+									"max_series": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "The maximum number of active series that can be ingested for this label set",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Int64{ /*START VALIDATORS*/
+											int64validator.AtLeast(0),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Limits that can be applied to a label set",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.Object{ /*START VALIDATORS*/
+									fwvalidators.NotNullObject(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "An array of label set and associated limits",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Set{ /*START VALIDATORS*/
+						setvalidator.SizeAtLeast(0),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						setplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: RetentionPeriodInDays
+				"retention_period_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "How many days that metrics are retained in the workspace",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.AtLeast(1),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Workspace configuration",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: WorkspaceId
 		// CloudFormation resource type schema:
 		//
@@ -271,11 +456,18 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		"arn":                      "Arn",
 		"key":                      "Key",
 		"kms_key_arn":              "KmsKeyArn",
+		"label_set":                "LabelSet",
+		"limits":                   "Limits",
+		"limits_per_label_sets":    "LimitsPerLabelSets",
 		"log_group_arn":            "LogGroupArn",
 		"logging_configuration":    "LoggingConfiguration",
+		"max_series":               "MaxSeries",
+		"name":                     "Name",
 		"prometheus_endpoint":      "PrometheusEndpoint",
+		"retention_period_in_days": "RetentionPeriodInDays",
 		"tags":                     "Tags",
 		"value":                    "Value",
+		"workspace_configuration":  "WorkspaceConfiguration",
 		"workspace_id":             "WorkspaceId",
 	})
 

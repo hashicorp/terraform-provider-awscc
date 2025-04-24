@@ -64,7 +64,9 @@ func aIPromptResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "enum": [
 		//	    "ANTHROPIC_CLAUDE_MESSAGES",
-		//	    "ANTHROPIC_CLAUDE_TEXT_COMPLETIONS"
+		//	    "ANTHROPIC_CLAUDE_TEXT_COMPLETIONS",
+		//	    "MESSAGES",
+		//	    "TEXT_COMPLETIONS"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -74,6 +76,8 @@ func aIPromptResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.OneOf(
 					"ANTHROPIC_CLAUDE_MESSAGES",
 					"ANTHROPIC_CLAUDE_TEXT_COMPLETIONS",
+					"MESSAGES",
+					"TEXT_COMPLETIONS",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

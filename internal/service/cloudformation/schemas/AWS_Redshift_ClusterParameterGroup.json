@@ -77,7 +77,16 @@
     }
   },
   "tagging": {
-    "taggable": true
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "redshift:DescribeTags",
+      "redshift:CreateTags",
+      "redshift:DeleteTags"
+    ]
   },
   "required": [
     "Description",
@@ -90,11 +99,6 @@
   ],
   "primaryIdentifier": [
     "/properties/ParameterGroupName"
-  ],
-  "writeOnlyProperties": [
-    "/properties/Tags",
-    "/properties/Tags/*/Key",
-    "/properties/Tags/*/Value"
   ],
   "handlers": {
     "create": {
@@ -140,6 +144,7 @@
     "delete": {
       "permissions": [
         "redshift:DescribeTags",
+        "redshift:DeleteTags",
         "redshift:DescribeClusterParameterGroups",
         "redshift:DeleteClusterParameterGroup",
         "redshift:DescribeClusterParameters",

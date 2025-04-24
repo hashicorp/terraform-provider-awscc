@@ -653,7 +653,6 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: BaseCapacity
 				"base_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Optional: true,
 					Computed: true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
@@ -807,7 +806,6 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: MaxCapacity
 				"max_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Optional: true,
 					Computed: true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),

@@ -98,7 +98,7 @@ func customActionResource(ctx context.Context) (resource.Resource, error) {
 		//	              "type": "string"
 		//	            },
 		//	            "Value": {
-		//	              "maxLength": 50,
+		//	              "maxLength": 1024,
 		//	              "minLength": 0,
 		//	              "type": "string"
 		//	            },
@@ -175,7 +175,7 @@ func customActionResource(ctx context.Context) (resource.Resource, error) {
 									Optional: true,
 									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(0, 50),
+										stringvalidator.LengthBetween(0, 1024),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),

@@ -70,7 +70,7 @@ The value must be either -1 or an integer between 1 and 3,653.
 - `master_username` (String) The user name associated with the master user account for the cluster that is being created. The user name can't be PUBLIC and first character must be a letter.
 - `multi_az` (Boolean) A boolean indicating if the redshift cluster is multi-az or not. If you don't provide this parameter or set the value to false, the redshift cluster will be single-az.
 - `namespace_resource_policy` (String) The namespace resource policy document that will be attached to a Redshift cluster.
-- `node_type` (String) The node type to be provisioned for the cluster.Valid Values: ds2.xlarge | ds2.8xlarge | dc1.large | dc1.8xlarge | dc2.large | dc2.8xlarge | ra3.4xlarge | ra3.16xlarge
+- `node_type` (String) The node type to be provisioned for the cluster.Valid Values: ds2.xlarge | ds2.8xlarge | dc1.large | dc1.8xlarge | dc2.large | dc2.8xlarge | ra3.large | ra3.4xlarge | ra3.16xlarge
 - `number_of_nodes` (Number) The number of compute nodes in the cluster. This parameter is required when the ClusterType parameter is specified as multi-node.
 - `owner_account` (String)
 - `port` (Number) The port number on which the cluster accepts incoming connections. The cluster is accessible only via the JDBC and ODBC connection strings

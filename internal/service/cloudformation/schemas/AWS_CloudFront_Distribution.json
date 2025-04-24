@@ -135,6 +135,13 @@
       "type": "object",
       "description": "A complex type that describes how CloudFront processes requests.\n You must create at least as many cache behaviors (including the default cache behavior) as you have origins if you want CloudFront to serve objects from all of the origins. Each cache behavior specifies the one origin from which you want CloudFront to get objects. If you have two origins and only the default cache behavior, the default cache behavior will cause CloudFront to get objects from one of the origins, but the other origin is never used.\n For the current quota (formerly known as limit) on the number of cache behaviors that you can add to a distribution, see [Quotas](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html) in the *Amazon CloudFront Developer Guide*.\n If you don't want to specify any cache behaviors, include only an empty ``CacheBehaviors`` element. Don't specify an empty individual ``CacheBehavior`` element, because this is invalid. For more information, see [CacheBehaviors](https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_CacheBehaviors.html). \n To delete all cache behaviors in an existing distribution, update the distribution configuration and include only an empty ``CacheBehaviors`` element.\n To add, change, or remove one or more cache behaviors, update the distribution configuration and specify all of the cache behaviors that you want to include in the updated distribution.\n For more information about cache behaviors, see [Cache Behavior Settings](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesCacheBehavior) in the *Amazon CloudFront Developer Guide*."
     },
+    "ConnectionMode": {
+      "enum": [
+        "direct",
+        "tenant-only"
+      ],
+      "type": "string"
+    },
     "Cookies": {
       "additionalProperties": false,
       "properties": {
@@ -399,6 +406,10 @@
           "type": "string",
           "description": "A comment to describe the distribution. The comment cannot be longer than 128 characters."
         },
+        "ConnectionMode": {
+          "$ref": "#/definitions/ConnectionMode",
+          "description": ""
+        },
         "ContinuousDeploymentPolicyId": {
           "type": "string",
           "description": "The identifier of a continuous deployment policy. For more information, see ``CreateContinuousDeploymentPolicy``."
@@ -446,11 +457,11 @@
           "description": "A complex type that contains information about origin groups for this distribution.\n Specify a value for either the ``Origins`` or ``OriginGroups`` property."
         },
         "Origins": {
+          "insertionOrder": false,
           "items": {
             "$ref": "#/definitions/Origin"
           },
           "type": "array",
-          "insertionOrder": false,
           "uniqueItems": false,
           "description": "A complex type that contains information about origins for this distribution.\n Specify a value for either the ``Origins`` or ``OriginGroups`` property."
         },
@@ -475,6 +486,19 @@
         "Staging": {
           "type": "boolean",
           "description": "A Boolean that indicates whether this is a staging distribution. When this value is ``true``, this is a staging distribution. When this value is ``false``, this is not a staging distribution."
+        },
+        "TenantConfig": {
+          "properties": {
+            "ParameterDefinitions": {
+              "items": {
+                "$ref": "#/definitions/ParameterDefinition"
+              },
+              "type": "array"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object",
+          "description": ""
         },
         "ViewerCertificate": {
           "$ref": "#/definitions/ViewerCertificate",
@@ -883,6 +907,44 @@
       "type": "object",
       "description": "CloudFront Origin Shield.\n Using Origin Shield can help reduce the load on your origin. For more information, see [Using Origin Shield](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/origin-shield.html) in the *Amazon CloudFront Developer Guide*."
     },
+    "ParameterDefinition": {
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "Definition": {
+          "properties": {
+            "StringSchema": {
+              "properties": {
+                "Comment": {
+                  "type": "string"
+                },
+                "DefaultValue": {
+                  "type": "string"
+                },
+                "Required": {
+                  "type": "boolean"
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "Required"
+              ],
+              "type": "object"
+            }
+          },
+          "additionalProperties": false,
+          "type": "object"
+        }
+      },
+      "required": [
+        "Name",
+        "Definition"
+      ],
+      "additionalProperties": false,
+      "type": "object",
+      "description": ""
+    },
     "Restrictions": {
       "additionalProperties": false,
       "properties": {
@@ -1011,8 +1073,10 @@
   "handlers": {
     "create": {
       "permissions": [
+        "cloudfront:CreateConnectionGroup",
         "cloudfront:CreateDistribution",
         "cloudfront:CreateDistributionWithTags",
+        "cloudfront:GetConnectionGroup",
         "cloudfront:GetDistribution",
         "cloudfront:GetDistributionConfig",
         "cloudfront:TagResource"
@@ -1027,6 +1091,7 @@
     },
     "list": {
       "permissions": [
+        "cloudfront:ListTagsForResource",
         "cloudfront:ListDistributions"
       ]
     },
@@ -1038,6 +1103,8 @@
     },
     "update": {
       "permissions": [
+        "cloudfront:CreateConnectionGroup",
+        "cloudfront:GetConnectionGroup",
         "cloudfront:GetDistribution",
         "cloudfront:GetDistributionConfig",
         "cloudfront:UpdateDistribution",
@@ -1082,9 +1149,15 @@
   ],
   "tagging": {
     "cloudFormationSystemTags": false,
-    "tagOnCreate": false,
-    "tagUpdatable": false,
-    "taggable": false
+    "permissions": [
+      "cloudfront:TagResource",
+      "cloudfront:ListTagsForResource",
+      "cloudfront:UntagResource"
+    ],
+    "tagOnCreate": true,
+    "tagProperty": "/properties/Tags",
+    "tagUpdatable": true,
+    "taggable": true
   },
   "typeName": "AWS::CloudFront::Distribution"
 }
