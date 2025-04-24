@@ -1,0 +1,296 @@
+{
+  "additionalProperties": false,
+  "definitions": {
+    "Certificate": {
+      "additionalProperties": false,
+      "properties": {
+        "Arn": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Customizations": {
+      "additionalProperties": false,
+      "properties": {
+        "WebAcl": {
+          "$ref": "#/definitions/WebAclCustomization"
+        },
+        "Certificate": {
+          "$ref": "#/definitions/Certificate"
+        },
+        "GeoRestrictions": {
+          "$ref": "#/definitions/GeoRestrictionCustomization"
+        }
+      },
+      "type": "object"
+    },
+    "DomainResult": {
+      "additionalProperties": false,
+      "properties": {
+        "Domain": {
+          "type": "string"
+        },
+        "Status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "inactive"
+          ]
+        },
+        "Reason": {
+          "type": "string",
+          "enum": [
+            "pending-validation",
+            "validation-failed",
+            "pending-activation",
+            "customer-activated"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "GeoRestrictionCustomization": {
+      "additionalProperties": false,
+      "properties": {
+        "RestrictionType": {
+          "enum": [
+            "blacklist",
+            "whitelist",
+            "none"
+          ],
+          "type": "string"
+        },
+        "Locations": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": false
+        }
+      },
+      "type": "object"
+    },
+    "ManagedCertificateRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "ValidationTokenHost": {
+          "enum": [
+            "cloudfront",
+            "self-hosted"
+          ],
+          "type": "string"
+        },
+        "PrimaryDomainName": {
+          "type": "string"
+        },
+        "CertificateTransparencyLoggingPreference": {
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Parameter": {
+      "additionalProperties": false,
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Tag": {
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Value",
+        "Key"
+      ],
+      "type": "object"
+    },
+    "WebAclCustomization": {
+      "additionalProperties": false,
+      "properties": {
+        "Action": {
+          "enum": [
+            "override",
+            "disable"
+          ],
+          "type": "string"
+        },
+        "Arn": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "Resource Type definition for AWS::CloudFront::DistributionTenant",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "acm:DeleteCertificate",
+        "acm:DescribeCertificate",
+        "acm:RequestCertificate",
+        "cloudfront:CreateDistributionTenant",
+        "cloudfront:GetDistributionTenant",
+        "cloudfront:GetManagedCertificateDetails",
+        "cloudfront:TagResource",
+        "cloudfront:VerifyDnsConfiguration"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "acm:DeleteCertificate",
+        "cloudfront:DeleteDistributionTenant",
+        "cloudfront:UpdateDistributionTenant",
+        "cloudfront:GetDistributionTenant"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cloudfront:ListDistributionTenants",
+        "cloudfront:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cloudfront:GetDistributionTenant",
+        "cloudfront:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "acm:DeleteCertificate",
+        "acm:DescribeCertificate",
+        "acm:RequestCertificate",
+        "cloudfront:GetDistributionTenant",
+        "cloudfront:GetManagedCertificateDetails",
+        "cloudfront:UpdateDistributionTenant",
+        "cloudfront:ListTagsForResource",
+        "cloudfront:TagResource",
+        "cloudfront:UntagResource",
+        "cloudfront:VerifyDnsConfiguration"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/Id"
+  ],
+  "properties": {
+    "Id": {
+      "type": "string"
+    },
+    "DistributionId": {
+      "type": "string"
+    },
+    "Name": {
+      "type": "string"
+    },
+    "Arn": {
+      "type": "string"
+    },
+    "DomainResults": {
+      "items": {
+        "$ref": "#/definitions/DomainResult"
+      },
+      "type": "array",
+      "uniqueItems": false
+    },
+    "Tags": {
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "type": "array",
+      "uniqueItems": false
+    },
+    "Customizations": {
+      "$ref": "#/definitions/Customizations"
+    },
+    "Parameters": {
+      "items": {
+        "$ref": "#/definitions/Parameter"
+      },
+      "type": "array",
+      "uniqueItems": false
+    },
+    "ConnectionGroupId": {
+      "type": "string"
+    },
+    "CreatedTime": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "LastModifiedTime": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "Enabled": {
+      "type": "boolean"
+    },
+    "Status": {
+      "type": "string"
+    },
+    "ETag": {
+      "type": "string"
+    },
+    "Domains": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": false
+    },
+    "ManagedCertificateRequest": {
+      "$ref": "#/definitions/ManagedCertificateRequest"
+    }
+  },
+  "createOnlyProperties": [
+    "/properties/Name",
+    "/properties/ManagedCertificateRequest"
+  ],
+  "readOnlyProperties": [
+    "/properties/Id",
+    "/properties/Arn",
+    "/properties/DomainResults",
+    "/properties/ETag",
+    "/properties/Status",
+    "/properties/CreatedTime",
+    "/properties/LastModifiedTime"
+  ],
+  "required": [
+    "DistributionId",
+    "Name",
+    "Domains"
+  ],
+  "writeOnlyProperties": [
+    "/properties/ManagedCertificateRequest"
+  ],
+  "tagging": {
+    "cloudFormationSystemTags": false,
+    "permissions": [
+      "cloudfront:TagResource",
+      "cloudfront:ListTagsForResource",
+      "cloudfront:UntagResource"
+    ],
+    "tagOnCreate": true,
+    "tagProperty": "/properties/Tags",
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "AWS::CloudFront::DistributionTenant"
+}
