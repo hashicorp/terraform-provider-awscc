@@ -1,4 +1,9 @@
-## 1.39.0 (Unreleased)
+## 1.39.0-alpha1 (Unreleased)
+
+NOTES:
+
+* provider: This release is being used to test new build and release actions.
+
 ## 1.38.0 (April 24, 2025)
 
 FEATURES:
