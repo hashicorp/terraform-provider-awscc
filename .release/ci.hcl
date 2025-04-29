@@ -17,7 +17,7 @@ project "terraform-provider-awscc" {
 
   github {
     organization     = "hashicorp"
-    repository       = "terraform-provider-awscc
+    repository       = "terraform-provider-awscc"
     release_branches = ["main", "release/**"]
   }
 }
