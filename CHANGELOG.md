@@ -1,4 +1,6 @@
-## 1.39.0-alpha1 (Unreleased)
+## 1.39.0 (Unreleased)
+
+## 1.39.0-alpha1 (April 29, 2025)
 
 NOTES:
 
