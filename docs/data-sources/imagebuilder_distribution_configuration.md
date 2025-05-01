@@ -38,6 +38,7 @@ Read-Only:
 - `launch_template_configurations` (Attributes List) A group of launchTemplateConfiguration settings that apply to image distribution. (see [below for nested schema](#nestedatt--distributions--launch_template_configurations))
 - `license_configuration_arns` (List of String) The License Manager Configuration to associate with the AMI in the specified Region.
 - `region` (String) region
+- `ssm_parameter_configurations` (Attributes List) The SSM parameter configurations to use for AMI distribution. (see [below for nested schema](#nestedatt--distributions--ssm_parameter_configurations))
 
 <a id="nestedatt--distributions--ami_distribution_configuration"></a>
 ### Nested Schema for `distributions.ami_distribution_configuration`
@@ -120,3 +121,13 @@ Read-Only:
 - `account_id` (String) The account ID that this configuration applies to.
 - `launch_template_id` (String) Identifies the EC2 launch template to use.
 - `set_default_version` (Boolean) Set the specified EC2 launch template as the default launch template for the specified account.
+
+
+<a id="nestedatt--distributions--ssm_parameter_configurations"></a>
+### Nested Schema for `distributions.ssm_parameter_configurations`
+
+Read-Only:
+
+- `ami_account_id` (String) The account ID for the AMI to update the parameter with.
+- `data_type` (String) The data type of the SSM parameter.
+- `parameter_name` (String) The name of the SSM parameter.

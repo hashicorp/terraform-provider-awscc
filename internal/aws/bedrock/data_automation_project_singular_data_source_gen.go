@@ -161,10 +161,123 @@ func dataAutomationProjectDataSource(ctx context.Context) (datasource.DataSource
 		//	  "additionalProperties": false,
 		//	  "description": "Override configuration",
 		//	  "properties": {
+		//	    "Audio": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "ModalityProcessing": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "State": {
+		//	              "enum": [
+		//	                "ENABLED",
+		//	                "DISABLED"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "Document": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
+		//	        "ModalityProcessing": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "State": {
+		//	              "enum": [
+		//	                "ENABLED",
+		//	                "DISABLED"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
 		//	        "Splitter": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "State": {
+		//	              "enum": [
+		//	                "ENABLED",
+		//	                "DISABLED"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "Image": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "ModalityProcessing": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "State": {
+		//	              "enum": [
+		//	                "ENABLED",
+		//	                "DISABLED"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "ModalityRouting": {
+		//	      "additionalProperties": false,
+		//	      "description": "Modality routing configuration",
+		//	      "properties": {
+		//	        "jpeg": {
+		//	          "enum": [
+		//	            "DOCUMENT",
+		//	            "IMAGE",
+		//	            "VIDEO",
+		//	            "AUDIO"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "mov": {
+		//	          "enum": [
+		//	            "DOCUMENT",
+		//	            "IMAGE",
+		//	            "VIDEO",
+		//	            "AUDIO"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "mp4": {
+		//	          "enum": [
+		//	            "DOCUMENT",
+		//	            "IMAGE",
+		//	            "VIDEO",
+		//	            "AUDIO"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "png": {
+		//	          "enum": [
+		//	            "DOCUMENT",
+		//	            "IMAGE",
+		//	            "VIDEO",
+		//	            "AUDIO"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "Video": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "ModalityProcessing": {
 		//	          "additionalProperties": false,
 		//	          "properties": {
 		//	            "State": {
@@ -185,11 +298,92 @@ func dataAutomationProjectDataSource(ctx context.Context) (datasource.DataSource
 		//	}
 		"override_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Audio
+				"audio": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ModalityProcessing
+						"modality_processing": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: State
+								"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: Document
 				"document": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ModalityProcessing
+						"modality_processing": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: State
+								"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
 						// Property: Splitter
 						"splitter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: State
+								"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Image
+				"image": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ModalityProcessing
+						"modality_processing": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: State
+								"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ModalityRouting
+				"modality_routing": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: jpeg
+						"jpeg": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: mov
+						"mov": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: mp4
+						"mp_4": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: png
+						"png": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Modality routing configuration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Video
+				"video": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ModalityProcessing
+						"modality_processing": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: State
 								"state": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -949,12 +1143,18 @@ func dataAutomationProjectDataSource(ctx context.Context) (datasource.DataSource
 		"generative_field":              "GenerativeField",
 		"granularity":                   "Granularity",
 		"image":                         "Image",
+		"jpeg":                          "jpeg",
 		"key":                           "Key",
 		"kms_encryption_context":        "KmsEncryptionContext",
 		"kms_key_id":                    "KmsKeyId",
 		"last_modified_time":            "LastModifiedTime",
+		"modality_processing":           "ModalityProcessing",
+		"modality_routing":              "ModalityRouting",
+		"mov":                           "mov",
+		"mp_4":                          "mp4",
 		"output_format":                 "OutputFormat",
 		"override_configuration":        "OverrideConfiguration",
+		"png":                           "png",
 		"project_arn":                   "ProjectArn",
 		"project_description":           "ProjectDescription",
 		"project_name":                  "ProjectName",

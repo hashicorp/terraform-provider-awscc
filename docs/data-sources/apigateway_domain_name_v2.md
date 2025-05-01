@@ -35,6 +35,7 @@ Data Source schema for AWS::ApiGateway::DomainNameV2
 
 Read-Only:
 
+- `ip_address_type` (String)
 - `types` (List of String)
 
 

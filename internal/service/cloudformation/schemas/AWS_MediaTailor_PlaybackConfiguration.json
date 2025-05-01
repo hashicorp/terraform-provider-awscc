@@ -3,6 +3,9 @@
   "description": "Resource schema for AWS::MediaTailor::PlaybackConfiguration",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-mediatailor.git",
   "properties": {
+    "AdConditioningConfiguration": {
+      "$ref": "#/definitions/AdConditioningConfiguration"
+    },
     "AdDecisionServerUrl": {
       "description": "The URL for the ad decision server (ADS). This includes the specification of static parameters and placeholders for dynamic parameters. AWS Elemental MediaTailor substitutes player-specific and session-specific parameters as needed when calling the ADS. Alternately, for testing you can provide a static VAST URL. The maximum length is 25,000 characters.",
       "type": "string"
@@ -85,6 +88,19 @@
     }
   },
   "definitions": {
+    "AdConditioningConfiguration": {
+      "type": "object",
+      "description": "<p>The setting that indicates what conditioning MediaTailor will perform on ads that the ad decision server (ADS) returns.</p>",
+      "properties": {
+        "StreamingMediaFileConditioning": {
+          "$ref": "#/definitions/StreamingMediaFileConditioning"
+        }
+      },
+      "required": [
+        "StreamingMediaFileConditioning"
+      ],
+      "additionalProperties": false
+    },
     "AvailSuppression": {
       "description": "The configuration for avail suppression, also known as ad suppression. For more information about ad suppression, see Ad Suppression (https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html).",
       "type": "object",
@@ -174,6 +190,13 @@
           "type": "string"
         }
       }
+    },
+    "StreamingMediaFileConditioning": {
+      "type": "string",
+      "enum": [
+        "TRANSCODE",
+        "NONE"
+      ]
     },
     "LivePreRollConfiguration": {
       "description": "The configuration for pre-roll ad insertion.",

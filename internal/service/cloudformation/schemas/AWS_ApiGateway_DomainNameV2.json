@@ -1,104 +1,30 @@
 {
-  "typeName": "AWS::ApiGateway::DomainNameV2",
-  "description": "Resource Type definition for AWS::ApiGateway::DomainNameV2.",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
-  "definitions": {
-    "EndpointConfiguration": {
-      "type": "object",
-      "properties": {
-        "Types": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "additionalProperties": false
-    },
-    "Tag": {
-      "type": "object",
-      "properties": {
-        "Key": {
-          "type": "string"
-        },
-        "Value": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": false
-    }
-  },
-  "properties": {
-    "CertificateArn": {
-      "type": "string"
-    },
-    "DomainName": {
-      "type": "string"
-    },
-    "EndpointConfiguration": {
-      "$ref": "#/definitions/EndpointConfiguration"
-    },
-    "SecurityPolicy": {
-      "type": "string"
-    },
-    "Policy": {
-      "type": [
-        "object",
-        "string"
-      ]
-    },
-    "DomainNameId": {
-      "type": "string"
-    },
-    "DomainNameArn": {
-      "type": "string",
-      "description": "The amazon resource name (ARN) of the domain name resource."
-    },
-    "Tags": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/Tag"
-      }
-    }
-  },
   "tagging": {
-    "taggable": true,
-    "tagOnCreate": true,
-    "tagUpdatable": true,
-    "cloudFormationSystemTags": true,
-    "tagProperty": "/properties/Tags",
     "permissions": [
       "apigateway:PUT",
       "apigateway:PATCH",
       "apigateway:DELETE",
       "apigateway:GET",
       "apigateway:POST"
-    ]
+    ],
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "tagProperty": "/properties/Tags",
+    "cloudFormationSystemTags": true
   },
-  "additionalProperties": false,
-  "primaryIdentifier": [
-    "/properties/DomainNameArn"
-  ],
-  "createOnlyProperties": [
-    "/properties/DomainName",
-    "/properties/SecurityPolicy",
-    "/properties/EndpointConfiguration"
-  ],
-  "readOnlyProperties": [
-    "/properties/DomainNameId",
-    "/properties/DomainNameArn"
-  ],
   "handlers": {
+    "read": {
+      "permissions": [
+        "apigateway:GET"
+      ]
+    },
     "create": {
       "permissions": [
         "apigateway:POST",
         "apigateway:GET",
         "apigateway:UpdateDomainNamePolicy"
-      ]
-    },
-    "read": {
-      "permissions": [
-        "apigateway:GET"
       ]
     },
     "update": {
@@ -109,17 +35,94 @@
         "apigateway:UpdateDomainNamePolicy"
       ]
     },
+    "list": {
+      "permissions": [
+        "apigateway:GET"
+      ]
+    },
     "delete": {
       "permissions": [
         "apigateway:DELETE",
         "apigateway:GET",
         "apigateway:UpdateDomainNamePolicy"
       ]
+    }
+  },
+  "typeName": "AWS::ApiGateway::DomainNameV2",
+  "readOnlyProperties": [
+    "/properties/DomainNameId",
+    "/properties/DomainNameArn"
+  ],
+  "description": "Resource Type definition for AWS::ApiGateway::DomainNameV2.",
+  "createOnlyProperties": [
+    "/properties/DomainName",
+    "/properties/SecurityPolicy",
+    "/properties/EndpointConfiguration"
+  ],
+  "additionalProperties": false,
+  "primaryIdentifier": [
+    "/properties/DomainNameArn"
+  ],
+  "definitions": {
+    "EndpointConfiguration": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "IpAddressType": {
+          "type": "string"
+        },
+        "Types": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     },
-    "list": {
-      "permissions": [
-        "apigateway:GET"
+    "Tag": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Value": {
+          "type": "string"
+        },
+        "Key": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "properties": {
+    "Policy": {
+      "type": [
+        "object",
+        "string"
       ]
+    },
+    "DomainNameId": {
+      "type": "string"
+    },
+    "DomainName": {
+      "type": "string"
+    },
+    "SecurityPolicy": {
+      "type": "string"
+    },
+    "DomainNameArn": {
+      "description": "The amazon resource name (ARN) of the domain name resource.",
+      "type": "string"
+    },
+    "EndpointConfiguration": {
+      "$ref": "#/definitions/EndpointConfiguration"
+    },
+    "Tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    },
+    "CertificateArn": {
+      "type": "string"
     }
   }
 }

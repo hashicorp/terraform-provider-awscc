@@ -641,7 +641,8 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "PHP_81",
 		//	                    "RUBY_31",
 		//	                    "PYTHON_311",
-		//	                    "NODEJS_18"
+		//	                    "NODEJS_18",
+		//	                    "NODEJS_22"
 		//	                  ],
 		//	                  "type": "string"
 		//	                },
@@ -908,6 +909,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 													"RUBY_31",
 													"PYTHON_311",
 													"NODEJS_18",
+													"NODEJS_22",
 												),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
@@ -1275,9 +1277,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
-				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
-			// Tags is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -1360,7 +1360,6 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/Tags",
 		"/properties/AutoScalingConfigurationArn",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

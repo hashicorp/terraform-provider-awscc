@@ -80,8 +80,8 @@ EOF
 - `code_s3_location` (String) The Amazon S3 endpoint.
 - `data_source_name` (String) The resolver data source name.
 - `kind` (String) The resolver type.
-  +   *UNIT*: A UNIT resolver type. A UNIT resolver is the default resolver type. You can use a UNIT resolver to run a GraphQL query against a single data source.
-  +   *PIPELINE*: A PIPELINE resolver type. You can use a PIPELINE resolver to invoke a series of ``Function`` objects in a serial manner. You can use a pipeline resolver to run a GraphQL query against multiple data sources.
+  +  *UNIT*: A UNIT resolver type. A UNIT resolver is the default resolver type. You can use a UNIT resolver to run a GraphQL query against a single data source.
+  +  *PIPELINE*: A PIPELINE resolver type. You can use a PIPELINE resolver to invoke a series of ``Function`` objects in a serial manner. You can use a pipeline resolver to run a GraphQL query against multiple data sources.
 - `max_batch_size` (Number) The maximum number of resolver request inputs that will be sent to a single LAMlong function in a ``BatchInvoke`` operation.
 - `metrics_config` (String) Enables or disables enhanced resolver metrics for specified resolvers. Note that ``MetricsConfig`` won't be used unless the ``resolverLevelMetricsBehavior`` value is set to ``PER_RESOLVER_METRICS``. If the ``resolverLevelMetricsBehavior`` is set to ``FULL_REQUEST_RESOLVER_METRICS`` instead, ``MetricsConfig`` will be ignored. However, you can still set its value.
 - `pipeline_config` (Attributes) Functions linked with the pipeline resolver. (see [below for nested schema](#nestedatt--pipeline_config))
@@ -132,12 +132,12 @@ Optional:
 Optional:
 
 - `conflict_detection` (String) The Conflict Detection strategy to use.
-  +   *VERSION*: Detect conflicts based on object versions for this resolver.
-  +   *NONE*: Do not detect conflicts when invoking this resolver.
+  +  *VERSION*: Detect conflicts based on object versions for this resolver.
+  +  *NONE*: Do not detect conflicts when invoking this resolver.
 - `conflict_handler` (String) The Conflict Resolution strategy to perform in the event of a conflict.
-  +   *OPTIMISTIC_CONCURRENCY*: Resolve conflicts by rejecting mutations when versions don't match the latest version at the server.
-  +   *AUTOMERGE*: Resolve conflicts with the Automerge conflict resolution strategy.
-  +   *LAMBDA*: Resolve conflicts with an LAMlong function supplied in the ``LambdaConflictHandlerConfig``.
+  +  *OPTIMISTIC_CONCURRENCY*: Resolve conflicts by rejecting mutations when versions don't match the latest version at the server.
+  +  *AUTOMERGE*: Resolve conflicts with the Automerge conflict resolution strategy.
+  +  *LAMBDA*: Resolve conflicts with an LAMlong function supplied in the ``LambdaConflictHandlerConfig``.
 - `lambda_conflict_handler_config` (Attributes) The ``LambdaConflictHandlerConfig`` when configuring ``LAMBDA`` as the Conflict Handler. (see [below for nested schema](#nestedatt--sync_config--lambda_conflict_handler_config))
 
 <a id="nestedatt--sync_config--lambda_conflict_handler_config"></a>

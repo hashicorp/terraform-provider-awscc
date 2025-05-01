@@ -38,6 +38,23 @@
         }
       },
       "additionalProperties": false
+    },
+    "RefreshTokenRotation": {
+      "type": "object",
+      "properties": {
+        "Feature": {
+          "type": "string",
+          "enum": [
+            "ENABLED",
+            "DISABLED"
+          ]
+        },
+        "RetryGracePeriodSeconds": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 60
+        }
+      }
     }
   },
   "properties": {
@@ -83,6 +100,9 @@
     },
     "TokenValidityUnits": {
       "$ref": "#/definitions/TokenValidityUnits"
+    },
+    "RefreshTokenRotation": {
+      "$ref": "#/definitions/RefreshTokenRotation"
     },
     "UserPoolId": {
       "type": "string"

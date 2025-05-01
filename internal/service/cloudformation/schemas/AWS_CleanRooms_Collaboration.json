@@ -320,8 +320,7 @@
     "/properties/JobLogStatus",
     "/properties/QueryLogStatus",
     "/properties/Members",
-    "/properties/CreatorPaymentConfiguration",
-    "/properties/AnalyticsEngine"
+    "/properties/CreatorPaymentConfiguration"
   ],
   "primaryIdentifier": [
     "/properties/CollaborationIdentifier"

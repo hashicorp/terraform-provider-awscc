@@ -68,6 +68,188 @@ func channelNamespaceDataSource(ctx context.Context) (datasource.DataSource, err
 			Description: "The Amazon S3 endpoint where the code is located.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: HandlerConfigs
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "OnPublish": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Behavior": {
+		//	          "description": "Integration behavior for a handler configuration.",
+		//	          "enum": [
+		//	            "CODE",
+		//	            "DIRECT"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "Integration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "DataSourceName": {
+		//	              "description": "Data source to invoke for this integration.",
+		//	              "maxLength": 512,
+		//	              "minLength": 1,
+		//	              "pattern": "([_A-Za-z][_0-9A-Za-z]{0,511})?",
+		//	              "type": "string"
+		//	            },
+		//	            "LambdaConfig": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "InvokeType": {
+		//	                  "description": "Invocation type for direct lambda integrations.",
+		//	                  "enum": [
+		//	                    "REQUEST_RESPONSE",
+		//	                    "EVENT"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "InvokeType"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "DataSourceName"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Behavior",
+		//	        "Integration"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "OnSubscribe": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Behavior": {
+		//	          "description": "Integration behavior for a handler configuration.",
+		//	          "enum": [
+		//	            "CODE",
+		//	            "DIRECT"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "Integration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "DataSourceName": {
+		//	              "description": "Data source to invoke for this integration.",
+		//	              "maxLength": 512,
+		//	              "minLength": 1,
+		//	              "pattern": "([_A-Za-z][_0-9A-Za-z]{0,511})?",
+		//	              "type": "string"
+		//	            },
+		//	            "LambdaConfig": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "InvokeType": {
+		//	                  "description": "Invocation type for direct lambda integrations.",
+		//	                  "enum": [
+		//	                    "REQUEST_RESPONSE",
+		//	                    "EVENT"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "InvokeType"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "DataSourceName"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Behavior",
+		//	        "Integration"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"handler_configs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: OnPublish
+				"on_publish": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Behavior
+						"behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Integration behavior for a handler configuration.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Integration
+						"integration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: DataSourceName
+								"data_source_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Data source to invoke for this integration.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: LambdaConfig
+								"lambda_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: InvokeType
+										"invoke_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Invocation type for direct lambda integrations.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: OnSubscribe
+				"on_subscribe": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Behavior
+						"behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Integration behavior for a handler configuration.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Integration
+						"integration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: DataSourceName
+								"data_source_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Data source to invoke for this integration.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: LambdaConfig
+								"lambda_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: InvokeType
+										"invoke_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Invocation type for direct lambda integrations.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -231,11 +413,19 @@ func channelNamespaceDataSource(ctx context.Context) (datasource.DataSource, err
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"api_id":                "ApiId",
 		"auth_type":             "AuthType",
+		"behavior":              "Behavior",
 		"channel_namespace_arn": "ChannelNamespaceArn",
 		"code_handlers":         "CodeHandlers",
 		"code_s3_location":      "CodeS3Location",
+		"data_source_name":      "DataSourceName",
+		"handler_configs":       "HandlerConfigs",
+		"integration":           "Integration",
+		"invoke_type":           "InvokeType",
 		"key":                   "Key",
+		"lambda_config":         "LambdaConfig",
 		"name":                  "Name",
+		"on_publish":            "OnPublish",
+		"on_subscribe":          "OnSubscribe",
 		"publish_auth_modes":    "PublishAuthModes",
 		"subscribe_auth_modes":  "SubscribeAuthModes",
 		"tags":                  "Tags",

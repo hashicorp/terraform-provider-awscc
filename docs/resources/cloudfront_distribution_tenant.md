@@ -111,7 +111,6 @@ Optional:
 Read-Only:
 
 - `domain` (String)
-- `reason` (String)
 - `status` (String)
 
 ## Import

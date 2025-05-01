@@ -1,4 +1,10 @@
-## 1.39.0 (Unreleased)
+## 1.39.0 (May 1, 2025)
+
+FEATURES:
+
+* **New Data Source:** `awscc_ecr_registry_scanning_configuration`
+* **New Data Source:** `awscc_ecr_registry_scanning_configurations`
+* **New Resource:** `awscc_ecr_registry_scanning_configuration`
 
 ## 1.39.0-alpha1 (April 29, 2025)
 

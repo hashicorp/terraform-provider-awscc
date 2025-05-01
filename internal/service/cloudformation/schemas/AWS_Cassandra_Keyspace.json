@@ -101,7 +101,7 @@
       "uniqueItems": true,
       "insertionOrder": false,
       "minItems": 2,
-      "maxItems": 6
+      "maxItems": 17
     }
   },
   "additionalProperties": false,

@@ -80,7 +80,6 @@ Read-Only:
 Read-Only:
 
 - `domain` (String)
-- `reason` (String)
 - `status` (String)
 
 

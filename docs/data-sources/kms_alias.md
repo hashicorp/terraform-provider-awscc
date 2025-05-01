@@ -29,7 +29,7 @@ Data Source schema for AWS::KMS::Alias
  For help finding the key ID and ARN, see [Finding the key ID and ARN](https://docs.aws.amazon.com/kms/latest/developerguide/viewing-keys.html#find-cmk-id-arn) in the *Developer Guide*.
  Specify the key ID or the key ARN of the KMS key.
  For example:
-  +  Key ID: ``1234abcd-12ab-34cd-56ef-1234567890ab`` 
-  +  Key ARN: ``arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`` 
+  +  Key ID: ``1234abcd-12ab-34cd-56ef-1234567890ab``
+  +  Key ARN: ``arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab``
   
  To get the key ID and key ARN for a KMS key, use [ListKeys](https://docs.aws.amazon.com/kms/latest/APIReference/API_ListKeys.html) or [DescribeKey](https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html).

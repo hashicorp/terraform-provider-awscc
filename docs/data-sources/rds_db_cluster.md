@@ -32,7 +32,7 @@ Data Source schema for AWS::RDS::DBCluster
  Valid for: Aurora DB clusters only
 - `backtrack_window` (Number) The target backtrack window, in seconds. To disable backtracking, set this value to ``0``.
  Valid for Cluster Type: Aurora MySQL DB clusters only
- Default: ``0`` 
+ Default: ``0``
  Constraints:
   +  If specified, this value must be set to a number from 0 to 259,200 (72 hours).
 - `backup_retention_period` (Number) The number of days for which automated backups are retained.
@@ -56,7 +56,7 @@ Data Source schema for AWS::RDS::DBCluster
   +  First character must be a letter.
   +  Can't end with a hyphen or contain two consecutive hyphens.
   
- Example: ``my-cluster1`` 
+ Example: ``my-cluster1``
  Valid for: Aurora DB clusters and Multi-AZ DB clusters
 - `db_cluster_instance_class` (String) The compute and memory capacity of each DB instance in the Multi-AZ DB cluster, for example ``db.m6gd.xlarge``. Not all DB instance classes are available in all AWS-Regions, or for all database engines.
  For the full list of DB instance classes and availability for your engine, see [DB instance class](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html) in the *Amazon RDS User Guide*.
@@ -90,9 +90,9 @@ Data Source schema for AWS::RDS::DBCluster
  Valid for: Aurora DB clusters only
 - `enable_cloudwatch_logs_exports` (List of String) The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see [Publishing Database Logs to Amazon CloudWatch Logs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch) in the *Amazon Aurora User Guide*.
   *Aurora MySQL* 
- Valid values: ``audit``, ``error``, ``general``, ``slowquery`` 
+ Valid values: ``audit``, ``error``, ``general``, ``slowquery``
   *Aurora PostgreSQL* 
- Valid values: ``postgresql`` 
+ Valid values: ``postgresql``
  Valid for: Aurora DB clusters and Multi-AZ DB clusters
 - `enable_global_write_forwarding` (Boolean) Specifies whether to enable this DB cluster to forward write operations to the primary cluster of a global cluster (Aurora global database). By default, write operations are not allowed on Aurora DB clusters that are secondary clusters in an Aurora global database.
  You can set this value only on Aurora DB clusters that are members of an Aurora global database. With this parameter enabled, a secondary cluster can forward writes to the current primary cluster, and the resulting changes are replicated back to this cluster. For the primary DB cluster of an Aurora global database, this value is used immediately if the primary is demoted by a global cluster API operation, but it does nothing until then.
@@ -102,7 +102,7 @@ Data Source schema for AWS::RDS::DBCluster
  For more information, see [Using RDS Data API](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html) in the *Amazon Aurora User Guide*.
  Valid for Cluster Type: Aurora DB clusters only
 - `enable_iam_database_authentication` (Boolean) A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts. By default, mapping is disabled.
- For more information, see [IAM Database Authentication](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html) in the *Amazon Aurora User Guide.* 
+ For more information, see [IAM Database Authentication](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html) in the *Amazon Aurora User Guide.*
  Valid for: Aurora DB clusters only
 - `enable_local_write_forwarding` (Boolean) Specifies whether read replicas can forward write operations to the writer DB instance in the DB cluster. By default, write operations aren't allowed on reader DB instances.
  Valid for: Aurora DB clusters only
@@ -118,11 +118,11 @@ Data Source schema for AWS::RDS::DBCluster
 - `engine_lifecycle_support` (String) The life cycle type for this DB cluster.
   By default, this value is set to ``open-source-rds-extended-support``, which enrolls your DB cluster into Amazon RDS Extended Support. At the end of standard support, you can avoid charges for Extended Support by setting the value to ``open-source-rds-extended-support-disabled``. In this case, creating the DB cluster will fail if the DB major version is past its end of standard support date.
   You can use this setting to enroll your DB cluster into Amazon RDS Extended Support. With RDS Extended Support, you can run the selected major engine version on your DB cluster past the end of standard support for that engine version. For more information, see the following sections:
-  +  Amazon Aurora - [Using Amazon RDS Extended Support](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html) in the *Amazon Aurora User Guide* 
-  +  Amazon RDS - [Using Amazon RDS Extended Support](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html) in the *Amazon RDS User Guide* 
+  +  Amazon Aurora - [Using Amazon RDS Extended Support](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html) in the *Amazon Aurora User Guide*
+  +  Amazon RDS - [Using Amazon RDS Extended Support](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html) in the *Amazon RDS User Guide*
   
  Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
- Valid Values: ``open-source-rds-extended-support | open-source-rds-extended-support-disabled`` 
+ Valid Values: ``open-source-rds-extended-support | open-source-rds-extended-support-disabled``
  Default: ``open-source-rds-extended-support``
 - `engine_mode` (String) The DB engine mode of the DB cluster, either ``provisioned`` or ``serverless``.
  The ``serverless`` engine mode only applies for Aurora Serverless v1 DB clusters. Aurora Serverless v2 DB clusters use the ``provisioned`` engine mode.
@@ -166,7 +166,7 @@ Data Source schema for AWS::RDS::DBCluster
  If you create a read replica of an encrypted DB cluster in another AWS Region, make sure to set ``KmsKeyId`` to a KMS key identifier that is valid in the destination AWS Region. This KMS key is used to encrypt the read replica in that AWS Region.
  Valid for: Aurora DB clusters and Multi-AZ DB clusters
 - `manage_master_user_password` (Boolean) Specifies whether to manage the master user password with AWS Secrets Manager.
- For more information, see [Password management with Secrets Manager](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html) in the *Amazon RDS User Guide* and [Password management with Secrets Manager](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-secrets-manager.html) in the *Amazon Aurora User Guide.* 
+ For more information, see [Password management with Secrets Manager](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html) in the *Amazon RDS User Guide* and [Password management with Secrets Manager](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-secrets-manager.html) in the *Amazon Aurora User Guide.*
  Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
  Constraints:
   +  Can't manage the master user password with AWS Secrets Manager if ``MasterUserPassword`` is specified.
@@ -182,7 +182,7 @@ Data Source schema for AWS::RDS::DBCluster
 - `monitoring_interval` (Number) The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB cluster. To turn off collecting Enhanced Monitoring metrics, specify ``0``.
  If ``MonitoringRoleArn`` is specified, also set ``MonitoringInterval`` to a value other than ``0``.
  Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
- Valid Values: ``0 | 1 | 5 | 10 | 15 | 30 | 60`` 
+ Valid Values: ``0 | 1 | 5 | 10 | 15 | 30 | 60``
  Default: ``0``
 - `monitoring_role_arn` (String) The Amazon Resource Name (ARN) for the IAM role that permits RDS to send Enhanced Monitoring metrics to Amazon CloudWatch Logs. An example is ``arn:aws:iam:123456789012:role/emaccess``. For information on creating a monitoring role, see [Setting up and enabling Enhanced Monitoring](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html#USER_Monitoring.OS.Enabling) in the *Amazon RDS User Guide*.
  If ``MonitoringInterval`` is set to a value other than ``0``, supply a ``MonitoringRoleArn`` value.
@@ -193,7 +193,7 @@ Data Source schema for AWS::RDS::DBCluster
   +   ``DUAL`` 
   
  The network type is determined by the ``DBSubnetGroup`` specified for the DB cluster. A ``DBSubnetGroup`` can support only the IPv4 protocol or the IPv4 and IPv6 protocols (``DUAL``).
- For more information, see [Working with a DB instance in a VPC](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html) in the *Amazon Aurora User Guide.* 
+ For more information, see [Working with a DB instance in a VPC](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html) in the *Amazon Aurora User Guide.*
  Valid for: Aurora DB clusters only
 - `performance_insights_enabled` (Boolean) Specifies whether to turn on Performance Insights for the DB cluster.
  For more information, see [Using Amazon Performance Insights](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html) in the *Amazon RDS User Guide*.
@@ -206,7 +206,7 @@ Data Source schema for AWS::RDS::DBCluster
  Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
  Valid Values:
   +   ``7`` 
-  +   *month* * 31, where *month* is a number of months from 1-23. Examples: ``93`` (3 months * 31), ``341`` (11 months * 31), ``589`` (19 months * 31)
+  +  *month* * 31, where *month* is a number of months from 1-23. Examples: ``93`` (3 months * 31), ``341`` (11 months * 31), ``589`` (19 months * 31)
   +   ``731`` 
   
  Default: ``7`` days
@@ -215,13 +215,13 @@ Data Source schema for AWS::RDS::DBCluster
  Default:
   +  When ``EngineMode`` is ``provisioned``, ``3306`` (for both Aurora MySQL and Aurora PostgreSQL)
   +  When ``EngineMode`` is ``serverless``:
-  +   ``3306`` when ``Engine`` is ``aurora`` or ``aurora-mysql`` 
-  +   ``5432`` when ``Engine`` is ``aurora-postgresql`` 
+  +  ``3306`` when ``Engine`` is ``aurora`` or ``aurora-mysql``
+  +  ``5432`` when ``Engine`` is ``aurora-postgresql``
   
   
   The ``No interruption`` on update behavior only applies to DB clusters. If you are updating a DB instance, see [Port](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-port) for the AWS::RDS::DBInstance resource.
   Valid for: Aurora DB clusters and Multi-AZ DB clusters
-- `preferred_backup_window` (String) The daily time range during which automated backups are created. For more information, see [Backup Window](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.Backups.BackupWindow) in the *Amazon Aurora User Guide.* 
+- `preferred_backup_window` (String) The daily time range during which automated backups are created. For more information, see [Backup Window](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.Backups.BackupWindow) in the *Amazon Aurora User Guide.*
  Constraints:
   +  Must be in the format ``hh24:mi-hh24:mi``.
   +  Must be in Universal Coordinated Time (UTC).
@@ -230,8 +230,8 @@ Data Source schema for AWS::RDS::DBCluster
   
  Valid for: Aurora DB clusters and Multi-AZ DB clusters
 - `preferred_maintenance_window` (String) The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).
- Format: ``ddd:hh24:mi-ddd:hh24:mi`` 
- The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week. To see the time blocks available, see [Maintaining an Amazon Aurora DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow.Aurora) in the *Amazon Aurora User Guide.* 
+ Format: ``ddd:hh24:mi-ddd:hh24:mi``
+ The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week. To see the time blocks available, see [Maintaining an Amazon Aurora DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow.Aurora) in the *Amazon Aurora User Guide.*
  Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
  Constraints: Minimum 30-minute window.
  Valid for: Aurora DB clusters and Multi-AZ DB clusters
@@ -259,14 +259,14 @@ Data Source schema for AWS::RDS::DBCluster
   +  Must be before the latest restorable time for the DB instance
   +  Must be specified if ``UseLatestRestorableTime`` parameter isn't provided
   +  Can't be specified if the ``UseLatestRestorableTime`` parameter is enabled
-  +  Can't be specified if the ``RestoreType`` parameter is ``copy-on-write`` 
+  +  Can't be specified if the ``RestoreType`` parameter is ``copy-on-write``
   
  This property must be used with ``SourceDBClusterIdentifier`` property. The resulting cluster will have the identifier that matches the value of the ``DBclusterIdentifier`` property.
- Example: ``2015-03-07T23:45:00Z`` 
+ Example: ``2015-03-07T23:45:00Z``
  Valid for: Aurora DB clusters and Multi-AZ DB clusters
 - `restore_type` (String) The type of restore to be performed. You can specify one of the following values:
-  +   ``full-copy`` - The new DB cluster is restored as a full copy of the source DB cluster.
-  +   ``copy-on-write`` - The new DB cluster is restored as a clone of the source DB cluster.
+  +  ``full-copy`` - The new DB cluster is restored as a full copy of the source DB cluster.
+  +  ``copy-on-write`` - The new DB cluster is restored as a clone of the source DB cluster.
   
  If you don't specify a ``RestoreType`` value, then the new DB cluster is restored as a full copy of the source DB cluster.
  Valid for: Aurora DB clusters and Multi-AZ DB clusters
@@ -287,7 +287,7 @@ Data Source schema for AWS::RDS::DBCluster
   +   ``RestoreType`` 
   +   ``SourceDBClusterIdentifier`` 
   +   ``SourceRegion`` 
-  +   ``StorageEncrypted`` (for an encrypted snapshot)
+  +  ``StorageEncrypted`` (for an encrypted snapshot)
   +   ``UseLatestRestorableTime`` 
   
  Constraints:
@@ -315,12 +315,12 @@ Data Source schema for AWS::RDS::DBCluster
  When specified for a Multi-AZ DB cluster, a value for the ``Iops`` parameter is required.
  Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
  Valid Values:
-  +  Aurora DB clusters - ``aurora | aurora-iopt1`` 
-  +  Multi-AZ DB clusters - ``io1 | io2 | gp3`` 
+  +  Aurora DB clusters - ``aurora | aurora-iopt1``
+  +  Multi-AZ DB clusters - ``io1 | io2 | gp3``
   
  Default:
-  +  Aurora DB clusters - ``aurora`` 
-  +  Multi-AZ DB clusters - ``io1`` 
+  +  Aurora DB clusters - ``aurora``
+  +  Multi-AZ DB clusters - ``io1``
   
   When you create an Aurora DB cluster with the storage type set to ``aurora-iopt1``, the storage type is returned in the response. The storage type isn't returned when you set it to ``aurora``.
 - `tags` (Attributes Set) Tags to assign to the DB cluster.
@@ -386,8 +386,8 @@ Read-Only:
 - `seconds_until_auto_pause` (Number) The time, in seconds, before an Aurora DB cluster in ``serverless`` mode is paused.
  Specify a value between 300 and 86,400 seconds.
 - `timeout_action` (String) The action to take when the timeout is reached, either ``ForceApplyCapacityChange`` or ``RollbackCapacityChange``.
-  ``ForceApplyCapacityChange`` sets the capacity to the specified value as soon as possible.
-  ``RollbackCapacityChange``, the default, ignores the capacity change if a scaling point isn't found in the timeout period.
+ ``ForceApplyCapacityChange`` sets the capacity to the specified value as soon as possible.
+ ``RollbackCapacityChange``, the default, ignores the capacity change if a scaling point isn't found in the timeout period.
   If you specify ``ForceApplyCapacityChange``, connections that prevent Aurora Serverless v1 from finding a scaling point might be dropped.
   For more information, see [Autoscaling for Aurora Serverless v1](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.how-it-works.html#aurora-serverless.how-it-works.auto-scaling) in the *Amazon Aurora User Guide*.
 

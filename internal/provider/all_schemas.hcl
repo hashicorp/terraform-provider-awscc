@@ -1995,6 +1995,10 @@ resource_schema "aws_ecr_registry_policy" {
   cloudformation_type_name = "AWS::ECR::RegistryPolicy"
 }
 
+resource_schema "aws_ecr_registry_scanning_configuration" {
+  cloudformation_type_name = "AWS::ECR::RegistryScanningConfiguration"
+}
+
 resource_schema "aws_ecr_replication_configuration" {
   cloudformation_type_name = "AWS::ECR::ReplicationConfiguration"
 }

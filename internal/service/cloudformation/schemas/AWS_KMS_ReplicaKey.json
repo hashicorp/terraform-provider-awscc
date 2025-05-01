@@ -1,5 +1,10 @@
 {
   "tagging": {
+    "permissions": [
+      "kms:TagResource",
+      "kms:UntagResource",
+      "kms:ListResourceTags"
+    ],
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,

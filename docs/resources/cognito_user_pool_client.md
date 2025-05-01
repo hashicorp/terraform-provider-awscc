@@ -117,6 +117,7 @@ resource "awscc_cognito_user_pool_client" "example" {
 - `logout_ur_ls` (List of String)
 - `prevent_user_existence_errors` (String)
 - `read_attributes` (List of String)
+- `refresh_token_rotation` (Attributes) (see [below for nested schema](#nestedatt--refresh_token_rotation))
 - `refresh_token_validity` (Number)
 - `supported_identity_providers` (List of String)
 - `token_validity_units` (Attributes) (see [below for nested schema](#nestedatt--token_validity_units))
@@ -139,6 +140,15 @@ Optional:
 - `external_id` (String)
 - `role_arn` (String)
 - `user_data_shared` (Boolean)
+
+
+<a id="nestedatt--refresh_token_rotation"></a>
+### Nested Schema for `refresh_token_rotation`
+
+Optional:
+
+- `feature` (String)
+- `retry_grace_period_seconds` (Number)
 
 
 <a id="nestedatt--token_validity_units"></a>

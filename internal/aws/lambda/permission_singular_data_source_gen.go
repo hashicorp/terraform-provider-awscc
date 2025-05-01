@@ -54,14 +54,14 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The name or ARN of the Lambda function, version, or alias.\n  **Name formats**\n +   *Function name* – ``my-function`` (name-only), ``my-function:v1`` (with alias).\n  +   *Function ARN* – ``arn:aws:lambda:us-west-2:123456789012:function:my-function``.\n  +   *Partial ARN* – ``123456789012:function:my-function``.\n  \n You can append a version number or alias to any of the formats. The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.",
+		//	  "description": "The name or ARN of the Lambda function, version, or alias.\n  **Name formats**\n +  *Function name* – ``my-function`` (name-only), ``my-function:v1`` (with alias).\n  +  *Function ARN* – ``arn:aws:lambda:us-west-2:123456789012:function:my-function``.\n  +  *Partial ARN* – ``123456789012:function:my-function``.\n  \n You can append a version number or alias to any of the formats. The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.",
 		//	  "maxLength": 140,
 		//	  "minLength": 1,
 		//	  "pattern": "^(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?$",
 		//	  "type": "string"
 		//	}
 		"function_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name or ARN of the Lambda function, version, or alias.\n  **Name formats**\n +   *Function name* – ``my-function`` (name-only), ``my-function:v1`` (with alias).\n  +   *Function ARN* – ``arn:aws:lambda:us-west-2:123456789012:function:my-function``.\n  +   *Partial ARN* – ``123456789012:function:my-function``.\n  \n You can append a version number or alias to any of the formats. The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.",
+			Description: "The name or ARN of the Lambda function, version, or alias.\n  **Name formats**\n +  *Function name* – ``my-function`` (name-only), ``my-function:v1`` (with alias).\n  +  *Function ARN* – ``arn:aws:lambda:us-west-2:123456789012:function:my-function``.\n  +  *Partial ARN* – ``123456789012:function:my-function``.\n  \n You can append a version number or alias to any of the formats. The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: FunctionUrlAuthType

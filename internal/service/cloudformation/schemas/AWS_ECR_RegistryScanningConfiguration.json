@@ -1,0 +1,154 @@
+{
+  "typeName": "AWS::ECR::RegistryScanningConfiguration",
+  "description": "The AWS::ECR::RegistryScanningConfiguration controls the scanning configuration for an Amazon Elastic Container Registry (Amazon Private ECR). For more information, see https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-ecr.git",
+  "definitions": {
+    "ScanningRules": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 2,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/ScanningRule"
+      },
+      "description": "The scanning rules associated with the registry. A registry scanning configuration may contain a maximum of 2 rules."
+    },
+    "ScanningRule": {
+      "type": "object",
+      "properties": {
+        "RepositoryFilters": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 100,
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/RepositoryFilter"
+          },
+          "description": "The repository filters associated with the scanning configuration for a private registry."
+        },
+        "ScanFrequency": {
+          "$ref": "#/definitions/ScanFrequency"
+        }
+      },
+      "description": "A rule representing the details of a scanning configuration.",
+      "required": [
+        "ScanFrequency",
+        "RepositoryFilters"
+      ],
+      "additionalProperties": false
+    },
+    "RepositoryFilter": {
+      "type": "object",
+      "properties": {
+        "Filter": {
+          "$ref": "#/definitions/Filter"
+        },
+        "FilterType": {
+          "$ref": "#/definitions/FilterType"
+        }
+      },
+      "description": "The details of a scanning repository filter.",
+      "required": [
+        "Filter",
+        "FilterType"
+      ],
+      "additionalProperties": false
+    },
+    "Filter": {
+      "type": "string",
+      "description": "The filter to use when scanning.",
+      "pattern": "^[a-z0-9*](?:[._\\-/a-z0-9*]?[a-z0-9*]+)*$"
+    },
+    "FilterType": {
+      "description": "The type associated with the filter.",
+      "type": "string",
+      "enum": [
+        "WILDCARD"
+      ]
+    },
+    "ScanFrequency": {
+      "description": "The frequency that scans are performed.",
+      "type": "string",
+      "enum": [
+        "SCAN_ON_PUSH",
+        "CONTINUOUS_SCAN"
+      ]
+    },
+    "ScanType": {
+      "description": "The type of scanning configured for the registry.",
+      "type": "string",
+      "enum": [
+        "BASIC",
+        "ENHANCED"
+      ]
+    },
+    "RegistryId": {
+      "type": "string",
+      "description": "The registry id.",
+      "pattern": "^[0-9]{12}$"
+    }
+  },
+  "properties": {
+    "Rules": {
+      "$ref": "#/definitions/ScanningRules"
+    },
+    "ScanType": {
+      "$ref": "#/definitions/ScanType"
+    },
+    "RegistryId": {
+      "$ref": "#/definitions/RegistryId"
+    }
+  },
+  "required": [
+    "Rules",
+    "ScanType"
+  ],
+  "primaryIdentifier": [
+    "/properties/RegistryId"
+  ],
+  "readOnlyProperties": [
+    "/properties/RegistryId"
+  ],
+  "additionalProperties": false,
+  "handlers": {
+    "create": {
+      "permissions": [
+        "ecr:PutRegistryScanningConfiguration",
+        "ecr:GetRegistryScanningConfiguration",
+        "inspector2:Enable",
+        "iam:CreateServiceLinkedRole"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "ecr:GetRegistryScanningConfiguration"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "ecr:PutRegistryScanningConfiguration",
+        "ecr:GetRegistryScanningConfiguration",
+        "inspector2:Enable",
+        "inspector2:Disable",
+        "inspector2:ListAccountPermissions",
+        "iam:CreateServiceLinkedRole"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ecr:PutRegistryScanningConfiguration",
+        "ecr:GetRegistryScanningConfiguration",
+        "inspector2:ListAccountPermissions",
+        "inspector2:Disable"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "ecr:GetRegistryScanningConfiguration"
+      ]
+    }
+  },
+  "tagging": {
+    "taggable": false
+  }
+}

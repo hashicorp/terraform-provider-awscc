@@ -454,7 +454,8 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                    "PHP_81",
 		//	                    "RUBY_31",
 		//	                    "PYTHON_311",
-		//	                    "NODEJS_18"
+		//	                    "NODEJS_18",
+		//	                    "NODEJS_22"
 		//	                  ],
 		//	                  "type": "string"
 		//	                },

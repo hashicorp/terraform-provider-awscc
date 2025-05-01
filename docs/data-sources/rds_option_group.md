@@ -43,7 +43,7 @@ Data Source schema for AWS::RDS::OptionGroup
   +  First character must be a letter
   +  Can't end with a hyphen or contain two consecutive hyphens
   
- Example: ``myoptiongroup`` 
+ Example: ``myoptiongroup``
  If you don't specify a value for ``OptionGroupName`` property, a name is automatically created for the option group.
   This value is stored as a lowercase string.
 - `tags` (Attributes List) Tags to assign to the option group. (see [below for nested schema](#nestedatt--tags))
