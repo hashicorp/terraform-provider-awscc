@@ -58,17 +58,89 @@ Read-Only:
 
 Read-Only:
 
+- `audio` (Attributes) (see [below for nested schema](#nestedatt--override_configuration--audio))
 - `document` (Attributes) (see [below for nested schema](#nestedatt--override_configuration--document))
+- `image` (Attributes) (see [below for nested schema](#nestedatt--override_configuration--image))
+- `modality_routing` (Attributes) Modality routing configuration (see [below for nested schema](#nestedatt--override_configuration--modality_routing))
+- `video` (Attributes) (see [below for nested schema](#nestedatt--override_configuration--video))
+
+<a id="nestedatt--override_configuration--audio"></a>
+### Nested Schema for `override_configuration.audio`
+
+Read-Only:
+
+- `modality_processing` (Attributes) (see [below for nested schema](#nestedatt--override_configuration--audio--modality_processing))
+
+<a id="nestedatt--override_configuration--audio--modality_processing"></a>
+### Nested Schema for `override_configuration.audio.modality_processing`
+
+Read-Only:
+
+- `state` (String)
+
+
 
 <a id="nestedatt--override_configuration--document"></a>
 ### Nested Schema for `override_configuration.document`
 
 Read-Only:
 
+- `modality_processing` (Attributes) (see [below for nested schema](#nestedatt--override_configuration--document--modality_processing))
 - `splitter` (Attributes) (see [below for nested schema](#nestedatt--override_configuration--document--splitter))
+
+<a id="nestedatt--override_configuration--document--modality_processing"></a>
+### Nested Schema for `override_configuration.document.modality_processing`
+
+Read-Only:
+
+- `state` (String)
+
 
 <a id="nestedatt--override_configuration--document--splitter"></a>
 ### Nested Schema for `override_configuration.document.splitter`
+
+Read-Only:
+
+- `state` (String)
+
+
+
+<a id="nestedatt--override_configuration--image"></a>
+### Nested Schema for `override_configuration.image`
+
+Read-Only:
+
+- `modality_processing` (Attributes) (see [below for nested schema](#nestedatt--override_configuration--image--modality_processing))
+
+<a id="nestedatt--override_configuration--image--modality_processing"></a>
+### Nested Schema for `override_configuration.image.modality_processing`
+
+Read-Only:
+
+- `state` (String)
+
+
+
+<a id="nestedatt--override_configuration--modality_routing"></a>
+### Nested Schema for `override_configuration.modality_routing`
+
+Read-Only:
+
+- `jpeg` (String)
+- `mov` (String)
+- `mp_4` (String)
+- `png` (String)
+
+
+<a id="nestedatt--override_configuration--video"></a>
+### Nested Schema for `override_configuration.video`
+
+Read-Only:
+
+- `modality_processing` (Attributes) (see [below for nested schema](#nestedatt--override_configuration--video--modality_processing))
+
+<a id="nestedatt--override_configuration--video--modality_processing"></a>
+### Nested Schema for `override_configuration.video.modality_processing`
 
 Read-Only:
 

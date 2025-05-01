@@ -83,9 +83,9 @@ resource "awscc_iam_role" "default" {
 - `action` (String) The action that the principal can use on the function. For example, ``lambda:InvokeFunction`` or ``lambda:GetFunction``.
 - `function_name` (String) The name or ARN of the Lambda function, version, or alias.
   **Name formats**
- +   *Function name* – ``my-function`` (name-only), ``my-function:v1`` (with alias).
-  +   *Function ARN* – ``arn:aws:lambda:us-west-2:123456789012:function:my-function``.
-  +   *Partial ARN* – ``123456789012:function:my-function``.
+ +  *Function name* – ``my-function`` (name-only), ``my-function:v1`` (with alias).
+  +  *Function ARN* – ``arn:aws:lambda:us-west-2:123456789012:function:my-function``.
+  +  *Partial ARN* – ``123456789012:function:my-function``.
   
  You can append a version number or alias to any of the formats. The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
 - `principal` (String) The AWS-service, AWS-account, IAM user, or IAM role that invokes the function. If you specify a service, use ``SourceArn`` or ``SourceAccount`` to limit who can invoke the function through that service.

@@ -111,6 +111,7 @@ Read-Only:
 - `action_type_id` (Attributes) Represents information about an action type. (see [below for nested schema](#nestedatt--stages--actions--action_type_id))
 - `commands` (List of String) The shell commands to run with your compute action in CodePipeline.
 - `configuration` (String) The action's configuration. These are key-value pairs that specify input values for an action.
+- `environment_variables` (Attributes List) The list of environment variables that are input to a compute based action. (see [below for nested schema](#nestedatt--stages--actions--environment_variables))
 - `input_artifacts` (Attributes List) (see [below for nested schema](#nestedatt--stages--actions--input_artifacts))
 - `name` (String) The action declaration's name.
 - `namespace` (String) The variable namespace associated with the action. All variables produced as output by this action fall under this namespace.
@@ -130,6 +131,15 @@ Read-Only:
 - `owner` (String) The creator of the action being called. There are three valid values for the Owner field in the action category section within your pipeline structure: AWS, ThirdParty, and Custom.
 - `provider` (String) The provider of the service being called by the action. Valid providers are determined by the action category. For example, an action in the Deploy category type might have a provider of CodeDeploy, which would be specified as CodeDeploy.
 - `version` (String) A string that describes the action version.
+
+
+<a id="nestedatt--stages--actions--environment_variables"></a>
+### Nested Schema for `stages.actions.environment_variables`
+
+Read-Only:
+
+- `name` (String) The name of the environment variable.
+- `value` (String) The value of the environment variable.
 
 
 <a id="nestedatt--stages--actions--input_artifacts"></a>

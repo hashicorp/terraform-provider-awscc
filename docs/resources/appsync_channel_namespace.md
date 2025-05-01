@@ -69,6 +69,7 @@ resource "awscc_appsync_channel_namespace" "example" {
 
 - `code_handlers` (String) String of APPSYNC_JS code to be used by the handlers.
 - `code_s3_location` (String) The Amazon S3 endpoint where the code is located.
+- `handler_configs` (Attributes) (see [below for nested schema](#nestedatt--handler_configs))
 - `publish_auth_modes` (Attributes List) List of AuthModes supported for Publish operations. (see [below for nested schema](#nestedatt--publish_auth_modes))
 - `subscribe_auth_modes` (Attributes List) List of AuthModes supported for Subscribe operations. (see [below for nested schema](#nestedatt--subscribe_auth_modes))
 - `tags` (Attributes Set) An arbitrary set of tags (key-value pairs) for this AppSync API. (see [below for nested schema](#nestedatt--tags))
@@ -77,6 +78,67 @@ resource "awscc_appsync_channel_namespace" "example" {
 
 - `channel_namespace_arn` (String) The Amazon Resource Name (ARN) for the Channel Namespace.
 - `id` (String) Uniquely identifies the resource.
+
+<a id="nestedatt--handler_configs"></a>
+### Nested Schema for `handler_configs`
+
+Optional:
+
+- `on_publish` (Attributes) (see [below for nested schema](#nestedatt--handler_configs--on_publish))
+- `on_subscribe` (Attributes) (see [below for nested schema](#nestedatt--handler_configs--on_subscribe))
+
+<a id="nestedatt--handler_configs--on_publish"></a>
+### Nested Schema for `handler_configs.on_publish`
+
+Optional:
+
+- `behavior` (String) Integration behavior for a handler configuration.
+- `integration` (Attributes) (see [below for nested schema](#nestedatt--handler_configs--on_publish--integration))
+
+<a id="nestedatt--handler_configs--on_publish--integration"></a>
+### Nested Schema for `handler_configs.on_publish.integration`
+
+Optional:
+
+- `data_source_name` (String) Data source to invoke for this integration.
+- `lambda_config` (Attributes) (see [below for nested schema](#nestedatt--handler_configs--on_publish--integration--lambda_config))
+
+<a id="nestedatt--handler_configs--on_publish--integration--lambda_config"></a>
+### Nested Schema for `handler_configs.on_publish.integration.lambda_config`
+
+Optional:
+
+- `invoke_type` (String) Invocation type for direct lambda integrations.
+
+
+
+
+<a id="nestedatt--handler_configs--on_subscribe"></a>
+### Nested Schema for `handler_configs.on_subscribe`
+
+Optional:
+
+- `behavior` (String) Integration behavior for a handler configuration.
+- `integration` (Attributes) (see [below for nested schema](#nestedatt--handler_configs--on_subscribe--integration))
+
+<a id="nestedatt--handler_configs--on_subscribe--integration"></a>
+### Nested Schema for `handler_configs.on_subscribe.integration`
+
+Optional:
+
+- `data_source_name` (String) Data source to invoke for this integration.
+- `lambda_config` (Attributes) (see [below for nested schema](#nestedatt--handler_configs--on_subscribe--integration--lambda_config))
+
+<a id="nestedatt--handler_configs--on_subscribe--integration--lambda_config"></a>
+### Nested Schema for `handler_configs.on_subscribe.integration.lambda_config`
+
+Optional:
+
+- `invoke_type` (String) Invocation type for direct lambda integrations.
+
+
+
+
 
 <a id="nestedatt--publish_auth_modes"></a>
 ### Nested Schema for `publish_auth_modes`

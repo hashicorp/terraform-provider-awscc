@@ -35,6 +35,7 @@ Resource Type definition for AWS::ApiGateway::DomainNameV2.
 
 Optional:
 
+- `ip_address_type` (String)
 - `types` (List of String)
 
 

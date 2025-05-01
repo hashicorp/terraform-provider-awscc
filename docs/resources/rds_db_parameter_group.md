@@ -110,7 +110,7 @@ resource "awscc_rds_db_parameter_group" "this" {
   This value is stored as a lowercase string.
 - `parameters` (String) A mapping of parameter names and values for the parameter update. You must specify at least one parameter name and value.
  For more information about parameter groups, see [Working with parameter groups](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithParamGroups.html) in the *Amazon RDS User Guide*, or [Working with parameter groups](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithParamGroups.html) in the *Amazon Aurora User Guide*.
-   AWS CloudFormation doesn't support specifying an apply method for each individual parameter. The default apply method for each parameter is used.
+  AWS CloudFormation doesn't support specifying an apply method for each individual parameter. The default apply method for each parameter is used.
 - `tags` (Attributes List) Tags to assign to the DB parameter group. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
