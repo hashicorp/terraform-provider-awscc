@@ -394,6 +394,60 @@ func userPoolClientResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: RefreshTokenRotation
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "properties": {
+		//	    "Feature": {
+		//	      "enum": [
+		//	        "ENABLED",
+		//	        "DISABLED"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "RetryGracePeriodSeconds": {
+		//	      "maximum": 60,
+		//	      "minimum": 0,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"refresh_token_rotation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Feature
+				"feature": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"ENABLED",
+							"DISABLED",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: RetryGracePeriodSeconds
+				"retry_grace_period_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.Between(0, 60),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: RefreshTokenValidity
 		// CloudFormation resource type schema:
 		//
@@ -549,6 +603,7 @@ func userPoolClientResource(ctx context.Context) (resource.Resource, error) {
 		"enable_token_revocation":                       "EnableTokenRevocation",
 		"explicit_auth_flows":                           "ExplicitAuthFlows",
 		"external_id":                                   "ExternalId",
+		"feature":                                       "Feature",
 		"generate_secret":                               "GenerateSecret",
 		"id_token":                                      "IdToken",
 		"id_token_validity":                             "IdTokenValidity",
@@ -557,7 +612,9 @@ func userPoolClientResource(ctx context.Context) (resource.Resource, error) {
 		"prevent_user_existence_errors":                 "PreventUserExistenceErrors",
 		"read_attributes":                               "ReadAttributes",
 		"refresh_token":                                 "RefreshToken",
+		"refresh_token_rotation":                        "RefreshTokenRotation",
 		"refresh_token_validity":                        "RefreshTokenValidity",
+		"retry_grace_period_seconds":                    "RetryGracePeriodSeconds",
 		"role_arn":                                      "RoleArn",
 		"supported_identity_providers":                  "SupportedIdentityProviders",
 		"token_validity_units":                          "TokenValidityUnits",

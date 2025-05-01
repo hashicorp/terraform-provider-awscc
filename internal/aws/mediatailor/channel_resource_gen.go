@@ -350,7 +350,6 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
 			}, /*END PLAN MODIFIERS*/
-			// Outputs is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: PlaybackMode
 		// CloudFormation resource type schema:
@@ -542,9 +541,6 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 		"vod_source_name":                      "VodSourceName",
 	})
 
-	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/Outputs",
-	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

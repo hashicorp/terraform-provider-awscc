@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -93,6 +94,284 @@ func channelNamespaceResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 			// CodeS3Location is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: HandlerConfigs
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "OnPublish": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Behavior": {
+		//	          "description": "Integration behavior for a handler configuration.",
+		//	          "enum": [
+		//	            "CODE",
+		//	            "DIRECT"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "Integration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "DataSourceName": {
+		//	              "description": "Data source to invoke for this integration.",
+		//	              "maxLength": 512,
+		//	              "minLength": 1,
+		//	              "pattern": "([_A-Za-z][_0-9A-Za-z]{0,511})?",
+		//	              "type": "string"
+		//	            },
+		//	            "LambdaConfig": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "InvokeType": {
+		//	                  "description": "Invocation type for direct lambda integrations.",
+		//	                  "enum": [
+		//	                    "REQUEST_RESPONSE",
+		//	                    "EVENT"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "InvokeType"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "DataSourceName"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Behavior",
+		//	        "Integration"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "OnSubscribe": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Behavior": {
+		//	          "description": "Integration behavior for a handler configuration.",
+		//	          "enum": [
+		//	            "CODE",
+		//	            "DIRECT"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "Integration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "DataSourceName": {
+		//	              "description": "Data source to invoke for this integration.",
+		//	              "maxLength": 512,
+		//	              "minLength": 1,
+		//	              "pattern": "([_A-Za-z][_0-9A-Za-z]{0,511})?",
+		//	              "type": "string"
+		//	            },
+		//	            "LambdaConfig": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "InvokeType": {
+		//	                  "description": "Invocation type for direct lambda integrations.",
+		//	                  "enum": [
+		//	                    "REQUEST_RESPONSE",
+		//	                    "EVENT"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "InvokeType"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "DataSourceName"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Behavior",
+		//	        "Integration"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"handler_configs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: OnPublish
+				"on_publish": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Behavior
+						"behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Integration behavior for a handler configuration.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"CODE",
+									"DIRECT",
+								),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Integration
+						"integration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: DataSourceName
+								"data_source_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Data source to invoke for this integration.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 512),
+										stringvalidator.RegexMatches(regexp.MustCompile("([_A-Za-z][_0-9A-Za-z]{0,511})?"), ""),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: LambdaConfig
+								"lambda_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: InvokeType
+										"invoke_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Invocation type for direct lambda integrations.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"REQUEST_RESPONSE",
+													"EVENT",
+												),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: OnSubscribe
+				"on_subscribe": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Behavior
+						"behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Integration behavior for a handler configuration.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"CODE",
+									"DIRECT",
+								),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Integration
+						"integration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: DataSourceName
+								"data_source_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Data source to invoke for this integration.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 512),
+										stringvalidator.RegexMatches(regexp.MustCompile("([_A-Za-z][_0-9A-Za-z]{0,511})?"), ""),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: LambdaConfig
+								"lambda_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: InvokeType
+										"invoke_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Invocation type for direct lambda integrations.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"REQUEST_RESPONSE",
+													"EVENT",
+												),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
@@ -326,11 +605,19 @@ func channelNamespaceResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"api_id":                "ApiId",
 		"auth_type":             "AuthType",
+		"behavior":              "Behavior",
 		"channel_namespace_arn": "ChannelNamespaceArn",
 		"code_handlers":         "CodeHandlers",
 		"code_s3_location":      "CodeS3Location",
+		"data_source_name":      "DataSourceName",
+		"handler_configs":       "HandlerConfigs",
+		"integration":           "Integration",
+		"invoke_type":           "InvokeType",
 		"key":                   "Key",
+		"lambda_config":         "LambdaConfig",
 		"name":                  "Name",
+		"on_publish":            "OnPublish",
+		"on_subscribe":          "OnSubscribe",
 		"publish_auth_modes":    "PublishAuthModes",
 		"subscribe_auth_modes":  "SubscribeAuthModes",
 		"tags":                  "Tags",

@@ -108,7 +108,7 @@ func keyspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	        ],
 		//	        "type": "string"
 		//	      },
-		//	      "maxItems": 6,
+		//	      "maxItems": 17,
 		//	      "minItems": 2,
 		//	      "type": "array",
 		//	      "uniqueItems": true
@@ -131,7 +131,7 @@ func keyspaceResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.Set{ /*START VALIDATORS*/
-						setvalidator.SizeBetween(2, 6),
+						setvalidator.SizeBetween(2, 17),
 						setvalidator.ValueStringsAre(
 							stringvalidator.OneOf(
 								"af-south-1",

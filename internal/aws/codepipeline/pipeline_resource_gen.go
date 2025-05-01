@@ -550,6 +550,30 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 		//	              "description": "The action's configuration. These are key-value pairs that specify input values for an action.",
 		//	              "type": "object"
 		//	            },
+		//	            "EnvironmentVariables": {
+		//	              "description": "The list of environment variables that are input to a compute based action.",
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "description": "Represents information about the environment variable of an action.",
+		//	                "properties": {
+		//	                  "Name": {
+		//	                    "description": "The name of the environment variable.",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Value": {
+		//	                    "description": "The value of the environment variable.",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Name",
+		//	                  "Value"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": true
+		//	            },
 		//	            "InputArtifacts": {
 		//	              "items": {
 		//	                "additionalProperties": false,
@@ -1060,6 +1084,46 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 									Computed:    true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: EnvironmentVariables
+								"environment_variables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Name
+											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The name of the environment variable.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Value
+											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The value of the environment variable.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "The list of environment variables that are input to a compute based action.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.UniqueValues(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: InputArtifacts
@@ -2478,6 +2542,7 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 		"description":                       "Description",
 		"disable_inbound_stage_transitions": "DisableInboundStageTransitions",
 		"encryption_key":                    "EncryptionKey",
+		"environment_variables":             "EnvironmentVariables",
 		"events":                            "Events",
 		"excludes":                          "Excludes",
 		"execution_mode":                    "ExecutionMode",

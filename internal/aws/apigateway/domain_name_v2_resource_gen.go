@@ -86,6 +86,9 @@ func domainNameV2Resource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "IpAddressType": {
+		//	      "type": "string"
+		//	    },
 		//	    "Types": {
 		//	      "items": {
 		//	        "type": "string"
@@ -97,6 +100,14 @@ func domainNameV2Resource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"endpoint_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: IpAddressType
+				"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: Types
 				"types": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
@@ -213,6 +224,7 @@ func domainNameV2Resource(ctx context.Context) (resource.Resource, error) {
 		"domain_name_arn":        "DomainNameArn",
 		"domain_name_id":         "DomainNameId",
 		"endpoint_configuration": "EndpointConfiguration",
+		"ip_address_type":        "IpAddressType",
 		"key":                    "Key",
 		"policy":                 "Policy",
 		"security_policy":        "SecurityPolicy",
