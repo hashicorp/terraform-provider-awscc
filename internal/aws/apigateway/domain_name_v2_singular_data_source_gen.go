@@ -67,6 +67,9 @@ func domainNameV2DataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "IpAddressType": {
+		//	      "type": "string"
+		//	    },
 		//	    "Types": {
 		//	      "items": {
 		//	        "type": "string"
@@ -78,6 +81,10 @@ func domainNameV2DataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	}
 		"endpoint_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: IpAddressType
+				"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: Types
 				"types": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
@@ -159,6 +166,7 @@ func domainNameV2DataSource(ctx context.Context) (datasource.DataSource, error) 
 		"domain_name_arn":        "DomainNameArn",
 		"domain_name_id":         "DomainNameId",
 		"endpoint_configuration": "EndpointConfiguration",
+		"ip_address_type":        "IpAddressType",
 		"key":                    "Key",
 		"policy":                 "Policy",
 		"security_policy":        "SecurityPolicy",

@@ -84,7 +84,7 @@ func keyspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        ],
 		//	        "type": "string"
 		//	      },
-		//	      "maxItems": 6,
+		//	      "maxItems": 17,
 		//	      "minItems": 2,
 		//	      "type": "array",
 		//	      "uniqueItems": true

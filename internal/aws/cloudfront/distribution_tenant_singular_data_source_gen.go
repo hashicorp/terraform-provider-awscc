@@ -171,15 +171,6 @@ func distributionTenantDataSource(ctx context.Context) (datasource.DataSource, e
 		//	      "Domain": {
 		//	        "type": "string"
 		//	      },
-		//	      "Reason": {
-		//	        "enum": [
-		//	          "pending-validation",
-		//	          "validation-failed",
-		//	          "pending-activation",
-		//	          "customer-activated"
-		//	        ],
-		//	        "type": "string"
-		//	      },
 		//	      "Status": {
 		//	        "enum": [
 		//	          "active",
@@ -198,10 +189,6 @@ func distributionTenantDataSource(ctx context.Context) (datasource.DataSource, e
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Domain
 					"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Reason
-					"reason": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
 					}, /*END ATTRIBUTE*/
 					// Property: Status
@@ -436,7 +423,6 @@ func distributionTenantDataSource(ctx context.Context) (datasource.DataSource, e
 		"name":                                        "Name",
 		"parameters":                                  "Parameters",
 		"primary_domain_name":                         "PrimaryDomainName",
-		"reason":                                      "Reason",
 		"restriction_type":                            "RestrictionType",
 		"status":                                      "Status",
 		"tags":                                        "Tags",

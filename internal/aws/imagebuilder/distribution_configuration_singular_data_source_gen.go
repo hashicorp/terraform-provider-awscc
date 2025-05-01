@@ -258,6 +258,37 @@ func distributionConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		//	      "Region": {
 		//	        "description": "region",
 		//	        "type": "string"
+		//	      },
+		//	      "SsmParameterConfigurations": {
+		//	        "description": "The SSM parameter configurations to use for AMI distribution.",
+		//	        "insertionOrder": true,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "description": "The SSM parameter configuration for AMI distribution.",
+		//	          "properties": {
+		//	            "AmiAccountId": {
+		//	              "description": "The account ID for the AMI to update the parameter with.",
+		//	              "type": "string"
+		//	            },
+		//	            "DataType": {
+		//	              "description": "The data type of the SSM parameter.",
+		//	              "enum": [
+		//	                "text",
+		//	                "aws:ec2:image"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "ParameterName": {
+		//	              "description": "The name of the SSM parameter.",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ParameterName"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "type": "array"
 		//	      }
 		//	    },
 		//	    "required": [
@@ -464,6 +495,30 @@ func distributionConfigurationDataSource(ctx context.Context) (datasource.DataSo
 						Description: "region",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
+					// Property: SsmParameterConfigurations
+					"ssm_parameter_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AmiAccountId
+								"ami_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The account ID for the AMI to update the parameter with.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: DataType
+								"data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The data type of the SSM parameter.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ParameterName
+								"parameter_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the SSM parameter.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "The SSM parameter configurations to use for AMI distribution.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "The distributions of the distribution configuration.",
@@ -517,11 +572,13 @@ func distributionConfigurationDataSource(ctx context.Context) (datasource.DataSo
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"account_id":                           "AccountId",
+		"ami_account_id":                       "AmiAccountId",
 		"ami_distribution_configuration":       "AmiDistributionConfiguration",
 		"ami_tags":                             "AmiTags",
 		"arn":                                  "Arn",
 		"container_distribution_configuration": "ContainerDistributionConfiguration",
 		"container_tags":                       "ContainerTags",
+		"data_type":                            "DataType",
 		"description":                          "Description",
 		"distributions":                        "Distributions",
 		"enabled":                              "Enabled",
@@ -538,11 +595,13 @@ func distributionConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		"name":                                 "Name",
 		"organization_arns":                    "OrganizationArns",
 		"organizational_unit_arns":             "OrganizationalUnitArns",
+		"parameter_name":                       "ParameterName",
 		"region":                               "Region",
 		"repository_name":                      "RepositoryName",
 		"service":                              "Service",
 		"set_default_version":                  "SetDefaultVersion",
 		"snapshot_configuration":               "SnapshotConfiguration",
+		"ssm_parameter_configurations":         "SsmParameterConfigurations",
 		"tags":                                 "Tags",
 		"target_account_ids":                   "TargetAccountIds",
 		"target_repository":                    "TargetRepository",

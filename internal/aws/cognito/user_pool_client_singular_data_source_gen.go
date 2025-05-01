@@ -275,6 +275,39 @@ func userPoolClientDataSource(ctx context.Context) (datasource.DataSource, error
 			ElementType: types.StringType,
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: RefreshTokenRotation
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "properties": {
+		//	    "Feature": {
+		//	      "enum": [
+		//	        "ENABLED",
+		//	        "DISABLED"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "RetryGracePeriodSeconds": {
+		//	      "maximum": 60,
+		//	      "minimum": 0,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"refresh_token_rotation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Feature
+				"feature": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: RetryGracePeriodSeconds
+				"retry_grace_period_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: RefreshTokenValidity
 		// CloudFormation resource type schema:
 		//
@@ -391,6 +424,7 @@ func userPoolClientDataSource(ctx context.Context) (datasource.DataSource, error
 		"enable_token_revocation":                       "EnableTokenRevocation",
 		"explicit_auth_flows":                           "ExplicitAuthFlows",
 		"external_id":                                   "ExternalId",
+		"feature":                                       "Feature",
 		"generate_secret":                               "GenerateSecret",
 		"id_token":                                      "IdToken",
 		"id_token_validity":                             "IdTokenValidity",
@@ -399,7 +433,9 @@ func userPoolClientDataSource(ctx context.Context) (datasource.DataSource, error
 		"prevent_user_existence_errors":                 "PreventUserExistenceErrors",
 		"read_attributes":                               "ReadAttributes",
 		"refresh_token":                                 "RefreshToken",
+		"refresh_token_rotation":                        "RefreshTokenRotation",
 		"refresh_token_validity":                        "RefreshTokenValidity",
+		"retry_grace_period_seconds":                    "RetryGracePeriodSeconds",
 		"role_arn":                                      "RoleArn",
 		"supported_identity_providers":                  "SupportedIdentityProviders",
 		"token_validity_units":                          "TokenValidityUnits",
