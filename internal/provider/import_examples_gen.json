@@ -2085,6 +2085,11 @@
         "path": "./examples/resources/awscc_ecr_registry_policy/import.sh"
     },
     {
+        "resource": "awscc_ecr_registry_scanning_configuration",
+        "identifier": ["RegistryId"],
+        "path": "./examples/resources/awscc_ecr_registry_scanning_configuration/import.sh"
+    },
+    {
         "resource": "awscc_ecr_replication_configuration",
         "identifier": ["RegistryId"],
         "path": "./examples/resources/awscc_ecr_replication_configuration/import.sh"
