@@ -119,14 +119,21 @@
     "tagOnCreate": true,
     "tagUpdatable": true,
     "taggable": true,
-    "tagProperty": "/properties/Tags"
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "wafv2:TagResource",
+      "wafv2:UntagResource",
+      "wafv2:ListTagsForResource"
+    ]
   },
   "handlers": {
     "create": {
       "permissions": [
         "wafv2:CreateIPSet",
         "wafv2:GetIPSet",
-        "wafv2:ListTagsForResource"
+        "wafv2:ListTagsForResource",
+        "wafv2:TagResource",
+        "wafv2:UntagResource"
       ]
     },
     "delete": {

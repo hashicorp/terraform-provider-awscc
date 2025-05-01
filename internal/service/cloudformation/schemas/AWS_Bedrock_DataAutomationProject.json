@@ -257,6 +257,36 @@
       "properties": {
         "Splitter": {
           "$ref": "#/definitions/SplitterConfiguration"
+        },
+        "ModalityProcessing": {
+          "$ref": "#/definitions/ModalityProcessingConfiguration"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AudioOverrideConfiguration": {
+      "type": "object",
+      "properties": {
+        "ModalityProcessing": {
+          "$ref": "#/definitions/ModalityProcessingConfiguration"
+        }
+      },
+      "additionalProperties": false
+    },
+    "VideoOverrideConfiguration": {
+      "type": "object",
+      "properties": {
+        "ModalityProcessing": {
+          "$ref": "#/definitions/ModalityProcessingConfiguration"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ImageOverrideConfiguration": {
+      "type": "object",
+      "properties": {
+        "ModalityProcessing": {
+          "$ref": "#/definitions/ModalityProcessingConfiguration"
         }
       },
       "additionalProperties": false
@@ -403,11 +433,60 @@
       "properties": {
         "Document": {
           "$ref": "#/definitions/DocumentOverrideConfiguration"
+        },
+        "Audio": {
+          "$ref": "#/definitions/AudioOverrideConfiguration"
+        },
+        "Video": {
+          "$ref": "#/definitions/VideoOverrideConfiguration"
+        },
+        "Image": {
+          "$ref": "#/definitions/ImageOverrideConfiguration"
+        },
+        "ModalityRouting": {
+          "$ref": "#/definitions/ModalityRoutingConfiguration"
         }
       },
       "additionalProperties": false
     },
+    "ModalityRoutingConfiguration": {
+      "type": "object",
+      "description": "Modality routing configuration",
+      "properties": {
+        "jpeg": {
+          "$ref": "#/definitions/DesiredModality"
+        },
+        "png": {
+          "$ref": "#/definitions/DesiredModality"
+        },
+        "mp4": {
+          "$ref": "#/definitions/DesiredModality"
+        },
+        "mov": {
+          "$ref": "#/definitions/DesiredModality"
+        }
+      },
+      "additionalProperties": false
+    },
+    "DesiredModality": {
+      "type": "string",
+      "enum": [
+        "DOCUMENT",
+        "IMAGE",
+        "VIDEO",
+        "AUDIO"
+      ]
+    },
     "SplitterConfiguration": {
+      "type": "object",
+      "properties": {
+        "State": {
+          "$ref": "#/definitions/State"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ModalityProcessingConfiguration": {
       "type": "object",
       "properties": {
         "State": {

@@ -1,182 +1,248 @@
 {
+  "typeName": "AWS::ImageBuilder::DistributionConfiguration",
+  "description": "Resource schema for AWS::ImageBuilder::DistributionConfiguration",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-imagebuilder.git",
-  "tagging": {
-    "taggable": true,
-    "tagOnCreate": true,
-    "tagUpdatable": true,
-    "tagProperty": "/properties/Tags",
-    "cloudFormationSystemTags": true
-  },
-  "handlers": {
-    "read": {
-      "permissions": [
-        "imagebuilder:GetDistributionConfiguration"
-      ]
+  "properties": {
+    "Arn": {
+      "description": "The Amazon Resource Name (ARN) of the distribution configuration.",
+      "type": "string"
     },
-    "create": {
-      "permissions": [
-        "iam:GetRole",
-        "iam:CreateServiceLinkedRole",
-        "ec2:DescribeLaunchTemplates",
-        "ec2:CreateLaunchTemplateVersion",
-        "ec2:ModifyLaunchTemplate",
-        "imagebuilder:TagResource",
-        "imagebuilder:GetDistributionConfiguration",
-        "imagebuilder:CreateDistributionConfiguration"
-      ]
+    "Name": {
+      "description": "The name of the distribution configuration.",
+      "type": "string"
     },
-    "update": {
-      "permissions": [
-        "ec2:DescribeLaunchTemplates",
-        "ec2:CreateLaunchTemplateVersion",
-        "ec2:ModifyLaunchTemplate",
-        "imagebuilder:GetDistributionConfiguration",
-        "imagebuilder:UpdateDistributionConfiguration"
-      ]
+    "Description": {
+      "description": "The description of the distribution configuration.",
+      "type": "string"
     },
-    "list": {
-      "permissions": [
-        "imagebuilder:ListDistributionConfigurations"
-      ]
+    "Distributions": {
+      "description": "The distributions of the distribution configuration.",
+      "type": "array",
+      "insertionOrder": true,
+      "items": {
+        "$ref": "#/definitions/Distribution"
+      }
     },
-    "delete": {
-      "permissions": [
-        "imagebuilder:GetDistributionConfiguration",
-        "imagebuilder:UnTagResource",
-        "imagebuilder:DeleteDistributionConfiguration"
-      ]
+    "Tags": {
+      "description": "The tags associated with the component.",
+      "type": "object",
+      "additionalProperties": false,
+      "patternProperties": {
+        "": {
+          "type": "string"
+        }
+      }
     }
   },
-  "typeName": "AWS::ImageBuilder::DistributionConfiguration",
-  "readOnlyProperties": [
-    "/properties/Arn"
-  ],
-  "description": "Resource schema for AWS::ImageBuilder::DistributionConfiguration",
-  "createOnlyProperties": [
-    "/properties/Name"
-  ],
-  "additionalProperties": false,
-  "primaryIdentifier": [
-    "/properties/Arn"
-  ],
   "definitions": {
+    "Distribution": {
+      "description": "The distributions of the distribution configuration.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Region": {
+          "description": "region",
+          "type": "string"
+        },
+        "AmiDistributionConfiguration": {
+          "$ref": "#/definitions/AmiDistributionConfiguration"
+        },
+        "ContainerDistributionConfiguration": {
+          "$ref": "#/definitions/ContainerDistributionConfiguration"
+        },
+        "LicenseConfigurationArns": {
+          "description": "The License Manager Configuration to associate with the AMI in the specified Region.",
+          "type": "array",
+          "insertionOrder": true,
+          "items": {
+            "$ref": "#/definitions/LicenseConfigurationArn"
+          }
+        },
+        "LaunchTemplateConfigurations": {
+          "description": "A group of launchTemplateConfiguration settings that apply to image distribution.",
+          "type": "array",
+          "insertionOrder": true,
+          "items": {
+            "$ref": "#/definitions/LaunchTemplateConfiguration"
+          }
+        },
+        "FastLaunchConfigurations": {
+          "description": "The Windows faster-launching configurations to use for AMI distribution.",
+          "type": "array",
+          "insertionOrder": true,
+          "items": {
+            "$ref": "#/definitions/FastLaunchConfiguration"
+          }
+        },
+        "SsmParameterConfigurations": {
+          "description": "The SSM parameter configurations to use for AMI distribution.",
+          "type": "array",
+          "insertionOrder": true,
+          "items": {
+            "$ref": "#/definitions/SsmParameterConfiguration"
+          }
+        }
+      },
+      "required": [
+        "Region"
+      ]
+    },
     "AmiDistributionConfiguration": {
       "description": "The specific AMI settings (for example, launch permissions, AMI tags).",
-      "additionalProperties": false,
       "type": "object",
+      "additionalProperties": false,
       "properties": {
-        "AmiTags": {
-          "patternProperties": {
-            "": {
-              "type": "string"
-            }
-          },
-          "description": "The tags to apply to AMIs distributed to this Region.",
-          "additionalProperties": false,
-          "type": "object"
-        },
-        "Description": {
-          "description": "The description of the AMI distribution configuration.",
+        "Name": {
+          "description": "The name of the AMI distribution configuration.",
           "type": "string"
         },
         "KmsKeyId": {
           "description": "The KMS key identifier used to encrypt the distributed image.",
           "type": "string"
         },
-        "LaunchPermissionConfiguration": {
-          "$ref": "#/definitions/LaunchPermissionConfiguration"
+        "Description": {
+          "description": "The description of the AMI distribution configuration.",
+          "type": "string"
+        },
+        "AmiTags": {
+          "description": "The tags to apply to AMIs distributed to this Region.",
+          "type": "object",
+          "additionalProperties": false,
+          "patternProperties": {
+            "": {
+              "type": "string"
+            }
+          }
         },
         "TargetAccountIds": {
           "description": "The ID of accounts to which you want to distribute an image.",
-          "insertionOrder": true,
           "type": "array",
+          "insertionOrder": true,
           "items": {
             "type": "string"
           }
         },
-        "Name": {
-          "description": "The name of the AMI distribution configuration.",
-          "type": "string"
+        "LaunchPermissionConfiguration": {
+          "$ref": "#/definitions/LaunchPermissionConfiguration"
         }
       }
     },
     "ContainerDistributionConfiguration": {
       "description": "Container distribution settings for encryption, licensing, and sharing in a specific Region.",
-      "additionalProperties": false,
       "type": "object",
+      "additionalProperties": false,
       "properties": {
-        "TargetRepository": {
-          "description": "The destination repository for the container distribution configuration.",
-          "$ref": "#/definitions/TargetContainerRepository"
+        "Description": {
+          "description": "The description of the container distribution configuration.",
+          "type": "string"
         },
         "ContainerTags": {
           "description": "Tags that are attached to the container distribution configuration.",
-          "insertionOrder": true,
           "type": "array",
+          "insertionOrder": true,
           "items": {
             "type": "string"
           }
         },
-        "Description": {
-          "description": "The description of the container distribution configuration.",
-          "type": "string"
+        "TargetRepository": {
+          "description": "The destination repository for the container distribution configuration.",
+          "$ref": "#/definitions/TargetContainerRepository"
         }
       }
     },
-    "FastLaunchSnapshotConfiguration": {
-      "description": "Configuration settings for managing the number of snapshots that are created from pre-provisioned instances for the Windows AMI when faster launching is enabled.",
-      "additionalProperties": false,
+    "LaunchTemplateConfiguration": {
+      "description": "launchTemplateConfiguration settings that apply to image distribution.",
       "type": "object",
+      "additionalProperties": false,
       "properties": {
-        "TargetResourceCount": {
-          "description": "The number of pre-provisioned snapshots to keep on hand for a fast-launch enabled Windows AMI.",
+        "LaunchTemplateId": {
+          "description": "Identifies the EC2 launch template to use.",
+          "type": "string"
+        },
+        "AccountId": {
+          "description": "The account ID that this configuration applies to.",
+          "type": "string"
+        },
+        "SetDefaultVersion": {
+          "description": "Set the specified EC2 launch template as the default launch template for the specified account.",
+          "type": "boolean"
+        }
+      }
+    },
+    "FastLaunchConfiguration": {
+      "description": "The Windows faster-launching configuration to use for AMI distribution.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "AccountId": {
+          "description": "The owner account ID for the fast-launch enabled Windows AMI.",
+          "type": "string"
+        },
+        "Enabled": {
+          "description": "A Boolean that represents the current state of faster launching for the Windows AMI. Set to true to start using Windows faster launching, or false to stop using it.",
+          "type": "boolean"
+        },
+        "LaunchTemplate": {
+          "description": "The launch template that the fast-launch enabled Windows AMI uses when it launches Windows instances to create pre-provisioned snapshots.",
+          "$ref": "#/definitions/FastLaunchLaunchTemplateSpecification"
+        },
+        "MaxParallelLaunches": {
+          "description": "The maximum number of parallel instances that are launched for creating resources.",
           "type": "integer"
+        },
+        "SnapshotConfiguration": {
+          "description": "Configuration settings for managing the number of snapshots that are created from pre-provisioned instances for the Windows AMI when faster launching is enabled.",
+          "$ref": "#/definitions/FastLaunchSnapshotConfiguration"
         }
       }
     },
     "LaunchPermissionConfiguration": {
       "description": "Launch permissions can be used to configure which AWS accounts can use the AMI to launch instances.",
-      "additionalProperties": false,
       "type": "object",
+      "additionalProperties": false,
       "properties": {
-        "OrganizationArns": {
-          "description": "The ARN for an Amazon Web Services Organization that you want to share your AMI with.",
-          "insertionOrder": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "OrganizationalUnitArns": {
-          "description": "The ARN for an Organizations organizational unit (OU) that you want to share your AMI with.",
-          "insertionOrder": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
         "UserIds": {
           "description": "The AWS account ID.",
-          "insertionOrder": false,
           "type": "array",
+          "insertionOrder": false,
           "items": {
             "type": "string"
           }
         },
         "UserGroups": {
           "description": "The name of the group.",
-          "insertionOrder": false,
           "type": "array",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          }
+        },
+        "OrganizationArns": {
+          "description": "The ARN for an Amazon Web Services Organization that you want to share your AMI with.",
+          "type": "array",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          }
+        },
+        "OrganizationalUnitArns": {
+          "description": "The ARN for an Organizations organizational unit (OU) that you want to share your AMI with.",
+          "type": "array",
+          "insertionOrder": false,
           "items": {
             "type": "string"
           }
         }
       }
     },
+    "LicenseConfigurationArn": {
+      "description": "The Amazon Resource Name (ARN) of the License Manager configuration.",
+      "type": "string"
+    },
     "TargetContainerRepository": {
       "description": "The destination repository for the container image.",
-      "additionalProperties": false,
       "type": "object",
+      "additionalProperties": false,
       "properties": {
         "Service": {
           "description": "The service of target container repository.",
@@ -191,78 +257,15 @@
         }
       }
     },
-    "Distribution": {
-      "description": "The distributions of the distribution configuration.",
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "AmiDistributionConfiguration": {
-          "$ref": "#/definitions/AmiDistributionConfiguration"
-        },
-        "ContainerDistributionConfiguration": {
-          "$ref": "#/definitions/ContainerDistributionConfiguration"
-        },
-        "FastLaunchConfigurations": {
-          "description": "The Windows faster-launching configurations to use for AMI distribution.",
-          "insertionOrder": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FastLaunchConfiguration"
-          }
-        },
-        "LaunchTemplateConfigurations": {
-          "description": "A group of launchTemplateConfiguration settings that apply to image distribution.",
-          "insertionOrder": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/LaunchTemplateConfiguration"
-          }
-        },
-        "LicenseConfigurationArns": {
-          "description": "The License Manager Configuration to associate with the AMI in the specified Region.",
-          "insertionOrder": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/LicenseConfigurationArn"
-          }
-        },
-        "Region": {
-          "description": "region",
-          "type": "string"
-        }
-      },
-      "required": [
-        "Region"
-      ]
-    },
-    "LaunchTemplateConfiguration": {
-      "description": "launchTemplateConfiguration settings that apply to image distribution.",
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "SetDefaultVersion": {
-          "description": "Set the specified EC2 launch template as the default launch template for the specified account.",
-          "type": "boolean"
-        },
-        "AccountId": {
-          "description": "The account ID that this configuration applies to.",
-          "type": "string"
-        },
-        "LaunchTemplateId": {
-          "description": "Identifies the EC2 launch template to use.",
-          "type": "string"
-        }
-      }
-    },
-    "LicenseConfigurationArn": {
-      "description": "The Amazon Resource Name (ARN) of the License Manager configuration.",
-      "type": "string"
-    },
     "FastLaunchLaunchTemplateSpecification": {
       "description": "The launch template that the fast-launch enabled Windows AMI uses when it launches Windows instances to create pre-provisioned snapshots.",
-      "additionalProperties": false,
       "type": "object",
+      "additionalProperties": false,
       "properties": {
+        "LaunchTemplateId": {
+          "description": "The ID of the launch template to use for faster launching for a Windows AMI.",
+          "type": "string"
+        },
         "LaunchTemplateName": {
           "description": "The name of the launch template to use for faster launching for a Windows AMI.",
           "type": "string"
@@ -270,75 +273,108 @@
         "LaunchTemplateVersion": {
           "description": "The version of the launch template to use for faster launching for a Windows AMI.",
           "type": "string"
-        },
-        "LaunchTemplateId": {
-          "description": "The ID of the launch template to use for faster launching for a Windows AMI.",
-          "type": "string"
         }
       }
     },
-    "FastLaunchConfiguration": {
-      "description": "The Windows faster-launching configuration to use for AMI distribution.",
-      "additionalProperties": false,
+    "FastLaunchSnapshotConfiguration": {
+      "description": "Configuration settings for managing the number of snapshots that are created from pre-provisioned instances for the Windows AMI when faster launching is enabled.",
       "type": "object",
+      "additionalProperties": false,
       "properties": {
-        "AccountId": {
-          "description": "The owner account ID for the fast-launch enabled Windows AMI.",
-          "type": "string"
-        },
-        "LaunchTemplate": {
-          "description": "The launch template that the fast-launch enabled Windows AMI uses when it launches Windows instances to create pre-provisioned snapshots.",
-          "$ref": "#/definitions/FastLaunchLaunchTemplateSpecification"
-        },
-        "Enabled": {
-          "description": "A Boolean that represents the current state of faster launching for the Windows AMI. Set to true to start using Windows faster launching, or false to stop using it.",
-          "type": "boolean"
-        },
-        "MaxParallelLaunches": {
-          "description": "The maximum number of parallel instances that are launched for creating resources.",
+        "TargetResourceCount": {
+          "description": "The number of pre-provisioned snapshots to keep on hand for a fast-launch enabled Windows AMI.",
           "type": "integer"
-        },
-        "SnapshotConfiguration": {
-          "description": "Configuration settings for managing the number of snapshots that are created from pre-provisioned instances for the Windows AMI when faster launching is enabled.",
-          "$ref": "#/definitions/FastLaunchSnapshotConfiguration"
         }
       }
+    },
+    "SsmParameterConfiguration": {
+      "description": "The SSM parameter configuration for AMI distribution.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "AmiAccountId": {
+          "description": "The account ID for the AMI to update the parameter with.",
+          "type": "string"
+        },
+        "ParameterName": {
+          "description": "The name of the SSM parameter.",
+          "type": "string"
+        },
+        "DataType": {
+          "description": "The data type of the SSM parameter.",
+          "type": "string",
+          "enum": [
+            "text",
+            "aws:ec2:image"
+          ]
+        }
+      },
+      "required": [
+        "ParameterName"
+      ]
     }
   },
+  "additionalProperties": false,
   "required": [
     "Name",
     "Distributions"
   ],
-  "properties": {
-    "Description": {
-      "description": "The description of the distribution configuration.",
-      "type": "string"
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags"
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "iam:GetRole",
+        "iam:CreateServiceLinkedRole",
+        "ec2:DescribeLaunchTemplates",
+        "ec2:CreateLaunchTemplateVersion",
+        "ec2:ModifyLaunchTemplate",
+        "ssm:GetParameter",
+        "imagebuilder:TagResource",
+        "imagebuilder:GetDistributionConfiguration",
+        "imagebuilder:CreateDistributionConfiguration"
+      ]
     },
-    "Arn": {
-      "description": "The Amazon Resource Name (ARN) of the distribution configuration.",
-      "type": "string"
+    "update": {
+      "permissions": [
+        "ec2:DescribeLaunchTemplates",
+        "ec2:CreateLaunchTemplateVersion",
+        "ec2:ModifyLaunchTemplate",
+        "ssm:GetParameter",
+        "imagebuilder:GetDistributionConfiguration",
+        "imagebuilder:UpdateDistributionConfiguration"
+      ]
     },
-    "Tags": {
-      "patternProperties": {
-        "": {
-          "type": "string"
-        }
-      },
-      "description": "The tags associated with the component.",
-      "additionalProperties": false,
-      "type": "object"
+    "read": {
+      "permissions": [
+        "imagebuilder:GetDistributionConfiguration"
+      ]
     },
-    "Name": {
-      "description": "The name of the distribution configuration.",
-      "type": "string"
+    "delete": {
+      "permissions": [
+        "imagebuilder:GetDistributionConfiguration",
+        "imagebuilder:UnTagResource",
+        "imagebuilder:DeleteDistributionConfiguration"
+      ]
     },
-    "Distributions": {
-      "description": "The distributions of the distribution configuration.",
-      "insertionOrder": true,
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/Distribution"
-      }
+    "list": {
+      "permissions": [
+        "imagebuilder:ListDistributionConfigurations"
+      ]
     }
   }
 }

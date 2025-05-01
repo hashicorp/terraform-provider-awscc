@@ -53,6 +53,10 @@
     "Status": {
       "description": "The status of the cluster.",
       "type": "string"
+    },
+    "VpcEndpointServiceName": {
+      "description": "The VPC endpoint service name.",
+      "type": "string"
     }
   },
   "additionalProperties": false,
@@ -76,7 +80,8 @@
     "/properties/ResourceArn",
     "/properties/Identifier",
     "/properties/CreationTime",
-    "/properties/Status"
+    "/properties/Status",
+    "/properties/VpcEndpointServiceName"
   ],
   "handlers": {
     "create": {
@@ -84,6 +89,7 @@
         "dsql:CreateCluster",
         "dsql:GetCluster",
         "dsql:TagResource",
+        "dsql:GetVpcEndpointServiceName",
         "dsql:ListTagsForResource",
         "iam:CreateServiceLinkedRole"
       ]
@@ -91,6 +97,7 @@
     "read": {
       "permissions": [
         "dsql:GetCluster",
+        "dsql:GetVpcEndpointServiceName",
         "dsql:ListTagsForResource",
         "tag:GetTagKeys",
         "tag:GetTagValues"
@@ -102,6 +109,7 @@
         "dsql:GetCluster",
         "dsql:UntagResource",
         "dsql:TagResource",
+        "dsql:GetVpcEndpointServiceName",
         "dsql:ListTagsForResource"
       ]
     },

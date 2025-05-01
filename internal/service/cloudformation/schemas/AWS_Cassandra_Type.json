@@ -116,5 +116,8 @@
         "cassandra:Select"
       ]
     }
+  },
+  "propertyTransform": {
+    "/properties/Fields/*/FieldType": "$lowercase(FieldType)"
   }
 }

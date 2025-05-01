@@ -162,7 +162,11 @@
     "tagOnCreate": true,
     "tagUpdatable": true,
     "cloudFormationSystemTags": false,
-    "tagProperty": "/properties/Tags"
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "mediatailor:TagResource",
+      "mediatailor:UntagResource"
+    ]
   },
   "properties": {
     "Arn": {
@@ -219,9 +223,6 @@
   ],
   "readOnlyProperties": [
     "/properties/Arn"
-  ],
-  "writeOnlyProperties": [
-    "/properties/Outputs"
   ],
   "createOnlyProperties": [
     "/properties/ChannelName",

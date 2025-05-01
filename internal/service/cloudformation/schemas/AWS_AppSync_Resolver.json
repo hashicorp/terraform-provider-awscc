@@ -36,7 +36,7 @@
           }
         }
       },
-      "description": "Use the ``PipelineConfig`` property type to specify ``PipelineConfig`` for an APSYlong resolver.\n  ``PipelineConfig`` is a property of the [AWS::AppSync::Resolver](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-resolver.html) resource."
+      "description": "Use the ``PipelineConfig`` property type to specify ``PipelineConfig`` for an APSYlong resolver.\n ``PipelineConfig`` is a property of the [AWS::AppSync::Resolver](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-resolver.html) resource."
     },
     "CachingConfig": {
       "type": "object",
@@ -67,11 +67,11 @@
       "properties": {
         "ConflictHandler": {
           "type": "string",
-          "description": "The Conflict Resolution strategy to perform in the event of a conflict.\n  +   *OPTIMISTIC_CONCURRENCY*: Resolve conflicts by rejecting mutations when versions don't match the latest version at the server.\n  +   *AUTOMERGE*: Resolve conflicts with the Automerge conflict resolution strategy.\n  +   *LAMBDA*: Resolve conflicts with an LAMlong function supplied in the ``LambdaConflictHandlerConfig``."
+          "description": "The Conflict Resolution strategy to perform in the event of a conflict.\n  +  *OPTIMISTIC_CONCURRENCY*: Resolve conflicts by rejecting mutations when versions don't match the latest version at the server.\n  +  *AUTOMERGE*: Resolve conflicts with the Automerge conflict resolution strategy.\n  +  *LAMBDA*: Resolve conflicts with an LAMlong function supplied in the ``LambdaConflictHandlerConfig``."
         },
         "ConflictDetection": {
           "type": "string",
-          "description": "The Conflict Detection strategy to use.\n  +   *VERSION*: Detect conflicts based on object versions for this resolver.\n  +   *NONE*: Do not detect conflicts when invoking this resolver."
+          "description": "The Conflict Detection strategy to use.\n  +  *VERSION*: Detect conflicts based on object versions for this resolver.\n  +  *NONE*: Do not detect conflicts when invoking this resolver."
         },
         "LambdaConflictHandlerConfig": {
           "$ref": "#/definitions/LambdaConflictHandlerConfig",
@@ -122,7 +122,7 @@
     },
     "Kind": {
       "type": "string",
-      "description": "The resolver type.\n  +   *UNIT*: A UNIT resolver type. A UNIT resolver is the default resolver type. You can use a UNIT resolver to run a GraphQL query against a single data source.\n  +   *PIPELINE*: A PIPELINE resolver type. You can use a PIPELINE resolver to invoke a series of ``Function`` objects in a serial manner. You can use a pipeline resolver to run a GraphQL query against multiple data sources."
+      "description": "The resolver type.\n  +  *UNIT*: A UNIT resolver type. A UNIT resolver is the default resolver type. You can use a UNIT resolver to run a GraphQL query against a single data source.\n  +  *PIPELINE*: A PIPELINE resolver type. You can use a PIPELINE resolver to invoke a series of ``Function`` objects in a serial manner. You can use a pipeline resolver to run a GraphQL query against multiple data sources."
     },
     "MaxBatchSize": {
       "type": "integer",

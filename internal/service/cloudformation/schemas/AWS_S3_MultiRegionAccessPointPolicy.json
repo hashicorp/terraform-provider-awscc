@@ -32,6 +32,9 @@
       ]
     }
   },
+  "tagging": {
+    "taggable": false
+  },
   "additionalProperties": false,
   "required": [
     "Policy",

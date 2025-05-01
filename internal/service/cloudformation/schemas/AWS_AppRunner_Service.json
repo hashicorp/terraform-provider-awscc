@@ -113,7 +113,8 @@
             "PHP_81",
             "RUBY_31",
             "PYTHON_311",
-            "NODEJS_18"
+            "NODEJS_18",
+            "NODEJS_22"
           ]
         },
         "BuildCommand": {
@@ -483,15 +484,19 @@
     "tagOnCreate": true,
     "tagUpdatable": false,
     "cloudFormationSystemTags": false,
-    "tagProperty": "/properties/Tags"
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "apprunner:TagResource",
+      "apprunner:UntagResource",
+      "apprunner:ListTagsForResource"
+    ]
   },
   "required": [
     "SourceConfiguration"
   ],
   "createOnlyProperties": [
     "/properties/ServiceName",
-    "/properties/EncryptionConfiguration",
-    "/properties/Tags"
+    "/properties/EncryptionConfiguration"
   ],
   "readOnlyProperties": [
     "/properties/ServiceArn",
@@ -500,7 +505,6 @@
     "/properties/Status"
   ],
   "writeOnlyProperties": [
-    "/properties/Tags",
     "/properties/AutoScalingConfigurationArn"
   ],
   "primaryIdentifier": [

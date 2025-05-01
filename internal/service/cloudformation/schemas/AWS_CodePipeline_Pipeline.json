@@ -229,6 +229,14 @@
             "type": "string"
           }
         },
+        "EnvironmentVariables": {
+          "description": "The list of environment variables that are input to a compute based action.",
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/EnvironmentVariable"
+          }
+        },
         "Region": {
           "description": "The action declaration's AWS Region, such as us-east-1.",
           "type": "string"
@@ -492,6 +500,25 @@
       },
       "required": [
         "Name"
+      ]
+    },
+    "EnvironmentVariable": {
+      "description": "Represents information about the environment variable of an action.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Name": {
+          "description": "The name of the environment variable.",
+          "type": "string"
+        },
+        "Value": {
+          "description": "The value of the environment variable.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Name",
+        "Value"
       ]
     },
     "FailureConditions": {
