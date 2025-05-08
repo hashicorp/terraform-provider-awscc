@@ -234,7 +234,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "Alias of the new directory created as part of new instance creation.",
-		//	  "maxLength": 62,
+		//	  "maxLength": 45,
 		//	  "minLength": 1,
 		//	  "pattern": "",
 		//	  "type": "string"
@@ -244,7 +244,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 62),
+				stringvalidator.LengthBetween(1, 45),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),

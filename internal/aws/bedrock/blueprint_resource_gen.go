@@ -262,7 +262,8 @@ func blueprintResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Modality Type",
 		//	  "enum": [
 		//	    "DOCUMENT",
-		//	    "IMAGE"
+		//	    "IMAGE",
+		//	    "AUDIO"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -273,6 +274,7 @@ func blueprintResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.OneOf(
 					"DOCUMENT",
 					"IMAGE",
+					"AUDIO",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
