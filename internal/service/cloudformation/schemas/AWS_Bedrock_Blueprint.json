@@ -61,7 +61,8 @@
       "description": "Modality Type",
       "enum": [
         "DOCUMENT",
-        "IMAGE"
+        "IMAGE",
+        "AUDIO"
       ]
     },
     "BlueprintStage": {

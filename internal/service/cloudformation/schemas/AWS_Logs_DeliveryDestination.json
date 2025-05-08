@@ -43,16 +43,10 @@
           "maxLength": 60
         },
         "DeliveryDestinationPolicy": {
-          "type": "string",
-          "description": "The contents of the policy attached to the delivery destination",
-          "minLength": 1,
-          "maxLength": 51200
+          "type": "object",
+          "description": "The contents of the policy attached to the delivery destination"
         }
       },
-      "required": [
-        "DeliveryDestinationName",
-        "DeliveryDestinationPolicy"
-      ],
       "additionalProperties": false
     }
   },
@@ -91,9 +85,7 @@
     "DeliveryDestinationPolicy": {
       "description": "IAM policy that grants permissions to CloudWatch Logs to deliver logs cross-account to a specified destination in this account.\n\nThe policy must be in JSON string format.\n\nLength Constraints: Maximum length of 51200",
       "type": "object",
-      "items": {
-        "$ref": "#/definitions/DestinationPolicy"
-      }
+      "$ref": "#/definitions/DestinationPolicy"
     },
     "OutputFormat": {
       "description": "The format of the logs that are sent to this delivery destination.",

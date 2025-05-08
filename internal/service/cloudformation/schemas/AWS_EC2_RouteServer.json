@@ -122,7 +122,9 @@
         "ec2:DeleteTags",
         "ec2:DescribeRouteServers",
         "ec2:DescribeTags",
-        "ec2:ModifyRouteServer"
+        "ec2:ModifyRouteServer",
+        "sns:CreateTopic",
+        "sns:DeleteTopic"
       ]
     },
     "delete": {

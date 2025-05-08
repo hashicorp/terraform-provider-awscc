@@ -93,6 +93,7 @@
       "permissions": [
         "route53profiles:AssociateProfile",
         "route53profiles:GetProfileAssociation",
+        "route53profiles:ListProfileAssociations",
         "ec2:DescribeVpcs",
         "route53profiles:TagResource",
         "route53profiles:ListTagsForResource"

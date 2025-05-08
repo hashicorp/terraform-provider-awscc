@@ -583,6 +583,18 @@
       "$ref": "#/definitions/IdentityCenterOptions"
     }
   },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "es:AddTags",
+      "es:RemoveTags",
+      "es:ListTags"
+    ]
+  },
   "additionalProperties": false,
   "createOnlyProperties": [
     "/properties/DomainName"
@@ -618,7 +630,8 @@
         "es:CreateDomain",
         "es:DescribeDomain",
         "es:AddTags",
-        "es:ListTags"
+        "es:ListTags",
+        "es:DescribeDomainChangeProgress"
       ]
     },
     "read": {
