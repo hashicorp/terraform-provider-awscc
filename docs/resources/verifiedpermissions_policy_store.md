@@ -163,8 +163,10 @@ resource "awscc_verifiedpermissions_policy_store" "example" {
 
 ### Optional
 
+- `deletion_protection` (Attributes) (see [below for nested schema](#nestedatt--deletion_protection))
 - `description` (String)
 - `schema` (Attributes) (see [below for nested schema](#nestedatt--schema))
+- `tags` (Attributes List) The tags to add to the policy store (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -180,12 +182,29 @@ Required:
 - `mode` (String)
 
 
+<a id="nestedatt--deletion_protection"></a>
+### Nested Schema for `deletion_protection`
+
+Optional:
+
+- `mode` (String)
+
+
 <a id="nestedatt--schema"></a>
 ### Nested Schema for `schema`
 
 Optional:
 
 - `cedar_json` (String)
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String)
+- `value` (String)
 
 ## Import
 

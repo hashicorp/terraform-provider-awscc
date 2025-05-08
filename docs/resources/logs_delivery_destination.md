@@ -24,11 +24,11 @@ A delivery destination is an AWS resource that represents an AWS service that lo
 
 ### Optional
 
-- `delivery_destination_policy` (String) IAM policy that grants permissions to CloudWatch Logs to deliver logs cross-account to a specified destination in this account.
+- `delivery_destination_policy` (Attributes) IAM policy that grants permissions to CloudWatch Logs to deliver logs cross-account to a specified destination in this account.
 
 The policy must be in JSON string format.
 
-Length Constraints: Maximum length of 51200
+Length Constraints: Maximum length of 51200 (see [below for nested schema](#nestedatt--delivery_destination_policy))
 - `destination_resource_arn` (String) The ARN of the Amazon Web Services destination that this delivery destination represents. That Amazon Web Services destination can be a log group in CloudWatch Logs, an Amazon S3 bucket, or a delivery stream in Firehose.
 - `output_format` (String) The format of the logs that are sent to this delivery destination.
 - `tags` (Attributes Set) The tags that have been assigned to this delivery destination. (see [below for nested schema](#nestedatt--tags))
@@ -38,6 +38,15 @@ Length Constraints: Maximum length of 51200
 - `arn` (String) The Amazon Resource Name (ARN) that uniquely identifies this delivery destination.
 - `delivery_destination_type` (String) Displays whether this delivery destination is CloudWatch Logs, Amazon S3, or Kinesis Data Firehose.
 - `id` (String) Uniquely identifies the resource.
+
+<a id="nestedatt--delivery_destination_policy"></a>
+### Nested Schema for `delivery_destination_policy`
+
+Optional:
+
+- `delivery_destination_name` (String) The name of the delivery destination to assign this policy to
+- `delivery_destination_policy` (String) The contents of the policy attached to the delivery destination
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

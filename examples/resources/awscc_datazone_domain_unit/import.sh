@@ -1,0 +1,1 @@
+$ terraform import awscc_datazone_domain_unit.example "domain_id|id"
