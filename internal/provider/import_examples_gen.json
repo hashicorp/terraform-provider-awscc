@@ -630,6 +630,11 @@
         "path": "./examples/resources/awscc_bedrock_guardrail_version/import.sh"
     },
     {
+        "resource": "awscc_bedrock_intelligent_prompt_router",
+        "identifier": ["PromptRouterArn"],
+        "path": "./examples/resources/awscc_bedrock_intelligent_prompt_router/import.sh"
+    },
+    {
         "resource": "awscc_bedrock_knowledge_base",
         "identifier": ["KnowledgeBaseId"],
         "path": "./examples/resources/awscc_bedrock_knowledge_base/import.sh"
@@ -1470,6 +1475,11 @@
         "path": "./examples/resources/awscc_datazone_domain/import.sh"
     },
     {
+        "resource": "awscc_datazone_domain_unit",
+        "identifier": ["DomainId","Id"],
+        "path": "./examples/resources/awscc_datazone_domain_unit/import.sh"
+    },
+    {
         "resource": "awscc_datazone_environment",
         "identifier": ["DomainId","Id"],
         "path": "./examples/resources/awscc_datazone_environment/import.sh"
@@ -1493,6 +1503,11 @@
         "resource": "awscc_datazone_group_profile",
         "identifier": ["DomainId","Id"],
         "path": "./examples/resources/awscc_datazone_group_profile/import.sh"
+    },
+    {
+        "resource": "awscc_datazone_owner",
+        "identifier": ["DomainIdentifier","EntityType","EntityIdentifier","OwnerType","OwnerIdentifier"],
+        "path": "./examples/resources/awscc_datazone_owner/import.sh"
     },
     {
         "resource": "awscc_datazone_project",
@@ -4988,6 +5003,11 @@
         "resource": "awscc_ssmcontacts_rotation",
         "identifier": ["Arn"],
         "path": "./examples/resources/awscc_ssmcontacts_rotation/import.sh"
+    },
+    {
+        "resource": "awscc_ssmguiconnect_preferences",
+        "identifier": ["AccountId"],
+        "path": "./examples/resources/awscc_ssmguiconnect_preferences/import.sh"
     },
     {
         "resource": "awscc_ssmincidents_replication_set",
