@@ -652,6 +652,10 @@ resource_schema "aws_bedrock_guardrail_version" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_bedrock_intelligent_prompt_router" {
+  cloudformation_type_name = "AWS::Bedrock::IntelligentPromptRouter"
+}
+
 resource_schema "aws_bedrock_knowledge_base" {
   cloudformation_type_name = "AWS::Bedrock::KnowledgeBase"
 }
@@ -1457,6 +1461,11 @@ resource_schema "aws_datazone_domain" {
   cloudformation_type_name = "AWS::DataZone::Domain"
 }
 
+resource_schema "aws_datazone_domain_unit" {
+  cloudformation_type_name               = "AWS::DataZone::DomainUnit"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_datazone_environment" {
   cloudformation_type_name               = "AWS::DataZone::Environment"
   suppress_plural_data_source_generation = true
@@ -1479,6 +1488,11 @@ resource_schema "aws_datazone_environment_profile" {
 
 resource_schema "aws_datazone_group_profile" {
   cloudformation_type_name               = "AWS::DataZone::GroupProfile"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_datazone_owner" {
+  cloudformation_type_name               = "AWS::DataZone::Owner"
   suppress_plural_data_source_generation = true
 }
 
@@ -1587,7 +1601,7 @@ resource_schema "aws_docdbelastic_cluster" {
 }
 
 resource_schema "aws_dsql_cluster" {
-  cloudformation_type_name = "AWS::DSQL::Cluster"
+  cloudformation_type_name                 = "AWS::DSQL::Cluster"
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
@@ -2093,7 +2107,7 @@ resource_schema "aws_emr_security_configuration" {
 }
 
 resource_schema "aws_emr_step" {
-  cloudformation_type_name = "AWS::EMR::Step"
+  cloudformation_type_name               = "AWS::EMR::Step"
   suppress_plural_data_source_generation = true
 }
 
@@ -4605,6 +4619,11 @@ resource_schema "aws_ssmcontacts_plan" {
 
 resource_schema "aws_ssmcontacts_rotation" {
   cloudformation_type_name = "AWS::SSMContacts::Rotation"
+}
+
+resource_schema "aws_ssmguiconnect_preferences" {
+  cloudformation_type_name               = "AWS::SSMGuiConnect::Preferences"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_ssmincidents_replication_set" {

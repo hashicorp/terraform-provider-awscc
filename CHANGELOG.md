@@ -1,3 +1,17 @@
+## 1.40.0 (May 8, 2025)
+
+FEATURES:
+
+* **New Data Source:** `awscc_bedrock_intelligent_prompt_router`
+* **New Data Source:** `awscc_bedrock_intelligent_prompt_routers`
+* **New Data Source:** `awscc_datazone_domain_unit`
+* **New Data Source:** `awscc_datazone_owner`
+* **New Data Source:** `awscc_ssmguiconnect_preferences`
+* **New Resource:** `awscc_bedrock_intelligent_prompt_router`
+* **New Resource:** `awscc_datazone_domain_unit`
+* **New Resource:** `awscc_datazone_owner`
+* **New Resource:** `awscc_ssmguiconnect_preferences`
+
 ## 1.39.0 (May 1, 2025)
 
 FEATURES:
@@ -2671,40 +2685,40 @@ BREAKING CHANGES:
 
 FEATURES:
 
-* **New Data Source:** `awscc_amplify_apps.md`
-* **New Data Source:** `awscc_apprunner_vpc_connector.md`
-* **New Data Source:** `awscc_apprunner_vpc_connectors.md`
-* **New Data Source:** `awscc_batch_compute_environment.md`
-* **New Data Source:** `awscc_batch_compute_environments.md`
-* **New Data Source:** `awscc_batch_job_queue.md`
-* **New Data Source:** `awscc_batch_job_queues.md`
-* **New Data Source:** `awscc_cloudformation_hook_default_version.md`
-* **New Data Source:** `awscc_cloudformation_hook_type_config.md`
-* **New Data Source:** `awscc_cloudformation_hook_version.md`
-* **New Data Source:** `awscc_ecr_pull_through_cache_rule.md`
-* **New Data Source:** `awscc_ecr_pull_through_cache_rules.md`
-* **New Data Source:** `awscc_eks_nodegroup.md`
-* **New Data Source:** `awscc_frauddetector_event_types.md`
-* **New Data Source:** `awscc_gamelift_game_server_groups.md`
-* **New Data Source:** `awscc_robomaker_robot_application.md`
-* **New Data Source:** `awscc_robomaker_robot_applications.md`
-* **New Data Source:** `awscc_ses_configuration_set_event_destination.md`
-* **New Data Source:** `awscc_ses_template.md`
-* **New Data Source:** `awscc_ses_templates.md`
-* **New Data Source:** `awscc_sqs_queue.md`
-* **New Data Source:** `awscc_sqs_queues.md`
-* **New Resource:** `awscc_apprunner_vpc_connector.md`
-* **New Resource:** `awscc_batch_compute_environment.md`
-* **New Resource:** `awscc_batch_job_queue.md`
-* **New Resource:** `awscc_cloudformation_hook_default_version.md`
-* **New Resource:** `awscc_cloudformation_hook_type_config.md`
-* **New Resource:** `awscc_cloudformation_hook_version.md`
-* **New Resource:** `awscc_ecr_pull_through_cache_rule.md`
-* **New Resource:** `awscc_eks_nodegroup.md`
-* **New Resource:** `awscc_robomaker_robot_application.md`
-* **New Resource:** `awscc_ses_configuration_set_event_destination.md`
-* **New Resource:** `awscc_ses_template.md`
-* **New Resource:** `awscc_sqs_queue.md`
+* **New Data Source:** `awscc_amplify_apps`
+* **New Data Source:** `awscc_apprunner_vpc_connector`
+* **New Data Source:** `awscc_apprunner_vpc_connectors`
+* **New Data Source:** `awscc_batch_compute_environment`
+* **New Data Source:** `awscc_batch_compute_environments`
+* **New Data Source:** `awscc_batch_job_queue`
+* **New Data Source:** `awscc_batch_job_queues`
+* **New Data Source:** `awscc_cloudformation_hook_default_version`
+* **New Data Source:** `awscc_cloudformation_hook_type_config`
+* **New Data Source:** `awscc_cloudformation_hook_version`
+* **New Data Source:** `awscc_ecr_pull_through_cache_rule`
+* **New Data Source:** `awscc_ecr_pull_through_cache_rules`
+* **New Data Source:** `awscc_eks_nodegroup`
+* **New Data Source:** `awscc_frauddetector_event_types`
+* **New Data Source:** `awscc_gamelift_game_server_groups`
+* **New Data Source:** `awscc_robomaker_robot_application`
+* **New Data Source:** `awscc_robomaker_robot_applications`
+* **New Data Source:** `awscc_ses_configuration_set_event_destination`
+* **New Data Source:** `awscc_ses_template`
+* **New Data Source:** `awscc_ses_templates`
+* **New Data Source:** `awscc_sqs_queue`
+* **New Data Source:** `awscc_sqs_queues`
+* **New Resource:** `awscc_apprunner_vpc_connector`
+* **New Resource:** `awscc_batch_compute_environment`
+* **New Resource:** `awscc_batch_job_queue`
+* **New Resource:** `awscc_cloudformation_hook_default_version`
+* **New Resource:** `awscc_cloudformation_hook_type_config`
+* **New Resource:** `awscc_cloudformation_hook_version`
+* **New Resource:** `awscc_ecr_pull_through_cache_rule`
+* **New Resource:** `awscc_eks_nodegroup`
+* **New Resource:** `awscc_robomaker_robot_application`
+* **New Resource:** `awscc_ses_configuration_set_event_destination`
+* **New Resource:** `awscc_ses_template`
+* **New Resource:** `awscc_sqs_queue`
 
 ## [0.11.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.11.0) (January 27, 2022)
 

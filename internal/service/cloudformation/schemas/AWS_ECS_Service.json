@@ -11,6 +11,26 @@
     "tagProperty": "/properties/Tags",
     "cloudFormationSystemTags": false
   },
+  "typeName": "AWS::ECS::Service",
+  "readOnlyProperties": [
+    "/properties/ServiceArn",
+    "/properties/Name"
+  ],
+  "description": "The ``AWS::ECS::Service`` resource creates an Amazon Elastic Container Service (Amazon ECS) service that runs and maintains the requested number of tasks and associated load balancers.\n  The stack update fails if you change any properties that require replacement and at least one ECS Service Connect ``ServiceConnectConfiguration`` property is configured. This is because AWS CloudFormation creates the replacement service first, but each ``ServiceConnectService`` must have a name that is unique in the namespace.\n   Starting April 15, 2023, AWS; will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, ECS, or EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service.",
+  "createOnlyProperties": [
+    "/properties/Cluster",
+    "/properties/LaunchType",
+    "/properties/Role",
+    "/properties/SchedulingStrategy",
+    "/properties/ServiceName"
+  ],
+  "primaryIdentifier": [
+    "/properties/ServiceArn",
+    "/properties/Cluster"
+  ],
+  "conditionalCreateOnlyProperties": [
+    "/properties/DeploymentController"
+  ],
   "propertyTransform": {
     "/properties/TaskDefinition": "TaskDefinition $OR $join([\"arn:(aws)[-]{0,1}[a-z]{0,3}[-]{0,1}[a-z]{0,3}:ecs:[a-z0-9-]+:[0-9]{12}:task-definition/\", $contains(TaskDefinition,\":\")?TaskDefinition:$join([TaskDefinition, \":[0-9]+\"])])",
     "/properties/Role": "Role $OR $join([\"arn:(aws)[-]{0,1}[a-z]{0,3}[-]{0,1}[a-z]{0,3}:iam::[0-9]{12}[:]role/{1}\", Role])"
@@ -57,29 +77,11 @@
       "timeoutInMinutes": 30
     }
   },
-  "typeName": "AWS::ECS::Service",
-  "readOnlyProperties": [
-    "/properties/ServiceArn",
-    "/properties/Name"
-  ],
-  "description": "The ``AWS::ECS::Service`` resource creates an Amazon Elastic Container Service (Amazon ECS) service that runs and maintains the requested number of tasks and associated load balancers.\n  The stack update fails if you change any properties that require replacement and at least one ECS Service Connect ``ServiceConnectConfiguration`` property is configured. This is because AWS CloudFormation creates the replacement service first, but each ``ServiceConnectService`` must have a name that is unique in the namespace.\n   Starting April 15, 2023, AWS; will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, ECS, or EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service.",
   "writeOnlyProperties": [
     "/properties/ServiceConnectConfiguration",
     "/properties/VolumeConfigurations"
   ],
-  "createOnlyProperties": [
-    "/properties/Cluster",
-    "/properties/DeploymentController",
-    "/properties/LaunchType",
-    "/properties/Role",
-    "/properties/SchedulingStrategy",
-    "/properties/ServiceName"
-  ],
   "additionalProperties": false,
-  "primaryIdentifier": [
-    "/properties/ServiceArn",
-    "/properties/Cluster"
-  ],
   "definitions": {
     "TimeoutConfiguration": {
       "description": "An object that represents the timeout configurations for Service Connect.\n  If ``idleTimeout`` is set to a time that is less than ``perRequestTimeout``, the connection will close when the ``idleTimeout`` is reached and not the ``perRequestTimeout``.",

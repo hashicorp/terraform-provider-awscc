@@ -110,7 +110,7 @@
       "type": "string",
       "pattern": "",
       "minLength": 1,
-      "maxLength": 62
+      "maxLength": 45
     },
     "CreatedTime": {
       "description": "Timestamp of instance creation logged as part of instance creation.",

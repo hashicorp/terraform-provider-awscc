@@ -22,10 +22,20 @@ Data Source schema for AWS::VerifiedPermissions::PolicyStore
 ### Read-Only
 
 - `arn` (String)
+- `deletion_protection` (Attributes) (see [below for nested schema](#nestedatt--deletion_protection))
 - `description` (String)
 - `policy_store_id` (String)
 - `schema` (Attributes) (see [below for nested schema](#nestedatt--schema))
+- `tags` (Attributes List) The tags to add to the policy store (see [below for nested schema](#nestedatt--tags))
 - `validation_settings` (Attributes) (see [below for nested schema](#nestedatt--validation_settings))
+
+<a id="nestedatt--deletion_protection"></a>
+### Nested Schema for `deletion_protection`
+
+Read-Only:
+
+- `mode` (String)
+
 
 <a id="nestedatt--schema"></a>
 ### Nested Schema for `schema`
@@ -33,6 +43,15 @@ Data Source schema for AWS::VerifiedPermissions::PolicyStore
 Read-Only:
 
 - `cedar_json` (String)
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)
 
 
 <a id="nestedatt--validation_settings"></a>

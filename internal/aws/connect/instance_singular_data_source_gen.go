@@ -177,7 +177,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "Alias of the new directory created as part of new instance creation.",
-		//	  "maxLength": 62,
+		//	  "maxLength": 45,
 		//	  "minLength": 1,
 		//	  "pattern": "",
 		//	  "type": "string"

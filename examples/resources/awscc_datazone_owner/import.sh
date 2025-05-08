@@ -1,0 +1,1 @@
+$ terraform import awscc_datazone_owner.example "domain_identifier|entity_type|entity_identifier|owner_type|owner_identifier"

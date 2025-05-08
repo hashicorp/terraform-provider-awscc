@@ -1,1 +1,1 @@
-$ terraform import awscc_ssmguiconnect_preferences.example <resource ID>
+$ terraform import awscc_ssmguiconnect_preferences.example "account_id"

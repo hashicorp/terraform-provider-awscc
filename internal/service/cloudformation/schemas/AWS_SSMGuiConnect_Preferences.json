@@ -1,0 +1,130 @@
+{
+  "typeName": "AWS::SSMGuiConnect::Preferences",
+  "description": "Definition of AWS::SSMGuiConnect::Preferences Resource Type",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-ssm-guiconnect.git",
+  "definitions": {
+    "BucketOwner": {
+      "description": "The AWS account number that owns the S3 bucket.",
+      "type": "string",
+      "pattern": "^[0-9]{12}$"
+    },
+    "BucketName": {
+      "description": "The name of the S3 bucket where RDP connection recordings are stored.",
+      "type": "string",
+      "pattern": ""
+    },
+    "S3Bucket": {
+      "description": "The S3 bucket where RDP connection recordings are stored.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "BucketOwner": {
+          "$ref": "#/definitions/BucketOwner"
+        },
+        "BucketName": {
+          "$ref": "#/definitions/BucketName"
+        }
+      },
+      "required": [
+        "BucketOwner",
+        "BucketName"
+      ]
+    },
+    "S3Buckets": {
+      "description": "The S3 bucket where RDP connection recordings are stored.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/S3Bucket"
+      },
+      "minItems": 1,
+      "maxItems": 1
+    },
+    "RecordingDestinations": {
+      "description": "Determines where recordings of RDP connections are stored.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "S3Buckets": {
+          "$ref": "#/definitions/S3Buckets"
+        }
+      },
+      "required": [
+        "S3Buckets"
+      ]
+    },
+    "KMSKeyArn": {
+      "description": "The ARN of a AWS KMS key that is used to encrypt data while it is being processed by the service. This key must exist in the same AWS Region as the node you start an RDP connection to.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    }
+  },
+  "properties": {
+    "AccountId": {
+      "description": "The AWS Account Id that the preference is associated with, used as the unique identifier for this resource.",
+      "type": "string",
+      "pattern": "\\d{12}"
+    },
+    "ConnectionRecordingPreferences": {
+      "description": "The set of preferences used for recording RDP connections in the requesting AWS account and AWS Region. This includes details such as which S3 bucket recordings are stored in.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "RecordingDestinations": {
+          "$ref": "#/definitions/RecordingDestinations"
+        },
+        "KMSKeyArn": {
+          "$ref": "#/definitions/KMSKeyArn"
+        }
+      },
+      "required": [
+        "RecordingDestinations",
+        "KMSKeyArn"
+      ]
+    }
+  },
+  "tagging": {
+    "taggable": false
+  },
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/AccountId"
+  ],
+  "primaryIdentifier": [
+    "/properties/AccountId"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "kms:CreateGrant",
+        "ssm-guiconnect:UpdateConnectionRecordingPreferences",
+        "ssm-guiconnect:GetConnectionRecordingPreferences"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "ssm-guiconnect:GetConnectionRecordingPreferences"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "kms:CreateGrant",
+        "ssm-guiconnect:UpdateConnectionRecordingPreferences",
+        "ssm-guiconnect:GetConnectionRecordingPreferences",
+        "ssm-guiconnect:DeleteConnectionRecordingPreferences"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ssm-guiconnect:GetConnectionRecordingPreferences",
+        "ssm-guiconnect:DeleteConnectionRecordingPreferences"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "ssm-guiconnect:GetConnectionRecordingPreferences"
+      ]
+    }
+  }
+}
