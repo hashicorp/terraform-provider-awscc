@@ -41,14 +41,36 @@ func deliveryDestinationDataSource(ctx context.Context) (datasource.DataSource, 
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "additionalProperties": false,
 		//	  "description": "IAM policy that grants permissions to CloudWatch Logs to deliver logs cross-account to a specified destination in this account.\n\nThe policy must be in JSON string format.\n\nLength Constraints: Maximum length of 51200",
-		//	  "items": {
-		//	    "$ref": "#/definitions/DestinationPolicy"
+		//	  "properties": {
+		//	    "DeliveryDestinationName": {
+		//	      "description": "The name of the delivery destination to assign this policy to",
+		//	      "maxLength": 60,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    },
+		//	    "DeliveryDestinationPolicy": {
+		//	      "description": "The contents of the policy attached to the delivery destination",
+		//	      "type": "object"
+		//	    }
 		//	  },
 		//	  "type": "object"
 		//	}
-		"delivery_destination_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  jsontypes.NormalizedType{},
+		"delivery_destination_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DeliveryDestinationName
+				"delivery_destination_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the delivery destination to assign this policy to",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DeliveryDestinationPolicy
+				"delivery_destination_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType:  jsontypes.NormalizedType{},
+					Description: "The contents of the policy attached to the delivery destination",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "IAM policy that grants permissions to CloudWatch Logs to deliver logs cross-account to a specified destination in this account.\n\nThe policy must be in JSON string format.\n\nLength Constraints: Maximum length of 51200",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -176,6 +198,7 @@ func deliveryDestinationDataSource(ctx context.Context) (datasource.DataSource, 
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                         "Arn",
+		"delivery_destination_name":   "DeliveryDestinationName",
 		"delivery_destination_policy": "DeliveryDestinationPolicy",
 		"delivery_destination_type":   "DeliveryDestinationType",
 		"destination_resource_arn":    "DestinationResourceArn",

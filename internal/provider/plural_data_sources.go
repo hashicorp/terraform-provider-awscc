@@ -759,7 +759,6 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ssmcontacts_contacts -cftype AWS::SSMContacts::Contact -package ssmcontacts ../aws/ssmcontacts/contact_plural_data_source_gen.go ../aws/ssmcontacts/contact_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ssmcontacts_contact_channels -cftype AWS::SSMContacts::ContactChannel -package ssmcontacts ../aws/ssmcontacts/contact_channel_plural_data_source_gen.go ../aws/ssmcontacts/contact_channel_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ssmcontacts_rotations -cftype AWS::SSMContacts::Rotation -package ssmcontacts ../aws/ssmcontacts/rotation_plural_data_source_gen.go ../aws/ssmcontacts/rotation_plural_data_source_gen_test.go
-//go:generate go run generators/plural-data-source/main.go -data-source awscc_ssmguiconnect_preferences -cftype AWS::SSMGuiConnect::Preferences -package ssmguiconnect ../aws/ssmguiconnect/preferences_plural_data_source_gen.go ../aws/ssmguiconnect/preferences_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ssmincidents_replication_sets -cftype AWS::SSMIncidents::ReplicationSet -package ssmincidents ../aws/ssmincidents/replication_set_plural_data_source_gen.go ../aws/ssmincidents/replication_set_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ssmincidents_response_plans -cftype AWS::SSMIncidents::ResponsePlan -package ssmincidents ../aws/ssmincidents/response_plan_plural_data_source_gen.go ../aws/ssmincidents/response_plan_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ssmquicksetup_configuration_managers -cftype AWS::SSMQuickSetup::ConfigurationManager -package ssmquicksetup ../aws/ssmquicksetup/configuration_manager_plural_data_source_gen.go ../aws/ssmquicksetup/configuration_manager_plural_data_source_gen_test.go
@@ -1072,7 +1071,6 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/sqs"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssm"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssmcontacts"
-	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssmguiconnect"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssmincidents"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssmquicksetup"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/sso"

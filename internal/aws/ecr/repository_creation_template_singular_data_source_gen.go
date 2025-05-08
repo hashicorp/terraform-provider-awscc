@@ -172,11 +172,11 @@ func repositoryCreationTemplateDataSource(ctx context.Context) (datasource.DataS
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "he repository policy to apply to repositories created using the template. A repository policy is a permissions policy associated with a repository to control access permissions.",
+		//	  "description": "The repository policy to apply to repositories created using the template. A repository policy is a permissions policy associated with a repository to control access permissions.",
 		//	  "type": "string"
 		//	}
 		"repository_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "he repository policy to apply to repositories created using the template. A repository policy is a permissions policy associated with a repository to control access permissions.",
+			Description: "The repository policy to apply to repositories created using the template. A repository policy is a permissions policy associated with a repository to control access permissions.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ResourceTags

@@ -59,11 +59,11 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The number of I/O operations per second (IOPS). For ``gp3``, ``io1``, and ``io2`` volumes, this represents the number of IOPS that are provisioned for the volume. For ``gp2`` volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting.\n The following are the supported values for each volume type:\n  +   ``gp3``: 3,000 - 16,000 IOPS\n  +   ``io1``: 100 - 64,000 IOPS\n  +   ``io2``: 100 - 256,000 IOPS\n  \n For ``io2`` volumes, you can achieve up to 256,000 IOPS on [instances built on the Nitro System](https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html). On other instances, you can achieve performance up to 32,000 IOPS.\n This parameter is required for ``io1`` and ``io2`` volumes. The default for ``gp3`` volumes is 3,000 IOPS. This parameter is not supported for ``gp2``, ``st1``, ``sc1``, or ``standard`` volumes.",
+		//	  "description": "The number of I/O operations per second (IOPS). For ``gp3``, ``io1``, and ``io2`` volumes, this represents the number of IOPS that are provisioned for the volume. For ``gp2`` volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting.\n The following are the supported values for each volume type:\n  +  ``gp3``: 3,000 - 16,000 IOPS\n  +  ``io1``: 100 - 64,000 IOPS\n  +  ``io2``: 100 - 256,000 IOPS\n  \n For ``io2`` volumes, you can achieve up to 256,000 IOPS on [instances built on the Nitro System](https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html). On other instances, you can achieve performance up to 32,000 IOPS.\n This parameter is required for ``io1`` and ``io2`` volumes. The default for ``gp3`` volumes is 3,000 IOPS. This parameter is not supported for ``gp2``, ``st1``, ``sc1``, or ``standard`` volumes.",
 		//	  "type": "integer"
 		//	}
 		"iops": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of I/O operations per second (IOPS). For ``gp3``, ``io1``, and ``io2`` volumes, this represents the number of IOPS that are provisioned for the volume. For ``gp2`` volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting.\n The following are the supported values for each volume type:\n  +   ``gp3``: 3,000 - 16,000 IOPS\n  +   ``io1``: 100 - 64,000 IOPS\n  +   ``io2``: 100 - 256,000 IOPS\n  \n For ``io2`` volumes, you can achieve up to 256,000 IOPS on [instances built on the Nitro System](https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html). On other instances, you can achieve performance up to 32,000 IOPS.\n This parameter is required for ``io1`` and ``io2`` volumes. The default for ``gp3`` volumes is 3,000 IOPS. This parameter is not supported for ``gp2``, ``st1``, ``sc1``, or ``standard`` volumes.",
+			Description: "The number of I/O operations per second (IOPS). For ``gp3``, ``io1``, and ``io2`` volumes, this represents the number of IOPS that are provisioned for the volume. For ``gp2`` volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting.\n The following are the supported values for each volume type:\n  +  ``gp3``: 3,000 - 16,000 IOPS\n  +  ``io1``: 100 - 64,000 IOPS\n  +  ``io2``: 100 - 256,000 IOPS\n  \n For ``io2`` volumes, you can achieve up to 256,000 IOPS on [instances built on the Nitro System](https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html). On other instances, you can achieve performance up to 32,000 IOPS.\n This parameter is required for ``io1`` and ``io2`` volumes. The default for ``gp3`` volumes is 3,000 IOPS. This parameter is not supported for ``gp2``, ``st1``, ``sc1``, or ``standard`` volumes.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyId
@@ -81,11 +81,11 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Indicates whether Amazon EBS Multi-Attach is enabled.\n  CFNlong does not currently support updating a single-attach volume to be multi-attach enabled, updating a multi-attach enabled volume to be single-attach, or updating the size or number of I/O operations per second (IOPS) of a multi-attach enabled volume.",
+		//	  "description": "Indicates whether Amazon EBS Multi-Attach is enabled.\n CFNlong does not currently support updating a single-attach volume to be multi-attach enabled, updating a multi-attach enabled volume to be single-attach, or updating the size or number of I/O operations per second (IOPS) of a multi-attach enabled volume.",
 		//	  "type": "boolean"
 		//	}
 		"multi_attach_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether Amazon EBS Multi-Attach is enabled.\n  CFNlong does not currently support updating a single-attach volume to be multi-attach enabled, updating a multi-attach enabled volume to be single-attach, or updating the size or number of I/O operations per second (IOPS) of a multi-attach enabled volume.",
+			Description: "Indicates whether Amazon EBS Multi-Attach is enabled.\n CFNlong does not currently support updating a single-attach volume to be multi-attach enabled, updating a multi-attach enabled volume to be single-attach, or updating the size or number of I/O operations per second (IOPS) of a multi-attach enabled volume.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: OutpostArn
@@ -103,11 +103,11 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The size of the volume, in GiBs. You must specify either a snapshot ID or a volume size. If you specify a snapshot, the default is the snapshot size. You can specify a volume size that is equal to or larger than the snapshot size.\n The following are the supported volumes sizes for each volume type:\n  +   ``gp2`` and ``gp3``: 1 - 16,384 GiB\n  +   ``io1``: 4 - 16,384 GiB\n  +   ``io2``: 4 - 65,536 GiB\n  +   ``st1`` and ``sc1``: 125 - 16,384 GiB\n  +   ``standard``: 1 - 1024 GiB",
+		//	  "description": "The size of the volume, in GiBs. You must specify either a snapshot ID or a volume size. If you specify a snapshot, the default is the snapshot size. You can specify a volume size that is equal to or larger than the snapshot size.\n The following are the supported volumes sizes for each volume type:\n  +  ``gp2`` and ``gp3``: 1 - 16,384 GiB\n  +  ``io1``: 4 - 16,384 GiB\n  +  ``io2``: 4 - 65,536 GiB\n  +  ``st1`` and ``sc1``: 125 - 16,384 GiB\n  +  ``standard``: 1 - 1024 GiB",
 		//	  "type": "integer"
 		//	}
 		"size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The size of the volume, in GiBs. You must specify either a snapshot ID or a volume size. If you specify a snapshot, the default is the snapshot size. You can specify a volume size that is equal to or larger than the snapshot size.\n The following are the supported volumes sizes for each volume type:\n  +   ``gp2`` and ``gp3``: 1 - 16,384 GiB\n  +   ``io1``: 4 - 16,384 GiB\n  +   ``io2``: 4 - 65,536 GiB\n  +   ``st1`` and ``sc1``: 125 - 16,384 GiB\n  +   ``standard``: 1 - 1024 GiB",
+			Description: "The size of the volume, in GiBs. You must specify either a snapshot ID or a volume size. If you specify a snapshot, the default is the snapshot size. You can specify a volume size that is equal to or larger than the snapshot size.\n The following are the supported volumes sizes for each volume type:\n  +  ``gp2`` and ``gp3``: 1 - 16,384 GiB\n  +  ``io1``: 4 - 16,384 GiB\n  +  ``io2``: 4 - 65,536 GiB\n  +  ``st1`` and ``sc1``: 125 - 16,384 GiB\n  +  ``standard``: 1 - 1024 GiB",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SnapshotId
@@ -189,15 +189,26 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: VolumeInitializationRate
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "integer"
+		//	}
+		"volume_initialization_rate": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VolumeType
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The volume type. This parameter can be one of the following values:\n  +  General Purpose SSD: ``gp2`` | ``gp3`` \n  +  Provisioned IOPS SSD: ``io1`` | ``io2`` \n  +  Throughput Optimized HDD: ``st1`` \n  +  Cold HDD: ``sc1`` \n  +  Magnetic: ``standard`` \n  \n For more information, see [Amazon EBS volume types](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html).\n Default: ``gp2``",
+		//	  "description": "The volume type. This parameter can be one of the following values:\n  +  General Purpose SSD: ``gp2`` | ``gp3``\n  +  Provisioned IOPS SSD: ``io1`` | ``io2``\n  +  Throughput Optimized HDD: ``st1``\n  +  Cold HDD: ``sc1``\n  +  Magnetic: ``standard``\n  \n For more information, see [Amazon EBS volume types](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html).\n Default: ``gp2``",
 		//	  "type": "string"
 		//	}
 		"volume_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The volume type. This parameter can be one of the following values:\n  +  General Purpose SSD: ``gp2`` | ``gp3`` \n  +  Provisioned IOPS SSD: ``io1`` | ``io2`` \n  +  Throughput Optimized HDD: ``st1`` \n  +  Cold HDD: ``sc1`` \n  +  Magnetic: ``standard`` \n  \n For more information, see [Amazon EBS volume types](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html).\n Default: ``gp2``",
+			Description: "The volume type. This parameter can be one of the following values:\n  +  General Purpose SSD: ``gp2`` | ``gp3``\n  +  Provisioned IOPS SSD: ``io1`` | ``io2``\n  +  Throughput Optimized HDD: ``st1``\n  +  Cold HDD: ``sc1``\n  +  Magnetic: ``standard``\n  \n For more information, see [Amazon EBS volume types](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html).\n Default: ``gp2``",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
@@ -217,21 +228,22 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::Volume").WithTerraformTypeName("awscc_ec2_volume")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"auto_enable_io":       "AutoEnableIO",
-		"availability_zone":    "AvailabilityZone",
-		"encrypted":            "Encrypted",
-		"iops":                 "Iops",
-		"key":                  "Key",
-		"kms_key_id":           "KmsKeyId",
-		"multi_attach_enabled": "MultiAttachEnabled",
-		"outpost_arn":          "OutpostArn",
-		"size":                 "Size",
-		"snapshot_id":          "SnapshotId",
-		"tags":                 "Tags",
-		"throughput":           "Throughput",
-		"value":                "Value",
-		"volume_id":            "VolumeId",
-		"volume_type":          "VolumeType",
+		"auto_enable_io":             "AutoEnableIO",
+		"availability_zone":          "AvailabilityZone",
+		"encrypted":                  "Encrypted",
+		"iops":                       "Iops",
+		"key":                        "Key",
+		"kms_key_id":                 "KmsKeyId",
+		"multi_attach_enabled":       "MultiAttachEnabled",
+		"outpost_arn":                "OutpostArn",
+		"size":                       "Size",
+		"snapshot_id":                "SnapshotId",
+		"tags":                       "Tags",
+		"throughput":                 "Throughput",
+		"value":                      "Value",
+		"volume_id":                  "VolumeId",
+		"volume_initialization_rate": "VolumeInitializationRate",
+		"volume_type":                "VolumeType",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)
