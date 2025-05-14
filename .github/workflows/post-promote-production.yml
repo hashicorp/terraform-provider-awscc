@@ -1,0 +1,154 @@
+name: post-promote-production
+
+on:
+  repository_dispatch:
+    types:
+      - post-promote-production
+      - post-promote-production::*
+
+defaults:
+  run:
+    shell: bash
+
+permissions:
+  contents: read
+
+jobs:
+  # The CRT workflow that calls this workflow has a timeout of 100 minutes, at which point it uses the API
+  # to cancel the workflow, so using an infinite loop rather than a specific number of retries.
+  registry-check:
+    name: Check Terraform Registry for Latest Version
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.release-data.outputs.version }}
+    steps:
+      - name: Await Ingest
+        id: release-data
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          LATEST_GITHUB_RELEASE=$(gh release list --repo hashicorp/terraform-provider-aws --json name,isLatest --jq '.[] | select(.isLatest).name')
+
+          while :
+          do
+            LATEST_REGISTRY_DATA=$(curl -s "https://registry.terraform.io/v2/providers/323/provider-versions/latest")
+            LATEST_REGISTRY_VERSION=$(echo "$LATEST_REGISTRY_DATA" | jq -r '.data.attributes.tag')
+
+            if [[ "$LATEST_GITHUB_RELEASE" == "$LATEST_REGISTRY_VERSION" ]]; then
+              echo "Registry is now in sync with GitHub"
+              echo "version=$(echo $LATEST_REGISTRY_DATA | jq -r '.data.attributes.version')" >> "$GITHUB_OUTPUT"
+              break
+            else
+              echo "Latest Registry version ($LATEST_REGISTRY_VERSION) does not yet match lastest GitHub version ($LATEST_GITHUB_RELEASE). Waiting..."
+              sleep 300
+            fi
+          done
+
+  init-check:
+    name: Initialize Provider
+    needs: [registry-check]
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: hashicorp/setup-terraform@b9cd54a3c349d3f38e8881555d616ced269862dd
+        with:
+          terraform_wrapper: false
+
+      - name: Set Provider Version in Terraform Configuration
+        run: |
+          cat <<EOF > main.tf
+          terraform {
+            required_providers {
+              aws = {
+                source  = "hashicorp/aws"
+                version = "${{ needs.registry-check.outputs.version }}"
+              }
+            }
+          }
+
+          provider "aws" {
+            region = "us-east-1"
+          }
+          EOF
+
+      # Explicitly setting '+o pipefail' here, as GitHub uses 'set -eo pipefail' for the bash shell
+      # and we need to capture error messages rather than outright fail
+      - name: Initialize
+        id: init
+        run: |
+          set +o pipefail
+          ERROR=$(terraform init -upgrade -json | jq --slurp '.[] | select(.diagnostic.severity == "error")')
+
+          if [[ $ERROR != "" ]]; then
+            echo "formatted_error=$(echo $ERROR | jq '.["@message"] + "\n\n" + .diagnostic.detail | @json')" >> "$GITHUB_OUTPUT"
+            exit 1
+          fi
+
+
+      - name: Send Slack Notification on Initialization Failure
+        if: ${{ failure() }}
+        uses: slackapi/slack-github-action@b0fa283ad8fea605de13dc3f449259339835fc52 # v2.1.0
+        with:
+          method: chat.postMessage
+          token: ${{ secrets.SLACK_BOT_TOKEN }}
+          payload: |
+            {
+              "channel" : "${{ secrets.SLACK_CHANNEL }}",
+              "text": "Provider initialization for version ${{ needs.registry-check.outputs.version }} on ${{ matrix.os }}",
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": ":warning: Provider initialization for version ${{ needs.registry-check.outputs.version }} on ${{ matrix.os }}",
+                    "emoji": true
+                  }
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "rich_text",
+                  "elements": [
+                		{
+                      "type": "rich_text_section",
+                      "elements": [
+                        {
+                          "type": "text",
+                          "text": "The output from initialization is included below. The run logs may be found at"
+                        },
+                        {
+                          "type": "link",
+                          "text": " this link.",
+                          "url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "rich_text_section",
+                      "elements": [
+                        {
+                          "type": "text",
+                          "text": "\n\nRun output:",
+                          "style": {
+                            "bold": true
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "rich_text_preformatted",
+                      "elements": [
+                        {
+                          "type": "text",
+                          "text": ${{ fromJSON(steps.init.outputs.formatted_error) }}
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
