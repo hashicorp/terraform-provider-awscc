@@ -76,6 +76,7 @@ jobs:
 
       # Explicitly setting '+o pipefail' here, as GitHub uses 'set -eo pipefail' for the bash shell
       # and we need to capture error messages rather than outright fail
+      # Reference: https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#defaultsrunshell
       - name: Initialize
         id: init
         run: |
