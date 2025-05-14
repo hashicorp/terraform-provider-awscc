@@ -27,11 +27,11 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          LATEST_GITHUB_RELEASE=$(gh release list --repo hashicorp/terraform-provider-aws --json name,isLatest --jq '.[] | select(.isLatest).name')
+          LATEST_GITHUB_RELEASE=$(gh release list --json name,isLatest --jq '.[] | select(.isLatest).name')
 
           while :
           do
-            LATEST_REGISTRY_DATA=$(curl -s "https://registry.terraform.io/v2/providers/323/provider-versions/latest")
+            LATEST_REGISTRY_DATA=$(curl -s "https://registry.terraform.io/v2/providers/2242/provider-versions/latest")
             LATEST_REGISTRY_VERSION=$(echo "$LATEST_REGISTRY_DATA" | jq -r '.data.attributes.tag')
 
             if [[ "$LATEST_GITHUB_RELEASE" == "$LATEST_REGISTRY_VERSION" ]]; then
@@ -62,14 +62,14 @@ jobs:
           cat <<EOF > main.tf
           terraform {
             required_providers {
-              aws = {
-                source  = "hashicorp/aws"
+              awscc = {
+                source  = "hashicorp/awscc"
                 version = "${{ needs.registry-check.outputs.version }}"
               }
             }
           }
 
-          provider "aws" {
+          provider "awscc" {
             region = "us-east-1"
           }
           EOF
