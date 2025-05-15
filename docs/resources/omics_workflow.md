@@ -25,6 +25,7 @@ Definition of AWS::Omics::Workflow Resource Type
 - `name` (String)
 - `parameter_template` (Attributes Map) (see [below for nested schema](#nestedatt--parameter_template))
 - `storage_capacity` (Number)
+- `storage_type` (String)
 - `tags` (Map of String) A map of resource tags
 
 ### Read-Only
@@ -34,6 +35,7 @@ Definition of AWS::Omics::Workflow Resource Type
 - `id` (String) Uniquely identifies the resource.
 - `status` (String)
 - `type` (String)
+- `uuid` (String)
 - `workflow_id` (String)
 
 <a id="nestedatt--parameter_template"></a>

@@ -22,7 +22,7 @@ Data Source schema for AWS::ECR::RegistryScanningConfiguration
 ### Read-Only
 
 - `registry_id` (String) The registry id.
-- `rules` (Attributes List) The scanning rules associated with the registry. A registry scanning configuration may contain a maximum of 2 rules. (see [below for nested schema](#nestedatt--rules))
+- `rules` (Attributes List) The scanning rules associated with the registry. (see [below for nested schema](#nestedatt--rules))
 - `scan_type` (String) The type of scanning configured for the registry.
 
 <a id="nestedatt--rules"></a>
@@ -30,8 +30,8 @@ Data Source schema for AWS::ECR::RegistryScanningConfiguration
 
 Read-Only:
 
-- `repository_filters` (Attributes List) The repository filters associated with the scanning configuration for a private registry. (see [below for nested schema](#nestedatt--rules--repository_filters))
-- `scan_frequency` (String) The frequency that scans are performed.
+- `repository_filters` (Attributes List) The details of a scanning repository filter. For more information on how to use filters, see [Using filters](https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html#image-scanning-filters) in the *Amazon Elastic Container Registry User Guide*. (see [below for nested schema](#nestedatt--rules--repository_filters))
+- `scan_frequency` (String) The frequency that scans are performed at for a private registry. When the ``ENHANCED`` scan type is specified, the supported scan frequencies are ``CONTINUOUS_SCAN`` and ``SCAN_ON_PUSH``. When the ``BASIC`` scan type is specified, the ``SCAN_ON_PUSH`` scan frequency is supported. If scan on push is not specified, then the ``MANUAL`` scan frequency is set by default.
 
 <a id="nestedatt--rules--repository_filters"></a>
 ### Nested Schema for `rules.repository_filters`

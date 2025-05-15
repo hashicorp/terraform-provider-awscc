@@ -21,24 +21,25 @@ Data Source schema for AWS::DataSync::StorageSystem
 
 ### Read-Only
 
-- `agent_arns` (List of String) The ARN of the DataSync agent that connects to and reads from the on-premises storage system's management interface.
-- `cloudwatch_log_group_arn` (String) The ARN of the Amazon CloudWatch log group used to monitor and log discovery job events.
-- `connectivity_status` (String) Indicates whether the DataSync agent can access the on-premises storage system.
-- `name` (String) A familiar name for the on-premises storage system.
-- `secrets_manager_arn` (String) The ARN of a secret stored by AWS Secrets Manager.
-- `server_configuration` (Attributes) The server name and network port required to connect with the management interface of the on-premises storage system. (see [below for nested schema](#nestedatt--server_configuration))
-- `server_credentials` (Attributes) The username and password for accessing your on-premises storage system's management interface. (see [below for nested schema](#nestedatt--server_credentials))
-- `storage_system_arn` (String) The ARN of the on-premises storage system added to DataSync Discovery.
-- `system_type` (String) The type of on-premises storage system that DataSync Discovery will analyze.
-- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `agent_arns` (List of String)
+- `cloudwatch_log_group_arn` (String)
+- `connectivity_status` (String)
+- `name` (String)
+- `secrets_manager_arn` (String)
+- `server_configuration` (Attributes) (see [below for nested schema](#nestedatt--server_configuration))
+- `server_credentials` (Attributes) (see [below for nested schema](#nestedatt--server_credentials))
+- `storage_system_arn` (String)
+- `storage_system_id` (String)
+- `system_type` (String)
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--server_configuration"></a>
 ### Nested Schema for `server_configuration`
 
 Read-Only:
 
-- `server_hostname` (String) The domain name or IP address of the storage system's management interface.
-- `server_port` (Number) The network port needed to access the system's management interface
+- `server_hostname` (String)
+- `server_port` (Number)
 
 
 <a id="nestedatt--server_credentials"></a>
@@ -46,8 +47,8 @@ Read-Only:
 
 Read-Only:
 
-- `password` (String) The password for your storage system's management interface
-- `username` (String) The username for your storage system's management interface.
+- `password` (String)
+- `username` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -55,5 +56,5 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) The key for an AWS resource tag.
-- `value` (String) The value for an AWS resource tag.
+- `key` (String)
+- `value` (String)

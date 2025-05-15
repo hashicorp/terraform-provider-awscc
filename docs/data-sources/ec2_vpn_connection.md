@@ -29,7 +29,7 @@ Data Source schema for AWS::EC2::VPNConnection
 - `local_ipv_6_network_cidr` (String) The IPv6 CIDR on the customer gateway (on-premises) side of the VPN connection.
  Default: ``::/0``
 - `outside_ip_address_type` (String) The type of IPv4 address assigned to the outside interface of the customer gateway device.
- Valid values: ``PrivateIpv4`` | ``PublicIpv4`` 
+ Valid values: ``PrivateIpv4`` | ``PublicIpv4``
  Default: ``PublicIpv4``
 - `remote_ipv_4_network_cidr` (String) The IPv4 CIDR on the AWS side of the VPN connection.
  Default: ``0.0.0.0/0``
@@ -65,7 +65,7 @@ Read-Only:
 Read-Only:
 
 - `dpd_timeout_action` (String) The action to take after DPD timeout occurs. Specify ``restart`` to restart the IKE initiation. Specify ``clear`` to end the IKE session.
- Valid Values: ``clear`` | ``none`` | ``restart`` 
+ Valid Values: ``clear`` | ``none`` | ``restart``
  Default: ``clear``
 - `dpd_timeout_seconds` (Number) The number of seconds after which a DPD timeout occurs.
  Constraints: A value greater than or equal to 30.
@@ -104,7 +104,7 @@ Read-Only:
  Constraints: A value between 64 and 2048.
  Default: ``1024``
 - `startup_action` (String) The action to take when the establishing the tunnel for the VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify ``start`` for AWS to initiate the IKE negotiation.
- Valid Values: ``add`` | ``start`` 
+ Valid Values: ``add`` | ``start``
  Default: ``add``
 - `tunnel_inside_cidr` (String) The range of inside IP addresses for the tunnel. Any specified CIDR blocks must be unique across all VPN connections that use the same virtual private gateway. 
  Constraints: A size /30 CIDR block from the ``169.254.0.0/16`` range. The following CIDR blocks are reserved and cannot be used:

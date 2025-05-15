@@ -62,6 +62,7 @@ resource "awscc_codebuild_fleet" "example" {
 Optional:
 
 - `disk` (Number)
+- `instance_type` (String)
 - `machine_type` (String)
 - `memory` (Number)
 - `v_cpu` (Number)

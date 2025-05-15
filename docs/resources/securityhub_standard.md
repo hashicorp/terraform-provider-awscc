@@ -131,7 +131,7 @@ resource "awscc_securityhub_standard" "nist" {
 ### Optional
 
 - `disabled_standards_controls` (Attributes List) Specifies which controls are to be disabled in a standard. 
-  *Maximum*: ``100`` (see [below for nested schema](#nestedatt--disabled_standards_controls))
+ *Maximum*: ``100`` (see [below for nested schema](#nestedatt--disabled_standards_controls))
 
 ### Read-Only
 

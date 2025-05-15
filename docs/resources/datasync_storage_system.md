@@ -3,12 +3,12 @@
 page_title: "awscc_datasync_storage_system Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource schema for AWS::DataSync::StorageSystem.
+  Resource Type definition for AWS::DataSync::StorageSystem
 ---
 
 # awscc_datasync_storage_system (Resource)
 
-Resource schema for AWS::DataSync::StorageSystem.
+Resource Type definition for AWS::DataSync::StorageSystem
 
 ## Example Usage
 
@@ -54,34 +54,35 @@ resource "awscc_datasync_storage_system" "example" {
 
 ### Required
 
-- `agent_arns` (List of String) The ARN of the DataSync agent that connects to and reads from the on-premises storage system's management interface.
-- `server_configuration` (Attributes) The server name and network port required to connect with the management interface of the on-premises storage system. (see [below for nested schema](#nestedatt--server_configuration))
-- `system_type` (String) The type of on-premises storage system that DataSync Discovery will analyze.
+- `agent_arns` (List of String)
+- `server_configuration` (Attributes) (see [below for nested schema](#nestedatt--server_configuration))
+- `system_type` (String)
 
 ### Optional
 
-- `cloudwatch_log_group_arn` (String) The ARN of the Amazon CloudWatch log group used to monitor and log discovery job events.
-- `name` (String) A familiar name for the on-premises storage system.
-- `server_credentials` (Attributes) The username and password for accessing your on-premises storage system's management interface. (see [below for nested schema](#nestedatt--server_credentials))
-- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `cloudwatch_log_group_arn` (String)
+- `name` (String)
+- `server_credentials` (Attributes) (see [below for nested schema](#nestedatt--server_credentials))
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- `connectivity_status` (String) Indicates whether the DataSync agent can access the on-premises storage system.
+- `connectivity_status` (String)
 - `id` (String) Uniquely identifies the resource.
-- `secrets_manager_arn` (String) The ARN of a secret stored by AWS Secrets Manager.
-- `storage_system_arn` (String) The ARN of the on-premises storage system added to DataSync Discovery.
+- `secrets_manager_arn` (String)
+- `storage_system_arn` (String)
+- `storage_system_id` (String)
 
 <a id="nestedatt--server_configuration"></a>
 ### Nested Schema for `server_configuration`
 
 Required:
 
-- `server_hostname` (String) The domain name or IP address of the storage system's management interface.
+- `server_hostname` (String)
 
 Optional:
 
-- `server_port` (Number) The network port needed to access the system's management interface
+- `server_port` (Number)
 
 
 <a id="nestedatt--server_credentials"></a>
@@ -89,8 +90,8 @@ Optional:
 
 Optional:
 
-- `password` (String) The password for your storage system's management interface
-- `username` (String) The username for your storage system's management interface.
+- `password` (String)
+- `username` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -98,13 +99,13 @@ Optional:
 
 Optional:
 
-- `key` (String) The key for an AWS resource tag.
-- `value` (String) The value for an AWS resource tag.
+- `key` (String)
+- `value` (String)
 
 ## Import
 
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_datasync_storage_system.example "storage_system_arn"
+$ terraform import awscc_datasync_storage_system.example "id"
 ```

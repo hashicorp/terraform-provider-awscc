@@ -24,7 +24,9 @@ Data Source schema for AWS::SageMaker::App
 - `app_arn` (String) The Amazon Resource Name (ARN) of the app.
 - `app_name` (String) The name of the app.
 - `app_type` (String) The type of app.
+- `built_in_lifecycle_config_arn` (String) The lifecycle configuration that runs before the default lifecycle configuration.
 - `domain_id` (String) The domain ID.
+- `recovery_mode` (Boolean) Indicates whether the application is launched in recovery mode.
 - `resource_spec` (Attributes) The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. (see [below for nested schema](#nestedatt--resource_spec))
 - `tags` (Attributes List) A list of tags to apply to the app. (see [below for nested schema](#nestedatt--tags))
 - `user_profile_name` (String) The user profile name.

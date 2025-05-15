@@ -45,11 +45,20 @@ resource "awscc_ec2_host" "dedicated_host1" {
 - `instance_family` (String) Specifies the instance family to be supported by the Dedicated Hosts. If you specify an instance family, the Dedicated Hosts support multiple instance types within that instance family.
 - `instance_type` (String) Specifies the instance type to be supported by the Dedicated Hosts. If you specify an instance type, the Dedicated Hosts support instances of the specified instance type only.
 - `outpost_arn` (String) The Amazon Resource Name (ARN) of the Amazon Web Services Outpost on which to allocate the Dedicated Host.
+- `tags` (Attributes List) Any tags assigned to the Host. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `host_id` (String) ID of the host created.
 - `id` (String) Uniquely identifies the resource.
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String)
+- `value` (String)
 
 ## Import
 

@@ -21,6 +21,7 @@ Data Source schema for AWS::AutoScaling::AutoScalingGroup
 
 ### Read-Only
 
+- `auto_scaling_group_arn` (String)
 - `auto_scaling_group_name` (String) The name of the Auto Scaling group. This name must be unique per Region per account.
  The name can contain any ASCII character 33 to 126 including most punctuation characters, digits, and upper and lowercased letters.
   You cannot use a colon (:) in the name.
@@ -28,7 +29,7 @@ Data Source schema for AWS::AutoScaling::AutoScalingGroup
 - `availability_zone_impairment_policy` (Attributes) The Availability Zone impairment policy. (see [below for nested schema](#nestedatt--availability_zone_impairment_policy))
 - `availability_zones` (List of String) A list of Availability Zones where instances in the Auto Scaling group can be created. Used for launching into the default VPC subnet in each Availability Zone when not using the ``VPCZoneIdentifier`` property, or for attaching a network interface when an existing network interface ID is specified in a launch template.
 - `capacity_rebalance` (Boolean) Indicates whether Capacity Rebalancing is enabled. Otherwise, Capacity Rebalancing is disabled. When you turn on Capacity Rebalancing, Amazon EC2 Auto Scaling attempts to launch a Spot Instance whenever Amazon EC2 notifies that a Spot Instance is at an elevated risk of interruption. After launching a new instance, it then terminates an old instance. For more information, see [Use Capacity Rebalancing to handle Amazon EC2 Spot Interruptions](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-capacity-rebalancing.html) in the in the *Amazon EC2 Auto Scaling User Guide*.
-- `capacity_reservation_specification` (Attributes) (see [below for nested schema](#nestedatt--capacity_reservation_specification))
+- `capacity_reservation_specification` (Attributes) The capacity reservation specification. (see [below for nested schema](#nestedatt--capacity_reservation_specification))
 - `context` (String) Reserved.
 - `cooldown` (String) *Only needed if you use simple scaling policies.* 
  The amount of time, in seconds, between one scaling activity ending and another one starting due to simple scaling policies. For more information, see [Scaling cooldowns for Amazon EC2 Auto Scaling](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-scaling-cooldowns.html) in the *Amazon EC2 Auto Scaling User Guide*.
@@ -108,16 +109,20 @@ Read-Only:
 
 Read-Only:
 
-- `capacity_reservation_preference` (String)
-- `capacity_reservation_target` (Attributes) (see [below for nested schema](#nestedatt--capacity_reservation_specification--capacity_reservation_target))
+- `capacity_reservation_preference` (String) The capacity reservation preference. The following options are available: 
+  +   ``capacity-reservations-only`` - Auto Scaling will only launch instances into a Capacity Reservation or Capacity Reservation resource group. If capacity isn't available, instances will fail to launch.
+  +   ``capacity-reservations-first`` - Auto Scaling will try to launch instances into a Capacity Reservation or Capacity Reservation resource group first. If capacity isn't available, instances will run in On-Demand capacity.
+  +   ``none`` - Auto Scaling will not launch instances into a Capacity Reservation. Instances will run in On-Demand capacity. 
+  +   ``default`` - Auto Scaling uses the Capacity Reservation preference from your launch template or an open Capacity Reservation.
+- `capacity_reservation_target` (Attributes) Describes a target Capacity Reservation or Capacity Reservation resource group. (see [below for nested schema](#nestedatt--capacity_reservation_specification--capacity_reservation_target))
 
 <a id="nestedatt--capacity_reservation_specification--capacity_reservation_target"></a>
 ### Nested Schema for `capacity_reservation_specification.capacity_reservation_target`
 
 Read-Only:
 
-- `capacity_reservation_ids` (List of String)
-- `capacity_reservation_resource_group_arns` (List of String)
+- `capacity_reservation_ids` (List of String) The Capacity Reservation IDs to launch instances into.
+- `capacity_reservation_resource_group_arns` (List of String) The resource group ARNs of the Capacity Reservation to launch instances into.
 
 
 
@@ -309,7 +314,7 @@ Read-Only:
  Default: ``excluded``
 - `baseline_ebs_bandwidth_mbps` (Attributes) The minimum and maximum baseline bandwidth performance for an instance type, in Mbps. For more information, see [Amazon EBS–optimized instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html) in the *Amazon EC2 User Guide for Linux Instances*.
  Default: No minimum or maximum limits (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--baseline_ebs_bandwidth_mbps))
-- `baseline_performance_factors` (Attributes) (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--baseline_performance_factors))
+- `baseline_performance_factors` (Attributes) The baseline performance factors for the instance requirements. (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--baseline_performance_factors))
 - `burstable_performance` (String) Indicates whether burstable performance instance types are included, excluded, or required. For more information, see [Burstable performance instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html) in the *Amazon EC2 User Guide for Linux Instances*.
  Default: ``excluded``
 - `cpu_manufacturers` (Set of String) Lists which specific CPU manufacturers to include.
@@ -393,21 +398,35 @@ Read-Only:
 
 Read-Only:
 
-- `cpu` (Attributes) (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--baseline_performance_factors--cpu))
+- `cpu` (Attributes) The CPU performance to consider, using an instance family as the baseline reference. (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--baseline_performance_factors--cpu))
 
 <a id="nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--baseline_performance_factors--cpu"></a>
 ### Nested Schema for `mixed_instances_policy.launch_template.overrides.instance_requirements.baseline_performance_factors.cpu`
 
 Read-Only:
 
-- `references` (Attributes List) (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--baseline_performance_factors--cpu--references))
+- `references` (Attributes List) Specify an instance family to use as the baseline reference for CPU performance. All instance types that match your specified attributes will be compared against the CPU performance of the referenced instance family, regardless of CPU manufacturer or architecture differences. 
+  Currently only one instance family can be specified in the list. (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--baseline_performance_factors--cpu--references))
 
 <a id="nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--baseline_performance_factors--cpu--references"></a>
 ### Nested Schema for `mixed_instances_policy.launch_template.overrides.instance_requirements.baseline_performance_factors.cpu.references`
 
 Read-Only:
 
-- `instance_family` (String)
+- `instance_family` (String) The instance family to use as a baseline reference. 
+  Make sure that you specify the correct value for the instance family. The instance family is everything before the period (.) in the instance type name. For example, in the instance ``c6i.large``, the instance family is ``c6i``, not ``c6``. For more information, see [Amazon EC2 instance type naming conventions](https://docs.aws.amazon.com/ec2/latest/instancetypes/instance-type-names.html) in *Amazon EC2 Instance Types*.
+  The following instance types are *not supported* for performance protection.
+  +   ``c1`` 
+  +   ``g3| g3s`` 
+  +   ``hpc7g`` 
+  +   ``m1| m2`` 
+  +   ``mac1 | mac2 | mac2-m1ultra | mac2-m2 | mac2-m2pro`` 
+  +   ``p3dn | p4d | p5`` 
+  +   ``t1`` 
+  +   ``u-12tb1 | u-18tb1 | u-24tb1 | u-3tb1 | u-6tb1 | u-9tb1 | u7i-12tb | u7in-16tb | u7in-24tb | u7in-32tb`` 
+  
+ If you performance protection by specifying a supported instance family, the returned instance types will exclude the preceding unsupported instance families.
+ If you specify an unsupported instance family as a value for baseline performance, the API returns an empty response.
 
 
 

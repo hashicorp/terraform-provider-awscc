@@ -27,7 +27,8 @@ Data Source schema for AWS::RDS::DBCluster
 - `associated_roles` (Attributes List) Provides a list of the AWS Identity and Access Management (IAM) roles that are associated with the DB cluster. IAM roles that are associated with a DB cluster grant permission for the DB cluster to access other Amazon Web Services on your behalf.
  Valid for: Aurora DB clusters and Multi-AZ DB clusters (see [below for nested schema](#nestedatt--associated_roles))
 - `auto_minor_version_upgrade` (Boolean) Specifies whether minor engine upgrades are applied automatically to the DB cluster during the maintenance window. By default, minor engine upgrades are applied automatically.
- Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB cluster
+ Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB cluster.
+ For more information about automatic minor version upgrades, see [Automatically upgrading the minor engine version](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Upgrading.html#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades).
 - `availability_zones` (List of String) A list of Availability Zones (AZs) where instances in the DB cluster can be created. For information on AWS Regions and Availability Zones, see [Choosing the Regions and Availability Zones](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.RegionsAndAvailabilityZones.html) in the *Amazon Aurora User Guide*. 
  Valid for: Aurora DB clusters only
 - `backtrack_window` (Number) The target backtrack window, in seconds. To disable backtracking, set this value to ``0``.
