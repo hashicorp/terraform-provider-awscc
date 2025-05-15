@@ -34,7 +34,8 @@
         "BUILD_GENERAL1_LARGE",
         "BUILD_GENERAL1_XLARGE",
         "BUILD_GENERAL1_2XLARGE",
-        "ATTRIBUTE_BASED_COMPUTE"
+        "ATTRIBUTE_BASED_COMPUTE",
+        "CUSTOM_INSTANCE_TYPE"
       ]
     },
     "OverflowBehavior": {
@@ -227,6 +228,9 @@
             "GENERAL",
             "NVME"
           ]
+        },
+        "instanceType": {
+          "type": "string"
         }
       }
     }
@@ -242,7 +246,11 @@
     "tagOnCreate": true,
     "tagUpdatable": true,
     "cloudFormationSystemTags": true,
-    "tagProperty": "/properties/Tags"
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "codebuild:CreateFleet",
+      "codebuild:UpdateFleet"
+    ]
   },
   "handlers": {
     "create": {

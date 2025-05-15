@@ -1451,7 +1451,7 @@
     },
     {
         "resource": "awscc_datasync_storage_system",
-        "identifier": ["StorageSystemArn"],
+        "identifier": ["Id"],
         "path": "./examples/resources/awscc_datasync_storage_system/import.sh"
     },
     {

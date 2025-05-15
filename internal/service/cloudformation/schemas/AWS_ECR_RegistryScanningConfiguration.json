@@ -1,6 +1,6 @@
 {
   "typeName": "AWS::ECR::RegistryScanningConfiguration",
-  "description": "The AWS::ECR::RegistryScanningConfiguration controls the scanning configuration for an Amazon Elastic Container Registry (Amazon Private ECR). For more information, see https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html",
+  "description": "The scanning configuration for a private registry.",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-ecr.git",
   "definitions": {
     "ScanningRules": {
@@ -24,13 +24,14 @@
           "items": {
             "$ref": "#/definitions/RepositoryFilter"
           },
-          "description": "The repository filters associated with the scanning configuration for a private registry."
+          "description": "The details of a scanning repository filter. For more information on how to use filters, see [Using filters](https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html#image-scanning-filters) in the *Amazon Elastic Container Registry User Guide*."
         },
         "ScanFrequency": {
-          "$ref": "#/definitions/ScanFrequency"
+          "$ref": "#/definitions/ScanFrequency",
+          "description": "The frequency that scans are performed at for a private registry. When the ``ENHANCED`` scan type is specified, the supported scan frequencies are ``CONTINUOUS_SCAN`` and ``SCAN_ON_PUSH``. When the ``BASIC`` scan type is specified, the ``SCAN_ON_PUSH`` scan frequency is supported. If scan on push is not specified, then the ``MANUAL`` scan frequency is set by default."
         }
       },
-      "description": "A rule representing the details of a scanning configuration.",
+      "description": "The scanning rules associated with the registry.",
       "required": [
         "ScanFrequency",
         "RepositoryFilters"
@@ -41,13 +42,15 @@
       "type": "object",
       "properties": {
         "Filter": {
-          "$ref": "#/definitions/Filter"
+          "$ref": "#/definitions/Filter",
+          "description": "The filter to use when scanning."
         },
         "FilterType": {
-          "$ref": "#/definitions/FilterType"
+          "$ref": "#/definitions/FilterType",
+          "description": "The type associated with the filter."
         }
       },
-      "description": "The details of a scanning repository filter.",
+      "description": "The filter settings used with image replication. Specifying a repository filter to a replication rule provides a method for controlling which repositories in a private registry are replicated. If no filters are added, the contents of all repositories are replicated.",
       "required": [
         "Filter",
         "FilterType"
@@ -90,13 +93,16 @@
   },
   "properties": {
     "Rules": {
-      "$ref": "#/definitions/ScanningRules"
+      "$ref": "#/definitions/ScanningRules",
+      "description": "The scanning rules associated with the registry."
     },
     "ScanType": {
-      "$ref": "#/definitions/ScanType"
+      "$ref": "#/definitions/ScanType",
+      "description": "The type of scanning configured for the registry."
     },
     "RegistryId": {
-      "$ref": "#/definitions/RegistryId"
+      "$ref": "#/definitions/RegistryId",
+      "description": ""
     }
   },
   "required": [
