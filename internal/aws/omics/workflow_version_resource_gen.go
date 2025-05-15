@@ -26,12 +26,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceFactory("awscc_omics_workflow", workflowResource)
+	registry.AddResourceFactory("awscc_omics_workflow_version", workflowVersionResource)
 }
 
-// workflowResource returns the Terraform awscc_omics_workflow resource.
-// This Terraform resource corresponds to the CloudFormation AWS::Omics::Workflow resource.
-func workflowResource(ctx context.Context) (resource.Resource, error) {
+// workflowVersionResource returns the Terraform awscc_omics_workflow_version resource.
+// This Terraform resource corresponds to the CloudFormation AWS::Omics::WorkflowVersion resource.
+func workflowVersionResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
 		// Property: Accelerators
 		// CloudFormation resource type schema:
@@ -158,21 +158,6 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
-		// Property: Id
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "maxLength": 18,
-		//	  "minLength": 1,
-		//	  "pattern": "^[0-9]+$",
-		//	  "type": "string"
-		//	}
-		"workflow_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
 		// Property: Main
 		// CloudFormation resource type schema:
 		//
@@ -192,26 +177,6 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
-		// Property: Name
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "maxLength": 128,
-		//	  "minLength": 1,
-		//	  "pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$",
-		//	  "type": "string"
-		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 128),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ParameterTemplate
@@ -280,7 +245,8 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 		//	    "ACTIVE",
 		//	    "UPDATING",
 		//	    "DELETED",
-		//	    "FAILED"
+		//	    "FAILED",
+		//	    "INACTIVE"
 		//	  ],
 		//	  "maxLength": 64,
 		//	  "minLength": 1,
@@ -308,7 +274,6 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 				float64planmodifier.UseStateForUnknown(),
-				float64planmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: StorageType
@@ -368,7 +333,8 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "enum": [
-		//	    "PRIVATE"
+		//	    "PRIVATE",
+		//	    "READY2RUN"
 		//	  ],
 		//	  "maxLength": 64,
 		//	  "minLength": 1,
@@ -384,6 +350,8 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "maxLength": 36,
+		//	  "minLength": 1,
 		//	  "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
 		//	  "type": "string"
 		//	}
@@ -391,6 +359,65 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: VersionName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 64,
+		//	  "minLength": 1,
+		//	  "pattern": "^[A-Za-z0-9][A-Za-z0-9\\-\\._]*$",
+		//	  "type": "string"
+		//	}
+		"version_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Required: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 64),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9][A-Za-z0-9\\-\\._]*$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: WorkflowBucketOwnerId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 12,
+		//	  "minLength": 1,
+		//	  "pattern": "^[0-9]{12}$",
+		//	  "type": "string"
+		//	}
+		"workflow_bucket_owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 12),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]{12}$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: WorkflowId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 18,
+		//	  "minLength": 1,
+		//	  "pattern": "^[0-9]+$",
+		//	  "type": "string"
+		//	}
+		"workflow_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Required: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 18),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
@@ -405,33 +432,34 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Definition of AWS::Omics::Workflow Resource Type",
+		Description: "Definition of AWS::Omics::WorkflowVersion Resource Type.",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
 	var opts generic.ResourceOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Omics::Workflow").WithTerraformTypeName("awscc_omics_workflow")
+	opts = opts.WithCloudFormationTypeName("AWS::Omics::WorkflowVersion").WithTerraformTypeName("awscc_omics_workflow_version")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"accelerators":       "Accelerators",
-		"arn":                "Arn",
-		"creation_time":      "CreationTime",
-		"definition_uri":     "DefinitionUri",
-		"description":        "Description",
-		"engine":             "Engine",
-		"main":               "Main",
-		"name":               "Name",
-		"optional":           "Optional",
-		"parameter_template": "ParameterTemplate",
-		"status":             "Status",
-		"storage_capacity":   "StorageCapacity",
-		"storage_type":       "StorageType",
-		"tags":               "Tags",
-		"type":               "Type",
-		"uuid":               "Uuid",
-		"workflow_id":        "Id",
+		"accelerators":             "Accelerators",
+		"arn":                      "Arn",
+		"creation_time":            "CreationTime",
+		"definition_uri":           "DefinitionUri",
+		"description":              "Description",
+		"engine":                   "Engine",
+		"main":                     "Main",
+		"optional":                 "Optional",
+		"parameter_template":       "ParameterTemplate",
+		"status":                   "Status",
+		"storage_capacity":         "StorageCapacity",
+		"storage_type":             "StorageType",
+		"tags":                     "Tags",
+		"type":                     "Type",
+		"uuid":                     "Uuid",
+		"version_name":             "VersionName",
+		"workflow_bucket_owner_id": "WorkflowBucketOwnerId",
+		"workflow_id":              "WorkflowId",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

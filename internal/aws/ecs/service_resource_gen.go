@@ -1537,6 +1537,10 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	            "description": "The throughput to provision for a volume, in MiB/s, with a maximum of 1,000 MiB/s. This parameter maps 1:1 with the ``Throughput`` parameter of the [CreateVolume API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in the *Amazon EC2 API Reference*.\n  This parameter is only supported for the ``gp3`` volume type.",
 		//	            "type": "integer"
 		//	          },
+		//	          "VolumeInitializationRate": {
+		//	            "description": "",
+		//	            "type": "integer"
+		//	          },
 		//	          "VolumeType": {
 		//	            "description": "The volume type. This parameter maps 1:1 with the ``VolumeType`` parameter of the [CreateVolume API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in the *Amazon EC2 API Reference*. For more information, see [Amazon EBS volume types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html) in the *Amazon EC2 User Guide*.\n The following are the supported volume types.\n  +  General Purpose SSD: ``gp2``|``gp3``\n  +  Provisioned IOPS SSD: ``io1``|``io2``\n  +  Throughput Optimized HDD: ``st1``\n  +  Cold HDD: ``sc1``\n  +  Magnetic: ``standard``\n  The magnetic volume type is not supported on Fargate.",
 		//	            "type": "string"
@@ -1705,6 +1709,15 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Throughput
 							"throughput": schema.Int64Attribute{ /*START ATTRIBUTE*/
 								Description: "The throughput to provision for a volume, in MiB/s, with a maximum of 1,000 MiB/s. This parameter maps 1:1 with the ``Throughput`` parameter of the [CreateVolume API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in the *Amazon EC2 API Reference*.\n  This parameter is only supported for the ``gp3`` volume type.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: VolumeInitializationRate
+							"volume_initialization_rate": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1932,6 +1945,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		"value":                             "Value",
 		"value_from":                        "ValueFrom",
 		"volume_configurations":             "VolumeConfigurations",
+		"volume_initialization_rate":        "VolumeInitializationRate",
 		"volume_type":                       "VolumeType",
 		"vpc_lattice_configurations":        "VpcLatticeConfigurations",
 		"weight":                            "Weight",

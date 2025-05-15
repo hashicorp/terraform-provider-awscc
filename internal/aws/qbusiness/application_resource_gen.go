@@ -347,7 +347,8 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	    "AWS_IAM_IDP_SAML",
 		//	    "AWS_IAM_IDP_OIDC",
 		//	    "AWS_IAM_IDC",
-		//	    "AWS_QUICKSIGHT_IDP"
+		//	    "AWS_QUICKSIGHT_IDP",
+		//	    "ANONYMOUS"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -360,6 +361,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 					"AWS_IAM_IDP_OIDC",
 					"AWS_IAM_IDC",
 					"AWS_QUICKSIGHT_IDP",
+					"ANONYMOUS",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

@@ -7,18 +7,14 @@ package datasync
 
 import (
 	"context"
-	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
-	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
-	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -39,49 +35,25 @@ func storageSystemResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ARN of the DataSync agent that connects to and reads from the on-premises storage system's management interface.",
-		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "maxLength": 128,
-		//	    "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$",
 		//	    "type": "string"
 		//	  },
-		//	  "maxItems": 1,
-		//	  "minItems": 1,
-		//	  "type": "array"
+		//	  "type": "array",
+		//	  "uniqueItems": false
 		//	}
 		"agent_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "The ARN of the DataSync agent that connects to and reads from the on-premises storage system's management interface.",
 			Required:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeBetween(1, 1),
-				listvalidator.ValueStringsAre(
-					stringvalidator.LengthAtMost(128),
-					stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$"), ""),
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: CloudWatchLogGroupArn
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ARN of the Amazon CloudWatch log group used to monitor and log discovery job events.",
-		//	  "maxLength": 562,
-		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):logs:[a-z\\-0-9]+:[0-9]{12}:log-group:([^:\\*]*)(:\\*)?$",
 		//	  "type": "string"
 		//	}
 		"cloudwatch_log_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the Amazon CloudWatch log group used to monitor and log discovery job events.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(562),
-				stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):logs:[a-z\\-0-9]+:[0-9]{12}:log-group:([^:\\*]*)(:\\*)?$"), ""),
-			}, /*END VALIDATORS*/
+			Optional: true,
+			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -90,17 +62,22 @@ func storageSystemResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Indicates whether the DataSync agent can access the on-premises storage system.",
-		//	  "enum": [
-		//	    "PASS",
-		//	    "FAIL",
-		//	    "UNKNOWN"
-		//	  ],
 		//	  "type": "string"
 		//	}
 		"connectivity_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether the DataSync agent can access the on-premises storage system.",
-			Computed:    true,
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"storage_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -109,20 +86,11 @@ func storageSystemResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A familiar name for the on-premises storage system.",
-		//	  "maxLength": 256,
-		//	  "minLength": 1,
-		//	  "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A familiar name for the on-premises storage system.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\s+=._:@/-]+$"), ""),
-			}, /*END VALIDATORS*/
+			Optional: true,
+			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -131,14 +99,10 @@ func storageSystemResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ARN of a secret stored by AWS Secrets Manager.",
-		//	  "maxLength": 2048,
-		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):secretsmanager:[a-z\\-0-9]+:[0-9]{12}:secret:.*",
 		//	  "type": "string"
 		//	}
 		"secrets_manager_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of a secret stored by AWS Secrets Manager.",
-			Computed:    true,
+			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -148,18 +112,11 @@ func storageSystemResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The server name and network port required to connect with the management interface of the on-premises storage system.",
 		//	  "properties": {
 		//	    "ServerHostname": {
-		//	      "description": "The domain name or IP address of the storage system's management interface.",
-		//	      "maxLength": 255,
-		//	      "pattern": "^(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9])$",
 		//	      "type": "string"
 		//	    },
 		//	    "ServerPort": {
-		//	      "description": "The network port needed to access the system's management interface",
-		//	      "maximum": 65535,
-		//	      "minimum": 1,
 		//	      "type": "integer"
 		//	    }
 		//	  },
@@ -172,44 +129,29 @@ func storageSystemResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: ServerHostname
 				"server_hostname": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The domain name or IP address of the storage system's management interface.",
-					Required:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(255),
-						stringvalidator.RegexMatches(regexp.MustCompile("^(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9])$"), ""),
-					}, /*END VALIDATORS*/
+					Required: true,
 				}, /*END ATTRIBUTE*/
 				// Property: ServerPort
 				"server_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The network port needed to access the system's management interface",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.Int64{ /*START VALIDATORS*/
-						int64validator.Between(1, 65535),
-					}, /*END VALIDATORS*/
+					Optional: true,
+					Computed: true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The server name and network port required to connect with the management interface of the on-premises storage system.",
-			Required:    true,
+			Required: true,
 		}, /*END ATTRIBUTE*/
 		// Property: ServerCredentials
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The username and password for accessing your on-premises storage system's management interface.",
 		//	  "properties": {
 		//	    "Password": {
-		//	      "description": "The password for your storage system's management interface",
-		//	      "maxLength": 1024,
 		//	      "type": "string"
 		//	    },
 		//	    "Username": {
-		//	      "description": "The username for your storage system's management interface.",
-		//	      "maxLength": 1024,
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -223,11 +165,9 @@ func storageSystemResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Password
 				"password": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The password for your storage system's management interface",
-					Optional:    true,
-					Computed:    true,
+					Optional: true,
+					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(1024),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -236,11 +176,9 @@ func storageSystemResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Username
 				"username": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The username for your storage system's management interface.",
-					Optional:    true,
-					Computed:    true,
+					Optional: true,
+					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(1024),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -248,26 +186,20 @@ func storageSystemResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The username and password for accessing your on-premises storage system's management interface.",
-			Optional:    true,
-			Computed:    true,
+			Optional: true,
+			Computed: true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
-			// ServerCredentials is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: StorageSystemArn
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ARN of the on-premises storage system added to DataSync Discovery.",
-		//	  "maxLength": 128,
-		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:system/storage-system-[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
 		//	  "type": "string"
 		//	}
 		"storage_system_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the on-premises storage system added to DataSync Discovery.",
-			Computed:    true,
+			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -276,67 +208,42 @@ func storageSystemResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The type of on-premises storage system that DataSync Discovery will analyze.",
-		//	  "enum": [
-		//	    "NetAppONTAP"
-		//	  ],
 		//	  "type": "string"
 		//	}
 		"system_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of on-premises storage system that DataSync Discovery will analyze.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"NetAppONTAP",
-				),
-			}, /*END VALIDATORS*/
+			Required: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "An array of key-value pairs to apply to this resource.",
-		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "A key-value pair to associate with a resource.",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "The key for an AWS resource tag.",
-		//	        "maxLength": 256,
-		//	        "minLength": 1,
-		//	        "pattern": "^[a-zA-Z0-9\\s+=._:/-]+$",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "The value for an AWS resource tag.",
-		//	        "maxLength": 256,
-		//	        "minLength": 1,
-		//	        "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
 		//	        "type": "string"
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Key",
-		//	      "Value"
+		//	      "Value",
+		//	      "Key"
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "maxItems": 50,
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key for an AWS resource tag.",
-						Optional:    true,
-						Computed:    true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 256),
-							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\s+=._:/-]+$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -345,12 +252,9 @@ func storageSystemResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for an AWS resource tag.",
-						Optional:    true,
-						Computed:    true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 256),
-							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\s+=._:@/-]+$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -359,14 +263,13 @@ func storageSystemResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.Set{ /*START VALIDATORS*/
-				setvalidator.SizeAtMost(50),
+			Optional: true,
+			Computed: true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.UniqueValues(),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
@@ -381,7 +284,7 @@ func storageSystemResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Resource schema for AWS::DataSync::StorageSystem.",
+		Description: "Resource Type definition for AWS::DataSync::StorageSystem",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -403,15 +306,13 @@ func storageSystemResource(ctx context.Context) (resource.Resource, error) {
 		"server_hostname":          "ServerHostname",
 		"server_port":              "ServerPort",
 		"storage_system_arn":       "StorageSystemArn",
+		"storage_system_id":        "Id",
 		"system_type":              "SystemType",
 		"tags":                     "Tags",
 		"username":                 "Username",
 		"value":                    "Value",
 	})
 
-	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/ServerCredentials",
-	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
