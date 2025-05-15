@@ -68,6 +68,19 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The type of app.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: BuiltInLifecycleConfigArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The lifecycle configuration that runs before the default lifecycle configuration.",
+		//	  "maxLength": 256,
+		//	  "pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$",
+		//	  "type": "string"
+		//	}
+		"built_in_lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The lifecycle configuration that runs before the default lifecycle configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainId
 		// CloudFormation resource type schema:
 		//
@@ -79,6 +92,17 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The domain ID.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: RecoveryMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates whether the application is launched in recovery mode.",
+		//	  "type": "boolean"
+		//	}
+		"recovery_mode": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether the application is launched in recovery mode.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ResourceSpec
@@ -160,7 +184,7 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "LifecycleConfigArn": {
 		//	      "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
 		//	      "maxLength": 256,
-		//	      "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
+		//	      "pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$",
 		//	      "type": "string"
 		//	    },
 		//	    "SageMakerImageArn": {
@@ -283,19 +307,21 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::App").WithTerraformTypeName("awscc_sagemaker_app")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"app_arn":                      "AppArn",
-		"app_name":                     "AppName",
-		"app_type":                     "AppType",
-		"domain_id":                    "DomainId",
-		"instance_type":                "InstanceType",
-		"key":                          "Key",
-		"lifecycle_config_arn":         "LifecycleConfigArn",
-		"resource_spec":                "ResourceSpec",
-		"sage_maker_image_arn":         "SageMakerImageArn",
-		"sage_maker_image_version_arn": "SageMakerImageVersionArn",
-		"tags":                         "Tags",
-		"user_profile_name":            "UserProfileName",
-		"value":                        "Value",
+		"app_arn":                       "AppArn",
+		"app_name":                      "AppName",
+		"app_type":                      "AppType",
+		"built_in_lifecycle_config_arn": "BuiltInLifecycleConfigArn",
+		"domain_id":                     "DomainId",
+		"instance_type":                 "InstanceType",
+		"key":                           "Key",
+		"lifecycle_config_arn":          "LifecycleConfigArn",
+		"recovery_mode":                 "RecoveryMode",
+		"resource_spec":                 "ResourceSpec",
+		"sage_maker_image_arn":          "SageMakerImageArn",
+		"sage_maker_image_version_arn":  "SageMakerImageVersionArn",
+		"tags":                          "Tags",
+		"user_profile_name":             "UserProfileName",
+		"value":                         "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

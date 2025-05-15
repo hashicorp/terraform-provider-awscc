@@ -17,12 +17,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceFactory("awscc_omics_workflow", workflowDataSource)
+	registry.AddDataSourceFactory("awscc_omics_workflow_version", workflowVersionDataSource)
 }
 
-// workflowDataSource returns the Terraform awscc_omics_workflow data source.
-// This Terraform data source corresponds to the CloudFormation AWS::Omics::Workflow resource.
-func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
+// workflowVersionDataSource returns the Terraform awscc_omics_workflow_version data source.
+// This Terraform data source corresponds to the CloudFormation AWS::Omics::WorkflowVersion resource.
+func workflowVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
 		// Property: Accelerators
 		// CloudFormation resource type schema:
@@ -101,18 +101,6 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"engine": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
-		// Property: Id
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "maxLength": 18,
-		//	  "minLength": 1,
-		//	  "pattern": "^[0-9]+$",
-		//	  "type": "string"
-		//	}
-		"workflow_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
 		// Property: Main
 		// CloudFormation resource type schema:
 		//
@@ -123,18 +111,6 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"main": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
-		// Property: Name
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "maxLength": 128,
-		//	  "minLength": 1,
-		//	  "pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$",
-		//	  "type": "string"
-		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: ParameterTemplate
@@ -186,7 +162,8 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "ACTIVE",
 		//	    "UPDATING",
 		//	    "DELETED",
-		//	    "FAILED"
+		//	    "FAILED",
+		//	    "INACTIVE"
 		//	  ],
 		//	  "maxLength": 64,
 		//	  "minLength": 1,
@@ -248,7 +225,8 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "enum": [
-		//	    "PRIVATE"
+		//	    "PRIVATE",
+		//	    "READY2RUN"
 		//	  ],
 		//	  "maxLength": 64,
 		//	  "minLength": 1,
@@ -261,10 +239,48 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "maxLength": 36,
+		//	  "minLength": 1,
 		//	  "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
 		//	  "type": "string"
 		//	}
 		"uuid": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: VersionName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 64,
+		//	  "minLength": 1,
+		//	  "pattern": "^[A-Za-z0-9][A-Za-z0-9\\-\\._]*$",
+		//	  "type": "string"
+		//	}
+		"version_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: WorkflowBucketOwnerId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 12,
+		//	  "minLength": 1,
+		//	  "pattern": "^[0-9]{12}$",
+		//	  "type": "string"
+		//	}
+		"workflow_bucket_owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: WorkflowId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 18,
+		//	  "minLength": 1,
+		//	  "pattern": "^[0-9]+$",
+		//	  "type": "string"
+		//	}
+		"workflow_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
@@ -275,32 +291,33 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Data Source schema for AWS::Omics::Workflow",
+		Description: "Data Source schema for AWS::Omics::WorkflowVersion",
 		Attributes:  attributes,
 	}
 
 	var opts generic.DataSourceOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Omics::Workflow").WithTerraformTypeName("awscc_omics_workflow")
+	opts = opts.WithCloudFormationTypeName("AWS::Omics::WorkflowVersion").WithTerraformTypeName("awscc_omics_workflow_version")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"accelerators":       "Accelerators",
-		"arn":                "Arn",
-		"creation_time":      "CreationTime",
-		"definition_uri":     "DefinitionUri",
-		"description":        "Description",
-		"engine":             "Engine",
-		"main":               "Main",
-		"name":               "Name",
-		"optional":           "Optional",
-		"parameter_template": "ParameterTemplate",
-		"status":             "Status",
-		"storage_capacity":   "StorageCapacity",
-		"storage_type":       "StorageType",
-		"tags":               "Tags",
-		"type":               "Type",
-		"uuid":               "Uuid",
-		"workflow_id":        "Id",
+		"accelerators":             "Accelerators",
+		"arn":                      "Arn",
+		"creation_time":            "CreationTime",
+		"definition_uri":           "DefinitionUri",
+		"description":              "Description",
+		"engine":                   "Engine",
+		"main":                     "Main",
+		"optional":                 "Optional",
+		"parameter_template":       "ParameterTemplate",
+		"status":                   "Status",
+		"storage_capacity":         "StorageCapacity",
+		"storage_type":             "StorageType",
+		"tags":                     "Tags",
+		"type":                     "Type",
+		"uuid":                     "Uuid",
+		"version_name":             "VersionName",
+		"workflow_bucket_owner_id": "WorkflowBucketOwnerId",
+		"workflow_id":              "WorkflowId",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

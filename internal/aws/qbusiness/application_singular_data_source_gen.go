@@ -233,7 +233,8 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "AWS_IAM_IDP_SAML",
 		//	    "AWS_IAM_IDP_OIDC",
 		//	    "AWS_IAM_IDC",
-		//	    "AWS_QUICKSIGHT_IDP"
+		//	    "AWS_QUICKSIGHT_IDP",
+		//	    "ANONYMOUS"
 		//	  ],
 		//	  "type": "string"
 		//	}

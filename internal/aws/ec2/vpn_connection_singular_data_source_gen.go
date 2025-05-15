@@ -70,11 +70,11 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The type of IPv4 address assigned to the outside interface of the customer gateway device.\n Valid values: ``PrivateIpv4`` | ``PublicIpv4`` \n Default: ``PublicIpv4``",
+		//	  "description": "The type of IPv4 address assigned to the outside interface of the customer gateway device.\n Valid values: ``PrivateIpv4`` | ``PublicIpv4``\n Default: ``PublicIpv4``",
 		//	  "type": "string"
 		//	}
 		"outside_ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of IPv4 address assigned to the outside interface of the customer gateway device.\n Valid values: ``PrivateIpv4`` | ``PublicIpv4`` \n Default: ``PublicIpv4``",
+			Description: "The type of IPv4 address assigned to the outside interface of the customer gateway device.\n Valid values: ``PrivateIpv4`` | ``PublicIpv4``\n Default: ``PublicIpv4``",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RemoteIpv4NetworkCidr
@@ -233,7 +233,7 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	    "description": "The tunnel options for a single VPN tunnel.",
 		//	    "properties": {
 		//	      "DPDTimeoutAction": {
-		//	        "description": "The action to take after DPD timeout occurs. Specify ``restart`` to restart the IKE initiation. Specify ``clear`` to end the IKE session.\n Valid Values: ``clear`` | ``none`` | ``restart`` \n Default: ``clear``",
+		//	        "description": "The action to take after DPD timeout occurs. Specify ``restart`` to restart the IKE initiation. Specify ``clear`` to end the IKE session.\n Valid Values: ``clear`` | ``none`` | ``restart``\n Default: ``clear``",
 		//	        "enum": [
 		//	          "clear",
 		//	          "none",
@@ -490,7 +490,7 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	        "type": "integer"
 		//	      },
 		//	      "StartupAction": {
-		//	        "description": "The action to take when the establishing the tunnel for the VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify ``start`` for AWS to initiate the IKE negotiation.\n Valid Values: ``add`` | ``start`` \n Default: ``add``",
+		//	        "description": "The action to take when the establishing the tunnel for the VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify ``start`` for AWS to initiate the IKE negotiation.\n Valid Values: ``add`` | ``start``\n Default: ``add``",
 		//	        "enum": [
 		//	          "add",
 		//	          "start"
@@ -516,7 +516,7 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: DPDTimeoutAction
 					"dpd_timeout_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The action to take after DPD timeout occurs. Specify ``restart`` to restart the IKE initiation. Specify ``clear`` to end the IKE session.\n Valid Values: ``clear`` | ``none`` | ``restart`` \n Default: ``clear``",
+						Description: "The action to take after DPD timeout occurs. Specify ``restart`` to restart the IKE initiation. Specify ``clear`` to end the IKE session.\n Valid Values: ``clear`` | ``none`` | ``restart``\n Default: ``clear``",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: DPDTimeoutSeconds
@@ -688,7 +688,7 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 					}, /*END ATTRIBUTE*/
 					// Property: StartupAction
 					"startup_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The action to take when the establishing the tunnel for the VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify ``start`` for AWS to initiate the IKE negotiation.\n Valid Values: ``add`` | ``start`` \n Default: ``add``",
+						Description: "The action to take when the establishing the tunnel for the VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify ``start`` for AWS to initiate the IKE negotiation.\n Valid Values: ``add`` | ``start``\n Default: ``add``",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: TunnelInsideCidr

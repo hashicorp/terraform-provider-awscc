@@ -27,95 +27,71 @@ func storageSystemDataSource(ctx context.Context) (datasource.DataSource, error)
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ARN of the DataSync agent that connects to and reads from the on-premises storage system's management interface.",
-		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "maxLength": 128,
-		//	    "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$",
 		//	    "type": "string"
 		//	  },
-		//	  "maxItems": 1,
-		//	  "minItems": 1,
-		//	  "type": "array"
+		//	  "type": "array",
+		//	  "uniqueItems": false
 		//	}
 		"agent_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "The ARN of the DataSync agent that connects to and reads from the on-premises storage system's management interface.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CloudWatchLogGroupArn
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ARN of the Amazon CloudWatch log group used to monitor and log discovery job events.",
-		//	  "maxLength": 562,
-		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):logs:[a-z\\-0-9]+:[0-9]{12}:log-group:([^:\\*]*)(:\\*)?$",
 		//	  "type": "string"
 		//	}
 		"cloudwatch_log_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the Amazon CloudWatch log group used to monitor and log discovery job events.",
-			Computed:    true,
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: ConnectivityStatus
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Indicates whether the DataSync agent can access the on-premises storage system.",
-		//	  "enum": [
-		//	    "PASS",
-		//	    "FAIL",
-		//	    "UNKNOWN"
-		//	  ],
 		//	  "type": "string"
 		//	}
 		"connectivity_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether the DataSync agent can access the on-premises storage system.",
-			Computed:    true,
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"storage_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A familiar name for the on-premises storage system.",
-		//	  "maxLength": 256,
-		//	  "minLength": 1,
-		//	  "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A familiar name for the on-premises storage system.",
-			Computed:    true,
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: SecretsManagerArn
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ARN of a secret stored by AWS Secrets Manager.",
-		//	  "maxLength": 2048,
-		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):secretsmanager:[a-z\\-0-9]+:[0-9]{12}:secret:.*",
 		//	  "type": "string"
 		//	}
 		"secrets_manager_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of a secret stored by AWS Secrets Manager.",
-			Computed:    true,
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: ServerConfiguration
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The server name and network port required to connect with the management interface of the on-premises storage system.",
 		//	  "properties": {
 		//	    "ServerHostname": {
-		//	      "description": "The domain name or IP address of the storage system's management interface.",
-		//	      "maxLength": 255,
-		//	      "pattern": "^(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9])$",
 		//	      "type": "string"
 		//	    },
 		//	    "ServerPort": {
-		//	      "description": "The network port needed to access the system's management interface",
-		//	      "maximum": 65535,
-		//	      "minimum": 1,
 		//	      "type": "integer"
 		//	    }
 		//	  },
@@ -128,33 +104,25 @@ func storageSystemDataSource(ctx context.Context) (datasource.DataSource, error)
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: ServerHostname
 				"server_hostname": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The domain name or IP address of the storage system's management interface.",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: ServerPort
 				"server_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The network port needed to access the system's management interface",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The server name and network port required to connect with the management interface of the on-premises storage system.",
-			Computed:    true,
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: ServerCredentials
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The username and password for accessing your on-premises storage system's management interface.",
 		//	  "properties": {
 		//	    "Password": {
-		//	      "description": "The password for your storage system's management interface",
-		//	      "maxLength": 1024,
 		//	      "type": "string"
 		//	    },
 		//	    "Username": {
-		//	      "description": "The username for your storage system's management interface.",
-		//	      "maxLength": 1024,
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -168,97 +136,70 @@ func storageSystemDataSource(ctx context.Context) (datasource.DataSource, error)
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Password
 				"password": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The password for your storage system's management interface",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: Username
 				"username": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The username for your storage system's management interface.",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The username and password for accessing your on-premises storage system's management interface.",
-			Computed:    true,
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: StorageSystemArn
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ARN of the on-premises storage system added to DataSync Discovery.",
-		//	  "maxLength": 128,
-		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:system/storage-system-[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
 		//	  "type": "string"
 		//	}
 		"storage_system_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the on-premises storage system added to DataSync Discovery.",
-			Computed:    true,
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: SystemType
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The type of on-premises storage system that DataSync Discovery will analyze.",
-		//	  "enum": [
-		//	    "NetAppONTAP"
-		//	  ],
 		//	  "type": "string"
 		//	}
 		"system_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of on-premises storage system that DataSync Discovery will analyze.",
-			Computed:    true,
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "An array of key-value pairs to apply to this resource.",
-		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "A key-value pair to associate with a resource.",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "The key for an AWS resource tag.",
-		//	        "maxLength": 256,
-		//	        "minLength": 1,
-		//	        "pattern": "^[a-zA-Z0-9\\s+=._:/-]+$",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "The value for an AWS resource tag.",
-		//	        "maxLength": 256,
-		//	        "minLength": 1,
-		//	        "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
 		//	        "type": "string"
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Key",
-		//	      "Value"
+		//	      "Value",
+		//	      "Key"
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "maxItems": 50,
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key for an AWS resource tag.",
-						Computed:    true,
+						Computed: true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for an AWS resource tag.",
-						Computed:    true,
+						Computed: true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -289,6 +230,7 @@ func storageSystemDataSource(ctx context.Context) (datasource.DataSource, error)
 		"server_hostname":          "ServerHostname",
 		"server_port":              "ServerPort",
 		"storage_system_arn":       "StorageSystemArn",
+		"storage_system_id":        "Id",
 		"system_type":              "SystemType",
 		"tags":                     "Tags",
 		"username":                 "Username",

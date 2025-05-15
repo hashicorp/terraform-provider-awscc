@@ -192,7 +192,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The Data Prepper pipeline configuration.",
-		//	  "maxLength": 24000,
+		//	  "maxLength": 100000,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}

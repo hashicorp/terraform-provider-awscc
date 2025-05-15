@@ -140,6 +140,15 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "A collection of settings.",
 		//	  "properties": {
+		//	    "AutoMountHomeEFS": {
+		//	      "description": "Indicates whether auto-mounting of an EFS volume is supported for the user profile. ",
+		//	      "enum": [
+		//	        "Enabled",
+		//	        "Disabled",
+		//	        "DefaultAsDomain"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "CodeEditorAppSettings": {
 		//	      "additionalProperties": false,
 		//	      "description": "The CodeEditor app settings.",
@@ -181,6 +190,12 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            }
 		//	          },
 		//	          "type": "object"
+		//	        },
+		//	        "BuiltInLifecycleConfigArn": {
+		//	          "description": "The lifecycle configuration that runs before the default lifecycle configuration.",
+		//	          "maxLength": 256,
+		//	          "pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$",
+		//	          "type": "string"
 		//	        },
 		//	        "CustomImages": {
 		//	          "description": "A list of custom images for use for CodeEditor apps.",
@@ -293,7 +308,7 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "LifecycleConfigArn": {
 		//	              "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
 		//	              "maxLength": 256,
-		//	              "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
+		//	              "pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$",
 		//	              "type": "string"
 		//	            },
 		//	            "SageMakerImageArn": {
@@ -316,7 +331,7 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "items": {
 		//	            "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
 		//	            "maxLength": 256,
-		//	            "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
+		//	            "pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$",
 		//	            "type": "string"
 		//	          },
 		//	          "maxItems": 30,
@@ -455,6 +470,12 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          },
 		//	          "type": "object"
 		//	        },
+		//	        "BuiltInLifecycleConfigArn": {
+		//	          "description": "The lifecycle configuration that runs before the default lifecycle configuration.",
+		//	          "maxLength": 256,
+		//	          "pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$",
+		//	          "type": "string"
+		//	        },
 		//	        "CodeRepositories": {
 		//	          "description": "A list of CodeRepositories available for use with JupyterLab apps.",
 		//	          "items": {
@@ -588,7 +609,7 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "LifecycleConfigArn": {
 		//	              "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
 		//	              "maxLength": 256,
-		//	              "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
+		//	              "pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$",
 		//	              "type": "string"
 		//	            },
 		//	            "SageMakerImageArn": {
@@ -611,7 +632,7 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "items": {
 		//	            "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
 		//	            "maxLength": 256,
-		//	            "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
+		//	            "pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$",
 		//	            "type": "string"
 		//	          },
 		//	          "maxItems": 30,
@@ -701,7 +722,7 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "LifecycleConfigArn": {
 		//	              "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
 		//	              "maxLength": 256,
-		//	              "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
+		//	              "pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$",
 		//	              "type": "string"
 		//	            },
 		//	            "SageMakerImageArn": {
@@ -724,7 +745,7 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "items": {
 		//	            "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
 		//	            "maxLength": 256,
-		//	            "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
+		//	            "pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$",
 		//	            "type": "string"
 		//	          },
 		//	          "maxItems": 30,
@@ -850,7 +871,7 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "LifecycleConfigArn": {
 		//	              "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
 		//	              "maxLength": 256,
-		//	              "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
+		//	              "pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$",
 		//	              "type": "string"
 		//	            },
 		//	            "SageMakerImageArn": {
@@ -873,7 +894,7 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "items": {
 		//	            "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
 		//	            "maxLength": 256,
-		//	            "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
+		//	            "pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$",
 		//	            "type": "string"
 		//	          },
 		//	          "maxItems": 30,
@@ -1007,6 +1028,180 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "type": "array",
 		//	          "uniqueItems": true
 		//	        },
+		//	        "HiddenInstanceTypes": {
+		//	          "description": "The instance types you are hiding from the Studio user interface.",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "description": "The instance type that the image version runs on.",
+		//	            "enum": [
+		//	              "system",
+		//	              "ml.t3.micro",
+		//	              "ml.t3.small",
+		//	              "ml.t3.medium",
+		//	              "ml.t3.large",
+		//	              "ml.t3.xlarge",
+		//	              "ml.t3.2xlarge",
+		//	              "ml.m5.large",
+		//	              "ml.m5.xlarge",
+		//	              "ml.m5.2xlarge",
+		//	              "ml.m5.4xlarge",
+		//	              "ml.m5.8xlarge",
+		//	              "ml.m5.12xlarge",
+		//	              "ml.m5.16xlarge",
+		//	              "ml.m5.24xlarge",
+		//	              "ml.m5d.large",
+		//	              "ml.m5d.xlarge",
+		//	              "ml.m5d.2xlarge",
+		//	              "ml.m5d.4xlarge",
+		//	              "ml.m5d.8xlarge",
+		//	              "ml.m5d.12xlarge",
+		//	              "ml.m5d.16xlarge",
+		//	              "ml.m5d.24xlarge",
+		//	              "ml.c5.large",
+		//	              "ml.c5.xlarge",
+		//	              "ml.c5.2xlarge",
+		//	              "ml.c5.4xlarge",
+		//	              "ml.c5.9xlarge",
+		//	              "ml.c5.12xlarge",
+		//	              "ml.c5.18xlarge",
+		//	              "ml.c5.24xlarge",
+		//	              "ml.p3.2xlarge",
+		//	              "ml.p3.8xlarge",
+		//	              "ml.p3.16xlarge",
+		//	              "ml.p3dn.24xlarge",
+		//	              "ml.g4dn.xlarge",
+		//	              "ml.g4dn.2xlarge",
+		//	              "ml.g4dn.4xlarge",
+		//	              "ml.g4dn.8xlarge",
+		//	              "ml.g4dn.12xlarge",
+		//	              "ml.g4dn.16xlarge",
+		//	              "ml.r5.large",
+		//	              "ml.r5.xlarge",
+		//	              "ml.r5.2xlarge",
+		//	              "ml.r5.4xlarge",
+		//	              "ml.r5.8xlarge",
+		//	              "ml.r5.12xlarge",
+		//	              "ml.r5.16xlarge",
+		//	              "ml.r5.24xlarge",
+		//	              "ml.g5.xlarge",
+		//	              "ml.g5.2xlarge",
+		//	              "ml.g5.4xlarge",
+		//	              "ml.g5.8xlarge",
+		//	              "ml.g5.12xlarge",
+		//	              "ml.g5.16xlarge",
+		//	              "ml.g5.24xlarge",
+		//	              "ml.g5.48xlarge",
+		//	              "ml.g6.xlarge",
+		//	              "ml.g6.2xlarge",
+		//	              "ml.g6.4xlarge",
+		//	              "ml.g6.8xlarge",
+		//	              "ml.g6.12xlarge",
+		//	              "ml.g6.16xlarge",
+		//	              "ml.g6.24xlarge",
+		//	              "ml.g6.48xlarge",
+		//	              "ml.g6e.xlarge",
+		//	              "ml.g6e.2xlarge",
+		//	              "ml.g6e.4xlarge",
+		//	              "ml.g6e.8xlarge",
+		//	              "ml.g6e.12xlarge",
+		//	              "ml.g6e.16xlarge",
+		//	              "ml.g6e.24xlarge",
+		//	              "ml.g6e.48xlarge",
+		//	              "ml.geospatial.interactive",
+		//	              "ml.p4d.24xlarge",
+		//	              "ml.p4de.24xlarge",
+		//	              "ml.trn1.2xlarge",
+		//	              "ml.trn1.32xlarge",
+		//	              "ml.trn1n.32xlarge",
+		//	              "ml.p5.48xlarge",
+		//	              "ml.m6i.large",
+		//	              "ml.m6i.xlarge",
+		//	              "ml.m6i.2xlarge",
+		//	              "ml.m6i.4xlarge",
+		//	              "ml.m6i.8xlarge",
+		//	              "ml.m6i.12xlarge",
+		//	              "ml.m6i.16xlarge",
+		//	              "ml.m6i.24xlarge",
+		//	              "ml.m6i.32xlarge",
+		//	              "ml.m7i.large",
+		//	              "ml.m7i.xlarge",
+		//	              "ml.m7i.2xlarge",
+		//	              "ml.m7i.4xlarge",
+		//	              "ml.m7i.8xlarge",
+		//	              "ml.m7i.12xlarge",
+		//	              "ml.m7i.16xlarge",
+		//	              "ml.m7i.24xlarge",
+		//	              "ml.m7i.48xlarge",
+		//	              "ml.c6i.large",
+		//	              "ml.c6i.xlarge",
+		//	              "ml.c6i.2xlarge",
+		//	              "ml.c6i.4xlarge",
+		//	              "ml.c6i.8xlarge",
+		//	              "ml.c6i.12xlarge",
+		//	              "ml.c6i.16xlarge",
+		//	              "ml.c6i.24xlarge",
+		//	              "ml.c6i.32xlarge",
+		//	              "ml.c7i.large",
+		//	              "ml.c7i.xlarge",
+		//	              "ml.c7i.2xlarge",
+		//	              "ml.c7i.4xlarge",
+		//	              "ml.c7i.8xlarge",
+		//	              "ml.c7i.12xlarge",
+		//	              "ml.c7i.16xlarge",
+		//	              "ml.c7i.24xlarge",
+		//	              "ml.c7i.48xlarge",
+		//	              "ml.r6i.large",
+		//	              "ml.r6i.xlarge",
+		//	              "ml.r6i.2xlarge",
+		//	              "ml.r6i.4xlarge",
+		//	              "ml.r6i.8xlarge",
+		//	              "ml.r6i.12xlarge",
+		//	              "ml.r6i.16xlarge",
+		//	              "ml.r6i.24xlarge",
+		//	              "ml.r6i.32xlarge",
+		//	              "ml.r7i.large",
+		//	              "ml.r7i.xlarge",
+		//	              "ml.r7i.2xlarge",
+		//	              "ml.r7i.4xlarge",
+		//	              "ml.r7i.8xlarge",
+		//	              "ml.r7i.12xlarge",
+		//	              "ml.r7i.16xlarge",
+		//	              "ml.r7i.24xlarge",
+		//	              "ml.r7i.48xlarge",
+		//	              "ml.m6id.large",
+		//	              "ml.m6id.xlarge",
+		//	              "ml.m6id.2xlarge",
+		//	              "ml.m6id.4xlarge",
+		//	              "ml.m6id.8xlarge",
+		//	              "ml.m6id.12xlarge",
+		//	              "ml.m6id.16xlarge",
+		//	              "ml.m6id.24xlarge",
+		//	              "ml.m6id.32xlarge",
+		//	              "ml.c6id.large",
+		//	              "ml.c6id.xlarge",
+		//	              "ml.c6id.2xlarge",
+		//	              "ml.c6id.4xlarge",
+		//	              "ml.c6id.8xlarge",
+		//	              "ml.c6id.12xlarge",
+		//	              "ml.c6id.16xlarge",
+		//	              "ml.c6id.24xlarge",
+		//	              "ml.c6id.32xlarge",
+		//	              "ml.r6id.large",
+		//	              "ml.r6id.xlarge",
+		//	              "ml.r6id.2xlarge",
+		//	              "ml.r6id.4xlarge",
+		//	              "ml.r6id.8xlarge",
+		//	              "ml.r6id.12xlarge",
+		//	              "ml.r6id.16xlarge",
+		//	              "ml.r6id.24xlarge",
+		//	              "ml.r6id.32xlarge"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "minItems": 0,
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        },
 		//	        "HiddenMlTools": {
 		//	          "description": "The machine learning tools that are hidden from the Studio left navigation pane.",
 		//	          "insertionOrder": false,
@@ -1038,6 +1233,39 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "minItems": 0,
 		//	          "type": "array",
 		//	          "uniqueItems": true
+		//	        },
+		//	        "HiddenSageMakerImageVersionAliases": {
+		//	          "description": "The version aliases you are hiding from the Studio user interface.",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "SageMakerImageName": {
+		//	                "description": "The SageMaker image name that you are hiding from the Studio user interface.",
+		//	                "enum": [
+		//	                  "sagemaker_distribution"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "VersionAliases": {
+		//	                "insertionOrder": false,
+		//	                "items": {
+		//	                  "maxLength": 128,
+		//	                  "minLength": 1,
+		//	                  "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$",
+		//	                  "type": "string"
+		//	                },
+		//	                "maxItems": 20,
+		//	                "type": "array",
+		//	                "uniqueItems": false
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 5,
+		//	          "minItems": 0,
+		//	          "type": "array",
+		//	          "uniqueItems": true
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -1047,6 +1275,11 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"user_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AutoMountHomeEFS
+				"auto_mount_home_efs": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether auto-mounting of an EFS volume is supported for the user profile. ",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: CodeEditorAppSettings
 				"code_editor_app_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1081,6 +1314,11 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: BuiltInLifecycleConfigArn
+						"built_in_lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The lifecycle configuration that runs before the default lifecycle configuration.",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: CustomImages
 						"custom_images": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1237,6 +1475,11 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: BuiltInLifecycleConfigArn
+						"built_in_lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The lifecycle configuration that runs before the default lifecycle configuration.",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: CodeRepositories
 						"code_repositories": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1499,10 +1742,35 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 							Description: "Applications supported in Studio that are hidden from the Studio left navigation pane.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
+						// Property: HiddenInstanceTypes
+						"hidden_instance_types": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The instance types you are hiding from the Studio user interface.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
 						// Property: HiddenMlTools
 						"hidden_ml_tools": schema.SetAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
 							Description: "The machine learning tools that are hidden from the Studio left navigation pane.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: HiddenSageMakerImageVersionAliases
+						"hidden_sage_maker_image_version_aliases": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: SageMakerImageName
+									"sage_maker_image_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The SageMaker image name that you are hiding from the Studio user interface.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: VersionAliases
+									"version_aliases": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "The version aliases you are hiding from the Studio user interface.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -1530,63 +1798,69 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::UserProfile").WithTerraformTypeName("awscc_sagemaker_user_profile")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"access_status":                    "AccessStatus",
-		"app_image_config_name":            "AppImageConfigName",
-		"app_lifecycle_management":         "AppLifecycleManagement",
-		"code_editor_app_settings":         "CodeEditorAppSettings",
-		"code_repositories":                "CodeRepositories",
-		"custom_file_system_configs":       "CustomFileSystemConfigs",
-		"custom_images":                    "CustomImages",
-		"custom_posix_user_config":         "CustomPosixUserConfig",
-		"default_ebs_storage_settings":     "DefaultEbsStorageSettings",
-		"default_ebs_volume_size_in_gb":    "DefaultEbsVolumeSizeInGb",
-		"default_landing_uri":              "DefaultLandingUri",
-		"default_resource_spec":            "DefaultResourceSpec",
-		"domain_id":                        "DomainId",
-		"efs_file_system_config":           "EFSFileSystemConfig",
-		"execution_role":                   "ExecutionRole",
-		"file_system_id":                   "FileSystemId",
-		"file_system_path":                 "FileSystemPath",
-		"fsx_lustre_file_system_config":    "FSxLustreFileSystemConfig",
-		"gid":                              "Gid",
-		"hidden_app_types":                 "HiddenAppTypes",
-		"hidden_ml_tools":                  "HiddenMlTools",
-		"idle_settings":                    "IdleSettings",
-		"idle_timeout_in_minutes":          "IdleTimeoutInMinutes",
-		"image_name":                       "ImageName",
-		"image_version_number":             "ImageVersionNumber",
-		"instance_type":                    "InstanceType",
-		"jupyter_lab_app_settings":         "JupyterLabAppSettings",
-		"jupyter_server_app_settings":      "JupyterServerAppSettings",
-		"kernel_gateway_app_settings":      "KernelGatewayAppSettings",
-		"key":                              "Key",
-		"lifecycle_config_arn":             "LifecycleConfigArn",
-		"lifecycle_config_arns":            "LifecycleConfigArns",
-		"lifecycle_management":             "LifecycleManagement",
-		"max_idle_timeout_in_minutes":      "MaxIdleTimeoutInMinutes",
-		"maximum_ebs_volume_size_in_gb":    "MaximumEbsVolumeSizeInGb",
-		"min_idle_timeout_in_minutes":      "MinIdleTimeoutInMinutes",
-		"notebook_output_option":           "NotebookOutputOption",
-		"r_studio_server_pro_app_settings": "RStudioServerProAppSettings",
-		"repository_url":                   "RepositoryUrl",
-		"s3_kms_key_id":                    "S3KmsKeyId",
-		"s3_output_path":                   "S3OutputPath",
-		"sage_maker_image_arn":             "SageMakerImageArn",
-		"sage_maker_image_version_arn":     "SageMakerImageVersionArn",
-		"security_groups":                  "SecurityGroups",
-		"sharing_settings":                 "SharingSettings",
-		"single_sign_on_user_identifier":   "SingleSignOnUserIdentifier",
-		"single_sign_on_user_value":        "SingleSignOnUserValue",
-		"space_storage_settings":           "SpaceStorageSettings",
-		"studio_web_portal":                "StudioWebPortal",
-		"studio_web_portal_settings":       "StudioWebPortalSettings",
-		"tags":                             "Tags",
-		"uid":                              "Uid",
-		"user_group":                       "UserGroup",
-		"user_profile_arn":                 "UserProfileArn",
-		"user_profile_name":                "UserProfileName",
-		"user_settings":                    "UserSettings",
-		"value":                            "Value",
+		"access_status":                           "AccessStatus",
+		"app_image_config_name":                   "AppImageConfigName",
+		"app_lifecycle_management":                "AppLifecycleManagement",
+		"auto_mount_home_efs":                     "AutoMountHomeEFS",
+		"built_in_lifecycle_config_arn":           "BuiltInLifecycleConfigArn",
+		"code_editor_app_settings":                "CodeEditorAppSettings",
+		"code_repositories":                       "CodeRepositories",
+		"custom_file_system_configs":              "CustomFileSystemConfigs",
+		"custom_images":                           "CustomImages",
+		"custom_posix_user_config":                "CustomPosixUserConfig",
+		"default_ebs_storage_settings":            "DefaultEbsStorageSettings",
+		"default_ebs_volume_size_in_gb":           "DefaultEbsVolumeSizeInGb",
+		"default_landing_uri":                     "DefaultLandingUri",
+		"default_resource_spec":                   "DefaultResourceSpec",
+		"domain_id":                               "DomainId",
+		"efs_file_system_config":                  "EFSFileSystemConfig",
+		"execution_role":                          "ExecutionRole",
+		"file_system_id":                          "FileSystemId",
+		"file_system_path":                        "FileSystemPath",
+		"fsx_lustre_file_system_config":           "FSxLustreFileSystemConfig",
+		"gid":                                     "Gid",
+		"hidden_app_types":                        "HiddenAppTypes",
+		"hidden_instance_types":                   "HiddenInstanceTypes",
+		"hidden_ml_tools":                         "HiddenMlTools",
+		"hidden_sage_maker_image_version_aliases": "HiddenSageMakerImageVersionAliases",
+		"idle_settings":                           "IdleSettings",
+		"idle_timeout_in_minutes":                 "IdleTimeoutInMinutes",
+		"image_name":                              "ImageName",
+		"image_version_number":                    "ImageVersionNumber",
+		"instance_type":                           "InstanceType",
+		"jupyter_lab_app_settings":                "JupyterLabAppSettings",
+		"jupyter_server_app_settings":             "JupyterServerAppSettings",
+		"kernel_gateway_app_settings":             "KernelGatewayAppSettings",
+		"key":                                     "Key",
+		"lifecycle_config_arn":                    "LifecycleConfigArn",
+		"lifecycle_config_arns":                   "LifecycleConfigArns",
+		"lifecycle_management":                    "LifecycleManagement",
+		"max_idle_timeout_in_minutes":             "MaxIdleTimeoutInMinutes",
+		"maximum_ebs_volume_size_in_gb":           "MaximumEbsVolumeSizeInGb",
+		"min_idle_timeout_in_minutes":             "MinIdleTimeoutInMinutes",
+		"notebook_output_option":                  "NotebookOutputOption",
+		"r_studio_server_pro_app_settings":        "RStudioServerProAppSettings",
+		"repository_url":                          "RepositoryUrl",
+		"s3_kms_key_id":                           "S3KmsKeyId",
+		"s3_output_path":                          "S3OutputPath",
+		"sage_maker_image_arn":                    "SageMakerImageArn",
+		"sage_maker_image_name":                   "SageMakerImageName",
+		"sage_maker_image_version_arn":            "SageMakerImageVersionArn",
+		"security_groups":                         "SecurityGroups",
+		"sharing_settings":                        "SharingSettings",
+		"single_sign_on_user_identifier":          "SingleSignOnUserIdentifier",
+		"single_sign_on_user_value":               "SingleSignOnUserValue",
+		"space_storage_settings":                  "SpaceStorageSettings",
+		"studio_web_portal":                       "StudioWebPortal",
+		"studio_web_portal_settings":              "StudioWebPortalSettings",
+		"tags":                                    "Tags",
+		"uid":                                     "Uid",
+		"user_group":                              "UserGroup",
+		"user_profile_arn":                        "UserProfileArn",
+		"user_profile_name":                       "UserProfileName",
+		"user_settings":                           "UserSettings",
+		"value":                                   "Value",
+		"version_aliases":                         "VersionAliases",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

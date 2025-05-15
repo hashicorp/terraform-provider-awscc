@@ -82,11 +82,11 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Specifies whether minor engine upgrades are applied automatically to the DB cluster during the maintenance window. By default, minor engine upgrades are applied automatically.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB cluster",
+		//	  "description": "Specifies whether minor engine upgrades are applied automatically to the DB cluster during the maintenance window. By default, minor engine upgrades are applied automatically.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB cluster.\n For more information about automatic minor version upgrades, see [Automatically upgrading the minor engine version](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Upgrading.html#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades).",
 		//	  "type": "boolean"
 		//	}
 		"auto_minor_version_upgrade": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether minor engine upgrades are applied automatically to the DB cluster during the maintenance window. By default, minor engine upgrades are applied automatically.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB cluster",
+			Description: "Specifies whether minor engine upgrades are applied automatically to the DB cluster during the maintenance window. By default, minor engine upgrades are applied automatically.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB cluster.\n For more information about automatic minor version upgrades, see [Automatically upgrading the minor engine version](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Upgrading.html#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityZones

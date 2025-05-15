@@ -37,6 +37,10 @@ func eIPAssociationDataSource(ctx context.Context) (datasource.DataSource, error
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "anyOf": [
+		//	    {},
+		//	    {}
+		//	  ],
 		//	  "description": "",
 		//	  "type": "string"
 		//	}

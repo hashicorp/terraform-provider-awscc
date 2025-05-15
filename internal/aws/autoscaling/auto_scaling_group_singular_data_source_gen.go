@@ -23,6 +23,17 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::AutoScaling::AutoScalingGroup resource.
 func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AutoScalingGroupARN
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"auto_scaling_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AutoScalingGroupName
 		// CloudFormation resource type schema:
 		//
@@ -138,16 +149,18 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "",
+		//	  "description": "The capacity reservation specification.",
 		//	  "properties": {
 		//	    "CapacityReservationPreference": {
+		//	      "description": "The capacity reservation preference. The following options are available: \n  +   ``capacity-reservations-only`` - Auto Scaling will only launch instances into a Capacity Reservation or Capacity Reservation resource group. If capacity isn't available, instances will fail to launch.\n  +   ``capacity-reservations-first`` - Auto Scaling will try to launch instances into a Capacity Reservation or Capacity Reservation resource group first. If capacity isn't available, instances will run in On-Demand capacity.\n  +   ``none`` - Auto Scaling will not launch instances into a Capacity Reservation. Instances will run in On-Demand capacity. \n  +   ``default`` - Auto Scaling uses the Capacity Reservation preference from your launch template or an open Capacity Reservation.",
 		//	      "type": "string"
 		//	    },
 		//	    "CapacityReservationTarget": {
 		//	      "additionalProperties": false,
-		//	      "description": "",
+		//	      "description": "Describes a target Capacity Reservation or Capacity Reservation resource group.",
 		//	      "properties": {
 		//	        "CapacityReservationIds": {
+		//	          "description": "The Capacity Reservation IDs to launch instances into.",
 		//	          "insertionOrder": true,
 		//	          "items": {
 		//	            "type": "string"
@@ -156,6 +169,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	          "uniqueItems": true
 		//	        },
 		//	        "CapacityReservationResourceGroupArns": {
+		//	          "description": "The resource group ARNs of the Capacity Reservation to launch instances into.",
 		//	          "insertionOrder": true,
 		//	          "items": {
 		//	            "type": "string"
@@ -176,7 +190,8 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: CapacityReservationPreference
 				"capacity_reservation_preference": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "The capacity reservation preference. The following options are available: \n  +   ``capacity-reservations-only`` - Auto Scaling will only launch instances into a Capacity Reservation or Capacity Reservation resource group. If capacity isn't available, instances will fail to launch.\n  +   ``capacity-reservations-first`` - Auto Scaling will try to launch instances into a Capacity Reservation or Capacity Reservation resource group first. If capacity isn't available, instances will run in On-Demand capacity.\n  +   ``none`` - Auto Scaling will not launch instances into a Capacity Reservation. Instances will run in On-Demand capacity. \n  +   ``default`` - Auto Scaling uses the Capacity Reservation preference from your launch template or an open Capacity Reservation.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: CapacityReservationTarget
 				"capacity_reservation_target": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -184,19 +199,21 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 						// Property: CapacityReservationIds
 						"capacity_reservation_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
+							Description: "The Capacity Reservation IDs to launch instances into.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: CapacityReservationResourceGroupArns
 						"capacity_reservation_resource_group_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
+							Description: "The resource group ARNs of the Capacity Reservation to launch instances into.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "",
+					Description: "Describes a target Capacity Reservation or Capacity Reservation resource group.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "",
+			Description: "The capacity reservation specification.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Context
@@ -735,20 +752,21 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	                  },
 		//	                  "BaselinePerformanceFactors": {
 		//	                    "additionalProperties": false,
-		//	                    "description": "",
+		//	                    "description": "The baseline performance factors for the instance requirements.",
 		//	                    "properties": {
 		//	                      "Cpu": {
 		//	                        "additionalProperties": false,
-		//	                        "description": "",
+		//	                        "description": "The CPU performance to consider, using an instance family as the baseline reference.",
 		//	                        "properties": {
 		//	                          "References": {
+		//	                            "description": "Specify an instance family to use as the baseline reference for CPU performance. All instance types that match your specified attributes will be compared against the CPU performance of the referenced instance family, regardless of CPU manufacturer or architecture differences. \n  Currently only one instance family can be specified in the list.",
 		//	                            "insertionOrder": true,
 		//	                            "items": {
 		//	                              "additionalProperties": false,
-		//	                              "description": "",
+		//	                              "description": "Specify an instance family to use as the baseline reference for CPU performance. All instance types that All instance types that match your specified attributes will be compared against the CPU performance of the referenced instance family, regardless of CPU manufacturer or architecture differences. \n  Currently only one instance family can be specified in the list.",
 		//	                              "properties": {
 		//	                                "InstanceFamily": {
-		//	                                  "description": "",
+		//	                                  "description": "The instance family to use as a baseline reference. \n  Make sure that you specify the correct value for the instance family. The instance family is everything before the period (.) in the instance type name. For example, in the instance ``c6i.large``, the instance family is ``c6i``, not ``c6``. For more information, see [Amazon EC2 instance type naming conventions](https://docs.aws.amazon.com/ec2/latest/instancetypes/instance-type-names.html) in *Amazon EC2 Instance Types*.\n  The following instance types are *not supported* for performance protection.\n  +   ``c1`` \n  +   ``g3| g3s`` \n  +   ``hpc7g`` \n  +   ``m1| m2`` \n  +   ``mac1 | mac2 | mac2-m1ultra | mac2-m2 | mac2-m2pro`` \n  +   ``p3dn | p4d | p5`` \n  +   ``t1`` \n  +   ``u-12tb1 | u-18tb1 | u-24tb1 | u-3tb1 | u-6tb1 | u-9tb1 | u7i-12tb | u7in-16tb | u7in-24tb | u7in-32tb`` \n  \n If you performance protection by specifying a supported instance family, the returned instance types will exclude the preceding unsupported instance families.\n If you specify an unsupported instance family as a value for baseline performance, the API returns an empty response.",
 		//	                                  "type": "string"
 		//	                                }
 		//	                              },
@@ -1131,19 +1149,20 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 																		// Property: InstanceFamily
 																		"instance_family": schema.StringAttribute{ /*START ATTRIBUTE*/
-																			Description: "",
+																			Description: "The instance family to use as a baseline reference. \n  Make sure that you specify the correct value for the instance family. The instance family is everything before the period (.) in the instance type name. For example, in the instance ``c6i.large``, the instance family is ``c6i``, not ``c6``. For more information, see [Amazon EC2 instance type naming conventions](https://docs.aws.amazon.com/ec2/latest/instancetypes/instance-type-names.html) in *Amazon EC2 Instance Types*.\n  The following instance types are *not supported* for performance protection.\n  +   ``c1`` \n  +   ``g3| g3s`` \n  +   ``hpc7g`` \n  +   ``m1| m2`` \n  +   ``mac1 | mac2 | mac2-m1ultra | mac2-m2 | mac2-m2pro`` \n  +   ``p3dn | p4d | p5`` \n  +   ``t1`` \n  +   ``u-12tb1 | u-18tb1 | u-24tb1 | u-3tb1 | u-6tb1 | u-9tb1 | u7i-12tb | u7in-16tb | u7in-24tb | u7in-32tb`` \n  \n If you performance protection by specifying a supported instance family, the returned instance types will exclude the preceding unsupported instance families.\n If you specify an unsupported instance family as a value for baseline performance, the API returns an empty response.",
 																			Computed:    true,
 																		}, /*END ATTRIBUTE*/
 																	}, /*END SCHEMA*/
 																}, /*END NESTED OBJECT*/
-																Computed: true,
+																Description: "Specify an instance family to use as the baseline reference for CPU performance. All instance types that match your specified attributes will be compared against the CPU performance of the referenced instance family, regardless of CPU manufacturer or architecture differences. \n  Currently only one instance family can be specified in the list.",
+																Computed:    true,
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
-														Description: "",
+														Description: "The CPU performance to consider, using an instance family as the baseline reference.",
 														Computed:    true,
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
-												Description: "",
+												Description: "The baseline performance factors for the instance requirements.",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 											// Property: BurstablePerformance
@@ -1670,6 +1689,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		"accelerator_total_memory_mi_b":            "AcceleratorTotalMemoryMiB",
 		"accelerator_types":                        "AcceleratorTypes",
 		"allowed_instance_types":                   "AllowedInstanceTypes",
+		"auto_scaling_group_arn":                   "AutoScalingGroupARN",
 		"auto_scaling_group_name":                  "AutoScalingGroupName",
 		"availability_zone_distribution":           "AvailabilityZoneDistribution",
 		"availability_zone_impairment_policy":      "AvailabilityZoneImpairmentPolicy",

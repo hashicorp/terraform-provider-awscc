@@ -121,6 +121,47 @@ func hostDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The Amazon Resource Name (ARN) of the Amazon Web Services Outpost on which to allocate the Dedicated Host.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Any tags assigned to the Host.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Value",
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Any tags assigned to the Host.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -146,7 +187,10 @@ func hostDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"host_recovery":     "HostRecovery",
 		"instance_family":   "InstanceFamily",
 		"instance_type":     "InstanceType",
+		"key":               "Key",
 		"outpost_arn":       "OutpostArn",
+		"tags":              "Tags",
+		"value":             "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)
