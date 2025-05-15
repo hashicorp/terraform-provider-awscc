@@ -1,4 +1,4 @@
-## 1.41.0 (Unreleased)
+## 1.41.0 (May 15, 2025)
 
 FEATURES:
 
