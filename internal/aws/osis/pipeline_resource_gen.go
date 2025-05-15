@@ -260,7 +260,7 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The Data Prepper pipeline configuration.",
-		//	  "maxLength": 24000,
+		//	  "maxLength": 100000,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
@@ -268,7 +268,7 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The Data Prepper pipeline configuration.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 24000),
+				stringvalidator.LengthBetween(1, 100000),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: PipelineName

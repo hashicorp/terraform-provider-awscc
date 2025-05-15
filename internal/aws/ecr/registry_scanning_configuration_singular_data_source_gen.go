@@ -38,18 +38,18 @@ func registryScanningConfigurationDataSource(ctx context.Context) (datasource.Da
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The scanning rules associated with the registry. A registry scanning configuration may contain a maximum of 2 rules.",
+		//	  "description": "The scanning rules associated with the registry.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "A rule representing the details of a scanning configuration.",
+		//	    "description": "The scanning rules associated with the registry.",
 		//	    "properties": {
 		//	      "RepositoryFilters": {
-		//	        "description": "The repository filters associated with the scanning configuration for a private registry.",
+		//	        "description": "The details of a scanning repository filter. For more information on how to use filters, see [Using filters](https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html#image-scanning-filters) in the *Amazon Elastic Container Registry User Guide*.",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "additionalProperties": false,
-		//	          "description": "The details of a scanning repository filter.",
+		//	          "description": "The filter settings used with image replication. Specifying a repository filter to a replication rule provides a method for controlling which repositories in a private registry are replicated. If no filters are added, the contents of all repositories are replicated.",
 		//	          "properties": {
 		//	            "Filter": {
 		//	              "description": "The filter to use when scanning.",
@@ -75,7 +75,7 @@ func registryScanningConfigurationDataSource(ctx context.Context) (datasource.Da
 		//	        "type": "array"
 		//	      },
 		//	      "ScanFrequency": {
-		//	        "description": "The frequency that scans are performed.",
+		//	        "description": "The frequency that scans are performed at for a private registry. When the ``ENHANCED`` scan type is specified, the supported scan frequencies are ``CONTINUOUS_SCAN`` and ``SCAN_ON_PUSH``. When the ``BASIC`` scan type is specified, the ``SCAN_ON_PUSH`` scan frequency is supported. If scan on push is not specified, then the ``MANUAL`` scan frequency is set by default.",
 		//	        "enum": [
 		//	          "SCAN_ON_PUSH",
 		//	          "CONTINUOUS_SCAN"
@@ -112,17 +112,17 @@ func registryScanningConfigurationDataSource(ctx context.Context) (datasource.Da
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "The repository filters associated with the scanning configuration for a private registry.",
+						Description: "The details of a scanning repository filter. For more information on how to use filters, see [Using filters](https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html#image-scanning-filters) in the *Amazon Elastic Container Registry User Guide*.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ScanFrequency
 					"scan_frequency": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The frequency that scans are performed.",
+						Description: "The frequency that scans are performed at for a private registry. When the ``ENHANCED`` scan type is specified, the supported scan frequencies are ``CONTINUOUS_SCAN`` and ``SCAN_ON_PUSH``. When the ``BASIC`` scan type is specified, the ``SCAN_ON_PUSH`` scan frequency is supported. If scan on push is not specified, then the ``MANUAL`` scan frequency is set by default.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "The scanning rules associated with the registry. A registry scanning configuration may contain a maximum of 2 rules.",
+			Description: "The scanning rules associated with the registry.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ScanType

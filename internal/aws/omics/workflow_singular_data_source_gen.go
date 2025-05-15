@@ -206,6 +206,21 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"storage_capacity": schema.Float64Attribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: StorageType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "STATIC",
+		//	    "DYNAMIC"
+		//	  ],
+		//	  "maxLength": 64,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"storage_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -242,6 +257,16 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: Uuid
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+		//	  "type": "string"
+		//	}
+		"uuid": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -271,8 +296,10 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"parameter_template": "ParameterTemplate",
 		"status":             "Status",
 		"storage_capacity":   "StorageCapacity",
+		"storage_type":       "StorageType",
 		"tags":               "Tags",
 		"type":               "Type",
+		"uuid":               "Uuid",
 		"workflow_id":        "Id",
 	})
 

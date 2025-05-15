@@ -815,6 +815,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// AmazonOpenSearchServerlessDestinationConfiguration is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: AmazonopensearchserviceDestinationConfiguration
 		// CloudFormation resource type schema:
@@ -1692,6 +1693,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// AmazonopensearchserviceDestinationConfiguration is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
@@ -2224,6 +2226,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
+			// DatabaseSourceConfiguration is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: DeliveryStreamEncryptionConfigurationInput
 		// CloudFormation resource type schema:
@@ -2365,6 +2368,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
+					// ThroughputHintInMBs is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Optional: true,
@@ -2761,6 +2765,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
+							// Enabled is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: LogGroupName
 						"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -3254,6 +3259,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// ElasticsearchDestinationConfiguration is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: ExtendedS3DestinationConfiguration
 		// CloudFormation resource type schema:
@@ -3850,6 +3856,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
+					// CustomTimeZone is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: DataFormatConversionConfiguration
 				"data_format_conversion_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -4283,6 +4290,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
+					// FileExtension is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: Prefix
 				"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -5008,6 +5016,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
+							// AccessKey is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: Name
 						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -5130,6 +5139,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
+					// ProcessingConfiguration is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: RequestConfiguration
 				"request_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -5342,6 +5352,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
+											// AWSKMSKeyARN is a write-only property.
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Optional: true,
@@ -5459,6 +5470,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
+					// SecretsManagerConfiguration is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Optional: true,
@@ -6245,6 +6257,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// IcebergDestinationConfiguration is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: KinesisStreamSourceConfiguration
 		// CloudFormation resource type schema:
@@ -6314,6 +6327,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
+			// KinesisStreamSourceConfiguration is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: MSKSourceConfiguration
 		// CloudFormation resource type schema:
@@ -6459,6 +6473,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
+			// MSKSourceConfiguration is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: RedshiftDestinationConfiguration
 		// CloudFormation resource type schema:
@@ -6984,6 +6999,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
+					// Password is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: ProcessingConfiguration
 				"processing_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -7073,6 +7089,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
+					// ProcessingConfiguration is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: RetryOptions
 				"retry_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -7214,6 +7231,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
+											// AWSKMSKeyARN is a write-only property.
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Optional: true,
@@ -7252,6 +7270,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
+							// ErrorOutputPrefix is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: Prefix
 						"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -7407,6 +7426,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
+											// AWSKMSKeyARN is a write-only property.
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Optional: true,
@@ -7445,6 +7465,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
+							// ErrorOutputPrefix is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: Prefix
 						"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -7493,6 +7514,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
+							// Enabled is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: RoleARN
 						"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -7505,6 +7527,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
+							// RoleARN is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: SecretARN
 						"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -7517,6 +7540,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
+							// SecretARN is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
@@ -7836,6 +7860,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// S3DestinationConfiguration is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: SnowflakeDestinationConfiguration
 		// CloudFormation resource type schema:
@@ -8774,6 +8799,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 						objectplanmodifier.UseStateForUnknown(),
 						objectplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// SnowflakeVpcConfiguration is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: Table
 				"table": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -8804,6 +8830,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// SnowflakeDestinationConfiguration is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: SplunkDestinationConfiguration
 		// CloudFormation resource type schema:
@@ -9118,6 +9145,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
+					// BufferingHints is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: CloudWatchLoggingOptions
 				"cloudwatch_logging_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -9152,6 +9180,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
+					// CloudWatchLoggingOptions is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: HECAcknowledgmentTimeoutInSeconds
 				"hec_acknowledgment_timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -9290,6 +9319,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
+					// ProcessingConfiguration is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: RetryOptions
 				"retry_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -9446,6 +9476,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
+									// NoEncryptionConfig is a write-only property.
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
@@ -9543,6 +9574,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
+					// SecretsManagerConfiguration is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Optional: true,
@@ -9806,6 +9838,40 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		"writer_version":                                 "WriterVersion",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/HttpEndpointDestinationConfiguration/EndpointConfiguration/AccessKey",
+		"/properties/RedshiftDestinationConfiguration/Password",
+		"/properties/ElasticsearchDestinationConfiguration/CloudWatchLoggingOptions/Enabled",
+		"/properties/AmazonopensearchserviceDestinationConfiguration",
+		"/properties/ElasticsearchDestinationConfiguration",
+		"/properties/SnowflakeDestinationConfiguration",
+		"/properties/AmazonOpenSearchServerlessDestinationConfiguration",
+		"/properties/DatabaseSourceConfiguration",
+		"/properties/IcebergDestinationConfiguration",
+		"/properties/HttpEndpointDestinationConfiguration/SecretsManagerConfiguration",
+		"/properties/RedshiftDestinationConfiguration/ProcessingConfiguration",
+		"/properties/S3DestinationConfiguration",
+		"/properties/MSKSourceConfiguration",
+		"/properties/KinesisStreamSourceConfiguration",
+		"/properties/SnowflakeDestinationConfiguration/SnowflakeVpcConfiguration",
+		"/properties/HttpEndpointDestinationConfiguration/ProcessingConfiguration",
+		"/properties/RedshiftDestinationConfiguration/S3Configuration/EncryptionConfiguration/KMSEncryptionConfig/AWSKMSKeyARN",
+		"/properties/SplunkDestinationConfiguration/BufferingHints",
+		"/properties/SplunkDestinationConfiguration/SecretsManagerConfiguration",
+		"/properties/SplunkDestinationConfiguration/ProcessingConfiguration",
+		"/properties/SplunkDestinationConfiguration/CloudWatchLoggingOptions",
+		"/properties/SplunkDestinationConfiguration/S3Configuration/EncryptionConfiguration/NoEncryptionConfig",
+		"/properties/RedshiftDestinationConfiguration/S3BackupConfiguration/ErrorOutputPrefix",
+		"/properties/RedshiftDestinationConfiguration/S3BackupConfiguration/EncryptionConfiguration/KMSEncryptionConfig/AWSKMSKeyARN",
+		"/properties/ExtendedS3DestinationConfiguration/FileExtension",
+		"/properties/RedshiftDestinationConfiguration/S3Configuration/ErrorOutputPrefix",
+		"/properties/RedshiftDestinationConfiguration/SecretsManagerConfiguration/Enabled",
+		"/properties/RedshiftDestinationConfiguration/SecretsManagerConfiguration/SecretARN",
+		"/properties/HttpEndpointDestinationConfiguration/S3Configuration/EncryptionConfiguration/KMSEncryptionConfig/AWSKMSKeyARN",
+		"/properties/ExtendedS3DestinationConfiguration/CustomTimeZone",
+		"/properties/RedshiftDestinationConfiguration/SecretsManagerConfiguration/RoleARN",
+		"/properties/DirectPutSourceConfiguration/ThroughputHintInMBs",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

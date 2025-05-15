@@ -287,7 +287,10 @@
         "qbusiness:ListTagsForResource",
         "qbusiness:TagResource",
         "qbusiness:UntagResource",
-        "qbusiness:UpdateDataAccessor"
+        "qbusiness:UpdateDataAccessor",
+        "sso:PutApplicationAuthenticationMethod",
+        "sso:PutApplicationGrant",
+        "sso:PutApplicationAccessScope"
       ]
     },
     "delete": {

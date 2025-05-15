@@ -57,6 +57,7 @@ Optional:
 
 Optional:
 
+- `auto_mount_home_efs` (String) Indicates whether auto-mounting of an EFS volume is supported for the user profile.
 - `code_editor_app_settings` (Attributes) The CodeEditor app settings. (see [below for nested schema](#nestedatt--user_settings--code_editor_app_settings))
 - `custom_file_system_configs` (Attributes List) (see [below for nested schema](#nestedatt--user_settings--custom_file_system_configs))
 - `custom_posix_user_config` (Attributes) (see [below for nested schema](#nestedatt--user_settings--custom_posix_user_config))
@@ -78,6 +79,7 @@ Optional:
 Optional:
 
 - `app_lifecycle_management` (Attributes) (see [below for nested schema](#nestedatt--user_settings--code_editor_app_settings--app_lifecycle_management))
+- `built_in_lifecycle_config_arn` (String) The lifecycle configuration that runs before the default lifecycle configuration.
 - `custom_images` (Attributes List) A list of custom images for use for CodeEditor apps. (see [below for nested schema](#nestedatt--user_settings--code_editor_app_settings--custom_images))
 - `default_resource_spec` (Attributes) The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the CodeEditor app. (see [below for nested schema](#nestedatt--user_settings--code_editor_app_settings--default_resource_spec))
 - `lifecycle_config_arns` (List of String) A list of LifecycleConfigArns available for use with CodeEditor apps.
@@ -165,6 +167,7 @@ Optional:
 Optional:
 
 - `app_lifecycle_management` (Attributes) (see [below for nested schema](#nestedatt--user_settings--jupyter_lab_app_settings--app_lifecycle_management))
+- `built_in_lifecycle_config_arn` (String) The lifecycle configuration that runs before the default lifecycle configuration.
 - `code_repositories` (Attributes List) A list of CodeRepositories available for use with JupyterLab apps. (see [below for nested schema](#nestedatt--user_settings--jupyter_lab_app_settings--code_repositories))
 - `custom_images` (Attributes List) A list of custom images available for use for JupyterLab apps (see [below for nested schema](#nestedatt--user_settings--jupyter_lab_app_settings--custom_images))
 - `default_resource_spec` (Attributes) The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the JupyterLab app. (see [below for nested schema](#nestedatt--user_settings--jupyter_lab_app_settings--default_resource_spec))
@@ -312,7 +315,17 @@ Optional:
 Optional:
 
 - `hidden_app_types` (Set of String) Applications supported in Studio that are hidden from the Studio left navigation pane.
+- `hidden_instance_types` (Set of String) The instance types you are hiding from the Studio user interface.
 - `hidden_ml_tools` (Set of String) The machine learning tools that are hidden from the Studio left navigation pane.
+- `hidden_sage_maker_image_version_aliases` (Attributes Set) The version aliases you are hiding from the Studio user interface. (see [below for nested schema](#nestedatt--user_settings--studio_web_portal_settings--hidden_sage_maker_image_version_aliases))
+
+<a id="nestedatt--user_settings--studio_web_portal_settings--hidden_sage_maker_image_version_aliases"></a>
+### Nested Schema for `user_settings.studio_web_portal_settings.hidden_sage_maker_image_version_aliases`
+
+Optional:
+
+- `sage_maker_image_name` (String) The SageMaker image name that you are hiding from the Studio user interface.
+- `version_aliases` (List of String)
 
 ## Import
 

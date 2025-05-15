@@ -30,6 +30,7 @@ Data Source schema for AWS::WorkSpaces::WorkspacesPool
 - `pool_arn` (String)
 - `pool_id` (String)
 - `pool_name` (String)
+- `running_mode` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `timeout_settings` (Attributes) (see [below for nested schema](#nestedatt--timeout_settings))
 

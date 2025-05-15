@@ -1,5 +1,9 @@
 {
   "tagging": {
+    "permissions": [
+      "autoscaling:CreateOrUpdateTags",
+      "autoscaling:DeleteTags"
+    ],
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
@@ -10,6 +14,9 @@
     "/properties/NotificationConfiguration"
   ],
   "typeName": "AWS::AutoScaling::AutoScalingGroup",
+  "readOnlyProperties": [
+    "/properties/AutoScalingGroupARN"
+  ],
   "description": "The ``AWS::AutoScaling::AutoScalingGroup`` resource defines an Amazon EC2 Auto Scaling group, which is a collection of Amazon EC2 instances that are treated as a logical grouping for the purposes of automatic scaling and management. \n For more information about Amazon EC2 Auto Scaling, see the [Amazon EC2 Auto Scaling User Guide](https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html). \n  Amazon EC2 Auto Scaling configures instances launched as part of an Auto Scaling group using either a [launch template](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html) or a launch configuration. We strongly recommend that you do not use launch configurations. For more information, see [Launch configurations](https://docs.aws.amazon.com/autoscaling/ec2/userguide/launch-configurations.html) in the *Amazon EC2 Auto Scaling User Guide*.\n For help migrating from launch configurations to launch templates, see [Migrate CloudFormation stacks from launch configurations to launch templates](https://docs.aws.amazon.com/autoscaling/ec2/userguide/migrate-launch-configurations-with-cloudformation.html) in the *Amazon EC2 Auto Scaling User Guide*.",
   "createOnlyProperties": [
     "/properties/InstanceId",
@@ -276,12 +283,12 @@
       }
     },
     "PerformanceFactorReferenceRequest": {
-      "description": "",
+      "description": "Specify an instance family to use as the baseline reference for CPU performance. All instance types that All instance types that match your specified attributes will be compared against the CPU performance of the referenced instance family, regardless of CPU manufacturer or architecture differences. \n  Currently only one instance family can be specified in the list.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "InstanceFamily": {
-          "description": "",
+          "description": "The instance family to use as a baseline reference. \n  Make sure that you specify the correct value for the instance family. The instance family is everything before the period (.) in the instance type name. For example, in the instance ``c6i.large``, the instance family is ``c6i``, not ``c6``. For more information, see [Amazon EC2 instance type naming conventions](https://docs.aws.amazon.com/ec2/latest/instancetypes/instance-type-names.html) in *Amazon EC2 Instance Types*.\n  The following instance types are *not supported* for performance protection.\n  +   ``c1`` \n  +   ``g3| g3s`` \n  +   ``hpc7g`` \n  +   ``m1| m2`` \n  +   ``mac1 | mac2 | mac2-m1ultra | mac2-m2 | mac2-m2pro`` \n  +   ``p3dn | p4d | p5`` \n  +   ``t1`` \n  +   ``u-12tb1 | u-18tb1 | u-24tb1 | u-3tb1 | u-6tb1 | u-9tb1 | u7i-12tb | u7in-16tb | u7in-24tb | u7in-32tb`` \n  \n If you performance protection by specifying a supported instance family, the returned instance types will exclude the preceding unsupported instance families.\n If you specify an unsupported instance family as a value for baseline performance, the API returns an empty response.",
           "type": "string"
         }
       }
@@ -333,12 +340,12 @@
       }
     },
     "CpuPerformanceFactorRequest": {
-      "description": "",
+      "description": "The CPU performance to consider, using an instance family as the baseline reference.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "References": {
-          "description": "",
+          "description": "Specify an instance family to use as the baseline reference for CPU performance. All instance types that match your specified attributes will be compared against the CPU performance of the referenced instance family, regardless of CPU manufacturer or architecture differences. \n  Currently only one instance family can be specified in the list.",
           "$ref": "#/definitions/PerformanceFactorReferenceSetRequest"
         }
       }
@@ -575,12 +582,12 @@
       }
     },
     "BaselinePerformanceFactorsRequest": {
-      "description": "",
+      "description": "The baseline performance to consider, using an instance family as a baseline reference. The instance family establishes the lowest acceptable level of performance. Auto Scaling uses this baseline to guide instance type selection, but there is no guarantee that the selected instance types will always exceed the baseline for every application. \n Currently, this parameter only supports CPU performance as a baseline performance factor. For example, specifying ``c6i`` uses the CPU performance of the ``c6i`` family as the baseline reference.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "Cpu": {
-          "description": "",
+          "description": "The CPU performance to consider, using an instance family as the baseline reference.",
           "$ref": "#/definitions/CpuPerformanceFactorRequest"
         }
       }
@@ -740,7 +747,7 @@
           "$ref": "#/definitions/NetworkBandwidthGbpsRequest"
         },
         "BaselinePerformanceFactors": {
-          "description": "",
+          "description": "The baseline performance factors for the instance requirements.",
           "$ref": "#/definitions/BaselinePerformanceFactorsRequest"
         },
         "BaselineEbsBandwidthMbps": {
@@ -779,27 +786,31 @@
       ]
     },
     "CapacityReservationTarget": {
-      "description": "",
+      "description": "The target for the Capacity Reservation. Specify Capacity Reservations IDs or Capacity Reservation resource group ARNs.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "CapacityReservationIds": {
+          "description": "The Capacity Reservation IDs to launch instances into.",
           "$ref": "#/definitions/CapacityReservationIds"
         },
         "CapacityReservationResourceGroupArns": {
+          "description": "The resource group ARNs of the Capacity Reservation to launch instances into.",
           "$ref": "#/definitions/CapacityReservationResourceGroupArns"
         }
       }
     },
     "CapacityReservationSpecification": {
-      "description": "",
+      "description": "Describes the Capacity Reservation preference and targeting options. If you specify ``open`` or ``none`` for ``CapacityReservationPreference``, do not specify a ``CapacityReservationTarget``.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "CapacityReservationPreference": {
+          "description": "The capacity reservation preference. The following options are available: \n  +   ``capacity-reservations-only`` - Auto Scaling will only launch instances into a Capacity Reservation or Capacity Reservation resource group. If capacity isn't available, instances will fail to launch.\n  +   ``capacity-reservations-first`` - Auto Scaling will try to launch instances into a Capacity Reservation or Capacity Reservation resource group first. If capacity isn't available, instances will run in On-Demand capacity.\n  +   ``none`` - Auto Scaling will not launch instances into a Capacity Reservation. Instances will run in On-Demand capacity. \n  +   ``default`` - Auto Scaling uses the Capacity Reservation preference from your launch template or an open Capacity Reservation.",
           "type": "string"
         },
         "CapacityReservationTarget": {
+          "description": "Describes a target Capacity Reservation or Capacity Reservation resource group.",
           "$ref": "#/definitions/CapacityReservationTarget"
         }
       },
@@ -919,6 +930,10 @@
       "description": "The ID of the instance used to base the launch configuration on. For more information, see [Create an Auto Scaling group using an EC2 instance](https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-from-instance.html) in the *Amazon EC2 Auto Scaling User Guide*.\n If you specify ``LaunchTemplate``, ``MixedInstancesPolicy``, or ``LaunchConfigurationName``, don't specify ``InstanceId``.",
       "type": "string"
     },
+    "AutoScalingGroupARN": {
+      "description": "",
+      "type": "string"
+    },
     "AvailabilityZones": {
       "uniqueItems": false,
       "description": "A list of Availability Zones where instances in the Auto Scaling group can be created. Used for launching into the default VPC subnet in each Availability Zone when not using the ``VPCZoneIdentifier`` property, or for attaching a network interface when an existing network interface ID is specified in a launch template.",
@@ -990,7 +1005,7 @@
       "type": "string"
     },
     "CapacityReservationSpecification": {
-      "description": "",
+      "description": "The capacity reservation specification.",
       "$ref": "#/definitions/CapacityReservationSpecification"
     },
     "HealthCheckType": {

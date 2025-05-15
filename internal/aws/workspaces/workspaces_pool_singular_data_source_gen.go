@@ -157,6 +157,19 @@ func workspacesPoolDataSource(ctx context.Context) (datasource.DataSource, error
 		"pool_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: RunningMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "ALWAYS_ON",
+		//	    "AUTO_STOP"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"running_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -268,6 +281,7 @@ func workspacesPoolDataSource(ctx context.Context) (datasource.DataSource, error
 		"pool_arn":                           "PoolArn",
 		"pool_id":                            "PoolId",
 		"pool_name":                          "PoolName",
+		"running_mode":                       "RunningMode",
 		"settings_group":                     "SettingsGroup",
 		"status":                             "Status",
 		"tags":                               "Tags",

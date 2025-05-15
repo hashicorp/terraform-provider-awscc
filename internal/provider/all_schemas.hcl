@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1157 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1168 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -457,12 +457,12 @@ resource_schema "aws_applicationinsights_application" {
   cloudformation_type_name = "AWS::ApplicationInsights::Application"
 }
 
-resource_schema "aws_applicationsignals_service_level_objective" {
-  cloudformation_type_name = "AWS::ApplicationSignals::ServiceLevelObjective"
-}
-
 resource_schema "aws_applicationsignals_discovery" {
   cloudformation_type_name = "AWS::ApplicationSignals::Discovery"
+}
+
+resource_schema "aws_applicationsignals_service_level_objective" {
+  cloudformation_type_name = "AWS::ApplicationSignals::ServiceLevelObjective"
 }
 
 resource_schema "aws_athena_capacity_reservation" {
@@ -614,13 +614,13 @@ resource_schema "aws_bedrock_blueprint" {
   cloudformation_type_name = "AWS::Bedrock::Blueprint"
 }
 
+resource_schema "aws_bedrock_data_automation_project" {
+  cloudformation_type_name = "AWS::Bedrock::DataAutomationProject"
+}
+
 resource_schema "aws_bedrock_data_source" {
   cloudformation_type_name               = "AWS::Bedrock::DataSource"
   suppress_plural_data_source_generation = true
-}
-
-resource_schema "aws_bedrock_data_automation_project" {
-  cloudformation_type_name = "AWS::Bedrock::DataAutomationProject"
 }
 
 resource_schema "aws_bedrock_flow" {
@@ -1358,6 +1358,16 @@ resource_schema "aws_dms_replication_config" {
   cloudformation_type_name = "AWS::DMS::ReplicationConfig"
 }
 
+resource_schema "aws_dsql_cluster" {
+  cloudformation_type_name                 = "AWS::DSQL::Cluster"
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+
+  # Suppression Reason: Tags is of unsupported type: list of
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/2272
+}
+
 resource_schema "aws_databrew_dataset" {
   cloudformation_type_name = "AWS::DataBrew::Dataset"
 }
@@ -1439,6 +1449,8 @@ resource_schema "aws_datasync_location_smb" {
   cloudformation_type_name = "AWS::DataSync::LocationSMB"
 }
 
+# This resource was not present in the 05/14/2025 refresh.
+# However we are leaving it here as we have no way currently to remove resources cleanly.
 resource_schema "aws_datasync_storage_system" {
   cloudformation_type_name = "AWS::DataSync::StorageSystem"
 }
@@ -1598,16 +1610,6 @@ resource_schema "aws_directoryservice_simple_ad" {
 
 resource_schema "aws_docdbelastic_cluster" {
   cloudformation_type_name = "AWS::DocDBElastic::Cluster"
-}
-
-resource_schema "aws_dsql_cluster" {
-  cloudformation_type_name                 = "AWS::DSQL::Cluster"
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
-
-  # Suppression Reason: Tags is of unsupported type: list of
-  # https://github.com/hashicorp/terraform-provider-awscc/issues/2272
 }
 
 resource_schema "aws_dynamodb_global_table" {
@@ -3795,6 +3797,10 @@ resource_schema "aws_omics_variant_store" {
 
 resource_schema "aws_omics_workflow" {
   cloudformation_type_name = "AWS::Omics::Workflow"
+}
+
+resource_schema "aws_omics_workflow_version" {
+  cloudformation_type_name = "AWS::Omics::WorkflowVersion"
 }
 
 resource_schema "aws_opensearchserverless_access_policy" {

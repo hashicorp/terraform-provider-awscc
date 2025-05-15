@@ -3,6 +3,29 @@
   "description": "Resource Type definition for AWS::SSMContacts::Contact",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
   "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "description": "The key name of the tag",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "description": "The value for the tag.",
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
     "ContactTargetInfo": {
       "type": "object",
       "description": "The contact that SSM Incident Manager is engaging during an incident.",
@@ -136,6 +159,14 @@
         "$ref": "#/definitions/Stage"
       }
     },
+    "Tags": {
+      "type": "array",
+      "insertionOrder": false,
+      "uniqueItems": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    },
     "Arn": {
       "type": "string",
       "description": "The Amazon Resource Name (ARN) of the contact."
@@ -160,24 +191,42 @@
     "/properties/Alias",
     "/properties/Type"
   ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "ssm-contacts:TagResource",
+      "ssm-contacts:UntagResource",
+      "ssm-contacts:ListTagsForResource"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
         "ssm-contacts:CreateContact",
         "ssm-contacts:GetContact",
-        "ssm-contacts:AssociateContact"
+        "ssm-contacts:AssociateContact",
+        "ssm-contacts:TagResource",
+        "ssm-contacts:ListTagsForResource"
       ]
     },
     "read": {
       "permissions": [
-        "ssm-contacts:GetContact"
+        "ssm-contacts:GetContact",
+        "ssm-contacts:ListTagsForResource"
       ]
     },
     "update": {
       "permissions": [
         "ssm-contacts:UpdateContact",
         "ssm-contacts:GetContact",
-        "ssm-contacts:AssociateContact"
+        "ssm-contacts:AssociateContact",
+        "ssm-contacts:TagResource",
+        "ssm-contacts:UntagResource",
+        "ssm-contacts:ListTagsForResource"
       ]
     },
     "delete": {
@@ -189,7 +238,8 @@
     },
     "list": {
       "permissions": [
-        "ssm-contacts:ListContacts"
+        "ssm-contacts:ListContacts",
+        "ssm-contacts:ListTagsForResource"
       ]
     }
   }

@@ -73,6 +73,9 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		//	    "disk": {
 		//	      "type": "integer"
 		//	    },
+		//	    "instanceType": {
+		//	      "type": "string"
+		//	    },
 		//	    "machineType": {
 		//	      "enum": [
 		//	        "GENERAL",
@@ -97,6 +100,14 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: instanceType
+				"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: machineType
@@ -146,7 +157,8 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		//	    "BUILD_GENERAL1_LARGE",
 		//	    "BUILD_GENERAL1_XLARGE",
 		//	    "BUILD_GENERAL1_2XLARGE",
-		//	    "ATTRIBUTE_BASED_COMPUTE"
+		//	    "ATTRIBUTE_BASED_COMPUTE",
+		//	    "CUSTOM_INSTANCE_TYPE"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -161,6 +173,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 					"BUILD_GENERAL1_XLARGE",
 					"BUILD_GENERAL1_2XLARGE",
 					"ATTRIBUTE_BASED_COMPUTE",
+					"CUSTOM_INSTANCE_TYPE",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -667,6 +680,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		"fleet_service_role":              "FleetServiceRole",
 		"fleet_vpc_config":                "FleetVpcConfig",
 		"image_id":                        "ImageId",
+		"instance_type":                   "instanceType",
 		"key":                             "Key",
 		"machine_type":                    "machineType",
 		"max_capacity":                    "MaxCapacity",

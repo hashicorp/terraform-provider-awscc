@@ -22,7 +22,7 @@ Data Source schema for AWS::SecurityHub::Standard
 ### Read-Only
 
 - `disabled_standards_controls` (Attributes List) Specifies which controls are to be disabled in a standard. 
-  *Maximum*: ``100`` (see [below for nested schema](#nestedatt--disabled_standards_controls))
+ *Maximum*: ``100`` (see [below for nested schema](#nestedatt--disabled_standards_controls))
 - `standards_arn` (String) The ARN of the standard that you want to enable. To view a list of available ASH standards and their ARNs, use the [DescribeStandards](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeStandards.html) API operation.
 - `standards_subscription_arn` (String)
 

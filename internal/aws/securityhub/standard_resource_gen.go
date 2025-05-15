@@ -34,7 +34,7 @@ func standardResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Specifies which controls are to be disabled in a standard. \n  *Maximum*: ``100``",
+		//	  "description": "Specifies which controls are to be disabled in a standard. \n *Maximum*: ``100``",
 		//	  "insertionOrder": true,
 		//	  "items": {
 		//	    "additionalProperties": false,
@@ -87,7 +87,7 @@ func standardResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "Specifies which controls are to be disabled in a standard. \n  *Maximum*: ``100``",
+			Description: "Specifies which controls are to be disabled in a standard. \n *Maximum*: ``100``",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/

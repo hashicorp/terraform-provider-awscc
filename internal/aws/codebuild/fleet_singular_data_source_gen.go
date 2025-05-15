@@ -52,6 +52,9 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "disk": {
 		//	      "type": "integer"
 		//	    },
+		//	    "instanceType": {
+		//	      "type": "string"
+		//	    },
 		//	    "machineType": {
 		//	      "enum": [
 		//	        "GENERAL",
@@ -72,6 +75,10 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: disk
 				"disk": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: instanceType
+				"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: machineType
@@ -99,7 +106,8 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "BUILD_GENERAL1_LARGE",
 		//	    "BUILD_GENERAL1_XLARGE",
 		//	    "BUILD_GENERAL1_2XLARGE",
-		//	    "ATTRIBUTE_BASED_COMPUTE"
+		//	    "ATTRIBUTE_BASED_COMPUTE",
+		//	    "CUSTOM_INSTANCE_TYPE"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -436,6 +444,7 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"fleet_service_role":              "FleetServiceRole",
 		"fleet_vpc_config":                "FleetVpcConfig",
 		"image_id":                        "ImageId",
+		"instance_type":                   "instanceType",
 		"key":                             "Key",
 		"machine_type":                    "machineType",
 		"max_capacity":                    "MaxCapacity",

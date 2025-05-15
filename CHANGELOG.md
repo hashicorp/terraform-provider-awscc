@@ -1,3 +1,11 @@
+## 1.41.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_omics_workflow_version`
+* **New Data Source:** `awscc_omics_workflow_versions`
+* **New Resource:** `awscc_omics_workflow_version`
+
 ## 1.40.0 (May 8, 2025)
 
 FEATURES:

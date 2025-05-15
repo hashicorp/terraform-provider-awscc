@@ -151,7 +151,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "type": "object"
 		//	        },
 		//	        "Logging": {
-		//	          "description": "The log setting to use for redirecting logs for your execute command results. The following log settings are available.\n  +   ``NONE``: The execute command session is not logged.\n  +   ``DEFAULT``: The ``awslogs`` configuration in the task definition is used. If no logging parameter is specified, it defaults to this value. If no ``awslogs`` log driver is configured in the task definition, the output won't be logged.\n  +   ``OVERRIDE``: Specify the logging details as a part of ``logConfiguration``. If the ``OVERRIDE`` logging option is specified, the ``logConfiguration`` is required.",
+		//	          "description": "The log setting to use for redirecting logs for your execute command results. The following log settings are available.\n  +  ``NONE``: The execute command session is not logged.\n  +  ``DEFAULT``: The ``awslogs`` configuration in the task definition is used. If no logging parameter is specified, it defaults to this value. If no ``awslogs`` log driver is configured in the task definition, the output won't be logged.\n  +  ``OVERRIDE``: Specify the logging details as a part of ``logConfiguration``. If the ``OVERRIDE`` logging option is specified, the ``logConfiguration`` is required.",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -219,7 +219,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: Logging
 						"logging": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The log setting to use for redirecting logs for your execute command results. The following log settings are available.\n  +   ``NONE``: The execute command session is not logged.\n  +   ``DEFAULT``: The ``awslogs`` configuration in the task definition is used. If no logging parameter is specified, it defaults to this value. If no ``awslogs`` log driver is configured in the task definition, the output won't be logged.\n  +   ``OVERRIDE``: Specify the logging details as a part of ``logConfiguration``. If the ``OVERRIDE`` logging option is specified, the ``logConfiguration`` is required.",
+							Description: "The log setting to use for redirecting logs for your execute command results. The following log settings are available.\n  +  ``NONE``: The execute command session is not logged.\n  +  ``DEFAULT``: The ``awslogs`` configuration in the task definition is used. If no logging parameter is specified, it defaults to this value. If no ``awslogs`` log driver is configured in the task definition, the output won't be logged.\n  +  ``OVERRIDE``: Specify the logging details as a part of ``logConfiguration``. If the ``OVERRIDE`` logging option is specified, the ``logConfiguration`` is required.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/

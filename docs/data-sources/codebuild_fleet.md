@@ -41,6 +41,7 @@ Data Source schema for AWS::CodeBuild::Fleet
 Read-Only:
 
 - `disk` (Number)
+- `instance_type` (String)
 - `machine_type` (String)
 - `memory` (Number)
 - `v_cpu` (Number)

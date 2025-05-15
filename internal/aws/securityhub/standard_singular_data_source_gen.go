@@ -26,7 +26,7 @@ func standardDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Specifies which controls are to be disabled in a standard. \n  *Maximum*: ``100``",
+		//	  "description": "Specifies which controls are to be disabled in a standard. \n *Maximum*: ``100``",
 		//	  "insertionOrder": true,
 		//	  "items": {
 		//	    "additionalProperties": false,
@@ -67,7 +67,7 @@ func standardDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "Specifies which controls are to be disabled in a standard. \n  *Maximum*: ``100``",
+			Description: "Specifies which controls are to be disabled in a standard. \n *Maximum*: ``100``",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: StandardsArn

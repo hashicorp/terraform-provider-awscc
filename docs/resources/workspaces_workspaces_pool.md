@@ -26,6 +26,7 @@ Resource Type definition for AWS::WorkSpaces::WorkspacesPool
 
 - `application_settings` (Attributes) (see [below for nested schema](#nestedatt--application_settings))
 - `description` (String)
+- `running_mode` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `timeout_settings` (Attributes) (see [below for nested schema](#nestedatt--timeout_settings))
 

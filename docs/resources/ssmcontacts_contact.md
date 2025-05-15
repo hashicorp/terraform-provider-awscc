@@ -24,6 +24,7 @@ Resource Type definition for AWS::SSMContacts::Contact
 ### Optional
 
 - `plan` (Attributes List) The stages that an escalation plan or engagement plan engages contacts and contact methods in. (see [below for nested schema](#nestedatt--plan))
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -63,6 +64,17 @@ Optional:
 
 - `contact_id` (String) The Amazon Resource Name (ARN) of the contact.
 - `is_essential` (Boolean) A Boolean value determining if the contact's acknowledgement stops the progress of stages in the plan.
+
+
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String) The key name of the tag
+- `value` (String) The value for the tag.
 
 ## Import
 

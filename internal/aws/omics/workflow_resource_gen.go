@@ -311,6 +311,32 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 				float64planmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: StorageType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "STATIC",
+		//	    "DYNAMIC"
+		//	  ],
+		//	  "maxLength": 64,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"storage_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 64),
+				stringvalidator.OneOf(
+					"STATIC",
+					"DYNAMIC",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -354,6 +380,19 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Uuid
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+		//	  "type": "string"
+		//	}
+		"uuid": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -388,8 +427,10 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 		"parameter_template": "ParameterTemplate",
 		"status":             "Status",
 		"storage_capacity":   "StorageCapacity",
+		"storage_type":       "StorageType",
 		"tags":               "Tags",
 		"type":               "Type",
+		"uuid":               "Uuid",
 		"workflow_id":        "Id",
 	})
 

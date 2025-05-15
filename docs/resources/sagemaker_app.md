@@ -24,12 +24,14 @@ Resource Type definition for AWS::SageMaker::App
 
 ### Optional
 
+- `recovery_mode` (Boolean) Indicates whether the application is launched in recovery mode.
 - `resource_spec` (Attributes) The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. (see [below for nested schema](#nestedatt--resource_spec))
 - `tags` (Attributes List) A list of tags to apply to the app. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `app_arn` (String) The Amazon Resource Name (ARN) of the app.
+- `built_in_lifecycle_config_arn` (String) The lifecycle configuration that runs before the default lifecycle configuration.
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--resource_spec"></a>

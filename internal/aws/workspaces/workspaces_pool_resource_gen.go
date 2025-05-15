@@ -223,6 +223,29 @@ func workspacesPoolResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: RunningMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "ALWAYS_ON",
+		//	    "AUTO_STOP"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"running_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ALWAYS_ON",
+					"AUTO_STOP",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -383,6 +406,7 @@ func workspacesPoolResource(ctx context.Context) (resource.Resource, error) {
 		"pool_arn":                           "PoolArn",
 		"pool_id":                            "PoolId",
 		"pool_name":                          "PoolName",
+		"running_mode":                       "RunningMode",
 		"settings_group":                     "SettingsGroup",
 		"status":                             "Status",
 		"tags":                               "Tags",

@@ -68,6 +68,21 @@
         "autoscaling:DescribeWarmPool",
         "autoscaling:DescribeAutoScalingGroups"
       ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "AutoScalingGroupName": {
+            "$ref": "resource-schema.json#/properties/AutoScalingGroupName"
+          }
+        },
+        "required": [
+          "AutoScalingGroupName"
+        ]
+      },
+      "permissions": [
+        "autoscaling:DescribeWarmPool"
+      ]
     }
   }
 }
