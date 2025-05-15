@@ -420,14 +420,14 @@
         "path": "./examples/resources/awscc_applicationinsights_application/import.sh"
     },
     {
-        "resource": "awscc_applicationsignals_service_level_objective",
-        "identifier": ["Arn"],
-        "path": "./examples/resources/awscc_applicationsignals_service_level_objective/import.sh"
-    },
-    {
         "resource": "awscc_applicationsignals_discovery",
         "identifier": ["AccountId"],
         "path": "./examples/resources/awscc_applicationsignals_discovery/import.sh"
+    },
+    {
+        "resource": "awscc_applicationsignals_service_level_objective",
+        "identifier": ["Arn"],
+        "path": "./examples/resources/awscc_applicationsignals_service_level_objective/import.sh"
     },
     {
         "resource": "awscc_athena_capacity_reservation",
@@ -600,14 +600,14 @@
         "path": "./examples/resources/awscc_bedrock_blueprint/import.sh"
     },
     {
-        "resource": "awscc_bedrock_data_source",
-        "identifier": ["KnowledgeBaseId","DataSourceId"],
-        "path": "./examples/resources/awscc_bedrock_data_source/import.sh"
-    },
-    {
         "resource": "awscc_bedrock_data_automation_project",
         "identifier": ["ProjectArn"],
         "path": "./examples/resources/awscc_bedrock_data_automation_project/import.sh"
+    },
+    {
+        "resource": "awscc_bedrock_data_source",
+        "identifier": ["KnowledgeBaseId","DataSourceId"],
+        "path": "./examples/resources/awscc_bedrock_data_source/import.sh"
     },
     {
         "resource": "awscc_bedrock_flow_alias",
@@ -4088,6 +4088,11 @@
         "resource": "awscc_omics_workflow",
         "identifier": ["Id"],
         "path": "./examples/resources/awscc_omics_workflow/import.sh"
+    },
+    {
+        "resource": "awscc_omics_workflow_version",
+        "identifier": ["Arn"],
+        "path": "./examples/resources/awscc_omics_workflow_version/import.sh"
     },
     {
         "resource": "awscc_opensearchserverless_access_policy",
