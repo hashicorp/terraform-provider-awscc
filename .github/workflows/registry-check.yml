@@ -105,8 +105,6 @@ jobs:
 
       - name: Await Ingest
         id: registry-version
-        env:
-          GH_TOKEN: ${{ github.token }}
         run: |
           SECONDS=0
 
