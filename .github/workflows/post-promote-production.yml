@@ -25,4 +25,4 @@ jobs:
         env:
           GH_TOKEN: ${{ steps.token.outputs.token }}
         run: |
-          gh workflow run --repo ${{ github.repository }} --ref main slack-test.yml
+          gh workflow run --repo ${{ github.repository }} --ref main registry-check.yml
