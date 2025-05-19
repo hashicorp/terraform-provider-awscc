@@ -3,7 +3,7 @@ on:
     inputs:
       timeout:
         description: The number of minutes to wait for Registry ingress
-        required: false
+        required: true
         default: 120
 
 defaults:
