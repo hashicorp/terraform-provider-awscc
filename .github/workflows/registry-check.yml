@@ -152,7 +152,7 @@ jobs:
 
             if [[ -z "$REGISTRY_DATA" ]]; then
               echo "Terraform Registry has not yet ingested version $VERSION. Continuing to wait for ingest..."
-              sleep 30
+              sleep 300
             else
               echo "Registry has ingested version $VERSION"
               echo "version=$(echo $REGISTRY_DATA | jq -r '.attributes.version')" >> "$GITHUB_OUTPUT"
