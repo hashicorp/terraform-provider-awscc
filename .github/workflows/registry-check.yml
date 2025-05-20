@@ -2,7 +2,7 @@ on:
   workflow_dispatch:
     inputs:
       timeout:
-        description: The number of minutes to wait for Registry ingress
+        description: The number of minutes to wait for Registry ingest
         required: true
         default: 120
       version:
@@ -19,7 +19,7 @@ jobs:
     name: Check Terraform Registry for Latest Version
     runs-on: ubuntu-latest
     outputs:
-      version: ${{ steps.registry-version.outputs.latest }}
+      version: ${{ steps.registry-ingest.outputs.version }}
       channel: ${{ steps.message.outputs.channel_id }}
       ts: ${{ steps.message.outputs.ts }}
     steps:
@@ -111,7 +111,7 @@ jobs:
             }
 
       - name: Await Ingest
-        id: registry-version
+        id: registry-ingest
         env:
           VERSION: ${{ steps.github-release.outputs.tag || format('v{0}', inputs.version) }}
         run: |
@@ -148,16 +148,16 @@ jobs:
               break
             fi
 
-            LATEST_REGISTRY_DATA=$(curl -s "https://registry.terraform.io/v2/providers/2242/provider-versions/latest")
-            LATEST_REGISTRY_VERSION_TAG=$(echo "$LATEST_REGISTRY_DATA" | jq -r '.data.attributes.tag')
+            REGISTRY_DATA=$(curl -s "https://registry.terraform.io/v2/providers/2242/provider-versions" | jq --arg version $VERSION '.data[] | select(.attributes.tag == $version)')
 
-            if [[ "$VERSION" == "$LATEST_REGISTRY_VERSION_TAG" ]]; then
-              echo "Registry is now in sync with GitHub"
+            if [[ -z "$REGISTRY_DATA" ]]; then
+              echo "Terraform Registry has not yet ingested version $VERSION. Continuing to wait for ingest..."
+              sleep 30
+            else
+              echo "Registry has ingested version $VERSION"
+              echo "version=$(echo $REGISTRY_DATA | jq -r '.attributes.version')" >> "$GITHUB_OUTPUT"
 
-              LATEST_REGISTRY_VERSION=$(echo $LATEST_REGISTRY_DATA | jq -r '.data.attributes.version')
-              echo "latest=$LATEST_REGISTRY_VERSION" >> "$GITHUB_OUTPUT"
-
-              UPDATED_BLOCKS=$(echo $LATEST_REGISTRY_DATA | jq -c '[
+              UPDATED_BLOCKS=$(jq -nc --arg version $VERSION '[
                 {
                   "type": "rich_text",
                   "elements": [
@@ -170,7 +170,7 @@ jobs:
                         },
                         {
                           "type": "text",
-                          "text": (" Terraform Registry has ingested version " + .data.attributes.tag + ". Initialization testing details will be threaded below.")
+                          "text": (" Terraform Registry has ingested version " + $version + ". Initialization testing details will be threaded below.")
                         }
                       ]
                     }
@@ -179,9 +179,6 @@ jobs:
               ]')
 
               break
-            else
-              echo "Terraform Registry has not yet ingressed version $VERSION. Continuing to wait for ingress..."
-              sleep 300
             fi
           done
 
@@ -202,7 +199,7 @@ jobs:
               "channel": "${{ steps.message.outputs.channel_id }}",
               "ts": "${{ steps.message.outputs.ts }}",
               "as_user": true,
-              "blocks": ${{ fromJSON(steps.registry-version.outputs.slack-payload-blocks) }}
+              "blocks": ${{ fromJSON(steps.registry-ingest.outputs.slack-payload-blocks) }}
             }
 
   init-check:
