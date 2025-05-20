@@ -33,13 +33,15 @@ jobs:
 
       - name: Set Up Initial Slack Message Blocks
         id: parent
+        env:
+          VERSION: ${{ steps.github-release.outputs.tag || format('v{0}', inputs.version) }}
         run: |
-          BASE_MESSAGE_BLOCKS=$(jq -nc '[
+          BASE_MESSAGE_BLOCKS=$(jq -nc --arg version $VERSION '[
             {
               "type": "header",
               "text": {
                 "type": "plain_text",
-                "text": "Initialization Check for awscc Version ${{ steps.github-release.outputs.tag || format('v{0}', inputs.version) }}"
+                "text": ("Initialization Check for awscc Version " + $version)
               }
             },
             {
@@ -70,7 +72,7 @@ jobs:
             }
           ]')
 
-          INITIAL_MESSAGE_ADDITION=$(jq -nc '[
+          INITIAL_MESSAGE_ADDITION=$(jq -nc --arg version $VERSION '[
             {
               "type": "rich_text",
               "elements": [
@@ -83,7 +85,7 @@ jobs:
                     },
                     {
                       "type": "text",
-                      "text": " Waiting on Terraform Registry to ingest version ${{ steps.github-release.outputs.tag || format('v{0}', inputs.version) }}..."
+                      "text": (" Waiting on Terraform Registry to ingest version " + $version + "...")
                     }
                   ]
                 }
@@ -110,6 +112,8 @@ jobs:
 
       - name: Await Ingest
         id: registry-version
+        env:
+          VERSION: ${{ steps.github-release.outputs.tag || format('v{0}', inputs.version) }}
         run: |
           SECONDS=0
 
@@ -120,7 +124,7 @@ jobs:
               echo "Timeout has been reached, exiting."
               TIMED_OUT="true"
 
-              UPDATED_BLOCKS=$(jq -nc '[
+              UPDATED_BLOCKS=$(jq -nc --arg version $VERSION '[
                 {
                   "type": "rich_text",
                   "elements": [
@@ -133,7 +137,7 @@ jobs:
                         },
                         {
                           "type": "text",
-                          "text": " Timed out while waiting for the Terraform Registry to ingest version ${{ steps.github-release.outputs.tag || format('v{0}', inputs.version) }}"
+                          "text": (" Timed out while waiting for the Terraform Registry to ingest version " + $version)
                         }
                       ]
                     }
@@ -147,7 +151,7 @@ jobs:
             LATEST_REGISTRY_DATA=$(curl -s "https://registry.terraform.io/v2/providers/2242/provider-versions/latest")
             LATEST_REGISTRY_VERSION_TAG=$(echo "$LATEST_REGISTRY_DATA" | jq -r '.data.attributes.tag')
 
-            if [[ "${{ steps.github-release.outputs.tag || format('v{0}', inputs.version) }}" == "$LATEST_REGISTRY_VERSION_TAG" ]]; then
+            if [[ "$VERSION" == "$LATEST_REGISTRY_VERSION_TAG" ]]; then
               echo "Registry is now in sync with GitHub"
 
               LATEST_REGISTRY_VERSION=$(echo $LATEST_REGISTRY_DATA | jq -r '.data.attributes.version')
@@ -176,7 +180,7 @@ jobs:
 
               break
             else
-              echo "Latest Registry version tag ($LATEST_REGISTRY_VERSION_TAG) does not yet match lastest GitHub release tag (${{ steps.github-release.outputs.tag || format('v{0}', inputs.version) }}). Waiting..."
+              echo "Terraform Registry has not yet ingressed version $VERSION. Continuing to wait for ingress..."
               sleep 300
             fi
           done
