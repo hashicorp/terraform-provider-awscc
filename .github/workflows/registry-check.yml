@@ -5,6 +5,10 @@ on:
         description: The number of minutes to wait for Registry ingress
         required: true
         default: 120
+      version:
+        description: |
+          The version of the provider to test initialization for. If unset, will use the version pulled from the latest GitHub release.
+        required: false
 
 defaults:
   run:
@@ -20,6 +24,7 @@ jobs:
       ts: ${{ steps.message.outputs.ts }}
     steps:
       - name: Get Latest GitHub Release
+        if: inputs.version == ''
         id: github-release
         env:
           GH_TOKEN: ${{ github.token }}
@@ -34,7 +39,7 @@ jobs:
               "type": "header",
               "text": {
                 "type": "plain_text",
-                "text": "Initialization Check for awscc Version ${{ steps.github-release.outputs.tag }}"
+                "text": "Initialization Check for awscc Version ${{ steps.github-release.outputs.tag || format('v{0}', inputs.version) }}"
               }
             },
             {
@@ -78,7 +83,7 @@ jobs:
                     },
                     {
                       "type": "text",
-                      "text": " Waiting on Terraform Registry to ingest version ${{ steps.github-release.outputs.tag }}..."
+                      "text": " Waiting on Terraform Registry to ingest version ${{ steps.github-release.outputs.tag || format('v{0}', inputs.version) }}..."
                     }
                   ]
                 }
@@ -128,7 +133,7 @@ jobs:
                         },
                         {
                           "type": "text",
-                          "text": " Timed out while waiting for the Terraform Registry to ingest version ${{ steps.github-release.outputs.tag }}"
+                          "text": " Timed out while waiting for the Terraform Registry to ingest version ${{ steps.github-release.outputs.tag || format('v{0}', inputs.version) }}"
                         }
                       ]
                     }
@@ -142,7 +147,7 @@ jobs:
             LATEST_REGISTRY_DATA=$(curl -s "https://registry.terraform.io/v2/providers/2242/provider-versions/latest")
             LATEST_REGISTRY_VERSION_TAG=$(echo "$LATEST_REGISTRY_DATA" | jq -r '.data.attributes.tag')
 
-            if [[ "${{ steps.github-release.outputs.tag }}" == "$LATEST_REGISTRY_VERSION_TAG" ]]; then
+            if [[ "${{ steps.github-release.outputs.tag || format('v{0}', inputs.version) }}" == "$LATEST_REGISTRY_VERSION_TAG" ]]; then
               echo "Registry is now in sync with GitHub"
 
               LATEST_REGISTRY_VERSION=$(echo $LATEST_REGISTRY_DATA | jq -r '.data.attributes.version')
@@ -171,7 +176,7 @@ jobs:
 
               break
             else
-              echo "Latest Registry version tag ($LATEST_REGISTRY_VERSION_TAG) does not yet match lastest GitHub release tag (${{ steps.github-release.outputs.tag }}). Waiting..."
+              echo "Latest Registry version tag ($LATEST_REGISTRY_VERSION_TAG) does not yet match lastest GitHub release tag (${{ steps.github-release.outputs.tag || format('v{0}', inputs.version) }}). Waiting..."
               sleep 300
             fi
           done

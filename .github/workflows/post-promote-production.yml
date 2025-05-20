@@ -25,4 +25,8 @@ jobs:
         env:
           GH_TOKEN: ${{ steps.token.outputs.token }}
         run: |
-          gh workflow run --repo ${{ github.repository }} --ref main registry-check.yml
+          gh workflow run \
+            --repo ${{ github.repository }} \
+            --ref main \
+            --field version=${{ github.event.client_payload.payload.version }} \
+            registry-check.yml
