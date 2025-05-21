@@ -1,3 +1,5 @@
+name: Registry Initialization Check
+
 on:
   workflow_dispatch:
     inputs:
