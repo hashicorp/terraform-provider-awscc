@@ -88,6 +88,16 @@ event "promote-production" {
     config       = ""
   }
 
+  promotion-events {
+    bump-version-patch = true
+
+    post-promotion {
+      organization = "hashicorp"
+      repository = "terraform-provider-awscc"
+      workflow = "post-promote-production.yml"
+    }
+  }
+
   depends = ["trigger-production"]
 
   notification {
