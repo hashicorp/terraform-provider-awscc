@@ -6,24 +6,18 @@ on:
       - post-promote-production
       - post-promote-production::*
 
-permissions: {}
+permissions:
+  actions: write
 
 jobs:
   start-registry-check:
     name: Start Registry Check
     runs-on: ubuntu-latest
     steps:
-      - name: Generate GitHub App Token
-        id: token
-        uses: actions/create-github-app-token@df432ceedc7162793a195dd1713ff69aefc7379e # v2.0.6
-        with:
-          app-id: ${{ secrets.APP_ID }}
-          private-key: ${{ secrets.APP_PEM }}
-
       - name: Initiate Workflow
         shell: bash
         env:
-          GH_TOKEN: ${{ steps.token.outputs.token }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           gh workflow run \
             --repo ${{ github.repository }} \
