@@ -22,7 +22,6 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.registry-ingest.outputs.version }}
-      channel: ${{ steps.message.outputs.channel_id }}
       ts: ${{ steps.message.outputs.ts }}
     steps:
       - name: Get Latest GitHub Release
@@ -221,7 +220,7 @@ jobs:
           token: ${{ secrets.SLACK_BOT_TOKEN }}
           payload: |
             {
-              "channel": "${{ needs.registry-check.outputs.channel }}",
+              "channel": "${{ secrets.SLACK_CHANNEL }}",
               "text": "Initialization details for ${{ matrix.os }}",
               "thread_ts": "${{ needs.registry-check.outputs.ts }}",
               "blocks": [
@@ -349,7 +348,7 @@ jobs:
           token: ${{ secrets.SLACK_BOT_TOKEN }}
           payload: |
             {
-              "channel": "${{ needs.registry-check.outputs.channel }}",
+              "channel": "${{ steps.thread-message.outputs.channel_id }}",
               "as_user": true,
               "ts": "${{ steps.thread-message.outputs.ts }}",
               "blocks": ${{ fromJSON(steps.init.outputs.payload) }}
