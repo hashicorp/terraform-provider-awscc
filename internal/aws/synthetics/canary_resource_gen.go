@@ -227,6 +227,22 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END PLAN MODIFIERS*/
 			// DeleteLambdaResourcesOnCanaryDeletion is a write-only property.
 		}, /*END ATTRIBUTE*/
+		// Property: DryRunAndUpdate
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Setting to control if UpdateCanary will perform a DryRun and validate it is PASSING before performing the Update. Default is FALSE.",
+		//	  "type": "boolean"
+		//	}
+		"dry_run_and_update": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Setting to control if UpdateCanary will perform a DryRun and validate it is PASSING before performing the Update. Default is FALSE.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// DryRunAndUpdate is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: ExecutionRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -447,6 +463,20 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "Expression": {
 		//	      "type": "string"
+		//	    },
+		//	    "RetryConfig": {
+		//	      "additionalProperties": false,
+		//	      "description": "Provide canary auto retry configuration",
+		//	      "properties": {
+		//	        "MaxRetries": {
+		//	          "description": "maximum times the canary will be retried upon the scheduled run failure",
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "MaxRetries"
+		//	      ],
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "required": [
@@ -467,6 +497,29 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 				// Property: Expression
 				"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Required: true,
+				}, /*END ATTRIBUTE*/
+				// Property: RetryConfig
+				"retry_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: MaxRetries
+						"max_retries": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "maximum times the canary will be retried upon the scheduled run failure",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								fwvalidators.NotNullInt64(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Provide canary auto retry configuration",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Frequency to run your canaries",
@@ -797,6 +850,7 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		"canary_id":            "Id",
 		"code":                 "Code",
 		"delete_lambda_resources_on_canary_deletion": "DeleteLambdaResourcesOnCanaryDeletion",
+		"dry_run_and_update":                         "DryRunAndUpdate",
 		"duration_in_seconds":                        "DurationInSeconds",
 		"encryption_mode":                            "EncryptionMode",
 		"environment_variables":                      "EnvironmentVariables",
@@ -808,10 +862,12 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		"ipv_6_allowed_for_dual_stack":               "Ipv6AllowedForDualStack",
 		"key":                                        "Key",
 		"kms_key_arn":                                "KmsKeyArn",
+		"max_retries":                                "MaxRetries",
 		"memory_in_mb":                               "MemoryInMB",
 		"name":                                       "Name",
 		"provisioned_resource_cleanup":               "ProvisionedResourceCleanup",
 		"resources_to_replicate_tags":                "ResourcesToReplicateTags",
+		"retry_config":                               "RetryConfig",
 		"run_config":                                 "RunConfig",
 		"runtime_version":                            "RuntimeVersion",
 		"s3_bucket":                                  "S3Bucket",
@@ -845,6 +901,7 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/ResourcesToReplicateTags",
 		"/properties/RunConfig/EnvironmentVariables",
 		"/properties/VisualReference",
+		"/properties/DryRunAndUpdate",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

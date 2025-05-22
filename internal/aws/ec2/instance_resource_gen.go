@@ -15,6 +15,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
@@ -883,6 +884,138 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 				listplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: MetadataOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The metadata options for the instance",
+		//	  "properties": {
+		//	    "HttpEndpoint": {
+		//	      "description": "Enables or disables the HTTP metadata endpoint on your instances. If you specify a value of disabled, you cannot access your instance metadata.",
+		//	      "enum": [
+		//	        "disabled",
+		//	        "enabled"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "HttpProtocolIpv6": {
+		//	      "description": "Enables or disables the IPv6 endpoint for the instance metadata service. To use this option, the instance must be a Nitro-based instance launched in a subnet that supports IPv6.",
+		//	      "enum": [
+		//	        "disabled",
+		//	        "enabled"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "HttpPutResponseHopLimit": {
+		//	      "default": 1,
+		//	      "description": "The number of network hops that the metadata token can travel. Maximum is 64.",
+		//	      "maximum": 64,
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    },
+		//	    "HttpTokens": {
+		//	      "description": "Indicates whether IMDSv2 is required.",
+		//	      "enum": [
+		//	        "optional",
+		//	        "required"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "InstanceMetadataTags": {
+		//	      "description": "Indicates whether tags from the instance are propagated to the EBS volumes.",
+		//	      "enum": [
+		//	        "disabled",
+		//	        "enabled"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"metadata_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: HttpEndpoint
+				"http_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Enables or disables the HTTP metadata endpoint on your instances. If you specify a value of disabled, you cannot access your instance metadata.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"disabled",
+							"enabled",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: HttpProtocolIpv6
+				"http_protocol_ipv_6": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Enables or disables the IPv6 endpoint for the instance metadata service. To use this option, the instance must be a Nitro-based instance launched in a subnet that supports IPv6.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"disabled",
+							"enabled",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: HttpPutResponseHopLimit
+				"http_put_response_hop_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The number of network hops that the metadata token can travel. Maximum is 64.",
+					Optional:    true,
+					Computed:    true,
+					Default:     int64default.StaticInt64(1),
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.Between(1, 64),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: HttpTokens
+				"http_tokens": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether IMDSv2 is required.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"optional",
+							"required",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: InstanceMetadataTags
+				"instance_metadata_tags": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether tags from the instance are propagated to the EBS volumes.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"disabled",
+							"enabled",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The metadata options for the instance",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Monitoring
@@ -1900,10 +2033,15 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"host_id":                              "HostId",
 		"host_resource_group_arn":              "HostResourceGroupArn",
 		"hostname_type":                        "HostnameType",
+		"http_endpoint":                        "HttpEndpoint",
+		"http_protocol_ipv_6":                  "HttpProtocolIpv6",
+		"http_put_response_hop_limit":          "HttpPutResponseHopLimit",
+		"http_tokens":                          "HttpTokens",
 		"iam_instance_profile":                 "IamInstanceProfile",
 		"image_id":                             "ImageId",
 		"instance_id":                          "InstanceId",
 		"instance_initiated_shutdown_behavior": "InstanceInitiatedShutdownBehavior",
+		"instance_metadata_tags":               "InstanceMetadataTags",
 		"instance_type":                        "InstanceType",
 		"iops":                                 "Iops",
 		"ipv_6_address":                        "Ipv6Address",
@@ -1918,6 +2056,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"launch_template_name":                 "LaunchTemplateName",
 		"license_configuration_arn":            "LicenseConfigurationArn",
 		"license_specifications":               "LicenseSpecifications",
+		"metadata_options":                     "MetadataOptions",
 		"monitoring":                           "Monitoring",
 		"name":                                 "Name",
 		"network_interface_id":                 "NetworkInterfaceId",

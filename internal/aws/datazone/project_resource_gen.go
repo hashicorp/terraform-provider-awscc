@@ -114,6 +114,26 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END PLAN MODIFIERS*/
 			// DomainIdentifier is a write-only property.
 		}, /*END ATTRIBUTE*/
+		// Property: DomainUnitId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the domain unit.",
+		//	  "pattern": "^[a-z0-9_\\-]+$",
+		//	  "type": "string"
+		//	}
+		"domain_unit_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the domain unit.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9_\\-]+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: GlossaryTerms
 		// CloudFormation resource type schema:
 		//
@@ -193,6 +213,167 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.RegexMatches(regexp.MustCompile("^[\\w -]+$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ProjectProfileId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The project profile ID.",
+		//	  "pattern": "^[a-zA-Z0-9_-]{1,36}$",
+		//	  "type": "string"
+		//	}
+		"project_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The project profile ID.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]{1,36}$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// ProjectProfileId is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: ProjectProfileVersion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The project profile version to which the project should be updated. You can only specify the following string for this parameter: latest.",
+		//	  "type": "string"
+		//	}
+		"project_profile_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The project profile version to which the project should be updated. You can only specify the following string for this parameter: latest.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// ProjectProfileVersion is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: ProjectStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The status of the project.",
+		//	  "enum": [
+		//	    "ACTIVE",
+		//	    "MOVING",
+		//	    "DELETING",
+		//	    "DELETE_FAILED",
+		//	    "UPDATING",
+		//	    "UPDATE_FAILED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"project_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the project.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: UserParameters
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The user parameters of the project.",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "EnvironmentConfigurationName": {
+		//	        "maxLength": 64,
+		//	        "minLength": 1,
+		//	        "pattern": "^[\\w -]+$",
+		//	        "type": "string"
+		//	      },
+		//	      "EnvironmentId": {
+		//	        "pattern": "^[a-zA-Z0-9_-]{1,36}$",
+		//	        "type": "string"
+		//	      },
+		//	      "EnvironmentParameters": {
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Name": {
+		//	              "type": "string"
+		//	            },
+		//	            "Value": {
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "type": "array"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"user_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: EnvironmentConfigurationName
+					"environment_configuration_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 64),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[\\w -]+$"), ""),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: EnvironmentId
+					"environment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]{1,36}$"), ""),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: EnvironmentParameters
+					"environment_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Name
+								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Value
+								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The user parameters of the project.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// UserParameters is a write-only property.
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -215,19 +396,31 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::DataZone::Project").WithTerraformTypeName("awscc_datazone_project")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"created_at":        "CreatedAt",
-		"created_by":        "CreatedBy",
-		"description":       "Description",
-		"domain_id":         "DomainId",
-		"domain_identifier": "DomainIdentifier",
-		"glossary_terms":    "GlossaryTerms",
-		"last_updated_at":   "LastUpdatedAt",
-		"name":              "Name",
-		"project_id":        "Id",
+		"created_at":                     "CreatedAt",
+		"created_by":                     "CreatedBy",
+		"description":                    "Description",
+		"domain_id":                      "DomainId",
+		"domain_identifier":              "DomainIdentifier",
+		"domain_unit_id":                 "DomainUnitId",
+		"environment_configuration_name": "EnvironmentConfigurationName",
+		"environment_id":                 "EnvironmentId",
+		"environment_parameters":         "EnvironmentParameters",
+		"glossary_terms":                 "GlossaryTerms",
+		"last_updated_at":                "LastUpdatedAt",
+		"name":                           "Name",
+		"project_id":                     "Id",
+		"project_profile_id":             "ProjectProfileId",
+		"project_profile_version":        "ProjectProfileVersion",
+		"project_status":                 "ProjectStatus",
+		"user_parameters":                "UserParameters",
+		"value":                          "Value",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/DomainIdentifier",
+		"/properties/ProjectProfileVersion",
+		"/properties/ProjectProfileId",
+		"/properties/UserParameters",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

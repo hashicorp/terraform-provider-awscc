@@ -475,7 +475,6 @@ func gameServerGroupResource(ctx context.Context) (resource.Resource, error) {
 				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
-			// Tags is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: VpcSubnets
 		// CloudFormation resource type schema:
@@ -566,7 +565,6 @@ func gameServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/MaxSize",
 		"/properties/AutoScalingPolicy",
 		"/properties/VpcSubnets",
-		"/properties/Tags",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

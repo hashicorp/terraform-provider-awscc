@@ -202,6 +202,49 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 		//	              "additionalProperties": false,
 		//	              "type": "object"
 		//	            },
+		//	            "PublishToSns": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "ActionFailurePolicy": {
+		//	                  "enum": [
+		//	                    "CONTINUE",
+		//	                    "DROP"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "Encoding": {
+		//	                  "enum": [
+		//	                    "UTF-8",
+		//	                    "BASE64"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "PayloadType": {
+		//	                  "enum": [
+		//	                    "CONTENT",
+		//	                    "HEADERS"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "RoleArn": {
+		//	                  "maxLength": 2048,
+		//	                  "minLength": 20,
+		//	                  "pattern": "^[a-zA-Z0-9:_/+=,@.#-]+$",
+		//	                  "type": "string"
+		//	                },
+		//	                "TopicArn": {
+		//	                  "maxLength": 2048,
+		//	                  "minLength": 20,
+		//	                  "pattern": "^arn:(aws|aws-cn|aws-us-gov):sns:[a-z]{2}-[a-z]+-\\d{1}:\\d{12}:[\\w\\-]{1,256}$",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "TopicArn",
+		//	                "RoleArn"
+		//	              ],
+		//	              "type": "object"
+		//	            },
 		//	            "Relay": {
 		//	              "additionalProperties": false,
 		//	              "properties": {
@@ -1140,6 +1183,84 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 									Computed:   true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: PublishToSns
+								"publish_to_sns": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ActionFailurePolicy
+										"action_failure_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"CONTINUE",
+													"DROP",
+												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Encoding
+										"encoding": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"UTF-8",
+													"BASE64",
+												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: PayloadType
+										"payload_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"CONTENT",
+													"HEADERS",
+												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: RoleArn
+										"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthBetween(20, 2048),
+												stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9:_/+=,@.#-]+$"), ""),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: TopicArn
+										"topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthBetween(20, 2048),
+												stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov):sns:[a-z]{2}-[a-z]+-\\d{1}:\\d{12}:[\\w\\-]{1,256}$"), ""),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Relay
@@ -2489,6 +2610,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 		"deliver_to_q_business": "DeliverToQBusiness",
 		"dmarc_expression":      "DmarcExpression",
 		"drop":                  "Drop",
+		"encoding":              "Encoding",
 		"evaluate":              "Evaluate",
 		"header_name":           "HeaderName",
 		"header_value":          "HeaderValue",
@@ -2501,6 +2623,8 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 		"name":                  "Name",
 		"number_expression":     "NumberExpression",
 		"operator":              "Operator",
+		"payload_type":          "PayloadType",
+		"publish_to_sns":        "PublishToSns",
 		"relay":                 "Relay",
 		"replace_recipient":     "ReplaceRecipient",
 		"replace_with":          "ReplaceWith",
@@ -2517,6 +2641,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 		"string_expression":     "StringExpression",
 		"tags":                  "Tags",
 		"target_archive":        "TargetArchive",
+		"topic_arn":             "TopicArn",
 		"unless":                "Unless",
 		"value":                 "Value",
 		"values":                "Values",

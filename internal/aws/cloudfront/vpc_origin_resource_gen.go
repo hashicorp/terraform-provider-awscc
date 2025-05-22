@@ -312,9 +312,9 @@ func vpcOriginResource(ctx context.Context) (resource.Resource, error) {
 		"vpc_origin_id":              "Id",
 	})
 
-	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+	opts = opts.WithCreateTimeoutInMinutes(40).WithDeleteTimeoutInMinutes(0)
 
-	opts = opts.WithUpdateTimeoutInMinutes(0)
+	opts = opts.WithUpdateTimeoutInMinutes(40)
 
 	v, err := generic.NewResource(ctx, opts...)
 

@@ -78,11 +78,11 @@ func loadBalancerResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Indicates whether to evaluate inbound security group rules for traffic sent to a Network Load Balancer through privatelink. The default is ``on``.",
+		//	  "description": "Indicates whether to evaluate inbound security group rules for traffic sent to a Network Load Balancer through privatelink. The default is ``on``.\n You can't configure this property on a Network Load Balancer unless you associated a security group with the load balancer when you created it.",
 		//	  "type": "string"
 		//	}
 		"enforce_security_group_inbound_rules_on_private_link_traffic": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether to evaluate inbound security group rules for traffic sent to a Network Load Balancer through privatelink. The default is ``on``.",
+			Description: "Indicates whether to evaluate inbound security group rules for traffic sent to a Network Load Balancer through privatelink. The default is ``on``.\n You can't configure this property on a Network Load Balancer unless you associated a security group with the load balancer when you created it.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -108,11 +108,11 @@ func loadBalancerResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The ID of the IPv4 IPAM pool.",
 		//	  "type": "string"
 		//	}
 		"ipv_4_ipam_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "The ID of the IPv4 IPAM pool.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

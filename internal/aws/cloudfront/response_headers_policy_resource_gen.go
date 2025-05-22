@@ -106,7 +106,7 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 		//	          "description": "A list of HTTP methods that CloudFront includes as values for the ``Access-Control-Allow-Methods`` HTTP response header.\n For more information about the ``Access-Control-Allow-Methods`` HTTP response header, see [Access-Control-Allow-Methods](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Methods) in the MDN Web Docs.",
 		//	          "properties": {
 		//	            "Items": {
-		//	              "description": "The list of HTTP methods. Valid values are:\n  +   ``GET`` \n  +   ``DELETE`` \n  +   ``HEAD`` \n  +   ``OPTIONS`` \n  +   ``PATCH`` \n  +   ``POST`` \n  +   ``PUT`` \n  +   ``ALL`` \n  \n  ``ALL`` is a special value that includes all of the listed HTTP methods.",
+		//	              "description": "The list of HTTP methods. Valid values are:\n  +   ``GET`` \n  +   ``DELETE`` \n  +   ``HEAD`` \n  +   ``OPTIONS`` \n  +   ``PATCH`` \n  +   ``POST`` \n  +   ``PUT`` \n  +   ``ALL`` \n  \n ``ALL`` is a special value that includes all of the listed HTTP methods.",
 		//	              "insertionOrder": false,
 		//	              "items": {
 		//	                "type": "string"
@@ -467,7 +467,7 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 								// Property: Items
 								"items": schema.ListAttribute{ /*START ATTRIBUTE*/
 									ElementType: types.StringType,
-									Description: "The list of HTTP methods. Valid values are:\n  +   ``GET`` \n  +   ``DELETE`` \n  +   ``HEAD`` \n  +   ``OPTIONS`` \n  +   ``PATCH`` \n  +   ``POST`` \n  +   ``PUT`` \n  +   ``ALL`` \n  \n  ``ALL`` is a special value that includes all of the listed HTTP methods.",
+									Description: "The list of HTTP methods. Valid values are:\n  +   ``GET`` \n  +   ``DELETE`` \n  +   ``HEAD`` \n  +   ``OPTIONS`` \n  +   ``PATCH`` \n  +   ``POST`` \n  +   ``PUT`` \n  +   ``ALL`` \n  \n ``ALL`` is a special value that includes all of the listed HTTP methods.",
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.List{ /*START VALIDATORS*/

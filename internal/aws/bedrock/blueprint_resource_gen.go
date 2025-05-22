@@ -263,7 +263,8 @@ func blueprintResource(ctx context.Context) (resource.Resource, error) {
 		//	  "enum": [
 		//	    "DOCUMENT",
 		//	    "IMAGE",
-		//	    "AUDIO"
+		//	    "AUDIO",
+		//	    "VIDEO"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -275,6 +276,7 @@ func blueprintResource(ctx context.Context) (resource.Resource, error) {
 					"DOCUMENT",
 					"IMAGE",
 					"AUDIO",
+					"VIDEO",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

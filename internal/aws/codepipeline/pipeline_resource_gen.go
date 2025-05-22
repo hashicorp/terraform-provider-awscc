@@ -560,6 +560,14 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "description": "The name of the environment variable.",
 		//	                    "type": "string"
 		//	                  },
+		//	                  "Type": {
+		//	                    "description": "The type of the environment variable.",
+		//	                    "enum": [
+		//	                      "PLAINTEXT",
+		//	                      "SECRETS_MANAGER"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
 		//	                  "Value": {
 		//	                    "description": "The value of the environment variable.",
 		//	                    "type": "string"
@@ -1097,6 +1105,21 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Type
+											"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The type of the environment variable.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.OneOf(
+														"PLAINTEXT",
+														"SECRETS_MANAGER",
+													),
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 													stringplanmodifier.UseStateForUnknown(),
