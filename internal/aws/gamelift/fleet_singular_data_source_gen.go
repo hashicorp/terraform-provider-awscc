@@ -237,6 +237,18 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The name of an EC2 instance type that is supported in Amazon GameLift. A fleet instance type determines the computing resources of each instance in the fleet, including CPU, memory, storage, and networking capacity. Amazon GameLift supports the following EC2 instance types. See Amazon EC2 Instance Types for detailed descriptions.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: FleetArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) that is assigned to a Amazon GameLift Servers Fleet resource and uniquely identifies it. ARNs are unique across all Regions. In a GameLift Fleet ARN, the resource ID matches the FleetId value.",
+		//	  "pattern": "^arn:.*:fleet/[a-z]*fleet-[a-zA-Z0-9\\-]+$",
+		//	  "type": "string"
+		//	}
+		"fleet_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) that is assigned to a Amazon GameLift Servers Fleet resource and uniquely identifies it. ARNs are unique across all Regions. In a GameLift Fleet ARN, the resource ID matches the FleetId value.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FleetId
 		// CloudFormation resource type schema:
 		//
@@ -858,6 +870,57 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "This parameter is no longer used. Instead, specify a server launch path using the RuntimeConfiguration parameter. Requests that specify a server launch path and launch parameters instead of a runtime configuration will continue to work.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An array of key-value pairs to apply to this resource.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A key-value pair to associate with a resource.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length.",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length.",
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 200,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -889,6 +952,7 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"ec2_inbound_permissions":   "EC2InboundPermissions",
 		"ec2_instance_type":         "EC2InstanceType",
 		"evaluation_periods":        "EvaluationPeriods",
+		"fleet_arn":                 "FleetArn",
 		"fleet_id":                  "FleetId",
 		"fleet_type":                "FleetType",
 		"from_port":                 "FromPort",
@@ -896,6 +960,7 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"instance_role_arn":                       "InstanceRoleARN",
 		"instance_role_credentials_provider":      "InstanceRoleCredentialsProvider",
 		"ip_range":                                "IpRange",
+		"key":                                     "Key",
 		"launch_path":                             "LaunchPath",
 		"location":                                "Location",
 		"location_capacity":                       "LocationCapacity",
@@ -925,11 +990,13 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"server_launch_path":                 "ServerLaunchPath",
 		"server_processes":                   "ServerProcesses",
 		"status":                             "Status",
+		"tags":                               "Tags",
 		"target_configuration":               "TargetConfiguration",
 		"target_value":                       "TargetValue",
 		"threshold":                          "Threshold",
 		"to_port":                            "ToPort",
 		"update_status":                      "UpdateStatus",
+		"value":                              "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

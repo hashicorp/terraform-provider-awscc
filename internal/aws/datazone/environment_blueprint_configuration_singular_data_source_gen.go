@@ -93,6 +93,16 @@ func environmentBlueprintConfigurationDataSource(ctx context.Context) (datasourc
 		"environment_blueprint_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: EnvironmentRolePermissionBoundary
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "pattern": "^arn:aws[^:]*:iam::(aws|\\d{12}):policy/[\\w+=,.@-]*$",
+		//	  "type": "string"
+		//	}
+		"environment_role_permission_boundary": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ManageAccessRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -101,6 +111,60 @@ func environmentBlueprintConfigurationDataSource(ctx context.Context) (datasourc
 		//	  "type": "string"
 		//	}
 		"manage_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: ProvisioningConfigurations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "properties": {
+		//	      "LakeFormationConfiguration": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "LocationRegistrationExcludeS3Locations": {
+		//	            "items": {
+		//	              "maxLength": 1024,
+		//	              "minLength": 1,
+		//	              "pattern": "^s3://.+$",
+		//	              "type": "string"
+		//	            },
+		//	            "maxItems": 20,
+		//	            "minItems": 0,
+		//	            "type": "array"
+		//	          },
+		//	          "LocationRegistrationRole": {
+		//	            "pattern": "^arn:aws[^:]*:iam::\\d{12}:(role|role/service-role)/[\\w+=,.@-]*$",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"provisioning_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: LakeFormationConfiguration
+					"lake_formation_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: LocationRegistrationExcludeS3Locations
+							"location_registration_exclude_s3_locations": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: LocationRegistrationRole
+							"location_registration_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProvisioningRoleArn
@@ -185,18 +249,23 @@ func environmentBlueprintConfigurationDataSource(ctx context.Context) (datasourc
 	opts = opts.WithCloudFormationTypeName("AWS::DataZone::EnvironmentBlueprintConfiguration").WithTerraformTypeName("awscc_datazone_environment_blueprint_configuration")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"created_at":                       "CreatedAt",
-		"domain_id":                        "DomainId",
-		"domain_identifier":                "DomainIdentifier",
-		"enabled_regions":                  "EnabledRegions",
-		"environment_blueprint_id":         "EnvironmentBlueprintId",
-		"environment_blueprint_identifier": "EnvironmentBlueprintIdentifier",
-		"manage_access_role_arn":           "ManageAccessRoleArn",
-		"parameters":                       "Parameters",
-		"provisioning_role_arn":            "ProvisioningRoleArn",
-		"region":                           "Region",
-		"regional_parameters":              "RegionalParameters",
-		"updated_at":                       "UpdatedAt",
+		"created_at":                                 "CreatedAt",
+		"domain_id":                                  "DomainId",
+		"domain_identifier":                          "DomainIdentifier",
+		"enabled_regions":                            "EnabledRegions",
+		"environment_blueprint_id":                   "EnvironmentBlueprintId",
+		"environment_blueprint_identifier":           "EnvironmentBlueprintIdentifier",
+		"environment_role_permission_boundary":       "EnvironmentRolePermissionBoundary",
+		"lake_formation_configuration":               "LakeFormationConfiguration",
+		"location_registration_exclude_s3_locations": "LocationRegistrationExcludeS3Locations",
+		"location_registration_role":                 "LocationRegistrationRole",
+		"manage_access_role_arn":                     "ManageAccessRoleArn",
+		"parameters":                                 "Parameters",
+		"provisioning_configurations":                "ProvisioningConfigurations",
+		"provisioning_role_arn":                      "ProvisioningRoleArn",
+		"region":                                     "Region",
+		"regional_parameters":                        "RegionalParameters",
+		"updated_at":                                 "UpdatedAt",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

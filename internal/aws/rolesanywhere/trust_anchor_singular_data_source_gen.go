@@ -128,6 +128,10 @@ func trustAnchorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "string"
 		//	    }
 		//	  },
+		//	  "required": [
+		//	    "SourceType",
+		//	    "SourceData"
+		//	  ],
 		//	  "type": "object"
 		//	}
 		"source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/

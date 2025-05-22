@@ -162,6 +162,13 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "pattern": "^sp-[0-9a-f]{32}$",
 		//	          "type": "string"
 		//	        },
+		//	        "TagPropagationMode": {
+		//	          "enum": [
+		//	            "NO_PROPAGATION",
+		//	            "PROPAGATE_TAGS_TO_WORKERS_AT_LAUNCH"
+		//	          ],
+		//	          "type": "string"
+		//	        },
 		//	        "WorkerCapabilities": {
 		//	          "additionalProperties": false,
 		//	          "properties": {
@@ -600,6 +607,10 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 						"storage_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
+						// Property: TagPropagationMode
+						"tag_propagation_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
 						// Property: WorkerCapabilities
 						"worker_capabilities": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -920,6 +931,42 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"fleet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: HostConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "ScriptBody": {
+		//	      "maxLength": 15000,
+		//	      "minLength": 0,
+		//	      "type": "string"
+		//	    },
+		//	    "ScriptTimeoutSeconds": {
+		//	      "default": 300,
+		//	      "maximum": 3600,
+		//	      "minimum": 300,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "ScriptBody"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"host_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ScriptBody
+				"script_body": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ScriptTimeoutSeconds
+				"script_timeout_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaxWorkerCount
 		// CloudFormation resource type schema:
 		//
@@ -1066,6 +1113,7 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"excluded_instance_types":       "ExcludedInstanceTypes",
 		"farm_id":                       "FarmId",
 		"fleet_id":                      "FleetId",
+		"host_configuration":            "HostConfiguration",
 		"instance_capabilities":         "InstanceCapabilities",
 		"instance_market_options":       "InstanceMarketOptions",
 		"iops":                          "Iops",
@@ -1081,11 +1129,14 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"role_arn":                      "RoleArn",
 		"root_ebs_volume":               "RootEbsVolume",
 		"runtime":                       "Runtime",
+		"script_body":                   "ScriptBody",
+		"script_timeout_seconds":        "ScriptTimeoutSeconds",
 		"selections":                    "Selections",
 		"service_managed_ec_2":          "ServiceManagedEc2",
 		"size_gi_b":                     "SizeGiB",
 		"status":                        "Status",
 		"storage_profile_id":            "StorageProfileId",
+		"tag_propagation_mode":          "TagPropagationMode",
 		"tags":                          "Tags",
 		"throughput_mi_b":               "ThroughputMiB",
 		"type":                          "Type",

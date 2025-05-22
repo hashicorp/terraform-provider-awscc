@@ -397,6 +397,14 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                    "description": "The name of the environment variable.",
 		//	                    "type": "string"
 		//	                  },
+		//	                  "Type": {
+		//	                    "description": "The type of the environment variable.",
+		//	                    "enum": [
+		//	                      "PLAINTEXT",
+		//	                      "SECRETS_MANAGER"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
 		//	                  "Value": {
 		//	                    "description": "The value of the environment variable.",
 		//	                    "type": "string"
@@ -911,6 +919,11 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 											// Property: Name
 											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "The name of the environment variable.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Type
+											"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The type of the environment variable.",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 											// Property: Value

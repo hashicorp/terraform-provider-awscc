@@ -198,7 +198,8 @@ func blueprintDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "enum": [
 		//	    "DOCUMENT",
 		//	    "IMAGE",
-		//	    "AUDIO"
+		//	    "AUDIO",
+		//	    "VIDEO"
 		//	  ],
 		//	  "type": "string"
 		//	}

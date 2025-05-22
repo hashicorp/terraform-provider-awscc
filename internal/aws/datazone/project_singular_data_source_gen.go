@@ -84,6 +84,18 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The ID of the Amazon DataZone domain in which this project is created.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: DomainUnitId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the domain unit.",
+		//	  "pattern": "^[a-z0-9_\\-]+$",
+		//	  "type": "string"
+		//	}
+		"domain_unit_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the domain unit.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GlossaryTerms
 		// CloudFormation resource type schema:
 		//
@@ -142,6 +154,118 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The name of the Amazon DataZone project.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ProjectProfileId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The project profile ID.",
+		//	  "pattern": "^[a-zA-Z0-9_-]{1,36}$",
+		//	  "type": "string"
+		//	}
+		"project_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The project profile ID.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ProjectProfileVersion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The project profile version to which the project should be updated. You can only specify the following string for this parameter: latest.",
+		//	  "type": "string"
+		//	}
+		"project_profile_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The project profile version to which the project should be updated. You can only specify the following string for this parameter: latest.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ProjectStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The status of the project.",
+		//	  "enum": [
+		//	    "ACTIVE",
+		//	    "MOVING",
+		//	    "DELETING",
+		//	    "DELETE_FAILED",
+		//	    "UPDATING",
+		//	    "UPDATE_FAILED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"project_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the project.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: UserParameters
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The user parameters of the project.",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "EnvironmentConfigurationName": {
+		//	        "maxLength": 64,
+		//	        "minLength": 1,
+		//	        "pattern": "^[\\w -]+$",
+		//	        "type": "string"
+		//	      },
+		//	      "EnvironmentId": {
+		//	        "pattern": "^[a-zA-Z0-9_-]{1,36}$",
+		//	        "type": "string"
+		//	      },
+		//	      "EnvironmentParameters": {
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Name": {
+		//	              "type": "string"
+		//	            },
+		//	            "Value": {
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "type": "array"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"user_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: EnvironmentConfigurationName
+					"environment_configuration_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: EnvironmentId
+					"environment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: EnvironmentParameters
+					"environment_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Name
+								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Value
+								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The user parameters of the project.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -159,15 +283,24 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::DataZone::Project").WithTerraformTypeName("awscc_datazone_project")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"created_at":        "CreatedAt",
-		"created_by":        "CreatedBy",
-		"description":       "Description",
-		"domain_id":         "DomainId",
-		"domain_identifier": "DomainIdentifier",
-		"glossary_terms":    "GlossaryTerms",
-		"last_updated_at":   "LastUpdatedAt",
-		"name":              "Name",
-		"project_id":        "Id",
+		"created_at":                     "CreatedAt",
+		"created_by":                     "CreatedBy",
+		"description":                    "Description",
+		"domain_id":                      "DomainId",
+		"domain_identifier":              "DomainIdentifier",
+		"domain_unit_id":                 "DomainUnitId",
+		"environment_configuration_name": "EnvironmentConfigurationName",
+		"environment_id":                 "EnvironmentId",
+		"environment_parameters":         "EnvironmentParameters",
+		"glossary_terms":                 "GlossaryTerms",
+		"last_updated_at":                "LastUpdatedAt",
+		"name":                           "Name",
+		"project_id":                     "Id",
+		"project_profile_id":             "ProjectProfileId",
+		"project_profile_version":        "ProjectProfileVersion",
+		"project_status":                 "ProjectStatus",
+		"user_parameters":                "UserParameters",
+		"value":                          "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)
