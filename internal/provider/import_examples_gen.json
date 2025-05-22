@@ -1450,6 +1450,11 @@
         "path": "./examples/resources/awscc_datasync_location_smb/import.sh"
     },
     {
+        "resource": "awscc_datasync_storage_system",
+        "identifier": ["Id"],
+        "path": "./examples/resources/awscc_datasync_storage_system/import.sh"
+    },
+    {
         "resource": "awscc_datasync_task",
         "identifier": ["TaskArn"],
         "path": "./examples/resources/awscc_datasync_task/import.sh"
@@ -4898,6 +4903,11 @@
         "resource": "awscc_ses_mail_manager_archive",
         "identifier": ["ArchiveId"],
         "path": "./examples/resources/awscc_ses_mail_manager_archive/import.sh"
+    },
+    {
+        "resource": "awscc_ses_mail_manager_address_list",
+        "identifier": ["AddressListId"],
+        "path": "./examples/resources/awscc_ses_mail_manager_address_list/import.sh"
     },
     {
         "resource": "awscc_ses_mail_manager_ingress_point",
