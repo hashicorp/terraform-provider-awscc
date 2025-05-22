@@ -5,20 +5,23 @@
       "additionalProperties": false,
       "properties": {
         "Key": {
-          "type": "string"
+          "type": "string",
+          "description": "A string that contains ``Tag`` key.\n The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``."
         },
         "Value": {
-          "type": "string"
+          "type": "string",
+          "description": "A string that contains an optional ``Tag`` value.\n The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``."
         }
       },
       "required": [
         "Value",
         "Key"
       ],
-      "type": "object"
+      "type": "object",
+      "description": "A complex type that contains ``Tag`` key and ``Tag`` value."
     }
   },
-  "description": "Resource Type definition for AWS::CloudFront::ConnectionGroup",
+  "description": "The connection group for your distribution tenants. When you first create a distribution tenant and you don't specify a connection group, CloudFront will automatically create a default connection group for you. When you create a new distribution tenant and don't specify a connection group, the default one will be associated with your distribution tenant.",
   "handlers": {
     "create": {
       "permissions": [
@@ -61,49 +64,62 @@
   ],
   "properties": {
     "Id": {
-      "type": "string"
+      "type": "string",
+      "description": ""
     },
     "Name": {
-      "type": "string"
+      "type": "string",
+      "description": "The name of the connection group."
     },
     "Arn": {
-      "type": "string"
+      "type": "string",
+      "description": ""
     },
     "CreatedTime": {
       "format": "date-time",
-      "type": "string"
+      "type": "string",
+      "description": ""
     },
     "LastModifiedTime": {
       "format": "date-time",
-      "type": "string"
+      "type": "string",
+      "description": ""
     },
     "Tags": {
       "items": {
         "$ref": "#/definitions/Tag"
       },
       "type": "array",
-      "uniqueItems": false
+      "uniqueItems": false,
+      "description": "A complex type that contains zero or more ``Tag`` elements."
     },
     "Ipv6Enabled": {
-      "type": "boolean"
+      "type": "boolean",
+      "description": "IPv6 is enabled for the connection group."
     },
     "RoutingEndpoint": {
-      "type": "string"
+      "type": "string",
+      "description": ""
     },
     "AnycastIpListId": {
-      "type": "string"
+      "type": "string",
+      "description": "The ID of the Anycast static IP list."
     },
     "Status": {
-      "type": "string"
+      "type": "string",
+      "description": ""
     },
     "Enabled": {
-      "type": "boolean"
+      "type": "boolean",
+      "description": "Whether the connection group is enabled."
     },
     "IsDefault": {
-      "type": "boolean"
+      "type": "boolean",
+      "description": ""
     },
     "ETag": {
-      "type": "string"
+      "type": "string",
+      "description": ""
     }
   },
   "createOnlyProperties": [

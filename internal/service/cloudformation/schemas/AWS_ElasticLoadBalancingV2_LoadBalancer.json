@@ -98,11 +98,11 @@
     },
     "EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic": {
       "type": "string",
-      "description": "Indicates whether to evaluate inbound security group rules for traffic sent to a Network Load Balancer through privatelink. The default is ``on``."
+      "description": "Indicates whether to evaluate inbound security group rules for traffic sent to a Network Load Balancer through privatelink. The default is ``on``.\n You can't configure this property on a Network Load Balancer unless you associated a security group with the load balancer when you created it."
     },
     "Ipv4IpamPoolId": {
       "type": "string",
-      "description": ""
+      "description": "The ID of the IPv4 IPAM pool."
     }
   },
   "definitions": {

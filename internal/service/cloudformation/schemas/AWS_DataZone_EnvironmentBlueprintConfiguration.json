@@ -76,10 +76,50 @@
   ],
   "writeOnlyProperties": [
     "/properties/DomainIdentifier",
-    "/properties/EnvironmentBlueprintIdentifier"
+    "/properties/EnvironmentBlueprintIdentifier",
+    "/properties/EnvironmentRolePermissionBoundary",
+    "/properties/ProvisioningConfigurations"
   ],
   "additionalProperties": false,
   "definitions": {
+    "ProvisioningConfiguration": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "type": "object",
+          "title": "LakeFormationConfiguration",
+          "properties": {
+            "LakeFormationConfiguration": {
+              "$ref": "#/definitions/LakeFormationConfiguration"
+            }
+          },
+          "required": [
+            "LakeFormationConfiguration"
+          ]
+        }
+      ]
+    },
+    "LakeFormationConfiguration": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "LocationRegistrationExcludeS3Locations": {
+          "minItems": 0,
+          "maxItems": 20,
+          "type": "array",
+          "items": {
+            "minLength": 1,
+            "pattern": "^s3://.+$",
+            "type": "string",
+            "maxLength": 1024
+          }
+        },
+        "LocationRegistrationRole": {
+          "pattern": "^arn:aws[^:]*:iam::\\d{12}:(role|role/service-role)/[\\w+=,.@-]*$",
+          "type": "string"
+        }
+      }
+    },
     "RegionalParameter": {
       "additionalProperties": false,
       "type": "object",
@@ -104,22 +144,6 @@
     }
   },
   "properties": {
-    "RegionalParameters": {
-      "uniqueItems": true,
-      "insertionOrder": false,
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/RegionalParameter"
-      }
-    },
-    "ProvisioningRoleArn": {
-      "pattern": "^arn:aws[^:]*:iam::\\d{12}:(role|role/service-role)/[\\w+=,.@-]*$",
-      "type": "string"
-    },
-    "DomainId": {
-      "pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$",
-      "type": "string"
-    },
     "CreatedAt": {
       "format": "date-time",
       "type": "string"
@@ -147,8 +171,34 @@
       "format": "date-time",
       "type": "string"
     },
+    "RegionalParameters": {
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/RegionalParameter"
+      }
+    },
+    "ProvisioningRoleArn": {
+      "pattern": "^arn:aws[^:]*:iam::\\d{12}:(role|role/service-role)/[\\w+=,.@-]*$",
+      "type": "string"
+    },
+    "DomainId": {
+      "pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$",
+      "type": "string"
+    },
+    "ProvisioningConfigurations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ProvisioningConfiguration"
+      }
+    },
     "DomainIdentifier": {
       "pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$",
+      "type": "string"
+    },
+    "EnvironmentRolePermissionBoundary": {
+      "pattern": "^arn:aws[^:]*:iam::(aws|\\d{12}):policy/[\\w+=,.@-]*$",
       "type": "string"
     },
     "ManageAccessRoleArn": {

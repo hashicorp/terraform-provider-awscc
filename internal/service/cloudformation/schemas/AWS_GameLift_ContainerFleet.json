@@ -517,8 +517,7 @@
   ],
   "createOnlyProperties": [
     "/properties/InstanceType",
-    "/properties/BillingType",
-    "/properties/Locations"
+    "/properties/BillingType"
   ],
   "readOnlyProperties": [
     "/properties/CreationTime",
@@ -531,8 +530,6 @@
     "/properties/MaximumGameServerContainerGroupsPerInstance"
   ],
   "writeOnlyProperties": [
-    "/properties/ScalingPolicies",
-    "/properties/Locations",
     "/properties/DeploymentConfiguration",
     "/properties/GameServerContainerGroupsPerInstance",
     "/properties/GameServerContainerGroupDefinitionName",

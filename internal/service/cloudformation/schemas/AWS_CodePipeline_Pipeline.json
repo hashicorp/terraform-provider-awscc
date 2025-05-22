@@ -514,6 +514,14 @@
         "Value": {
           "description": "The value of the environment variable.",
           "type": "string"
+        },
+        "Type": {
+          "description": "The type of the environment variable.",
+          "enum": [
+            "PLAINTEXT",
+            "SECRETS_MANAGER"
+          ],
+          "type": "string"
         }
       },
       "required": [

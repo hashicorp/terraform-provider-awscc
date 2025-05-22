@@ -1450,11 +1450,6 @@
         "path": "./examples/resources/awscc_datasync_location_smb/import.sh"
     },
     {
-        "resource": "awscc_datasync_storage_system",
-        "identifier": ["Id"],
-        "path": "./examples/resources/awscc_datasync_storage_system/import.sh"
-    },
-    {
         "resource": "awscc_datasync_task",
         "identifier": ["TaskArn"],
         "path": "./examples/resources/awscc_datasync_task/import.sh"

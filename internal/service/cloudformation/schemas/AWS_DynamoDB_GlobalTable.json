@@ -176,68 +176,6 @@
         "KeySchema"
       ]
     },
-    "SSESpecification": {
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "SSEEnabled": {
-          "type": "boolean"
-        },
-        "SSEType": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "SSEEnabled"
-      ]
-    },
-    "KinesisStreamSpecification": {
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "ApproximateCreationDateTimePrecision": {
-          "type": "string",
-          "enum": [
-            "MICROSECOND",
-            "MILLISECOND"
-          ]
-        },
-        "StreamArn": {
-          "relationshipRef": {
-            "typeName": "AWS::Kinesis::Stream",
-            "propertyPath": "/properties/Arn"
-          },
-          "type": "string"
-        }
-      },
-      "required": [
-        "StreamArn"
-      ]
-    },
-    "StreamSpecification": {
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "StreamViewType": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "StreamViewType"
-      ]
-    },
-    "ContributorInsightsSpecification": {
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "Enabled": {
-          "type": "boolean"
-        }
-      },
-      "required": [
-        "Enabled"
-      ]
-    },
     "ReplicaSpecification": {
       "additionalProperties": false,
       "type": "object",
@@ -294,32 +232,6 @@
       },
       "required": [
         "Region"
-      ]
-    },
-    "CapacityAutoScalingSettings": {
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "MinCapacity": {
-          "type": "integer",
-          "minimum": 1
-        },
-        "SeedCapacity": {
-          "type": "integer",
-          "minimum": 1
-        },
-        "TargetTrackingScalingPolicyConfiguration": {
-          "$ref": "#/definitions/TargetTrackingScalingPolicyConfiguration"
-        },
-        "MaxCapacity": {
-          "type": "integer",
-          "minimum": 1
-        }
-      },
-      "required": [
-        "MinCapacity",
-        "MaxCapacity",
-        "TargetTrackingScalingPolicyConfiguration"
       ]
     },
     "AttributeDefinition": {
@@ -400,56 +312,6 @@
         "IndexName"
       ]
     },
-    "WarmThroughput": {
-      "anyOf": [
-        {
-          "required": [
-            "ReadUnitsPerSecond"
-          ]
-        },
-        {
-          "required": [
-            "WriteUnitsPerSecond"
-          ]
-        }
-      ],
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "ReadUnitsPerSecond": {
-          "type": "integer",
-          "minimum": 1
-        },
-        "WriteUnitsPerSecond": {
-          "type": "integer",
-          "minimum": 1
-        }
-      }
-    },
-    "TargetTrackingScalingPolicyConfiguration": {
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "ScaleOutCooldown": {
-          "type": "integer",
-          "minimum": 0
-        },
-        "TargetValue": {
-          "format": "double",
-          "type": "number"
-        },
-        "DisableScaleIn": {
-          "type": "boolean"
-        },
-        "ScaleInCooldown": {
-          "type": "integer",
-          "minimum": 0
-        }
-      },
-      "required": [
-        "TargetValue"
-      ]
-    },
     "GlobalSecondaryIndex": {
       "additionalProperties": false,
       "type": "object",
@@ -516,6 +378,163 @@
       },
       "required": [
         "ResourcePolicy"
+      ]
+    },
+    "GlobalTableWitness": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Region": {
+          "type": "string"
+        }
+      }
+    },
+    "ReadOnDemandThroughputSettings": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "MaxReadRequestUnits": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "SSESpecification": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "SSEEnabled": {
+          "type": "boolean"
+        },
+        "SSEType": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "SSEEnabled"
+      ]
+    },
+    "KinesisStreamSpecification": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "ApproximateCreationDateTimePrecision": {
+          "type": "string",
+          "enum": [
+            "MICROSECOND",
+            "MILLISECOND"
+          ]
+        },
+        "StreamArn": {
+          "relationshipRef": {
+            "typeName": "AWS::Kinesis::Stream",
+            "propertyPath": "/properties/Arn"
+          },
+          "type": "string"
+        }
+      },
+      "required": [
+        "StreamArn"
+      ]
+    },
+    "StreamSpecification": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "StreamViewType": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "StreamViewType"
+      ]
+    },
+    "ContributorInsightsSpecification": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Enabled": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "Enabled"
+      ]
+    },
+    "CapacityAutoScalingSettings": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "MinCapacity": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "SeedCapacity": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "TargetTrackingScalingPolicyConfiguration": {
+          "$ref": "#/definitions/TargetTrackingScalingPolicyConfiguration"
+        },
+        "MaxCapacity": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "MinCapacity",
+        "MaxCapacity",
+        "TargetTrackingScalingPolicyConfiguration"
+      ]
+    },
+    "WarmThroughput": {
+      "anyOf": [
+        {
+          "required": [
+            "ReadUnitsPerSecond"
+          ]
+        },
+        {
+          "required": [
+            "WriteUnitsPerSecond"
+          ]
+        }
+      ],
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "ReadUnitsPerSecond": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "WriteUnitsPerSecond": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "TargetTrackingScalingPolicyConfiguration": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "ScaleOutCooldown": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "TargetValue": {
+          "format": "double",
+          "type": "number"
+        },
+        "DisableScaleIn": {
+          "type": "boolean"
+        },
+        "ScaleInCooldown": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "TargetValue"
       ]
     },
     "ReplicaSSESpecification": {
@@ -623,16 +642,6 @@
       "required": [
         "Enabled"
       ]
-    },
-    "ReadOnDemandThroughputSettings": {
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "MaxReadRequestUnits": {
-          "type": "integer",
-          "minimum": 1
-        }
-      }
     }
   },
   "required": [

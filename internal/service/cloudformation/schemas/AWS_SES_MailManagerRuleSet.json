@@ -94,6 +94,51 @@
       ],
       "additionalProperties": false
     },
+    "SnsAction": {
+      "type": "object",
+      "properties": {
+        "ActionFailurePolicy": {
+          "$ref": "#/definitions/ActionFailurePolicy"
+        },
+        "TopicArn": {
+          "type": "string",
+          "maxLength": 2048,
+          "minLength": 20,
+          "pattern": "^arn:(aws|aws-cn|aws-us-gov):sns:[a-z]{2}-[a-z]+-\\d{1}:\\d{12}:[\\w\\-]{1,256}$"
+        },
+        "RoleArn": {
+          "type": "string",
+          "maxLength": 2048,
+          "minLength": 20,
+          "pattern": "^[a-zA-Z0-9:_/+=,@.#-]+$"
+        },
+        "Encoding": {
+          "$ref": "#/definitions/SnsNotificationEncoding"
+        },
+        "PayloadType": {
+          "$ref": "#/definitions/SnsNotificationPayloadType"
+        }
+      },
+      "required": [
+        "TopicArn",
+        "RoleArn"
+      ],
+      "additionalProperties": false
+    },
+    "SnsNotificationEncoding": {
+      "type": "string",
+      "enum": [
+        "UTF-8",
+        "BASE64"
+      ]
+    },
+    "SnsNotificationPayloadType": {
+      "type": "string",
+      "enum": [
+        "CONTENT",
+        "HEADERS"
+      ]
+    },
     "DeliverToQBusinessAction": {
       "type": "object",
       "properties": {
@@ -331,6 +376,19 @@
           },
           "required": [
             "DeliverToQBusiness"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "PublishToSns",
+          "properties": {
+            "PublishToSns": {
+              "$ref": "#/definitions/SnsAction"
+            }
+          },
+          "required": [
+            "PublishToSns"
           ],
           "additionalProperties": false
         }

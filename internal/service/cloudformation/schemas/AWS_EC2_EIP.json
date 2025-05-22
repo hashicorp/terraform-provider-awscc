@@ -121,7 +121,6 @@
     }
   },
   "createOnlyProperties": [
-    "/properties/Domain",
     "/properties/NetworkBorderGroup",
     "/properties/TransferAddress",
     "/properties/IpamPoolId",
