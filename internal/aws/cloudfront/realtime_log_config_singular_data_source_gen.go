@@ -41,11 +41,11 @@ func realtimeLogConfigDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "Contains information about the Amazon Kinesis data stream where you are sending real-time log data for this real-time log configuration.",
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "Contains information about the Amazon Kinesis data stream where you are sending real-time log data in a real-time log configuration.",
+		//	    "description": "Contains information about the Amazon Kinesis data stream where you are sending real-time log data for this real-time log configuration.",
 		//	    "properties": {
 		//	      "KinesisStreamConfig": {
 		//	        "additionalProperties": false,
-		//	        "description": "Contains information about the Amazon Kinesis data stream where you are sending real-time log data.",
+		//	        "description": "Contains information about the Amazon Kinesis data stream where you are sending real-time log data in a real-time log configuration.",
 		//	        "properties": {
 		//	          "RoleArn": {
 		//	            "description": "The Amazon Resource Name (ARN) of an IAMlong (IAM) role that CloudFront can use to send real-time log data to your Kinesis data stream.\n For more information the IAM role, see [Real-time log configuration IAM role](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-iam-role) in the *Amazon CloudFront Developer Guide*.",
@@ -94,7 +94,7 @@ func realtimeLogConfigDataSource(ctx context.Context) (datasource.DataSource, er
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "Contains information about the Amazon Kinesis data stream where you are sending real-time log data.",
+						Description: "Contains information about the Amazon Kinesis data stream where you are sending real-time log data in a real-time log configuration.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: StreamType

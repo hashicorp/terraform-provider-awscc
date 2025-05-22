@@ -6,7 +6,6 @@
 package datasync_test
 
 import (
-	"regexp"
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-testing/helper/resource"
@@ -18,8 +17,30 @@ func TestAccAWSDataSyncLocationObjectStorage_basic(t *testing.T) {
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
-			Config:      td.EmptyConfig(),
-			ExpectError: regexp.MustCompile("Missing required argument"),
+			Config: td.EmptyConfig(),
+			Check: resource.ComposeTestCheckFunc(
+				td.CheckExistsInAWS(),
+			),
+		},
+		{
+			ResourceName:      td.ResourceName,
+			ImportState:       true,
+			ImportStateVerify: true,
+		},
+	})
+}
+
+func TestAccAWSDataSyncLocationObjectStorage_disappears(t *testing.T) {
+	td := acctest.NewTestData(t, "AWS::DataSync::LocationObjectStorage", "awscc_datasync_location_object_storage", "test")
+
+	td.ResourceTest(t, []resource.TestStep{
+		{
+			Config: td.EmptyConfig(),
+			Check: resource.ComposeTestCheckFunc(
+				td.CheckExistsInAWS(),
+				td.DeleteResource(),
+			),
+			ExpectNonEmptyPlan: true,
 		},
 	})
 }

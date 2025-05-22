@@ -4905,6 +4905,11 @@
         "path": "./examples/resources/awscc_ses_mail_manager_archive/import.sh"
     },
     {
+        "resource": "awscc_ses_mail_manager_address_list",
+        "identifier": ["AddressListId"],
+        "path": "./examples/resources/awscc_ses_mail_manager_address_list/import.sh"
+    },
+    {
         "resource": "awscc_ses_mail_manager_ingress_point",
         "identifier": ["IngressPointId"],
         "path": "./examples/resources/awscc_ses_mail_manager_ingress_point/import.sh"

@@ -241,14 +241,16 @@
     "tagProperty": "/properties/Tags",
     "permissions": [
       "xray:TagResource",
-      "xray:UntagResource"
+      "xray:UntagResource",
+      "xray:ListTagsForResource"
     ]
   },
   "handlers": {
     "create": {
       "permissions": [
         "xray:CreateSamplingRule",
-        "xray:TagResource"
+        "xray:TagResource",
+        "xray:ListTagsForResource"
       ]
     },
     "read": {

@@ -175,7 +175,7 @@
     },
     "Tags": {
       "type": "array",
-      "description": "A list of labels to assign to the new game server group resource. Updating game server group tags with CloudFormation will not take effect. Please update this property using AWS GameLift APIs instead.",
+      "description": "A list of labels to assign to the new game server group resource.",
       "items": {
         "$ref": "#/definitions/Tag"
       },
@@ -371,8 +371,7 @@
     "/properties/MinSize",
     "/properties/MaxSize",
     "/properties/AutoScalingPolicy",
-    "/properties/VpcSubnets",
-    "/properties/Tags"
+    "/properties/VpcSubnets"
   ],
   "primaryIdentifier": [
     "/properties/GameServerGroupArn"
@@ -381,6 +380,7 @@
     "create": {
       "permissions": [
         "gamelift:CreateGameServerGroup",
+        "gamelift:ListTagsForResource",
         "gamelift:TagResource",
         "gamelift:DescribeGameServerGroup",
         "iam:assumeRole",
@@ -409,12 +409,16 @@
     },
     "read": {
       "permissions": [
-        "gamelift:DescribeGameServerGroup"
+        "gamelift:DescribeGameServerGroup",
+        "gamelift:ListTagsForResource"
       ]
     },
     "update": {
       "permissions": [
         "gamelift:UpdateGameServerGroup",
+        "gamelift:TagResource",
+        "gamelift:UntagResource",
+        "gamelift:ListTagsForResource",
         "iam:assumeRole",
         "iam:PassRole",
         "autoscaling:DescribeAutoScalingGroups",

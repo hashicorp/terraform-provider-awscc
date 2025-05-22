@@ -8,7 +8,8 @@
   "handlers": {
     "read": {
       "permissions": [
-        "datazone:ListEntityOwners"
+        "datazone:ListEntityOwners",
+        "iam:GetRole"
       ]
     },
     "create": {
@@ -16,12 +17,14 @@
         "datazone:AddEntityOwner",
         "datazone:ListEntityOwners",
         "datazone:GetGroupProfile",
-        "datazone:GetUserProfile"
+        "datazone:GetUserProfile",
+        "iam:GetRole"
       ]
     },
     "list": {
       "permissions": [
-        "datazone:ListEntityOwners"
+        "datazone:ListEntityOwners",
+        "iam:GetRole"
       ],
       "handlerSchema": {
         "properties": {
@@ -52,7 +55,8 @@
     "delete": {
       "permissions": [
         "datazone:RemoveEntityOwner",
-        "datazone:GetUserProfile"
+        "datazone:GetUserProfile",
+        "iam:GetRole"
       ]
     }
   },

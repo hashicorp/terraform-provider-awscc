@@ -91,6 +91,10 @@
         "AUTOMATIC",
         "OFF"
       ]
+    },
+    "DryRunAndUpdate": {
+      "description": "Setting to control if UpdateCanary will perform a DryRun and validate it is PASSING before performing the Update. Default is FALSE.",
+      "type": "boolean"
     }
   },
   "definitions": {
@@ -103,6 +107,10 @@
         },
         "DurationInSeconds": {
           "type": "string"
+        },
+        "RetryConfig": {
+          "$ref": "#/definitions/RetryConfig",
+          "description": "Provide canary auto retry configuration"
         }
       },
       "required": [
@@ -299,6 +307,19 @@
       "enum": [
         "lambda-function"
       ]
+    },
+    "RetryConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "MaxRetries": {
+          "type": "integer",
+          "description": "maximum times the canary will be retried upon the scheduled run failure"
+        }
+      },
+      "required": [
+        "MaxRetries"
+      ]
     }
   },
   "required": [
@@ -353,8 +374,10 @@
       "permissions": [
         "synthetics:UpdateCanary",
         "synthetics:StartCanary",
+        "synthetics:StartCanaryDryRun",
         "synthetics:StopCanary",
         "synthetics:GetCanary",
+        "synthetics:GetCanaryRuns",
         "synthetics:TagResource",
         "synthetics:UntagResource",
         "s3:GetObject",
@@ -424,7 +447,8 @@
     "/properties/StartCanaryAfterCreation",
     "/properties/ResourcesToReplicateTags",
     "/properties/RunConfig/EnvironmentVariables",
-    "/properties/VisualReference"
+    "/properties/VisualReference",
+    "/properties/DryRunAndUpdate"
   ],
   "deprecatedProperties": [
     "/properties/DeleteLambdaResourcesOnCanaryDeletion"

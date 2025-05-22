@@ -276,6 +276,31 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "Additional options related to the Slurm scheduler.",
 		//	  "properties": {
+		//	    "Accounting": {
+		//	      "description": "The accounting configuration includes configurable settings for Slurm accounting.",
+		//	      "properties": {
+		//	        "DefaultPurgeTimeInDays": {
+		//	          "default": -1,
+		//	          "description": "The default value for all purge settings for `slurmdbd.conf`. For more information, see the [slurmdbd.conf documentation at SchedMD](https://slurm.schedmd.com/slurmdbd.conf.html). The default value is `-1`. A value of `-1` means there is no purge time and records persist as long as the cluster exists.",
+		//	          "maximum": 10000,
+		//	          "minimum": -1,
+		//	          "type": "integer"
+		//	        },
+		//	        "Mode": {
+		//	          "default": "NONE",
+		//	          "description": "The default value is `STANDARD`. A value of `STANDARD` means that Slurm accounting is enabled.",
+		//	          "enum": [
+		//	            "STANDARD",
+		//	            "NONE"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Mode"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "AuthKey": {
 		//	      "additionalProperties": false,
 		//	      "description": "The shared Slurm key for authentication, also known as the cluster secret.",
@@ -329,6 +354,23 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"slurm_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Accounting
+				"accounting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DefaultPurgeTimeInDays
+						"default_purge_time_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The default value for all purge settings for `slurmdbd.conf`. For more information, see the [slurmdbd.conf documentation at SchedMD](https://slurm.schedmd.com/slurmdbd.conf.html). The default value is `-1`. A value of `-1` means there is no purge time and records persist as long as the cluster exists.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Mode
+						"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The default value is `STANDARD`. A value of `STANDARD` means that Slurm accounting is enabled.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The accounting configuration includes configurable settings for Slurm accounting.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: AuthKey
 				"auth_key": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -429,13 +471,16 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::PCS::Cluster").WithTerraformTypeName("awscc_pcs_cluster")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"accounting":                      "Accounting",
 		"arn":                             "Arn",
 		"auth_key":                        "AuthKey",
 		"cluster_id":                      "Id",
 		"code":                            "Code",
+		"default_purge_time_in_days":      "DefaultPurgeTimeInDays",
 		"endpoints":                       "Endpoints",
 		"error_info":                      "ErrorInfo",
 		"message":                         "Message",
+		"mode":                            "Mode",
 		"name":                            "Name",
 		"networking":                      "Networking",
 		"parameter_name":                  "ParameterName",

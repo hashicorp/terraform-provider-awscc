@@ -4539,6 +4539,10 @@ resource_schema "aws_ses_mail_manager_archive" {
   cloudformation_type_name = "AWS::SES::MailManagerArchive"
 }
 
+resource_schema "aws_ses_mail_manager_address_list" {
+  cloudformation_type_name = "AWS::SES::MailManagerAddressList"
+}
+
 resource_schema "aws_ses_mail_manager_ingress_point" {
   cloudformation_type_name = "AWS::SES::MailManagerIngressPoint"
 }

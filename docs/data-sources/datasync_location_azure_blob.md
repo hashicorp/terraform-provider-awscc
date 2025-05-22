@@ -21,14 +21,17 @@ Data Source schema for AWS::DataSync::LocationAzureBlob
 
 ### Read-Only
 
-- `agent_arns` (List of String) The Amazon Resource Names (ARNs) of agents to use for an Azure Blob Location.
+- `agent_arns` (List of String) Specifies the Amazon Resource Name (ARN) of the DataSync agent that can connect with your Azure Blob Storage container. If you are setting up an agentless cross-cloud transfer, you do not need to specify a value for this parameter.
 - `azure_access_tier` (String) Specifies an access tier for the objects you're transferring into your Azure Blob Storage container.
 - `azure_blob_authentication_type` (String) The specific authentication type that you want DataSync to use to access your Azure Blob Container.
 - `azure_blob_container_url` (String) The URL of the Azure Blob container that was described.
 - `azure_blob_sas_configuration` (Attributes) Specifies the shared access signature (SAS) that DataSync uses to access your Azure Blob Storage container. (see [below for nested schema](#nestedatt--azure_blob_sas_configuration))
 - `azure_blob_type` (String) Specifies a blob type for the objects you're transferring into your Azure Blob Storage container.
+- `cmk_secret_config` (Attributes) Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and a customer-managed AWS KMS key. (see [below for nested schema](#nestedatt--cmk_secret_config))
+- `custom_secret_config` (Attributes) Specifies configuration information for a customer-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and an IAM role that DataSync can assume and access the customer-managed secret. (see [below for nested schema](#nestedatt--custom_secret_config))
 - `location_arn` (String) The Amazon Resource Name (ARN) of the Azure Blob Location that is created.
 - `location_uri` (String) The URL of the Azure Blob Location that was described.
+- `managed_secret_config` (Attributes) Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location. DataSync uses the default AWS-managed KMS key to encrypt this secret in AWS Secrets Manager. (see [below for nested schema](#nestedatt--managed_secret_config))
 - `subdirectory` (String) The subdirectory in the Azure Blob Container that is used to read data from the Azure Blob Source Location.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
@@ -38,6 +41,32 @@ Data Source schema for AWS::DataSync::LocationAzureBlob
 Read-Only:
 
 - `azure_blob_sas_token` (String) Specifies the shared access signature (SAS) token, which indicates the permissions DataSync needs to access your Azure Blob Storage container.
+
+
+<a id="nestedatt--cmk_secret_config"></a>
+### Nested Schema for `cmk_secret_config`
+
+Read-Only:
+
+- `kms_key_arn` (String) Specifies the ARN for the customer-managed AWS KMS key used to encrypt the secret specified for SecretArn. DataSync provides this key to AWS Secrets Manager.
+- `secret_arn` (String) Specifies the ARN for an AWS Secrets Manager secret, managed by DataSync.
+
+
+<a id="nestedatt--custom_secret_config"></a>
+### Nested Schema for `custom_secret_config`
+
+Read-Only:
+
+- `secret_access_role_arn` (String) Specifies the ARN for the AWS Identity and Access Management role that DataSync uses to access the secret specified for SecretArn.
+- `secret_arn` (String) Specifies the ARN for a customer created AWS Secrets Manager secret.
+
+
+<a id="nestedatt--managed_secret_config"></a>
+### Nested Schema for `managed_secret_config`
+
+Read-Only:
+
+- `secret_arn` (String) Specifies the ARN for an AWS Secrets Manager secret.
 
 
 <a id="nestedatt--tags"></a>

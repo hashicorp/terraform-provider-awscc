@@ -76,9 +76,19 @@ Read-Only:
 
 Read-Only:
 
+- `accounting` (Attributes) The accounting configuration includes configurable settings for Slurm accounting. (see [below for nested schema](#nestedatt--slurm_configuration--accounting))
 - `auth_key` (Attributes) The shared Slurm key for authentication, also known as the cluster secret. (see [below for nested schema](#nestedatt--slurm_configuration--auth_key))
 - `scale_down_idle_time_in_seconds` (Number) The time before an idle node is scaled down.
 - `slurm_custom_settings` (Attributes List) Additional Slurm-specific configuration that directly maps to Slurm settings. (see [below for nested schema](#nestedatt--slurm_configuration--slurm_custom_settings))
+
+<a id="nestedatt--slurm_configuration--accounting"></a>
+### Nested Schema for `slurm_configuration.accounting`
+
+Read-Only:
+
+- `default_purge_time_in_days` (Number) The default value for all purge settings for `slurmdbd.conf`. For more information, see the [slurmdbd.conf documentation at SchedMD](https://slurm.schedmd.com/slurmdbd.conf.html). The default value is `-1`. A value of `-1` means there is no purge time and records persist as long as the cluster exists.
+- `mode` (String) The default value is `STANDARD`. A value of `STANDARD` means that Slurm accounting is enabled.
+
 
 <a id="nestedatt--slurm_configuration--auth_key"></a>
 ### Nested Schema for `slurm_configuration.auth_key`

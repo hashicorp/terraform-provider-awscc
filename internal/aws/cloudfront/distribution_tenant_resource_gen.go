@@ -36,10 +36,12 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -48,11 +50,13 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The ID of the connection group for the distribution tenant. If you don't specify a connection group, CloudFront uses the default connection group.",
 		//	  "type": "string"
 		//	}
 		"connection_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "The ID of the connection group for the distribution tenant. If you don't specify a connection group, CloudFront uses the default connection group.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -61,12 +65,14 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: timetypes.RFC3339Type{},
-			Computed:   true,
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -76,11 +82,14 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "Customizations for the distribution tenant. For each distribution tenant, you can specify the geographic restrictions, and the Amazon Resource Names (ARNs) for the ACM certificate and WAF web ACL. These are specific values that you can override or disable from the multi-tenant distribution that was used to create the distribution tenant.",
 		//	  "properties": {
 		//	    "Certificate": {
 		//	      "additionalProperties": false,
+		//	      "description": "The ACMlong (ACM) certificate.",
 		//	      "properties": {
 		//	        "Arn": {
+		//	          "description": "The Amazon Resource Name (ARN) of the ACM certificate.",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -88,8 +97,10 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 		//	    },
 		//	    "GeoRestrictions": {
 		//	      "additionalProperties": false,
+		//	      "description": "The geographic restrictions.",
 		//	      "properties": {
 		//	        "Locations": {
+		//	          "description": "The locations for geographic restrictions.",
 		//	          "items": {
 		//	            "type": "string"
 		//	          },
@@ -97,6 +108,7 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 		//	          "uniqueItems": false
 		//	        },
 		//	        "RestrictionType": {
+		//	          "description": "The method that you want to use to restrict distribution of your content by country:\n  +  ``none``: No geographic restriction is enabled, meaning access to content is not restricted by client geo location.\n  +  ``blacklist``: The ``Location`` elements specify the countries in which you don't want CloudFront to distribute your content.\n  +  ``whitelist``: The ``Location`` elements specify the countries in which you want CloudFront to distribute your content.",
 		//	          "enum": [
 		//	            "blacklist",
 		//	            "whitelist",
@@ -109,8 +121,10 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 		//	    },
 		//	    "WebAcl": {
 		//	      "additionalProperties": false,
+		//	      "description": "The WAF web ACL.",
 		//	      "properties": {
 		//	        "Action": {
+		//	          "description": "The action for the WAF web ACL customization. You can specify ``override`` to specify a separate WAF web ACL for the distribution tenant. If you specify ``disable``, the distribution tenant won't have WAF web ACL protections and won't inherit from the multi-tenant distribution.",
 		//	          "enum": [
 		//	            "override",
 		//	            "disable"
@@ -118,6 +132,7 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 		//	          "type": "string"
 		//	        },
 		//	        "Arn": {
+		//	          "description": "The Amazon Resource Name (ARN) of the WAF web ACL.",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -133,15 +148,17 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Arn
 						"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
+							Description: "The Amazon Resource Name (ARN) of the ACM certificate.",
+							Optional:    true,
+							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Optional: true,
-					Computed: true,
+					Description: "The ACMlong (ACM) certificate.",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -152,6 +169,7 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 						// Property: Locations
 						"locations": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
+							Description: "The locations for geographic restrictions.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -160,8 +178,9 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 						}, /*END ATTRIBUTE*/
 						// Property: RestrictionType
 						"restriction_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
+							Description: "The method that you want to use to restrict distribution of your content by country:\n  +  ``none``: No geographic restriction is enabled, meaning access to content is not restricted by client geo location.\n  +  ``blacklist``: The ``Location`` elements specify the countries in which you don't want CloudFront to distribute your content.\n  +  ``whitelist``: The ``Location`` elements specify the countries in which you want CloudFront to distribute your content.",
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"blacklist",
@@ -174,8 +193,9 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Optional: true,
-					Computed: true,
+					Description: "The geographic restrictions.",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -185,8 +205,9 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Action
 						"action": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
+							Description: "The action for the WAF web ACL customization. You can specify ``override`` to specify a separate WAF web ACL for the distribution tenant. If you specify ``disable``, the distribution tenant won't have WAF web ACL protections and won't inherit from the multi-tenant distribution.",
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"override",
@@ -199,22 +220,25 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 						}, /*END ATTRIBUTE*/
 						// Property: Arn
 						"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
+							Description: "The Amazon Resource Name (ARN) of the WAF web ACL.",
+							Optional:    true,
+							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Optional: true,
-					Computed: true,
+					Description: "The WAF web ACL.",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Optional: true,
-			Computed: true,
+			Description: "Customizations for the distribution tenant. For each distribution tenant, you can specify the geographic restrictions, and the Amazon Resource Names (ARNs) for the ACM certificate and WAF web ACL. These are specific values that you can override or disable from the multi-tenant distribution that was used to create the distribution tenant.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -223,22 +247,28 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The ID of the multi-tenant distribution.",
 		//	  "type": "string"
 		//	}
 		"distribution_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
+			Description: "The ID of the multi-tenant distribution.",
+			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DomainResults
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "items": {
 		//	    "additionalProperties": false,
+		//	    "description": "The details about the domain result.",
 		//	    "properties": {
 		//	      "Domain": {
+		//	        "description": "The specified domain.",
 		//	        "type": "string"
 		//	      },
 		//	      "Status": {
+		//	        "description": "Whether the domain is active or inactive.",
 		//	        "enum": [
 		//	          "active",
 		//	          "inactive"
@@ -256,15 +286,18 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Domain
 					"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "The specified domain.",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Status
 					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "Whether the domain is active or inactive.",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -273,6 +306,7 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The domains associated with the distribution tenant.",
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
@@ -281,16 +315,19 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 		//	}
 		"domains": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			Description: "The domains associated with the distribution tenant.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ETag
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"e_tag": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -299,11 +336,13 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "Indicates whether the distribution tenant is in an enabled state. If disabled, the distribution tenant won't serve traffic.",
 		//	  "type": "boolean"
 		//	}
 		"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "Indicates whether the distribution tenant is in an enabled state. If disabled, the distribution tenant won't serve traffic.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -312,10 +351,12 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"distribution_tenant_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -324,12 +365,14 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
 		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: timetypes.RFC3339Type{},
-			Computed:   true,
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -339,8 +382,10 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "An object that represents the request for the Amazon CloudFront managed ACM certificate.",
 		//	  "properties": {
 		//	    "CertificateTransparencyLoggingPreference": {
+		//	      "description": "You can opt out of certificate transparency logging by specifying the ``disabled`` option. Opt in by specifying ``enabled``. For more information, see [Certificate Transparency Logging](https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency) in the *User Guide*.",
 		//	      "enum": [
 		//	        "enabled",
 		//	        "disabled"
@@ -348,9 +393,11 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 		//	      "type": "string"
 		//	    },
 		//	    "PrimaryDomainName": {
+		//	      "description": "The primary domain name associated with the CloudFront managed ACM certificate.",
 		//	      "type": "string"
 		//	    },
 		//	    "ValidationTokenHost": {
+		//	      "description": "Specify how the HTTP validation token will be served when requesting the CloudFront managed ACM certificate.\n  +  For ``cloudfront``, CloudFront will automatically serve the validation token. Choose this mode if you can point the domain's DNS to CloudFront immediately.\n  +  For ``self-hosted``, you serve the validation token from your existing infrastructure. Choose this mode when you need to maintain current traffic flow while your certificate is being issued. You can place the validation token at the well-known path on your existing web server, wait for ACM to validate and issue the certificate, and then update your DNS to point to CloudFront.",
 		//	      "enum": [
 		//	        "cloudfront",
 		//	        "self-hosted"
@@ -364,8 +411,9 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: CertificateTransparencyLoggingPreference
 				"certificate_transparency_logging_preference": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
+					Description: "You can opt out of certificate transparency logging by specifying the ``disabled`` option. Opt in by specifying ``enabled``. For more information, see [Certificate Transparency Logging](https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency) in the *User Guide*.",
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"enabled",
@@ -378,16 +426,18 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 				}, /*END ATTRIBUTE*/
 				// Property: PrimaryDomainName
 				"primary_domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
+					Description: "The primary domain name associated with the CloudFront managed ACM certificate.",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: ValidationTokenHost
 				"validation_token_host": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
+					Description: "Specify how the HTTP validation token will be served when requesting the CloudFront managed ACM certificate.\n  +  For ``cloudfront``, CloudFront will automatically serve the validation token. Choose this mode if you can point the domain's DNS to CloudFront immediately.\n  +  For ``self-hosted``, you serve the validation token from your existing infrastructure. Choose this mode when you need to maintain current traffic flow while your certificate is being issued. You can place the validation token at the well-known path on your existing web server, wait for ACM to validate and issue the certificate, and then update your DNS to point to CloudFront.",
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"cloudfront",
@@ -399,8 +449,9 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Optional: true,
-			Computed: true,
+			Description: "An object that represents the request for the Amazon CloudFront managed ACM certificate.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 				objectplanmodifier.RequiresReplaceIfConfigured(),
@@ -411,10 +462,12 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The name of the distribution tenant.",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
+			Description: "The name of the distribution tenant.",
+			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -423,13 +476,17 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "A list of parameter values to add to the resource. A parameter is specified as a key-value pair. A valid parameter value must exist for any parameter that is marked as required in the multi-tenant distribution.",
 		//	  "items": {
 		//	    "additionalProperties": false,
+		//	    "description": "A list of parameter values to add to the resource. A parameter is specified as a key-value pair. A valid parameter value must exist for any parameter that is marked as required in the multi-tenant distribution.",
 		//	    "properties": {
 		//	      "Name": {
+		//	        "description": "The parameter name.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "The parameter value.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -443,24 +500,27 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Name
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "The parameter name.",
+						Optional:    true,
+						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "The parameter value.",
+						Optional:    true,
+						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Optional: true,
-			Computed: true,
+			Description: "A list of parameter values to add to the resource. A parameter is specified as a key-value pair. A valid parameter value must exist for any parameter that is marked as required in the multi-tenant distribution.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -469,10 +529,12 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -481,13 +543,17 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "A complex type that contains zero or more ``Tag`` elements.",
 		//	  "items": {
 		//	    "additionalProperties": false,
+		//	    "description": "A complex type that contains ``Tag`` key and ``Tag`` value.",
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "A string that contains ``Tag`` key.\n The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "A string that contains an optional ``Tag`` value.\n The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -505,8 +571,9 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "A string that contains ``Tag`` key.\n The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -516,8 +583,9 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "A string that contains an optional ``Tag`` value.\n The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -527,8 +595,9 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Optional: true,
-			Computed: true,
+			Description: "A complex type that contains zero or more ``Tag`` elements.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -545,7 +614,7 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 	}
 
 	schema := schema.Schema{
-		Description: "Resource Type definition for AWS::CloudFront::DistributionTenant",
+		Description: "The distribution tenant.",
 		Version:     1,
 		Attributes:  attributes,
 	}

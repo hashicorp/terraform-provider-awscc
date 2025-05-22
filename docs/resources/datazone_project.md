@@ -42,7 +42,11 @@ resource "awscc_datazone_domain" "example" {
 ### Optional
 
 - `description` (String) The description of the Amazon DataZone project.
+- `domain_unit_id` (String) The ID of the domain unit.
 - `glossary_terms` (List of String) The glossary terms that can be used in this Amazon DataZone project.
+- `project_profile_id` (String) The project profile ID.
+- `project_profile_version` (String) The project profile version to which the project should be updated. You can only specify the following string for this parameter: latest.
+- `user_parameters` (Attributes List) The user parameters of the project. (see [below for nested schema](#nestedatt--user_parameters))
 
 ### Read-Only
 
@@ -52,6 +56,24 @@ resource "awscc_datazone_domain" "example" {
 - `id` (String) Uniquely identifies the resource.
 - `last_updated_at` (String) The timestamp of when the project was last updated.
 - `project_id` (String) The ID of the Amazon DataZone project.
+- `project_status` (String) The status of the project.
+
+<a id="nestedatt--user_parameters"></a>
+### Nested Schema for `user_parameters`
+
+Optional:
+
+- `environment_configuration_name` (String)
+- `environment_id` (String)
+- `environment_parameters` (Attributes List) (see [below for nested schema](#nestedatt--user_parameters--environment_parameters))
+
+<a id="nestedatt--user_parameters--environment_parameters"></a>
+### Nested Schema for `user_parameters.environment_parameters`
+
+Optional:
+
+- `name` (String)
+- `value` (String)
 
 ## Import
 

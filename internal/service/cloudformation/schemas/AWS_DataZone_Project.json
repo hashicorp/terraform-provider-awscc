@@ -2,7 +2,151 @@
   "typeName": "AWS::DataZone::Project",
   "description": "Amazon DataZone projects are business use case?based groupings of people, assets (data), and tools used to simplify access to the AWS analytics.",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-datazone",
-  "definitions": {},
+  "definitions": {
+    "EnvironmentConfigurationUserParameter": {
+      "type": "object",
+      "properties": {
+        "EnvironmentId": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_-]{1,36}$"
+        },
+        "EnvironmentConfigurationName": {
+          "type": "string",
+          "maxLength": 64,
+          "minLength": 1,
+          "pattern": "^[\\w -]+$"
+        },
+        "EnvironmentParameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnvironmentParameter"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "EnvironmentDeploymentDetails": {
+      "type": "object",
+      "properties": {
+        "OverallDeploymentStatus": {
+          "$ref": "#/definitions/OverallDeploymentStatus"
+        },
+        "EnvironmentFailureReasons": {
+          "$ref": "#/definitions/EnvironmentFailureReasons"
+        }
+      },
+      "additionalProperties": false
+    },
+    "EnvironmentError": {
+      "type": "object",
+      "properties": {
+        "Code": {
+          "type": "string"
+        },
+        "Message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Message"
+      ],
+      "additionalProperties": false
+    },
+    "EnvironmentFailureReasons": {
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnvironmentError"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "EnvironmentParameter": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "EnvironmentResolvedAccount": {
+      "type": "object",
+      "properties": {
+        "AwsAccountId": {
+          "type": "string",
+          "pattern": "^\\d{12}$"
+        },
+        "RegionName": {
+          "type": "string",
+          "pattern": "^[a-z]{2}-[a-z]{4,10}-\\d$"
+        },
+        "SourceAccountPoolId": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_-]{1,36}$"
+        }
+      },
+      "required": [
+        "AwsAccountId",
+        "RegionName",
+        "SourceAccountPoolId"
+      ],
+      "additionalProperties": false
+    },
+    "OverallDeploymentStatus": {
+      "type": "string",
+      "enum": [
+        "PENDING_DEPLOYMENT",
+        "IN_PROGRESS",
+        "SUCCESSFUL",
+        "FAILED_VALIDATION",
+        "FAILED_DEPLOYMENT"
+      ]
+    },
+    "ProjectDeletionError": {
+      "type": "object",
+      "description": "Error that occurred during project deletion",
+      "properties": {
+        "Code": {
+          "type": "string",
+          "description": "Project Deletion Error Code"
+        },
+        "Message": {
+          "type": "string",
+          "description": "Project Deletion Error Message"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ProjectStatus": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "MOVING",
+        "DELETING",
+        "DELETE_FAILED",
+        "UPDATING",
+        "UPDATE_FAILED"
+      ]
+    },
+    "Tags": {
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "maxLength": 256,
+          "pattern": "^[\\w \\.:/=+@-]*$"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
   "properties": {
     "CreatedAt": {
       "description": "The timestamp of when the project was created.",
@@ -27,6 +171,11 @@
       "description": "The ID of the Amazon DataZone domain in which this project is created.",
       "type": "string",
       "pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$"
+    },
+    "DomainUnitId": {
+      "description": "The ID of the domain unit.",
+      "type": "string",
+      "pattern": "^[a-z0-9_\\-]+$"
     },
     "GlossaryTerms": {
       "description": "The glossary terms that can be used in this Amazon DataZone project.",
@@ -55,6 +204,26 @@
       "maxLength": 64,
       "minLength": 1,
       "pattern": "^[\\w -]+$"
+    },
+    "ProjectProfileId": {
+      "description": "The project profile ID.",
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_-]{1,36}$"
+    },
+    "ProjectProfileVersion": {
+      "description": "The project profile version to which the project should be updated. You can only specify the following string for this parameter: latest.",
+      "type": "string"
+    },
+    "ProjectStatus": {
+      "description": "The status of the project.",
+      "$ref": "#/definitions/ProjectStatus"
+    },
+    "UserParameters": {
+      "description": "The user parameters of the project.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/EnvironmentConfigurationUserParameter"
+      }
     }
   },
   "required": [
@@ -66,17 +235,23 @@
     "/properties/CreatedAt",
     "/properties/CreatedBy",
     "/properties/DomainId",
-    "/properties/LastUpdatedAt"
+    "/properties/LastUpdatedAt",
+    "/properties/ProjectStatus"
   ],
   "writeOnlyProperties": [
-    "/properties/DomainIdentifier"
+    "/properties/DomainIdentifier",
+    "/properties/ProjectProfileVersion",
+    "/properties/ProjectProfileId",
+    "/properties/UserParameters"
   ],
   "primaryIdentifier": [
     "/properties/DomainId",
     "/properties/Id"
   ],
   "createOnlyProperties": [
-    "/properties/DomainIdentifier"
+    "/properties/ProjectProfileId",
+    "/properties/DomainIdentifier",
+    "/properties/DomainUnitId"
   ],
   "additionalIdentifiers": [
     [

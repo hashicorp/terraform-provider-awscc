@@ -632,6 +632,86 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The license configurations.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: MetadataOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The metadata options for the instance",
+		//	  "properties": {
+		//	    "HttpEndpoint": {
+		//	      "description": "Enables or disables the HTTP metadata endpoint on your instances. If you specify a value of disabled, you cannot access your instance metadata.",
+		//	      "enum": [
+		//	        "disabled",
+		//	        "enabled"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "HttpProtocolIpv6": {
+		//	      "description": "Enables or disables the IPv6 endpoint for the instance metadata service. To use this option, the instance must be a Nitro-based instance launched in a subnet that supports IPv6.",
+		//	      "enum": [
+		//	        "disabled",
+		//	        "enabled"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "HttpPutResponseHopLimit": {
+		//	      "default": 1,
+		//	      "description": "The number of network hops that the metadata token can travel. Maximum is 64.",
+		//	      "maximum": 64,
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    },
+		//	    "HttpTokens": {
+		//	      "description": "Indicates whether IMDSv2 is required.",
+		//	      "enum": [
+		//	        "optional",
+		//	        "required"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "InstanceMetadataTags": {
+		//	      "description": "Indicates whether tags from the instance are propagated to the EBS volumes.",
+		//	      "enum": [
+		//	        "disabled",
+		//	        "enabled"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"metadata_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: HttpEndpoint
+				"http_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Enables or disables the HTTP metadata endpoint on your instances. If you specify a value of disabled, you cannot access your instance metadata.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: HttpProtocolIpv6
+				"http_protocol_ipv_6": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Enables or disables the IPv6 endpoint for the instance metadata service. To use this option, the instance must be a Nitro-based instance launched in a subnet that supports IPv6.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: HttpPutResponseHopLimit
+				"http_put_response_hop_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The number of network hops that the metadata token can travel. Maximum is 64.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: HttpTokens
+				"http_tokens": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether IMDSv2 is required.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: InstanceMetadataTags
+				"instance_metadata_tags": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether tags from the instance are propagated to the EBS volumes.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The metadata options for the instance",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Monitoring
 		// CloudFormation resource type schema:
 		//
@@ -1380,10 +1460,15 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"host_id":                              "HostId",
 		"host_resource_group_arn":              "HostResourceGroupArn",
 		"hostname_type":                        "HostnameType",
+		"http_endpoint":                        "HttpEndpoint",
+		"http_protocol_ipv_6":                  "HttpProtocolIpv6",
+		"http_put_response_hop_limit":          "HttpPutResponseHopLimit",
+		"http_tokens":                          "HttpTokens",
 		"iam_instance_profile":                 "IamInstanceProfile",
 		"image_id":                             "ImageId",
 		"instance_id":                          "InstanceId",
 		"instance_initiated_shutdown_behavior": "InstanceInitiatedShutdownBehavior",
+		"instance_metadata_tags":               "InstanceMetadataTags",
 		"instance_type":                        "InstanceType",
 		"iops":                                 "Iops",
 		"ipv_6_address":                        "Ipv6Address",
@@ -1398,6 +1483,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"launch_template_name":                 "LaunchTemplateName",
 		"license_configuration_arn":            "LicenseConfigurationArn",
 		"license_specifications":               "LicenseSpecifications",
+		"metadata_options":                     "MetadataOptions",
 		"monitoring":                           "Monitoring",
 		"name":                                 "Name",
 		"network_interface_id":                 "NetworkInterfaceId",

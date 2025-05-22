@@ -162,11 +162,11 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "description": "The details of the managed storage configuration.",
 		//	      "properties": {
 		//	        "FargateEphemeralStorageKmsKeyId": {
-		//	          "description": "Specify the KMSlong key ID for the Fargate ephemeral storage.\n The key must be a single Region key.",
+		//	          "description": "Specify the KMSlong key ID for Fargate ephemeral storage.\n When you specify a ``fargateEphemeralStorageKmsKeyId``, AWS Fargate uses the key to encrypt data at rest in ephemeral storage. For more information about Fargate ephemeral storage encryption, see [Customer managed keys for Fargate ephemeral storage for Amazon ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-storage-encryption.html) in the *Amazon Elastic Container Service Developer Guide*.\n The key must be a single Region key.",
 		//	          "type": "string"
 		//	        },
 		//	        "KmsKeyId": {
-		//	          "description": "Specify a KMSlong key ID to encrypt the managed storage.\n The key must be a single Region key.",
+		//	          "description": "Specify a KMSlong key ID to encrypt Amazon ECS managed storage.\n  When you specify a ``kmsKeyId``, Amazon ECS uses the key to encrypt data volumes managed by Amazon ECS that are attached to tasks in the cluster. The following data volumes are managed by Amazon ECS: Amazon EBS. For more information about encryption of Amazon EBS volumes attached to Amazon ECS tasks, see [Encrypt data stored in Amazon EBS volumes for Amazon ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-kms-encryption.html) in the *Amazon Elastic Container Service Developer Guide*.\n The key must be a single Region key.",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -231,12 +231,12 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: FargateEphemeralStorageKmsKeyId
 						"fargate_ephemeral_storage_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Specify the KMSlong key ID for the Fargate ephemeral storage.\n The key must be a single Region key.",
+							Description: "Specify the KMSlong key ID for Fargate ephemeral storage.\n When you specify a ``fargateEphemeralStorageKmsKeyId``, AWS Fargate uses the key to encrypt data at rest in ephemeral storage. For more information about Fargate ephemeral storage encryption, see [Customer managed keys for Fargate ephemeral storage for Amazon ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-storage-encryption.html) in the *Amazon Elastic Container Service Developer Guide*.\n The key must be a single Region key.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: KmsKeyId
 						"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Specify a KMSlong key ID to encrypt the managed storage.\n The key must be a single Region key.",
+							Description: "Specify a KMSlong key ID to encrypt Amazon ECS managed storage.\n  When you specify a ``kmsKeyId``, Amazon ECS uses the key to encrypt data volumes managed by Amazon ECS that are attached to tasks in the cluster. The following data volumes are managed by Amazon ECS: Amazon EBS. For more information about encryption of Amazon EBS volumes attached to Amazon ECS tasks, see [Encrypt data stored in Amazon EBS volumes for Amazon ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-kms-encryption.html) in the *Amazon Elastic Container Service Developer Guide*.\n The key must be a single Region key.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/

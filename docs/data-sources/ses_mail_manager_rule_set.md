@@ -47,6 +47,7 @@ Read-Only:
 - `deliver_to_mailbox` (Attributes) (see [below for nested schema](#nestedatt--rules--actions--deliver_to_mailbox))
 - `deliver_to_q_business` (Attributes) (see [below for nested schema](#nestedatt--rules--actions--deliver_to_q_business))
 - `drop` (String)
+- `publish_to_sns` (Attributes) (see [below for nested schema](#nestedatt--rules--actions--publish_to_sns))
 - `relay` (Attributes) (see [below for nested schema](#nestedatt--rules--actions--relay))
 - `replace_recipient` (Attributes) (see [below for nested schema](#nestedatt--rules--actions--replace_recipient))
 - `send` (Attributes) (see [below for nested schema](#nestedatt--rules--actions--send))
@@ -89,6 +90,18 @@ Read-Only:
 - `application_id` (String)
 - `index_id` (String)
 - `role_arn` (String)
+
+
+<a id="nestedatt--rules--actions--publish_to_sns"></a>
+### Nested Schema for `rules.actions.publish_to_sns`
+
+Read-Only:
+
+- `action_failure_policy` (String)
+- `encoding` (String)
+- `payload_type` (String)
+- `role_arn` (String)
+- `topic_arn` (String)
 
 
 <a id="nestedatt--rules--actions--relay"></a>

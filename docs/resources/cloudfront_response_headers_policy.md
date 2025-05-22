@@ -166,7 +166,7 @@ Optional:
   +   ``PUT`` 
   +   ``ALL`` 
   
-  ``ALL`` is a special value that includes all of the listed HTTP methods.
+ ``ALL`` is a special value that includes all of the listed HTTP methods.
 
 
 <a id="nestedatt--response_headers_policy_config--cors_config--access_control_allow_origins"></a>

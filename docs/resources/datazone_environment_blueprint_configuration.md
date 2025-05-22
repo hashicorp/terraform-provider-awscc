@@ -38,7 +38,9 @@ resource "awscc_datazone_environment_blueprint_configuration" "example" {
 
 ### Optional
 
+- `environment_role_permission_boundary` (String)
 - `manage_access_role_arn` (String)
+- `provisioning_configurations` (Attributes List) (see [below for nested schema](#nestedatt--provisioning_configurations))
 - `provisioning_role_arn` (String)
 - `regional_parameters` (Attributes Set) (see [below for nested schema](#nestedatt--regional_parameters))
 
@@ -49,6 +51,23 @@ resource "awscc_datazone_environment_blueprint_configuration" "example" {
 - `environment_blueprint_id` (String)
 - `id` (String) Uniquely identifies the resource.
 - `updated_at` (String)
+
+<a id="nestedatt--provisioning_configurations"></a>
+### Nested Schema for `provisioning_configurations`
+
+Optional:
+
+- `lake_formation_configuration` (Attributes) (see [below for nested schema](#nestedatt--provisioning_configurations--lake_formation_configuration))
+
+<a id="nestedatt--provisioning_configurations--lake_formation_configuration"></a>
+### Nested Schema for `provisioning_configurations.lake_formation_configuration`
+
+Optional:
+
+- `location_registration_exclude_s3_locations` (List of String)
+- `location_registration_role` (String)
+
+
 
 <a id="nestedatt--regional_parameters"></a>
 ### Nested Schema for `regional_parameters`

@@ -195,7 +195,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	              "description": "A complex type that contains a Lambda@Edge function association.",
 		//	              "properties": {
 		//	                "EventType": {
-		//	                  "description": "Specifies the event type that triggers a Lambda@Edge function invocation. You can specify the following values:\n  +   ``viewer-request``: The function executes when CloudFront receives a request from a viewer and before it checks to see whether the requested object is in the edge cache.\n  +   ``origin-request``: The function executes only when CloudFront sends a request to your origin. When the requested object is in the edge cache, the function doesn't execute.\n  +   ``origin-response``: The function executes after CloudFront receives a response from the origin and before it caches the object in the response. When the requested object is in the edge cache, the function doesn't execute.\n  +   ``viewer-response``: The function executes before CloudFront returns the requested object to the viewer. The function executes regardless of whether the object was already in the edge cache.\n If the origin returns an HTTP status code other than HTTP 200 (OK), the function doesn't execute.",
+		//	                  "description": "Specifies the event type that triggers a Lambda@Edge function invocation. You can specify the following values:\n  +  ``viewer-request``: The function executes when CloudFront receives a request from a viewer and before it checks to see whether the requested object is in the edge cache.\n  +  ``origin-request``: The function executes only when CloudFront sends a request to your origin. When the requested object is in the edge cache, the function doesn't execute.\n  +  ``origin-response``: The function executes after CloudFront receives a response from the origin and before it caches the object in the response. When the requested object is in the edge cache, the function doesn't execute.\n  +  ``viewer-response``: The function executes before CloudFront returns the requested object to the viewer. The function executes regardless of whether the object was already in the edge cache.\n If the origin returns an HTTP status code other than HTTP 200 (OK), the function doesn't execute.",
 		//	                  "type": "string"
 		//	                },
 		//	                "IncludeBody": {
@@ -264,7 +264,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	            "uniqueItems": false
 		//	          },
 		//	          "ViewerProtocolPolicy": {
-		//	            "description": "The protocol that viewers can use to access the files in the origin specified by ``TargetOriginId`` when a request matches the path pattern in ``PathPattern``. You can specify the following options:\n  +   ``allow-all``: Viewers can use HTTP or HTTPS.\n  +   ``redirect-to-https``: If a viewer submits an HTTP request, CloudFront returns an HTTP status code of 301 (Moved Permanently) to the viewer along with the HTTPS URL. The viewer then resubmits the request using the new URL.\n  +   ``https-only``: If a viewer sends an HTTP request, CloudFront returns an HTTP status code of 403 (Forbidden).\n  \n For more information about requiring the HTTPS protocol, see [Requiring HTTPS Between Viewers and CloudFront](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-viewers-to-cloudfront.html) in the *Amazon CloudFront Developer Guide*.\n  The only way to guarantee that viewers retrieve an object that was fetched from the origin using HTTPS is never to use any other protocol to fetch the object. If you have recently changed from HTTP to HTTPS, we recommend that you clear your objects' cache because cached objects are protocol agnostic. That means that an edge location will return an object from the cache regardless of whether the current request protocol matches the protocol used previously. For more information, see [Managing Cache Expiration](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html) in the *Amazon CloudFront Developer Guide*.",
+		//	            "description": "The protocol that viewers can use to access the files in the origin specified by ``TargetOriginId`` when a request matches the path pattern in ``PathPattern``. You can specify the following options:\n  +  ``allow-all``: Viewers can use HTTP or HTTPS.\n  +  ``redirect-to-https``: If a viewer submits an HTTP request, CloudFront returns an HTTP status code of 301 (Moved Permanently) to the viewer along with the HTTPS URL. The viewer then resubmits the request using the new URL.\n  +  ``https-only``: If a viewer sends an HTTP request, CloudFront returns an HTTP status code of 403 (Forbidden).\n  \n For more information about requiring the HTTPS protocol, see [Requiring HTTPS Between Viewers and CloudFront](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-viewers-to-cloudfront.html) in the *Amazon CloudFront Developer Guide*.\n  The only way to guarantee that viewers retrieve an object that was fetched from the origin using HTTPS is never to use any other protocol to fetch the object. If you have recently changed from HTTP to HTTPS, we recommend that you clear your objects' cache because cached objects are protocol agnostic. That means that an edge location will return an object from the cache regardless of whether the current request protocol matches the protocol used previously. For more information, see [Managing Cache Expiration](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html) in the *Amazon CloudFront Developer Guide*.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -284,6 +284,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	      "type": "string"
 		//	    },
 		//	    "ConnectionMode": {
+		//	      "description": "The connection mode to filter distributions by.",
 		//	      "enum": [
 		//	        "direct",
 		//	        "tenant-only"
@@ -508,7 +509,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	            "description": "A complex type that contains a Lambda@Edge function association.",
 		//	            "properties": {
 		//	              "EventType": {
-		//	                "description": "Specifies the event type that triggers a Lambda@Edge function invocation. You can specify the following values:\n  +   ``viewer-request``: The function executes when CloudFront receives a request from a viewer and before it checks to see whether the requested object is in the edge cache.\n  +   ``origin-request``: The function executes only when CloudFront sends a request to your origin. When the requested object is in the edge cache, the function doesn't execute.\n  +   ``origin-response``: The function executes after CloudFront receives a response from the origin and before it caches the object in the response. When the requested object is in the edge cache, the function doesn't execute.\n  +   ``viewer-response``: The function executes before CloudFront returns the requested object to the viewer. The function executes regardless of whether the object was already in the edge cache.\n If the origin returns an HTTP status code other than HTTP 200 (OK), the function doesn't execute.",
+		//	                "description": "Specifies the event type that triggers a Lambda@Edge function invocation. You can specify the following values:\n  +  ``viewer-request``: The function executes when CloudFront receives a request from a viewer and before it checks to see whether the requested object is in the edge cache.\n  +  ``origin-request``: The function executes only when CloudFront sends a request to your origin. When the requested object is in the edge cache, the function doesn't execute.\n  +  ``origin-response``: The function executes after CloudFront receives a response from the origin and before it caches the object in the response. When the requested object is in the edge cache, the function doesn't execute.\n  +  ``viewer-response``: The function executes before CloudFront returns the requested object to the viewer. The function executes regardless of whether the object was already in the edge cache.\n If the origin returns an HTTP status code other than HTTP 200 (OK), the function doesn't execute.",
 		//	                "type": "string"
 		//	              },
 		//	              "IncludeBody": {
@@ -576,7 +577,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	          "uniqueItems": false
 		//	        },
 		//	        "ViewerProtocolPolicy": {
-		//	          "description": "The protocol that viewers can use to access the files in the origin specified by ``TargetOriginId`` when a request matches the path pattern in ``PathPattern``. You can specify the following options:\n  +   ``allow-all``: Viewers can use HTTP or HTTPS.\n  +   ``redirect-to-https``: If a viewer submits an HTTP request, CloudFront returns an HTTP status code of 301 (Moved Permanently) to the viewer along with the HTTPS URL. The viewer then resubmits the request using the new URL.\n  +   ``https-only``: If a viewer sends an HTTP request, CloudFront returns an HTTP status code of 403 (Forbidden).\n  \n For more information about requiring the HTTPS protocol, see [Requiring HTTPS Between Viewers and CloudFront](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-viewers-to-cloudfront.html) in the *Amazon CloudFront Developer Guide*.\n  The only way to guarantee that viewers retrieve an object that was fetched from the origin using HTTPS is never to use any other protocol to fetch the object. If you have recently changed from HTTP to HTTPS, we recommend that you clear your objects' cache because cached objects are protocol agnostic. That means that an edge location will return an object from the cache regardless of whether the current request protocol matches the protocol used previously. For more information, see [Managing Cache Expiration](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html) in the *Amazon CloudFront Developer Guide*.",
+		//	          "description": "The protocol that viewers can use to access the files in the origin specified by ``TargetOriginId`` when a request matches the path pattern in ``PathPattern``. You can specify the following options:\n  +  ``allow-all``: Viewers can use HTTP or HTTPS.\n  +  ``redirect-to-https``: If a viewer submits an HTTP request, CloudFront returns an HTTP status code of 301 (Moved Permanently) to the viewer along with the HTTPS URL. The viewer then resubmits the request using the new URL.\n  +  ``https-only``: If a viewer sends an HTTP request, CloudFront returns an HTTP status code of 403 (Forbidden).\n  \n For more information about requiring the HTTPS protocol, see [Requiring HTTPS Between Viewers and CloudFront](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-viewers-to-cloudfront.html) in the *Amazon CloudFront Developer Guide*.\n  The only way to guarantee that viewers retrieve an object that was fetched from the origin using HTTPS is never to use any other protocol to fetch the object. If you have recently changed from HTTP to HTTPS, we recommend that you clear your objects' cache because cached objects are protocol agnostic. That means that an edge location will return an object from the cache regardless of whether the current request protocol matches the protocol used previously. For more information, see [Managing Cache Expiration](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html) in the *Amazon CloudFront Developer Guide*.",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -770,7 +771,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	                "type": "integer"
 		//	              },
 		//	              "OriginProtocolPolicy": {
-		//	                "description": "Specifies the protocol (HTTP or HTTPS) that CloudFront uses to connect to the origin. Valid values are:\n  +   ``http-only`` ? CloudFront always uses HTTP to connect to the origin.\n  +   ``match-viewer`` ? CloudFront connects to the origin using the same protocol that the viewer used to connect to CloudFront.\n  +   ``https-only`` ? CloudFront always uses HTTPS to connect to the origin.",
+		//	                "description": "Specifies the protocol (HTTP or HTTPS) that CloudFront uses to connect to the origin. Valid values are:\n  +  ``http-only`` ? CloudFront always uses HTTP to connect to the origin.\n  +  ``match-viewer`` ? CloudFront connects to the origin using the same protocol that the viewer used to connect to CloudFront.\n  +  ``https-only`` ? CloudFront always uses HTTPS to connect to the origin.",
 		//	                "type": "string"
 		//	              },
 		//	              "OriginReadTimeout": {
@@ -925,7 +926,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	              "uniqueItems": false
 		//	            },
 		//	            "RestrictionType": {
-		//	              "description": "The method that you want to use to restrict distribution of your content by country:\n  +   ``none``: No geo restriction is enabled, meaning access to content is not restricted by client geo location.\n  +   ``blacklist``: The ``Location`` elements specify the countries in which you don't want CloudFront to distribute your content.\n  +   ``whitelist``: The ``Location`` elements specify the countries in which you want CloudFront to distribute your content.",
+		//	              "description": "The method that you want to use to restrict distribution of your content by country:\n  +  ``none``: No geo restriction is enabled, meaning access to content is not restricted by client geo location.\n  +  ``blacklist``: The ``Location`` elements specify the countries in which you don't want CloudFront to distribute your content.\n  +  ``whitelist``: The ``Location`` elements specify the countries in which you want CloudFront to distribute your content.",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -965,15 +966,16 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	    },
 		//	    "TenantConfig": {
 		//	      "additionalProperties": false,
-		//	      "description": "",
+		//	      "description": "A distribution tenant configuration.",
 		//	      "properties": {
 		//	        "ParameterDefinitions": {
 		//	          "items": {
 		//	            "additionalProperties": false,
-		//	            "description": "",
+		//	            "description": "A list of parameter values to add to the resource. A parameter is specified as a key-value pair. A valid parameter value must exist for any parameter that is marked as required in the multi-tenant distribution.",
 		//	            "properties": {
 		//	              "Definition": {
 		//	                "additionalProperties": false,
+		//	                "description": "The value that you assigned to the parameter.",
 		//	                "properties": {
 		//	                  "StringSchema": {
 		//	                    "additionalProperties": false,
@@ -997,6 +999,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	                "type": "object"
 		//	              },
 		//	              "Name": {
+		//	                "description": "The name of the parameter.",
 		//	                "type": "string"
 		//	              }
 		//	            },
@@ -1023,7 +1026,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	          "type": "string"
 		//	        },
 		//	        "CloudFrontDefaultCertificate": {
-		//	          "description": "If the distribution uses the CloudFront domain name such as ``d111111abcdef8.cloudfront.net``, set this field to ``true``.\n If the distribution uses ``Aliases`` (alternate domain names or CNAMEs), omit this field and specify values for the following fields:\n  +   ``AcmCertificateArn`` or ``IamCertificateId`` (specify a value for one, not both) \n  +   ``MinimumProtocolVersion`` \n  +   ``SslSupportMethod``",
+		//	          "description": "If the distribution uses the CloudFront domain name such as ``d111111abcdef8.cloudfront.net``, set this field to ``true``.\n If the distribution uses ``Aliases`` (alternate domain names or CNAMEs), omit this field and specify values for the following fields:\n  +  ``AcmCertificateArn`` or ``IamCertificateId`` (specify a value for one, not both) \n  +   ``MinimumProtocolVersion`` \n  +   ``SslSupportMethod``",
 		//	          "type": "boolean"
 		//	        },
 		//	        "IamCertificateId": {
@@ -1035,7 +1038,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	          "type": "string"
 		//	        },
 		//	        "SslSupportMethod": {
-		//	          "description": "In CloudFormation, this field name is ``SslSupportMethod``. Note the different capitalization.\n  If the distribution uses ``Aliases`` (alternate domain names or CNAMEs), specify which viewers the distribution accepts HTTPS connections from.\n  +   ``sni-only`` ? The distribution accepts HTTPS connections from only viewers that support [server name indication (SNI)](https://docs.aws.amazon.com/https://en.wikipedia.org/wiki/Server_Name_Indication). This is recommended. Most browsers and clients support SNI.\n  +   ``vip`` ? The distribution accepts HTTPS connections from all viewers including those that don't support SNI. This is not recommended, and results in additional monthly charges from CloudFront.\n  +   ``static-ip`` - Do not specify this value unless your distribution has been enabled for this feature by the CloudFront team. If you have a use case that requires static IP addresses for a distribution, contact CloudFront through the [Center](https://docs.aws.amazon.com/support/home).\n  \n If the distribution uses the CloudFront domain name such as ``d111111abcdef8.cloudfront.net``, don't set a value for this field.",
+		//	          "description": "In CloudFormation, this field name is ``SslSupportMethod``. Note the different capitalization.\n  If the distribution uses ``Aliases`` (alternate domain names or CNAMEs), specify which viewers the distribution accepts HTTPS connections from.\n  +  ``sni-only`` ? The distribution accepts HTTPS connections from only viewers that support [server name indication (SNI)](https://docs.aws.amazon.com/https://en.wikipedia.org/wiki/Server_Name_Indication). This is recommended. Most browsers and clients support SNI.\n  +  ``vip`` ? The distribution accepts HTTPS connections from all viewers including those that don't support SNI. This is not recommended, and results in additional monthly charges from CloudFront.\n  +  ``static-ip`` - Do not specify this value unless your distribution has been enabled for this feature by the CloudFront team. If you have a use case that requires static IP addresses for a distribution, contact CloudFront through the [Center](https://docs.aws.amazon.com/support/home).\n  \n If the distribution uses the CloudFront domain name such as ``d111111abcdef8.cloudfront.net``, don't set a value for this field.",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -1043,7 +1046,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	    },
 		//	    "WebACLId": {
 		//	      "default": "",
-		//	      "description": "A unique identifier that specifies the WAF web ACL, if any, to associate with this distribution. To specify a web ACL created using the latest version of WAF, use the ACL ARN, for example ``arn:aws:wafv2:us-east-1:123456789012:global/webacl/ExampleWebACL/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111``. To specify a web ACL created using WAF Classic, use the ACL ID, for example ``a1b2c3d4-5678-90ab-cdef-EXAMPLE11111``.\n  WAF is a web application firewall that lets you monitor the HTTP and HTTPS requests that are forwarded to CloudFront, and lets you control access to your content. Based on conditions that you specify, such as the IP addresses that requests originate from or the values of query strings, CloudFront responds to requests either with the requested content or with an HTTP 403 status code (Forbidden). You can also configure CloudFront to return a custom error page when a request is blocked. For more information about WAF, see the [Developer Guide](https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html).",
+		//	      "description": "A unique identifier that specifies the WAF web ACL, if any, to associate with this distribution. To specify a web ACL created using the latest version of WAF, use the ACL ARN, for example ``arn:aws:wafv2:us-east-1:123456789012:global/webacl/ExampleWebACL/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111``. To specify a web ACL created using WAF Classic, use the ACL ID, for example ``a1b2c3d4-5678-90ab-cdef-EXAMPLE11111``.\n WAF is a web application firewall that lets you monitor the HTTP and HTTPS requests that are forwarded to CloudFront, and lets you control access to your content. Based on conditions that you specify, such as the IP addresses that requests originate from or the values of query strings, CloudFront responds to requests either with the requested content or with an HTTP 403 status code (Forbidden). You can also configure CloudFront to return a custom error page when a request is blocked. For more information about WAF, see the [Developer Guide](https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html).",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -1187,7 +1190,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: EventType
 										"event_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "Specifies the event type that triggers a Lambda@Edge function invocation. You can specify the following values:\n  +   ``viewer-request``: The function executes when CloudFront receives a request from a viewer and before it checks to see whether the requested object is in the edge cache.\n  +   ``origin-request``: The function executes only when CloudFront sends a request to your origin. When the requested object is in the edge cache, the function doesn't execute.\n  +   ``origin-response``: The function executes after CloudFront receives a response from the origin and before it caches the object in the response. When the requested object is in the edge cache, the function doesn't execute.\n  +   ``viewer-response``: The function executes before CloudFront returns the requested object to the viewer. The function executes regardless of whether the object was already in the edge cache.\n If the origin returns an HTTP status code other than HTTP 200 (OK), the function doesn't execute.",
+											Description: "Specifies the event type that triggers a Lambda@Edge function invocation. You can specify the following values:\n  +  ``viewer-request``: The function executes when CloudFront receives a request from a viewer and before it checks to see whether the requested object is in the edge cache.\n  +  ``origin-request``: The function executes only when CloudFront sends a request to your origin. When the requested object is in the edge cache, the function doesn't execute.\n  +  ``origin-response``: The function executes after CloudFront receives a response from the origin and before it caches the object in the response. When the requested object is in the edge cache, the function doesn't execute.\n  +  ``viewer-response``: The function executes before CloudFront returns the requested object to the viewer. The function executes regardless of whether the object was already in the edge cache.\n If the origin returns an HTTP status code other than HTTP 200 (OK), the function doesn't execute.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: IncludeBody
@@ -1259,7 +1262,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 							}, /*END ATTRIBUTE*/
 							// Property: ViewerProtocolPolicy
 							"viewer_protocol_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The protocol that viewers can use to access the files in the origin specified by ``TargetOriginId`` when a request matches the path pattern in ``PathPattern``. You can specify the following options:\n  +   ``allow-all``: Viewers can use HTTP or HTTPS.\n  +   ``redirect-to-https``: If a viewer submits an HTTP request, CloudFront returns an HTTP status code of 301 (Moved Permanently) to the viewer along with the HTTPS URL. The viewer then resubmits the request using the new URL.\n  +   ``https-only``: If a viewer sends an HTTP request, CloudFront returns an HTTP status code of 403 (Forbidden).\n  \n For more information about requiring the HTTPS protocol, see [Requiring HTTPS Between Viewers and CloudFront](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-viewers-to-cloudfront.html) in the *Amazon CloudFront Developer Guide*.\n  The only way to guarantee that viewers retrieve an object that was fetched from the origin using HTTPS is never to use any other protocol to fetch the object. If you have recently changed from HTTP to HTTPS, we recommend that you clear your objects' cache because cached objects are protocol agnostic. That means that an edge location will return an object from the cache regardless of whether the current request protocol matches the protocol used previously. For more information, see [Managing Cache Expiration](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html) in the *Amazon CloudFront Developer Guide*.",
+								Description: "The protocol that viewers can use to access the files in the origin specified by ``TargetOriginId`` when a request matches the path pattern in ``PathPattern``. You can specify the following options:\n  +  ``allow-all``: Viewers can use HTTP or HTTPS.\n  +  ``redirect-to-https``: If a viewer submits an HTTP request, CloudFront returns an HTTP status code of 301 (Moved Permanently) to the viewer along with the HTTPS URL. The viewer then resubmits the request using the new URL.\n  +  ``https-only``: If a viewer sends an HTTP request, CloudFront returns an HTTP status code of 403 (Forbidden).\n  \n For more information about requiring the HTTPS protocol, see [Requiring HTTPS Between Viewers and CloudFront](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-viewers-to-cloudfront.html) in the *Amazon CloudFront Developer Guide*.\n  The only way to guarantee that viewers retrieve an object that was fetched from the origin using HTTPS is never to use any other protocol to fetch the object. If you have recently changed from HTTP to HTTPS, we recommend that you clear your objects' cache because cached objects are protocol agnostic. That means that an edge location will return an object from the cache regardless of whether the current request protocol matches the protocol used previously. For more information, see [Managing Cache Expiration](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html) in the *Amazon CloudFront Developer Guide*.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -1274,7 +1277,8 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 				}, /*END ATTRIBUTE*/
 				// Property: ConnectionMode
 				"connection_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "The connection mode to filter distributions by.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ContinuousDeploymentPolicyId
 				"continuous_deployment_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1457,7 +1461,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: EventType
 									"event_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "Specifies the event type that triggers a Lambda@Edge function invocation. You can specify the following values:\n  +   ``viewer-request``: The function executes when CloudFront receives a request from a viewer and before it checks to see whether the requested object is in the edge cache.\n  +   ``origin-request``: The function executes only when CloudFront sends a request to your origin. When the requested object is in the edge cache, the function doesn't execute.\n  +   ``origin-response``: The function executes after CloudFront receives a response from the origin and before it caches the object in the response. When the requested object is in the edge cache, the function doesn't execute.\n  +   ``viewer-response``: The function executes before CloudFront returns the requested object to the viewer. The function executes regardless of whether the object was already in the edge cache.\n If the origin returns an HTTP status code other than HTTP 200 (OK), the function doesn't execute.",
+										Description: "Specifies the event type that triggers a Lambda@Edge function invocation. You can specify the following values:\n  +  ``viewer-request``: The function executes when CloudFront receives a request from a viewer and before it checks to see whether the requested object is in the edge cache.\n  +  ``origin-request``: The function executes only when CloudFront sends a request to your origin. When the requested object is in the edge cache, the function doesn't execute.\n  +  ``origin-response``: The function executes after CloudFront receives a response from the origin and before it caches the object in the response. When the requested object is in the edge cache, the function doesn't execute.\n  +  ``viewer-response``: The function executes before CloudFront returns the requested object to the viewer. The function executes regardless of whether the object was already in the edge cache.\n If the origin returns an HTTP status code other than HTTP 200 (OK), the function doesn't execute.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: IncludeBody
@@ -1524,7 +1528,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 						}, /*END ATTRIBUTE*/
 						// Property: ViewerProtocolPolicy
 						"viewer_protocol_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The protocol that viewers can use to access the files in the origin specified by ``TargetOriginId`` when a request matches the path pattern in ``PathPattern``. You can specify the following options:\n  +   ``allow-all``: Viewers can use HTTP or HTTPS.\n  +   ``redirect-to-https``: If a viewer submits an HTTP request, CloudFront returns an HTTP status code of 301 (Moved Permanently) to the viewer along with the HTTPS URL. The viewer then resubmits the request using the new URL.\n  +   ``https-only``: If a viewer sends an HTTP request, CloudFront returns an HTTP status code of 403 (Forbidden).\n  \n For more information about requiring the HTTPS protocol, see [Requiring HTTPS Between Viewers and CloudFront](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-viewers-to-cloudfront.html) in the *Amazon CloudFront Developer Guide*.\n  The only way to guarantee that viewers retrieve an object that was fetched from the origin using HTTPS is never to use any other protocol to fetch the object. If you have recently changed from HTTP to HTTPS, we recommend that you clear your objects' cache because cached objects are protocol agnostic. That means that an edge location will return an object from the cache regardless of whether the current request protocol matches the protocol used previously. For more information, see [Managing Cache Expiration](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html) in the *Amazon CloudFront Developer Guide*.",
+							Description: "The protocol that viewers can use to access the files in the origin specified by ``TargetOriginId`` when a request matches the path pattern in ``PathPattern``. You can specify the following options:\n  +  ``allow-all``: Viewers can use HTTP or HTTPS.\n  +  ``redirect-to-https``: If a viewer submits an HTTP request, CloudFront returns an HTTP status code of 301 (Moved Permanently) to the viewer along with the HTTPS URL. The viewer then resubmits the request using the new URL.\n  +  ``https-only``: If a viewer sends an HTTP request, CloudFront returns an HTTP status code of 403 (Forbidden).\n  \n For more information about requiring the HTTPS protocol, see [Requiring HTTPS Between Viewers and CloudFront](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-viewers-to-cloudfront.html) in the *Amazon CloudFront Developer Guide*.\n  The only way to guarantee that viewers retrieve an object that was fetched from the origin using HTTPS is never to use any other protocol to fetch the object. If you have recently changed from HTTP to HTTPS, we recommend that you clear your objects' cache because cached objects are protocol agnostic. That means that an edge location will return an object from the cache regardless of whether the current request protocol matches the protocol used previously. For more information, see [Managing Cache Expiration](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html) in the *Amazon CloudFront Developer Guide*.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -1689,7 +1693,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 									}, /*END ATTRIBUTE*/
 									// Property: OriginProtocolPolicy
 									"origin_protocol_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "Specifies the protocol (HTTP or HTTPS) that CloudFront uses to connect to the origin. Valid values are:\n  +   ``http-only`` ? CloudFront always uses HTTP to connect to the origin.\n  +   ``match-viewer`` ? CloudFront connects to the origin using the same protocol that the viewer used to connect to CloudFront.\n  +   ``https-only`` ? CloudFront always uses HTTPS to connect to the origin.",
+										Description: "Specifies the protocol (HTTP or HTTPS) that CloudFront uses to connect to the origin. Valid values are:\n  +  ``http-only`` ? CloudFront always uses HTTP to connect to the origin.\n  +  ``match-viewer`` ? CloudFront connects to the origin using the same protocol that the viewer used to connect to CloudFront.\n  +  ``https-only`` ? CloudFront always uses HTTPS to connect to the origin.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: OriginReadTimeout
@@ -1821,7 +1825,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 								}, /*END ATTRIBUTE*/
 								// Property: RestrictionType
 								"restriction_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The method that you want to use to restrict distribution of your content by country:\n  +   ``none``: No geo restriction is enabled, meaning access to content is not restricted by client geo location.\n  +   ``blacklist``: The ``Location`` elements specify the countries in which you don't want CloudFront to distribute your content.\n  +   ``whitelist``: The ``Location`` elements specify the countries in which you want CloudFront to distribute your content.",
+									Description: "The method that you want to use to restrict distribution of your content by country:\n  +  ``none``: No geo restriction is enabled, meaning access to content is not restricted by client geo location.\n  +  ``blacklist``: The ``Location`` elements specify the countries in which you don't want CloudFront to distribute your content.\n  +  ``whitelist``: The ``Location`` elements specify the countries in which you want CloudFront to distribute your content.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -1883,18 +1887,20 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 												Computed: true,
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
-										Computed: true,
+										Description: "The value that you assigned to the parameter.",
+										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: Name
 									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
+										Description: "The name of the parameter.",
+										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "",
+					Description: "A distribution tenant configuration.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ViewerCertificate
@@ -1907,7 +1913,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 						}, /*END ATTRIBUTE*/
 						// Property: CloudFrontDefaultCertificate
 						"cloudfront_default_certificate": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "If the distribution uses the CloudFront domain name such as ``d111111abcdef8.cloudfront.net``, set this field to ``true``.\n If the distribution uses ``Aliases`` (alternate domain names or CNAMEs), omit this field and specify values for the following fields:\n  +   ``AcmCertificateArn`` or ``IamCertificateId`` (specify a value for one, not both) \n  +   ``MinimumProtocolVersion`` \n  +   ``SslSupportMethod``",
+							Description: "If the distribution uses the CloudFront domain name such as ``d111111abcdef8.cloudfront.net``, set this field to ``true``.\n If the distribution uses ``Aliases`` (alternate domain names or CNAMEs), omit this field and specify values for the following fields:\n  +  ``AcmCertificateArn`` or ``IamCertificateId`` (specify a value for one, not both) \n  +   ``MinimumProtocolVersion`` \n  +   ``SslSupportMethod``",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: IamCertificateId
@@ -1922,7 +1928,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 						}, /*END ATTRIBUTE*/
 						// Property: SslSupportMethod
 						"ssl_support_method": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "In CloudFormation, this field name is ``SslSupportMethod``. Note the different capitalization.\n  If the distribution uses ``Aliases`` (alternate domain names or CNAMEs), specify which viewers the distribution accepts HTTPS connections from.\n  +   ``sni-only`` ? The distribution accepts HTTPS connections from only viewers that support [server name indication (SNI)](https://docs.aws.amazon.com/https://en.wikipedia.org/wiki/Server_Name_Indication). This is recommended. Most browsers and clients support SNI.\n  +   ``vip`` ? The distribution accepts HTTPS connections from all viewers including those that don't support SNI. This is not recommended, and results in additional monthly charges from CloudFront.\n  +   ``static-ip`` - Do not specify this value unless your distribution has been enabled for this feature by the CloudFront team. If you have a use case that requires static IP addresses for a distribution, contact CloudFront through the [Center](https://docs.aws.amazon.com/support/home).\n  \n If the distribution uses the CloudFront domain name such as ``d111111abcdef8.cloudfront.net``, don't set a value for this field.",
+							Description: "In CloudFormation, this field name is ``SslSupportMethod``. Note the different capitalization.\n  If the distribution uses ``Aliases`` (alternate domain names or CNAMEs), specify which viewers the distribution accepts HTTPS connections from.\n  +  ``sni-only`` ? The distribution accepts HTTPS connections from only viewers that support [server name indication (SNI)](https://docs.aws.amazon.com/https://en.wikipedia.org/wiki/Server_Name_Indication). This is recommended. Most browsers and clients support SNI.\n  +  ``vip`` ? The distribution accepts HTTPS connections from all viewers including those that don't support SNI. This is not recommended, and results in additional monthly charges from CloudFront.\n  +  ``static-ip`` - Do not specify this value unless your distribution has been enabled for this feature by the CloudFront team. If you have a use case that requires static IP addresses for a distribution, contact CloudFront through the [Center](https://docs.aws.amazon.com/support/home).\n  \n If the distribution uses the CloudFront domain name such as ``d111111abcdef8.cloudfront.net``, don't set a value for this field.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -1931,7 +1937,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 				}, /*END ATTRIBUTE*/
 				// Property: WebACLId
 				"web_acl_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A unique identifier that specifies the WAF web ACL, if any, to associate with this distribution. To specify a web ACL created using the latest version of WAF, use the ACL ARN, for example ``arn:aws:wafv2:us-east-1:123456789012:global/webacl/ExampleWebACL/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111``. To specify a web ACL created using WAF Classic, use the ACL ID, for example ``a1b2c3d4-5678-90ab-cdef-EXAMPLE11111``.\n  WAF is a web application firewall that lets you monitor the HTTP and HTTPS requests that are forwarded to CloudFront, and lets you control access to your content. Based on conditions that you specify, such as the IP addresses that requests originate from or the values of query strings, CloudFront responds to requests either with the requested content or with an HTTP 403 status code (Forbidden). You can also configure CloudFront to return a custom error page when a request is blocked. For more information about WAF, see the [Developer Guide](https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html).",
+					Description: "A unique identifier that specifies the WAF web ACL, if any, to associate with this distribution. To specify a web ACL created using the latest version of WAF, use the ACL ARN, for example ``arn:aws:wafv2:us-east-1:123456789012:global/webacl/ExampleWebACL/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111``. To specify a web ACL created using WAF Classic, use the ACL ID, for example ``a1b2c3d4-5678-90ab-cdef-EXAMPLE11111``.\n WAF is a web application firewall that lets you monitor the HTTP and HTTPS requests that are forwarded to CloudFront, and lets you control access to your content. Based on conditions that you specify, such as the IP addresses that requests originate from or the values of query strings, CloudFront responds to requests either with the requested content or with an HTTP 403 status code (Forbidden). You can also configure CloudFront to return a custom error page when a request is blocked. For more information about WAF, see the [Developer Guide](https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html).",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/

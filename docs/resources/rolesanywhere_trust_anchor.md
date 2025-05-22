@@ -35,7 +35,7 @@ Definition of AWS::RolesAnywhere::TrustAnchor Resource Type.
 <a id="nestedatt--source"></a>
 ### Nested Schema for `source`
 
-Optional:
+Required:
 
 - `source_data` (Attributes) (see [below for nested schema](#nestedatt--source--source_data))
 - `source_type` (String)

@@ -130,6 +130,7 @@
         "ec2:ModifyInstanceAttribute",
         "ec2:ModifyInstanceCreditSpecification",
         "ec2:ModifyInstanceMaintenanceOptions",
+        "ec2:ModifyInstanceMetadataOptions",
         "ec2:ModifyInstancePlacement",
         "ec2:MonitorInstances",
         "ec2:AttachVolume",
@@ -209,6 +210,51 @@
         "LaunchTemplateId": {
           "description": "The ID of the launch template. You must specify the LaunchTemplateName or the LaunchTemplateId, but not both.",
           "type": "string"
+        }
+      }
+    },
+    "MetadataOptions": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "HttpPutResponseHopLimit": {
+          "default": 1,
+          "description": "The number of network hops that the metadata token can travel. Maximum is 64.",
+          "maximum": 64,
+          "type": "integer",
+          "minimum": 1
+        },
+        "HttpProtocolIpv6": {
+          "description": "Enables or disables the IPv6 endpoint for the instance metadata service. To use this option, the instance must be a Nitro-based instance launched in a subnet that supports IPv6.",
+          "type": "string",
+          "enum": [
+            "disabled",
+            "enabled"
+          ]
+        },
+        "HttpTokens": {
+          "description": "Indicates whether IMDSv2 is required.",
+          "type": "string",
+          "enum": [
+            "optional",
+            "required"
+          ]
+        },
+        "InstanceMetadataTags": {
+          "description": "Indicates whether tags from the instance are propagated to the EBS volumes.",
+          "type": "string",
+          "enum": [
+            "disabled",
+            "enabled"
+          ]
+        },
+        "HttpEndpoint": {
+          "description": "Enables or disables the HTTP metadata endpoint on your instances. If you specify a value of disabled, you cannot access your instance metadata.",
+          "type": "string",
+          "enum": [
+            "disabled",
+            "enabled"
+          ]
         }
       }
     },
@@ -632,6 +678,11 @@
       "items": {
         "$ref": "#/definitions/LicenseSpecification"
       }
+    },
+    "MetadataOptions": {
+      "description": "The metadata options for the instance",
+      "type": "object",
+      "$ref": "#/definitions/MetadataOptions"
     },
     "InstanceId": {
       "description": "The EC2 Instance ID.",

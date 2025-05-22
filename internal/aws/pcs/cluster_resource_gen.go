@@ -12,11 +12,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -336,6 +338,31 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "Additional options related to the Slurm scheduler.",
 		//	  "properties": {
+		//	    "Accounting": {
+		//	      "description": "The accounting configuration includes configurable settings for Slurm accounting.",
+		//	      "properties": {
+		//	        "DefaultPurgeTimeInDays": {
+		//	          "default": -1,
+		//	          "description": "The default value for all purge settings for `slurmdbd.conf`. For more information, see the [slurmdbd.conf documentation at SchedMD](https://slurm.schedmd.com/slurmdbd.conf.html). The default value is `-1`. A value of `-1` means there is no purge time and records persist as long as the cluster exists.",
+		//	          "maximum": 10000,
+		//	          "minimum": -1,
+		//	          "type": "integer"
+		//	        },
+		//	        "Mode": {
+		//	          "default": "NONE",
+		//	          "description": "The default value is `STANDARD`. A value of `STANDARD` means that Slurm accounting is enabled.",
+		//	          "enum": [
+		//	            "STANDARD",
+		//	            "NONE"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Mode"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "AuthKey": {
 		//	      "additionalProperties": false,
 		//	      "description": "The shared Slurm key for authentication, also known as the cluster secret.",
@@ -389,6 +416,46 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"slurm_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Accounting
+				"accounting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DefaultPurgeTimeInDays
+						"default_purge_time_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The default value for all purge settings for `slurmdbd.conf`. For more information, see the [slurmdbd.conf documentation at SchedMD](https://slurm.schedmd.com/slurmdbd.conf.html). The default value is `-1`. A value of `-1` means there is no purge time and records persist as long as the cluster exists.",
+							Optional:    true,
+							Computed:    true,
+							Default:     int64default.StaticInt64(-1),
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.Between(-1, 10000),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Mode
+						"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The default value is `STANDARD`. A value of `STANDARD` means that Slurm accounting is enabled.",
+							Optional:    true,
+							Computed:    true,
+							Default:     stringdefault.StaticString("NONE"),
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"STANDARD",
+									"NONE",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The accounting configuration includes configurable settings for Slurm accounting.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: AuthKey
 				"auth_key": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -550,13 +617,16 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::PCS::Cluster").WithTerraformTypeName("awscc_pcs_cluster")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"accounting":                      "Accounting",
 		"arn":                             "Arn",
 		"auth_key":                        "AuthKey",
 		"cluster_id":                      "Id",
 		"code":                            "Code",
+		"default_purge_time_in_days":      "DefaultPurgeTimeInDays",
 		"endpoints":                       "Endpoints",
 		"error_info":                      "ErrorInfo",
 		"message":                         "Message",
+		"mode":                            "Mode",
 		"name":                            "Name",
 		"networking":                      "Networking",
 		"parameter_name":                  "ParameterName",

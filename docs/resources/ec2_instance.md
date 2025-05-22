@@ -146,6 +146,7 @@ resource "awscc_ec2_instance" "example" {
 - `key_name` (String) The name of the key pair.
 - `launch_template` (Attributes) The launch template to use to launch the instances. (see [below for nested schema](#nestedatt--launch_template))
 - `license_specifications` (Attributes List) The license configurations. (see [below for nested schema](#nestedatt--license_specifications))
+- `metadata_options` (Attributes) The metadata options for the instance (see [below for nested schema](#nestedatt--metadata_options))
 - `monitoring` (Boolean) Specifies whether detailed monitoring is enabled for the instance.
 - `network_interfaces` (Attributes List) The network interfaces to associate with the instance. (see [below for nested schema](#nestedatt--network_interfaces))
 - `placement_group_name` (String) The name of an existing placement group that you want to launch the instance into (cluster | partition | spread).
@@ -273,6 +274,18 @@ Optional:
 Optional:
 
 - `license_configuration_arn` (String) The Amazon Resource Name (ARN) of the license configuration.
+
+
+<a id="nestedatt--metadata_options"></a>
+### Nested Schema for `metadata_options`
+
+Optional:
+
+- `http_endpoint` (String) Enables or disables the HTTP metadata endpoint on your instances. If you specify a value of disabled, you cannot access your instance metadata.
+- `http_protocol_ipv_6` (String) Enables or disables the IPv6 endpoint for the instance metadata service. To use this option, the instance must be a Nitro-based instance launched in a subnet that supports IPv6.
+- `http_put_response_hop_limit` (Number) The number of network hops that the metadata token can travel. Maximum is 64.
+- `http_tokens` (String) Indicates whether IMDSv2 is required.
+- `instance_metadata_tags` (String) Indicates whether tags from the instance are propagated to the EBS volumes.
 
 
 <a id="nestedatt--network_interfaces"></a>

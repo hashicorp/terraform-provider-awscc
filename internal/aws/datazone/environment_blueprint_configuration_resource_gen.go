@@ -14,7 +14,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -134,6 +136,24 @@ func environmentBlueprintConfigurationResource(ctx context.Context) (resource.Re
 			}, /*END PLAN MODIFIERS*/
 			// EnvironmentBlueprintIdentifier is a write-only property.
 		}, /*END ATTRIBUTE*/
+		// Property: EnvironmentRolePermissionBoundary
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "pattern": "^arn:aws[^:]*:iam::(aws|\\d{12}):policy/[\\w+=,.@-]*$",
+		//	  "type": "string"
+		//	}
+		"environment_role_permission_boundary": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[^:]*:iam::(aws|\\d{12}):policy/[\\w+=,.@-]*$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// EnvironmentRolePermissionBoundary is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: ManageAccessRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -150,6 +170,87 @@ func environmentBlueprintConfigurationResource(ctx context.Context) (resource.Re
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ProvisioningConfigurations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "properties": {
+		//	      "LakeFormationConfiguration": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "LocationRegistrationExcludeS3Locations": {
+		//	            "items": {
+		//	              "maxLength": 1024,
+		//	              "minLength": 1,
+		//	              "pattern": "^s3://.+$",
+		//	              "type": "string"
+		//	            },
+		//	            "maxItems": 20,
+		//	            "minItems": 0,
+		//	            "type": "array"
+		//	          },
+		//	          "LocationRegistrationRole": {
+		//	            "pattern": "^arn:aws[^:]*:iam::\\d{12}:(role|role/service-role)/[\\w+=,.@-]*$",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"provisioning_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: LakeFormationConfiguration
+					"lake_formation_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: LocationRegistrationExcludeS3Locations
+							"location_registration_exclude_s3_locations": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									listvalidator.SizeBetween(0, 20),
+									listvalidator.ValueStringsAre(
+										stringvalidator.LengthBetween(1, 1024),
+										stringvalidator.RegexMatches(regexp.MustCompile("^s3://.+$"), ""),
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: LocationRegistrationRole
+							"location_registration_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[^:]*:iam::\\d{12}:(role|role/service-role)/[\\w+=,.@-]*$"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// ProvisioningConfigurations is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: ProvisioningRoleArn
 		// CloudFormation resource type schema:
@@ -263,23 +364,30 @@ func environmentBlueprintConfigurationResource(ctx context.Context) (resource.Re
 	opts = opts.WithCloudFormationTypeName("AWS::DataZone::EnvironmentBlueprintConfiguration").WithTerraformTypeName("awscc_datazone_environment_blueprint_configuration")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"created_at":                       "CreatedAt",
-		"domain_id":                        "DomainId",
-		"domain_identifier":                "DomainIdentifier",
-		"enabled_regions":                  "EnabledRegions",
-		"environment_blueprint_id":         "EnvironmentBlueprintId",
-		"environment_blueprint_identifier": "EnvironmentBlueprintIdentifier",
-		"manage_access_role_arn":           "ManageAccessRoleArn",
-		"parameters":                       "Parameters",
-		"provisioning_role_arn":            "ProvisioningRoleArn",
-		"region":                           "Region",
-		"regional_parameters":              "RegionalParameters",
-		"updated_at":                       "UpdatedAt",
+		"created_at":                                 "CreatedAt",
+		"domain_id":                                  "DomainId",
+		"domain_identifier":                          "DomainIdentifier",
+		"enabled_regions":                            "EnabledRegions",
+		"environment_blueprint_id":                   "EnvironmentBlueprintId",
+		"environment_blueprint_identifier":           "EnvironmentBlueprintIdentifier",
+		"environment_role_permission_boundary":       "EnvironmentRolePermissionBoundary",
+		"lake_formation_configuration":               "LakeFormationConfiguration",
+		"location_registration_exclude_s3_locations": "LocationRegistrationExcludeS3Locations",
+		"location_registration_role":                 "LocationRegistrationRole",
+		"manage_access_role_arn":                     "ManageAccessRoleArn",
+		"parameters":                                 "Parameters",
+		"provisioning_configurations":                "ProvisioningConfigurations",
+		"provisioning_role_arn":                      "ProvisioningRoleArn",
+		"region":                                     "Region",
+		"regional_parameters":                        "RegionalParameters",
+		"updated_at":                                 "UpdatedAt",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/DomainIdentifier",
 		"/properties/EnvironmentBlueprintIdentifier",
+		"/properties/EnvironmentRolePermissionBoundary",
+		"/properties/ProvisioningConfigurations",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

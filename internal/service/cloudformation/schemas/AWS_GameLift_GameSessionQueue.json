@@ -221,6 +221,7 @@
     "create": {
       "permissions": [
         "gamelift:CreateGameSessionQueue",
+        "gamelift:DescribeGameSessionQueues",
         "gamelift:ListTagsForResource",
         "gamelift:TagResource"
       ]

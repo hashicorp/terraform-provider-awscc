@@ -21,24 +21,26 @@ Data Source schema for AWS::CloudFront::ConnectionGroup
 
 ### Read-Only
 
-- `anycast_ip_list_id` (String)
+- `anycast_ip_list_id` (String) The ID of the Anycast static IP list.
 - `arn` (String)
 - `connection_group_id` (String)
 - `created_time` (String)
 - `e_tag` (String)
-- `enabled` (Boolean)
-- `ipv_6_enabled` (Boolean)
+- `enabled` (Boolean) Whether the connection group is enabled.
+- `ipv_6_enabled` (Boolean) IPv6 is enabled for the connection group.
 - `is_default` (Boolean)
 - `last_modified_time` (String)
-- `name` (String)
+- `name` (String) The name of the connection group.
 - `routing_endpoint` (String)
 - `status` (String)
-- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes List) A complex type that contains zero or more ``Tag`` elements. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) A string that contains ``Tag`` key.
+ The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.
+- `value` (String) A string that contains an optional ``Tag`` value.
+ The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.

@@ -178,6 +178,49 @@ func mailManagerRuleSetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	              "additionalProperties": false,
 		//	              "type": "object"
 		//	            },
+		//	            "PublishToSns": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "ActionFailurePolicy": {
+		//	                  "enum": [
+		//	                    "CONTINUE",
+		//	                    "DROP"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "Encoding": {
+		//	                  "enum": [
+		//	                    "UTF-8",
+		//	                    "BASE64"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "PayloadType": {
+		//	                  "enum": [
+		//	                    "CONTENT",
+		//	                    "HEADERS"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "RoleArn": {
+		//	                  "maxLength": 2048,
+		//	                  "minLength": 20,
+		//	                  "pattern": "^[a-zA-Z0-9:_/+=,@.#-]+$",
+		//	                  "type": "string"
+		//	                },
+		//	                "TopicArn": {
+		//	                  "maxLength": 2048,
+		//	                  "minLength": 20,
+		//	                  "pattern": "^arn:(aws|aws-cn|aws-us-gov):sns:[a-z]{2}-[a-z]+-\\d{1}:\\d{12}:[\\w\\-]{1,256}$",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "TopicArn",
+		//	                "RoleArn"
+		//	              ],
+		//	              "type": "object"
+		//	            },
 		//	            "Relay": {
 		//	              "additionalProperties": false,
 		//	              "properties": {
@@ -997,6 +1040,32 @@ func mailManagerRuleSetDataSource(ctx context.Context) (datasource.DataSource, e
 									CustomType: jsontypes.NormalizedType{},
 									Computed:   true,
 								}, /*END ATTRIBUTE*/
+								// Property: PublishToSns
+								"publish_to_sns": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ActionFailurePolicy
+										"action_failure_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Encoding
+										"encoding": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: PayloadType
+										"payload_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: RoleArn
+										"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: TopicArn
+										"topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
 								// Property: Relay
 								"relay": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1530,6 +1599,7 @@ func mailManagerRuleSetDataSource(ctx context.Context) (datasource.DataSource, e
 		"deliver_to_q_business": "DeliverToQBusiness",
 		"dmarc_expression":      "DmarcExpression",
 		"drop":                  "Drop",
+		"encoding":              "Encoding",
 		"evaluate":              "Evaluate",
 		"header_name":           "HeaderName",
 		"header_value":          "HeaderValue",
@@ -1542,6 +1612,8 @@ func mailManagerRuleSetDataSource(ctx context.Context) (datasource.DataSource, e
 		"name":                  "Name",
 		"number_expression":     "NumberExpression",
 		"operator":              "Operator",
+		"payload_type":          "PayloadType",
+		"publish_to_sns":        "PublishToSns",
 		"relay":                 "Relay",
 		"replace_recipient":     "ReplaceRecipient",
 		"replace_with":          "ReplaceWith",
@@ -1558,6 +1630,7 @@ func mailManagerRuleSetDataSource(ctx context.Context) (datasource.DataSource, e
 		"string_expression":     "StringExpression",
 		"tags":                  "Tags",
 		"target_archive":        "TargetArchive",
+		"topic_arn":             "TopicArn",
 		"unless":                "Unless",
 		"value":                 "Value",
 		"values":                "Values",

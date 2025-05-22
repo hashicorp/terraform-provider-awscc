@@ -115,6 +115,7 @@ resource "awscc_deadline_fleet" "example" {
 ### Optional
 
 - `description` (String)
+- `host_configuration` (Attributes) (see [below for nested schema](#nestedatt--host_configuration))
 - `min_worker_count` (Number)
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
@@ -142,6 +143,7 @@ Optional:
 
 - `mode` (String)
 - `storage_profile_id` (String)
+- `tag_propagation_mode` (String)
 - `worker_capabilities` (Attributes) (see [below for nested schema](#nestedatt--configuration--customer_managed--worker_capabilities))
 
 <a id="nestedatt--configuration--customer_managed--worker_capabilities"></a>
@@ -323,6 +325,15 @@ Optional:
 - `type` (String)
 
 
+
+
+<a id="nestedatt--host_configuration"></a>
+### Nested Schema for `host_configuration`
+
+Optional:
+
+- `script_body` (String)
+- `script_timeout_seconds` (Number)
 
 
 <a id="nestedatt--tags"></a>

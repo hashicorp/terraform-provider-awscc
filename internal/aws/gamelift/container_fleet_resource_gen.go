@@ -737,9 +737,7 @@ func containerFleetResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
-				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
-			// Locations is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: LogConfiguration
 		// CloudFormation resource type schema:
@@ -1162,7 +1160,6 @@ func containerFleetResource(ctx context.Context) (resource.Resource, error) {
 				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
-			// ScalingPolicies is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
@@ -1341,8 +1338,6 @@ func containerFleetResource(ctx context.Context) (resource.Resource, error) {
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/ScalingPolicies",
-		"/properties/Locations",
 		"/properties/DeploymentConfiguration",
 		"/properties/GameServerContainerGroupsPerInstance",
 		"/properties/GameServerContainerGroupDefinitionName",

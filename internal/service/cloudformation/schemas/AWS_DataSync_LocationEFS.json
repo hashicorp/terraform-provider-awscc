@@ -177,7 +177,8 @@
         "datasync:TagResource",
         "datasync:UntagResource",
         "elasticfilesystem:DescribeFileSystems",
-        "elasticfilesystem:DescribeAccessPoints"
+        "elasticfilesystem:DescribeAccessPoints",
+        "iam:PassRole"
       ]
     },
     "delete": {

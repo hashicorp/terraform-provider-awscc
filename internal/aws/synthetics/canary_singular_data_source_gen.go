@@ -168,6 +168,17 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Deletes associated lambda resources created by Synthetics if set to True. Default is False",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: DryRunAndUpdate
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Setting to control if UpdateCanary will perform a DryRun and validate it is PASSING before performing the Update. Default is FALSE.",
+		//	  "type": "boolean"
+		//	}
+		"dry_run_and_update": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Setting to control if UpdateCanary will perform a DryRun and validate it is PASSING before performing the Update. Default is FALSE.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ExecutionRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -331,6 +342,20 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    },
 		//	    "Expression": {
 		//	      "type": "string"
+		//	    },
+		//	    "RetryConfig": {
+		//	      "additionalProperties": false,
+		//	      "description": "Provide canary auto retry configuration",
+		//	      "properties": {
+		//	        "MaxRetries": {
+		//	          "description": "maximum times the canary will be retried upon the scheduled run failure",
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "MaxRetries"
+		//	      ],
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "required": [
@@ -347,6 +372,18 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: Expression
 				"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: RetryConfig
+				"retry_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: MaxRetries
+						"max_retries": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "maximum times the canary will be retried upon the scheduled run failure",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Provide canary auto retry configuration",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Frequency to run your canaries",
@@ -587,6 +624,7 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"canary_id":            "Id",
 		"code":                 "Code",
 		"delete_lambda_resources_on_canary_deletion": "DeleteLambdaResourcesOnCanaryDeletion",
+		"dry_run_and_update":                         "DryRunAndUpdate",
 		"duration_in_seconds":                        "DurationInSeconds",
 		"encryption_mode":                            "EncryptionMode",
 		"environment_variables":                      "EnvironmentVariables",
@@ -598,10 +636,12 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"ipv_6_allowed_for_dual_stack":               "Ipv6AllowedForDualStack",
 		"key":                                        "Key",
 		"kms_key_arn":                                "KmsKeyArn",
+		"max_retries":                                "MaxRetries",
 		"memory_in_mb":                               "MemoryInMB",
 		"name":                                       "Name",
 		"provisioned_resource_cleanup":               "ProvisionedResourceCleanup",
 		"resources_to_replicate_tags":                "ResourcesToReplicateTags",
+		"retry_config":                               "RetryConfig",
 		"run_config":                                 "RunConfig",
 		"runtime_version":                            "RuntimeVersion",
 		"s3_bucket":                                  "S3Bucket",

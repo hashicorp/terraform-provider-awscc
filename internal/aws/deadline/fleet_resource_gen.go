@@ -184,6 +184,13 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		//	          "pattern": "^sp-[0-9a-f]{32}$",
 		//	          "type": "string"
 		//	        },
+		//	        "TagPropagationMode": {
+		//	          "enum": [
+		//	            "NO_PROPAGATION",
+		//	            "PROPAGATE_TAGS_TO_WORKERS_AT_LAUNCH"
+		//	          ],
+		//	          "type": "string"
+		//	        },
 		//	        "WorkerCapabilities": {
 		//	          "additionalProperties": false,
 		//	          "properties": {
@@ -635,6 +642,20 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("^sp-[0-9a-f]{32}$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: TagPropagationMode
+						"tag_propagation_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"NO_PROPAGATION",
+									"PROPAGATE_TAGS_TO_WORKERS_AT_LAUNCH",
+								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -1408,6 +1429,62 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: HostConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "ScriptBody": {
+		//	      "maxLength": 15000,
+		//	      "minLength": 0,
+		//	      "type": "string"
+		//	    },
+		//	    "ScriptTimeoutSeconds": {
+		//	      "default": 300,
+		//	      "maximum": 3600,
+		//	      "minimum": 300,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "ScriptBody"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"host_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ScriptBody
+				"script_body": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(0, 15000),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ScriptTimeoutSeconds
+				"script_timeout_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Default:  int64default.StaticInt64(300),
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.Between(300, 3600),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: MaxWorkerCount
 		// CloudFormation resource type schema:
 		//
@@ -1602,6 +1679,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		"excluded_instance_types":       "ExcludedInstanceTypes",
 		"farm_id":                       "FarmId",
 		"fleet_id":                      "FleetId",
+		"host_configuration":            "HostConfiguration",
 		"instance_capabilities":         "InstanceCapabilities",
 		"instance_market_options":       "InstanceMarketOptions",
 		"iops":                          "Iops",
@@ -1617,11 +1695,14 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		"role_arn":                      "RoleArn",
 		"root_ebs_volume":               "RootEbsVolume",
 		"runtime":                       "Runtime",
+		"script_body":                   "ScriptBody",
+		"script_timeout_seconds":        "ScriptTimeoutSeconds",
 		"selections":                    "Selections",
 		"service_managed_ec_2":          "ServiceManagedEc2",
 		"size_gi_b":                     "SizeGiB",
 		"status":                        "Status",
 		"storage_profile_id":            "StorageProfileId",
+		"tag_propagation_mode":          "TagPropagationMode",
 		"tags":                          "Tags",
 		"throughput_mi_b":               "ThroughputMiB",
 		"type":                          "Type",

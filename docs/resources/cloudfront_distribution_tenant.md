@@ -3,12 +3,12 @@
 page_title: "awscc_cloudfront_distribution_tenant Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource Type definition for AWS::CloudFront::DistributionTenant
+  The distribution tenant.
 ---
 
 # awscc_cloudfront_distribution_tenant (Resource)
 
-Resource Type definition for AWS::CloudFront::DistributionTenant
+The distribution tenant.
 
 
 
@@ -17,18 +17,18 @@ Resource Type definition for AWS::CloudFront::DistributionTenant
 
 ### Required
 
-- `distribution_id` (String)
-- `domains` (List of String)
-- `name` (String)
+- `distribution_id` (String) The ID of the multi-tenant distribution.
+- `domains` (List of String) The domains associated with the distribution tenant.
+- `name` (String) The name of the distribution tenant.
 
 ### Optional
 
-- `connection_group_id` (String)
-- `customizations` (Attributes) (see [below for nested schema](#nestedatt--customizations))
-- `enabled` (Boolean)
-- `managed_certificate_request` (Attributes) (see [below for nested schema](#nestedatt--managed_certificate_request))
-- `parameters` (Attributes List) (see [below for nested schema](#nestedatt--parameters))
-- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `connection_group_id` (String) The ID of the connection group for the distribution tenant. If you don't specify a connection group, CloudFront uses the default connection group.
+- `customizations` (Attributes) Customizations for the distribution tenant. For each distribution tenant, you can specify the geographic restrictions, and the Amazon Resource Names (ARNs) for the ACM certificate and WAF web ACL. These are specific values that you can override or disable from the multi-tenant distribution that was used to create the distribution tenant. (see [below for nested schema](#nestedatt--customizations))
+- `enabled` (Boolean) Indicates whether the distribution tenant is in an enabled state. If disabled, the distribution tenant won't serve traffic.
+- `managed_certificate_request` (Attributes) An object that represents the request for the Amazon CloudFront managed ACM certificate. (see [below for nested schema](#nestedatt--managed_certificate_request))
+- `parameters` (Attributes List) A list of parameter values to add to the resource. A parameter is specified as a key-value pair. A valid parameter value must exist for any parameter that is marked as required in the multi-tenant distribution. (see [below for nested schema](#nestedatt--parameters))
+- `tags` (Attributes List) A complex type that contains zero or more ``Tag`` elements. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -46,16 +46,16 @@ Resource Type definition for AWS::CloudFront::DistributionTenant
 
 Optional:
 
-- `certificate` (Attributes) (see [below for nested schema](#nestedatt--customizations--certificate))
-- `geo_restrictions` (Attributes) (see [below for nested schema](#nestedatt--customizations--geo_restrictions))
-- `web_acl` (Attributes) (see [below for nested schema](#nestedatt--customizations--web_acl))
+- `certificate` (Attributes) The ACMlong (ACM) certificate. (see [below for nested schema](#nestedatt--customizations--certificate))
+- `geo_restrictions` (Attributes) The geographic restrictions. (see [below for nested schema](#nestedatt--customizations--geo_restrictions))
+- `web_acl` (Attributes) The WAF web ACL. (see [below for nested schema](#nestedatt--customizations--web_acl))
 
 <a id="nestedatt--customizations--certificate"></a>
 ### Nested Schema for `customizations.certificate`
 
 Optional:
 
-- `arn` (String)
+- `arn` (String) The Amazon Resource Name (ARN) of the ACM certificate.
 
 
 <a id="nestedatt--customizations--geo_restrictions"></a>
@@ -63,8 +63,11 @@ Optional:
 
 Optional:
 
-- `locations` (List of String)
-- `restriction_type` (String)
+- `locations` (List of String) The locations for geographic restrictions.
+- `restriction_type` (String) The method that you want to use to restrict distribution of your content by country:
+  +  ``none``: No geographic restriction is enabled, meaning access to content is not restricted by client geo location.
+  +  ``blacklist``: The ``Location`` elements specify the countries in which you don't want CloudFront to distribute your content.
+  +  ``whitelist``: The ``Location`` elements specify the countries in which you want CloudFront to distribute your content.
 
 
 <a id="nestedatt--customizations--web_acl"></a>
@@ -72,8 +75,8 @@ Optional:
 
 Optional:
 
-- `action` (String)
-- `arn` (String)
+- `action` (String) The action for the WAF web ACL customization. You can specify ``override`` to specify a separate WAF web ACL for the distribution tenant. If you specify ``disable``, the distribution tenant won't have WAF web ACL protections and won't inherit from the multi-tenant distribution.
+- `arn` (String) The Amazon Resource Name (ARN) of the WAF web ACL.
 
 
 
@@ -82,9 +85,11 @@ Optional:
 
 Optional:
 
-- `certificate_transparency_logging_preference` (String)
-- `primary_domain_name` (String)
-- `validation_token_host` (String)
+- `certificate_transparency_logging_preference` (String) You can opt out of certificate transparency logging by specifying the ``disabled`` option. Opt in by specifying ``enabled``. For more information, see [Certificate Transparency Logging](https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency) in the *User Guide*.
+- `primary_domain_name` (String) The primary domain name associated with the CloudFront managed ACM certificate.
+- `validation_token_host` (String) Specify how the HTTP validation token will be served when requesting the CloudFront managed ACM certificate.
+  +  For ``cloudfront``, CloudFront will automatically serve the validation token. Choose this mode if you can point the domain's DNS to CloudFront immediately.
+  +  For ``self-hosted``, you serve the validation token from your existing infrastructure. Choose this mode when you need to maintain current traffic flow while your certificate is being issued. You can place the validation token at the well-known path on your existing web server, wait for ACM to validate and issue the certificate, and then update your DNS to point to CloudFront.
 
 
 <a id="nestedatt--parameters"></a>
@@ -92,8 +97,8 @@ Optional:
 
 Optional:
 
-- `name` (String)
-- `value` (String)
+- `name` (String) The parameter name.
+- `value` (String) The parameter value.
 
 
 <a id="nestedatt--tags"></a>
@@ -101,8 +106,10 @@ Optional:
 
 Optional:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) A string that contains ``Tag`` key.
+ The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.
+- `value` (String) A string that contains an optional ``Tag`` value.
+ The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.
 
 
 <a id="nestedatt--domain_results"></a>
@@ -110,8 +117,8 @@ Optional:
 
 Read-Only:
 
-- `domain` (String)
-- `status` (String)
+- `domain` (String) The specified domain.
+- `status` (String) Whether the domain is active or inactive.
 
 ## Import
 

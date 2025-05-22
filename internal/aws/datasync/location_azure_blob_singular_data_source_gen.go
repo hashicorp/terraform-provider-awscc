@@ -27,7 +27,7 @@ func locationAzureBlobDataSource(ctx context.Context) (datasource.DataSource, er
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The Amazon Resource Names (ARNs) of agents to use for an Azure Blob Location.",
+		//	  "description": "Specifies the Amazon Resource Name (ARN) of the DataSync agent that can connect with your Azure Blob Storage container. If you are setting up an agentless cross-cloud transfer, you do not need to specify a value for this parameter.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "maxLength": 128,
@@ -40,7 +40,7 @@ func locationAzureBlobDataSource(ctx context.Context) (datasource.DataSource, er
 		//	}
 		"agent_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "The Amazon Resource Names (ARNs) of agents to use for an Azure Blob Location.",
+			Description: "Specifies the Amazon Resource Name (ARN) of the DataSync agent that can connect with your Azure Blob Storage container. If you are setting up an agentless cross-cloud transfer, you do not need to specify a value for this parameter.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AzureAccessTier
@@ -67,7 +67,8 @@ func locationAzureBlobDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "default": "SAS",
 		//	  "description": "The specific authentication type that you want DataSync to use to access your Azure Blob Container.",
 		//	  "enum": [
-		//	    "SAS"
+		//	    "SAS",
+		//	    "NONE"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -134,6 +135,86 @@ func locationAzureBlobDataSource(ctx context.Context) (datasource.DataSource, er
 			Description: "Specifies a blob type for the objects you're transferring into your Azure Blob Storage container.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: CmkSecretConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and a customer-managed AWS KMS key.",
+		//	  "properties": {
+		//	    "KmsKeyArn": {
+		//	      "description": "Specifies the ARN for the customer-managed AWS KMS key used to encrypt the secret specified for SecretArn. DataSync provides this key to AWS Secrets Manager.",
+		//	      "maxLength": 2048,
+		//	      "pattern": "^(arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):kms:[a-z-0-9]+:[0-9]{12}:key/.*|)$",
+		//	      "type": "string"
+		//	    },
+		//	    "SecretArn": {
+		//	      "description": "Specifies the ARN for an AWS Secrets Manager secret, managed by DataSync.",
+		//	      "maxLength": 2048,
+		//	      "pattern": "^(arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):secretsmanager:[a-z-0-9]+:[0-9]{12}:secret:.*|)$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"cmk_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KmsKeyArn
+				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the ARN for the customer-managed AWS KMS key used to encrypt the secret specified for SecretArn. DataSync provides this key to AWS Secrets Manager.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretArn
+				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the ARN for an AWS Secrets Manager secret, managed by DataSync.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and a customer-managed AWS KMS key.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: CustomSecretConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Specifies configuration information for a customer-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and an IAM role that DataSync can assume and access the customer-managed secret.",
+		//	  "properties": {
+		//	    "SecretAccessRoleArn": {
+		//	      "description": "Specifies the ARN for the AWS Identity and Access Management role that DataSync uses to access the secret specified for SecretArn.",
+		//	      "maxLength": 2048,
+		//	      "pattern": "^(arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*|)$",
+		//	      "type": "string"
+		//	    },
+		//	    "SecretArn": {
+		//	      "description": "Specifies the ARN for a customer created AWS Secrets Manager secret.",
+		//	      "maxLength": 2048,
+		//	      "pattern": "^(arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):secretsmanager:[a-z-0-9]+:[0-9]{12}:secret:.*|)$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "SecretArn",
+		//	    "SecretAccessRoleArn"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"custom_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SecretAccessRoleArn
+				"secret_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the ARN for the AWS Identity and Access Management role that DataSync uses to access the secret specified for SecretArn.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretArn
+				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the ARN for a customer created AWS Secrets Manager secret.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies configuration information for a customer-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and an IAM role that DataSync can assume and access the customer-managed secret.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LocationArn
 		// CloudFormation resource type schema:
 		//
@@ -158,6 +239,36 @@ func locationAzureBlobDataSource(ctx context.Context) (datasource.DataSource, er
 		//	}
 		"location_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The URL of the Azure Blob Location that was described.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ManagedSecretConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location. DataSync uses the default AWS-managed KMS key to encrypt this secret in AWS Secrets Manager.",
+		//	  "properties": {
+		//	    "SecretArn": {
+		//	      "description": "Specifies the ARN for an AWS Secrets Manager secret.",
+		//	      "maxLength": 2048,
+		//	      "pattern": "^(arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):secretsmanager:[a-z-0-9]+:[0-9]{12}:secret:.*|)$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "SecretArn"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"managed_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SecretArn
+				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the ARN for an AWS Secrets Manager secret.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location. DataSync uses the default AWS-managed KMS key to encrypt this secret in AWS Secrets Manager.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Subdirectory
@@ -250,9 +361,15 @@ func locationAzureBlobDataSource(ctx context.Context) (datasource.DataSource, er
 		"azure_blob_sas_configuration":   "AzureBlobSasConfiguration",
 		"azure_blob_sas_token":           "AzureBlobSasToken",
 		"azure_blob_type":                "AzureBlobType",
+		"cmk_secret_config":              "CmkSecretConfig",
+		"custom_secret_config":           "CustomSecretConfig",
 		"key":                            "Key",
+		"kms_key_arn":                    "KmsKeyArn",
 		"location_arn":                   "LocationArn",
 		"location_uri":                   "LocationUri",
+		"managed_secret_config":          "ManagedSecretConfig",
+		"secret_access_role_arn":         "SecretAccessRoleArn",
+		"secret_arn":                     "SecretArn",
 		"subdirectory":                   "Subdirectory",
 		"tags":                           "Tags",
 		"value":                          "Value",

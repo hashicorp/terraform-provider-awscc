@@ -26,6 +26,7 @@ Data Source schema for AWS::Synthetics::Canary
 - `canary_id` (String) Id of the canary
 - `code` (Attributes) Provide the canary script source (see [below for nested schema](#nestedatt--code))
 - `delete_lambda_resources_on_canary_deletion` (Boolean) Deletes associated lambda resources created by Synthetics if set to True. Default is False
+- `dry_run_and_update` (Boolean) Setting to control if UpdateCanary will perform a DryRun and validate it is PASSING before performing the Update. Default is FALSE.
 - `execution_role_arn` (String) Lambda Execution role used to run your canaries
 - `failure_retention_period` (Number) Retention period of failed canary runs represented in number of days
 - `name` (String) Name of the canary.
@@ -89,6 +90,15 @@ Read-Only:
 
 - `duration_in_seconds` (String)
 - `expression` (String)
+- `retry_config` (Attributes) Provide canary auto retry configuration (see [below for nested schema](#nestedatt--schedule--retry_config))
+
+<a id="nestedatt--schedule--retry_config"></a>
+### Nested Schema for `schedule.retry_config`
+
+Read-Only:
+
+- `max_retries` (Number) maximum times the canary will be retried upon the scheduled run failure
+
 
 
 <a id="nestedatt--tags"></a>
