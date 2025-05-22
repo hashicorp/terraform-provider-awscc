@@ -1,3 +1,11 @@
+## 1.42.0 (May 22, 2025)
+
+FEATURES:
+
+* **New Data Source:** `awscc_ses_mail_manager_address_list`
+* **New Data Source:** `awscc_ses_mail_manager_address_lists`
+* **New Resource:** `awscc_ses_mail_manager_address_list`
+
 ## 1.41.0 (May 15, 2025)
 
 FEATURES:
