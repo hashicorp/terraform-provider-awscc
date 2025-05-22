@@ -26,7 +26,29 @@ Data Source schema for AWS::DataZone::Project
 - `description` (String) The description of the Amazon DataZone project.
 - `domain_id` (String) The identifier of the Amazon DataZone domain in which the project was created.
 - `domain_identifier` (String) The ID of the Amazon DataZone domain in which this project is created.
+- `domain_unit_id` (String) The ID of the domain unit.
 - `glossary_terms` (List of String) The glossary terms that can be used in this Amazon DataZone project.
 - `last_updated_at` (String) The timestamp of when the project was last updated.
 - `name` (String) The name of the Amazon DataZone project.
 - `project_id` (String) The ID of the Amazon DataZone project.
+- `project_profile_id` (String) The project profile ID.
+- `project_profile_version` (String) The project profile version to which the project should be updated. You can only specify the following string for this parameter: latest.
+- `project_status` (String) The status of the project.
+- `user_parameters` (Attributes List) The user parameters of the project. (see [below for nested schema](#nestedatt--user_parameters))
+
+<a id="nestedatt--user_parameters"></a>
+### Nested Schema for `user_parameters`
+
+Read-Only:
+
+- `environment_configuration_name` (String)
+- `environment_id` (String)
+- `environment_parameters` (Attributes List) (see [below for nested schema](#nestedatt--user_parameters--environment_parameters))
+
+<a id="nestedatt--user_parameters--environment_parameters"></a>
+### Nested Schema for `user_parameters.environment_parameters`
+
+Read-Only:
+
+- `name` (String)
+- `value` (String)

@@ -28,6 +28,7 @@ Data Source schema for AWS::Deadline::Fleet
 - `display_name` (String)
 - `farm_id` (String)
 - `fleet_id` (String)
+- `host_configuration` (Attributes) (see [below for nested schema](#nestedatt--host_configuration))
 - `max_worker_count` (Number)
 - `min_worker_count` (Number)
 - `role_arn` (String)
@@ -78,6 +79,7 @@ Read-Only:
 
 - `mode` (String)
 - `storage_profile_id` (String)
+- `tag_propagation_mode` (String)
 - `worker_capabilities` (Attributes) (see [below for nested schema](#nestedatt--configuration--customer_managed--worker_capabilities))
 
 <a id="nestedatt--configuration--customer_managed--worker_capabilities"></a>
@@ -259,6 +261,15 @@ Read-Only:
 - `type` (String)
 
 
+
+
+<a id="nestedatt--host_configuration"></a>
+### Nested Schema for `host_configuration`
+
+Read-Only:
+
+- `script_body` (String)
+- `script_timeout_seconds` (Number)
 
 
 <a id="nestedatt--tags"></a>

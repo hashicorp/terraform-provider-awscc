@@ -25,11 +25,12 @@ Data Source schema for AWS::ElasticLoadBalancingV2::LoadBalancer
 - `dns_name` (String)
 - `enable_prefix_for_ipv_6_source_nat` (String) [Network Load Balancers with UDP listeners] Indicates whether to use an IPv6 prefix from each subnet for source NAT. The IP address type must be ``dualstack``. The default value is ``off``.
 - `enforce_security_group_inbound_rules_on_private_link_traffic` (String) Indicates whether to evaluate inbound security group rules for traffic sent to a Network Load Balancer through privatelink. The default is ``on``.
+ You can't configure this property on a Network Load Balancer unless you associated a security group with the load balancer when you created it.
 - `ip_address_type` (String) The IP address type. Internal load balancers must use ``ipv4``.
  [Application Load Balancers] The possible values are ``ipv4`` (IPv4 addresses), ``dualstack`` (IPv4 and IPv6 addresses), and ``dualstack-without-public-ipv4`` (public IPv6 addresses and private IPv4 and IPv6 addresses).
  Application Load Balancer authentication supports IPv4 addresses only when connecting to an Identity Provider (IdP) or Amazon Cognito endpoint. Without a public IPv4 address the load balancer can't complete the authentication process, resulting in HTTP 500 errors.
  [Network Load Balancers and Gateway Load Balancers] The possible values are ``ipv4`` (IPv4 addresses) and ``dualstack`` (IPv4 and IPv6 addresses).
-- `ipv_4_ipam_pool_id` (String)
+- `ipv_4_ipam_pool_id` (String) The ID of the IPv4 IPAM pool.
 - `load_balancer_arn` (String)
 - `load_balancer_attributes` (Attributes Set) The load balancer attributes. (see [below for nested schema](#nestedatt--load_balancer_attributes))
 - `load_balancer_full_name` (String)

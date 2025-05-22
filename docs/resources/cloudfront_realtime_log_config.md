@@ -125,7 +125,7 @@ resource "awscc_cloudfront_realtime_log_config" "example" {
 
 Required:
 
-- `kinesis_stream_config` (Attributes) Contains information about the Amazon Kinesis data stream where you are sending real-time log data. (see [below for nested schema](#nestedatt--end_points--kinesis_stream_config))
+- `kinesis_stream_config` (Attributes) Contains information about the Amazon Kinesis data stream where you are sending real-time log data in a real-time log configuration. (see [below for nested schema](#nestedatt--end_points--kinesis_stream_config))
 - `stream_type` (String) The type of data stream where you are sending real-time log data. The only valid value is ``Kinesis``.
 
 <a id="nestedatt--end_points--kinesis_stream_config"></a>

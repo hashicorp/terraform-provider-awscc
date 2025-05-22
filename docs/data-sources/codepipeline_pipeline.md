@@ -139,6 +139,7 @@ Read-Only:
 Read-Only:
 
 - `name` (String) The name of the environment variable.
+- `type` (String) The type of the environment variable.
 - `value` (String) The value of the environment variable.
 
 

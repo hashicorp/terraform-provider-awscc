@@ -3,12 +3,12 @@
 page_title: "awscc_cloudfront_connection_group Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource Type definition for AWS::CloudFront::ConnectionGroup
+  The connection group for your distribution tenants. When you first create a distribution tenant and you don't specify a connection group, CloudFront will automatically create a default connection group for you. When you create a new distribution tenant and don't specify a connection group, the default one will be associated with your distribution tenant.
 ---
 
 # awscc_cloudfront_connection_group (Resource)
 
-Resource Type definition for AWS::CloudFront::ConnectionGroup
+The connection group for your distribution tenants. When you first create a distribution tenant and you don't specify a connection group, CloudFront will automatically create a default connection group for you. When you create a new distribution tenant and don't specify a connection group, the default one will be associated with your distribution tenant.
 
 
 
@@ -17,14 +17,14 @@ Resource Type definition for AWS::CloudFront::ConnectionGroup
 
 ### Required
 
-- `name` (String)
+- `name` (String) The name of the connection group.
 
 ### Optional
 
-- `anycast_ip_list_id` (String)
-- `enabled` (Boolean)
-- `ipv_6_enabled` (Boolean)
-- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `anycast_ip_list_id` (String) The ID of the Anycast static IP list.
+- `enabled` (Boolean) Whether the connection group is enabled.
+- `ipv_6_enabled` (Boolean) IPv6 is enabled for the connection group.
+- `tags` (Attributes List) A complex type that contains zero or more ``Tag`` elements. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -43,8 +43,10 @@ Resource Type definition for AWS::CloudFront::ConnectionGroup
 
 Optional:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) A string that contains ``Tag`` key.
+ The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.
+- `value` (String) A string that contains an optional ``Tag`` value.
+ The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.
 
 ## Import
 

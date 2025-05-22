@@ -22,10 +22,13 @@ Data Source schema for AWS::DataSync::LocationObjectStorage
 ### Read-Only
 
 - `access_key` (String) Optional. The access key is used if credentials are required to access the self-managed object storage server.
-- `agent_arns` (List of String) The Amazon Resource Name (ARN) of the agents associated with the self-managed object storage server location.
+- `agent_arns` (List of String) Specifies the Amazon Resource Names (ARNs) of the DataSync agents that can connect with your object storage system. If you are setting up an agentless cross-cloud transfer, you do not need to specify a value for this parameter.
 - `bucket_name` (String) The name of the bucket on the self-managed object storage server.
+- `cmk_secret_config` (Attributes) Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and a customer-managed AWS KMS key. (see [below for nested schema](#nestedatt--cmk_secret_config))
+- `custom_secret_config` (Attributes) Specifies configuration information for a customer-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and an IAM role that DataSync can assume and access the customer-managed secret. (see [below for nested schema](#nestedatt--custom_secret_config))
 - `location_arn` (String) The Amazon Resource Name (ARN) of the location that is created.
 - `location_uri` (String) The URL of the object storage location that was described.
+- `managed_secret_config` (Attributes) Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location. DataSync uses the default AWS-managed KMS key to encrypt this secret in AWS Secrets Manager. (see [below for nested schema](#nestedatt--managed_secret_config))
 - `secret_key` (String) Optional. The secret key is used if credentials are required to access the self-managed object storage server.
 - `server_certificate` (String) X.509 PEM content containing a certificate authority or chain to trust.
 - `server_hostname` (String) The name of the self-managed object storage server. This value is the IP address or Domain Name Service (DNS) name of the object storage server.
@@ -33,6 +36,32 @@ Data Source schema for AWS::DataSync::LocationObjectStorage
 - `server_protocol` (String) The protocol that the object storage server uses to communicate.
 - `subdirectory` (String) The subdirectory in the self-managed object storage server that is used to read data from.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--cmk_secret_config"></a>
+### Nested Schema for `cmk_secret_config`
+
+Read-Only:
+
+- `kms_key_arn` (String) Specifies the ARN for the customer-managed AWS KMS key used to encrypt the secret specified for SecretArn. DataSync provides this key to AWS Secrets Manager.
+- `secret_arn` (String) Specifies the ARN for an AWS Secrets Manager secret, managed by DataSync.
+
+
+<a id="nestedatt--custom_secret_config"></a>
+### Nested Schema for `custom_secret_config`
+
+Read-Only:
+
+- `secret_access_role_arn` (String) Specifies the ARN for the AWS Identity and Access Management role that DataSync uses to access the secret specified for SecretArn.
+- `secret_arn` (String) Specifies the ARN for a customer created AWS Secrets Manager secret.
+
+
+<a id="nestedatt--managed_secret_config"></a>
+### Nested Schema for `managed_secret_config`
+
+Read-Only:
+
+- `secret_arn` (String) Specifies the ARN for an AWS Secrets Manager secret.
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
