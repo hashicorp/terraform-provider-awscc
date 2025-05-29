@@ -175,6 +175,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_dms_instance_profiles -cftype AWS::DMS::InstanceProfile -package dms ../aws/dms/instance_profile_plural_data_source_gen.go ../aws/dms/instance_profile_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_dms_migration_projects -cftype AWS::DMS::MigrationProject -package dms ../aws/dms/migration_project_plural_data_source_gen.go ../aws/dms/migration_project_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_dms_replication_configs -cftype AWS::DMS::ReplicationConfig -package dms ../aws/dms/replication_config_plural_data_source_gen.go ../aws/dms/replication_config_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_dsql_clusters -cftype AWS::DSQL::Cluster -package dsql ../aws/dsql/cluster_plural_data_source_gen.go ../aws/dsql/cluster_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_databrew_datasets -cftype AWS::DataBrew::Dataset -package databrew ../aws/databrew/dataset_plural_data_source_gen.go ../aws/databrew/dataset_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_databrew_jobs -cftype AWS::DataBrew::Job -package databrew ../aws/databrew/job_plural_data_source_gen.go ../aws/databrew/job_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_databrew_projects -cftype AWS::DataBrew::Project -package databrew ../aws/databrew/project_plural_data_source_gen.go ../aws/databrew/project_plural_data_source_gen_test.go
@@ -935,6 +936,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/directoryservice"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/dms"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/docdbelastic"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/dsql"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/dynamodb"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ec2"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ecr"

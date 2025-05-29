@@ -1360,9 +1360,9 @@ resource_schema "aws_dms_replication_config" {
 
 resource_schema "aws_dsql_cluster" {
   cloudformation_type_name                 = "AWS::DSQL::Cluster"
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
+  # suppress_resource_generation             = true
+  # suppress_singular_data_source_generation = true
+  # suppress_plural_data_source_generation   = true
 
   # Suppression Reason: Tags is of unsupported type: list of
   # https://github.com/hashicorp/terraform-provider-awscc/issues/2272

@@ -1360,6 +1360,11 @@
         "path": "./examples/resources/awscc_dms_replication_config/import.sh"
     },
     {
+        "resource": "awscc_dsql_cluster",
+        "identifier": ["Identifier"],
+        "path": "./examples/resources/awscc_dsql_cluster/import.sh"
+    },
+    {
         "resource": "awscc_databrew_dataset",
         "identifier": ["Name"],
         "path": "./examples/resources/awscc_databrew_dataset/import.sh"

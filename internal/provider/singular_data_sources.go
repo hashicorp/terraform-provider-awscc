@@ -274,6 +274,7 @@
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_dms_instance_profile -cfschema ../service/cloudformation/schemas/AWS_DMS_InstanceProfile.json -package dms ../aws/dms/instance_profile_singular_data_source_gen.go ../aws/dms/instance_profile_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_dms_migration_project -cfschema ../service/cloudformation/schemas/AWS_DMS_MigrationProject.json -package dms ../aws/dms/migration_project_singular_data_source_gen.go ../aws/dms/migration_project_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_dms_replication_config -cfschema ../service/cloudformation/schemas/AWS_DMS_ReplicationConfig.json -package dms ../aws/dms/replication_config_singular_data_source_gen.go ../aws/dms/replication_config_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source awscc_dsql_cluster -cfschema ../service/cloudformation/schemas/AWS_DSQL_Cluster.json -package dsql ../aws/dsql/cluster_singular_data_source_gen.go ../aws/dsql/cluster_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_databrew_dataset -cfschema ../service/cloudformation/schemas/AWS_DataBrew_Dataset.json -package databrew ../aws/databrew/dataset_singular_data_source_gen.go ../aws/databrew/dataset_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_databrew_job -cfschema ../service/cloudformation/schemas/AWS_DataBrew_Job.json -package databrew ../aws/databrew/job_singular_data_source_gen.go ../aws/databrew/job_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_databrew_project -cfschema ../service/cloudformation/schemas/AWS_DataBrew_Project.json -package databrew ../aws/databrew/project_singular_data_source_gen.go ../aws/databrew/project_singular_data_source_gen_test.go
@@ -1216,6 +1217,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/directoryservice"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/dms"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/docdbelastic"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/dsql"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/dynamodb"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ec2"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ecr"
