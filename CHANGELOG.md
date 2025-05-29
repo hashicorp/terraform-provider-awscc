@@ -4,9 +4,12 @@ FEATURES:
 
 * **New Data Source:** `awscc_datazone_project_profile`
 * **New Data Source:** `awscc_datazone_project_profiles`
+* **New Data Source:** `awscc_dsql_cluster`
+* **New Data Source:** `awscc_dsql_clusters`
 * **New Data Source:** `awscc_route53resolver_resolver_endpoint`
 * **New Data Source:** `awscc_route53resolver_resolver_endpoints`
 * **New Resource:** `awscc_datazone_project_profile`
+* **New Resource:** `awscc_dsql_cluster`
 * **New Resource:** `awscc_route53resolver_resolver_endpoint`
 
 ## 1.42.0 (May 22, 2025)
