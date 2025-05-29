@@ -373,6 +373,36 @@ func mailManagerRuleSetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	                        "TLS_WRAPPED"
 		//	                      ],
 		//	                      "type": "string"
+		//	                    },
+		//	                    "IsInAddressList": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "AddressLists": {
+		//	                          "items": {
+		//	                            "type": "string"
+		//	                          },
+		//	                          "maxItems": 1,
+		//	                          "minItems": 1,
+		//	                          "type": "array",
+		//	                          "uniqueItems": true
+		//	                        },
+		//	                        "Attribute": {
+		//	                          "enum": [
+		//	                            "RECIPIENT",
+		//	                            "MAIL_FROM",
+		//	                            "SENDER",
+		//	                            "FROM",
+		//	                            "TO",
+		//	                            "CC"
+		//	                          ],
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "Attribute",
+		//	                        "AddressLists"
+		//	                      ],
+		//	                      "type": "object"
 		//	                    }
 		//	                  },
 		//	                  "type": "object"
@@ -682,6 +712,36 @@ func mailManagerRuleSetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	                        "TLS_WRAPPED"
 		//	                      ],
 		//	                      "type": "string"
+		//	                    },
+		//	                    "IsInAddressList": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "AddressLists": {
+		//	                          "items": {
+		//	                            "type": "string"
+		//	                          },
+		//	                          "maxItems": 1,
+		//	                          "minItems": 1,
+		//	                          "type": "array",
+		//	                          "uniqueItems": true
+		//	                        },
+		//	                        "Attribute": {
+		//	                          "enum": [
+		//	                            "RECIPIENT",
+		//	                            "MAIL_FROM",
+		//	                            "SENDER",
+		//	                            "FROM",
+		//	                            "TO",
+		//	                            "CC"
+		//	                          ],
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "Attribute",
+		//	                        "AddressLists"
+		//	                      ],
+		//	                      "type": "object"
 		//	                    }
 		//	                  },
 		//	                  "type": "object"
@@ -1167,6 +1227,21 @@ func mailManagerRuleSetDataSource(ctx context.Context) (datasource.DataSource, e
 												"attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Computed: true,
 												}, /*END ATTRIBUTE*/
+												// Property: IsInAddressList
+												"is_in_address_list": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: AddressLists
+														"address_lists": schema.ListAttribute{ /*START ATTRIBUTE*/
+															ElementType: types.StringType,
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: Attribute
+														"attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 											Computed: true,
 										}, /*END ATTRIBUTE*/
@@ -1357,6 +1432,21 @@ func mailManagerRuleSetDataSource(ctx context.Context) (datasource.DataSource, e
 												}, /*END ATTRIBUTE*/
 												// Property: Attribute
 												"attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: IsInAddressList
+												"is_in_address_list": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: AddressLists
+														"address_lists": schema.ListAttribute{ /*START ATTRIBUTE*/
+															ElementType: types.StringType,
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: Attribute
+														"attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
 													Computed: true,
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
@@ -1588,6 +1678,7 @@ func mailManagerRuleSetDataSource(ctx context.Context) (datasource.DataSource, e
 		"action_failure_policy": "ActionFailurePolicy",
 		"actions":               "Actions",
 		"add_header":            "AddHeader",
+		"address_lists":         "AddressLists",
 		"analysis":              "Analysis",
 		"analyzer":              "Analyzer",
 		"application_id":        "ApplicationId",
@@ -1605,6 +1696,7 @@ func mailManagerRuleSetDataSource(ctx context.Context) (datasource.DataSource, e
 		"header_value":          "HeaderValue",
 		"index_id":              "IndexId",
 		"ip_expression":         "IpExpression",
+		"is_in_address_list":    "IsInAddressList",
 		"key":                   "Key",
 		"mail_from":             "MailFrom",
 		"mailbox_arn":           "MailboxArn",

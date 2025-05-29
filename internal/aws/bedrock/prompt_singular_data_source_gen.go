@@ -196,7 +196,7 @@ func promptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "properties": {
 		//	              "MaxTokens": {
 		//	                "description": "Maximum length of output",
-		//	                "maximum": 4096,
+		//	                "maximum": 512000,
 		//	                "minimum": 0,
 		//	                "type": "number"
 		//	              },

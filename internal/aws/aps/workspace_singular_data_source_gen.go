@@ -112,6 +112,106 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "AMP Workspace prometheus endpoint",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: QueryLoggingConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Query logging configuration",
+		//	  "properties": {
+		//	    "Destinations": {
+		//	      "description": "The destinations configuration for query logging",
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "Destinations for query logging",
+		//	        "properties": {
+		//	          "CloudWatchLogs": {
+		//	            "additionalProperties": false,
+		//	            "description": "Represents a cloudwatch logs destination for query logging",
+		//	            "properties": {
+		//	              "LogGroupArn": {
+		//	                "description": "The ARN of the CloudWatch Logs log group",
+		//	                "maxLength": 512,
+		//	                "minLength": 0,
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "LogGroupArn"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "Filters": {
+		//	            "additionalProperties": false,
+		//	            "description": "Filters for logging",
+		//	            "properties": {
+		//	              "QspThreshold": {
+		//	                "description": "Query logs with QSP above this limit are vended",
+		//	                "minimum": 0,
+		//	                "type": "integer"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "QspThreshold"
+		//	            ],
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "CloudWatchLogs",
+		//	          "Filters"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 1,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Destinations"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"query_logging_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Destinations
+				"destinations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CloudWatchLogs
+							"cloudwatch_logs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: LogGroupArn
+									"log_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The ARN of the CloudWatch Logs log group",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Represents a cloudwatch logs destination for query logging",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Filters
+							"filters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: QspThreshold
+									"qsp_threshold": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "Query logs with QSP above this limit are vended",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Filters for logging",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The destinations configuration for query logging",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Query logging configuration",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -318,24 +418,29 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::APS::Workspace").WithTerraformTypeName("awscc_aps_workspace")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"alert_manager_definition": "AlertManagerDefinition",
-		"alias":                    "Alias",
-		"arn":                      "Arn",
-		"key":                      "Key",
-		"kms_key_arn":              "KmsKeyArn",
-		"label_set":                "LabelSet",
-		"limits":                   "Limits",
-		"limits_per_label_sets":    "LimitsPerLabelSets",
-		"log_group_arn":            "LogGroupArn",
-		"logging_configuration":    "LoggingConfiguration",
-		"max_series":               "MaxSeries",
-		"name":                     "Name",
-		"prometheus_endpoint":      "PrometheusEndpoint",
-		"retention_period_in_days": "RetentionPeriodInDays",
-		"tags":                     "Tags",
-		"value":                    "Value",
-		"workspace_configuration":  "WorkspaceConfiguration",
-		"workspace_id":             "WorkspaceId",
+		"alert_manager_definition":    "AlertManagerDefinition",
+		"alias":                       "Alias",
+		"arn":                         "Arn",
+		"cloudwatch_logs":             "CloudWatchLogs",
+		"destinations":                "Destinations",
+		"filters":                     "Filters",
+		"key":                         "Key",
+		"kms_key_arn":                 "KmsKeyArn",
+		"label_set":                   "LabelSet",
+		"limits":                      "Limits",
+		"limits_per_label_sets":       "LimitsPerLabelSets",
+		"log_group_arn":               "LogGroupArn",
+		"logging_configuration":       "LoggingConfiguration",
+		"max_series":                  "MaxSeries",
+		"name":                        "Name",
+		"prometheus_endpoint":         "PrometheusEndpoint",
+		"qsp_threshold":               "QspThreshold",
+		"query_logging_configuration": "QueryLoggingConfiguration",
+		"retention_period_in_days":    "RetentionPeriodInDays",
+		"tags":                        "Tags",
+		"value":                       "Value",
+		"workspace_configuration":     "WorkspaceConfiguration",
+		"workspace_id":                "WorkspaceId",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

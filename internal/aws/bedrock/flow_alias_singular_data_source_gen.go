@@ -37,6 +37,45 @@ func flowAliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Arn of the Flow Alias",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ConcurrencyConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "MaxConcurrency": {
+		//	      "description": "Number of nodes executed concurrently at a time",
+		//	      "maximum": 100,
+		//	      "minimum": 1,
+		//	      "type": "number"
+		//	    },
+		//	    "Type": {
+		//	      "enum": [
+		//	        "Automatic",
+		//	        "Manual"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Type"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"concurrency_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaxConcurrency
+				"max_concurrency": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "Number of nodes executed concurrently at a time",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -204,17 +243,20 @@ func flowAliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Bedrock::FlowAlias").WithTerraformTypeName("awscc_bedrock_flow_alias")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                   "Arn",
-		"created_at":            "CreatedAt",
-		"description":           "Description",
-		"flow_alias_id":         "Id",
-		"flow_arn":              "FlowArn",
-		"flow_id":               "FlowId",
-		"flow_version":          "FlowVersion",
-		"name":                  "Name",
-		"routing_configuration": "RoutingConfiguration",
-		"tags":                  "Tags",
-		"updated_at":            "UpdatedAt",
+		"arn":                       "Arn",
+		"concurrency_configuration": "ConcurrencyConfiguration",
+		"created_at":                "CreatedAt",
+		"description":               "Description",
+		"flow_alias_id":             "Id",
+		"flow_arn":                  "FlowArn",
+		"flow_id":                   "FlowId",
+		"flow_version":              "FlowVersion",
+		"max_concurrency":           "MaxConcurrency",
+		"name":                      "Name",
+		"routing_configuration":     "RoutingConfiguration",
+		"tags":                      "Tags",
+		"type":                      "Type",
+		"updated_at":                "UpdatedAt",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

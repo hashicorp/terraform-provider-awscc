@@ -123,6 +123,21 @@ func iPAMDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Id of the IPAM.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: MeteredAccount
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A metered account is an account that is charged for active IP addresses managed in IPAM",
+		//	  "enum": [
+		//	    "ipam-owner",
+		//	    "resource-owner"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"metered_account": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A metered account is an account that is charged for active IP addresses managed in IPAM",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OperatingRegions
 		// CloudFormation resource type schema:
 		//
@@ -294,6 +309,7 @@ func iPAMDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"enable_private_gua":                   "EnablePrivateGua",
 		"ipam_id":                              "IpamId",
 		"key":                                  "Key",
+		"metered_account":                      "MeteredAccount",
 		"operating_regions":                    "OperatingRegions",
 		"organizations_entity_path":            "OrganizationsEntityPath",
 		"private_default_scope_id":             "PrivateDefaultScopeId",
