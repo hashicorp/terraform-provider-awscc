@@ -1520,6 +1520,11 @@
         "path": "./examples/resources/awscc_datazone_project_membership/import.sh"
     },
     {
+        "resource": "awscc_datazone_project_profile",
+        "identifier": ["DomainIdentifier","Identifier"],
+        "path": "./examples/resources/awscc_datazone_project_profile/import.sh"
+    },
+    {
         "resource": "awscc_datazone_subscription_target",
         "identifier": ["DomainId","EnvironmentId","Id"],
         "path": "./examples/resources/awscc_datazone_subscription_target/import.sh"
@@ -4743,6 +4748,11 @@
         "resource": "awscc_route53resolver_resolver_dnssec_config",
         "identifier": ["Id"],
         "path": "./examples/resources/awscc_route53resolver_resolver_dnssec_config/import.sh"
+    },
+    {
+        "resource": "awscc_route53resolver_resolver_endpoint",
+        "identifier": ["ResolverEndpointId"],
+        "path": "./examples/resources/awscc_route53resolver_resolver_endpoint/import.sh"
     },
     {
         "resource": "awscc_route53resolver_resolver_query_logging_config",
