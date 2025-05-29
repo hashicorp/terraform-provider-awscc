@@ -397,6 +397,36 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 		//	                        "TLS_WRAPPED"
 		//	                      ],
 		//	                      "type": "string"
+		//	                    },
+		//	                    "IsInAddressList": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "AddressLists": {
+		//	                          "items": {
+		//	                            "type": "string"
+		//	                          },
+		//	                          "maxItems": 1,
+		//	                          "minItems": 1,
+		//	                          "type": "array",
+		//	                          "uniqueItems": true
+		//	                        },
+		//	                        "Attribute": {
+		//	                          "enum": [
+		//	                            "RECIPIENT",
+		//	                            "MAIL_FROM",
+		//	                            "SENDER",
+		//	                            "FROM",
+		//	                            "TO",
+		//	                            "CC"
+		//	                          ],
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "Attribute",
+		//	                        "AddressLists"
+		//	                      ],
+		//	                      "type": "object"
 		//	                    }
 		//	                  },
 		//	                  "type": "object"
@@ -706,6 +736,36 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 		//	                        "TLS_WRAPPED"
 		//	                      ],
 		//	                      "type": "string"
+		//	                    },
+		//	                    "IsInAddressList": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "AddressLists": {
+		//	                          "items": {
+		//	                            "type": "string"
+		//	                          },
+		//	                          "maxItems": 1,
+		//	                          "minItems": 1,
+		//	                          "type": "array",
+		//	                          "uniqueItems": true
+		//	                        },
+		//	                        "Attribute": {
+		//	                          "enum": [
+		//	                            "RECIPIENT",
+		//	                            "MAIL_FROM",
+		//	                            "SENDER",
+		//	                            "FROM",
+		//	                            "TO",
+		//	                            "CC"
+		//	                          ],
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "Attribute",
+		//	                        "AddressLists"
+		//	                      ],
+		//	                      "type": "object"
 		//	                    }
 		//	                  },
 		//	                  "type": "object"
@@ -1519,6 +1579,49 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 														stringplanmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
+												// Property: IsInAddressList
+												"is_in_address_list": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: AddressLists
+														"address_lists": schema.ListAttribute{ /*START ATTRIBUTE*/
+															ElementType: types.StringType,
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.List{ /*START VALIDATORS*/
+																listvalidator.SizeBetween(1, 1),
+																listvalidator.UniqueValues(),
+																fwvalidators.NotNullList(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																listplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: Attribute
+														"attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Optional: true,
+															Computed: true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.OneOf(
+																	"RECIPIENT",
+																	"MAIL_FROM",
+																	"SENDER",
+																	"FROM",
+																	"TO",
+																	"CC",
+																),
+																fwvalidators.NotNullString(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Optional: true,
+													Computed: true,
+													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+														objectplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 											Optional: true,
 											Computed: true,
@@ -2042,6 +2145,49 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: IsInAddressList
+												"is_in_address_list": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: AddressLists
+														"address_lists": schema.ListAttribute{ /*START ATTRIBUTE*/
+															ElementType: types.StringType,
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.List{ /*START VALIDATORS*/
+																listvalidator.SizeBetween(1, 1),
+																listvalidator.UniqueValues(),
+																fwvalidators.NotNullList(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																listplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: Attribute
+														"attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Optional: true,
+															Computed: true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.OneOf(
+																	"RECIPIENT",
+																	"MAIL_FROM",
+																	"SENDER",
+																	"FROM",
+																	"TO",
+																	"CC",
+																),
+																fwvalidators.NotNullString(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Optional: true,
+													Computed: true,
+													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+														objectplanmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
@@ -2599,6 +2745,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 		"action_failure_policy": "ActionFailurePolicy",
 		"actions":               "Actions",
 		"add_header":            "AddHeader",
+		"address_lists":         "AddressLists",
 		"analysis":              "Analysis",
 		"analyzer":              "Analyzer",
 		"application_id":        "ApplicationId",
@@ -2616,6 +2763,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 		"header_value":          "HeaderValue",
 		"index_id":              "IndexId",
 		"ip_expression":         "IpExpression",
+		"is_in_address_list":    "IsInAddressList",
 		"key":                   "Key",
 		"mail_from":             "MailFrom",
 		"mailbox_arn":           "MailboxArn",

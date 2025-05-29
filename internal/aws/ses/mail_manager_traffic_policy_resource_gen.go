@@ -111,6 +111,31 @@ func mailManagerTrafficPolicyResource(ctx context.Context) (resource.Resource, e
 		//	                        "ResultField"
 		//	                      ],
 		//	                      "type": "object"
+		//	                    },
+		//	                    "IsInAddressList": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "AddressLists": {
+		//	                          "items": {
+		//	                            "type": "string"
+		//	                          },
+		//	                          "maxItems": 1,
+		//	                          "minItems": 1,
+		//	                          "type": "array",
+		//	                          "uniqueItems": true
+		//	                        },
+		//	                        "Attribute": {
+		//	                          "enum": [
+		//	                            "RECIPIENT"
+		//	                          ],
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "AddressLists",
+		//	                        "Attribute"
+		//	                      ],
+		//	                      "type": "object"
 		//	                    }
 		//	                  },
 		//	                  "type": "object"
@@ -356,6 +381,44 @@ func mailManagerTrafficPolicyResource(ctx context.Context) (resource.Resource, e
 															Validators: []validator.String{ /*START VALIDATORS*/
 																stringvalidator.LengthBetween(1, 256),
 																stringvalidator.RegexMatches(regexp.MustCompile("^(addon\\.)?[\\sa-zA-Z0-9_]+$"), ""),
+																fwvalidators.NotNullString(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Optional: true,
+													Computed: true,
+													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+														objectplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: IsInAddressList
+												"is_in_address_list": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: AddressLists
+														"address_lists": schema.ListAttribute{ /*START ATTRIBUTE*/
+															ElementType: types.StringType,
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.List{ /*START VALIDATORS*/
+																listvalidator.SizeBetween(1, 1),
+																listvalidator.UniqueValues(),
+																fwvalidators.NotNullList(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																listplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: Attribute
+														"attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Optional: true,
+															Computed: true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.OneOf(
+																	"RECIPIENT",
+																),
 																fwvalidators.NotNullString(),
 															}, /*END VALIDATORS*/
 															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -851,6 +914,7 @@ func mailManagerTrafficPolicyResource(ctx context.Context) (resource.Resource, e
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"action":                 "Action",
+		"address_lists":          "AddressLists",
 		"analysis":               "Analysis",
 		"analyzer":               "Analyzer",
 		"attribute":              "Attribute",
@@ -860,6 +924,7 @@ func mailManagerTrafficPolicyResource(ctx context.Context) (resource.Resource, e
 		"evaluate":               "Evaluate",
 		"ip_expression":          "IpExpression",
 		"ipv_6_expression":       "Ipv6Expression",
+		"is_in_address_list":     "IsInAddressList",
 		"key":                    "Key",
 		"max_message_size_bytes": "MaxMessageSizeBytes",
 		"operator":               "Operator",

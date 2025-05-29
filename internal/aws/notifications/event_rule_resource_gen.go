@@ -235,7 +235,7 @@ func eventRuleResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Definition of AWS::Notifications::EventRule Resource Type",
+		Description: "Resource Type definition for AWS::Notifications::EventRule",
 		Version:     1,
 		Attributes:  attributes,
 	}

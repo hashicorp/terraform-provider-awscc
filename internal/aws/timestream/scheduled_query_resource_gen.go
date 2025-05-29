@@ -65,8 +65,8 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
+			// ClientToken is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: ErrorReportConfiguration
 		// CloudFormation resource type schema:
@@ -1098,6 +1098,9 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 		"value":                                 "Value",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/ClientToken",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

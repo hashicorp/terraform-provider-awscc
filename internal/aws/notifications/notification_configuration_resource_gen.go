@@ -210,7 +210,7 @@ func notificationConfigurationResource(ctx context.Context) (resource.Resource, 
 	}
 
 	schema := schema.Schema{
-		Description: "Definition of AWS::Notifications::NotificationConfiguration Resource Type",
+		Description: "Resource Type definition for AWS::Notifications::NotificationConfiguration",
 		Version:     1,
 		Attributes:  attributes,
 	}
