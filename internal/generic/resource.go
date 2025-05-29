@@ -5,7 +5,6 @@ package generic
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"strings"
 	"time"
@@ -24,7 +23,6 @@ import (
 	ccdiag "github.com/hashicorp/terraform-provider-awscc/internal/errs/diag"
 	tfcloudcontrol "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudcontrol"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
-	"github.com/mattbaird/jsonpatch"
 )
 
 // ResourceOptionsFunc is a type alias for a resource type functional option.
@@ -775,23 +773,6 @@ func (r *genericResource) bootstrapContext(ctx context.Context) context.Context 
 	ctx = r.provider.RegisterLogger(ctx)
 
 	return ctx
-}
-
-// patchDocument returns a JSON Patch document describing the difference between `old` and `new`.
-func patchDocument(old, new string) (string, error) {
-	patch, err := jsonpatch.CreatePatch([]byte(old), []byte(new))
-
-	if err != nil {
-		return "", err
-	}
-
-	b, err := json.Marshal(patch)
-
-	if err != nil {
-		return "", err
-	}
-
-	return string(b), nil
 }
 
 // propertyPathToAttributePath returns the AttributePath for the specified JSON Pointer property path.
