@@ -22,6 +22,7 @@ Data Source schema for AWS::Bedrock::FlowAlias
 ### Read-Only
 
 - `arn` (String) Arn of the Flow Alias
+- `concurrency_configuration` (Attributes) (see [below for nested schema](#nestedatt--concurrency_configuration))
 - `created_at` (String) Time Stamp.
 - `description` (String) Description of the Resource.
 - `flow_alias_id` (String) Id for a Flow Alias generated at the server side.
@@ -31,6 +32,15 @@ Data Source schema for AWS::Bedrock::FlowAlias
 - `routing_configuration` (Attributes List) Routing configuration for a Flow alias. (see [below for nested schema](#nestedatt--routing_configuration))
 - `tags` (Map of String) A map of tag keys and values
 - `updated_at` (String) Time Stamp.
+
+<a id="nestedatt--concurrency_configuration"></a>
+### Nested Schema for `concurrency_configuration`
+
+Read-Only:
+
+- `max_concurrency` (Number) Number of nodes executed concurrently at a time
+- `type` (String)
+
 
 <a id="nestedatt--routing_configuration"></a>
 ### Nested Schema for `routing_configuration`

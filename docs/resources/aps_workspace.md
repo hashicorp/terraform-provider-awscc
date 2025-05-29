@@ -89,6 +89,7 @@ resource "awscc_aps_workspace" "example" {
 - `alias` (String) AMP Workspace alias.
 - `kms_key_arn` (String) KMS Key ARN used to encrypt and decrypt AMP workspace data.
 - `logging_configuration` (Attributes) Logging configuration (see [below for nested schema](#nestedatt--logging_configuration))
+- `query_logging_configuration` (Attributes) Query logging configuration (see [below for nested schema](#nestedatt--query_logging_configuration))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `workspace_configuration` (Attributes) Workspace configuration (see [below for nested schema](#nestedatt--workspace_configuration))
 
@@ -105,6 +106,39 @@ resource "awscc_aps_workspace" "example" {
 Optional:
 
 - `log_group_arn` (String) CloudWatch log group ARN
+
+
+<a id="nestedatt--query_logging_configuration"></a>
+### Nested Schema for `query_logging_configuration`
+
+Optional:
+
+- `destinations` (Attributes List) The destinations configuration for query logging (see [below for nested schema](#nestedatt--query_logging_configuration--destinations))
+
+<a id="nestedatt--query_logging_configuration--destinations"></a>
+### Nested Schema for `query_logging_configuration.destinations`
+
+Optional:
+
+- `cloudwatch_logs` (Attributes) Represents a cloudwatch logs destination for query logging (see [below for nested schema](#nestedatt--query_logging_configuration--destinations--cloudwatch_logs))
+- `filters` (Attributes) Filters for logging (see [below for nested schema](#nestedatt--query_logging_configuration--destinations--filters))
+
+<a id="nestedatt--query_logging_configuration--destinations--cloudwatch_logs"></a>
+### Nested Schema for `query_logging_configuration.destinations.cloudwatch_logs`
+
+Optional:
+
+- `log_group_arn` (String) The ARN of the CloudWatch Logs log group
+
+
+<a id="nestedatt--query_logging_configuration--destinations--filters"></a>
+### Nested Schema for `query_logging_configuration.destinations.filters`
+
+Optional:
+
+- `qsp_threshold` (Number) Query logs with QSP above this limit are vended
+
+
 
 
 <a id="nestedatt--tags"></a>

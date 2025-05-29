@@ -1,0 +1,1 @@
+$ terraform import awscc_route53resolver_resolver_endpoint.example "resolver_endpoint_id"

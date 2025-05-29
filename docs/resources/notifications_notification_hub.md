@@ -3,12 +3,12 @@
 page_title: "awscc_notifications_notification_hub Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Definition of AWS::Notifications::NotificationHub Resource Type
+  Resource Type definition for AWS::Notifications::NotificationHub
 ---
 
 # awscc_notifications_notification_hub (Resource)
 
-Definition of AWS::Notifications::NotificationHub Resource Type
+Resource Type definition for AWS::Notifications::NotificationHub
 
 
 

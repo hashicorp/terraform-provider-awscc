@@ -28,6 +28,7 @@ Data Source schema for AWS::EC2::IPAM
 - `description` (String)
 - `enable_private_gua` (Boolean) Enable provisioning of GUA space in private pools.
 - `ipam_id` (String) Id of the IPAM.
+- `metered_account` (String) A metered account is an account that is charged for active IP addresses managed in IPAM
 - `operating_regions` (Attributes Set) The regions IPAM is enabled for. Allows pools to be created in these regions, as well as enabling monitoring (see [below for nested schema](#nestedatt--operating_regions))
 - `private_default_scope_id` (String) The Id of the default scope for publicly routable IP space, created with this IPAM.
 - `public_default_scope_id` (String) The Id of the default scope for publicly routable IP space, created with this IPAM.

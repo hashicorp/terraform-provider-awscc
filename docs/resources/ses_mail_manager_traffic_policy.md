@@ -116,6 +116,7 @@ Optional:
 Optional:
 
 - `analysis` (Attributes) (see [below for nested schema](#nestedatt--policy_statements--conditions--boolean_expression--evaluate--analysis))
+- `is_in_address_list` (Attributes) (see [below for nested schema](#nestedatt--policy_statements--conditions--boolean_expression--evaluate--is_in_address_list))
 
 <a id="nestedatt--policy_statements--conditions--boolean_expression--evaluate--analysis"></a>
 ### Nested Schema for `policy_statements.conditions.boolean_expression.evaluate.analysis`
@@ -124,6 +125,15 @@ Optional:
 
 - `analyzer` (String)
 - `result_field` (String)
+
+
+<a id="nestedatt--policy_statements--conditions--boolean_expression--evaluate--is_in_address_list"></a>
+### Nested Schema for `policy_statements.conditions.boolean_expression.evaluate.is_in_address_list`
+
+Optional:
+
+- `address_lists` (List of String)
+- `attribute` (String)
 
 
 

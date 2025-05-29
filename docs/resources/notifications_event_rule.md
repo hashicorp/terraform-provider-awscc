@@ -3,12 +3,12 @@
 page_title: "awscc_notifications_event_rule Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Definition of AWS::Notifications::EventRule Resource Type
+  Resource Type definition for AWS::Notifications::EventRule
 ---
 
 # awscc_notifications_event_rule (Resource)
 
-Definition of AWS::Notifications::EventRule Resource Type
+Resource Type definition for AWS::Notifications::EventRule
 
 
 

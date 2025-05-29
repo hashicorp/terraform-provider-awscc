@@ -171,6 +171,7 @@ Read-Only:
 
 - `analysis` (Attributes) (see [below for nested schema](#nestedatt--rules--conditions--boolean_expression--evaluate--analysis))
 - `attribute` (String)
+- `is_in_address_list` (Attributes) (see [below for nested schema](#nestedatt--rules--conditions--boolean_expression--evaluate--is_in_address_list))
 
 <a id="nestedatt--rules--conditions--boolean_expression--evaluate--analysis"></a>
 ### Nested Schema for `rules.conditions.boolean_expression.evaluate.analysis`
@@ -179,6 +180,15 @@ Read-Only:
 
 - `analyzer` (String)
 - `result_field` (String)
+
+
+<a id="nestedatt--rules--conditions--boolean_expression--evaluate--is_in_address_list"></a>
+### Nested Schema for `rules.conditions.boolean_expression.evaluate.is_in_address_list`
+
+Read-Only:
+
+- `address_lists` (List of String)
+- `attribute` (String)
 
 
 
@@ -313,6 +323,7 @@ Read-Only:
 
 - `analysis` (Attributes) (see [below for nested schema](#nestedatt--rules--unless--boolean_expression--evaluate--analysis))
 - `attribute` (String)
+- `is_in_address_list` (Attributes) (see [below for nested schema](#nestedatt--rules--unless--boolean_expression--evaluate--is_in_address_list))
 
 <a id="nestedatt--rules--unless--boolean_expression--evaluate--analysis"></a>
 ### Nested Schema for `rules.unless.boolean_expression.evaluate.analysis`
@@ -321,6 +332,15 @@ Read-Only:
 
 - `analyzer` (String)
 - `result_field` (String)
+
+
+<a id="nestedatt--rules--unless--boolean_expression--evaluate--is_in_address_list"></a>
+### Nested Schema for `rules.unless.boolean_expression.evaluate.is_in_address_list`
+
+Read-Only:
+
+- `address_lists` (List of String)
+- `attribute` (String)
 
 
 

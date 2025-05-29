@@ -106,6 +106,7 @@ Read-Only:
 - `agent` (Attributes) Agent flow node configuration (see [below for nested schema](#nestedatt--definition--nodes--configuration--agent))
 - `collector` (String) Collector flow node configuration
 - `condition` (Attributes) Condition flow node configuration (see [below for nested schema](#nestedatt--definition--nodes--configuration--condition))
+- `inline_code` (Attributes) Inline code config strucuture, contains code configs (see [below for nested schema](#nestedatt--definition--nodes--configuration--inline_code))
 - `input` (String) Input flow node configuration
 - `iterator` (String) Iterator flow node configuration
 - `knowledge_base` (Attributes) Knowledge base flow node configuration (see [below for nested schema](#nestedatt--definition--nodes--configuration--knowledge_base))
@@ -139,6 +140,15 @@ Read-Only:
 - `expression` (String) Expression for a condition in a flow
 - `name` (String) Name of a condition in a flow
 
+
+
+<a id="nestedatt--definition--nodes--configuration--inline_code"></a>
+### Nested Schema for `definition.nodes.configuration.inline_code`
+
+Read-Only:
+
+- `code` (String) The inline code entered by customers. max size is 5MB.
+- `language` (String) Enum encodes the supported language type
 
 
 <a id="nestedatt--definition--nodes--configuration--knowledge_base"></a>
