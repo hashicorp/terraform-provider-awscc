@@ -467,7 +467,7 @@
         },
         "MaxTokens": {
           "type": "number",
-          "maximum": 4096,
+          "maximum": 512000,
           "minimum": 0,
           "description": "Maximum length of output"
         },

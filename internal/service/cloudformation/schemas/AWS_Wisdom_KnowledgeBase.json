@@ -34,7 +34,8 @@
         "EXTERNAL",
         "CUSTOM",
         "MESSAGE_TEMPLATES",
-        "MANAGED"
+        "MANAGED",
+        "QUICK_RESPONSES"
       ]
     },
     "RenderingConfiguration": {

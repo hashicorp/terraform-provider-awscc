@@ -289,8 +289,7 @@
     }
   },
   "createOnlyProperties": [
-    "/properties/Name",
-    "/properties/ManagedCertificateRequest"
+    "/properties/Name"
   ],
   "readOnlyProperties": [
     "/properties/Id",

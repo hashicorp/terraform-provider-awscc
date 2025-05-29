@@ -4,6 +4,7 @@
   "definitions": {
     "Tag": {
       "description": "A map of key and value pairs to use to tag your cluster.",
+      "type": "object",
       "properties": {
         "Key": {
           "type": "string",

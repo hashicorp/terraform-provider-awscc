@@ -3,6 +3,31 @@
   "description": "Definition of AWS::Bedrock::FlowAlias Resource Type",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-bedrock-flows",
   "definitions": {
+    "ConcurrencyType": {
+      "type": "string",
+      "enum": [
+        "Automatic",
+        "Manual"
+      ]
+    },
+    "FlowAliasConcurrencyConfiguration": {
+      "type": "object",
+      "properties": {
+        "Type": {
+          "$ref": "#/definitions/ConcurrencyType"
+        },
+        "MaxConcurrency": {
+          "type": "number",
+          "maximum": 100,
+          "minimum": 1,
+          "description": "Number of nodes executed concurrently at a time"
+        }
+      },
+      "required": [
+        "Type"
+      ],
+      "additionalProperties": false
+    },
     "FlowAliasRoutingConfigurationListItem": {
       "type": "object",
       "description": "Details about the routing configuration for a Flow alias.",
@@ -44,6 +69,9 @@
       "maxLength": 2048,
       "pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:flow/[0-9a-zA-Z]{10}$",
       "description": "Arn representation of the Flow"
+    },
+    "ConcurrencyConfiguration": {
+      "$ref": "#/definitions/FlowAliasConcurrencyConfiguration"
     },
     "CreatedAt": {
       "type": "string",

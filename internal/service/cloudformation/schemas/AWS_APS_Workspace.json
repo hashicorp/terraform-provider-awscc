@@ -118,6 +118,73 @@
         }
       },
       "additionalProperties": false
+    },
+    "CloudWatchLogDestination": {
+      "description": "Represents a cloudwatch logs destination for query logging",
+      "type": "object",
+      "properties": {
+        "LogGroupArn": {
+          "description": "The ARN of the CloudWatch Logs log group",
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 512
+        }
+      },
+      "required": [
+        "LogGroupArn"
+      ],
+      "additionalProperties": false
+    },
+    "LoggingFilter": {
+      "description": "Filters for logging",
+      "type": "object",
+      "properties": {
+        "QspThreshold": {
+          "description": "Query logs with QSP above this limit are vended",
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "QspThreshold"
+      ],
+      "additionalProperties": false
+    },
+    "LoggingDestination": {
+      "description": "Destinations for query logging",
+      "type": "object",
+      "properties": {
+        "CloudWatchLogs": {
+          "$ref": "#/definitions/CloudWatchLogDestination"
+        },
+        "Filters": {
+          "$ref": "#/definitions/LoggingFilter"
+        }
+      },
+      "required": [
+        "CloudWatchLogs",
+        "Filters"
+      ],
+      "additionalProperties": false
+    },
+    "QueryLoggingConfiguration": {
+      "description": "Query logging configuration",
+      "type": "object",
+      "properties": {
+        "Destinations": {
+          "description": "The destinations configuration for query logging",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LoggingDestination"
+          },
+          "minItems": 1,
+          "maxItems": 1
+        }
+      },
+      "required": [
+        "Destinations"
+      ],
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -154,6 +221,9 @@
     },
     "WorkspaceConfiguration": {
       "$ref": "#/definitions/WorkspaceConfiguration"
+    },
+    "QueryLoggingConfiguration": {
+      "$ref": "#/definitions/QueryLoggingConfiguration"
     },
     "KmsKeyArn": {
       "description": "KMS Key ARN used to encrypt and decrypt AMP workspace data.",
@@ -205,6 +275,7 @@
         "aps:CreateAlertManagerDefinition",
         "aps:DescribeAlertManagerDefinition",
         "aps:CreateLoggingConfiguration",
+        "aps:CreateQueryLoggingConfiguration",
         "aps:DescribeWorkspaceConfiguration",
         "aps:UpdateWorkspaceConfiguration",
         "logs:CreateLogDelivery",
@@ -222,6 +293,7 @@
         "aps:ListTagsForResource",
         "aps:DescribeAlertManagerDefinition",
         "aps:DescribeLoggingConfiguration",
+        "aps:DescribeQueryLoggingConfiguration",
         "aps:DescribeWorkspaceConfiguration"
       ]
     },
@@ -241,6 +313,10 @@
         "aps:DeleteLoggingConfiguration",
         "aps:DescribeWorkspaceConfiguration",
         "aps:UpdateWorkspaceConfiguration",
+        "aps:CreateQueryLoggingConfiguration",
+        "aps:UpdateQueryLoggingConfiguration",
+        "aps:DeleteQueryLoggingConfiguration",
+        "aps:DescribeQueryLoggingConfiguration",
         "logs:CreateLogDelivery",
         "logs:GetLogDelivery",
         "logs:UpdateLogDelivery",
@@ -255,6 +331,7 @@
         "aps:DescribeWorkspace",
         "aps:DeleteAlertManagerDefinition",
         "aps:DeleteLoggingConfiguration",
+        "aps:DeleteQueryLoggingConfiguration",
         "logs:DeleteLogDelivery"
       ]
     },

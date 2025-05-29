@@ -30,6 +30,34 @@
       ],
       "additionalProperties": false
     },
+    "IngressAddressListEmailAttribute": {
+      "type": "string",
+      "enum": [
+        "RECIPIENT"
+      ]
+    },
+    "IngressIsInAddressList": {
+      "type": "object",
+      "properties": {
+        "Attribute": {
+          "$ref": "#/definitions/IngressAddressListEmailAttribute"
+        },
+        "AddressLists": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 1,
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "AddressLists",
+        "Attribute"
+      ],
+      "additionalProperties": false
+    },
     "IngressBooleanExpression": {
       "type": "object",
       "properties": {
@@ -65,6 +93,19 @@
           },
           "required": [
             "Analysis"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "IsInAddressList",
+          "properties": {
+            "IsInAddressList": {
+              "$ref": "#/definitions/IngressIsInAddressList"
+            }
+          },
+          "required": [
+            "IsInAddressList"
           ],
           "additionalProperties": false
         }

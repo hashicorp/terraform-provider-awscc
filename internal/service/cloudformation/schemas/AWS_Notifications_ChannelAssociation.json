@@ -1,6 +1,6 @@
 {
   "typeName": "AWS::Notifications::ChannelAssociation",
-  "description": "Definition of AWS::Notifications::ChannelAssociation Resource Type",
+  "description": "Resource Type definition for AWS::Notifications::ChannelAssociation",
   "properties": {
     "Arn": {
       "type": "string",
