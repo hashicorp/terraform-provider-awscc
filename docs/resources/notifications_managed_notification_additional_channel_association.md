@@ -3,12 +3,12 @@
 page_title: "awscc_notifications_managed_notification_additional_channel_association Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Definition of AWS::Notifications::ManagedNotificationAdditionalChannelAssociation Resource Type
+  Resource Type definition for AWS::Notifications::ManagedNotificationAdditionalChannelAssociation
 ---
 
 # awscc_notifications_managed_notification_additional_channel_association (Resource)
 
-Definition of AWS::Notifications::ManagedNotificationAdditionalChannelAssociation Resource Type
+Resource Type definition for AWS::Notifications::ManagedNotificationAdditionalChannelAssociation
 
 ## Example Usage
 

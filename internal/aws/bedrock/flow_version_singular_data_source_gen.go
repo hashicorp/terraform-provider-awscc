@@ -212,6 +212,29 @@ func flowVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                ],
 		//	                "type": "object"
 		//	              },
+		//	              "InlineCode": {
+		//	                "additionalProperties": false,
+		//	                "description": "Inline code config strucuture, contains code configs",
+		//	                "properties": {
+		//	                  "Code": {
+		//	                    "description": "The inline code entered by customers. max size is 5MB.",
+		//	                    "maxLength": 5000000,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Language": {
+		//	                    "description": "Enum encodes the supported language type",
+		//	                    "enum": [
+		//	                      "Python_3"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Code",
+		//	                  "Language"
+		//	                ],
+		//	                "type": "object"
+		//	              },
 		//	              "Input": {
 		//	                "additionalProperties": false,
 		//	                "description": "Input flow node configuration",
@@ -621,7 +644,8 @@ func flowVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "Iterator",
 		//	              "Collector",
 		//	              "Storage",
-		//	              "Retrieval"
+		//	              "Retrieval",
+		//	              "InlineCode"
 		//	            ],
 		//	            "type": "string"
 		//	          }
@@ -754,6 +778,23 @@ func flowVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "Condition flow node configuration",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: InlineCode
+									"inline_code": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Code
+											"code": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The inline code entered by customers. max size is 5MB.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Language
+											"language": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Enum encodes the supported language type",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Inline code config strucuture, contains code configs",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: Input
@@ -1195,6 +1236,7 @@ func flowVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"agent_alias_arn":             "AgentAliasArn",
 		"bot_alias_arn":               "BotAliasArn",
 		"bucket_name":                 "BucketName",
+		"code":                        "Code",
 		"collector":                   "Collector",
 		"condition":                   "Condition",
 		"conditional":                 "Conditional",
@@ -1215,6 +1257,7 @@ func flowVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"guardrail_version":           "GuardrailVersion",
 		"inference_configuration":     "InferenceConfiguration",
 		"inline":                      "Inline",
+		"inline_code":                 "InlineCode",
 		"input":                       "Input",
 		"input_variables":             "InputVariables",
 		"inputs":                      "Inputs",
@@ -1223,6 +1266,7 @@ func flowVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"knowledge_base_id":           "KnowledgeBaseId",
 		"lambda_arn":                  "LambdaArn",
 		"lambda_function":             "LambdaFunction",
+		"language":                    "Language",
 		"lex":                         "Lex",
 		"locale_id":                   "LocaleId",
 		"max_tokens":                  "MaxTokens",

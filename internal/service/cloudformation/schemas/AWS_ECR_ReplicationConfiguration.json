@@ -37,7 +37,7 @@
         "Destinations": {
           "type": "array",
           "minItems": 1,
-          "maxItems": 25,
+          "maxItems": 100,
           "items": {
             "$ref": "#/definitions/ReplicationDestination"
           },

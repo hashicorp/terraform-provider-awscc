@@ -75,7 +75,7 @@ func channelAssociationResource(ctx context.Context) (resource.Resource, error) 
 	}
 
 	schema := schema.Schema{
-		Description: "Definition of AWS::Notifications::ChannelAssociation Resource Type",
+		Description: "Resource Type definition for AWS::Notifications::ChannelAssociation",
 		Version:     1,
 		Attributes:  attributes,
 	}

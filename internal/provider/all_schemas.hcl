@@ -1359,13 +1359,7 @@ resource_schema "aws_dms_replication_config" {
 }
 
 resource_schema "aws_dsql_cluster" {
-  cloudformation_type_name                 = "AWS::DSQL::Cluster"
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
-
-  # Suppression Reason: Tags is of unsupported type: list of
-  # https://github.com/hashicorp/terraform-provider-awscc/issues/2272
+  cloudformation_type_name = "AWS::DSQL::Cluster"
 }
 
 resource_schema "aws_databrew_dataset" {
@@ -1516,6 +1510,10 @@ resource_schema "aws_datazone_project" {
 resource_schema "aws_datazone_project_membership" {
   cloudformation_type_name               = "AWS::DataZone::ProjectMembership"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_datazone_project_profile" {
+  cloudformation_type_name = "AWS::DataZone::ProjectProfile"
 }
 
 resource_schema "aws_datazone_subscription_target" {
@@ -4405,6 +4403,10 @@ resource_schema "aws_route53resolver_resolver_config" {
 
 resource_schema "aws_route53resolver_resolver_dnssec_config" {
   cloudformation_type_name = "AWS::Route53Resolver::ResolverDNSSECConfig"
+}
+
+resource_schema "aws_route53resolver_resolver_endpoint" {
+  cloudformation_type_name = "AWS::Route53Resolver::ResolverEndpoint"
 }
 
 resource_schema "aws_route53resolver_resolver_query_logging_config" {

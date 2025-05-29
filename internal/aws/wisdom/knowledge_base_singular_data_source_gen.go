@@ -62,7 +62,8 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	    "EXTERNAL",
 		//	    "CUSTOM",
 		//	    "MESSAGE_TEMPLATES",
-		//	    "MANAGED"
+		//	    "MANAGED",
+		//	    "QUICK_RESPONSES"
 		//	  ],
 		//	  "type": "string"
 		//	}

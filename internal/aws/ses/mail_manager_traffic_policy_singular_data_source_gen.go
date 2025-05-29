@@ -87,6 +87,31 @@ func mailManagerTrafficPolicyDataSource(ctx context.Context) (datasource.DataSou
 		//	                        "ResultField"
 		//	                      ],
 		//	                      "type": "object"
+		//	                    },
+		//	                    "IsInAddressList": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "AddressLists": {
+		//	                          "items": {
+		//	                            "type": "string"
+		//	                          },
+		//	                          "maxItems": 1,
+		//	                          "minItems": 1,
+		//	                          "type": "array",
+		//	                          "uniqueItems": true
+		//	                        },
+		//	                        "Attribute": {
+		//	                          "enum": [
+		//	                            "RECIPIENT"
+		//	                          ],
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "AddressLists",
+		//	                        "Attribute"
+		//	                      ],
+		//	                      "type": "object"
 		//	                    }
 		//	                  },
 		//	                  "type": "object"
@@ -318,6 +343,21 @@ func mailManagerTrafficPolicyDataSource(ctx context.Context) (datasource.DataSou
 													}, /*END SCHEMA*/
 													Computed: true,
 												}, /*END ATTRIBUTE*/
+												// Property: IsInAddressList
+												"is_in_address_list": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: AddressLists
+														"address_lists": schema.ListAttribute{ /*START ATTRIBUTE*/
+															ElementType: types.StringType,
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: Attribute
+														"attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 											Computed: true,
 										}, /*END ATTRIBUTE*/
@@ -544,6 +584,7 @@ func mailManagerTrafficPolicyDataSource(ctx context.Context) (datasource.DataSou
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"action":                 "Action",
+		"address_lists":          "AddressLists",
 		"analysis":               "Analysis",
 		"analyzer":               "Analyzer",
 		"attribute":              "Attribute",
@@ -553,6 +594,7 @@ func mailManagerTrafficPolicyDataSource(ctx context.Context) (datasource.DataSou
 		"evaluate":               "Evaluate",
 		"ip_expression":          "IpExpression",
 		"ipv_6_expression":       "Ipv6Expression",
+		"is_in_address_list":     "IsInAddressList",
 		"key":                    "Key",
 		"max_message_size_bytes": "MaxMessageSizeBytes",
 		"operator":               "Operator",

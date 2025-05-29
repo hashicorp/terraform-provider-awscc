@@ -40,6 +40,7 @@ resource "awscc_bedrock_flow_version" "example" {
 
 ### Optional
 
+- `concurrency_configuration` (Attributes) (see [below for nested schema](#nestedatt--concurrency_configuration))
 - `description` (String) Description of the Resource.
 - `tags` (Map of String) A map of tag keys and values
 
@@ -58,6 +59,15 @@ resource "awscc_bedrock_flow_version" "example" {
 Optional:
 
 - `flow_version` (String) Version.
+
+
+<a id="nestedatt--concurrency_configuration"></a>
+### Nested Schema for `concurrency_configuration`
+
+Optional:
+
+- `max_concurrency` (Number) Number of nodes executed concurrently at a time
+- `type` (String)
 
 ## Import
 

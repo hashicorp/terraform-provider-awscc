@@ -197,9 +197,6 @@
     "/properties/Tags",
     "/properties/ResourceSpec"
   ],
-  "writeOnlyProperties": [
-    "/properties/Tags"
-  ],
   "primaryIdentifier": [
     "/properties/AppName",
     "/properties/AppType",
@@ -214,25 +211,43 @@
     "create": {
       "permissions": [
         "sagemaker:CreateApp",
-        "sagemaker:DescribeApp"
+        "sagemaker:DescribeApp",
+        "sagemaker:AddTags",
+        "sagemaker:ListTags"
       ]
     },
     "read": {
       "permissions": [
         "sagemaker:DescribeApp",
-        "sagemaker:DescribeApp"
+        "sagemaker:DescribeApp",
+        "sagemaker:ListTags"
       ]
     },
     "delete": {
       "permissions": [
         "sagemaker:DeleteApp",
-        "sagemaker:DescribeApp"
+        "sagemaker:DescribeApp",
+        "sagemaker:DeleteTags",
+        "sagemaker:ListTags"
       ]
     },
     "list": {
       "permissions": [
-        "sagemaker:ListApps"
+        "sagemaker:ListApps",
+        "sagemaker:ListTags"
       ]
     }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "sagemaker:AddTags",
+      "sagemaker:ListTags",
+      "sagemaker:DeleteTags"
+    ]
   }
 }

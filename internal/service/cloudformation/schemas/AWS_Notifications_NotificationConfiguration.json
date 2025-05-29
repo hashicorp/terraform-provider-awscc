@@ -1,6 +1,6 @@
 {
   "typeName": "AWS::Notifications::NotificationConfiguration",
-  "description": "Definition of AWS::Notifications::NotificationConfiguration Resource Type",
+  "description": "Resource Type definition for AWS::Notifications::NotificationConfiguration",
   "definitions": {
     "AggregationDuration": {
       "type": "string",

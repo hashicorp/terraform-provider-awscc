@@ -63,7 +63,8 @@
   "handlers": {
     "create": {
       "permissions": [
-        "lakeformation:CreateLFTag"
+        "lakeformation:CreateLFTag",
+        "lakeformation:GetLFTag"
       ]
     },
     "read": {
@@ -73,7 +74,8 @@
     },
     "update": {
       "permissions": [
-        "lakeformation:UpdateLFTag"
+        "lakeformation:UpdateLFTag",
+        "lakeformation:GetLFTag"
       ]
     },
     "delete": {

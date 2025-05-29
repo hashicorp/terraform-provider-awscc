@@ -389,7 +389,8 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "enum": [
 		//	    "CMAC",
 		//	    "ANSI_X9_24",
-		//	    "HMAC"
+		//	    "HMAC",
+		//	    "SHA_1"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -401,6 +402,7 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 					"CMAC",
 					"ANSI_X9_24",
 					"HMAC",
+					"SHA_1",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

@@ -1,6 +1,6 @@
 {
   "typeName": "AWS::Notifications::ManagedNotificationAccountContactAssociation",
-  "description": "This resource schema represents the ManagedNotificationAccountContactAssociation resource in the AWS User Notifications.",
+  "description": "Resource Type definition for ManagedNotificationAccountContactAssociation",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
   "definitions": {
     "ManagedNotificationConfigurationArn": {

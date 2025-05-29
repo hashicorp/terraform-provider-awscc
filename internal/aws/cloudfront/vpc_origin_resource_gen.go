@@ -200,7 +200,7 @@ func vpcOriginResource(ctx context.Context) (resource.Resource, error) {
 		//	        "TLSv1",
 		//	        "SSLv3"
 		//	      ],
-		//	      "description": "",
+		//	      "description": "Specifies the minimum SSL/TLS protocol that CloudFront uses when connecting to your origin over HTTPS. Valid values include ``SSLv3``, ``TLSv1``, ``TLSv1.1``, and ``TLSv1.2``.\n For more information, see [Minimum Origin SSL Protocol](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginSSLProtocols) in the *Amazon CloudFront Developer Guide*.",
 		//	      "items": {
 		//	        "type": "string"
 		//	      },
@@ -259,7 +259,7 @@ func vpcOriginResource(ctx context.Context) (resource.Resource, error) {
 				// Property: OriginSSLProtocols
 				"origin_ssl_protocols": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "",
+					Description: "Specifies the minimum SSL/TLS protocol that CloudFront uses when connecting to your origin over HTTPS. Valid values include ``SSLv3``, ``TLSv1``, ``TLSv1.1``, and ``TLSv1.2``.\n For more information, see [Minimum Origin SSL Protocol](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginSSLProtocols) in the *Amazon CloudFront Developer Guide*.",
 					Optional:    true,
 					Computed:    true,
 					Default: defaults.StaticListOfString(

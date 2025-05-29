@@ -249,7 +249,7 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 		//	            "properties": {
 		//	              "MaxTokens": {
 		//	                "description": "Maximum length of output",
-		//	                "maximum": 4096,
+		//	                "maximum": 512000,
 		//	                "minimum": 0,
 		//	                "type": "number"
 		//	              },
@@ -716,7 +716,7 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.Float64{ /*START VALIDATORS*/
-											float64validator.Between(0.000000, 4096.000000),
+											float64validator.Between(0.000000, 512000.000000),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 											float64planmodifier.UseStateForUnknown(),

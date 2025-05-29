@@ -117,7 +117,7 @@ func notificationHubResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Definition of AWS::Notifications::NotificationHub Resource Type",
+		Description: "Resource Type definition for AWS::Notifications::NotificationHub",
 		Version:     1,
 		Attributes:  attributes,
 	}

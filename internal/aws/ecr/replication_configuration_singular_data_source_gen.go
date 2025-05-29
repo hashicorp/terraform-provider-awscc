@@ -69,7 +69,7 @@ func replicationConfigurationDataSource(ctx context.Context) (datasource.DataSou
 		//	              ],
 		//	              "type": "object"
 		//	            },
-		//	            "maxItems": 25,
+		//	            "maxItems": 100,
 		//	            "minItems": 1,
 		//	            "type": "array"
 		//	          },

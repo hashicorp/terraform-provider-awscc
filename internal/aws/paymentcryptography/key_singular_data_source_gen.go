@@ -250,7 +250,8 @@ func keyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "enum": [
 		//	    "CMAC",
 		//	    "ANSI_X9_24",
-		//	    "HMAC"
+		//	    "HMAC",
+		//	    "SHA_1"
 		//	  ],
 		//	  "type": "string"
 		//	}

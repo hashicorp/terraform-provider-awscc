@@ -1,0 +1,1 @@
+$ terraform import awscc_dsql_cluster.example "identifier"

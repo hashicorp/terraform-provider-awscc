@@ -3,12 +3,12 @@
 page_title: "awscc_lakeformation_principal_permissions Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  The AWS::LakeFormation::PrincipalPermissions resource represents the permissions that a principal has on a GLUDC resource (such as GLUlong databases or GLUlong tables). When you create a PrincipalPermissions resource, the permissions are granted via the LFlong GrantPermissions API operation. When you delete a PrincipalPermissions resource, the permissions on principal-resource pair are revoked via the LFlong RevokePermissions API operation.
+  The AWS::LakeFormation::PrincipalPermissions resource represents the permissions that a principal has on a GLUDC resource (such as GLUlong databases or GLUlong tables). When you create a PrincipalPermissions resource, the permissions are granted via the LFlongGrantPermissions API operation. When you delete a PrincipalPermissions resource, the permissions on principal-resource pair are revoked via the LFlongRevokePermissions API operation.
 ---
 
 # awscc_lakeformation_principal_permissions (Resource)
 
-The ``AWS::LakeFormation::PrincipalPermissions`` resource represents the permissions that a principal has on a GLUDC resource (such as GLUlong databases or GLUlong tables). When you create a ``PrincipalPermissions`` resource, the permissions are granted via the LFlong ``GrantPermissions`` API operation. When you delete a ``PrincipalPermissions`` resource, the permissions on principal-resource pair are revoked via the LFlong ``RevokePermissions`` API operation.
+The ``AWS::LakeFormation::PrincipalPermissions`` resource represents the permissions that a principal has on a GLUDC resource (such as GLUlong databases or GLUlong tables). When you create a ``PrincipalPermissions`` resource, the permissions are granted via the LFlong``GrantPermissions`` API operation. When you delete a ``PrincipalPermissions`` resource, the permissions on principal-resource pair are revoked via the LFlong``RevokePermissions`` API operation.
 
 
 

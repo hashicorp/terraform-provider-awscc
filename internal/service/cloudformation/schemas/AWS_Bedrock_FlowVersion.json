@@ -376,6 +376,19 @@
             "Collector"
           ],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "InlineCode",
+          "properties": {
+            "InlineCode": {
+              "$ref": "#/definitions/InlineCodeFlowNodeConfiguration"
+            }
+          },
+          "required": [
+            "InlineCode"
+          ],
+          "additionalProperties": false
         }
       ]
     },
@@ -473,7 +486,8 @@
         "Iterator",
         "Collector",
         "Storage",
-        "Retrieval"
+        "Retrieval",
+        "InlineCode"
       ]
     },
     "FlowStatus": {
@@ -605,6 +619,32 @@
         "ServiceConfiguration"
       ],
       "additionalProperties": false
+    },
+    "InlineCodeFlowNodeConfiguration": {
+      "type": "object",
+      "description": "Inline code config strucuture, contains code configs",
+      "properties": {
+        "Code": {
+          "type": "string",
+          "maxLength": 5000000,
+          "description": "The inline code entered by customers. max size is 5MB."
+        },
+        "Language": {
+          "$ref": "#/definitions/SupportedLanguages"
+        }
+      },
+      "required": [
+        "Code",
+        "Language"
+      ],
+      "additionalProperties": false
+    },
+    "SupportedLanguages": {
+      "type": "string",
+      "description": "Enum encodes the supported language type",
+      "enum": [
+        "Python_3"
+      ]
     },
     "PromptFlowNodeInlineConfiguration": {
       "type": "object",

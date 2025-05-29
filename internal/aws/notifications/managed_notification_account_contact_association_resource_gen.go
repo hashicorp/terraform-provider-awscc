@@ -85,7 +85,7 @@ func managedNotificationAccountContactAssociationResource(ctx context.Context) (
 	}
 
 	schema := schema.Schema{
-		Description: "This resource schema represents the ManagedNotificationAccountContactAssociation resource in the AWS User Notifications.",
+		Description: "Resource Type definition for ManagedNotificationAccountContactAssociation",
 		Version:     1,
 		Attributes:  attributes,
 	}

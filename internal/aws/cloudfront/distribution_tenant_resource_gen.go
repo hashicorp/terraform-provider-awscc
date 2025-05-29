@@ -454,7 +454,6 @@ func distributionTenantResource(ctx context.Context) (resource.Resource, error) 
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// ManagedCertificateRequest is a write-only property.
 		}, /*END ATTRIBUTE*/

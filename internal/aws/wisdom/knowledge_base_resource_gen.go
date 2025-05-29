@@ -88,7 +88,8 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		//	    "EXTERNAL",
 		//	    "CUSTOM",
 		//	    "MESSAGE_TEMPLATES",
-		//	    "MANAGED"
+		//	    "MANAGED",
+		//	    "QUICK_RESPONSES"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -100,6 +101,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 					"CUSTOM",
 					"MESSAGE_TEMPLATES",
 					"MANAGED",
+					"QUICK_RESPONSES",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

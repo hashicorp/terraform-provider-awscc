@@ -1,6 +1,6 @@
 {
   "typeName": "AWS::Notifications::EventRule",
-  "description": "Definition of AWS::Notifications::EventRule Resource Type",
+  "description": "Resource Type definition for AWS::Notifications::EventRule",
   "definitions": {
     "EventRuleStatus": {
       "type": "string",

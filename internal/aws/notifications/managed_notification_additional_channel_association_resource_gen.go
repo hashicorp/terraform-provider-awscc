@@ -75,7 +75,7 @@ func managedNotificationAdditionalChannelAssociationResource(ctx context.Context
 	}
 
 	schema := schema.Schema{
-		Description: "Definition of AWS::Notifications::ManagedNotificationAdditionalChannelAssociation Resource Type",
+		Description: "Resource Type definition for AWS::Notifications::ManagedNotificationAdditionalChannelAssociation",
 		Version:     1,
 		Attributes:  attributes,
 	}

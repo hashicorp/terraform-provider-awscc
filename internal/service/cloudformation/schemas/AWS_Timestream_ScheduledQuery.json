@@ -491,7 +491,6 @@
     "/properties/QueryString",
     "/properties/ScheduleConfiguration",
     "/properties/NotificationConfiguration",
-    "/properties/ClientToken",
     "/properties/ScheduledQueryExecutionRoleArn",
     "/properties/TargetConfiguration",
     "/properties/ErrorReportConfiguration",
@@ -507,6 +506,9 @@
     "/properties/SQTargetConfiguration",
     "/properties/SQErrorReportConfiguration",
     "/properties/SQKmsKeyId"
+  ],
+  "writeOnlyProperties": [
+    "/properties/ClientToken"
   ],
   "tagging": {
     "taggable": true,
@@ -524,14 +526,20 @@
     "create": {
       "permissions": [
         "timestream:CreateScheduledQuery",
-        "timestream:DescribeEndpoints"
+        "timestream:DescribeEndpoints",
+        "timestream:TagResource",
+        "iam:PassRole",
+        "kms:DescribeKey",
+        "kms:GenerateDataKey"
       ]
     },
     "read": {
       "permissions": [
         "timestream:DescribeScheduledQuery",
         "timestream:ListTagsForResource",
-        "timestream:DescribeEndpoints"
+        "timestream:DescribeEndpoints",
+        "kms:GenerateDataKey",
+        "kms:Decrypt"
       ]
     },
     "update": {
@@ -545,6 +553,7 @@
     "delete": {
       "permissions": [
         "timestream:DeleteScheduledQuery",
+        "timestream:DescribeScheduledQuery",
         "timestream:DescribeEndpoints"
       ]
     },

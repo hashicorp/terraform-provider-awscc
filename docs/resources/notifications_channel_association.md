@@ -3,12 +3,12 @@
 page_title: "awscc_notifications_channel_association Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Definition of AWS::Notifications::ChannelAssociation Resource Type
+  Resource Type definition for AWS::Notifications::ChannelAssociation
 ---
 
 # awscc_notifications_channel_association (Resource)
 
-Definition of AWS::Notifications::ChannelAssociation Resource Type
+Resource Type definition for AWS::Notifications::ChannelAssociation
 
 
 

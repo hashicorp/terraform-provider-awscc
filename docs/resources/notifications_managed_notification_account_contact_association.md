@@ -3,12 +3,12 @@
 page_title: "awscc_notifications_managed_notification_account_contact_association Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  This resource schema represents the ManagedNotificationAccountContactAssociation resource in the AWS User Notifications.
+  Resource Type definition for ManagedNotificationAccountContactAssociation
 ---
 
 # awscc_notifications_managed_notification_account_contact_association (Resource)
 
-This resource schema represents the ManagedNotificationAccountContactAssociation resource in the AWS User Notifications.
+Resource Type definition for ManagedNotificationAccountContactAssociation
 
 
 
