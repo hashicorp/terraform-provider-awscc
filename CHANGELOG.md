@@ -1,3 +1,14 @@
+## 1.43.0 (May 29, 2025)
+
+FEATURES:
+
+* **New Data Source:** `awscc_datazone_project_profile`
+* **New Data Source:** `awscc_datazone_project_profiles`
+* **New Data Source:** `awscc_route53resolver_resolver_endpoint`
+* **New Data Source:** `awscc_route53resolver_resolver_endpoints`
+* **New Resource:** `awscc_datazone_project_profile`
+* **New Resource:** `awscc_route53resolver_resolver_endpoint`
+
 ## 1.42.0 (May 22, 2025)
 
 FEATURES:
