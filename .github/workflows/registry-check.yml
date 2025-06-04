@@ -16,6 +16,9 @@ defaults:
   run:
     shell: bash
 
+permissions:
+  contents: read
+
 jobs:
   registry-check:
     name: Check Terraform Registry for Latest Version
