@@ -583,6 +583,10 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "Type"
 		//	          ],
 		//	          "type": "object"
+		//	        },
+		//	        "StorageProfileId": {
+		//	          "pattern": "^sp-[0-9a-f]{32}$",
+		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "required": [
@@ -880,6 +884,10 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 									Computed: true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: StorageProfileId
+						"storage_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/

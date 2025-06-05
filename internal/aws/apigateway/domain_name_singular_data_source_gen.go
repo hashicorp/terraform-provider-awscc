@@ -194,6 +194,23 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: RoutingMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": "BASE_PATH_MAPPING_ONLY",
+		//	  "description": "",
+		//	  "enum": [
+		//	    "BASE_PATH_MAPPING_ONLY",
+		//	    "ROUTING_RULE_THEN_BASE_PATH_MAPPING",
+		//	    "ROUTING_RULE_ONLY"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"routing_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SecurityPolicy
 		// CloudFormation resource type schema:
 		//
@@ -271,6 +288,7 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"regional_certificate_arn":               "RegionalCertificateArn",
 		"regional_domain_name":                   "RegionalDomainName",
 		"regional_hosted_zone_id":                "RegionalHostedZoneId",
+		"routing_mode":                           "RoutingMode",
 		"security_policy":                        "SecurityPolicy",
 		"tags":                                   "Tags",
 		"truststore_uri":                         "TruststoreUri",

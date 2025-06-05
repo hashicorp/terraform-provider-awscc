@@ -23,47 +23,6 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::DataZone::ProjectProfile resource.
 func projectProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
-		// Property: AllowedDesignations
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "items": {
-		//	    "additionalProperties": false,
-		//	    "properties": {
-		//	      "DesignationId": {
-		//	        "maxLength": 36,
-		//	        "minLength": 1,
-		//	        "pattern": "^[a-zA-Z0-9_-]+$",
-		//	        "type": "string"
-		//	      }
-		//	    },
-		//	    "required": [
-		//	      "DesignationId"
-		//	    ],
-		//	    "type": "object"
-		//	  },
-		//	  "type": "array"
-		//	}
-		"allowed_designations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: DesignationId
-					"designation_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
-		// Property: ChangeLog
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "type": "string"
-		//	}
-		"change_log": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -181,45 +140,6 @@ func projectProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
-		// Property: ProjectScopes
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "items": {
-		//	    "additionalProperties": false,
-		//	    "properties": {
-		//	      "Name": {
-		//	        "maxLength": 64,
-		//	        "minLength": 1,
-		//	        "pattern": "^[\\w -]+$",
-		//	        "type": "string"
-		//	      },
-		//	      "Policy": {
-		//	        "type": "string"
-		//	      }
-		//	    },
-		//	    "required": [
-		//	      "Name"
-		//	    ],
-		//	    "type": "object"
-		//	  },
-		//	  "type": "array"
-		//	}
-		"project_scopes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Name
-					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Policy
-					"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -250,12 +170,9 @@ func projectProfileDataSource(ctx context.Context) (datasource.DataSource, error
 	opts = opts.WithCloudFormationTypeName("AWS::DataZone::ProjectProfile").WithTerraformTypeName("awscc_datazone_project_profile")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"allowed_designations":   "AllowedDesignations",
-		"change_log":             "ChangeLog",
 		"created_at":             "CreatedAt",
 		"created_by":             "CreatedBy",
 		"description":            "Description",
-		"designation_id":         "DesignationId",
 		"domain_id":              "DomainId",
 		"domain_identifier":      "DomainIdentifier",
 		"domain_unit_id":         "DomainUnitId",
@@ -263,9 +180,7 @@ func projectProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		"identifier":             "Identifier",
 		"last_updated_at":        "LastUpdatedAt",
 		"name":                   "Name",
-		"policy":                 "Policy",
 		"project_profile_id":     "Id",
-		"project_scopes":         "ProjectScopes",
 		"status":                 "Status",
 	})
 
