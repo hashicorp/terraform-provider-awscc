@@ -565,8 +565,8 @@ func apiResource(ctx context.Context) (resource.Resource, error) {
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/BasePath",
 		"/properties/Body",
+		"/properties/BasePath",
 		"/properties/BodyS3Location",
 		"/properties/BodyS3Location/Etag",
 		"/properties/BodyS3Location/Bucket",

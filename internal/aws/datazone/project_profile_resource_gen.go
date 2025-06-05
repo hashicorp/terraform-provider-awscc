@@ -13,13 +13,11 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -30,66 +28,6 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::DataZone::ProjectProfile resource.
 func projectProfileResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
-		// Property: AllowedDesignations
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "items": {
-		//	    "additionalProperties": false,
-		//	    "properties": {
-		//	      "DesignationId": {
-		//	        "maxLength": 36,
-		//	        "minLength": 1,
-		//	        "pattern": "^[a-zA-Z0-9_-]+$",
-		//	        "type": "string"
-		//	      }
-		//	    },
-		//	    "required": [
-		//	      "DesignationId"
-		//	    ],
-		//	    "type": "object"
-		//	  },
-		//	  "type": "array"
-		//	}
-		"allowed_designations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: DesignationId
-					"designation_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 36),
-							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// AllowedDesignations is a write-only property.
-		}, /*END ATTRIBUTE*/
-		// Property: ChangeLog
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "type": "string"
-		//	}
-		"change_log": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// ChangeLog is a write-only property.
-		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -256,63 +194,6 @@ func projectProfileResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.RegexMatches(regexp.MustCompile("^[\\w -]+$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
-		// Property: ProjectScopes
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "items": {
-		//	    "additionalProperties": false,
-		//	    "properties": {
-		//	      "Name": {
-		//	        "maxLength": 64,
-		//	        "minLength": 1,
-		//	        "pattern": "^[\\w -]+$",
-		//	        "type": "string"
-		//	      },
-		//	      "Policy": {
-		//	        "type": "string"
-		//	      }
-		//	    },
-		//	    "required": [
-		//	      "Name"
-		//	    ],
-		//	    "type": "object"
-		//	  },
-		//	  "type": "array"
-		//	}
-		"project_scopes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Name
-					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 64),
-							stringvalidator.RegexMatches(regexp.MustCompile("^[\\w -]+$"), ""),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Policy
-					"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// ProjectScopes is a write-only property.
-		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -358,12 +239,9 @@ func projectProfileResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::DataZone::ProjectProfile").WithTerraformTypeName("awscc_datazone_project_profile")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"allowed_designations":   "AllowedDesignations",
-		"change_log":             "ChangeLog",
 		"created_at":             "CreatedAt",
 		"created_by":             "CreatedBy",
 		"description":            "Description",
-		"designation_id":         "DesignationId",
 		"domain_id":              "DomainId",
 		"domain_identifier":      "DomainIdentifier",
 		"domain_unit_id":         "DomainUnitId",
@@ -371,17 +249,12 @@ func projectProfileResource(ctx context.Context) (resource.Resource, error) {
 		"identifier":             "Identifier",
 		"last_updated_at":        "LastUpdatedAt",
 		"name":                   "Name",
-		"policy":                 "Policy",
 		"project_profile_id":     "Id",
-		"project_scopes":         "ProjectScopes",
 		"status":                 "Status",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/DomainUnitIdentifier",
-		"/properties/AllowedDesignations",
-		"/properties/ProjectScopes",
-		"/properties/ChangeLog",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

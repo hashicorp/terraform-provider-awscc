@@ -605,6 +605,10 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		//	            "Type"
 		//	          ],
 		//	          "type": "object"
+		//	        },
+		//	        "StorageProfileId": {
+		//	          "pattern": "^sp-[0-9a-f]{32}$",
+		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "required": [
@@ -1354,6 +1358,17 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: StorageProfileId
+						"storage_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^sp-[0-9a-f]{32}$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
