@@ -58,6 +58,26 @@
     "VpcEndpointServiceName": {
       "description": "The VPC endpoint service name.",
       "type": "string"
+    },
+    "MultiRegionProperties": {
+      "description": "The Multi-region properties associated to this cluster.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "WitnessRegion": {
+          "description": "The witness region in a multi-region cluster.",
+          "type": "string"
+        },
+        "Clusters": {
+          "type": "array",
+          "items": {
+            "description": "The cluster Amazon Resource Name (ARN) in a multi-region cluster.",
+            "type": "string"
+          },
+          "uniqueItems": true,
+          "insertionOrder": false
+        }
+      }
     }
   },
   "additionalProperties": false,
@@ -92,7 +112,10 @@
         "dsql:TagResource",
         "dsql:GetVpcEndpointServiceName",
         "dsql:ListTagsForResource",
-        "iam:CreateServiceLinkedRole"
+        "iam:CreateServiceLinkedRole",
+        "dsql:PutMultiRegionProperties",
+        "dsql:AddPeerCluster",
+        "dsql:PutWitnessRegion"
       ]
     },
     "read": {
@@ -111,7 +134,11 @@
         "dsql:UntagResource",
         "dsql:TagResource",
         "dsql:GetVpcEndpointServiceName",
-        "dsql:ListTagsForResource"
+        "dsql:ListTagsForResource",
+        "dsql:PutMultiRegionProperties",
+        "dsql:PutWitnessRegion",
+        "dsql:AddPeerCluster",
+        "dsql:RemovePeerCluster"
       ]
     },
     "delete": {

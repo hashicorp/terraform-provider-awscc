@@ -1310,11 +1310,6 @@
         "path": "./examples/resources/awscc_customerprofiles_domain/import.sh"
     },
     {
-        "resource": "awscc_customerprofiles_event_stream",
-        "identifier": ["DomainName","EventStreamName"],
-        "path": "./examples/resources/awscc_customerprofiles_event_stream/import.sh"
-    },
-    {
         "resource": "awscc_customerprofiles_event_trigger",
         "identifier": ["DomainName","EventTriggerName"],
         "path": "./examples/resources/awscc_customerprofiles_event_trigger/import.sh"

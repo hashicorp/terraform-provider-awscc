@@ -217,6 +217,7 @@
         "iotfleetwise:GetVehicle",
         "iotfleetwise:CreateVehicle",
         "iot:CreateThing",
+        "iot:DeleteThing",
         "iot:DescribeThing",
         "iotfleetwise:ListTagsForResource",
         "iotfleetwise:ListVehicles",

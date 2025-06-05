@@ -373,6 +373,10 @@
         },
         "InstanceMarketOptions": {
           "$ref": "#/definitions/ServiceManagedEc2InstanceMarketOptions"
+        },
+        "StorageProfileId": {
+          "type": "string",
+          "pattern": "^sp-[0-9a-f]{32}$"
         }
       },
       "required": [

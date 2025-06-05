@@ -411,6 +411,45 @@
             "InlineCode"
           ],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "Loop",
+          "properties": {
+            "Loop": {
+              "$ref": "#/definitions/LoopFlowNodeConfiguration"
+            }
+          },
+          "required": [
+            "Loop"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "LoopInput",
+          "properties": {
+            "LoopInput": {
+              "$ref": "#/definitions/LoopInputFlowNodeConfiguration"
+            }
+          },
+          "required": [
+            "LoopInput"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "LoopController",
+          "properties": {
+            "LoopController": {
+              "$ref": "#/definitions/LoopControllerFlowNodeConfiguration"
+            }
+          },
+          "required": [
+            "LoopController"
+          ],
+          "additionalProperties": false
         }
       ]
     },
@@ -423,6 +462,15 @@
         "Boolean",
         "Object",
         "Array"
+      ]
+    },
+    "FlowNodeInputCategory": {
+      "type": "string",
+      "description": "Optional tag to classify input type, currently exclusive to LoopNode",
+      "enum": [
+        "LoopCondition",
+        "ReturnValueToLoopStart",
+        "ExitLoop"
       ]
     },
     "FlowNodeInput": {
@@ -442,6 +490,9 @@
           "maxLength": 64,
           "minLength": 1,
           "description": "Expression for a node input in a flow"
+        },
+        "Category": {
+          "$ref": "#/definitions/FlowNodeInputCategory"
         }
       },
       "required": [
@@ -486,7 +537,10 @@
         "Retrieval",
         "Iterator",
         "Collector",
-        "InlineCode"
+        "InlineCode",
+        "Loop",
+        "LoopInput",
+        "LoopController"
       ]
     },
     "FlowStatus": {
@@ -539,6 +593,24 @@
         },
         "GuardrailConfiguration": {
           "$ref": "#/definitions/GuardrailConfiguration"
+        },
+        "NumberOfResults": {
+          "type": "number",
+          "maximum": 100,
+          "minimum": 1,
+          "description": "Number Of Results to Retrieve"
+        },
+        "PromptTemplate": {
+          "$ref": "#/definitions/KnowledgeBasePromptTemplate"
+        },
+        "InferenceConfiguration": {
+          "$ref": "#/definitions/PromptInferenceConfiguration"
+        },
+        "OrchestrationConfiguration": {
+          "$ref": "#/definitions/KnowledgeBaseOrchestrationConfiguration"
+        },
+        "RerankingConfiguration": {
+          "$ref": "#/definitions/VectorSearchRerankingConfiguration"
         }
       },
       "required": [
@@ -976,6 +1048,44 @@
       },
       "additionalProperties": false
     },
+    "LoopFlowNodeConfiguration": {
+      "type": "object",
+      "description": "Loop node config, contains loop's internal definition",
+      "properties": {
+        "Definition": {
+          "$ref": "#/definitions/FlowDefinition"
+        }
+      },
+      "required": [
+        "Definition"
+      ],
+      "additionalProperties": false
+    },
+    "LoopInputFlowNodeConfiguration": {
+      "type": "object",
+      "description": "Configuration for the LoopInput node",
+      "additionalProperties": false
+    },
+    "LoopControllerFlowNodeConfiguration": {
+      "type": "object",
+      "description": "Configuration for the LoopController node, which manages loop execution",
+      "properties": {
+        "ContinueCondition": {
+          "$ref": "#/definitions/FlowCondition"
+        },
+        "MaxIterations": {
+          "type": "number",
+          "default": 10,
+          "maximum": 1000,
+          "minimum": 1,
+          "description": "Maximum number of iterations the loop can perform"
+        }
+      },
+      "required": [
+        "ContinueCondition"
+      ],
+      "additionalProperties": false
+    },
     "InlineCodeFlowNodeConfiguration": {
       "type": "object",
       "description": "Inline code config strucuture, contains code configs",
@@ -1001,6 +1111,215 @@
       "enum": [
         "Python_3"
       ]
+    },
+    "BedrockRerankingModelArn": {
+      "type": "string",
+      "maxLength": 2048,
+      "minLength": 1,
+      "pattern": "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}::foundation-model/(.*))?$",
+      "description": "Arn of a Bedrock Reranking model"
+    },
+    "AdditionalModelRequestFields": {
+      "type": "object"
+    },
+    "VectorSearchRerankingConfigurationType": {
+      "type": "string",
+      "description": "Enum of Rerank Configuration Types",
+      "enum": [
+        "BEDROCK_RERANKING_MODEL"
+      ]
+    },
+    "RerankingMetadataSelectionMode": {
+      "type": "string",
+      "description": "Reranking Metadata Selection Mode",
+      "enum": [
+        "SELECTIVE",
+        "ALL"
+      ]
+    },
+    "FieldForReranking": {
+      "type": "object",
+      "properties": {
+        "FieldName": {
+          "type": "string",
+          "maxLength": 2000,
+          "minLength": 1,
+          "description": "Field name for reranking"
+        }
+      },
+      "description": "Field name for reranking",
+      "required": [
+        "FieldName"
+      ],
+      "additionalProperties": false
+    },
+    "FieldsForReranking": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/FieldForReranking"
+      },
+      "maxItems": 100,
+      "minItems": 1,
+      "description": "List of Fields For Reranking",
+      "insertionOrder": true
+    },
+    "RerankingMetadataSelectiveModeConfiguration": {
+      "description": "Reranking Metadata Selective Mode Configuration",
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "FieldsToInclude",
+          "properties": {
+            "FieldsToInclude": {
+              "$ref": "#/definitions/FieldsForReranking"
+            }
+          },
+          "required": [
+            "FieldsToInclude"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "FieldsToExclude",
+          "properties": {
+            "FieldsToExclude": {
+              "$ref": "#/definitions/FieldsForReranking"
+            }
+          },
+          "required": [
+            "FieldsToExclude"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "MetadataConfigurationForReranking": {
+      "type": "object",
+      "title": "MetadataConfigurationForReranking",
+      "properties": {
+        "SelectionMode": {
+          "$ref": "#/definitions/RerankingMetadataSelectionMode"
+        },
+        "SelectiveModeConfiguration": {
+          "$ref": "#/definitions/RerankingMetadataSelectiveModeConfiguration"
+        }
+      },
+      "required": [
+        "SelectionMode"
+      ],
+      "additionalProperties": false
+    },
+    "VectorSearchBedrockRerankingModelConfiguration": {
+      "type": "object",
+      "title": "VectorSearchBedrockRerankingModelConfiguration",
+      "properties": {
+        "ModelArn": {
+          "$ref": "#/definitions/BedrockRerankingModelArn"
+        },
+        "AdditionalModelRequestFields": {
+          "$ref": "#/definitions/AdditionalModelRequestFields"
+        }
+      },
+      "required": [
+        "ModelArn"
+      ],
+      "additionalProperties": false
+    },
+    "VectorSearchBedrockRerankingConfiguration": {
+      "type": "object",
+      "title": "VectorSearchBedrockRerankingConfiguration",
+      "properties": {
+        "ModelConfiguration": {
+          "$ref": "#/definitions/VectorSearchBedrockRerankingModelConfiguration"
+        },
+        "NumberOfRerankedResults": {
+          "type": "number",
+          "maximum": 100,
+          "minimum": 1,
+          "description": "Number Of Results For Reranking"
+        },
+        "MetadataConfiguration": {
+          "$ref": "#/definitions/MetadataConfigurationForReranking"
+        }
+      },
+      "required": [
+        "ModelConfiguration"
+      ],
+      "additionalProperties": false
+    },
+    "VectorSearchRerankingConfiguration": {
+      "type": "object",
+      "title": "VectorSearchRerankingConfiguration",
+      "properties": {
+        "Type": {
+          "$ref": "#/definitions/VectorSearchRerankingConfigurationType"
+        },
+        "BedrockRerankingConfiguration": {
+          "$ref": "#/definitions/VectorSearchBedrockRerankingConfiguration"
+        }
+      },
+      "required": [
+        "Type"
+      ],
+      "additionalProperties": false
+    },
+    "PerformanceConfigurationLatency": {
+      "type": "string",
+      "description": "Performance Configuration Latency",
+      "enum": [
+        "standard",
+        "optimized"
+      ]
+    },
+    "PerformanceConfiguration": {
+      "type": "object",
+      "title": "PerformanceConfiguration",
+      "properties": {
+        "Latency": {
+          "$ref": "#/definitions/PerformanceConfigurationLatency"
+        }
+      },
+      "additionalProperties": false
+    },
+    "KnowledgeBasePromptTemplate": {
+      "description": "Knowledge Base Prompt template",
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "Text",
+          "properties": {
+            "TextPromptTemplate": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100000
+            }
+          },
+          "required": [
+            "TextPromptTemplate"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "KnowledgeBaseOrchestrationConfiguration": {
+      "type": "object",
+      "title": "KnowledgeBaseOrchestrationConfiguration",
+      "properties": {
+        "PromptTemplate": {
+          "$ref": "#/definitions/KnowledgeBasePromptTemplate"
+        },
+        "InferenceConfig": {
+          "$ref": "#/definitions/PromptInferenceConfiguration"
+        },
+        "AdditionalModelRequestFields": {
+          "$ref": "#/definitions/AdditionalModelRequestFields"
+        },
+        "PerformanceConfig": {
+          "$ref": "#/definitions/PerformanceConfiguration"
+        }
+      },
+      "additionalProperties": false
     }
   },
   "properties": {
