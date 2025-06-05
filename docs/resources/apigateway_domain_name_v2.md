@@ -21,6 +21,7 @@ Resource Type definition for AWS::ApiGateway::DomainNameV2.
 - `domain_name` (String)
 - `endpoint_configuration` (Attributes) (see [below for nested schema](#nestedatt--endpoint_configuration))
 - `policy` (String)
+- `routing_mode` (String) The valid routing modes are [BASE_PATH_MAPPING_ONLY], [ROUTING_RULE_THEN_BASE_PATH_MAPPING] and [ROUTING_RULE_ONLY]. All other inputs are invalid.
 - `security_policy` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 

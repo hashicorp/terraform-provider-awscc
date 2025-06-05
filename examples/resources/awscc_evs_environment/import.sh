@@ -1,0 +1,1 @@
+$ terraform import awscc_evs_environment.example "environment_id"

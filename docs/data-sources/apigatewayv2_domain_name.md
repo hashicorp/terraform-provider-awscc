@@ -27,6 +27,7 @@ Data Source schema for AWS::ApiGatewayV2::DomainName
 - `mutual_tls_authentication` (Attributes) The mutual TLS authentication configuration for a custom domain name. (see [below for nested schema](#nestedatt--mutual_tls_authentication))
 - `regional_domain_name` (String)
 - `regional_hosted_zone_id` (String)
+- `routing_mode` (String)
 - `tags` (Map of String) The collection of tags associated with a domain name.
 
 <a id="nestedatt--domain_name_configurations"></a>

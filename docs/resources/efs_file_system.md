@@ -94,7 +94,7 @@ resource "awscc_efs_file_system" "this" {
   +  When to move files in the file system from primary storage or IA storage to Archive storage.
   +  When to move files that are in IA or Archive storage to primary storage.
   
-   EFS requires that each ``LifecyclePolicy`` object have only a single transition. This means that in a request body, ``LifecyclePolicies`` needs to be structured as an array of ``LifecyclePolicy`` objects, one object for each transition, ``TransitionToIA``, ``TransitionToArchive`` ``TransitionToPrimaryStorageClass``. See the example requests in the following section for more information. (see [below for nested schema](#nestedatt--lifecycle_policies))
+  EFS requires that each ``LifecyclePolicy`` object have only a single transition. This means that in a request body, ``LifecyclePolicies`` needs to be structured as an array of ``LifecyclePolicy`` objects, one object for each transition, ``TransitionToIA``, ``TransitionToArchive````TransitionToPrimaryStorageClass``. See the example requests in the following section for more information. (see [below for nested schema](#nestedatt--lifecycle_policies))
 - `performance_mode` (String) The performance mode of the file system. We recommend ``generalPurpose`` performance mode for all file systems. File systems using the ``maxIO`` performance mode can scale to higher levels of aggregate throughput and operations per second with a tradeoff of slightly higher latencies for most file operations. The performance mode can't be changed after the file system has been created. The ``maxIO`` mode is not supported on One Zone file systems.
   Due to the higher per-operation latencies with Max I/O, we recommend using General Purpose performance mode for all file systems.
   Default is ``generalPurpose``.
@@ -115,8 +115,8 @@ resource "awscc_efs_file_system" "this" {
 Optional:
 
 - `status` (String) Set the backup policy status for the file system.
-  +   *ENABLED* - Turns automatic backups on for the file system. 
-  +   *DISABLED* - Turns automatic backups off for the file system.
+  +  *ENABLED* - Turns automatic backups on for the file system. 
+  +  *DISABLED* - Turns automatic backups off for the file system.
 
 
 <a id="nestedatt--file_system_protection"></a>
@@ -125,9 +125,9 @@ Optional:
 Optional:
 
 - `replication_overwrite_protection` (String) The status of the file system's replication overwrite protection.
-  +   ``ENABLED`` ? The file system cannot be used as the destination file system in a replication configuration. The file system is writeable. Replication overwrite protection is ``ENABLED`` by default. 
-  +   ``DISABLED`` ? The file system can be used as the destination file system in a replication configuration. The file system is read-only and can only be modified by EFS replication.
-  +   ``REPLICATING`` ? The file system is being used as the destination file system in a replication configuration. The file system is read-only and is modified only by EFS replication.
+  +  ``ENABLED`` ? The file system cannot be used as the destination file system in a replication configuration. The file system is writeable. Replication overwrite protection is ``ENABLED`` by default. 
+  +  ``DISABLED`` ? The file system can be used as the destination file system in a replication configuration. The file system is read-only and can only be modified by EFS replication.
+  +  ``REPLICATING`` ? The file system is being used as the destination file system in a replication configuration. The file system is read-only and is modified only by EFS replication.
   
  If the replication configuration is deleted, the file system's replication overwrite protection is re-enabled, the file system becomes writeable.
 

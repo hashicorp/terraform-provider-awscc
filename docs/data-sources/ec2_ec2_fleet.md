@@ -59,6 +59,7 @@ Read-Only:
 Read-Only:
 
 - `availability_zone` (String)
+- `block_device_mappings` (Attributes List) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--block_device_mappings))
 - `instance_requirements` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements))
 - `instance_type` (String)
 - `max_price` (String)
@@ -66,6 +67,31 @@ Read-Only:
 - `priority` (Number)
 - `subnet_id` (String)
 - `weighted_capacity` (Number)
+
+<a id="nestedatt--launch_template_configs--overrides--block_device_mappings"></a>
+### Nested Schema for `launch_template_configs.overrides.block_device_mappings`
+
+Read-Only:
+
+- `device_name` (String)
+- `ebs` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--block_device_mappings--ebs))
+- `no_device` (String)
+- `virtual_name` (String)
+
+<a id="nestedatt--launch_template_configs--overrides--block_device_mappings--ebs"></a>
+### Nested Schema for `launch_template_configs.overrides.block_device_mappings.ebs`
+
+Read-Only:
+
+- `delete_on_termination` (Boolean)
+- `encrypted` (Boolean)
+- `iops` (Number)
+- `kms_key_id` (String)
+- `snapshot_id` (String)
+- `volume_size` (Number)
+- `volume_type` (String)
+
+
 
 <a id="nestedatt--launch_template_configs--overrides--instance_requirements"></a>
 ### Nested Schema for `launch_template_configs.overrides.instance_requirements`
