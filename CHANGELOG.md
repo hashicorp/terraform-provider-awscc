@@ -1,3 +1,22 @@
+## 1.44.0 (June 5, 2025)
+
+FEATURES:
+
+* **New Data Source:** `awscc_apigatewayv2_routing_rule`
+* **New Data Source:** `awscc_evs_environment`
+* **New Data Source:** `awscc_evs_environments`
+* **New Data Source:** `awscc_lightsail_instance_snapshot`
+* **New Data Source:** `awscc_lightsail_instance_snapshots`
+* **New Data Source:** `awscc_networkfirewall_vpc_endpoint_association`
+* **New Data Source:** `awscc_networkfirewall_vpc_endpoint_associations`
+* **New Data Source:** `awscc_s3express_access_point`
+* **New Data Source:** `awscc_s3express_access_points`
+* **New Resource:** `awscc_apigatewayv2_routing_rule`
+* **New Resource:** `awscc_evs_environment`
+* **New Resource:** `awscc_lightsail_instance_snapshot`
+* **New Resource:** `awscc_networkfirewall_vpc_endpoint_association`
+* **New Resource:** `awscc_s3express_access_point`
+
 ## 1.43.0 (May 29, 2025)
 
 FEATURES:
