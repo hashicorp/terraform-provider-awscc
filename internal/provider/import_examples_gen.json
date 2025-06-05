@@ -220,6 +220,11 @@
         "path": "./examples/resources/awscc_apigatewayv2_route/import.sh"
     },
     {
+        "resource": "awscc_apigatewayv2_routing_rule",
+        "identifier": ["RoutingRuleArn"],
+        "path": "./examples/resources/awscc_apigatewayv2_routing_rule/import.sh"
+    },
+    {
         "resource": "awscc_apigatewayv2_route_response",
         "identifier": ["ApiId","RouteId","RouteResponseId"],
         "path": "./examples/resources/awscc_apigatewayv2_route_response/import.sh"
@@ -1308,6 +1313,11 @@
         "resource": "awscc_customerprofiles_domain",
         "identifier": ["DomainName"],
         "path": "./examples/resources/awscc_customerprofiles_domain/import.sh"
+    },
+    {
+        "resource": "awscc_customerprofiles_event_stream",
+        "identifier": ["DomainName","EventStreamName"],
+        "path": "./examples/resources/awscc_customerprofiles_event_stream/import.sh"
     },
     {
         "resource": "awscc_customerprofiles_event_trigger",
@@ -2415,6 +2425,11 @@
         "path": "./examples/resources/awscc_evidently_segment/import.sh"
     },
     {
+        "resource": "awscc_evs_environment",
+        "identifier": ["EnvironmentId"],
+        "path": "./examples/resources/awscc_evs_environment/import.sh"
+    },
+    {
         "resource": "awscc_fis_experiment_template",
         "identifier": ["Id"],
         "path": "./examples/resources/awscc_fis_experiment_template/import.sh"
@@ -3450,6 +3465,11 @@
         "path": "./examples/resources/awscc_lightsail_instance/import.sh"
     },
     {
+        "resource": "awscc_lightsail_instance_snapshot",
+        "identifier": ["InstanceSnapshotName"],
+        "path": "./examples/resources/awscc_lightsail_instance_snapshot/import.sh"
+    },
+    {
         "resource": "awscc_lightsail_load_balancer",
         "identifier": ["LoadBalancerName"],
         "path": "./examples/resources/awscc_lightsail_load_balancer/import.sh"
@@ -3923,6 +3943,11 @@
         "resource": "awscc_networkfirewall_tls_inspection_configuration",
         "identifier": ["TLSInspectionConfigurationArn"],
         "path": "./examples/resources/awscc_networkfirewall_tls_inspection_configuration/import.sh"
+    },
+    {
+        "resource": "awscc_networkfirewall_vpc_endpoint_association",
+        "identifier": ["VpcEndpointAssociationArn"],
+        "path": "./examples/resources/awscc_networkfirewall_vpc_endpoint_association/import.sh"
     },
     {
         "resource": "awscc_networkmanager_connect_attachment",
@@ -4823,6 +4848,11 @@
         "resource": "awscc_s3_storage_lens_group",
         "identifier": ["Name"],
         "path": "./examples/resources/awscc_s3_storage_lens_group/import.sh"
+    },
+    {
+        "resource": "awscc_s3express_access_point",
+        "identifier": ["Name"],
+        "path": "./examples/resources/awscc_s3express_access_point/import.sh"
     },
     {
         "resource": "awscc_s3express_bucket_policy",
