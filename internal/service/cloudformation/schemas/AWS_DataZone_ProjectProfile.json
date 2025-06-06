@@ -47,10 +47,7 @@
   ],
   "description": "Definition of AWS::DataZone::ProjectProfile Resource Type",
   "writeOnlyProperties": [
-    "/properties/DomainUnitIdentifier",
-    "/properties/AllowedDesignations",
-    "/properties/ProjectScopes",
-    "/properties/ChangeLog"
+    "/properties/DomainUnitIdentifier"
   ],
   "createOnlyProperties": [
     "/properties/DomainIdentifier"
@@ -250,12 +247,6 @@
       "format": "date-time",
       "type": "string"
     },
-    "ProjectScopes": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/ProjectScope"
-      }
-    },
     "DomainUnitIdentifier": {
       "minLength": 1,
       "pattern": "^[a-z0-9_\\-]+$",
@@ -274,15 +265,6 @@
     },
     "Identifier": {
       "pattern": "^[a-zA-Z0-9_-]{1,36}$",
-      "type": "string"
-    },
-    "AllowedDesignations": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/DesignationConfiguration"
-      }
-    },
-    "ChangeLog": {
       "type": "string"
     },
     "Id": {

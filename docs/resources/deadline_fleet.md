@@ -225,6 +225,7 @@ Optional:
 
 - `instance_capabilities` (Attributes) (see [below for nested schema](#nestedatt--configuration--service_managed_ec_2--instance_capabilities))
 - `instance_market_options` (Attributes) (see [below for nested schema](#nestedatt--configuration--service_managed_ec_2--instance_market_options))
+- `storage_profile_id` (String)
 
 <a id="nestedatt--configuration--service_managed_ec_2--instance_capabilities"></a>
 ### Nested Schema for `configuration.service_managed_ec_2.instance_capabilities`

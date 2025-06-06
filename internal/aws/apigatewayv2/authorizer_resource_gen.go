@@ -57,6 +57,7 @@ func authorizerResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// AuthorizerCredentialsArn is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: AuthorizerId
 		// CloudFormation resource type schema:
@@ -86,6 +87,7 @@ func authorizerResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// AuthorizerPayloadFormatVersion is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: AuthorizerResultTtlInSeconds
 		// CloudFormation resource type schema:
@@ -101,6 +103,7 @@ func authorizerResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// AuthorizerResultTtlInSeconds is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: AuthorizerType
 		// CloudFormation resource type schema:
@@ -127,6 +130,7 @@ func authorizerResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// AuthorizerUri is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: EnableSimpleResponses
 		// CloudFormation resource type schema:
@@ -142,6 +146,7 @@ func authorizerResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// EnableSimpleResponses is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: IdentitySource
 		// CloudFormation resource type schema:
@@ -278,6 +283,13 @@ func authorizerResource(ctx context.Context) (resource.Resource, error) {
 		"name":                              "Name",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/AuthorizerPayloadFormatVersion",
+		"/properties/AuthorizerResultTtlInSeconds",
+		"/properties/EnableSimpleResponses",
+		"/properties/AuthorizerCredentialsArn",
+		"/properties/AuthorizerUri",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

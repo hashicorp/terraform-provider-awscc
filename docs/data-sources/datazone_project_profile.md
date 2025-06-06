@@ -21,8 +21,6 @@ Data Source schema for AWS::DataZone::ProjectProfile
 
 ### Read-Only
 
-- `allowed_designations` (Attributes List) (see [below for nested schema](#nestedatt--allowed_designations))
-- `change_log` (String)
 - `created_at` (String)
 - `created_by` (String)
 - `description` (String)
@@ -34,21 +32,4 @@ Data Source schema for AWS::DataZone::ProjectProfile
 - `last_updated_at` (String)
 - `name` (String)
 - `project_profile_id` (String)
-- `project_scopes` (Attributes List) (see [below for nested schema](#nestedatt--project_scopes))
 - `status` (String)
-
-<a id="nestedatt--allowed_designations"></a>
-### Nested Schema for `allowed_designations`
-
-Read-Only:
-
-- `designation_id` (String)
-
-
-<a id="nestedatt--project_scopes"></a>
-### Nested Schema for `project_scopes`
-
-Read-Only:
-
-- `name` (String)
-- `policy` (String)

@@ -1,0 +1,1 @@
+$ terraform import awscc_lightsail_instance_snapshot.example "instance_snapshot_name"

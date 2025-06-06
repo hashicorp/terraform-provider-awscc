@@ -102,6 +102,23 @@ func domainNameV2DataSource(ctx context.Context) (datasource.DataSource, error) 
 		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: RoutingMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": "BASE_PATH_MAPPING_ONLY",
+		//	  "description": "The valid routing modes are [BASE_PATH_MAPPING_ONLY], [ROUTING_RULE_THEN_BASE_PATH_MAPPING] and [ROUTING_RULE_ONLY]. All other inputs are invalid.",
+		//	  "enum": [
+		//	    "BASE_PATH_MAPPING_ONLY",
+		//	    "ROUTING_RULE_THEN_BASE_PATH_MAPPING",
+		//	    "ROUTING_RULE_ONLY"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"routing_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The valid routing modes are [BASE_PATH_MAPPING_ONLY], [ROUTING_RULE_THEN_BASE_PATH_MAPPING] and [ROUTING_RULE_ONLY]. All other inputs are invalid.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SecurityPolicy
 		// CloudFormation resource type schema:
 		//
@@ -169,6 +186,7 @@ func domainNameV2DataSource(ctx context.Context) (datasource.DataSource, error) 
 		"ip_address_type":        "IpAddressType",
 		"key":                    "Key",
 		"policy":                 "Policy",
+		"routing_mode":           "RoutingMode",
 		"security_policy":        "SecurityPolicy",
 		"tags":                   "Tags",
 		"types":                  "Types",

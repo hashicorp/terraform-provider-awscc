@@ -33,6 +33,7 @@ Data Source schema for AWS::ApiGateway::DomainName
 - `regional_certificate_arn` (String)
 - `regional_domain_name` (String)
 - `regional_hosted_zone_id` (String)
+- `routing_mode` (String)
 - `security_policy` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 

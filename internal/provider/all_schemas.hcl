@@ -256,6 +256,11 @@ resource_schema "aws_apigatewayv2_route" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_apigatewayv2_routing_rule" {
+  cloudformation_type_name               = "AWS::ApiGatewayV2::RoutingRule"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_apigatewayv2_route_response" {
   cloudformation_type_name = "AWS::ApiGatewayV2::RouteResponse"
 }
@@ -2306,6 +2311,10 @@ resource_schema "aws_evidently_segment" {
   cloudformation_type_name = "AWS::Evidently::Segment"
 }
 
+resource_schema "aws_evs_environment" {
+  cloudformation_type_name = "AWS::EVS::Environment"
+}
+
 resource_schema "aws_fis_experiment_template" {
   cloudformation_type_name = "AWS::FIS::ExperimentTemplate"
 }
@@ -3206,6 +3215,10 @@ resource_schema "aws_lightsail_instance" {
   cloudformation_type_name = "AWS::Lightsail::Instance"
 }
 
+resource_schema "aws_lightsail_instance_snapshot" {
+  cloudformation_type_name = "AWS::Lightsail::InstanceSnapshot"
+}
+
 resource_schema "aws_lightsail_load_balancer" {
   cloudformation_type_name = "AWS::Lightsail::LoadBalancer"
 }
@@ -3621,6 +3634,10 @@ resource_schema "aws_networkfirewall_rule_group" {
 
 resource_schema "aws_networkfirewall_tls_inspection_configuration" {
   cloudformation_type_name = "AWS::NetworkFirewall::TLSInspectionConfiguration"
+}
+
+resource_schema "aws_networkfirewall_vpc_endpoint_association" {
+  cloudformation_type_name = "AWS::NetworkFirewall::VpcEndpointAssociation"
 }
 
 resource_schema "aws_networkmanager_connect_attachment" {
@@ -4463,6 +4480,10 @@ resource_schema "aws_s3_storage_lens" {
 
 resource_schema "aws_s3_storage_lens_group" {
   cloudformation_type_name = "AWS::S3::StorageLensGroup"
+}
+
+resource_schema "aws_s3express_access_point" {
+  cloudformation_type_name = "AWS::S3Express::AccessPoint"
 }
 
 resource_schema "aws_s3express_bucket_policy" {

@@ -1,0 +1,1 @@
+$ terraform import awscc_apigatewayv2_routing_rule.example "routing_rule_arn"

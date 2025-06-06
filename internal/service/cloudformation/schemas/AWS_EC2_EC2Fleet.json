@@ -1,196 +1,70 @@
 {
-  "handlers": {
-    "read": {
-      "permissions": [
-        "ec2:DescribeFleets"
+  "typeName": "AWS::EC2::EC2Fleet",
+  "description": "Resource Type definition for AWS::EC2::EC2Fleet",
+  "additionalProperties": false,
+  "properties": {
+    "TargetCapacitySpecification": {
+      "$ref": "#/definitions/TargetCapacitySpecificationRequest"
+    },
+    "OnDemandOptions": {
+      "$ref": "#/definitions/OnDemandOptionsRequest"
+    },
+    "Type": {
+      "type": "string",
+      "enum": [
+        "maintain",
+        "request",
+        "instant"
       ]
     },
-    "create": {
-      "permissions": [
-        "ec2:CreateFleet",
-        "ec2:DescribeFleets"
+    "ExcessCapacityTerminationPolicy": {
+      "type": "string",
+      "enum": [
+        "termination",
+        "no-termination"
       ]
     },
-    "update": {
-      "permissions": [
-        "ec2:ModifyFleet",
-        "ec2:DescribeFleets"
-      ]
+    "TagSpecifications": {
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "$ref": "#/definitions/TagSpecification"
+      }
     },
-    "list": {
-      "permissions": [
-        "ec2:DescribeFleets"
-      ]
+    "SpotOptions": {
+      "$ref": "#/definitions/SpotOptionsRequest"
     },
-    "delete": {
-      "permissions": [
-        "ec2:DescribeFleets",
-        "ec2:DeleteFleets"
-      ]
+    "ValidFrom": {
+      "type": "string"
+    },
+    "ReplaceUnhealthyInstances": {
+      "type": "boolean"
+    },
+    "LaunchTemplateConfigs": {
+      "type": "array",
+      "uniqueItems": false,
+      "maxItems": 50,
+      "items": {
+        "$ref": "#/definitions/FleetLaunchTemplateConfigRequest"
+      }
+    },
+    "FleetId": {
+      "type": "string"
+    },
+    "TerminateInstancesWithExpiration": {
+      "type": "boolean"
+    },
+    "ValidUntil": {
+      "type": "string"
+    },
+    "Context": {
+      "type": "string"
     }
   },
-  "typeName": "AWS::EC2::EC2Fleet",
-  "readOnlyProperties": [
-    "/properties/FleetId"
-  ],
-  "description": "Resource Type definition for AWS::EC2::EC2Fleet",
-  "createOnlyProperties": [
-    "/properties/LaunchTemplateConfigs",
-    "/properties/OnDemandOptions",
-    "/properties/ReplaceUnhealthyInstances",
-    "/properties/SpotOptions",
-    "/properties/TagSpecifications",
-    "/properties/TerminateInstancesWithExpiration",
-    "/properties/Type",
-    "/properties/ValidFrom",
-    "/properties/ValidUntil"
-  ],
-  "additionalProperties": false,
-  "primaryIdentifier": [
-    "/properties/FleetId"
-  ],
   "definitions": {
-    "TargetCapacitySpecificationRequest": {
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "DefaultTargetCapacityType": {
-          "type": "string",
-          "enum": [
-            "on-demand",
-            "spot"
-          ]
-        },
-        "TotalTargetCapacity": {
-          "type": "integer"
-        },
-        "OnDemandTargetCapacity": {
-          "type": "integer"
-        },
-        "SpotTargetCapacity": {
-          "type": "integer"
-        },
-        "TargetCapacityUnitType": {
-          "type": "string",
-          "enum": [
-            "vcpu",
-            "memory-mib",
-            "units"
-          ]
-        }
-      },
-      "required": [
-        "TotalTargetCapacity"
-      ]
-    },
-    "FleetLaunchTemplateSpecificationRequest": {
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "LaunchTemplateName": {
-          "minLength": 3,
-          "pattern": "[a-zA-Z0-9\\(\\)\\.\\-/_]+",
-          "type": "string",
-          "maxLength": 128
-        },
-        "Version": {
-          "type": "string"
-        },
-        "LaunchTemplateId": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "Version"
-      ]
-    },
-    "MemoryGiBPerVCpuRequest": {
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "Min": {
-          "type": "number"
-        },
-        "Max": {
-          "type": "number"
-        }
-      }
-    },
-    "CapacityReservationOptionsRequest": {
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "UsageStrategy": {
-          "type": "string",
-          "enum": [
-            "use-capacity-reservations-first"
-          ]
-        }
-      }
-    },
-    "TotalLocalStorageGBRequest": {
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "Min": {
-          "type": "number"
-        },
-        "Max": {
-          "type": "number"
-        }
-      }
-    },
-    "NetworkBandwidthGbpsRequest": {
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "Min": {
-          "type": "number"
-        },
-        "Max": {
-          "type": "number"
-        }
-      }
-    },
-    "VCpuCountRangeRequest": {
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "Min": {
-          "type": "integer"
-        },
-        "Max": {
-          "type": "integer"
-        }
-      }
-    },
-    "BaselineEbsBandwidthMbpsRequest": {
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "Min": {
-          "type": "integer"
-        },
-        "Max": {
-          "type": "integer"
-        }
-      }
-    },
-    "NetworkInterfaceCountRequest": {
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "Min": {
-          "type": "integer"
-        },
-        "Max": {
-          "type": "integer"
-        }
-      }
-    },
     "OnDemandOptionsRequest": {
-      "additionalProperties": false,
       "type": "object",
+      "additionalProperties": false,
       "properties": {
         "SingleAvailabilityZone": {
           "type": "boolean"
@@ -213,9 +87,12 @@
       }
     },
     "SpotOptionsRequest": {
-      "additionalProperties": false,
       "type": "object",
+      "additionalProperties": false,
       "properties": {
+        "MaintenanceStrategies": {
+          "$ref": "#/definitions/MaintenanceStrategies"
+        },
         "SingleAvailabilityZone": {
           "type": "boolean"
         },
@@ -242,9 +119,6 @@
         "MaxTotalPrice": {
           "type": "string"
         },
-        "MaintenanceStrategies": {
-          "$ref": "#/definitions/MaintenanceStrategies"
-        },
         "InstanceInterruptionBehavior": {
           "type": "string",
           "enum": [
@@ -258,9 +132,63 @@
         }
       }
     },
-    "Placement": {
-      "additionalProperties": false,
+    "TargetCapacitySpecificationRequest": {
       "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "DefaultTargetCapacityType": {
+          "type": "string",
+          "enum": [
+            "on-demand",
+            "spot"
+          ]
+        },
+        "TargetCapacityUnitType": {
+          "type": "string",
+          "enum": [
+            "vcpu",
+            "memory-mib",
+            "units"
+          ]
+        },
+        "TotalTargetCapacity": {
+          "type": "integer"
+        },
+        "OnDemandTargetCapacity": {
+          "type": "integer"
+        },
+        "SpotTargetCapacity": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "TotalTargetCapacity"
+      ]
+    },
+    "FleetLaunchTemplateSpecificationRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "LaunchTemplateName": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 128,
+          "pattern": "[a-zA-Z0-9\\(\\)\\.\\-/_]+"
+        },
+        "LaunchTemplateId": {
+          "type": "string"
+        },
+        "Version": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Version"
+      ]
+    },
+    "Placement": {
+      "type": "object",
+      "additionalProperties": false,
       "properties": {
         "GroupName": {
           "type": "string"
@@ -288,41 +216,13 @@
         }
       }
     },
-    "PerformanceFactorReferenceRequest": {
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "InstanceFamily": {
-          "type": "string"
-        }
-      }
-    },
-    "CpuPerformanceFactorRequest": {
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "References": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PerformanceFactorReferenceRequest"
-          }
-        }
-      }
-    },
-    "MaintenanceStrategies": {
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "CapacityRebalance": {
-          "$ref": "#/definitions/CapacityRebalance"
-        }
-      }
-    },
     "BlockDeviceMapping": {
-      "additionalProperties": false,
       "type": "object",
+      "additionalProperties": false,
       "properties": {
+        "DeviceName": {
+          "type": "string"
+        },
         "Ebs": {
           "$ref": "#/definitions/EbsBlockDevice"
         },
@@ -331,59 +231,76 @@
         },
         "VirtualName": {
           "type": "string"
+        }
+      }
+    },
+    "EbsBlockDevice": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "DeleteOnTermination": {
+          "type": "boolean"
         },
-        "DeviceName": {
+        "Encrypted": {
+          "type": "boolean"
+        },
+        "Iops": {
+          "type": "integer"
+        },
+        "KmsKeyId": {
           "type": "string"
-        }
-      }
-    },
-    "AcceleratorCountRequest": {
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "Min": {
+        },
+        "SnapshotId": {
+          "type": "string"
+        },
+        "VolumeSize": {
           "type": "integer"
         },
-        "Max": {
-          "type": "integer"
-        }
-      }
-    },
-    "CapacityRebalance": {
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "TerminationDelay": {
-          "type": "integer"
-        },
-        "ReplacementStrategy": {
+        "VolumeType": {
           "type": "string",
           "enum": [
-            "launch",
-            "launch-before-terminate"
+            "gp2",
+            "gp3",
+            "io1",
+            "io2",
+            "sc1",
+            "st1",
+            "standard"
           ]
         }
       }
     },
     "FleetLaunchTemplateConfigRequest": {
-      "additionalProperties": false,
       "type": "object",
+      "additionalProperties": false,
       "properties": {
         "LaunchTemplateSpecification": {
           "$ref": "#/definitions/FleetLaunchTemplateSpecificationRequest"
         },
         "Overrides": {
-          "uniqueItems": false,
           "type": "array",
+          "uniqueItems": false,
           "items": {
             "$ref": "#/definitions/FleetLaunchTemplateOverridesRequest"
           }
         }
       }
     },
-    "FleetLaunchTemplateOverridesRequest": {
-      "additionalProperties": false,
+    "CapacityReservationOptionsRequest": {
       "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "UsageStrategy": {
+          "type": "string",
+          "enum": [
+            "use-capacity-reservations-first"
+          ]
+        }
+      }
+    },
+    "FleetLaunchTemplateOverridesRequest": {
+      "type": "object",
+      "additionalProperties": false,
       "properties": {
         "WeightedCapacity": {
           "type": "number"
@@ -400,206 +317,43 @@
         "SubnetId": {
           "type": "string"
         },
-        "InstanceRequirements": {
-          "$ref": "#/definitions/InstanceRequirementsRequest"
-        },
         "InstanceType": {
           "type": "string"
         },
+        "InstanceRequirements": {
+          "$ref": "#/definitions/InstanceRequirementsRequest"
+        },
         "MaxPrice": {
           "type": "string"
+        },
+        "BlockDeviceMappings": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/BlockDeviceMapping"
+          }
         }
       }
     },
-    "InstanceRequirementsRequest": {
-      "additionalProperties": false,
+    "Tag": {
       "type": "object",
-      "properties": {
-        "InstanceGenerations": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "current",
-              "previous"
-            ]
-          }
-        },
-        "MemoryGiBPerVCpu": {
-          "$ref": "#/definitions/MemoryGiBPerVCpuRequest"
-        },
-        "AcceleratorTypes": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "gpu",
-              "fpga",
-              "inference"
-            ]
-          }
-        },
-        "VCpuCount": {
-          "$ref": "#/definitions/VCpuCountRangeRequest"
-        },
-        "AcceleratorManufacturers": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "amazon-web-services",
-              "amd",
-              "habana",
-              "nvidia",
-              "xilinx"
-            ]
-          }
-        },
-        "LocalStorage": {
-          "type": "string",
-          "enum": [
-            "included",
-            "required",
-            "excluded"
-          ]
-        },
-        "CpuManufacturers": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "intel",
-              "amd",
-              "amazon-web-services",
-              "apple"
-            ]
-          }
-        },
-        "BareMetal": {
-          "type": "string",
-          "enum": [
-            "included",
-            "required",
-            "excluded"
-          ]
-        },
-        "RequireHibernateSupport": {
-          "type": "boolean"
-        },
-        "MaxSpotPriceAsPercentageOfOptimalOnDemandPrice": {
-          "type": "integer"
-        },
-        "OnDemandMaxPricePercentageOverLowestPrice": {
-          "type": "integer"
-        },
-        "MemoryMiB": {
-          "$ref": "#/definitions/MemoryMiBRequest"
-        },
-        "LocalStorageTypes": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "hdd",
-              "ssd"
-            ]
-          }
-        },
-        "NetworkInterfaceCount": {
-          "$ref": "#/definitions/NetworkInterfaceCountRequest"
-        },
-        "ExcludedInstanceTypes": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "minLength": 1,
-            "pattern": "[a-zA-Z0-9\\.\\*]+",
-            "type": "string",
-            "maxLength": 30
-          }
-        },
-        "AllowedInstanceTypes": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "minLength": 1,
-            "pattern": "[a-zA-Z0-9\\.\\*]+",
-            "type": "string",
-            "maxLength": 30
-          }
-        },
-        "NetworkBandwidthGbps": {
-          "$ref": "#/definitions/NetworkBandwidthGbpsRequest"
-        },
-        "AcceleratorCount": {
-          "$ref": "#/definitions/AcceleratorCountRequest"
-        },
-        "BaselinePerformanceFactors": {
-          "$ref": "#/definitions/BaselinePerformanceFactorsRequest"
-        },
-        "SpotMaxPricePercentageOverLowestPrice": {
-          "type": "integer"
-        },
-        "BaselineEbsBandwidthMbps": {
-          "$ref": "#/definitions/BaselineEbsBandwidthMbpsRequest"
-        },
-        "AcceleratorNames": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "a10g",
-              "a100",
-              "h100",
-              "inferentia",
-              "k520",
-              "k80",
-              "m60",
-              "radeon-pro-v520",
-              "t4",
-              "t4g",
-              "vu9p",
-              "v100"
-            ]
-          }
-        },
-        "AcceleratorTotalMemoryMiB": {
-          "$ref": "#/definitions/AcceleratorTotalMemoryMiBRequest"
-        },
-        "BurstablePerformance": {
-          "type": "string",
-          "enum": [
-            "included",
-            "required",
-            "excluded"
-          ]
-        },
-        "TotalLocalStorageGB": {
-          "$ref": "#/definitions/TotalLocalStorageGBRequest"
-        }
-      }
-    },
-    "MemoryMiBRequest": {
       "additionalProperties": false,
-      "type": "object",
       "properties": {
-        "Min": {
-          "type": "integer"
+        "Value": {
+          "type": "string"
         },
-        "Max": {
-          "type": "integer"
+        "Key": {
+          "type": "string"
         }
-      }
+      },
+      "required": [
+        "Value",
+        "Key"
+      ]
     },
     "TagSpecification": {
-      "additionalProperties": false,
       "type": "object",
+      "additionalProperties": false,
       "properties": {
         "ResourceType": {
           "type": "string",
@@ -654,26 +408,191 @@
           ]
         },
         "Tags": {
-          "uniqueItems": false,
           "type": "array",
+          "uniqueItems": false,
           "items": {
             "$ref": "#/definitions/Tag"
           }
         }
       }
     },
-    "BaselinePerformanceFactorsRequest": {
-      "additionalProperties": false,
+    "InstanceRequirementsRequest": {
       "type": "object",
+      "additionalProperties": false,
       "properties": {
-        "Cpu": {
-          "$ref": "#/definitions/CpuPerformanceFactorRequest"
+        "VCpuCount": {
+          "$ref": "#/definitions/VCpuCountRangeRequest"
+        },
+        "MemoryMiB": {
+          "$ref": "#/definitions/MemoryMiBRequest"
+        },
+        "CpuManufacturers": {
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "type": "string",
+            "enum": [
+              "intel",
+              "amd",
+              "amazon-web-services",
+              "apple"
+            ]
+          }
+        },
+        "MemoryGiBPerVCpu": {
+          "$ref": "#/definitions/MemoryGiBPerVCpuRequest"
+        },
+        "AllowedInstanceTypes": {
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 30,
+            "pattern": "[a-zA-Z0-9\\.\\*]+"
+          }
+        },
+        "ExcludedInstanceTypes": {
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 30,
+            "pattern": "[a-zA-Z0-9\\.\\*]+"
+          }
+        },
+        "InstanceGenerations": {
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "type": "string",
+            "enum": [
+              "current",
+              "previous"
+            ]
+          }
+        },
+        "SpotMaxPricePercentageOverLowestPrice": {
+          "type": "integer"
+        },
+        "OnDemandMaxPricePercentageOverLowestPrice": {
+          "type": "integer"
+        },
+        "MaxSpotPriceAsPercentageOfOptimalOnDemandPrice": {
+          "type": "integer"
+        },
+        "BareMetal": {
+          "type": "string",
+          "enum": [
+            "included",
+            "required",
+            "excluded"
+          ]
+        },
+        "BurstablePerformance": {
+          "type": "string",
+          "enum": [
+            "included",
+            "required",
+            "excluded"
+          ]
+        },
+        "RequireHibernateSupport": {
+          "type": "boolean"
+        },
+        "NetworkBandwidthGbps": {
+          "$ref": "#/definitions/NetworkBandwidthGbpsRequest"
+        },
+        "NetworkInterfaceCount": {
+          "$ref": "#/definitions/NetworkInterfaceCountRequest"
+        },
+        "LocalStorage": {
+          "type": "string",
+          "enum": [
+            "included",
+            "required",
+            "excluded"
+          ]
+        },
+        "LocalStorageTypes": {
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "type": "string",
+            "enum": [
+              "hdd",
+              "ssd"
+            ]
+          }
+        },
+        "TotalLocalStorageGB": {
+          "$ref": "#/definitions/TotalLocalStorageGBRequest"
+        },
+        "BaselineEbsBandwidthMbps": {
+          "$ref": "#/definitions/BaselineEbsBandwidthMbpsRequest"
+        },
+        "AcceleratorTypes": {
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "type": "string",
+            "enum": [
+              "gpu",
+              "fpga",
+              "inference"
+            ]
+          }
+        },
+        "AcceleratorCount": {
+          "$ref": "#/definitions/AcceleratorCountRequest"
+        },
+        "AcceleratorManufacturers": {
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "type": "string",
+            "enum": [
+              "amazon-web-services",
+              "amd",
+              "habana",
+              "nvidia",
+              "xilinx"
+            ]
+          }
+        },
+        "AcceleratorNames": {
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "type": "string",
+            "enum": [
+              "a10g",
+              "a100",
+              "h100",
+              "inferentia",
+              "k520",
+              "k80",
+              "m60",
+              "radeon-pro-v520",
+              "t4",
+              "t4g",
+              "vu9p",
+              "v100"
+            ]
+          }
+        },
+        "AcceleratorTotalMemoryMiB": {
+          "$ref": "#/definitions/AcceleratorTotalMemoryMiBRequest"
+        },
+        "BaselinePerformanceFactors": {
+          "$ref": "#/definitions/BaselinePerformanceFactorsRequest"
         }
       }
     },
-    "AcceleratorTotalMemoryMiBRequest": {
-      "additionalProperties": false,
+    "VCpuCountRangeRequest": {
       "type": "object",
+      "additionalProperties": false,
       "properties": {
         "Min": {
           "type": "integer"
@@ -683,120 +602,211 @@
         }
       }
     },
-    "EbsBlockDevice": {
-      "additionalProperties": false,
+    "MemoryMiBRequest": {
       "type": "object",
+      "additionalProperties": false,
       "properties": {
-        "SnapshotId": {
-          "type": "string"
+        "Min": {
+          "type": "integer"
         },
-        "VolumeType": {
+        "Max": {
+          "type": "integer"
+        }
+      }
+    },
+    "MemoryGiBPerVCpuRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Min": {
+          "type": "number"
+        },
+        "Max": {
+          "type": "number"
+        }
+      }
+    },
+    "NetworkBandwidthGbpsRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Min": {
+          "type": "number"
+        },
+        "Max": {
+          "type": "number"
+        }
+      }
+    },
+    "NetworkInterfaceCountRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Min": {
+          "type": "integer"
+        },
+        "Max": {
+          "type": "integer"
+        }
+      }
+    },
+    "TotalLocalStorageGBRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Min": {
+          "type": "number"
+        },
+        "Max": {
+          "type": "number"
+        }
+      }
+    },
+    "BaselineEbsBandwidthMbpsRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Min": {
+          "type": "integer"
+        },
+        "Max": {
+          "type": "integer"
+        }
+      }
+    },
+    "AcceleratorCountRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Min": {
+          "type": "integer"
+        },
+        "Max": {
+          "type": "integer"
+        }
+      }
+    },
+    "AcceleratorTotalMemoryMiBRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Min": {
+          "type": "integer"
+        },
+        "Max": {
+          "type": "integer"
+        }
+      }
+    },
+    "BaselinePerformanceFactorsRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Cpu": {
+          "$ref": "#/definitions/CpuPerformanceFactorRequest"
+        }
+      }
+    },
+    "CpuPerformanceFactorRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "References": {
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "$ref": "#/definitions/PerformanceFactorReferenceRequest"
+          }
+        }
+      }
+    },
+    "PerformanceFactorReferenceRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "InstanceFamily": {
+          "type": "string"
+        }
+      }
+    },
+    "MaintenanceStrategies": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "CapacityRebalance": {
+          "$ref": "#/definitions/CapacityRebalance"
+        }
+      }
+    },
+    "CapacityRebalance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ReplacementStrategy": {
           "type": "string",
           "enum": [
-            "gp2",
-            "gp3",
-            "io1",
-            "io2",
-            "sc1",
-            "st1",
-            "standard"
+            "launch",
+            "launch-before-terminate"
           ]
         },
-        "KmsKeyId": {
-          "type": "string"
-        },
-        "Encrypted": {
-          "type": "boolean"
-        },
-        "Iops": {
+        "TerminationDelay": {
           "type": "integer"
-        },
-        "VolumeSize": {
-          "type": "integer"
-        },
-        "DeleteOnTermination": {
-          "type": "boolean"
         }
       }
-    },
-    "Tag": {
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "Value": {
-          "type": "string"
-        },
-        "Key": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "Value",
-        "Key"
-      ]
-    }
-  },
-  "properties": {
-    "Context": {
-      "type": "string"
-    },
-    "TargetCapacitySpecification": {
-      "$ref": "#/definitions/TargetCapacitySpecificationRequest"
-    },
-    "OnDemandOptions": {
-      "$ref": "#/definitions/OnDemandOptionsRequest"
-    },
-    "ExcessCapacityTerminationPolicy": {
-      "type": "string",
-      "enum": [
-        "termination",
-        "no-termination"
-      ]
-    },
-    "TagSpecifications": {
-      "uniqueItems": false,
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/TagSpecification"
-      }
-    },
-    "SpotOptions": {
-      "$ref": "#/definitions/SpotOptionsRequest"
-    },
-    "LaunchTemplateConfigs": {
-      "maxItems": 50,
-      "uniqueItems": false,
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/FleetLaunchTemplateConfigRequest"
-      }
-    },
-    "TerminateInstancesWithExpiration": {
-      "type": "boolean"
-    },
-    "ValidUntil": {
-      "type": "string"
-    },
-    "Type": {
-      "type": "string",
-      "enum": [
-        "maintain",
-        "request",
-        "instant"
-      ]
-    },
-    "FleetId": {
-      "type": "string"
-    },
-    "ValidFrom": {
-      "type": "string"
-    },
-    "ReplaceUnhealthyInstances": {
-      "type": "boolean"
     }
   },
   "required": [
     "TargetCapacitySpecification",
     "LaunchTemplateConfigs"
-  ]
+  ],
+  "createOnlyProperties": [
+    "/properties/LaunchTemplateConfigs",
+    "/properties/OnDemandOptions",
+    "/properties/ReplaceUnhealthyInstances",
+    "/properties/SpotOptions",
+    "/properties/TagSpecifications",
+    "/properties/TerminateInstancesWithExpiration",
+    "/properties/Type",
+    "/properties/ValidFrom",
+    "/properties/ValidUntil"
+  ],
+  "primaryIdentifier": [
+    "/properties/FleetId"
+  ],
+  "readOnlyProperties": [
+    "/properties/FleetId"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "ec2:CreateFleet",
+        "ec2:DescribeFleets"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ec2:DescribeFleets",
+        "ec2:DeleteFleets"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "ec2:DescribeFleets"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "ec2:DescribeFleets"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "ec2:ModifyFleet",
+        "ec2:DescribeFleets"
+      ]
+    }
+  },
+  "tagging": {
+    "taggable": false
+  }
 }

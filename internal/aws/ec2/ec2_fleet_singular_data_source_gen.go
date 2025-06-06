@@ -89,6 +89,61 @@ func eC2FleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "AvailabilityZone": {
 		//	              "type": "string"
 		//	            },
+		//	            "BlockDeviceMappings": {
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "DeviceName": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Ebs": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "DeleteOnTermination": {
+		//	                        "type": "boolean"
+		//	                      },
+		//	                      "Encrypted": {
+		//	                        "type": "boolean"
+		//	                      },
+		//	                      "Iops": {
+		//	                        "type": "integer"
+		//	                      },
+		//	                      "KmsKeyId": {
+		//	                        "type": "string"
+		//	                      },
+		//	                      "SnapshotId": {
+		//	                        "type": "string"
+		//	                      },
+		//	                      "VolumeSize": {
+		//	                        "type": "integer"
+		//	                      },
+		//	                      "VolumeType": {
+		//	                        "enum": [
+		//	                          "gp2",
+		//	                          "gp3",
+		//	                          "io1",
+		//	                          "io2",
+		//	                          "sc1",
+		//	                          "st1",
+		//	                          "standard"
+		//	                        ],
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  },
+		//	                  "NoDevice": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "VirtualName": {
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": true
+		//	            },
 		//	            "InstanceRequirements": {
 		//	              "additionalProperties": false,
 		//	              "properties": {
@@ -451,6 +506,60 @@ func eC2FleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: AvailabilityZone
 								"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: BlockDeviceMappings
+								"block_device_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: DeviceName
+											"device_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Ebs
+											"ebs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: DeleteOnTermination
+													"delete_on_termination": schema.BoolAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: Encrypted
+													"encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: Iops
+													"iops": schema.Int64Attribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: KmsKeyId
+													"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: SnapshotId
+													"snapshot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: VolumeSize
+													"volume_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: VolumeType
+													"volume_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: NoDevice
+											"no_device": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: VirtualName
+											"virtual_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
 									Computed: true,
 								}, /*END ATTRIBUTE*/
 								// Property: InstanceRequirements
@@ -1187,6 +1296,7 @@ func eC2FleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"bare_metal":                         "BareMetal",
 		"baseline_ebs_bandwidth_mbps":        "BaselineEbsBandwidthMbps",
 		"baseline_performance_factors":       "BaselinePerformanceFactors",
+		"block_device_mappings":              "BlockDeviceMappings",
 		"burstable_performance":              "BurstablePerformance",
 		"capacity_rebalance":                 "CapacityRebalance",
 		"capacity_reservation_options":       "CapacityReservationOptions",
@@ -1194,6 +1304,10 @@ func eC2FleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"cpu":                                "Cpu",
 		"cpu_manufacturers":                  "CpuManufacturers",
 		"default_target_capacity_type":       "DefaultTargetCapacityType",
+		"delete_on_termination":              "DeleteOnTermination",
+		"device_name":                        "DeviceName",
+		"ebs":                                "Ebs",
+		"encrypted":                          "Encrypted",
 		"excess_capacity_termination_policy": "ExcessCapacityTerminationPolicy",
 		"excluded_instance_types":            "ExcludedInstanceTypes",
 		"fleet_id":                           "FleetId",
@@ -1206,7 +1320,9 @@ func eC2FleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"instance_pools_to_use_count":        "InstancePoolsToUseCount",
 		"instance_requirements":              "InstanceRequirements",
 		"instance_type":                      "InstanceType",
+		"iops":                               "Iops",
 		"key":                                "Key",
+		"kms_key_id":                         "KmsKeyId",
 		"launch_template_configs":            "LaunchTemplateConfigs",
 		"launch_template_id":                 "LaunchTemplateId",
 		"launch_template_name":               "LaunchTemplateName",
@@ -1224,6 +1340,7 @@ func eC2FleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"min_target_capacity":     "MinTargetCapacity",
 		"network_bandwidth_gbps":  "NetworkBandwidthGbps",
 		"network_interface_count": "NetworkInterfaceCount",
+		"no_device":               "NoDevice",
 		"on_demand_max_price_percentage_over_lowest_price": "OnDemandMaxPricePercentageOverLowestPrice",
 		"on_demand_options":           "OnDemandOptions",
 		"on_demand_target_capacity":   "OnDemandTargetCapacity",
@@ -1238,6 +1355,7 @@ func eC2FleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"resource_type":               "ResourceType",
 		"single_availability_zone":    "SingleAvailabilityZone",
 		"single_instance_type":        "SingleInstanceType",
+		"snapshot_id":                 "SnapshotId",
 		"spot_max_price_percentage_over_lowest_price": "SpotMaxPricePercentageOverLowestPrice",
 		"spot_options":                        "SpotOptions",
 		"spot_target_capacity":                "SpotTargetCapacity",
@@ -1259,6 +1377,9 @@ func eC2FleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"valid_until":                         "ValidUntil",
 		"value":                               "Value",
 		"version":                             "Version",
+		"virtual_name":                        "VirtualName",
+		"volume_size":                         "VolumeSize",
+		"volume_type":                         "VolumeType",
 		"weighted_capacity":                   "WeightedCapacity",
 	})
 

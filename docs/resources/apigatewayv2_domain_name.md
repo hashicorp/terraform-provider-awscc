@@ -37,6 +37,7 @@ resource "awscc_apigatewayv2_domain_name" "example" {
 
 - `domain_name_configurations` (Attributes List) The domain name configurations. (see [below for nested schema](#nestedatt--domain_name_configurations))
 - `mutual_tls_authentication` (Attributes) The mutual TLS authentication configuration for a custom domain name. (see [below for nested schema](#nestedatt--mutual_tls_authentication))
+- `routing_mode` (String)
 - `tags` (Map of String) The collection of tags associated with a domain name.
 
 ### Read-Only

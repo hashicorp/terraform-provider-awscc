@@ -18,6 +18,7 @@ Resource Type definition for AWS::DSQL::Cluster
 ### Optional
 
 - `deletion_protection_enabled` (Boolean) Whether deletion protection is enabled in this cluster.
+- `multi_region_properties` (Attributes) The Multi-region properties associated to this cluster. (see [below for nested schema](#nestedatt--multi_region_properties))
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -28,6 +29,15 @@ Resource Type definition for AWS::DSQL::Cluster
 - `resource_arn` (String) The Amazon Resource Name (ARN) for the cluster.
 - `status` (String) The status of the cluster.
 - `vpc_endpoint_service_name` (String) The VPC endpoint service name.
+
+<a id="nestedatt--multi_region_properties"></a>
+### Nested Schema for `multi_region_properties`
+
+Optional:
+
+- `clusters` (Set of String)
+- `witness_region` (String) The witness region in a multi-region cluster.
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

@@ -1,0 +1,1 @@
+$ terraform import awscc_networkfirewall_vpc_endpoint_association.example "vpc_endpoint_association_arn"

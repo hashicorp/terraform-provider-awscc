@@ -8,13 +8,16 @@ package apigatewayv2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
@@ -235,6 +238,35 @@ func domainNameResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: RoutingMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": "API_MAPPING_ONLY",
+		//	  "description": "",
+		//	  "enum": [
+		//	    "API_MAPPING_ONLY",
+		//	    "ROUTING_RULE_THEN_API_MAPPING",
+		//	    "ROUTING_RULE_ONLY"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"routing_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			Default:     stringdefault.StaticString("API_MAPPING_ONLY"),
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"API_MAPPING_ONLY",
+					"ROUTING_RULE_THEN_API_MAPPING",
+					"ROUTING_RULE_ONLY",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -291,6 +323,7 @@ func domainNameResource(ctx context.Context) (resource.Resource, error) {
 		"ownership_verification_certificate_arn": "OwnershipVerificationCertificateArn",
 		"regional_domain_name":                   "RegionalDomainName",
 		"regional_hosted_zone_id":                "RegionalHostedZoneId",
+		"routing_mode":                           "RoutingMode",
 		"security_policy":                        "SecurityPolicy",
 		"tags":                                   "Tags",
 		"truststore_uri":                         "TruststoreUri",

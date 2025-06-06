@@ -10,6 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -53,6 +54,45 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the created cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: MultiRegionProperties
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The Multi-region properties associated to this cluster.",
+		//	  "properties": {
+		//	    "Clusters": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "description": "The cluster Amazon Resource Name (ARN) in a multi-region cluster.",
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "WitnessRegion": {
+		//	      "description": "The witness region in a multi-region cluster.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"multi_region_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Clusters
+				"clusters": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: WitnessRegion
+				"witness_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The witness region in a multi-region cluster.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The Multi-region properties associated to this cluster.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ResourceArn
@@ -153,15 +193,18 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::DSQL::Cluster").WithTerraformTypeName("awscc_dsql_cluster")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"clusters":                    "Clusters",
 		"creation_time":               "CreationTime",
 		"deletion_protection_enabled": "DeletionProtectionEnabled",
 		"identifier":                  "Identifier",
 		"key":                         "Key",
+		"multi_region_properties":     "MultiRegionProperties",
 		"resource_arn":                "ResourceArn",
 		"status":                      "Status",
 		"tags":                        "Tags",
 		"value":                       "Value",
 		"vpc_endpoint_service_name":   "VpcEndpointServiceName",
+		"witness_region":              "WitnessRegion",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

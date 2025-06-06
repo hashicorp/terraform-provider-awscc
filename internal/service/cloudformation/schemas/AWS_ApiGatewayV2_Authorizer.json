@@ -20,14 +20,6 @@
       "type": "string",
       "description": "The authorizer type. Specify ``REQUEST`` for a Lambda function using incoming request parameters. Specify ``JWT`` to use JSON Web Tokens (supported only for HTTP APIs)."
     },
-    "JwtConfiguration": {
-      "$ref": "#/definitions/JWTConfiguration",
-      "description": "The ``JWTConfiguration`` property specifies the configuration of a JWT authorizer. Required for the ``JWT`` authorizer type. Supported only for HTTP APIs."
-    },
-    "AuthorizerResultTtlInSeconds": {
-      "type": "integer",
-      "description": "The time to live (TTL) for cached authorizer results, in seconds. If it equals 0, authorization caching is disabled. If it is greater than 0, API Gateway caches authorizer responses. The maximum value is 3600, or 1 hour. Supported only for HTTP API Lambda authorizers."
-    },
     "IdentitySource": {
       "type": "array",
       "uniqueItems": false,
@@ -36,17 +28,25 @@
       },
       "description": "The identity source for which authorization is requested.\n For a ``REQUEST`` authorizer, this is optional. The value is a set of one or more mapping expressions of the specified request parameters. The identity source can be headers, query string parameters, stage variables, and context parameters. For example, if an Auth header and a Name query string parameter are defined as identity sources, this value is route.request.header.Auth, route.request.querystring.Name for WebSocket APIs. For HTTP APIs, use selection expressions prefixed with ``$``, for example, ``$request.header.Auth``, ``$request.querystring.Name``. These parameters are used to perform runtime validation for Lambda-based authorizers by verifying all of the identity-related request parameters are present in the request, not null, and non-empty. Only when this is true does the authorizer invoke the authorizer Lambda function. Otherwise, it returns a 401 Unauthorized response without calling the Lambda function. For HTTP APIs, identity sources are also used as the cache key when caching is enabled. To learn more, see [Working with Lambda authorizers for HTTP APIs](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html).\n For ``JWT``, a single entry that specifies where to extract the JSON Web Token (JWT) from inbound requests. Currently only header-based and query parameter-based selections are supported, for example ``$request.header.Authorization``."
     },
+    "JwtConfiguration": {
+      "$ref": "#/definitions/JWTConfiguration",
+      "description": "The ``JWTConfiguration`` property specifies the configuration of a JWT authorizer. Required for the ``JWT`` authorizer type. Supported only for HTTP APIs."
+    },
+    "AuthorizerResultTtlInSeconds": {
+      "type": "integer",
+      "description": "The time to live (TTL) for cached authorizer results, in seconds. If it equals 0, authorization caching is disabled. If it is greater than 0, API Gateway caches authorizer responses. The maximum value is 3600, or 1 hour. Supported only for HTTP API Lambda authorizers."
+    },
     "AuthorizerPayloadFormatVersion": {
       "type": "string",
       "description": "Specifies the format of the payload sent to an HTTP API Lambda authorizer. Required for HTTP API Lambda authorizers. Supported values are ``1.0`` and ``2.0``. To learn more, see [Working with Lambda authorizers for HTTP APIs](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html)."
     },
-    "ApiId": {
-      "type": "string",
-      "description": "The API identifier."
-    },
     "EnableSimpleResponses": {
       "type": "boolean",
       "description": "Specifies whether a Lambda authorizer returns a response in a simple format. By default, a Lambda authorizer must return an IAM policy. If enabled, the Lambda authorizer can return a boolean value instead of an IAM policy. Supported only for HTTP APIs. To learn more, see [Working with Lambda authorizers for HTTP APIs](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html)."
+    },
+    "ApiId": {
+      "type": "string",
+      "description": "The API identifier."
     },
     "AuthorizerId": {
       "type": "string",
@@ -92,6 +92,13 @@
   ],
   "readOnlyProperties": [
     "/properties/AuthorizerId"
+  ],
+  "writeOnlyProperties": [
+    "/properties/AuthorizerPayloadFormatVersion",
+    "/properties/AuthorizerResultTtlInSeconds",
+    "/properties/EnableSimpleResponses",
+    "/properties/AuthorizerCredentialsArn",
+    "/properties/AuthorizerUri"
   ],
   "tagging": {
     "taggable": false,

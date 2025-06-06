@@ -333,6 +333,98 @@ func eventDataStoreResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ContextKeySelectors
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An array that enriches event records in an existing event data store by including additional information specified in individual ContexKeySelector entries. If you add ContextKeySelectors, you must set MaxEventSize to Large.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "An object that contains information types to be included in CloudTrail enriched events.",
+		//	    "properties": {
+		//	      "Equals": {
+		//	        "description": "An operator that includes events that match the exact value of the event record field specified in Type.",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "maxLength": 128,
+		//	          "minLength": 1,
+		//	          "pattern": "(.+)",
+		//	          "type": "string"
+		//	        },
+		//	        "maxItems": 50,
+		//	        "minItems": 1,
+		//	        "type": "array",
+		//	        "uniqueItems": true
+		//	      },
+		//	      "Type": {
+		//	        "description": "Specifies the type of the event record field in ContextKeySelector. Valid values include RequestContext, TagContext.",
+		//	        "enum": [
+		//	          "RequestContext",
+		//	          "TagContext"
+		//	        ],
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Type",
+		//	      "Equals"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 2,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"context_key_selectors": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Equals
+					"equals": schema.SetAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "An operator that includes events that match the exact value of the event record field specified in Type.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.Set{ /*START VALIDATORS*/
+							setvalidator.SizeBetween(1, 50),
+							setvalidator.ValueStringsAre(
+								stringvalidator.LengthBetween(1, 128),
+								stringvalidator.RegexMatches(regexp.MustCompile("(.+)"), ""),
+							),
+							fwvalidators.NotNullSet(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+							setplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Specifies the type of the event record field in ContextKeySelector. Valid values include RequestContext, TagContext.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"RequestContext",
+								"TagContext",
+							),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array that enriches event records in an existing event data store by including additional information specified in individual ContexKeySelector entries. If you add ContextKeySelectors, you must set MaxEventSize to Large.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.Set{ /*START VALIDATORS*/
+				setvalidator.SizeAtMost(2),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedTimestamp
 		// CloudFormation resource type schema:
 		//
@@ -473,6 +565,31 @@ func eventDataStoreResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Specifies the KMS key ID to use to encrypt the events delivered by CloudTrail. The value can be an alias name prefixed by 'alias/', a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.",
 			Optional:    true,
 			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: MaxEventSize
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies the maximum size allowed for the event. Valid values are Standard and Large. If you add ContextKeySelectors, this value must be set to Large.",
+		//	  "enum": [
+		//	    "Standard",
+		//	    "Large"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"max_event_size": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the maximum size allowed for the event. Valid values are Standard and Large. If you add ContextKeySelectors, this value must be set to Large.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"Standard",
+					"Large",
+				),
+			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -667,6 +784,7 @@ func eventDataStoreResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"advanced_event_selectors":       "AdvancedEventSelectors",
 		"billing_mode":                   "BillingMode",
+		"context_key_selectors":          "ContextKeySelectors",
 		"created_timestamp":              "CreatedTimestamp",
 		"ends_with":                      "EndsWith",
 		"equals":                         "Equals",
@@ -681,6 +799,7 @@ func eventDataStoreResource(ctx context.Context) (resource.Resource, error) {
 		"insights_destination":           "InsightsDestination",
 		"key":                            "Key",
 		"kms_key_id":                     "KmsKeyId",
+		"max_event_size":                 "MaxEventSize",
 		"multi_region_enabled":           "MultiRegionEnabled",
 		"name":                           "Name",
 		"not_ends_with":                  "NotEndsWith",
@@ -692,6 +811,7 @@ func eventDataStoreResource(ctx context.Context) (resource.Resource, error) {
 		"status":                         "Status",
 		"tags":                           "Tags",
 		"termination_protection_enabled": "TerminationProtectionEnabled",
+		"type":                           "Type",
 		"updated_timestamp":              "UpdatedTimestamp",
 		"value":                          "Value",
 	})

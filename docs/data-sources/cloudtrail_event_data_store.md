@@ -23,6 +23,7 @@ Data Source schema for AWS::CloudTrail::EventDataStore
 
 - `advanced_event_selectors` (Attributes Set) The advanced event selectors that were used to select events for the data store. (see [below for nested schema](#nestedatt--advanced_event_selectors))
 - `billing_mode` (String) The mode that the event data store will use to charge for event storage.
+- `context_key_selectors` (Attributes Set) An array that enriches event records in an existing event data store by including additional information specified in individual ContexKeySelector entries. If you add ContextKeySelectors, you must set MaxEventSize to Large. (see [below for nested schema](#nestedatt--context_key_selectors))
 - `created_timestamp` (String) The timestamp of the event data store's creation.
 - `event_data_store_arn` (String) The ARN of the event data store.
 - `federation_enabled` (Boolean) Indicates whether federation is enabled on an event data store.
@@ -31,6 +32,7 @@ Data Source schema for AWS::CloudTrail::EventDataStore
 - `insight_selectors` (Attributes Set) Lets you enable Insights event logging by specifying the Insights selectors that you want to enable on an existing event data store. Both InsightSelectors and InsightsDestination need to have a value in order to enable Insights events on an event data store. (see [below for nested schema](#nestedatt--insight_selectors))
 - `insights_destination` (String) Specifies the ARN of the event data store that will collect Insights events. Both InsightSelectors and InsightsDestination need to have a value in order to enable Insights events on an event data store
 - `kms_key_id` (String) Specifies the KMS key ID to use to encrypt the events delivered by CloudTrail. The value can be an alias name prefixed by 'alias/', a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.
+- `max_event_size` (String) Specifies the maximum size allowed for the event. Valid values are Standard and Large. If you add ContextKeySelectors, this value must be set to Large.
 - `multi_region_enabled` (Boolean) Indicates whether the event data store includes events from all regions, or only from the region in which it was created.
 - `name` (String) The name of the event data store.
 - `organization_enabled` (Boolean) Indicates that an event data store is collecting logged events for an organization.
@@ -61,6 +63,15 @@ Read-Only:
 - `not_starts_with` (Set of String) An operator that excludes events that match the first few characters of the event record field specified as the value of Field.
 - `starts_with` (Set of String) An operator that includes events that match the first few characters of the event record field specified as the value of Field.
 
+
+
+<a id="nestedatt--context_key_selectors"></a>
+### Nested Schema for `context_key_selectors`
+
+Read-Only:
+
+- `equals` (Set of String) An operator that includes events that match the exact value of the event record field specified in Type.
+- `type` (String) Specifies the type of the event record field in ContextKeySelector. Valid values include RequestContext, TagContext.
 
 
 <a id="nestedatt--insight_selectors"></a>

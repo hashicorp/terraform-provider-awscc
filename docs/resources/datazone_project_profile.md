@@ -21,12 +21,9 @@ Definition of AWS::DataZone::ProjectProfile Resource Type
 
 ### Optional
 
-- `allowed_designations` (Attributes List) (see [below for nested schema](#nestedatt--allowed_designations))
-- `change_log` (String)
 - `description` (String)
 - `domain_identifier` (String)
 - `domain_unit_identifier` (String)
-- `project_scopes` (Attributes List) (see [below for nested schema](#nestedatt--project_scopes))
 - `status` (String)
 
 ### Read-Only
@@ -39,22 +36,6 @@ Definition of AWS::DataZone::ProjectProfile Resource Type
 - `identifier` (String)
 - `last_updated_at` (String)
 - `project_profile_id` (String)
-
-<a id="nestedatt--allowed_designations"></a>
-### Nested Schema for `allowed_designations`
-
-Optional:
-
-- `designation_id` (String)
-
-
-<a id="nestedatt--project_scopes"></a>
-### Nested Schema for `project_scopes`
-
-Optional:
-
-- `name` (String)
-- `policy` (String)
 
 ## Import
 
