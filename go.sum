@@ -35,10 +35,10 @@ github.com/aws/aws-sdk-go-v2/internal/ini v1.8.3 h1:bIqFDwgGXXN1Kpp99pDOdKMTTb5d
 github.com/aws/aws-sdk-go-v2/internal/ini v1.8.3/go.mod h1:H5O/EsxDWyU+LP/V8i5sm8cxoZgc2fdNR9bxlOFrQTo=
 github.com/aws/aws-sdk-go-v2/internal/v4a v1.3.34 h1:ZNTqv4nIdE/DiBfUUfXcLZ/Spcuz+RjeziUtNJackkM=
 github.com/aws/aws-sdk-go-v2/internal/v4a v1.3.34/go.mod h1:zf7Vcd1ViW7cPqYWEHLHJkS50X0JS2IKz9Cgaj6ugrs=
-github.com/aws/aws-sdk-go-v2/service/cloudcontrol v1.24.3 h1:67e/C9khmgT05g7OoJiB8e011wOCjn+JZj/FH2QqVGU=
-github.com/aws/aws-sdk-go-v2/service/cloudcontrol v1.24.3/go.mod h1:ifQSgXMoHWzSB1gBIqKPDqXkp9TP/a/fmx0AIRFHVL0=
-github.com/aws/aws-sdk-go-v2/service/cloudformation v1.60.0 h1:MX2zcyNzOeqfRChQXlqY5p5LkTJTYxZp4zMD0p3ige0=
-github.com/aws/aws-sdk-go-v2/service/cloudformation v1.60.0/go.mod h1:penaZKzGmqHGZId4EUCBIW/f9l4Y7hQ5NKd45yoCYuI=
+github.com/aws/aws-sdk-go-v2/service/cloudcontrol v1.24.4 h1:3GftxP2qPDppuXJP6mqsSvz0jQ+6b4f+nhhJqtvqp6A=
+github.com/aws/aws-sdk-go-v2/service/cloudcontrol v1.24.4/go.mod h1:ifQSgXMoHWzSB1gBIqKPDqXkp9TP/a/fmx0AIRFHVL0=
+github.com/aws/aws-sdk-go-v2/service/cloudformation v1.60.1 h1:jPqc5WvPzTfsiVc4npduHmjwuIuBdAHKFQ/gcJ0Ixs4=
+github.com/aws/aws-sdk-go-v2/service/cloudformation v1.60.1/go.mod h1:penaZKzGmqHGZId4EUCBIW/f9l4Y7hQ5NKd45yoCYuI=
 github.com/aws/aws-sdk-go-v2/service/dynamodb v1.43.2 h1:bjp0bB5k3MQ9diYqjV1/ocHZHdTnoKSqQRa2s5B+648=
 github.com/aws/aws-sdk-go-v2/service/dynamodb v1.43.2/go.mod h1:yYaWRnVSPyAmexW5t7G3TcuYoalYfT+xQwzWsvtUQ7M=
 github.com/aws/aws-sdk-go-v2/service/iam v1.42.0 h1:G6+UzGvubaet9QOh0664E9JeT+b6Zvop3AChozRqkrA=
