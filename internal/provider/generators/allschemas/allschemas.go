@@ -1,11 +1,10 @@
 // Copyright (c) HashiCorp, Inc.
 // SPDX-License-Identifier: MPL-2.0
 
-package main
+package allschemas
 
 import (
 	"context"
-	"fmt"
 	"sort"
 	"strings"
 
@@ -21,7 +20,7 @@ import (
 	tfslices "github.com/hashicorp/terraform-provider-awscc/internal/slices"
 )
 
-func main() {
+func NewSchemaGeneration() *AllSchemas {
 	g := common.NewGenerator()
 	ctx := context.TODO()
 	cfg, err := config.LoadDefaultConfig(ctx)
@@ -78,6 +77,9 @@ func main() {
 
 	g.Infof("# %d CloudFormation resource types schemas are available for use with the Cloud Control API.", len(cfTypeNames))
 
+	AllNewSchemas := AllSchemas{
+		Resources: make([]ResourceSchema, 0, len(cfTypeNames)),
+	}
 	for _, cfTypeName := range cfTypeNames {
 		org, svc, res, err := naming.ParseCloudFormationTypeName(cfTypeName)
 
@@ -126,19 +128,35 @@ func main() {
 			}
 		}
 
-		var block string
-		if suppressPluralDataSource {
-			block = fmt.Sprintf(`
-resource_schema %[1]q {
-  cloudformation_type_name               = %[2]q
-  suppress_plural_data_source_generation = %[3]t
-}`, tfTypeName, cfTypeName, suppressPluralDataSource)
-		} else {
-			block = fmt.Sprintf(`
-resource_schema %[1]q {
-  cloudformation_type_name = %[2]q
-}`, tfTypeName, cfTypeName)
+		var currResourceSchema = ResourceSchema{
+			ResourceTypeName:       tfTypeName,
+			CloudFormationTypeName: cfTypeName,
 		}
-		g.Infof("%s", block)
+
+		if suppressPluralDataSource {
+			currResourceSchema.SuppressPluralDataSourceGeneration = suppressPluralDataSource
+		}
+		AllNewSchemas.Resources = append(AllNewSchemas.Resources, currResourceSchema)
+		g.Infof("diff_schema %s {", currResourceSchema.ResourceTypeName)
+		g.Infof("  cloudformation_type_name = %s", currResourceSchema.CloudFormationTypeName)
+		if currResourceSchema.SuppressPluralDataSourceGeneration {
+			g.Infof("  suppress_plural_data_source_generation = %t", currResourceSchema.SuppressPluralDataSourceGeneration)
+		}
+		g.Infof("}")
 	}
+	return &AllNewSchemas
+}
+
+type AllSchemas struct {
+	Resources []ResourceSchema `hcl:"resource,block"`
+}
+
+type ResourceSchema struct {
+	CloudFormationSchemaPath             string `hcl:"cloudformation_schema_path,optional"`
+	CloudFormationTypeName               string `hcl:"cloudformation_type_name"`
+	SuppressionReason                    string `hcl:"suppression_reason,optional"`
+	ResourceTypeName                     string `hcl:"resource_type_name,label"` // Block Name
+	SuppressPluralDataSourceGeneration   bool   `hcl:"suppress_plural_data_source_generation,optional"`
+	SuppressResourceGeneration           bool   `hcl:"suppress_resource_generation,optional"`
+	SuppressSingularDataSourceGeneration bool   `hcl:"suppress_singular_data_source_generation,optional"`
 }
