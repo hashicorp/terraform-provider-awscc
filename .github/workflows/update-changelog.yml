@@ -108,8 +108,6 @@ jobs:
 
           ### Changes
           - Added changelog section for v${{ steps.version.outputs.next_version }} (Unreleased)
-
-          This entry is ready for future release notes to be added.
           EOF
 
       - name: Create Pull Request
@@ -117,7 +115,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh pr create \
-            --title "Add changelog entry for v${{ steps.version.outputs.next_version }}" \
+            --title "Add CHANGELOG entry for v${{ steps.version.outputs.next_version }}" \
             --body-file pr_description.md \
             --base main \
             --head ${{ steps.version.outputs.branch_name }}
