@@ -15,6 +15,7 @@ import (
 	"path/filepath"
 	"sort"
 	"strings"
+	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
@@ -232,7 +233,7 @@ func (d *Downloader) Schemas() ([]*ResourceData, *DataSources, error) {
 	var singularDataSources, pluralDataSources []*DataSourceData
 
 	for _, schema := range d.config.ResourceSchemas {
-		cfResourceSchemaFilename, cfResourceTypeName, err := d.ResourceSchema(schema)
+		cfResourceSchemaFilename, cfResourceTypeName, err := d.ResourceSchema(schema, 0)
 
 		if err != nil {
 			d.ui.Warn(fmt.Sprintf("error loading CloudFormation Resource Provider Schema for %s: %s", schema.ResourceTypeName, err))
@@ -310,7 +311,14 @@ func (d *Downloader) Schemas() ([]*ResourceData, *DataSources, error) {
 }
 
 // ResourceSchema returns the local resource schema file name and type name.
-func (d *Downloader) ResourceSchema(schema ResourceSchema) (string, string, error) {
+func (d *Downloader) ResourceSchema(schema ResourceSchema, waitTime int) (string, string, error) {
+	if waitTime > 0 {
+		d.infof("waiting %d seconds before downloading schema for %q", waitTime, schema.CloudFormationTypeName)
+		time.Sleep(time.Duration(waitTime) * time.Second)
+	}
+	if waitTime > 300 {
+		return "", "", fmt.Errorf("wait time %d seconds is too long for resource %s , maximum is 300 seconds", waitTime, schema.CloudFormationTypeName)
+	}
 	resourceSchemaFilename := schema.CloudFormationSchemaPath
 	if resourceSchemaFilename == "" {
 		filename := fmt.Sprintf("%s.json", schema.CloudFormationTypeName)
@@ -333,7 +341,18 @@ func (d *Downloader) ResourceSchema(schema ResourceSchema) (string, string, erro
 		output, err := d.client.DescribeType(context.TODO(), input)
 
 		if err != nil {
-			return "", "", fmt.Errorf("describing CloudFormation type: %w", err)
+			if strings.Contains(err.Error(), "describing CloudFormation type: operation error CloudFormation: DescribeType, exceeded maximum number of attempts, 3, https response error StatusCode: 400, RequestID:") {
+				if waitTime == 0 {
+					waitTime = 2
+				} else {
+					waitTime *= 2
+				}
+				d.infof("retrying DescribeType for %q with %d second timeout", schema.CloudFormationTypeName, waitTime)
+				return d.ResourceSchema(schema, waitTime)
+			} else {
+				return "", "", fmt.Errorf("describing CloudFormation type: %w", err)
+			}
+
 		}
 
 		schema, err := cfschema.Sanitize(aws.ToString(output.Schema))

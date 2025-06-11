@@ -118,7 +118,7 @@ write allSchemas array to allSchemas.hcl
 
 make sure to check for errors and
 */
-func diffSchemas(newSchemas, lastSchemas *allschemas.AllSchemas, allSchemasPath string) error {
+func diffSchemas(newSchemas, lastSchemas *allschemas.AllSchemas, allSchemasPath string) (*allschemas.AllSchemas, error) {
 	// Create a map from lastSchemas for lookup
 	lastSchemasMap := make(map[string]allschemas.ResourceSchema)
 	for _, resource := range lastSchemas.Resources {
@@ -158,7 +158,7 @@ func diffSchemas(newSchemas, lastSchemas *allschemas.AllSchemas, allSchemasPath 
 
 	if len(changedOrNewResources) == 0 {
 		fmt.Println("No changes or new resources found.")
-		return nil
+		return nil, nil
 	}
 
 	fmt.Printf("Found %d changed or new resources.\n", len(changedOrNewResources))
@@ -167,16 +167,16 @@ func diffSchemas(newSchemas, lastSchemas *allschemas.AllSchemas, allSchemasPath 
 	existingAllSchemas := &allschemas.AllSchemas{}
 	file, err := os.ReadFile(allSchemasPath)
 	if err != nil {
-		return fmt.Errorf("failed to read file %s: %w", allSchemasPath, err)
+		return nil, fmt.Errorf("failed to read file %s: %w", allSchemasPath, err)
 	}
 
 	parser := hclparse.NewParser()
 	fileHCL, diag := parser.ParseHCL(file, allSchemasPath)
 	if diag.HasErrors() {
-		return fmt.Errorf("failed to parse HCL from %s: %s", allSchemasPath, diag.Error())
+		return nil, fmt.Errorf("failed to parse HCL from %s: %s", allSchemasPath, diag.Error())
 	}
 	if diag := gohcl.DecodeBody(fileHCL.Body, nil, existingAllSchemas); diag.HasErrors() {
-		return fmt.Errorf("failed to decode HCL from %s: %s", allSchemasPath, diag.Error())
+		return nil, fmt.Errorf("failed to decode HCL from %s: %s", allSchemasPath, diag.Error())
 	}
 
 	// Create a map of existing resources
@@ -212,7 +212,7 @@ func diffSchemas(newSchemas, lastSchemas *allschemas.AllSchemas, allSchemasPath 
 		return existingAllSchemas.Resources[i].ResourceTypeName < existingAllSchemas.Resources[j].ResourceTypeName
 	})
 	// Write updated schema back to file
-	return writeSchemasToHCLFile(existingAllSchemas, allSchemasPath)
+	return existingAllSchemas, writeSchemasToHCLFile(existingAllSchemas, allSchemasPath)
 }
 
 func writeSchemasToHCLFile(schema *allschemas.AllSchemas, filePath string) error {

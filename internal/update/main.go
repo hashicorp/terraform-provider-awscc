@@ -1,6 +1,7 @@
 package update
 
 import (
+	"context"
 	"fmt"
 	"os"
 	"os/exec"
@@ -20,6 +21,7 @@ func main() error {
 		os.Exit(1)
 	}
 	// do we have to do anything about diags?
+	ctx := context.Background()
 	client, err := newGithubClient()
 	if err != nil {
 		return fmt.Errorf("failed to create GitHub client: %w", err)
@@ -35,7 +37,7 @@ func main() error {
 	if err != nil {
 		return fmt.Errorf("failed to parse current schemas: %w", err)
 	}
-	err = makeSchemas(client, *currAllSchemas) // First Make Schema
+	err = makeSchemas(ctx, client, *currAllSchemas) // First Make Schema
 	if err != nil {
 		return fmt.Errorf("failed to make schemas: %w", err)
 	}
@@ -43,7 +45,7 @@ func main() error {
 	if err != nil {
 		return fmt.Errorf("failed to git add files: %w", err)
 	}
-	currentDate := time.Now().Format("2006/01/02")
+	currentDate := time.Now().Format("2006-01-02")
 	err = execGit("commit", "-m", fmt.Sprintf("%s CloudFormation schemas in us-east-1; Refresh existing schemas.", currentDate))
 	if err != nil {
 		return fmt.Errorf("failed to commit schema refresh: %w", err)
@@ -59,17 +61,17 @@ func main() error {
 	fmt.Println("Last date found:", lastDate)
 
 	newSchemas := allschemas.NewSchemaGeneration()
-	err = writeSchemasToHCLFile(newSchemas, "internal/provider/generators/allschemas/"+currentDate+".hcl")
+	err = writeSchemasToHCLFile(newSchemas, "internal/provider/generators/allschemas/available_schemas."+currentDate+".hcl")
 	if err != nil {
 		return fmt.Errorf("failed to write new schemas to HCL file: %w", err)
 	}
 	// Parse schema from previous run
-	lastSchemas, err := parseSchemaToStruct("internal/provider/generators/allschemas/" + lastDate + ".hcl")
+	lastSchemas, err := parseSchemaToStruct("internal/provider/generators/allschemas/available_schemas." + lastDate + ".hcl")
 	if err != nil {
 		return fmt.Errorf("failed to parse last schemas: %w", err)
 	}
 
-	err = diffSchemas(lastSchemas, newSchemas, "internal/provider/allschemas.hcl")
+	currAllSchemas, err = diffSchemas(lastSchemas, newSchemas, "internal/provider/allschemas.hcl")
 
 	// Diff Step Stop
 
@@ -87,14 +89,14 @@ func main() error {
 	}
 
 	// Execute make resources command
-	err = execCommand("make", "resources")
-	if err != nil {
-		return fmt.Errorf("failed to execute make resources: %w", err)
-	}
 
-	err = makeSchemas(client, *newSchemas)
+	err = makeSchemas(ctx, client, *currAllSchemas)
 	if err != nil {
 		return fmt.Errorf("failed to make new schemas: %w", err)
+	}
+	err = makeResources(ctx, client, *currAllSchemas)
+	if err != nil {
+		return fmt.Errorf("failed to execute make resources: %w", err)
 	}
 	err = execGit("add", "-A")
 	if err != nil {
@@ -106,19 +108,24 @@ func main() error {
 	}
 
 	// Run make singular-data-sources plural-data-sources
-	err = execCommand("make", "singular-data-sources", "plural-data-sources")
+	err = makeBuild(ctx, client, *currAllSchemas, "singular-data-sources")
 	if err != nil {
-		return fmt.Errorf("failed to execute make data-sources: %w", err)
+		return fmt.Errorf("failed to update singular data sources: %w", err)
+	}
+
+	err = makeBuild(ctx, client, *currAllSchemas, "plural-data-sources")
+	if err != nil {
+		return fmt.Errorf("failed to update plural data sources: %w", err)
 	}
 
 	// Commit data source schema changes
 	err = execGit("add", "-A")
 	if err != nil {
-		return fmt.Errorf("failed to git add data source files: %w", err)
+		return fmt.Errorf("failed to git add data source files after updating data sources: %w", err)
 	}
 	err = execGit("commit", "-m", fmt.Sprintf("%s CloudFormation schemas in us-east-1; Generate Terraform data source schemas.", currentDate))
 	if err != nil {
-		return fmt.Errorf("failed to commit data source schemas: %w", err)
+		return fmt.Errorf("failed to commit schemas after updating data sources: %w", err)
 	}
 
 	// Validate the provider
