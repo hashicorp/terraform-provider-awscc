@@ -56,6 +56,33 @@ func mountTargetDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Valid IPv4 address within the address range of the specified subnet.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: IpAddressType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "enum": [
+		//	    "IPV4_ONLY",
+		//	    "IPV6_ONLY",
+		//	    "DUAL_STACK"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Ipv6Address
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"ipv_6_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SecurityGroups
 		// CloudFormation resource type schema:
 		//
@@ -103,6 +130,8 @@ func mountTargetDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"file_system_id":  "FileSystemId",
 		"ip_address":      "IpAddress",
+		"ip_address_type": "IpAddressType",
+		"ipv_6_address":   "Ipv6Address",
 		"mount_target_id": "Id",
 		"security_groups": "SecurityGroups",
 		"subnet_id":       "SubnetId",

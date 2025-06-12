@@ -27,7 +27,6 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "maxLength": 10000,
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -46,8 +45,6 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "maxLength": 79,
-		//	  "pattern": "[a-zA-Z][a-zA-Z0-9\\-\\.\\:]*",
 		//	  "type": "string"
 		//	}
 		"backup_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -57,7 +54,6 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "minLength": 1,
 		//	  "type": "integer"
 		//	}
 		"backup_retention_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -67,8 +63,6 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "maxLength": 2097152,
-		//	  "pattern": "(?s)\\s*-----BEGIN CERTIFICATE-----.+-----END CERTIFICATE-----\\s*",
 		//	  "type": "string"
 		//	}
 		"custom_certificate": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -78,8 +72,6 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "maxLength": 253,
-		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
 		"custom_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -89,8 +81,6 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "maxLength": 4096,
-		//	  "pattern": "(?ms)\\s*^-----BEGIN (?-s:.*)PRIVATE KEY-----$.*?^-----END (?-s:.*)PRIVATE KEY-----$\\s*",
 		//	  "type": "string"
 		//	}
 		"custom_private_key": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -109,7 +99,6 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "maxLength": 10000,
 		//	  "type": "string"
 		//	}
 		"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -119,7 +108,6 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "maxLength": 10000,
 		//	  "type": "string"
 		//	}
 		"engine": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -133,13 +121,9 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "additionalProperties": false,
 		//	    "properties": {
 		//	      "Name": {
-		//	        "maxLength": 10000,
-		//	        "pattern": "(?s).*",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "maxLength": 10000,
-		//	        "pattern": "(?s).*",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -167,7 +151,6 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "maxLength": 10000,
 		//	  "type": "string"
 		//	}
 		"engine_model": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -177,18 +160,24 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "maxLength": 10000,
 		//	  "type": "string"
 		//	}
 		"engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"server_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceProfileArn
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "maxLength": 10000,
-		//	  "pattern": "arn:aws:iam::[0-9]{12}:instance-profile/.*",
 		//	  "type": "string"
 		//	}
 		"instance_profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -198,7 +187,6 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "maxLength": 10000,
 		//	  "type": "string"
 		//	}
 		"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -208,8 +196,6 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "maxLength": 10000,
-		//	  "pattern": ".*",
 		//	  "type": "string"
 		//	}
 		"key_pair": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -219,8 +205,6 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "maxLength": 10000,
-		//	  "pattern": "^((Mon|Tue|Wed|Thu|Fri|Sat|Sun):)?([0-1][0-9]|2[0-3]):[0-5][0-9]$",
 		//	  "type": "string"
 		//	}
 		"preferred_backup_window": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -230,8 +214,6 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "maxLength": 10000,
-		//	  "pattern": "^((Mon|Tue|Wed|Thu|Fri|Sat|Sun):)?([0-1][0-9]|2[0-3]):[0-5][0-9]$",
 		//	  "type": "string"
 		//	}
 		"preferred_maintenance_window": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -242,7 +224,6 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "items": {
-		//	    "maxLength": 10000,
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array",
@@ -256,9 +237,6 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "maxLength": 40,
-		//	  "minLength": 1,
-		//	  "pattern": "[a-zA-Z][a-zA-Z0-9\\-]*",
 		//	  "type": "string"
 		//	}
 		"server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -268,8 +246,6 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "maxLength": 10000,
-		//	  "pattern": "arn:aws:iam::[0-9]{12}:role/.*",
 		//	  "type": "string"
 		//	}
 		"service_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -280,7 +256,6 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "items": {
-		//	    "maxLength": 10000,
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array",
@@ -298,15 +273,9 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "additionalProperties": false,
 		//	    "properties": {
 		//	      "Key": {
-		//	        "maxLength": 128,
-		//	        "minLength": 1,
-		//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "maxLength": 256,
-		//	        "minLength": 0,
-		//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -372,6 +341,7 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"preferred_backup_window":      "PreferredBackupWindow",
 		"preferred_maintenance_window": "PreferredMaintenanceWindow",
 		"security_group_ids":           "SecurityGroupIds",
+		"server_id":                    "Id",
 		"server_name":                  "ServerName",
 		"service_role_arn":             "ServiceRoleArn",
 		"subnet_ids":                   "SubnetIds",

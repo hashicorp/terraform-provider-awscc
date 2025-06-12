@@ -57,6 +57,30 @@ func podIdentityAssociationDataSource(ctx context.Context) (datasource.DataSourc
 			Description: "The cluster that the pod identity association is created for.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: DisableSessionTags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Disable Session Tags of the pod identity association.",
+		//	  "minLength": 1,
+		//	  "type": "boolean"
+		//	}
+		"disable_session_tags": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "The Disable Session Tags of the pod identity association.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ExternalId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The External Id of the pod identity association.",
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The External Id of the pod identity association.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Namespace
 		// CloudFormation resource type schema:
 		//
@@ -140,6 +164,18 @@ func podIdentityAssociationDataSource(ctx context.Context) (datasource.DataSourc
 			Description: "An array of key-value pairs to apply to this resource.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: TargetRoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Target Role Arn of the pod identity association.",
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"target_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Target Role Arn of the pod identity association.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -157,15 +193,18 @@ func podIdentityAssociationDataSource(ctx context.Context) (datasource.DataSourc
 	opts = opts.WithCloudFormationTypeName("AWS::EKS::PodIdentityAssociation").WithTerraformTypeName("awscc_eks_pod_identity_association")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"association_arn": "AssociationArn",
-		"association_id":  "AssociationId",
-		"cluster_name":    "ClusterName",
-		"key":             "Key",
-		"namespace":       "Namespace",
-		"role_arn":        "RoleArn",
-		"service_account": "ServiceAccount",
-		"tags":            "Tags",
-		"value":           "Value",
+		"association_arn":      "AssociationArn",
+		"association_id":       "AssociationId",
+		"cluster_name":         "ClusterName",
+		"disable_session_tags": "DisableSessionTags",
+		"external_id":          "ExternalId",
+		"key":                  "Key",
+		"namespace":            "Namespace",
+		"role_arn":             "RoleArn",
+		"service_account":      "ServiceAccount",
+		"tags":                 "Tags",
+		"target_role_arn":      "TargetRoleArn",
+		"value":                "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

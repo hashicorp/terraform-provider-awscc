@@ -137,15 +137,15 @@ func segmentDefinitionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	                              "description": "Defines the range to be applied to the calculated attribute definition.",
 		//	                              "properties": {
 		//	                                "End": {
-		//	                                  "description": "The ending point for this overridden range.",
-		//	                                  "maximum": 366,
-		//	                                  "minimum": 0,
+		//	                                  "description": "The ending point for this overridden range. Positive numbers indicate how many days in the past data should be included, and negative numbers indicate how many days in the future.",
+		//	                                  "maximum": 2147483647,
+		//	                                  "minimum": -2147483648,
 		//	                                  "type": "integer"
 		//	                                },
 		//	                                "Start": {
-		//	                                  "description": "The starting point for this overridden range.",
-		//	                                  "maximum": 366,
-		//	                                  "minimum": 1,
+		//	                                  "description": "The starting point for this overridden range. Positive numbers indicate how many days in the past data should be included, and negative numbers indicate how many days in the future.",
+		//	                                  "maximum": 2147483647,
+		//	                                  "minimum": -2147483648,
 		//	                                  "type": "integer"
 		//	                                },
 		//	                                "Unit": {
@@ -1689,12 +1689,12 @@ func segmentDefinitionDataSource(ctx context.Context) (datasource.DataSource, er
 																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 																	// Property: End
 																	"end": schema.Int64Attribute{ /*START ATTRIBUTE*/
-																		Description: "The ending point for this overridden range.",
+																		Description: "The ending point for this overridden range. Positive numbers indicate how many days in the past data should be included, and negative numbers indicate how many days in the future.",
 																		Computed:    true,
 																	}, /*END ATTRIBUTE*/
 																	// Property: Start
 																	"start": schema.Int64Attribute{ /*START ATTRIBUTE*/
-																		Description: "The starting point for this overridden range.",
+																		Description: "The starting point for this overridden range. Positive numbers indicate how many days in the past data should be included, and negative numbers indicate how many days in the future.",
 																		Computed:    true,
 																	}, /*END ATTRIBUTE*/
 																	// Property: Unit
