@@ -1,4 +1,8 @@
-## 1.45.0 (Unreleased)
+## 1.45.0 (June 12, 2025)
+
+FEATURES:
+
+* provider: Updated resource schemas
 
 ## 1.44.0 (June 5, 2025)
 
