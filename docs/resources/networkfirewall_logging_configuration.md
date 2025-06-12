@@ -140,6 +140,7 @@ resource "awscc_networkfirewall_logging_configuration" "example" {
 
 ### Optional
 
+- `enable_monitoring_dashboard` (Boolean)
 - `firewall_name` (String)
 
 ### Read-Only

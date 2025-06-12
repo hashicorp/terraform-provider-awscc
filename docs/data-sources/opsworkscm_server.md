@@ -40,6 +40,7 @@ Data Source schema for AWS::OpsWorksCM::Server
 - `preferred_backup_window` (String)
 - `preferred_maintenance_window` (String)
 - `security_group_ids` (List of String)
+- `server_id` (String)
 - `server_name` (String)
 - `service_role_arn` (String)
 - `subnet_ids` (List of String)

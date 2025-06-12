@@ -104,6 +104,7 @@ resource "awscc_customerprofiles_object_type" "example" {
 - `expiration_days` (Number) The default number of days until the data within the domain expires.
 - `fields` (Attributes List) A list of the name and ObjectType field. (see [below for nested schema](#nestedatt--fields))
 - `keys` (Attributes List) A list of unique keys that can be used to map data to the profile. (see [below for nested schema](#nestedatt--keys))
+- `max_profile_object_count` (Number) The maximum number of profile objects for this object type
 - `source_last_updated_timestamp_format` (String) The format of your sourceLastUpdatedTimestamp that was previously set up.
 - `tags` (Attributes List) The tags (keys and values) associated with the integration. (see [below for nested schema](#nestedatt--tags))
 - `template_id` (String) A unique identifier for the object template.
@@ -113,6 +114,7 @@ resource "awscc_customerprofiles_object_type" "example" {
 - `created_at` (String) The time of this integration got created.
 - `id` (String) Uniquely identifies the resource.
 - `last_updated_at` (String) The time of this integration got last updated at.
+- `max_available_profile_object_count` (Number) The maximum available number of profile objects
 
 <a id="nestedatt--fields"></a>
 ### Nested Schema for `fields`

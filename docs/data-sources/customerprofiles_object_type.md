@@ -30,6 +30,8 @@ Data Source schema for AWS::CustomerProfiles::ObjectType
 - `fields` (Attributes List) A list of the name and ObjectType field. (see [below for nested schema](#nestedatt--fields))
 - `keys` (Attributes List) A list of unique keys that can be used to map data to the profile. (see [below for nested schema](#nestedatt--keys))
 - `last_updated_at` (String) The time of this integration got last updated at.
+- `max_available_profile_object_count` (Number) The maximum available number of profile objects
+- `max_profile_object_count` (Number) The maximum number of profile objects for this object type
 - `object_type_name` (String) The name of the profile object type.
 - `source_last_updated_timestamp_format` (String) The format of your sourceLastUpdatedTimestamp that was previously set up.
 - `tags` (Attributes List) The tags (keys and values) associated with the integration. (see [below for nested schema](#nestedatt--tags))

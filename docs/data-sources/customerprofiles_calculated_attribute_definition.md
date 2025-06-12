@@ -29,8 +29,11 @@ Data Source schema for AWS::CustomerProfiles::CalculatedAttributeDefinition
 - `display_name` (String) The display name of the calculated attribute.
 - `domain_name` (String) The unique name of the domain.
 - `last_updated_at` (String) The timestamp of when the calculated attribute definition was most recently edited.
+- `readiness` (Attributes) The readiness status of the calculated attribute. (see [below for nested schema](#nestedatt--readiness))
 - `statistic` (String) The aggregation operation to perform for the calculated attribute.
+- `status` (String) The status of the calculated attribute definition.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `use_historical_data` (Boolean) Whether to use historical data for the calculated attribute.
 
 <a id="nestedatt--attribute_details"></a>
 ### Nested Schema for `attribute_details`
@@ -63,8 +66,20 @@ Read-Only:
 
 Read-Only:
 
+- `timestamp_format` (String) The format the timestamp field in your JSON object is specified. This value should be one of EPOCHMILLI or ISO_8601. E.g. if your object type is MyType and source JSON is {"generatedAt": {"timestamp": "2001-07-04T12:08:56.235Z"}}, then TimestampFormat should be "ISO_8601".
+- `timestamp_source` (String) An expression specifying the field in your JSON object from which the date should be parsed. The expression should follow the structure of \"{ObjectTypeName.<Location of timestamp field in JSON pointer format>}\". E.g. if your object type is MyType and source JSON is {"generatedAt": {"timestamp": "1737587945945"}}, then TimestampSource should be "{MyType.generatedAt.timestamp}".
 - `unit` (String) The unit of time.
 - `value` (Number) The amount of time of the specified unit.
+- `value_range` (Attributes) A structure specifying the endpoints of the relative time period over which data is included in the aggregation. (see [below for nested schema](#nestedatt--conditions--range--value_range))
+
+<a id="nestedatt--conditions--range--value_range"></a>
+### Nested Schema for `conditions.range.value_range`
+
+Read-Only:
+
+- `end` (Number) The ending point for this range. Positive numbers indicate how many days in the past data should be included, and negative numbers indicate how many days in the future.
+- `start` (Number) The starting point for this range. Positive numbers indicate how many days in the past data should be included, and negative numbers indicate how many days in the future.
+
 
 
 <a id="nestedatt--conditions--threshold"></a>
@@ -75,6 +90,15 @@ Read-Only:
 - `operator` (String) The operator of the threshold.
 - `value` (String) The value of the threshold.
 
+
+
+<a id="nestedatt--readiness"></a>
+### Nested Schema for `readiness`
+
+Read-Only:
+
+- `message` (String) Any information pertaining to the status of the calculated attribute if required.
+- `progress_percentage` (Number) The progress percentage for including historical data in your calculated attribute.
 
 
 <a id="nestedatt--tags"></a>

@@ -71,6 +71,7 @@ Data Source schema for AWS::MWAA::Environment
 - `webserver_url` (String) Url endpoint for the environment's Airflow UI.
 - `webserver_vpc_endpoint_service` (String) The webserver VPC endpoint service name, applicable if private webserver access mode selected.
 - `weekly_maintenance_window_start` (String) Start time for the weekly maintenance window.
+- `worker_replacement_strategy` (String) The worker replacement strategy to use when updating the environment. Valid values: `FORCED`, `GRACEFUL`. FORCED means Apache Airflow workers will be stopped and replaced without waiting for tasks to complete before an update. GRACEFUL means Apache Airflow workers will be able to complete running tasks for up to 12 hours during an update before being stopped and replaced.
 
 <a id="nestedatt--logging_configuration"></a>
 ### Nested Schema for `logging_configuration`

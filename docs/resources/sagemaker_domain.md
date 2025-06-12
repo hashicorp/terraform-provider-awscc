@@ -655,6 +655,7 @@ Optional:
 - `execution_role_identity_config` (String) The configuration for attaching a SageMaker user profile name to the execution role as a sts:SourceIdentity key.
 - `r_studio_server_pro_domain_settings` (Attributes) A collection of settings that update the current configuration for the RStudioServerPro Domain-level app. (see [below for nested schema](#nestedatt--domain_settings--r_studio_server_pro_domain_settings))
 - `security_group_ids` (List of String) The security groups for the Amazon Virtual Private Cloud that the Domain uses for communication between Domain-level apps and user apps.
+- `unified_studio_settings` (Attributes) A collection of settings that apply to an Amazon SageMaker AI domain when you use it in Amazon SageMaker Unified Studio. (see [below for nested schema](#nestedatt--domain_settings--unified_studio_settings))
 
 <a id="nestedatt--domain_settings--docker_settings"></a>
 ### Nested Schema for `domain_settings.docker_settings`
@@ -685,6 +686,25 @@ Optional:
 - `sage_maker_image_arn` (String) The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.
 - `sage_maker_image_version_arn` (String) The Amazon Resource Name (ARN) of the image version created on the instance.
 
+
+
+<a id="nestedatt--domain_settings--unified_studio_settings"></a>
+### Nested Schema for `domain_settings.unified_studio_settings`
+
+Optional:
+
+- `domain_account_id` (String) The ID of the AWS account that has the Amazon SageMaker Unified Studio domain. The default value, if you don't specify an ID, is the ID of the account that has the Amazon SageMaker AI domain.
+- `domain_id` (String) The ID of the Amazon SageMaker Unified Studio domain associated with this domain.
+- `domain_region` (String) The AWS Region where the domain is located in Amazon SageMaker Unified Studio. The default value, if you don't specify a Region, is the Region where the Amazon SageMaker AI domain is located.
+- `environment_id` (String) The ID of the environment that Amazon SageMaker Unified Studio associates with the domain.
+- `project_id` (String) The ID of the Amazon SageMaker Unified Studio project that corresponds to the domain.
+- `project_s3_path` (String) The location where Amazon S3 stores temporary execution data and other artifacts for the project that corresponds to the domain.
+- `studio_web_portal_access` (String) Sets whether you can access the domain in Amazon SageMaker Studio:
+
+ENABLED
+You can access the domain in Amazon SageMaker Studio. If you migrate the domain to Amazon SageMaker Unified Studio, you can access it in both studio interfaces.
+DISABLED
+You can't access the domain in Amazon SageMaker Studio. If you migrate the domain to Amazon SageMaker Unified Studio, you can access it only in that studio interface.
 
 
 

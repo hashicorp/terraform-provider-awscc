@@ -22,4 +22,13 @@ Data Source schema for AWS::EC2::EgressOnlyInternetGateway
 ### Read-Only
 
 - `egress_only_internet_gateway_id` (String) Service Generated ID of the EgressOnlyInternetGateway
+- `tags` (Attributes List) Any tags assigned to the egress only internet gateway. (see [below for nested schema](#nestedatt--tags))
 - `vpc_id` (String) The ID of the VPC for which to create the egress-only internet gateway.
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)
