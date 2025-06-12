@@ -1,3 +1,5 @@
+## 1.46.0 (Unreleased)
+
 ## 1.45.0 (June 12, 2025)
 
 FEATURES:
