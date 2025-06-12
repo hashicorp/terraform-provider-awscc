@@ -279,6 +279,7 @@ resource "awscc_mwaa_environment" "example" {
 - `tags` (String) A map of tags for the environment.
 - `webserver_access_mode` (String) Choice for mode of webserver access including over public internet or via private VPC endpoint.
 - `weekly_maintenance_window_start` (String) Start time for the weekly maintenance window.
+- `worker_replacement_strategy` (String) The worker replacement strategy to use when updating the environment. Valid values: `FORCED`, `GRACEFUL`. FORCED means Apache Airflow workers will be stopped and replaced without waiting for tasks to complete before an update. GRACEFUL means Apache Airflow workers will be able to complete running tasks for up to 12 hours during an update before being stopped and replaced.
 
 ### Read-Only
 

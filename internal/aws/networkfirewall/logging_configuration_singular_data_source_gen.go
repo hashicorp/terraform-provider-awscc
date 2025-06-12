@@ -23,6 +23,15 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::NetworkFirewall::LoggingConfiguration resource.
 func loggingConfigurationDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: EnableMonitoringDashboard
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "boolean"
+		//	}
+		"enable_monitoring_dashboard": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: FirewallArn
 		// CloudFormation resource type schema:
 		//
@@ -150,13 +159,14 @@ func loggingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkFirewall::LoggingConfiguration").WithTerraformTypeName("awscc_networkfirewall_logging_configuration")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"firewall_arn":            "FirewallArn",
-		"firewall_name":           "FirewallName",
-		"log_destination":         "LogDestination",
-		"log_destination_configs": "LogDestinationConfigs",
-		"log_destination_type":    "LogDestinationType",
-		"log_type":                "LogType",
-		"logging_configuration":   "LoggingConfiguration",
+		"enable_monitoring_dashboard": "EnableMonitoringDashboard",
+		"firewall_arn":                "FirewallArn",
+		"firewall_name":               "FirewallName",
+		"log_destination":             "LogDestination",
+		"log_destination_configs":     "LogDestinationConfigs",
+		"log_destination_type":        "LogDestinationType",
+		"log_type":                    "LogType",
+		"logging_configuration":       "LoggingConfiguration",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

@@ -60,6 +60,8 @@ resource "awscc_ec2_subnet" "main" {
 ### Optional
 
 - `ip_address` (String) Valid IPv4 address within the address range of the specified subnet.
+- `ip_address_type` (String)
+- `ipv_6_address` (String)
 
 ### Read-Only
 

@@ -128,6 +128,9 @@ func assetResource(ctx context.Context) (resource.Resource, error) {
 		"asset_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The unique identifier for the Asset.",
 			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: PackagingGroupId
 		// CloudFormation resource type schema:
@@ -236,6 +239,7 @@ func assetResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
+				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

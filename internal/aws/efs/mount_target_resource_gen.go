@@ -8,10 +8,12 @@ package efs
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
@@ -62,6 +64,51 @@ func mountTargetResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Valid IPv4 address within the address range of the specified subnet.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: IpAddressType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "enum": [
+		//	    "IPV4_ONLY",
+		//	    "IPV6_ONLY",
+		//	    "DUAL_STACK"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"IPV4_ONLY",
+					"IPV6_ONLY",
+					"DUAL_STACK",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// IpAddressType is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: Ipv6Address
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"ipv_6_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -124,11 +171,16 @@ func mountTargetResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"file_system_id":  "FileSystemId",
 		"ip_address":      "IpAddress",
+		"ip_address_type": "IpAddressType",
+		"ipv_6_address":   "Ipv6Address",
 		"mount_target_id": "Id",
 		"security_groups": "SecurityGroups",
 		"subnet_id":       "SubnetId",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/IpAddressType",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

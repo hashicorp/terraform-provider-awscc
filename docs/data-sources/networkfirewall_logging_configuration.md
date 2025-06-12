@@ -21,6 +21,7 @@ Data Source schema for AWS::NetworkFirewall::LoggingConfiguration
 
 ### Read-Only
 
+- `enable_monitoring_dashboard` (Boolean)
 - `firewall_arn` (String) A resource ARN.
 - `firewall_name` (String)
 - `logging_configuration` (Attributes) (see [below for nested schema](#nestedatt--logging_configuration))

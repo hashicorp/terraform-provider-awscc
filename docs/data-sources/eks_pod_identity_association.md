@@ -24,10 +24,13 @@ Data Source schema for AWS::EKS::PodIdentityAssociation
 - `association_arn` (String) The ARN of the pod identity association.
 - `association_id` (String) The ID of the pod identity association.
 - `cluster_name` (String) The cluster that the pod identity association is created for.
+- `disable_session_tags` (Boolean) The Disable Session Tags of the pod identity association.
+- `external_id` (String) The External Id of the pod identity association.
 - `namespace` (String) The Kubernetes namespace that the pod identity association is created for.
 - `role_arn` (String) The IAM role ARN that the pod identity association is created for.
 - `service_account` (String) The Kubernetes service account that the pod identity association is created for.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `target_role_arn` (String) The Target Role Arn of the pod identity association.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

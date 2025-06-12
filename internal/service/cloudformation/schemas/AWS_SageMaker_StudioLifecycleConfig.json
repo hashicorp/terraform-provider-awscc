@@ -126,5 +126,8 @@
       "sagemaker:ListTags",
       "sagemaker:DeleteTags"
     ]
+  },
+  "propertyTransform": {
+    "/properties/StudioLifecycleConfigName": "$lowercase(StudioLifecycleConfigName) $OR StudioLifecycleConfigName"
   }
 }

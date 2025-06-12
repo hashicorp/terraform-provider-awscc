@@ -1053,6 +1053,32 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: WorkerReplacementStrategy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The worker replacement strategy to use when updating the environment. Valid values: `FORCED`, `GRACEFUL`. FORCED means Apache Airflow workers will be stopped and replaced without waiting for tasks to complete before an update. GRACEFUL means Apache Airflow workers will be able to complete running tasks for up to 12 hours during an update before being stopped and replaced.",
+		//	  "enum": [
+		//	    "FORCED",
+		//	    "GRACEFUL"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"worker_replacement_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The worker replacement strategy to use when updating the environment. Valid values: `FORCED`, `GRACEFUL`. FORCED means Apache Airflow workers will be stopped and replaced without waiting for tasks to complete before an update. GRACEFUL means Apache Airflow workers will be able to complete running tasks for up to 12 hours during an update before being stopped and replaced.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"FORCED",
+					"GRACEFUL",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// WorkerReplacementStrategy is a write-only property.
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -1115,11 +1141,15 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		"webserver_vpc_endpoint_service":   "WebserverVpcEndpointService",
 		"weekly_maintenance_window_start":  "WeeklyMaintenanceWindowStart",
 		"worker_logs":                      "WorkerLogs",
+		"worker_replacement_strategy":      "WorkerReplacementStrategy",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/WorkerReplacementStrategy",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(180).WithDeleteTimeoutInMinutes(0)
 
-	opts = opts.WithUpdateTimeoutInMinutes(480)
+	opts = opts.WithUpdateTimeoutInMinutes(900)
 
 	v, err := generic.NewResource(ctx, opts...)
 

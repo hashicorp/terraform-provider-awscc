@@ -115,7 +115,7 @@ func calculatedAttributeDefinitionDataSource(ctx context.Context) (datasource.Da
 		//	  "properties": {
 		//	    "ObjectCount": {
 		//	      "description": "The number of profile objects used for the calculated attribute.",
-		//	      "maximum": 100,
+		//	      "maximum": 300,
 		//	      "minimum": 1,
 		//	      "type": "integer"
 		//	    },
@@ -123,6 +123,18 @@ func calculatedAttributeDefinitionDataSource(ctx context.Context) (datasource.Da
 		//	      "additionalProperties": false,
 		//	      "description": "The relative time period over which data is included in the aggregation.",
 		//	      "properties": {
+		//	        "TimestampFormat": {
+		//	          "description": "The format the timestamp field in your JSON object is specified. This value should be one of EPOCHMILLI or ISO_8601. E.g. if your object type is MyType and source JSON is {\"generatedAt\": {\"timestamp\": \"2001-07-04T12:08:56.235Z\"}}, then TimestampFormat should be \"ISO_8601\".",
+		//	          "maxLength": 255,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "TimestampSource": {
+		//	          "description": "An expression specifying the field in your JSON object from which the date should be parsed. The expression should follow the structure of \\\"{ObjectTypeName.\u003cLocation of timestamp field in JSON pointer format\u003e}\\\". E.g. if your object type is MyType and source JSON is {\"generatedAt\": {\"timestamp\": \"1737587945945\"}}, then TimestampSource should be \"{MyType.generatedAt.timestamp}\".",
+		//	          "maxLength": 255,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
 		//	        "Unit": {
 		//	          "description": "The unit of time.",
 		//	          "enum": [
@@ -132,13 +144,35 @@ func calculatedAttributeDefinitionDataSource(ctx context.Context) (datasource.Da
 		//	        },
 		//	        "Value": {
 		//	          "description": "The amount of time of the specified unit.",
-		//	          "maximum": 366,
+		//	          "maximum": 2147483647,
 		//	          "minimum": 1,
 		//	          "type": "integer"
+		//	        },
+		//	        "ValueRange": {
+		//	          "additionalProperties": false,
+		//	          "description": "A structure specifying the endpoints of the relative time period over which data is included in the aggregation.",
+		//	          "properties": {
+		//	            "End": {
+		//	              "description": "The ending point for this range. Positive numbers indicate how many days in the past data should be included, and negative numbers indicate how many days in the future.",
+		//	              "maximum": 2147483647,
+		//	              "minimum": -2147483648,
+		//	              "type": "integer"
+		//	            },
+		//	            "Start": {
+		//	              "description": "The starting point for this range. Positive numbers indicate how many days in the past data should be included, and negative numbers indicate how many days in the future.",
+		//	              "maximum": 2147483647,
+		//	              "minimum": -2147483648,
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Start",
+		//	            "End"
+		//	          ],
+		//	          "type": "object"
 		//	        }
 		//	      },
 		//	      "required": [
-		//	        "Value",
 		//	        "Unit"
 		//	      ],
 		//	      "type": "object"
@@ -183,6 +217,16 @@ func calculatedAttributeDefinitionDataSource(ctx context.Context) (datasource.Da
 				// Property: Range
 				"range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: TimestampFormat
+						"timestamp_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The format the timestamp field in your JSON object is specified. This value should be one of EPOCHMILLI or ISO_8601. E.g. if your object type is MyType and source JSON is {\"generatedAt\": {\"timestamp\": \"2001-07-04T12:08:56.235Z\"}}, then TimestampFormat should be \"ISO_8601\".",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: TimestampSource
+						"timestamp_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "An expression specifying the field in your JSON object from which the date should be parsed. The expression should follow the structure of \\\"{ObjectTypeName.<Location of timestamp field in JSON pointer format>}\\\". E.g. if your object type is MyType and source JSON is {\"generatedAt\": {\"timestamp\": \"1737587945945\"}}, then TimestampSource should be \"{MyType.generatedAt.timestamp}\".",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
 						// Property: Unit
 						"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The unit of time.",
@@ -191,6 +235,23 @@ func calculatedAttributeDefinitionDataSource(ctx context.Context) (datasource.Da
 						// Property: Value
 						"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Description: "The amount of time of the specified unit.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ValueRange
+						"value_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: End
+								"end": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The ending point for this range. Positive numbers indicate how many days in the past data should be included, and negative numbers indicate how many days in the future.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Start
+								"start": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The starting point for this range. Positive numbers indicate how many days in the past data should be included, and negative numbers indicate how many days in the future.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A structure specifying the endpoints of the relative time period over which data is included in the aggregation.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -281,6 +342,42 @@ func calculatedAttributeDefinitionDataSource(ctx context.Context) (datasource.Da
 			Description: "The timestamp of when the calculated attribute definition was most recently edited.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Readiness
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The readiness status of the calculated attribute.",
+		//	  "properties": {
+		//	    "Message": {
+		//	      "description": "Any information pertaining to the status of the calculated attribute if required.",
+		//	      "type": "string"
+		//	    },
+		//	    "ProgressPercentage": {
+		//	      "description": "The progress percentage for including historical data in your calculated attribute.",
+		//	      "maximum": 100,
+		//	      "minimum": 0,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"readiness": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Message
+				"message": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Any information pertaining to the status of the calculated attribute if required.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ProgressPercentage
+				"progress_percentage": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The progress percentage for including historical data in your calculated attribute.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The readiness status of the calculated attribute.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Statistic
 		// CloudFormation resource type schema:
 		//
@@ -300,6 +397,23 @@ func calculatedAttributeDefinitionDataSource(ctx context.Context) (datasource.Da
 		//	}
 		"statistic": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The aggregation operation to perform for the calculated attribute.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Status
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The status of the calculated attribute definition.",
+		//	  "enum": [
+		//	    "IN_PROGRESS",
+		//	    "PREPARING",
+		//	    "COMPLETED",
+		//	    "FAILED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the calculated attribute definition.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -354,6 +468,17 @@ func calculatedAttributeDefinitionDataSource(ctx context.Context) (datasource.Da
 			Description: "An array of key-value pairs to apply to this resource.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: UseHistoricalData
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Whether to use historical data for the calculated attribute.",
+		//	  "type": "boolean"
+		//	}
+		"use_historical_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether to use historical data for the calculated attribute.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -379,18 +504,28 @@ func calculatedAttributeDefinitionDataSource(ctx context.Context) (datasource.Da
 		"description":               "Description",
 		"display_name":              "DisplayName",
 		"domain_name":               "DomainName",
+		"end":                       "End",
 		"expression":                "Expression",
 		"key":                       "Key",
 		"last_updated_at":           "LastUpdatedAt",
+		"message":                   "Message",
 		"name":                      "Name",
 		"object_count":              "ObjectCount",
 		"operator":                  "Operator",
+		"progress_percentage":       "ProgressPercentage",
 		"range":                     "Range",
+		"readiness":                 "Readiness",
+		"start":                     "Start",
 		"statistic":                 "Statistic",
+		"status":                    "Status",
 		"tags":                      "Tags",
 		"threshold":                 "Threshold",
+		"timestamp_format":          "TimestampFormat",
+		"timestamp_source":          "TimestampSource",
 		"unit":                      "Unit",
+		"use_historical_data":       "UseHistoricalData",
 		"value":                     "Value",
+		"value_range":               "ValueRange",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

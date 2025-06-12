@@ -71,7 +71,6 @@ variable "fis_role_arn" {
 - `description` (String) A description for the experiment template.
 - `role_arn` (String) The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.
 - `stop_conditions` (Attributes List) One or more stop conditions. (see [below for nested schema](#nestedatt--stop_conditions))
-- `tags` (Map of String)
 - `targets` (Attributes Map) The targets for the experiment. (see [below for nested schema](#nestedatt--targets))
 
 ### Optional
@@ -80,6 +79,7 @@ variable "fis_role_arn" {
 - `experiment_options` (Attributes) (see [below for nested schema](#nestedatt--experiment_options))
 - `experiment_report_configuration` (Attributes) (see [below for nested schema](#nestedatt--experiment_report_configuration))
 - `log_configuration` (Attributes) (see [below for nested schema](#nestedatt--log_configuration))
+- `tags` (Map of String)
 
 ### Read-Only
 

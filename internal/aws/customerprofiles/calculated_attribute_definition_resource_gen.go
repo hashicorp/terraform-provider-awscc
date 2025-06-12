@@ -14,6 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -143,7 +144,7 @@ func calculatedAttributeDefinitionResource(ctx context.Context) (resource.Resour
 		//	  "properties": {
 		//	    "ObjectCount": {
 		//	      "description": "The number of profile objects used for the calculated attribute.",
-		//	      "maximum": 100,
+		//	      "maximum": 300,
 		//	      "minimum": 1,
 		//	      "type": "integer"
 		//	    },
@@ -151,6 +152,18 @@ func calculatedAttributeDefinitionResource(ctx context.Context) (resource.Resour
 		//	      "additionalProperties": false,
 		//	      "description": "The relative time period over which data is included in the aggregation.",
 		//	      "properties": {
+		//	        "TimestampFormat": {
+		//	          "description": "The format the timestamp field in your JSON object is specified. This value should be one of EPOCHMILLI or ISO_8601. E.g. if your object type is MyType and source JSON is {\"generatedAt\": {\"timestamp\": \"2001-07-04T12:08:56.235Z\"}}, then TimestampFormat should be \"ISO_8601\".",
+		//	          "maxLength": 255,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "TimestampSource": {
+		//	          "description": "An expression specifying the field in your JSON object from which the date should be parsed. The expression should follow the structure of \\\"{ObjectTypeName.\u003cLocation of timestamp field in JSON pointer format\u003e}\\\". E.g. if your object type is MyType and source JSON is {\"generatedAt\": {\"timestamp\": \"1737587945945\"}}, then TimestampSource should be \"{MyType.generatedAt.timestamp}\".",
+		//	          "maxLength": 255,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
 		//	        "Unit": {
 		//	          "description": "The unit of time.",
 		//	          "enum": [
@@ -160,13 +173,35 @@ func calculatedAttributeDefinitionResource(ctx context.Context) (resource.Resour
 		//	        },
 		//	        "Value": {
 		//	          "description": "The amount of time of the specified unit.",
-		//	          "maximum": 366,
+		//	          "maximum": 2147483647,
 		//	          "minimum": 1,
 		//	          "type": "integer"
+		//	        },
+		//	        "ValueRange": {
+		//	          "additionalProperties": false,
+		//	          "description": "A structure specifying the endpoints of the relative time period over which data is included in the aggregation.",
+		//	          "properties": {
+		//	            "End": {
+		//	              "description": "The ending point for this range. Positive numbers indicate how many days in the past data should be included, and negative numbers indicate how many days in the future.",
+		//	              "maximum": 2147483647,
+		//	              "minimum": -2147483648,
+		//	              "type": "integer"
+		//	            },
+		//	            "Start": {
+		//	              "description": "The starting point for this range. Positive numbers indicate how many days in the past data should be included, and negative numbers indicate how many days in the future.",
+		//	              "maximum": 2147483647,
+		//	              "minimum": -2147483648,
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Start",
+		//	            "End"
+		//	          ],
+		//	          "type": "object"
 		//	        }
 		//	      },
 		//	      "required": [
-		//	        "Value",
 		//	        "Unit"
 		//	      ],
 		//	      "type": "object"
@@ -209,7 +244,7 @@ func calculatedAttributeDefinitionResource(ctx context.Context) (resource.Resour
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.Int64{ /*START VALIDATORS*/
-						int64validator.Between(1, 100),
+						int64validator.Between(1, 300),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
@@ -218,6 +253,32 @@ func calculatedAttributeDefinitionResource(ctx context.Context) (resource.Resour
 				// Property: Range
 				"range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: TimestampFormat
+						"timestamp_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The format the timestamp field in your JSON object is specified. This value should be one of EPOCHMILLI or ISO_8601. E.g. if your object type is MyType and source JSON is {\"generatedAt\": {\"timestamp\": \"2001-07-04T12:08:56.235Z\"}}, then TimestampFormat should be \"ISO_8601\".",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 255),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: TimestampSource
+						"timestamp_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "An expression specifying the field in your JSON object from which the date should be parsed. The expression should follow the structure of \\\"{ObjectTypeName.<Location of timestamp field in JSON pointer format>}\\\". E.g. if your object type is MyType and source JSON is {\"generatedAt\": {\"timestamp\": \"1737587945945\"}}, then TimestampSource should be \"{MyType.generatedAt.timestamp}\".",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 255),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: Unit
 						"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The unit of time.",
@@ -239,11 +300,47 @@ func calculatedAttributeDefinitionResource(ctx context.Context) (resource.Resour
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
-								int64validator.Between(1, 366),
-								fwvalidators.NotNullInt64(),
+								int64validator.Between(1, 2147483647),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ValueRange
+						"value_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: End
+								"end": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The ending point for this range. Positive numbers indicate how many days in the past data should be included, and negative numbers indicate how many days in the future.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Int64{ /*START VALIDATORS*/
+										int64validator.Between(-2147483648, 2147483647),
+										fwvalidators.NotNullInt64(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Start
+								"start": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The starting point for this range. Positive numbers indicate how many days in the past data should be included, and negative numbers indicate how many days in the future.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Int64{ /*START VALIDATORS*/
+										int64validator.Between(-2147483648, 2147483647),
+										fwvalidators.NotNullInt64(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A structure specifying the endpoints of the relative time period over which data is included in the aggregation.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -395,6 +492,45 @@ func calculatedAttributeDefinitionResource(ctx context.Context) (resource.Resour
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Readiness
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The readiness status of the calculated attribute.",
+		//	  "properties": {
+		//	    "Message": {
+		//	      "description": "Any information pertaining to the status of the calculated attribute if required.",
+		//	      "type": "string"
+		//	    },
+		//	    "ProgressPercentage": {
+		//	      "description": "The progress percentage for including historical data in your calculated attribute.",
+		//	      "maximum": 100,
+		//	      "minimum": 0,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"readiness": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Message
+				"message": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Any information pertaining to the status of the calculated attribute if required.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ProgressPercentage
+				"progress_percentage": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The progress percentage for including historical data in your calculated attribute.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The readiness status of the calculated attribute.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Statistic
 		// CloudFormation resource type schema:
 		//
@@ -427,6 +563,26 @@ func calculatedAttributeDefinitionResource(ctx context.Context) (resource.Resour
 					"MAX_OCCURRENCE",
 				),
 			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Status
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The status of the calculated attribute definition.",
+		//	  "enum": [
+		//	    "IN_PROGRESS",
+		//	    "PREPARING",
+		//	    "COMPLETED",
+		//	    "FAILED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the calculated attribute definition.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
@@ -503,6 +659,22 @@ func calculatedAttributeDefinitionResource(ctx context.Context) (resource.Resour
 				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: UseHistoricalData
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Whether to use historical data for the calculated attribute.",
+		//	  "type": "boolean"
+		//	}
+		"use_historical_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether to use historical data for the calculated attribute.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+				boolplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -533,18 +705,28 @@ func calculatedAttributeDefinitionResource(ctx context.Context) (resource.Resour
 		"description":               "Description",
 		"display_name":              "DisplayName",
 		"domain_name":               "DomainName",
+		"end":                       "End",
 		"expression":                "Expression",
 		"key":                       "Key",
 		"last_updated_at":           "LastUpdatedAt",
+		"message":                   "Message",
 		"name":                      "Name",
 		"object_count":              "ObjectCount",
 		"operator":                  "Operator",
+		"progress_percentage":       "ProgressPercentage",
 		"range":                     "Range",
+		"readiness":                 "Readiness",
+		"start":                     "Start",
 		"statistic":                 "Statistic",
+		"status":                    "Status",
 		"tags":                      "Tags",
 		"threshold":                 "Threshold",
+		"timestamp_format":          "TimestampFormat",
+		"timestamp_source":          "TimestampSource",
 		"unit":                      "Unit",
+		"use_historical_data":       "UseHistoricalData",
 		"value":                     "Value",
+		"value_range":               "ValueRange",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

@@ -134,8 +134,8 @@ Optional:
 
 Optional:
 
-- `end` (Number) The ending point for this overridden range.
-- `start` (Number) The starting point for this overridden range.
+- `end` (Number) The ending point for this overridden range. Positive numbers indicate how many days in the past data should be included, and negative numbers indicate how many days in the future.
+- `start` (Number) The starting point for this overridden range. Positive numbers indicate how many days in the past data should be included, and negative numbers indicate how many days in the future.
 - `unit` (String) The unit to be applied to the range.
 
 

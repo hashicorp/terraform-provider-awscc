@@ -46,6 +46,7 @@ Resource Type definition for AWS::OpsWorksCM::Server
 - `arn` (String)
 - `endpoint` (String)
 - `id` (String) Uniquely identifies the resource.
+- `server_id` (String)
 - `server_name` (String)
 
 <a id="nestedatt--engine_attributes"></a>
@@ -70,5 +71,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_opsworkscm_server.example "server_name"
+$ terraform import awscc_opsworkscm_server.example "id"
 ```

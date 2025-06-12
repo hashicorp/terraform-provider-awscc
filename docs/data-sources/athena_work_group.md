@@ -50,6 +50,7 @@ Read-Only:
 - `enforce_work_group_configuration` (Boolean) If set to "true", the settings for the workgroup override client-side settings. If set to "false", client-side settings are used
 - `engine_version` (Attributes) The Athena engine version for running queries. (see [below for nested schema](#nestedatt--work_group_configuration--engine_version))
 - `execution_role` (String) Execution Role ARN required to run Athena Spark Calculations
+- `managed_query_results_configuration` (Attributes) The configuration for the managed query results and encryption option. ResultConfiguration and ManagedQueryResultsConfiguration cannot be set at the same time (see [below for nested schema](#nestedatt--work_group_configuration--managed_query_results_configuration))
 - `publish_cloudwatch_metrics_enabled` (Boolean) Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.
 - `requester_pays_enabled` (Boolean) If set to true, allows members assigned to a workgroup to reference Amazon S3 Requester Pays buckets in queries. If set to false, workgroup members cannot query data from Requester Pays buckets, and queries that retrieve data from Requester Pays buckets cause an error.
 - `result_configuration` (Attributes) The location in Amazon S3 where query results are stored and the encryption option, if any, used for query results. These are known as "client-side settings". If workgroup settings override client-side settings, then the query uses the workgroup settings. (see [below for nested schema](#nestedatt--work_group_configuration--result_configuration))
@@ -69,6 +70,23 @@ Read-Only:
 
 - `effective_engine_version` (String) Read only. The engine version on which the query runs. If the user requests a valid engine version other than Auto, the effective engine version is the same as the engine version that the user requested. If the user requests Auto, the effective engine version is chosen by Athena. When a request to update the engine version is made by a CreateWorkGroup or UpdateWorkGroup operation, the EffectiveEngineVersion field is ignored.
 - `selected_engine_version` (String) The engine version requested by the user. Possible values are determined by the output of ListEngineVersions, including Auto. The default is Auto.
+
+
+<a id="nestedatt--work_group_configuration--managed_query_results_configuration"></a>
+### Nested Schema for `work_group_configuration.managed_query_results_configuration`
+
+Read-Only:
+
+- `enabled` (Boolean)
+- `encryption_configuration` (Attributes) Indicates the encryption configuration for Athena Managed Storage. If not setting this field, Managed Storage will encrypt the query results with Athena's encryption key (see [below for nested schema](#nestedatt--work_group_configuration--managed_query_results_configuration--encryption_configuration))
+
+<a id="nestedatt--work_group_configuration--managed_query_results_configuration--encryption_configuration"></a>
+### Nested Schema for `work_group_configuration.managed_query_results_configuration.encryption_configuration`
+
+Read-Only:
+
+- `kms_key` (String) For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID.
+
 
 
 <a id="nestedatt--work_group_configuration--result_configuration"></a>
@@ -111,6 +129,7 @@ Read-Only:
 - `enforce_work_group_configuration` (Boolean) If set to "true", the settings for the workgroup override client-side settings. If set to "false", client-side settings are used
 - `engine_version` (Attributes) The Athena engine version for running queries. (see [below for nested schema](#nestedatt--work_group_configuration_updates--engine_version))
 - `execution_role` (String) Execution Role ARN required to run Athena Spark Calculations
+- `managed_query_results_configuration` (Attributes) The configuration for the managed query results and encryption option. ResultConfiguration and ManagedQueryResultsConfiguration cannot be set at the same time (see [below for nested schema](#nestedatt--work_group_configuration_updates--managed_query_results_configuration))
 - `publish_cloudwatch_metrics_enabled` (Boolean) Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.
 - `remove_bytes_scanned_cutoff_per_query` (Boolean) Indicates that the data usage control limit per query is removed.
 - `remove_customer_content_encryption_configuration` (Boolean)
@@ -132,6 +151,23 @@ Read-Only:
 
 - `effective_engine_version` (String) Read only. The engine version on which the query runs. If the user requests a valid engine version other than Auto, the effective engine version is the same as the engine version that the user requested. If the user requests Auto, the effective engine version is chosen by Athena. When a request to update the engine version is made by a CreateWorkGroup or UpdateWorkGroup operation, the EffectiveEngineVersion field is ignored.
 - `selected_engine_version` (String) The engine version requested by the user. Possible values are determined by the output of ListEngineVersions, including Auto. The default is Auto.
+
+
+<a id="nestedatt--work_group_configuration_updates--managed_query_results_configuration"></a>
+### Nested Schema for `work_group_configuration_updates.managed_query_results_configuration`
+
+Read-Only:
+
+- `enabled` (Boolean)
+- `encryption_configuration` (Attributes) Indicates the encryption configuration for Athena Managed Storage. If not setting this field, Managed Storage will encrypt the query results with Athena's encryption key (see [below for nested schema](#nestedatt--work_group_configuration_updates--managed_query_results_configuration--encryption_configuration))
+
+<a id="nestedatt--work_group_configuration_updates--managed_query_results_configuration--encryption_configuration"></a>
+### Nested Schema for `work_group_configuration_updates.managed_query_results_configuration.encryption_configuration`
+
+Read-Only:
+
+- `kms_key` (String) For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID.
+
 
 
 <a id="nestedatt--work_group_configuration_updates--result_configuration_updates"></a>

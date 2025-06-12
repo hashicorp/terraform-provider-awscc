@@ -50,7 +50,7 @@ func objectTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "Description of the profile object type.",
-		//	  "maxLength": 1000,
+		//	  "maxLength": 10000,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
@@ -283,6 +283,30 @@ func objectTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The time of this integration got last updated at.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: MaxAvailableProfileObjectCount
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The maximum available number of profile objects",
+		//	  "minimum": 0,
+		//	  "type": "integer"
+		//	}
+		"max_available_profile_object_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The maximum available number of profile objects",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: MaxProfileObjectCount
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The maximum number of profile objects for this object type",
+		//	  "minimum": 1,
+		//	  "type": "integer"
+		//	}
+		"max_profile_object_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The maximum number of profile objects for this object type",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ObjectTypeName
 		// CloudFormation resource type schema:
 		//
@@ -399,6 +423,8 @@ func objectTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"key":                                  "Key",
 		"keys":                                 "Keys",
 		"last_updated_at":                      "LastUpdatedAt",
+		"max_available_profile_object_count":   "MaxAvailableProfileObjectCount",
+		"max_profile_object_count":             "MaxProfileObjectCount",
 		"name":                                 "Name",
 		"object_type_field":                    "ObjectTypeField",
 		"object_type_key_list":                 "ObjectTypeKeyList",

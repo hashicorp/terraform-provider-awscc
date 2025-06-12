@@ -68,12 +68,15 @@ variable "serviceaccount" {
 
 ### Optional
 
+- `disable_session_tags` (Boolean) The Disable Session Tags of the pod identity association.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `target_role_arn` (String) The Target Role Arn of the pod identity association.
 
 ### Read-Only
 
 - `association_arn` (String) The ARN of the pod identity association.
 - `association_id` (String) The ID of the pod identity association.
+- `external_id` (String) The External Id of the pod identity association.
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--tags"></a>

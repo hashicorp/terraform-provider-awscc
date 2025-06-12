@@ -704,6 +704,21 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Start time for the weekly maintenance window.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: WorkerReplacementStrategy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The worker replacement strategy to use when updating the environment. Valid values: `FORCED`, `GRACEFUL`. FORCED means Apache Airflow workers will be stopped and replaced without waiting for tasks to complete before an update. GRACEFUL means Apache Airflow workers will be able to complete running tasks for up to 12 hours during an update before being stopped and replaced.",
+		//	  "enum": [
+		//	    "FORCED",
+		//	    "GRACEFUL"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"worker_replacement_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The worker replacement strategy to use when updating the environment. Valid values: `FORCED`, `GRACEFUL`. FORCED means Apache Airflow workers will be stopped and replaced without waiting for tasks to complete before an update. GRACEFUL means Apache Airflow workers will be able to complete running tasks for up to 12 hours during an update before being stopped and replaced.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -761,6 +776,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"webserver_vpc_endpoint_service":   "WebserverVpcEndpointService",
 		"weekly_maintenance_window_start":  "WeeklyMaintenanceWindowStart",
 		"worker_logs":                      "WorkerLogs",
+		"worker_replacement_strategy":      "WorkerReplacementStrategy",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

@@ -4,89 +4,63 @@
   "additionalProperties": false,
   "properties": {
     "KeyPair": {
-      "type": "string",
-      "pattern": ".*",
-      "maxLength": 10000
+      "type": "string"
     },
     "EngineVersion": {
-      "type": "string",
-      "maxLength": 10000
+      "type": "string"
     },
     "ServiceRoleArn": {
-      "type": "string",
-      "pattern": "arn:aws:iam::[0-9]{12}:role/.*",
-      "maxLength": 10000
+      "type": "string"
     },
     "DisableAutomatedBackup": {
       "type": "boolean"
     },
     "BackupId": {
-      "type": "string",
-      "pattern": "[a-zA-Z][a-zA-Z0-9\\-\\.\\:]*",
-      "maxLength": 79
+      "type": "string"
     },
     "EngineModel": {
-      "type": "string",
-      "maxLength": 10000
+      "type": "string"
     },
     "PreferredMaintenanceWindow": {
-      "type": "string",
-      "pattern": "^((Mon|Tue|Wed|Thu|Fri|Sat|Sun):)?([0-1][0-9]|2[0-3]):[0-5][0-9]$",
-      "maxLength": 10000
+      "type": "string"
     },
     "AssociatePublicIpAddress": {
       "type": "boolean"
     },
     "InstanceProfileArn": {
-      "type": "string",
-      "pattern": "arn:aws:iam::[0-9]{12}:instance-profile/.*",
-      "maxLength": 10000
+      "type": "string"
     },
     "CustomCertificate": {
-      "type": "string",
-      "pattern": "(?s)\\s*-----BEGIN CERTIFICATE-----.+-----END CERTIFICATE-----\\s*",
-      "maxLength": 2097152
+      "type": "string"
     },
     "PreferredBackupWindow": {
-      "type": "string",
-      "pattern": "^((Mon|Tue|Wed|Thu|Fri|Sat|Sun):)?([0-1][0-9]|2[0-3]):[0-5][0-9]$",
-      "maxLength": 10000
+      "type": "string"
     },
     "SecurityGroupIds": {
       "type": "array",
       "uniqueItems": false,
       "items": {
-        "type": "string",
-        "maxLength": 10000
+        "type": "string"
       }
     },
     "SubnetIds": {
       "type": "array",
       "uniqueItems": false,
       "items": {
-        "type": "string",
-        "maxLength": 10000
+        "type": "string"
       }
     },
     "CustomDomain": {
-      "type": "string",
-      "pattern": "",
-      "maxLength": 253
+      "type": "string"
     },
     "Endpoint": {
-      "type": "string",
-      "maxLength": 10000
+      "type": "string"
     },
     "CustomPrivateKey": {
-      "type": "string",
-      "pattern": "(?ms)\\s*^-----BEGIN (?-s:.*)PRIVATE KEY-----$.*?^-----END (?-s:.*)PRIVATE KEY-----$\\s*",
-      "maxLength": 4096
+      "type": "string"
     },
     "ServerName": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 40,
-      "pattern": "[a-zA-Z][a-zA-Z0-9\\-]*"
+      "type": "string"
     },
     "EngineAttributes": {
       "type": "array",
@@ -96,16 +70,16 @@
       }
     },
     "BackupRetentionCount": {
-      "type": "integer",
-      "minLength": 1
+      "type": "integer"
+    },
+    "Id": {
+      "type": "string"
     },
     "Arn": {
-      "type": "string",
-      "maxLength": 10000
+      "type": "string"
     },
     "InstanceType": {
-      "type": "string",
-      "maxLength": 10000
+      "type": "string"
     },
     "Tags": {
       "type": "array",
@@ -115,8 +89,7 @@
       }
     },
     "Engine": {
-      "type": "string",
-      "maxLength": 10000
+      "type": "string"
     }
   },
   "definitions": {
@@ -125,14 +98,10 @@
       "additionalProperties": false,
       "properties": {
         "Value": {
-          "type": "string",
-          "pattern": "(?s).*",
-          "maxLength": 10000
+          "type": "string"
         },
         "Name": {
-          "type": "string",
-          "pattern": "(?s).*",
-          "maxLength": 10000
+          "type": "string"
         }
       }
     },
@@ -141,16 +110,10 @@
       "additionalProperties": false,
       "properties": {
         "Value": {
-          "type": "string",
-          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
-          "minLength": 0,
-          "maxLength": 256
+          "type": "string"
         },
         "Key": {
-          "type": "string",
-          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
-          "minLength": 1,
-          "maxLength": 128
+          "type": "string"
         }
       },
       "required": [
@@ -173,7 +136,6 @@
     "/properties/CustomDomain",
     "/properties/InstanceProfileArn",
     "/properties/SecurityGroupIds",
-    "/properties/ServerName",
     "/properties/SubnetIds",
     "/properties/BackupId",
     "/properties/EngineModel",
@@ -182,55 +144,12 @@
     "/properties/Engine"
   ],
   "primaryIdentifier": [
-    "/properties/ServerName"
+    "/properties/Id"
   ],
   "readOnlyProperties": [
+    "/properties/Id",
     "/properties/ServerName",
     "/properties/Endpoint",
     "/properties/Arn"
-  ],
-  "writeOnlyProperties": [
-    "/properties/BackupId",
-    "/properties/CustomCertificate",
-    "/properties/CustomDomain",
-    "/properties/CustomPrivateKey",
-    "/properties/EngineAttributes",
-    "/properties/EngineVersion",
-    "/properties/KeyPair",
-    "/properties/Tags"
-  ],
-  "handlers": {
-    "create": {
-      "permissions": [
-        "opsworks-cm:CreateServer",
-        "opsworks-cm:DescribeServers",
-        "iam:PassRole"
-      ]
-    },
-    "delete": {
-      "permissions": [
-        "opsworks-cm:DeleteServer",
-        "opsworks-cm:DescribeServers"
-      ]
-    },
-    "update": {
-      "permissions": [
-        "opsworks-cm:UpdateServer",
-        "opsworks-cm:TagResource",
-        "opsworks-cm:UntagResource",
-        "opsworks-cm:DescribeServers"
-      ]
-    },
-    "list": {
-      "permissions": [
-        "opsworks-cm:DescribeServers",
-        "opsworks-cm:ListTagsForResource"
-      ]
-    },
-    "read": {
-      "permissions": [
-        "opsworks-cm:DescribeServers"
-      ]
-    }
-  }
+  ]
 }

@@ -4941,6 +4941,59 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	      "minItems": 1,
 		//	      "type": "array",
 		//	      "uniqueItems": false
+		//	    },
+		//	    "UnifiedStudioSettings": {
+		//	      "additionalProperties": false,
+		//	      "description": "A collection of settings that apply to an Amazon SageMaker AI domain when you use it in Amazon SageMaker Unified Studio.",
+		//	      "properties": {
+		//	        "DomainAccountId": {
+		//	          "description": "The ID of the AWS account that has the Amazon SageMaker Unified Studio domain. The default value, if you don't specify an ID, is the ID of the account that has the Amazon SageMaker AI domain.",
+		//	          "maxLength": 12,
+		//	          "minLength": 12,
+		//	          "pattern": "^\\d+$",
+		//	          "type": "string"
+		//	        },
+		//	        "DomainId": {
+		//	          "description": "The ID of the Amazon SageMaker Unified Studio domain associated with this domain.",
+		//	          "maxLength": 36,
+		//	          "minLength": 1,
+		//	          "pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$",
+		//	          "type": "string"
+		//	        },
+		//	        "DomainRegion": {
+		//	          "description": "The AWS Region where the domain is located in Amazon SageMaker Unified Studio. The default value, if you don't specify a Region, is the Region where the Amazon SageMaker AI domain is located.",
+		//	          "pattern": "[a-zA-Z]{2}-[a-zA-Z\\-]+-\\d+",
+		//	          "type": "string"
+		//	        },
+		//	        "EnvironmentId": {
+		//	          "description": "The ID of the environment that Amazon SageMaker Unified Studio associates with the domain.",
+		//	          "maxLength": 36,
+		//	          "minLength": 1,
+		//	          "pattern": "^[a-zA-Z0-9_-]{1,36}$",
+		//	          "type": "string"
+		//	        },
+		//	        "ProjectId": {
+		//	          "description": "The ID of the Amazon SageMaker Unified Studio project that corresponds to the domain.",
+		//	          "pattern": "^[a-zA-Z0-9_-]{1,36}$",
+		//	          "type": "string"
+		//	        },
+		//	        "ProjectS3Path": {
+		//	          "description": "The location where Amazon S3 stores temporary execution data and other artifacts for the project that corresponds to the domain.",
+		//	          "maxLength": 100,
+		//	          "minLength": 1,
+		//	          "pattern": "[\\w\\.-]+$",
+		//	          "type": "string"
+		//	        },
+		//	        "StudioWebPortalAccess": {
+		//	          "description": "Sets whether you can access the domain in Amazon SageMaker Studio:\n\nENABLED\nYou can access the domain in Amazon SageMaker Studio. If you migrate the domain to Amazon SageMaker Unified Studio, you can access it in both studio interfaces.\nDISABLED\nYou can't access the domain in Amazon SageMaker Studio. If you migrate the domain to Amazon SageMaker Unified Studio, you can access it only in that studio interface.\n",
+		//	          "enum": [
+		//	            "ENABLED",
+		//	            "DISABLED"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -5197,6 +5250,108 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						generic.Multiset(),
 						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UnifiedStudioSettings
+				"unified_studio_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DomainAccountId
+						"domain_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ID of the AWS account that has the Amazon SageMaker Unified Studio domain. The default value, if you don't specify an ID, is the ID of the account that has the Amazon SageMaker AI domain.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(12, 12),
+								stringvalidator.RegexMatches(regexp.MustCompile("^\\d+$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: DomainId
+						"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ID of the Amazon SageMaker Unified Studio domain associated with this domain.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 36),
+								stringvalidator.RegexMatches(regexp.MustCompile("^dzd[-_][a-zA-Z0-9_-]{1,36}$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: DomainRegion
+						"domain_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The AWS Region where the domain is located in Amazon SageMaker Unified Studio. The default value, if you don't specify a Region, is the Region where the Amazon SageMaker AI domain is located.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z]{2}-[a-zA-Z\\-]+-\\d+"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: EnvironmentId
+						"environment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ID of the environment that Amazon SageMaker Unified Studio associates with the domain.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 36),
+								stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]{1,36}$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ProjectId
+						"project_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ID of the Amazon SageMaker Unified Studio project that corresponds to the domain.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]{1,36}$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ProjectS3Path
+						"project_s3_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The location where Amazon S3 stores temporary execution data and other artifacts for the project that corresponds to the domain.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 100),
+								stringvalidator.RegexMatches(regexp.MustCompile("[\\w\\.-]+$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: StudioWebPortalAccess
+						"studio_web_portal_access": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Sets whether you can access the domain in Amazon SageMaker Studio:\n\nENABLED\nYou can access the domain in Amazon SageMaker Studio. If you migrate the domain to Amazon SageMaker Unified Studio, you can access it in both studio interfaces.\nDISABLED\nYou can't access the domain in Amazon SageMaker Studio. If you migrate the domain to Amazon SageMaker Unified Studio, you can access it only in that studio interface.\n",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"ENABLED",
+									"DISABLED",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "A collection of settings that apply to an Amazon SageMaker AI domain when you use it in Amazon SageMaker Unified Studio.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -5496,13 +5651,16 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"default_space_settings":                         "DefaultSpaceSettings",
 		"default_user_settings":                          "DefaultUserSettings",
 		"docker_settings":                                "DockerSettings",
+		"domain_account_id":                              "DomainAccountId",
 		"domain_arn":                                     "DomainArn",
 		"domain_execution_role_arn":                      "DomainExecutionRoleArn",
 		"domain_id":                                      "DomainId",
 		"domain_name":                                    "DomainName",
+		"domain_region":                                  "DomainRegion",
 		"domain_settings":                                "DomainSettings",
 		"efs_file_system_config":                         "EFSFileSystemConfig",
 		"enable_docker_access":                           "EnableDockerAccess",
+		"environment_id":                                 "EnvironmentId",
 		"execution_role":                                 "ExecutionRole",
 		"execution_role_identity_config":                 "ExecutionRoleIdentityConfig",
 		"file_system_id":                                 "FileSystemId",
@@ -5531,6 +5689,8 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"maximum_ebs_volume_size_in_gb":                  "MaximumEbsVolumeSizeInGb",
 		"min_idle_timeout_in_minutes":                    "MinIdleTimeoutInMinutes",
 		"notebook_output_option":                         "NotebookOutputOption",
+		"project_id":                                     "ProjectId",
+		"project_s3_path":                                "ProjectS3Path",
 		"r_session_app_settings":                         "RSessionAppSettings",
 		"r_studio_connect_url":                           "RStudioConnectUrl",
 		"r_studio_package_manager_url":                   "RStudioPackageManagerUrl",
@@ -5550,11 +5710,13 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"single_sign_on_managed_application_instance_id": "SingleSignOnManagedApplicationInstanceId",
 		"space_storage_settings":                         "SpaceStorageSettings",
 		"studio_web_portal":                              "StudioWebPortal",
+		"studio_web_portal_access":                       "StudioWebPortalAccess",
 		"studio_web_portal_settings":                     "StudioWebPortalSettings",
 		"subnet_ids":                                     "SubnetIds",
 		"tag_propagation":                                "TagPropagation",
 		"tags":                                           "Tags",
 		"uid":                                            "Uid",
+		"unified_studio_settings":                        "UnifiedStudioSettings",
 		"url":                                            "Url",
 		"user_group":                                     "UserGroup",
 		"value":                                          "Value",

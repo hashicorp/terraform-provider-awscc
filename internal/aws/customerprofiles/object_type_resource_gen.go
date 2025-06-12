@@ -69,7 +69,7 @@ func objectTypeResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "Description of the profile object type.",
-		//	  "maxLength": 1000,
+		//	  "maxLength": 10000,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
@@ -77,7 +77,7 @@ func objectTypeResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Description of the profile object type.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 1000),
+				stringvalidator.LengthBetween(1, 10000),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: DomainName
@@ -419,6 +419,40 @@ func objectTypeResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: MaxAvailableProfileObjectCount
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The maximum available number of profile objects",
+		//	  "minimum": 0,
+		//	  "type": "integer"
+		//	}
+		"max_available_profile_object_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The maximum available number of profile objects",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: MaxProfileObjectCount
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The maximum number of profile objects for this object type",
+		//	  "minimum": 1,
+		//	  "type": "integer"
+		//	}
+		"max_profile_object_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The maximum number of profile objects for this object type",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.Int64{ /*START VALIDATORS*/
+				int64validator.AtLeast(1),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ObjectTypeName
 		// CloudFormation resource type schema:
 		//
@@ -585,6 +619,8 @@ func objectTypeResource(ctx context.Context) (resource.Resource, error) {
 		"key":                                  "Key",
 		"keys":                                 "Keys",
 		"last_updated_at":                      "LastUpdatedAt",
+		"max_available_profile_object_count":   "MaxAvailableProfileObjectCount",
+		"max_profile_object_count":             "MaxProfileObjectCount",
 		"name":                                 "Name",
 		"object_type_field":                    "ObjectTypeField",
 		"object_type_key_list":                 "ObjectTypeKeyList",

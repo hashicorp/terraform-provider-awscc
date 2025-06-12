@@ -644,9 +644,10 @@ func experimentTemplateResource(ctx context.Context) (resource.Resource, error) 
 		"tags":              // Pattern: ""
 		schema.MapAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-				mapplanmodifier.RequiresReplace(),
+				mapplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Targets

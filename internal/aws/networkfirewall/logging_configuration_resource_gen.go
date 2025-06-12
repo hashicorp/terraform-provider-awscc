@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -29,6 +30,19 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::NetworkFirewall::LoggingConfiguration resource.
 func loggingConfigurationResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: EnableMonitoringDashboard
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "boolean"
+		//	}
+		"enable_monitoring_dashboard": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: FirewallArn
 		// CloudFormation resource type schema:
 		//
@@ -197,13 +211,14 @@ func loggingConfigurationResource(ctx context.Context) (resource.Resource, error
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkFirewall::LoggingConfiguration").WithTerraformTypeName("awscc_networkfirewall_logging_configuration")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"firewall_arn":            "FirewallArn",
-		"firewall_name":           "FirewallName",
-		"log_destination":         "LogDestination",
-		"log_destination_configs": "LogDestinationConfigs",
-		"log_destination_type":    "LogDestinationType",
-		"log_type":                "LogType",
-		"logging_configuration":   "LoggingConfiguration",
+		"enable_monitoring_dashboard": "EnableMonitoringDashboard",
+		"firewall_arn":                "FirewallArn",
+		"firewall_name":               "FirewallName",
+		"log_destination":             "LogDestination",
+		"log_destination_configs":     "LogDestinationConfigs",
+		"log_destination_type":        "LogDestinationType",
+		"log_type":                    "LogType",
+		"logging_configuration":       "LoggingConfiguration",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
