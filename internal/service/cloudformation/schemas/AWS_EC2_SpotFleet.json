@@ -1010,5 +1010,8 @@
         "ec2:DescribeSpotFleetRequests"
       ]
     }
+  },
+  "tagging": {
+    "taggable": false
   }
 }

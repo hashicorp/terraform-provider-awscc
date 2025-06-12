@@ -11,7 +11,7 @@
       "maxLength": 36
     },
     "BatchSize": {
-      "description": "The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function. Lambda passes all of the records in the batch to the function in a single call, up to the payload limit for synchronous invocation (6 MB).\n  +   *Amazon Kinesis* ? Default 100. Max 10,000.\n  +   *Amazon DynamoDB Streams* ? Default 100. Max 10,000.\n  +   *Amazon Simple Queue Service* ? Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.\n  +   *Amazon Managed Streaming for Apache Kafka* ? Default 100. Max 10,000.\n  +   *Self-managed Apache Kafka* ? Default 100. Max 10,000.\n  +   *Amazon MQ (ActiveMQ and RabbitMQ)* ? Default 100. Max 10,000.\n  +   *DocumentDB* ? Default 100. Max 10,000.",
+      "description": "The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function. Lambda passes all of the records in the batch to the function in a single call, up to the payload limit for synchronous invocation (6 MB).\n  +  *Amazon Kinesis* ? Default 100. Max 10,000.\n  +  *Amazon DynamoDB Streams* ? Default 100. Max 10,000.\n  +  *Amazon Simple Queue Service* ? Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.\n  +  *Amazon Managed Streaming for Apache Kafka* ? Default 100. Max 10,000.\n  +  *Self-managed Apache Kafka* ? Default 100. Max 10,000.\n  +  *Amazon MQ (ActiveMQ and RabbitMQ)* ? Default 100. Max 10,000.\n  +  *DocumentDB* ? Default 100. Max 10,000.",
       "type": "integer",
       "minimum": 1,
       "maximum": 10000
@@ -29,7 +29,7 @@
       "type": "boolean"
     },
     "EventSourceArn": {
-      "description": "The Amazon Resource Name (ARN) of the event source.\n  +   *Amazon Kinesis* ? The ARN of the data stream or a stream consumer.\n  +   *Amazon DynamoDB Streams* ? The ARN of the stream.\n  +   *Amazon Simple Queue Service* ? The ARN of the queue.\n  +   *Amazon Managed Streaming for Apache Kafka* ? The ARN of the cluster or the ARN of the VPC connection (for [cross-account event source mappings](https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#msk-multi-vpc)).\n  +   *Amazon MQ* ? The ARN of the broker.\n  +   *Amazon DocumentDB* ? The ARN of the DocumentDB change stream.",
+      "description": "The Amazon Resource Name (ARN) of the event source.\n  +  *Amazon Kinesis* ? The ARN of the data stream or a stream consumer.\n  +  *Amazon DynamoDB Streams* ? The ARN of the stream.\n  +  *Amazon Simple Queue Service* ? The ARN of the queue.\n  +  *Amazon Managed Streaming for Apache Kafka* ? The ARN of the cluster or the ARN of the VPC connection (for [cross-account event source mappings](https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#msk-multi-vpc)).\n  +  *Amazon MQ* ? The ARN of the broker.\n  +  *Amazon DocumentDB* ? The ARN of the DocumentDB change stream.",
       "type": "string",
       "pattern": "arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:([a-z]{2}(-gov)?(-iso([a-z])?)?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)",
       "minLength": 12,
@@ -54,14 +54,14 @@
       "maxLength": 2048
     },
     "FunctionName": {
-      "description": "The name or ARN of the Lambda function.\n  **Name formats**\n +   *Function name* ? ``MyFunction``.\n  +   *Function ARN* ? ``arn:aws:lambda:us-west-2:123456789012:function:MyFunction``.\n  +   *Version or Alias ARN* ? ``arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD``.\n  +   *Partial ARN* ? ``123456789012:function:MyFunction``.\n  \n The length constraint applies only to the full ARN. If you specify only the function name, it's limited to 64 characters in length.",
+      "description": "The name or ARN of the Lambda function.\n  **Name formats**\n +  *Function name* ? ``MyFunction``.\n  +  *Function ARN* ? ``arn:aws:lambda:us-west-2:123456789012:function:MyFunction``.\n  +  *Version or Alias ARN* ? ``arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD``.\n  +  *Partial ARN* ? ``123456789012:function:MyFunction``.\n  \n The length constraint applies only to the full ARN. If you specify only the function name, it's limited to 64 characters in length.",
       "type": "string",
       "pattern": "(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?(-iso([a-z])?)?-[a-z]+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?",
       "minLength": 1,
       "maxLength": 140
     },
     "MaximumBatchingWindowInSeconds": {
-      "description": "The maximum amount of time, in seconds, that Lambda spends gathering records before invoking the function.\n  *Default (, , event sources)*: 0\n  *Default (, Kafka, , event sources)*: 500 ms\n  *Related setting:* For SQS event sources, when you set ``BatchSize`` to a value greater than 10, you must set ``MaximumBatchingWindowInSeconds`` to at least 1.",
+      "description": "The maximum amount of time, in seconds, that Lambda spends gathering records before invoking the function.\n *Default (, , event sources)*: 0\n *Default (, Kafka, , event sources)*: 500 ms\n *Related setting:* For SQS event sources, when you set ``BatchSize`` to a value greater than 10, you must set ``MaximumBatchingWindowInSeconds`` to at least 1.",
       "type": "integer",
       "minimum": 0,
       "maximum": 300
@@ -85,7 +85,7 @@
       "maximum": 10
     },
     "StartingPosition": {
-      "description": "The position in a stream from which to start reading. Required for Amazon Kinesis and Amazon DynamoDB.\n  +   *LATEST* - Read only new records.\n  +   *TRIM_HORIZON* - Process all available records.\n  +   *AT_TIMESTAMP* - Specify a time from which to start reading records.",
+      "description": "The position in a stream from which to start reading. Required for Amazon Kinesis and Amazon DynamoDB.\n  +  *LATEST* - Read only new records.\n  +  *TRIM_HORIZON* - Process all available records.\n  +  *AT_TIMESTAMP* - Specify a time from which to start reading records.",
       "type": "string",
       "pattern": "(LATEST|TRIM_HORIZON|AT_TIMESTAMP)+",
       "minLength": 6,
@@ -233,7 +233,7 @@
     },
     "OnFailure": {
       "type": "object",
-      "description": "A destination for events that failed processing.",
+      "description": "A destination for events that failed processing. See [Capturing records of Lambda asynchronous invocations](https://docs.aws.amazon.com/lambda/latest/dg/invocation-async-retain-records.html) for more information.",
       "additionalProperties": false,
       "properties": {
         "Destination": {
@@ -251,7 +251,7 @@
       "description": "An array of the authentication protocol, VPC components, or virtual host to secure and define your event source.",
       "properties": {
         "Type": {
-          "description": "The type of authentication protocol, VPC components, or virtual host for your event source. For example: ``\"Type\":\"SASL_SCRAM_512_AUTH\"``.\n  +   ``BASIC_AUTH`` ? (Amazon MQ) The ASMlong secret that stores your broker credentials.\n  +   ``BASIC_AUTH`` ? (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key used for SASL/PLAIN authentication of your Apache Kafka brokers.\n  +   ``VPC_SUBNET`` ? (Self-managed Apache Kafka) The subnets associated with your VPC. Lambda connects to these subnets to fetch data from your self-managed Apache Kafka cluster.\n  +   ``VPC_SECURITY_GROUP`` ? (Self-managed Apache Kafka) The VPC security group used to manage access to your self-managed Apache Kafka brokers.\n  +   ``SASL_SCRAM_256_AUTH`` ? (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key used for SASL SCRAM-256 authentication of your self-managed Apache Kafka brokers.\n  +   ``SASL_SCRAM_512_AUTH`` ? (Amazon MSK, Self-managed Apache Kafka) The Secrets Manager ARN of your secret key used for SASL SCRAM-512 authentication of your self-managed Apache Kafka brokers.\n  +   ``VIRTUAL_HOST`` ?- (RabbitMQ) The name of the virtual host in your RabbitMQ broker. Lambda uses this RabbitMQ host as the event source. This property cannot be specified in an UpdateEventSourceMapping API call.\n  +   ``CLIENT_CERTIFICATE_TLS_AUTH`` ? (Amazon MSK, self-managed Apache Kafka) The Secrets Manager ARN of your secret key containing the certificate chain (X.509 PEM), private key (PKCS#8 PEM), and private key password (optional) used for mutual TLS authentication of your MSK/Apache Kafka brokers.\n  +   ``SERVER_ROOT_CA_CERTIFICATE`` ? (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key containing the root CA certificate (X.509 PEM) used for TLS encryption of your Apache Kafka brokers.",
+          "description": "The type of authentication protocol, VPC components, or virtual host for your event source. For example: ``\"Type\":\"SASL_SCRAM_512_AUTH\"``.\n  +  ``BASIC_AUTH`` ? (Amazon MQ) The ASMlong secret that stores your broker credentials.\n  +  ``BASIC_AUTH`` ? (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key used for SASL/PLAIN authentication of your Apache Kafka brokers.\n  +  ``VPC_SUBNET`` ? (Self-managed Apache Kafka) The subnets associated with your VPC. Lambda connects to these subnets to fetch data from your self-managed Apache Kafka cluster.\n  +  ``VPC_SECURITY_GROUP`` ? (Self-managed Apache Kafka) The VPC security group used to manage access to your self-managed Apache Kafka brokers.\n  +  ``SASL_SCRAM_256_AUTH`` ? (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key used for SASL SCRAM-256 authentication of your self-managed Apache Kafka brokers.\n  +  ``SASL_SCRAM_512_AUTH`` ? (Amazon MSK, Self-managed Apache Kafka) The Secrets Manager ARN of your secret key used for SASL SCRAM-512 authentication of your self-managed Apache Kafka brokers.\n  +  ``VIRTUAL_HOST`` ?- (RabbitMQ) The name of the virtual host in your RabbitMQ broker. Lambda uses this RabbitMQ host as the event source. This property cannot be specified in an UpdateEventSourceMapping API call.\n  +  ``CLIENT_CERTIFICATE_TLS_AUTH`` ? (Amazon MSK, self-managed Apache Kafka) The Secrets Manager ARN of your secret key containing the certificate chain (X.509 PEM), private key (PKCS#8 PEM), and private key password (optional) used for mutual TLS authentication of your MSK/Apache Kafka brokers.\n  +  ``SERVER_ROOT_CA_CERTIFICATE`` ? (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key containing the root CA certificate (X.509 PEM) used for TLS encryption of your Apache Kafka brokers.",
           "enum": [
             "BASIC_AUTH",
             "VPC_SUBNET",
@@ -320,6 +320,10 @@
         "ConsumerGroupId": {
           "description": "The identifier for the Kafka consumer group to join. The consumer group ID must be unique among all your Kafka event sources. After creating a Kafka event source mapping with the consumer group ID specified, you cannot update this value. For more information, see [Customizable consumer group ID](https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-consumer-group-id).",
           "$ref": "#/definitions/ConsumerGroupId"
+        },
+        "SchemaRegistryConfig": {
+          "description": "",
+          "$ref": "#/definitions/SchemaRegistryConfig"
         }
       }
     },
@@ -329,8 +333,12 @@
       "additionalProperties": false,
       "properties": {
         "ConsumerGroupId": {
-          "description": "The identifier for the Kafka consumer group to join. The consumer group ID must be unique among all your Kafka event sources. After creating a Kafka event source mapping with the consumer group ID specified, you cannot update this value. For more information, see [Customizable consumer group ID](https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-consumer-group-id).",
+          "description": "The identifier for the Kafka consumer group to join. The consumer group ID must be unique among all your Kafka event sources. After creating a Kafka event source mapping with the consumer group ID specified, you cannot update this value. For more information, see [Customizable consumer group ID](https://docs.aws.amazon.com/lambda/latest/dg/with-kafka-process.html#services-smaa-topic-add).",
           "$ref": "#/definitions/ConsumerGroupId"
+        },
+        "SchemaRegistryConfig": {
+          "description": "",
+          "$ref": "#/definitions/SchemaRegistryConfig"
         }
       }
     },
@@ -419,6 +427,85 @@
         }
       }
     },
+    "SchemaRegistryConfig": {
+      "description": "",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "SchemaRegistryURI": {
+          "description": "The URI for your schema registry. The correct URI format depends on the type of schema registry you're using.",
+          "type": "string",
+          "pattern": "[a-zA-Z0-9-/*:_+=.@-]*",
+          "minLength": 1,
+          "maxLength": 10000
+        },
+        "EventRecordFormat": {
+          "description": "The record format that Lambda delivers to your function after schema validation.",
+          "enum": [
+            "JSON",
+            "SOURCE"
+          ],
+          "type": "string"
+        },
+        "AccessConfigs": {
+          "description": "An array of access configuration objects that tell Lambda how to authenticate with your schema registry.",
+          "type": "array",
+          "uniqueItems": true,
+          "maxItems": 2,
+          "items": {
+            "$ref": "#/definitions/SchemaRegistryAccessConfig"
+          }
+        },
+        "SchemaValidationConfigs": {
+          "description": "An array of schema validation configuration objects, which tell Lambda the message attributes you want to validate and filter using your schema registry.",
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 1,
+          "maxItems": 2,
+          "items": {
+            "$ref": "#/definitions/SchemaValidationConfig"
+          }
+        }
+      }
+    },
+    "SchemaRegistryAccessConfig": {
+      "description": "",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Type": {
+          "description": "The type of authentication Lambda uses to access your schema registry.",
+          "type": "string",
+          "enum": [
+            "BASIC_AUTH",
+            "CLIENT_CERTIFICATE_TLS_AUTH",
+            "SERVER_ROOT_CA_CERTIFICATE"
+          ]
+        },
+        "URI": {
+          "description": "The URI of the secret (Secrets Manager secret ARN) to authenticate with your schema registry.",
+          "type": "string",
+          "pattern": "arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:([a-z]{2}(-gov)?(-iso([a-z])?)?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)",
+          "minLength": 1,
+          "maxLength": 10000
+        }
+      }
+    },
+    "SchemaValidationConfig": {
+      "description": "",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Attribute": {
+          "description": "The attribute you want your schema registry to validate and filter for.",
+          "type": "string",
+          "enum": [
+            "KEY",
+            "VALUE"
+          ]
+        }
+      }
+    },
     "MetricsConfig": {
       "description": "The metrics configuration for your event source. Use this configuration object to define which metrics you want your event source mapping to produce.",
       "type": "object",
@@ -447,9 +534,7 @@
     "/properties/EventSourceArn",
     "/properties/StartingPosition",
     "/properties/StartingPositionTimestamp",
-    "/properties/SelfManagedEventSource",
-    "/properties/AmazonManagedKafkaEventSourceConfig",
-    "/properties/SelfManagedKafkaEventSourceConfig"
+    "/properties/SelfManagedEventSource"
   ],
   "readOnlyProperties": [
     "/properties/Id",
@@ -459,7 +544,8 @@
     "/properties/Id"
   ],
   "propertyTransform": {
-    "/properties/StartingPositionTimestamp": "StartingPositionTimestamp * 1000"
+    "/properties/StartingPositionTimestamp": "StartingPositionTimestamp * 1000",
+    "/properties/FunctionName": "$split(FunctionName, \":\")[-1] $OR FunctionName $OR $join([\"((arn:.*:lambda:.*:[0-9]{12}:function)|([0-9]{12}:function)):\", $split(FunctionName, \":\")[-1]])"
   },
   "handlers": {
     "create": {

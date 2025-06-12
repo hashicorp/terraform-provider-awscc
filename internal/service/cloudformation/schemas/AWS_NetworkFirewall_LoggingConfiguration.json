@@ -81,6 +81,9 @@
     },
     "LoggingConfiguration": {
       "$ref": "#/definitions/LoggingConfiguration"
+    },
+    "EnableMonitoringDashboard": {
+      "type": "boolean"
     }
   },
   "tagging": {

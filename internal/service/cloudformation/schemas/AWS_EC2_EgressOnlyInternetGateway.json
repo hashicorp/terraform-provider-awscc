@@ -11,13 +11,48 @@
     "VpcId": {
       "description": "The ID of the VPC for which to create the egress-only internet gateway.",
       "type": "string"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Any tags assigned to the egress only internet gateway.",
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Value",
+        "Key"
+      ]
     }
   },
   "tagging": {
-    "taggable": false,
-    "tagOnCreate": false,
-    "tagUpdatable": false,
-    "cloudFormationSystemTags": false
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "ec2:CreateTags",
+      "ec2:DeleteTags"
+    ]
   },
   "required": [
     "VpcId"
@@ -35,19 +70,29 @@
     "create": {
       "permissions": [
         "ec2:CreateEgressOnlyInternetGateway",
+        "ec2:CreateTags",
         "ec2:DescribeEgressOnlyInternetGateways"
       ]
     },
     "read": {
       "permissions": [
-        "ec2:DescribeEgressOnlyInternetGateways"
+        "ec2:DescribeEgressOnlyInternetGateways",
+        "ec2:DescribeTags"
       ]
     },
     "delete": {
       "permissions": [
         "ec2:DeleteEgressOnlyInternetGateway",
         "ec2:DescribeEgressOnlyInternetGateways",
-        "ec2:DescribeVpcs"
+        "ec2:DescribeVpcs",
+        "ec2:DeleteTags"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "ec2:DeleteTags",
+        "ec2:CreateTags",
+        "ec2:DescribeEgressOnlyInternetGateways"
       ]
     },
     "list": {

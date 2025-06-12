@@ -118,7 +118,12 @@
     "tagOnCreate": true,
     "tagUpdatable": false,
     "cloudFormationSystemTags": false,
-    "tagProperty": "/properties/Tags"
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "mediapackage:TagResource",
+      "mediapackage:UntagResource",
+      "mediapackage:ListTagsForResource"
+    ]
   },
   "additionalProperties": false,
   "required": [

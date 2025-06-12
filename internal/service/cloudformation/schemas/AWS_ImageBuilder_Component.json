@@ -127,7 +127,7 @@
     "tagProperty": "/properties/Tags",
     "permissions": [
       "imagebuilder:TagResource",
-      "imagebuilder:UnTagResource"
+      "imagebuilder:UntagResource"
     ]
   },
   "handlers": {
@@ -158,7 +158,7 @@
     "delete": {
       "permissions": [
         "imagebuilder:GetComponent",
-        "imagebuilder:UnTagResource",
+        "imagebuilder:UntagResource",
         "imagebuilder:DeleteComponent"
       ]
     },

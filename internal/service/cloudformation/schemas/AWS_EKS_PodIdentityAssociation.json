@@ -1,42 +1,117 @@
 {
+  "typeName": "AWS::EKS::PodIdentityAssociation",
+  "description": "An object representing an Amazon EKS PodIdentityAssociation.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-eks.git",
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "ClusterName": {
+      "description": "The cluster that the pod identity association is created for.",
+      "type": "string",
+      "minLength": 1
+    },
+    "RoleArn": {
+      "description": "The IAM role ARN that the pod identity association is created for.",
+      "type": "string"
+    },
+    "Namespace": {
+      "description": "The Kubernetes namespace that the pod identity association is created for.",
+      "type": "string"
+    },
+    "ServiceAccount": {
+      "description": "The Kubernetes service account that the pod identity association is created for.",
+      "type": "string"
+    },
+    "AssociationArn": {
+      "description": "The ARN of the pod identity association.",
+      "type": "string"
+    },
+    "AssociationId": {
+      "description": "The ID of the pod identity association.",
+      "type": "string",
+      "minLength": 1
+    },
+    "TargetRoleArn": {
+      "description": "The Target Role Arn of the pod identity association.",
+      "type": "string",
+      "minLength": 1
+    },
+    "ExternalId": {
+      "description": "The External Id of the pod identity association.",
+      "type": "string",
+      "minLength": 1
+    },
+    "DisableSessionTags": {
+      "description": "The Disable Session Tags of the pod identity association.",
+      "type": "boolean",
+      "minLength": 1
+    },
+    "Tags": {
+      "description": "An array of key-value pairs to apply to this resource.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
   "tagging": {
-    "permissions": [
-      "eks:TagResource",
-      "eks:UntagResource"
-    ],
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
     "tagProperty": "/properties/Tags",
-    "cloudFormationSystemTags": true
+    "permissions": [
+      "eks:TagResource",
+      "eks:UntagResource"
+    ]
   },
-  "typeName": "AWS::EKS::PodIdentityAssociation",
-  "readOnlyProperties": [
-    "/properties/AssociationArn",
-    "/properties/AssociationId"
-  ],
-  "description": "An object representing an Amazon EKS PodIdentityAssociation.",
-  "createOnlyProperties": [
-    "/properties/ClusterName",
-    "/properties/Namespace",
-    "/properties/ServiceAccount"
-  ],
-  "primaryIdentifier": [
-    "/properties/AssociationArn"
-  ],
+  "additionalProperties": false,
   "required": [
     "ClusterName",
     "RoleArn",
     "Namespace",
     "ServiceAccount"
   ],
-  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-eks.git",
+  "primaryIdentifier": [
+    "/properties/AssociationArn"
+  ],
+  "createOnlyProperties": [
+    "/properties/ClusterName",
+    "/properties/Namespace",
+    "/properties/ServiceAccount"
+  ],
+  "readOnlyProperties": [
+    "/properties/AssociationArn",
+    "/properties/AssociationId",
+    "/properties/ExternalId"
+  ],
+  "replacementStrategy": "create_then_delete",
   "handlers": {
-    "read": {
-      "permissions": [
-        "eks:DescribePodIdentityAssociation"
-      ]
-    },
     "create": {
       "permissions": [
         "eks:CreatePodIdentityAssociation",
@@ -44,6 +119,11 @@
         "eks:TagResource",
         "iam:PassRole",
         "iam:GetRole"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "eks:DescribePodIdentityAssociation"
       ]
     },
     "update": {
@@ -56,10 +136,13 @@
         "iam:GetRole"
       ]
     },
-    "list": {
+    "delete": {
       "permissions": [
-        "eks:ListPodIdentityAssociations"
-      ],
+        "eks:DeletePodIdentityAssociation",
+        "eks:DescribePodIdentityAssociation"
+      ]
+    },
+    "list": {
       "handlerSchema": {
         "properties": {
           "ClusterName": {
@@ -69,77 +152,10 @@
         "required": [
           "ClusterName"
         ]
-      }
-    },
-    "delete": {
-      "permissions": [
-        "eks:DeletePodIdentityAssociation",
-        "eks:DescribePodIdentityAssociation"
-      ]
-    }
-  },
-  "additionalProperties": false,
-  "definitions": {
-    "Tag": {
-      "description": "A key-value pair to associate with a resource.",
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "Value": {
-          "minLength": 0,
-          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-          "type": "string",
-          "maxLength": 256
-        },
-        "Key": {
-          "minLength": 1,
-          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-          "type": "string",
-          "maxLength": 128
-        }
       },
-      "required": [
-        "Key",
-        "Value"
+      "permissions": [
+        "eks:ListPodIdentityAssociations"
       ]
     }
-  },
-  "properties": {
-    "AssociationArn": {
-      "description": "The ARN of the pod identity association.",
-      "type": "string"
-    },
-    "ServiceAccount": {
-      "description": "The Kubernetes service account that the pod identity association is created for.",
-      "type": "string"
-    },
-    "ClusterName": {
-      "minLength": 1,
-      "description": "The cluster that the pod identity association is created for.",
-      "type": "string"
-    },
-    "RoleArn": {
-      "description": "The IAM role ARN that the pod identity association is created for.",
-      "type": "string"
-    },
-    "Namespace": {
-      "description": "The Kubernetes namespace that the pod identity association is created for.",
-      "type": "string"
-    },
-    "AssociationId": {
-      "minLength": 1,
-      "description": "The ID of the pod identity association.",
-      "type": "string"
-    },
-    "Tags": {
-      "uniqueItems": true,
-      "description": "An array of key-value pairs to apply to this resource.",
-      "insertionOrder": false,
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/Tag"
-      }
-    }
-  },
-  "replacementStrategy": "create_then_delete"
+  }
 }

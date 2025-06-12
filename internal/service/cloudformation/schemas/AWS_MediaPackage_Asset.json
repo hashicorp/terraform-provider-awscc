@@ -89,7 +89,12 @@
     "tagOnCreate": true,
     "tagUpdatable": false,
     "cloudFormationSystemTags": false,
-    "tagProperty": "/properties/Tags"
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "mediapackage-vod:TagResource",
+      "mediapackage-vod:UntagResource",
+      "mediapackage-vod:ListTagsForResource"
+    ]
   },
   "additionalProperties": false,
   "required": [
@@ -106,6 +111,10 @@
   ],
   "primaryIdentifier": [
     "/properties/Id"
+  ],
+  "createOnlyProperties": [
+    "/properties/Id",
+    "/properties/Tags"
   ],
   "handlers": {
     "create": {

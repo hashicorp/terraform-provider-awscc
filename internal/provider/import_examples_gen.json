@@ -4166,7 +4166,7 @@
     },
     {
         "resource": "awscc_opsworkscm_server",
-        "identifier": ["ServerName"],
+        "identifier": ["Id"],
         "path": "./examples/resources/awscc_opsworkscm_server/import.sh"
     },
     {

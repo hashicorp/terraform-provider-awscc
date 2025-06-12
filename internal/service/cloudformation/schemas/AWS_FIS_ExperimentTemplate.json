@@ -421,14 +421,12 @@
     "Description",
     "StopConditions",
     "Targets",
-    "RoleArn",
-    "Tags"
+    "RoleArn"
   ],
   "readOnlyProperties": [
     "/properties/Id"
   ],
   "createOnlyProperties": [
-    "/properties/Tags",
     "/properties/ExperimentOptions/AccountTargeting"
   ],
   "tagging": {

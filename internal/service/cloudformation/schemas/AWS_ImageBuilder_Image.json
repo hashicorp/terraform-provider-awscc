@@ -3,7 +3,7 @@
   "tagging": {
     "permissions": [
       "imagebuilder:TagResource",
-      "imagebuilder:UnTagResource"
+      "imagebuilder:UntagResource"
     ],
     "taggable": true,
     "tagOnCreate": true,
@@ -73,7 +73,7 @@
       "permissions": [
         "imagebuilder:GetImage",
         "imagebuilder:DeleteImage",
-        "imagebuilder:UnTagResource",
+        "imagebuilder:UntagResource",
         "imagebuilder:CancelImageCreation"
       ]
     }
