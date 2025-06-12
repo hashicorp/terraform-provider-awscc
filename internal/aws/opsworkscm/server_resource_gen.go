@@ -7,10 +7,7 @@ package opsworkscm
 
 import (
 	"context"
-	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
-	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
@@ -37,7 +34,6 @@ func serverResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "maxLength": 10000,
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -64,28 +60,20 @@ func serverResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "maxLength": 79,
-		//	  "pattern": "[a-zA-Z][a-zA-Z0-9\\-\\.\\:]*",
 		//	  "type": "string"
 		//	}
 		"backup_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(79),
-				stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z][a-zA-Z0-9\\-\\.\\:]*"), ""),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
-			// BackupId is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: BackupRetentionCount
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "minLength": 1,
 		//	  "type": "integer"
 		//	}
 		"backup_retention_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -99,63 +87,43 @@ func serverResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "maxLength": 2097152,
-		//	  "pattern": "(?s)\\s*-----BEGIN CERTIFICATE-----.+-----END CERTIFICATE-----\\s*",
 		//	  "type": "string"
 		//	}
 		"custom_certificate": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(2097152),
-				stringvalidator.RegexMatches(regexp.MustCompile("(?s)\\s*-----BEGIN CERTIFICATE-----.+-----END CERTIFICATE-----\\s*"), ""),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
-			// CustomCertificate is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: CustomDomain
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "maxLength": 253,
-		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
 		"custom_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(253),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
-			// CustomDomain is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: CustomPrivateKey
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "maxLength": 4096,
-		//	  "pattern": "(?ms)\\s*^-----BEGIN (?-s:.*)PRIVATE KEY-----$.*?^-----END (?-s:.*)PRIVATE KEY-----$\\s*",
 		//	  "type": "string"
 		//	}
 		"custom_private_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(4096),
-				stringvalidator.RegexMatches(regexp.MustCompile("(?ms)\\s*^-----BEGIN (?-s:.*)PRIVATE KEY-----$.*?^-----END (?-s:.*)PRIVATE KEY-----$\\s*"), ""),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
-			// CustomPrivateKey is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: DisableAutomatedBackup
 		// CloudFormation resource type schema:
@@ -174,7 +142,6 @@ func serverResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "maxLength": 10000,
 		//	  "type": "string"
 		//	}
 		"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -187,15 +154,11 @@ func serverResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "maxLength": 10000,
 		//	  "type": "string"
 		//	}
 		"engine": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(10000),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
@@ -209,13 +172,9 @@ func serverResource(ctx context.Context) (resource.Resource, error) {
 		//	    "additionalProperties": false,
 		//	    "properties": {
 		//	      "Name": {
-		//	        "maxLength": 10000,
-		//	        "pattern": "(?s).*",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "maxLength": 10000,
-		//	        "pattern": "(?s).*",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -231,10 +190,6 @@ func serverResource(ctx context.Context) (resource.Resource, error) {
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Optional: true,
 						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthAtMost(10000),
-							stringvalidator.RegexMatches(regexp.MustCompile("(?s).*"), ""),
-						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
@@ -243,10 +198,6 @@ func serverResource(ctx context.Context) (resource.Resource, error) {
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Optional: true,
 						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthAtMost(10000),
-							stringvalidator.RegexMatches(regexp.MustCompile("(?s).*"), ""),
-						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
@@ -258,21 +209,16 @@ func serverResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
-			// EngineAttributes is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: EngineModel
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "maxLength": 10000,
 		//	  "type": "string"
 		//	}
 		"engine_model": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(10000),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
@@ -282,35 +228,36 @@ func serverResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "maxLength": 10000,
 		//	  "type": "string"
 		//	}
 		"engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(10000),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
-			// EngineVersion is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"server_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceProfileArn
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "maxLength": 10000,
-		//	  "pattern": "arn:aws:iam::[0-9]{12}:instance-profile/.*",
 		//	  "type": "string"
 		//	}
 		"instance_profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(10000),
-				stringvalidator.RegexMatches(regexp.MustCompile("arn:aws:iam::[0-9]{12}:instance-profile/.*"), ""),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -319,14 +266,10 @@ func serverResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "maxLength": 10000,
 		//	  "type": "string"
 		//	}
 		"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(10000),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -335,38 +278,25 @@ func serverResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "maxLength": 10000,
-		//	  "pattern": ".*",
 		//	  "type": "string"
 		//	}
 		"key_pair": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(10000),
-				stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
-			// KeyPair is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: PreferredBackupWindow
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "maxLength": 10000,
-		//	  "pattern": "^((Mon|Tue|Wed|Thu|Fri|Sat|Sun):)?([0-1][0-9]|2[0-3]):[0-5][0-9]$",
 		//	  "type": "string"
 		//	}
 		"preferred_backup_window": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(10000),
-				stringvalidator.RegexMatches(regexp.MustCompile("^((Mon|Tue|Wed|Thu|Fri|Sat|Sun):)?([0-1][0-9]|2[0-3]):[0-5][0-9]$"), ""),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -375,17 +305,11 @@ func serverResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "maxLength": 10000,
-		//	  "pattern": "^((Mon|Tue|Wed|Thu|Fri|Sat|Sun):)?([0-1][0-9]|2[0-3]):[0-5][0-9]$",
 		//	  "type": "string"
 		//	}
 		"preferred_maintenance_window": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(10000),
-				stringvalidator.RegexMatches(regexp.MustCompile("^((Mon|Tue|Wed|Thu|Fri|Sat|Sun):)?([0-1][0-9]|2[0-3]):[0-5][0-9]$"), ""),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -395,7 +319,6 @@ func serverResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "items": {
-		//	    "maxLength": 10000,
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array",
@@ -405,11 +328,6 @@ func serverResource(ctx context.Context) (resource.Resource, error) {
 			ElementType: types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.ValueStringsAre(
-					stringvalidator.LengthAtMost(10000),
-				),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
 				listplanmodifier.RequiresReplaceIfConfigured(),
@@ -419,32 +337,22 @@ func serverResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "maxLength": 40,
-		//	  "minLength": 1,
-		//	  "pattern": "[a-zA-Z][a-zA-Z0-9\\-]*",
 		//	  "type": "string"
 		//	}
 		"server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ServiceRoleArn
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "maxLength": 10000,
-		//	  "pattern": "arn:aws:iam::[0-9]{12}:role/.*",
 		//	  "type": "string"
 		//	}
 		"service_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(10000),
-				stringvalidator.RegexMatches(regexp.MustCompile("arn:aws:iam::[0-9]{12}:role/.*"), ""),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -454,7 +362,6 @@ func serverResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "items": {
-		//	    "maxLength": 10000,
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array",
@@ -464,11 +371,6 @@ func serverResource(ctx context.Context) (resource.Resource, error) {
 			ElementType: types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.ValueStringsAre(
-					stringvalidator.LengthAtMost(10000),
-				),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
 				listplanmodifier.RequiresReplaceIfConfigured(),
@@ -482,15 +384,9 @@ func serverResource(ctx context.Context) (resource.Resource, error) {
 		//	    "additionalProperties": false,
 		//	    "properties": {
 		//	      "Key": {
-		//	        "maxLength": 128,
-		//	        "minLength": 1,
-		//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "maxLength": 256,
-		//	        "minLength": 0,
-		//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -511,8 +407,6 @@ func serverResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
-							stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -524,8 +418,6 @@ func serverResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
-							stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -539,7 +431,6 @@ func serverResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
-			// Tags is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -584,6 +475,7 @@ func serverResource(ctx context.Context) (resource.Resource, error) {
 		"preferred_backup_window":      "PreferredBackupWindow",
 		"preferred_maintenance_window": "PreferredMaintenanceWindow",
 		"security_group_ids":           "SecurityGroupIds",
+		"server_id":                    "Id",
 		"server_name":                  "ServerName",
 		"service_role_arn":             "ServiceRoleArn",
 		"subnet_ids":                   "SubnetIds",
@@ -591,16 +483,6 @@ func serverResource(ctx context.Context) (resource.Resource, error) {
 		"value":                        "Value",
 	})
 
-	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/BackupId",
-		"/properties/CustomCertificate",
-		"/properties/CustomDomain",
-		"/properties/CustomPrivateKey",
-		"/properties/EngineAttributes",
-		"/properties/EngineVersion",
-		"/properties/KeyPair",
-		"/properties/Tags",
-	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

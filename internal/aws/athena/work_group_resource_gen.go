@@ -245,6 +245,27 @@ func workGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "Execution Role ARN required to run Athena Spark Calculations",
 		//	      "type": "string"
 		//	    },
+		//	    "ManagedQueryResultsConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "The configuration for the managed query results and encryption option. ResultConfiguration and ManagedQueryResultsConfiguration cannot be set at the same time",
+		//	      "properties": {
+		//	        "Enabled": {
+		//	          "type": "boolean"
+		//	        },
+		//	        "EncryptionConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "Indicates the encryption configuration for Athena Managed Storage. If not setting this field, Managed Storage will encrypt the query results with Athena's encryption key",
+		//	          "properties": {
+		//	            "KmsKey": {
+		//	              "description": "For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID. ",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "PublishCloudWatchMetricsEnabled": {
 		//	      "description": "Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.",
 		//	      "type": "boolean"
@@ -402,6 +423,45 @@ func workGroupResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ManagedQueryResultsConfiguration
+				"managed_query_results_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: EncryptionConfiguration
+						"encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: KmsKey
+								"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID. ",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Indicates the encryption configuration for Athena Managed Storage. If not setting this field, Managed Storage will encrypt the query results with Athena's encryption key",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration for the managed query results and encryption option. ResultConfiguration and ManagedQueryResultsConfiguration cannot be set at the same time",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: PublishCloudWatchMetricsEnabled
@@ -575,6 +635,27 @@ func workGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	    "ExecutionRole": {
 		//	      "description": "Execution Role ARN required to run Athena Spark Calculations",
 		//	      "type": "string"
+		//	    },
+		//	    "ManagedQueryResultsConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "The configuration for the managed query results and encryption option. ResultConfiguration and ManagedQueryResultsConfiguration cannot be set at the same time",
+		//	      "properties": {
+		//	        "Enabled": {
+		//	          "type": "boolean"
+		//	        },
+		//	        "EncryptionConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "Indicates the encryption configuration for Athena Managed Storage. If not setting this field, Managed Storage will encrypt the query results with Athena's encryption key",
+		//	          "properties": {
+		//	            "KmsKey": {
+		//	              "description": "For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID. ",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
 		//	    },
 		//	    "PublishCloudWatchMetricsEnabled": {
 		//	      "description": "Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.",
@@ -751,6 +832,45 @@ func workGroupResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ManagedQueryResultsConfiguration
+				"managed_query_results_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: EncryptionConfiguration
+						"encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: KmsKey
+								"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID. ",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Indicates the encryption configuration for Athena Managed Storage. If not setting this field, Managed Storage will encrypt the query results with Athena's encryption key",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration for the managed query results and encryption option. ResultConfiguration and ManagedQueryResultsConfiguration cannot be set at the same time",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: PublishCloudWatchMetricsEnabled
@@ -950,6 +1070,7 @@ func workGroupResource(ctx context.Context) (resource.Resource, error) {
 		"customer_content_encryption_configuration": "CustomerContentEncryptionConfiguration",
 		"description":                               "Description",
 		"effective_engine_version":                  "EffectiveEngineVersion",
+		"enabled":                                   "Enabled",
 		"encryption_configuration":                  "EncryptionConfiguration",
 		"encryption_option":                         "EncryptionOption",
 		"enforce_work_group_configuration":          "EnforceWorkGroupConfiguration",
@@ -958,6 +1079,7 @@ func workGroupResource(ctx context.Context) (resource.Resource, error) {
 		"expected_bucket_owner":                     "ExpectedBucketOwner",
 		"key":                                       "Key",
 		"kms_key":                                   "KmsKey",
+		"managed_query_results_configuration":       "ManagedQueryResultsConfiguration",
 		"name":                                      "Name",
 		"output_location":                           "OutputLocation",
 		"publish_cloudwatch_metrics_enabled":        "PublishCloudWatchMetricsEnabled",

@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -73,6 +74,37 @@ func podIdentityAssociationResource(ctx context.Context) (resource.Resource, err
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DisableSessionTags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Disable Session Tags of the pod identity association.",
+		//	  "minLength": 1,
+		//	  "type": "boolean"
+		//	}
+		"disable_session_tags": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "The Disable Session Tags of the pod identity association.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ExternalId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The External Id of the pod identity association.",
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The External Id of the pod identity association.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Namespace
@@ -184,6 +216,25 @@ func podIdentityAssociationResource(ctx context.Context) (resource.Resource, err
 				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: TargetRoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Target Role Arn of the pod identity association.",
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"target_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Target Role Arn of the pod identity association.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtLeast(1),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -206,15 +257,18 @@ func podIdentityAssociationResource(ctx context.Context) (resource.Resource, err
 	opts = opts.WithCloudFormationTypeName("AWS::EKS::PodIdentityAssociation").WithTerraformTypeName("awscc_eks_pod_identity_association")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"association_arn": "AssociationArn",
-		"association_id":  "AssociationId",
-		"cluster_name":    "ClusterName",
-		"key":             "Key",
-		"namespace":       "Namespace",
-		"role_arn":        "RoleArn",
-		"service_account": "ServiceAccount",
-		"tags":            "Tags",
-		"value":           "Value",
+		"association_arn":      "AssociationArn",
+		"association_id":       "AssociationId",
+		"cluster_name":         "ClusterName",
+		"disable_session_tags": "DisableSessionTags",
+		"external_id":          "ExternalId",
+		"key":                  "Key",
+		"namespace":            "Namespace",
+		"role_arn":             "RoleArn",
+		"service_account":      "ServiceAccount",
+		"tags":                 "Tags",
+		"target_role_arn":      "TargetRoleArn",
+		"value":                "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
