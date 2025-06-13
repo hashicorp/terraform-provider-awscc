@@ -14,8 +14,8 @@ If you wish to work on the provider, you'll first need [Go](http://www.golang.or
 Clone repository to: `$HOME/development/terraform-providers/`
 
 ```sh
-$ mkdir -p $HOME/development/terraform-providers/; cd $HOME/development/terraform-providers/
-$ git clone git@github.com:terraform-providers/terraform-provider-awscc
+$ mkdir -p $HOME/development/hashicorp/; cd $HOME/development/hashicorp/
+$ git clone git@github.com:hashicorp/terraform-provider-awscc
 ...
 ```
 
