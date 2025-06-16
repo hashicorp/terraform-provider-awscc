@@ -10,7 +10,7 @@ resource "awscc_ec2_vpc" "main" {
   tags = [{
     key   = "Name"
     value = "route-server-vpc"
-  }, {
+    }, {
     key   = "Modified By"
     value = "AWSCC"
   }]
@@ -25,7 +25,7 @@ resource "awscc_ec2_subnet" "main" {
   tags = [{
     key   = "Name"
     value = "route-server-subnet"
-  }, {
+    }, {
     key   = "Modified By"
     value = "AWSCC"
   }]
@@ -36,7 +36,7 @@ resource "awscc_ec2_internet_gateway" "main" {
   tags = [{
     key   = "Name"
     value = "route-server-igw"
-  }, {
+    }, {
     key   = "Modified By"
     value = "AWSCC"
   }]
@@ -45,7 +45,7 @@ resource "awscc_ec2_internet_gateway" "main" {
 # Attach Internet Gateway to VPC
 resource "aws_internet_gateway_attachment" "main" {
   internet_gateway_id = awscc_ec2_internet_gateway.main.id
-  vpc_id             = awscc_ec2_vpc.main.id
+  vpc_id              = awscc_ec2_vpc.main.id
 }
 
 # Route Server
@@ -54,7 +54,7 @@ resource "awscc_ec2_transit_gateway" "main" {
   tags = [{
     key   = "Name"
     value = "route-server-tgw"
-  }, {
+    }, {
     key   = "Modified By"
     value = "AWSCC"
   }]
@@ -69,7 +69,7 @@ resource "awscc_ec2_transit_gateway_vpc_attachment" "main" {
   tags = [{
     key   = "Name"
     value = "route-server-endpoint"
-  }, {
+    }, {
     key   = "Modified By"
     value = "AWSCC"
   }]

@@ -7,7 +7,7 @@ resource "awscc_batch_consumable_resource" "demo" {
   tags = [{
     key   = "Environment"
     value = "demo"
-  }, {
+    }, {
     key   = "Modified By"
     value = "AWSCC"
   }]

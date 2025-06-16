@@ -62,7 +62,7 @@ resource "awscc_ssmguiconnect_preferences" "example" {
     recording_destinations = {
       s3_buckets = [
         {
-          bucket_name  = awscc_s3_bucket.recordings.id 
+          bucket_name  = awscc_s3_bucket.recordings.id
           bucket_owner = data.aws_caller_identity.current.account_id
         }
       ]
