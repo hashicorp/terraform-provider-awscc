@@ -47,6 +47,7 @@ type ResourceSchema struct {
 	CloudFormationSchemaPath             string `hcl:"cloudformation_schema_path,optional"`
 	CloudFormationTypeName               string `hcl:"cloudformation_type_name"`
 	ResourceTypeName                     string `hcl:"resource_type_name,label"`
+	SuppressionReason                    string `hcl:"suppression_reason,optional"`
 	SuppressPluralDataSourceGeneration   bool   `hcl:"suppress_plural_data_source_generation,optional"`
 	SuppressResourceGeneration           bool   `hcl:"suppress_resource_generation,optional"`
 	SuppressSingularDataSourceGeneration bool   `hcl:"suppress_singular_data_source_generation,optional"`

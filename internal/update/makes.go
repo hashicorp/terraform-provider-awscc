@@ -16,9 +16,17 @@ import (
 	allschemas "github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/allschemas"
 )
 
+const (
+	BuildTypeSchemas             = "schemas"
+	BuildTypeResources           = "resources"
+	BuildTypeSingularDataSources = "singular-data-sources"
+	BuildTypePluralDataSources   = "plural-data-sources"
+	CloudFormationSchemasDir     = "internal/service/cloudformation/schemas"
+)
+
 func makeBuild(ctx context.Context, client *github.Client, currentSchemas *allschemas.AllSchemas, buildType string, filePaths *UpdateFilePaths) error {
-	if buildType != "schemas" && buildType != "resources" && buildType != "singular-data-sources" && buildType != "plural-data-sources" {
-		return fmt.Errorf("invalid build type: %s, must be 'schemas', 'resources', 'singular-data-sources', or 'plural-data-sources'", buildType)
+	if buildType != BuildTypeSchemas && buildType != BuildTypeResources && buildType != BuildTypeSingularDataSources && buildType != BuildTypePluralDataSources {
+		return fmt.Errorf("invalid build type: %s, must be '%s', '%s', '%s', or '%s'", buildType, BuildTypeSchemas, BuildTypeResources, BuildTypeSingularDataSources, BuildTypePluralDataSources)
 	}
 
 	file, err := os.OpenFile(filePaths.RunMakesErrors, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0644)
@@ -26,10 +34,6 @@ func makeBuild(ctx context.Context, client *github.Client, currentSchemas *allsc
 		return fmt.Errorf("failed to open error log file: %w", err)
 	}
 	defer file.Close()
-	awsServices, err := listResourceTypes(ctx)
-	if err != nil {
-		return fmt.Errorf("failed to list AWS resource types: %w", err)
-	}
 
 	var loopCount int = 1
 
@@ -42,7 +46,6 @@ func makeBuild(ctx context.Context, client *github.Client, currentSchemas *allsc
 			return fmt.Errorf("failed to clear makes_errors.txt: %w", err)
 		}
 		file.Close()
-		time.Sleep(2 * time.Second) // Ensure file is closed before reopening in command
 
 		// Generate a random filename for the tee output
 		tmpFile, err := os.CreateTemp("", "makes_output_*.txt")
@@ -63,46 +66,42 @@ func makeBuild(ctx context.Context, client *github.Client, currentSchemas *allsc
 			return fmt.Errorf("failed to execute make %s command: %w", buildType, err)
 		}
 		*/
-
 		runMakesErrorData, err := os.ReadFile(filePaths.RunMakesErrors)
 		if err != nil {
 			return fmt.Errorf("failed to read error log file: %w", err)
 		}
+		err = os.Truncate(filePaths.RunMakesErrors, 0)
+		if err != nil {
+			return fmt.Errorf("error occurred after reading error log file: %w", err)
+		}
 
-		lines := strings.Split(string(runMakesErrorData), "\n")
-		for _, line := range lines {
-			if err := processErrorLine(ctx, line, client, currentSchemas, buildType, filePaths, awsServices); err != nil {
+		makesErrors := strings.Split(string(runMakesErrorData), "\n")
+		for _, errorLine := range makesErrors {
+			err := processErrorLine(ctx, errorLine, client, currentSchemas, buildType, filePaths, nil)
+			if err != nil {
 				tflog.Debug(ctx, fmt.Sprintf("Error processing line: %v", err))
 			}
 		}
 		i = 0
-		loopCount = len(lines)
-		for idx, line := range lines {
-			fmt.Printf("lines[%d]: %q\n", idx, line)
+		loopCount = len(makesErrors)
+		for idx, errorLine := range makesErrors {
+			fmt.Printf("lines[%d]: %q\n", idx, errorLine)
 		}
-		print("Processed ", len(lines), " lines from error log file.\n")
-		for _, l := range lines {
+		print("Processed ", len(makesErrors), " lines from error log file.\n")
+		for _, l := range makesErrors {
 			fmt.Println(l)
 		}
-		runMakesErrorFile, err := os.OpenFile(filePaths.RunMakesErrors, os.O_RDWR|os.O_CREATE, 0644)
-		if err != nil {
-			return fmt.Errorf("failed to reopen error log file: %w", err)
-		}
-		err = runMakesErrorFile.Truncate(0)
-		if err != nil {
-			return fmt.Errorf("failed to clear error log file: %w", err)
-		}
-		runMakesErrorFile.Close()
 	}
 
 	return nil
 }
-func processErrorLine(ctx context.Context, line string, client *github.Client, currentSchemas *allschemas.AllSchemas, buildType string, filePaths *UpdateFilePaths, awsServices map[string]string) error {
-	if line == "" {
+func processErrorLine(ctx context.Context, errorLine string, client *github.Client, currentSchemas *allschemas.AllSchemas, buildType string, filePaths *UpdateFilePaths, awsServices map[string]string) error {
+	if errorLine == "" {
 		return nil // Skip empty lines
 	}
-	fmt.Printf("Found an entry in the error log: %s during make %s \n", line, buildType)
-	if strings.Contains(line, "stack overflow") {
+	var resourceName string
+	fmt.Printf("Found an entry in the error log: %s during make %s \n", errorLine, buildType)
+	if strings.Contains(errorLine, "stack overflow") {
 		fmt.Println("Detected stack overflow error, attempting to extract resource name from logs.")
 		var resourceName string = ""
 		// Try to extract resource name from stack overflow error using emit_attribute_last_tftype.txt
@@ -124,35 +123,31 @@ func processErrorLine(ctx context.Context, line string, client *github.Client, c
 			return fmt.Errorf("resource name not found for stack overflow: %s", resourceName)
 		}
 		new := isNew(resourceName, currentSchemas)
-		err = suppress(ctx, resourceName, line, client, new, buildType, filePaths)
+		err = suppress(ctx, resourceName, errorLine, client, new, buildType, filePaths)
 		fmt.Print("Suppression result: ", err)
 		return err
-	} else if strings.Contains(line, "AWS_") {
-		var resourceName string = ""
-		// Example error:
+	} else if strings.Contains(errorLine, "AWS_") {
 		// "../service/cloudformation/schemas/AWS_AccessAnalyzer_Analyzer.json: emitting schema code:"
-		words := strings.Split(line, " ")
-		for _, word := range words {
-			if strings.HasPrefix(word, "../service/cloudformation/schemas/AWS_") && strings.HasSuffix(word, ".json:") {
-				trimmed := strings.TrimPrefix(word, "../service/cloudformation/schemas/")
+		errorLineParts := strings.Split(errorLine, " ")
+		for _, errorLinePart := range errorLineParts {
+			if strings.HasPrefix(errorLinePart, "../service/cloudformation/schemas/AWS_") && strings.HasSuffix(errorLinePart, ".json:") {
+				trimmed := strings.TrimPrefix(errorLinePart, "../service/cloudformation/schemas/")
 				resourceName = strings.TrimSuffix(trimmed, ".json:")
 				break
 			}
 		}
 		if resourceName == "" {
-			return fmt.Errorf("failed to extract resource name from error line: %s", line)
+			return fmt.Errorf("failed to extract resource name from error line: %s", errorLine)
 		}
 		new := isNew(resourceName, currentSchemas)
-		return suppress(ctx, resourceName, line, client, new, buildType, filePaths)
-	} else if strings.Contains(line, "AWS::") {
+		return suppress(ctx, resourceName, errorLine, client, new, buildType, filePaths)
+	} else if strings.Contains(errorLine, "AWS::") {
 		// Deleted Resource
 		/* error loading CloudFormation Resource Provider Schema for aws_datasync_storage_system: describing CloudFormation type: operation error CloudFormation: DescribeType, https response error StatusCode: 404, RequestID: b41adbc2-cb4f-4e06-93c0-b6cb2bbae150, TypeNotFoundException: The type 'AWS::DataSync::StorageSystem' cannot be found. */
-
-		errorParts := strings.Split(line, " ")
+		errorParts := strings.Split(errorLine, " ")
 		if len(errorParts) < 2 {
-			return fmt.Errorf("failed to parse 404 error line: %s", line)
+			return fmt.Errorf("failed to parse 404 error line: %s", errorLine)
 		}
-		var resourceName string
 		for _, part := range errorParts {
 			if strings.Contains(part, "AWS::") {
 				resourceName = part
@@ -161,7 +156,6 @@ func processErrorLine(ctx context.Context, line string, client *github.Client, c
 				for len(resourceName) > 0 && !isLetter(resourceName[0]) {
 					resourceName = resourceName[1:]
 				}
-
 				// Trim from end until we find any letter
 				for len(resourceName) > 0 && !isLetter(resourceName[len(resourceName)-1]) {
 					resourceName = resourceName[:len(resourceName)-1]
@@ -170,20 +164,20 @@ func processErrorLine(ctx context.Context, line string, client *github.Client, c
 			}
 		}
 		if resourceName == "" {
-			return fmt.Errorf("failed to extract resource name from 404 error line: %s", line)
+			return fmt.Errorf("failed to extract resource name from 404 error line: %s", errorLine)
 		}
 		new := isNew(resourceName, currentSchemas)
-		return suppress(ctx, resourceName, line, client, new, buildType, filePaths)
-	} else if strings.Contains(line, "aws_") {
+		return suppress(ctx, resourceName, errorLine, client, new, buildType, filePaths)
+	} else if strings.Contains(errorLine, "aws_") {
 		var resourceName string
 		/*
 			Example error: "error loading CloudFormation Resource Provider Schema for aws_nimblestudio_studio: describing CloudFormation type: operation error CloudFormation: DescribeType, exceeded maximum number of attempts, 3, https response error StatusCode: 400, ..."
 		*/
-		words := strings.Split(line, " ")
+		words := strings.Split(errorLine, " ")
 		for _, word := range words {
 			if strings.HasPrefix(word, "aws_") {
 				// Look for a matching file in internal/service/cloudformation/schemas
-				schemasDir := "internal/service/cloudformation/schemas"
+				schemasDir := CloudFormationSchemasDir
 				files, err := os.ReadDir(schemasDir)
 				if err != nil {
 					return fmt.Errorf("failed to read schemas directory: %w", err)
@@ -199,14 +193,14 @@ func processErrorLine(ctx context.Context, line string, client *github.Client, c
 			}
 		}
 		if resourceName == "" {
-			return fmt.Errorf("failed to extract resource name from 400 error line: %s", line)
+			return fmt.Errorf("failed to extract resource name from 400 error line: %s", errorLine)
 		}
 		new := isNew(resourceName, currentSchemas)
-		return suppress(ctx, resourceName, line, client, new, buildType, filePaths)
-	} else if strings.Contains(line, "StatusCode: 403,") {
+		return suppress(ctx, resourceName, errorLine, client, new, buildType, filePaths)
+	} else if strings.Contains(errorLine, "StatusCode: 403,") {
 		return fmt.Errorf("authentication failed: no valid AWS credentials")
 	} else {
-		return fmt.Errorf("unhandled schema error: %s", line)
+		return fmt.Errorf("unhandled schema error: %s", errorLine)
 	}
 }
 func suppress(ctx context.Context, resource, schemaError string, client *github.Client, new bool, mode string, filePaths *UpdateFilePaths) error {
@@ -220,7 +214,7 @@ func suppress(ctx context.Context, resource, schemaError string, client *github.
 	// Use empty issue URL instead
 	issueURL := ""
 	// Add to all_schemas.hcl
-	if mode != "schemas" {
+	if mode != BuildTypeSchemas {
 		allSchemas, err := parseSchemaToStruct(filePaths.AllSchemasHCL, allschemas.AllSchemas{})
 		// we can probably optimize this but dont premature optimize
 		if err != nil {
@@ -230,13 +224,13 @@ func suppress(ctx context.Context, resource, schemaError string, client *github.
 		for i := range allSchemas.Resources {
 			if terraformResourceName == allSchemas.Resources[i].CloudFormationTypeName {
 				switch mode {
-				case "schemas": // This deletes the resource
+				case BuildTypeSchemas: // This deletes the resource
 					allSchemas.Resources[i].SuppressResourceGeneration = true
 					tflog.Debug(ctx, fmt.Sprintf("Suppressing resource generation for %s", allSchemas.Resources[i].CloudFormationTypeName))
-				case "resources":
+				case BuildTypeResources:
 					allSchemas.Resources[i].SuppressResourceGeneration = true
 					tflog.Debug(ctx, fmt.Sprintf("Suppressing resource generation for %s", allSchemas.Resources[i].CloudFormationTypeName))
-				case "singular-data-sources":
+				case BuildTypeSingularDataSources:
 					allSchemas.Resources[i].SuppressSingularDataSourceGeneration = true
 					tflog.Debug(ctx, fmt.Sprintf("Suppressing singular data source generation for %s", allSchemas.Resources[i].CloudFormationTypeName))
 				case "plural-data-source":
@@ -274,12 +268,11 @@ func addSchemaToCheckout(resource string, filePaths *UpdateFilePaths) error {
 	file, err := os.OpenFile(filePaths.SuppressionCheckout, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		log.Println("Error opening file:", err)
-		file.Close()
 		return fmt.Errorf("failed to open checkout file for writing: %w", err)
 	}
 	defer file.Close()
 
-	writeContent := fmt.Sprintf("internal/service/cloudformation/schemas/%s.json \n", resource)
+	writeContent := fmt.Sprintf("%s/%s.json \n", CloudFormationSchemasDir, resource)
 	log.Println("Writing to file:", writeContent)
 
 	_, err = file.WriteString(writeContent)
