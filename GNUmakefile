@@ -83,3 +83,6 @@ prereq-go: # If $(GO_VER) is not installed, install it
 		$(GO_VER) download ; \
 		echo "make: $(GO_VER) ready" ; \
 	fi
+update: prereq-go ## Update Schema
+	echo "==> Updating Schema..."
+	$(GO_VER) run internal/update/*.go
