@@ -17,21 +17,21 @@ help: ## Display this help
 build: prereq-go ## Build the provider
 	$(GO_VER) install
 
-plural-data-sources: prereq-go ## Generate plural data sources
+plural-data-sources: prereq-go prereq-goimports ## Generate plural data sources
 	rm -f internal/*/*/*_plural_data_source_gen.go
 	rm -f internal/*/*/*_plural_data_source_gen_test.go
 	$(GO_VER) generate internal/provider/plural_data_sources.go
 	goimports -w internal/*/*/*_plural_data_source_gen.go
 	goimports -w internal/*/*/*_plural_data_source_gen_test.go
 
-singular-data-sources: prereq-go ## Generate singular data sources
+singular-data-sources: prereq-go prereq-goimports ## Generate singular data sources
 	rm -f internal/*/*/*_singular_data_source_gen.go
 	rm -f internal/*/*/*_singular_data_source_gen_test.go
 	$(GO_VER) generate internal/provider/singular_data_sources.go
 	goimports -w internal/*/*/*_singular_data_source_gen.go
 	goimports -w internal/*/*/*_singular_data_source_gen_test.go
 
-resources: prereq-go ## Generate resources
+resources: prereq-go prereq-goimports ## Generate resources
 	rm -f internal/*/*/*_resource_gen.go
 	rm -f internal/*/*/*_resource_gen_test.go
 	$(GO_VER) generate internal/provider/resources.go
@@ -82,4 +82,10 @@ prereq-go: # If $(GO_VER) is not installed, install it
 		go install golang.org/dl/$(GO_VER)@latest ; \
 		$(GO_VER) download ; \
 		echo "make: $(GO_VER) ready" ; \
+	fi
+
+prereq-goimports: # If the goimports cannot be found, notify the user with how to fix
+	@if ! type "goimports" > /dev/null 2>&1 ; then \
+	    echo 'WARNING: GOPATH/bin missing from PATH. HINT: "export PATH=$$PATH:$$($(GO_VER) env GOPATH)/bin"' ; \
+		which goimports; \
 	fi
