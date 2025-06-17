@@ -43,8 +43,20 @@ func makeBuild(ctx context.Context, client *github.Client, currentSchemas *allsc
 		}
 		file.Close()
 		time.Sleep(2 * time.Second) // Ensure file is closed before reopening in command
-		command := fmt.Sprintf("make %s 2>&1 | tee %s | grep \"error\" > %s", buildType, filePaths.RunMakesOutput, filePaths.RunMakesErrors)
+
+		// Generate a random filename for the tee output
+		tmpFile, err := os.CreateTemp("", "makes_output_*.txt")
+		if err != nil {
+			return fmt.Errorf("failed to create temporary output file: %w", err)
+		}
+		tmpFileName := tmpFile.Name()
+		tmpFile.Close()
+
+		command := fmt.Sprintf("make %s 2>&1 | tee %s | grep \"error\" > %s", buildType, tmpFileName, filePaths.RunMakesErrors)
 		execCommand("sh", "-c", command)
+
+		// Optionally, you can clean up the temp file after use if needed:
+		// defer os.Remove(tmpFileName)
 		/* I think the grep is erroring out so no returns
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "Make command failed: %v\nSee makes_output.txt for full output.\n", err)
@@ -65,7 +77,13 @@ func makeBuild(ctx context.Context, client *github.Client, currentSchemas *allsc
 		}
 		i = 0
 		loopCount = len(lines)
+		for idx, line := range lines {
+			fmt.Printf("lines[%d]: %q\n", idx, line)
+		}
 		print("Processed ", len(lines), " lines from error log file.\n")
+		for _, l := range lines {
+			fmt.Println(l)
+		}
 		runMakesErrorFile, err := os.OpenFile(filePaths.RunMakesErrors, os.O_RDWR|os.O_CREATE, 0644)
 		if err != nil {
 			return fmt.Errorf("failed to reopen error log file: %w", err)
