@@ -1,0 +1,6 @@
+run_makes_resource_log = "internal/provider/logs.txt"
+run_makes_output = "internal/update/run_makes_output.txt"
+run_makes_errors = "internal/update/makes_error.txt"
+suppression_checkout = "internal/update/suppressions_checkout.txt"
+aws_schemas = "internal/service/cloudformation/schemas/AWS_*.json"
+all_schemas_hcl = "internal/provider/all_schemas.hcl"

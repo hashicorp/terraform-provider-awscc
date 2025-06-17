@@ -1,0 +1,10 @@
+internal/service/cloudformation/schemas/AWS_DataSync_StorageSystem.json 
+internal/service/cloudformation/schemas/AWS_NimbleStudio_LaunchProfile.json 
+internal/service/cloudformation/schemas/AWS_NimbleStudio_StreamingImage.json 
+internal/service/cloudformation/schemas/AWS_NimbleStudio_Studio.json 
+internal/service/cloudformation/schemas/AWS_NimbleStudio_StudioComponent.json 
+internal/service/cloudformation/schemas/AWS_AccessAnalyzer_Analyzer.json 
+internal/service/cloudformation/schemas/AWS_AppFlow_ConnectorProfile.json
+internal/service/cloudformation/schemas/AWS_Bedrock_FlowVersion.json 
+internal/service/cloudformation/schemas/AWS_Bedrock_FlowVersion.json 
+internal/service/cloudformation/schemas/AWS_Bedrock_FlowVersion.json 
