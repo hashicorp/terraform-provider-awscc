@@ -633,7 +633,7 @@ resource_schema "aws_bedrock_flow" {
 
   # Suppression Reason: DefinitionSubstitutions is of unsupported type: key-value map of .
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1907
-  suppress_resource_generation             = true
+  suppress_resource_generation             = false
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
 }

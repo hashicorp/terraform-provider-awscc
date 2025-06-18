@@ -213,7 +213,6 @@ func suppress(ctx context.Context, cloudFormationTypeName, schemaError string, c
 	var err error
 	// Add to all_schemas.hcl
 	if buildType != BuildTypeSchemas {
-		allSchemas, err = parseSchemaToStruct(filePaths.AllSchemasHCL, allschemas.AllSchemas{})
 		if err != nil {
 			return fmt.Errorf("failed to parse all_schemas.hcl: %w", err)
 		}
@@ -239,13 +238,8 @@ func suppress(ctx context.Context, cloudFormationTypeName, schemaError string, c
 				}
 			}
 		}
-		err = writeSchemasToHCLFile(allSchemas, "internal/provider/all_schemas.hcl")
-		if err != nil {
-			return fmt.Errorf("failed to write schemas to HCL file: %w", err)
-		}
 	} else {
-		log.Println("Skipping suppression for schemas mode")
-		tflog.Debug(ctx, fmt.Sprintf("Skipping suppression for %s in mode %s", cloudFormationTypeName, buildType))
+		fmt.Println("Suppressing for build type:", buildType, "new:", new, "resource:", cloudFormationTypeName)
 		if !new {
 			err := addSchemaToCheckout(cloudFormationTypeName, filePaths)
 			if err != nil {
@@ -262,16 +256,14 @@ func suppress(ctx context.Context, cloudFormationTypeName, schemaError string, c
 			sort.Slice(allSchemas.Resources, func(i, j int) bool {
 				return allSchemas.Resources[i].ResourceTypeName < allSchemas.Resources[j].ResourceTypeName
 			})
-			tflog.Debug(ctx, fmt.Sprintf("Suppressing resource generation for %s in all_schemas.hcl", cloudFormationTypeName))
-			err := writeSchemasToHCLFile(allSchemas, "internal/provider/all_schemas.hcl")
-			if err != nil {
-				return fmt.Errorf("failed to write schemas to HCL file: %w", err)
-			}
-			return nil
-
+			fmt.Println(fmt.Sprintf("Suppressing resource generation for %s in all_schemas.hcl", cloudFormationTypeName))
 		}
 	}
 
+	err = writeSchemasToHCLFile(allSchemas, "internal/provider/all_schemas.hcl")
+	if err != nil {
+		return fmt.Errorf("failed to write schemas to HCL file: %w", err)
+	}
 	return nil
 }
 func addSchemaToCheckout(resource string, filePaths *UpdateFilePaths) error {
@@ -286,7 +278,7 @@ func addSchemaToCheckout(resource string, filePaths *UpdateFilePaths) error {
 	}
 	defer file.Close()
 
-	writeContent := fmt.Sprintf("%s/%s.json \n", CloudFormationSchemasDir, resource)
+	writeContent := fmt.Sprintf("\n%s/%s.json", CloudFormationSchemasDir, resource)
 	log.Println("Writing to file:", writeContent)
 
 	_, err = file.WriteString(writeContent)
