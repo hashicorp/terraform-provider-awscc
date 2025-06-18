@@ -353,8 +353,13 @@ func GetResourceFromLog(filePaths *UpdateFilePaths, buildType string) (string, e
 
 func isNew(cloudFormationTypeName string, currentSchemas *allschemas.AllSchemas) bool {
 	cloudFormationTypeName = strings.ReplaceAll(cloudFormationTypeName, "_", "::")
+	fmt.Println("Checking if resource is new:", cloudFormationTypeName)
 	for _, r := range currentSchemas.Resources {
-		if r.CloudFormationTypeName == cloudFormationTypeName {
+		rType := strings.TrimSpace(r.CloudFormationTypeName)
+		cfType := strings.TrimSpace(cloudFormationTypeName)
+		fmt.Println("Comparing with:", r.CloudFormationTypeName)
+		if rType == cfType {
+			print("Resource found in current schemas:", cloudFormationTypeName, "\n")
 			return false
 		}
 	}

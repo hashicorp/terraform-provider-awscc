@@ -13,7 +13,6 @@ import (
 	"time"
 
 	"github.com/google/go-github/v72/github"
-	"github.com/hashicorp/hcl/v2/hclsimple"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	allschemas "github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/allschemas"
 )
@@ -226,22 +225,6 @@ func getLastDate() (string, error) {
 	}
 
 	return lastDate, nil
-}
-
-func parseUpdateConfig() (*UpdateFilePaths, error) {
-	var filename = "internal/update/update_files.hcl"
-	data, err := os.ReadFile(filename)
-	if err != nil {
-		return nil, fmt.Errorf("failed to read config file: %w", err)
-	}
-
-	var config UpdateFilePaths
-	err = hclsimple.Decode(filename, data, nil, &config)
-	if err != nil {
-		return nil, fmt.Errorf("failed to parse config file: %w", err)
-	}
-
-	return &config, nil
 }
 
 type UpdateFilePaths struct {
