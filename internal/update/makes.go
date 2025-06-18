@@ -338,10 +338,10 @@ func GetResourceFromLog(filePaths *UpdateFilePaths, buildType string) (string, e
 	return resourceName, nil
 }
 
-func isNew(resourceName string, currentSchemas *allschemas.AllSchemas) bool {
-	resourceName = strings.ToLower(resourceName)
+func isNew(cloudFormationTypeName string, currentSchemas *allschemas.AllSchemas) bool {
+	cloudFormationTypeName = strings.ReplaceAll(cloudFormationTypeName, "_", "::")
 	for _, r := range currentSchemas.Resources {
-		if r.ResourceTypeName == resourceName {
+		if r.CloudFormationTypeName == cloudFormationTypeName {
 			return false
 		}
 	}
