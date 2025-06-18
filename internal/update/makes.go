@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"sort"
 	"strings"
 	"time"
 
@@ -203,8 +204,8 @@ func processErrorLine(ctx context.Context, errorLine string, client *github.Clie
 		return fmt.Errorf("unhandled schema error: %s", errorLine)
 	}
 }
-func suppress(ctx context.Context, resource, schemaError string, client *github.Client, new bool, mode string, filePaths *UpdateFilePaths) error {
-	log.Println("Suppressing resource:", resource)
+func suppress(ctx context.Context, cloudFormationTypeName, schemaError string, client *github.Client, new bool, mode string, filePaths *UpdateFilePaths) error {
+	log.Println("Suppressing resource:", cloudFormationTypeName)
 	// Create Issue - temporarily commented out to avoid GitHub API calls
 	// issueURL, err := createIssue(resource, schemaError, client)
 	// if err != nil {
@@ -213,20 +214,17 @@ func suppress(ctx context.Context, resource, schemaError string, client *github.
 
 	// Use empty issue URL instead
 	issueURL := ""
+	allSchemas, err := parseSchemaToStruct(filePaths.AllSchemasHCL, allschemas.AllSchemas{})
 	// Add to all_schemas.hcl
-	if mode != BuildTypeSchemas {
-		allSchemas, err := parseSchemaToStruct(filePaths.AllSchemasHCL, allschemas.AllSchemas{})
+	if mode != BuildTypeSchemas || (mode == BuildTypeSchemas && new) {
 		// we can probably optimize this but dont premature optimize
 		if err != nil {
 			return fmt.Errorf("failed to parse all_schemas.hcl: %w", err)
 		}
-		terraformResourceName := strings.ToLower(resource)
+		terraformResourceName := strings.ToLower(cloudFormationTypeName)
 		for i := range allSchemas.Resources {
 			if terraformResourceName == allSchemas.Resources[i].CloudFormationTypeName {
 				switch mode {
-				case BuildTypeSchemas: // This deletes the resource
-					allSchemas.Resources[i].SuppressResourceGeneration = true
-					tflog.Debug(ctx, fmt.Sprintf("Suppressing resource generation for %s", allSchemas.Resources[i].CloudFormationTypeName))
 				case BuildTypeResources:
 					allSchemas.Resources[i].SuppressResourceGeneration = true
 					tflog.Debug(ctx, fmt.Sprintf("Suppressing resource generation for %s", allSchemas.Resources[i].CloudFormationTypeName))
@@ -251,10 +249,25 @@ func suppress(ctx context.Context, resource, schemaError string, client *github.
 		}
 	} else {
 		log.Println("Skipping suppression for schemas mode")
-		tflog.Debug(ctx, fmt.Sprintf("Skipping suppression for %s in mode %s", resource, mode))
-		err := addSchemaToCheckout(resource, filePaths)
-		if err != nil {
-			return fmt.Errorf("failed to add resource to checkout file: %w", err)
+		tflog.Debug(ctx, fmt.Sprintf("Skipping suppression for %s in mode %s", cloudFormationTypeName, mode))
+		if !new {
+			err := addSchemaToCheckout(cloudFormationTypeName, filePaths)
+			if err != nil {
+				return fmt.Errorf("failed to add resource to checkout file: %w", err)
+			}
+			return fmt.Errorf("added resource to checkout: %w", err)
+		} else { // This effectively deletes the resource from the provider
+			temp := &allschemas.ResourceAllSchema{
+				ResourceTypeName:           strings.ToLower(cloudFormationTypeName),
+				CloudFormationTypeName:     cloudFormationTypeName,
+				SuppressResourceGeneration: true,
+			}
+			allSchemas.Resources = append(allSchemas.Resources, *temp)
+			sort.Slice(allSchemas.Resources, func(i, j int) bool {
+				return allSchemas.Resources[i].ResourceTypeName < allSchemas.Resources[j].ResourceTypeName
+			})
+			tflog.Debug(ctx, fmt.Sprintf("Suppressing resource generation for %s in all_schemas.hcl", cloudFormationTypeName))
+
 		}
 	}
 
