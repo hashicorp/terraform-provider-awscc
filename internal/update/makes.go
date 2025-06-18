@@ -7,11 +7,7 @@ import (
 	"os"
 	"sort"
 	"strings"
-	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/config"
-	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
 	"github.com/google/go-github/v72/github"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	allschemas "github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/allschemas"
@@ -78,7 +74,7 @@ func makeBuild(ctx context.Context, client *github.Client, currentSchemas *allsc
 
 		makesErrors := strings.Split(string(runMakesErrorData), "\n")
 		for _, errorLine := range makesErrors {
-			err := processErrorLine(ctx, errorLine, client, currentSchemas, buildType, filePaths, nil)
+			err := processErrorLine(ctx, errorLine, client, currentSchemas, buildType, filePaths)
 			if err != nil {
 				tflog.Debug(ctx, fmt.Sprintf("Error processing line: %v", err))
 			}
@@ -96,7 +92,7 @@ func makeBuild(ctx context.Context, client *github.Client, currentSchemas *allsc
 
 	return nil
 }
-func processErrorLine(ctx context.Context, errorLine string, client *github.Client, currentSchemas *allschemas.AllSchemas, buildType string, filePaths *UpdateFilePaths, awsServices map[string]string) error {
+func processErrorLine(ctx context.Context, errorLine string, client *github.Client, currentSchemas *allschemas.AllSchemas, buildType string, filePaths *UpdateFilePaths) error {
 	if errorLine == "" {
 		return nil // Skip empty lines
 	}
@@ -124,7 +120,7 @@ func processErrorLine(ctx context.Context, errorLine string, client *github.Clie
 			return fmt.Errorf("resource name not found for stack overflow: %s", resourceName)
 		}
 		new := isNew(resourceName, currentSchemas)
-		err = suppress(ctx, resourceName, errorLine, client, new, buildType, filePaths)
+		err = suppress(ctx, resourceName, errorLine, client, new, buildType, filePaths, currentSchemas)
 		fmt.Print("Suppression result: ", err)
 		return err
 	} else if strings.Contains(errorLine, "AWS_") {
@@ -141,7 +137,7 @@ func processErrorLine(ctx context.Context, errorLine string, client *github.Clie
 			return fmt.Errorf("failed to extract resource name from error line: %s", errorLine)
 		}
 		new := isNew(resourceName, currentSchemas)
-		return suppress(ctx, resourceName, errorLine, client, new, buildType, filePaths)
+		return suppress(ctx, resourceName, errorLine, client, new, buildType, filePaths, currentSchemas)
 	} else if strings.Contains(errorLine, "AWS::") {
 		// Deleted Resource
 		/* error loading CloudFormation Resource Provider Schema for aws_datasync_storage_system: describing CloudFormation type: operation error CloudFormation: DescribeType, https response error StatusCode: 404, RequestID: b41adbc2-cb4f-4e06-93c0-b6cb2bbae150, TypeNotFoundException: The type 'AWS::DataSync::StorageSystem' cannot be found. */
@@ -168,7 +164,7 @@ func processErrorLine(ctx context.Context, errorLine string, client *github.Clie
 			return fmt.Errorf("failed to extract resource name from 404 error line: %s", errorLine)
 		}
 		new := isNew(resourceName, currentSchemas)
-		return suppress(ctx, resourceName, errorLine, client, new, buildType, filePaths)
+		return suppress(ctx, resourceName, errorLine, client, new, buildType, filePaths, currentSchemas)
 	} else if strings.Contains(errorLine, "aws_") {
 		var resourceName string
 		/*
@@ -197,14 +193,14 @@ func processErrorLine(ctx context.Context, errorLine string, client *github.Clie
 			return fmt.Errorf("failed to extract resource name from 400 error line: %s", errorLine)
 		}
 		new := isNew(resourceName, currentSchemas)
-		return suppress(ctx, resourceName, errorLine, client, new, buildType, filePaths)
+		return suppress(ctx, resourceName, errorLine, client, new, buildType, filePaths, currentSchemas)
 	} else if strings.Contains(errorLine, "StatusCode: 403,") {
 		return fmt.Errorf("authentication failed: no valid AWS credentials")
 	} else {
 		return fmt.Errorf("unhandled schema error: %s", errorLine)
 	}
 }
-func suppress(ctx context.Context, cloudFormationTypeName, schemaError string, client *github.Client, new bool, mode string, filePaths *UpdateFilePaths) error {
+func suppress(ctx context.Context, cloudFormationTypeName, schemaError string, client *github.Client, new bool, buildType string, filePaths *UpdateFilePaths, allSchemas *allschemas.AllSchemas) error {
 	log.Println("Suppressing resource:", cloudFormationTypeName)
 	// Create Issue - temporarily commented out to avoid GitHub API calls
 	// issueURL, err := createIssue(resource, schemaError, client)
@@ -214,17 +210,17 @@ func suppress(ctx context.Context, cloudFormationTypeName, schemaError string, c
 
 	// Use empty issue URL instead
 	issueURL := ""
-	allSchemas, err := parseSchemaToStruct(filePaths.AllSchemasHCL, allschemas.AllSchemas{})
+	var err error
 	// Add to all_schemas.hcl
-	if mode != BuildTypeSchemas || (mode == BuildTypeSchemas && new) {
-		// we can probably optimize this but dont premature optimize
+	if buildType != BuildTypeSchemas {
+		allSchemas, err = parseSchemaToStruct(filePaths.AllSchemasHCL, allschemas.AllSchemas{})
 		if err != nil {
 			return fmt.Errorf("failed to parse all_schemas.hcl: %w", err)
 		}
 		terraformResourceName := strings.ToLower(cloudFormationTypeName)
 		for i := range allSchemas.Resources {
 			if terraformResourceName == allSchemas.Resources[i].CloudFormationTypeName {
-				switch mode {
+				switch buildType {
 				case BuildTypeResources:
 					allSchemas.Resources[i].SuppressResourceGeneration = true
 					tflog.Debug(ctx, fmt.Sprintf("Suppressing resource generation for %s", allSchemas.Resources[i].CloudFormationTypeName))
@@ -249,13 +245,13 @@ func suppress(ctx context.Context, cloudFormationTypeName, schemaError string, c
 		}
 	} else {
 		log.Println("Skipping suppression for schemas mode")
-		tflog.Debug(ctx, fmt.Sprintf("Skipping suppression for %s in mode %s", cloudFormationTypeName, mode))
+		tflog.Debug(ctx, fmt.Sprintf("Skipping suppression for %s in mode %s", cloudFormationTypeName, buildType))
 		if !new {
 			err := addSchemaToCheckout(cloudFormationTypeName, filePaths)
 			if err != nil {
 				return fmt.Errorf("failed to add resource to checkout file: %w", err)
 			}
-			return fmt.Errorf("added resource to checkout: %w", err)
+			return nil
 		} else { // This effectively deletes the resource from the provider
 			temp := &allschemas.ResourceAllSchema{
 				ResourceTypeName:           strings.ToLower(cloudFormationTypeName),
@@ -267,6 +263,11 @@ func suppress(ctx context.Context, cloudFormationTypeName, schemaError string, c
 				return allSchemas.Resources[i].ResourceTypeName < allSchemas.Resources[j].ResourceTypeName
 			})
 			tflog.Debug(ctx, fmt.Sprintf("Suppressing resource generation for %s in all_schemas.hcl", cloudFormationTypeName))
+			err := writeSchemasToHCLFile(allSchemas, "internal/provider/all_schemas.hcl")
+			if err != nil {
+				return fmt.Errorf("failed to write schemas to HCL file: %w", err)
+			}
+			return nil
 
 		}
 	}
@@ -295,7 +296,6 @@ func addSchemaToCheckout(resource string, filePaths *UpdateFilePaths) error {
 	}
 
 	log.Println("Successfully wrote to file")
-	time.Sleep(1 * time.Second)
 	return nil
 }
 func checkoutSchemas(ctx context.Context, suppressionData string) error {
@@ -431,60 +431,4 @@ func createIssue(resource, schemaError string, client *github.Client) (string, e
 
 func isLetter(c byte) bool {
 	return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
-}
-
-// Get config with specific region
-func getConfigWithRegion(ctx context.Context, region string) (aws.Config, error) {
-	cfg, err := config.LoadDefaultConfig(ctx,
-		config.WithRegion(region),
-	)
-	if err != nil {
-		return aws.Config{}, err
-	}
-	return cfg, nil
-}
-
-// List CloudFormation resource types using SDK v2
-func listResourceTypes(ctx context.Context) (map[string]string, error) {
-	// Get AWS configuration
-	cfg, err := getConfigWithRegion(ctx, "us-east-1")
-	if err != nil {
-		return nil, err
-	}
-
-	// Create CloudFormation client
-	client := cloudformation.NewFromConfig(cfg)
-
-	// Create the input for ListTypes
-	input := &cloudformation.ListTypesInput{
-		Type:       "RESOURCE",
-		Visibility: "PUBLIC",
-	}
-
-	resourceTypes := make(map[string]string)
-	paginator := cloudformation.NewListTypesPaginator(client, input)
-
-	// Paginate through results
-	for paginator.HasMorePages() {
-		page, err := paginator.NextPage(ctx)
-		if err != nil {
-			return nil, err
-		}
-
-		for _, summary := range page.TypeSummaries {
-			if summary.TypeName != nil {
-				tfccString := aws.ToString(summary.TypeName)
-
-				tfccString = strings.ToLower(tfccString)
-				tfccString = strings.ReplaceAll(tfccString, "::", "_")
-
-				aws_string := aws.ToString(summary.TypeName)
-				aws_string = strings.ReplaceAll(aws_string, "::", "_")
-
-				resourceTypes[tfccString] = aws_string
-			}
-		}
-	}
-
-	return resourceTypes, nil
 }
