@@ -1,0 +1,117 @@
+{
+  "typeName": "AWS::SecurityHub::AggregatorV2",
+  "description": "The AWS::SecurityHub::AggregatorV2 resource represents the AWS Security Hub AggregatorV2 in your account. One aggregatorv2 resource is created for each account in non opt-in region in which you configure region linking mode.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-securityhub",
+  "definitions": {
+    "Region": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9-]{1,32}$"
+    },
+    "Tags": {
+      "description": "A key-value pair to associate with the Security Hub V2 resource.",
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "additionalProperties": false,
+      "maxProperties": 50
+    }
+  },
+  "properties": {
+    "AggregatorV2Arn": {
+      "description": "The ARN of the AggregatorV2 being created and assigned as the unique identifier",
+      "type": "string",
+      "pattern": "arn:aws\\S*:securityhub:\\S*"
+    },
+    "RegionLinkingMode": {
+      "description": "Indicates to link a list of included Regions",
+      "type": "string",
+      "enum": [
+        "SPECIFIED_REGIONS"
+      ]
+    },
+    "LinkedRegions": {
+      "description": "The list of included Regions",
+      "type": "array",
+      "insertionOrder": false,
+      "uniqueItems": true,
+      "minItems": 1,
+      "maxItems": 50,
+      "items": {
+        "$ref": "#/definitions/Region"
+      }
+    },
+    "Tags": {
+      "$ref": "#/definitions/Tags"
+    },
+    "AggregationRegion": {
+      "description": "The aggregation Region of the AggregatorV2",
+      "$ref": "#/definitions/Region"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "RegionLinkingMode",
+    "LinkedRegions"
+  ],
+  "readOnlyProperties": [
+    "/properties/AggregatorV2Arn",
+    "/properties/AggregationRegion"
+  ],
+  "primaryIdentifier": [
+    "/properties/AggregatorV2Arn"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "securityhub:ListTagsForResource",
+      "securityhub:TagResource",
+      "securityhub:UntagResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "securityhub:CreateAggregatorV2",
+        "securityhub:GetAggregatorV2",
+        "securityhub:TagResource",
+        "securityhub:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "securityhub:GetAggregatorV2",
+        "securityhub:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "securityhub:UpdateAggregatorV2",
+        "securityhub:GetAggregatorV2",
+        "securityhub:TagResource",
+        "securityhub:UntagResource",
+        "securityhub:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "securityhub:DeleteAggregatorV2"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "securityhub:ListAggregatorsV2",
+        "securityhub:ListTagsForResource"
+      ]
+    }
+  }
+}

@@ -1935,6 +1935,11 @@
         "path": "./examples/resources/awscc_ec2_subnet_route_table_association/import.sh"
     },
     {
+        "resource": "awscc_ec2_traffic_mirror_filter",
+        "identifier": ["Id"],
+        "path": "./examples/resources/awscc_ec2_traffic_mirror_filter/import.sh"
+    },
+    {
         "resource": "awscc_ec2_transit_gateway",
         "identifier": ["Id"],
         "path": "./examples/resources/awscc_ec2_transit_gateway/import.sh"
@@ -3620,6 +3625,11 @@
         "path": "./examples/resources/awscc_m2_environment/import.sh"
     },
     {
+        "resource": "awscc_mpa_identity_source",
+        "identifier": ["IdentitySourceArn"],
+        "path": "./examples/resources/awscc_mpa_identity_source/import.sh"
+    },
+    {
         "resource": "awscc_msk_batch_scram_secret",
         "identifier": ["ClusterArn"],
         "path": "./examples/resources/awscc_msk_batch_scram_secret/import.sh"
@@ -5265,6 +5275,16 @@
         "path": "./examples/resources/awscc_secretsmanager_secret_target_attachment/import.sh"
     },
     {
+        "resource": "awscc_securityhub_aggregator_v2",
+        "identifier": ["AggregatorV2Arn"],
+        "path": "./examples/resources/awscc_securityhub_aggregator_v2/import.sh"
+    },
+    {
+        "resource": "awscc_securityhub_automation_rule_v2",
+        "identifier": ["RuleArn"],
+        "path": "./examples/resources/awscc_securityhub_automation_rule_v2/import.sh"
+    },
+    {
         "resource": "awscc_securityhub_configuration_policy",
         "identifier": ["Arn"],
         "path": "./examples/resources/awscc_securityhub_configuration_policy/import.sh"
@@ -5283,6 +5303,11 @@
         "resource": "awscc_securityhub_hub",
         "identifier": ["ARN"],
         "path": "./examples/resources/awscc_securityhub_hub/import.sh"
+    },
+    {
+        "resource": "awscc_securityhub_hub_v2",
+        "identifier": ["HubV2Arn"],
+        "path": "./examples/resources/awscc_securityhub_hub_v2/import.sh"
     },
     {
         "resource": "awscc_securityhub_insight",
