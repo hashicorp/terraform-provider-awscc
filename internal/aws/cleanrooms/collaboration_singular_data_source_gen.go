@@ -434,8 +434,7 @@ func collaborationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	    },
 		//	    "required": [
 		//	      "AccountId",
-		//	      "DisplayName",
-		//	      "MemberAbilities"
+		//	      "DisplayName"
 		//	    ],
 		//	    "type": "object"
 		//	  },

@@ -576,7 +576,7 @@ func appMonitorResource(ctx context.Context) (resource.Resource, error) {
 		//	      "properties": {
 		//	        "S3Uri": {
 		//	          "description": "The S3Uri of the bucket or folder that stores the source map files. It is required if status is ENABLED.",
-		//	          "pattern": "^s3://[a-z0-9][-.a-z0-9]{1,61}(?:/[-!_*'().a-z0-9A-Z]+(?:/[-!_*'().a-z0-9A-Z]+)*)?/?$",
+		//	          "pattern": "^s3://[a-z0-9][-.a-z0-9]{1,62}(?:/[-!_*'().a-z0-9A-Z]+(?:/[-!_*'().a-z0-9A-Z]+)*)?/?$",
 		//	          "type": "string"
 		//	        },
 		//	        "Status": {
@@ -607,7 +607,7 @@ func appMonitorResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.RegexMatches(regexp.MustCompile("^s3://[a-z0-9][-.a-z0-9]{1,61}(?:/[-!_*'().a-z0-9A-Z]+(?:/[-!_*'().a-z0-9A-Z]+)*)?/?$"), ""),
+								stringvalidator.RegexMatches(regexp.MustCompile("^s3://[a-z0-9][-.a-z0-9]{1,62}(?:/[-!_*'().a-z0-9A-Z]+(?:/[-!_*'().a-z0-9A-Z]+)*)?/?$"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),

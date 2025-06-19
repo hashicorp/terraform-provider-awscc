@@ -1,0 +1,174 @@
+{
+  "typeName": "AWS::MPA::IdentitySource",
+  "description": "Resource Type definition for AWS::MPA::IdentitySource.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "definitions": {
+    "IdentitySourceArn": {
+      "type": "string"
+    },
+    "IamIdentityCenter": {
+      "type": "object",
+      "properties": {
+        "InstanceArn": {
+          "type": "string",
+          "pattern": "^arn:.+:sso:::instance/(?:sso)?ins-[a-zA-Z0-9-.]{16}$"
+        },
+        "Region": {
+          "type": "string"
+        },
+        "ApprovalPortalUrl": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "InstanceArn",
+        "Region"
+      ]
+    },
+    "IdentitySourceParameters": {
+      "type": "object",
+      "properties": {
+        "IamIdentityCenter": {
+          "$ref": "#/definitions/IamIdentityCenter"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "IamIdentityCenter"
+      ]
+    },
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "type": "string"
+        },
+        "Value": {
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Value",
+        "Key"
+      ]
+    },
+    "Tags": {
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "properties": {
+    "IdentitySourceArn": {
+      "$ref": "#/definitions/IdentitySourceArn"
+    },
+    "IdentitySourceParameters": {
+      "$ref": "#/definitions/IdentitySourceParameters"
+    },
+    "Tags": {
+      "$ref": "#/definitions/Tags"
+    },
+    "IdentitySourceType": {
+      "type": "string"
+    },
+    "CreationTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "Status": {
+      "type": "string"
+    },
+    "StatusCode": {
+      "type": "string"
+    },
+    "StatusMessage": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "mpa:TagResource",
+      "mpa:ListTagsForResource",
+      "mpa:UntagResource"
+    ]
+  },
+  "required": [
+    "IdentitySourceParameters"
+  ],
+  "primaryIdentifier": [
+    "/properties/IdentitySourceArn"
+  ],
+  "readOnlyProperties": [
+    "/properties/IdentitySourceArn",
+    "/properties/IdentitySourceType",
+    "/properties/IdentitySourceParameters/IamIdentityCenter/ApprovalPortalUrl",
+    "/properties/CreationTime",
+    "/properties/Status",
+    "/properties/StatusCode",
+    "/properties/StatusMessage"
+  ],
+  "createOnlyProperties": [
+    "/properties/IdentitySourceParameters",
+    "/properties/IdentitySourceParameters/IamIdentityCenter",
+    "/properties/IdentitySourceParameters/IamIdentityCenter/InstanceArn",
+    "/properties/IdentitySourceParameters/IamIdentityCenter/Region"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "mpa:CreateIdentitySource",
+        "mpa:TagResource",
+        "mpa:ListTagsForResource",
+        "mpa:GetIdentitySource",
+        "sso:DescribeApplication",
+        "sso:DescribeInstance",
+        "sso:CreateApplication",
+        "sso:PutApplicationAssignmentConfiguration",
+        "sso:PutApplicationGrant",
+        "sso:PutApplicationAuthenticationMethod",
+        "sso:PutApplicationAccessScope"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "mpa:GetIdentitySource",
+        "mpa:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "mpa:GetIdentitySource",
+        "mpa:TagResource",
+        "mpa:ListTagsForResource",
+        "mpa:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "mpa:DeleteIdentitySource",
+        "mpa:GetIdentitySource",
+        "mpa:UntagResource",
+        "sso:DeleteApplication"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "mpa:ListIdentitySources",
+        "mpa:ListTagsForResource"
+      ]
+    }
+  }
+}

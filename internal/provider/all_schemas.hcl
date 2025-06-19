@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1168 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1181 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -1865,6 +1865,10 @@ resource_schema "aws_ec2_subnet_route_table_association" {
   cloudformation_type_name = "AWS::EC2::SubnetRouteTableAssociation"
 }
 
+resource_schema "aws_ec2_traffic_mirror_filter" {
+  cloudformation_type_name = "AWS::EC2::TrafficMirrorFilter"
+}
+
 resource_schema "aws_ec2_transit_gateway" {
   cloudformation_type_name = "AWS::EC2::TransitGateway"
 }
@@ -3351,6 +3355,20 @@ resource_schema "aws_m2_deployment" {
 
 resource_schema "aws_m2_environment" {
   cloudformation_type_name = "AWS::M2::Environment"
+}
+
+resource_schema "aws_mpa_approval_team" {
+  cloudformation_type_name = "AWS::MPA::ApprovalTeam"
+
+  # Suppression Reason: Policies is of unsupported type: set of ""
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/1510
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
+resource_schema "aws_mpa_identity_source" {
+  cloudformation_type_name = "AWS::MPA::IdentitySource"
 }
 
 resource_schema "aws_msk_batch_scram_secret" {
@@ -4848,6 +4866,10 @@ resource_schema "aws_secretsmanager_secret_target_attachment" {
   cloudformation_type_name = "AWS::SecretsManager::SecretTargetAttachment"
 }
 
+resource_schema "aws_securityhub_aggregator_v2" {
+  cloudformation_type_name = "AWS::SecurityHub::AggregatorV2"
+}
+
 resource_schema "aws_securityhub_automation_rule" {
   cloudformation_type_name = "AWS::SecurityHub::AutomationRule"
 
@@ -4857,6 +4879,10 @@ resource_schema "aws_securityhub_automation_rule" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+}
+
+resource_schema "aws_securityhub_automation_rule_v2" {
+  cloudformation_type_name = "AWS::SecurityHub::AutomationRuleV2"
 }
 
 resource_schema "aws_securityhub_configuration_policy" {
@@ -4873,6 +4899,10 @@ resource_schema "aws_securityhub_finding_aggregator" {
 
 resource_schema "aws_securityhub_hub" {
   cloudformation_type_name = "AWS::SecurityHub::Hub"
+}
+
+resource_schema "aws_securityhub_hub_v2" {
+  cloudformation_type_name = "AWS::SecurityHub::HubV2"
 }
 
 resource_schema "aws_securityhub_insight" {

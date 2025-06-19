@@ -1,0 +1,1 @@
+$ terraform import awscc_mpa_identity_source.example "identity_source_arn"

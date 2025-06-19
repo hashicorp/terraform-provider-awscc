@@ -13,7 +13,7 @@
     },
     "MapPublicIpOnLaunch": {
       "type": "boolean",
-      "description": "Indicates whether instances launched in this subnet receive a public IPv4 address. The default value is ``false``.\n  AWS charges for all public IPv4 addresses, including public IPv4 addresses associated with running instances and Elastic IP addresses. For more information, see the *Public IPv4 Address* tab on the [VPC pricing page](https://docs.aws.amazon.com/vpc/pricing/)."
+      "description": "Indicates whether instances launched in this subnet receive a public IPv4 address. The default value is ``false``.\n AWS charges for all public IPv4 addresses, including public IPv4 addresses associated with running instances and Elastic IP addresses. For more information, see the *Public IPv4 Address* tab on the [VPC pricing page](https://docs.aws.amazon.com/vpc/pricing/)."
     },
     "EnableLniAtDeviceIndex": {
       "type": "integer",
@@ -102,6 +102,17 @@
     "Ipv6NetmaskLength": {
       "type": "integer",
       "description": "An IPv6 netmask length for the subnet."
+    },
+    "BlockPublicAccessStates": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "",
+      "properties": {
+        "InternetGatewayBlockMode": {
+          "type": "string",
+          "description": "The mode of VPC BPA. Options here are off, block-bidirectional, block-ingress "
+        }
+      }
     }
   },
   "tagging": {
@@ -160,7 +171,8 @@
   "readOnlyProperties": [
     "/properties/NetworkAclAssociationId",
     "/properties/SubnetId",
-    "/properties/Ipv6CidrBlocks"
+    "/properties/Ipv6CidrBlocks",
+    "/properties/BlockPublicAccessStates"
   ],
   "writeOnlyProperties": [
     "/properties/EnableLniAtDeviceIndex",

@@ -221,6 +221,10 @@
           "description": "Provide maximum memory available for canary in MB",
           "type": "integer"
         },
+        "EphemeralStorage": {
+          "description": "Provide ephemeralStorage available for canary in MB",
+          "type": "integer"
+        },
         "ActiveTracing": {
           "description": "Enable active tracing if set to true",
           "type": "boolean"

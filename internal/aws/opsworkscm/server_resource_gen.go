@@ -340,9 +340,11 @@ func serverResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ServiceRoleArn

@@ -380,6 +380,10 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "type": "object"
 		//	    },
+		//	    "EphemeralStorage": {
+		//	      "description": "Provide ephemeralStorage available for canary in MB",
+		//	      "type": "integer"
+		//	    },
 		//	    "MemoryInMB": {
 		//	      "description": "Provide maximum memory available for canary in MB",
 		//	      "type": "integer"
@@ -413,6 +417,15 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 						mapplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 					// EnvironmentVariables is a write-only property.
+				}, /*END ATTRIBUTE*/
+				// Property: EphemeralStorage
+				"ephemeral_storage": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Provide ephemeralStorage available for canary in MB",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: MemoryInMB
 				"memory_in_mb": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -854,6 +867,7 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		"duration_in_seconds":                        "DurationInSeconds",
 		"encryption_mode":                            "EncryptionMode",
 		"environment_variables":                      "EnvironmentVariables",
+		"ephemeral_storage":                          "EphemeralStorage",
 		"execution_role_arn":                         "ExecutionRoleArn",
 		"expression":                                 "Expression",
 		"failure_retention_period":                   "FailureRetentionPeriod",

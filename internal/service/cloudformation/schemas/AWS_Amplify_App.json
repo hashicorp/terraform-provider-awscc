@@ -115,6 +115,9 @@
       "items": {
         "$ref": "#/definitions/Tag"
       }
+    },
+    "JobConfig": {
+      "$ref": "#/definitions/JobConfig"
     }
   },
   "definitions": {
@@ -211,6 +214,23 @@
           ]
         }
       }
+    },
+    "JobConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "BuildComputeType": {
+          "type": "string",
+          "enum": [
+            "STANDARD_8GB",
+            "LARGE_16GB",
+            "XLARGE_72GB"
+          ]
+        }
+      },
+      "required": [
+        "BuildComputeType"
+      ]
     },
     "CustomRule": {
       "type": "object",
