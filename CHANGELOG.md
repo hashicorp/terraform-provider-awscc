@@ -1,5 +1,23 @@
 ## 1.46.0 (Unreleased)
 
+FEATURES:
+
+* **New Data Source:** `awscc_ec2_traffic_mirror_filter`
+* **New Data Source:** `awscc_ec2_traffic_mirror_filters`
+* **New Data Source:** `awscc_mpa_identity_source`
+* **New Data Source:** `awscc_mpa_identity_sources`
+* **New Data Source:** `awscc_securityhub_aggregator_v2`
+* **New Data Source:** `awscc_securityhub_aggregator_v2s`
+* **New Data Source:** `awscc_securityhub_automation_rule_v2`
+* **New Data Source:** `awscc_securityhub_automation_rule_v2s`
+* **New Data Source:** `awscc_securityhub_hub_v2`
+* **New Data Source:** `awscc_securityhub_hub_v2s`
+* **New Resource:** `awscc_ec2_traffic_mirror_filter`
+* **New Resource:** `awscc_mpa_identity_source`
+* **New Resource:** `awscc_securityhub_aggregator_v2`
+* **New Resource:** `awscc_securityhub_automation_rule_v2`
+* **New Resource:** `awscc_securityhub_hub_v2`
+
 ## 1.45.0 (June 12, 2025)
 
 FEATURES:
