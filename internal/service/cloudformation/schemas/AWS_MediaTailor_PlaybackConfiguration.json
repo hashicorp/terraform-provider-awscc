@@ -57,6 +57,10 @@
       "description": "The configuration for HLS content.",
       "$ref": "#/definitions/HlsConfiguration"
     },
+    "LogConfiguration": {
+      "description": "The configuration that defines where AWS Elemental MediaTailor sends logs for the playback configuration.",
+      "$ref": "#/definitions/LogConfiguration"
+    },
     "PlaybackConfigurationArn": {
       "description": "The Amazon Resource Name (ARN) for the playback configuration.",
       "type": "string"
@@ -258,6 +262,69 @@
         "ManifestEndpointPrefix": {
           "description": "The URL that is used to initiate a playback session for devices that support Apple HLS. The session uses server-side reporting.",
           "type": "string"
+        }
+      }
+    },
+    "LogConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "AdsInteractionLog": {
+          "description": "The event types that MediaTailor emits in logs for interactions with the ADS.",
+          "$ref": "#/definitions/AdsInteractionLog"
+        },
+        "EnabledLoggingStrategies": {
+          "description": "The method used for collecting logs from AWS Elemental MediaTailor. To configure MediaTailor to send logs directly to Amazon CloudWatch Logs, choose LEGACY_CLOUDWATCH. To configure MediaTailor to send logs to CloudWatch, which then vends the logs to your destination of choice, choose VENDED_LOGS. Supported destinations are CloudWatch Logs log group, Amazon S3 bucket, and Amazon Data Firehose stream. To use vended logs, you must configure the delivery destination in Amazon CloudWatch",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ManifestServiceInteractionLog": {
+          "description": "The event types that MediaTailor emits in logs for interactions with the origin server.",
+          "$ref": "#/definitions/ManifestServiceInteractionLog"
+        },
+        "PercentEnabled": {
+          "description": "The percentage of session logs that MediaTailor sends to your CloudWatch Logs account. For example, if your playback configuration has 1000 sessions and percentEnabled is set to 60, MediaTailor sends logs for 600 of the sessions to CloudWatch Logs. MediaTailor decides at random which of the playback configuration sessions to send logs for. If you want to view logs for a specific session, you can use the debug log mode.",
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        }
+      },
+      "required": [
+        "PercentEnabled"
+      ]
+    },
+    "AdsInteractionLog": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ExcludeEventTypes": {
+          "type": "array",
+          "description": "Indicates that MediaTailor won't emit the selected events in the logs for playback sessions that are initialized with this configuration.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "PublishOptInEventTypes": {
+          "type": "array",
+          "description": "Indicates that MediaTailor emits RAW_ADS_RESPONSE logs for playback sessions that are initialized with this configuration.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ManifestServiceInteractionLog": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ExcludeEventTypes": {
+          "type": "array",
+          "description": "Indicates that MediaTailor won't emit the selected events in the logs for playback sessions that are initialized with this configuration.",
+          "items": {
+            "type": "string"
+          }
         }
       }
     }
