@@ -23,11 +23,14 @@ const (
 	HCLExtension                = ".hcl"
 	AvailableSchemasFilePattern = "available_schemas.%s.hcl"
 
+	// Commit message components
+	CloudFormationRegion = "CloudFormation schemas in us-east-1"
+
 	// Git commit message formats
-	CommitMsgRefreshSchemas    = "%s CloudFormation schemas in us-east-1; Refresh existing schemas."
-	CommitMsgNewSchemas        = "%s CloudFormation schemas in us-east-1; New schemas."
-	CommitMsgResourceSchemas   = "%s CloudFormation schemas in us-east-1; Generate Terraform resource schemas."
-	CommitMsgDataSourceSchemas = "%s CloudFormation schemas in us-east-1; Generate Terraform data source schemas."
+	CommitMsgRefreshSchemas    = "%s " + CloudFormationRegion + "; Refresh existing schemas."
+	CommitMsgNewSchemas        = "%s " + CloudFormationRegion + "; New schemas."
+	CommitMsgResourceSchemas   = "%s " + CloudFormationRegion + "; Generate Terraform resource schemas."
+	CommitMsgDataSourceSchemas = "%s " + CloudFormationRegion + "; Generate Terraform data source schemas."
 	CommitMsgDocs              = "%s Run 'make docs-all'."
 
 	// Branch name format
