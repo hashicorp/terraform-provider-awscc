@@ -492,6 +492,35 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"iam_service_role": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: JobConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "BuildComputeType": {
+		//	      "enum": [
+		//	        "STANDARD_8GB",
+		//	        "LARGE_16GB",
+		//	        "XLARGE_72GB"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "BuildComputeType"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"job_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BuildComputeType
+				"build_compute_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -607,6 +636,7 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"auto_branch_creation_config":   "AutoBranchCreationConfig",
 		"auto_branch_creation_patterns": "AutoBranchCreationPatterns",
 		"basic_auth_config":             "BasicAuthConfig",
+		"build_compute_type":            "BuildComputeType",
 		"build_spec":                    "BuildSpec",
 		"cache_config":                  "CacheConfig",
 		"compute_role_arn":              "ComputeRoleArn",
@@ -624,6 +654,7 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"environment_variables":         "EnvironmentVariables",
 		"framework":                     "Framework",
 		"iam_service_role":              "IAMServiceRole",
+		"job_config":                    "JobConfig",
 		"key":                           "Key",
 		"name":                          "Name",
 		"oauth_token":                   "OauthToken",

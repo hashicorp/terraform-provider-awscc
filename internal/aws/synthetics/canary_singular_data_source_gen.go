@@ -280,6 +280,10 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "type": "object"
 		//	    },
+		//	    "EphemeralStorage": {
+		//	      "description": "Provide ephemeralStorage available for canary in MB",
+		//	      "type": "integer"
+		//	    },
 		//	    "MemoryInMB": {
 		//	      "description": "Provide maximum memory available for canary in MB",
 		//	      "type": "integer"
@@ -303,6 +307,11 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 				schema.MapAttribute{     /*START ATTRIBUTE*/
 					ElementType: types.StringType,
 					Description: "Environment variable key-value pairs.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EphemeralStorage
+				"ephemeral_storage": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Provide ephemeralStorage available for canary in MB",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: MemoryInMB
@@ -628,6 +637,7 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"duration_in_seconds":                        "DurationInSeconds",
 		"encryption_mode":                            "EncryptionMode",
 		"environment_variables":                      "EnvironmentVariables",
+		"ephemeral_storage":                          "EphemeralStorage",
 		"execution_role_arn":                         "ExecutionRoleArn",
 		"expression":                                 "Expression",
 		"failure_retention_period":                   "FailureRetentionPeriod",
