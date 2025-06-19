@@ -109,6 +109,7 @@ Optional:
 
 - `active_tracing` (Boolean) Enable active tracing if set to true
 - `environment_variables` (Map of String) Environment variable key-value pairs.
+- `ephemeral_storage` (Number) Provide ephemeralStorage available for canary in MB
 - `memory_in_mb` (Number) Provide maximum memory available for canary in MB
 - `timeout_in_seconds` (Number) Provide maximum canary timeout per run in seconds
 

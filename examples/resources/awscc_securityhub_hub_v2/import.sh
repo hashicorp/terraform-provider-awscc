@@ -1,0 +1,1 @@
+$ terraform import awscc_securityhub_hub_v2.example "hub_v2_arn"

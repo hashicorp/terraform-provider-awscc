@@ -163,6 +163,7 @@ resource "awscc_inspectorv2_filter" "example" {
 ### Optional
 
 - `description` (String) Findings filter description.
+- `tags` (Map of String)
 
 ### Read-Only
 
@@ -175,6 +176,9 @@ resource "awscc_inspectorv2_filter" "example" {
 Optional:
 
 - `aws_account_id` (Attributes List) (see [below for nested schema](#nestedatt--filter_criteria--aws_account_id))
+- `code_vulnerability_detector_name` (Attributes List) (see [below for nested schema](#nestedatt--filter_criteria--code_vulnerability_detector_name))
+- `code_vulnerability_detector_tags` (Attributes List) (see [below for nested schema](#nestedatt--filter_criteria--code_vulnerability_detector_tags))
+- `code_vulnerability_file_path` (Attributes List) (see [below for nested schema](#nestedatt--filter_criteria--code_vulnerability_file_path))
 - `component_id` (Attributes List) (see [below for nested schema](#nestedatt--filter_criteria--component_id))
 - `component_type` (Attributes List) (see [below for nested schema](#nestedatt--filter_criteria--component_type))
 - `ec_2_instance_image_id` (Attributes List) (see [below for nested schema](#nestedatt--filter_criteria--ec_2_instance_image_id))
@@ -186,11 +190,19 @@ Optional:
 - `ecr_image_registry` (Attributes List) (see [below for nested schema](#nestedatt--filter_criteria--ecr_image_registry))
 - `ecr_image_repository_name` (Attributes List) (see [below for nested schema](#nestedatt--filter_criteria--ecr_image_repository_name))
 - `ecr_image_tags` (Attributes List) (see [below for nested schema](#nestedatt--filter_criteria--ecr_image_tags))
+- `epss_score` (Attributes List) (see [below for nested schema](#nestedatt--filter_criteria--epss_score))
+- `exploit_available` (Attributes List) (see [below for nested schema](#nestedatt--filter_criteria--exploit_available))
 - `finding_arn` (Attributes List) (see [below for nested schema](#nestedatt--filter_criteria--finding_arn))
 - `finding_status` (Attributes List) (see [below for nested schema](#nestedatt--filter_criteria--finding_status))
 - `finding_type` (Attributes List) (see [below for nested schema](#nestedatt--filter_criteria--finding_type))
 - `first_observed_at` (Attributes List) (see [below for nested schema](#nestedatt--filter_criteria--first_observed_at))
+- `fix_available` (Attributes List) (see [below for nested schema](#nestedatt--filter_criteria--fix_available))
 - `inspector_score` (Attributes List) (see [below for nested schema](#nestedatt--filter_criteria--inspector_score))
+- `lambda_function_execution_role_arn` (Attributes List) (see [below for nested schema](#nestedatt--filter_criteria--lambda_function_execution_role_arn))
+- `lambda_function_last_modified_at` (Attributes List) (see [below for nested schema](#nestedatt--filter_criteria--lambda_function_last_modified_at))
+- `lambda_function_layers` (Attributes List) (see [below for nested schema](#nestedatt--filter_criteria--lambda_function_layers))
+- `lambda_function_name` (Attributes List) (see [below for nested schema](#nestedatt--filter_criteria--lambda_function_name))
+- `lambda_function_runtime` (Attributes List) (see [below for nested schema](#nestedatt--filter_criteria--lambda_function_runtime))
 - `last_observed_at` (Attributes List) (see [below for nested schema](#nestedatt--filter_criteria--last_observed_at))
 - `network_protocol` (Attributes List) (see [below for nested schema](#nestedatt--filter_criteria--network_protocol))
 - `port_range` (Attributes List) (see [below for nested schema](#nestedatt--filter_criteria--port_range))
@@ -208,6 +220,33 @@ Optional:
 
 <a id="nestedatt--filter_criteria--aws_account_id"></a>
 ### Nested Schema for `filter_criteria.aws_account_id`
+
+Optional:
+
+- `comparison` (String)
+- `value` (String)
+
+
+<a id="nestedatt--filter_criteria--code_vulnerability_detector_name"></a>
+### Nested Schema for `filter_criteria.code_vulnerability_detector_name`
+
+Optional:
+
+- `comparison` (String)
+- `value` (String)
+
+
+<a id="nestedatt--filter_criteria--code_vulnerability_detector_tags"></a>
+### Nested Schema for `filter_criteria.code_vulnerability_detector_tags`
+
+Optional:
+
+- `comparison` (String)
+- `value` (String)
+
+
+<a id="nestedatt--filter_criteria--code_vulnerability_file_path"></a>
+### Nested Schema for `filter_criteria.code_vulnerability_file_path`
 
 Optional:
 
@@ -314,6 +353,24 @@ Optional:
 - `value` (String)
 
 
+<a id="nestedatt--filter_criteria--epss_score"></a>
+### Nested Schema for `filter_criteria.epss_score`
+
+Optional:
+
+- `lower_inclusive` (Number)
+- `upper_inclusive` (Number)
+
+
+<a id="nestedatt--filter_criteria--exploit_available"></a>
+### Nested Schema for `filter_criteria.exploit_available`
+
+Optional:
+
+- `comparison` (String)
+- `value` (String)
+
+
 <a id="nestedatt--filter_criteria--finding_arn"></a>
 ### Nested Schema for `filter_criteria.finding_arn`
 
@@ -350,6 +407,15 @@ Optional:
 - `start_inclusive` (Number)
 
 
+<a id="nestedatt--filter_criteria--fix_available"></a>
+### Nested Schema for `filter_criteria.fix_available`
+
+Optional:
+
+- `comparison` (String)
+- `value` (String)
+
+
 <a id="nestedatt--filter_criteria--inspector_score"></a>
 ### Nested Schema for `filter_criteria.inspector_score`
 
@@ -357,6 +423,51 @@ Optional:
 
 - `lower_inclusive` (Number)
 - `upper_inclusive` (Number)
+
+
+<a id="nestedatt--filter_criteria--lambda_function_execution_role_arn"></a>
+### Nested Schema for `filter_criteria.lambda_function_execution_role_arn`
+
+Optional:
+
+- `comparison` (String)
+- `value` (String)
+
+
+<a id="nestedatt--filter_criteria--lambda_function_last_modified_at"></a>
+### Nested Schema for `filter_criteria.lambda_function_last_modified_at`
+
+Optional:
+
+- `end_inclusive` (Number)
+- `start_inclusive` (Number)
+
+
+<a id="nestedatt--filter_criteria--lambda_function_layers"></a>
+### Nested Schema for `filter_criteria.lambda_function_layers`
+
+Optional:
+
+- `comparison` (String)
+- `value` (String)
+
+
+<a id="nestedatt--filter_criteria--lambda_function_name"></a>
+### Nested Schema for `filter_criteria.lambda_function_name`
+
+Optional:
+
+- `comparison` (String)
+- `value` (String)
+
+
+<a id="nestedatt--filter_criteria--lambda_function_runtime"></a>
+### Nested Schema for `filter_criteria.lambda_function_runtime`
+
+Optional:
+
+- `comparison` (String)
+- `value` (String)
 
 
 <a id="nestedatt--filter_criteria--last_observed_at"></a>
@@ -484,8 +595,10 @@ Optional:
 
 - `architecture` (Attributes) (see [below for nested schema](#nestedatt--filter_criteria--vulnerable_packages--architecture))
 - `epoch` (Attributes) (see [below for nested schema](#nestedatt--filter_criteria--vulnerable_packages--epoch))
+- `file_path` (Attributes) (see [below for nested schema](#nestedatt--filter_criteria--vulnerable_packages--file_path))
 - `name` (Attributes) (see [below for nested schema](#nestedatt--filter_criteria--vulnerable_packages--name))
 - `release` (Attributes) (see [below for nested schema](#nestedatt--filter_criteria--vulnerable_packages--release))
+- `source_lambda_layer_arn` (Attributes) (see [below for nested schema](#nestedatt--filter_criteria--vulnerable_packages--source_lambda_layer_arn))
 - `source_layer_hash` (Attributes) (see [below for nested schema](#nestedatt--filter_criteria--vulnerable_packages--source_layer_hash))
 - `version` (Attributes) (see [below for nested schema](#nestedatt--filter_criteria--vulnerable_packages--version))
 
@@ -507,6 +620,15 @@ Optional:
 - `upper_inclusive` (Number)
 
 
+<a id="nestedatt--filter_criteria--vulnerable_packages--file_path"></a>
+### Nested Schema for `filter_criteria.vulnerable_packages.file_path`
+
+Optional:
+
+- `comparison` (String)
+- `value` (String)
+
+
 <a id="nestedatt--filter_criteria--vulnerable_packages--name"></a>
 ### Nested Schema for `filter_criteria.vulnerable_packages.name`
 
@@ -518,6 +640,15 @@ Optional:
 
 <a id="nestedatt--filter_criteria--vulnerable_packages--release"></a>
 ### Nested Schema for `filter_criteria.vulnerable_packages.release`
+
+Optional:
+
+- `comparison` (String)
+- `value` (String)
+
+
+<a id="nestedatt--filter_criteria--vulnerable_packages--source_lambda_layer_arn"></a>
+### Nested Schema for `filter_criteria.vulnerable_packages.source_lambda_layer_arn`
 
 Optional:
 

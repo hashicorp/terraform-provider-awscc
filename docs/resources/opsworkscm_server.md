@@ -38,6 +38,7 @@ Resource Type definition for AWS::OpsWorksCM::Server
 - `preferred_backup_window` (String)
 - `preferred_maintenance_window` (String)
 - `security_group_ids` (List of String)
+- `server_name` (String)
 - `subnet_ids` (List of String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
@@ -47,7 +48,6 @@ Resource Type definition for AWS::OpsWorksCM::Server
 - `endpoint` (String)
 - `id` (String) Uniquely identifies the resource.
 - `server_id` (String)
-- `server_name` (String)
 
 <a id="nestedatt--engine_attributes"></a>
 ### Nested Schema for `engine_attributes`
