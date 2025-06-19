@@ -1,10 +1,10 @@
-name: post-promote-production
+name: Post Promote Production
 
 on:
   repository_dispatch:
     types:
-      - post-promote-production
-      - post-promote-production::*
+      - crt-post-promote-production
+      - crt-post-promote-production::*
 
 permissions:
   actions: write

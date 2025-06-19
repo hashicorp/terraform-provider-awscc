@@ -94,7 +94,7 @@ event "promote-production" {
     post-promotion {
       organization = "hashicorp"
       repository = "terraform-provider-awscc"
-      workflow = "post-promote-production.yml"
+      workflow = "crt-post-promote-production.yml"
     }
   }
 
