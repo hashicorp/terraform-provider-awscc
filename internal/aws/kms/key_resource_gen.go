@@ -166,7 +166,10 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 		//	    "HMAC_256",
 		//	    "HMAC_384",
 		//	    "HMAC_512",
-		//	    "SM2"
+		//	    "SM2",
+		//	    "ML_DSA_44",
+		//	    "ML_DSA_65",
+		//	    "ML_DSA_87"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -190,6 +193,9 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 					"HMAC_384",
 					"HMAC_512",
 					"SM2",
+					"ML_DSA_44",
+					"ML_DSA_65",
+					"ML_DSA_87",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

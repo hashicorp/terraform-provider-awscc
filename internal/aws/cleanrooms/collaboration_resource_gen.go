@@ -174,7 +174,8 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"creator_member_abilities": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.Set{ /*START VALIDATORS*/
 				setvalidator.ValueStringsAre(
 					stringvalidator.OneOf(
@@ -185,7 +186,8 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.RequiresReplace(),
+				setplanmodifier.UseStateForUnknown(),
+				setplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: CreatorPaymentConfiguration
@@ -601,8 +603,7 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "required": [
 		//	      "AccountId",
-		//	      "DisplayName",
-		//	      "MemberAbilities"
+		//	      "DisplayName"
 		//	    ],
 		//	    "type": "object"
 		//	  },
@@ -615,18 +616,28 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: AccountId
 					"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(12, 12),
 							stringvalidator.RegexMatches(regexp.MustCompile("^\\d+$"), ""),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: DisplayName
 					"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 100),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: MLMemberAbilities
 					"ml_member_abilities": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -659,7 +670,8 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 					// Property: MemberAbilities
 					"member_abilities": schema.SetAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.Set{ /*START VALIDATORS*/
 							setvalidator.ValueStringsAre(
 								stringvalidator.OneOf(
@@ -669,6 +681,9 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 								),
 							),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+							setplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: PaymentConfiguration
 					"payment_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -779,13 +794,15 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Required: true,
+			Optional: true,
+			Computed: true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeBetween(0, 9),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
-				listplanmodifier.RequiresReplace(),
+				listplanmodifier.UseStateForUnknown(),
+				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Name
