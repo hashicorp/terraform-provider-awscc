@@ -7,14 +7,54 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
-
-	//"path/filepath"
 	"strings"
 	"time"
 
 	"github.com/google/go-github/v72/github"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	allschemas "github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/allschemas"
+)
+
+// Constants for file paths and patterns
+const (
+	// File names and patterns
+	UpdateFilePathsHCL          = "internal/update/update_filepaths.hcl"
+	AvailableSchemasPrefix      = "available_schemas."
+	HCLExtension                = ".hcl"
+	AvailableSchemasFilePattern = "available_schemas.%s.hcl"
+
+	// Git commit message formats
+	CommitMsgRefreshSchemas    = "%s CloudFormation schemas in us-east-1; Refresh existing schemas."
+	CommitMsgNewSchemas        = "%s CloudFormation schemas in us-east-1; New schemas."
+	CommitMsgResourceSchemas   = "%s CloudFormation schemas in us-east-1; Generate Terraform resource schemas."
+	CommitMsgDataSourceSchemas = "%s CloudFormation schemas in us-east-1; Generate Terraform data source schemas."
+	CommitMsgDocs              = "%s Run 'make docs-all'."
+
+	// Branch name format
+	BranchNameFormat    = "update-schemas-%d"
+	BranchNameMaxRandom = 1000000
+
+	// Date format
+	DateFormat = "2006-01-02"
+
+	// Environment variables
+	GithubTokenEnv = "GITHUB_TOKEN"
+
+	// Make commands
+	MakeBuildCmd   = "build"
+	MakeTestAccCmd = "testacc"
+	MakeDocsAllCmd = "docs-all"
+
+	// Make targets
+	TargetSchemas             = "schemas"
+	TargetResources           = "resources"
+	TargetSingularDataSources = "singular-data-sources"
+	TargetPluralDataSources   = "plural-data-sources"
+
+	// Test arguments
+	PKGNameArg            = "PKG_NAME=internal/aws/logs"
+	TestArgsArg           = "TESTARGS=-run=TestAccAWSLogsLogGroup_\\|TestAccAWSLogsLogGroupDataSource_"
+	AccTestParallelismArg = "ACCTEST_PARALLELISM=3"
 )
 
 func main() {
@@ -45,15 +85,16 @@ func run() error {
 
 	// Use nil client instead
 
-	branchName := fmt.Sprintf("update-schemas-%d", rand.Intn(1000000))
+	branchName := fmt.Sprintf(BranchNameFormat, rand.Intn(BranchNameMaxRandom))
 	fmt.Printf("Generated branch name: %s\n", branchName)
-	execGit("checkout", "-b", branchName)
 
 	var client *github.Client = nil
-	filePaths, err := parseSchemaToStruct("internal/update/update_filepaths.hcl", UpdateFilePaths{})
+	filePaths, err := parseSchemaToStruct(UpdateFilePathsHCL, UpdateFilePaths{})
 	if err != nil {
 		return fmt.Errorf("failed to parse update file paths: %w", err)
 	}
+
+	execGit("checkout", "-b", branchName)
 
 	matches, err := filepath.Glob(filePaths.AwsSchemas)
 	if err != nil {
@@ -72,14 +113,14 @@ func run() error {
 	if err != nil {
 		return fmt.Errorf("failed to parse current schemas: %w", err)
 	}
-	err = makeBuild(ctx, client, currAllSchemas, "schemas", filePaths)
+	err = makeBuild(ctx, client, currAllSchemas, TargetSchemas, filePaths)
 	if err != nil {
 		return fmt.Errorf("failed to make schemas: %w", err)
 	}
 	execGit("add", "-A")
 
-	currentDate := time.Now().Format("2006-01-02")
-	execGit("commit", "-m", fmt.Sprintf("%s CloudFormation schemas in us-east-1; Refresh existing schemas.", currentDate))
+	currentDate := time.Now().Format(DateFormat)
+	execGit("commit", "-m", fmt.Sprintf(CommitMsgRefreshSchemas, currentDate))
 	// go run internal/provider/generators/allschemas/main.go > internal/provider/generators/allschemas/available_schemas.year-month-day.hcl
 
 	// Diff Step Start
@@ -90,13 +131,14 @@ func run() error {
 	}
 	tflog.Info(ctx, fmt.Sprintf("Last schema date: %s", lastDate))
 
+	currentDate = time.Now().Format(DateFormat)
 	newSchemas := allschemas.NewSchemaGeneration()
-	err = writeSchemasToHCLFile(newSchemas, "internal/provider/generators/allschemas/available_schemas."+currentDate+".hcl")
+	err = writeSchemasToHCLFile(newSchemas, fmt.Sprintf("%s/%s%s%s", filePaths.AllSchemasDir, AvailableSchemasPrefix, currentDate, HCLExtension))
 	if err != nil {
 		return fmt.Errorf("failed to write new schemas to HCL file: %w", err)
 	}
 	// Parse schema from previous run
-	lastSchemas, err := parseSchemaToStruct("internal/provider/generators/allschemas/available_schemas."+lastDate+".hcl", allschemas.AvailableSchemas{})
+	lastSchemas, err := parseSchemaToStruct(fmt.Sprintf("%s/%s%s%s", filePaths.AllSchemasDir, AvailableSchemasPrefix, lastDate, HCLExtension), allschemas.AvailableSchemas{})
 	if err != nil {
 		return fmt.Errorf("failed to parse last schemas: %w", err)
 	}
@@ -110,29 +152,29 @@ func run() error {
 	}
 	execGit("add", "-A")
 
-	execGit("commit", "-m", fmt.Sprintf("%s CloudFormation schemas in us-east-1; New schemas.", currentDate))
+	execGit("commit", "-m", fmt.Sprintf(CommitMsgNewSchemas, currentDate))
 
 	// Execute make resources command
 
-	err = makeBuild(ctx, client, currAllSchemas, "schemas", filePaths)
+	err = makeBuild(ctx, client, currAllSchemas, TargetSchemas, filePaths)
 	if err != nil {
 		return fmt.Errorf("failed to make new schemas: %w", err)
 	}
-	err = makeBuild(ctx, client, currAllSchemas, "resources", filePaths)
+	err = makeBuild(ctx, client, currAllSchemas, TargetResources, filePaths)
 	if err != nil {
 		return fmt.Errorf("failed to execute make resources: %w", err)
 	}
 	execGit("add", "-A")
 
-	execGit("commit", "-m", fmt.Sprintf("%s CloudFormation schemas in us-east-1; Generate Terraform resource schemas.", currentDate))
+	execGit("commit", "-m", fmt.Sprintf(CommitMsgResourceSchemas, currentDate))
 
 	// Run make singular-data-sources plural-data-sources
-	err = makeBuild(ctx, client, currAllSchemas, "singular-data-sources", filePaths)
+	err = makeBuild(ctx, client, currAllSchemas, TargetSingularDataSources, filePaths)
 	if err != nil {
 		return fmt.Errorf("failed to update singular data sources: %w", err)
 	}
 
-	err = makeBuild(ctx, client, currAllSchemas, "plural-data-sources", filePaths)
+	err = makeBuild(ctx, client, currAllSchemas, TargetPluralDataSources, filePaths)
 	if err != nil {
 		return fmt.Errorf("failed to update plural data sources: %w", err)
 	}
@@ -142,23 +184,23 @@ func run() error {
 	if err != nil {
 		return fmt.Errorf("failed to git add data source files after updating data sources: %w", err)
 	}
-	err = execGit("commit", "-m", fmt.Sprintf("%s CloudFormation schemas in us-east-1; Generate Terraform data source schemas.", currentDate))
+	err = execGit("commit", "-m", fmt.Sprintf(CommitMsgDataSourceSchemas, currentDate))
 	if err != nil {
 		return fmt.Errorf("failed to commit schemas after updating data sources: %w", err)
 	}
 
 	// Validate the provider
-	err = execCommand("make", "build")
+	err = execCommand("make", MakeBuildCmd)
 	if err != nil {
 		return fmt.Errorf("failed to build provider: %w", err)
 	}
 
-	err = execCommand("make", "testacc", "PKG_NAME=internal/aws/logs", "TESTARGS=-run=TestAccAWSLogsLogGroup_\\|TestAccAWSLogsLogGroupDataSource_", "ACCTEST_PARALLELISM=3")
+	err = execCommand("make", MakeTestAccCmd, PKGNameArg, TestArgsArg, AccTestParallelismArg)
 	if err != nil {
 		return fmt.Errorf("failed to run acceptance tests: %w", err)
 	}
 
-	err = execCommand("make", "docs-all")
+	err = execCommand("make", MakeDocsAllCmd)
 	if err != nil {
 		return fmt.Errorf("failed to generate documentation: %w", err)
 	}
@@ -168,7 +210,7 @@ func run() error {
 	if err != nil {
 		return fmt.Errorf("failed to git add documentation files: %w", err)
 	}
-	err = execGit("commit", "-m", fmt.Sprintf("%s Run 'make docs-all'.", currentDate))
+	err = execGit("commit", "-m", fmt.Sprintf(CommitMsgDocs, currentDate))
 	if err != nil {
 		return fmt.Errorf("failed to commit documentation: %w", err)
 	}
@@ -193,16 +235,22 @@ func execGit(args ...string) error {
 }
 
 func newGithubClient() (*github.Client, error) {
-	token := os.Getenv("GITHUB_TOKEN")
+	token := os.Getenv(GithubTokenEnv)
 	if token == "" {
-		return nil, fmt.Errorf("GITHUB_TOKEN environment variable is not set")
+		return nil, fmt.Errorf("%s environment variable is not set", GithubTokenEnv)
 	}
 	client := github.NewClient(nil).WithAuthToken(token)
 	return client, nil
 }
 
 func getLastDate() (string, error) {
-	files, err := os.ReadDir("internal/provider/generators/allschemas")
+	// First get the file paths configuration
+	filePaths, err := parseSchemaToStruct(UpdateFilePathsHCL, UpdateFilePaths{})
+	if err != nil {
+		return "", fmt.Errorf("failed to parse update file paths: %w", err)
+	}
+
+	files, err := os.ReadDir(filePaths.AllSchemasDir)
 	if err != nil {
 		return "", fmt.Errorf("failed to read directory: %w", err)
 	}
@@ -211,12 +259,12 @@ func getLastDate() (string, error) {
 	for _, file := range files {
 		name := file.Name()
 		// Check if file matches the pattern "available_schemas.yyyy-mm-dd.hcl"
-		if strings.HasPrefix(name, "available_schemas.") && strings.HasSuffix(name, ".hcl") {
-			datePart := strings.TrimPrefix(name, "available_schemas.")
-			datePart = strings.TrimSuffix(datePart, ".hcl")
+		if strings.HasPrefix(name, AvailableSchemasPrefix) && strings.HasSuffix(name, HCLExtension) {
+			datePart := strings.TrimPrefix(name, AvailableSchemasPrefix)
+			datePart = strings.TrimSuffix(datePart, HCLExtension)
 
 			// Validate that it looks like a date
-			if _, err := time.Parse("2006-01-02", datePart); err == nil {
+			if _, err := time.Parse(DateFormat, datePart); err == nil {
 				if datePart > lastDate {
 					lastDate = datePart
 				}
@@ -234,4 +282,5 @@ type UpdateFilePaths struct {
 	SuppressionCheckout string `hcl:"suppression_checkout"`
 	AwsSchemas          string `hcl:"aws_schemas"`
 	AllSchemasHCL       string `hcl:"all_schemas_hcl"`
+	AllSchemasDir       string `hcl:"all_schemas_dir"`
 }
