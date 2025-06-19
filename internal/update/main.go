@@ -146,7 +146,7 @@ func run() error {
 		return fmt.Errorf("failed to parse last schemas: %w", err)
 	}
 
-	currAllSchemas, err = diffSchemas(ctx, lastSchemas, newSchemas, filePaths.AllSchemasHCL)
+	currAllSchemas, err = diffSchemas(ctx, lastSchemas, newSchemas, filePaths.AllSchemasHCL, filePaths)
 
 	// Diff Step Stop
 

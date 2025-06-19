@@ -34,7 +34,7 @@ func parseSchemaToStruct[T any](filePath string, schema T) (*T, error) {
 	return &schema, nil
 }
 
-func diffSchemas(ctx context.Context, newSchemas *allschemas.AvailableSchemas, lastSchemas *allschemas.AvailableSchemas, allSchemasPath string) (*allschemas.AllSchemas, error) {
+func diffSchemas(ctx context.Context, newSchemas *allschemas.AvailableSchemas, lastSchemas *allschemas.AvailableSchemas, allSchemasPath string, filePaths *UpdateFilePaths) (*allschemas.AllSchemas, error) {
 	// Create a map from lastSchemas for
 	// schema name to index
 	// use index to get the resource from lastSchemas
@@ -71,7 +71,7 @@ func diffSchemas(ctx context.Context, newSchemas *allschemas.AvailableSchemas, l
 	// Read existing allSchemas.hcl
 	existingAllSchemas := &allschemas.AllSchemas{}
 	var err error
-	existingAllSchemas, err = parseSchemaToStruct("internal/provider/all_schemas.hcl", allschemas.AllSchemas{}) // replace this with file
+	existingAllSchemas, err = parseSchemaToStruct(filePaths.AllSchemasHCL, allschemas.AllSchemas{}) // replace this with file
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse existing allSchemas: %w", err)
 	}
