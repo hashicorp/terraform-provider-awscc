@@ -1,4 +1,6 @@
 data "aws_caller_identity" "current" {}
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Create an AppSync API
@@ -14,7 +16,7 @@ resource "awscc_appsync_graph_ql_api" "example" {
 # Create a domain name for AppSync
 resource "awscc_appsync_domain_name" "example" {
   domain_name     = "api.example.com"
-  certificate_arn = "arn:aws:acm:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:certificate/example-certificate"
+  certificate_arn = "arn:aws:acm:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:certificate/example-certificate"
 }
 
 # Create the domain name API association

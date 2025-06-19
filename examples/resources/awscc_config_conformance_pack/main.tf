@@ -1,4 +1,6 @@
 # Get current AWS region
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Get current AWS account ID
@@ -6,7 +8,7 @@ data "aws_caller_identity" "current" {}
 
 # S3 bucket for storing conformance pack files
 resource "awscc_s3_bucket" "config_bucket" {
-  bucket_name = "config-conformance-pack-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.name}"
+  bucket_name = "config-conformance-pack-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.region}"
 
   tags = [{
     key   = "Modified By"
@@ -27,8 +29,8 @@ data "aws_iam_policy_document" "bucket_policy" {
       "s3:PutObject"
     ]
     resources = [
-      "arn:aws:s3:::config-conformance-pack-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.name}",
-      "arn:aws:s3:::config-conformance-pack-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.name}/*"
+      "arn:aws:s3:::config-conformance-pack-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.region}",
+      "arn:aws:s3:::config-conformance-pack-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.region}/*"
     ]
   }
 }

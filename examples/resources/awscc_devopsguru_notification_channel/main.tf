@@ -1,5 +1,7 @@
 # Get current AWS account ID and region
 data "aws_caller_identity" "current" {}
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Create SNS Topic using AWS provider
@@ -32,7 +34,7 @@ data "aws_iam_policy_document" "devopsguru_sns" {
     condition {
       test     = "StringEquals"
       variable = "aws:SourceArn"
-      values   = ["arn:aws:devops-guru:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:*"]
+      values   = ["arn:aws:devops-guru:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:*"]
     }
   }
 }

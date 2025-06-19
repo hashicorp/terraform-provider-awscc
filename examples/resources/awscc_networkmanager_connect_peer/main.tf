@@ -1,3 +1,5 @@
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 data "aws_caller_identity" "current" {}
 
@@ -16,7 +18,7 @@ resource "awscc_ec2_vpc" "example" {
 resource "awscc_ec2_subnet" "example" {
   vpc_id                  = awscc_ec2_vpc.example.id
   cidr_block              = "10.0.1.0/24"
-  availability_zone       = "${data.aws_region.current.name}a"
+  availability_zone       = "${data.aws_region.current.region}a"
   map_public_ip_on_launch = false
 
   tags = [{
@@ -62,8 +64,8 @@ resource "awscc_networkmanager_core_network" "example" {
 # Create VPC attachment
 resource "awscc_networkmanager_vpc_attachment" "example" {
   core_network_id = awscc_networkmanager_core_network.example.core_network_id
-  vpc_arn         = "arn:aws:ec2:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:vpc/${awscc_ec2_vpc.example.id}"
-  subnet_arns     = ["arn:aws:ec2:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:subnet/${awscc_ec2_subnet.example.id}"]
+  vpc_arn         = "arn:aws:ec2:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:vpc/${awscc_ec2_vpc.example.id}"
+  subnet_arns     = ["arn:aws:ec2:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:subnet/${awscc_ec2_subnet.example.id}"]
 
   tags = [{
     key   = "Name"
@@ -75,7 +77,7 @@ resource "awscc_networkmanager_vpc_attachment" "example" {
 resource "awscc_networkmanager_connect_attachment" "example" {
   core_network_id         = awscc_networkmanager_core_network.example.core_network_id
   transport_attachment_id = awscc_networkmanager_vpc_attachment.example.attachment_id
-  edge_location           = data.aws_region.current.name
+  edge_location           = data.aws_region.current.region
   options = {
     protocol = "GRE"
   }
@@ -94,7 +96,7 @@ resource "awscc_networkmanager_connect_peer" "example" {
     peer_asn = 65000
   }
   inside_cidr_blocks = ["169.254.6.0/29"]
-  subnet_arn         = "arn:aws:ec2:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:subnet/${awscc_ec2_subnet.example.id}"
+  subnet_arn         = "arn:aws:ec2:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:subnet/${awscc_ec2_subnet.example.id}"
 
   tags = [{
     key   = "Name"

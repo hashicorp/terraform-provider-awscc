@@ -1,3 +1,5 @@
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # IAM role for Lambda function
@@ -82,7 +84,7 @@ resource "awscc_apigateway_authorizer" "example" {
   name                   = "example-authorizer"
   rest_api_id            = awscc_apigateway_rest_api.example.id
   type                   = "TOKEN"
-  authorizer_uri         = "arn:aws:apigateway:${data.aws_region.current.name}:lambda:path/2015-03-31/functions/${aws_lambda_function.authorizer.arn}/invocations"
+  authorizer_uri         = "arn:aws:apigateway:${data.aws_region.current.region}:lambda:path/2015-03-31/functions/${aws_lambda_function.authorizer.arn}/invocations"
   identity_source        = "method.request.header.Authorization"
   authorizer_credentials = awscc_iam_role.authorizer_role.arn
 }

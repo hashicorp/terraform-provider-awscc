@@ -1,4 +1,6 @@
 data "aws_caller_identity" "current" {}
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Example configuration for an Amazon Lex bot alias 
@@ -15,7 +17,7 @@ resource "awscc_lex_bot_alias" "example" {
       enabled = true
       code_hook_specification = {
         lambda_code_hook = {
-          lambda_arn                  = "arn:aws:lambda:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:function:example-function"
+          lambda_arn                  = "arn:aws:lambda:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:function:example-function"
           code_hook_interface_version = "1.0"
         }
       }
@@ -31,7 +33,7 @@ resource "awscc_lex_bot_alias" "example" {
       enabled = true
       destination = {
         cloudwatch = {
-          cloudwatch_log_group_arn = "arn:aws:logs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:log-group:/aws/lex/TestBot:*",
+          cloudwatch_log_group_arn = "arn:aws:logs:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:log-group:/aws/lex/TestBot:*",
           log_prefix               = "TestBot/"
         }
       }

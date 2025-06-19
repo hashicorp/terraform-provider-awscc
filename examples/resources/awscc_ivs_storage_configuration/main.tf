@@ -1,10 +1,12 @@
 # Get the current region and account ID
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 data "aws_caller_identity" "current" {}
 
 # Create the S3 bucket
 resource "awscc_s3_bucket" "ivs_recordings" {
-  bucket_name = "ivs-recordings-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.name}"
+  bucket_name = "ivs-recordings-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.region}"
 }
 
 # Create S3 bucket policy document
@@ -25,7 +27,7 @@ data "aws_iam_policy_document" "ivs_recording_policy" {
     condition {
       test     = "StringEquals"
       variable = "AWS:SourceArn"
-      values   = ["arn:aws:ivs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:recording-configuration/*"]
+      values   = ["arn:aws:ivs:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:recording-configuration/*"]
     }
   }
 }

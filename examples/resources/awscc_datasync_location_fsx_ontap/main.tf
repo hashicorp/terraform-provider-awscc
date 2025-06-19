@@ -1,5 +1,7 @@
 data "aws_caller_identity" "current" {}
 
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 resource "aws_vpc" "example" {
@@ -19,7 +21,7 @@ resource "aws_internet_gateway" "example" {
 resource "aws_subnet" "example" {
   vpc_id            = aws_vpc.example.id
   cidr_block        = "10.0.1.0/24"
-  availability_zone = "${data.aws_region.current.name}a"
+  availability_zone = "${data.aws_region.current.region}a"
   tags = {
     Name = "datasync-fsx-ontap-subnet"
   }
@@ -83,7 +85,7 @@ resource "aws_fsx_ontap_storage_virtual_machine" "example" {
 
 # DataSync Location FSx ONTAP
 resource "awscc_datasync_location_fsx_ontap" "example" {
-  security_group_arns         = ["arn:aws:ec2:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:security-group/${aws_security_group.fsx_ontap.id}"]
+  security_group_arns         = ["arn:aws:ec2:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:security-group/${aws_security_group.fsx_ontap.id}"]
   storage_virtual_machine_arn = aws_fsx_ontap_storage_virtual_machine.example.arn
   subdirectory                = "/share"
   protocol = {

@@ -1,9 +1,11 @@
 data "aws_caller_identity" "current" {}
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Create an S3 bucket for the application source
 resource "awscc_s3_bucket" "app_bucket" {
-  bucket_name = "beanstalk-app-source-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.name}"
+  bucket_name = "beanstalk-app-source-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.region}"
   tags = [{
     key   = "Modified By"
     value = "AWSCC"

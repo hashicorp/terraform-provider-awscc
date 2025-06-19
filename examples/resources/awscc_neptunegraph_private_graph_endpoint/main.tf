@@ -1,3 +1,5 @@
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Example VPC for Neptune Graph
@@ -13,7 +15,7 @@ resource "awscc_ec2_vpc" "example" {
 resource "awscc_ec2_subnet" "example1" {
   vpc_id            = awscc_ec2_vpc.example.id
   cidr_block        = "10.0.1.0/24"
-  availability_zone = "${data.aws_region.current.name}a"
+  availability_zone = "${data.aws_region.current.region}a"
   tags = [{
     key   = "Name"
     value = "neptune-graph-subnet-1"
@@ -24,7 +26,7 @@ resource "awscc_ec2_subnet" "example1" {
 resource "awscc_ec2_subnet" "example2" {
   vpc_id            = awscc_ec2_vpc.example.id
   cidr_block        = "10.0.2.0/24"
-  availability_zone = "${data.aws_region.current.name}b"
+  availability_zone = "${data.aws_region.current.region}b"
   tags = [{
     key   = "Name"
     value = "neptune-graph-subnet-2"

@@ -1,8 +1,10 @@
 data "aws_caller_identity" "current" {}
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 locals {
-  bucket_name = "simspaceweaver-simulation-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.name}"
+  bucket_name = "simspaceweaver-simulation-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.region}"
 }
 
 # S3 bucket for simulation schema and snapshots
@@ -58,7 +60,7 @@ data "aws_iam_policy_document" "simulation" {
       "logs:PutLogEvents"
     ]
     resources = [
-      "arn:aws:logs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:log-group:/aws/simspaceweaver/*"
+      "arn:aws:logs:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:log-group:/aws/simspaceweaver/*"
     ]
   }
 }

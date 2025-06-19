@@ -1,6 +1,6 @@
 resource "awscc_wafv2_web_acl_association" "example" {
   
-  resource_arn = "arn:aws:apigateway:${data.aws_region.current.name}::/restapis/${awscc_apigateway_rest_api.example.id}/stages/${awscc_apigateway_stage.example.stage_name}"
+  resource_arn = "arn:aws:apigateway:${data.aws_region.current.region}::/restapis/${awscc_apigateway_rest_api.example.id}/stages/${awscc_apigateway_stage.example.stage_name}"
   web_acl_arn  = aws_wafv2_web_acl.example.arn
 }
 
@@ -19,6 +19,8 @@ resource "aws_wafv2_web_acl" "example" {
   }
 }
 
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 resource "awscc_apigateway_rest_api" "example" {

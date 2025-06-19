@@ -1,4 +1,6 @@
 # Get current AWS region
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Get current AWS account ID
@@ -42,7 +44,7 @@ data "aws_iam_policy_document" "lambda_logging" {
       "logs:CreateLogStream",
       "logs:PutLogEvents"
     ]
-    resources = ["arn:aws:logs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:log-group:/aws/lambda/*"]
+    resources = ["arn:aws:logs:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:log-group:/aws/lambda/*"]
   }
 }
 
@@ -76,18 +78,18 @@ resource "aws_lambda_permission" "sns" {
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.example.function_name
   principal     = "sns.amazonaws.com"
-  source_arn    = "arn:aws:sns:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:${awscc_sns_topic.example.topic_name}"
+  source_arn    = "arn:aws:sns:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:${awscc_sns_topic.example.topic_name}"
 }
 
 resource "awscc_sns_subscription" "example" {
   protocol  = "lambda"
-  topic_arn = "arn:aws:sns:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:${awscc_sns_topic.example.topic_name}"
+  topic_arn = "arn:aws:sns:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:${awscc_sns_topic.example.topic_name}"
   endpoint  = aws_lambda_function.example.arn
   filter_policy = jsonencode({
     "event_type" : ["order_placed", "order_cancelled"]
   })
   filter_policy_scope = "MessageAttributes"
-  region             = data.aws_region.current.name
+  region             = data.aws_region.current.region
 
   depends_on = [aws_lambda_permission.sns]
 }

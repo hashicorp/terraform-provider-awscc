@@ -1,3 +1,5 @@
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Example Connect Attachment - This is an example template, not intended for direct use
@@ -10,7 +12,7 @@ resource "awscc_networkmanager_connect_attachment" "example" {
   transport_attachment_id = "attachment-xxxx"
 
   # The edge location for the attachment (AWS Region)
-  edge_location = data.aws_region.current.name
+  edge_location = data.aws_region.current.region
 
   # Configuration options for the connect attachment
   options = {

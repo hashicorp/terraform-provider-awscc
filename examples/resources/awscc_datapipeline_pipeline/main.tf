@@ -1,8 +1,10 @@
 data "aws_caller_identity" "current" {}
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 resource "awscc_s3_bucket" "pipeline_logs" {
-  bucket_name = "datapipeline-logs-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.name}"
+  bucket_name = "datapipeline-logs-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.region}"
 
   public_access_block_configuration = {
     block_public_acls       = true

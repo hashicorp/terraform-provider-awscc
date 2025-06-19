@@ -1,11 +1,13 @@
 data "aws_caller_identity" "current" {}
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Create a directory bucket first (requires S3 Express)
 resource "awscc_s3express_directory_bucket" "example" {
   bucket_name     = "example-express-directory-bucket"
   data_redundancy = "SingleAvailabilityZone"
-  location_name   = "${data.aws_region.current.name}a"
+  location_name   = "${data.aws_region.current.region}a"
 }
 
 data "aws_iam_policy_document" "access_point_policy" {
@@ -23,8 +25,8 @@ data "aws_iam_policy_document" "access_point_policy" {
       "s3:ListBucket"
     ]
     resources = [
-      "arn:aws:s3:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:accesspoint/*",
-      "arn:aws:s3:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:accesspoint/*/object/*"
+      "arn:aws:s3:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:accesspoint/*",
+      "arn:aws:s3:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:accesspoint/*/object/*"
     ]
   }
 }

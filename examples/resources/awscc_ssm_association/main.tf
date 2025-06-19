@@ -1,4 +1,6 @@
 # Data sources for region and caller identity
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 data "aws_caller_identity" "current" {}
 
@@ -22,7 +24,7 @@ resource "awscc_ssm_association" "example" {
     s3_location = {
       output_s3_bucket_name = awscc_s3_bucket.output.id
       output_s3_key_prefix  = "ssm-output/"
-      output_s3_region      = data.aws_region.current.name
+      output_s3_region      = data.aws_region.current.region
     }
   }
 
@@ -33,7 +35,7 @@ resource "awscc_ssm_association" "example" {
 
 # Create S3 bucket for output
 resource "awscc_s3_bucket" "output" {
-  bucket_name = "ssm-association-output-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.name}"
+  bucket_name = "ssm-association-output-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.region}"
 
   public_access_block_configuration = {
     block_public_acls       = true
@@ -76,7 +78,7 @@ data "aws_iam_policy_document" "bucket_policy" {
     condition {
       test     = "StringEquals"
       variable = "aws:SourceRegion"
-      values   = [data.aws_region.current.name]
+      values   = [data.aws_region.current.region]
     }
   }
 }

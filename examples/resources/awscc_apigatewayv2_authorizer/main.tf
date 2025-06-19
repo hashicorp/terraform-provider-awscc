@@ -1,4 +1,6 @@
 # Get current AWS region
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Create a Cognito User Pool for JWT authorization
@@ -31,7 +33,7 @@ resource "awscc_apigatewayv2_authorizer" "example" {
 
   jwt_configuration = {
     audience = ["example-app"]
-    issuer   = "https://cognito-idp.${data.aws_region.current.name}.amazonaws.com/${aws_cognito_user_pool.example.id}"
+    issuer   = "https://cognito-idp.${data.aws_region.current.region}.amazonaws.com/${aws_cognito_user_pool.example.id}"
   }
 
   identity_source = ["$request.header.Authorization"]

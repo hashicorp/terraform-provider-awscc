@@ -1,9 +1,11 @@
 data "aws_caller_identity" "current" {}
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Create an S3 bucket to store the IP set
 resource "aws_s3_bucket" "ipset" {
-  bucket = "guardduty-ipset-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.name}"
+  bucket = "guardduty-ipset-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.region}"
 }
 
 # Create the initial IP set file in S3

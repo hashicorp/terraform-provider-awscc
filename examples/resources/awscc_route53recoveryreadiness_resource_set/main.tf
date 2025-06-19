@@ -9,6 +9,8 @@ resource "awscc_route53recoveryreadiness_recovery_group" "example" {
 }
 
 # Get current AWS region and account ID
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 data "aws_caller_identity" "current" {}
 
@@ -18,7 +20,7 @@ resource "awscc_route53recoveryreadiness_resource_set" "nlb_example" {
   resource_set_type = "AWS::ElasticLoadBalancingV2::LoadBalancer"
 
   resources = [{
-    resource_arn = "arn:aws:elasticloadbalancing:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:loadbalancer/app/example/1234567890"
+    resource_arn = "arn:aws:elasticloadbalancing:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:loadbalancer/app/example/1234567890"
     readiness_scopes = [
       awscc_route53recoveryreadiness_recovery_group.example.recovery_group_arn
     ]
