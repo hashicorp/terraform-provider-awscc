@@ -1,4 +1,6 @@
 data "aws_caller_identity" "current" {}
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 data "aws_iam_policy_document" "assume_role" {
@@ -23,8 +25,8 @@ data "aws_iam_policy_document" "sagemaker" {
       "s3:ListBucket"
     ]
     resources = [
-      "arn:aws:s3:::sagemaker-${data.aws_region.current.name}-${data.aws_caller_identity.current.account_id}/*",
-      "arn:aws:s3:::sagemaker-${data.aws_region.current.name}-${data.aws_caller_identity.current.account_id}"
+      "arn:aws:s3:::sagemaker-${data.aws_region.current.region}-${data.aws_caller_identity.current.account_id}/*",
+      "arn:aws:s3:::sagemaker-${data.aws_region.current.region}-${data.aws_caller_identity.current.account_id}"
     ]
   }
 
@@ -35,7 +37,7 @@ data "aws_iam_policy_document" "sagemaker" {
       "logs:CreateLogStream",
       "logs:PutLogEvents"
     ]
-    resources = ["arn:aws:logs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:log-group:/aws/sagemaker/*"]
+    resources = ["arn:aws:logs:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:log-group:/aws/sagemaker/*"]
   }
 }
 
@@ -70,7 +72,7 @@ resource "awscc_sagemaker_model_explainability_job_definition" "example" {
 
   model_explainability_app_specification = {
     image_uri  = "123456789012.dkr.ecr.us-west-2.amazonaws.com/sagemaker-clarify-processing:1.0"
-    config_uri = "s3://sagemaker-${data.aws_region.current.name}-${data.aws_caller_identity.current.account_id}/explainability/config.json"
+    config_uri = "s3://sagemaker-${data.aws_region.current.region}-${data.aws_caller_identity.current.account_id}/explainability/config.json"
   }
 
   model_explainability_job_input = {
@@ -89,7 +91,7 @@ resource "awscc_sagemaker_model_explainability_job_definition" "example" {
     monitoring_outputs = [{
       s3_output = {
         local_path     = "/opt/ml/processing/output"
-        s3_uri         = "s3://sagemaker-${data.aws_region.current.name}-${data.aws_caller_identity.current.account_id}/explainability/output"
+        s3_uri         = "s3://sagemaker-${data.aws_region.current.region}-${data.aws_caller_identity.current.account_id}/explainability/output"
         s3_upload_mode = "EndOfJob"
       }
     }]

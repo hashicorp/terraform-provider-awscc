@@ -2,6 +2,8 @@
 data "aws_caller_identity" "current" {}
 
 # Get current AWS Region
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Create a signal catalog first
@@ -42,7 +44,7 @@ resource "awscc_iotfleetwise_fleet" "example" {
 
 # Create S3 bucket for data collection
 resource "awscc_s3_bucket" "fleetwise_data" {
-  bucket_name = "example-fleetwise-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.name}"
+  bucket_name = "example-fleetwise-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.region}"
 
   tags = [{
     key   = "Modified By"

@@ -1,10 +1,12 @@
 # Get the current AWS region and account ID
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 data "aws_caller_identity" "current" {}
 
 # Create S3 bucket for artifacts
 resource "awscc_s3_bucket" "artifacts" {
-  bucket_name = "codepipeline-artifacts-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.name}"
+  bucket_name = "codepipeline-artifacts-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.region}"
 }
 
 # Create IAM role for CodePipeline

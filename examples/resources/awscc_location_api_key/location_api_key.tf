@@ -4,7 +4,7 @@ resource "awscc_location_api_key" "example" {
   no_expiry   = true
   restrictions = {
     allow_actions   = ["geo:GetMap*", "geo:GetPlace"]
-    allow_resources = ["arn:aws:geo:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:map/ExampleMap*"]
+    allow_resources = ["arn:aws:geo:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:map/ExampleMap*"]
   }
   tags = [{
     key   = "Modified_By"
@@ -13,4 +13,6 @@ resource "awscc_location_api_key" "example" {
 }
 
 data "aws_caller_identity" "current" {}
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}

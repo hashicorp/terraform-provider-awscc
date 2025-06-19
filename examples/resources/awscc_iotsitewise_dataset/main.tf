@@ -1,4 +1,6 @@
 data "aws_caller_identity" "current" {}
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 resource "awscc_iam_role" "dataset_role" {
@@ -50,7 +52,7 @@ resource "aws_iam_role_policy_attachment" "dataset_role_policy" {
 }
 
 locals {
-  knowledge_base_arn = "arn:aws:kendra:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:knowledgebase/example"
+  knowledge_base_arn = "arn:aws:kendra:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:knowledgebase/example"
 }
 
 resource "awscc_iotsitewise_dataset" "example" {

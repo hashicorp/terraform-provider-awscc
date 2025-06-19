@@ -1,3 +1,5 @@
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 data "aws_caller_identity" "current" {}
 
@@ -21,8 +23,8 @@ data "aws_iam_policy_document" "comprehend_flywheel" {
       "s3:PutObject"
     ]
     resources = [
-      "arn:aws:s3:::example-datalake-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.name}",
-      "arn:aws:s3:::example-datalake-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.name}/*"
+      "arn:aws:s3:::example-datalake-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.region}",
+      "arn:aws:s3:::example-datalake-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.region}/*"
     ]
   }
 
@@ -53,7 +55,7 @@ resource "awscc_iam_role" "comprehend_flywheel" {
 
 resource "awscc_comprehend_flywheel" "example" {
   flywheel_name        = "example-flywheel"
-  data_lake_s3_uri     = "s3://example-datalake-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.name}/flywheel-input"
+  data_lake_s3_uri     = "s3://example-datalake-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.region}/flywheel-input"
   data_access_role_arn = awscc_iam_role.comprehend_flywheel.arn
   model_type = "DOCUMENT_CLASSIFIER"
 

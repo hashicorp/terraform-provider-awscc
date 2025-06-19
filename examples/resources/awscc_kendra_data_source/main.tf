@@ -1,4 +1,6 @@
 # Get the current AWS region
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Get the current AWS account ID
@@ -64,7 +66,7 @@ resource "awscc_iam_role" "kendra_index_role" {
             Action = [
               "logs:CreateLogGroup"
             ]
-            Resource = "arn:aws:logs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:log-group:/aws/kendra/*"
+            Resource = "arn:aws:logs:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:log-group:/aws/kendra/*"
           },
           {
             Effect = "Allow"
@@ -73,7 +75,7 @@ resource "awscc_iam_role" "kendra_index_role" {
               "logs:CreateLogStream",
               "logs:PutLogEvents"
             ]
-            Resource = "arn:aws:logs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:log-group:/aws/kendra/*:log-stream:*"
+            Resource = "arn:aws:logs:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:log-group:/aws/kendra/*:log-stream:*"
           }
         ]
       })

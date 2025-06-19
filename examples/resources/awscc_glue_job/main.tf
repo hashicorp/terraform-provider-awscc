@@ -1,5 +1,7 @@
 # Data sources for AWS account ID and region
 data "aws_caller_identity" "current" {}
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # IAM role policy document
@@ -31,7 +33,7 @@ data "aws_iam_policy_document" "glue_job" {
     ]
     resources = [
       "arn:aws:s3:::aws-glue-*/*",
-      "arn:aws:logs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:log-group:/aws-glue/*"
+      "arn:aws:logs:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:log-group:/aws-glue/*"
     ]
   }
 }
@@ -62,7 +64,7 @@ resource "awscc_glue_job" "example" {
   command = {
     name            = "pythonshell"
     python_version  = "3.9"
-    script_location = "s3://aws-glue-scripts-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.name}/example-script.py"
+    script_location = "s3://aws-glue-scripts-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.region}/example-script.py"
   }
 
   glue_version = "3.0"

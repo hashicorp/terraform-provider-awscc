@@ -1,5 +1,7 @@
 # Get current AWS account ID and region
 data "aws_caller_identity" "current" {}
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Create an S3 bucket for workflow operations
@@ -36,7 +38,7 @@ resource "awscc_iam_role" "workflow_lambda_role" {
               "logs:CreateLogStream",
               "logs:PutLogEvents"
             ]
-            Resource = "arn:aws:logs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:log-group:/aws/lambda/*"
+            Resource = "arn:aws:logs:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:log-group:/aws/lambda/*"
           }
         ]
       })

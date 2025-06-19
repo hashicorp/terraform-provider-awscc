@@ -1,3 +1,5 @@
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # VPC Resources
@@ -24,7 +26,7 @@ resource "awscc_ec2_subnet" "private" {
 # VPC Endpoint
 resource "awscc_ec2_vpc_endpoint" "apprunner" {
   vpc_id             = aws_vpc.main.id
-  service_name       = "com.amazonaws.${data.aws_region.current.name}.apprunner.requests"
+  service_name       = "com.amazonaws.${data.aws_region.current.region}.apprunner.requests"
   vpc_endpoint_type  = "Interface"
   subnet_ids         = [awscc_ec2_subnet.private.id]
   security_group_ids = [awscc_ec2_security_group.endpoint.id]

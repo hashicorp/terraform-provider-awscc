@@ -1,11 +1,13 @@
 # Get current AWS account ID and region
 data "aws_caller_identity" "current" {}
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Example SSM Contact Rotation
 resource "awscc_ssmcontacts_rotation" "example" {
   name         = "weekly_oncall_rotation"
-  contact_ids  = ["arn:aws:ssm-contacts:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:contact/example-contact"]
+  contact_ids  = ["arn:aws:ssm-contacts:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:contact/example-contact"]
   time_zone_id = "America/Los_Angeles"
   start_time   = "2025-01-05T09:00:00"
 

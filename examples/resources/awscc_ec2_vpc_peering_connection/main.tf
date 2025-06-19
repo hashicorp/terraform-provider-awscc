@@ -1,4 +1,6 @@
 data "aws_caller_identity" "current" {}
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Create VPC 1 (Requester)
@@ -24,7 +26,7 @@ resource "awscc_ec2_vpc_peering_connection" "example" {
   vpc_id        = awscc_ec2_vpc.vpc1.id
   peer_vpc_id   = awscc_ec2_vpc.vpc2.id
   peer_owner_id = data.aws_caller_identity.current.account_id
-  peer_region   = data.aws_region.current.name
+  peer_region   = data.aws_region.current.region
   tags = [{
     key   = "Name"
     value = "VPC-Peering-Example"

@@ -1,3 +1,5 @@
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # VPC and Networking Resources
@@ -12,7 +14,7 @@ resource "awscc_ec2_vpc" "example" {
 resource "awscc_ec2_subnet" "example" {
   vpc_id            = awscc_ec2_vpc.example.id
   cidr_block        = "10.0.1.0/24"
-  availability_zone = "${data.aws_region.current.name}a"
+  availability_zone = "${data.aws_region.current.region}a"
   tags = [{
     key   = "Name"
     value = "mediaconnect-example-subnet"
@@ -73,7 +75,7 @@ resource "awscc_iam_role_policy" "mediaconnect" {
 # MediaConnect Flow
 resource "awscc_mediaconnect_flow" "example" {
   name              = "example-flow"
-  availability_zone = "${data.aws_region.current.name}a"
+  availability_zone = "${data.aws_region.current.region}a"
   source = {
     name               = "example-source"
     description        = "Example source"

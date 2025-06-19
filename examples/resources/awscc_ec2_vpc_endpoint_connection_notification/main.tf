@@ -1,3 +1,5 @@
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Create an SNS topic
@@ -38,7 +40,7 @@ resource "awscc_ec2_vpc" "main" {
 }
 
 resource "awscc_ec2_vpc_endpoint" "example" {
-  service_name      = "com.amazonaws.${data.aws_region.current.name}.s3"
+  service_name      = "com.amazonaws.${data.aws_region.current.region}.s3"
   vpc_id            = awscc_ec2_vpc.main.id
   vpc_endpoint_type = "Interface"
 }

@@ -1,4 +1,6 @@
 # Get current region
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Create VPC for SimpleAD
@@ -21,7 +23,7 @@ resource "aws_internet_gateway" "simple_ad_igw" {
 resource "aws_subnet" "simple_ad_subnet_1" {
   vpc_id            = aws_vpc.simple_ad_vpc.id
   cidr_block        = "10.0.1.0/24"
-  availability_zone = "${data.aws_region.current.name}a"
+  availability_zone = "${data.aws_region.current.region}a"
   tags = {
     "Modified By" = "AWSCC"
   }
@@ -30,7 +32,7 @@ resource "aws_subnet" "simple_ad_subnet_1" {
 resource "aws_subnet" "simple_ad_subnet_2" {
   vpc_id            = aws_vpc.simple_ad_vpc.id
   cidr_block        = "10.0.2.0/24"
-  availability_zone = "${data.aws_region.current.name}b"
+  availability_zone = "${data.aws_region.current.region}b"
   tags = {
     "Modified By" = "AWSCC"
   }

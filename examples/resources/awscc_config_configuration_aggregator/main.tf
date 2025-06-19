@@ -1,4 +1,6 @@
 # Use data source for region
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # IAM role for Config Aggregator
@@ -44,7 +46,7 @@ resource "awscc_config_configuration_aggregator" "example" {
 
   organization_aggregation_source = {
     role_arn        = awscc_iam_role.config_aggregator_role.arn
-    aws_regions     = [data.aws_region.current.name]
+    aws_regions     = [data.aws_region.current.region]
     all_aws_regions = false
   }
 

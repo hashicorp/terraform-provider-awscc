@@ -1,4 +1,6 @@
 # Get current AWS region
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Task execution role and policy
@@ -91,7 +93,7 @@ resource "awscc_ecs_task_definition" "example" {
         log_driver = "awslogs"
         options = {
           "awslogs-group"         = "/ecs/example-task-definition"
-          "awslogs-region"        = data.aws_region.current.name
+          "awslogs-region"        = data.aws_region.current.region
           "awslogs-stream-prefix" = "nginx"
         }
       }

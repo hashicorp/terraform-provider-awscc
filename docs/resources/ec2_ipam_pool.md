@@ -14,12 +14,14 @@ Resource Schema of AWS::EC2::IPAMPool Type
 ### Basic
 
 ```terraform
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 resource "awscc_ec2_ipam" "example" {
   operating_regions = [
     {
-      region_name = data.aws_region.current.name
+      region_name = data.aws_region.current.region
     }
   ]
 }
@@ -28,7 +30,7 @@ resource "awscc_ec2_ipam_pool" "example" {
   address_family = "ipv4"
   description    = "example pool"
   ipam_scope_id  = awscc_ec2_ipam.example.private_default_scope_id
-  locale         = data.aws_region.current.name
+  locale         = data.aws_region.current.region
 
   tags = [{
     key   = "Modified By"
@@ -40,12 +42,14 @@ resource "awscc_ec2_ipam_pool" "example" {
 ### Nested pools
 
 ```terraform
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 resource "awscc_ec2_ipam" "example" {
   operating_regions = [
     {
-      region_name = data.aws_region.current.name
+      region_name = data.aws_region.current.region
     }
   ]
 }
@@ -53,7 +57,7 @@ resource "awscc_ec2_ipam" "example" {
 resource "awscc_ec2_ipam_pool" "level1" {
   address_family = "ipv4"
   ipam_scope_id  = awscc_ec2_ipam.example.private_default_scope_id
-  locale         = data.aws_region.current.name
+  locale         = data.aws_region.current.region
 }
 
 resource "awscc_ec2_ipam_pool_cidr" "level1_cidr1" {
@@ -64,7 +68,7 @@ resource "awscc_ec2_ipam_pool_cidr" "level1_cidr1" {
 resource "awscc_ec2_ipam_pool" "level_2" {
   address_family      = "ipv4"
   ipam_scope_id       = awscc_ec2_ipam.example.private_default_scope_id
-  locale              = data.aws_region.current.name
+  locale              = data.aws_region.current.region
   source_ipam_pool_id = awscc_ec2_ipam_pool.level1.id
 }
 
@@ -77,12 +81,14 @@ resource "awscc_ec2_ipam_pool_cidr" "level2_cidr1" {
 ### Allocation specifications
 
 ```terraform
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 resource "awscc_ec2_ipam" "example" {
   operating_regions = [
     {
-      region_name = data.aws_region.current.name
+      region_name = data.aws_region.current.region
     }
   ]
 }
@@ -90,7 +96,7 @@ resource "awscc_ec2_ipam" "example" {
 resource "awscc_ec2_ipam_pool" "example" {
   address_family = "ipv4"
   ipam_scope_id  = awscc_ec2_ipam.example.private_default_scope_id
-  locale         = data.aws_region.current.name
+  locale         = data.aws_region.current.region
 
   allocation_default_netmask_length = 24
   allocation_max_netmask_length     = 25
@@ -106,12 +112,14 @@ resource "awscc_ec2_ipam_pool" "example" {
 ### Auto import
 
 ```terraform
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 resource "awscc_ec2_ipam" "example" {
   operating_regions = [
     {
-      region_name = data.aws_region.current.name
+      region_name = data.aws_region.current.region
     }
   ]
 }
@@ -120,19 +128,21 @@ resource "awscc_ec2_ipam_pool" "example" {
   address_family = "ipv4"
   auto_import    = true
   ipam_scope_id  = awscc_ec2_ipam.example.private_default_scope_id
-  locale         = data.aws_region.current.name
+  locale         = data.aws_region.current.region
 }
 ```
 
 ### Provisioned CIDRs
 
 ```terraform
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 resource "awscc_ec2_ipam" "example" {
   operating_regions = [
     {
-      region_name = data.aws_region.current.name
+      region_name = data.aws_region.current.region
     }
   ]
 }
@@ -140,7 +150,7 @@ resource "awscc_ec2_ipam" "example" {
 resource "awscc_ec2_ipam_pool" "example" {
   address_family = "ipv4"
   ipam_scope_id  = awscc_ec2_ipam.example.private_default_scope_id
-  locale         = data.aws_region.current.name
+  locale         = data.aws_region.current.region
 
   provisioned_cidrs = [
     {
@@ -153,12 +163,14 @@ resource "awscc_ec2_ipam_pool" "example" {
 ### IPv6 BYOIP publicly advertisable pools
 
 ```terraform
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 resource "awscc_ec2_ipam" "example" {
   operating_regions = [
     {
-      region_name = data.aws_region.current.name
+      region_name = data.aws_region.current.region
     }
   ]
 }
@@ -166,7 +178,7 @@ resource "awscc_ec2_ipam" "example" {
 resource "awscc_ec2_ipam_pool" "example" {
   address_family = "ipv6"
   ipam_scope_id  = awscc_ec2_ipam.example.public_default_scope_id
-  locale         = data.aws_region.current.name
+  locale         = data.aws_region.current.region
 
   aws_service           = "ec2"
   public_ip_source      = "byoip"
@@ -177,12 +189,14 @@ resource "awscc_ec2_ipam_pool" "example" {
 ### IPv6 Amazon public ip source
 
 ```terraform
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 resource "awscc_ec2_ipam" "example" {
   operating_regions = [
     {
-      region_name = data.aws_region.current.name
+      region_name = data.aws_region.current.region
     }
   ]
 }
@@ -190,14 +204,14 @@ resource "awscc_ec2_ipam" "example" {
 resource "awscc_ec2_ipam_pool" "example" {
   address_family = "ipv6"
   ipam_scope_id  = awscc_ec2_ipam.example.public_default_scope_id
-  locale         = data.aws_region.current.name
+  locale         = data.aws_region.current.region
 
   aws_service      = "ec2"
   public_ip_source = "amazon"
 }
 ```
 
-<!-- schema generated by tfplugindocs -->
+# schema generated by tfplugindocs
 ## Schema
 
 ### Required

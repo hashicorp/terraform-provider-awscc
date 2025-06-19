@@ -1,3 +1,5 @@
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # VPC and Network Resources
@@ -12,7 +14,7 @@ resource "awscc_ec2_vpc" "msk_vpc" {
 resource "awscc_ec2_subnet" "msk_subnet_1" {
   vpc_id            = awscc_ec2_vpc.msk_vpc.id
   cidr_block        = "10.0.1.0/24"
-  availability_zone = "${data.aws_region.current.name}a"
+  availability_zone = "${data.aws_region.current.region}a"
   tags = [{
     key   = "Name"
     value = "msk-subnet-1"
@@ -22,7 +24,7 @@ resource "awscc_ec2_subnet" "msk_subnet_1" {
 resource "awscc_ec2_subnet" "msk_subnet_2" {
   vpc_id            = awscc_ec2_vpc.msk_vpc.id
   cidr_block        = "10.0.2.0/24"
-  availability_zone = "${data.aws_region.current.name}b"
+  availability_zone = "${data.aws_region.current.region}b"
   tags = [{
     key   = "Name"
     value = "msk-subnet-2"

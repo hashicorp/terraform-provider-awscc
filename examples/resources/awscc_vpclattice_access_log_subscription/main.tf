@@ -1,4 +1,6 @@
 data "aws_caller_identity" "current" {}
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Create the VPC Lattice Service Network
@@ -14,7 +16,7 @@ resource "awscc_vpclattice_service_network" "example" {
 
 # Create S3 bucket for logs
 resource "awscc_s3_bucket" "logs" {
-  bucket_name = "vpc-lattice-logs-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.name}"
+  bucket_name = "vpc-lattice-logs-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.region}"
 
   tags = [{
     key   = "Modified By"

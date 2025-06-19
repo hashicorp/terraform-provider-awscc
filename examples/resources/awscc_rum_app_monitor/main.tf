@@ -1,5 +1,7 @@
 # Get current AWS account ID and region
 data "aws_caller_identity" "current" {}
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Create an IAM role for RUM guest access
@@ -27,7 +29,7 @@ resource "awscc_iam_role" "rum_guest_role" {
             Action = [
               "rum:PutRumEvents"
             ]
-            Resource = "arn:aws:rum:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:appmonitor/example-app-monitor"
+            Resource = "arn:aws:rum:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:appmonitor/example-app-monitor"
           }
         ]
       })

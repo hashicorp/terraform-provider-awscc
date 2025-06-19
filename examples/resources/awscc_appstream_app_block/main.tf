@@ -1,10 +1,12 @@
 # Get the current AWS region and account ID
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 data "aws_caller_identity" "current" {}
 
 # Create an S3 bucket to store the app block files
 resource "awscc_s3_bucket" "app_block" {
-  bucket_name = "appstream-app-block-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.name}"
+  bucket_name = "appstream-app-block-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.region}"
 
   tags = [{
     key   = "Modified By"

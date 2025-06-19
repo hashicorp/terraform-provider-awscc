@@ -1,4 +1,6 @@
 # Get current AWS region
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Get current AWS account ID
@@ -14,14 +16,14 @@ resource "awscc_arczonalshift_zonal_autoshift_configuration" "example" {
 
     blocking_alarms = [
       {
-        alarm_identifier = "arn:aws:cloudwatch:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:alarm:example-blocking-alarm"
+        alarm_identifier = "arn:aws:cloudwatch:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:alarm:example-blocking-alarm"
         type             = "CloudWatch"
       }
     ]
 
     outcome_alarms = [
       {
-        alarm_identifier = "arn:aws:cloudwatch:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:alarm:example-outcome-alarm"
+        alarm_identifier = "arn:aws:cloudwatch:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:alarm:example-outcome-alarm"
         type             = "CloudWatch"
       }
     ]

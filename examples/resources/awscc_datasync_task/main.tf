@@ -1,11 +1,13 @@
 
 # Data sources for dynamic values
 data "aws_caller_identity" "current" {}
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Create S3 buckets for source and destination
 resource "awscc_s3_bucket" "source" {
-  bucket_name = lower("datasync-source-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.name}")
+  bucket_name = lower("datasync-source-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.region}")
   tags = [{
     key   = "Modified By"
     value = "AWSCC"
@@ -13,7 +15,7 @@ resource "awscc_s3_bucket" "source" {
 }
 
 resource "awscc_s3_bucket" "destination" {
-  bucket_name = lower("datasync-dest-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.name}")
+  bucket_name = lower("datasync-dest-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.region}")
   tags = [{
     key   = "Modified By"
     value = "AWSCC"

@@ -1,3 +1,5 @@
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # First, create a SageMaker domain
@@ -45,7 +47,7 @@ resource "awscc_sagemaker_domain" "example" {
 resource "aws_default_vpc" "default" {}
 
 resource "aws_default_subnet" "default" {
-  availability_zone = "${data.aws_region.current.name}a"
+  availability_zone = "${data.aws_region.current.region}a"
 }
 
 # Create a SageMaker space

@@ -1,4 +1,6 @@
 # Get current region
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Get current account ID
@@ -29,7 +31,7 @@ resource "awscc_ses_mail_manager_relay" "example" {
   server_port = 587
 
   authentication = {
-    secret_arn = format("arn:aws:secretsmanager:%s:%s:secret:%s", data.aws_region.current.name, data.aws_caller_identity.current.account_id, awscc_secretsmanager_secret.smtp_secret.id)
+    secret_arn = format("arn:aws:secretsmanager:%s:%s:secret:%s", data.aws_region.current.region, data.aws_caller_identity.current.account_id, awscc_secretsmanager_secret.smtp_secret.id)
   }
 
   tags = [{

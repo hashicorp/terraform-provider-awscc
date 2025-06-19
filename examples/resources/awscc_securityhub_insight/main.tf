@@ -1,6 +1,8 @@
 # Data sources to get AWS Account ID and Region
 data "aws_caller_identity" "current" {}
 
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # SecurityHub Insight resource
@@ -29,7 +31,7 @@ resource "awscc_securityhub_insight" "example" {
 
     region = [{
       comparison = "EQUALS"
-      value      = data.aws_region.current.name
+      value      = data.aws_region.current.region
     }]
 
     record_state = [{

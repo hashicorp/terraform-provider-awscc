@@ -1,5 +1,7 @@
 data "aws_caller_identity" "current" {}
 
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 data "aws_iam_policy_document" "assume_role" {
@@ -51,7 +53,7 @@ resource "awscc_entityresolution_id_namespace" "example" {
   role_arn          = awscc_iam_role.id_namespace.arn
 
   input_source_config = [{
-    input_source_arn = "arn:aws:glue:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:table/example-database/example-table"
+    input_source_arn = "arn:aws:glue:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:table/example-database/example-table"
     schema_name      = "schema1"
   }]
 

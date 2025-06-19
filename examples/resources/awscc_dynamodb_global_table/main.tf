@@ -1,4 +1,8 @@
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "secondary" {
   provider = aws.secondary
 }
@@ -39,7 +43,7 @@ resource "awscc_dynamodb_global_table" "example" {
   # Define replicas
   replicas = [
     {
-      region                      = data.aws_region.current.name
+      region                      = data.aws_region.current.region
       deletion_protection_enabled = false
       point_in_time_recovery_specification = {
         point_in_time_recovery_enabled = true
@@ -50,7 +54,7 @@ resource "awscc_dynamodb_global_table" "example" {
       }]
     },
     {
-      region                      = data.aws_region.secondary.name
+      region                      = data.aws_region.secondary.region
       deletion_protection_enabled = false
       point_in_time_recovery_specification = {
         point_in_time_recovery_enabled = true

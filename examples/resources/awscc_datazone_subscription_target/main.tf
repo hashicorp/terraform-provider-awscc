@@ -1,4 +1,6 @@
 # Data sources to get current AWS region and account ID
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 data "aws_caller_identity" "current" {}
 
@@ -64,7 +66,7 @@ resource "awscc_datazone_subscription_target" "example" {
       form_name = "AWS_S3_CONFIGURATION"
       content = jsonencode({
         bucket = "datazone-subscription-${data.aws_caller_identity.current.account_id}"
-        region = data.aws_region.current.name
+        region = data.aws_region.current.region
       })
     }
   ]

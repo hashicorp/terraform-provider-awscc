@@ -1,4 +1,6 @@
 # Get current region name
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Create an IAM role for the batch job
@@ -34,7 +36,7 @@ resource "awscc_batch_job_definition" "example" {
     environment = [
       {
         name  = "REGION"
-        value = data.aws_region.current.name
+        value = data.aws_region.current.region
       }
     ]
     executionRoleArn = awscc_iam_role.batch_job_role.arn

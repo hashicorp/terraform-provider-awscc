@@ -1,4 +1,6 @@
 # Data sources to get AWS region
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Create IAM role for SageMaker using AWSCC
@@ -39,7 +41,7 @@ resource "aws_iam_role_policy" "sagemaker_image_policy" {
           "ecr:GetDownloadUrlForLayer",
           "ecr:GetAuthorizationToken"
         ]
-        Resource = ["arn:aws:ecr:${data.aws_region.current.name}:763104351884:repository/*"]
+        Resource = ["arn:aws:ecr:${data.aws_region.current.region}:763104351884:repository/*"]
       },
       {
         Effect = "Allow"
@@ -65,7 +67,7 @@ resource "awscc_sagemaker_image" "example" {
 # Create the Image Version
 resource "awscc_sagemaker_image_version" "example" {
   image_name       = awscc_sagemaker_image.example.image_name
-  base_image       = "763104351884.dkr.ecr.${data.aws_region.current.name}.amazonaws.com/pytorch-training:1.8.1-gpu-py36-cu111-ubuntu18.04"
+  base_image       = "763104351884.dkr.ecr.${data.aws_region.current.region}.amazonaws.com/pytorch-training:1.8.1-gpu-py36-cu111-ubuntu18.04"
   alias            = "v1"
   aliases          = ["latest", "stable"]
   horovod          = true

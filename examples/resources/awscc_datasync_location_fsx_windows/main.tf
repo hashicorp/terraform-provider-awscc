@@ -1,4 +1,6 @@
 # Get current AWS region and account ID
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 data "aws_caller_identity" "current" {}
 
@@ -15,7 +17,7 @@ resource "awscc_ec2_vpc" "fsx" {
 resource "awscc_ec2_subnet" "fsx" {
   vpc_id            = awscc_ec2_vpc.fsx.id
   cidr_block        = "10.0.1.0/24"
-  availability_zone = "${data.aws_region.current.name}a"
+  availability_zone = "${data.aws_region.current.region}a"
   tags = [{
     key   = "Name"
     value = "FSx-Subnet"
@@ -50,7 +52,7 @@ resource "aws_fsx_windows_file_system" "example" {
 # Create DataSync location for FSx Windows
 resource "awscc_datasync_location_fsx_windows" "example" {
   fsx_filesystem_arn  = aws_fsx_windows_file_system.example.arn
-  security_group_arns = ["arn:aws:ec2:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:security-group/${awscc_ec2_security_group.fsx.id}"]
+  security_group_arns = ["arn:aws:ec2:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:security-group/${awscc_ec2_security_group.fsx.id}"]
   user                = "Admin"
   password            = "Password123!"
   domain              = "example.com"

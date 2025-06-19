@@ -1,4 +1,6 @@
 # Get current AWS region and account ID
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 data "aws_caller_identity" "current" {}
 
@@ -33,10 +35,10 @@ resource "aws_dx_gateway" "example" {
 resource "awscc_networkmanager_direct_connect_gateway_attachment" "example" {
   core_network_id = awscc_networkmanager_core_network.example.id
   direct_connect_gateway_arn = format("arn:aws:directconnect:%s:%s:dx-gateway/%s",
-    data.aws_region.current.name,
+    data.aws_region.current.region,
     data.aws_caller_identity.current.account_id,
   aws_dx_gateway.example.id)
-  edge_locations = [data.aws_region.current.name]
+  edge_locations = [data.aws_region.current.region]
 
   tags = [{
     key   = "Modified By"

@@ -1,4 +1,6 @@
 # Data sources for AWS region
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Create a primary replication group in one region
@@ -33,7 +35,7 @@ resource "awscc_elasticache_global_replication_group" "example" {
   members = [
     {
       replication_group_id     = aws_elasticache_replication_group.primary.id
-      replication_group_region = data.aws_region.current.name
+      replication_group_region = data.aws_region.current.region
       role                     = "PRIMARY"
     }
   ]

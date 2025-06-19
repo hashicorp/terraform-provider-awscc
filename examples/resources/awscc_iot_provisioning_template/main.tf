@@ -1,5 +1,7 @@
 
 # Data sources to get region and account ID
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 data "aws_caller_identity" "current" {}
 
@@ -26,9 +28,9 @@ data "aws_iam_policy_document" "provisioning" {
       "iot:UpdateCertificate"
     ]
     resources = [
-      "arn:aws:iot:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:thing/*",
-      "arn:aws:iot:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:thinggroup/*",
-      "arn:aws:iot:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:cert/*"
+      "arn:aws:iot:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:thing/*",
+      "arn:aws:iot:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:thinggroup/*",
+      "arn:aws:iot:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:cert/*"
     ]
   }
 }

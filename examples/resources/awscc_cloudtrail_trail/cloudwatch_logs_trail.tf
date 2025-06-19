@@ -42,7 +42,7 @@ resource "awscc_iam_role_policy" "example" {
           "logs:PutLogEvents"
         ]
         Effect   = "Allow"
-        Resource = "arn:aws:logs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:log-group:${awscc_logs_log_group.example.id}:log-stream:${data.aws_caller_identity.current.account_id}_CloudTrail_${data.aws_region.current.name}*"
+        Resource = "arn:aws:logs:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:log-group:${awscc_logs_log_group.example.id}:log-stream:${data.aws_caller_identity.current.account_id}_CloudTrail_${data.aws_region.current.region}*"
       }
     ]
   })
@@ -50,4 +50,6 @@ resource "awscc_iam_role_policy" "example" {
 
 data "aws_caller_identity" "current" {}
 
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}

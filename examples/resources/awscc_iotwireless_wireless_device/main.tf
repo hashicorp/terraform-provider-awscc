@@ -1,11 +1,13 @@
 # Data sources for AWS account ID and region
 data "aws_caller_identity" "current" {}
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Create a Destination for IoT Wireless
 resource "awscc_iotwireless_destination" "example" {
   name            = "example-destination"
-  expression      = "arn:aws:iot:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:topic/my-topic"
+  expression      = "arn:aws:iot:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:topic/my-topic"
   expression_type = "MqttTopic"
   description     = "IoT Wireless Destination for Example"
   role_arn        = awscc_iam_role.iot_wireless_role.arn
@@ -48,8 +50,8 @@ resource "awscc_iam_role" "iot_wireless_role" {
             "iot:Receive"
           ]
           Resource = [
-            "arn:aws:iot:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:topic/*",
-            "arn:aws:iot:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:client/*"
+            "arn:aws:iot:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:topic/*",
+            "arn:aws:iot:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:client/*"
           ]
         }
       ]

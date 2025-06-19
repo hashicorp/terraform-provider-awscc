@@ -1,4 +1,6 @@
 data "aws_caller_identity" "current" {}
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Create VPC and subnets
@@ -13,7 +15,7 @@ resource "awscc_ec2_vpc" "example" {
 resource "awscc_ec2_subnet" "example_subnet1" {
   vpc_id            = awscc_ec2_vpc.example.id
   cidr_block        = "10.0.1.0/24"
-  availability_zone = "${data.aws_region.current.name}a"
+  availability_zone = "${data.aws_region.current.region}a"
   tags = [{
     key   = "Name"
     value = "example-subnet-1"
@@ -23,7 +25,7 @@ resource "awscc_ec2_subnet" "example_subnet1" {
 resource "awscc_ec2_subnet" "example_subnet2" {
   vpc_id            = awscc_ec2_vpc.example.id
   cidr_block        = "10.0.2.0/24"
-  availability_zone = "${data.aws_region.current.name}b"
+  availability_zone = "${data.aws_region.current.region}b"
   tags = [{
     key   = "Name"
     value = "example-subnet-2"
@@ -51,7 +53,7 @@ resource "awscc_networkmanager_core_network" "example" {
       ],
       "edge-locations" : [
         {
-          "location" : data.aws_region.current.name
+          "location" : data.aws_region.current.region
         }
       ]
     },
@@ -84,10 +86,10 @@ resource "awscc_networkmanager_core_network" "example" {
 # Create VPC Attachment
 resource "awscc_networkmanager_vpc_attachment" "example" {
   core_network_id = awscc_networkmanager_core_network.example.id
-  vpc_arn         = format("arn:aws:ec2:%s:%s:vpc/%s", data.aws_region.current.name, data.aws_caller_identity.current.account_id, awscc_ec2_vpc.example.id)
+  vpc_arn         = format("arn:aws:ec2:%s:%s:vpc/%s", data.aws_region.current.region, data.aws_caller_identity.current.account_id, awscc_ec2_vpc.example.id)
   subnet_arns = [
-    format("arn:aws:ec2:%s:%s:subnet/%s", data.aws_region.current.name, data.aws_caller_identity.current.account_id, awscc_ec2_subnet.example_subnet1.id),
-    format("arn:aws:ec2:%s:%s:subnet/%s", data.aws_region.current.name, data.aws_caller_identity.current.account_id, awscc_ec2_subnet.example_subnet2.id)
+    format("arn:aws:ec2:%s:%s:subnet/%s", data.aws_region.current.region, data.aws_caller_identity.current.account_id, awscc_ec2_subnet.example_subnet1.id),
+    format("arn:aws:ec2:%s:%s:subnet/%s", data.aws_region.current.region, data.aws_caller_identity.current.account_id, awscc_ec2_subnet.example_subnet2.id)
   ]
   options = {
     appliance_mode_support = false

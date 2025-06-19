@@ -1,4 +1,6 @@
 # Get current region and account ID
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 data "aws_caller_identity" "current" {}
 
@@ -15,7 +17,7 @@ data "aws_iam_policy_document" "backup_vault_policy" {
     actions = [
       "backup:CopyIntoBackupVault"
     ]
-    resources = ["arn:aws:backup:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:backup-vault:*"]
+    resources = ["arn:aws:backup:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:backup-vault:*"]
   }
 }
 
@@ -33,6 +35,6 @@ resource "awscc_backup_logically_air_gapped_backup_vault" "example" {
 
   notifications = {
     backup_vault_events = ["BACKUP_JOB_COMPLETED", "RESTORE_JOB_COMPLETED"]
-    sns_topic_arn       = "arn:aws:sns:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:backup-notifications"
+    sns_topic_arn       = "arn:aws:sns:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:backup-notifications"
   }
 }

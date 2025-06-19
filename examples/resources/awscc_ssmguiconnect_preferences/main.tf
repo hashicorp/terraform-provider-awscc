@@ -1,4 +1,6 @@
 data "aws_caller_identity" "current" {}
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Create a basic KMS key for testing
@@ -32,7 +34,7 @@ resource "awscc_kms_key" "recording_key" {
 
 # Create S3 bucket for recordings with integrated public access block and encryption
 resource "awscc_s3_bucket" "recordings" {
-  bucket_name = "ssm-gui-connect-recordings-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.name}"
+  bucket_name = "ssm-gui-connect-recordings-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.region}"
 
   public_access_block_configuration = {
     block_public_acls       = true
