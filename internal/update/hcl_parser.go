@@ -34,7 +34,7 @@ func parseSchemaToStruct[T any](filePath string, schema T) (*T, error) {
 	return &schema, nil
 }
 
-func diffSchemas(ctx context.Context, newSchemas *allschemas.AvailableSchemas, lastSchemas *allschemas.AvailableSchemas, allSchemasPath string, filePaths *UpdateFilePaths) (*allschemas.AllSchemas, error) {
+func diffSchemas(ctx context.Context, newSchemas *allschemas.AvailableSchemas, lastSchemas *allschemas.AvailableSchemas, allSchemasPath string, changes *[]string, filePaths *UpdateFilePaths) (*allschemas.AllSchemas, error) {
 	// Create a map from lastSchemas for
 	// schema name to index
 	// use index to get the resource from lastSchemas
@@ -58,6 +58,7 @@ func diffSchemas(ctx context.Context, newSchemas *allschemas.AvailableSchemas, l
 		} else {
 			// New resource
 			changedOrNewResources = append(changedOrNewResources, newResource)
+			*changes = append(*changes, fmt.Sprintf("%s - new", newResource.CloudFormationTypeName))
 		}
 	}
 
@@ -81,16 +82,23 @@ func diffSchemas(ctx context.Context, newSchemas *allschemas.AvailableSchemas, l
 
 	for _, resource := range changedOrNewResources {
 		if existingResourceIndex, exists := existingResourcesMap[resource.CloudFormationTypeName]; exists {
+			changed := false
 			// Update existing resource
 			curr := existingAllSchemas.Resources[existingResourceIndex]
 			if curr.CloudFormationTypeName != resource.CloudFormationTypeName {
 				existingAllSchemas.Resources[existingResourceIndex].CloudFormationTypeName = resource.CloudFormationTypeName
+				changed = true
 			}
 			if curr.ResourceTypeName != resource.ResourceTypeName {
 				existingAllSchemas.Resources[existingResourceIndex].ResourceTypeName = resource.ResourceTypeName
+				changed = true
 			}
 			if curr.SuppressPluralDataSourceGeneration != resource.SuppressPluralDataSourceGeneration {
 				existingAllSchemas.Resources[existingResourceIndex].SuppressPluralDataSourceGeneration = resource.SuppressPluralDataSourceGeneration
+				changed = true
+			}
+			if changed {
+				*changes = append(*changes, fmt.Sprintf("%s - update", resource.CloudFormationTypeName))
 			}
 		} else {
 			tempResource := &allschemas.ResourceAllSchema{
@@ -109,9 +117,11 @@ func diffSchemas(ctx context.Context, newSchemas *allschemas.AvailableSchemas, l
 	for i := range existingAllSchemas.Resources {
 		err = validateResourceType(ctx, existingAllSchemas.Resources[i].CloudFormationTypeName)
 		if err != nil {
+			// Log resource removal due to validation error
+			*changes = append(*changes, fmt.Sprintf("%s - removal", existingAllSchemas.Resources[i].CloudFormationTypeName))
+
 			// Remove the invalid resource from the slice
-			existingAllSchemas.Resources = append(existingAllSchemas.Resources[:i], existingAllSchemas.Resources[i+1:]...)
-			i--
+			existingAllSchemas.Resources[i].SuppressResourceGeneration = true
 		}
 	}
 	// Write updated schema back to file

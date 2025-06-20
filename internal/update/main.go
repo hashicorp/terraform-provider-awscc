@@ -72,6 +72,7 @@ func main() {
 
 func run() error {
 	ctx := context.Background()
+	changes := []string{}
 
 	diags := checkEnv(ctx)
 	if diags.HasError() {
@@ -123,7 +124,7 @@ func run() error {
 	if err != nil {
 		return fmt.Errorf("failed to parse current schemas: %w", err)
 	}
-	err = makeBuild(ctx, client, currAllSchemas, TargetSchemas, filePaths)
+	err = makeBuild(ctx, client, currAllSchemas, TargetSchemas, &changes, filePaths)
 	if err != nil {
 		return fmt.Errorf("failed to make schemas: %w", err)
 	}
@@ -157,7 +158,7 @@ func run() error {
 		return fmt.Errorf("failed to parse last schemas: %w", err)
 	}
 
-	currAllSchemas, err = diffSchemas(ctx, lastSchemas, newSchemas, filePaths.AllSchemasHCL, filePaths)
+	currAllSchemas, err = diffSchemas(ctx, lastSchemas, newSchemas, filePaths.AllSchemasHCL, &changes, filePaths)
 
 	// Diff Step Stop
 
@@ -174,11 +175,11 @@ func run() error {
 
 	// Execute make resources command
 
-	err = makeBuild(ctx, client, currAllSchemas, TargetSchemas, filePaths)
+	err = makeBuild(ctx, client, currAllSchemas, TargetSchemas, &changes, filePaths)
 	if err != nil {
 		return fmt.Errorf("failed to make new schemas: %w", err)
 	}
-	err = makeBuild(ctx, client, currAllSchemas, TargetResources, filePaths)
+	err = makeBuild(ctx, client, currAllSchemas, TargetResources, &changes, filePaths)
 	if err != nil {
 		return fmt.Errorf("failed to execute make resources: %w", err)
 	}
@@ -191,12 +192,12 @@ func run() error {
 	}
 
 	// Run make singular-data-sources plural-data-sources
-	err = makeBuild(ctx, client, currAllSchemas, TargetSingularDataSources, filePaths)
+	err = makeBuild(ctx, client, currAllSchemas, TargetSingularDataSources, &changes, filePaths)
 	if err != nil {
 		return fmt.Errorf("failed to update singular data sources: %w", err)
 	}
 
-	err = makeBuild(ctx, client, currAllSchemas, TargetPluralDataSources, filePaths)
+	err = makeBuild(ctx, client, currAllSchemas, TargetPluralDataSources, &changes, filePaths)
 	if err != nil {
 		return fmt.Errorf("failed to update plural data sources: %w", err)
 	}
@@ -236,6 +237,17 @@ func run() error {
 	if err != nil {
 		return fmt.Errorf("failed to commit documentation: %w", err)
 	}
+
+	// Print all suppressions that happened during the process
+	suppressions := strings.Builder{}
+	for _, change := range changes {
+		suppressions.WriteString(change)
+		suppressions.WriteString("\n")
+	}
+	fmt.Println("Suppressions during process:\n" + suppressions.String())
+
+	fmt.Fprintf(os.Stdout, "env_token=production\n")
+	fmt.Fprintf(os.Stdout, "suppressions<<EOF\n%sEOF\n", suppressions.String())
 	return nil
 }
 

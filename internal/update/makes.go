@@ -21,7 +21,7 @@ const (
 	CloudFormationSchemasDir     = "internal/service/cloudformation/schemas"
 )
 
-func makeBuild(ctx context.Context, client *github.Client, currentSchemas *allschemas.AllSchemas, buildType string, filePaths *UpdateFilePaths) error {
+func makeBuild(ctx context.Context, client *github.Client, currentSchemas *allschemas.AllSchemas, buildType string, changes *[]string, filePaths *UpdateFilePaths) error {
 	if buildType != BuildTypeSchemas && buildType != BuildTypeResources && buildType != BuildTypeSingularDataSources && buildType != BuildTypePluralDataSources {
 		return fmt.Errorf("invalid build type: %s, must be '%s', '%s', '%s', or '%s'", buildType, BuildTypeSchemas, BuildTypeResources, BuildTypeSingularDataSources, BuildTypePluralDataSources)
 	}
@@ -78,7 +78,7 @@ func makeBuild(ctx context.Context, client *github.Client, currentSchemas *allsc
 
 		makesErrors := strings.Split(string(runMakesErrorData), "\n")
 		for _, errorLine := range makesErrors {
-			err := processErrorLine(ctx, errorLine, client, currentSchemas, buildType, filePaths)
+			err := processErrorLine(ctx, errorLine, client, currentSchemas, buildType, changes, filePaths)
 			if err != nil {
 				tflog.Debug(ctx, fmt.Sprintf("Error processing line: %v", err))
 			}
@@ -96,7 +96,7 @@ func makeBuild(ctx context.Context, client *github.Client, currentSchemas *allsc
 
 	return nil
 }
-func processErrorLine(ctx context.Context, errorLine string, client *github.Client, currentSchemas *allschemas.AllSchemas, buildType string, filePaths *UpdateFilePaths) error {
+func processErrorLine(ctx context.Context, errorLine string, client *github.Client, currentSchemas *allschemas.AllSchemas, buildType string, changes *[]string, filePaths *UpdateFilePaths) error {
 	if errorLine == "" {
 		return nil // Skip empty lines
 	}
@@ -123,7 +123,7 @@ func processErrorLine(ctx context.Context, errorLine string, client *github.Clie
 			return fmt.Errorf("resource name not found for stack overflow: %s", resourceName)
 		}
 		new := isNew(resourceName, currentSchemas)
-		err = suppress(ctx, resourceName, errorLine, client, new, buildType, filePaths, currentSchemas)
+		err = suppress(ctx, resourceName, errorLine, client, new, buildType, changes, filePaths, currentSchemas)
 		fmt.Print("Suppression result: ", err)
 		return err
 	} else if strings.Contains(errorLine, "AWS_") {
@@ -140,7 +140,7 @@ func processErrorLine(ctx context.Context, errorLine string, client *github.Clie
 			return fmt.Errorf("failed to extract resource name from error line: %s", errorLine)
 		}
 		new := isNew(resourceName, currentSchemas)
-		return suppress(ctx, resourceName, errorLine, client, new, buildType, filePaths, currentSchemas)
+		return suppress(ctx, resourceName, errorLine, client, new, buildType, changes, filePaths, currentSchemas)
 	} else if strings.Contains(errorLine, "AWS::") {
 		// Deleted Resource
 		/* error loading CloudFormation Resource Provider Schema for aws_datasync_storage_system: describing CloudFormation type: operation error CloudFormation: DescribeType, https response error StatusCode: 404, RequestID: b41adbc2-cb4f-4e06-93c0-b6cb2bbae150, TypeNotFoundException: The type 'AWS::DataSync::StorageSystem' cannot be found. */
@@ -167,7 +167,7 @@ func processErrorLine(ctx context.Context, errorLine string, client *github.Clie
 			return fmt.Errorf("failed to extract resource name from 404 error line: %s", errorLine)
 		}
 		new := isNew(resourceName, currentSchemas)
-		return suppress(ctx, resourceName, errorLine, client, new, buildType, filePaths, currentSchemas)
+		return suppress(ctx, resourceName, errorLine, client, new, buildType, changes, filePaths, currentSchemas)
 	} else if strings.Contains(errorLine, "aws_") {
 		var resourceName string
 		/*
@@ -196,20 +196,24 @@ func processErrorLine(ctx context.Context, errorLine string, client *github.Clie
 			return fmt.Errorf("failed to extract resource name from 400 error line: %s", errorLine)
 		}
 		new := isNew(resourceName, currentSchemas)
-		return suppress(ctx, resourceName, errorLine, client, new, buildType, filePaths, currentSchemas)
+		return suppress(ctx, resourceName, errorLine, client, new, buildType, changes, filePaths, currentSchemas)
 	} else if strings.Contains(errorLine, "StatusCode: 403,") {
 		return fmt.Errorf("authentication failed: no valid AWS credentials")
 	} else {
 		return fmt.Errorf("unhandled schema error: %s", errorLine)
 	}
 }
-func suppress(ctx context.Context, cloudFormationTypeName, schemaError string, _ *github.Client, new bool, buildType string, filePaths *UpdateFilePaths, allSchemas *allschemas.AllSchemas) error {
+func suppress(ctx context.Context, cloudFormationTypeName, schemaError string, _ *github.Client, new bool, buildType string, changes *[]string, filePaths *UpdateFilePaths, allSchemas *allschemas.AllSchemas) error {
 	log.Println("Suppressing resource:", cloudFormationTypeName)
 	// Create Issue - temporarily commented out to avoid GitHub API calls
 	// issueURL, err := createIssue(resource, schemaError, client)
 	// if err != nil {
 	//     return fmt.Errorf("failed to create GitHub issue: %w", err)
 	// }
+
+	// Record this suppression in the changes slice
+	suppressionRecord := fmt.Sprintf("%s - Suppressed", cloudFormationTypeName)
+	*changes = append(*changes, suppressionRecord)
 
 	// Use empty issue URL instead
 	issueURL := ""
