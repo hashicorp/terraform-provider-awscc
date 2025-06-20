@@ -26,17 +26,19 @@ func makeBuild(ctx context.Context, client *github.Client, currentSchemas *allsc
 		return fmt.Errorf("invalid build type: %s, must be '%s', '%s', '%s', or '%s'", buildType, BuildTypeSchemas, BuildTypeResources, BuildTypeSingularDataSources, BuildTypePluralDataSources)
 	}
 
-	file, err := os.OpenFile(filePaths.RunMakesErrors, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0644)
+	file, err := os.OpenFile(filePaths.RunMakesErrors, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0600)
 	if err != nil {
 		return fmt.Errorf("failed to open error log file: %w", err)
 	}
 	defer file.Close()
 
-	var loopCount int = 1
+	var loopCount = 1
 
 	for i := 0; i < loopCount; i++ {
 		log.Println("Running make command for", buildType)
-		checkoutSchemas(ctx, filePaths.SuppressionCheckout)
+		if err := checkoutSchemas(ctx, filePaths.SuppressionCheckout); err != nil {
+			return fmt.Errorf("failed to checkout schemas: %w", err)
+		}
 
 		err = os.Truncate(filePaths.RunMakesErrors, 0)
 		if err != nil {
@@ -53,7 +55,9 @@ func makeBuild(ctx context.Context, client *github.Client, currentSchemas *allsc
 		tmpFile.Close()
 
 		command := fmt.Sprintf("make %s 2>&1 | tee %s | grep \"error\" > %s", buildType, tmpFileName, filePaths.RunMakesErrors)
-		execCommand("sh", "-c", command)
+		if err := execCommand("sh", "-c", command); err != nil {
+			fmt.Fprintf(os.Stderr, "Make command failed: %v\nSee makes_output.txt for full output.\n", err)
+		}
 
 		// Optionally, you can clean up the temp file after use if needed:
 		// defer os.Remove(tmpFileName)
@@ -100,7 +104,6 @@ func processErrorLine(ctx context.Context, errorLine string, client *github.Clie
 	fmt.Printf("Found an entry in the error log: %s during make %s \n", errorLine, buildType)
 	if strings.Contains(errorLine, "stack overflow") {
 		fmt.Println("Detected stack overflow error, attempting to extract resource name from logs.")
-		var resourceName string = ""
 		// Try to extract resource name from stack overflow error using emit_attribute_last_tftype.txt
 		lastResourceFile := "internal/provider/last_resource.txt"
 		data, err := os.ReadFile(lastResourceFile)
@@ -200,7 +203,7 @@ func processErrorLine(ctx context.Context, errorLine string, client *github.Clie
 		return fmt.Errorf("unhandled schema error: %s", errorLine)
 	}
 }
-func suppress(ctx context.Context, cloudFormationTypeName, schemaError string, client *github.Client, new bool, buildType string, filePaths *UpdateFilePaths, allSchemas *allschemas.AllSchemas) error {
+func suppress(ctx context.Context, cloudFormationTypeName, schemaError string, _ *github.Client, new bool, buildType string, filePaths *UpdateFilePaths, allSchemas *allschemas.AllSchemas) error {
 	log.Println("Suppressing resource:", cloudFormationTypeName)
 	// Create Issue - temporarily commented out to avoid GitHub API calls
 	// issueURL, err := createIssue(resource, schemaError, client)
@@ -256,7 +259,7 @@ func suppress(ctx context.Context, cloudFormationTypeName, schemaError string, c
 			sort.Slice(allSchemas.Resources, func(i, j int) bool {
 				return allSchemas.Resources[i].ResourceTypeName < allSchemas.Resources[j].ResourceTypeName
 			})
-			fmt.Println(fmt.Sprintf("Suppressing resource generation for %s in all_schemas.hcl", cloudFormationTypeName))
+			fmt.Printf("Suppressing resource generation for %s in all_schemas.hcl\n", cloudFormationTypeName)
 		}
 	}
 
@@ -271,7 +274,7 @@ func addSchemaToCheckout(resource string, filePaths *UpdateFilePaths) error {
 
 	log.Println("Opening file:", filePaths.SuppressionCheckout)
 
-	file, err := os.OpenFile(filePaths.SuppressionCheckout, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	file, err := os.OpenFile(filePaths.SuppressionCheckout, os.O_APPEND|os.O_CREATE|os.O_WRONLY, FilePermission)
 	if err != nil {
 		log.Println("Error opening file:", err)
 		return fmt.Errorf("failed to open checkout file for writing: %w", err)
@@ -326,7 +329,7 @@ func checkoutSchemas(ctx context.Context, suppressionData string) error {
 	return nil
 }
 
-func GetResourceFromLog(filePaths *UpdateFilePaths, buildType string) (string, error) {
+func GetResourceFromLog(filePaths *UpdateFilePaths, _ string) (string, error) {
 	var resourceName string
 	logData, err := os.ReadFile(filePaths.RunMakesResourceLog)
 	fmt.Println("Reading log file:", filePaths.RunMakesResourceLog)

@@ -19,6 +19,7 @@ import (
 const (
 	DataSourceType = "DataSource"
 	ResourceType   = "Resource"
+	FilePermission = 0600
 )
 
 // GenerateTemplateData generates the template body from the Resource
@@ -45,7 +46,7 @@ func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, 
 	} else {
 		fmt.Println("Current working directory:", cwd)
 	}
-	if writeErr := os.WriteFile("last_resource.txt", []byte(resourceName), 0644); writeErr != nil {
+	if writeErr := os.WriteFile("last_resource.txt", []byte(resourceName), FilePermission); writeErr != nil {
 		// Log but don't fail if writing debug file fails
 		fmt.Println("Warning: could not write last_resource.txt file:", writeErr)
 		ui.Warn(fmt.Sprintf("Failed to write to last_resource.txt: %s", writeErr))

@@ -58,6 +58,9 @@ const (
 	PKGNameArg            = "PKG_NAME=internal/aws/logs"
 	TestArgsArg           = "TESTARGS=-run=TestAccAWSLogsLogGroup_\\|TestAccAWSLogsLogGroupDataSource_"
 	AccTestParallelismArg = "ACCTEST_PARALLELISM=3"
+
+	// File permissions
+	FilePermission = 0600
 )
 
 func main() {
@@ -97,7 +100,9 @@ func run() error {
 		return fmt.Errorf("failed to parse update file paths: %w", err)
 	}
 
-	execGit("checkout", "-b", branchName)
+	if err := execGit("checkout", "-b", branchName); err != nil {
+		return fmt.Errorf("failed to create and checkout branch %s: %w", branchName, err)
+	}
 
 	matches, err := filepath.Glob(filePaths.AwsSchemas)
 	if err != nil {
@@ -111,7 +116,9 @@ func run() error {
 
 	// open file and get to suppressionData
 
-	checkoutSchemas(ctx, filePaths.SuppressionCheckout)
+	if err := checkoutSchemas(ctx, filePaths.SuppressionCheckout); err != nil {
+		return fmt.Errorf("failed to checkout schemas: %w", err)
+	}
 	currAllSchemas, err := parseSchemaToStruct(filePaths.AllSchemasHCL, allschemas.AllSchemas{})
 	if err != nil {
 		return fmt.Errorf("failed to parse current schemas: %w", err)
@@ -120,10 +127,14 @@ func run() error {
 	if err != nil {
 		return fmt.Errorf("failed to make schemas: %w", err)
 	}
-	execGit("add", "-A")
+	if err := execGit("add", "-A"); err != nil {
+		return fmt.Errorf("failed to git add files after schema refresh: %w", err)
+	}
 
 	currentDate := time.Now().Format(DateFormat)
-	execGit("commit", "-m", fmt.Sprintf(CommitMsgRefreshSchemas, currentDate))
+	if err := execGit("commit", "-m", fmt.Sprintf(CommitMsgRefreshSchemas, currentDate)); err != nil {
+		return fmt.Errorf("failed to commit schema refresh: %w", err)
+	}
 	// go run internal/provider/generators/allschemas/main.go > internal/provider/generators/allschemas/available_schemas.year-month-day.hcl
 
 	// Diff Step Start
@@ -153,9 +164,13 @@ func run() error {
 	if err != nil {
 		return fmt.Errorf("failed to diff schemas: %w", err)
 	}
-	execGit("add", "-A")
+	if err := execGit("add", "-A"); err != nil {
+		return fmt.Errorf("failed to git add files after schema diff: %w", err)
+	}
 
-	execGit("commit", "-m", fmt.Sprintf(CommitMsgNewSchemas, currentDate))
+	if err := execGit("commit", "-m", fmt.Sprintf(CommitMsgNewSchemas, currentDate)); err != nil {
+		return fmt.Errorf("failed to commit new schemas: %w", err)
+	}
 
 	// Execute make resources command
 
@@ -167,9 +182,13 @@ func run() error {
 	if err != nil {
 		return fmt.Errorf("failed to execute make resources: %w", err)
 	}
-	execGit("add", "-A")
+	if err := execGit("add", "-A"); err != nil {
+		return fmt.Errorf("failed to git add files after generating resource schemas: %w", err)
+	}
 
-	execGit("commit", "-m", fmt.Sprintf(CommitMsgResourceSchemas, currentDate))
+	if err := execGit("commit", "-m", fmt.Sprintf(CommitMsgResourceSchemas, currentDate)); err != nil {
+		return fmt.Errorf("failed to commit resource schemas: %w", err)
+	}
 
 	// Run make singular-data-sources plural-data-sources
 	err = makeBuild(ctx, client, currAllSchemas, TargetSingularDataSources, filePaths)
@@ -232,18 +251,7 @@ func execGit(args ...string) error {
 	cmd := exec.Command("git", args...)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
-	_ = cmd.Run()
-	// Ignore all errors from git commands
-	return nil
-}
-
-func newGithubClient() (*github.Client, error) {
-	token := os.Getenv(GithubTokenEnv)
-	if token == "" {
-		return nil, fmt.Errorf("%s environment variable is not set", GithubTokenEnv)
-	}
-	client := github.NewClient(nil).WithAuthToken(token)
-	return client, nil
+	return cmd.Run()
 }
 
 func getLastDate() (string, error) {

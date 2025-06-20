@@ -69,9 +69,8 @@ func diffSchemas(ctx context.Context, newSchemas *allschemas.AvailableSchemas, l
 	fmt.Printf("Found %d changed or new resources.\n", len(changedOrNewResources))
 
 	// Read existing allSchemas.hcl
-	existingAllSchemas := &allschemas.AllSchemas{}
 	var err error
-	existingAllSchemas, err = parseSchemaToStruct(filePaths.AllSchemasHCL, allschemas.AllSchemas{}) // replace this with file
+	existingAllSchemas, err := parseSchemaToStruct(filePaths.AllSchemasHCL, allschemas.AllSchemas{}) // replace this with file
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse existing allSchemas: %w", err)
 	}
@@ -93,7 +92,6 @@ func diffSchemas(ctx context.Context, newSchemas *allschemas.AvailableSchemas, l
 			if curr.SuppressPluralDataSourceGeneration != resource.SuppressPluralDataSourceGeneration {
 				existingAllSchemas.Resources[existingResourceIndex].SuppressPluralDataSourceGeneration = resource.SuppressPluralDataSourceGeneration
 			}
-
 		} else {
 			tempResource := &allschemas.ResourceAllSchema{
 				ResourceTypeName:       resource.ResourceTypeName,
@@ -108,6 +106,14 @@ func diffSchemas(ctx context.Context, newSchemas *allschemas.AvailableSchemas, l
 	sort.Slice(existingAllSchemas.Resources, func(i, j int) bool {
 		return existingAllSchemas.Resources[i].ResourceTypeName < existingAllSchemas.Resources[j].ResourceTypeName
 	})
+	for i := range existingAllSchemas.Resources {
+		err = validateResourceType(ctx, existingAllSchemas.Resources[i].CloudFormationTypeName)
+		if err != nil {
+			// Remove the invalid resource from the slice
+			existingAllSchemas.Resources = append(existingAllSchemas.Resources[:i], existingAllSchemas.Resources[i+1:]...)
+			i--
+		}
+	}
 	// Write updated schema back to file
 	return existingAllSchemas, writeSchemasToHCLFile(existingAllSchemas, allSchemasPath)
 }
