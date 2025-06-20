@@ -18,7 +18,6 @@ const (
 	BuildTypeResources           = "resources"
 	BuildTypeSingularDataSources = "singular-data-sources"
 	BuildTypePluralDataSources   = "plural-data-sources"
-	CloudFormationSchemasDir     = "internal/service/cloudformation/schemas"
 )
 
 func makeBuild(ctx context.Context, client *github.Client, currentSchemas *allschemas.AllSchemas, buildType string, changes *[]string, filePaths *UpdateFilePaths) error {
@@ -105,11 +104,10 @@ func processErrorLine(ctx context.Context, errorLine string, client *github.Clie
 	if strings.Contains(errorLine, "stack overflow") {
 		fmt.Println("Detected stack overflow error, attempting to extract resource name from logs.")
 		// Try to extract resource name from stack overflow error using emit_attribute_last_tftype.txt
-		lastResourceFile := "internal/provider/last_resource.txt"
-		data, err := os.ReadFile(lastResourceFile)
+		data, err := os.ReadFile(filePaths.LastResource)
 		if err != nil {
-			fmt.Printf("Failed to read %s: %v\n", lastResourceFile, err)
-			return fmt.Errorf("failed to read %s: %w", lastResourceFile, err)
+			fmt.Printf("Failed to read %s: %v\n", filePaths.LastResource, err)
+			return fmt.Errorf("failed to read %s: %w", filePaths.LastResource, err)
 		}
 		lines := strings.Split(strings.TrimSpace(string(data)), "\n")
 		if len(lines) > 0 {
@@ -177,7 +175,7 @@ func processErrorLine(ctx context.Context, errorLine string, client *github.Clie
 		for _, word := range words {
 			if strings.HasPrefix(word, "aws_") {
 				// Look for a matching file in internal/service/cloudformation/schemas
-				schemasDir := CloudFormationSchemasDir
+				schemasDir := filePaths.CloudFormationSchemasDir
 				files, err := os.ReadDir(schemasDir)
 				if err != nil {
 					return fmt.Errorf("failed to read schemas directory: %w", err)
@@ -267,7 +265,7 @@ func suppress(ctx context.Context, cloudFormationTypeName, schemaError string, _
 		}
 	}
 
-	err = writeSchemasToHCLFile(allSchemas, "internal/provider/all_schemas.hcl")
+	err = writeSchemasToHCLFile(allSchemas, filePaths.AllSchemasHCL)
 	if err != nil {
 		return fmt.Errorf("failed to write schemas to HCL file: %w", err)
 	}
@@ -285,7 +283,7 @@ func addSchemaToCheckout(resource string, filePaths *UpdateFilePaths) error {
 	}
 	defer file.Close()
 
-	writeContent := fmt.Sprintf("\n%s/%s.json", CloudFormationSchemasDir, resource)
+	writeContent := fmt.Sprintf("\n%s/%s.json", filePaths.CloudFormationSchemasDir, resource)
 	log.Println("Writing to file:", writeContent)
 
 	_, err = file.WriteString(writeContent)

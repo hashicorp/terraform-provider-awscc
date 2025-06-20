@@ -299,11 +299,13 @@ func getLastDate() (string, error) {
 }
 
 type UpdateFilePaths struct {
-	RunMakesResourceLog string `hcl:"run_makes_resource_log"`
-	RunMakesOutput      string `hcl:"run_makes_output"`
-	RunMakesErrors      string `hcl:"run_makes_errors"`
-	SuppressionCheckout string `hcl:"suppression_checkout"`
-	AwsSchemas          string `hcl:"aws_schemas"`
-	AllSchemasHCL       string `hcl:"all_schemas_hcl"`
-	AllSchemasDir       string `hcl:"all_schemas_dir"`
+	RunMakesResourceLog      string `hcl:"run_makes_resource_log"`
+	RunMakesOutput           string `hcl:"run_makes_output"`
+	RunMakesErrors           string `hcl:"run_makes_errors"`
+	SuppressionCheckout      string `hcl:"suppression_checkout"`
+	AwsSchemas               string `hcl:"aws_schemas"`
+	AllSchemasHCL            string `hcl:"all_schemas_hcl"`
+	AllSchemasDir            string `hcl:"all_schemas_dir"`
+	LastResource             string `hcl:"lastresource"`
+	CloudFormationSchemasDir string `hcl:"cloudformation_schemas_dir"`
 }
