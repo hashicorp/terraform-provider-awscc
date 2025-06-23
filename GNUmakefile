@@ -85,4 +85,4 @@ prereq-go: # If $(GO_VER) is not installed, install it
 	fi
 update: prereq-go ## Update Schema
 	echo "==> Updating Schema..."
-	$(GO_VER) run internal/update/*.go
+	$(GO_VER) run $$(find internal/update -name "*.go" -not -name "*_test.go")
