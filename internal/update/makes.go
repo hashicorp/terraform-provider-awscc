@@ -89,7 +89,7 @@ func makeBuild(ctx context.Context, client *github.Client, currentSchemas *allsc
 		}
 		print("Processed ", len(makesErrors), " lines from error log file.\n")
 		for _, l := range makesErrors {
-			fmt.Println(l)
+			log.Println(l)
 		}
 	}
 
@@ -102,7 +102,7 @@ func processErrorLine(ctx context.Context, errorLine string, client *github.Clie
 	var resourceName string
 	fmt.Printf("Found an entry in the error log: %s during make %s \n", errorLine, buildType)
 	if strings.Contains(errorLine, "stack overflow") {
-		fmt.Println("Detected stack overflow error, attempting to extract resource name from logs.")
+		log.Println("Detected stack overflow error, attempting to extract resource name from logs.")
 		// Try to extract resource name from stack overflow error using emit_attribute_last_tftype.txt
 		data, err := os.ReadFile(filePaths.LastResource)
 		if err != nil {
@@ -113,11 +113,11 @@ func processErrorLine(ctx context.Context, errorLine string, client *github.Clie
 		if len(lines) > 0 {
 			resourceName = strings.TrimSpace(lines[0])
 		} else {
-			fmt.Println("Could not extract resource name from last_resource.txt")
+			log.Println("Could not extract resource name from last_resource.txt")
 			return fmt.Errorf("could not extract resource name from last_resource.txt")
 		}
 		if resourceName == "" {
-			fmt.Println("Resource name not found for stack overflow:", resourceName)
+			log.Println("Resource name not found for stack overflow:", resourceName)
 			return fmt.Errorf("resource name not found for stack overflow: %s", resourceName)
 		}
 		new := isNew(resourceName, currentSchemas)
@@ -241,7 +241,7 @@ func suppress(ctx context.Context, cloudFormationTypeName, schemaError string, _
 			}
 		}
 	} else {
-		fmt.Println("Suppressing for build type:", buildType, "new:", new, "resource:", cloudFormationTypeName)
+		log.Println("Suppressing for build type:", buildType, "new:", new, "resource:", cloudFormationTypeName)
 		if !new {
 			err := addSchemaToCheckout(cloudFormationTypeName, filePaths)
 			if err != nil {
@@ -331,13 +331,13 @@ func checkoutSchemas(ctx context.Context, suppressionData string) error {
 func GetResourceFromLog(filePaths *UpdateFilePaths, _ string) (string, error) {
 	var resourceName string
 	logData, err := os.ReadFile(filePaths.RunMakesResourceLog)
-	fmt.Println("Reading log file:", filePaths.RunMakesResourceLog)
+	log.Println("Reading log file:", filePaths.RunMakesResourceLog)
 	if err != nil {
 		return "", fmt.Errorf("failed to read logs file: %w", err)
 	}
 	logLines := strings.Split(strings.TrimSpace(string(logData)), "\n")
 	if len(logLines) > 0 {
-		fmt.Println("Log lines found:", logLines)
+		log.Println("Log lines found:", logLines)
 		resourceName = logLines[len(logLines)-1]
 	} else {
 		return "", fmt.Errorf("no resource name found in logs")
@@ -347,11 +347,11 @@ func GetResourceFromLog(filePaths *UpdateFilePaths, _ string) (string, error) {
 
 func isNew(cloudFormationTypeName string, currentSchemas *allschemas.AllSchemas) bool {
 	cloudFormationTypeName = strings.ReplaceAll(cloudFormationTypeName, "_", "::")
-	fmt.Println("Checking if resource is new:", cloudFormationTypeName)
+	log.Println("Checking if resource is new:", cloudFormationTypeName)
 	for _, r := range currentSchemas.Resources {
 		rType := strings.TrimSpace(r.CloudFormationTypeName)
 		cfType := strings.TrimSpace(cloudFormationTypeName)
-		fmt.Println("Comparing with:", r.CloudFormationTypeName)
+		log.Println("Comparing with:", r.CloudFormationTypeName)
 		if rType == cfType {
 			print("Resource found in current schemas:", cloudFormationTypeName, "\n")
 			return false

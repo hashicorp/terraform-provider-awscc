@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"log"
 	"os"
 	"sort"
 
@@ -64,7 +65,7 @@ func diffSchemas(newSchemas *allschemas.AvailableSchemas, lastSchemas *allschema
 	}
 
 	if len(changedOrNewResources) == 0 {
-		fmt.Println("No changes or new resources found.")
+		log.Println("No changes or new resources found.")
 		return nil, nil
 	}
 

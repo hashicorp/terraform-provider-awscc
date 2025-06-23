@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"log"
 	"math/rand"
 	"os"
 	"os/exec"
@@ -76,7 +77,7 @@ func run() error {
 
 	diags := checkEnv(ctx)
 	if diags.HasError() {
-		fmt.Println("Environment variable check failed:")
+		log.Println("Environment variable check failed:")
 		for _, diag := range diags {
 			fmt.Printf("Error: %s - %s\n", diag.Summary(), diag.Detail())
 		}
@@ -255,7 +256,7 @@ func run() error {
 		suppressions.WriteString(change)
 		suppressions.WriteString("\n")
 	}
-	fmt.Println("Suppressions during process:\n" + suppressions.String())
+	log.Println("Suppressions during process:\n" + suppressions.String())
 
 	fmt.Fprintf(os.Stdout, "env_token=production\n")
 	fmt.Fprintf(os.Stdout, "suppressions<<EOF\n%sEOF\n", suppressions.String())
