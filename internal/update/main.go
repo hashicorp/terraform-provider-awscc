@@ -158,9 +158,20 @@ func run() error {
 		return fmt.Errorf("failed to parse last schemas: %w", err)
 	}
 
-	currAllSchemas, err = diffSchemas(ctx, lastSchemas, newSchemas, filePaths.AllSchemasHCL, &changes, filePaths)
-
+	currAllSchemas, err = diffSchemas(newSchemas, lastSchemas, &changes, filePaths)
 	// Diff Step Stop
+
+	// Since we've disabled validation in diffSchemas, we should do it here
+	for i := range currAllSchemas.Resources {
+		flag, err := validateResourceType(ctx, currAllSchemas.Resources[i].CloudFormationTypeName)
+		if err != nil {
+			return fmt.Errorf("failed to check if resource %s is provisionable: %w", currAllSchemas.Resources[i].CloudFormationTypeName, err)
+		}
+		if !flag {
+			currAllSchemas.Resources[i].SuppressResourceGeneration = true
+			createIssue(currAllSchemas.Resources[i].CloudFormationTypeName, "Resource is not provisionable", client)
+		}
+	}
 
 	if err != nil {
 		return fmt.Errorf("failed to diff schemas: %w", err)

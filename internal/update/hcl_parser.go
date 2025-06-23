@@ -34,7 +34,7 @@ func parseSchemaToStruct[T any](filePath string, schema T) (*T, error) {
 	return &schema, nil
 }
 
-func diffSchemas(ctx context.Context, newSchemas *allschemas.AvailableSchemas, lastSchemas *allschemas.AvailableSchemas, allSchemasPath string, changes *[]string, filePaths *UpdateFilePaths) (*allschemas.AllSchemas, error) {
+func diffSchemas(newSchemas *allschemas.AvailableSchemas, lastSchemas *allschemas.AvailableSchemas, changes *[]string, filePaths *UpdateFilePaths) (*allschemas.AllSchemas, error) {
 	// Create a map from lastSchemas for
 	// schema name to index
 	// use index to get the resource from lastSchemas
@@ -55,6 +55,7 @@ func diffSchemas(ctx context.Context, newSchemas *allschemas.AvailableSchemas, l
 				newResource.ResourceTypeName != lastSchemas.Resources[lastResourceIndex].ResourceTypeName {
 				changedOrNewResources = append(changedOrNewResources, newResource)
 			}
+			*changes = append(*changes, fmt.Sprintf("%s - changed", newResource.CloudFormationTypeName))
 		} else {
 			// New resource
 			changedOrNewResources = append(changedOrNewResources, newResource)
@@ -71,7 +72,7 @@ func diffSchemas(ctx context.Context, newSchemas *allschemas.AvailableSchemas, l
 
 	// Read existing allSchemas.hcl
 	var err error
-	existingAllSchemas, err := parseSchemaToStruct(filePaths.AllSchemasHCL, allschemas.AllSchemas{}) // replace this with file
+	existingAllSchemas, err := parseSchemaToStruct(filePaths.AllSchemasHCL, allschemas.AllSchemas{})
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse existing allSchemas: %w", err)
 	}
@@ -114,18 +115,19 @@ func diffSchemas(ctx context.Context, newSchemas *allschemas.AvailableSchemas, l
 	sort.Slice(existingAllSchemas.Resources, func(i, j int) bool {
 		return existingAllSchemas.Resources[i].ResourceTypeName < existingAllSchemas.Resources[j].ResourceTypeName
 	})
-	for i := range existingAllSchemas.Resources {
-		err = validateResourceType(ctx, existingAllSchemas.Resources[i].CloudFormationTypeName)
-		if err != nil {
-			// Log resource removal due to validation error
-			*changes = append(*changes, fmt.Sprintf("%s - removal", existingAllSchemas.Resources[i].CloudFormationTypeName))
-
-			// Remove the invalid resource from the slice
-			existingAllSchemas.Resources[i].SuppressResourceGeneration = true
-		}
-	}
+	// Skip validation of resources as requested
+	// Original code was:
+	// for i := range existingAllSchemas.Resources {
+	//	err = validateResourceType(ctx, existingAllSchemas.Resources[i].CloudFormationTypeName)
+	//	if err != nil {
+	//		// Log resource removal due to validation error
+	//		*changes = append(*changes, fmt.Sprintf("%s - removal", existingAllSchemas.Resources[i].CloudFormationTypeName))
+	//		// Remove the invalid resource from the slice
+	//		existingAllSchemas.Resources[i].SuppressResourceGeneration = true
+	//	}
+	// }
 	// Write updated schema back to file
-	return existingAllSchemas, writeSchemasToHCLFile(existingAllSchemas, allSchemasPath)
+	return existingAllSchemas, writeSchemasToHCLFile(existingAllSchemas, filePaths.AllSchemasHCL)
 }
 
 func writeSchemasToHCLFile(schema interface{}, filePath string) error {
@@ -148,10 +150,10 @@ func writeSchemasToHCLFile(schema interface{}, filePath string) error {
 	return nil
 }
 
-func validateResourceType(ctx context.Context, resourceType string) error {
+func validateResourceType(ctx context.Context, resourceType string) (bool, error) {
 	cfg, err := config.LoadDefaultConfig(ctx, config.WithRegion("us-east-1"))
 	if err != nil {
-		return fmt.Errorf("failed to load AWS config: %w", err)
+		return false, fmt.Errorf("failed to load AWS config: %w", err)
 	}
 	conn := cloudformation.NewFromConfig(cfg)
 
@@ -162,11 +164,11 @@ func validateResourceType(ctx context.Context, resourceType string) error {
 
 	res, err := conn.DescribeType(ctx, input)
 	if err != nil {
-		return fmt.Errorf("failed to describe resource type %s: %w", resourceType, err)
+		return false, fmt.Errorf("failed to describe resource type %s: %w", resourceType, err)
 	}
 	if string(res.ProvisioningType) == "NON_PROVISIONABLE" {
-		return fmt.Errorf("resource type %s is not provisionable", resourceType)
+		return true, fmt.Errorf("resource type %s is not provisionable", resourceType)
 	}
 	fmt.Printf("Resource type %s is valid.\n", resourceType)
-	return nil
+	return true, nil
 }

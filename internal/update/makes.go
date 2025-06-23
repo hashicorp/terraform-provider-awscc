@@ -218,9 +218,6 @@ func suppress(ctx context.Context, cloudFormationTypeName, schemaError string, _
 	var err error
 	// Add to all_schemas.hcl
 	if buildType != BuildTypeSchemas {
-		if err != nil {
-			return fmt.Errorf("failed to parse all_schemas.hcl: %w", err)
-		}
 		terraformResourceName := strings.ToLower(cloudFormationTypeName)
 		for i := range allSchemas.Resources {
 			if terraformResourceName == allSchemas.Resources[i].CloudFormationTypeName {

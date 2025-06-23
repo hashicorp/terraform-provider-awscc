@@ -15,7 +15,6 @@ import (
 )
 
 func TestProcessErrorLine_SchemasCase(t *testing.T) {
-	t.Parallel()
 
 	// Create a temporary directory for test files
 	tempDir := t.TempDir()
