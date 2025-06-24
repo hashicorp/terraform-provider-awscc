@@ -173,7 +173,7 @@ func validateResourceType(ctx context.Context, resourceType string) (bool, error
 		return true, nil
 	}
 	if string(res.ProvisioningType) == "NON_PROVISIONABLE" {
-		return false, fmt.Errorf("resource type %s is not provisionable", resourceType)
+		return false, nil
 	}
 	fmt.Printf("Resource type %s is valid.\n", resourceType)
 	return true, nil
