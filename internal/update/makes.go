@@ -20,7 +20,7 @@ const (
 	BuildTypePluralDataSources   = "plural-data-sources"
 )
 
-func makeBuild(ctx context.Context, client *github.Client, currentSchemas *allschemas.AllSchemas, buildType string, changes *[]string, filePaths *UpdateFilePaths) error {
+func makeBuild(ctx context.Context, client *github.Client, currentSchemas *allschemas.AllSchemas, buildType string, changes *[]string, filePaths *UpdateFilePaths, isNewMap map[string]bool) error {
 	if buildType != BuildTypeSchemas && buildType != BuildTypeResources && buildType != BuildTypeSingularDataSources && buildType != BuildTypePluralDataSources {
 		return fmt.Errorf("invalid build type: %s, must be '%s', '%s', '%s', or '%s'", buildType, BuildTypeSchemas, BuildTypeResources, BuildTypeSingularDataSources, BuildTypePluralDataSources)
 	}
@@ -77,7 +77,7 @@ func makeBuild(ctx context.Context, client *github.Client, currentSchemas *allsc
 
 		makesErrors := strings.Split(string(runMakesErrorData), "\n")
 		for _, errorLine := range makesErrors {
-			err := processErrorLine(ctx, errorLine, client, currentSchemas, buildType, changes, filePaths)
+			err := processErrorLine(ctx, errorLine, client, currentSchemas, buildType, changes, filePaths, isNewMap)
 			if err != nil {
 				tflog.Debug(ctx, fmt.Sprintf("Error processing line: %v", err))
 			}
@@ -95,7 +95,7 @@ func makeBuild(ctx context.Context, client *github.Client, currentSchemas *allsc
 
 	return nil
 }
-func processErrorLine(ctx context.Context, errorLine string, client *github.Client, currentSchemas *allschemas.AllSchemas, buildType string, changes *[]string, filePaths *UpdateFilePaths) error {
+func processErrorLine(ctx context.Context, errorLine string, client *github.Client, currentSchemas *allschemas.AllSchemas, buildType string, changes *[]string, filePaths *UpdateFilePaths, isNewMap map[string]bool) error {
 	if errorLine == "" {
 		return nil // Skip empty lines
 	}
@@ -120,7 +120,7 @@ func processErrorLine(ctx context.Context, errorLine string, client *github.Clie
 			log.Println("Resource name not found for stack overflow:", resourceName)
 			return fmt.Errorf("resource name not found for stack overflow: %s", resourceName)
 		}
-		new := isNew(resourceName, currentSchemas)
+		new := isNew(resourceName, isNewMap)
 		err = suppress(ctx, resourceName, errorLine, client, new, buildType, changes, filePaths, currentSchemas)
 		fmt.Print("Suppression result: ", err)
 		return err
@@ -137,7 +137,7 @@ func processErrorLine(ctx context.Context, errorLine string, client *github.Clie
 		if resourceName == "" {
 			return fmt.Errorf("failed to extract resource name from error line: %s", errorLine)
 		}
-		new := isNew(resourceName, currentSchemas)
+		new := isNew(resourceName, isNewMap)
 		return suppress(ctx, resourceName, errorLine, client, new, buildType, changes, filePaths, currentSchemas)
 	} else if strings.Contains(errorLine, "AWS::") {
 		// Deleted Resource
@@ -164,7 +164,7 @@ func processErrorLine(ctx context.Context, errorLine string, client *github.Clie
 		if resourceName == "" {
 			return fmt.Errorf("failed to extract resource name from 404 error line: %s", errorLine)
 		}
-		new := isNew(resourceName, currentSchemas)
+		new := isNew(resourceName, isNewMap)
 		return suppress(ctx, resourceName, errorLine, client, new, buildType, changes, filePaths, currentSchemas)
 	} else if strings.Contains(errorLine, "aws_") {
 		var resourceName string
@@ -193,7 +193,7 @@ func processErrorLine(ctx context.Context, errorLine string, client *github.Clie
 		if resourceName == "" {
 			return fmt.Errorf("failed to extract resource name from 400 error line: %s", errorLine)
 		}
-		new := isNew(resourceName, currentSchemas)
+		new := isNew(resourceName, isNewMap)
 		return suppress(ctx, resourceName, errorLine, client, new, buildType, changes, filePaths, currentSchemas)
 	} else if strings.Contains(errorLine, "StatusCode: 403,") {
 		return fmt.Errorf("authentication failed: no valid AWS credentials")
@@ -345,18 +345,16 @@ func GetResourceFromLog(filePaths *UpdateFilePaths, _ string) (string, error) {
 	return resourceName, nil
 }
 
-func isNew(cloudFormationTypeName string, currentSchemas *allschemas.AllSchemas) bool {
+func isNew(cloudFormationTypeName string, isNewMap map[string]bool) bool {
 	cloudFormationTypeName = strings.ReplaceAll(cloudFormationTypeName, "_", "::")
 	log.Println("Checking if resource is new:", cloudFormationTypeName)
-	for _, r := range currentSchemas.Resources {
-		rType := strings.TrimSpace(r.CloudFormationTypeName)
-		cfType := strings.TrimSpace(cloudFormationTypeName)
-		log.Println("Comparing with:", r.CloudFormationTypeName)
-		if rType == cfType {
-			print("Resource found in current schemas:", cloudFormationTypeName, "\n")
-			return false
-		}
+
+	// Check if the resource exists in the map
+	if _, exists := isNewMap[cloudFormationTypeName]; exists {
+		print("Resource found in current schemas:", cloudFormationTypeName, "\n")
+		return false
 	}
+
 	return true
 }
 

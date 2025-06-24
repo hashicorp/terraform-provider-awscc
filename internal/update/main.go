@@ -83,6 +83,7 @@ func run() error {
 		}
 		return fmt.Errorf("environment variable check failed")
 	}
+
 	// do we have to do anything about diags?
 
 	// Comment out GitHub client creation to avoid requiring GitHub token
@@ -101,6 +102,8 @@ func run() error {
 	if err != nil {
 		return fmt.Errorf("failed to parse update file paths: %w", err)
 	}
+
+	isNewMap := make(map[string]bool)
 
 	if err := execGit("checkout", "-b", branchName); err != nil {
 		return fmt.Errorf("failed to create and checkout branch %s: %w", branchName, err)
@@ -125,7 +128,11 @@ func run() error {
 	if err != nil {
 		return fmt.Errorf("failed to parse current schemas: %w", err)
 	}
-	err = makeBuild(ctx, client, currAllSchemas, TargetSchemas, &changes, filePaths)
+	for i := range currAllSchemas.Resources {
+		isNewMap[currAllSchemas.Resources[i].CloudFormationTypeName] = true
+	}
+
+	err = makeBuild(ctx, client, currAllSchemas, TargetSchemas, &changes, filePaths, isNewMap)
 	if err != nil {
 		return fmt.Errorf("failed to make schemas: %w", err)
 	}
@@ -187,11 +194,11 @@ func run() error {
 
 	// Execute make resources command
 
-	err = makeBuild(ctx, client, currAllSchemas, TargetSchemas, &changes, filePaths)
+	err = makeBuild(ctx, client, currAllSchemas, TargetSchemas, &changes, filePaths, isNewMap)
 	if err != nil {
 		return fmt.Errorf("failed to make new schemas: %w", err)
 	}
-	err = makeBuild(ctx, client, currAllSchemas, TargetResources, &changes, filePaths)
+	err = makeBuild(ctx, client, currAllSchemas, TargetResources, &changes, filePaths, isNewMap)
 	if err != nil {
 		return fmt.Errorf("failed to execute make resources: %w", err)
 	}
@@ -204,12 +211,12 @@ func run() error {
 	}
 
 	// Run make singular-data-sources plural-data-sources
-	err = makeBuild(ctx, client, currAllSchemas, TargetSingularDataSources, &changes, filePaths)
+	err = makeBuild(ctx, client, currAllSchemas, TargetSingularDataSources, &changes, filePaths, isNewMap)
 	if err != nil {
 		return fmt.Errorf("failed to update singular data sources: %w", err)
 	}
 
-	err = makeBuild(ctx, client, currAllSchemas, TargetPluralDataSources, &changes, filePaths)
+	err = makeBuild(ctx, client, currAllSchemas, TargetPluralDataSources, &changes, filePaths, isNewMap)
 	if err != nil {
 		return fmt.Errorf("failed to update plural data sources: %w", err)
 	}
