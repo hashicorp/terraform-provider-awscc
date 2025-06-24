@@ -9,7 +9,7 @@ import (
 	"strings"
 
 	"github.com/google/go-github/v72/github"
-	"github.com/hashicorp/terraform-plugin-log/tflog"
+	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
 	allschemas "github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/allschemas"
 )
 
@@ -79,7 +79,7 @@ func makeBuild(ctx context.Context, client *github.Client, currentSchemas *allsc
 		for _, errorLine := range makesErrors {
 			err := processErrorLine(ctx, errorLine, client, currentSchemas, buildType, changes, filePaths, isNewMap)
 			if err != nil {
-				tflog.Debug(ctx, fmt.Sprintf("Error processing line: %v", err))
+				log.Printf("Error processing line: %v", err)
 			}
 		}
 		i = 0
@@ -201,8 +201,8 @@ func processErrorLine(ctx context.Context, errorLine string, client *github.Clie
 		return fmt.Errorf("unhandled schema error: %s", errorLine)
 	}
 }
-func suppress(ctx context.Context, cloudFormationTypeName, schemaError string, _ *github.Client, new bool, buildType string, changes *[]string, filePaths *UpdateFilePaths, allSchemas *allschemas.AllSchemas) error {
-	log.Println("Suppressing resource:", cloudFormationTypeName)
+func suppress(ctx context.Context, cfTypeName, schemaError string, _ *github.Client, new bool, buildType string, changes *[]string, filePaths *UpdateFilePaths, allSchemas *allschemas.AllSchemas) error {
+	log.Println("Suppressing resource:", cfTypeName)
 	// Create Issue - temporarily commented out to avoid GitHub API calls
 	// issueURL, err := createIssue(resource, schemaError, client)
 	// if err != nil {
@@ -210,7 +210,7 @@ func suppress(ctx context.Context, cloudFormationTypeName, schemaError string, _
 	// }
 
 	// Record this suppression in the changes slice
-	suppressionRecord := fmt.Sprintf("%s - Suppressed", cloudFormationTypeName)
+	suppressionRecord := fmt.Sprintf("%s - Suppressed", cfTypeName)
 	*changes = append(*changes, suppressionRecord)
 
 	// Use empty issue URL instead
@@ -218,19 +218,22 @@ func suppress(ctx context.Context, cloudFormationTypeName, schemaError string, _
 	var err error
 	// Add to all_schemas.hcl
 	if buildType != BuildTypeSchemas {
-		terraformResourceName := strings.ToLower(cloudFormationTypeName)
+		tfTypeName, err := cfTypeNameToTerraformTypeName(cfTypeName)
+		if err != nil {
+			return fmt.Errorf("failed to convert CloudFormation type name to Terraform type name: %w", err)
+		}
 		for i := range allSchemas.Resources {
-			if terraformResourceName == allSchemas.Resources[i].CloudFormationTypeName {
+			if tfTypeName == allSchemas.Resources[i].CloudFormationTypeName {
 				switch buildType {
 				case BuildTypeResources:
 					allSchemas.Resources[i].SuppressResourceGeneration = true
-					tflog.Debug(ctx, fmt.Sprintf("Suppressing resource generation for %s", allSchemas.Resources[i].CloudFormationTypeName))
+					log.Printf("Suppressing resource generation for %s", allSchemas.Resources[i].CloudFormationTypeName)
 				case BuildTypeSingularDataSources:
 					allSchemas.Resources[i].SuppressSingularDataSourceGeneration = true
-					tflog.Debug(ctx, fmt.Sprintf("Suppressing singular data source generation for %s", allSchemas.Resources[i].CloudFormationTypeName))
+					log.Printf("Suppressing singular data source generation for %s", allSchemas.Resources[i].CloudFormationTypeName)
 				case "plural-data-source":
 					allSchemas.Resources[i].SuppressPluralDataSourceGeneration = true
-					tflog.Debug(ctx, fmt.Sprintf("Suppressing plural data source generation for %s", allSchemas.Resources[i].CloudFormationTypeName))
+					log.Printf("Suppressing plural data source generation for %s", allSchemas.Resources[i].CloudFormationTypeName)
 				default:
 					if allSchemas.Resources[i].SuppressionReason == "" {
 						allSchemas.Resources[i].SuppressionReason = fmt.Sprintf("%s %s", schemaError, issueURL)
@@ -241,24 +244,24 @@ func suppress(ctx context.Context, cloudFormationTypeName, schemaError string, _
 			}
 		}
 	} else {
-		log.Println("Suppressing for build type:", buildType, "new:", new, "resource:", cloudFormationTypeName)
+		log.Println("Suppressing for build type:", buildType, "new:", new, "resource:", cfTypeName)
 		if !new {
-			err := addSchemaToCheckout(cloudFormationTypeName, filePaths)
+			err := addSchemaToCheckout(cfTypeName, filePaths)
 			if err != nil {
 				return fmt.Errorf("failed to add resource to checkout file: %w", err)
 			}
 			return nil
 		} else { // This effectively deletes the resource from the provider
 			temp := &allschemas.ResourceAllSchema{
-				ResourceTypeName:           strings.ToLower(cloudFormationTypeName),
-				CloudFormationTypeName:     cloudFormationTypeName,
+				ResourceTypeName:           strings.ToLower(cfTypeName),
+				CloudFormationTypeName:     cfTypeName,
 				SuppressResourceGeneration: true,
 			}
 			allSchemas.Resources = append(allSchemas.Resources, *temp)
 			sort.Slice(allSchemas.Resources, func(i, j int) bool {
 				return allSchemas.Resources[i].ResourceTypeName < allSchemas.Resources[j].ResourceTypeName
 			})
-			fmt.Printf("Suppressing resource generation for %s in all_schemas.hcl\n", cloudFormationTypeName)
+			fmt.Printf("Suppressing resource generation for %s in all_schemas.hcl\n", cfTypeName)
 		}
 	}
 
@@ -320,7 +323,7 @@ func checkoutSchemas(ctx context.Context, suppressionData string) error {
 			if path != "" {
 				err := execGit("checkout", path)
 				if err != nil {
-					tflog.Debug(ctx, fmt.Sprintf("Failed to checkout %s: %v", path, err))
+					log.Printf("Failed to checkout %s: %v", path, err)
 				}
 			}
 		}
@@ -345,13 +348,29 @@ func GetResourceFromLog(filePaths *UpdateFilePaths, _ string) (string, error) {
 	return resourceName, nil
 }
 
-func isNew(cloudFormationTypeName string, isNewMap map[string]bool) bool {
-	cloudFormationTypeName = strings.ReplaceAll(cloudFormationTypeName, "_", "::")
-	log.Println("Checking if resource is new:", cloudFormationTypeName)
+func cfTypeNameToTerraformTypeName(cfTypeName string) (string, error) {
+	// Convert CloudFormation type name to Terraform type name
+	log.Println("Converting CloudFormation type name to Terraform type name:", cfTypeName)
+	org, svc, res, err := naming.ParseCloudFormationTypeName(cfTypeName)
+	log.Println("Parsed CloudFormation type name:", org, svc, res)
+	if err != nil {
+		return "", fmt.Errorf("parsing CloudFormation type name (%s): %w", cfTypeName, err)
+	}
 
+	tfTypeName := strings.Join([]string{strings.ToLower(org), strings.ToLower(svc), naming.CloudFormationPropertyToTerraformAttribute(res)}, "_")
+	return tfTypeName, nil
+}
+func isNew(cloudFormationTypeName string, isNewMap map[string]bool) bool {
+	log.Println("Checking if resource is new:", cloudFormationTypeName)
+	// Convert CloudFormation type name to Terraform type name
+	tfTypeName, err := cfTypeNameToTerraformTypeName(cloudFormationTypeName)
+	if err != nil {
+		log.Printf("Error converting CloudFormation type name to Terraform type name: %v", err)
+		return false
+	}
 	// Check if the resource exists in the map
-	if _, exists := isNewMap[cloudFormationTypeName]; exists {
-		print("Resource found in current schemas:", cloudFormationTypeName, "\n")
+	if _, exists := isNewMap[tfTypeName]; exists {
+		log.Println("Resource found in current schemas:", cloudFormationTypeName, "\n")
 		return false
 	}
 
