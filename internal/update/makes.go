@@ -350,14 +350,14 @@ func GetResourceFromLog(filePaths *UpdateFilePaths, _ string) (string, error) {
 
 func cfTypeNameToTerraformTypeName(cfTypeName string) (string, error) {
 	// Convert CloudFormation type name to Terraform type name
+	cfTypeName = strings.ReplaceAll(cfTypeName, "_", "::")
 	log.Println("Converting CloudFormation type name to Terraform type name:", cfTypeName)
 	org, svc, res, err := naming.ParseCloudFormationTypeName(cfTypeName)
 	log.Println("Parsed CloudFormation type name:", org, svc, res)
 	if err != nil {
 		return "", fmt.Errorf("parsing CloudFormation type name (%s): %w", cfTypeName, err)
 	}
-
-	tfTypeName := strings.Join([]string{strings.ToLower(org), strings.ToLower(svc), naming.CloudFormationPropertyToTerraformAttribute(res)}, "_")
+	tfTypeName := naming.CreateTerraformTypeName(strings.ToLower(org), strings.ToLower(svc), naming.CloudFormationPropertyToTerraformAttribute(res))
 	return tfTypeName, nil
 }
 func isNew(cloudFormationTypeName string, isNewMap map[string]bool) bool {
