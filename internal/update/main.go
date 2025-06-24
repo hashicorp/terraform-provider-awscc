@@ -169,6 +169,10 @@ func run() error {
 	currAllSchemas, err = diffSchemas(newSchemas, lastSchemas, &changes, filePaths)
 	// Diff Step Stop
 
+	if err != nil {
+		return fmt.Errorf("failed to diff schemas: %w", err)
+	}
+
 	// Since we've disabled validation in diffSchemas, we should do it here
 	for i := range currAllSchemas.Resources {
 		flag, err := validateResourceType(ctx, currAllSchemas.Resources[i].CloudFormationTypeName)

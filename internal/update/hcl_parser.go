@@ -66,7 +66,12 @@ func diffSchemas(newSchemas *allschemas.AvailableSchemas, lastSchemas *allschema
 
 	if len(changedOrNewResources) == 0 {
 		log.Println("No changes or new resources found.")
-		return nil, nil
+		// Instead of returning nil, return the existing schemas
+		existingAllSchemas, err := parseSchemaToStruct(filePaths.AllSchemasHCL, allschemas.AllSchemas{})
+		if err != nil {
+			return nil, fmt.Errorf("failed to parse existing allSchemas when no changes found: %w", err)
+		}
+		return existingAllSchemas, nil
 	}
 
 	fmt.Printf("Found %d changed or new resources.\n", len(changedOrNewResources))
