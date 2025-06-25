@@ -1,4 +1,6 @@
 # Get current AWS region
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Get current AWS account ID
@@ -8,10 +10,10 @@ data "aws_caller_identity" "current" {}
 # Note: The source and target clusters must already exist
 resource "awscc_redshift_integration" "example" {
   # ARN of the source Aurora cluster
-  source_arn = "arn:aws:rds:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:cluster:example-aurora-cluster"
+  source_arn = "arn:aws:rds:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:cluster:example-aurora-cluster"
 
   # ARN of the target Redshift cluster
-  target_arn = "arn:aws:redshift:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:cluster:example-redshift-cluster"
+  target_arn = "arn:aws:redshift:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:cluster:example-redshift-cluster"
 
   # Name for the integration
   integration_name = "aurora-to-redshift"

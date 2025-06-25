@@ -14,7 +14,7 @@ resource "awscc_sagemaker_cluster" "this" {
   ]
   orchestrator = {
     eks = {
-      cluster_arn = "arn:${data.aws_partition.current.partition}:eks:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:cluster/hyperpod-eks-example"
+      cluster_arn = "arn:${data.aws_partition.current.partition}:eks:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:cluster/hyperpod-eks-example"
     }
   }
   vpc_config = {
@@ -46,5 +46,7 @@ resource "aws_s3_object" "params" {
 }
 
 data "aws_caller_identity" "current" {}
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 data "aws_partition" "current" {}

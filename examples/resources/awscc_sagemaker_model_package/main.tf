@@ -1,4 +1,6 @@
 # Get current AWS region
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Create SageMaker Model Package Group
@@ -19,7 +21,7 @@ resource "awscc_sagemaker_model_package" "example" {
   inference_specification = {
     containers = [
       {
-        image             = "763104351884.dkr.ecr.${data.aws_region.current.name}.amazonaws.com/tensorflow-inference:2.12.1-cpu"
+        image             = "763104351884.dkr.ecr.${data.aws_region.current.region}.amazonaws.com/tensorflow-inference:2.12.1-cpu"
         framework         = "TENSORFLOW"
         framework_version = "2.12.1"
       }

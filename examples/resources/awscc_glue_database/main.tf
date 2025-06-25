@@ -1,4 +1,6 @@
 data "aws_caller_identity" "current" {}
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Glue Database Example
@@ -19,6 +21,6 @@ resource "awscc_glue_database" "example" {
         }
       }
     ]
-    location_uri = "s3://example-bucket-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.name}/databases/example_database"
+    location_uri = "s3://example-bucket-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.region}/databases/example_database"
   }
 }

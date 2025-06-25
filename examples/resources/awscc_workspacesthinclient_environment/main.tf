@@ -1,4 +1,6 @@
 # Get the current AWS region
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Get the current AWS account ID
@@ -7,7 +9,7 @@ data "aws_caller_identity" "current" {}
 # Create a WorkSpaces ThinClient Environment
 resource "awscc_workspacesthinclient_environment" "example" {
   name        = "example-thinclient-env"
-  desktop_arn = "arn:aws:workspaces:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:workspace/ws-abcd1234"
+  desktop_arn = "arn:aws:workspaces:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:workspace/ws-abcd1234"
 
   maintenance_window = {
     type              = "CUSTOM"

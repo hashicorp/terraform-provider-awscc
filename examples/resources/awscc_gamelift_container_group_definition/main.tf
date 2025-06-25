@@ -2,6 +2,8 @@
 data "aws_caller_identity" "current" {}
 
 # Get current region
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 resource "awscc_gamelift_container_group_definition" "example" {
@@ -12,7 +14,7 @@ resource "awscc_gamelift_container_group_definition" "example" {
 
   game_server_container_definition = {
     container_name     = "game-server"
-    image_uri          = "${data.aws_caller_identity.current.account_id}.dkr.ecr.${data.aws_region.current.name}.amazonaws.com/game-server:latest"
+    image_uri          = "${data.aws_caller_identity.current.account_id}.dkr.ecr.${data.aws_region.current.region}.amazonaws.com/game-server:latest"
     server_sdk_version = "5.2.0"
 
     port_configuration = {
@@ -36,7 +38,7 @@ resource "awscc_gamelift_container_group_definition" "example" {
   support_container_definitions = [
     {
       container_name              = "monitoring"
-      image_uri                   = "${data.aws_caller_identity.current.account_id}.dkr.ecr.${data.aws_region.current.name}.amazonaws.com/monitoring:latest"
+      image_uri                   = "${data.aws_caller_identity.current.account_id}.dkr.ecr.${data.aws_region.current.region}.amazonaws.com/monitoring:latest"
       essential                   = false
       memory_hard_limit_mebibytes = 512
       vcpu                        = 1

@@ -1,10 +1,12 @@
 data "aws_caller_identity" "current" {}
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 data "aws_guardduty_detector" "existing" {}
 
 # S3 bucket for findings
 resource "awscc_s3_bucket" "findings" {
-  bucket_name = "guardduty-findings-${data.aws_region.current.name}-${data.aws_caller_identity.current.account_id}"
+  bucket_name = "guardduty-findings-${data.aws_region.current.region}-${data.aws_caller_identity.current.account_id}"
   tags = [{
     key   = "Modified By"
     value = "AWSCC"
@@ -68,7 +70,7 @@ resource "awscc_s3_bucket_policy" "findings" {
         ],
         Condition = {
           StringEquals = {
-            "aws:SourceArn"     = "arn:aws:guardduty:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:detector/${data.aws_guardduty_detector.existing.id}",
+            "aws:SourceArn"     = "arn:aws:guardduty:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:detector/${data.aws_guardduty_detector.existing.id}",
             "aws:SourceAccount" = data.aws_caller_identity.current.account_id
           }
         }

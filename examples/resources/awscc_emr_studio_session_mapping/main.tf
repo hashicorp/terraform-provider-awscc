@@ -1,4 +1,6 @@
 data "aws_caller_identity" "current" {}
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # IAM role for EMR Studio
@@ -76,7 +78,7 @@ resource "aws_iam_policy" "session_policy" {
 # EMR Studio
 resource "awscc_emr_studio" "example" {
   auth_mode                   = "IAM"
-  default_s3_location         = "s3://emr-studio-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.name}/example"
+  default_s3_location         = "s3://emr-studio-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.region}/example"
   engine_security_group_id    = "sg-0123456789abcdef0" # Replace with your security group ID
   name                        = "example-studio"
   service_role                = aws_iam_role.emr_studio_role.arn

@@ -1,4 +1,6 @@
 # Get the current AWS region
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Get the current AWS account ID
@@ -17,7 +19,7 @@ resource "awscc_ec2_vpc" "example" {
 resource "awscc_ec2_subnet" "example" {
   vpc_id            = awscc_ec2_vpc.example.id
   cidr_block        = "10.0.1.0/24"
-  availability_zone = "${data.aws_region.current.name}a"
+  availability_zone = "${data.aws_region.current.region}a"
   tags = [{
     key   = "Modified By"
     value = "AWSCC"
@@ -73,8 +75,8 @@ resource "awscc_networkfirewall_firewall_policy" "example" {
 
 # Local values for ARNs
 locals {
-  policy_arn   = "arn:aws:network-firewall:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:firewall-policy/example-policy"
-  firewall_arn = "arn:aws:network-firewall:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:firewall/example-firewall"
+  policy_arn   = "arn:aws:network-firewall:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:firewall-policy/example-policy"
+  firewall_arn = "arn:aws:network-firewall:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:firewall/example-firewall"
 }
 
 # Create Network Firewall

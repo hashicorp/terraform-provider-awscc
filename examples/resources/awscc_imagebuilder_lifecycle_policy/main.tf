@@ -1,4 +1,6 @@
 # Get current AWS region
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # IAM role policy document for Image Builder Lifecycle Policy
@@ -72,7 +74,7 @@ resource "awscc_imagebuilder_lifecycle_policy" "example" {
       }
       exclusion_rules = {
         amis = {
-          regions = [data.aws_region.current.name]
+          regions = [data.aws_region.current.region]
         }
         tag_map = {
           "Environment" = "Production"

@@ -1,4 +1,6 @@
 # Get current AWS region
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Get current AWS account ID
@@ -42,7 +44,7 @@ data "aws_iam_policy_document" "lambda_logging" {
       "logs:PutLogEvents"
     ]
     resources = [
-      "arn:aws:logs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:log-group:/aws/lambda/${aws_lambda_function.message_review.function_name}:*"
+      "arn:aws:logs:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:log-group:/aws/lambda/${aws_lambda_function.message_review.function_name}:*"
     ]
   }
 }
@@ -60,7 +62,7 @@ resource "aws_lambda_permission" "ivschat" {
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.message_review.function_name
   principal     = "ivschat.amazonaws.com"
-  source_arn    = "arn:aws:ivschat:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:room/*"
+  source_arn    = "arn:aws:ivschat:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:room/*"
 }
 
 # Create an IVS Chat room

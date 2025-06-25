@@ -1,5 +1,7 @@
 # Get current AWS account ID and region
 data "aws_caller_identity" "current" {}
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # IAM role for data source
@@ -23,7 +25,7 @@ data "aws_iam_policy_document" "logs_integration" {
       "logs:DescribeLogStreams",
       "logs:DescribeLogGroups"
     ]
-    resources = ["arn:aws:logs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:*"]
+    resources = ["arn:aws:logs:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:*"]
   }
 }
 

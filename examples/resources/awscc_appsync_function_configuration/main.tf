@@ -1,4 +1,6 @@
 # Get current AWS region
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Create AppSync API (no AWSCC equivalent yet)
@@ -97,7 +99,7 @@ resource "aws_appsync_datasource" "example" {
 
   dynamodb_config {
     table_name = awscc_dynamodb_table.example.table_name
-    region     = data.aws_region.current.name
+    region     = data.aws_region.current.region
   }
 
   service_role_arn = awscc_iam_role.appsync_datasource_role.arn

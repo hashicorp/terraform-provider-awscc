@@ -1,5 +1,7 @@
 # Get current AWS account ID and region
 data "aws_caller_identity" "current" {}
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # IAM role for SageMaker Pipeline
@@ -24,7 +26,7 @@ data "aws_iam_policy_document" "pipeline_policy" {
       "sagemaker:StopTrainingJob"
     ]
     resources = [
-      "arn:aws:sagemaker:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:*"
+      "arn:aws:sagemaker:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:*"
     ]
   }
 
@@ -37,8 +39,8 @@ data "aws_iam_policy_document" "pipeline_policy" {
       "s3:ListBucket"
     ]
     resources = [
-      "arn:aws:s3:::sagemaker-${data.aws_region.current.name}-${data.aws_caller_identity.current.account_id}/*",
-      "arn:aws:s3:::sagemaker-${data.aws_region.current.name}-${data.aws_caller_identity.current.account_id}"
+      "arn:aws:s3:::sagemaker-${data.aws_region.current.region}-${data.aws_caller_identity.current.account_id}/*",
+      "arn:aws:s3:::sagemaker-${data.aws_region.current.region}-${data.aws_caller_identity.current.account_id}"
     ]
   }
 
@@ -49,7 +51,7 @@ data "aws_iam_policy_document" "pipeline_policy" {
       "logs:CreateLogStream",
       "logs:PutLogEvents"
     ]
-    resources = ["arn:aws:logs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:log-group:/aws/sagemaker/*"]
+    resources = ["arn:aws:logs:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:log-group:/aws/sagemaker/*"]
   }
 }
 
@@ -90,7 +92,7 @@ resource "awscc_sagemaker_pipeline" "example" {
               }
             }
             AppSpecification = {
-              ImageUri = "${data.aws_caller_identity.current.account_id}.dkr.ecr.${data.aws_region.current.name}.amazonaws.com/sagemaker-scikit-learn:0.23-1-cpu-py3"
+              ImageUri = "${data.aws_caller_identity.current.account_id}.dkr.ecr.${data.aws_region.current.region}.amazonaws.com/sagemaker-scikit-learn:0.23-1-cpu-py3"
               ContainerArguments = [
                 "--input-data", "InputDataUrl"
               ]

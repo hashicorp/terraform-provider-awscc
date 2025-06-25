@@ -1,9 +1,11 @@
 data "aws_caller_identity" "current" {}
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Create S3 bucket for MWAA
 resource "aws_s3_bucket" "mwaa" {
-  bucket = "mwaa-environment-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.name}"
+  bucket = "mwaa-environment-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.region}"
 }
 
 resource "aws_s3_bucket_public_access_block" "mwaa" {
@@ -36,7 +38,7 @@ resource "aws_vpc" "mwaa" {
 resource "aws_subnet" "private_1" {
   vpc_id            = aws_vpc.mwaa.id
   cidr_block        = "10.192.1.0/24"
-  availability_zone = "${data.aws_region.current.name}a"
+  availability_zone = "${data.aws_region.current.region}a"
 
   tags = {
     Name = "mwaa-private-1"
@@ -46,7 +48,7 @@ resource "aws_subnet" "private_1" {
 resource "aws_subnet" "private_2" {
   vpc_id            = aws_vpc.mwaa.id
   cidr_block        = "10.192.2.0/24"
-  availability_zone = "${data.aws_region.current.name}b"
+  availability_zone = "${data.aws_region.current.region}b"
 
   tags = {
     Name = "mwaa-private-2"
@@ -112,7 +114,7 @@ data "aws_iam_policy_document" "mwaa_execution" {
       "logs:GetQueryResults"
     ]
     resources = [
-      "arn:aws:logs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:log-group:airflow-*"
+      "arn:aws:logs:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:log-group:airflow-*"
     ]
   }
 
@@ -135,7 +137,7 @@ data "aws_iam_policy_document" "mwaa_execution" {
       "sqs:SendMessage"
     ]
     resources = [
-      "arn:aws:sqs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:airflow-celery-*"
+      "arn:aws:sqs:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:airflow-celery-*"
     ]
   }
 }

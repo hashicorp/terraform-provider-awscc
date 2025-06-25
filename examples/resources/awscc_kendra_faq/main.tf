@@ -1,5 +1,7 @@
 data "aws_caller_identity" "current" {}
 
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Create the Kendra IAM role for the index
@@ -43,7 +45,7 @@ resource "awscc_kendra_index" "example" {
 
 # Create S3 bucket for FAQ files
 resource "awscc_s3_bucket" "faq_bucket" {
-  bucket_name = "kendra-faq-bucket-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.name}"
+  bucket_name = "kendra-faq-bucket-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.region}"
 
   tags = [{
     key   = "Modified By"

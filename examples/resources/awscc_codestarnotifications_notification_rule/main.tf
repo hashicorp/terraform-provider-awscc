@@ -1,4 +1,6 @@
 data "aws_caller_identity" "current" {}
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Create an SNS topic for notifications
@@ -35,7 +37,7 @@ resource "awscc_codestarnotifications_notification_rule" "example" {
   name        = "example-notification-rule"
   detail_type = "BASIC"
 
-  resource = "arn:aws:codecommit:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:MyDemoRepo"
+  resource = "arn:aws:codecommit:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:MyDemoRepo"
 
   event_type_ids = [
     "codecommit-repository-comments-on-commits",

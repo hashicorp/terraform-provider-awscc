@@ -1,6 +1,8 @@
 # Example configuration for awscc_elasticloadbalancingv2_trust_store_revocation
 
 data "aws_caller_identity" "current" {}
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Create an S3 bucket to store CA certificates and revocation lists
@@ -52,7 +54,7 @@ resource "aws_s3_object" "revocation_list" {
 
 # Example awscc_elasticloadbalancingv2_trust_store_revocation resource
 resource "awscc_elasticloadbalancingv2_trust_store_revocation" "example" {
-  trust_store_arn = "arn:aws:elasticloadbalancing:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:truststore/example-trust-store"
+  trust_store_arn = "arn:aws:elasticloadbalancing:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:truststore/example-trust-store"
   revocation_contents = [{
     revocation_type = "CRL"
     s3_bucket       = aws_s3_bucket.revocations.id

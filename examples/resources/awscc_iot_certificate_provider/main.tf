@@ -1,4 +1,6 @@
 data "aws_caller_identity" "current" {}
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # IAM role for Lambda
@@ -21,7 +23,7 @@ data "aws_iam_policy_document" "lambda_permissions" {
       "logs:CreateLogStream",
       "logs:PutLogEvents"
     ]
-    resources = ["arn:aws:logs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:log-group:/aws/lambda/*"]
+    resources = ["arn:aws:logs:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:log-group:/aws/lambda/*"]
   }
 
   statement {
@@ -60,7 +62,7 @@ resource "awscc_lambda_permission" "allow_iot_invoke" {
   action        = "lambda:InvokeFunction"
   function_name = "iot-certificate-provider"
   principal     = "iot.amazonaws.com"
-  source_arn    = "arn:aws:iot:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:*"
+  source_arn    = "arn:aws:iot:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:*"
 }
 
 # Sample Lambda function for certificate provider

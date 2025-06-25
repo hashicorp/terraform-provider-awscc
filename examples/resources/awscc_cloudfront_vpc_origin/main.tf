@@ -1,4 +1,6 @@
 # Get AWS region and account details
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Create VPC for the ALB
@@ -22,7 +24,7 @@ resource "aws_internet_gateway" "example" {
 resource "awscc_ec2_subnet" "public1" {
   vpc_id                  = awscc_ec2_vpc.example.id
   cidr_block              = "10.0.1.0/24"
-  availability_zone       = "${data.aws_region.current.name}a"
+  availability_zone       = "${data.aws_region.current.region}a"
   map_public_ip_on_launch = true
   tags = [{
     key   = "Name"
@@ -33,7 +35,7 @@ resource "awscc_ec2_subnet" "public1" {
 resource "awscc_ec2_subnet" "public2" {
   vpc_id                  = awscc_ec2_vpc.example.id
   cidr_block              = "10.0.2.0/24"
-  availability_zone       = "${data.aws_region.current.name}b"
+  availability_zone       = "${data.aws_region.current.region}b"
   map_public_ip_on_launch = true
   tags = [{
     key   = "Name"

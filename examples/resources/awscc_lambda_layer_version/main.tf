@@ -1,9 +1,11 @@
 data "aws_caller_identity" "current" {}
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # S3 bucket to store the layer code
 resource "awscc_s3_bucket" "lambda_layer" {
-  bucket_name = "lambda-layer-example-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.name}"
+  bucket_name = "lambda-layer-example-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.region}"
 
   # Add required tags per guidelines
   tags = [{

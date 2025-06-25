@@ -1,3 +1,5 @@
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
 
 # Create the Bedrock Intelligent Prompt Router
@@ -8,16 +10,16 @@ resource "awscc_bedrock_intelligent_prompt_router" "example" {
   # Primary models to route between (limited to exactly 2 models)
   models = [
     {
-      model_arn = "arn:aws:bedrock:${data.aws_region.current.name}::foundation-model/anthropic.claude-3-5-sonnet-20241022-v2:0"
+      model_arn = "arn:aws:bedrock:${data.aws_region.current.region}::foundation-model/anthropic.claude-3-5-sonnet-20241022-v2:0"
     },
     {
-      model_arn = "arn:aws:bedrock:${data.aws_region.current.name}::foundation-model/anthropic.claude-3-haiku-20240307-v1:0"
+      model_arn = "arn:aws:bedrock:${data.aws_region.current.region}::foundation-model/anthropic.claude-3-haiku-20240307-v1:0"
     }
   ]
 
   # Fallback model (must be one of the models in the models list above)
   fallback_model = {
-    model_arn = "arn:aws:bedrock:${data.aws_region.current.name}::foundation-model/anthropic.claude-3-haiku-20240307-v1:0"
+    model_arn = "arn:aws:bedrock:${data.aws_region.current.region}::foundation-model/anthropic.claude-3-haiku-20240307-v1:0"
   }
 
   # Routing criteria based on response quality difference

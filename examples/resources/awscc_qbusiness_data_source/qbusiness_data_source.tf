@@ -88,7 +88,7 @@ resource "awscc_iam_role_policy" "example" {
           "qbusiness:BatchPutDocument",
           "qbusiness:BatchDeleteDocument"
         ]
-        Resource = "arn:aws:qbusiness:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:application/${awscc_qbusiness_application.example.id}/index/${awscc_qbusiness_index.example.id}"
+        Resource = "arn:aws:qbusiness:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:application/${awscc_qbusiness_application.example.id}/index/${awscc_qbusiness_index.example.id}"
       },
       {
         Effect = "Allow"
@@ -98,9 +98,9 @@ resource "awscc_iam_role_policy" "example" {
           "qbusiness:UpdateUser",
         "qbusiness:ListGroups"]
         Resource = [
-          "arn:aws:qbusiness:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:application/${awscc_qbusiness_application.example.id}",
-          "arn:aws:qbusiness:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:application/${awscc_qbusiness_application.example.id}/index/${awscc_qbusiness_index.example.id}",
-          "arn:aws:qbusiness:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:application/${awscc_qbusiness_application.example.id}/index/${awscc_qbusiness_index.example.id}/data-source/*"
+          "arn:aws:qbusiness:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:application/${awscc_qbusiness_application.example.id}",
+          "arn:aws:qbusiness:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:application/${awscc_qbusiness_application.example.id}/index/${awscc_qbusiness_index.example.id}",
+          "arn:aws:qbusiness:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:application/${awscc_qbusiness_application.example.id}/index/${awscc_qbusiness_index.example.id}/data-source/*"
         ]
       }
     ]
@@ -114,4 +114,6 @@ variable "bucket_name" {
 
 data "aws_caller_identity" "current" {}
 
+# Note: Using data.aws_region.current.region (AWS provider v6.0+)
+# For AWS provider < v6.0, use data.aws_region.current.name instead
 data "aws_region" "current" {}
