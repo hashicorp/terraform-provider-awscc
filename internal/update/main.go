@@ -129,7 +129,7 @@ func run() error {
 		return fmt.Errorf("failed to parse current schemas: %w", err)
 	}
 	for i := range currAllSchemas.Resources {
-		isNewMap[currAllSchemas.Resources[i].CloudFormationTypeName] = true
+		isNewMap[currAllSchemas.Resources[i].ResourceTypeName] = true
 	}
 
 	err = makeBuild(ctx, client, currAllSchemas, TargetSchemas, &changes, filePaths, isNewMap)
