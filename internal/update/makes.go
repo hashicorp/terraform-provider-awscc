@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/google/go-github/v72/github"
+	"github.com/gostaticanalysis/nilerr"
 	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
 	allschemas "github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/allschemas"
 )
@@ -239,11 +240,15 @@ func suppress(ctx context.Context, cfTypeName, schemaError string, _ *github.Cli
 	if buildType != BuildTypeSchemas || new {
 		tfTypeName, err := cfTypeNameToTerraformTypeName(cfTypeName)
 		fmt.Println("Converting CloudFormation type name to Terraform type name:", cfTypeName, "->", tfTypeName)
+		if tfTypeName == "" && cfTypeName != "" {
+			err = nil
+			tfTypeName = strings.ReplaceAll(cfTypeName, "::", "_")
+		}
 		if err != nil {
 			return fmt.Errorf("failed to convert CloudFormation type name to Terraform type name: %w", err)
 		}
 		for i := range allSchemas.Resources {
-			if tfTypeName == allSchemas.Resources[i].ResourceTypeName {
+			if tfTypeName == allSchemas.Resources[i].ResourceTypeName || {
 				switch buildType {
 				case BuildTypeSchemas:
 					allSchemas.Resources[i].SuppressResourceGeneration = true
