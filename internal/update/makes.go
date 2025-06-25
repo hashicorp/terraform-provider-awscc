@@ -98,127 +98,195 @@ func processErrorLine(ctx context.Context, errorLine string, client *github.Clie
 	if errorLine == "" {
 		return nil // Skip empty lines
 	}
-	var resourceName string
-	fmt.Printf("Found an entry in the error log: %s during make %s \n", errorLine, buildType)
-	if strings.Contains(errorLine, "stack overflow") {
-		log.Println("Detected stack overflow error, attempting to extract resource name from logs.")
-		// Try to extract resource name from stack overflow error using emit_attribute_last_tftype.txt
-		data, err := os.ReadFile(filePaths.LastResource)
-		if err != nil {
-			fmt.Printf("Failed to read %s: %v\n", filePaths.LastResource, err)
-			return fmt.Errorf("failed to read %s: %w", filePaths.LastResource, err)
-		}
-		lines := strings.Split(strings.TrimSpace(string(data)), "\n")
-		if len(lines) > 0 {
-			resourceName = strings.TrimSpace(lines[0])
-		} else {
-			log.Println("Could not extract resource name from last_resource.txt")
-			return fmt.Errorf("could not extract resource name from last_resource.txt")
-		}
-		if resourceName == "" {
-			log.Println("Resource name not found for stack overflow:", resourceName)
-			return fmt.Errorf("resource name not found for stack overflow: %s", resourceName)
-		}
-		new := isNew(resourceName, isNewMap)
-		err = suppress(ctx, resourceName, errorLine, client, new, buildType, changes, filePaths, currentSchemas)
-		fmt.Print("Suppression result: ", err)
-		return err
-	} else if strings.Contains(errorLine, "AWS_") {
-		// "../service/cloudformation/schemas/AWS_AccessAnalyzer_Analyzer.json: emitting schema code:"
-		errorLineParts := strings.Split(errorLine, " ")
-		for _, errorLinePart := range errorLineParts {
-			if strings.HasPrefix(errorLinePart, "../service/cloudformation/schemas/AWS_") && strings.HasSuffix(errorLinePart, ".json:") {
-				trimmed := strings.TrimPrefix(errorLinePart, "../service/cloudformation/schemas/")
-				resourceName = strings.TrimSuffix(trimmed, ".json:")
-				break
-			}
-		}
-		if resourceName == "" {
-			return fmt.Errorf("failed to extract resource name from error line: %s", errorLine)
-		}
-		new := isNew(resourceName, isNewMap)
-		return suppress(ctx, resourceName, errorLine, client, new, buildType, changes, filePaths, currentSchemas)
-	} else if strings.Contains(errorLine, "AWS::") {
-		// Deleted Resource
-		/* error loading CloudFormation Resource Provider Schema for aws_datasync_storage_system: describing CloudFormation type: operation error CloudFormation: DescribeType, https response error StatusCode: 404, RequestID: b41adbc2-cb4f-4e06-93c0-b6cb2bbae150, TypeNotFoundException: The type 'AWS::DataSync::StorageSystem' cannot be found. */
-		errorParts := strings.Split(errorLine, " ")
-		if len(errorParts) < 2 {
-			return fmt.Errorf("failed to parse 404 error line: %s", errorLine)
-		}
-		for _, part := range errorParts {
-			if strings.Contains(part, "AWS::") {
-				resourceName = part
-				resourceName = strings.ReplaceAll(resourceName, "::", "_")
-				// Trim from start until we find any letter
-				for len(resourceName) > 0 && !isLetter(resourceName[0]) {
-					resourceName = resourceName[1:]
-				}
-				// Trim from end until we find any letter
-				for len(resourceName) > 0 && !isLetter(resourceName[len(resourceName)-1]) {
-					resourceName = resourceName[:len(resourceName)-1]
-				}
-				break
-			}
-		}
-		if resourceName == "" {
-			return fmt.Errorf("failed to extract resource name from 404 error line: %s", errorLine)
-		}
-		new := isNew(resourceName, isNewMap)
-		return suppress(ctx, resourceName, errorLine, client, new, buildType, changes, filePaths, currentSchemas)
-	} else if strings.Contains(errorLine, "aws_") {
-		var resourceName string
-		/*
-			Example error: "error loading CloudFormation Resource Provider Schema for aws_nimblestudio_studio: describing CloudFormation type: operation error CloudFormation: DescribeType, exceeded maximum number of attempts, 3, https response error StatusCode: 400, ..."
-		*/
-		words := strings.Split(errorLine, " ")
-		for _, word := range words {
-			if strings.HasPrefix(word, "aws_") {
-				// Look for a matching file in internal/service/cloudformation/schemas
-				schemasDir := filePaths.CloudFormationSchemasDir
-				files, err := os.ReadDir(schemasDir)
-				if err != nil {
-					return fmt.Errorf("failed to read schemas directory: %w", err)
-				}
-				for _, file := range files {
-					if !file.IsDir() && strings.HasSuffix(file.Name(), ".json") {
-						resourceName = strings.TrimSuffix(file.Name(), ".json")
-					}
-				}
-				if resourceName == "" {
-					return fmt.Errorf("resource schema file not found for: %s", word)
-				}
-			}
-		}
-		if resourceName == "" {
-			return fmt.Errorf("failed to extract resource name from 400 error line: %s", errorLine)
-		}
-		new := isNew(resourceName, isNewMap)
-		return suppress(ctx, resourceName, errorLine, client, new, buildType, changes, filePaths, currentSchemas)
-	} else if strings.Contains(errorLine, "awscc_") {
-		// Example error: "error loading CloudFormation Resource Provider Schema for awscc_aws
-		words := strings.Split(errorLine, " ")
-		for _, word := range words {
-			if strings.HasPrefix(word, "awscc_") {
-				// Look for a matching file in internal/service/cloudformation/schemas
-				word = strings.ReplaceAll(word, "awscc_", "aws_")
-				t1, t2, t3, err := naming.ParseTerraformTypeName(word)
-				if err != nil {
-					return fmt.Errorf("failed to parse Terraform type name: %w", err)
-				}
-				resourceName = fmt.Sprintf("%s_%s_%s", t1, t2, t3)
-			}
-			fmt.Println("Word found in error line data source:", resourceName)
-		}
-		if resourceName == "" {
-			return fmt.Errorf("failed to extract resource name from 400 error line: %s", errorLine)
-		}
-		return suppress(ctx, resourceName, errorLine, client, true, buildType, changes, filePaths, currentSchemas)
 
+	fmt.Printf("Found an entry in the error log: %s during make %s \n", errorLine, buildType)
+
+	// Check for different error patterns and handle them
+	if strings.Contains(errorLine, "stack overflow") {
+		return handleStackOverflowError(ctx, errorLine, client, currentSchemas, buildType, changes, filePaths, isNewMap)
+	} else if strings.Contains(errorLine, "AWS_") {
+		return handleAWS_Error(ctx, errorLine, client, currentSchemas, buildType, changes, filePaths, isNewMap)
+	} else if strings.Contains(errorLine, "AWS::") {
+		return handleAWSColonError(ctx, errorLine, client, currentSchemas, buildType, changes, filePaths, isNewMap)
+	} else if strings.Contains(errorLine, "aws_") {
+		return handleAWS_UnderscoreError(ctx, errorLine, client, currentSchemas, buildType, changes, filePaths, isNewMap)
+	} else if strings.Contains(errorLine, "awscc_") {
+		return handleAWSCC_Error(ctx, errorLine, client, currentSchemas, buildType, changes, filePaths, isNewMap)
 	} else if strings.Contains(errorLine, "StatusCode: 403,") {
-		return fmt.Errorf("authentication failed: no valid AWS credentials")
+		return handleStatusCode403Error(ctx, errorLine, client, currentSchemas, buildType, changes, filePaths, isNewMap)
 	} else {
-		return fmt.Errorf("unhandled schema error: %s", errorLine)
+		return handleUnhandledError(ctx, errorLine, client, currentSchemas, buildType, changes, filePaths, isNewMap)
 	}
+}
+
+func handleStackOverflowError(ctx context.Context, errorLine string, client *github.Client, currentSchemas *allschemas.AllSchemas, buildType string, changes *[]string, filePaths *UpdateFilePaths, isNewMap map[string]bool) error {
+	log.Println("Detected stack overflow error, attempting to extract resource name from logs.")
+	// Try to extract resource name from stack overflow error using emit_attribute_last_tftype.txt
+	data, err := os.ReadFile(filePaths.LastResource)
+	if err != nil {
+		fmt.Printf("Failed to read %s: %v\n", filePaths.LastResource, err)
+		return fmt.Errorf("failed to read %s: %w", filePaths.LastResource, err)
+	}
+	lines := strings.Split(strings.TrimSpace(string(data)), "\n")
+	var resourceName string
+	if len(lines) > 0 {
+		resourceName = strings.TrimSpace(lines[0])
+	} else {
+		log.Println("Could not extract resource name from last_resource.txt")
+		return fmt.Errorf("could not extract resource name from last_resource.txt")
+	}
+	if resourceName == "" {
+		log.Println("Resource name not found for stack overflow:", resourceName)
+		return fmt.Errorf("resource name not found for stack overflow: %s", resourceName)
+	}
+	new := isNew(resourceName, isNewMap)
+	err = suppress(ctx, resourceName, errorLine, client, new, buildType, changes, filePaths, currentSchemas)
+	fmt.Print("Suppression result: ", err)
+	return err
+}
+
+func handleAWS_Error(ctx context.Context, errorLine string, client *github.Client, currentSchemas *allschemas.AllSchemas, buildType string, changes *[]string, filePaths *UpdateFilePaths, isNewMap map[string]bool) error {
+	// "../service/cloudformation/schemas/AWS_AccessAnalyzer_Analyzer.json: emitting schema code:"
+	errorLineParts := strings.Split(errorLine, " ")
+	var resourceName string
+	for _, errorLinePart := range errorLineParts {
+		if strings.HasPrefix(errorLinePart, "../service/cloudformation/schemas/AWS_") && strings.HasSuffix(errorLinePart, ".json:") {
+			trimmed := strings.TrimPrefix(errorLinePart, "../service/cloudformation/schemas/")
+			resourceName = strings.TrimSuffix(trimmed, ".json:")
+			break
+		}
+	}
+	if resourceName == "" {
+		return fmt.Errorf("failed to extract resource name from error line: %s", errorLine)
+	}
+	new := isNew(resourceName, isNewMap)
+	return suppress(ctx, resourceName, errorLine, client, new, buildType, changes, filePaths, currentSchemas)
+}
+
+func handleAWSColonError(ctx context.Context, errorLine string, client *github.Client, currentSchemas *allschemas.AllSchemas, buildType string, changes *[]string, filePaths *UpdateFilePaths, isNewMap map[string]bool) error {
+	// Deleted Resource
+	/* error loading CloudFormation Resource Provider Schema for aws_datasync_storage_system: describing CloudFormation type: operation error CloudFormation: DescribeType, https response error StatusCode: 404, RequestID: b41adbc2-cb4f-4e06-93c0-b6cb2bbae150, TypeNotFoundException: The type 'AWS::DataSync::StorageSystem' cannot be found. */
+	errorParts := strings.Split(errorLine, " ")
+	if len(errorParts) < 2 {
+		return fmt.Errorf("failed to parse 404 error line: %s", errorLine)
+	}
+	var resourceName string
+	for _, part := range errorParts {
+		if strings.Contains(part, "AWS::") {
+			resourceName = part
+			resourceName = strings.ReplaceAll(resourceName, "::", "_")
+			// Trim from start until we find any letter
+			for len(resourceName) > 0 && !isLetter(resourceName[0]) {
+				resourceName = resourceName[1:]
+			}
+			// Trim from end until we find any letter
+			for len(resourceName) > 0 && !isLetter(resourceName[len(resourceName)-1]) {
+				resourceName = resourceName[:len(resourceName)-1]
+			}
+			break
+		}
+	}
+	if resourceName == "" {
+		return fmt.Errorf("failed to extract resource name from 404 error line: %s", errorLine)
+	}
+	new := isNew(resourceName, isNewMap)
+	return suppress(ctx, resourceName, errorLine, client, new, buildType, changes, filePaths, currentSchemas)
+}
+
+func handleAWS_UnderscoreError(ctx context.Context, errorLine string, client *github.Client, currentSchemas *allschemas.AllSchemas, buildType string, changes *[]string, filePaths *UpdateFilePaths, isNewMap map[string]bool) error {
+	var resourceName string
+	/*
+		Example error: "error loading CloudFormation Resource Provider Schema for aws_nimblestudio_studio: describing CloudFormation type: operation error CloudFormation: DescribeType, exceeded maximum number of attempts, 3, https response error StatusCode: 400, ..."
+	*/
+	words := strings.Split(errorLine, " ")
+	for _, word := range words {
+		if strings.HasPrefix(word, "aws_") {
+			// Look for a matching file in internal/service/cloudformation/schemas
+			schemasDir := filePaths.CloudFormationSchemasDir
+			files, err := os.ReadDir(schemasDir)
+			if err != nil {
+				return fmt.Errorf("failed to read schemas directory: %w", err)
+			}
+			for _, file := range files {
+				if !file.IsDir() && strings.HasSuffix(file.Name(), ".json") {
+					resourceName = strings.TrimSuffix(file.Name(), ".json")
+				}
+			}
+			if resourceName == "" {
+				return fmt.Errorf("resource schema file not found for: %s", word)
+			}
+		}
+	}
+	if resourceName == "" {
+		return fmt.Errorf("failed to extract resource name from 400 error line: %s", errorLine)
+	}
+	new := isNew(resourceName, isNewMap)
+	return suppress(ctx, resourceName, errorLine, client, new, buildType, changes, filePaths, currentSchemas)
+}
+
+func handleAWSCC_Error(ctx context.Context, errorLine string, client *github.Client, currentSchemas *allschemas.AllSchemas, buildType string, changes *[]string, filePaths *UpdateFilePaths, isNewMap map[string]bool) error {
+	// Example error: "error loading CloudFormation Resource Provider Schema for awscc_aws
+	words := strings.Split(errorLine, " ")
+	var foundWord string
+
+	for _, word := range words {
+		if strings.HasPrefix(word, "awscc_") {
+			foundWord = word
+			break
+		}
+	}
+
+	if foundWord == "" {
+		return fmt.Errorf("failed to extract awscc_ prefixed word from error line: %s", errorLine)
+	}
+
+	var resourceName string
+	// Check if we're dealing with plural or singular data sources
+	if buildType == BuildTypePluralDataSources {
+		// For plural data sources
+		fmt.Println("Processing plural data source:", foundWord)
+		// Use getPluralResourceNames function
+		matchedResource, _, err := getPluralResourceNames(foundWord, isNewMap)
+		if err != nil {
+			return fmt.Errorf("failed to get plural resource name: %w", err)
+		}
+		t1, t2, t3, err := naming.ParseTerraformTypeName(matchedResource)
+		if err != nil {
+			return fmt.Errorf("failed to parse Terraform type name for singular data source: %w", err)
+		}
+		resourceName = fmt.Sprintf("%s_%s_%s", t1, t2, t3)
+	} else if buildType == BuildTypeSingularDataSources {
+		// For singular data sources - existing logic
+		word := strings.ReplaceAll(foundWord, "awscc_", "aws_")
+		t1, t2, t3, err := naming.ParseTerraformTypeName(word)
+		if err != nil {
+			return fmt.Errorf("failed to parse Terraform type name for singular data source: %w", err)
+		}
+		resourceName = fmt.Sprintf("%s_%s_%s", t1, t2, t3)
+	} else {
+		// For other build types
+		word := strings.ReplaceAll(foundWord, "awscc_", "aws_")
+		t1, t2, t3, err := naming.ParseTerraformTypeName(word)
+		if err != nil {
+			return fmt.Errorf("failed to parse Terraform type name: %w", err)
+		}
+		resourceName = fmt.Sprintf("%s_%s_%s", t1, t2, t3)
+	}
+
+	fmt.Println("Word found in error line data source:", resourceName)
+
+	if resourceName == "" {
+		return fmt.Errorf("failed to extract resource name from error line: %s", errorLine)
+	}
+	return suppress(ctx, resourceName, errorLine, client, true, buildType, changes, filePaths, currentSchemas)
+}
+
+func handleStatusCode403Error(_ context.Context, errorLine string, _ *github.Client, _ *allschemas.AllSchemas, _ string, _ *[]string, _ *UpdateFilePaths, _ map[string]bool) error {
+	return fmt.Errorf("authentication failed: no valid AWS credentials")
+}
+
+func handleUnhandledError(_ context.Context, errorLine string, _ *github.Client, _ *allschemas.AllSchemas, _ string, _ *[]string, _ *UpdateFilePaths, _ map[string]bool) error {
+	return fmt.Errorf("unhandled schema error: %s", errorLine)
 }
 
 func normalzieNames(cfTypeName string, tfTypeName string) (string, string) {
@@ -232,6 +300,7 @@ func normalzieNames(cfTypeName string, tfTypeName string) (string, string) {
 }
 
 func suppress(ctx context.Context, cfTypeName, schemaError string, _ *github.Client, new bool, buildType string, changes *[]string, filePaths *UpdateFilePaths, allSchemas *allschemas.AllSchemas) error {
+
 	log.Println("Suppressing resource:", cfTypeName)
 	// Create Issue - temporarily commented out to avoid GitHub API calls
 	// issueURL, err := createIssue(resource, schemaError, client)
@@ -419,6 +488,42 @@ func isNew(cloudFormationTypeName string, isNewMap map[string]bool) bool {
 	}
 
 	return true
+}
+
+func getPluralResourceNames(input string, isNewMap map[string]bool) (string, string, error) {
+	// awscc_dynamodb_tables
+	// awscc_s3_storage_lenses
+	// awscc_xray_resource_policies
+	// awscc_workspacesweb_network_settings_plural
+
+	// Trim awscc_ prefix and add aws_ prefix
+	if !strings.HasPrefix(input, "awscc_") {
+		return "", "", fmt.Errorf("input does not start with awscc_: %s", input)
+	}
+
+	// Remove awscc_ prefix and add aws_ prefix
+	modifiedInput := "aws_" + strings.TrimPrefix(input, "awscc_")
+
+	// Keep the original for return
+	originalModified := modifiedInput
+
+	// Gradually trim from right until we find a match in isNewMap
+	for len(modifiedInput) > 4 { // At minimum we need "aws_"
+		if _, exists := isNewMap[modifiedInput]; exists {
+			return modifiedInput, originalModified, nil
+		}
+
+		// Find the last underscore
+		lastUnderscoreIndex := strings.LastIndex(modifiedInput, "_")
+		if lastUnderscoreIndex <= 3 { // If no underscore or only in "aws_" part
+			break
+		}
+
+		// Trim everything after the last underscore
+		modifiedInput = modifiedInput[:lastUnderscoreIndex]
+	}
+
+	return "", "", fmt.Errorf("no match found for %s after trimming", input)
 }
 
 func createIssue(resource, schemaError string, client *github.Client) (string, error) {

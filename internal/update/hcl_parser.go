@@ -55,8 +55,8 @@ func diffSchemas(newSchemas *allschemas.AvailableSchemas, lastSchemas *allschema
 				newResource.SuppressPluralDataSourceGeneration != lastSchemas.Resources[lastResourceIndex].SuppressPluralDataSourceGeneration ||
 				newResource.ResourceTypeName != lastSchemas.Resources[lastResourceIndex].ResourceTypeName {
 				changedOrNewResources = append(changedOrNewResources, newResource)
+				*changes = append(*changes, fmt.Sprintf("%s - changed", newResource.CloudFormationTypeName))
 			}
-			*changes = append(*changes, fmt.Sprintf("%s - changed", newResource.CloudFormationTypeName))
 		} else {
 			// New resource
 			changedOrNewResources = append(changedOrNewResources, newResource)
@@ -162,7 +162,6 @@ func validateResourceType(ctx context.Context, resourceType string) (bool, error
 		return false, fmt.Errorf("failed to load AWS config: %w", err)
 	}
 	conn := cloudformation.NewFromConfig(cfg)
-
 	input := &cloudformation.DescribeTypeInput{
 		Type:     types.RegistryTypeResource,
 		TypeName: aws.String(resourceType),
