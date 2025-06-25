@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"sort"
 	"strings"
 
 	"github.com/google/go-github/v72/github"
@@ -217,7 +216,7 @@ func suppress(ctx context.Context, cfTypeName, schemaError string, _ *github.Cli
 	issueURL := ""
 	var err error
 	// Add to all_schemas.hcl
-	if buildType != BuildTypeSchemas {
+	if buildType != BuildTypeSchemas && !new {
 		tfTypeName, err := cfTypeNameToTerraformTypeName(cfTypeName)
 		if err != nil {
 			return fmt.Errorf("failed to convert CloudFormation type name to Terraform type name: %w", err)
@@ -225,13 +224,16 @@ func suppress(ctx context.Context, cfTypeName, schemaError string, _ *github.Cli
 		for i := range allSchemas.Resources {
 			if tfTypeName == allSchemas.Resources[i].CloudFormationTypeName {
 				switch buildType {
+				case BuildTypeSchemas:
+					allSchemas.Resources[i].SuppressResourceGeneration = true
+					log.Printf("Suppressing schema generation for %s", allSchemas.Resources[i].CloudFormationTypeName)
 				case BuildTypeResources:
 					allSchemas.Resources[i].SuppressResourceGeneration = true
 					log.Printf("Suppressing resource generation for %s", allSchemas.Resources[i].CloudFormationTypeName)
 				case BuildTypeSingularDataSources:
 					allSchemas.Resources[i].SuppressSingularDataSourceGeneration = true
 					log.Printf("Suppressing singular data source generation for %s", allSchemas.Resources[i].CloudFormationTypeName)
-				case "plural-data-source":
+				case BuildTypePluralDataSources:
 					allSchemas.Resources[i].SuppressPluralDataSourceGeneration = true
 					log.Printf("Suppressing plural data source generation for %s", allSchemas.Resources[i].CloudFormationTypeName)
 				default:
@@ -251,18 +253,21 @@ func suppress(ctx context.Context, cfTypeName, schemaError string, _ *github.Cli
 				return fmt.Errorf("failed to add resource to checkout file: %w", err)
 			}
 			return nil
-		} else { // This effectively deletes the resource from the provider
-			temp := &allschemas.ResourceAllSchema{
-				ResourceTypeName:           strings.ToLower(cfTypeName),
-				CloudFormationTypeName:     cfTypeName,
-				SuppressResourceGeneration: true,
-			}
-			allSchemas.Resources = append(allSchemas.Resources, *temp)
-			sort.Slice(allSchemas.Resources, func(i, j int) bool {
-				return allSchemas.Resources[i].ResourceTypeName < allSchemas.Resources[j].ResourceTypeName
-			})
-			fmt.Printf("Suppressing resource generation for %s in all_schemas.hcl\n", cfTypeName)
 		}
+		/*
+			else { // This effectively deletes the resource from the provider
+				temp := &allschemas.ResourceAllSchema{
+					ResourceTypeName:           strings.ToLower(cfTypeName),
+					CloudFormationTypeName:     cfTypeName,
+					SuppressResourceGeneration: true,
+				}
+				allSchemas.Resources = append(allSchemas.Resources, *temp)
+				sort.Slice(allSchemas.Resources, func(i, j int) bool {
+					return allSchemas.Resources[i].ResourceTypeName < allSchemas.Resources[j].ResourceTypeName
+				})
+				fmt.Printf("Suppressing resource generation for %s in all_schemas.hcl\n", cfTypeName)
+		*/
+
 	}
 
 	err = writeSchemasToHCLFile(allSchemas, filePaths.AllSchemasHCL)
