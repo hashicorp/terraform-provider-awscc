@@ -216,7 +216,7 @@ func suppress(ctx context.Context, cfTypeName, schemaError string, _ *github.Cli
 	issueURL := ""
 	var err error
 	// Add to all_schemas.hcl
-	if buildType != BuildTypeSchemas && !new {
+	if buildType != BuildTypeSchemas || new {
 		tfTypeName, err := cfTypeNameToTerraformTypeName(cfTypeName)
 		fmt.Println("Converting CloudFormation type name to Terraform type name:", cfTypeName, "->", tfTypeName)
 		if err != nil {
