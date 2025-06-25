@@ -212,8 +212,7 @@ func processErrorLine(ctx context.Context, errorLine string, client *github.Clie
 		if resourceName == "" {
 			return fmt.Errorf("failed to extract resource name from 400 error line: %s", errorLine)
 		}
-		new := isNew(resourceName, isNewMap)
-		return suppress(ctx, resourceName, errorLine, client, new, buildType, changes, filePaths, currentSchemas)
+		return suppress(ctx, resourceName, errorLine, client, true, buildType, changes, filePaths, currentSchemas)
 
 	} else if strings.Contains(errorLine, "StatusCode: 403,") {
 		return fmt.Errorf("authentication failed: no valid AWS credentials")
