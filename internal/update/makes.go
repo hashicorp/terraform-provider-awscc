@@ -194,6 +194,27 @@ func processErrorLine(ctx context.Context, errorLine string, client *github.Clie
 		}
 		new := isNew(resourceName, isNewMap)
 		return suppress(ctx, resourceName, errorLine, client, new, buildType, changes, filePaths, currentSchemas)
+	} else if strings.Contains(errorLine, "awscc_") {
+		// Example error: "error loading CloudFormation Resource Provider Schema for awscc_aws
+		words := strings.Split(errorLine, " ")
+		for _, word := range words {
+			if strings.HasPrefix(word, "awscc_") {
+				// Look for a matching file in internal/service/cloudformation/schemas
+				word = strings.ReplaceAll(word, "awscc_", "aws_")
+				t1, t2, t3, err := naming.ParseTerraformTypeName(word)
+				if err != nil {
+					return fmt.Errorf("failed to parse Terraform type name: %w", err)
+				}
+				resourceName = fmt.Sprintf("%s_%s_%s", t1, t2, t3)
+			}
+			fmt.Println("Word found in error line data source:", resourceName)
+		}
+		if resourceName == "" {
+			return fmt.Errorf("failed to extract resource name from 400 error line: %s", errorLine)
+		}
+		new := isNew(resourceName, isNewMap)
+		return suppress(ctx, resourceName, errorLine, client, new, buildType, changes, filePaths, currentSchemas)
+
 	} else if strings.Contains(errorLine, "StatusCode: 403,") {
 		return fmt.Errorf("authentication failed: no valid AWS credentials")
 	} else {
