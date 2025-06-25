@@ -218,11 +218,12 @@ func suppress(ctx context.Context, cfTypeName, schemaError string, _ *github.Cli
 	// Add to all_schemas.hcl
 	if buildType != BuildTypeSchemas && !new {
 		tfTypeName, err := cfTypeNameToTerraformTypeName(cfTypeName)
+		fmt.Println("Converting CloudFormation type name to Terraform type name:", cfTypeName, "->", tfTypeName)
 		if err != nil {
 			return fmt.Errorf("failed to convert CloudFormation type name to Terraform type name: %w", err)
 		}
 		for i := range allSchemas.Resources {
-			if tfTypeName == allSchemas.Resources[i].CloudFormationTypeName {
+			if tfTypeName == allSchemas.Resources[i].ResourceTypeName {
 				switch buildType {
 				case BuildTypeSchemas:
 					allSchemas.Resources[i].SuppressResourceGeneration = true
