@@ -220,6 +220,17 @@ func processErrorLine(ctx context.Context, errorLine string, client *github.Clie
 		return fmt.Errorf("unhandled schema error: %s", errorLine)
 	}
 }
+
+func normalzieNames(cfTypeName string, tfTypeName string) (string, string) {
+	// Remove all ':' and '_' and concatenate the parts, then lowercase
+	normalize := func(s string) string {
+		s = strings.ReplaceAll(s, ":", "")
+		s = strings.ReplaceAll(s, "_", "")
+		return strings.ToLower(s)
+	}
+	return normalize(cfTypeName), normalize(tfTypeName)
+}
+
 func suppress(ctx context.Context, cfTypeName, schemaError string, _ *github.Client, new bool, buildType string, changes *[]string, filePaths *UpdateFilePaths, allSchemas *allschemas.AllSchemas) error {
 	log.Println("Suppressing resource:", cfTypeName)
 	// Create Issue - temporarily commented out to avoid GitHub API calls
@@ -246,8 +257,11 @@ func suppress(ctx context.Context, cfTypeName, schemaError string, _ *github.Cli
 		if err != nil {
 			return fmt.Errorf("failed to convert CloudFormation type name to Terraform type name: %w", err)
 		}
+		cfTypeName, tfTypeName := normalzieNames(cfTypeName, tfTypeName)
 		for i := range allSchemas.Resources {
-			if tfTypeName == allSchemas.Resources[i].ResourceTypeName {
+			resourceCfTypeName, resourceTypeName := normalzieNames(allSchemas.Resources[i].CloudFormationTypeName, allSchemas.Resources[i].ResourceTypeName)
+
+			if tfTypeName == resourceTypeName || cfTypeName == resourceCfTypeName {
 				switch buildType {
 				case BuildTypeSchemas:
 					allSchemas.Resources[i].SuppressResourceGeneration = true
