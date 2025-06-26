@@ -9,6 +9,7 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
@@ -857,6 +858,11 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	    {
 		//	      "required": [
 		//	        "WorkDocsConfiguration"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "TemplateConfiguration"
 		//	      ]
 		//	    }
 		//	  ],
@@ -2280,6 +2286,18 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "Urls",
 		//	        "SecretArn",
 		//	        "SharePointVersion"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "TemplateConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Template": {
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Template"
 		//	      ],
 		//	      "type": "object"
 		//	    },
@@ -4870,6 +4888,28 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: TemplateConfiguration
+				"template_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Template
+						"template": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType: jsontypes.NormalizedType{},
+							Optional:   true,
+							Computed:   true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: WebCrawlerConfiguration
 				"web_crawler_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -5491,7 +5531,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	    "CONFLUENCE",
 		//	    "GOOGLEDRIVE",
 		//	    "WEBCRAWLER",
-		//	    "WORKDOCS"
+		//	    "WORKDOCS",
+		//	    "TEMPLATE"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -5511,6 +5552,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 					"GOOGLEDRIVE",
 					"WEBCRAWLER",
 					"WORKDOCS",
+					"TEMPLATE",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -5665,6 +5707,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"target_document_attribute_key":                 "TargetDocumentAttributeKey",
 		"target_document_attribute_value":               "TargetDocumentAttributeValue",
 		"target_document_attribute_value_deletion":      "TargetDocumentAttributeValueDeletion",
+		"template":                                      "Template",
+		"template_configuration":                        "TemplateConfiguration",
 		"tenant_domain":                                 "TenantDomain",
 		"type":                                          "Type",
 		"url_exclusion_patterns":                        "UrlExclusionPatterns",

@@ -54,7 +54,9 @@
   "primaryIdentifier": [
     "/properties/ResourceId"
   ],
-  "taggable": false,
+  "tagging": {
+    "taggable": false
+  },
   "additionalProperties": false,
   "propertyTransform": {
     "/properties/AutodefinedReverseFlag": "$join([AutodefinedReverseFlag, \"D\"])"

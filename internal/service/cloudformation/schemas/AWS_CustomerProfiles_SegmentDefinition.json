@@ -373,6 +373,9 @@
         },
         "Attributes": {
           "$ref": "#/definitions/CustomAttributes"
+        },
+        "ProfileType": {
+          "$ref": "#/definitions/ProfileTypeDimension"
         }
       },
       "additionalProperties": false
@@ -394,6 +397,29 @@
           "insertionOrder": false,
           "minItems": 1,
           "maxItems": 50
+        }
+      },
+      "required": [
+        "DimensionType",
+        "Values"
+      ],
+      "additionalProperties": false
+    },
+    "ProfileTypeDimension": {
+      "description": "Specifies profile type based criteria for a segment.",
+      "type": "object",
+      "properties": {
+        "DimensionType": {
+          "$ref": "#/definitions/ProfileTypeDimensionType"
+        },
+        "Values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProfileType"
+          },
+          "insertionOrder": false,
+          "minItems": 1,
+          "maxItems": 1
         }
       },
       "required": [
@@ -439,6 +465,22 @@
         "CONTAINS",
         "BEGINS_WITH",
         "ENDS_WITH"
+      ]
+    },
+    "ProfileTypeDimensionType": {
+      "description": "The type of segment dimension to use for a profile type dimension.",
+      "type": "string",
+      "enum": [
+        "INCLUSIVE",
+        "EXCLUSIVE"
+      ]
+    },
+    "ProfileType": {
+      "description": "The type of profile.",
+      "type": "string",
+      "enum": [
+        "ACCOUNT_PROFILE",
+        "PROFILE"
       ]
     }
   },

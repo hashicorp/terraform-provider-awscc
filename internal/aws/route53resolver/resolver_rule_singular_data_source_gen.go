@@ -33,6 +33,19 @@ func resolverRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 			Description: "The Amazon Resource Name (ARN) of the resolver rule.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: DelegationRecord
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name server domain for queries to be delegated to if a query matches the delegation record.",
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"delegation_record": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name server domain for queries to be delegated to if a query matches the delegation record.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainName
 		// CloudFormation resource type schema:
 		//
@@ -243,6 +256,7 @@ func resolverRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                    "Arn",
+		"delegation_record":      "DelegationRecord",
 		"domain_name":            "DomainName",
 		"ip":                     "Ip",
 		"ipv_6":                  "Ipv6",

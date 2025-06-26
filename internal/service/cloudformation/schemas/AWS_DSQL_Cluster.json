@@ -78,6 +78,29 @@
           "insertionOrder": false
         }
       }
+    },
+    "KmsEncryptionKey": {
+      "description": "The KMS key that encrypts data on the cluster.",
+      "type": "string"
+    },
+    "EncryptionDetails": {
+      "description": "The encryption configuration details for the cluster.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "EncryptionStatus": {
+          "description": "The status of encryption for the cluster.",
+          "type": "string"
+        },
+        "EncryptionType": {
+          "description": "The type of encryption that protects data in the cluster.",
+          "type": "string"
+        },
+        "KmsKeyArn": {
+          "description": "The Amazon Resource Name (ARN) of the KMS key that encrypts data in the cluster.",
+          "type": "string"
+        }
+      }
     }
   },
   "additionalProperties": false,
@@ -102,12 +125,17 @@
     "/properties/Identifier",
     "/properties/CreationTime",
     "/properties/Status",
-    "/properties/VpcEndpointServiceName"
+    "/properties/VpcEndpointServiceName",
+    "/properties/EncryptionDetails"
+  ],
+  "writeOnlyProperties": [
+    "/properties/KmsEncryptionKey"
   ],
   "handlers": {
     "create": {
       "permissions": [
         "dsql:CreateCluster",
+        "dsql:UpdateCluster",
         "dsql:GetCluster",
         "dsql:TagResource",
         "dsql:GetVpcEndpointServiceName",
@@ -115,7 +143,11 @@
         "iam:CreateServiceLinkedRole",
         "dsql:PutMultiRegionProperties",
         "dsql:AddPeerCluster",
-        "dsql:PutWitnessRegion"
+        "dsql:PutWitnessRegion",
+        "kms:Decrypt",
+        "kms:Encrypt",
+        "kms:GenerateDataKey",
+        "kms:DescribeKey"
       ]
     },
     "read": {
@@ -138,7 +170,11 @@
         "dsql:PutMultiRegionProperties",
         "dsql:PutWitnessRegion",
         "dsql:AddPeerCluster",
-        "dsql:RemovePeerCluster"
+        "dsql:RemovePeerCluster",
+        "kms:Decrypt",
+        "kms:Encrypt",
+        "kms:GenerateDataKey",
+        "kms:DescribeKey"
       ]
     },
     "delete": {

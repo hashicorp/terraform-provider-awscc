@@ -445,6 +445,31 @@ func transformerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "AdvancedOptions": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "X12": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "SplitOptions": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "SplitBy": {
+		//	                  "enum": [
+		//	                    "NONE",
+		//	                    "TRANSACTION"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "FormatOptions": {
 		//	      "properties": {
 		//	        "X12": {
@@ -828,6 +853,28 @@ func transformerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"input_conversion": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AdvancedOptions
+				"advanced_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: X12
+						"x12": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: SplitOptions
+								"split_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: SplitBy
+										"split_by": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: FormatOptions
 				"format_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1515,6 +1562,7 @@ func transformerDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::B2BI::Transformer").WithTerraformTypeName("awscc_b2bi_transformer")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"advanced_options":  "AdvancedOptions",
 		"bucket_name":       "BucketName",
 		"created_at":        "CreatedAt",
 		"edi_type":          "EdiType",
@@ -1533,6 +1581,8 @@ func transformerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"output_conversion": "OutputConversion",
 		"sample_document":   "SampleDocument",
 		"sample_documents":  "SampleDocuments",
+		"split_by":          "SplitBy",
+		"split_options":     "SplitOptions",
 		"status":            "Status",
 		"tags":              "Tags",
 		"template":          "Template",

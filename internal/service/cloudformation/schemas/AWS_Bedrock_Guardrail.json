@@ -165,6 +165,23 @@
         "HIGH"
       ]
     },
+    "GuardrailCrossRegionConfig": {
+      "type": "object",
+      "description": "The system-defined guardrail profile that you?re using with your guardrail",
+      "properties": {
+        "GuardrailProfileArn": {
+          "type": "string",
+          "maxLength": 2048,
+          "minLength": 15,
+          "pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:guardrail-profile/[a-z0-9-]+[.]{1}guardrail[.]{1}v[0-9:]+$",
+          "description": "The Amazon Resource Name (ARN) of the guardrail profile"
+        }
+      },
+      "required": [
+        "GuardrailProfileArn"
+      ],
+      "additionalProperties": false
+    },
     "GuardrailStatus": {
       "type": "string",
       "description": "Status of the guardrail",
@@ -540,6 +557,9 @@
       "type": "string",
       "description": "Time Stamp",
       "format": "date-time"
+    },
+    "CrossRegionConfig": {
+      "$ref": "#/definitions/GuardrailCrossRegionConfig"
     },
     "Description": {
       "type": "string",

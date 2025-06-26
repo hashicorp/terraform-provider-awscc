@@ -1,0 +1,669 @@
+{
+  "typeName": "AWS::WorkspacesInstances::WorkspaceInstance",
+  "description": "Resource Type definition for AWS::WorkspacesInstances::WorkspaceInstance",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-schema.git",
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "additionalProperties": false
+    },
+    "BlockDeviceMapping": {
+      "type": "object",
+      "properties": {
+        "DeviceName": {
+          "type": "string",
+          "maxLength": 32
+        },
+        "Ebs": {
+          "$ref": "#/definitions/EbsBlockDevice"
+        },
+        "NoDevice": {
+          "type": "string",
+          "maxLength": 32
+        },
+        "VirtualName": {
+          "type": "string",
+          "pattern": "^ephemeral(0|[1-9][0-9]{0,2})$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "EbsBlockDevice": {
+      "type": "object",
+      "properties": {
+        "VolumeType": {
+          "type": "string",
+          "enum": [
+            "standard",
+            "io1",
+            "io2",
+            "gp2",
+            "sc1",
+            "st1",
+            "gp3"
+          ]
+        },
+        "Encrypted": {
+          "type": "boolean"
+        },
+        "KmsKeyId": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "Iops": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "Throughput": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "VolumeSize": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "CapacityReservationSpecification": {
+      "type": "object",
+      "properties": {
+        "CapacityReservationPreference": {
+          "type": "string",
+          "enum": [
+            "capacity-reservations-only",
+            "open",
+            "none"
+          ]
+        },
+        "CapacityReservationTarget": {
+          "$ref": "#/definitions/CapacityReservationTarget"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CapacityReservationTarget": {
+      "type": "object",
+      "properties": {
+        "CapacityReservationId": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "CapacityReservationResourceGroupArn": {
+          "type": "string",
+          "pattern": "^arn:.*"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CpuOptionsRequest": {
+      "type": "object",
+      "properties": {
+        "CoreCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "ThreadsPerCore": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "CreditSpecificationRequest": {
+      "type": "object",
+      "properties": {
+        "CpuCredits": {
+          "type": "string",
+          "enum": [
+            "standard",
+            "unlimited"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "EnclaveOptionsRequest": {
+      "type": "object",
+      "properties": {
+        "Enabled": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "HibernationOptionsRequest": {
+      "type": "object",
+      "properties": {
+        "Configured": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "IamInstanceProfileSpecification": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "maxLength": 64
+        }
+      },
+      "additionalProperties": false
+    },
+    "InstanceMarketOptionsRequest": {
+      "type": "object",
+      "properties": {
+        "MarketType": {
+          "type": "string",
+          "enum": [
+            "spot",
+            "capacity-block"
+          ]
+        },
+        "SpotOptions": {
+          "$ref": "#/definitions/SpotMarketOptions"
+        }
+      },
+      "additionalProperties": false
+    },
+    "SpotMarketOptions": {
+      "type": "object",
+      "properties": {
+        "BlockDurationMinutes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "InstanceInterruptionBehavior": {
+          "type": "string",
+          "enum": [
+            "hibernate",
+            "stop"
+          ]
+        },
+        "MaxPrice": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "SpotInstanceType": {
+          "type": "string",
+          "enum": [
+            "one-time",
+            "persistent"
+          ]
+        },
+        "ValidUntilUtc": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ConnectionTrackingSpecificationRequest": {
+      "type": "object",
+      "properties": {
+        "TcpEstablishedTimeout": {
+          "type": "integer"
+        },
+        "UdpStreamTimeout": {
+          "type": "integer"
+        },
+        "UdpTimeout": {
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false
+    },
+    "EnaSrdSpecificationRequest": {
+      "type": "object",
+      "properties": {
+        "EnaSrdEnabled": {
+          "type": "boolean"
+        },
+        "EnaSrdUdpSpecification": {
+          "$ref": "#/definitions/EnaSrdUdpSpecificationRequest"
+        }
+      },
+      "additionalProperties": false
+    },
+    "EnaSrdUdpSpecificationRequest": {
+      "type": "object",
+      "properties": {
+        "EnaSrdUdpEnabled": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "InstanceIpv6Address": {
+      "type": "object",
+      "properties": {
+        "Ipv6Address": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "IsPrimaryIpv6": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Ipv4PrefixSpecificationRequest": {
+      "type": "object",
+      "properties": {
+        "Ipv4Prefix": {
+          "type": "string",
+          "maxLength": 128
+        }
+      },
+      "additionalProperties": false
+    },
+    "Ipv6PrefixSpecificationRequest": {
+      "type": "object",
+      "properties": {
+        "Ipv6Prefix": {
+          "type": "string",
+          "maxLength": 128
+        }
+      },
+      "additionalProperties": false
+    },
+    "PrivateIpAddressSpecification": {
+      "type": "object",
+      "properties": {
+        "PrivateIpAddress": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "Primary": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "LicenseConfigurationRequest": {
+      "type": "object",
+      "properties": {
+        "LicenseConfigurationArn": {
+          "type": "string",
+          "pattern": "^arn:.*"
+        }
+      },
+      "additionalProperties": false
+    },
+    "InstanceMaintenanceOptionsRequest": {
+      "type": "object",
+      "properties": {
+        "AutoRecovery": {
+          "type": "string",
+          "enum": [
+            "disabled",
+            "default"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "InstanceMetadataOptionsRequest": {
+      "type": "object",
+      "properties": {
+        "HttpEndpoint": {
+          "type": "string",
+          "enum": [
+            "enabled",
+            "disabled"
+          ]
+        },
+        "HttpProtocolIpv6": {
+          "type": "string",
+          "enum": [
+            "enabled",
+            "disabled"
+          ]
+        },
+        "HttpPutResponseHopLimit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 64
+        },
+        "HttpTokens": {
+          "type": "string",
+          "enum": [
+            "optional",
+            "required"
+          ]
+        },
+        "InstanceMetadataTags": {
+          "type": "string",
+          "enum": [
+            "enabled",
+            "disabled"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "RunInstancesMonitoringEnabled": {
+      "type": "object",
+      "properties": {
+        "Enabled": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "InstanceNetworkInterfaceSpecification": {
+      "type": "object",
+      "properties": {
+        "Description": {
+          "type": "string",
+          "maxLength": 1000,
+          "pattern": "^[\\S\\s]*$"
+        },
+        "DeviceIndex": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "Groups": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^sg-[0-9a-zA-Z]{1,63}$"
+          }
+        },
+        "SubnetId": {
+          "type": "string",
+          "pattern": "^subnet-[0-9a-zA-Z]{1,63}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "InstanceNetworkPerformanceOptionsRequest": {
+      "type": "object",
+      "properties": {
+        "BandwidthWeighting": {
+          "type": "string",
+          "enum": [
+            "default",
+            "vpc-1",
+            "ebs-1"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "Placement": {
+      "type": "object",
+      "properties": {
+        "AvailabilityZone": {
+          "type": "string",
+          "pattern": "^[a-z]{2}-[a-z]+-\\d[a-z](-[a-z0-9]+)?$"
+        },
+        "GroupName": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "Tenancy": {
+          "type": "string",
+          "enum": [
+            "default",
+            "dedicated",
+            "host"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "PrivateDnsNameOptionsRequest": {
+      "type": "object",
+      "properties": {
+        "HostnameType": {
+          "type": "string",
+          "enum": [
+            "ip-name",
+            "resource-name"
+          ]
+        },
+        "EnableResourceNameDnsARecord": {
+          "type": "boolean"
+        },
+        "EnableResourceNameDnsAAAARecord": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "EC2ManagedInstance": {
+      "type": "object",
+      "properties": {
+        "InstanceId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "TagSpecification": {
+      "type": "object",
+      "properties": {
+        "ResourceType": {
+          "type": "string",
+          "enum": [
+            "instance",
+            "volume",
+            "spot-instances-request",
+            "network-interface"
+          ]
+        },
+        "Tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "maxItems": 30
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "ManagedInstance": {
+      "type": "object",
+      "properties": {
+        "BlockDeviceMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BlockDeviceMapping"
+          }
+        },
+        "CpuOptions": {
+          "$ref": "#/definitions/CpuOptionsRequest"
+        },
+        "CreditSpecification": {
+          "$ref": "#/definitions/CreditSpecificationRequest"
+        },
+        "DisableApiStop": {
+          "type": "boolean"
+        },
+        "EbsOptimized": {
+          "type": "boolean"
+        },
+        "EnclaveOptions": {
+          "$ref": "#/definitions/EnclaveOptionsRequest"
+        },
+        "HibernationOptions": {
+          "$ref": "#/definitions/HibernationOptionsRequest"
+        },
+        "IamInstanceProfile": {
+          "$ref": "#/definitions/IamInstanceProfileSpecification"
+        },
+        "ImageId": {
+          "type": "string",
+          "pattern": "^ami-[0-9a-zA-Z]{1,63}$"
+        },
+        "InstanceType": {
+          "type": "string",
+          "pattern": "^([a-z0-9-]+)\\.([a-z0-9]+)$"
+        },
+        "KeyName": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "MaintenanceOptions": {
+          "$ref": "#/definitions/InstanceMaintenanceOptionsRequest"
+        },
+        "MetadataOptions": {
+          "$ref": "#/definitions/InstanceMetadataOptionsRequest"
+        },
+        "Monitoring": {
+          "$ref": "#/definitions/RunInstancesMonitoringEnabled"
+        },
+        "NetworkInterfaces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InstanceNetworkInterfaceSpecification"
+          }
+        },
+        "NetworkPerformanceOptions": {
+          "$ref": "#/definitions/InstanceNetworkPerformanceOptionsRequest"
+        },
+        "Placement": {
+          "$ref": "#/definitions/Placement"
+        },
+        "PrivateDnsNameOptions": {
+          "$ref": "#/definitions/PrivateDnsNameOptionsRequest"
+        },
+        "TagSpecifications": {
+          "type": "array",
+          "maxItems": 30,
+          "items": {
+            "$ref": "#/definitions/TagSpecification"
+          }
+        },
+        "UserData": {
+          "type": "string",
+          "maxLength": 16000
+        }
+      },
+      "required": [
+        "ImageId",
+        "InstanceType"
+      ],
+      "additionalProperties": false
+    },
+    "Tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 30
+    },
+    "WorkspaceInstanceId": {
+      "type": "string",
+      "description": "Unique identifier for the workspace instance",
+      "pattern": "^wsinst-[0-9a-zA-Z]{8,63}$"
+    },
+    "ProvisionState": {
+      "type": "string",
+      "description": "The current state of the workspace instance",
+      "enum": [
+        "ALLOCATING",
+        "ALLOCATED",
+        "DEALLOCATING",
+        "DEALLOCATED",
+        "ERROR_ALLOCATING",
+        "ERROR_DEALLOCATING"
+      ]
+    },
+    "EC2ManagedInstance": {
+      "$ref": "#/definitions/EC2ManagedInstance"
+    }
+  },
+  "required": [],
+  "readOnlyProperties": [
+    "/properties/WorkspaceInstanceId",
+    "/properties/ProvisionState",
+    "/properties/EC2ManagedInstance",
+    "/properties/EC2ManagedInstance/InstanceId"
+  ],
+  "writeOnlyProperties": [
+    "/properties/ManagedInstance"
+  ],
+  "createOnlyProperties": [
+    "/properties/ManagedInstance"
+  ],
+  "conditionalCreateOnlyProperties": [
+    "/properties/Tags"
+  ],
+  "primaryIdentifier": [
+    "/properties/WorkspaceInstanceId"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "workspaces-instances:CreateWorkspaceInstance",
+        "workspaces-instances:GetWorkspaceInstance",
+        "workspaces-instances:TagResource",
+        "ec2:RunInstances",
+        "ec2:DescribeInstances",
+        "ec2:DescribeInstanceStatus",
+        "ec2:CreateTags",
+        "iam:PassRole"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "workspaces-instances:GetWorkspaceInstance",
+        "workspaces-instances:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "workspaces-instances:TagResource",
+        "workspaces-instances:UntagResource",
+        "workspaces-instances:ListTagsForResource",
+        "workspaces-instances:GetWorkspaceInstance"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "workspaces-instances:DeleteWorkspaceInstance",
+        "workspaces-instances:GetWorkspaceInstance",
+        "ec2:TerminateInstances",
+        "ec2:DescribeInstances",
+        "ec2:DescribeInstanceStatus"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "workspaces-instances:ListWorkspaceInstances"
+      ]
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "workspaces-instances:TagResource",
+      "workspaces-instances:UntagResource",
+      "workspaces-instances:ListTagsForResource"
+    ]
+  },
+  "additionalProperties": false
+}

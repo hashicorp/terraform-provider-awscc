@@ -531,7 +531,6 @@
   ],
   "writeOnlyProperties": [
     "/properties/DeploymentConfiguration",
-    "/properties/GameServerContainerGroupsPerInstance",
     "/properties/GameServerContainerGroupDefinitionName",
     "/properties/PerInstanceContainerGroupDefinitionName"
   ],

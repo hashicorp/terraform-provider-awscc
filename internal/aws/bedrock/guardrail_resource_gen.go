@@ -488,6 +488,50 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: CrossRegionConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The system-defined guardrail profile that you?re using with your guardrail",
+		//	  "properties": {
+		//	    "GuardrailProfileArn": {
+		//	      "description": "The Amazon Resource Name (ARN) of the guardrail profile",
+		//	      "maxLength": 2048,
+		//	      "minLength": 15,
+		//	      "pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:guardrail-profile/[a-z0-9-]+[.]{1}guardrail[.]{1}v[0-9:]+$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "GuardrailProfileArn"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"cross_region_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: GuardrailProfileArn
+				"guardrail_profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) of the guardrail profile",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(15, 2048),
+						stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:guardrail-profile/[a-z0-9-]+[.]{1}guardrail[.]{1}v[0-9:]+$"), ""),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The system-defined guardrail profile that you?re using with your guardrail",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -1658,6 +1702,7 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 		"content_policy_config":               "ContentPolicyConfig",
 		"contextual_grounding_policy_config":  "ContextualGroundingPolicyConfig",
 		"created_at":                          "CreatedAt",
+		"cross_region_config":                 "CrossRegionConfig",
 		"definition":                          "Definition",
 		"description":                         "Description",
 		"enabled":                             "Enabled",
@@ -1666,6 +1711,7 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 		"filters_config":                      "FiltersConfig",
 		"guardrail_arn":                       "GuardrailArn",
 		"guardrail_id":                        "GuardrailId",
+		"guardrail_profile_arn":               "GuardrailProfileArn",
 		"input_action":                        "InputAction",
 		"input_enabled":                       "InputEnabled",
 		"input_modalities":                    "InputModalities",

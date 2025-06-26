@@ -20,6 +20,11 @@
         "path": "./examples/resources/awscc_acmpca_permission/import.sh"
     },
     {
+        "resource": "awscc_aiops_investigation_group",
+        "identifier": ["Arn"],
+        "path": "./examples/resources/awscc_aiops_investigation_group/import.sh"
+    },
+    {
         "resource": "awscc_aps_rule_groups_namespace",
         "identifier": ["Arn"],
         "path": "./examples/resources/awscc_aps_rule_groups_namespace/import.sh"
@@ -2465,6 +2470,11 @@
         "path": "./examples/resources/awscc_fsx_data_repository_association/import.sh"
     },
     {
+        "resource": "awscc_fsx_s3_access_point_attachment",
+        "identifier": ["Name"],
+        "path": "./examples/resources/awscc_fsx_s3_access_point_attachment/import.sh"
+    },
+    {
         "resource": "awscc_finspace_environment",
         "identifier": ["EnvironmentId"],
         "path": "./examples/resources/awscc_finspace_environment/import.sh"
@@ -4905,6 +4915,11 @@
         "path": "./examples/resources/awscc_s3outposts_endpoint/import.sh"
     },
     {
+        "resource": "awscc_s3tables_namespace",
+        "identifier": ["TableBucketARN","Namespace"],
+        "path": "./examples/resources/awscc_s3tables_namespace/import.sh"
+    },
+    {
         "resource": "awscc_s3tables_table_bucket",
         "identifier": ["TableBucketARN"],
         "path": "./examples/resources/awscc_s3tables_table_bucket/import.sh"
@@ -5703,6 +5718,21 @@
         "resource": "awscc_workspaces_workspaces_pool",
         "identifier": ["PoolId"],
         "path": "./examples/resources/awscc_workspaces_workspaces_pool/import.sh"
+    },
+    {
+        "resource": "awscc_workspacesinstances_volume",
+        "identifier": ["VolumeId"],
+        "path": "./examples/resources/awscc_workspacesinstances_volume/import.sh"
+    },
+    {
+        "resource": "awscc_workspacesinstances_volume_association",
+        "identifier": ["WorkspaceInstanceId","VolumeId","Device"],
+        "path": "./examples/resources/awscc_workspacesinstances_volume_association/import.sh"
+    },
+    {
+        "resource": "awscc_workspacesinstances_workspace_instance",
+        "identifier": ["WorkspaceInstanceId"],
+        "path": "./examples/resources/awscc_workspacesinstances_workspace_instance/import.sh"
     },
     {
         "resource": "awscc_workspacesthinclient_environment",

@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1181 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1187 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -29,6 +29,10 @@ resource_schema "aws_acmpca_certificate_authority_activation" {
 resource_schema "aws_acmpca_permission" {
   cloudformation_type_name               = "AWS::ACMPCA::Permission"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_aiops_investigation_group" {
+  cloudformation_type_name = "AWS::AIOps::InvestigationGroup"
 }
 
 resource_schema "aws_aps_rule_groups_namespace" {
@@ -2344,6 +2348,10 @@ resource_schema "aws_fsx_data_repository_association" {
   cloudformation_type_name = "AWS::FSx::DataRepositoryAssociation"
 }
 
+resource_schema "aws_fsx_s3_access_point_attachment" {
+  cloudformation_type_name = "AWS::FSx::S3AccessPointAttachment"
+}
+
 resource_schema "aws_finspace_environment" {
   cloudformation_type_name = "AWS::FinSpace::Environment"
 }
@@ -4539,6 +4547,11 @@ resource_schema "aws_s3outposts_endpoint" {
   cloudformation_type_name = "AWS::S3Outposts::Endpoint"
 }
 
+resource_schema "aws_s3tables_namespace" {
+  cloudformation_type_name               = "AWS::S3Tables::Namespace"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_s3tables_table_bucket" {
   cloudformation_type_name = "AWS::S3Tables::TableBucket"
 }
@@ -5293,6 +5306,18 @@ resource_schema "aws_workspaces_connection_alias" {
 
 resource_schema "aws_workspaces_workspaces_pool" {
   cloudformation_type_name = "AWS::WorkSpaces::WorkspacesPool"
+}
+
+resource_schema "aws_workspacesinstances_volume" {
+  cloudformation_type_name = "AWS::WorkspacesInstances::Volume"
+}
+
+resource_schema "aws_workspacesinstances_volume_association" {
+  cloudformation_type_name = "AWS::WorkspacesInstances::VolumeAssociation"
+}
+
+resource_schema "aws_workspacesinstances_workspace_instance" {
+  cloudformation_type_name = "AWS::WorkspacesInstances::WorkspaceInstance"
 }
 
 resource_schema "aws_workspacesthinclient_environment" {

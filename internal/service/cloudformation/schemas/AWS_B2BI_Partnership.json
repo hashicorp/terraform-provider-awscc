@@ -7,9 +7,29 @@
       "properties": {
         "OutboundEdi": {
           "$ref": "#/definitions/OutboundEdiOptions"
+        },
+        "InboundEdi": {
+          "$ref": "#/definitions/InboundEdiOptions"
         }
       },
       "additionalProperties": false
+    },
+    "InboundEdiOptions": {
+      "type": "object",
+      "properties": {
+        "X12": {
+          "$ref": "#/definitions/X12InboundEdiOptions"
+        }
+      },
+      "additionalProperties": false
+    },
+    "LineTerminator": {
+      "type": "string",
+      "enum": [
+        "CRLF",
+        "LF",
+        "CR"
+      ]
     },
     "OutboundEdiOptions": {
       "oneOf": [
@@ -48,6 +68,67 @@
       ],
       "additionalProperties": false
     },
+    "WrapFormat": {
+      "type": "string",
+      "enum": [
+        "SEGMENT",
+        "ONE_LINE",
+        "LINE_LENGTH"
+      ]
+    },
+    "WrapOptions": {
+      "type": "object",
+      "properties": {
+        "WrapBy": {
+          "$ref": "#/definitions/WrapFormat"
+        },
+        "LineTerminator": {
+          "$ref": "#/definitions/LineTerminator"
+        },
+        "LineLength": {
+          "type": "number",
+          "minimum": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "X12AcknowledgmentOptions": {
+      "type": "object",
+      "properties": {
+        "FunctionalAcknowledgment": {
+          "$ref": "#/definitions/X12FunctionalAcknowledgment"
+        },
+        "TechnicalAcknowledgment": {
+          "$ref": "#/definitions/X12TechnicalAcknowledgment"
+        }
+      },
+      "required": [
+        "FunctionalAcknowledgment",
+        "TechnicalAcknowledgment"
+      ],
+      "additionalProperties": false
+    },
+    "X12ControlNumbers": {
+      "type": "object",
+      "properties": {
+        "StartingInterchangeControlNumber": {
+          "type": "number",
+          "maximum": 999999999,
+          "minimum": 1
+        },
+        "StartingFunctionalGroupControlNumber": {
+          "type": "number",
+          "maximum": 999999999,
+          "minimum": 1
+        },
+        "StartingTransactionSetControlNumber": {
+          "type": "number",
+          "maximum": 999999999,
+          "minimum": 1
+        }
+      },
+      "additionalProperties": false
+    },
     "X12Delimiters": {
       "type": "object",
       "properties": {
@@ -77,9 +158,20 @@
       "properties": {
         "Common": {
           "$ref": "#/definitions/X12OutboundEdiHeaders"
+        },
+        "WrapOptions": {
+          "$ref": "#/definitions/WrapOptions"
         }
       },
       "additionalProperties": false
+    },
+    "X12FunctionalAcknowledgment": {
+      "type": "string",
+      "enum": [
+        "DO_NOT_GENERATE",
+        "GENERATE_ALL_SEGMENTS",
+        "GENERATE_WITHOUT_TRANSACTION_SET_RESPONSE_LOOP"
+      ]
     },
     "X12FunctionalGroupHeaders": {
       "type": "object",
@@ -101,6 +193,23 @@
           "maxLength": 2,
           "minLength": 1,
           "pattern": "^[a-zA-Z0-9]*$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "X12GS05TimeFormat": {
+      "type": "string",
+      "enum": [
+        "HHMM",
+        "HHMMSS",
+        "HHMMSSDD"
+      ]
+    },
+    "X12InboundEdiOptions": {
+      "type": "object",
+      "properties": {
+        "AcknowledgmentOptions": {
+          "$ref": "#/definitions/X12AcknowledgmentOptions"
         }
       },
       "additionalProperties": false
@@ -166,9 +275,22 @@
         },
         "ValidateEdi": {
           "type": "boolean"
+        },
+        "ControlNumbers": {
+          "$ref": "#/definitions/X12ControlNumbers"
+        },
+        "Gs05TimeFormat": {
+          "$ref": "#/definitions/X12GS05TimeFormat"
         }
       },
       "additionalProperties": false
+    },
+    "X12TechnicalAcknowledgment": {
+      "type": "string",
+      "enum": [
+        "DO_NOT_GENERATE",
+        "GENERATE_ALL_SEGMENTS"
+      ]
     }
   },
   "properties": {

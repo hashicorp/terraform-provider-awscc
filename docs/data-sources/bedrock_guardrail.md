@@ -26,6 +26,7 @@ Data Source schema for AWS::Bedrock::Guardrail
 - `content_policy_config` (Attributes) Content policy config for a guardrail. (see [below for nested schema](#nestedatt--content_policy_config))
 - `contextual_grounding_policy_config` (Attributes) Contextual grounding policy config for a guardrail. (see [below for nested schema](#nestedatt--contextual_grounding_policy_config))
 - `created_at` (String) Time Stamp
+- `cross_region_config` (Attributes) The system-defined guardrail profile that you?re using with your guardrail (see [below for nested schema](#nestedatt--cross_region_config))
 - `description` (String) Description of the guardrail or its version
 - `failure_recommendations` (List of String) List of failure recommendations
 - `guardrail_arn` (String) Arn representation for the guardrail
@@ -82,6 +83,14 @@ Read-Only:
 - `threshold` (Number) The threshold for this filter.
 - `type` (String) Type of contextual grounding filter
 
+
+
+<a id="nestedatt--cross_region_config"></a>
+### Nested Schema for `cross_region_config`
+
+Read-Only:
+
+- `guardrail_profile_arn` (String) The Amazon Resource Name (ARN) of the guardrail profile
 
 
 <a id="nestedatt--sensitive_information_policy_config"></a>

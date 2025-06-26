@@ -124,6 +124,13 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 		//	                "type": "array",
 		//	                "uniqueItems": false
 		//	              },
+		//	              "UserdataType": {
+		//	                "enum": [
+		//	                  "EKS_BOOTSTRAP_SH",
+		//	                  "EKS_NODEADM"
+		//	                ],
+		//	                "type": "string"
+		//	              },
 		//	              "Version": {
 		//	                "type": "string"
 		//	              }
@@ -132,6 +139,13 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 		//	          },
 		//	          "type": "array",
 		//	          "uniqueItems": false
+		//	        },
+		//	        "UserdataType": {
+		//	          "enum": [
+		//	            "EKS_BOOTSTRAP_SH",
+		//	            "EKS_NODEADM"
+		//	          ],
+		//	          "type": "string"
 		//	        },
 		//	        "Version": {
 		//	          "type": "string"
@@ -271,12 +285,20 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 										ElementType: types.StringType,
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
+									// Property: UserdataType
+									"userdata_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
 									// Property: Version
 									"version": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Computed: true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: UserdataType
+						"userdata_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
 						// Property: Version
@@ -524,6 +546,7 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 		"unmanagedv_cpus":                "UnmanagedvCpus",
 		"update_policy":                  "UpdatePolicy",
 		"update_to_latest_image_version": "UpdateToLatestImageVersion",
+		"userdata_type":                  "UserdataType",
 		"version":                        "Version",
 	})
 

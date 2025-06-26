@@ -634,12 +634,23 @@
       },
       "additionalProperties": false
     },
+    "InstanceLimitsHandling": {
+      "type": "string",
+      "description": "Enumeration of Instance Limits handling in a Campaign",
+      "enum": [
+        "OPT_IN",
+        "OPT_OUT"
+      ]
+    },
     "CommunicationLimitsConfig": {
       "type": "object",
       "description": "Communication limits config",
       "properties": {
         "AllChannelsSubtypes": {
           "$ref": "#/definitions/CommunicationLimits"
+        },
+        "InstanceLimitsHandling": {
+          "$ref": "#/definitions/InstanceLimitsHandling"
         }
       },
       "additionalProperties": false

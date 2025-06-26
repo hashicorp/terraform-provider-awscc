@@ -177,8 +177,7 @@ func trustAnchorResource(ctx context.Context) (resource.Resource, error) {
 		//	    "SourceType": {
 		//	      "enum": [
 		//	        "AWS_ACM_PCA",
-		//	        "CERTIFICATE_BUNDLE",
-		//	        "SELF_SIGNED_REPOSITORY"
+		//	        "CERTIFICATE_BUNDLE"
 		//	      ],
 		//	      "type": "string"
 		//	    }
@@ -220,7 +219,6 @@ func trustAnchorResource(ctx context.Context) (resource.Resource, error) {
 						stringvalidator.OneOf(
 							"AWS_ACM_PCA",
 							"CERTIFICATE_BUNDLE",
-							"SELF_SIGNED_REPOSITORY",
 						),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/

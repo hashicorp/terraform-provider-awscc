@@ -162,6 +162,7 @@ Optional:
 Optional:
 
 - `all_channels_subtypes` (Attributes) Communication limits (see [below for nested schema](#nestedatt--communication_limits_override--all_channels_subtypes))
+- `instance_limits_handling` (String) Enumeration of Instance Limits handling in a Campaign
 
 <a id="nestedatt--communication_limits_override--all_channels_subtypes"></a>
 ### Nested Schema for `communication_limits_override.all_channels_subtypes`

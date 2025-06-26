@@ -1,5 +1,4 @@
 {
-  "sourceUrl": "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html",
   "tagging": {
     "permissions": [
       "ecs:TagResource",
@@ -12,6 +11,37 @@
     "tagProperty": "/properties/Tags",
     "cloudFormationSystemTags": true
   },
+  "deprecatedProperties": [
+    "/properties/InferenceAccelerators"
+  ],
+  "typeName": "AWS::ECS::TaskDefinition",
+  "readOnlyProperties": [
+    "/properties/TaskDefinitionArn"
+  ],
+  "description": "Registers a new task definition from the supplied ``family`` and ``containerDefinitions``. Optionally, you can add data volumes to your containers with the ``volumes`` parameter. For more information about task definition parameters and defaults, see [Amazon ECS Task Definitions](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html) in the *Amazon Elastic Container Service Developer Guide*.\n You can specify a role for your task with the ``taskRoleArn`` parameter. When you specify a role for a task, its containers can then use the latest versions of the CLI or SDKs to make API requests to the AWS services that are specified in the policy that's associated with the role. For more information, see [IAM Roles for Tasks](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html) in the *Amazon Elastic Container Service Developer Guide*.\n You can specify a Docker networking mode for the containers in your task definition with the ``networkMode`` parameter. If you specify the ``awsvpc`` network mode, the task is allocated an elastic network interface, and you must specify a [NetworkConfiguration](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_NetworkConfiguration.html) when you create a service or run a task with the task definition. For more information, see [Task Networking](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html) in the *Amazon Elastic Container Service Developer Guide*.\n  In the following example or examples, the Authorization header contents (``AUTHPARAMS``) must be replaced with an AWS Signature Version 4 signature. For more information, see [Signature Version 4 Signing Process](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html) in the *General Reference*.\n You only need to learn how to sign HTTP requests if you intend to create them manually. When you use the [](https://docs.aws.amazon.com/cli/) or one of the [SDKs](https://docs.aws.amazon.com/tools/) to make requests to AWS, these tools automatically sign the requests for you, with the access key that you specify when you configure the tools. When you use these tools, you don't have to sign requests yourself.",
+  "createOnlyProperties": [
+    "/properties/Family",
+    "/properties/ContainerDefinitions",
+    "/properties/Cpu",
+    "/properties/EnableFaultInjection",
+    "/properties/ExecutionRoleArn",
+    "/properties/InferenceAccelerators",
+    "/properties/Memory",
+    "/properties/NetworkMode",
+    "/properties/PlacementConstraints",
+    "/properties/ProxyConfiguration",
+    "/properties/RequiresCompatibilities",
+    "/properties/RuntimePlatform",
+    "/properties/TaskRoleArn",
+    "/properties/Volumes",
+    "/properties/PidMode",
+    "/properties/IpcMode",
+    "/properties/EphemeralStorage"
+  ],
+  "primaryIdentifier": [
+    "/properties/TaskDefinitionArn"
+  ],
+  "sourceUrl": "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html",
   "propertyTransform": {
     "/properties/ExecutionRoleArn": "ExecutionRoleArn $OR $join([\"arn:(aws)[-]{0,1}[a-z]{0,2}[-]{0,1}[a-z]{0,3}:iam::[0-9]{12}[:]role/\", ExecutionRoleArn])",
     "/properties/TaskRoleArn": "TaskRoleArn $OR $split(TaskRoleArn, \"role/\")[-1] $OR $join([\"arn:(aws)[-]{0,1}[a-z]{0,2}[-]{0,1}[a-z]{0,3}:iam::[0-9]{12}[:]role/\", TaskRoleArn])"
@@ -56,34 +86,7 @@
       ]
     }
   },
-  "typeName": "AWS::ECS::TaskDefinition",
-  "readOnlyProperties": [
-    "/properties/TaskDefinitionArn"
-  ],
-  "description": "Registers a new task definition from the supplied ``family`` and ``containerDefinitions``. Optionally, you can add data volumes to your containers with the ``volumes`` parameter. For more information about task definition parameters and defaults, see [Amazon ECS Task Definitions](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html) in the *Amazon Elastic Container Service Developer Guide*.\n You can specify a role for your task with the ``taskRoleArn`` parameter. When you specify a role for a task, its containers can then use the latest versions of the CLI or SDKs to make API requests to the AWS services that are specified in the policy that's associated with the role. For more information, see [IAM Roles for Tasks](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html) in the *Amazon Elastic Container Service Developer Guide*.\n You can specify a Docker networking mode for the containers in your task definition with the ``networkMode`` parameter. If you specify the ``awsvpc`` network mode, the task is allocated an elastic network interface, and you must specify a [NetworkConfiguration](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_NetworkConfiguration.html) when you create a service or run a task with the task definition. For more information, see [Task Networking](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html) in the *Amazon Elastic Container Service Developer Guide*.\n  In the following example or examples, the Authorization header contents (``AUTHPARAMS``) must be replaced with an AWS Signature Version 4 signature. For more information, see [Signature Version 4 Signing Process](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html) in the *General Reference*.\n You only need to learn how to sign HTTP requests if you intend to create them manually. When you use the [](https://docs.aws.amazon.com/cli/) or one of the [SDKs](https://docs.aws.amazon.com/tools/) to make requests to AWS, these tools automatically sign the requests for you, with the access key that you specify when you configure the tools. When you use these tools, you don't have to sign requests yourself.",
-  "createOnlyProperties": [
-    "/properties/Family",
-    "/properties/ContainerDefinitions",
-    "/properties/Cpu",
-    "/properties/EnableFaultInjection",
-    "/properties/ExecutionRoleArn",
-    "/properties/InferenceAccelerators",
-    "/properties/Memory",
-    "/properties/NetworkMode",
-    "/properties/PlacementConstraints",
-    "/properties/ProxyConfiguration",
-    "/properties/RequiresCompatibilities",
-    "/properties/RuntimePlatform",
-    "/properties/TaskRoleArn",
-    "/properties/Volumes",
-    "/properties/PidMode",
-    "/properties/IpcMode",
-    "/properties/EphemeralStorage"
-  ],
   "additionalProperties": false,
-  "primaryIdentifier": [
-    "/properties/TaskDefinitionArn"
-  ],
   "definitions": {
     "VolumeFrom": {
       "description": "Details on a data volume from another container in the same task definition.",
@@ -232,7 +235,7 @@
           "type": "boolean"
         },
         "Image": {
-          "description": "The image used to start a container. This string is passed directly to the Docker daemon. By default, images in the Docker Hub registry are available. Other repositories are specified with either ``repository-url/image:tag`` or ``repository-url/image@digest``. Up to 255 letters (uppercase and lowercase), numbers, hyphens, underscores, colons, periods, forward slashes, and number signs are allowed. This parameter maps to ``Image`` in the docker container create command and the ``IMAGE`` parameter of docker run.\n  +  When a new task starts, the Amazon ECS container agent pulls the latest version of the specified image and tag for the container to use. However, subsequent updates to a repository image aren't propagated to already running tasks.\n  +  Images in Amazon ECR repositories can be specified by either using the full ``registry/repository:tag`` or ``registry/repository@digest``. For example, ``012345678910.dkr.ecr.<region-name>.amazonaws.com/<repository-name>:latest`` or ``012345678910.dkr.ecr.<region-name>.amazonaws.com/<repository-name>@sha256:94afd1f2e64d908bc90dbca0035a5b567EXAMPLE``. \n  +  Images in official repositories on Docker Hub use a single name (for example, ``ubuntu`` or ``mongo``).\n  +  Images in other repositories on Docker Hub are qualified with an organization name (for example, ``amazon/amazon-ecs-agent``).\n  +  Images in other online repositories are qualified further by a domain name (for example, ``quay.io/assemblyline/ubuntu``).",
+          "description": "The image used to start a container. This string is passed directly to the Docker daemon. By default, images in the Docker Hub registry are available. Other repositories are specified with either ``repository-url/image:tag`` or ``repository-url/image@digest``. For images using tags (repository-url/image:tag), up to 255 characters total are allowed, including letters (uppercase and lowercase), numbers, hyphens, underscores, colons, periods, forward slashes, and number signs (#). For images using digests (repository-url/image@digest), the 255 character limit applies only to the repository URL and image name (everything before the @ sign). The only supported hash function is sha256, and the hash value after sha256: must be exactly 64 characters (only letters A-F, a-f, and numbers 0-9 are allowed). This parameter maps to ``Image`` in the docker container create command and the ``IMAGE`` parameter of docker run.\n  +  When a new task starts, the Amazon ECS container agent pulls the latest version of the specified image and tag for the container to use. However, subsequent updates to a repository image aren't propagated to already running tasks.\n  +  Images in Amazon ECR repositories can be specified by either using the full ``registry/repository:tag`` or ``registry/repository@digest``. For example, ``012345678910.dkr.ecr.<region-name>.amazonaws.com/<repository-name>:latest`` or ``012345678910.dkr.ecr.<region-name>.amazonaws.com/<repository-name>@sha256:94afd1f2e64d908bc90dbca0035a5b567EXAMPLE``. \n  +  Images in official repositories on Docker Hub use a single name (for example, ``ubuntu`` or ``mongo``).\n  +  Images in other repositories on Docker Hub are qualified with an organization name (for example, ``amazon/amazon-ecs-agent``).\n  +  Images in other online repositories are qualified further by a domain name (for example, ``quay.io/assemblyline/ubuntu``).",
           "type": "string"
         },
         "Essential": {
@@ -374,7 +377,7 @@
           }
         },
         "DependsOn": {
-          "description": "The dependencies defined for container startup and shutdown. A container can contain multiple dependencies. When a dependency is defined for container startup, for container shutdown it is reversed.\n For tasks using the EC2 launch type, the container instances require at least version 1.26.0 of the container agent to turn on container dependencies. However, we recommend using the latest container agent version. For information about checking your agent version and updating to the latest version, see [Updating the Amazon ECS Container Agent](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html) in the *Amazon Elastic Container Service Developer Guide*. If you're using an Amazon ECS-optimized Linux AMI, your instance needs at least version 1.26.0-1 of the ``ecs-init`` package. If your container instances are launched from version ``20190301`` or later, then they contain the required versions of the container agent and ``ecs-init``. For more information, see [Amazon ECS-optimized Linux AMI](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html) in the *Amazon Elastic Container Service Developer Guide*.\n For tasks using the Fargate launch type, the task or service requires the following platforms:\n  +  Linux platform version ``1.3.0`` or later.\n  +  Windows platform version ``1.0.0`` or later.\n  \n If the task definition is used in a blue/green deployment that uses [AWS::CodeDeploy::DeploymentGroup BlueGreenDeploymentConfiguration](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-bluegreendeploymentconfiguration.html), the ``dependsOn`` parameter is not supported. For more information see [Issue #680](https://docs.aws.amazon.com/https://github.com/aws-cloudformation/cloudformation-coverage-roadmap/issues/680) on the on the GitHub website.",
+          "description": "The dependencies defined for container startup and shutdown. A container can contain multiple dependencies. When a dependency is defined for container startup, for container shutdown it is reversed.\n For tasks using the EC2 launch type, the container instances require at least version 1.26.0 of the container agent to turn on container dependencies. However, we recommend using the latest container agent version. For information about checking your agent version and updating to the latest version, see [Updating the Amazon ECS Container Agent](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html) in the *Amazon Elastic Container Service Developer Guide*. If you're using an Amazon ECS-optimized Linux AMI, your instance needs at least version 1.26.0-1 of the ``ecs-init`` package. If your container instances are launched from version ``20190301`` or later, then they contain the required versions of the container agent and ``ecs-init``. For more information, see [Amazon ECS-optimized Linux AMI](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html) in the *Amazon Elastic Container Service Developer Guide*.\n For tasks using the Fargate launch type, the task or service requires the following platforms:\n  +  Linux platform version ``1.3.0`` or later.\n  +  Windows platform version ``1.0.0`` or later.\n  \n If the task definition is used in a blue/green deployment that uses [AWS::CodeDeploy::DeploymentGroup BlueGreenDeploymentConfiguration](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-bluegreendeploymentconfiguration.html), the ``dependsOn`` parameter is not supported.",
           "insertionOrder": false,
           "type": "array",
           "items": {

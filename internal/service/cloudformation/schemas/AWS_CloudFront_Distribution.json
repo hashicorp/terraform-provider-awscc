@@ -716,6 +716,10 @@
           "type": "integer",
           "description": "The number of seconds that CloudFront waits when trying to establish a connection to the origin. The minimum timeout is 1 second, the maximum is 10 seconds, and the default (if you don't specify otherwise) is 10 seconds.\n For more information, see [Origin Connection Timeout](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#origin-connection-timeout) in the *Amazon CloudFront Developer Guide*."
         },
+        "ResponseCompletionTimeout": {
+          "type": "integer",
+          "description": ""
+        },
         "CustomOriginConfig": {
           "$ref": "#/definitions/CustomOriginConfig",
           "description": "Use this type to specify an origin that is not an Amazon S3 bucket, with one exception. If the Amazon S3 bucket is configured with static website hosting, use this type. If the Amazon S3 bucket is not configured with static website hosting, use the ``S3OriginConfig`` type instead."
@@ -968,6 +972,11 @@
           "default": "",
           "type": "string",
           "description": "If you're using origin access control (OAC) instead of origin access identity, specify an empty ``OriginAccessIdentity`` element. For more information, see [Restricting access to an](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-origin.html) in the *Amazon CloudFront Developer Guide*.\n  The CloudFront origin access identity to associate with the origin. Use an origin access identity to configure the origin so that viewers can *only* access objects in an Amazon S3 bucket through CloudFront. The format of the value is:\n  ``origin-access-identity/cloudfront/ID-of-origin-access-identity`` \n The ``ID-of-origin-access-identity`` is the value that CloudFront returned in the ``ID`` element when you created the origin access identity.\n If you want viewers to be able to access objects using either the CloudFront URL or the Amazon S3 URL, specify an empty ``OriginAccessIdentity`` element.\n To delete the origin access identity from an existing distribution, update the distribution configuration and include an empty ``OriginAccessIdentity`` element.\n To replace the origin access identity, update the distribution configuration and specify the new origin access identity.\n For more information about the origin access identity, see [Serving Private Content through CloudFront](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html) in the *Amazon CloudFront Developer Guide*."
+        },
+        "OriginReadTimeout": {
+          "default": 30,
+          "type": "integer",
+          "description": ""
         }
       },
       "type": "object",

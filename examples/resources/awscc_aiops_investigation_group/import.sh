@@ -1,0 +1,1 @@
+$ terraform import awscc_aiops_investigation_group.example "arn"

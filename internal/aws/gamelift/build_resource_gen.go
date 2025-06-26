@@ -121,7 +121,6 @@ func buildResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
-			// ServerSdkVersion is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: StorageLocation
 		// CloudFormation resource type schema:
@@ -340,7 +339,6 @@ func buildResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/StorageLocation",
-		"/properties/ServerSdkVersion",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
