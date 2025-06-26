@@ -123,8 +123,7 @@
     "/properties/ServerSdkVersion"
   ],
   "writeOnlyProperties": [
-    "/properties/StorageLocation",
-    "/properties/ServerSdkVersion"
+    "/properties/StorageLocation"
   ],
   "readOnlyProperties": [
     "/properties/BuildId",
@@ -139,7 +138,8 @@
         "gamelift:DescribeBuild",
         "gamelift:CreateBuild",
         "gamelift:ListTagsForResource",
-        "gamelift:TagResource"
+        "gamelift:TagResource",
+        "iam:PassRole"
       ]
     },
     "read": {

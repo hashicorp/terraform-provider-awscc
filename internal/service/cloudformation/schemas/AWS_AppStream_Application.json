@@ -133,9 +133,14 @@
   "tagging": {
     "taggable": true,
     "tagOnCreate": true,
-    "tagUpdatable": false,
+    "tagUpdatable": true,
     "cloudFormationSystemTags": false,
-    "tagProperty": "/properties/Tags"
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "appstream:TagResource",
+      "appstream:ListTagsForResource",
+      "appstream:UntagResource"
+    ]
   },
   "required": [
     "Name",
@@ -155,7 +160,6 @@
     "/properties/CreatedTime"
   ],
   "writeOnlyProperties": [
-    "/properties/Tags",
     "/properties/AttributesToDelete"
   ],
   "deprecatedProperties": [
@@ -175,18 +179,23 @@
     },
     "read": {
       "permissions": [
-        "appstream:DescribeApplications"
+        "appstream:DescribeApplications",
+        "appstream:ListTagsForResource"
       ]
     },
     "update": {
       "permissions": [
         "appstream:UpdateApplication",
+        "appstream:DescribeApplications",
+        "appstream:TagResource",
+        "appstream:UntagResource",
         "s3:GetObject"
       ]
     },
     "delete": {
       "permissions": [
-        "appstream:DeleteApplication"
+        "appstream:DeleteApplication",
+        "appstream:DescribeApplications"
       ]
     }
   }

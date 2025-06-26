@@ -135,7 +135,6 @@
     "/properties/CreatedTime"
   ],
   "writeOnlyProperties": [
-    "/properties/Tags",
     "/properties/AppBlockArns"
   ],
   "primaryIdentifier": [
@@ -146,7 +145,12 @@
     "tagOnCreate": true,
     "tagUpdatable": true,
     "cloudFormationSystemTags": false,
-    "tagProperty": "/properties/Tags"
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "appstream:ListTagsForResource",
+      "appstream:TagResource",
+      "appstream:UntagResource"
+    ]
   },
   "handlers": {
     "create": {
@@ -157,12 +161,14 @@
         "appstream:AssociateAppBlockBuilderAppBlock",
         "appstream:DescribeAppBlockBuilderAppBlockAssociations",
         "appstream:TagResource",
+        "appstream:ListTagsForResource",
         "iam:PassRole"
       ]
     },
     "read": {
       "permissions": [
-        "appstream:DescribeAppBlockBuilders"
+        "appstream:DescribeAppBlockBuilders",
+        "appstream:ListTagsForResource"
       ]
     },
     "update": {

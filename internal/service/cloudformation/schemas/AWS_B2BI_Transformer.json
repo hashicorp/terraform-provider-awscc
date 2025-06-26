@@ -2,6 +2,15 @@
   "typeName": "AWS::B2BI::Transformer",
   "description": "Definition of AWS::B2BI::Transformer Resource Type",
   "definitions": {
+    "AdvancedOptions": {
+      "type": "object",
+      "properties": {
+        "X12": {
+          "$ref": "#/definitions/X12AdvancedOptions"
+        }
+      },
+      "additionalProperties": false
+    },
     "EdiType": {
       "oneOf": [
         {
@@ -58,6 +67,9 @@
         },
         "FormatOptions": {
           "$ref": "#/definitions/FormatOptions"
+        },
+        "AdvancedOptions": {
+          "$ref": "#/definitions/AdvancedOptions"
         }
       },
       "required": [
@@ -174,6 +186,15 @@
         "inactive"
       ]
     },
+    "X12AdvancedOptions": {
+      "type": "object",
+      "properties": {
+        "SplitOptions": {
+          "$ref": "#/definitions/X12SplitOptions"
+        }
+      },
+      "additionalProperties": false
+    },
     "X12Details": {
       "type": "object",
       "properties": {
@@ -182,6 +203,22 @@
         },
         "Version": {
           "$ref": "#/definitions/X12Version"
+        }
+      },
+      "additionalProperties": false
+    },
+    "X12SplitBy": {
+      "type": "string",
+      "enum": [
+        "NONE",
+        "TRANSACTION"
+      ]
+    },
+    "X12SplitOptions": {
+      "type": "object",
+      "properties": {
+        "SplitBy": {
+          "$ref": "#/definitions/X12SplitBy"
         }
       },
       "additionalProperties": false
