@@ -528,6 +528,14 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        }
 		//	      },
 		//	      "type": "object"
+		//	    },
+		//	    "InstanceLimitsHandling": {
+		//	      "description": "Enumeration of Instance Limits handling in a Campaign",
+		//	      "enum": [
+		//	        "OPT_IN",
+		//	        "OPT_OUT"
+		//	      ],
+		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -561,6 +569,11 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Communication limits",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: InstanceLimitsHandling
+				"instance_limits_handling": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Enumeration of Instance Limits handling in a Campaign",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -1464,6 +1477,7 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"end_time":                          "EndTime",
 		"event_trigger":                     "EventTrigger",
 		"frequency":                         "Frequency",
+		"instance_limits_handling":          "InstanceLimitsHandling",
 		"key":                               "Key",
 		"local_time_zone_config":            "LocalTimeZoneConfig",
 		"local_time_zone_detection":         "LocalTimeZoneDetection",

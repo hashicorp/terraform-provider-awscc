@@ -123,9 +123,19 @@ func vpcAttachmentDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	      "description": "Indicates whether to enable ApplianceModeSupport Support for Vpc Attachment. Valid Values: true | false",
 		//	      "type": "boolean"
 		//	    },
+		//	    "DnsSupport": {
+		//	      "default": true,
+		//	      "description": "Indicates whether to enable private DNS Support for Vpc Attachment. Valid Values: true | false",
+		//	      "type": "boolean"
+		//	    },
 		//	    "Ipv6Support": {
 		//	      "default": false,
 		//	      "description": "Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable",
+		//	      "type": "boolean"
+		//	    },
+		//	    "SecurityGroupReferencingSupport": {
+		//	      "default": true,
+		//	      "description": "Indicates whether to enable Security Group Referencing Support for Vpc Attachment. Valid Values: true | false",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -138,9 +148,19 @@ func vpcAttachmentDataSource(ctx context.Context) (datasource.DataSource, error)
 					Description: "Indicates whether to enable ApplianceModeSupport Support for Vpc Attachment. Valid Values: true | false",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: DnsSupport
+				"dns_support": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether to enable private DNS Support for Vpc Attachment. Valid Values: true | false",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: Ipv6Support
 				"ipv_6_support": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecurityGroupReferencingSupport
+				"security_group_referencing_support": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether to enable Security Group Referencing Support for Vpc Attachment. Valid Values: true | false",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -455,6 +475,7 @@ func vpcAttachmentDataSource(ctx context.Context) (datasource.DataSource, error)
 		"core_network_arn":                       "CoreNetworkArn",
 		"core_network_id":                        "CoreNetworkId",
 		"created_at":                             "CreatedAt",
+		"dns_support":                            "DnsSupport",
 		"edge_location":                          "EdgeLocation",
 		"ipv_6_support":                          "Ipv6Support",
 		"key":                                    "Key",
@@ -464,6 +485,7 @@ func vpcAttachmentDataSource(ctx context.Context) (datasource.DataSource, error)
 		"proposed_network_function_group_change": "ProposedNetworkFunctionGroupChange",
 		"proposed_segment_change":                "ProposedSegmentChange",
 		"resource_arn":                           "ResourceArn",
+		"security_group_referencing_support":     "SecurityGroupReferencingSupport",
 		"segment_name":                           "SegmentName",
 		"state":                                  "State",
 		"subnet_arns":                            "SubnetArns",
