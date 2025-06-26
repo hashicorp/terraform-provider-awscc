@@ -119,7 +119,8 @@ resource "awscc_route53resolver_resolver_endpoint" "example" {
 
 - `direction` (String) Indicates whether the Resolver endpoint allows inbound or outbound DNS queries:
 - INBOUND: allows DNS queries to your VPC from your network 
-- OUTBOUND: allows DNS queries from your VPC to your network
+- OUTBOUND: allows DNS queries from your VPC to your network 
+- INBOUND_DELEGATION: allows DNS queries to your VPC from your network with authoritative answers from private hosted zones
 - `ip_addresses` (Attributes List) The subnets and IP addresses in your VPC that DNS queries originate from (for outbound endpoints) or that you forward DNS queries to (for inbound endpoints). The subnet ID uniquely identifies a VPC. (see [below for nested schema](#nestedatt--ip_addresses))
 - `security_group_ids` (List of String) The ID of one or more security groups that control access to this VPC. The security group must include one or more inbound rules (for inbound endpoints) or outbound rules (for outbound endpoints). Inbound and outbound rules must allow TCP and UDP access. For inbound access, open port 53. For outbound access, open the port that you're using for DNS queries on your network.
 

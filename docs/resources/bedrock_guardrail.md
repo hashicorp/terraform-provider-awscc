@@ -229,6 +229,7 @@ variable "kms_key_arn" {
 
 - `content_policy_config` (Attributes) Content policy config for a guardrail. (see [below for nested schema](#nestedatt--content_policy_config))
 - `contextual_grounding_policy_config` (Attributes) Contextual grounding policy config for a guardrail. (see [below for nested schema](#nestedatt--contextual_grounding_policy_config))
+- `cross_region_config` (Attributes) The system-defined guardrail profile that you?re using with your guardrail (see [below for nested schema](#nestedatt--cross_region_config))
 - `description` (String) Description of the guardrail or its version
 - `kms_key_arn` (String) The KMS key with which the guardrail was encrypted at rest
 - `sensitive_information_policy_config` (Attributes) Sensitive information policy config for a guardrail. (see [below for nested schema](#nestedatt--sensitive_information_policy_config))
@@ -289,6 +290,14 @@ Optional:
 - `threshold` (Number) The threshold for this filter.
 - `type` (String) Type of contextual grounding filter
 
+
+
+<a id="nestedatt--cross_region_config"></a>
+### Nested Schema for `cross_region_config`
+
+Optional:
+
+- `guardrail_profile_arn` (String) The Amazon Resource Name (ARN) of the guardrail profile
 
 
 <a id="nestedatt--sensitive_information_policy_config"></a>

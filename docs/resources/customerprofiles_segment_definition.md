@@ -166,6 +166,7 @@ Optional:
 - `party_type_string` (Attributes) Specifies profile based criteria for a segment. (see [below for nested schema](#nestedatt--segment_groups--groups--dimensions--profile_attributes--party_type_string))
 - `personal_email_address` (Attributes) Specifies profile based criteria for a segment. (see [below for nested schema](#nestedatt--segment_groups--groups--dimensions--profile_attributes--personal_email_address))
 - `phone_number` (Attributes) Specifies profile based criteria for a segment. (see [below for nested schema](#nestedatt--segment_groups--groups--dimensions--profile_attributes--phone_number))
+- `profile_type` (Attributes) Specifies profile type based criteria for a segment. (see [below for nested schema](#nestedatt--segment_groups--groups--dimensions--profile_attributes--profile_type))
 - `shipping_address` (Attributes) The address based criteria for the segment. (see [below for nested schema](#nestedatt--segment_groups--groups--dimensions--profile_attributes--shipping_address))
 
 <a id="nestedatt--segment_groups--groups--dimensions--profile_attributes--account_number"></a>
@@ -519,6 +520,15 @@ Optional:
 Optional:
 
 - `dimension_type` (String) The type of segment dimension to use for a string dimension.
+- `values` (List of String)
+
+
+<a id="nestedatt--segment_groups--groups--dimensions--profile_attributes--profile_type"></a>
+### Nested Schema for `segment_groups.groups.dimensions.profile_attributes.profile_type`
+
+Optional:
+
+- `dimension_type` (String) The type of segment dimension to use for a profile type dimension.
 - `values` (List of String)
 
 
