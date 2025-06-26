@@ -308,9 +308,23 @@ func suppress(ctx context.Context, cfTypeName, schemaError string, _ *github.Cli
 	//     return fmt.Errorf("failed to create GitHub issue: %w", err)
 	// }
 
-	// Record this suppression in the changes slice
-	suppressionRecord := fmt.Sprintf("%s - Suppressed", cfTypeName)
-	*changes = append(*changes, suppressionRecord)
+	// Record this resource change with the appropriate type
+	var reason string
+	switch buildType {
+	case BuildTypeResources:
+		reason = "New Resource Suppression"
+	case BuildTypeSingularDataSources:
+		reason = "New Singular Data Source Suppression"
+	case BuildTypePluralDataSources:
+		reason = "New Plural Data Source Suppression"
+	case BuildTypeSchemas:
+		if new {
+			reason = "Suppressed Resource"
+		}
+	}
+
+	// Store the change data as a string for later use
+	*changes = append(*changes, fmt.Sprintf("%s - %s", cfTypeName, reason))
 
 	// Use empty issue URL instead
 	issueURL := ""
@@ -483,7 +497,7 @@ func isNew(cloudFormationTypeName string, isNewMap map[string]bool) bool {
 	}
 	// Check if the resource exists in the map
 	if _, exists := isNewMap[tfTypeName]; exists {
-		log.Println("Resource found in current schemas:", cloudFormationTypeName, "\n")
+		log.Println("Resource found in current schemas:", cloudFormationTypeName)
 		return false
 	}
 

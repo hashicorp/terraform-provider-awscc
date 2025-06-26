@@ -205,14 +205,17 @@ func TestProcessErrorLine_SchemasCase(t *testing.T) {
 			if err := os.MkdirAll(allSchemasDir, 0755); err != nil {
 				t.Fatalf("Failed to create AllSchemas directory: %v", err)
 			}
-			
+
 			err = writeSchemasToHCLFile(*testSchemas, filePaths.AllSchemasHCL)
 			if err != nil {
 				t.Fatalf("Failed to write schemas to HCL file: %v", err)
 			}
 
+			// Create isNewMap for testing
+			isNewMap := make(map[string]bool)
+
 			// Call processErrorLine with updated file paths and test schemas
-			err = processErrorLine(ctx, tc.errorLine, client, testSchemas, tc.buildType, &changes, filePaths)
+			err = processErrorLine(ctx, tc.errorLine, client, testSchemas, tc.buildType, &changes, filePaths, isNewMap)
 			if tc.expectedError && err == nil {
 				t.Fatalf("Expected error but got none")
 			}
@@ -253,7 +256,7 @@ func TestProcessErrorLine_SchemasCase(t *testing.T) {
 			if len(v.Resources) == 0 {
 				t.Fatalf("No resources found in AllSchemas")
 			}
-			
+
 			// Verify that the suppression process completed successfully
 			// Note: The actual suppression flags might not be set in the test AllSchemas structure
 			// because the suppression logic may work on a different copy or the changes

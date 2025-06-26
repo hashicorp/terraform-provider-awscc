@@ -7,3 +7,6 @@ all_schemas_hcl = "internal/provider/all_schemas.hcl"
 all_schemas_dir = "internal/provider/generators/allschemas"
 lastresource = "internal/provider/last_resource.txt"
 cloudformation_schemas_dir = "internal/service/cloudformation/schemas"
+awscc_repository_link = "https://github.com/hashicorp/terraform-provider-awscc.git"
+awscc_repository_name = "terraform-provider-awscc"
+
