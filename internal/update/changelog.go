@@ -13,7 +13,7 @@ import (
 
 func parseChangeLog() ([]string, error) {
 	// Open CHANGELOG.md file
-	file, err := os.Open("CHANGELOG.md")
+	file, err := os.Open("./CHANGELOG.md")
 	if err != nil {
 		return nil, fmt.Errorf("failed to open CHANGELOG.md: %w", err)
 	}

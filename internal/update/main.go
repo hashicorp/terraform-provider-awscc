@@ -17,6 +17,9 @@ import (
 	allschemas "github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/allschemas"
 )
 
+// Global variable to store test results for PR creation
+var AcceptanceTestResults string
+
 // Constants for file paths and patterns
 const (
 	// File names and patterns
@@ -177,20 +180,11 @@ func run() error {
 	}
 
 	// Since we've disabled validation in diffSchemas, we should do it here
-	for i := range currAllSchemas.Resources {
-		flag, err := validateResourceType(ctx, currAllSchemas.Resources[i].CloudFormationTypeName)
-		if err != nil {
-			return fmt.Errorf("failed to check if resource %s is provisionable: %w", currAllSchemas.Resources[i].CloudFormationTypeName, err)
-		}
-		if !flag {
-			currAllSchemas.Resources[i].SuppressResourceGeneration = true
-			createIssue(currAllSchemas.Resources[i].CloudFormationTypeName, "Resource is not provisionable", client)
-		}
+	err = validateResources(ctx, currAllSchemas, client, filePaths)
+	if err != nil {
+		return fmt.Errorf("failed to validate resources: %w", err)
 	}
 
-	if err != nil {
-		return fmt.Errorf("failed to diff schemas: %w", err)
-	}
 	if err := execGit("add", "-A"); err != nil {
 		return fmt.Errorf("failed to git add files after schema diff: %w", err)
 	}
@@ -244,9 +238,11 @@ func run() error {
 		return fmt.Errorf("failed to build provider: %w", err)
 	}
 
-	err = execCommand("make", MakeTestAccCmd, PKGNameArg, TestArgsArg, AccTestParallelismArg)
+	// Run acceptance tests and capture output for PR description
+	AcceptanceTestResults, err = RunAcceptanceTests()
 	if err != nil {
-		return fmt.Errorf("failed to run acceptance tests: %w", err)
+		log.Printf("Warning: Acceptance tests had issues: %v", err)
+		// We continue even if there are test failures to include results in PR
 	}
 
 	err = execCommand("make", MakeDocsAllCmd)
@@ -272,8 +268,19 @@ func run() error {
 	}
 	log.Println("Suppressions during process:\n" + suppressions.String())
 
+	// If we have a GitHub client, create a PR with the test results
+
 	fmt.Fprintf(os.Stdout, "env_token=production\n")
 	fmt.Fprintf(os.Stdout, "suppressions<<EOF\n%sEOF\n", suppressions.String())
+	// return nil
+
+	// Create GitHubConfig
+	config := NewGitHubConfig(client, filePaths.RepositoryLink, GetCurrentDate())
+
+	_, err = submitOnGit(client, &changes, filePaths, AcceptanceTestResults, config.RepoOwner, config.RepoName)
+	if err != nil {
+		return fmt.Errorf("failed to submit PR: %w", err)
+	}
 	return nil
 }
 
@@ -334,4 +341,30 @@ type UpdateFilePaths struct {
 	AllSchemasDir            string `hcl:"all_schemas_dir"`
 	LastResource             string `hcl:"lastresource"`
 	CloudFormationSchemasDir string `hcl:"cloudformation_schemas_dir"`
+	RepositoryLink           string `hcl:"repository_link"`
+}
+
+// GetAcceptanceTestResults returns the captured acceptance test results.
+// If no tests have been run yet, it returns an empty string.
+func GetAcceptanceTestResults() string {
+	return AcceptanceTestResults
+}
+
+// validateResources checks if each resource in the schema is provisionable and suppresses
+// generation for those that are not. It also creates GitHub issues for non-provisionable resources.
+func validateResources(ctx context.Context, currAllSchemas *allschemas.AllSchemas, client *github.Client, filePaths *UpdateFilePaths) error {
+	// Create GitHubConfig
+	config := NewGitHubConfig(client, filePaths.RepositoryLink, GetCurrentDate())
+
+	for i := range currAllSchemas.Resources {
+		flag, err := validateResourceType(ctx, currAllSchemas.Resources[i].CloudFormationTypeName)
+		if err != nil {
+			return fmt.Errorf("failed to check if resource %s is provisionable: %w", currAllSchemas.Resources[i].CloudFormationTypeName, err)
+		}
+		if !flag {
+			currAllSchemas.Resources[i].SuppressResourceGeneration = true
+			createIssue(ctx, currAllSchemas.Resources[i].CloudFormationTypeName, "Resource is not provisionable", config, filePaths.RepositoryLink)
+		}
+	}
+	return nil
 }
