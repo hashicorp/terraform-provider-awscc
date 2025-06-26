@@ -105,7 +105,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		//	      "EventBusArn": {
 		//	        "maxLength": 512,
 		//	        "minLength": 1,
-		//	        "pattern": "^arn:aws[a-z-]*:events:[a-z]{2}-[a-z-]+-\\d+:\\d{12}:event-bus/[\\w.-]+$",
+		//	        "pattern": "^arn:aws[a-z-]*:events:[a-z]+-[a-z-]+-\\d+:\\d{12}:event-bus/[\\w.-]+$",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -126,7 +126,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 						Required: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 512),
-							stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z-]*:events:[a-z]{2}-[a-z-]+-\\d+:\\d{12}:event-bus/[\\w.-]+$"), ""),
+							stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z-]*:events:[a-z]+-[a-z-]+-\\d+:\\d{12}:event-bus/[\\w.-]+$"), ""),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/

@@ -322,7 +322,6 @@ func containerFleetResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
-			// GameServerContainerGroupsPerInstance is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: GameSessionCreationLimitPolicy
 		// CloudFormation resource type schema:
@@ -1339,7 +1338,6 @@ func containerFleetResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/DeploymentConfiguration",
-		"/properties/GameServerContainerGroupsPerInstance",
 		"/properties/GameServerContainerGroupDefinitionName",
 		"/properties/PerInstanceContainerGroupDefinitionName",
 	})
