@@ -1,149 +1,128 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
 	"os"
 	"sort"
 	"strconv"
 	"strings"
+	"time"
 
+	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
 	allschemas "github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/allschemas"
 )
 
-func parseChangeLog() ([]string, error) {
-	return parseChangeLogFromFile("./CHANGELOG.md")
-}
+// generateDataSourceChanges takes changes and filepaths, parses allSchemas, and adds data source entries
+func generateDataSourceChanges(changes []string, filePaths *UpdateFilePaths) ([]string, error) {
+	fmt.Printf("generateDataSourceChanges called with %d changes\n", len(changes))
 
-func parseChangeLogFromFile(filePath string) ([]string, error) {
-	// Open CHANGELOG.md file
-	file, err := os.Open(filePath)
+	// Parse the AllSchemasHCL file to get all schemas
+	allSchemas, err := parseSchemaToStruct(filePaths.AllSchemasHCL, allschemas.AllSchemas{})
 	if err != nil {
-		return nil, fmt.Errorf("failed to open %s: %w", filePath, err)
+		return changes, fmt.Errorf("failed to parse AllSchemasHCL: %w", err)
 	}
-	defer file.Close()
 
-	scanner := bufio.NewScanner(file)
+	fmt.Printf("Parsed %d resources from AllSchemasHCL\n", len(allSchemas.Resources))
 
-	// Variables to track parsing state
-	var (
-		changes          []string
-		inCurrentRelease = false
-		inFeatures       = false
-	)
+	// Create a map of CloudFormationTypeName to ResourceAllSchema for quick lookup
+	cfTypeToResource := make(map[string]allschemas.ResourceAllSchema)
+	for _, resource := range allSchemas.Resources {
+		cfTypeToResource[resource.CloudFormationTypeName] = resource
+		fmt.Printf("  Found resource: %s\n", resource.CloudFormationTypeName)
+	}
+	// Process each change entry
+	var newChanges []string
+	for _, change := range changes {
+		fmt.Printf("Processing change: %s\n", change)
 
-	// Parse the file line by line
-	for scanner.Scan() {
-		line := scanner.Text()
-		trimmedLine := strings.TrimSpace(line)
+		// Separate each entry by " - " into resource and message
+		parts := strings.SplitN(change, " - ", 2)
+		if len(parts) != 2 {
+			fmt.Printf("  Skipping malformed change: %s\n", change)
+			newChanges = append(newChanges, change)
+			continue
+		}
 
-		// Look for version headers (e.g., "## 1.45.0 (June 12, 2025)")
-		if strings.HasPrefix(trimmedLine, "## ") {
-			// If we find a version header, we're entering a new release section
-			if strings.Contains(trimmedLine, "(Unreleased)") {
-				// Skip the unreleased section
-				inCurrentRelease = false
+		resource := parts[0]
+		message := parts[1]
+
+		fmt.Printf("  Resource: %s, Message: %s\n", resource, message)
+
+		// Add the original change
+		newChanges = append(newChanges, change)
+
+		// Check if this is a suppression message - if so, skip data source generation
+		if isSuppressionMessage(message) {
+			fmt.Printf("  Skipping data source generation for suppressed resource: %s\n", resource)
+			continue
+		}
+
+		// Check if this entry is in allSchemas.Resources
+		if resourceSchema, exists := cfTypeToResource[resource]; exists {
+			fmt.Printf("  Found resource %s in allSchemas\n", resource)
+
+			// Check if the resource has a suppression reason set
+			if resourceSchema.SuppressionReason != "" {
+				fmt.Printf("  Resource %s has suppression reason: %s - skipping data source generation\n", resource, resourceSchema.SuppressionReason)
 				continue
 			}
 
-			// Extract version number
-			versionParts := strings.Split(trimmedLine, " ")
-			if len(versionParts) >= 2 {
-				inCurrentRelease = true
-				inFeatures = false
-			}
-			continue
-		}
-
-		// Check if we're in the FEATURES section
-		if inCurrentRelease && trimmedLine == "FEATURES:" {
-			inFeatures = true
-			continue
-		}
-
-		// If we hit another section header or version header, we're no longer in FEATURES
-		if inCurrentRelease && inFeatures && trimmedLine != "" && !strings.HasPrefix(trimmedLine, "*") && strings.HasPrefix(trimmedLine, "##") {
-			inFeatures = false
-			continue
-		}
-
-		// Process feature lines
-		if inCurrentRelease && inFeatures && strings.HasPrefix(trimmedLine, "* **New Resource:**") {
-			resourceName := strings.TrimSpace(strings.TrimPrefix(trimmedLine, "* **New Resource:**"))
-			resourceName = strings.Trim(resourceName, "`")
-			changes = append(changes, fmt.Sprintf("%s - New Resource", resourceName))
-			continue
-		}
-
-		if inCurrentRelease && inFeatures && strings.HasPrefix(trimmedLine, "* **New Data Source:**") {
-			dataSourceName := strings.TrimSpace(strings.TrimPrefix(trimmedLine, "* **New Data Source:**"))
-			dataSourceName = strings.Trim(dataSourceName, "`")
-
-			// Check if it's a singular or plural data source based on naming convention
-			if strings.HasSuffix(dataSourceName, "s") && !strings.HasSuffix(dataSourceName, "ss") && !strings.HasSuffix(dataSourceName, "status") {
-				changes = append(changes, fmt.Sprintf("%s - New Plural Data Source", dataSourceName))
+			// Check if the resource's plural and singular data sources are suppressed
+			if !resourceSchema.SuppressPluralDataSourceGeneration {
+				plural := naming.Pluralize(resource)
+				pluralChange := fmt.Sprintf("%s - New Plural Data Source", plural)
+				newChanges = append(newChanges, pluralChange)
+				fmt.Printf("  Added plural data source: %s\n", pluralChange)
 			} else {
-				changes = append(changes, fmt.Sprintf("%s - New Singular Data Source", dataSourceName))
+				fmt.Printf("  Plural data source suppressed for %s\n", resource)
 			}
-			continue
+
+			if !resourceSchema.SuppressSingularDataSourceGeneration {
+				singularChange := fmt.Sprintf("%s - New Singular Data Source", resource)
+				newChanges = append(newChanges, singularChange)
+				fmt.Printf("  Added singular data source: %s\n", singularChange)
+			} else {
+				fmt.Printf("  Singular data source suppressed for %s\n", resource)
+			}
+		} else {
+			fmt.Printf("  Resource %s not found in allSchemas\n", resource)
 		}
 	}
 
-	if err := scanner.Err(); err != nil {
-		return nil, fmt.Errorf("error reading CHANGELOG.md: %w", err)
-	}
-
-	return changes, nil
+	fmt.Printf("generateDataSourceChanges returning %d changes (was %d)\n", len(newChanges), len(changes))
+	return newChanges, nil
 }
 
-func makeChangelog(newSchemas *allschemas.AvailableSchemas, lastSchemas *allschemas.AvailableSchemas, filePaths *UpdateFilePaths) error {
-	// Parse the CHANGELOG.md file to get existing changes
-	existingChanges, err := parseChangeLog()
-	if err != nil {
-		return fmt.Errorf("failed to parse CHANGELOG.md: %w", err)
-	}
-
-	// Find new resources by comparing schemas
-	var schemaChanges []string
-	for _, newResource := range newSchemas.Resources {
-		// Check if resource exists in lastSchemas
-		found := false
-		for _, lastResource := range lastSchemas.Resources {
-			if newResource.CloudFormationTypeName == lastResource.CloudFormationTypeName {
-				found = true
-				break
-			}
-		}
-
-		// If not found, it's a new resource
-		if !found {
-			schemaChanges = append(schemaChanges, fmt.Sprintf("%s - New Resource", newResource.CloudFormationTypeName))
-		}
-	}
-
-	// Combine existing changes with new schema changes
-	allChanges := append(existingChanges, schemaChanges...)
+func makeChangelog(changes *[]string, filePaths *UpdateFilePaths) error {
+	// Parse the CHANGELOG.md file to get existing change
 
 	// Generate additional changes like plural and singular data sources
-	err = generateChanges(&allChanges, filePaths)
-	if err != nil {
-		return fmt.Errorf("failed to generate changes: %w", err)
-	}
 
 	// Read the current CHANGELOG.md file
+
+	newChanges, err := generateDataSourceChanges(*changes, filePaths)
+	if err != nil {
+		return fmt.Errorf("failed to generate data source changes: %w", err)
+	}
 	originalContent, err := os.ReadFile("CHANGELOG.md")
 	if err != nil {
 		return fmt.Errorf("failed to read CHANGELOG.md: %w", err)
 	}
 
 	// Generate the new changelog content
-	newContent, err := writeChangelog(string(originalContent), allChanges)
+	newContent, err := writeChangelog(string(originalContent), newChanges)
 	if err != nil {
 		return fmt.Errorf("failed to format changelog: %w", err)
 	}
 
-	// Write the updated content back to CHANGELOG.md
-	err = os.WriteFile("CHANGELOG.md", []byte(newContent), 0644)
+	// Open the file in truncate mode and write the updated content
+	file, err := os.OpenFile("CHANGELOG.md", os.O_WRONLY|os.O_TRUNC, 0644)
+	if err != nil {
+		return fmt.Errorf("failed to open CHANGELOG.md for writing: %w", err)
+	}
+	defer file.Close()
+
+	_, err = file.WriteString(newContent)
 	if err != nil {
 		return fmt.Errorf("failed to write to CHANGELOG.md: %w", err)
 	}
@@ -151,75 +130,42 @@ func makeChangelog(newSchemas *allschemas.AvailableSchemas, lastSchemas *allsche
 	return nil
 }
 
-func generateChanges(changes *[]string, filePaths *UpdateFilePaths) error {
-	if changes == nil || len(*changes) == 0 {
-		return nil
-	}
-
-	type changelogParts struct {
-		Change   string
-		Resource string
-	}
-
-	temp := make([]changelogParts, 0)
-
-	for _, change := range *changes {
-		parts := strings.SplitN(change, " - ", 2)
-		if len(parts) == 2 {
-			temp = append(temp, changelogParts{
-				Change:   parts[1],
-				Resource: parts[0],
-			})
-		} else {
-			continue
-		}
-	}
-
-	v, err := parseSchemaToStruct(filePaths.AllSchemasHCL, allschemas.AllSchemas{})
-	if err != nil {
-		return fmt.Errorf("failed to parse existing allSchemas: %w", err)
-	}
-	// Create a map of cfTypeName to allschemas.Resource
-	cfTypeToResource := make(map[string]allschemas.ResourceAllSchema)
-	for _, resource := range v.Resources {
-		cfTypeToResource[resource.CloudFormationTypeName] = resource
-	}
-
-	for _, part := range temp {
-		if part.Change == "New Resource" {
-			if t, exists := cfTypeToResource[part.Resource]; exists {
-				if !t.SuppressPluralDataSourceGeneration {
-					*changes = append(*changes, "New Plural Data Source: "+t.CloudFormationTypeName)
-				}
-				if !t.SuppressSingularDataSourceGeneration {
-					*changes = append(*changes, "New Singular Data Source: "+t.CloudFormationTypeName)
-				}
-
-			}
-		}
-	}
-
-	sort.Strings(*changes)
-	return nil
-}
-
 // writeChangelog updates the existing changelog content with new changes
 func writeChangelog(originalContent string, changes []string) (string, error) {
+	fmt.Printf("writeChangelog called with %d changes\n", len(changes))
+
+	if len(changes) == 0 {
+		fmt.Println("No changes provided, returning original content")
+		return originalContent, nil
+	}
+
 	// Sort changes by type
 	var (
 		newResources   []string
 		newDataSources []string
+		suppressions   []string
 	)
 
+	fmt.Println("Categorizing changes:")
 	// Categorize changes
 	for _, change := range changes {
 		parts := strings.SplitN(change, " - ", 2)
 		if len(parts) != 2 {
+			fmt.Printf("  Skipping malformed change: %s\n", change)
 			continue
 		}
 
 		resource := parts[0]
 		changeType := parts[1]
+
+		fmt.Printf("  Processing: %s -> %s\n", resource, changeType)
+
+		// Check if this is a suppression message
+		if isSuppressionMessage(changeType) {
+			suppressions = append(suppressions, resource)
+			fmt.Printf("  Categorized as suppression: %s\n", resource)
+			continue
+		}
 
 		switch changeType {
 		case "New Resource":
@@ -232,96 +178,124 @@ func writeChangelog(originalContent string, changes []string) (string, error) {
 	// Sort each category alphabetically
 	sort.Strings(newResources)
 	sort.Strings(newDataSources)
+	sort.Strings(suppressions)
 
-	// Find the "Unreleased" section in the original content
-	scanner := bufio.NewScanner(strings.NewReader(originalContent))
-	var (
-		lines          []string
-		unreleaseFound bool
-		featuresFound  bool
-		insertPosition int
-	)
+	fmt.Printf("After sorting - Data Sources: %d, Resources: %d, Suppressions: %d\n", len(newDataSources), len(newResources), len(suppressions))
 
-	for scanner.Scan() {
-		line := scanner.Text()
-		lines = append(lines, line)
+	// Build the new changelog entries
+	var newEntries []string
 
-		if !unreleaseFound && strings.Contains(line, "## 1.") && strings.Contains(line, "(Unreleased)") {
-			unreleaseFound = true
-			continue
-		}
-
-		if unreleaseFound && !featuresFound && strings.TrimSpace(line) == "FEATURES:" {
-			featuresFound = true
-			insertPosition = len(lines)
-			continue
-		}
-
-		if unreleaseFound && featuresFound && strings.TrimSpace(line) != "" && !strings.HasPrefix(strings.TrimSpace(line), "*") {
-			insertPosition = len(lines)
-			break
-		}
-	}
-
-	// If we found the Unreleased section but not FEATURES, add it
-	if unreleaseFound && !featuresFound {
-		lines = append(lines[:insertPosition], append([]string{"", "FEATURES:", ""}, lines[insertPosition:]...)...)
-		insertPosition = insertPosition + 3
-	}
-
-	// If we didn't find an Unreleased section, create one
-	if !unreleaseFound {
-		// Get the current version from the first line that contains a version
-		var currentVersion string
-		for _, line := range lines {
-			if strings.HasPrefix(line, "## ") && strings.Contains(line, ".") {
-				parts := strings.Split(line, " ")
-				if len(parts) >= 2 {
-					currentVersion = parts[1]
-					break
-				}
-			}
-		}
-
-		// Calculate the next version
-		if currentVersion != "" {
-			parts := strings.Split(currentVersion, ".")
-			if len(parts) >= 3 {
-				major, _ := strconv.Atoi(parts[0])
-				minor, _ := strconv.Atoi(parts[1])
-				// patch value is not used for incrementing the version
-
-				minor++ // Increment the minor version
-				nextVersion := fmt.Sprintf("%d.%d.0", major, minor)
-
-				// Insert the new Unreleased section at the beginning
-				lines = append([]string{fmt.Sprintf("## %s (Unreleased)", nextVersion), "", "FEATURES:", ""}, lines...)
-				insertPosition = 4
-			}
-		}
-	}
-
-	// Create new changelog content
-	var newLines []string
-
-	// Add data sources
+	// Add data sources first
 	for _, ds := range newDataSources {
-		newLines = append(newLines, fmt.Sprintf("* **New Data Source:** `%s`", ds))
+		entry := fmt.Sprintf("* **New Data Source:** `%s`", ds)
+		newEntries = append(newEntries, entry)
+		fmt.Printf("  Added data source entry: %s\n", entry)
 	}
 
 	// Add resources
 	for _, res := range newResources {
-		newLines = append(newLines, fmt.Sprintf("* **New Resource:** `%s`", res))
+		entry := fmt.Sprintf("* **New Resource:** `%s`", res)
+		newEntries = append(newEntries, entry)
+		fmt.Printf("  Added resource entry: %s\n", entry)
 	}
 
-	// If we have changes, add them to the changelog
-	if len(newLines) > 0 {
-		if insertPosition > 0 && insertPosition < len(lines) {
-			lines = append(lines[:insertPosition], append(newLines, lines[insertPosition:]...)...)
-		} else {
-			lines = append(lines, newLines...)
+	// Note: Suppressions are tracked but not added to the public changelog
+	if len(suppressions) > 0 {
+		fmt.Printf("  Tracked %d suppressions (not added to changelog): %v\n", len(suppressions), suppressions)
+	}
+
+	if len(newEntries) == 0 {
+		fmt.Println("No valid entries to add, returning original content")
+		return originalContent, nil
+	}
+
+	fmt.Printf("Total entries to add: %d\n", len(newEntries))
+
+	// Parse and increment version
+	newVersion, err := parseAndIncrementVersion(originalContent)
+	if err != nil {
+		fmt.Printf("Warning: %v\n", err)
+	}
+
+	// Create new version header with current date
+	currentDate := time.Now().Format("January 2, 2006")
+	newVersionHeader := fmt.Sprintf("## %s (%s)", newVersion, currentDate)
+	fmt.Printf("Creating new version header: %s\n", newVersionHeader)
+
+	// Build the complete new section
+	var newSection []string
+	newSection = append(newSection, newVersionHeader)
+	newSection = append(newSection, "")
+	newSection = append(newSection, "FEATURES:")
+	newSection = append(newSection, "")
+	newSection = append(newSection, newEntries...)
+	newSection = append(newSection, "")
+
+	// Add the new section to the top of the changelog
+	lines := strings.Split(originalContent, "\n")
+	result := make([]string, 0, len(lines)+len(newSection))
+	result = append(result, newSection...)
+	result = append(result, lines...)
+
+	fmt.Printf("Final result has %d lines (original: %d)\n", len(result), len(lines))
+	return strings.Join(result, "\n"), nil
+}
+
+// parseAndIncrementVersion finds the latest version in changelog content and increments the minor version
+func parseAndIncrementVersion(changelogContent string) (string, error) {
+	lines := strings.Split(changelogContent, "\n")
+
+	for _, line := range lines {
+		// Look for version headers like "## 1.47.0 (June 26, 2025)"
+		if strings.HasPrefix(strings.TrimSpace(line), "## ") && strings.Contains(line, ".") {
+			fmt.Printf("Found version line: %s\n", line)
+
+			// Extract the version part
+			parts := strings.Fields(line)
+			if len(parts) >= 2 {
+				versionStr := parts[1] // Should be something like "1.47.0"
+
+				// Split version into major.minor.patch
+				versionParts := strings.Split(versionStr, ".")
+				if len(versionParts) >= 2 {
+					major, err := strconv.Atoi(versionParts[0])
+					if err != nil {
+						return "", fmt.Errorf("failed to parse major version: %w", err)
+					}
+
+					minor, err := strconv.Atoi(versionParts[1])
+					if err != nil {
+						return "", fmt.Errorf("failed to parse minor version: %w", err)
+					}
+
+					// Increment minor version and reset patch to 0
+					newVersion := fmt.Sprintf("%d.%d.0", major, minor+1)
+					fmt.Printf("Incremented version from %s to %s\n", versionStr, newVersion)
+					return newVersion, nil
+				}
+			}
 		}
 	}
 
-	return strings.Join(lines, "\n"), nil
+	// If no version found, start with a default
+	return "1.48.0", fmt.Errorf("no version found in changelog, using default")
+}
+
+// isSuppressionMessage checks if a message indicates suppression
+func isSuppressionMessage(message string) bool {
+	suppressionKeywords := []string{
+		"New Resource Suppression",
+		"New Singular Data Source Suppression",
+		"New Plural Data Source Suppression",
+		"Suppressed Resource",
+		"Suppression",
+	}
+
+	for _, keyword := range suppressionKeywords {
+		if strings.Contains(message, keyword) {
+			return true
+		}
+	}
+
+	return false
 }

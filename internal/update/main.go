@@ -7,8 +7,6 @@ import (
 	"math/rand"
 	"os"
 	"os/exec"
-
-	//"path/filepath"
 	"strings"
 	"time"
 
@@ -47,6 +45,7 @@ const (
 
 	// Environment variables
 	GithubTokenEnv = "GITHUB_TOKEN"
+	TestModeEnv    = "TEST_MODE"
 
 	// Make commands
 	MakeBuildCmd   = "build"
@@ -79,6 +78,12 @@ func run() error {
 	ctx := context.Background()
 	changes := []string{}
 
+	// Check if we're in test mode
+	testMode := os.Getenv(TestModeEnv) == "true"
+	if testMode {
+		fmt.Println("Running in TEST MODE - no Git operations or GitHub API calls will be made")
+	}
+
 	diags := checkEnv(ctx)
 	if diags.HasError() {
 		log.Println("Environment variable check failed:")
@@ -109,8 +114,12 @@ func run() error {
 
 	isNewMap := make(map[string]bool)
 
-	if err := execGit("checkout", "-b", branchName); err != nil {
-		return fmt.Errorf("failed to create and checkout branch %s: %w", branchName, err)
+	if !testMode {
+		if err := execGit("checkout", "-b", branchName); err != nil {
+			return fmt.Errorf("failed to create and checkout branch %s: %w", branchName, err)
+		}
+	} else {
+		fmt.Printf("TEST MODE: Would create and checkout branch: %s\n", branchName)
 	}
 
 	/*
@@ -277,9 +286,19 @@ func run() error {
 	// Create GitHubConfig
 	config := NewGitHubConfig(client, filePaths.RepositoryLink, GetCurrentDate())
 
-	_, err = submitOnGit(client, &changes, filePaths, AcceptanceTestResults, config.RepoOwner, config.RepoName)
+	if !testMode {
+		_, err = submitOnGit(client, &changes, filePaths, AcceptanceTestResults, config.RepoOwner, config.RepoName)
+		if err != nil {
+			return fmt.Errorf("failed to submit PR: %w", err)
+		}
+	} else {
+		fmt.Printf("TEST MODE: Would submit PR with %d changes to %s/%s\n", len(changes), config.RepoOwner, config.RepoName)
+		fmt.Printf("TEST MODE: Changes would be: %v\n", changes)
+	}
+
+	err = makeChangelog(&changes, filePaths)
 	if err != nil {
-		return fmt.Errorf("failed to submit PR: %w", err)
+		return fmt.Errorf("failed to update changelog: %w", err)
 	}
 	return nil
 }
