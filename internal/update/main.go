@@ -7,6 +7,7 @@ import (
 	"math/rand"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"strings"
 	"time"
 
@@ -122,17 +123,15 @@ func run() error {
 		fmt.Printf("TEST MODE: Would create and checkout branch: %s\n", branchName)
 	}
 
-	/*
-		matches, err := filepath.Glob(filePaths.AwsSchemas)
-		if err != nil {
-			return fmt.Errorf("failed to glob for old CloudFormation schemas: %w", err)
+	matches, err := filepath.Glob(filePaths.AwsSchemas)
+	if err != nil {
+		return fmt.Errorf("failed to glob for old CloudFormation schemas: %w", err)
+	}
+	for _, file := range matches {
+		if removeErr := os.Remove(file); removeErr != nil && !os.IsNotExist(removeErr) {
+			return fmt.Errorf("failed to remove old CloudFormation schema %s: %w", file, removeErr)
 		}
-		for _, file := range matches {
-			if removeErr := os.Remove(file); removeErr != nil && !os.IsNotExist(removeErr) {
-				return fmt.Errorf("failed to remove old CloudFormation schema %s: %w", file, removeErr)
-			}
-		}
-	*/
+	}
 
 	// open file and get to suppressionData
 
