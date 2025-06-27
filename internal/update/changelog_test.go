@@ -7,7 +7,7 @@ import (
 )
 
 func TestParseChangeLog(t *testing.T) {
-	changes, err := parseChangeLog()
+	changes, err := parseChangeLogFromFile("../../CHANGELOG.md")
 	if err != nil {
 		t.Fatalf("Failed to parse CHANGELOG.md: %v", err)
 	}
@@ -39,15 +39,15 @@ FEATURES:
 
 	// Sample changes
 	changes := []string{
-		"AWS::ApiGateway::Resource - New Resource",
-		"AWS::Lambda::Function - New Resource",
-		"awscc_apigateway_resource - New Singular Data Source",
-		"awscc_apigateway_resources - New Plural Data Source",
-		"awscc_lambda_function - New Singular Data Source",
+		"AWS::Example::Resource - New Resource",
+		"AWS::Example::Function - New Resource",
+		"awscc_example_resource - New Singular Data Source",
+		"awscc_example_resources - New Plural Data Source",
+		"awscc_example_function - New Singular Data Source",
 	}
 
 	// Format the changelog
-	result, err := formatChangelog(originalContent, changes)
+	result, err := writeChangelog(originalContent, changes)
 	if err != nil {
 		t.Fatalf("formatChangelog failed: %v", err)
 	}

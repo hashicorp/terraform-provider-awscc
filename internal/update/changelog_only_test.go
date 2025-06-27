@@ -26,7 +26,7 @@ FEATURES:
 	}
 
 	// Format the changelog
-	result, err := formatChangelog(originalContent, changes)
+	result, err := writeChangelog(originalContent, changes)
 	if err != nil {
 		t.Fatalf("formatChangelog failed: %v", err)
 	}
@@ -115,22 +115,22 @@ func TestParseChangeLogSample(t *testing.T) {
 				continue
 			}
 
-			// If we hit another section header, we're no longer in FEATURES
-			if inCurrentRelease && inFeatures && trimmedLine != "" && !strings.HasPrefix(trimmedLine, "*") && !strings.HasPrefix(trimmedLine, "**") {
+			// If we hit another section header or version header, we're no longer in FEATURES
+			if inCurrentRelease && inFeatures && trimmedLine != "" && !strings.HasPrefix(trimmedLine, "*") && strings.HasPrefix(trimmedLine, "##") {
 				inFeatures = false
 				continue
 			}
 
 			// Process feature lines
-			if inCurrentRelease && inFeatures && strings.HasPrefix(trimmedLine, "**New Resource:**") {
-				resourceName := strings.TrimSpace(strings.TrimPrefix(trimmedLine, "**New Resource:**"))
+			if inCurrentRelease && inFeatures && strings.HasPrefix(trimmedLine, "* **New Resource:**") {
+				resourceName := strings.TrimSpace(strings.TrimPrefix(trimmedLine, "* **New Resource:**"))
 				resourceName = strings.Trim(resourceName, "`")
 				changes = append(changes, fmt.Sprintf("%s - New Resource", resourceName))
 				continue
 			}
 
-			if inCurrentRelease && inFeatures && strings.HasPrefix(trimmedLine, "**New Data Source:**") {
-				dataSourceName := strings.TrimSpace(strings.TrimPrefix(trimmedLine, "**New Data Source:**"))
+			if inCurrentRelease && inFeatures && strings.HasPrefix(trimmedLine, "* **New Data Source:**") {
+				dataSourceName := strings.TrimSpace(strings.TrimPrefix(trimmedLine, "* **New Data Source:**"))
 				dataSourceName = strings.Trim(dataSourceName, "`")
 
 				// Check if it's a singular or plural data source based on naming convention
