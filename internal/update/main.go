@@ -94,7 +94,11 @@ func run() error {
 		return fmt.Errorf("environment variable check failed")
 	}
 
-	// do we have to do anything about diags?
+	// Parse file paths first to get repository link
+	filePaths, err := parseSchemaToStruct(UpdateFilePathsHCL, UpdateFilePaths{})
+	if err != nil {
+		return fmt.Errorf("failed to parse update file paths: %w", err)
+	}
 
 	// Comment out GitHub client creation to avoid requiring GitHub token
 	// client, err := newGithubClient()
@@ -103,15 +107,14 @@ func run() error {
 	// }
 
 	// Use nil client instead
+	var client *github.Client = nil
+
+	// Create GitHub config early in the run function
+	currentDate := GetCurrentDate()
+	config := NewGitHubConfig(client, filePaths.RepositoryLink, currentDate)
 
 	branchName := fmt.Sprintf(BranchNameFormat, rand.Intn(BranchNameMaxRandom))
 	fmt.Printf("Generated branch name: %s\n", branchName)
-
-	var client *github.Client = nil
-	filePaths, err := parseSchemaToStruct(UpdateFilePathsHCL, UpdateFilePaths{})
-	if err != nil {
-		return fmt.Errorf("failed to parse update file paths: %w", err)
-	}
 
 	isNewMap := make(map[string]bool)
 
@@ -154,7 +157,7 @@ func run() error {
 		return fmt.Errorf("failed to git add files after schema refresh: %w", err)
 	}
 
-	currentDate := time.Now().Format(DateFormat)
+	currentDate = time.Now().Format(DateFormat)
 	if err := execGit("commit", "-m", fmt.Sprintf(CommitMsgRefreshSchemas, currentDate)); err != nil {
 		return fmt.Errorf("failed to commit schema refresh: %w", err)
 	}
@@ -188,7 +191,7 @@ func run() error {
 	}
 
 	// Since we've disabled validation in diffSchemas, we should do it here
-	err = validateResources(ctx, currAllSchemas, client, filePaths)
+	err = validateResources(ctx, currAllSchemas, config, filePaths)
 	if err != nil {
 		return fmt.Errorf("failed to validate resources: %w", err)
 	}
@@ -282,8 +285,8 @@ func run() error {
 	fmt.Fprintf(os.Stdout, "suppressions<<EOF\n%sEOF\n", suppressions.String())
 	// return nil
 
-	// Create GitHubConfig
-	config := NewGitHubConfig(client, filePaths.RepositoryLink, GetCurrentDate())
+	// Update the existing config's date
+	config.CurrentDate = GetCurrentDate()
 
 	if !testMode {
 		_, err = submitOnGit(client, &changes, filePaths, AcceptanceTestResults, config.RepoOwner, config.RepoName)
@@ -370,10 +373,7 @@ func GetAcceptanceTestResults() string {
 
 // validateResources checks if each resource in the schema is provisionable and suppresses
 // generation for those that are not. It also creates GitHub issues for non-provisionable resources.
-func validateResources(ctx context.Context, currAllSchemas *allschemas.AllSchemas, client *github.Client, filePaths *UpdateFilePaths) error {
-	// Create GitHubConfig
-	config := NewGitHubConfig(client, filePaths.RepositoryLink, GetCurrentDate())
-
+func validateResources(ctx context.Context, currAllSchemas *allschemas.AllSchemas, config *GitHubConfig, filePaths *UpdateFilePaths) error {
 	for i := range currAllSchemas.Resources {
 		flag, err := validateResourceType(ctx, currAllSchemas.Resources[i].CloudFormationTypeName)
 		if err != nil {
@@ -381,7 +381,19 @@ func validateResources(ctx context.Context, currAllSchemas *allschemas.AllSchema
 		}
 		if !flag {
 			currAllSchemas.Resources[i].SuppressResourceGeneration = true
-			createIssue(ctx, currAllSchemas.Resources[i].CloudFormationTypeName, "Resource is not provisionable", config, filePaths.RepositoryLink)
+			if config != nil && config.Client != nil {
+				_, err := createIssue(ctx, currAllSchemas.Resources[i].CloudFormationTypeName, "Resource is not provisionable", config, filePaths.RepositoryLink)
+				if err != nil {
+					tflog.Warn(ctx, "Failed to create GitHub issue", map[string]interface{}{
+						"resource": currAllSchemas.Resources[i].CloudFormationTypeName,
+						"error":    err.Error(),
+					})
+				}
+			} else {
+				tflog.Info(ctx, "Skipping GitHub issue creation (no client)", map[string]interface{}{
+					"resource": currAllSchemas.Resources[i].CloudFormationTypeName,
+				})
+			}
 		}
 	}
 	return nil

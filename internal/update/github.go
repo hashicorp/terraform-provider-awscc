@@ -114,6 +114,10 @@ func createPullRequest(ctx context.Context, config *GitHubConfig, changes *[]str
 }
 
 func createIssue(ctx context.Context, resource, schemaError string, config *GitHubConfig, repositoryLink string) (string, error) {
+	if config == nil || config.Client == nil {
+		return "", fmt.Errorf("GitHub client not available - cannot create issue for resource %s", resource)
+	}
+	
 	repoOwner := config.RepoOwner
 	repoName := config.RepoName
 	client := config.Client
