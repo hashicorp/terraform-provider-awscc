@@ -18,11 +18,19 @@ instance arn in the `awscc` provider so you must use both the `aws` and `awscc` 
 {{ tffile (printf "examples/resources/%s/awscc_sso_permission_set.tf" .Name)}}
 
 {{ .SchemaMarkdown | trimspace }}
-{{- if or .HasImport .HasImportIDConfig }}
+{{- if or .HasImport .HasImportIDConfig .HasImportIdentityConfig }}
 
 ## Import
 
 Import is supported using the following syntax:
+{{- end }}
+{{- if .HasImportIdentityConfig }}
+
+In Terraform v1.12.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `identity` attribute, for example:
+
+{{tffile .ImportIdentityConfigFile }}
+
+{{ .IdentitySchemaMarkdown | trimspace }}
 {{- end }}
 {{- if .HasImportIDConfig }}
 

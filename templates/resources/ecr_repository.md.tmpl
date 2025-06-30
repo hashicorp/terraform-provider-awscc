@@ -27,11 +27,19 @@ To create ECR Repository with repository policy that allows AWS CodeBuild access
 {{ tffile (printf "examples/resources/%s/ecr_repository_repository_policy.tf" .Name)}}
 
 {{ .SchemaMarkdown | trimspace }}
-{{- if or .HasImport .HasImportIDConfig }}
+{{- if or .HasImport .HasImportIDConfig .HasImportIdentityConfig }}
 
 ## Import
 
 Import is supported using the following syntax:
+{{- end }}
+{{- if .HasImportIdentityConfig }}
+
+In Terraform v1.12.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `identity` attribute, for example:
+
+{{tffile .ImportIdentityConfigFile }}
+
+{{ .IdentitySchemaMarkdown | trimspace }}
 {{- end }}
 {{- if .HasImportIDConfig }}
 
@@ -45,4 +53,3 @@ The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/c
 
 {{codefile "shell" .ImportFile }}
 
-{{- end }}
