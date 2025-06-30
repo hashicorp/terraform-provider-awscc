@@ -117,7 +117,7 @@ func createIssue(ctx context.Context, resource, schemaError string, config *GitH
 	if config == nil || config.Client == nil {
 		return "", fmt.Errorf("GitHub client not available - cannot create issue for resource %s", resource)
 	}
-	
+
 	repoOwner := config.RepoOwner
 	repoName := config.RepoName
 	client := config.Client
@@ -334,7 +334,7 @@ func RunAcceptanceTests() (string, error) {
 	return testOutput, err
 }
 
-func submitOnGit(client *github.Client, changes *[]string, filePaths *UpdateFilePaths, execData string, repoOwner string, repoName string) (string, error) {
+func submitOnGit(config *GitHubConfig, changes *[]string, filePaths *UpdateFilePaths, execData string, repoOwner string, repoName string) (string, error) {
 	// Create a new branch and push it to remote
 	currentDate := GetCurrentDate()
 	branchName, err := createRemoteBranch(currentDate)
@@ -342,13 +342,16 @@ func submitOnGit(client *github.Client, changes *[]string, filePaths *UpdateFile
 		return "", fmt.Errorf("failed to create and push remote branch: %w", err)
 	}
 
-	// Create GitHubConfig
-	config := &GitHubConfig{
-		Client:      client,
-		Repository:  repoOwner + "/" + repoName,
-		RepoOwner:   repoOwner,
-		RepoName:    repoName,
-		CurrentDate: currentDate,
+	// Update config with current date and repo info if needed
+	config.CurrentDate = currentDate
+	if config.RepoOwner == "" {
+		config.RepoOwner = repoOwner
+	}
+	if config.RepoName == "" {
+		config.RepoName = repoName
+	}
+	if config.Repository == "" {
+		config.Repository = repoOwner + "/" + repoName
 	}
 
 	// Create a pull request with the changes

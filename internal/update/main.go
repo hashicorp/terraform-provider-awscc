@@ -149,7 +149,7 @@ func run() error {
 		isNewMap[currAllSchemas.Resources[i].ResourceTypeName] = true
 	}
 
-	err = makeBuild(ctx, client, currAllSchemas, TargetSchemas, &changes, filePaths, isNewMap)
+	err = makeBuild(ctx, config, currAllSchemas, TargetSchemas, &changes, filePaths, isNewMap)
 	if err != nil {
 		return fmt.Errorf("failed to make schemas: %w", err)
 	}
@@ -206,11 +206,11 @@ func run() error {
 
 	// Execute make resources command
 
-	err = makeBuild(ctx, client, currAllSchemas, TargetSchemas, &changes, filePaths, isNewMap)
+	err = makeBuild(ctx, config, currAllSchemas, TargetSchemas, &changes, filePaths, isNewMap)
 	if err != nil {
 		return fmt.Errorf("failed to make new schemas: %w", err)
 	}
-	err = makeBuild(ctx, client, currAllSchemas, TargetResources, &changes, filePaths, isNewMap)
+	err = makeBuild(ctx, config, currAllSchemas, TargetResources, &changes, filePaths, isNewMap)
 	if err != nil {
 		return fmt.Errorf("failed to execute make resources: %w", err)
 	}
@@ -223,12 +223,12 @@ func run() error {
 	}
 
 	// Run make singular-data-sources plural-data-sources
-	err = makeBuild(ctx, client, currAllSchemas, TargetSingularDataSources, &changes, filePaths, isNewMap)
+	err = makeBuild(ctx, config, currAllSchemas, TargetSingularDataSources, &changes, filePaths, isNewMap)
 	if err != nil {
 		return fmt.Errorf("failed to update singular data sources: %w", err)
 	}
 
-	err = makeBuild(ctx, client, currAllSchemas, TargetPluralDataSources, &changes, filePaths, isNewMap)
+	err = makeBuild(ctx, config, currAllSchemas, TargetPluralDataSources, &changes, filePaths, isNewMap)
 	if err != nil {
 		return fmt.Errorf("failed to update plural data sources: %w", err)
 	}
@@ -289,7 +289,7 @@ func run() error {
 	config.CurrentDate = GetCurrentDate()
 
 	if !testMode {
-		_, err = submitOnGit(client, &changes, filePaths, AcceptanceTestResults, config.RepoOwner, config.RepoName)
+		_, err = submitOnGit(config, &changes, filePaths, AcceptanceTestResults, config.RepoOwner, config.RepoName)
 		if err != nil {
 			return fmt.Errorf("failed to submit PR: %w", err)
 		}
