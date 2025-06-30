@@ -165,42 +165,6 @@ func createIssue(ctx context.Context, resource, schemaError string, config *GitH
 	return *issue.URL, nil
 }
 
-// FormatCommitMessage generates a formatted commit message for CloudFormation schema updates.
-// It formats messages similar to those seen in PR #2347.
-func FormatCommitMessage(date string, region string, updateType string, details string) string {
-	var messageFormat string
-
-	switch updateType {
-	case "refresh":
-		messageFormat = "%s CloudFormation schemas in %s; Refresh existing schemas."
-	case "new":
-		messageFormat = "%s CloudFormation schemas in %s; New schemas."
-	case "terraform-resources":
-		messageFormat = "%s CloudFormation schemas in %s; Generate Terraform resources."
-	case "terraform-datasources":
-		messageFormat = "%s CloudFormation schemas in %s; Generate Terraform data sources."
-	case "docs":
-		return fmt.Sprintf("%s Run 'make docs-all'.", date)
-	case "changelog":
-		return fmt.Sprintf("Add CHANGELOG entries.")
-	case "release":
-		return fmt.Sprintf("Prepare for v%s release.", details)
-	default:
-		messageFormat = "%s CloudFormation schemas in %s; %s"
-		if details == "" {
-			details = "Updates."
-		}
-	}
-
-	if updateType == "default" {
-		return fmt.Sprintf(messageFormat, date, region, details)
-	} else if updateType != "docs" && updateType != "changelog" && updateType != "release" {
-		return fmt.Sprintf(messageFormat, date, region)
-	}
-
-	return fmt.Sprintf(messageFormat, date, region)
-}
-
 // GenerateCompletePRTemplate creates a fully formatted PR description with all required sections
 // including community note, rollback plan, security controls, and test results.
 func GenerateCompletePRTemplate(testResults string, version string) string {
