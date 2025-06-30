@@ -3033,7 +3033,7 @@ using cached CloudFormation Resource Provider Schema "../service/cloudformation/
 Parsed Terraform type name: org=aws, svc=rds, res=custom_db_engine_version
 2025/06/17 09:26:45 Processing schemat: AWS::RDS::DBCluster
 using cached CloudFormation Resource Provider Schema "../service/cloudformation/schemas/AWS_RDS_DBCluster.json"
-Parsed Terraform type name: org=aws, svc=rds, res=db_cluster
+Parsed Terraform type name: org=aws, svc=rds, db_cluster
 2025/06/17 09:26:45 Processing schemat: AWS::RDS::DBClusterParameterGroup
 using cached CloudFormation Resource Provider Schema "../service/cloudformation/schemas/AWS_RDS_DBClusterParameterGroup.json"
 Parsed Terraform type name: org=aws, svc=rds, res=db_cluster_parameter_group

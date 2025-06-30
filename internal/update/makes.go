@@ -378,6 +378,7 @@ func suppress(ctx context.Context, cfTypeName, schemaError string, config *GitHu
 					log.Printf("Suppressing resource generation for %s", allSchemas.Resources[i].CloudFormationTypeName)
 				case BuildTypeSingularDataSources:
 					allSchemas.Resources[i].SuppressSingularDataSourceGeneration = true
+					allSchemas.Resources[i].SuppressPluralDataSourceGeneration = true
 					log.Printf("Suppressing singular data source generation for %s", allSchemas.Resources[i].CloudFormationTypeName)
 				case BuildTypePluralDataSources:
 					allSchemas.Resources[i].SuppressPluralDataSourceGeneration = true
