@@ -1,6 +1,9 @@
 // Copyright (c) HashiCorp, Inc.
 // SPDX-License-Identifier: MPL-2.0
 
+//go:build generate
+// +build generate
+
 package main
 
 import (
@@ -57,7 +60,11 @@ func main() {
 	g := NewGenerator()
 
 	for _, v := range data {
-		if err := g.GenerateIDExample(v.Resource, v.Path, v.Identifier); err != nil {
+		if err := g.GenerateExampleByID(v.Resource, v.Path, v.Identifier); err != nil {
+			g.Fatalf("error generating Terraform %s import example: %s", v.Resource, err)
+		}
+
+		if err := g.GenerateExampleByStringID(v.Resource, v.Path, v.Identifier); err != nil {
 			g.Fatalf("error generating Terraform %s import example: %s", v.Resource, err)
 		}
 	}
@@ -73,7 +80,7 @@ func NewGenerator() *Generator {
 	}
 }
 
-func (g *Generator) GenerateIDExample(resourceName, directory string, identifier []string) error {
+func (g *Generator) GenerateExampleByID(resourceName, directory string, identifier []string) error {
 	g.Infof("generating Terraform import code for %[1]q ", resourceName)
 	templateData := &TemplateData{
 		ResourceType: resourceName,
@@ -107,6 +114,40 @@ func (g *Generator) GenerateIDExample(resourceName, directory string, identifier
 	return nil
 }
 
+func (g *Generator) GenerateExampleByStringID(resourceName, directory string, identifier []string) error {
+	g.Infof("generating Terraform import code for %[1]q ", resourceName)
+	templateData := &TemplateData{
+		ResourceType: resourceName,
+		Identifier:   "<resource ID>",
+	}
+
+	if len(identifier) != 0 {
+		var out []string
+		for _, i := range identifier {
+			out = append(out, toSnake(i))
+		}
+
+		templateData.Identifier = fmt.Sprintf("\"%s\"", strings.Join(out, "|"))
+	}
+
+	filename := fmt.Sprintf("%simport-by-string-id.tf", directory)
+	d := g.NewUnformattedFileDestination(filename)
+
+	if err := d.CreateDirectories(); err != nil {
+		return err
+	}
+
+	if err := d.WriteTemplate("resource", importExampleTemplateByStringIDBody, templateData); err != nil {
+		return err
+	}
+
+	if err := d.Write(); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func toSnake(s string) string {
 	snake := matchFirstCap.ReplaceAllString(s, "${1}_${2}")
 	snake = matchAllCap.ReplaceAllString(snake, "${1}_${2}")
@@ -122,3 +163,8 @@ type TemplateData struct {
 }
 
 var importExampleTemplateBody = `$ terraform import {{ .ResourceType }}.example {{ .Identifier }}`
+
+var importExampleTemplateByStringIDBody = `import {
+  to = {{ .ResourceType }}.example
+  id = {{ .Identifier }}
+}`
