@@ -84,16 +84,7 @@ func (g *Generator) GenerateExampleByID(resourceName, directory string, identifi
 	g.Infof("generating Terraform import code for %[1]q ", resourceName)
 	templateData := &TemplateData{
 		ResourceType: resourceName,
-		Identifier:   "<resource ID>",
-	}
-
-	if len(identifier) != 0 {
-		var out []string
-		for _, i := range identifier {
-			out = append(out, toSnake(i))
-		}
-
-		templateData.Identifier = fmt.Sprintf("\"%s\"", strings.Join(out, "|"))
+		Identifier:   formatIdentifier(identifier),
 	}
 
 	filename := fmt.Sprintf("%simport.sh", directory)
@@ -118,16 +109,7 @@ func (g *Generator) GenerateExampleByStringID(resourceName, directory string, id
 	g.Infof("generating Terraform import code for %[1]q ", resourceName)
 	templateData := &TemplateData{
 		ResourceType: resourceName,
-		Identifier:   "<resource ID>",
-	}
-
-	if len(identifier) != 0 {
-		var out []string
-		for _, i := range identifier {
-			out = append(out, toSnake(i))
-		}
-
-		templateData.Identifier = fmt.Sprintf("\"%s\"", strings.Join(out, "|"))
+		Identifier:   formatIdentifier(identifier),
 	}
 
 	filename := fmt.Sprintf("%simport-by-string-id.tf", directory)
@@ -146,6 +128,19 @@ func (g *Generator) GenerateExampleByStringID(resourceName, directory string, id
 	}
 
 	return nil
+}
+
+func formatIdentifier(identifier []string) string {
+	if len(identifier) != 0 {
+		var out []string
+		for _, i := range identifier {
+			out = append(out, toSnake(i))
+		}
+
+		return fmt.Sprintf("\"%s\"", strings.Join(out, "|"))
+	}
+
+	return "<resource ID>"
 }
 
 func toSnake(s string) string {
