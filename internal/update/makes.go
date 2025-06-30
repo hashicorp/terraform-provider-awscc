@@ -266,7 +266,8 @@ func handleAWSCC_Error(ctx context.Context, errorLine string, client *github.Cli
 
 	var resourceName string
 	// Check if we're dealing with plural or singular data sources
-	if buildType == BuildTypePluralDataSources {
+	switch buildType {
+	case BuildTypePluralDataSources:
 		// For plural data sources
 		fmt.Println("Processing plural data source:", foundWord)
 		// Use getPluralResourceNames function
@@ -279,7 +280,7 @@ func handleAWSCC_Error(ctx context.Context, errorLine string, client *github.Cli
 			return fmt.Errorf("failed to parse Terraform type name for singular data source: %w", err)
 		}
 		resourceName = fmt.Sprintf("%s_%s_%s", t1, t2, t3)
-	} else if buildType == BuildTypeSingularDataSources {
+	case BuildTypeSingularDataSources:
 		// For singular data sources - existing logic
 		word := strings.ReplaceAll(foundWord, "awscc_", "aws_")
 		t1, t2, t3, err := naming.ParseTerraformTypeName(word)
@@ -287,7 +288,7 @@ func handleAWSCC_Error(ctx context.Context, errorLine string, client *github.Cli
 			return fmt.Errorf("failed to parse Terraform type name for singular data source: %w", err)
 		}
 		resourceName = fmt.Sprintf("%s_%s_%s", t1, t2, t3)
-	} else {
+	default:
 		// For other build types
 		word := strings.ReplaceAll(foundWord, "awscc_", "aws_")
 		t1, t2, t3, err := naming.ParseTerraformTypeName(word)
@@ -313,7 +314,7 @@ func handleUnhandledError(_ context.Context, errorLine string, _ *github.Client,
 	return fmt.Errorf("unhandled schema error: %s", errorLine)
 }
 
-func normalzieNames(cfTypeName string, tfTypeName string) (string, string) {
+func normalizeNames(cfTypeName string, tfTypeName string) (string, string) {
 	// Remove all ':' and '_' and concatenate the parts, then lowercase
 	normalize := func(s string) string {
 		s = strings.ReplaceAll(s, ":", "")
@@ -364,9 +365,9 @@ func suppress(ctx context.Context, cfTypeName, schemaError string, _ *github.Cli
 		if err != nil {
 			return fmt.Errorf("failed to convert CloudFormation type name to Terraform type name: %w", err)
 		}
-		cfTypeName, tfTypeName := normalzieNames(cfTypeName, tfTypeName)
+		cfTypeName, tfTypeName := normalizeNames(cfTypeName, tfTypeName)
 		for i := range allSchemas.Resources {
-			resourceCfTypeName, resourceTypeName := normalzieNames(allSchemas.Resources[i].CloudFormationTypeName, allSchemas.Resources[i].ResourceTypeName)
+			resourceCfTypeName, resourceTypeName := normalizeNames(allSchemas.Resources[i].CloudFormationTypeName, allSchemas.Resources[i].ResourceTypeName)
 
 			if tfTypeName == resourceTypeName || cfTypeName == resourceCfTypeName {
 				switch buildType {

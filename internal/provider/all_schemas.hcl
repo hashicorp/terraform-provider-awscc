@@ -5246,9 +5246,10 @@ resource_schema "aws_wisdom_message_template_version" {
   suppress_plural_data_source_generation = true
 }
 
+//fix this please 
 resource_schema "aws_workspaces_connection_alias" {
   cloudformation_type_name               = "AWS::WorkSpaces::ConnectionAlias"
-  suppress_plural_data_source_generation = true
+  suppress_plural_data_source_generation = false
 }
 
 resource_schema "aws_workspaces_workspaces_pool" {
