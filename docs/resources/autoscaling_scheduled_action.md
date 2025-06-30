@@ -38,6 +38,15 @@ The AWS::AutoScaling::ScheduledAction resource specifies an Amazon EC2 Auto Scal
 
 Import is supported using the following syntax:
 
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_autoscaling_scheduled_action.example
+  id = "scheduled_action_name|auto_scaling_group_name"
+}
+```
+
 The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell

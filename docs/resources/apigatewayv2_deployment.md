@@ -43,6 +43,15 @@ resource "awscc_apigatewayv2_deployment" "example" {
 
 Import is supported using the following syntax:
 
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_apigatewayv2_deployment.example
+  id = "api_id|deployment_id"
+}
+```
+
 The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
