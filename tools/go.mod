@@ -5,7 +5,7 @@ go 1.24.2
 require (
 	github.com/client9/misspell v0.3.4
 	github.com/golangci/golangci-lint v1.64.8
-	github.com/hashicorp/terraform-plugin-docs v0.21.1-0.20250630183124-3b9b212b7696
+	github.com/hashicorp/terraform-plugin-docs v0.21.1-0.20250630194154-5db550975c47
 	github.com/pavius/impi v0.0.3
 )
 

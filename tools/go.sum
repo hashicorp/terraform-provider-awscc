@@ -367,8 +367,8 @@ github.com/hashicorp/terraform-exec v0.23.0 h1:MUiBM1s0CNlRFsCLJuM5wXZrzA3MnPYEs
 github.com/hashicorp/terraform-exec v0.23.0/go.mod h1:mA+qnx1R8eePycfwKkCRk3Wy65mwInvlpAeOwmA7vlY=
 github.com/hashicorp/terraform-json v0.25.0 h1:rmNqc/CIfcWawGiwXmRuiXJKEiJu1ntGoxseG1hLhoQ=
 github.com/hashicorp/terraform-json v0.25.0/go.mod h1:sMKS8fiRDX4rVlR6EJUMudg1WcanxCMoWwTLkgZP/vc=
-github.com/hashicorp/terraform-plugin-docs v0.21.1-0.20250630183124-3b9b212b7696 h1:t7q+hQCs2j1hD1p23HyS2HB1LeRSsWtxC28ZwlMHNLI=
-github.com/hashicorp/terraform-plugin-docs v0.21.1-0.20250630183124-3b9b212b7696/go.mod h1:55DJVyZ7BNK4t/lANcQ1YpemRuS6KsvIO1BbGA+xzGE=
+github.com/hashicorp/terraform-plugin-docs v0.21.1-0.20250630194154-5db550975c47 h1:Lkt61bm6zV2cAB19Lt37S7y/2HLVIOO7qMdVkz9WE9s=
+github.com/hashicorp/terraform-plugin-docs v0.21.1-0.20250630194154-5db550975c47/go.mod h1:55DJVyZ7BNK4t/lANcQ1YpemRuS6KsvIO1BbGA+xzGE=
 github.com/hexops/gotextdiff v1.0.3 h1:gitA9+qJrrTCsiCl7+kh75nPqQt1cx4ZkudSTLoUqJM=
 github.com/hexops/gotextdiff v1.0.3/go.mod h1:pSWU5MAI3yDq+fZBTazCSJysOMbxWL1BSow5/V2vxeg=
 github.com/huandu/xstrings v1.3.3 h1:/Gcsuc1x8JVbJ9/rlye4xZnVAbEkGauT8lbebqcQws4=
