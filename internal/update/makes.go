@@ -103,20 +103,44 @@ func processErrorLine(ctx context.Context, errorLine string, client *github.Clie
 
 	// Check for different error patterns and handle them
 	if strings.Contains(errorLine, "stack overflow") {
-		return handleStackOverflowError(ctx, errorLine, client, currentSchemas, buildType, changes, filePaths, isNewMap)
+		if err := handleStackOverflowError(ctx, errorLine, client, currentSchemas, buildType, changes, filePaths, isNewMap); err != nil {
+			return fmt.Errorf("failed to handle stack overflow error: %w", err)
+		}
 	} else if strings.Contains(errorLine, "AWS_") {
-		return handleAWS_Error(ctx, errorLine, client, currentSchemas, buildType, changes, filePaths, isNewMap)
+		if err := handleAWS_Error(ctx, errorLine, client, currentSchemas, buildType, changes, filePaths, isNewMap); err != nil {
+			return fmt.Errorf("failed to handle AWS_ error: %w", err)
+		}
 	} else if strings.Contains(errorLine, "AWS::") {
-		return handleAWSColonError(ctx, errorLine, client, currentSchemas, buildType, changes, filePaths, isNewMap)
+		if err := handleAWSColonError(ctx, errorLine, client, currentSchemas, buildType, changes, filePaths, isNewMap); err != nil {
+			return fmt.Errorf("failed to handle AWS:: error: %w", err)
+		}
 	} else if strings.Contains(errorLine, "aws_") {
-		return handleAWS_UnderscoreError(ctx, errorLine, client, currentSchemas, buildType, changes, filePaths, isNewMap)
+		if err := handleAWS_UnderscoreError(ctx, errorLine, client, currentSchemas, buildType, changes, filePaths, isNewMap); err != nil {
+			return fmt.Errorf("failed to handle aws_ error: %w", err)
+		}
 	} else if strings.Contains(errorLine, "awscc_") {
-		return handleAWSCC_Error(ctx, errorLine, client, currentSchemas, buildType, changes, filePaths, isNewMap)
+		if err := handleAWSCC_Error(ctx, errorLine, client, currentSchemas, buildType, changes, filePaths, isNewMap); err != nil {
+			return fmt.Errorf("failed to handle awscc_ error: %w", err)
+		}
 	} else if strings.Contains(errorLine, "StatusCode: 403,") {
-		return handleStatusCode403Error(ctx, errorLine, client, currentSchemas, buildType, changes, filePaths, isNewMap)
+		if err := handleStatusCode403Error(ctx, errorLine, client, currentSchemas, buildType, changes, filePaths, isNewMap); err != nil {
+			return fmt.Errorf("failed to handle StatusCode 403 error: %w", err)
+		}
 	} else {
-		return handleUnhandledError(ctx, errorLine, client, currentSchemas, buildType, changes, filePaths, isNewMap)
+		if err := handleUnhandledError(ctx, errorLine, client, currentSchemas, buildType, changes, filePaths, isNewMap); err != nil {
+			return fmt.Errorf("failed to handle unhandled error: %w", err)
+		}
 	}
+
+	if buildType == BuildTypeSingularDataSources || buildType == BuildTypePluralDataSources {
+		err := makeBuild(ctx, client, currentSchemas, BuildTypeSchemas, changes, filePaths, isNewMap)
+		if err != nil {
+			return fmt.Errorf("failed to run make build for schemas: %w", err)
+		}
+		log.Println("Successfully ran make build for schemas after processing error line.")
+	}
+
+	return nil
 }
 
 func handleStackOverflowError(ctx context.Context, errorLine string, client *github.Client, currentSchemas *allschemas.AllSchemas, buildType string, changes *[]string, filePaths *UpdateFilePaths, isNewMap map[string]bool) error {
