@@ -1,3 +1,6 @@
+// Package main provides functionality for building and processing Terraform provider components.
+// This file contains make build orchestration and error handling for schema generation,
+// resource creation, and data source generation.
 package main
 
 import (
@@ -11,19 +14,37 @@ import (
 	allschemas "github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/allschemas"
 )
 
+// Build type constants define the different types of make operations that can be performed.
 const (
-	BuildTypeSchemas             = "schemas"
-	BuildTypeResources           = "resources"
-	BuildTypeSingularDataSources = "singular-data-sources"
-	BuildTypePluralDataSources   = "plural-data-sources"
+	BuildTypeSchemas             = "schemas"               // Generate CloudFormation schemas
+	BuildTypeResources           = "resources"             // Generate Terraform resources
+	BuildTypeSingularDataSources = "singular-data-sources" // Generate singular data sources
+	BuildTypePluralDataSources   = "plural-data-sources"   // Generate plural data sources
+
+	// makesErrorFileMode represents the file permissions for error log files
+	makesErrorFileMode = 0600
 )
 
+// makeBuild orchestrates the build process for different types of Terraform provider components.
+// It executes make commands for the specified buildType and processes any errors that occur,
+// applying suppressions and handling various error patterns.
+//
+// Parameters:
+//   - ctx: Context for cancellation and logging
+//   - config: GitHub configuration for issue creation
+//   - currentSchemas: Current schema definitions
+//   - buildType: Type of build to perform (schemas, resources, data-sources)
+//   - changes: Slice to append change descriptions to
+//   - filePaths: Configuration paths for various files
+//   - isNewMap: Map tracking which resources are new vs existing
 func makeBuild(ctx context.Context, config *GitHubConfig, currentSchemas *allschemas.AllSchemas, buildType string, changes *[]string, filePaths *UpdateFilePaths, isNewMap map[string]bool) error {
+	// Validate buildType parameter
 	if buildType != BuildTypeSchemas && buildType != BuildTypeResources && buildType != BuildTypeSingularDataSources && buildType != BuildTypePluralDataSources {
 		return fmt.Errorf("invalid build type: %s, must be '%s', '%s', '%s', or '%s'", buildType, BuildTypeSchemas, BuildTypeResources, BuildTypeSingularDataSources, BuildTypePluralDataSources)
 	}
 
-	file, err := os.OpenFile(filePaths.RunMakesErrors, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0600)
+	// Open error log file for capturing make command errors
+	file, err := os.OpenFile(filePaths.RunMakesErrors, os.O_RDWR|os.O_CREATE|os.O_TRUNC, makesErrorFileMode)
 	if err != nil {
 		return fmt.Errorf("failed to open error log file: %w", err)
 	}
@@ -31,19 +52,23 @@ func makeBuild(ctx context.Context, config *GitHubConfig, currentSchemas *allsch
 
 	var loopCount = 1
 
+	// Process errors iteratively until all are handled
 	for i := 0; i < loopCount; i++ {
 		log.Println("Running make command for", buildType)
-		if err := checkoutSchemas(ctx, filePaths.SuppressionCheckout); err != nil {
+
+		// Ensure schemas are up to date before building
+		if err := checkoutSchemas(filePaths.SuppressionCheckout); err != nil {
 			return fmt.Errorf("failed to checkout schemas: %w", err)
 		}
 
+		// Clear previous error log
 		err = os.Truncate(filePaths.RunMakesErrors, 0)
 		if err != nil {
 			return fmt.Errorf("failed to clear makes_errors.txt: %w", err)
 		}
 		file.Close()
 
-		// Generate a random filename for the tee output
+		// Create temporary file for capturing make command output
 		tmpFile, err := os.CreateTemp("", "makes_output_*.txt")
 		if err != nil {
 			return fmt.Errorf("failed to create temporary output file: %w", err)
@@ -51,19 +76,13 @@ func makeBuild(ctx context.Context, config *GitHubConfig, currentSchemas *allsch
 		tmpFileName := tmpFile.Name()
 		tmpFile.Close()
 
+		// Execute make command with error filtering
 		command := fmt.Sprintf("make %s 2>&1 | tee %s | grep \"error\" > %s", buildType, tmpFileName, filePaths.RunMakesErrors)
 		if err := execCommand("sh", "-c", command); err != nil {
 			fmt.Fprintf(os.Stderr, "Make command failed: %v\nSee makes_output.txt for full output.\n", err)
 		}
 
-		// Optionally, you can clean up the temp file after use if needed:
-		// defer os.Remove(tmpFileName)
-		/* I think the grep is erroring out so no returns
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "Make command failed: %v\nSee makes_output.txt for full output.\n", err)
-			return fmt.Errorf("failed to execute make %s command: %w", buildType, err)
-		}
-		*/
+		// Read and process errors from the error log
 		runMakesErrorData, err := os.ReadFile(filePaths.RunMakesErrors)
 		if err != nil {
 			return fmt.Errorf("failed to read error log file: %w", err)
@@ -73,6 +92,7 @@ func makeBuild(ctx context.Context, config *GitHubConfig, currentSchemas *allsch
 			return fmt.Errorf("error occurred after reading error log file: %w", err)
 		}
 
+		// Process each error line individually
 		makesErrors := strings.Split(string(runMakesErrorData), "\n")
 		for _, errorLine := range makesErrors {
 			err := processErrorLine(ctx, errorLine, config, currentSchemas, buildType, changes, filePaths, isNewMap)
@@ -80,10 +100,12 @@ func makeBuild(ctx context.Context, config *GitHubConfig, currentSchemas *allsch
 				log.Printf("Error processing line: %v", err)
 			}
 		}
+
+		// Reset loop and set count based on number of errors to process
 		i = 0
 		loopCount = len(makesErrors)
 		for idx, errorLine := range makesErrors {
-			fmt.Printf("lines[%d]: %q\n", idx, errorLine)
+			log.Printf("lines[%d]: %q\n", idx, errorLine)
 		}
 		print("Processed ", len(makesErrors), " lines from error log file.\n")
 		for _, l := range makesErrors {
@@ -93,14 +115,17 @@ func makeBuild(ctx context.Context, config *GitHubConfig, currentSchemas *allsch
 
 	return nil
 }
+
+// processErrorLine analyzes individual error lines and applies appropriate handling strategies.
+// It identifies different error patterns and delegates to specific handler functions.
 func processErrorLine(ctx context.Context, errorLine string, config *GitHubConfig, currentSchemas *allschemas.AllSchemas, buildType string, changes *[]string, filePaths *UpdateFilePaths, isNewMap map[string]bool) error {
 	if errorLine == "" {
 		return nil // Skip empty lines
 	}
 
-	fmt.Printf("Found an entry in the error log: %s during make %s \n", errorLine, buildType)
+	log.Printf("Found an entry in the error log: %s during make %s \n", errorLine, buildType)
 
-	// Check for different error patterns and handle them
+	// Dispatch to appropriate error handler based on error pattern
 	if strings.Contains(errorLine, "stack overflow") {
 		if err := handleStackOverflowError(ctx, errorLine, config, currentSchemas, buildType, changes, filePaths, isNewMap); err != nil {
 			return fmt.Errorf("failed to handle stack overflow error: %w", err)
@@ -131,6 +156,7 @@ func processErrorLine(ctx context.Context, errorLine string, config *GitHubConfi
 		}
 	}
 
+	// For data source builds, regenerate schemas to ensure consistency
 	if buildType == BuildTypeSingularDataSources || buildType == BuildTypePluralDataSources {
 		err := makeBuild(ctx, config, currentSchemas, BuildTypeSchemas, changes, filePaths, isNewMap)
 		if err != nil {
@@ -142,12 +168,15 @@ func processErrorLine(ctx context.Context, errorLine string, config *GitHubConfi
 	return nil
 }
 
+// handleStackOverflowError processes stack overflow errors by extracting the resource name
+// from the last processed resource file and applying suppression.
 func handleStackOverflowError(ctx context.Context, errorLine string, config *GitHubConfig, currentSchemas *allschemas.AllSchemas, buildType string, changes *[]string, filePaths *UpdateFilePaths, isNewMap map[string]bool) error {
 	log.Println("Detected stack overflow error, attempting to extract resource name from logs.")
-	// Try to extract resource name from stack overflow error using emit_attribute_last_tftype.txt
+
+	// Extract resource name from the last resource tracking file
 	data, err := os.ReadFile(filePaths.LastResource)
 	if err != nil {
-		fmt.Printf("Failed to read %s: %v\n", filePaths.LastResource, err)
+		log.Printf("Failed to read %s: %v\n", filePaths.LastResource, err)
 		return fmt.Errorf("failed to read %s: %w", filePaths.LastResource, err)
 	}
 	lines := strings.Split(strings.TrimSpace(string(data)), "\n")
@@ -162,14 +191,19 @@ func handleStackOverflowError(ctx context.Context, errorLine string, config *Git
 		log.Println("Resource name not found for stack overflow:", resourceName)
 		return fmt.Errorf("resource name not found for stack overflow: %s", resourceName)
 	}
+
+	// Apply suppression for the problematic resource
 	new := isNew(resourceName, isNewMap)
 	err = suppress(ctx, resourceName, errorLine, config, new, buildType, changes, filePaths, currentSchemas)
-	fmt.Print("Suppression result: ", err)
+	log.Printf("Suppression result: %v", err)
 	return err
 }
 
+// handleAWS_Error processes errors related to AWS CloudFormation schema files.
+// It extracts the resource name from error lines containing AWS_ prefixed schema paths.
 func handleAWS_Error(ctx context.Context, errorLine string, config *GitHubConfig, currentSchemas *allschemas.AllSchemas, buildType string, changes *[]string, filePaths *UpdateFilePaths, isNewMap map[string]bool) error {
-	// "../service/cloudformation/schemas/AWS_AccessAnalyzer_Analyzer.json: emitting schema code:"
+	// Parse error line to extract resource name from schema file path
+	// Example: "../service/cloudformation/schemas/AWS_AccessAnalyzer_Analyzer.json: emitting schema code:"
 	errorLineParts := strings.Split(errorLine, " ")
 	var resourceName string
 	for _, errorLinePart := range errorLineParts {
@@ -182,13 +216,19 @@ func handleAWS_Error(ctx context.Context, errorLine string, config *GitHubConfig
 	if resourceName == "" {
 		return fmt.Errorf("failed to extract resource name from error line: %s", errorLine)
 	}
+
 	new := isNew(resourceName, isNewMap)
 	return suppress(ctx, resourceName, errorLine, config, new, buildType, changes, filePaths, currentSchemas)
 }
 
+// handleAWSColonError processes errors related to AWS CloudFormation type descriptions.
+// It handles cases where CloudFormation types are not found or are no longer available.
 func handleAWSColonError(ctx context.Context, errorLine string, config *GitHubConfig, currentSchemas *allschemas.AllSchemas, buildType string, changes *[]string, filePaths *UpdateFilePaths, isNewMap map[string]bool) error {
-	// Deleted Resource
-	/* error loading CloudFormation Resource Provider Schema for aws_datasync_storage_system: describing CloudFormation type: operation error CloudFormation: DescribeType, https response error StatusCode: 404, RequestID: b41adbc2-cb4f-4e06-93c0-b6cb2bbae150, TypeNotFoundException: The type 'AWS::DataSync::StorageSystem' cannot be found. */
+	// Parse error lines containing AWS:: type references
+	/* Example: error loading CloudFormation Resource Provider Schema for aws_datasync_storage_system:
+	   describing CloudFormation type: operation error CloudFormation: DescribeType,
+	   https response error StatusCode: 404, RequestID: b41adbc2-cb4f-4e06-93c0-b6cb2bbae150,
+	   TypeNotFoundException: The type 'AWS::DataSync::StorageSystem' cannot be found. */
 	errorParts := strings.Split(errorLine, " ")
 	if len(errorParts) < 2 {
 		return fmt.Errorf("failed to parse 404 error line: %s", errorLine)
@@ -268,7 +308,7 @@ func handleAWSCC_Error(ctx context.Context, errorLine string, config *GitHubConf
 	switch buildType {
 	case BuildTypePluralDataSources:
 		// For plural data sources
-		fmt.Println("Processing plural data source:", foundWord)
+		log.Printf("Processing plural data source: %s", foundWord)
 		// Use getPluralResourceNames function
 		matchedResource, _, err := getPluralResourceNames(foundWord, isNewMap)
 		if err != nil {
@@ -297,7 +337,7 @@ func handleAWSCC_Error(ctx context.Context, errorLine string, config *GitHubConf
 		resourceName = fmt.Sprintf("%s_%s_%s", t1, t2, t3)
 	}
 
-	fmt.Println("Word found in error line data source:", resourceName)
+	log.Printf("Word found in error line data source: %s", resourceName)
 
 	if resourceName == "" {
 		return fmt.Errorf("failed to extract resource name from error line: %s", errorLine)
@@ -305,16 +345,28 @@ func handleAWSCC_Error(ctx context.Context, errorLine string, config *GitHubConf
 	return suppress(ctx, resourceName, errorLine, config, true, buildType, changes, filePaths, currentSchemas)
 }
 
+// handleStatusCode403Error processes HTTP 403 (Forbidden) errors.
+// These typically indicate authentication or permission issues with AWS API access.
 func handleStatusCode403Error(errorLine string) error {
 	return fmt.Errorf("authentication failed: no valid AWS credentials")
 }
 
+// handleUnhandledError processes error lines that don't match any known patterns.
+// It logs the error for debugging and returns a formatted error message.
 func handleUnhandledError(errorLine string) error {
 	return fmt.Errorf("unhandled schema error: %s", errorLine)
 }
 
+// normalizeNames normalizes CloudFormation and Terraform type names for comparison.
+// It removes separators and converts to lowercase to enable case-insensitive matching.
+//
+// Parameters:
+//   - cfTypeName: CloudFormation type name (e.g., "AWS::S3::Bucket")
+//   - tfTypeName: Terraform type name (e.g., "aws_s3_bucket")
+//
+// Returns normalized versions of both names.
 func normalizeNames(cfTypeName string, tfTypeName string) (string, string) {
-	// Remove all ':' and '_' and concatenate the parts, then lowercase
+	// Remove all separators and convert to lowercase for comparison
 	normalize := func(s string) string {
 		s = strings.ReplaceAll(s, ":", "")
 		s = strings.ReplaceAll(s, "_", "")
@@ -351,12 +403,16 @@ func suppress(ctx context.Context, cfTypeName, schemaError string, config *GitHu
 	*changes = append(*changes, fmt.Sprintf("%s - %s", cfTypeName, reason))
 
 	// Use empty issue URL instead
-	issueURL := ""
-	var err error
+	issueURL, err := createIssue(ctx, cfTypeName, schemaError, config, filePaths.RepositoryLink)
+	if err != nil {
+		log.Printf("Warning: Failed to create GitHub issue: %v", err)
+		issueURL = "" // Use empty string if issue creation fails
+	}
+
 	// Add to all_schemas.hcl
 	if buildType != BuildTypeSchemas || new {
 		tfTypeName, err := cfTypeNameToTerraformTypeName(cfTypeName)
-		fmt.Println("Converting CloudFormation type name to Terraform type name:", cfTypeName, "->", tfTypeName)
+		log.Printf("Converting CloudFormation type name to Terraform type name: %s -> %s", cfTypeName, tfTypeName)
 		if tfTypeName == "" && cfTypeName != "" {
 			err = nil
 			tfTypeName = strings.ReplaceAll(cfTypeName, "::", "_")
@@ -412,9 +468,8 @@ func suppress(ctx context.Context, cfTypeName, schemaError string, config *GitHu
 				sort.Slice(allSchemas.Resources, func(i, j int) bool {
 					return allSchemas.Resources[i].ResourceTypeName < allSchemas.Resources[j].ResourceTypeName
 				})
-				fmt.Printf("Suppressing resource generation for %s in all_schemas.hcl\n", cfTypeName)
+				log.Printf("Suppressing resource generation for %s in all_schemas.hcl\n", cfTypeName)
 		*/
-
 	}
 
 	err = writeSchemasToHCLFile(allSchemas, filePaths.AllSchemasHCL)
@@ -447,7 +502,7 @@ func addSchemaToCheckout(resource string, filePaths *UpdateFilePaths) error {
 	log.Println("Successfully wrote to file")
 	return nil
 }
-func checkoutSchemas(ctx context.Context, suppressionData string) error {
+func checkoutSchemas(suppressionData string) error {
 	info, err := os.Stat(suppressionData)
 	if err != nil {
 		if os.IsNotExist(err) {
@@ -485,18 +540,18 @@ func checkoutSchemas(ctx context.Context, suppressionData string) error {
 
 func GetResourceFromLog(filePaths *UpdateFilePaths) (string, error) {
 	var resourceName string
+
 	logData, err := os.ReadFile(filePaths.RunMakesResourceLog)
 	log.Println("Reading log file:", filePaths.RunMakesResourceLog)
 	if err != nil {
 		return "", fmt.Errorf("failed to read logs file: %w", err)
 	}
 	logLines := strings.Split(strings.TrimSpace(string(logData)), "\n")
-	if len(logLines) > 0 {
+	if len(logLines) > 0 && strings.TrimSpace(logLines[0]) != "" {
 		log.Println("Log lines found:", logLines)
 		resourceName = logLines[len(logLines)-1]
-	} else {
-		return "", fmt.Errorf("no resource name found in logs")
 	}
+	// If empty or no valid lines, return empty string (not an error)
 	return resourceName, nil
 }
 

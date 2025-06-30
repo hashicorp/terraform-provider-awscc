@@ -1,8 +1,8 @@
 package main
 
 import (
-	"fmt"
 	"io/fs"
+	"log"
 	"os"
 	"path/filepath"
 	"strings"
@@ -93,7 +93,11 @@ resource_schema "aws_lambda_function" {
 	if err != nil {
 		t.Fatalf("Failed to get current directory: %v", err)
 	}
-	defer os.Chdir(originalDir)
+	defer func() {
+		if chdirErr := os.Chdir(originalDir); chdirErr != nil {
+			t.Errorf("Failed to change back to original directory: %v", chdirErr)
+		}
+	}()
 	t.Logf("Current directory: %s", originalDir)
 
 	err = os.Chdir(testDir)
@@ -221,7 +225,7 @@ resource_schema "aws_lambda_function" {
 			"AWS::Lambda::Function - New Resource", // Plural data source suppressed, singular allowed
 		}
 
-		fmt.Printf("Testing partial suppression with changes: %v\n", changes)
+		log.Printf("Testing partial suppression with changes: %v\n", changes)
 
 		err := makeChangelog(&changes, filePaths)
 		if err != nil {
@@ -247,7 +251,7 @@ resource_schema "aws_lambda_function" {
 			t.Errorf("Expected to find AWS::Lambda::Function singular data source entry")
 		}
 
-		fmt.Printf("Test Case 3 passed - Partial suppression handled correctly\n")
+		log.Printf("Test Case 3 passed - Partial suppression handled correctly\n")
 	})
 
 	// Test Case 4: Mixed changes including suppressions
@@ -264,7 +268,7 @@ resource_schema "aws_lambda_function" {
 			"AWS::Lambda::Function - New Resource",
 		}
 
-		fmt.Printf("Testing mixed changes with suppressions: %v\n", changes)
+		log.Printf("Testing mixed changes with suppressions: %v\n", changes)
 
 		err := makeChangelog(&changes, filePaths)
 		if err != nil {
@@ -293,15 +297,15 @@ resource_schema "aws_lambda_function" {
 			t.Errorf("Should not have AWS::EC2::VPC in public changelog (suppressed)")
 		}
 
-		fmt.Printf("Test Case 4 passed - Mixed changes handled correctly\n")
+		log.Printf("Test Case 4 passed - Mixed changes handled correctly\n")
 	})
 
 	// Print the final test directory path for review
-	fmt.Printf("\n=== TEST COMPLETED ===\n")
-	fmt.Printf("Test files are preserved in: %s\n", testDir)
-	fmt.Printf("You can review the following files:\n")
-	fmt.Printf("- %s (updated changelog)\n", testChangelog)
-	fmt.Printf("- %s (test schema file)\n", testAllSchemasHCL)
+	log.Printf("\n=== TEST COMPLETED ===\n")
+	log.Printf("Test files are preserved in: %s\n", testDir)
+	log.Printf("You can review the following files:\n")
+	log.Printf("- %s (updated changelog)\n", testChangelog)
+	log.Printf("- %s (test schema file)\n", testAllSchemasHCL)
 
 	// List all files in test directory
 	err = filepath.WalkDir(testDir, func(path string, d fs.DirEntry, err error) error {
@@ -310,7 +314,7 @@ resource_schema "aws_lambda_function" {
 		}
 		if !d.IsDir() {
 			relPath, _ := filepath.Rel(testDir, path)
-			fmt.Printf("- %s\n", filepath.Join(testDir, relPath))
+			log.Printf("- %s\n", filepath.Join(testDir, relPath))
 		}
 		return nil
 	})
@@ -318,7 +322,7 @@ resource_schema "aws_lambda_function" {
 		t.Errorf("Failed to list test directory contents: %v", err)
 	}
 
-	fmt.Printf("\nTo clean up test files later, run: rm -rf %s\n", testDir)
+	log.Printf("\nTo clean up test files later, run: rm -rf %s\n", testDir)
 }
 
 // Test helper function to verify changelog structure
@@ -339,10 +343,7 @@ FEATURES:
 		"AWS::Lambda::Function - New Plural Data Source",
 	}
 
-	result, err := writeChangelog(originalContent, changes)
-	if err != nil {
-		t.Fatalf("writeChangelog failed: %v", err)
-	}
+	result := writeChangelog(originalContent, changes)
 
 	// Verify structure
 	if !strings.Contains(result, "## 1.47.0") {
@@ -361,6 +362,6 @@ FEATURES:
 		t.Errorf("Expected resource entry for AWS::S3::Bucket")
 	}
 
-	fmt.Printf("Changelog structure test passed\n")
-	fmt.Printf("Generated changelog preview:\n%s\n", result[:500])
+	log.Printf("Changelog structure test passed\n")
+	log.Printf("Generated changelog preview:\n%s\n", result[:500])
 }

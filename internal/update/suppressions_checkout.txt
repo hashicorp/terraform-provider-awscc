@@ -1,4 +1,0 @@
-internal/service/cloudformation/schemas/AWS_QuickSight_Analysis.json
-internal/service/cloudformation/schemas/AWS_QuickSight_Dashboard.json
-internal/service/cloudformation/schemas/AWS_QuickSight_DataSet.json
-internal/service/cloudformation/schemas/AWS_QuickSight_Template.json

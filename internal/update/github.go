@@ -1,3 +1,5 @@
+// Package main provides GitHub integration functionality for creating pull requests
+// and managing repository interactions during the schema update process.
 package main
 
 import (
@@ -12,43 +14,68 @@ import (
 	"github.com/google/go-github/v72/github"
 )
 
-// GitHubConfig encapsulates all GitHub-related configuration and client information
+const (
+	// branchRandomSuffixModulo limits the random suffix for branch names to avoid excessively long names
+	branchRandomSuffixModulo = 10000
+)
+
+// GitHubConfig encapsulates all GitHub-related configuration and client information.
+// It contains the authenticated client, repository details, and metadata needed
+// for creating pull requests and issues.
 type GitHubConfig struct {
-	Client      *github.Client
-	Repository  string
-	RepoOwner   string
-	RepoName    string
-	CurrentDate string
+	Client      *github.Client // Authenticated GitHub API client
+	Repository  string         // Full repository path (owner/name)
+	RepoOwner   string         // Repository owner (organization or user)
+	RepoName    string         // Repository name
+	CurrentDate string         // Current date for use in commit messages and branch names
 }
 
-// NewGitHubConfig creates a new GitHubConfig with the given parameters
+// NewGitHubConfig creates a new GitHubConfig with the given parameters.
+// It automatically extracts repository owner and name from the repository link if provided,
+// otherwise falls back to default values. The full repository path is constructed for API calls.
+//
+// Parameters:
+//   - client: Authenticated GitHub API client (can be nil for testing)
+//   - repositoryLink: Full GitHub repository URL (e.g., "https://github.com/owner/repo")
+//   - date: Current date string for use in commit messages and branch names
+//
+// Returns a configured GitHubConfig ready for use in API operations.
 func NewGitHubConfig(client *github.Client, repositoryLink string, date string) *GitHubConfig {
 	config := &GitHubConfig{
 		Client:      client,
 		CurrentDate: date,
-		RepoOwner:   "hashicorp",
-		RepoName:    "terraform-provider-awscc",
+		RepoOwner:   DefaultRepoOwner,
+		RepoName:    DefaultRepoName,
 	}
 
-	// If repository link is provided, use it to extract owner and name
+	// Extract owner and repository name from the repository link if provided
 	if repositoryLink != "" {
-		parts := strings.Split(strings.TrimPrefix(repositoryLink, "https://github.com/"), "/")
+		parts := strings.Split(strings.TrimPrefix(repositoryLink, GitHubURLPrefix), "/")
 		if len(parts) >= 2 {
 			config.RepoOwner = parts[0]
 			config.RepoName = parts[1]
 		}
 	}
 
-	// Set full repository path
+	// Construct full repository path for GitHub API calls
 	config.Repository = config.RepoOwner + "/" + config.RepoName
 
 	return config
 }
 
+// createRemoteBranch creates and pushes a new remote branch with a time-based suffix.
+// The branch name includes the current date and a random component to avoid collisions.
+//
+// Parameters:
+//   - currentData: Date string to include in the branch name
+//
+// Returns the created branch name or an error if the push operation fails.
 func createRemoteBranch(currentData string) (string, error) {
-	// Add a random component to avoid branch name collisions
-	randomSuffix := fmt.Sprintf("%d", time.Now().UnixNano()%10000)
+	// Generate unique branch name with timestamp to avoid conflicts
+	randomSuffix := fmt.Sprintf("%d", time.Now().UnixNano()%branchRandomSuffixModulo)
 	name := fmt.Sprintf("f-%s-schema-updates-%s", currentData, randomSuffix)
+
+	// Push the branch to origin with upstream tracking
 	cmd := exec.Command("git", "push", "-u", "origin", name)
 	if err := cmd.Run(); err != nil {
 		return "", fmt.Errorf("failed to push branch: %w", err)
@@ -56,31 +83,55 @@ func createRemoteBranch(currentData string) (string, error) {
 	return name, nil
 }
 
-func createPullRequest(ctx context.Context, config *GitHubConfig, changes *[]string, pullRequest string, filepaths *UpdateFilePaths) (string, error) {
+// createPullRequest creates a new pull request on GitHub with the provided changes and test results.
+// It constructs a detailed PR description including all schema changes and test execution data.
+//
+// Parameters:
+//   - ctx: Context for API request cancellation and timeout handling
+//   - config: GitHub configuration containing client and repository information
+//   - changes: Slice of change descriptions to include in the PR body
+//   - pullRequest: Name of the branch containing the changes
+//   - filepaths: Configuration containing repository information
+//   - execData: Test execution results to include in the PR description
+//
+// Returns the URL of the created pull request or an error if creation fails.
+func createPullRequest(ctx context.Context, config *GitHubConfig, changes *[]string, pullRequest string, filepaths *UpdateFilePaths, execData string) (string, error) {
 	repoOwner := config.RepoOwner
 	repoName := config.RepoName
 	client := config.Client
 	currentData := config.CurrentDate
 
-	// If repository link is provided in filepaths, use it to extract owner and name
+	// Override repository details if specified in filepaths configuration
 	if filepaths.RepositoryLink != "" {
-		parts := strings.Split(strings.TrimPrefix(filepaths.RepositoryLink, "https://github.com/"), "/")
+		parts := strings.Split(strings.TrimPrefix(filepaths.RepositoryLink, GitHubURLPrefix), "/")
 		if len(parts) >= 2 {
 			repoOwner = parts[0]
 			repoName = parts[1]
 		}
 	}
 
+	// Construct pull request title with current date
 	prTitle := fmt.Sprintf("Schema Updates for %s", currentData)
 
-	prBody := ""
+	// Build PR body with changes section
+	prBody := "## Changes\n\n"
 
 	for _, change := range *changes {
 		prBody += fmt.Sprintf("- %s\n", change)
 	}
-	if prBody == "" {
-		prBody = "No schema changes detected."
+	if len(*changes) == 0 {
+		prBody += "No schema changes detected.\n"
 	}
+
+	// Include test results if available
+	if execData != "" {
+		prBody += "\n## Test Results\n\n"
+		prBody += "```\n"
+		prBody += execData
+		prBody += "\n```\n"
+	}
+
+	// Create the pull request with all necessary fields
 	prRequest := &github.NewPullRequest{
 		Title:               &prTitle,
 		Body:                &prBody,
@@ -89,6 +140,8 @@ func createPullRequest(ctx context.Context, config *GitHubConfig, changes *[]str
 		HeadRepo:            github.Ptr(config.Repository),
 		MaintainerCanModify: github.Ptr(true),
 	}
+
+	// Submit the pull request to GitHub
 	pr, _, err := client.PullRequests.Create(ctx, repoOwner, repoName, prRequest)
 	if err != nil {
 		return "", fmt.Errorf("failed to create pull request: %w", err)
@@ -102,7 +155,7 @@ func createPullRequest(ctx context.Context, config *GitHubConfig, changes *[]str
 
 	log.Printf("Pull request created: %s\n", pr.GetHTMLURL())
 
-	// Add labels to the pull request
+	// Apply appropriate labels to categorize the pull request
 	labels := []string{"bug", "resource-suppression", "prioritized"}
 	_, _, err = client.Issues.AddLabelsToIssue(ctx, repoOwner, repoName, pr.GetNumber(), labels)
 	if err != nil {
@@ -113,7 +166,7 @@ func createPullRequest(ctx context.Context, config *GitHubConfig, changes *[]str
 	return pr.GetHTMLURL(), nil
 }
 
-func createIssue(ctx context.Context, resource, schemaError string, config *GitHubConfig, repositoryLink string) (string, error) {
+func createIssue(ctx context.Context, resource string, error string, config *GitHubConfig, repositoryLink string) (string, error) {
 	if config == nil || config.Client == nil {
 		return "", fmt.Errorf("GitHub client not available - cannot create issue for resource %s", resource)
 	}
@@ -124,7 +177,7 @@ func createIssue(ctx context.Context, resource, schemaError string, config *GitH
 
 	// If repository link is provided, use it to extract owner and name
 	if repositoryLink != "" {
-		parts := strings.Split(strings.TrimPrefix(repositoryLink, "https://github.com/"), "/")
+		parts := strings.Split(strings.TrimPrefix(repositoryLink, GitHubURLPrefix), "/")
 		if len(parts) >= 2 {
 			repoOwner = parts[0]
 			repoName = parts[1]
@@ -133,7 +186,7 @@ func createIssue(ctx context.Context, resource, schemaError string, config *GitH
 
 	issueTitle := fmt.Sprintf("Resource Suppression: %s", resource)
 	issueBody := createFormattedIssue(
-		fmt.Sprintf("Suppress generation of resource `%s` due to schema error.", resource),
+		fmt.Sprintf("Suppress generation of resource `%s` due to %s.", resource, error),
 		fmt.Sprintf("`%s`", resource),
 	)
 
@@ -213,8 +266,8 @@ func createFormattedPullRequest(ctx context.Context, config *GitHubConfig, testR
 	currentData := config.CurrentDate
 
 	// If repository is a GitHub URL, parse it to extract owner and repo name
-	if strings.HasPrefix(config.Repository, "https://github.com/") {
-		parts := strings.Split(strings.TrimPrefix(config.Repository, "https://github.com/"), "/")
+	if strings.HasPrefix(config.Repository, GitHubURLPrefix) {
+		parts := strings.Split(strings.TrimPrefix(config.Repository, GitHubURLPrefix), "/")
 		if len(parts) >= 2 {
 			repoOwner = parts[0]
 			repoName = parts[1]
@@ -257,15 +310,6 @@ func createFormattedPullRequest(ctx context.Context, config *GitHubConfig, testR
 	log.Printf("Labels added to pull request: %v\n", labels)
 
 	return pr.GetHTMLURL(), nil
-}
-
-// createFormattedPullRequestWithTests creates a pull request with our standardized template
-func createFormattedPullRequestWithTests(ctx context.Context, config *GitHubConfig, pullRequest string, version string) (string, error) {
-	// Get the stored test results from the global variable
-	testResults := GetAcceptanceTestResults()
-
-	// Create the formatted PR with the test results
-	return createFormattedPullRequest(ctx, config, testResults, version, pullRequest)
 }
 
 // RunAcceptanceTests executes the acceptance tests and captures the output for the PR description
@@ -319,7 +363,7 @@ func submitOnGit(config *GitHubConfig, changes *[]string, filePaths *UpdateFileP
 	}
 
 	// Create a pull request with the changes
-	prURL, err := createPullRequest(context.Background(), config, changes, branchName, filePaths)
+	prURL, err := createPullRequest(context.Background(), config, changes, branchName, filePaths, execData)
 	if err != nil {
 		return "", fmt.Errorf("failed to create pull request: %w", err)
 	}

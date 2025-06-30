@@ -1,7 +1,11 @@
+// Package main provides changelog generation and management functionality.
+// This file handles creating and updating changelog entries for new resources,
+// data sources, and schema changes in the Terraform provider.
 package main
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"sort"
 	"strconv"
@@ -12,33 +16,49 @@ import (
 	allschemas "github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/allschemas"
 )
 
-// generateDataSourceChanges takes changes and filepaths, parses allSchemas, and adds data source entries
-func generateDataSourceChanges(changes []string, filePaths *UpdateFilePaths) ([]string, error) {
-	fmt.Printf("generateDataSourceChanges called with %d changes\n", len(changes))
+const (
+	// changelogSplitParts represents the expected number of parts when splitting a change entry by " - "
+	changelogSplitParts = 2
+	// changelogFileMode represents the file permissions for CHANGELOG.md (readable by all, writable by owner)
+	changelogFileMode = 0644
+)
 
-	// Parse the AllSchemasHCL file to get all schemas
+// generateDataSourceChanges expands resource changes to include corresponding data source entries.
+// For each new resource, it automatically generates entries for both singular and plural data sources,
+// taking into account suppression settings from the schema configuration.
+//
+// Parameters:
+//   - changes: Slice of existing change descriptions
+//   - filePaths: Configuration containing paths to schema files
+//
+// Returns an expanded slice including original changes plus auto-generated data source entries.
+func generateDataSourceChanges(changes []string, filePaths *UpdateFilePaths) ([]string, error) {
+	log.Printf("generateDataSourceChanges called with %d changes\n", len(changes))
+
+	// Load all schema configurations to check suppression settings
 	allSchemas, err := parseSchemaToStruct(filePaths.AllSchemasHCL, allschemas.AllSchemas{})
 	if err != nil {
 		return changes, fmt.Errorf("failed to parse AllSchemasHCL: %w", err)
 	}
 
-	fmt.Printf("Parsed %d resources from AllSchemasHCL\n", len(allSchemas.Resources))
+	log.Printf("Parsed %d resources from AllSchemasHCL\n", len(allSchemas.Resources))
 
-	// Create a map of CloudFormationTypeName to ResourceAllSchema for quick lookup
+	// Create lookup map for quick resource schema access by CloudFormation type name
 	cfTypeToResource := make(map[string]allschemas.ResourceAllSchema)
 	for _, resource := range allSchemas.Resources {
 		cfTypeToResource[resource.CloudFormationTypeName] = resource
-		fmt.Printf("  Found resource: %s\n", resource.CloudFormationTypeName)
+		log.Printf("  Found resource: %s\n", resource.CloudFormationTypeName)
 	}
-	// Process each change entry
+
+	// Process each change and generate corresponding data source entries
 	var newChanges []string
 	for _, change := range changes {
-		fmt.Printf("Processing change: %s\n", change)
+		log.Printf("Processing change: %s\n", change)
 
-		// Separate each entry by " - " into resource and message
-		parts := strings.SplitN(change, " - ", 2)
-		if len(parts) != 2 {
-			fmt.Printf("  Skipping malformed change: %s\n", change)
+		// Parse change entry format: "ResourceName - Description"
+		parts := strings.SplitN(change, " - ", changelogSplitParts)
+		if len(parts) != changelogSplitParts {
+			log.Printf("  Skipping malformed change: %s\n", change)
 			newChanges = append(newChanges, change)
 			continue
 		}
@@ -46,77 +66,81 @@ func generateDataSourceChanges(changes []string, filePaths *UpdateFilePaths) ([]
 		resource := parts[0]
 		message := parts[1]
 
-		fmt.Printf("  Resource: %s, Message: %s\n", resource, message)
+		log.Printf("  Resource: %s, Message: %s\n", resource, message)
 
-		// Add the original change
+		// Always include the original resource change
 		newChanges = append(newChanges, change)
 
-		// Check if this is a suppression message - if so, skip data source generation
+		// Skip data source generation for suppressed resources
 		if isSuppressionMessage(message) {
-			fmt.Printf("  Skipping data source generation for suppressed resource: %s\n", resource)
+			log.Printf("  Skipping data source generation for suppressed resource: %s\n", resource)
 			continue
 		}
 
-		// Check if this entry is in allSchemas.Resources
+		// Generate data source entries if the resource exists in schemas and isn't suppressed
 		if resourceSchema, exists := cfTypeToResource[resource]; exists {
-			fmt.Printf("  Found resource %s in allSchemas\n", resource)
+			log.Printf("  Found resource %s in allSchemas\n", resource)
 
-			// Check if the resource has a suppression reason set
+			// Check resource-level suppression
 			if resourceSchema.SuppressionReason != "" {
-				fmt.Printf("  Resource %s has suppression reason: %s - skipping data source generation\n", resource, resourceSchema.SuppressionReason)
+				log.Printf("  Resource %s has suppression reason: %s - skipping data source generation\n", resource, resourceSchema.SuppressionReason)
 				continue
 			}
 
-			// Check if the resource's plural and singular data sources are suppressed
+			// Generate plural data source entry if not suppressed
 			if !resourceSchema.SuppressPluralDataSourceGeneration {
 				plural := naming.Pluralize(resource)
 				pluralChange := fmt.Sprintf("%s - New Plural Data Source", plural)
 				newChanges = append(newChanges, pluralChange)
-				fmt.Printf("  Added plural data source: %s\n", pluralChange)
+				log.Printf("  Added plural data source: %s\n", pluralChange)
 			} else {
-				fmt.Printf("  Plural data source suppressed for %s\n", resource)
+				log.Printf("  Plural data source suppressed for %s\n", resource)
 			}
 
+			// Generate singular data source entry if not suppressed
 			if !resourceSchema.SuppressSingularDataSourceGeneration {
 				singularChange := fmt.Sprintf("%s - New Singular Data Source", resource)
 				newChanges = append(newChanges, singularChange)
-				fmt.Printf("  Added singular data source: %s\n", singularChange)
+				log.Printf("  Added singular data source: %s\n", singularChange)
 			} else {
-				fmt.Printf("  Singular data source suppressed for %s\n", resource)
+				log.Printf("  Singular data source suppressed for %s\n", resource)
 			}
 		} else {
-			fmt.Printf("  Resource %s not found in allSchemas\n", resource)
+			log.Printf("  Resource %s not found in allSchemas\n", resource)
 		}
 	}
 
-	fmt.Printf("generateDataSourceChanges returning %d changes (was %d)\n", len(newChanges), len(changes))
+	log.Printf("generateDataSourceChanges returning %d changes (was %d)\n", len(newChanges), len(changes))
 	return newChanges, nil
 }
 
+// makeChangelog updates the CHANGELOG.md file with new resource and data source entries.
+// It expands resource changes to include corresponding data sources, increments the version,
+// and writes the updated changelog back to disk.
+//
+// Parameters:
+//   - changes: Slice of change descriptions to add to the changelog
+//   - filePaths: Configuration containing file paths (currently unused but kept for consistency)
+//
+// Returns an error if changelog processing or file operations fail.
 func makeChangelog(changes *[]string, filePaths *UpdateFilePaths) error {
-	// Parse the CHANGELOG.md file to get existing change
-
-	// Generate additional changes like plural and singular data sources
-
-	// Read the current CHANGELOG.md file
-
+	// Generate additional entries for data sources based on resource changes
 	newChanges, err := generateDataSourceChanges(*changes, filePaths)
 	if err != nil {
 		return fmt.Errorf("failed to generate data source changes: %w", err)
 	}
+
+	// Read the current changelog content
 	originalContent, err := os.ReadFile("CHANGELOG.md")
 	if err != nil {
 		return fmt.Errorf("failed to read CHANGELOG.md: %w", err)
 	}
 
 	// Generate the new changelog content
-	newContent, err := writeChangelog(string(originalContent), newChanges)
-	if err != nil {
-		return fmt.Errorf("failed to format changelog: %w", err)
-	}
+	newContent := writeChangelog(string(originalContent), newChanges)
 
 	// Open the file in truncate mode and write the updated content
-	file, err := os.OpenFile("CHANGELOG.md", os.O_WRONLY|os.O_TRUNC, 0644)
+	file, err := os.OpenFile("CHANGELOG.md", os.O_WRONLY|os.O_TRUNC, changelogFileMode)
 	if err != nil {
 		return fmt.Errorf("failed to open CHANGELOG.md for writing: %w", err)
 	}
@@ -131,12 +155,12 @@ func makeChangelog(changes *[]string, filePaths *UpdateFilePaths) error {
 }
 
 // writeChangelog updates the existing changelog content with new changes
-func writeChangelog(originalContent string, changes []string) (string, error) {
-	fmt.Printf("writeChangelog called with %d changes\n", len(changes))
+func writeChangelog(originalContent string, changes []string) string {
+	log.Printf("writeChangelog called with %d changes\n", len(changes))
 
 	if len(changes) == 0 {
-		fmt.Println("No changes provided, returning original content")
-		return originalContent, nil
+		log.Println("No changes provided, returning original content")
+		return originalContent
 	}
 
 	// Sort changes by type
@@ -146,24 +170,24 @@ func writeChangelog(originalContent string, changes []string) (string, error) {
 		suppressions   []string
 	)
 
-	fmt.Println("Categorizing changes:")
+	log.Println("Categorizing changes:")
 	// Categorize changes
 	for _, change := range changes {
-		parts := strings.SplitN(change, " - ", 2)
-		if len(parts) != 2 {
-			fmt.Printf("  Skipping malformed change: %s\n", change)
+		parts := strings.SplitN(change, " - ", changelogSplitParts)
+		if len(parts) != changelogSplitParts {
+			log.Printf("  Skipping malformed change: %s\n", change)
 			continue
 		}
 
 		resource := parts[0]
 		changeType := parts[1]
 
-		fmt.Printf("  Processing: %s -> %s\n", resource, changeType)
+		log.Printf("  Processing: %s -> %s\n", resource, changeType)
 
 		// Check if this is a suppression message
 		if isSuppressionMessage(changeType) {
 			suppressions = append(suppressions, resource)
-			fmt.Printf("  Categorized as suppression: %s\n", resource)
+			log.Printf("  Categorized as suppression: %s\n", resource)
 			continue
 		}
 
@@ -180,7 +204,7 @@ func writeChangelog(originalContent string, changes []string) (string, error) {
 	sort.Strings(newDataSources)
 	sort.Strings(suppressions)
 
-	fmt.Printf("After sorting - Data Sources: %d, Resources: %d, Suppressions: %d\n", len(newDataSources), len(newResources), len(suppressions))
+	log.Printf("After sorting - Data Sources: %d, Resources: %d, Suppressions: %d\n", len(newDataSources), len(newResources), len(suppressions))
 
 	// Build the new changelog entries
 	var newEntries []string
@@ -189,38 +213,38 @@ func writeChangelog(originalContent string, changes []string) (string, error) {
 	for _, ds := range newDataSources {
 		entry := fmt.Sprintf("* **New Data Source:** `%s`", ds)
 		newEntries = append(newEntries, entry)
-		fmt.Printf("  Added data source entry: %s\n", entry)
+		log.Printf("  Added data source entry: %s\n", entry)
 	}
 
 	// Add resources
 	for _, res := range newResources {
 		entry := fmt.Sprintf("* **New Resource:** `%s`", res)
 		newEntries = append(newEntries, entry)
-		fmt.Printf("  Added resource entry: %s\n", entry)
+		log.Printf("  Added resource entry: %s\n", entry)
 	}
 
 	// Note: Suppressions are tracked but not added to the public changelog
 	if len(suppressions) > 0 {
-		fmt.Printf("  Tracked %d suppressions (not added to changelog): %v\n", len(suppressions), suppressions)
+		log.Printf("  Tracked %d suppressions (not added to changelog): %v\n", len(suppressions), suppressions)
 	}
 
 	if len(newEntries) == 0 {
-		fmt.Println("No valid entries to add, returning original content")
-		return originalContent, nil
+		log.Println("No valid entries to add, returning original content")
+		return originalContent
 	}
 
-	fmt.Printf("Total entries to add: %d\n", len(newEntries))
+	log.Printf("Total entries to add: %d\n", len(newEntries))
 
 	// Parse and increment version
 	newVersion, err := parseAndIncrementVersion(originalContent)
 	if err != nil {
-		fmt.Printf("Warning: %v\n", err)
+		log.Printf("Warning: %v\n", err)
 	}
 
 	// Create new version header with current date
 	currentDate := time.Now().Format("January 2, 2006")
 	newVersionHeader := fmt.Sprintf("## %s (%s)", newVersion, currentDate)
-	fmt.Printf("Creating new version header: %s\n", newVersionHeader)
+	log.Printf("Creating new version header: %s\n", newVersionHeader)
 
 	// Build the complete new section
 	var newSection []string
@@ -237,8 +261,8 @@ func writeChangelog(originalContent string, changes []string) (string, error) {
 	result = append(result, newSection...)
 	result = append(result, lines...)
 
-	fmt.Printf("Final result has %d lines (original: %d)\n", len(result), len(lines))
-	return strings.Join(result, "\n"), nil
+	log.Printf("Final result has %d lines (original: %d)\n", len(result), len(lines))
+	return strings.Join(result, "\n")
 }
 
 // parseAndIncrementVersion finds the latest version in changelog content and increments the minor version
@@ -248,7 +272,7 @@ func parseAndIncrementVersion(changelogContent string) (string, error) {
 	for _, line := range lines {
 		// Look for version headers like "## 1.47.0 (June 26, 2025)"
 		if strings.HasPrefix(strings.TrimSpace(line), "## ") && strings.Contains(line, ".") {
-			fmt.Printf("Found version line: %s\n", line)
+			log.Printf("Found version line: %s\n", line)
 
 			// Extract the version part
 			parts := strings.Fields(line)
@@ -270,7 +294,7 @@ func parseAndIncrementVersion(changelogContent string) (string, error) {
 
 					// Increment minor version and reset patch to 0
 					newVersion := fmt.Sprintf("%d.%d.0", major, minor+1)
-					fmt.Printf("Incremented version from %s to %s\n", versionStr, newVersion)
+					log.Printf("Incremented version from %s to %s\n", versionStr, newVersion)
 					return newVersion, nil
 				}
 			}

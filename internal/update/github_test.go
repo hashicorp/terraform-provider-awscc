@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"log"
 	"os"
 	"strings"
 	"testing"
@@ -15,10 +16,10 @@ import (
 // These constants configure the test environment for interacting with GitHub.
 const (
 	// Repository owner for API tests
-	testRepoOwner = "ThomasZalewski"
+	testRepoOwner = ""
 
 	// Repository name for API tests
-	testRepoName = "terraform-provider-awscc-fork"
+	testRepoName = ""
 
 	// Test date for commit messages and PR creation
 	testCurrentDate = "2025-06-26"
@@ -116,7 +117,6 @@ func TestGenerateCompletePRTemplate(t *testing.T) {
 }
 
 func T_CreateRemoteBranch(client *github.Client) (string, error) {
-
 	ctx := context.Background()
 	repoOwner := testRepoOwner
 	repoName := testRepoName
@@ -150,26 +150,26 @@ func T_CreateRemoteBranch(client *github.Client) (string, error) {
 	randomSuffix := fmt.Sprintf("%d", os.Getpid())
 	branchName := fmt.Sprintf("test-%s-branch-%s", currentDate, randomSuffix)
 
-	fmt.Printf("Attempting to create branch: %s\n", branchName)
-	fmt.Printf("Using repository: %s/%s\n", repoOwner, repoName)
-	fmt.Printf("Base SHA: %s\n", ref.Object.GetSHA())
+	log.Printf("Attempting to create branch: %s\n", branchName)
+	log.Printf("Using repository: %s/%s\n", repoOwner, repoName)
+	log.Printf("Base SHA: %s\n", ref.Object.GetSHA())
 
 	// Check if branch already exists and delete it if it does
 	_, checkResp, checkErr := client.Git.GetRef(ctx, repoOwner, repoName, "refs/heads/"+branchName)
 	if checkErr == nil && checkResp.StatusCode == 200 {
-		fmt.Printf("Branch %s already exists, deleting it first\n", branchName)
+		log.Printf("Branch %s already exists, deleting it first\n", branchName)
 		delResp, delErr := client.Git.DeleteRef(ctx, repoOwner, repoName, "heads/"+branchName)
 		if delErr != nil {
-			fmt.Printf("Warning: Failed to delete existing branch: %v (status: %d)\n", delErr, delResp.StatusCode)
+			log.Printf("Warning: Failed to delete existing branch: %v (status: %d)\n", delErr, delResp.StatusCode)
 			// Try with a more unique name
 			randomSuffix = fmt.Sprintf("%d-%d", os.Getpid(), time.Now().UnixNano()%10000)
 			branchName = fmt.Sprintf("test-%s-branch-%s", currentDate, randomSuffix)
-			fmt.Printf("Trying with new branch name: %s\n", branchName)
+			log.Printf("Trying with new branch name: %s\n", branchName)
 		} else {
-			fmt.Printf("Successfully deleted existing branch\n")
+			log.Printf("Successfully deleted existing branch\n")
 		}
 	} else if checkResp != nil && checkResp.StatusCode != 404 {
-		fmt.Printf("Unexpected response when checking for existing branch: %d\n", checkResp.StatusCode)
+		log.Printf("Unexpected response when checking for existing branch: %d\n", checkResp.StatusCode)
 	}
 
 	// Create a new reference (branch) using the SHA from the default branch
@@ -181,7 +181,7 @@ func T_CreateRemoteBranch(client *github.Client) (string, error) {
 	}
 
 	// Create the branch on the remote repository
-	fmt.Printf("Creating new branch with ref: %s\n", newRef.GetRef())
+	log.Printf("Creating new branch with ref: %s\n", newRef.GetRef())
 	createdRef, resp, err := client.Git.CreateRef(ctx, repoOwner, repoName, newRef)
 	if err != nil {
 		return "", fmt.Errorf("Failed to create new branch '%s': %v (status: %d)", branchName, err, resp.StatusCode)
@@ -196,7 +196,7 @@ func T_CreateRemoteBranch(client *github.Client) (string, error) {
 	}
 
 	// Create a test commit on the new branch so there are changes for the pull request
-	fmt.Printf("Creating test commit on branch: %s\n", branchName)
+	log.Printf("Creating test commit on branch: %s\n", branchName)
 
 	// Create a test file content
 	testContent := fmt.Sprintf("# Test File\n\nThis is a test file created on %s for testing purposes.\nBranch: %s\nTimestamp: %s\n",
@@ -273,7 +273,7 @@ func T_CreateRemoteBranch(client *github.Client) (string, error) {
 		return "", fmt.Errorf("Expected status code 200 for reference update, got: %d", resp.StatusCode)
 	}
 
-	fmt.Printf("Successfully created branch %s with test commit %s\n", branchName, createdCommit.GetSHA())
+	log.Printf("Successfully created branch %s with test commit %s\n", branchName, createdCommit.GetSHA())
 	return branchName, nil
 }
 
@@ -310,7 +310,7 @@ func TestCreatePullRequest(t *testing.T) {
 	}
 	t.Logf("Using random branch name: %s", randomBranchName)
 
-	prURL, err := createPullRequest(ctx, config, changes, randomBranchName, filepaths)
+	prURL, err := createPullRequest(ctx, config, changes, randomBranchName, filepaths, "test execution data")
 
 	// Check the results
 	if err != nil {
@@ -350,7 +350,7 @@ func TestCreateIssue(t *testing.T) {
 		CurrentDate: testCurrentDate,
 	}
 
-	_, err := createIssue(ctx, testResourceName, testSchemaError, config, filepaths.RepositoryLink)
+	_, err := createIssue(ctx, testResourceName, "test error", config, filepaths.RepositoryLink)
 
 	// The function currently returns an empty string and nil error
 	// This is a placeholder for when the function is implemented
@@ -530,10 +530,4 @@ func extractRepoInfo(link string) (string, string) {
 	}
 
 	return owner, repo
-}
-
-// generateRandomBranchName creates a unique branch name for testing with a random suffix
-func generateRandomBranchName(prefix string) string {
-	// Use a combination of timestamp and random string to ensure uniqueness
-	return fmt.Sprintf("%s-%s-%d", prefix, testCurrentDate, os.Getpid())
 }

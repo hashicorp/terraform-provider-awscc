@@ -1,3 +1,6 @@
+// Package main provides HCL parsing and CloudFormation schema processing functionality.
+// This file contains utilities for parsing HCL configuration files, comparing schemas
+// between runs, and validating CloudFormation resource types.
 package main
 
 import (
@@ -17,17 +20,30 @@ import (
 	allschemas "github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/allschemas"
 )
 
+// parseSchemaToStruct is a generic function that parses HCL files into Go structs.
+// It reads the specified HCL file and unmarshals its contents into the provided schema type.
+//
+// Type parameter T: The target struct type to unmarshal into
+// Parameters:
+//   - filePath: Path to the HCL file to parse
+//   - schema: Instance of the target struct type
+//
+// Returns a pointer to the populated struct or an error if parsing fails.
 func parseSchemaToStruct[T any](filePath string, schema T) (*T, error) {
+	// Read the HCL file from disk
 	file, err := os.ReadFile(filePath)
 	if err != nil {
 		return &schema, fmt.Errorf("failed to read file %s: %w", filePath, err)
 	}
 
+	// Parse the HCL content using the HCL parser
 	parser := hclparse.NewParser()
 	fileHCL, diag := parser.ParseHCL(file, filePath)
 	if diag.HasErrors() {
 		return &schema, fmt.Errorf("failed to parse HCL from %s: %s", filePath, diag.Error())
 	}
+
+	// Decode the parsed HCL into the target struct
 	if diag := gohcl.DecodeBody(fileHCL.Body, nil, &schema); diag.HasErrors() {
 		return &schema, fmt.Errorf("failed to decode HCL from %s: %s", filePath, diag.Error())
 	}
@@ -35,19 +51,28 @@ func parseSchemaToStruct[T any](filePath string, schema T) (*T, error) {
 	return &schema, nil
 }
 
+// diffSchemas compares new and previous schema sets to identify changes and new resources.
+// It creates an AllSchemas structure containing only the resources that have changed
+// or are newly added, which is used for targeted resource generation.
+//
+// Parameters:
+//   - newSchemas: Current available schemas from CloudFormation
+//   - lastSchemas: Previous schemas from the last run
+//   - changes: Slice to append change descriptions to
+//   - filePaths: Configuration containing file paths
+//
+// Returns an AllSchemas structure with only changed/new resources.
 func diffSchemas(newSchemas *allschemas.AvailableSchemas, lastSchemas *allschemas.AvailableSchemas, changes *[]string, filePaths *UpdateFilePaths) (*allschemas.AllSchemas, error) {
-	// Create a map from lastSchemas for
-	// schema name to index
-	// use index to get the resource from lastSchemas
+	// Create lookup map for efficient schema comparison
 	lastSchemasMap := make(map[string]int)
 	for i, resource := range lastSchemas.Resources {
 		lastSchemasMap[resource.CloudFormationTypeName] = i
 	}
 
-	// Array to hold changed and new resources
+	// Collect resources that have changed or are new
 	var changedOrNewResources []allschemas.ResourceSchema
 
-	// Find changed or new resources
+	// Identify changed or new resources by comparing schemas
 	for _, newResource := range newSchemas.Resources {
 		if lastResourceIndex, exists := lastSchemasMap[newResource.CloudFormationTypeName]; exists {
 			// Check if resource changed
@@ -74,7 +99,7 @@ func diffSchemas(newSchemas *allschemas.AvailableSchemas, lastSchemas *allschema
 		return existingAllSchemas, nil
 	}
 
-	fmt.Printf("Found %d changed or new resources.\n", len(changedOrNewResources))
+	log.Printf("Found %d changed or new resources.\n", len(changedOrNewResources))
 
 	// Read existing allSchemas.hcl
 	var err error
@@ -132,48 +157,78 @@ func diffSchemas(newSchemas *allschemas.AvailableSchemas, lastSchemas *allschema
 	//		existingAllSchemas.Resources[i].SuppressResourceGeneration = true
 	//	}
 	// }
-	// Write updated schema back to file
+	// Write updated schema configuration back to the file
 	return existingAllSchemas, writeSchemasToHCLFile(existingAllSchemas, filePaths.AllSchemasHCL)
 }
 
+// writeSchemasToHCLFile serializes a schema structure to an HCL file.
+// It takes any schema interface{} and writes it to the specified file path using HCL encoding.
+//
+// Parameters:
+//   - schema: The schema structure to serialize (typically AllSchemas or AvailableSchemas)
+//   - filePath: Target file path for writing the HCL content
+//
+// Returns an error if file creation or writing fails.
 func writeSchemasToHCLFile(schema interface{}, filePath string) error {
+	// Create new HCL file structure
 	hclFile := hclwrite.NewEmptyFile()
 	body := hclFile.Body()
 
+	// Encode the schema into HCL format
 	gohcl.EncodeIntoBody(schema, body)
 
+	// Create or truncate the target file
 	file, err := os.Create(filePath)
 	if err != nil {
 		return fmt.Errorf("failed to create file %s: %w", filePath, err)
 	}
 	defer file.Close()
 
+	// Write the HCL content to the file
 	if _, err := file.Write(hclFile.Bytes()); err != nil {
 		return fmt.Errorf("failed to write HCL to file %s: %w", filePath, err)
 	}
 
-	fmt.Printf("Successfully wrote schema to %s\n", filePath)
+	log.Printf("Successfully wrote schema to %s\n", filePath)
 	return nil
 }
 
+// validateResourceType checks if a CloudFormation resource type is provisionable.
+// It uses the AWS CloudFormation API to describe the resource type and determine
+// if it can be provisioned through CloudFormation operations.
+//
+// Parameters:
+//   - ctx: Context for AWS API calls and cancellation
+//   - resourceType: CloudFormation resource type name (e.g., "AWS::S3::Bucket")
+//
+// Returns true if the resource is provisionable, false if it's marked as NON_PROVISIONABLE,
+// and an error if the API call fails in an unexpected way.
 func validateResourceType(ctx context.Context, resourceType string) (bool, error) {
-	cfg, err := config.LoadDefaultConfig(ctx, config.WithRegion("us-east-1"))
+	// Load AWS configuration with the specified region
+	cfg, err := config.LoadDefaultConfig(ctx, config.WithRegion(AWSRegion))
 	if err != nil {
 		return false, fmt.Errorf("failed to load AWS config: %w", err)
 	}
+
+	// Create CloudFormation client
 	conn := cloudformation.NewFromConfig(cfg)
 	input := &cloudformation.DescribeTypeInput{
 		Type:     types.RegistryTypeResource,
 		TypeName: aws.String(resourceType),
 	}
 
+	// Query CloudFormation for resource type details
 	res, err := conn.DescribeType(ctx, input)
 	if err != nil {
+		// If we can't describe the type, assume it's valid to avoid blocking everything
 		return true, nil
 	}
+
+	// Check if the resource is marked as non-provisionable
 	if string(res.ProvisioningType) == "NON_PROVISIONABLE" {
 		return false, nil
 	}
-	fmt.Printf("Resource type %s is valid.\n", resourceType)
+
+	log.Printf("Resource type %s is valid.\n", resourceType)
 	return true, nil
 }

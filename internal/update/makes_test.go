@@ -642,8 +642,6 @@ func TestCheckoutSchemas(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			t.Parallel()
 
-			ctx := context.Background()
-
 			// Create temporary directory for test files
 			tempDir := t.TempDir()
 			suppressionFile := filepath.Join(tempDir, "suppression.txt")
@@ -655,7 +653,7 @@ func TestCheckoutSchemas(t *testing.T) {
 				}
 			}
 
-			err := checkoutSchemas(ctx, suppressionFile)
+			err := checkoutSchemas(suppressionFile)
 
 			if test.expectError {
 				if err == nil {
