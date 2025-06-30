@@ -1,9 +1,6 @@
 // Copyright (c) HashiCorp, Inc.
 // SPDX-License-Identifier: MPL-2.0
 
-//go:build generate
-// +build generate
-
 package main
 
 import (
@@ -60,7 +57,7 @@ func main() {
 	g := NewGenerator()
 
 	for _, v := range data {
-		if err := g.GenerateExample(v.Resource, v.Path, v.Identifier); err != nil {
+		if err := g.GenerateIDExample(v.Resource, v.Path, v.Identifier); err != nil {
 			g.Fatalf("error generating Terraform %s import example: %s", v.Resource, err)
 		}
 	}
@@ -76,7 +73,7 @@ func NewGenerator() *Generator {
 	}
 }
 
-func (g *Generator) GenerateExample(resourceName, filename string, identifier []string) error {
+func (g *Generator) GenerateIDExample(resourceName, directory string, identifier []string) error {
 	g.Infof("generating Terraform import code for %[1]q ", resourceName)
 	templateData := &TemplateData{
 		ResourceType: resourceName,
@@ -92,6 +89,7 @@ func (g *Generator) GenerateExample(resourceName, filename string, identifier []
 		templateData.Identifier = fmt.Sprintf("\"%s\"", strings.Join(out, "|"))
 	}
 
+	filename := fmt.Sprintf("%simport.sh", directory)
 	d := g.NewUnformattedFileDestination(filename)
 
 	if err := d.CreateDirectories(); err != nil {

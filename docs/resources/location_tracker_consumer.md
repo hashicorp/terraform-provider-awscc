@@ -64,6 +64,8 @@ resource "awscc_location_tracker_consumer" "example" {
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_location_tracker_consumer.example "tracker_name|consumer_arn"
 ```

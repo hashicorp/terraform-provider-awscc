@@ -58,6 +58,8 @@ resource "awscc_logs_log_stream" "this" {
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_logs_log_stream.example "log_group_name|log_stream_name"
 ```

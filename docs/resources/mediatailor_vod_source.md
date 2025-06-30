@@ -95,6 +95,8 @@ Optional:
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_mediatailor_vod_source.example "source_location_name|vod_source_name"
 ```

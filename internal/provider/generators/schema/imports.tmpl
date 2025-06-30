@@ -4,7 +4,7 @@
     {
         "resource": "{{ $e.ResourceName }}",
         "identifier": [{{- range $i, $v := $e.Identifier }} {{- if $i}},{{- end}}"{{ $v }}"{{- end}}],
-        "path": "./examples/resources/{{ $e.ResourceName }}/import.sh"
+        "path": "./examples/resources/{{ $e.ResourceName }}/"
     }
 {{- end}}
 ]

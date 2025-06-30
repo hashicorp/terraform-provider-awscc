@@ -68,6 +68,8 @@ resource "awscc_servicecatalogappregistry_attribute_group_association" "example"
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_servicecatalogappregistry_attribute_group_association.example "application_arn|attribute_group_arn"
 ```

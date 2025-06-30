@@ -89,6 +89,8 @@ resource "awscc_cognito_identity_pool_principal_tag" "example" {
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_cognito_identity_pool_principal_tag.example "identity_pool_id|identity_provider_name"
 ```

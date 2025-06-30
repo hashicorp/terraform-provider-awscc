@@ -62,6 +62,8 @@ resource "awscc_appsync_domain_name_api_association" "example" {
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_appsync_domain_name_api_association.example "api_association_identifier"
 ```

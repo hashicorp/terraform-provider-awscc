@@ -65,6 +65,8 @@ resource "awscc_deadline_queue_environment" "example" {
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_deadline_queue_environment.example "farm_id|queue_id|queue_environment_id"
 ```

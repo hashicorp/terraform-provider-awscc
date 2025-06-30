@@ -75,6 +75,8 @@ resource "awscc_appconfig_hosted_configuration_version" "example" {
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_appconfig_hosted_configuration_version.example "application_id|configuration_profile_id|version_number"
 ```

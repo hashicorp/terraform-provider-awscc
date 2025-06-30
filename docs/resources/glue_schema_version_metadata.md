@@ -130,6 +130,8 @@ resource "awscc_glue_schema" "example" {
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_glue_schema_version_metadata.example "schema_version_id|key|value"
 ```

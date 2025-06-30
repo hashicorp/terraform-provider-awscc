@@ -93,6 +93,8 @@ resource "awscc_apigatewayv2_route" "example_http_route" {
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_apigatewayv2_route.example "api_id|route_id"
 ```

@@ -83,6 +83,8 @@ resource "aws_vpn_connection_route" "example" {
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_ec2_vpn_connection_route.example "destination_cidr_block|vpn_connection_id"
 ```

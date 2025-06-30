@@ -93,6 +93,8 @@ resource "awscc_apigateway_stage" "example" {
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_wafv2_web_acl_association.example "resource_arn|web_acl_arn"
 ```

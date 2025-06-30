@@ -50,6 +50,8 @@ resource "awscc_datazone_group_profile" "example" {
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_datazone_group_profile.example "domain_id|id"
 ```

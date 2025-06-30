@@ -44,6 +44,8 @@ resource "awscc_detective_organization_admin" "admin" {
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_detective_organization_admin.example "account_id"
 ```

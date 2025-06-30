@@ -104,6 +104,8 @@ resource "awscc_ec2_enclave_certificate_iam_role_association" "example" {
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_ec2_enclave_certificate_iam_role_association.example "certificate_arn|role_arn"
 ```

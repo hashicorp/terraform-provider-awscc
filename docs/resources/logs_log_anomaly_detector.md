@@ -118,6 +118,8 @@ data "aws_partition" "current" {}
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_logs_log_anomaly_detector.example "anomaly_detector_arn"
 ```

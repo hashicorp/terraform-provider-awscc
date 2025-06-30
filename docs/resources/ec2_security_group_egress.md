@@ -128,6 +128,8 @@ resource "awscc_ec2_vpc" "selected" {
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_ec2_security_group_egress.example "id"
 ```

@@ -85,6 +85,8 @@ Example: arn:aws:notifications::381491923782:managed-notification-configuration/
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_notifications_managed_notification_additional_channel_association.example "channel_arn|managed_notification_configuration_arn"
 ```

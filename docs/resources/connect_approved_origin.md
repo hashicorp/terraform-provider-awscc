@@ -36,6 +36,8 @@ resource "awscc_connect_approved_origin" "this" {
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_connect_approved_origin.example "instance_id|origin"
 ```

@@ -182,6 +182,8 @@ resource "awscc_verifiedpermissions_policy_store" "example" {
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_verifiedpermissions_policy_template.example "policy_store_id|policy_template_id"
 ```

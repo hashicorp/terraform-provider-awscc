@@ -36,6 +36,8 @@ The AWS::EC2::TransitGatewayMulticastGroupMember registers and deregisters membe
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_ec2_transit_gateway_multicast_group_member.example "transit_gateway_multicast_domain_id|group_ip_address|network_interface_id"
 ```

@@ -30,6 +30,8 @@ description: |-
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_mediapackagev2_origin_endpoint_policy.example "channel_group_name|channel_name|origin_endpoint_name"
 ```

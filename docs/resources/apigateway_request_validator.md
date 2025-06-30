@@ -48,6 +48,8 @@ resource "awscc_apigateway_request_validator" "example" {
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_apigateway_request_validator.example "rest_api_id|request_validator_id"
 ```

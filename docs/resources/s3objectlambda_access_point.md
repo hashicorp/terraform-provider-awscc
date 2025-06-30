@@ -229,6 +229,8 @@ Enabling this setting doesn't affect previously stored bucket policies, except t
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_s3objectlambda_access_point.example "name"
 ```

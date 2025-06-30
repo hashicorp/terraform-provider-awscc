@@ -94,6 +94,8 @@ resource "awscc_cognito_user_pool_user_to_group_attachment" "example" {
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_cognito_user_pool_user_to_group_attachment.example "user_pool_id|group_name|username"
 ```

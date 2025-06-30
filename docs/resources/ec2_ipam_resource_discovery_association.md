@@ -56,6 +56,8 @@ Optional:
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_ec2_ipam_resource_discovery_association.example "ipam_resource_discovery_association_id"
 ```

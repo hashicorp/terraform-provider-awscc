@@ -89,6 +89,8 @@ resource "awscc_personalize_dataset" "dataset_items"{
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_personalize_dataset_group.example "dataset_group_arn"
 ```
