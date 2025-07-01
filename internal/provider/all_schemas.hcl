@@ -628,6 +628,16 @@ resource_schema "aws_bedrock_data_source" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_bedrock_flow" {
+  cloudformation_type_name = "AWS::Bedrock::Flow"
+
+  # Suppression Reason: DefinitionSubstitutions is of unsupported type: key-value map of .
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/1907
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
 resource_schema "aws_bedrock_flow_alias" {
   cloudformation_type_name               = "AWS::Bedrock::FlowAlias"
   suppress_plural_data_source_generation = true
@@ -5246,10 +5256,9 @@ resource_schema "aws_wisdom_message_template_version" {
   suppress_plural_data_source_generation = true
 }
 
-//fix this please 
 resource_schema "aws_workspaces_connection_alias" {
   cloudformation_type_name               = "AWS::WorkSpaces::ConnectionAlias"
-  suppress_plural_data_source_generation = false
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_workspaces_workspaces_pool" {
