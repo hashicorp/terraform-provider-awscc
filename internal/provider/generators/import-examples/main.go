@@ -7,7 +7,6 @@
 package main
 
 import (
-	"encoding/json"
 	"flag"
 	"fmt"
 	"log"
@@ -16,6 +15,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/common"
+	json "github.com/json-iterator/go"
 )
 
 var (

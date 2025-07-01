@@ -22,6 +22,7 @@ require (
 	github.com/hashicorp/terraform-plugin-log v0.9.0
 	github.com/hashicorp/terraform-plugin-testing v1.13.2
 	github.com/jinzhu/inflection v1.0.0
+	github.com/json-iterator/go v1.1.12
 	github.com/mattbaird/jsonpatch v0.0.0-20200820163806-098863c1fc24
 	golang.org/x/text v0.26.0
 )
@@ -89,6 +90,8 @@ require (
 	github.com/mitchellh/go-wordwrap v1.0.0 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/mitchellh/reflectwalk v1.0.2 // indirect
+	github.com/modern-go/concurrent v0.0.0-20180228061459-e0a39a4cb421 // indirect
+	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/oklog/run v1.0.0 // indirect
 	github.com/posener/complete v1.2.3 // indirect
 	github.com/shopspring/decimal v1.2.0 // indirect
