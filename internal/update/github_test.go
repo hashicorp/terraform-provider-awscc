@@ -26,9 +26,6 @@ const (
 
 	// Resource name for issue creation tests
 	testResourceName = "AWS::Test::Resource"
-
-	// Schema error message for issue creation tests
-	testSchemaError = "Invalid schema format in properties"
 )
 
 // Variables that can't be constants
