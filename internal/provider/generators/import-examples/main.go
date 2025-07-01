@@ -7,7 +7,6 @@
 package main
 
 import (
-	"encoding/json"
 	"flag"
 	"fmt"
 	"log"
@@ -16,6 +15,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/common"
+	json "github.com/json-iterator/go"
 )
 
 var (
@@ -60,11 +60,7 @@ func main() {
 	g := NewGenerator()
 
 	for _, v := range data {
-		if err := g.GenerateExampleByID(v.Resource, v.Path, v.Identifier); err != nil {
-			g.Fatalf("error generating Terraform %s import example: %s", v.Resource, err)
-		}
-
-		if err := g.GenerateExampleByStringID(v.Resource, v.Path, v.Identifier); err != nil {
+		if err := g.GenerateExample(v.Resource, v.Path, v.Identifier); err != nil {
 			g.Fatalf("error generating Terraform %s import example: %s", v.Resource, err)
 		}
 	}
@@ -80,51 +76,17 @@ func NewGenerator() *Generator {
 	}
 }
 
-func (g *Generator) GenerateExampleByID(resourceName, directory string, identifier []string) error {
+func (g *Generator) GenerateExample(resourceName, directory string, identifier []string) error {
 	g.Infof("generating Terraform import code for %[1]q ", resourceName)
 	templateData := &TemplateData{
 		ResourceType: resourceName,
 		Identifier:   formatIdentifier(identifier),
 	}
 
-	filename := fmt.Sprintf("%simport.sh", directory)
-	d := g.NewUnformattedFileDestination(filename)
-
-	if err := d.CreateDirectories(); err != nil {
-		return err
-	}
-
-	if err := d.WriteTemplate("resource", importExampleTemplateBody, templateData); err != nil {
-		return err
-	}
-
-	if err := d.Write(); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (g *Generator) GenerateExampleByStringID(resourceName, directory string, identifier []string) error {
-	g.Infof("generating Terraform import code for %[1]q ", resourceName)
-	templateData := &TemplateData{
-		ResourceType: resourceName,
-		Identifier:   formatIdentifier(identifier),
-	}
-
-	filename := fmt.Sprintf("%simport-by-string-id.tf", directory)
-	d := g.NewUnformattedFileDestination(filename)
-
-	if err := d.CreateDirectories(); err != nil {
-		return err
-	}
-
-	if err := d.WriteTemplate("resource", importExampleTemplateByStringIDBody, templateData); err != nil {
-		return err
-	}
-
-	if err := d.Write(); err != nil {
-		return err
+	for _, v := range filesData {
+		if err := createFile(g, v.filename(directory), v.templateBody, templateData); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -141,6 +103,40 @@ func formatIdentifier(identifier []string) string {
 	}
 
 	return "<resource ID>"
+}
+
+type fileData struct {
+	filename     func(string) string
+	templateBody string
+}
+
+var filesData = []fileData{
+	{
+		filename:     func(directory string) string { return fmt.Sprintf("%simport.sh", directory) },
+		templateBody: importExampleTemplateBody,
+	},
+	{
+		filename:     func(directory string) string { return fmt.Sprintf("%simport-by-string-id.tf", directory) },
+		templateBody: importExampleTemplateByStringIDBody,
+	},
+}
+
+func createFile(g *Generator, filename, templateBody string, templateData *TemplateData) error {
+	d := g.NewUnformattedFileDestination(filename)
+
+	if err := d.CreateDirectories(); err != nil {
+		return err
+	}
+
+	if err := d.WriteTemplate("resource", templateBody, templateData); err != nil {
+		return err
+	}
+
+	if err := d.Write(); err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func toSnake(s string) string {
