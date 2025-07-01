@@ -25,9 +25,11 @@ const (
 	makesErrorFileMode = 0600
 )
 
-// makeBuild orchestrates the build process for different types of Terraform provider components.
-// It executes make commands for the specified buildType and processes any errors that occur,
-// applying suppressions and handling various error patterns.
+// makeBuild serves as the main api to orchestrate different types of Terraform provider components.
+// It is run in the order make schemas, make resources, make singular-data-sources, make plural-data-sources
+// Each make command is run and then errors are handled accordingly to the sub functions
+// The current make command with a grep for "error" piped to an output file until there are no more errors
+// After a failed make-singular-data-sources or make-plural-data-sources, it runs make schemas again to generate schemas
 //
 // Parameters:
 //   - ctx: Context for cancellation and logging
@@ -50,10 +52,10 @@ func makeBuild(ctx context.Context, config *GitHubConfig, currentSchemas *allsch
 	}
 	defer file.Close()
 
-	var loopCount = 1
+	hasErrors := true
 
 	// Process errors iteratively until all are handled
-	for i := 0; i < loopCount; i++ {
+	for hasErrors {
 		log.Println("Running make command for", buildType)
 
 		// Ensure schemas are up to date before building
@@ -94,20 +96,24 @@ func makeBuild(ctx context.Context, config *GitHubConfig, currentSchemas *allsch
 
 		// Process each error line individually
 		makesErrors := strings.Split(string(runMakesErrorData), "\n")
+		errorCount := 0
 		for _, errorLine := range makesErrors {
+			if errorLine == "" {
+				continue
+			}
+			errorCount++
 			err := processErrorLine(ctx, errorLine, config, currentSchemas, buildType, changes, filePaths, isNewMap)
 			if err != nil {
 				log.Printf("Error processing line: %v", err)
 			}
 		}
 
-		// Reset loop and set count based on number of errors to process
-		i = 0
-		loopCount = len(makesErrors)
+		// Continue looping if we found errors to process, otherwise exit
+		hasErrors = errorCount > 0
 		for idx, errorLine := range makesErrors {
 			log.Printf("lines[%d]: %q\n", idx, errorLine)
 		}
-		print("Processed ", len(makesErrors), " lines from error log file.\n")
+		print("Processed ", errorCount, " lines from error log file.\n")
 		for _, l := range makesErrors {
 			log.Println(l)
 		}
@@ -457,19 +463,6 @@ func suppress(ctx context.Context, cfTypeName, schemaError string, config *GitHu
 			}
 			return nil
 		}
-		/*
-			else { // This effectively deletes the resource from the provider
-				temp := &allschemas.ResourceAllSchema{
-					ResourceTypeName:           strings.ToLower(cfTypeName),
-					CloudFormationTypeName:     cfTypeName,
-					SuppressResourceGeneration: true,
-				}
-				allSchemas.Resources = append(allSchemas.Resources, *temp)
-				sort.Slice(allSchemas.Resources, func(i, j int) bool {
-					return allSchemas.Resources[i].ResourceTypeName < allSchemas.Resources[j].ResourceTypeName
-				})
-				log.Printf("Suppressing resource generation for %s in all_schemas.hcl\n", cfTypeName)
-		*/
 	}
 
 	err = writeSchemasToHCLFile(allSchemas, filePaths.AllSchemasHCL)
@@ -478,6 +471,8 @@ func suppress(ctx context.Context, cfTypeName, schemaError string, config *GitHu
 	}
 	return nil
 }
+
+// adds a schema file path to the suppression checkout file for git operations after a resource fails during make schemas
 func addSchemaToCheckout(resource string, filePaths *UpdateFilePaths) error {
 	log.Println("Adding resource to checkout:", resource)
 
@@ -502,6 +497,8 @@ func addSchemaToCheckout(resource string, filePaths *UpdateFilePaths) error {
 	log.Println("Successfully wrote to file")
 	return nil
 }
+
+// checkoutSchemas reads the suppression data file and checks out each listed schema file using git.
 func checkoutSchemas(suppressionData string) error {
 	info, err := os.Stat(suppressionData)
 	if err != nil {
@@ -538,23 +535,6 @@ func checkoutSchemas(suppressionData string) error {
 	return nil
 }
 
-func GetResourceFromLog(filePaths *UpdateFilePaths) (string, error) {
-	var resourceName string
-
-	logData, err := os.ReadFile(filePaths.RunMakesResourceLog)
-	log.Println("Reading log file:", filePaths.RunMakesResourceLog)
-	if err != nil {
-		return "", fmt.Errorf("failed to read logs file: %w", err)
-	}
-	logLines := strings.Split(strings.TrimSpace(string(logData)), "\n")
-	if len(logLines) > 0 && strings.TrimSpace(logLines[0]) != "" {
-		log.Println("Log lines found:", logLines)
-		resourceName = logLines[len(logLines)-1]
-	}
-	// If empty or no valid lines, return empty string (not an error)
-	return resourceName, nil
-}
-
 func cfTypeNameToTerraformTypeName(cfTypeName string) (string, error) {
 	// Convert CloudFormation type name to Terraform type name
 	cfTypeName = strings.ReplaceAll(cfTypeName, "_", "::")
@@ -567,6 +547,9 @@ func cfTypeNameToTerraformTypeName(cfTypeName string) (string, error) {
 	tfTypeName := naming.CreateTerraformTypeName(strings.ToLower(org), strings.ToLower(svc), naming.CloudFormationPropertyToTerraformAttribute(res))
 	return tfTypeName, nil
 }
+
+// isNew checks if a given CloudFormation type name corresponds to a new resource
+// this is checked by the absence of the resource in the passed in isNewMap
 func isNew(cloudFormationTypeName string, isNewMap map[string]bool) bool {
 	log.Println("Checking if resource is new:", cloudFormationTypeName)
 	// Convert CloudFormation type name to Terraform type name
@@ -584,6 +567,8 @@ func isNew(cloudFormationTypeName string, isNewMap map[string]bool) bool {
 	return true
 }
 
+// Returns plural resource name by trimming from the right until a match is found in isNewMap
+// Returns the modified input with aws_ prefix and original modified input for logging
 func getPluralResourceNames(input string, isNewMap map[string]bool) (string, string, error) {
 	// awscc_dynamodb_tables
 	// awscc_s3_storage_lenses
