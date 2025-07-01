@@ -1,9 +1,6 @@
 // Copyright (c) HashiCorp, Inc.
 // SPDX-License-Identifier: MPL-2.0
 
-//go:build generate
-// +build generate
-
 package main
 
 import (
@@ -25,7 +22,6 @@ var (
 type FileData struct {
 	Resource   string
 	Identifier []string
-	Path       string
 }
 
 func usage() {
@@ -60,7 +56,7 @@ func main() {
 	g := NewGenerator()
 
 	for _, v := range data {
-		if err := g.GenerateExample(v.Resource, v.Path, v.Identifier); err != nil {
+		if err := g.GenerateExample(v.Resource, v.Identifier); err != nil {
 			g.Fatalf("error generating Terraform %s import example: %s", v.Resource, err)
 		}
 	}
@@ -76,13 +72,14 @@ func NewGenerator() *Generator {
 	}
 }
 
-func (g *Generator) GenerateExample(resourceName, directory string, identifier []string) error {
+func (g *Generator) GenerateExample(resourceName string, identifier []string) error {
 	g.Infof("generating Terraform import code for %[1]q ", resourceName)
 	templateData := &TemplateData{
 		ResourceType: resourceName,
 		Identifier:   formatIdentifier(identifier),
 	}
 
+	directory := fmt.Sprintf("./examples/resources/%s", resourceName)
 	for _, v := range filesData {
 		if err := createFile(g, v.filename(directory), v.templateBody, templateData); err != nil {
 			return err
@@ -112,11 +109,11 @@ type fileData struct {
 
 var filesData = []fileData{
 	{
-		filename:     func(directory string) string { return fmt.Sprintf("%simport.sh", directory) },
+		filename:     func(directory string) string { return fmt.Sprintf("%s/import.sh", directory) },
 		templateBody: importExampleTemplateBody,
 	},
 	{
-		filename:     func(directory string) string { return fmt.Sprintf("%simport-by-string-id.tf", directory) },
+		filename:     func(directory string) string { return fmt.Sprintf("%s/import-by-string-id.tf", directory) },
 		templateBody: importExampleTemplateByStringIDBody,
 	},
 }
