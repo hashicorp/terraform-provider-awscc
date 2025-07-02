@@ -1,0 +1,1 @@
+$ terraform import awscc_odb_cloud_autonomous_vm_cluster.example "cloud_autonomous_vm_cluster_arn"

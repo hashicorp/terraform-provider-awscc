@@ -97,7 +97,7 @@ Data Source schema for AWS::RDS::DBInstance
   +  Can't be set to 0 if the DB instance is a source to read replicas
 - `ca_certificate_identifier` (String) The identifier of the CA certificate for this DB instance.
  For more information, see [Using SSL/TLS to encrypt a connection to a DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html) in the *Amazon RDS User Guide* and [Using SSL/TLS to encrypt a connection to a DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html) in the *Amazon Aurora User Guide*.
-- `certificate_details` (Attributes) The details of the DB instance?s server certificate.
+- `certificate_details` (Attributes) The details of the DB instance’s server certificate.
  For more information, see [Using SSL/TLS to encrypt a connection to a DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html) in the *Amazon RDS User Guide* and [Using SSL/TLS to encrypt a connection to a DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html) in the *Amazon Aurora User Guide*. (see [below for nested schema](#nestedatt--certificate_details))
 - `certificate_rotation_restart` (Boolean) Specifies whether the DB instance is restarted when you rotate your SSL/TLS certificate.
  By default, the DB instance is restarted when you rotate your SSL/TLS certificate. The certificate is not updated until the DB instance is restarted.
@@ -577,7 +577,7 @@ Read-Only:
 Read-Only:
 
 - `ca_identifier` (String) The CA identifier of the CA certificate used for the DB instance's server certificate.
-- `valid_till` (String) The expiration date of the DB instance?s server certificate.
+- `valid_till` (String) The expiration date of the DB instance’s server certificate.
 
 
 <a id="nestedatt--endpoint"></a>

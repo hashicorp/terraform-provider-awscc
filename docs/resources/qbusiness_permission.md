@@ -22,9 +22,22 @@ Definition of AWS::QBusiness::Permission Resource Type
 - `principal` (String)
 - `statement_id` (String)
 
+### Optional
+
+- `conditions` (Attributes List) (see [below for nested schema](#nestedatt--conditions))
+
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
+
+<a id="nestedatt--conditions"></a>
+### Nested Schema for `conditions`
+
+Optional:
+
+- `condition_key` (String)
+- `condition_operator` (String)
+- `condition_values` (List of String)
 
 ## Import
 

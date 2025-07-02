@@ -23,5 +23,15 @@ Data Source schema for AWS::QBusiness::Permission
 
 - `actions` (List of String)
 - `application_id` (String)
+- `conditions` (Attributes List) (see [below for nested schema](#nestedatt--conditions))
 - `principal` (String)
 - `statement_id` (String)
+
+<a id="nestedatt--conditions"></a>
+### Nested Schema for `conditions`
+
+Read-Only:
+
+- `condition_key` (String)
+- `condition_operator` (String)
+- `condition_values` (List of String)
