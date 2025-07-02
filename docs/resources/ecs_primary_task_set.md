@@ -29,6 +29,8 @@ A pseudo-resource that manages which of your ECS task sets is primary.
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_ecs_primary_task_set.example "cluster|service"
 ```

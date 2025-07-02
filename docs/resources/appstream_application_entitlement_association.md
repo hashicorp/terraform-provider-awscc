@@ -29,6 +29,8 @@ Resource Type definition for AWS::AppStream::ApplicationEntitlementAssociation
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_appstream_application_entitlement_association.example "stack_name|entitlement_name|application_identifier"
 ```

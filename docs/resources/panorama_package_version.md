@@ -41,6 +41,8 @@ Registers a package version.
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_panorama_package_version.example "package_id|package_version|patch_version"
 ```

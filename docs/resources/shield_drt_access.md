@@ -32,6 +32,8 @@ Config the role and list of Amazon S3 log buckets used by the Shield Response Te
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_shield_drt_access.example "account_id"
 ```

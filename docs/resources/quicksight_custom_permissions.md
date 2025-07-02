@@ -66,6 +66,8 @@ Optional:
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_quicksight_custom_permissions.example "aws_account_id|custom_permissions_name"
 ```

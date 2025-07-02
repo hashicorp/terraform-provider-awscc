@@ -28,6 +28,8 @@ AWS::S3ObjectLambda::AccessPointPolicy resource is an Amazon S3ObjectLambda poli
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_s3objectlambda_access_point_policy.example "object_lambda_access_point"
 ```

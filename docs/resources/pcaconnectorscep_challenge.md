@@ -32,6 +32,8 @@ Represents a SCEP Challenge that is used for certificate enrollment
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_pcaconnectorscep_challenge.example "challenge_arn"
 ```

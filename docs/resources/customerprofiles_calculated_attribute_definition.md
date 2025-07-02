@@ -116,6 +116,8 @@ Read-Only:
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_customerprofiles_calculated_attribute_definition.example "domain_name|calculated_attribute_name"
 ```

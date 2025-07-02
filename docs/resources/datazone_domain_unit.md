@@ -39,6 +39,8 @@ A domain unit enables you to easily organize your assets and other domain entiti
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_datazone_domain_unit.example "domain_id|id"
 ```
