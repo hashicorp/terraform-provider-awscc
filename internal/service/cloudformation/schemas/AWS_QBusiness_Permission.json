@@ -1,6 +1,38 @@
 {
   "typeName": "AWS::QBusiness::Permission",
   "description": "Definition of AWS::QBusiness::Permission Resource Type",
+  "definitions": {
+    "Condition": {
+      "type": "object",
+      "properties": {
+        "ConditionOperator": {
+          "type": "string",
+          "enum": [
+            "StringEquals"
+          ]
+        },
+        "ConditionKey": {
+          "type": "string",
+          "pattern": "^aws:PrincipalTag/qbusiness-dataaccessor:[a-zA-Z]+"
+        },
+        "ConditionValues": {
+          "type": "array",
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "maxItems": 1
+        }
+      },
+      "required": [
+        "ConditionOperator",
+        "ConditionKey",
+        "ConditionValues"
+      ],
+      "additionalProperties": false
+    }
+  },
   "properties": {
     "ApplicationId": {
       "type": "string",
@@ -23,6 +55,14 @@
       "maxItems": 10,
       "minItems": 1
     },
+    "Conditions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Condition"
+      },
+      "minItems": 1,
+      "maxItems": 10
+    },
     "Principal": {
       "type": "string",
       "maxLength": 1284,
@@ -40,7 +80,8 @@
     "/properties/ApplicationId",
     "/properties/StatementId",
     "/properties/Actions",
-    "/properties/Principal"
+    "/properties/Principal",
+    "/properties/Conditions"
   ],
   "primaryIdentifier": [
     "/properties/ApplicationId",

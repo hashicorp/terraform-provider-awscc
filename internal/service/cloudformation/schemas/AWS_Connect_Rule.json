@@ -109,7 +109,7 @@
             "DATE",
             "EMAIL"
           ],
-          "description": "The type of the reference. ``DATE`` must be of type Epoch timestamp. \n  *Allowed values*: ``URL`` | ``ATTACHMENT`` | ``NUMBER`` | ``STRING`` | ``DATE`` | ``EMAIL``"
+          "description": "The type of the reference. ``DATE`` must be of type Epoch timestamp. \n *Allowed values*: ``URL`` | ``ATTACHMENT`` | ``NUMBER`` | ``STRING`` | ``DATE`` | ``EMAIL``"
         }
       },
       "required": [
@@ -194,7 +194,7 @@
       "type": "object",
       "properties": {
         "DeliveryMethod": {
-          "description": "Notification delivery method.\n  *Allowed value*: ``EMAIL``",
+          "description": "Notification delivery method.\n *Allowed value*: ``EMAIL``",
           "type": "string",
           "enum": [
             "EMAIL"
@@ -213,7 +213,7 @@
           "maxLength": 1024
         },
         "ContentType": {
-          "description": "Content type format.\n  *Allowed value*: ``PLAIN_TEXT``",
+          "description": "Content type format.\n *Allowed value*: ``PLAIN_TEXT``",
           "type": "string",
           "enum": [
             "PLAIN_TEXT"
@@ -483,7 +483,7 @@
       "$ref": "#/definitions/Actions"
     },
     "PublishStatus": {
-      "description": "The publish status of the rule.\n  *Allowed values*: ``DRAFT`` | ``PUBLISHED``",
+      "description": "The publish status of the rule.\n *Allowed values*: ``DRAFT`` | ``PUBLISHED``",
       "type": "string",
       "enum": [
         "DRAFT",
@@ -514,7 +514,11 @@
     "tagOnCreate": false,
     "tagUpdatable": true,
     "cloudFormationSystemTags": true,
-    "tagProperty": "/properties/Tags"
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "connect:TagResource",
+      "connect:UntagResource"
+    ]
   },
   "handlers": {
     "create": {

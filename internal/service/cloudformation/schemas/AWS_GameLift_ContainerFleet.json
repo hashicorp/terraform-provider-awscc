@@ -110,6 +110,13 @@
         "LogDestination": {
           "$ref": "#/definitions/LogDestination"
         },
+        "LogGroupArn": {
+          "description": "If log destination is CLOUDWATCH, logs are sent to the specified log group in Amazon CloudWatch.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512,
+          "pattern": "[a-zA-Z0-9:/\\-\\*]+"
+        },
         "S3BucketName": {
           "description": "The name of the S3 bucket to pull logs from if S3 is the LogDestination",
           "type": "string",

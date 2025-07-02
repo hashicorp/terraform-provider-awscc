@@ -118,23 +118,55 @@
   "handlers": {
     "create": {
       "permissions": [
-        "elasticbeanstalk:CreateConfigurationTemplate"
+        "elasticbeanstalk:CreateConfigurationTemplate",
+        "s3:CreateBucket",
+        "s3:PutBucketAcl",
+        "s3:PutBucketObjectLockConfiguration",
+        "s3:PutBucketVersioning",
+        "s3:PutBucketOwnershipControls",
+        "s3:PutBucketPolicy",
+        "s3:PutBucketPublicAccessBlock",
+        "s3:PutObject",
+        "s3:ListBucket",
+        "s3:GetObject",
+        "s3:GetBucketLocation",
+        "s3:GetBucketPolicy",
+        "ec2:DescribeImages",
+        "ec2:CreateLaunchTemplate"
       ]
     },
     "read": {
       "permissions": [
-        "elasticbeanstalk:DescribeConfigurationSettings"
+        "elasticbeanstalk:DescribeConfigurationSettings",
+        "ec2:CreateLaunchTemplate",
+        "s3:ListBucket",
+        "s3:GetObject",
+        "s3:GetBucketLocation",
+        "s3:GetBucketPolicy"
       ]
     },
     "update": {
       "permissions": [
-        "elasticbeanstalk:UpdateConfigurationTemplate"
+        "elasticbeanstalk:UpdateConfigurationTemplate",
+        "ec2:CreateLaunchTemplate",
+        "s3:PutObject",
+        "s3:ListBucket",
+        "s3:GetObject",
+        "s3:GetBucketLocation",
+        "s3:GetBucketPolicy",
+        "ec2:DescribeImages"
       ]
     },
     "delete": {
       "permissions": [
         "elasticbeanstalk:DeleteConfigurationTemplate",
-        "elasticbeanstalk:DescribeConfigurationSettings"
+        "elasticbeanstalk:DescribeConfigurationSettings",
+        "ec2:CreateLaunchTemplate",
+        "s3:ListBucket",
+        "s3:GetObject",
+        "s3:GetBucketLocation",
+        "s3:GetBucketPolicy",
+        "s3:DeleteObject"
       ]
     },
     "list": {
