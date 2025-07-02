@@ -1,3 +1,5 @@
+## 1.49.0 (Unreleased)
+
 ## 1.48.0 (July 2, 2025)
 
 FEATURES:
