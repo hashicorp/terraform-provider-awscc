@@ -524,6 +524,47 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: GlobalTableWitnesses
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Region": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 1,
+		//	  "minItems": 1,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"global_table_witnesses": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Region
+					"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.Set{ /*START VALIDATORS*/
+				setvalidator.SizeBetween(1, 1),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: KeySchema
 		// CloudFormation resource type schema:
 		//
@@ -736,6 +777,29 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
 				setplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: MultiRegionConsistency
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "EVENTUAL",
+		//	    "STRONG"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"multi_region_consistency": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"EVENTUAL",
+					"STRONG",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Replicas
@@ -2060,6 +2124,7 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		"disable_scale_in":                     "DisableScaleIn",
 		"enabled":                              "Enabled",
 		"global_secondary_indexes":             "GlobalSecondaryIndexes",
+		"global_table_witnesses":               "GlobalTableWitnesses",
 		"index_name":                           "IndexName",
 		"key":                                  "Key",
 		"key_schema":                           "KeySchema",
@@ -2071,6 +2136,7 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		"max_read_request_units":               "MaxReadRequestUnits",
 		"max_write_request_units":              "MaxWriteRequestUnits",
 		"min_capacity":                         "MinCapacity",
+		"multi_region_consistency":             "MultiRegionConsistency",
 		"non_key_attributes":                   "NonKeyAttributes",
 		"point_in_time_recovery_enabled":       "PointInTimeRecoveryEnabled",
 		"point_in_time_recovery_specification": "PointInTimeRecoverySpecification",

@@ -656,7 +656,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		//	        "DatabaseName": {
 		//	          "maxLength": 64,
 		//	          "minLength": 1,
-		//	          "pattern": "^[a-z0-9]+$",
+		//	          "pattern": "^[a-z0-9_]+$",
 		//	          "type": "string"
 		//	        },
 		//	        "Host": {
@@ -1415,7 +1415,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 64),
-								stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9]+$"), ""),
+								stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9_]+$"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),

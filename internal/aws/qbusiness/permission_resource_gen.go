@@ -20,6 +20,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -72,6 +73,98 @@ func permissionResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Conditions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "ConditionKey": {
+		//	        "pattern": "^aws:PrincipalTag/qbusiness-dataaccessor:[a-zA-Z]+",
+		//	        "type": "string"
+		//	      },
+		//	      "ConditionOperator": {
+		//	        "enum": [
+		//	          "StringEquals"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "ConditionValues": {
+		//	        "items": {
+		//	          "type": "string"
+		//	        },
+		//	        "maxItems": 1,
+		//	        "minItems": 1,
+		//	        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+		//	        "type": "array"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "ConditionOperator",
+		//	      "ConditionKey",
+		//	      "ConditionValues"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 10,
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ConditionKey
+					"condition_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.RegexMatches(regexp.MustCompile("^aws:PrincipalTag/qbusiness-dataaccessor:[a-zA-Z]+"), ""),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: ConditionOperator
+					"condition_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"StringEquals",
+							),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: ConditionValues
+					"condition_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.List{ /*START VALIDATORS*/
+							listvalidator.SizeBetween(1, 1),
+							fwvalidators.NotNullList(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(1, 10),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Principal
@@ -134,15 +227,19 @@ func permissionResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::QBusiness::Permission").WithTerraformTypeName("awscc_qbusiness_permission")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"actions":        "Actions",
-		"application_id": "ApplicationId",
-		"principal":      "Principal",
-		"statement_id":   "StatementId",
+		"actions":            "Actions",
+		"application_id":     "ApplicationId",
+		"condition_key":      "ConditionKey",
+		"condition_operator": "ConditionOperator",
+		"condition_values":   "ConditionValues",
+		"conditions":         "Conditions",
+		"principal":          "Principal",
+		"statement_id":       "StatementId",
 	})
 
-	opts = opts.IsImmutableType(true)
-
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+
+	opts = opts.WithUpdateTimeoutInMinutes(0)
 
 	v, err := generic.NewResource(ctx, opts...)
 
