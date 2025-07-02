@@ -94,6 +94,17 @@ Optional:
 
 Import is supported using the following syntax:
 
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_backup_logically_air_gapped_backup_vault.example
+  id = "backup_vault_name"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_backup_logically_air_gapped_backup_vault.example "backup_vault_name"
 ```

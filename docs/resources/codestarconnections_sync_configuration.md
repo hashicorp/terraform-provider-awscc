@@ -40,6 +40,15 @@ Schema for AWS::CodeStarConnections::SyncConfiguration resource which is used to
 
 Import is supported using the following syntax:
 
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_codestarconnections_sync_configuration.example
+  id = "resource_name|sync_type"
+}
+```
+
 The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell

@@ -3,8 +3,7 @@
     {{- if $i}},{{- end}}
     {
         "resource": "{{ $e.ResourceName }}",
-        "identifier": [{{- range $i, $v := $e.Identifier }} {{- if $i}},{{- end}}"{{ $v }}"{{- end}}],
-        "path": "./examples/resources/{{ $e.ResourceName }}/"
+        "identifier": [{{- range $i, $v := $e.Identifier }} {{- if $i}},{{- end}}"{{ $v }}"{{- end}}]
     }
 {{- end}}
 ]

@@ -24,6 +24,15 @@ This resource schema represents the LogAnomalyDetectionIntegration resource in t
 
 Import is supported using the following syntax:
 
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_devopsguru_log_anomaly_detection_integration.example
+  id = "account_id"
+}
+```
+
 The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell

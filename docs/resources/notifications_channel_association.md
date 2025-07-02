@@ -30,6 +30,15 @@ Example: arn:aws:notifications::123456789012:configuration/a01jes88qxwkbj05xv9c9
 
 Import is supported using the following syntax:
 
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_notifications_channel_association.example
+  id = "arn|notification_configuration_arn"
+}
+```
+
 The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
