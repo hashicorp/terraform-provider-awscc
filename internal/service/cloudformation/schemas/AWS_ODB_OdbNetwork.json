@@ -1,0 +1,234 @@
+{
+  "typeName": "AWS::ODB::OdbNetwork",
+  "description": "The AWS::ODB::OdbNetwork resource creates an ODB Network",
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that's 1 to 128 Unicode characters in length and can't be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., :, /, =, +, @, -, and \".",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that's 1 to 256 characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key"
+      ]
+    }
+  },
+  "properties": {
+    "AvailabilityZone": {
+      "type": "string",
+      "description": "The AWS Availability Zone (AZ) where the ODB network is located.",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "AvailabilityZoneId": {
+      "type": "string",
+      "description": "The AZ ID of the AZ where the ODB network is located.",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "BackupSubnetCidr": {
+      "type": "string",
+      "description": "The CIDR range of the backup subnet in the ODB network.",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "ClientSubnetCidr": {
+      "type": "string",
+      "description": "The CIDR range of the client subnet in the ODB network.",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "DefaultDnsPrefix": {
+      "type": "string",
+      "description": "The DNS prefix to the default DNS domain name. The default DNS domain name is oraclevcn.com.",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "DeleteAssociatedResources": {
+      "type": "boolean",
+      "description": "Specifies whether to delete associated OCI networking resources along with the ODB network."
+    },
+    "DisplayName": {
+      "type": "string",
+      "description": "The user-friendly name of the ODB network.",
+      "pattern": "",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "OciNetworkAnchorId": {
+      "type": "string",
+      "description": "The unique identifier of the OCI network anchor for the ODB network.",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "OciResourceAnchorName": {
+      "type": "string",
+      "description": "The name of the OCI resource anchor that's associated with the ODB network."
+    },
+    "OciVcnUrl": {
+      "type": "string",
+      "description": "The URL for the VCN that's associated with the ODB network."
+    },
+    "OdbNetworkArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the ODB network."
+    },
+    "OdbNetworkId": {
+      "type": "string",
+      "description": "The unique identifier of the ODB network."
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Tags to assign to the Odb Network.",
+      "insertionOrder": false,
+      "uniqueItems": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/AvailabilityZone",
+    "/properties/AvailabilityZoneId",
+    "/properties/BackupSubnetCidr",
+    "/properties/ClientSubnetCidr",
+    "/properties/DefaultDnsPrefix",
+    "/properties/DisplayName"
+  ],
+  "readOnlyProperties": [
+    "/properties/OciNetworkAnchorId",
+    "/properties/OciResourceAnchorName",
+    "/properties/OciVcnUrl",
+    "/properties/OdbNetworkArn",
+    "/properties/OdbNetworkId"
+  ],
+  "writeOnlyProperties": [
+    "/properties/DeleteAssociatedResources",
+    "/properties/DefaultDnsPrefix"
+  ],
+  "primaryIdentifier": [
+    "/properties/OdbNetworkArn"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "odb:CreateOdbNetwork",
+        "odb:TagResource",
+        "ec2:DescribeAvailabilityZones",
+        "iam:CreateServiceLinkedRole",
+        "ec2:DescribeVpcs",
+        "ec2:CreateOdbNetworkPeering",
+        "odb:ListTagsForResource",
+        "sts:GetCallerIdentity",
+        "odb:GetOdbNetwork",
+        "odb:ListOdbNetworks",
+        "odb:UpdateOdbNetwork",
+        "vpc-lattice:CreateServiceNetwork",
+        "vpc-lattice:GetServiceNetwork",
+        "vpc-lattice:CreateServiceNetworkResourceAssociation",
+        "vpc-lattice:GetServiceNetworkResourceAssociation",
+        "vpc-lattice:CreateResourceGateway",
+        "vpc-lattice:GetResourceGateway",
+        "vpc-lattice:CreateServiceNetworkVpcEndpointAssociation",
+        "redshiftchannelmanagement:CreateChannel",
+        "ec2:ModifyOdbNetworkPeering",
+        "ec2:DescribeVpcEndpointAssociations",
+        "ec2:CreateVpcEndpoint",
+        "ec2:DescribeVpcEndpoints",
+        "ec2:CreateTags"
+      ],
+      "timeoutInMinutes": 2160
+    },
+    "read": {
+      "permissions": [
+        "odb:GetOdbNetwork",
+        "odb:ListOdbNetworks",
+        "odb:ListTagsForResource",
+        "sts:GetCallerIdentity",
+        "vpc-lattice:GetServiceNetwork",
+        "vpc-lattice:GetServiceNetworkResourceAssociation",
+        "vpc-lattice:GetResourceGateway",
+        "ec2:DescribeVpcEndpointAssociations",
+        "ec2:DescribeVpcEndpoints"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "odb:UpdateOdbNetwork",
+        "odb:TagResource",
+        "odb:UntagResource",
+        "ec2:DescribeVpcs",
+        "ec2:CreateOdbNetworkPeering",
+        "ec2:DeleteOdbNetworkPeering",
+        "odb:ListTagsForResource",
+        "sts:GetCallerIdentity",
+        "odb:GetOdbNetwork",
+        "odb:ListOdbNetworks",
+        "vpc-lattice:GetServiceNetwork",
+        "vpc-lattice:GetServiceNetworkResourceAssociation",
+        "vpc-lattice:GetResourceGateway",
+        "ec2:DescribeVpcEndpointAssociations",
+        "ec2:DescribeVpcEndpoints"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "odb:DeleteOdbNetwork",
+        "ec2:DeleteOdbNetworkPeering",
+        "ec2:DescribeVpcs",
+        "odb:ListTagsForResource",
+        "sts:GetCallerIdentity",
+        "odb:GetOdbNetwork",
+        "odb:ListOdbNetworks",
+        "vpc-lattice:DeleteServiceNetwork",
+        "vpc-lattice:GetServiceNetwork",
+        "vpc-lattice:DeleteServiceNetworkResourceAssociation",
+        "vpc-lattice:GetServiceNetworkResourceAssociation",
+        "vpc-lattice:DeleteResourceGateway",
+        "vpc-lattice:GetResourceGateway",
+        "ec2:ModifyOdbNetworkPeering",
+        "ec2:DescribeVpcEndpointAssociations",
+        "ec2:DeleteVpcEndpoints",
+        "ec2:DescribeVpcEndpoints"
+      ],
+      "timeoutInMinutes": 2160
+    },
+    "list": {
+      "permissions": [
+        "odb:ListOdbNetworks",
+        "odb:ListTagsForResource",
+        "sts:GetCallerIdentity",
+        "vpc-lattice:GetServiceNetwork",
+        "vpc-lattice:GetServiceNetworkResourceAssociation",
+        "vpc-lattice:GetResourceGateway",
+        "ec2:DescribeVpcEndpointAssociations",
+        "ec2:DescribeVpcEndpoints"
+      ]
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "odb:TagResource",
+      "odb:UntagResource",
+      "odb:ListTagsForResource"
+    ]
+  }
+}
