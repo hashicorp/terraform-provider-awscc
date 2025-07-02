@@ -51,6 +51,64 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"application_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: Conditions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "ConditionKey": {
+		//	        "pattern": "^aws:PrincipalTag/qbusiness-dataaccessor:[a-zA-Z]+",
+		//	        "type": "string"
+		//	      },
+		//	      "ConditionOperator": {
+		//	        "enum": [
+		//	          "StringEquals"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "ConditionValues": {
+		//	        "items": {
+		//	          "type": "string"
+		//	        },
+		//	        "maxItems": 1,
+		//	        "minItems": 1,
+		//	        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+		//	        "type": "array"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "ConditionOperator",
+		//	      "ConditionKey",
+		//	      "ConditionValues"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 10,
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ConditionKey
+					"condition_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: ConditionOperator
+					"condition_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: ConditionValues
+					"condition_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Principal
 		// CloudFormation resource type schema:
 		//
@@ -92,10 +150,14 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::QBusiness::Permission").WithTerraformTypeName("awscc_qbusiness_permission")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"actions":        "Actions",
-		"application_id": "ApplicationId",
-		"principal":      "Principal",
-		"statement_id":   "StatementId",
+		"actions":            "Actions",
+		"application_id":     "ApplicationId",
+		"condition_key":      "ConditionKey",
+		"condition_operator": "ConditionOperator",
+		"condition_values":   "ConditionValues",
+		"conditions":         "Conditions",
+		"principal":          "Principal",
+		"statement_id":       "StatementId",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

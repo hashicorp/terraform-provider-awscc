@@ -754,6 +754,13 @@ func containerFleetResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "string"
 		//	    },
+		//	    "LogGroupArn": {
+		//	      "description": "If log destination is CLOUDWATCH, logs are sent to the specified log group in Amazon CloudWatch.",
+		//	      "maxLength": 512,
+		//	      "minLength": 1,
+		//	      "pattern": "[a-zA-Z0-9:/\\-\\*]+",
+		//	      "type": "string"
+		//	    },
 		//	    "S3BucketName": {
 		//	      "description": "The name of the S3 bucket to pull logs from if S3 is the LogDestination",
 		//	      "maxLength": 1024,
@@ -776,6 +783,19 @@ func containerFleetResource(ctx context.Context) (resource.Resource, error) {
 							"CLOUDWATCH",
 							"S3",
 						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: LogGroupArn
+				"log_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "If log destination is CLOUDWATCH, logs are sent to the specified log group in Amazon CloudWatch.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 512),
+						stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9:/\\-\\*]+"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -1307,6 +1327,7 @@ func containerFleetResource(ctx context.Context) (resource.Resource, error) {
 		"locations":                                   "Locations",
 		"log_configuration":                           "LogConfiguration",
 		"log_destination":                             "LogDestination",
+		"log_group_arn":                               "LogGroupArn",
 		"max_size":                                    "MaxSize",
 		"maximum_game_server_container_groups_per_instance": "MaximumGameServerContainerGroupsPerInstance",
 		"metric_groups":                      "MetricGroups",

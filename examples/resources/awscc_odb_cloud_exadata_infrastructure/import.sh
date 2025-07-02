@@ -1,0 +1,1 @@
+$ terraform import awscc_odb_cloud_exadata_infrastructure.example "cloud_exadata_infrastructure_arn"

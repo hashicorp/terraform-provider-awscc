@@ -548,7 +548,7 @@
           "type": "string",
           "maxLength": 64,
           "minLength": 1,
-          "pattern": "^[a-z0-9]+$"
+          "pattern": "^[a-z0-9_]+$"
         },
         "Host": {
           "type": "string",

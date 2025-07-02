@@ -244,11 +244,11 @@ func vPCEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "Describes a Region.",
 		//	  "type": "string"
 		//	}
 		"service_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "Describes a Region.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SubnetIds

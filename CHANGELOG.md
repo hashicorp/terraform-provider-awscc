@@ -1,4 +1,31 @@
-## 1.48.0 (Unreleased)
+## 1.48.0 (July 2, 2025)
+
+FEATURES:
+
+* **New Data Source:** `awscc_ec2_traffic_mirror_filter_rule`
+* **New Data Source:** `awscc_ec2_traffic_mirror_filter_rules`
+* **New Data Source:** `awscc_kinesis_stream_consumer`
+* **New Data Source:** `awscc_kinesis_stream_consumers`
+* **New Data Source:** `awscc_neptune_db_instance`
+* **New Data Source:** `awscc_neptune_db_instances`
+* **New Data Source:** `awscc_odb_cloud_autonomous_vm_cluster`
+* **New Data Source:** `awscc_odb_cloud_autonomous_vm_clusters`
+* **New Data Source:** `awscc_odb_cloud_exadata_infrastructure`
+* **New Data Source:** `awscc_odb_cloud_exadata_infrastructures`
+* **New Data Source:** `awscc_odb_cloud_vm_cluster`
+* **New Data Source:** `awscc_odb_cloud_vm_clusters`
+* **New Data Source:** `awscc_odb_odb_network`
+* **New Data Source:** `awscc_odb_odb_networks`
+* **New Data Source:** `awscc_redshiftserverless_snapshot`
+* **New Data Source:** `awscc_redshiftserverless_snapshots`
+* **New Resource:** `awscc_ec2_traffic_mirror_filter_rule`
+* **New Resource:** `awscc_kinesis_stream_consumer`
+* **New Resource:** `awscc_neptune_db_instance`
+* **New Resource:** `awscc_odb_cloud_autonomous_vm_cluster`
+* **New Resource:** `awscc_odb_cloud_exadata_infrastructure`
+* **New Resource:** `awscc_odb_cloud_vm_cluster`
+* **New Resource:** `awscc_odb_odb_network`
+* **New Resource:** `awscc_redshiftserverless_snapshot`
 
 ## 1.47.0 (June 26, 2025)
 

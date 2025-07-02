@@ -504,6 +504,7 @@
         "rds:ModifyDBCluster",
         "rds:RestoreDBClusterFromSnapshot",
         "rds:RestoreDBClusterToPointInTime",
+        "rds:DescribeDBClusterSnapshots",
         "secretsmanager:CreateSecret",
         "secretsmanager:TagResource"
       ],

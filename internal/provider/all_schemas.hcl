@@ -1873,6 +1873,10 @@ resource_schema "aws_ec2_traffic_mirror_filter" {
   cloudformation_type_name = "AWS::EC2::TrafficMirrorFilter"
 }
 
+resource_schema "aws_ec2_traffic_mirror_filter_rule" {
+  cloudformation_type_name = "AWS::EC2::TrafficMirrorFilterRule"
+}
+
 resource_schema "aws_ec2_transit_gateway" {
   cloudformation_type_name = "AWS::EC2::TransitGateway"
 }
@@ -3081,6 +3085,10 @@ resource_schema "aws_kinesis_stream" {
   cloudformation_type_name = "AWS::Kinesis::Stream"
 }
 
+resource_schema "aws_kinesis_stream_consumer" {
+  cloudformation_type_name = "AWS::Kinesis::StreamConsumer"
+}
+
 resource_schema "aws_kinesisanalyticsv2_application" {
   cloudformation_type_name = "AWS::KinesisAnalyticsV2::Application"
 }
@@ -3626,6 +3634,10 @@ resource_schema "aws_neptune_db_cluster_parameter_group" {
   cloudformation_type_name = "AWS::Neptune::DBClusterParameterGroup"
 }
 
+resource_schema "aws_neptune_db_instance" {
+  cloudformation_type_name = "AWS::Neptune::DBInstance"
+}
+
 resource_schema "aws_neptune_db_parameter_group" {
   cloudformation_type_name = "AWS::Neptune::DBParameterGroup"
 }
@@ -3796,6 +3808,22 @@ resource_schema "aws_notifications_notification_hub" {
 
 resource_schema "aws_notificationscontacts_email_contact" {
   cloudformation_type_name = "AWS::NotificationsContacts::EmailContact"
+}
+
+resource_schema "aws_odb_cloud_autonomous_vm_cluster" {
+  cloudformation_type_name = "AWS::ODB::CloudAutonomousVmCluster"
+}
+
+resource_schema "aws_odb_cloud_exadata_infrastructure" {
+  cloudformation_type_name = "AWS::ODB::CloudExadataInfrastructure"
+}
+
+resource_schema "aws_odb_cloud_vm_cluster" {
+  cloudformation_type_name = "AWS::ODB::CloudVmCluster"
+}
+
+resource_schema "aws_odb_odb_network" {
+  cloudformation_type_name = "AWS::ODB::OdbNetwork"
 }
 
 resource_schema "aws_osis_pipeline" {
@@ -4242,6 +4270,10 @@ resource_schema "aws_redshift_scheduled_action" {
 
 resource_schema "aws_redshiftserverless_namespace" {
   cloudformation_type_name = "AWS::RedshiftServerless::Namespace"
+}
+
+resource_schema "aws_redshiftserverless_snapshot" {
+  cloudformation_type_name = "AWS::RedshiftServerless::Snapshot"
 }
 
 resource_schema "aws_redshiftserverless_workgroup" {

@@ -57,15 +57,16 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Determines whether to apply fleet or location capacities on fleet creation.",
+		//	  "description": "Determines when and how to apply fleet or location capacities. If you choose ON_CREATE_AND_UPDATE_WITH_AUTOSCALING, MinSize and MaxSize will still be applied on creation and on updates, but DesiredEC2Instances will only be applied once on fleet creation and will be ignored during updates to prevent conflicts with auto-scaling.",
 		//	  "enum": [
 		//	    "ON_UPDATE",
-		//	    "ON_CREATE_AND_UPDATE"
+		//	    "ON_CREATE_AND_UPDATE",
+		//	    "ON_CREATE_AND_UPDATE_WITH_AUTOSCALING"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"apply_capacity": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Determines whether to apply fleet or location capacities on fleet creation.",
+			Description: "Determines when and how to apply fleet or location capacities. If you choose ON_CREATE_AND_UPDATE_WITH_AUTOSCALING, MinSize and MaxSize will still be applied on creation and on updates, but DesiredEC2Instances will only be applied once on fleet creation and will be ignored during updates to prevent conflicts with auto-scaling.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BuildId

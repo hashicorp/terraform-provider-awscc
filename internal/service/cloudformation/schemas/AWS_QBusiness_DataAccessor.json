@@ -72,6 +72,71 @@
       },
       "additionalProperties": false
     },
+    "DataAccessorAuthenticationConfiguration": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "IdcTrustedTokenIssuerConfiguration",
+          "properties": {
+            "IdcTrustedTokenIssuerConfiguration": {
+              "$ref": "#/definitions/DataAccessorIdcTrustedTokenIssuerConfiguration"
+            }
+          },
+          "required": [
+            "IdcTrustedTokenIssuerConfiguration"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "DataAccessorAuthenticationDetail": {
+      "type": "object",
+      "properties": {
+        "AuthenticationType": {
+          "$ref": "#/definitions/DataAccessorAuthenticationType"
+        },
+        "AuthenticationConfiguration": {
+          "$ref": "#/definitions/DataAccessorAuthenticationConfiguration"
+        },
+        "ExternalIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+          },
+          "maxItems": 1,
+          "minItems": 1
+        }
+      },
+      "required": [
+        "AuthenticationType"
+      ],
+      "additionalProperties": false
+    },
+    "DataAccessorAuthenticationType": {
+      "type": "string",
+      "enum": [
+        "AWS_IAM_IDC_TTI",
+        "AWS_IAM_IDC_AUTH_CODE"
+      ]
+    },
+    "DataAccessorIdcTrustedTokenIssuerConfiguration": {
+      "type": "object",
+      "properties": {
+        "IdcTrustedTokenIssuerArn": {
+          "type": "string",
+          "maxLength": 1284,
+          "minLength": 0,
+          "pattern": "^arn:aws:sso::[0-9]{12}:trustedTokenIssuer/(sso)?ins-[a-zA-Z0-9-.]{16}/tti-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+        }
+      },
+      "required": [
+        "IdcTrustedTokenIssuerArn"
+      ],
+      "additionalProperties": false
+    },
     "DocumentAttribute": {
       "type": "object",
       "properties": {
@@ -194,6 +259,9 @@
       "minLength": 36,
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{35}$"
     },
+    "AuthenticationDetail": {
+      "$ref": "#/definitions/DataAccessorAuthenticationDetail"
+    },
     "CreatedAt": {
       "type": "string",
       "format": "date-time"
@@ -268,11 +336,13 @@
         "qbusiness:CreateDataAccessor",
         "qbusiness:GetDataAccessor",
         "qbusiness:ListTagsForResource",
+        "qbusiness:CreateDataAccessorWithTti",
         "qbusiness:TagResource",
         "sso:CreateApplication",
         "sso:PutApplicationAuthenticationMethod",
         "sso:PutApplicationGrant",
-        "sso:PutApplicationAccessScope"
+        "sso:PutApplicationAccessScope",
+        "sso:DescribeTrustedTokenIssuer"
       ]
     },
     "read": {
@@ -290,7 +360,9 @@
         "qbusiness:UpdateDataAccessor",
         "sso:PutApplicationAuthenticationMethod",
         "sso:PutApplicationGrant",
-        "sso:PutApplicationAccessScope"
+        "sso:PutApplicationAccessScope",
+        "sso:DescribeTrustedTokenIssuer",
+        "sso:UpdateApplication"
       ]
     },
     "delete": {

@@ -25,8 +25,10 @@ Data Source schema for AWS::DynamoDB::GlobalTable
 - `attribute_definitions` (Attributes Set) (see [below for nested schema](#nestedatt--attribute_definitions))
 - `billing_mode` (String)
 - `global_secondary_indexes` (Attributes Set) (see [below for nested schema](#nestedatt--global_secondary_indexes))
+- `global_table_witnesses` (Attributes Set) (see [below for nested schema](#nestedatt--global_table_witnesses))
 - `key_schema` (Attributes List) (see [below for nested schema](#nestedatt--key_schema))
 - `local_secondary_indexes` (Attributes Set) (see [below for nested schema](#nestedatt--local_secondary_indexes))
+- `multi_region_consistency` (String)
 - `replicas` (Attributes Set) (see [below for nested schema](#nestedatt--replicas))
 - `sse_specification` (Attributes) (see [below for nested schema](#nestedatt--sse_specification))
 - `stream_arn` (String)
@@ -123,6 +125,14 @@ Read-Only:
 
 
 
+
+
+<a id="nestedatt--global_table_witnesses"></a>
+### Nested Schema for `global_table_witnesses`
+
+Read-Only:
+
+- `region` (String)
 
 
 <a id="nestedatt--key_schema"></a>

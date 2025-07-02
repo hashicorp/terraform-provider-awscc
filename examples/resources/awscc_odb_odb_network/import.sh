@@ -1,0 +1,1 @@
+$ terraform import awscc_odb_odb_network.example "odb_network_arn"

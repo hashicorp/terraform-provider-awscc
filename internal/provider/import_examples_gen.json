@@ -1556,6 +1556,10 @@
         "identifier": ["Id"]
     },
     {
+        "resource": "awscc_ec2_traffic_mirror_filter_rule",
+        "identifier": ["TrafficMirrorFilterRuleId"]
+    },
+    {
         "resource": "awscc_ec2_transit_gateway",
         "identifier": ["Id"]
     },
@@ -2652,6 +2656,10 @@
         "identifier": ["Name"]
     },
     {
+        "resource": "awscc_kinesis_stream_consumer",
+        "identifier": ["ConsumerARN"]
+    },
+    {
         "resource": "awscc_kinesisanalyticsv2_application",
         "identifier": ["ApplicationName"]
     },
@@ -3136,6 +3144,10 @@
         "identifier": ["Name"]
     },
     {
+        "resource": "awscc_neptune_db_instance",
+        "identifier": ["DBInstanceIdentifier"]
+    },
+    {
         "resource": "awscc_neptune_db_parameter_group",
         "identifier": ["Name"]
     },
@@ -3278,6 +3290,22 @@
     {
         "resource": "awscc_notificationscontacts_email_contact",
         "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_odb_cloud_autonomous_vm_cluster",
+        "identifier": ["CloudAutonomousVmClusterArn"]
+    },
+    {
+        "resource": "awscc_odb_cloud_exadata_infrastructure",
+        "identifier": ["CloudExadataInfrastructureArn"]
+    },
+    {
+        "resource": "awscc_odb_cloud_vm_cluster",
+        "identifier": ["CloudVmClusterArn"]
+    },
+    {
+        "resource": "awscc_odb_odb_network",
+        "identifier": ["OdbNetworkArn"]
     },
     {
         "resource": "awscc_osis_pipeline",
@@ -3650,6 +3678,10 @@
     {
         "resource": "awscc_redshiftserverless_namespace",
         "identifier": ["NamespaceName"]
+    },
+    {
+        "resource": "awscc_redshiftserverless_snapshot",
+        "identifier": ["SnapshotName"]
     },
     {
         "resource": "awscc_redshiftserverless_workgroup",

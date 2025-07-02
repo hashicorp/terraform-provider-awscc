@@ -23,6 +23,7 @@ Data Source schema for AWS::Cassandra::Table
 
 - `auto_scaling_specifications` (Attributes) Represents the read and write settings used for AutoScaling. (see [below for nested schema](#nestedatt--auto_scaling_specifications))
 - `billing_mode` (Attributes) (see [below for nested schema](#nestedatt--billing_mode))
+- `cdc_specification` (Attributes) Represents the CDC configuration for the table (see [below for nested schema](#nestedatt--cdc_specification))
 - `client_side_timestamps_enabled` (Boolean) Indicates whether client side timestamps are enabled (true) or disabled (false) on the table. False by default, once it is enabled it cannot be disabled again.
 - `clustering_key_columns` (Attributes List) Clustering key columns of the table (see [below for nested schema](#nestedatt--clustering_key_columns))
 - `default_time_to_live` (Number) Default TTL (Time To Live) in seconds, where zero is disabled. If the value is greater than zero, TTL is enabled for the entire table and an expiration timestamp is added to each column.
@@ -120,6 +121,15 @@ Read-Only:
 - `read_capacity_units` (Number)
 - `write_capacity_units` (Number)
 
+
+
+<a id="nestedatt--cdc_specification"></a>
+### Nested Schema for `cdc_specification`
+
+Read-Only:
+
+- `status` (String) Indicates whether CDC is enabled or disabled for the table
+- `view_type` (String) Specifies what data should be captured in the change data stream
 
 
 <a id="nestedatt--clustering_key_columns"></a>
