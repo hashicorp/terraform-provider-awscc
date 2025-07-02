@@ -34,6 +34,8 @@ An example resource schema demonstrating some basic constructs and validation ru
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_licensemanager_grant.example "grant_arn"
 ```

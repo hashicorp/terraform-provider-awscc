@@ -33,6 +33,8 @@ Resource Type definition for AWS::WorkspacesInstances::VolumeAssociation
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_workspacesinstances_volume_association.example "workspace_instance_id|volume_id|device"
 ```

@@ -29,6 +29,8 @@ The AWS::SecurityHub::HubV2 resource represents the implementation of the AWS Se
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_securityhub_hub_v2.example "hub_v2_arn"
 ```

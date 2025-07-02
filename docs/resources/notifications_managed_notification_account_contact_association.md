@@ -28,6 +28,8 @@ Resource Type definition for ManagedNotificationAccountContactAssociation
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_notifications_managed_notification_account_contact_association.example "managed_notification_configuration_arn|contact_identifier"
 ```

@@ -31,6 +31,8 @@ Represents a deployment resource of an AWS Mainframe Modernization (M2) applicat
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_m2_deployment.example "application_id"
 ```

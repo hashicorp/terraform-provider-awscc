@@ -32,6 +32,8 @@ Resource Type definition for Local Gateway Route which describes a route for a l
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_ec2_local_gateway_route.example "destination_cidr_block|local_gateway_route_table_id"
 ```

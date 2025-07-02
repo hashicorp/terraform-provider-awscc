@@ -53,6 +53,8 @@ Optional:
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_datazone_owner.example "domain_identifier|entity_type|entity_identifier|owner_type|owner_identifier"
 ```
