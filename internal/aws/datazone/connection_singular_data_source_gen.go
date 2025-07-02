@@ -564,7 +564,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "DatabaseName": {
 		//	          "maxLength": 64,
 		//	          "minLength": 1,
-		//	          "pattern": "^[a-z0-9]+$",
+		//	          "pattern": "^[a-z0-9_]+$",
 		//	          "type": "string"
 		//	        },
 		//	        "Host": {

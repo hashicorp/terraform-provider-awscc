@@ -186,14 +186,14 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The details of the DB instance?s server certificate.\n For more information, see [Using SSL/TLS to encrypt a connection to a DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html) in the *Amazon RDS User Guide* and [Using SSL/TLS to encrypt a connection to a DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html) in the *Amazon Aurora User Guide*.",
+		//	  "description": "The details of the DB instance’s server certificate.\n For more information, see [Using SSL/TLS to encrypt a connection to a DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html) in the *Amazon RDS User Guide* and [Using SSL/TLS to encrypt a connection to a DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html) in the *Amazon Aurora User Guide*.",
 		//	  "properties": {
 		//	    "CAIdentifier": {
 		//	      "description": "The CA identifier of the CA certificate used for the DB instance's server certificate.",
 		//	      "type": "string"
 		//	    },
 		//	    "ValidTill": {
-		//	      "description": "The expiration date of the DB instance?s server certificate.",
+		//	      "description": "The expiration date of the DB instance’s server certificate.",
 		//	      "format": "date-time",
 		//	      "type": "string"
 		//	    }
@@ -210,11 +210,11 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: ValidTill
 				"valid_till": schema.StringAttribute{ /*START ATTRIBUTE*/
 					CustomType:  timetypes.RFC3339Type{},
-					Description: "The expiration date of the DB instance?s server certificate.",
+					Description: "The expiration date of the DB instance’s server certificate.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The details of the DB instance?s server certificate.\n For more information, see [Using SSL/TLS to encrypt a connection to a DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html) in the *Amazon RDS User Guide* and [Using SSL/TLS to encrypt a connection to a DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html) in the *Amazon Aurora User Guide*.",
+			Description: "The details of the DB instance’s server certificate.\n For more information, see [Using SSL/TLS to encrypt a connection to a DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html) in the *Amazon RDS User Guide* and [Using SSL/TLS to encrypt a connection to a DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html) in the *Amazon Aurora User Guide*.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CertificateRotationRestart
