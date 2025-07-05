@@ -33,6 +33,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_appflow_connector_profiles -cftype AWS::AppFlow::ConnectorProfile -package appflow ../aws/appflow/connector_profile_plural_data_source_gen.go ../aws/appflow/connector_profile_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_appflow_flows -cftype AWS::AppFlow::Flow -package appflow ../aws/appflow/flow_plural_data_source_gen.go ../aws/appflow/flow_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_appintegrations_applications -cftype AWS::AppIntegrations::Application -package appintegrations ../aws/appintegrations/application_plural_data_source_gen.go ../aws/appintegrations/application_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_appintegrations_data_integrations -cftype AWS::AppIntegrations::DataIntegration -package appintegrations ../aws/appintegrations/data_integration_plural_data_source_gen.go ../aws/appintegrations/data_integration_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_appintegrations_event_integrations -cftype AWS::AppIntegrations::EventIntegration -package appintegrations ../aws/appintegrations/event_integration_plural_data_source_gen.go ../aws/appintegrations/event_integration_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_apprunner_auto_scaling_configurations -cftype AWS::AppRunner::AutoScalingConfiguration -package apprunner ../aws/apprunner/auto_scaling_configuration_plural_data_source_gen.go ../aws/apprunner/auto_scaling_configuration_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_apprunner_observability_configurations -cftype AWS::AppRunner::ObservabilityConfiguration -package apprunner ../aws/apprunner/observability_configuration_plural_data_source_gen.go ../aws/apprunner/observability_configuration_plural_data_source_gen_test.go
@@ -64,6 +65,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_b2bi_partnerships -cftype AWS::B2BI::Partnership -package b2bi ../aws/b2bi/partnership_plural_data_source_gen.go ../aws/b2bi/partnership_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_b2bi_profiles -cftype AWS::B2BI::Profile -package b2bi ../aws/b2bi/profile_plural_data_source_gen.go ../aws/b2bi/profile_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_b2bi_transformers -cftype AWS::B2BI::Transformer -package b2bi ../aws/b2bi/transformer_plural_data_source_gen.go ../aws/b2bi/transformer_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_bcmdataexports_exports -cftype AWS::BCMDataExports::Export -package bcmdataexports ../aws/bcmdataexports/export_plural_data_source_gen.go ../aws/bcmdataexports/export_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_backup_backup_plans -cftype AWS::Backup::BackupPlan -package backup ../aws/backup/backup_plan_plural_data_source_gen.go ../aws/backup/backup_plan_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_backup_backup_selections -cftype AWS::Backup::BackupSelection -package backup ../aws/backup/backup_selection_plural_data_source_gen.go ../aws/backup/backup_selection_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_backup_backup_vaults -cftype AWS::Backup::BackupVault -package backup ../aws/backup/backup_vault_plural_data_source_gen.go ../aws/backup/backup_vault_plural_data_source_gen_test.go
@@ -921,6 +923,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/backup"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/backupgateway"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/batch"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/bcmdataexports"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/bedrock"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/billingconductor"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/budgets"

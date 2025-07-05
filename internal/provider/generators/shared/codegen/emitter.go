@@ -603,7 +603,17 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 				if len(patternProperty.PatternProperties) > 0 {
 					// Map of Maps
 
-					switch ItemType := patternProperty.Items.Type.String(); ItemType {
+					var nestedPatternProperty *cfschema.Property
+					for _, v := range patternProperty.PatternProperties {
+						nestedPatternProperty = v
+						break
+					}
+
+					if nestedPatternProperty == nil {
+						return features, unsupportedTypeError(path, "key-value map with empty pattern properties")
+					}
+
+					switch nestedPatternProperty.Type.String() {
 					case cfschema.PropertyTypeBoolean:
 						e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
 						e.printf("ElementType:types.MapType{ElemType:types.BoolType},\n")
@@ -616,8 +626,48 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 					case cfschema.PropertyTypeString:
 						e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
 						e.printf("ElementType:types.MapType{ElemType:types.StringType},\n")
+					case cfschema.PropertyTypeArray:
+						if nestedPatternProperty.Items == nil {
+							return features, unsupportedTypeError(path, "key-value map of map of array with no items")
+						}
+						itemType := nestedPatternProperty.Items.Type.String()
+						if aggregateType(nestedPatternProperty) == aggregateSet {
+							switch itemType {
+							case cfschema.PropertyTypeBoolean:
+								e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
+								e.printf("ElementType:types.MapType{ElemType:types.SetType{ElemType:types.BoolType}},\n")
+							case cfschema.PropertyTypeInteger:
+								e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
+								e.printf("ElementType:types.MapType{ElemType:types.SetType{ElemType:types.Int64Type}},\n")
+							case cfschema.PropertyTypeNumber:
+								e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
+								e.printf("ElementType:types.MapType{ElemType:types.SetType{ElemType:types.Float64Type}},\n")
+							case cfschema.PropertyTypeString:
+								e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
+								e.printf("ElementType:types.MapType{ElemType:types.SetType{ElemType:types.StringType}},\n")
+							default:
+								return features, unsupportedTypeError(path, fmt.Sprintf("key-value map of map of set of %s", itemType))
+							}
+						} else {
+							switch itemType {
+							case cfschema.PropertyTypeBoolean:
+								e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
+								e.printf("ElementType:types.MapType{ElemType:types.ListType{ElemType:types.BoolType}},\n")
+							case cfschema.PropertyTypeInteger:
+								e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
+								e.printf("ElementType:types.MapType{ElemType:types.ListType{ElemType:types.Int64Type}},\n")
+							case cfschema.PropertyTypeNumber:
+								e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
+								e.printf("ElementType:types.MapType{ElemType:types.ListType{ElemType:types.Float64Type}},\n")
+							case cfschema.PropertyTypeString:
+								e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
+								e.printf("ElementType:types.MapType{ElemType:types.ListType{ElemType:types.StringType}},\n")
+							default:
+								return features, unsupportedTypeError(path, fmt.Sprintf("key-value map of map of list of %s", itemType))
+							}
+						}
 					default:
-						return features, unsupportedTypeError(path, fmt.Sprintf("key-value map of map of %s", ItemType))
+						return features, unsupportedTypeError(path, fmt.Sprintf("key-value map of map of %s", nestedPatternProperty.Type.String()))
 					}
 					features.UsesFrameworkTypes = true
 				} else if len(patternProperty.Properties) == 0 {

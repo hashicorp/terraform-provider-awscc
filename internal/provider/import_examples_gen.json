@@ -236,6 +236,10 @@
         "identifier": ["ApplicationArn"]
     },
     {
+        "resource": "awscc_appintegrations_data_integration",
+        "identifier": ["Id"]
+    },
+    {
         "resource": "awscc_appintegrations_event_integration",
         "identifier": ["Name"]
     },
@@ -414,6 +418,10 @@
     {
         "resource": "awscc_b2bi_transformer",
         "identifier": ["TransformerId"]
+    },
+    {
+        "resource": "awscc_bcmdataexports_export",
+        "identifier": ["ExportArn"]
     },
     {
         "resource": "awscc_backup_backup_plan",
