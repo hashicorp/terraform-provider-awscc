@@ -428,16 +428,6 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 						*/
 						elementType = "types.ListType{ElemType: types.StringType}"
 					}
-
-					/*
-						list of map of map
-						get map
-						check case
-						set elementType to "types.MapType{ElemType: types.X}"
-
-
-
-					*/
 				} else if len(property.Items.Properties) == 0 {
 					return features, unsupportedTypeError(path, "list of undefined schema")
 				} else {
@@ -495,13 +485,6 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 					validators = append(validators, v)
 					features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "listvalidator")
 				}
-
-				/*
-					case cfschema.PropertyTypeObject:
-						if len(property.Items.PatternProperties) > 0 {
-						means its a map
-
-				*/
 				switch arrayType {
 				case aggregateOrderedSet:
 					validators = append(validators, "listvalidator.UniqueValues()")
@@ -509,7 +492,6 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 				case aggregateMultiset:
 					planModifiers = append(planModifiers, "generic.Multiset()")
 				}
-
 				if validatorsGenerator != nil {
 					if f, v, err := validatorsGenerator(path, property.Items); err != nil {
 						return features, err
