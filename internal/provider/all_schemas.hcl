@@ -4877,12 +4877,6 @@ resource_schema "aws_sagemaker_user_profile" {
 
 resource_schema "aws_scheduler_schedule" {
   cloudformation_type_name = "AWS::Scheduler::Schedule"
-
-  # Suppression Reason: Target/EcsParameters/Tags is of unsupported type: list of key-value map.
-  # https://github.com/hashicorp/terraform-provider-awscc/issues/1517
-  suppress_resource_generation             = false
-  suppress_singular_data_source_generation = false
-  suppress_plural_data_source_generation   = false
 }
 
 resource_schema "aws_scheduler_schedule_group" {
