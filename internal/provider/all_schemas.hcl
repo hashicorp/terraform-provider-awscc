@@ -3843,7 +3843,7 @@ resource_schema "aws_omics_annotation_store" {
 
   # Suppression Reason: StoreOptions/TsvStoreOptions/Schema is of unsupported type: list of key-value map.
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1517
-  suppress_resource_generation             = true
+  suppress_resource_generation             = false
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
 }
