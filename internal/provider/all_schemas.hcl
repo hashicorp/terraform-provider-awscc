@@ -301,9 +301,9 @@ resource_schema "aws_appconfig_extension" {
 
   # Suppression Reason: Actions is of unsupported type: key-value map of set of object.
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1508
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
+  suppress_resource_generation             = false
+  suppress_singular_data_source_generation = false
+  suppress_plural_data_source_generation   = false
 }
 
 resource_schema "aws_appconfig_extension_association" {

@@ -212,6 +212,10 @@
         "identifier": ["ApplicationId","EnvironmentId"]
     },
     {
+        "resource": "awscc_appconfig_extension",
+        "identifier": ["Id"]
+    },
+    {
         "resource": "awscc_appconfig_extension_association",
         "identifier": ["Id"]
     },
