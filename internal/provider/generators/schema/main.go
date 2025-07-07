@@ -233,7 +233,7 @@ func (d *Downloader) Schemas() ([]*ResourceData, *DataSources, error) {
 	var singularDataSources, pluralDataSources []*DataSourceData
 
 	for _, schema := range d.config.ResourceSchemas {
-		cfResourceSchemaFilename, cfResourceTypeName, err := d.ResourceSchema(schema)
+		cfResourceSchemaFilename, cfResourceTypeName, err := d.ResourceSchema(schema, 5)
 
 		if err != nil {
 			d.ui.Warn(fmt.Sprintf("error loading CloudFormation Resource Provider Schema for %s: %s", schema.ResourceTypeName, err))
@@ -311,7 +311,10 @@ func (d *Downloader) Schemas() ([]*ResourceData, *DataSources, error) {
 }
 
 // ResourceSchema returns the local resource schema file name and type name.
-func (d *Downloader) ResourceSchema(schema ResourceSchema) (string, string, error) {
+func (d *Downloader) ResourceSchema(schema ResourceSchema, timer int) (string, string, error) {
+	if timer > 300 {
+		return "", "", fmt.Errorf("timeout exceeded while downloading CloudFormation Resource Provider Schema for %s", schema.CloudFormationTypeName)
+	}
 	resourceSchemaFilename := schema.CloudFormationSchemaPath
 	if resourceSchemaFilename == "" {
 		filename := fmt.Sprintf("%s.json", schema.CloudFormationTypeName)
@@ -332,6 +335,12 @@ func (d *Downloader) ResourceSchema(schema ResourceSchema) (string, string, erro
 			TypeName: aws.String(schema.CloudFormationTypeName),
 		}
 		output, err := d.client.DescribeType(context.TODO(), input)
+
+		if strings.Contains(err.Error(), "api error Throttling: Rate exceeded") {
+			d.ui.Warn("API rate limit exceeded. Retrying after a short delay...")
+			timer *= 2                             // Exponential backoff
+			return d.ResourceSchema(schema, timer) // Retry with increased timer
+		}
 
 		if err != nil {
 			return "", "", fmt.Errorf("describing CloudFormation type: %w", err)
