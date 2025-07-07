@@ -587,9 +587,6 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 						if nestedPatternProperty == nil {
 							return features, unsupportedTypeError(path, "key-value map with empty pattern properties")
 						}
-						fmt.Println(nestedPatternProperty)
-						fmt.Println(nestedPatternProperty.Properties)
-						fmt.Println(nestedPatternProperty.PatternProperties)
 						if len(nestedPatternProperty.PatternProperties) > 0 {
 							return features, unsupportedTypeError(path, "key-value map of key-value map")
 						}
