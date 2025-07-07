@@ -402,20 +402,14 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 					if nestedPatternProperty == nil {
 						return features, unsupportedTypeError(path, "list of key-value map with no pattern")
 					}
-					print("hello")
-					print("nestedPatternProperty: ", nestedPatternProperty, "\n")
 					switch nestedPatternProperty.Type.String() {
 					case cfschema.PropertyTypeBoolean:
-						print("hello2")
 						elementType = "types.ListType{ElemType: types.BoolType}"
 					case cfschema.PropertyTypeInteger:
-						print("hello3")
 						elementType = "types.ListType{ElemType: types.Int64Type}"
 					case cfschema.PropertyTypeNumber:
-						print("hello4")
 						elementType = "types.ListType{ElemType: types.Float64Type}"
 					case cfschema.PropertyTypeString:
-						print("hello5")
 						/*
 							if f, c, err := stringCustomType(path, property.Items); err != nil {
 								return features, err
