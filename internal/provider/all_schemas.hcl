@@ -3310,6 +3310,7 @@ resource_schema "aws_logs_log_anomaly_detector" {
 
 resource_schema "aws_logs_log_group" {
   cloudformation_type_name = "AWS::Logs::LogGroup"
+  suppress_singular_data_source_generation = true
 }
 
 resource_schema "aws_logs_log_stream" {
