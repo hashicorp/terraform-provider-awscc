@@ -410,16 +410,6 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 					case cfschema.PropertyTypeNumber:
 						elementType = "types.ListType{ElemType: types.Float64Type}"
 					case cfschema.PropertyTypeString:
-						/*
-							if f, c, err := stringCustomType(path, property.Items); err != nil {
-								return features, err
-							} else if c != "" {
-								features = features.LogicalOr(f)
-								elementType = fmt.Sprintf("types.ListType{ElemType: %s}", c)
-							} else {
-								elementType = "types.ListType{ElemType: types.StringType}"
-							}
-						*/
 						elementType = "types.ListType{ElemType: types.StringType}"
 					}
 				} else if len(property.Items.Properties) == 0 {
@@ -682,7 +672,6 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 			default:
 				return features, unsupportedTypeError(path, fmt.Sprintf("key-value map of %s", propertyType))
 			}
-
 			for _, pattern := range patterns[1:] {
 				e.printf("// Pattern %q ignored.\n", pattern)
 			}
@@ -723,11 +712,9 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 				reqd:                property,
 			},
 			property.Properties)
-
 		if err != nil {
 			return features, err
 		}
-
 		features = features.LogicalOr(f)
 
 		e.printf(",\n")
