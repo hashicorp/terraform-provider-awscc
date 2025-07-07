@@ -570,15 +570,28 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 						e.printf("ElementType:types.SetType{ElemType:types.StringType},\n")
 
 					case cfschema.PropertyTypeObject:
+						if nestedPatternProperties := patternProperty.Items.PatternProperties; len(nestedPatternProperties) > 0 {
+							return features, unsupportedTypeError(path, "key-value map of key-value map")
+						}
+						if len(patternProperty.Items.Properties) == 0 {
+							return features, unsupportedTypeError(path, "key-value map with empty pattern properties")
+						}
+
 						var nestedPatternProperty *cfschema.Property
+
 						for _, v := range patternProperty.Items.Properties {
-							fmt.Println("hello", v)
 							nestedPatternProperty = v
 							break
 						}
 
 						if nestedPatternProperty == nil {
 							return features, unsupportedTypeError(path, "key-value map with empty pattern properties")
+						}
+						fmt.Println(nestedPatternProperty)
+						fmt.Println(nestedPatternProperty.Properties)
+						fmt.Println(nestedPatternProperty.PatternProperties)
+						if len(nestedPatternProperty.PatternProperties) > 0 {
+							return features, unsupportedTypeError(path, "key-value map of key-value map")
 						}
 
 						e.printf("schema.MapNestedAttribute{/*START ATTRIBUTE*/\n")

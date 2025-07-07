@@ -238,12 +238,6 @@ resource_schema "aws_apigatewayv2_domain_name" {
 
 resource_schema "aws_apigatewayv2_integration" {
   cloudformation_type_name = "AWS::ApiGatewayV2::Integration"
-
-  # Suppression Reason: ResponseParameters is of unsupported type: key-value map of list of object.
-  # https://github.com/hashicorp/terraform-provider-awscc/issues/1968
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_apigatewayv2_integration_response" {

@@ -168,6 +168,10 @@
         "identifier": ["DomainName"]
     },
     {
+        "resource": "awscc_apigatewayv2_integration",
+        "identifier": ["ApiId","IntegrationId"]
+    },
+    {
         "resource": "awscc_apigatewayv2_integration_response",
         "identifier": ["ApiId","IntegrationId","IntegrationResponseId"]
     },
