@@ -2195,22 +2195,15 @@ resource_schema "aws_elasticbeanstalk_environment" {
 
 resource_schema "aws_elasticloadbalancingv2_listener" {
   cloudformation_type_name               = "AWS::ElasticLoadBalancingV2::Listener"
-  suppress_plural_data_source_generation = true
 
   # Suppression Reason: error creating write-only attribute path (/properties/DefaultActions/*/AuthenticateOidcConfig/ClientSecret): invalid property path segment: "*"
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1521
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
 }
 
 resource_schema "aws_elasticloadbalancingv2_listener_rule" {
   cloudformation_type_name               = "AWS::ElasticLoadBalancingV2::ListenerRule"
-  suppress_plural_data_source_generation = true
-
   # Suppression Reason:  error creating write-only attribute path (/properties/Actions/*/AuthenticateOidcConfig/ClientSecret): invalid property path segment: "*"
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1521
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
 }
 
 resource_schema "aws_elasticloadbalancingv2_load_balancer" {
@@ -2279,12 +2272,9 @@ resource_schema "aws_events_archive" {
 
 resource_schema "aws_events_connection" {
   cloudformation_type_name = "AWS::Events::Connection"
-
   # Suppression Update: the latest schema refer `Password` with type string.
   # Historical suppression Reason: error creating write-only attribute path (/definitions/BasicAuthParameters/Password): expected "properties" for the second property path segment, got: "definitions"
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1521
-  suppress_resource_generation             = false
-  suppress_singular_data_source_generation = false
 }
 
 resource_schema "aws_events_endpoint" {
