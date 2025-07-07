@@ -673,7 +673,6 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 				} else if len(patternProperty.Properties) == 0 {
 					return features, unsupportedTypeError(path, "key-value map of undefined schema")
 				} else {
-
 					e.printf("schema.MapNestedAttribute{/*START ATTRIBUTE*/\n")
 					e.printf("NestedObject: schema.NestedAttributeObject{/*START NESTED OBJECT*/\n")
 					e.printf("Attributes:")
@@ -706,9 +705,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 
 					e.printf(",\n")
 					e.printf("}/*END NESTED OBJECT*/,\n")
-
 				}
-
 			default:
 				return features, unsupportedTypeError(path, fmt.Sprintf("key-value map of %s", propertyType))
 			}
