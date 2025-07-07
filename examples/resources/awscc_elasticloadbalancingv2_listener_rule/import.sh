@@ -1,0 +1,1 @@
+$ terraform import awscc_elasticloadbalancingv2_listener_rule.example "rule_arn"
