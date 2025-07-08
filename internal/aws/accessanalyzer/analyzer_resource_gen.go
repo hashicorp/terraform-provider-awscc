@@ -43,13 +43,123 @@ func analyzerResource(ctx context.Context) (resource.Resource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "The configuration for the analyzer",
 		//	  "properties": {
+		//	    "InternalAccessConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Specifies the configuration of an internal access analyzer for an AWS organization or account. This configuration determines how the analyzer evaluates internal access within your AWS environment.",
+		//	      "properties": {
+		//	        "InternalAccessAnalysisRule": {
+		//	          "additionalProperties": false,
+		//	          "description": "Contains information about analysis rules for the internal access analyzer. Analysis rules determine which entities will generate findings based on the criteria you define when you create the rule.",
+		//	          "properties": {
+		//	            "Inclusions": {
+		//	              "description": "A list of rules for the internal access analyzer containing criteria to include in analysis. Only resources that meet the rule criteria will generate findings.",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "description": "The criteria for an analysis rule for an internal access analyzer.",
+		//	                "properties": {
+		//	                  "AccountIds": {
+		//	                    "description": "A list of AWS account IDs to apply to the internal access analysis rule criteria. Account IDs can only be applied to the analysis rule criteria for organization-level analyzers and cannot include the organization owner account.",
+		//	                    "insertionOrder": false,
+		//	                    "items": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "type": "array"
+		//	                  },
+		//	                  "ResourceArns": {
+		//	                    "description": "A list of resource ARNs to apply to the internal access analysis rule criteria. The analyzer will only generate findings for resources that match these ARNs.",
+		//	                    "insertionOrder": false,
+		//	                    "items": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "type": "array"
+		//	                  },
+		//	                  "ResourceTypes": {
+		//	                    "description": "A list of resource types to apply to the internal access analysis rule criteria. The analyzer will only generate findings for resources of these types.",
+		//	                    "insertionOrder": false,
+		//	                    "items": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "type": "array"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "UnusedAccessConfiguration": {
 		//	      "additionalProperties": false,
 		//	      "description": "The Configuration for Unused Access Analyzer",
 		//	      "properties": {
+		//	        "AnalysisRule": {
+		//	          "additionalProperties": false,
+		//	          "description": "Contains information about rules for the analyzer.",
+		//	          "properties": {
+		//	            "Exclusions": {
+		//	              "description": "A list of rules for the analyzer containing criteria to exclude from analysis. Entities that meet the rule criteria will not generate findings.",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "description": "The criteria for an analysis rule for an analyzer.",
+		//	                "properties": {
+		//	                  "AccountIds": {
+		//	                    "description": "A list of AWS account IDs to apply to the analysis rule criteria. The accounts cannot include the organization analyzer owner account. Account IDs can only be applied to the analysis rule criteria for organization-level analyzers.",
+		//	                    "insertionOrder": false,
+		//	                    "items": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "type": "array"
+		//	                  },
+		//	                  "ResourceTags": {
+		//	                    "description": "An array of key-value pairs to match for your resources. You can use the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.\n\nFor the tag key, you can specify a value that is 1 to 128 characters in length and cannot be prefixed with aws:.\n\nFor the tag value, you can specify a value that is 0 to 256 characters in length. If the specified tag value is 0 characters, the rule is applied to all principals with the specified tag key.",
+		//	                    "insertionOrder": false,
+		//	                    "items": {
+		//	                      "description": "An array of key-value pairs to apply to this resource.",
+		//	                      "insertionOrder": false,
+		//	                      "items": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "A key-value pair to associate with a resource.",
+		//	                        "properties": {
+		//	                          "Key": {
+		//	                            "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		//	                            "maxLength": 127,
+		//	                            "minLength": 1,
+		//	                            "type": "string"
+		//	                          },
+		//	                          "Value": {
+		//	                            "description": "The value for the tag. You can specify a value that is 0 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		//	                            "maxLength": 255,
+		//	                            "minLength": 0,
+		//	                            "type": "string"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "Key"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      },
+		//	                      "type": "array",
+		//	                      "uniqueItems": true
+		//	                    },
+		//	                    "type": "array"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
 		//	        "UnusedAccessAge": {
-		//	          "description": "The specified access age in days for which to generate findings for unused access. For example, if you specify 90 days, the analyzer will generate findings for IAM entities within the accounts of the selected organization for any access that hasn't been used in 90 or more days since the analyzer's last scan. You can choose a value between 1 and 180 days.",
-		//	          "maximum": 180,
+		//	          "description": "The specified access age in days for which to generate findings for unused access. For example, if you specify 90 days, the analyzer will generate findings for IAM entities within the accounts of the selected organization for any access that hasn't been used in 90 or more days since the analyzer's last scan. You can choose a value between 1 and 365 days.",
+		//	          "maximum": 365,
 		//	          "minimum": 1,
 		//	          "type": "integer"
 		//	        }
@@ -61,16 +171,134 @@ func analyzerResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"analyzer_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: InternalAccessConfiguration
+				"internal_access_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: InternalAccessAnalysisRule
+						"internal_access_analysis_rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Inclusions
+								"inclusions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: AccountIds
+											"account_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Description: "A list of AWS account IDs to apply to the internal access analysis rule criteria. Account IDs can only be applied to the analysis rule criteria for organization-level analyzers and cannot include the organization owner account.",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													generic.Multiset(),
+													listplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: ResourceArns
+											"resource_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Description: "A list of resource ARNs to apply to the internal access analysis rule criteria. The analyzer will only generate findings for resources that match these ARNs.",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													generic.Multiset(),
+													listplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: ResourceTypes
+											"resource_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Description: "A list of resource types to apply to the internal access analysis rule criteria. The analyzer will only generate findings for resources of these types.",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													generic.Multiset(),
+													listplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "A list of rules for the internal access analyzer containing criteria to include in analysis. Only resources that meet the rule criteria will generate findings.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										generic.Multiset(),
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Contains information about analysis rules for the internal access analyzer. Analysis rules determine which entities will generate findings based on the criteria you define when you create the rule.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Specifies the configuration of an internal access analyzer for an AWS organization or account. This configuration determines how the analyzer evaluates internal access within your AWS environment.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: UnusedAccessConfiguration
 				"unused_access_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AnalysisRule
+						"analysis_rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Exclusions
+								"exclusions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: AccountIds
+											"account_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Description: "A list of AWS account IDs to apply to the analysis rule criteria. The accounts cannot include the organization analyzer owner account. Account IDs can only be applied to the analysis rule criteria for organization-level analyzers.",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													generic.Multiset(),
+													listplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: ResourceTags
+											"resource_tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													},                                       /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
+												Description: "An array of key-value pairs to match for your resources. You can use the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.\n\nFor the tag key, you can specify a value that is 1 to 128 characters in length and cannot be prefixed with aws:.\n\nFor the tag value, you can specify a value that is 0 to 256 characters in length. If the specified tag value is 0 characters, the rule is applied to all principals with the specified tag key.",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													listplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "A list of rules for the analyzer containing criteria to exclude from analysis. Entities that meet the rule criteria will not generate findings.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										generic.Multiset(),
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Contains information about rules for the analyzer.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: UnusedAccessAge
 						"unused_access_age": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "The specified access age in days for which to generate findings for unused access. For example, if you specify 90 days, the analyzer will generate findings for IAM entities within the accounts of the selected organization for any access that hasn't been used in 90 or more days since the analyzer's last scan. You can choose a value between 1 and 180 days.",
+							Description: "The specified access age in days for which to generate findings for unused access. For example, if you specify 90 days, the analyzer will generate findings for IAM entities within the accounts of the selected organization for any access that hasn't been used in 90 or more days since the analyzer's last scan. You can choose a value between 1 and 365 days.",
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
-								int64validator.Between(1, 180),
+								int64validator.Between(1, 365),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 								int64planmodifier.UseStateForUnknown(),
@@ -90,7 +318,6 @@ func analyzerResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: AnalyzerName
@@ -300,15 +527,14 @@ func analyzerResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		//	        "description": "The value for the tag. You can specify a value that is 0 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 		//	        "maxLength": 255,
-		//	        "minLength": 1,
+		//	        "minLength": 0,
 		//	        "type": "string"
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Key",
-		//	      "Value"
+		//	      "Key"
 		//	    ],
 		//	    "type": "object"
 		//	  },
@@ -334,12 +560,11 @@ func analyzerResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Description: "The value for the tag. You can specify a value that is 0 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 255),
-							fwvalidators.NotNullString(),
+							stringvalidator.LengthBetween(0, 255),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -361,13 +586,13 @@ func analyzerResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The type of the analyzer, must be one of ACCOUNT, ORGANIZATION, ACCOUNT_UNUSED_ACCESS or ORGANIZATION_UNUSED_ACCESS",
+		//	  "description": "The type of the analyzer, must be one of ACCOUNT, ORGANIZATION, ACCOUNT_INTERNAL_ACCESS, ORGANIZATION_INTERNAL_ACCESS, ACCOUNT_UNUSED_ACCESS and ORGANIZATION_UNUSED_ACCESS",
 		//	  "maxLength": 1024,
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of the analyzer, must be one of ACCOUNT, ORGANIZATION, ACCOUNT_UNUSED_ACCESS or ORGANIZATION_UNUSED_ACCESS",
+			Description: "The type of the analyzer, must be one of ACCOUNT, ORGANIZATION, ACCOUNT_INTERNAL_ACCESS, ORGANIZATION_INTERNAL_ACCESS, ACCOUNT_UNUSED_ACCESS and ORGANIZATION_UNUSED_ACCESS",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(0, 1024),
@@ -398,23 +623,32 @@ func analyzerResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::AccessAnalyzer::Analyzer").WithTerraformTypeName("awscc_accessanalyzer_analyzer")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"analyzer_configuration":      "AnalyzerConfiguration",
-		"analyzer_name":               "AnalyzerName",
-		"archive_rules":               "ArchiveRules",
-		"arn":                         "Arn",
-		"contains":                    "Contains",
-		"eq":                          "Eq",
-		"exists":                      "Exists",
-		"filter":                      "Filter",
-		"key":                         "Key",
-		"neq":                         "Neq",
-		"property":                    "Property",
-		"rule_name":                   "RuleName",
-		"tags":                        "Tags",
-		"type":                        "Type",
-		"unused_access_age":           "UnusedAccessAge",
-		"unused_access_configuration": "UnusedAccessConfiguration",
-		"value":                       "Value",
+		"account_ids":                   "AccountIds",
+		"analysis_rule":                 "AnalysisRule",
+		"analyzer_configuration":        "AnalyzerConfiguration",
+		"analyzer_name":                 "AnalyzerName",
+		"archive_rules":                 "ArchiveRules",
+		"arn":                           "Arn",
+		"contains":                      "Contains",
+		"eq":                            "Eq",
+		"exclusions":                    "Exclusions",
+		"exists":                        "Exists",
+		"filter":                        "Filter",
+		"inclusions":                    "Inclusions",
+		"internal_access_analysis_rule": "InternalAccessAnalysisRule",
+		"internal_access_configuration": "InternalAccessConfiguration",
+		"key":                           "Key",
+		"neq":                           "Neq",
+		"property":                      "Property",
+		"resource_arns":                 "ResourceArns",
+		"resource_tags":                 "ResourceTags",
+		"resource_types":                "ResourceTypes",
+		"rule_name":                     "RuleName",
+		"tags":                          "Tags",
+		"type":                          "Type",
+		"unused_access_age":             "UnusedAccessAge",
+		"unused_access_configuration":   "UnusedAccessConfiguration",
+		"value":                         "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

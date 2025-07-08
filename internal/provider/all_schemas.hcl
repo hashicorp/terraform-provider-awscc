@@ -5408,4 +5408,3 @@ resource_schema "aws_xray_sampling_rule" {
 resource_schema "aws_xray_transaction_search_config" {
   cloudformation_type_name = "AWS::XRay::TransactionSearchConfig"
 }
-
