@@ -443,7 +443,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 					}
 					features.UsesFrameworkTypes = true
 				} else {
-					return features, unsupportedTypeError(path, fmt.Sprintf("list of list of %s", itemType))
+					return features, unsupportedTypeError(path, fmt.Sprintf("list of array of %s", itemType))
 				}
 				features.UsesFrameworkTypes = true
 
