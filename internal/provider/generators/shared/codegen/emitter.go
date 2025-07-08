@@ -405,14 +405,13 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 						if len(property.Items.Items.PatternProperties) > 0 {
 							return features, unsupportedTypeError(path, "array of set of key-value map")
 						}
-
 						if len(property.Items.Items.Properties) == 0 {
 							return features, unsupportedTypeError(path, "list of undefined schema")
 						}
 
 						var nestednestedProperty *cfschema.Property
-						for _, pp := range property.Items.Items.Properties {
-							nestednestedProperty = pp
+						for _, value := range property.Items.Items.Properties {
+							nestednestedProperty = value
 							break
 						}
 						if nestednestedProperty == nil {
