@@ -446,7 +446,6 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 					return features, unsupportedTypeError(path, fmt.Sprintf("list of array of %s", itemType))
 				}
 				features.UsesFrameworkTypes = true
-
 			case cfschema.PropertyTypeObject:
 				if len(property.Items.PatternProperties) > 0 {
 					return features, unsupportedTypeError(path, "list of key-value map")
