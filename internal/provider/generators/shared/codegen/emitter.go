@@ -404,6 +404,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 					if nestedPatternProperty == nil {
 						return features, unsupportedTypeError(path, "list of key-value map with no pattern")
 					}
+
 					switch nestedPatternProperty.Type.String() {
 					case cfschema.PropertyTypeBoolean:
 						elementType = "types.ListType{ElemType: types.BoolType}"
