@@ -15,6 +15,7 @@ import (
 	"path/filepath"
 	"sort"
 	"strings"
+	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
@@ -339,6 +340,7 @@ func (d *Downloader) ResourceSchema(schema ResourceSchema, timer int) (string, s
 		if strings.Contains(err.Error(), "api error Throttling: Rate exceeded") {
 			d.ui.Warn("API rate limit exceeded. Retrying after a short delay...")
 			timer *= 2                             // Exponential backoff
+			time.Sleep(time.Duration(timer) * time.Second)
 			return d.ResourceSchema(schema, timer) // Retry with increased timer
 		}
 
