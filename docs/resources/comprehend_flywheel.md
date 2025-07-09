@@ -76,7 +76,7 @@ resource "awscc_comprehend_flywheel" "example" {
   flywheel_name        = "example-flywheel"
   data_lake_s3_uri     = "s3://example-datalake-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.name}/flywheel-input"
   data_access_role_arn = awscc_iam_role.comprehend_flywheel.arn
-  model_type = "DOCUMENT_CLASSIFIER"
+  model_type           = "DOCUMENT_CLASSIFIER"
 
   task_config = {
     language_code = "en"

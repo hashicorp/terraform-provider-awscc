@@ -1,7 +1,7 @@
 # Create a recovery group first
 resource "awscc_route53recoveryreadiness_recovery_group" "example" {
   recovery_group_name = "example-group"
-  
+
   tags = [{
     key   = "Modified By"
     value = "AWSCC"

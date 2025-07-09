@@ -119,7 +119,7 @@ resource "awscc_datasync_task" "example" {
 
   options = {
     verify_mode            = "ONLY_FILES_TRANSFERRED"
-    overwrite_mode        = "ALWAYS"
+    overwrite_mode         = "ALWAYS"
     atime                  = "BEST_EFFORT"
     mtime                  = "PRESERVE"
     uid                    = "NONE"

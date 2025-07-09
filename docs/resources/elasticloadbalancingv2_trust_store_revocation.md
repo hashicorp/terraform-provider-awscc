@@ -36,8 +36,8 @@ resource "aws_s3_bucket_policy" "allow_elb_access" {
     Version = "2012-10-17"
     Statement = [
       {
-        Sid       = "AllowELBService"
-        Effect    = "Allow"
+        Sid    = "AllowELBService"
+        Effect = "Allow"
         Principal = {
           Service = "elasticloadbalancing.amazonaws.com"
         }

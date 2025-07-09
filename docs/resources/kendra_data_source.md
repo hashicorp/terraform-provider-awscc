@@ -52,8 +52,8 @@ resource "awscc_iam_role" "kendra_index_role" {
     ]
   })
   description = "IAM role for Kendra Index"
-  path       = "/"
-  role_name  = "kendra-index-role"
+  path        = "/"
+  role_name   = "kendra-index-role"
 
   policies = [
     {
@@ -128,8 +128,8 @@ resource "awscc_iam_role" "kendra_datasource_role" {
     ]
   })
   description = "IAM role for Kendra Data Source"
-  path       = "/"
-  role_name  = "kendra-datasource-role"
+  path        = "/"
+  role_name   = "kendra-datasource-role"
 
   policies = [
     {

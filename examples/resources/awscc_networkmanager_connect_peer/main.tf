@@ -89,7 +89,7 @@ resource "awscc_networkmanager_connect_attachment" "example" {
 # Create Connect Peer
 resource "awscc_networkmanager_connect_peer" "example" {
   connect_attachment_id = awscc_networkmanager_connect_attachment.example.attachment_id
-  peer_address         = "10.0.0.1"
+  peer_address          = "10.0.0.1"
   bgp_options = {
     peer_asn = 65000
   }

@@ -22,8 +22,8 @@ resource "awscc_ecs_cluster_capacity_provider_associations" "example" {
 
   default_capacity_provider_strategy = [{
     capacity_provider = "FARGATE"
-    base = 1
-    weight = 100
+    base              = 1
+    weight            = 100
 
   }]
 }

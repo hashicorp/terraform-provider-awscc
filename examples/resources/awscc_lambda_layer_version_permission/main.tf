@@ -27,10 +27,10 @@ resource "aws_s3_object" "layer" {
 }
 
 resource "aws_lambda_layer_version" "example" {
-  layer_name          = "example-layer"
-  description         = "Example Layer created for layer version permission test"
-  compatible_runtimes = ["nodejs18.x"]
-  filename            = data.archive_file.layer.output_path
+  layer_name               = "example-layer"
+  description              = "Example Layer created for layer version permission test"
+  compatible_runtimes      = ["nodejs18.x"]
+  filename                 = data.archive_file.layer.output_path
   compatible_architectures = ["x86_64"]
 }
 
@@ -38,5 +38,5 @@ resource "awscc_lambda_layer_version_permission" "example" {
   action            = "lambda:GetLayerVersion"
   layer_version_arn = aws_lambda_layer_version.example.arn
   principal         = "*"
-  organization_id = "o-xxxxxxxxxx"
+  organization_id   = "o-xxxxxxxxxx"
 }

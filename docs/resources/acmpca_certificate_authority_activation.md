@@ -170,7 +170,7 @@ resource "awscc_acmpca_certificate" "root_ca" {
   certificate_authority_arn   = awscc_acmpca_certificate_authority.example.arn
   certificate_signing_request = awscc_acmpca_certificate_authority.example.certificate_signing_request
   signing_algorithm           = "SHA256WITHRSA"
-  template_arn               = "arn:aws:acm-pca:::template/RootCACertificate/V1"
+  template_arn                = "arn:aws:acm-pca:::template/RootCACertificate/V1"
   validity = {
     type  = "YEARS"
     value = 10
@@ -181,7 +181,7 @@ resource "awscc_acmpca_certificate" "root_ca" {
 resource "awscc_acmpca_certificate_authority_activation" "example" {
   certificate               = awscc_acmpca_certificate.root_ca.certificate
   certificate_authority_arn = awscc_acmpca_certificate_authority.example.arn
-  status                   = "ACTIVE"
+  status                    = "ACTIVE"
 }
 ```
 

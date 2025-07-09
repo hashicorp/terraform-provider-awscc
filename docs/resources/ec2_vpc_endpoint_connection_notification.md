@@ -66,8 +66,8 @@ resource "awscc_ec2_vpc_endpoint" "example" {
 
 resource "awscc_ec2_vpc_endpoint_connection_notification" "example" {
   connection_notification_arn = awscc_sns_topic.notification.topic_arn
-  vpc_endpoint_id            = awscc_ec2_vpc_endpoint.example.id
-  connection_events          = ["Accept", "Reject"]
+  vpc_endpoint_id             = awscc_ec2_vpc_endpoint.example.id
+  connection_events           = ["Accept", "Reject"]
 }
 ```
 

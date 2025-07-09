@@ -42,10 +42,10 @@ resource "awscc_ec2_subnet" "example" {
 
 # Create Network Load Balancer
 resource "awscc_elasticloadbalancingv2_load_balancer" "example" {
-  name               = "example-nlb"
-  scheme            = "internal"
-  type              = "network"
-  subnets           = [awscc_ec2_subnet.example.id]
+  name    = "example-nlb"
+  scheme  = "internal"
+  type    = "network"
+  subnets = [awscc_ec2_subnet.example.id]
   tags = [{
     key   = "Modified By"
     value = "AWSCC"

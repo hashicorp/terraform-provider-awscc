@@ -1,5 +1,5 @@
 resource "awscc_wafv2_web_acl_association" "example" {
-  
+
   resource_arn = "arn:aws:apigateway:${data.aws_region.current.name}::/restapis/${awscc_apigateway_rest_api.example.id}/stages/${awscc_apigateway_stage.example.stage_name}"
   web_acl_arn  = aws_wafv2_web_acl.example.arn
 }
@@ -50,7 +50,7 @@ resource "awscc_apigateway_deployment" "example" {
   rest_api_id = awscc_apigateway_rest_api.example.id
 
   depends_on = [awscc_apigateway_rest_api.example]
- 
+
 }
 
 resource "awscc_apigateway_stage" "example" {
@@ -58,5 +58,5 @@ resource "awscc_apigateway_stage" "example" {
   rest_api_id   = awscc_apigateway_rest_api.example.id
   stage_name    = "example"
 
-  depends_on = [ awscc_apigateway_deployment.example ]
+  depends_on = [awscc_apigateway_deployment.example]
 }

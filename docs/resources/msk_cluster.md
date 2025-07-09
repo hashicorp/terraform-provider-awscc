@@ -53,7 +53,7 @@ resource "awscc_ec2_subnet" "msk_subnet_2" {
 # Security Group for MSK
 resource "awscc_ec2_security_group" "msk_sg" {
   group_description = "Security group for MSK cluster"
-  vpc_id           = awscc_ec2_vpc.msk_vpc.id
+  vpc_id            = awscc_ec2_vpc.msk_vpc.id
   security_group_ingress = [
     {
       ip_protocol = "tcp"

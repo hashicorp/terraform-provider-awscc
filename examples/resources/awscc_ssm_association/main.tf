@@ -4,7 +4,7 @@ data "aws_caller_identity" "current" {}
 
 # Create an AWS SSM Association for running AWS-RunPowerShellScript
 resource "awscc_ssm_association" "example" {
-  name = "AWS-RunPowerShellScript"
+  name             = "AWS-RunPowerShellScript"
   association_name = "example-powershell-association"
 
   targets = [{
@@ -26,8 +26,8 @@ resource "awscc_ssm_association" "example" {
     }
   }
 
-  max_concurrency = "50%"
-  max_errors      = "25%"
+  max_concurrency     = "50%"
+  max_errors          = "25%"
   compliance_severity = "MEDIUM"
 }
 

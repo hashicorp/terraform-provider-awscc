@@ -42,8 +42,8 @@ resource "awscc_cognito_user_pool_client" "example" {
   ]
 
   prevent_user_existence_errors = "ENABLED"
-  read_attributes              = ["email"]
-  write_attributes             = ["email"]
+  read_attributes               = ["email"]
+  write_attributes              = ["email"]
 }
 
 # Configure the risk configuration attachment

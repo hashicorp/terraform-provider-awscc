@@ -108,7 +108,7 @@ resource "awscc_sns_subscription" "example" {
     "event_type" : ["order_placed", "order_cancelled"]
   })
   filter_policy_scope = "MessageAttributes"
-  region             = data.aws_region.current.name
+  region              = data.aws_region.current.name
 
   depends_on = [aws_lambda_permission.sns]
 }

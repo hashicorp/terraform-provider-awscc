@@ -30,7 +30,7 @@ resource "awscc_batch_scheduling_policy" "example" {
   tags = [{
     key   = "Environment"
     value = "dev"
-  }, {
+    }, {
     key   = "Modified By"
     value = "AWSCC"
   }]

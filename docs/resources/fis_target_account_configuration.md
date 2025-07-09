@@ -95,8 +95,8 @@ resource "awscc_fis_experiment_template" "example" {
 resource "awscc_fis_target_account_configuration" "example" {
   account_id             = data.aws_caller_identity.current.account_id
   experiment_template_id = awscc_fis_experiment_template.example.id
-  role_arn              = awscc_iam_role.fis_role.arn
-  description           = "Example FIS target account configuration"
+  role_arn               = awscc_iam_role.fis_role.arn
+  description            = "Example FIS target account configuration"
 }
 ```
 

@@ -1,6 +1,6 @@
 resource "awscc_billingconductor_pricing_rule" "example" {
-  name                = "Markup10percent"
-  
+  name = "Markup10percent"
+
   scope               = "GLOBAL"
   type                = "MARKUP"
   modifier_percentage = 10

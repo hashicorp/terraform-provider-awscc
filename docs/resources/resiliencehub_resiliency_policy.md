@@ -48,7 +48,7 @@ resource "awscc_resiliencehub_resiliency_policy" "example" {
   tags = [{
     key   = "Modified By"
     value = "AWSCC"
-  }, {
+    }, {
     key   = "Environment"
     value = "example"
   }]
