@@ -46,7 +46,7 @@ resource "awscc_appconfig_environment" "example" {
 # Create AppConfig Extension Association using AWS Lambda pre-built extension
 resource "awscc_appconfig_extension_association" "example" {
   extension_identifier = "arn:aws:appconfig:${data.aws_region.current.name}:aws:lambda:1"
-  resource_identifier = "arn:aws:appconfig:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:application/${awscc_appconfig_application.example.id}/environment/${awscc_appconfig_environment.example.id}"
+  resource_identifier  = "arn:aws:appconfig:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:application/${awscc_appconfig_application.example.id}/environment/${awscc_appconfig_environment.example.id}"
   parameters = {
     "FunctionARN" = "arn:aws:lambda:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:function:example-function"
   }

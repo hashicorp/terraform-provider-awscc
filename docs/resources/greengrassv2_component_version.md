@@ -16,10 +16,10 @@ Create a component from a recipe
 ```terraform
 resource "awscc_greengrassv2_component_version" "MyGreengrassComponentVersion_example" {
   inline_recipe = jsonencode({
-    "RecipeFormatVersion"     = "2020-01-25"
-    "ComponentName"           = "MyLambdaComponent"
-    "ComponentVersion"        = "1.0.0"
-    "ComponentDescription"    = "This is a sample Greengrass component created using InlineRecipe."
+    "RecipeFormatVersion"  = "2020-01-25"
+    "ComponentName"        = "MyLambdaComponent"
+    "ComponentVersion"     = "1.0.0"
+    "ComponentDescription" = "This is a sample Greengrass component created using InlineRecipe."
     "Manifests" = [
       {
         "Platform" = {
@@ -50,9 +50,9 @@ Create a component from a lambda-function
 #Example with lambda function
 resource "aws_greengrassv2_component_version" "MyGreengrassComponentVersion" {
   lambda_function {
-    lambda_arn = "arn:aws:lambda:<region>:<account-id>:function:<LambdaFunctionName>:<version>"
-    component_name           = "MyLambdaComponent"
-    component_version        = "1.0.0"
+    lambda_arn        = "arn:aws:lambda:<region>:<account-id>:function:<LambdaFunctionName>:<version>"
+    component_name    = "MyLambdaComponent"
+    component_version = "1.0.0"
   }
 
   tags = {
@@ -67,13 +67,13 @@ Create a component from a lambda-function and its nested schema
 ```terraform
 resource "aws_greengrassv2_component_version" "MyGreengrassComponentVersion-NestedLambda" {
   lambda_function {
-    component_name      = "MyLambdaComponent"
-    component_version   = "1.0.0"
-    lambda_arn          = "arn:aws:lambda:<region>:<account>:function:<LambdaFunctionName>:<LambdaVersion>"
+    component_name    = "MyLambdaComponent"
+    component_version = "1.0.0"
+    lambda_arn        = "arn:aws:lambda:<region>:<account>:function:<LambdaFunctionName>:<LambdaVersion>"
 
     component_dependencies {
-      dependency_type       = "runtime"
-      version_requirement   = ">=1.0.0"
+      dependency_type     = "runtime"
+      version_requirement = ">=1.0.0"
     }
 
     component_lambda_parameters {
@@ -87,7 +87,7 @@ resource "aws_greengrassv2_component_version" "MyGreengrassComponentVersion-Nest
         type  = "sns"
       }
 
-      exec_args                 = ["arg1", "arg2"]
+      exec_args                   = ["arg1", "arg2"]
       input_payload_encoding_type = "json"
 
       linux_process_params {
@@ -101,10 +101,10 @@ resource "aws_greengrassv2_component_version" "MyGreengrassComponentVersion-Nest
           mount_ro_sysfs    = false
 
           volumes {
-            add_group_owner   = false
-            destination_path  = "/mnt/data"
-            permission        = "rw"
-            source_path       = "/data"
+            add_group_owner  = false
+            destination_path = "/mnt/data"
+            permission       = "rw"
+            source_path      = "/data"
           }
         }
         container_params {
@@ -112,18 +112,18 @@ resource "aws_greengrassv2_component_version" "MyGreengrassComponentVersion-Nest
             CONTAINER_ENV_VAR1 = "container_value1"
             CONTAINER_ENV_VAR2 = "container_value2"
           }
-          image_uri           = "123456789012.dkr.ecr.us-west-2.amazonaws.com/my-container-image:latest"
-          memory_size_in_kb   = 2048
-          vcpu_count          = 2
+          image_uri         = "123456789012.dkr.ecr.us-west-2.amazonaws.com/my-container-image:latest"
+          memory_size_in_kb = 2048
+          vcpu_count        = 2
         }
       }
 
-      max_idle_time_in_seconds   = 300
-      max_instances_count        = 3
-      max_queue_size             = 10
-      pinned                     = false
-      status_timeout_in_seconds  = 60
-      timeout_in_seconds         = 30
+      max_idle_time_in_seconds  = 300
+      max_instances_count       = 3
+      max_queue_size            = 10
+      pinned                    = false
+      status_timeout_in_seconds = 60
+      timeout_in_seconds        = 30
     }
 
     component_platforms {

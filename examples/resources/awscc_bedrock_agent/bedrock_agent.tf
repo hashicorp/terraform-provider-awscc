@@ -36,25 +36,25 @@ resource "awscc_bedrock_agent" "example" {
 }
 
 variable "bucket_name" {
-  type    = string
+  type = string
 }
 
 variable "bucket_object_key" {
-  type    = string
+  type = string
 }
 
 variable "agent_role_arn" {
-  type    = string
+  type = string
 }
 
 variable "knowledge_base_id" {
-  type    = string
+  type = string
 }
 
 variable "kms_key_arn" {
-  type    = string
+  type = string
 }
 
 variable "lambda_arn" {
-  type    = string
+  type = string
 }

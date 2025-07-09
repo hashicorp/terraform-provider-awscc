@@ -91,13 +91,13 @@ resource "awscc_ec2_vpc" "main" {
 }
 
 resource "awscc_ec2_subnet" "main" {
-  vpc_id     = awscc_ec2_vpc.main.id
-  cidr_block = "10.0.1.0/24"
+  vpc_id            = awscc_ec2_vpc.main.id
+  cidr_block        = "10.0.1.0/24"
   availability_zone = "us-west-1c"
 }
 
 resource "aws_internet_gateway" "ig" {
-  vpc_id     = awscc_ec2_vpc.main.id
+  vpc_id = awscc_ec2_vpc.main.id
 }
 
 resource "aws_lb" "test" {

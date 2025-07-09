@@ -211,7 +211,7 @@ resource "awscc_bedrock_guardrail" "example" {
 }
 
 variable "kms_key_arn" {
-  type    = string
+  type = string
 }
 ```
 

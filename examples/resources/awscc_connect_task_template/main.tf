@@ -1,8 +1,8 @@
 # Create an Amazon Connect instance
 resource "awscc_connect_instance" "example" {
   identity_management_type = "CONNECT_MANAGED"
-  instance_alias          = "task-template-example"
-  
+  instance_alias           = "task-template-example"
+
   attributes = {
     inbound_calls  = true
     outbound_calls = true

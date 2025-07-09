@@ -13,35 +13,35 @@ Definition of AWS::ControlTower::LandingZone Resource Type
 Creates a new landing zone. Please make sure you have completed the pre-requisites as described in [here](https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-prereques.html) before you proceed. Change the placeholder value below with your own account id. Find additional example of the manifest [here](https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch.html).
 
 ```terraform
-resource awscc_controltower_landing_zone "this" {
+resource "awscc_controltower_landing_zone" "this" {
   manifest = jsonencode({
-      "governedRegions": toset(["us-west-2","us-east-1"]),
-      "organizationStructure": {
-          "security": {
-              "name": "Core"
-          },
-          "sandbox": {
-              "name": "Sandbox"
-          }
+    "governedRegions" : toset(["us-west-2", "us-east-1"]),
+    "organizationStructure" : {
+      "security" : {
+        "name" : "Core"
       },
-      "centralizedLogging": {
-            "accountId": "YOUR_LOG_ARCHIVE_ACCOUNT_ID",
-            "configurations": {
-                "loggingBucket": {
-                    "retentionDays": "60"
-                },
-                "accessLoggingBucket": {
-                    "retentionDays": "60"
-                },
-            },
-            "enabled": true
-      },
-      "securityRoles": {
-            "accountId": "YOUR_AUDIT_ACCOUNT_ID"
-      },
-      "accessManagement": {
-            "enabled": true
+      "sandbox" : {
+        "name" : "Sandbox"
       }
+    },
+    "centralizedLogging" : {
+      "accountId" : "YOUR_LOG_ARCHIVE_ACCOUNT_ID",
+      "configurations" : {
+        "loggingBucket" : {
+          "retentionDays" : "60"
+        },
+        "accessLoggingBucket" : {
+          "retentionDays" : "60"
+        },
+      },
+      "enabled" : true
+    },
+    "securityRoles" : {
+      "accountId" : "YOUR_AUDIT_ACCOUNT_ID"
+    },
+    "accessManagement" : {
+      "enabled" : true
+    }
     }
   )
   version = "3.3"
