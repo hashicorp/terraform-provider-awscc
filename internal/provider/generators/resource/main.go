@@ -92,7 +92,7 @@ func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename strin
 	if err := d.Write(); err != nil {
 		return err
 	}
-
+	
 	d = g.NewGoFileDestination(acctestsFilename)
 
 	if err := d.CreateDirectories(); err != nil {

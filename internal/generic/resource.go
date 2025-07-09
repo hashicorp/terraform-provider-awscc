@@ -16,8 +16,10 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
+	"github.com/hashicorp/terraform-plugin-framework/resource/identityschema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	ccdiag "github.com/hashicorp/terraform-provider-awscc/internal/errs/diag"
@@ -195,6 +197,14 @@ func resourceWithConfigValidators(vs ...resource.ConfigValidator) ResourceOption
 	}
 }
 
+func resourceWithPrimaryIdentifier(vs ...string) ResourceOptionsFunc {
+	return func(o *genericResource) error {
+		o.primaryIdentifier = vs
+
+		return nil
+	}
+}
+
 // ResourceOptions is a type alias for a slice of resource type functional options.
 type ResourceOptions []ResourceOptionsFunc
 
@@ -278,6 +288,10 @@ func (opts ResourceOptions) WithConfigValidators(vs ...resource.ConfigValidator)
 	return append(opts, resourceWithConfigValidators(vs...))
 }
 
+func (opts ResourceOptions) WithPrimaryIdentifier(v ...string) ResourceOptions {
+	return append(opts, resourceWithPrimaryIdentifier(v...))
+}
+
 // NewResource returns a new Resource from the specified varidaic list of functional options.
 // It's public as it's called from generated code.
 func NewResource(_ context.Context, optFns ...ResourceOptionsFunc) (resource.Resource, error) {
@@ -315,6 +329,7 @@ type genericResource struct {
 	deleteTimeout           time.Duration              // Maximum wait time for resource deletion
 	configValidators        []resource.ConfigValidator // Required attributes validators
 	provider                tfcloudcontrol.Provider
+	primaryIdentifier       []string
 }
 
 var (
@@ -423,6 +438,19 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 	response.Diagnostics.Append(r.populateUnknownValues(ctx, id, &response.State)...)
 	if response.Diagnostics.HasError() {
 		return
+	}
+
+	for _, v := range r.primaryIdentifier {
+		var out types.String
+		response.Diagnostics.Append(response.State.GetAttribute(ctx, path.Root(v), &out)...)
+		if response.Diagnostics.HasError() {
+			return
+		}
+
+		response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(v), out.ValueString())...)
+		if response.Diagnostics.HasError() {
+			return
+		}
 	}
 
 	tflog.Debug(ctx, "Response.State.Raw", map[string]interface{}{
@@ -659,6 +687,19 @@ func (r *genericResource) Delete(ctx context.Context, request resource.DeleteReq
 	response.State.RemoveResource(ctx)
 
 	traceExit(ctx, "Resource.Delete")
+}
+
+func (r *genericResource) IdentitySchema(_ context.Context, _ resource.IdentitySchemaRequest, response *resource.IdentitySchemaResponse) {
+	identitySchemaAttributes := make(map[string]identityschema.Attribute)
+	for _, v := range r.primaryIdentifier {
+		identitySchemaAttributes[v] = identityschema.StringAttribute{
+			RequiredForImport: true,
+		}
+	}
+
+	response.IdentitySchema = identityschema.Schema{
+		Attributes: identitySchemaAttributes,
+	}
 }
 
 func (r *genericResource) ImportState(ctx context.Context, request resource.ImportStateRequest, response *resource.ImportStateResponse) {
