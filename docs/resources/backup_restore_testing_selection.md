@@ -30,7 +30,7 @@ resource "awscc_backup_restore_testing_plan" "example" {
     recovery_point_arn = "${aws_backup_vault.test.arn}/recovery-point/test-recovery-point"
     recovery_point_filters = [
       {
-        created_after = "2024-01-01T00:00:00Z"
+        created_after        = "2024-01-01T00:00:00Z"
         recovery_point_types = ["SNAPSHOT"]
       }
     ]
@@ -40,9 +40,9 @@ resource "awscc_backup_restore_testing_plan" "example" {
 
 resource "awscc_backup_restore_testing_selection" "example" {
   restore_testing_selection_name = "example-restore-testing-selection"
-  restore_testing_plan_name     = awscc_backup_restore_testing_plan.example.restore_testing_plan_name
-  protected_resource_type       = "EC2"
-  iam_role_arn                 = aws_iam_role.example.arn
+  restore_testing_plan_name      = awscc_backup_restore_testing_plan.example.restore_testing_plan_name
+  protected_resource_type        = "EC2"
+  iam_role_arn                   = aws_iam_role.example.arn
 }
 
 # IAM role for AWS Backup restore testing

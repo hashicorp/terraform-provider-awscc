@@ -57,7 +57,7 @@ resource "awscc_iam_role" "image_builder_role" {
 # Create instance profile
 resource "awscc_iam_instance_profile" "image_builder_profile" {
   instance_profile_name = "ImageBuilderInstanceProfile"
-  roles                = [awscc_iam_role.image_builder_role.role_name]
+  roles                 = [awscc_iam_role.image_builder_role.role_name]
 }
 
 # Create VPC resources
@@ -119,7 +119,7 @@ resource "awscc_imagebuilder_infrastructure_configuration" "example" {
   tags = [{
     key   = "Environment"
     value = "Test"
-  }, {
+    }, {
     key   = "Modified By"
     value = "AWSCC"
   }]

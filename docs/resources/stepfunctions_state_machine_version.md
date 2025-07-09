@@ -53,7 +53,7 @@ resource "awscc_stepfunctions_state_machine" "sfn_stepmachine" {
 }
 
 resource "awscc_stepfunctions_state_machine_version" "version" {
-  description = "State machine version description"
+  description       = "State machine version description"
   state_machine_arn = awscc_stepfunctions_state_machine.sfn_stepmachine.arn
 }
 ```

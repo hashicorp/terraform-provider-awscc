@@ -26,7 +26,7 @@ Create an AWS Secrets Manager secret
 
 ```terraform
 resource "awscc_secretsmanager_secret" "example" {
-  name = "example"
+  name        = "example"
   description = "this is a user-provided description of the secret"
 }
 ```
@@ -40,9 +40,9 @@ resource "awscc_secretsmanager_secret" "example_replica" {
 
   replica_regions = [{
     region = "ap-southeast-1"
-  },
-  {
-    region = "ap-southeast-2"
+    },
+    {
+      region = "ap-southeast-2"
   }]
 }
 ```

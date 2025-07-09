@@ -17,8 +17,8 @@ The following example creates a connection named pagerduty-connection using ApiK
 
 ```terraform
 resource "awscc_events_connection" "pagerduty_connection" {
-  name                = "pagerduty-connection"
-  authorization_type  = "API_KEY"
+  name               = "pagerduty-connection"
+  authorization_type = "API_KEY"
 
   auth_parameters = {
     api_key_auth_parameters = {
@@ -41,8 +41,8 @@ The following example creates a connection named auth0-connection using OAuth au
 
 ```terraform
 resource "awscc_events_connection" "auth0_connection" {
-  name                = "auth0-connection"
-  authorization_type  = "OAUTH_CLIENT_CREDENTIALS"
+  name               = "auth0-connection"
+  authorization_type = "OAUTH_CLIENT_CREDENTIALS"
 
   auth_parameters = {
     o_auth_parameters = {
@@ -57,7 +57,7 @@ resource "awscc_events_connection" "auth0_connection" {
       o_auth_http_parameters = {
         body_parameters = [
           {
-            key = "audience",
+            key   = "audience",
             value = "my-auth0-identifier"
           }
         ]

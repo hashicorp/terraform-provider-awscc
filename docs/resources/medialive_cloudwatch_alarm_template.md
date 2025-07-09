@@ -47,7 +47,7 @@ resource "awscc_medialive_cloudwatch_alarm_template" "example" {
   tags = [{
     key   = "Modified By"
     value = "AWSCC"
-  }, {
+    }, {
     key   = "Environment"
     value = "Test"
   }]

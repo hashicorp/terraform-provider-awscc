@@ -6,7 +6,7 @@ resource "awscc_medialive_event_bridge_rule_template_group" "example" {
   tags = [{
     key   = "Environment"
     value = "Development"
-  }, {
+    }, {
     key   = "Modified_By"
     value = "AWSCC"
   }]

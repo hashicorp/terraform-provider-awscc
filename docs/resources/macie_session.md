@@ -22,7 +22,7 @@ Creates an enabled Macie session with findings published every fifteen minutes t
 # Create Macie Session
 resource "awscc_macie_session" "example" {
   finding_publishing_frequency = "FIFTEEN_MINUTES"
-  status                      = "ENABLED"
+  status                       = "ENABLED"
 }
 ```
 

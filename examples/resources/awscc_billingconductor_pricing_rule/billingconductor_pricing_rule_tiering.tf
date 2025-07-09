@@ -1,8 +1,8 @@
 resource "awscc_billingconductor_pricing_rule" "example_tiering" {
-  name        = "EnableFreeTiering"
-  
-  scope       = "GLOBAL"
-  type        = "TIERING"
+  name = "EnableFreeTiering"
+
+  scope = "GLOBAL"
+  type  = "TIERING"
 
   tiering = {
     free_tier = {

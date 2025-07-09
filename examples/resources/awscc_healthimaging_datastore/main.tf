@@ -50,7 +50,7 @@ resource "awscc_healthimaging_datastore" "example" {
   tags = [{
     key   = "Modified By"
     value = "AWSCC"
-  }, {
+    }, {
     key   = "Environment"
     value = "Test"
   }]

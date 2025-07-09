@@ -46,7 +46,7 @@ resource "awscc_gamelift_matchmaking_rule_set" "example" {
 }
 
 resource "awscc_gamelift_game_session_queue" "example" {
-  name             = "ExampleQueue"
+  name               = "ExampleQueue"
   timeout_in_seconds = 600
 
   destinations = [
@@ -58,10 +58,10 @@ resource "awscc_gamelift_game_session_queue" "example" {
 }
 
 resource "awscc_gamelift_matchmaking_configuration" "example" {
-  name             = "ExampleRuleSet"
-  acceptance_required = false
+  name                    = "ExampleRuleSet"
+  acceptance_required     = false
   request_timeout_seconds = 60
-  rule_set_name = awscc_gamelift_matchmaking_rule_set.example.id
+  rule_set_name           = awscc_gamelift_matchmaking_rule_set.example.id
 
   flex_match_mode = "WITH_QUEUE" // valid values are "WITH_QUEUE" or "STANDALONE"
   game_session_queue_arns = [

@@ -41,7 +41,7 @@ resource "awscc_ec2_internet_gateway" "m2_igw" {
 
 resource "awscc_ec2_vpc_gateway_attachment" "m2_igw_attachment" {
   internet_gateway_id = awscc_ec2_internet_gateway.m2_igw.id
-  vpc_id             = awscc_ec2_vpc.m2_vpc.id
+  vpc_id              = awscc_ec2_vpc.m2_vpc.id
 }
 
 resource "awscc_ec2_subnet" "m2_subnet_1" {
@@ -67,7 +67,7 @@ resource "awscc_ec2_subnet" "m2_subnet_2" {
 # Security Group
 resource "awscc_ec2_security_group" "m2_sg" {
   group_description = "Security group for M2 Environment"
-  vpc_id           = awscc_ec2_vpc.m2_vpc.id
+  vpc_id            = awscc_ec2_vpc.m2_vpc.id
   security_group_egress = [{
     ip_protocol = "-1"
     from_port   = 0
@@ -104,17 +104,17 @@ resource "awscc_m2_environment" "example" {
 
   subnet_ids         = [awscc_ec2_subnet.m2_subnet_1.id, awscc_ec2_subnet.m2_subnet_2.id]
   security_group_ids = [awscc_ec2_security_group.m2_sg.id]
-  kms_key_id        = awscc_kms_key.m2_key.arn
+  kms_key_id         = awscc_kms_key.m2_key.arn
 
   publicly_accessible = false
-  network_type       = "dual"
+  network_type        = "dual"
 
   preferred_maintenance_window = "sun:23:00-mon:01:30"
 
   tags = [{
     key   = "Environment"
     value = "test"
-  }, {
+    }, {
     key   = "Modified_By"
     value = "AWSCC"
   }]

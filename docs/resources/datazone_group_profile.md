@@ -23,7 +23,7 @@ Creates a DataZone group profile by assigning a group to a specific domain with 
 resource "awscc_datazone_group_profile" "example" {
   domain_identifier = "dzd_example123"
   group_identifier  = "example-group"
-  status           = "ASSIGNED"
+  status            = "ASSIGNED"
 }
 ```
 
