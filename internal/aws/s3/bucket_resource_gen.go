@@ -4532,6 +4532,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::S3::Bucket").WithTerraformTypeName("awscc_s3_bucket")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier("bucket_name")
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"abort_incomplete_multipart_upload":      "AbortIncompleteMultipartUpload",
 		"accelerate_configuration":               "AccelerateConfiguration",

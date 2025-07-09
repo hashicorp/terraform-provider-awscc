@@ -440,6 +440,7 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 		return
 	}
 
+	// set resource identity
 	for _, v := range r.primaryIdentifier {
 		var out types.String
 		response.Diagnostics.Append(response.State.GetAttribute(ctx, path.Root(v), &out)...)
@@ -527,6 +528,20 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 		response.Diagnostics.Append(ResourceIdentifierNotSetDiag(err))
 
 		return
+	}
+
+	// set resource identity
+	for _, v := range r.primaryIdentifier {
+		var out types.String
+		response.Diagnostics.Append(response.State.GetAttribute(ctx, path.Root(v), &out)...)
+		if response.Diagnostics.HasError() {
+			return
+		}
+
+		response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(v), out.ValueString())...)
+		if response.Diagnostics.HasError() {
+			return
+		}
 	}
 
 	tflog.Debug(ctx, "Response.State.Raw", map[string]interface{}{
@@ -707,11 +722,30 @@ func (r *genericResource) ImportState(ctx context.Context, request resource.Impo
 
 	traceEntry(ctx, "Resource.ImportState")
 
-	tflog.Debug(ctx, "Request.ID", map[string]interface{}{
-		"value": hclog.Fmt("%v", request.ID),
-	})
+	if request.ID != "" {
+		tflog.Debug(ctx, "Request.ID", map[string]interface{}{
+			"value": hclog.Fmt("%v", request.ID),
+		})
 
-	resource.ImportStatePassthroughID(ctx, idAttributePath, request, response)
+		resource.ImportStatePassthroughID(ctx, idAttributePath, request, response)
+
+		traceExit(ctx, "Resource.ImportState")
+		return
+	}
+
+	var identifier []string
+	for _, v := range r.primaryIdentifier {
+		var out types.String
+		response.Diagnostics.Append(request.Identity.GetAttribute(ctx, path.Root(v), &out)...)
+		if response.Diagnostics.HasError() {
+			return
+		}
+
+		identifier = append(identifier, out.ValueString())
+	}
+
+	id := strings.Join(identifier, "|")
+	response.Diagnostics.Append(response.State.SetAttribute(ctx, idAttributePath, &id)...)
 
 	traceExit(ctx, "Resource.ImportState")
 }
