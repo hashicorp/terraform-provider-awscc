@@ -69,7 +69,7 @@ docs-all: docs-import docs ## Generate all documentation
 docs: prereq-go ## Generate documentation
 	rm -f docs/data-sources/*.md
 	rm -f docs/resources/*.md
-	@tfplugindocs generate
+	@tfplugindocs generate --provider-name "terraform-provider-awscc"
 
 docs-import: prereq-go ## Generate import documentation
 	$(GO_VER) run internal/provider/generators/import-examples/main.go -file=internal/provider/import_examples_gen.json
