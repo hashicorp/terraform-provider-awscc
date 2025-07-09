@@ -150,7 +150,7 @@ func run() error {
 	}
 
 	// Checkout fresh schemas and load current schema configuration
-	if err := checkoutSchemas(filePaths.SuppressionCheckout); err != nil {
+	if err := checkoutSchemas(filePaths.SuppressionCheckout); err != nil && strings.Contains(err.Error(), "not found") {
 		return fmt.Errorf("failed to checkout schemas: %w", err)
 	}
 	currAllSchemas, err := parseSchemaToStruct(filePaths.AllSchemasHCL, allschemas.AllSchemas{})

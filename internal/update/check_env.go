@@ -47,14 +47,13 @@ func CheckAWSEnv() error {
 // Returns an error if the GitHub token is missing or invalid.
 func checkGithubToken() error {
 	// GitHub token validation is currently disabled to allow development without GitHub integration
-	// githubToken := os.Getenv("GITHUB_TOKEN")
-	// if githubToken == "" {
-	//     return fmt.Errorf("GITHUB_TOKEN environment variable is not set")
-	// }
-	//
-	// if len(githubToken) < 40 {
-	//     return fmt.Errorf("GITHUB_TOKEN must be at least 40 characters long")
-	// }
+	githubToken := os.Getenv("GITHUB_TOKEN")
+	if githubToken == "" {
+		return fmt.Errorf("GITHUB_TOKEN environment variable is not set")
+	}
+	if len(githubToken) < 40 {
+		return fmt.Errorf("GITHUB_TOKEN must be at least 40 characters long")
+	}
 
 	return nil
 }
