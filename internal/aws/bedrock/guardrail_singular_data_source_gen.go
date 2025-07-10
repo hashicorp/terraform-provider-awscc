@@ -57,6 +57,24 @@ func guardrailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "Content policy config for a guardrail.",
 		//	  "properties": {
+		//	    "ContentFiltersTierConfig": {
+		//	      "additionalProperties": false,
+		//	      "description": "Guardrail tier config for content policy",
+		//	      "properties": {
+		//	        "TierName": {
+		//	          "description": "Tier name for tier configuration in content filters policy",
+		//	          "enum": [
+		//	            "CLASSIC",
+		//	            "STANDARD"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "TierName"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "FiltersConfig": {
 		//	      "description": "List of content filter configs in content policy.",
 		//	      "items": {
@@ -161,6 +179,18 @@ func guardrailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"content_policy_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ContentFiltersTierConfig
+				"content_filters_tier_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: TierName
+						"tier_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Tier name for tier configuration in content filters policy",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Guardrail tier config for content policy",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: FiltersConfig
 				"filters_config": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -850,6 +880,24 @@ func guardrailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "minItems": 1,
 		//	      "type": "array"
+		//	    },
+		//	    "TopicsTierConfig": {
+		//	      "additionalProperties": false,
+		//	      "description": "Guardrail tier config for topic policy",
+		//	      "properties": {
+		//	        "TierName": {
+		//	          "description": "Tier name for tier configuration in topic policy",
+		//	          "enum": [
+		//	            "CLASSIC",
+		//	            "STANDARD"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "TierName"
+		//	      ],
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "required": [
@@ -903,6 +951,18 @@ func guardrailDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "List of topic configs in topic policy.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TopicsTierConfig
+				"topics_tier_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: TierName
+						"tier_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Tier name for tier configuration in topic policy",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Guardrail tier config for topic policy",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -1111,6 +1171,7 @@ func guardrailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"action":                              "Action",
 		"blocked_input_messaging":             "BlockedInputMessaging",
 		"blocked_outputs_messaging":           "BlockedOutputsMessaging",
+		"content_filters_tier_config":         "ContentFiltersTierConfig",
 		"content_policy_config":               "ContentPolicyConfig",
 		"contextual_grounding_policy_config":  "ContextualGroundingPolicyConfig",
 		"created_at":                          "CreatedAt",
@@ -1145,8 +1206,10 @@ func guardrailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags":                                "Tags",
 		"text":                                "Text",
 		"threshold":                           "Threshold",
+		"tier_name":                           "TierName",
 		"topic_policy_config":                 "TopicPolicyConfig",
 		"topics_config":                       "TopicsConfig",
+		"topics_tier_config":                  "TopicsTierConfig",
 		"type":                                "Type",
 		"updated_at":                          "UpdatedAt",
 		"value":                               "Value",

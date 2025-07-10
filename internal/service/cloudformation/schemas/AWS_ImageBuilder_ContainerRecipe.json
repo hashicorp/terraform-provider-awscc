@@ -242,18 +242,6 @@
   "oneOf": [
     {
       "required": [
-        "DockerfileTemplateData",
-        "Name",
-        "Version",
-        "Components",
-        "ParentImage",
-        "TargetRepository",
-        "ContainerType"
-      ]
-    },
-    {
-      "required": [
-        "DockerfileTemplateUri",
         "Name",
         "Version",
         "Components",
@@ -283,8 +271,7 @@
     "/properties/KmsKeyId",
     "/properties/PlatformOverride",
     "/properties/WorkingDirectory",
-    "/properties/Components",
-    "/properties/Tags"
+    "/properties/Components"
   ],
   "writeOnlyProperties": [
     "/properties/DockerfileTemplateData",
@@ -292,13 +279,10 @@
     "/properties/ImageOsVersionOverride",
     "/properties/PlatformOverride"
   ],
-  "propertyTransform": {
-    "/properties/InstanceConfiguration/BlockDeviceMappings/*/Ebs/VolumeType": "$uppercase(VolumeType)"
-  },
   "tagging": {
     "taggable": true,
     "tagOnCreate": true,
-    "tagUpdatable": false,
+    "tagUpdatable": true,
     "cloudFormationSystemTags": true,
     "tagProperty": "/properties/Tags",
     "permissions": [
@@ -334,6 +318,12 @@
       "permissions": [
         "imagebuilder:GetContainerRecipe",
         "kms:Decrypt"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "imagebuilder:TagResource",
+        "imagebuilder:UntagResource"
       ]
     },
     "delete": {

@@ -254,7 +254,16 @@ variable "kms_key_arn" {
 
 Optional:
 
+- `content_filters_tier_config` (Attributes) Guardrail tier config for content policy (see [below for nested schema](#nestedatt--content_policy_config--content_filters_tier_config))
 - `filters_config` (Attributes List) List of content filter configs in content policy. (see [below for nested schema](#nestedatt--content_policy_config--filters_config))
+
+<a id="nestedatt--content_policy_config--content_filters_tier_config"></a>
+### Nested Schema for `content_policy_config.content_filters_tier_config`
+
+Optional:
+
+- `tier_name` (String) Tier name for tier configuration in content filters policy
+
 
 <a id="nestedatt--content_policy_config--filters_config"></a>
 ### Nested Schema for `content_policy_config.filters_config`
@@ -352,6 +361,7 @@ Optional:
 Optional:
 
 - `topics_config` (Attributes List) List of topic configs in topic policy. (see [below for nested schema](#nestedatt--topic_policy_config--topics_config))
+- `topics_tier_config` (Attributes) Guardrail tier config for topic policy (see [below for nested schema](#nestedatt--topic_policy_config--topics_tier_config))
 
 <a id="nestedatt--topic_policy_config--topics_config"></a>
 ### Nested Schema for `topic_policy_config.topics_config`
@@ -366,6 +376,14 @@ Optional:
 - `output_action` (String)
 - `output_enabled` (Boolean)
 - `type` (String) Type of topic in a policy
+
+
+<a id="nestedatt--topic_policy_config--topics_tier_config"></a>
+### Nested Schema for `topic_policy_config.topics_tier_config`
+
+Optional:
+
+- `tier_name` (String) Tier name for tier configuration in topic policy
 
 
 

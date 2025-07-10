@@ -1560,6 +1560,10 @@
         "identifier": ["TrafficMirrorFilterRuleId"]
     },
     {
+        "resource": "awscc_ec2_traffic_mirror_target",
+        "identifier": ["Id"]
+    },
+    {
         "resource": "awscc_ec2_transit_gateway",
         "identifier": ["Id"]
     },
@@ -3974,6 +3978,10 @@
     {
         "resource": "awscc_s3tables_namespace",
         "identifier": ["TableBucketARN","Namespace"]
+    },
+    {
+        "resource": "awscc_s3tables_table",
+        "identifier": ["TableARN"]
     },
     {
         "resource": "awscc_s3tables_table_bucket",
