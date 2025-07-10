@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1187 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1197 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -1875,6 +1875,10 @@ resource_schema "aws_ec2_traffic_mirror_filter" {
 
 resource_schema "aws_ec2_traffic_mirror_filter_rule" {
   cloudformation_type_name = "AWS::EC2::TrafficMirrorFilterRule"
+}
+
+resource_schema "aws_ec2_traffic_mirror_target" {
+  cloudformation_type_name = "AWS::EC2::TrafficMirrorTarget"
 }
 
 resource_schema "aws_ec2_transit_gateway" {
@@ -4571,6 +4575,11 @@ resource_schema "aws_s3outposts_endpoint" {
 
 resource_schema "aws_s3tables_namespace" {
   cloudformation_type_name               = "AWS::S3Tables::Namespace"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_s3tables_table" {
+  cloudformation_type_name               = "AWS::S3Tables::Table"
   suppress_plural_data_source_generation = true
 }
 

@@ -248,6 +248,22 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: BackupTarget
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"backup_target": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CACertificateIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -268,14 +284,14 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The details of the DB instance’s server certificate.\n For more information, see [Using SSL/TLS to encrypt a connection to a DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html) in the *Amazon RDS User Guide* and [Using SSL/TLS to encrypt a connection to a DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html) in the *Amazon Aurora User Guide*.",
+		//	  "description": "The details of the DB instance?s server certificate.\n For more information, see [Using SSL/TLS to encrypt a connection to a DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html) in the *Amazon RDS User Guide* and [Using SSL/TLS to encrypt a connection to a DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html) in the *Amazon Aurora User Guide*.",
 		//	  "properties": {
 		//	    "CAIdentifier": {
 		//	      "description": "The CA identifier of the CA certificate used for the DB instance's server certificate.",
 		//	      "type": "string"
 		//	    },
 		//	    "ValidTill": {
-		//	      "description": "The expiration date of the DB instance’s server certificate.",
+		//	      "description": "The expiration date of the DB instance?s server certificate.",
 		//	      "format": "date-time",
 		//	      "type": "string"
 		//	    }
@@ -292,11 +308,11 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 				// Property: ValidTill
 				"valid_till": schema.StringAttribute{ /*START ATTRIBUTE*/
 					CustomType:  timetypes.RFC3339Type{},
-					Description: "The expiration date of the DB instance’s server certificate.",
+					Description: "The expiration date of the DB instance?s server certificate.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The details of the DB instance’s server certificate.\n For more information, see [Using SSL/TLS to encrypt a connection to a DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html) in the *Amazon RDS User Guide* and [Using SSL/TLS to encrypt a connection to a DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html) in the *Amazon Aurora User Guide*.",
+			Description: "The details of the DB instance?s server certificate.\n For more information, see [Using SSL/TLS to encrypt a connection to a DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html) in the *Amazon RDS User Guide* and [Using SSL/TLS to encrypt a connection to a DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html) in the *Amazon Aurora User Guide*.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
@@ -1648,6 +1664,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		"automatic_backup_replication_retention_period": "AutomaticBackupReplicationRetentionPeriod",
 		"availability_zone":                             "AvailabilityZone",
 		"backup_retention_period":                       "BackupRetentionPeriod",
+		"backup_target":                                 "BackupTarget",
 		"ca_certificate_identifier":                     "CACertificateIdentifier",
 		"ca_identifier":                                 "CAIdentifier",
 		"certificate_details":                           "CertificateDetails",

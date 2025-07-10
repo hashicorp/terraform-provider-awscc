@@ -1,0 +1,1 @@
+$ terraform import awscc_ec2_traffic_mirror_target.example "id"

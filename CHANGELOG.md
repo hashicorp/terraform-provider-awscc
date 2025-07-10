@@ -1,4 +1,12 @@
-## 1.49.0 (Unreleased)
+## 1.49.0 (July 10, 2025)
+
+FEATURES:
+
+* **New Data Source:** `awscc_ec2_traffic_mirror_target`
+* **New Data Source:** `awscc_ec2_traffic_mirror_targets`
+* **New Data Source:** `awscc_s3tables_table`
+* **New Resource:** `awscc_ec2_traffic_mirror_target`
+* **New Resource:** `awscc_s3tables_table`
 
 ## 1.48.0 (July 2, 2025)
 
