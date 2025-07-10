@@ -170,6 +170,17 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The number of days for which automated backups are retained. Setting this parameter to a positive number enables backups. Setting this parameter to 0 disables automated backups.\n  *Amazon Aurora* \n Not applicable. The retention period for automated backups is managed by the DB cluster.\n Default: 1\n Constraints:\n  +  Must be a value from 0 to 35\n  +  Can't be set to 0 if the DB instance is a source to read replicas",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: BackupTarget
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"backup_target": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CACertificateIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -186,14 +197,14 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The details of the DB instance’s server certificate.\n For more information, see [Using SSL/TLS to encrypt a connection to a DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html) in the *Amazon RDS User Guide* and [Using SSL/TLS to encrypt a connection to a DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html) in the *Amazon Aurora User Guide*.",
+		//	  "description": "The details of the DB instance?s server certificate.\n For more information, see [Using SSL/TLS to encrypt a connection to a DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html) in the *Amazon RDS User Guide* and [Using SSL/TLS to encrypt a connection to a DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html) in the *Amazon Aurora User Guide*.",
 		//	  "properties": {
 		//	    "CAIdentifier": {
 		//	      "description": "The CA identifier of the CA certificate used for the DB instance's server certificate.",
 		//	      "type": "string"
 		//	    },
 		//	    "ValidTill": {
-		//	      "description": "The expiration date of the DB instance’s server certificate.",
+		//	      "description": "The expiration date of the DB instance?s server certificate.",
 		//	      "format": "date-time",
 		//	      "type": "string"
 		//	    }
@@ -210,11 +221,11 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: ValidTill
 				"valid_till": schema.StringAttribute{ /*START ATTRIBUTE*/
 					CustomType:  timetypes.RFC3339Type{},
-					Description: "The expiration date of the DB instance’s server certificate.",
+					Description: "The expiration date of the DB instance?s server certificate.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The details of the DB instance’s server certificate.\n For more information, see [Using SSL/TLS to encrypt a connection to a DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html) in the *Amazon RDS User Guide* and [Using SSL/TLS to encrypt a connection to a DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html) in the *Amazon Aurora User Guide*.",
+			Description: "The details of the DB instance?s server certificate.\n For more information, see [Using SSL/TLS to encrypt a connection to a DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html) in the *Amazon RDS User Guide* and [Using SSL/TLS to encrypt a connection to a DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html) in the *Amazon Aurora User Guide*.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CertificateRotationRestart
@@ -1191,6 +1202,7 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"automatic_backup_replication_retention_period": "AutomaticBackupReplicationRetentionPeriod",
 		"availability_zone":                             "AvailabilityZone",
 		"backup_retention_period":                       "BackupRetentionPeriod",
+		"backup_target":                                 "BackupTarget",
 		"ca_certificate_identifier":                     "CACertificateIdentifier",
 		"ca_identifier":                                 "CAIdentifier",
 		"certificate_details":                           "CertificateDetails",
