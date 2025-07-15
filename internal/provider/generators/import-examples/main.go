@@ -119,10 +119,10 @@ var filesData = []fileData{
 		filename:     func(directory string) string { return fmt.Sprintf("%s/import-by-string-id.tf", directory) },
 		templateBody: importExampleTemplateByStringIDBody,
 	},
-	{
-		filename:     func(directory string) string { return fmt.Sprintf("%s/import-by-identity.tf", directory) },
-		templateBody: importExampleTemplateByIdentity,
-	},
+	//{
+	//	filename:     func(directory string) string { return fmt.Sprintf("%s/import-by-identity.tf", directory) },
+	//	templateBody: importExampleTemplateByIdentity,
+	//},
 }
 
 func createFile(g *Generator, filename, templateBody string, templateData *TemplateData) error {
@@ -166,10 +166,9 @@ var (
 }`
 
 	importExampleTemplateByIdentity = `import {
-  to = awscc_acmpca_certificate.example
-  identity = {
-    arn                       = "arn"
-    certificate_authority_arn = "certificate_authority_arn"
+  to = {{ .ResourceType }}.example
+  identity = { {{ $parts := Split .Identifier "|" }} {{ range $part := $parts }}
+{{ $part }} = "{{ $part }}" {{ end }}
   }
 }`
 )
