@@ -119,6 +119,10 @@ var filesData = []fileData{
 		filename:     func(directory string) string { return fmt.Sprintf("%s/import-by-string-id.tf", directory) },
 		templateBody: importExampleTemplateByStringIDBody,
 	},
+	{
+		filename:     func(directory string) string { return fmt.Sprintf("%s/import-by-identity.tf", directory) },
+		templateBody: importExampleTemplateByIdentity,
+	},
 }
 
 func createFile(g *Generator, filename, templateBody string, templateData *TemplateData) error {
@@ -153,9 +157,19 @@ type TemplateData struct {
 	Identifier   string
 }
 
-var importExampleTemplateBody = `$ terraform import {{ .ResourceType }}.example {{ .Identifier }}`
+var (
+	importExampleTemplateBody = `$ terraform import {{ .ResourceType }}.example {{ .Identifier }}`
 
-var importExampleTemplateByStringIDBody = `import {
+	importExampleTemplateByStringIDBody = `import {
   to = {{ .ResourceType }}.example
   id = {{ .Identifier }}
 }`
+
+	importExampleTemplateByIdentity = `import {
+  to = awscc_acmpca_certificate.example
+  identity = {
+    arn                       = "arn"
+    certificate_authority_arn = "certificate_authority_arn"
+  }
+}`
+)
