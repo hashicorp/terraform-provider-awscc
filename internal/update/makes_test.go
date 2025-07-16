@@ -465,7 +465,7 @@ func TestHandleAWSColonError(t *testing.T) {
 func TestHandleStatusCode403Error(t *testing.T) {
 	t.Parallel()
 
-	err := handleStatusCode403Error("StatusCode: 403, authentication failed")
+	err := handleStatusCode403Error()
 
 	if err == nil {
 		t.Fatal("expected error but got none")

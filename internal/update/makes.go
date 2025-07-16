@@ -70,16 +70,8 @@ func makeBuild(ctx context.Context, config *GitHubConfig, currentSchemas *allsch
 		}
 		file.Close()
 
-		// Create temporary file for capturing make command output
-		tmpFile, err := os.CreateTemp("", "makes_output_*.txt")
-		if err != nil {
-			return fmt.Errorf("failed to create temporary output file: %w", err)
-		}
-		tmpFileName := tmpFile.Name()
-		tmpFile.Close()
-
 		// Execute make command with error filtering
-		command := fmt.Sprintf("make %s 2>&1 | tee %s | grep \"error\" > %s", buildType, tmpFileName, filePaths.RunMakesErrors)
+		command := fmt.Sprintf("make %s 2>&1 | grep \"error\" > %s", buildType, filePaths.RunMakesErrors)
 		if err := execCommand("sh", "-c", command); err != nil {
 			fmt.Fprintf(os.Stderr, "Make command failed: %v\nSee makes_output.txt for full output.\n", err)
 		}
@@ -153,9 +145,12 @@ func processErrorLine(ctx context.Context, errorLine string, config *GitHubConfi
 			return fmt.Errorf("failed to handle awscc_ error: %w", err)
 		}
 	} else if strings.Contains(errorLine, "StatusCode: 403,") {
-		if err := handleStatusCode403Error(errorLine); err != nil {
+		if err := handleStatusCode403Error(); err != nil {
 			return fmt.Errorf("failed to handle StatusCode 403 error: %w", err)
 		}
+	} else if errorLine == "" {
+		// Skip empty lines
+		return nil
 	} else {
 		if err := handleUnhandledError(errorLine); err != nil {
 			return fmt.Errorf("failed to handle unhandled error: %w", err)
@@ -224,6 +219,7 @@ func handleAWS_Error(ctx context.Context, errorLine string, config *GitHubConfig
 	}
 
 	new := isNew(resourceName, isNewMap)
+	print(resourceName, new, buildType, changes, filePaths, currentSchemas)
 	return suppress(ctx, resourceName, errorLine, config, new, buildType, changes, filePaths, currentSchemas)
 }
 
@@ -353,7 +349,7 @@ func handleAWSCC_Error(ctx context.Context, errorLine string, config *GitHubConf
 
 // handleStatusCode403Error processes HTTP 403 (Forbidden) errors.
 // These typically indicate authentication or permission issues with AWS API access.
-func handleStatusCode403Error(errorLine string) error {
+func handleStatusCode403Error() error {
 	return fmt.Errorf("authentication failed: no valid AWS credentials")
 }
 

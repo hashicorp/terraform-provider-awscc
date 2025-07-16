@@ -14,7 +14,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/google/go-github/v72/github"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	allschemas "github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/allschemas"
 )
@@ -89,24 +88,16 @@ func main() {
 }
 
 // run orchestrates the complete schema update workflow:
-// 1. Validates environment variables
-// 2. Parses configuration and creates GitHub client
-// 3. Creates a new branch for changes
-// 4. Refreshes existing schemas
-// 5. Identifies and processes new schemas
-// 6. Generates resources and data sources
-// 7. Runs tests and documentation generation
-// 8. Creates a pull request with the changes
+// 1. Parses configuration and initializes GitHub setup
+// 2. Creates a new branch for changes
+// 3. Refreshes existing schemas
+// 4. Identifies and processes new schemas
+// 5. Generates resources and data sources
+// 6. Runs tests and documentation generation
+// 7. Creates a pull request with the changes
 func run() error {
 	ctx := context.Background()
 	changes := []string{}
-
-	// Validate required environment variables
-	err := checkEnv(ctx)
-	if err != nil {
-		log.Println("Environment variable check failed:")
-		return fmt.Errorf("environment variable check failed: %w", err)
-	}
 
 	// Parse configuration file to get file paths and repository information
 	filePaths, err := parseSchemaToStruct(UpdateFilePathsHCL, UpdateFilePaths{})
@@ -114,18 +105,12 @@ func run() error {
 		return fmt.Errorf("failed to parse update file paths: %w", err)
 	}
 
-	// GitHub client creation is commented out to avoid requiring GitHub token during development
-	// client, err := newGithubClient()
-	// if err != nil {
-	//     return fmt.Errorf("failed to create GitHub client: %w", err)
-	// }
-
-	// Use nil client instead for development/testing
-	var client *github.Client = nil
-
-	// Initialize GitHub configuration for later use in PR creation
+	// Initialize GitHub configuration with all GitHub-related setup
 	currentDate := GetCurrentDate()
-	config := NewGitHubConfig(client, filePaths.RepositoryLink, currentDate)
+	config, err := NewGitHubConfig(ctx, filePaths.RepositoryLink, currentDate)
+	if err != nil {
+		return fmt.Errorf("failed to initialize GitHub configuration: %w", err)
+	}
 
 	// Create a unique branch name for this update run
 	branchName := fmt.Sprintf(BranchNameFormat, rand.Intn(BranchNameMaxRandom))

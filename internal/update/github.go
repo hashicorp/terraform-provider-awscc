@@ -7,6 +7,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"os"
 	"os/exec"
 	"strings"
 	"time"
@@ -30,17 +31,33 @@ type GitHubConfig struct {
 	CurrentDate string         // Current date for use in commit messages and branch names
 }
 
-// NewGitHubConfig creates a new GitHubConfig with the given parameters.
-// It automatically extracts repository owner and name from the repository link if provided,
-// otherwise falls back to default values. The full repository path is constructed for API calls.
+// NewGitHubConfig creates a new GitHubConfig with all GitHub-related setup.
+// It validates environment variables, creates a GitHub client, and configures
+// repository details for API operations.
 //
 // Parameters:
-//   - client: Authenticated GitHub API client (can be nil for testing)
+//   - ctx: Context for logging and operations
 //   - repositoryLink: Full GitHub repository URL (e.g., "https://github.com/owner/repo")
 //   - date: Current date string for use in commit messages and branch names
 //
-// Returns a configured GitHubConfig ready for use in API operations.
-func NewGitHubConfig(client *github.Client, repositoryLink string, date string) *GitHubConfig {
+// Returns a configured GitHubConfig ready for use in API operations and any setup errors.
+func NewGitHubConfig(ctx context.Context, repositoryLink string, date string) (*GitHubConfig, error) {
+	// Validate required environment variables
+	err := checkEnv(ctx)
+	if err != nil {
+		log.Println("Environment variable check failed:")
+		return nil, fmt.Errorf("environment variable check failed: %w", err)
+	}
+
+	// Create GitHub client with authentication token
+	var client *github.Client
+	if githubToken := os.Getenv("GITHUB_TOKEN"); githubToken != "" {
+		client = github.NewClient(nil).WithAuthToken(githubToken)
+	} else {
+		// Use nil client for development/testing when no token is provided
+		client = nil
+	}
+
 	config := &GitHubConfig{
 		Client:      client,
 		CurrentDate: date,
@@ -60,7 +77,7 @@ func NewGitHubConfig(client *github.Client, repositoryLink string, date string) 
 	// Construct full repository path for GitHub API calls
 	config.Repository = config.RepoOwner + "/" + config.RepoName
 
-	return config
+	return config, nil
 }
 
 // createRemoteBranch creates and pushes a new remote branch with a time-based suffix.
