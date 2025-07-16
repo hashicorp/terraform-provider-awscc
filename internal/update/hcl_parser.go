@@ -80,12 +80,12 @@ func diffSchemas(newSchemas *allschemas.AvailableSchemas, lastSchemas *allschema
 				newResource.SuppressPluralDataSourceGeneration != lastSchemas.Resources[lastResourceIndex].SuppressPluralDataSourceGeneration ||
 				newResource.ResourceTypeName != lastSchemas.Resources[lastResourceIndex].ResourceTypeName {
 				changedOrNewResources = append(changedOrNewResources, newResource)
-				*changes = append(*changes, fmt.Sprintf("Changed Resource: %s", newResource.CloudFormationTypeName))
+				*changes = append(*changes, fmt.Sprintf("Changed Resource - %s", newResource.CloudFormationTypeName))
 			}
 		} else {
 			// New resource
 			changedOrNewResources = append(changedOrNewResources, newResource)
-			*changes = append(*changes, fmt.Sprintf("New Resource: %s", newResource.CloudFormationTypeName))
+			*changes = append(*changes, fmt.Sprintf("New Resource - %s", newResource.CloudFormationTypeName))
 		}
 	}
 
