@@ -389,22 +389,17 @@ func suppress(ctx context.Context, cfTypeName, schemaError string, config *GitHu
 	// Record this resource change with the appropriate type
 	var reason string
 	switch buildType {
-	case BuildTypeResources:
-		reason = "New Resource Suppression"
 	case BuildTypeSingularDataSources:
 		reason = "New Singular Data Source Suppression"
 	case BuildTypePluralDataSources:
 		reason = "New Plural Data Source Suppression"
-	case BuildTypeSchemas:
-		if new {
-			reason = "Suppressed Resource"
-		}
+	default:
+		reason = "New Resource Suppression"
 	}
 
 	// Store the change data as a string for later use
 	*changes = append(*changes, fmt.Sprintf("%s - %s", cfTypeName, reason))
 
-	// Use empty issue URL instead
 	issueURL, err := createIssue(ctx, cfTypeName, schemaError, config, filePaths.RepositoryLink)
 	if err != nil {
 		log.Printf("Warning: Failed to create GitHub issue: %v", err)

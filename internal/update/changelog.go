@@ -47,7 +47,6 @@ func generateDataSourceChanges(changes []string, filePaths *UpdateFilePaths) ([]
 	cfTypeToResource := make(map[string]allschemas.ResourceAllSchema)
 	for _, resource := range allSchemas.Resources {
 		cfTypeToResource[resource.CloudFormationTypeName] = resource
-		log.Printf("  Found resource: %s\n", resource.CloudFormationTypeName)
 	}
 
 	// Process each change and generate corresponding data source entries
@@ -79,8 +78,6 @@ func generateDataSourceChanges(changes []string, filePaths *UpdateFilePaths) ([]
 
 		// Generate data source entries if the resource exists in schemas and isn't suppressed
 		if resourceSchema, exists := cfTypeToResource[resource]; exists {
-			log.Printf("  Found resource %s in allSchemas\n", resource)
-
 			// Check resource-level suppression
 			if resourceSchema.SuppressionReason != "" {
 				log.Printf("  Resource %s has suppression reason: %s - skipping data source generation\n", resource, resourceSchema.SuppressionReason)
