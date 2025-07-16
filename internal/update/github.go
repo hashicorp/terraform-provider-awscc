@@ -70,7 +70,7 @@ func NewGitHubConfig(ctx context.Context, repositoryLink string, date string) (*
 		parts := strings.Split(strings.TrimPrefix(repositoryLink, GitHubURLPrefix), "/")
 		if len(parts) >= 2 {
 			config.RepoOwner = parts[0]
-			config.RepoName = parts[1]
+			config.RepoName = strings.TrimSuffix(parts[1], ".git") // Remove .git suffix if present
 		}
 	}
 
@@ -123,7 +123,7 @@ func createPullRequest(ctx context.Context, config *GitHubConfig, changes *[]str
 		parts := strings.Split(strings.TrimPrefix(filepaths.RepositoryLink, GitHubURLPrefix), "/")
 		if len(parts) >= 2 {
 			repoOwner = parts[0]
-			repoName = parts[1]
+			repoName = strings.TrimSuffix(parts[1], ".git") // Remove .git suffix if present
 		}
 	}
 
@@ -197,7 +197,7 @@ func createIssue(ctx context.Context, resource string, error string, config *Git
 		parts := strings.Split(strings.TrimPrefix(repositoryLink, GitHubURLPrefix), "/")
 		if len(parts) >= 2 {
 			repoOwner = parts[0]
-			repoName = parts[1]
+			repoName = strings.TrimSuffix(parts[1], ".git") // Remove .git suffix if present
 		}
 	}
 
@@ -287,7 +287,7 @@ func createFormattedPullRequest(ctx context.Context, config *GitHubConfig, testR
 		parts := strings.Split(strings.TrimPrefix(config.Repository, GitHubURLPrefix), "/")
 		if len(parts) >= 2 {
 			repoOwner = parts[0]
-			repoName = parts[1]
+			repoName = strings.TrimSuffix(parts[1], ".git") // Remove .git suffix if present
 		}
 	}
 
