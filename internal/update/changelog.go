@@ -173,20 +173,22 @@ func writeChangelog(originalContent string, changes []string) string {
 		resource := parts[0]
 		changeType := parts[1]
 
-		log.Printf("  Processing: %s -> %s\n", resource, changeType)
-
-		// Check if this is a suppression message
-		if isSuppressionMessage(changeType) {
-			suppressions = append(suppressions, resource)
-			log.Printf("  Categorized as suppression: %s\n", resource)
+		if parts[0] != "" || parts[1] != "" {
+			log.Printf("Processing change: %s - %s\n", resource, changeType)
 			continue
 		}
+
+		log.Printf("  Processing: %s -> %s\n", resource, changeType)
 
 		switch changeType {
 		case "New Resource":
 			newResources = append(newResources, resource)
 		case "New Singular Data Source", "New Plural Data Source":
 			newDataSources = append(newDataSources, resource)
+		default:
+			if isSuppressionMessage(changeType) {
+				suppressions = append(suppressions, resource)
+			}
 		}
 	}
 
@@ -214,9 +216,10 @@ func writeChangelog(originalContent string, changes []string) string {
 		log.Printf("  Added resource entry: %s\n", entry)
 	}
 
-	// Note: Suppressions are tracked but not added to the public changelog
-	if len(suppressions) > 0 {
-		log.Printf("  Tracked %d suppressions (not added to changelog): %v\n", len(suppressions), suppressions)
+	for _, sup := range suppressions {
+		log.Printf("  Tracked suppression: %s\n", sup)
+		entry := fmt.Sprintf("* **Suppressed Resource:** `%s`", sup)
+		newEntries = append(newEntries, entry)
 	}
 
 	if len(newEntries) == 0 {
