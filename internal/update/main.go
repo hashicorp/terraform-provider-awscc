@@ -297,22 +297,18 @@ func run() error {
 	}
 	log.Println("Suppressions during process:\n" + suppressions.String())
 
-	// Output environment variables for CI/CD pipeline integration
-	fmt.Fprintf(os.Stdout, "env_token=production\n")
-	fmt.Fprintf(os.Stdout, "suppressions<<EOF\n%sEOF\n", suppressions.String())
-
 	// Update the configuration with current date and submit pull request
 	config.CurrentDate = GetCurrentDate()
-
-	_, err = submitOnGit(config, &changes, filePaths, AcceptanceTestResults, config.RepoOwner, config.RepoName)
-	if err != nil {
-		return fmt.Errorf("failed to submit PR: %w", err)
-	}
 
 	// Update the changelog with the changes
 	err = makeChangelog(&changes, filePaths)
 	if err != nil {
 		return fmt.Errorf("failed to update changelog: %w", err)
+	}
+
+	_, err = submitOnGit(config, &changes, filePaths, AcceptanceTestResults, config.RepoOwner, config.RepoName)
+	if err != nil {
+		return fmt.Errorf("failed to submit PR: %w", err)
 	}
 	return nil
 }
