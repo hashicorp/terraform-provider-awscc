@@ -72,18 +72,12 @@ func generateDataSourceChanges(changes []string, filePaths *UpdateFilePaths) ([]
 
 		// Skip data source generation for suppressed resources
 		if isSuppressionMessage(message) {
-			log.Printf("  Skipping data source generation for suppressed resource: %s\n", resource)
+			log.Printf("Malformed suppression message for: %s\n", resource)
 			continue
 		}
 
 		// Generate data source entries if the resource exists in schemas and isn't suppressed
 		if resourceSchema, exists := cfTypeToResource[resource]; exists {
-			// Check resource-level suppression
-			if resourceSchema.SuppressionReason != "" {
-				log.Printf("  Resource %s has suppression reason: %s - skipping data source generation\n", resource, resourceSchema.SuppressionReason)
-				continue
-			}
-
 			// Generate plural data source entry if not suppressed
 			if !resourceSchema.SuppressPluralDataSourceGeneration {
 				plural := naming.Pluralize(resource)
@@ -103,7 +97,7 @@ func generateDataSourceChanges(changes []string, filePaths *UpdateFilePaths) ([]
 				log.Printf("  Singular data source suppressed for %s\n", resource)
 			}
 		} else {
-			log.Printf("  Resource %s not found in allSchemas\n", resource)
+			newChanges = append(newChanges, change)
 		}
 	}
 
