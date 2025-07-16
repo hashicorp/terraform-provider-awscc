@@ -19,4 +19,3 @@ internal/service/cloudformation/schemas/AWS_QuickSight_Analysis.json
 internal/service/cloudformation/schemas/AWS_QuickSight_Dashboard.json
 internal/service/cloudformation/schemas/AWS_QuickSight_DataSet.json
 internal/service/cloudformation/schemas/AWS_QuickSight_Template.json
-internal/service/clouformation/schemas/AWS_StepFunctions_StateMachine.json
