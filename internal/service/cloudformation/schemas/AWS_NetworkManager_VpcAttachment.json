@@ -103,6 +103,16 @@
           "description": "Indicates whether to enable ApplianceModeSupport Support for Vpc Attachment. Valid Values: true | false",
           "type": "boolean",
           "default": false
+        },
+        "DnsSupport": {
+          "description": "Indicates whether to enable private DNS Support for Vpc Attachment. Valid Values: true | false",
+          "type": "boolean",
+          "default": true
+        },
+        "SecurityGroupReferencingSupport": {
+          "description": "Indicates whether to enable Security Group Referencing Support for Vpc Attachment. Valid Values: true | false",
+          "type": "boolean",
+          "default": true
         }
       },
       "additionalProperties": false

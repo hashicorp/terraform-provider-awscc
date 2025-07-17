@@ -1,6 +1,7 @@
 {
   "typeName": "AWS::EC2::EC2Fleet",
   "description": "Resource Type definition for AWS::EC2::EC2Fleet",
+  "sourceUrl": "https://github.com/aws-cloudformation",
   "additionalProperties": false,
   "properties": {
     "TargetCapacitySpecification": {
@@ -790,6 +791,13 @@
       ]
     },
     "list": {
+      "handlerSchema": {
+        "properties": {
+          "Type": {
+            "$ref": "resource-schema.json#/properties/Type"
+          }
+        }
+      },
       "permissions": [
         "ec2:DescribeFleets"
       ]

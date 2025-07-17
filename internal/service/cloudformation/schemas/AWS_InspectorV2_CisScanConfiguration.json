@@ -204,7 +204,11 @@
     "tagOnCreate": true,
     "tagUpdatable": true,
     "cloudFormationSystemTags": true,
-    "tagProperty": "/properties/Tags"
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "inspector2:TagResource",
+      "inspector2:UntagResource"
+    ]
   },
   "handlers": {
     "create": {

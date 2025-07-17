@@ -173,6 +173,13 @@
         "Version": {
           "type": "string"
         },
+        "UserdataType": {
+          "type": "string",
+          "enum": [
+            "EKS_BOOTSTRAP_SH",
+            "EKS_NODEADM"
+          ]
+        },
         "Overrides": {
           "type": "array",
           "uniqueItems": false,
@@ -195,6 +202,13 @@
         },
         "Version": {
           "type": "string"
+        },
+        "UserdataType": {
+          "type": "string",
+          "enum": [
+            "EKS_BOOTSTRAP_SH",
+            "EKS_NODEADM"
+          ]
         },
         "TargetInstanceTypes": {
           "type": "array",
@@ -299,7 +313,8 @@
         "Batch:DescribeComputeEnvironments",
         "iam:CreateServiceLinkedRole",
         "Iam:PassRole",
-        "Eks:DescribeCluster"
+        "Eks:DescribeCluster",
+        "ec2:DescribeLaunchTemplateVersions"
       ]
     },
     "read": {
@@ -314,7 +329,8 @@
         "Batch:TagResource",
         "Batch:UnTagResource",
         "Iam:PassRole",
-        "Eks:DescribeCluster"
+        "Eks:DescribeCluster",
+        "ec2:DescribeLaunchTemplateVersions"
       ]
     },
     "delete": {
@@ -323,7 +339,8 @@
         "Batch:DescribeComputeEnvironments",
         "Batch:UpdateComputeEnvironment",
         "Iam:PassRole",
-        "Eks:DescribeCluster"
+        "Eks:DescribeCluster",
+        "ec2:DescribeLaunchTemplateVersions"
       ]
     },
     "list": {

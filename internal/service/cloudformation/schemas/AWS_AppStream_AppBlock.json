@@ -129,9 +129,14 @@
   "tagging": {
     "taggable": true,
     "tagOnCreate": true,
-    "tagUpdatable": false,
+    "tagUpdatable": true,
     "cloudFormationSystemTags": false,
-    "tagProperty": "/properties/Tags"
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "appstream:TagResource",
+      "appstream:ListTagsForResource",
+      "appstream:UntagResource"
+    ]
   },
   "primaryIdentifier": [
     "/properties/Arn"
@@ -149,9 +154,6 @@
     "/properties/Arn",
     "/properties/CreatedTime"
   ],
-  "writeOnlyProperties": [
-    "/properties/Tags"
-  ],
   "deprecatedProperties": [
     "/properties/Tags/TagKey",
     "/properties/Tags/TagValue"
@@ -168,12 +170,21 @@
     },
     "read": {
       "permissions": [
-        "appstream:DescribeAppBlocks"
+        "appstream:DescribeAppBlocks",
+        "appstream:ListTagsForResource"
       ]
     },
     "delete": {
       "permissions": [
-        "appstream:DeleteAppBlock"
+        "appstream:DeleteAppBlock",
+        "appstream:DescribeAppBlocks"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "appstream:DescribeAppBlocks",
+        "appstream:TagResource",
+        "appstream:UntagResource"
       ]
     }
   }

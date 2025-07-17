@@ -100,7 +100,6 @@
             "propertyPath": "/properties/Arn"
           },
           "minLength": 20,
-          "pattern": "^((arn):(aws|aws-cn|aws-iso|aws-iso-[a-z]{1}|aws-us-gov):(iam)::\\d{12}:role[/].*)$",
           "description": "ARN of an AWS Identity and Access Management (IAM) role for AWS AppConfig to monitor AlarmArn.",
           "type": "string",
           "maxLength": 2048

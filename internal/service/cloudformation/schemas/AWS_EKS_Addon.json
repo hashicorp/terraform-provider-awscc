@@ -1,148 +1,39 @@
 {
-  "typeName": "AWS::EKS::Addon",
-  "description": "Resource Schema for AWS::EKS::Addon",
-  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-eks.git",
-  "definitions": {
-    "Tag": {
-      "description": "A key-value pair to associate with a resource.",
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "Key": {
-          "type": "string",
-          "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-          "minLength": 1,
-          "maxLength": 127
-        },
-        "Value": {
-          "type": "string",
-          "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-          "minLength": 1,
-          "maxLength": 255
-        }
-      },
-      "required": [
-        "Key",
-        "Value"
-      ]
-    },
-    "PodIdentityAssociation": {
-      "description": "A pod identity to associate with an add-on.",
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "ServiceAccount": {
-          "type": "string",
-          "description": "The Kubernetes service account that the pod identity association is created for."
-        },
-        "RoleArn": {
-          "type": "string",
-          "pattern": "^arn:aws(-cn|-us-gov|-iso(-[a-z])?)?:iam::\\d{12}:(role)\\/*",
-          "description": "The IAM role ARN that the pod identity association is created for."
-        }
-      },
-      "required": [
-        "ServiceAccount",
-        "RoleArn"
-      ]
-    }
-  },
-  "properties": {
-    "ClusterName": {
-      "description": "Name of Cluster",
-      "type": "string",
-      "minLength": 1
-    },
-    "AddonName": {
-      "description": "Name of Addon",
-      "type": "string",
-      "minLength": 1
-    },
-    "AddonVersion": {
-      "description": "Version of Addon",
-      "type": "string",
-      "minLength": 1
-    },
-    "PreserveOnDelete": {
-      "description": "PreserveOnDelete parameter value",
-      "type": "boolean"
-    },
-    "ResolveConflicts": {
-      "description": "Resolve parameter value conflicts",
-      "type": "string",
-      "minLength": 1,
-      "enum": [
-        "NONE",
-        "OVERWRITE",
-        "PRESERVE"
-      ]
-    },
-    "ServiceAccountRoleArn": {
-      "description": "IAM role to bind to the add-on's service account",
-      "type": "string",
-      "minLength": 1
-    },
-    "PodIdentityAssociations": {
-      "description": "An array of pod identities to apply to this add-on.",
-      "type": "array",
-      "uniqueItems": true,
-      "insertionOrder": false,
-      "items": {
-        "$ref": "#/definitions/PodIdentityAssociation"
-      }
-    },
-    "ConfigurationValues": {
-      "description": "The configuration values to use with the add-on",
-      "type": "string",
-      "minLength": 1
-    },
-    "Arn": {
-      "description": "Amazon Resource Name (ARN) of the add-on",
-      "type": "string"
-    },
-    "Tags": {
-      "description": "An array of key-value pairs to apply to this resource.",
-      "type": "array",
-      "uniqueItems": true,
-      "insertionOrder": false,
-      "items": {
-        "$ref": "#/definitions/Tag"
-      }
-    }
-  },
   "tagging": {
-    "taggable": true,
-    "tagOnCreate": true,
-    "tagUpdatable": true,
-    "cloudFormationSystemTags": false,
-    "tagProperty": "/properties/Tags",
     "permissions": [
       "eks:TagResource",
       "eks:UntagResource"
-    ]
+    ],
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "tagProperty": "/properties/Tags",
+    "cloudFormationSystemTags": false
   },
-  "additionalProperties": false,
-  "required": [
-    "ClusterName",
-    "AddonName"
+  "typeName": "AWS::EKS::Addon",
+  "readOnlyProperties": [
+    "/properties/Arn"
+  ],
+  "description": "Resource Schema for AWS::EKS::Addon",
+  "createOnlyProperties": [
+    "/properties/ClusterName",
+    "/properties/AddonName"
   ],
   "primaryIdentifier": [
     "/properties/ClusterName",
     "/properties/AddonName"
   ],
-  "createOnlyProperties": [
-    "/properties/ClusterName",
-    "/properties/AddonName"
+  "required": [
+    "ClusterName",
+    "AddonName"
   ],
-  "readOnlyProperties": [
-    "/properties/Arn"
-  ],
-  "writeOnlyProperties": [
-    "/properties/ResolveConflicts",
-    "/properties/PreserveOnDelete",
-    "/properties/PodIdentityAssociations"
-  ],
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-eks.git",
   "handlers": {
+    "read": {
+      "permissions": [
+        "eks:DescribeAddon"
+      ]
+    },
     "create": {
       "permissions": [
         "eks:CreateAddon",
@@ -151,33 +42,6 @@
         "iam:PassRole",
         "iam:GetRole",
         "eks:CreatePodIdentityAssociation"
-      ]
-    },
-    "read": {
-      "permissions": [
-        "eks:DescribeAddon"
-      ]
-    },
-    "delete": {
-      "permissions": [
-        "eks:DeleteAddon",
-        "eks:DescribeAddon",
-        "eks:DeletePodIdentityAssociation"
-      ]
-    },
-    "list": {
-      "handlerSchema": {
-        "properties": {
-          "ClusterName": {
-            "$ref": "resource-schema.json#/properties/ClusterName"
-          }
-        },
-        "required": [
-          "ClusterName"
-        ]
-      },
-      "permissions": [
-        "eks:ListAddons"
       ]
     },
     "update": {
@@ -193,6 +57,142 @@
         "eks:DeletePodIdentityAssociation",
         "eks:UpdatePodIdentityAssociation"
       ]
+    },
+    "list": {
+      "permissions": [
+        "eks:ListAddons"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "ClusterName": {
+            "$ref": "resource-schema.json#/properties/ClusterName"
+          }
+        },
+        "required": [
+          "ClusterName"
+        ]
+      }
+    },
+    "delete": {
+      "permissions": [
+        "eks:DeleteAddon",
+        "eks:DescribeAddon",
+        "eks:DeletePodIdentityAssociation"
+      ]
+    }
+  },
+  "writeOnlyProperties": [
+    "/properties/ResolveConflicts",
+    "/properties/PreserveOnDelete",
+    "/properties/PodIdentityAssociations"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Value": {
+          "minLength": 1,
+          "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+          "type": "string",
+          "maxLength": 255
+        },
+        "Key": {
+          "minLength": 1,
+          "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+          "type": "string",
+          "maxLength": 127
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    },
+    "PodIdentityAssociation": {
+      "description": "A pod identity to associate with an add-on.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "ServiceAccount": {
+          "description": "The Kubernetes service account that the pod identity association is created for.",
+          "type": "string"
+        },
+        "RoleArn": {
+          "pattern": "^arn:aws(-cn|-us-gov|-iso(-[a-z])?)?:iam::\\d{12}:(role)\\/*",
+          "description": "The IAM role ARN that the pod identity association is created for.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "ServiceAccount",
+        "RoleArn"
+      ]
+    }
+  },
+  "properties": {
+    "PreserveOnDelete": {
+      "description": "PreserveOnDelete parameter value",
+      "type": "boolean"
+    },
+    "AddonVersion": {
+      "minLength": 1,
+      "description": "Version of Addon",
+      "type": "string"
+    },
+    "ServiceAccountRoleArn": {
+      "minLength": 1,
+      "description": "IAM role to bind to the add-on's service account",
+      "type": "string"
+    },
+    "ClusterName": {
+      "minLength": 1,
+      "description": "Name of Cluster",
+      "type": "string"
+    },
+    "AddonName": {
+      "minLength": 1,
+      "description": "Name of Addon",
+      "type": "string"
+    },
+    "PodIdentityAssociations": {
+      "uniqueItems": true,
+      "description": "An array of pod identities to apply to this add-on.",
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/PodIdentityAssociation"
+      }
+    },
+    "Arn": {
+      "description": "Amazon Resource Name (ARN) of the add-on",
+      "type": "string"
+    },
+    "ResolveConflicts": {
+      "minLength": 1,
+      "description": "Resolve parameter value conflicts",
+      "type": "string",
+      "enum": [
+        "NONE",
+        "OVERWRITE",
+        "PRESERVE"
+      ]
+    },
+    "Tags": {
+      "uniqueItems": true,
+      "description": "An array of key-value pairs to apply to this resource.",
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    },
+    "ConfigurationValues": {
+      "minLength": 1,
+      "description": "The configuration values to use with the add-on",
+      "type": "string"
     }
   }
 }
