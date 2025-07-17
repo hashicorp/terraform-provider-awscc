@@ -28,6 +28,8 @@ Retrieves information about the resource policy. The resource policy is an IAM p
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_vpclattice_resource_policy.example "resource_arn"
 ```

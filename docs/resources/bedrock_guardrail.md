@@ -229,6 +229,7 @@ variable "kms_key_arn" {
 
 - `content_policy_config` (Attributes) Content policy config for a guardrail. (see [below for nested schema](#nestedatt--content_policy_config))
 - `contextual_grounding_policy_config` (Attributes) Contextual grounding policy config for a guardrail. (see [below for nested schema](#nestedatt--contextual_grounding_policy_config))
+- `cross_region_config` (Attributes) The system-defined guardrail profile that you?re using with your guardrail (see [below for nested schema](#nestedatt--cross_region_config))
 - `description` (String) Description of the guardrail or its version
 - `kms_key_arn` (String) The KMS key with which the guardrail was encrypted at rest
 - `sensitive_information_policy_config` (Attributes) Sensitive information policy config for a guardrail. (see [below for nested schema](#nestedatt--sensitive_information_policy_config))
@@ -253,7 +254,16 @@ variable "kms_key_arn" {
 
 Optional:
 
+- `content_filters_tier_config` (Attributes) Guardrail tier config for content policy (see [below for nested schema](#nestedatt--content_policy_config--content_filters_tier_config))
 - `filters_config` (Attributes List) List of content filter configs in content policy. (see [below for nested schema](#nestedatt--content_policy_config--filters_config))
+
+<a id="nestedatt--content_policy_config--content_filters_tier_config"></a>
+### Nested Schema for `content_policy_config.content_filters_tier_config`
+
+Optional:
+
+- `tier_name` (String) Tier name for tier configuration in content filters policy
+
 
 <a id="nestedatt--content_policy_config--filters_config"></a>
 ### Nested Schema for `content_policy_config.filters_config`
@@ -289,6 +299,14 @@ Optional:
 - `threshold` (Number) The threshold for this filter.
 - `type` (String) Type of contextual grounding filter
 
+
+
+<a id="nestedatt--cross_region_config"></a>
+### Nested Schema for `cross_region_config`
+
+Optional:
+
+- `guardrail_profile_arn` (String) The Amazon Resource Name (ARN) of the guardrail profile
 
 
 <a id="nestedatt--sensitive_information_policy_config"></a>
@@ -343,6 +361,7 @@ Optional:
 Optional:
 
 - `topics_config` (Attributes List) List of topic configs in topic policy. (see [below for nested schema](#nestedatt--topic_policy_config--topics_config))
+- `topics_tier_config` (Attributes) Guardrail tier config for topic policy (see [below for nested schema](#nestedatt--topic_policy_config--topics_tier_config))
 
 <a id="nestedatt--topic_policy_config--topics_config"></a>
 ### Nested Schema for `topic_policy_config.topics_config`
@@ -357,6 +376,14 @@ Optional:
 - `output_action` (String)
 - `output_enabled` (Boolean)
 - `type` (String) Type of topic in a policy
+
+
+<a id="nestedatt--topic_policy_config--topics_tier_config"></a>
+### Nested Schema for `topic_policy_config.topics_tier_config`
+
+Optional:
+
+- `tier_name` (String) Tier name for tier configuration in topic policy
 
 
 

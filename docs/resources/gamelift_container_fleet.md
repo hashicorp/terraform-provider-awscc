@@ -180,6 +180,7 @@ Optional:
 Optional:
 
 - `log_destination` (String) Configures the service that provides logs.
+- `log_group_arn` (String) If log destination is CLOUDWATCH, logs are sent to the specified log group in Amazon CloudWatch.
 - `s3_bucket_name` (String) The name of the S3 bucket to pull logs from if S3 is the LogDestination
 
 

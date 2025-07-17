@@ -22,13 +22,28 @@ Definition of AWS::QBusiness::Permission Resource Type
 - `principal` (String)
 - `statement_id` (String)
 
+### Optional
+
+- `conditions` (Attributes List) (see [below for nested schema](#nestedatt--conditions))
+
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
 
+<a id="nestedatt--conditions"></a>
+### Nested Schema for `conditions`
+
+Optional:
+
+- `condition_key` (String)
+- `condition_operator` (String)
+- `condition_values` (List of String)
+
 ## Import
 
 Import is supported using the following syntax:
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_qbusiness_permission.example "application_id|statement_id"

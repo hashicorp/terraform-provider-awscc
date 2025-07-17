@@ -41,6 +41,8 @@ Length Constraints: Maximum length of 30720
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_logs_account_policy.example "account_id|policy_type|policy_name"
 ```

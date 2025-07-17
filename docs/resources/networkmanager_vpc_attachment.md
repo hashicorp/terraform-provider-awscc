@@ -162,7 +162,9 @@ resource "awscc_networkmanager_vpc_attachment" "example" {
 Optional:
 
 - `appliance_mode_support` (Boolean) Indicates whether to enable ApplianceModeSupport Support for Vpc Attachment. Valid Values: true | false
+- `dns_support` (Boolean) Indicates whether to enable private DNS Support for Vpc Attachment. Valid Values: true | false
 - `ipv_6_support` (Boolean) Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable
+- `security_group_referencing_support` (Boolean) Indicates whether to enable Security Group Referencing Support for Vpc Attachment. Valid Values: true | false
 
 
 <a id="nestedatt--proposed_network_function_group_change"></a>

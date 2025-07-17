@@ -1,0 +1,1 @@
+$ terraform import awscc_odb_cloud_vm_cluster.example "cloud_vm_cluster_arn"

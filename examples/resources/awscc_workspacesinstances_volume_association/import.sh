@@ -1,0 +1,1 @@
+$ terraform import awscc_workspacesinstances_volume_association.example "workspace_instance_id|volume_id|device"

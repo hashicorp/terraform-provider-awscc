@@ -92,8 +92,8 @@ resource "awscc_ec2_vpn_connection" "example" {
  Default: ``0.0.0.0/0``
 - `local_ipv_6_network_cidr` (String) The IPv6 CIDR on the customer gateway (on-premises) side of the VPN connection.
  Default: ``::/0``
-- `outside_ip_address_type` (String) The type of IPv4 address assigned to the outside interface of the customer gateway device.
- Valid values: ``PrivateIpv4`` | ``PublicIpv4``
+- `outside_ip_address_type` (String) The type of IP address assigned to the outside interface of the customer gateway device.
+ Valid values: ``PrivateIpv4`` | ``PublicIpv4`` | ``Ipv6``
  Default: ``PublicIpv4``
 - `remote_ipv_4_network_cidr` (String) The IPv4 CIDR on the AWS side of the VPN connection.
  Default: ``0.0.0.0/0``

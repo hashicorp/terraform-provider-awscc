@@ -76,6 +76,7 @@ Read-Only:
 - `launch_template_id` (String)
 - `launch_template_name` (String)
 - `overrides` (Attributes List) (see [below for nested schema](#nestedatt--compute_resources--launch_template--overrides))
+- `userdata_type` (String)
 - `version` (String)
 
 <a id="nestedatt--compute_resources--launch_template--overrides"></a>
@@ -86,6 +87,7 @@ Read-Only:
 - `launch_template_id` (String)
 - `launch_template_name` (String)
 - `target_instance_types` (List of String)
+- `userdata_type` (String)
 - `version` (String)
 
 

@@ -114,6 +114,7 @@ resource "awscc_rds_db_cluster" "example_db_cluster" {
  If you are restoring a DB cluster to a point in time with ``RestoreType`` set to ``copy-on-write``, and don't specify a DB subnet group name, then the DB cluster is restored with a default DB subnet group.
  Valid for: Aurora DB clusters and Multi-AZ DB clusters
 - `db_system_id` (String) Reserved for future use.
+- `delete_automated_backups` (Boolean)
 - `deletion_protection` (Boolean) A value that indicates whether the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled.
  Valid for: Aurora DB clusters and Multi-AZ DB clusters
 - `domain` (String) Indicates the directory ID of the Active Directory to create the DB cluster.
@@ -151,8 +152,8 @@ resource "awscc_rds_db_cluster" "example_db_cluster" {
 - `engine_lifecycle_support` (String) The life cycle type for this DB cluster.
   By default, this value is set to ``open-source-rds-extended-support``, which enrolls your DB cluster into Amazon RDS Extended Support. At the end of standard support, you can avoid charges for Extended Support by setting the value to ``open-source-rds-extended-support-disabled``. In this case, creating the DB cluster will fail if the DB major version is past its end of standard support date.
   You can use this setting to enroll your DB cluster into Amazon RDS Extended Support. With RDS Extended Support, you can run the selected major engine version on your DB cluster past the end of standard support for that engine version. For more information, see the following sections:
-  +  Amazon Aurora - [Using Amazon RDS Extended Support](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html) in the *Amazon Aurora User Guide*
-  +  Amazon RDS - [Using Amazon RDS Extended Support](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html) in the *Amazon RDS User Guide*
+  +  Amazon Aurora - [Amazon RDS Extended Support with Amazon Aurora](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html) in the *Amazon Aurora User Guide*
+  +  Amazon RDS - [Amazon RDS Extended Support with Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html) in the *Amazon RDS User Guide*
   
  Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
  Valid Values: ``open-source-rds-extended-support | open-source-rds-extended-support-disabled``

@@ -28,6 +28,8 @@ Resource Type definition for AWS::AppStream::ApplicationFleetAssociation
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_appstream_application_fleet_association.example "fleet_name|application_arn"
 ```

@@ -38,7 +38,7 @@ Data Source schema for AWS::EC2::VPCEndpoint
 - `security_group_ids` (Set of String) The IDs of the security groups to associate with the endpoint network interfaces. If this parameter is not specified, we use the default security group for the VPC. Security groups are supported only for interface endpoints.
 - `service_name` (String) The name of the endpoint service.
 - `service_network_arn` (String) The Amazon Resource Name (ARN) of the service network.
-- `service_region` (String)
+- `service_region` (String) Describes a Region.
 - `subnet_ids` (Set of String) The IDs of the subnets in which to create endpoint network interfaces. You must specify this property for an interface endpoint or a Gateway Load Balancer endpoint. You can't specify this property for a gateway endpoint. For a Gateway Load Balancer endpoint, you can specify only one subnet.
 - `tags` (Attributes List) The tags to associate with the endpoint. (see [below for nested schema](#nestedatt--tags))
 - `vpc_endpoint_id` (String)

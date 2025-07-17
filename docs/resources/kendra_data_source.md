@@ -342,6 +342,7 @@ Optional:
 - `salesforce_configuration` (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration--salesforce_configuration))
 - `service_now_configuration` (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration--service_now_configuration))
 - `share_point_configuration` (Attributes) SharePoint configuration (see [below for nested schema](#nestedatt--data_source_configuration--share_point_configuration))
+- `template_configuration` (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration--template_configuration))
 - `web_crawler_configuration` (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration--web_crawler_configuration))
 - `work_docs_configuration` (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration--work_docs_configuration))
 
@@ -848,6 +849,14 @@ Optional:
 - `security_group_ids` (List of String)
 - `subnet_ids` (List of String)
 
+
+
+<a id="nestedatt--data_source_configuration--template_configuration"></a>
+### Nested Schema for `data_source_configuration.template_configuration`
+
+Optional:
+
+- `template` (String)
 
 
 <a id="nestedatt--data_source_configuration--web_crawler_configuration"></a>

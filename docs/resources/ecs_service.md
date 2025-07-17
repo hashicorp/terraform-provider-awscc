@@ -5,13 +5,56 @@ description: |-
   The AWS::ECS::Service resource creates an Amazon Elastic Container Service (Amazon ECS) service that runs and maintains the requested number of tasks and associated load balancers.
   The stack update fails if you change any properties that require replacement and at least one ECS Service Connect ServiceConnectConfiguration property is configured. This is because AWS CloudFormation creates the replacement service first, but each ServiceConnectService must have a name that is unique in the namespace.
   Starting April 15, 2023, AWS; will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, ECS, or EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service.
+  On June 12, 2025, Amazon ECS launched support for updating capacity provider configuration for ECS services. With this launch, ECS also aligned the CFN update behavior for CapacityProviderStrategy parameter with the standard practice. For more information, see adds support for updating capacity provider configuration for ECS services https://docs.aws.amazon.com/about-aws/whats-new/2025/05/amazon-ecs-capacity-provider-configuration-ecs/. Previously ECS ignored the CapacityProviderStrategy property if it was set to an empty list for example, [] in CFN, because updating capacity provider configuration was not supported. Now, with support for capacity provider updates, customers can remove capacity providers from a service by passing an empty list. When you specify an empty list ([]) for the CapacityProviderStrategy property in your CFN template, ECS will remove any capacity providers associated with the service, as follows:
+  
+  For services created with a capacity provider strategy after the launch:
+  If there's a cluster default strategy set, the service will revert to using that default strategy.
+  If no cluster default strategy exists, you will receive the following error:
+  No launch type to fall back to for empty capacity provider strategy. Your service was not created with a launch type.
+  For services created with a capacity provider strategy prior to the launch:
+  If CapacityProviderStrategy had FARGATE_SPOT or FARGATE capacity providers, the launch type will be updated to FARGATE and the capacity provider will be removed.
+  If the strategy included Auto Scaling group capacity providers, the service will revert to EC2 launch type, and the Auto Scaling group capacity providers will not be used.
+  Recommended Actions
+  If you are currently using CapacityProviderStrategy: [] in your CFN templates, you should take one of the following actions:
+  
+  If you do not intend to update the Capacity Provider Strategy:
+  Remove the CapacityProviderStrategy property entirely from your CFN template
+  Alternatively, use !Ref ::NoValue for the CapacityProviderStrategy property in your template
+  If you intend to maintain or update the Capacity Provider Strategy, specify the actual Capacity Provider Strategy for the service in your CFN template.
+  If your CFN template had an empty list ([]) for CapacityProviderStrategy prior to the aforementioned launch on June 12, and you are using the same template with CapacityProviderStrategy: [], you might encounter the following error:
+  Invalid request provided: When switching from launch type to capacity provider strategy on an existing service, or making a change to a capacity provider strategy on a service that is already using one, you must force a new deployment. (Service: Ecs, Status Code: 400, Request ID: xxx) (SDK Attempt Count: 1)" (RequestToken: xxx HandlerErrorCode: InvalidRequest)
+  Note that CFN automatically initiates a new deployment when it detects a parameter change, but customers cannot choose to force a deployment through CFN. This is an invalid input scenario that requires one of the remediation actions listed above.
+  If you are experiencing active production issues related to this change, contact AWS Support or your Technical Account Manager.
 ---
 
 # awscc_ecs_service (Resource)
 
 The ``AWS::ECS::Service`` resource creates an Amazon Elastic Container Service (Amazon ECS) service that runs and maintains the requested number of tasks and associated load balancers.
   The stack update fails if you change any properties that require replacement and at least one ECS Service Connect ``ServiceConnectConfiguration`` property is configured. This is because AWS CloudFormation creates the replacement service first, but each ``ServiceConnectService`` must have a name that is unique in the namespace.
-   Starting April 15, 2023, AWS; will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, ECS, or EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service.
+   Starting April 15, 2023, AWS; will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, ECS, or EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service. 
+   On June 12, 2025, Amazon ECS launched support for updating capacity provider configuration for ECS services. With this launch, ECS also aligned the CFN update behavior for ``CapacityProviderStrategy`` parameter with the standard practice. For more information, see [adds support for updating capacity provider configuration for ECS services](https://docs.aws.amazon.com/about-aws/whats-new/2025/05/amazon-ecs-capacity-provider-configuration-ecs/). Previously ECS ignored the ``CapacityProviderStrategy`` property if it was set to an empty list for example, ``[]`` in CFN, because updating capacity provider configuration was not supported. Now, with support for capacity provider updates, customers can remove capacity providers from a service by passing an empty list. When you specify an empty list (``[]``) for the ``CapacityProviderStrategy`` property in your CFN template, ECS will remove any capacity providers associated with the service, as follows:
+  +  For services created with a capacity provider strategy after the launch:
+  +  If there's a cluster default strategy set, the service will revert to using that default strategy.
+  +  If no cluster default strategy exists, you will receive the following error:
+ No launch type to fall back to for empty capacity provider strategy. Your service was not created with a launch type.
+  
+  +  For services created with a capacity provider strategy prior to the launch:
+  +  If ``CapacityProviderStrategy`` had ``FARGATE_SPOT`` or ``FARGATE`` capacity providers, the launch type will be updated to ``FARGATE`` and the capacity provider will be removed.
+  +  If the strategy included Auto Scaling group capacity providers, the service will revert to EC2 launch type, and the Auto Scaling group capacity providers will not be used.
+  
+  
+ Recommended Actions
+ If you are currently using ``CapacityProviderStrategy: []`` in your CFN templates, you should take one of the following actions:
+  +  If you do not intend to update the Capacity Provider Strategy:
+  +  Remove the ``CapacityProviderStrategy`` property entirely from your CFN template
+  +  Alternatively, use ``!Ref ::NoValue`` for the ``CapacityProviderStrategy`` property in your template
+  
+  +  If you intend to maintain or update the Capacity Provider Strategy, specify the actual Capacity Provider Strategy for the service in your CFN template.
+  
+ If your CFN template had an empty list ([]) for ``CapacityProviderStrategy`` prior to the aforementioned launch on June 12, and you are using the same template with ``CapacityProviderStrategy: []``, you might encounter the following error:
+  Invalid request provided: When switching from launch type to capacity provider strategy on an existing service, or making a change to a capacity provider strategy on a service that is already using one, you must force a new deployment. (Service: Ecs, Status Code: 400, Request ID: xxx) (SDK Attempt Count: 1)" (RequestToken: xxx HandlerErrorCode: InvalidRequest) 
+ Note that CFN automatically initiates a new deployment when it detects a parameter change, but customers cannot choose to force a deployment through CFN. This is an invalid input scenario that requires one of the remediation actions listed above.
+ If you are experiencing active production issues related to this change, contact AWS Support or your Technical Account Manager.
 
 ## Example Usage
 
@@ -153,8 +196,10 @@ Optional:
 Optional:
 
 - `alarms` (Attributes) Information about the CloudWatch alarms. (see [below for nested schema](#nestedatt--deployment_configuration--alarms))
+- `bake_time_in_minutes` (Number)
 - `deployment_circuit_breaker` (Attributes) The deployment circuit breaker can only be used for services using the rolling update (``ECS``) deployment type.
   The *deployment circuit breaker* determines whether a service deployment will fail if the service can't reach a steady state. If you use the deployment circuit breaker, a service deployment will transition to a failed state and stop launching new tasks. If you use the rollback option, when a service deployment fails, the service is rolled back to the last deployment that completed successfully. For more information, see [Rolling update](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html) in the *Amazon Elastic Container Service Developer Guide* (see [below for nested schema](#nestedatt--deployment_configuration--deployment_circuit_breaker))
+- `lifecycle_hooks` (Attributes List) (see [below for nested schema](#nestedatt--deployment_configuration--lifecycle_hooks))
 - `maximum_percent` (Number) If a service is using the rolling update (``ECS``) deployment type, the ``maximumPercent`` parameter represents an upper limit on the number of your service's tasks that are allowed in the ``RUNNING`` or ``PENDING`` state during a deployment, as a percentage of the ``desiredCount`` (rounded down to the nearest integer). This parameter enables you to define the deployment batch size. For example, if your service is using the ``REPLICA`` service scheduler and has a ``desiredCount`` of four tasks and a ``maximumPercent`` value of 200%, the scheduler may start four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available). The default ``maximumPercent`` value for a service using the ``REPLICA`` service scheduler is 200%.
  The Amazon ECS scheduler uses this parameter to replace unhealthy tasks by starting replacement tasks first and then stopping the unhealthy tasks, as long as cluster resources for starting replacement tasks are available. For more information about how the scheduler replaces unhealthy tasks, see [Amazon ECS services](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html).
  If a service is using either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types, and tasks in the service use the EC2 launch type, the *maximum percent* value is set to the default value. The *maximum percent* value is used to define the upper limit on the number of the tasks in the service that remain in the ``RUNNING`` state while the container instances are in the ``DRAINING`` state.
@@ -176,6 +221,7 @@ Optional:
  If a service is using either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types and is running tasks that use the EC2 launch type, the *minimum healthy percent* value is set to the default value. The *minimum healthy percent* value is used to define the lower limit on the number of the tasks in the service that remain in the ``RUNNING`` state while the container instances are in the ``DRAINING`` state.
   You can't specify a custom ``minimumHealthyPercent`` value for a service that uses either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types and has tasks that use the EC2 launch type.
   If a service is using either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types and is running tasks that use the Fargate launch type, the minimum healthy percent value is not used, although it is returned when describing your service.
+- `strategy` (String)
 
 <a id="nestedatt--deployment_configuration--alarms"></a>
 ### Nested Schema for `deployment_configuration.alarms`
@@ -196,6 +242,16 @@ Optional:
 - `rollback` (Boolean) Determines whether to configure Amazon ECS to roll back the service if a service deployment fails. If rollback is on, when a service deployment fails, the service is rolled back to the last deployment that completed successfully.
 
 
+<a id="nestedatt--deployment_configuration--lifecycle_hooks"></a>
+### Nested Schema for `deployment_configuration.lifecycle_hooks`
+
+Optional:
+
+- `hook_target_arn` (String)
+- `lifecycle_stages` (List of String)
+- `role_arn` (String)
+
+
 
 <a id="nestedatt--deployment_controller"></a>
 ### Nested Schema for `deployment_controller`
@@ -211,6 +267,7 @@ Optional:
 
 Optional:
 
+- `advanced_configuration` (Attributes) (see [below for nested schema](#nestedatt--load_balancers--advanced_configuration))
 - `container_name` (String) The name of the container (as it appears in a container definition) to associate with the load balancer.
  You need to specify the container name when configuring the target group for an Amazon ECS load balancer.
 - `container_port` (Number) The port on the container to associate with the load balancer. This port must correspond to a ``containerPort`` in the task definition the tasks in the service are using. For tasks that use the EC2 launch type, the container instance they're launched on must allow ingress traffic on the ``hostPort`` of the port mapping.
@@ -221,6 +278,17 @@ Optional:
  For services using the ``ECS`` deployment controller, you can specify one or multiple target groups. For more information, see [Registering multiple target groups with a service](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/register-multiple-targetgroups.html) in the *Amazon Elastic Container Service Developer Guide*.
  For services using the ``CODE_DEPLOY`` deployment controller, you're required to define two target groups for the load balancer. For more information, see [Blue/green deployment with CodeDeploy](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-bluegreen.html) in the *Amazon Elastic Container Service Developer Guide*.
   If your service's task definition uses the ``awsvpc`` network mode, you must choose ``ip`` as the target type, not ``instance``. Do this when creating your target groups because tasks that use the ``awsvpc`` network mode are associated with an elastic network interface, not an Amazon EC2 instance. This network mode is required for the Fargate launch type.
+
+<a id="nestedatt--load_balancers--advanced_configuration"></a>
+### Nested Schema for `load_balancers.advanced_configuration`
+
+Optional:
+
+- `alternate_target_group_arn` (String)
+- `production_listener_rule` (String)
+- `role_arn` (String)
+- `test_listener_rule` (String)
+
 
 
 <a id="nestedatt--network_configuration"></a>
@@ -300,7 +368,7 @@ Optional:
  The options you can specify depend on the log driver. Some of the options you can specify when you use the ``awslogs`` log driver to route logs to Amazon CloudWatch include the following:
   + awslogs-create-group Required: No Specify whether you want the log group to be created automatically. If this option isn't specified, it defaults to false. Your IAM policy must include the logs:CreateLogGroup permission before you attempt to use awslogs-create-group. + awslogs-region Required: Yes Specify the Region that the awslogs log driver is to send your Docker logs to. You can choose to send all of your logs from clusters in different Regions to a single region in CloudWatch Logs. This is so that they're all visible in one location. Otherwise, you can separate them by Region for more granularity. Make sure that the specified log group exists in the Region that you specify with this option. + awslogs-group Required: Yes Make sure to specify a log group that the awslogs log driver sends its log streams to. + awslogs-stream-prefix Required: Yes, when using Fargate.Optional when using EC2. Use the awslogs-stream-prefix option to associate a log stream with the specified prefix, the container name, and the ID of the Amazon ECS task that the container belongs to. If you specify a prefix with this option, then the log stream takes the format prefix-name/container-name/ecs-task-id. If you don't specify a prefix with this option, then the log stream is named after the container ID that's assigned by the Docker daemon on the container instance. Because it's difficult to trace logs back to the container that sent them with just the Docker container ID (which is only available on the container instance), we recommend that you specify a prefix with this option. For Amazon ECS services, you can use the service name as the prefix. Doing so, you can trace log streams to the service that the container belongs to, the name of the container that sent them, and the ID of the task that the container belongs to. You must specify a stream-prefix for your logs to have your logs appear in the Log pane when using the Amazon ECS console. + awslogs-datetime-format Required: No This option defines a multiline start pattern in Python strftime format. A log message consists of a line that matches the pattern and any following lines that don’t match the pattern. The matched line is the delimiter between log messages. One example of a use case for using this format is for parsing output such as a stack dump, which might otherwise be logged in multiple entries. The correct pattern allows it to be captured in a single entry. For more information, see awslogs-datetime-format. You cannot configure both the awslogs-datetime-format and awslogs-multiline-pattern options. Multiline logging performs regular expression parsing and matching of all log messages. This might have a negative impact on logging performance. + awslogs-multiline-pattern Required: No This option defines a multiline start pattern that uses a regular expression. A log message consists of a line that matches the pattern and any following lines that don’t match the pattern. The matched line is the delimiter between log messages. For more information, see awslogs-multiline-pattern. This option is ignored if awslogs-datetime-format is also configured. You cannot configure both the awslogs-datetime-format and awslogs-multiline-pattern options. Multiline logging performs regular expression parsing and matching of all log messages. This might have a negative impact on logging performance. 
  The following options apply to all supported log drivers.
-  + mode Required: No Valid values: non-blocking | blocking This option defines the delivery mode of log messages from the container to the log driver specified using logDriver. The delivery mode you choose affects application availability when the flow of logs from container is interrupted. If you use the blocking mode and the flow of logs is interrupted, calls from container code to write to the stdout and stderr streams will block. The logging thread of the application will block as a result. This may cause the application to become unresponsive and lead to container healthcheck failure. If you use the non-blocking mode, the container's logs are instead stored in an in-memory intermediate buffer configured with the max-buffer-size option. This prevents the application from becoming unresponsive when logs cannot be sent. We recommend using this mode if you want to ensure service availability and are okay with some log loss. For more information, see Preventing log loss with non-blocking mode in the awslogs container log driver. You can set a default mode for all containers in a specific Region by using the defaultLogDriverMode account setting. If you don't specify the mode option or configure the account setting, Amazon ECS will default to the blocking mode. For more information about the account setting, see Default log driver mode in the Amazon Elastic Container Service Developer Guide. On June 25, 2025, Amazon ECS is changing the default log driver mode from blocking to non-blocking to prioritize task availability over logging. To continue using the blocking mode after this change, do one of the following: Set the mode option in your container definition's logConfiguration as blocking. Set the defaultLogDriverMode account setting to blocking. + max-buffer-size Required: No Default value: 1m When non-blocking mode is used, the max-buffer-size log option controls the size of the buffer that's used for intermediate message storage. Make sure to specify an adequate buffer size based on your application. When the buffer fills up, further logs cannot be stored. Logs that cannot be stored are lost. 
+  + mode Required: No Valid values: non-blocking | blocking This option defines the delivery mode of log messages from the container to the log driver specified using logDriver. The delivery mode you choose affects application availability when the flow of logs from container is interrupted. If you use the blocking mode and the flow of logs is interrupted, calls from container code to write to the stdout and stderr streams will block. The logging thread of the application will block as a result. This may cause the application to become unresponsive and lead to container healthcheck failure. If you use the non-blocking mode, the container's logs are instead stored in an in-memory intermediate buffer configured with the max-buffer-size option. This prevents the application from becoming unresponsive when logs cannot be sent. We recommend using this mode if you want to ensure service availability and are okay with some log loss. For more information, see Preventing log loss with non-blocking mode in the awslogs container log driver. You can set a default mode for all containers in a specific Region by using the defaultLogDriverMode account setting. If you don't specify the mode option or configure the account setting, Amazon ECS will default to the non-blocking mode. For more information about the account setting, see Default log driver mode in the Amazon Elastic Container Service Developer Guide. On June 25, 2025, Amazon ECS changed the default log driver mode from blocking to non-blocking to prioritize task availability over logging. To continue using the blocking mode after this change, do one of the following: Set the mode option in your container definition's logConfiguration as blocking. Set the defaultLogDriverMode account setting to blocking. + max-buffer-size Required: No Default value: 1m When non-blocking mode is used, the max-buffer-size log option controls the size of the buffer that's used for intermediate message storage. Make sure to specify an adequate buffer size based on your application. When the buffer fills up, further logs cannot be stored. Logs that cannot be stored are lost. 
  To route logs using the ``splunk`` log router, you need to specify a ``splunk-token`` and a ``splunk-url``.
  When you use the ``awsfirelens`` log router to route logs to an AWS Service or AWS Partner Network destination for log storage and analytics, you can set the ``log-driver-buffer-limit`` option to limit the number of events that are buffered in memory, before being sent to the log router container. It can help to resolve potential log loss issue because high throughput might result in memory running out for the buffer inside of Docker.
  Other options you can specify when using ``awsfirelens`` to route logs depend on the destination. When you export logs to Amazon Data Firehose, you can specify the AWS Region with ``region`` and a name for the log stream with ``delivery_stream``.
@@ -350,6 +418,32 @@ Optional:
  To avoid changing your applications in client Amazon ECS services, set this to the same name that the client application uses by default. For example, a few common names are ``database``, ``db``, or the lowercase name of a database, such as ``mysql`` or ``redis``. For more information, see [Service Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html) in the *Amazon Elastic Container Service Developer Guide*.
 - `port` (Number) The listening port number for the Service Connect proxy. This port is available inside of all of the tasks within the same namespace.
  To avoid changing your applications in client Amazon ECS services, set this to the same port that the client application uses by default. For more information, see [Service Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html) in the *Amazon Elastic Container Service Developer Guide*.
+- `test_traffic_rules` (Attributes) (see [below for nested schema](#nestedatt--service_connect_configuration--services--client_aliases--test_traffic_rules))
+
+<a id="nestedatt--service_connect_configuration--services--client_aliases--test_traffic_rules"></a>
+### Nested Schema for `service_connect_configuration.services.client_aliases.test_traffic_rules`
+
+Optional:
+
+- `header` (Attributes) (see [below for nested schema](#nestedatt--service_connect_configuration--services--client_aliases--test_traffic_rules--header))
+
+<a id="nestedatt--service_connect_configuration--services--client_aliases--test_traffic_rules--header"></a>
+### Nested Schema for `service_connect_configuration.services.client_aliases.test_traffic_rules.header`
+
+Optional:
+
+- `name` (String)
+- `value` (Attributes) (see [below for nested schema](#nestedatt--service_connect_configuration--services--client_aliases--test_traffic_rules--header--value))
+
+<a id="nestedatt--service_connect_configuration--services--client_aliases--test_traffic_rules--header--value"></a>
+### Nested Schema for `service_connect_configuration.services.client_aliases.test_traffic_rules.header.value`
+
+Optional:
+
+- `exact` (String)
+
+
+
 
 
 <a id="nestedatt--service_connect_configuration--services--timeout"></a>

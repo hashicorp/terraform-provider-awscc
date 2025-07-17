@@ -40,6 +40,8 @@ Schema for AWS::CodeStarConnections::SyncConfiguration resource which is used to
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import awscc_codestarconnections_sync_configuration.example "resource_name|sync_type"
 ```

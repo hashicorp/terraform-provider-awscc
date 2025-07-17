@@ -61,7 +61,7 @@ resource "awscc_ec2_subnet" "main" {
 - `ipv_6_native` (Boolean) Indicates whether this is an IPv6 only subnet. For more information, see [Subnet basics](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#subnet-basics) in the *User Guide*.
 - `ipv_6_netmask_length` (Number) An IPv6 netmask length for the subnet.
 - `map_public_ip_on_launch` (Boolean) Indicates whether instances launched in this subnet receive a public IPv4 address. The default value is ``false``.
-  AWS charges for all public IPv4 addresses, including public IPv4 addresses associated with running instances and Elastic IP addresses. For more information, see the *Public IPv4 Address* tab on the [VPC pricing page](https://docs.aws.amazon.com/vpc/pricing/).
+ AWS charges for all public IPv4 addresses, including public IPv4 addresses associated with running instances and Elastic IP addresses. For more information, see the *Public IPv4 Address* tab on the [VPC pricing page](https://docs.aws.amazon.com/vpc/pricing/).
 - `outpost_arn` (String) The Amazon Resource Name (ARN) of the Outpost.
 - `private_dns_name_options_on_launch` (Attributes) The hostname type for EC2 instances launched into this subnet and how DNS A and AAAA record queries to the instances should be handled. For more information, see [Amazon EC2 instance hostname types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html) in the *User Guide*.
  Available options:
@@ -72,6 +72,7 @@ resource "awscc_ec2_subnet" "main" {
 
 ### Read-Only
 
+- `block_public_access_states` (Attributes) (see [below for nested schema](#nestedatt--block_public_access_states))
 - `id` (String) Uniquely identifies the resource.
 - `ipv_6_cidr_blocks` (List of String)
 - `network_acl_association_id` (String)
@@ -94,6 +95,14 @@ Optional:
 
 - `key` (String) The tag key.
 - `value` (String) The tag value.
+
+
+<a id="nestedatt--block_public_access_states"></a>
+### Nested Schema for `block_public_access_states`
+
+Read-Only:
+
+- `internet_gateway_block_mode` (String) The mode of VPC BPA. Options here are off, block-bidirectional, block-ingress
 
 ## Import
 

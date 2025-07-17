@@ -103,6 +103,7 @@ resource "awscc_s3_bucket_policy" "allow_guardduty" {
 
 - `activate` (Boolean)
 - `detector_id` (String)
+- `expected_bucket_owner` (String)
 - `name` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 

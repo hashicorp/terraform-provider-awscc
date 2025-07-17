@@ -1,0 +1,1 @@
+$ terraform import awscc_securityhub_aggregator_v2.example "aggregator_v2_arn"

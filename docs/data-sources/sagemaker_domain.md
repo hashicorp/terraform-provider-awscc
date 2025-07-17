@@ -583,6 +583,7 @@ Read-Only:
 - `environment_id` (String) The ID of the environment that Amazon SageMaker Unified Studio associates with the domain.
 - `project_id` (String) The ID of the Amazon SageMaker Unified Studio project that corresponds to the domain.
 - `project_s3_path` (String) The location where Amazon S3 stores temporary execution data and other artifacts for the project that corresponds to the domain.
+- `single_sign_on_application_arn` (String) The ARN of the DataZone application managed by SageMaker Unified Studio in the AWS IAM Identity Center.
 - `studio_web_portal_access` (String) Sets whether you can access the domain in Amazon SageMaker Studio:
 
 ENABLED

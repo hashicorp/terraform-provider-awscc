@@ -37,6 +37,7 @@ Data Source schema for AWS::Amplify::App
 - `enable_branch_auto_deletion` (Boolean)
 - `environment_variables` (Attributes List) (see [below for nested schema](#nestedatt--environment_variables))
 - `iam_service_role` (String)
+- `job_config` (Attributes) (see [below for nested schema](#nestedatt--job_config))
 - `name` (String)
 - `oauth_token` (String)
 - `platform` (String)
@@ -116,6 +117,14 @@ Read-Only:
 
 - `name` (String)
 - `value` (String)
+
+
+<a id="nestedatt--job_config"></a>
+### Nested Schema for `job_config`
+
+Read-Only:
+
+- `build_compute_type` (String)
 
 
 <a id="nestedatt--tags"></a>

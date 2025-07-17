@@ -59,8 +59,33 @@ Read-Only:
 
 Read-Only:
 
+- `advanced_options` (Attributes) (see [below for nested schema](#nestedatt--input_conversion--advanced_options))
 - `format_options` (Attributes) (see [below for nested schema](#nestedatt--input_conversion--format_options))
 - `from_format` (String)
+
+<a id="nestedatt--input_conversion--advanced_options"></a>
+### Nested Schema for `input_conversion.advanced_options`
+
+Read-Only:
+
+- `x12` (Attributes) (see [below for nested schema](#nestedatt--input_conversion--advanced_options--x12))
+
+<a id="nestedatt--input_conversion--advanced_options--x12"></a>
+### Nested Schema for `input_conversion.advanced_options.x12`
+
+Read-Only:
+
+- `split_options` (Attributes) (see [below for nested schema](#nestedatt--input_conversion--advanced_options--x12--split_options))
+
+<a id="nestedatt--input_conversion--advanced_options--x12--split_options"></a>
+### Nested Schema for `input_conversion.advanced_options.x12.split_options`
+
+Read-Only:
+
+- `split_by` (String)
+
+
+
 
 <a id="nestedatt--input_conversion--format_options"></a>
 ### Nested Schema for `input_conversion.format_options`
