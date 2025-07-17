@@ -54,7 +54,7 @@ func generateDataSourceChanges(changes []string, filePaths *UpdateFilePaths) ([]
 	for _, change := range changes {
 		log.Printf("Processing change: %s\n", change)
 
-		// Parse change entry format: "ResourceName - Description"
+		// Parse change entry format: "Description - Message"
 		parts := strings.SplitN(change, " - ", changelogSplitParts)
 		if len(parts) != changelogSplitParts {
 			log.Printf("  Skipping malformed change: %s\n", change)
@@ -62,19 +62,13 @@ func generateDataSourceChanges(changes []string, filePaths *UpdateFilePaths) ([]
 			continue
 		}
 
-		resource := parts[0]
-		message := parts[1]
+		message := parts[0]
+		resource := parts[1]
 
 		log.Printf("  Resource: %s, Message: %s\n", resource, message)
 
 		// Always include the original resource change
 		newChanges = append(newChanges, change)
-
-		// Skip data source generation for suppressed resources
-		if isSuppressionMessage(message) {
-			log.Printf("Malformed suppression message for: %s\n", resource)
-			continue
-		}
 
 		// Generate data source entries if the resource exists in schemas and isn't suppressed
 		if resourceSchema, exists := cfTypeToResource[resource]; exists {
@@ -186,7 +180,7 @@ func writeChangelog(originalContent string, changes []string) string {
 		case "New Singular Data Source", "New Plural Data Source":
 			newDataSources = append(newDataSources, resource)
 		default:
-			if isSuppressionMessage(changeType) {
+			if strings.Contains(changeType, "Suppression") {
 				suppressions = append(suppressions, resource)
 			}
 		}
@@ -297,23 +291,4 @@ func parseAndIncrementVersion(changelogContent string) (string, error) {
 
 	// If no version found, start with a default
 	return "1.48.0", fmt.Errorf("no version found in changelog, using default")
-}
-
-// isSuppressionMessage checks if a message indicates suppression
-func isSuppressionMessage(message string) bool {
-	suppressionKeywords := []string{
-		"New Resource Suppression",
-		"New Singular Data Source Suppression",
-		"New Plural Data Source Suppression",
-		"Suppressed Resource",
-		"Suppression",
-	}
-
-	for _, keyword := range suppressionKeywords {
-		if strings.Contains(message, keyword) {
-			return true
-		}
-	}
-
-	return false
 }
