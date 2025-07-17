@@ -146,18 +146,6 @@ func diffSchemas(newSchemas *allschemas.AvailableSchemas, lastSchemas *allschema
 	sort.Slice(existingAllSchemas.Resources, func(i, j int) bool {
 		return existingAllSchemas.Resources[i].ResourceTypeName < existingAllSchemas.Resources[j].ResourceTypeName
 	})
-	// Skip validation of resources as requested
-	// Original code was:
-	// for i := range existingAllSchemas.Resources {
-	//	err = validateResourceType(ctx, existingAllSchemas.Resources[i].CloudFormationTypeName)
-	//	if err != nil {
-	//		// Log resource removal due to validation error
-	//		*changes = append(*changes, fmt.Sprintf("%s - removal", existingAllSchemas.Resources[i].CloudFormationTypeName))
-	//		// Remove the invalid resource from the slice
-	//		existingAllSchemas.Resources[i].SuppressResourceGeneration = true
-	//	}
-	// }
-	// Write updated schema configuration back to the file
 	return existingAllSchemas, writeSchemasToHCLFile(existingAllSchemas, filePaths.AllSchemasHCL)
 }
 

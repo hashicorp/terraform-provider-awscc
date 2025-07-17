@@ -380,25 +380,14 @@ func normalizeNames(cfTypeName string, tfTypeName string) (string, string) {
 func suppress(ctx context.Context, cfTypeName, schemaError string, config *GitHubConfig, new bool, buildType string, changes *[]string, filePaths *UpdateFilePaths, allSchemas *allschemas.AllSchemas) error {
 
 	log.Println("Suppressing resource:", cfTypeName)
-	// Create Issue - temporarily commented out to avoid GitHub API calls
-	// issueURL, err := createIssue(resource, schemaError, client)
-	// if err != nil {
-	//     return fmt.Errorf("failed to create GitHub issue: %w", err)
-	// }
-
-	// Record this resource change with the appropriate type
-	var reason string
 	switch buildType {
 	case BuildTypeSingularDataSources:
-		reason = "New Singular Data Source Suppression"
+		*changes = append(*changes, fmt.Sprintf("%s - New Single Data Source Suppression", cfTypeName))
 	case BuildTypePluralDataSources:
-		reason = "New Plural Data Source Suppression"
-	default:
-		reason = "New Resource Suppression"
+		*changes = append(*changes, fmt.Sprintf("%s - New Plural Data Source Suppression", cfTypeName))
 	}
 
 	// Store the change data as a string for later use
-	*changes = append(*changes, fmt.Sprintf("%s - %s", cfTypeName, reason))
 
 	issueURL, err := createIssue(ctx, cfTypeName, schemaError, config, filePaths.RepositoryLink)
 	if err != nil {
