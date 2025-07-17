@@ -109,10 +109,20 @@ func generateDataSourceChanges(changes []string, filePaths *UpdateFilePaths) ([]
 //
 // Returns an error if changelog processing or file operations fail.
 func makeChangelog(changes *[]string, filePaths *UpdateFilePaths) error {
+	// Check if there are any changes to process
+	if len(*changes) == 0 {
+		return fmt.Errorf("no changes provided to changelog - cannot generate changelog entry")
+	}
+
 	// Generate additional entries for data sources based on resource changes
 	newChanges, err := generateDataSourceChanges(*changes, filePaths)
 	if err != nil {
 		return fmt.Errorf("failed to generate data source changes: %w", err)
+	}
+
+	// Check if after processing there are still no valid changes
+	if len(newChanges) == 0 {
+		return fmt.Errorf("no valid changes found after processing - cannot generate changelog entry")
 	}
 
 	// Read the current changelog content
@@ -123,6 +133,11 @@ func makeChangelog(changes *[]string, filePaths *UpdateFilePaths) error {
 
 	// Generate the new changelog content
 	newContent := writeChangelog(string(originalContent), newChanges)
+
+	// Check if the content actually changed (writeChangelog returns original if no entries)
+	if newContent == string(originalContent) {
+		return fmt.Errorf("no valid changelog entries generated - cannot update changelog")
+	}
 
 	// Open the file in truncate mode and write the updated content
 	file, err := os.OpenFile("CHANGELOG.md", os.O_WRONLY|os.O_TRUNC, changelogFileMode)
