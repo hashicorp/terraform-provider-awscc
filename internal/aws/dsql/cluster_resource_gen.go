@@ -61,6 +61,52 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: EncryptionDetails
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The encryption configuration details for the cluster.",
+		//	  "properties": {
+		//	    "EncryptionStatus": {
+		//	      "description": "The status of encryption for the cluster.",
+		//	      "type": "string"
+		//	    },
+		//	    "EncryptionType": {
+		//	      "description": "The type of encryption that protects data in the cluster.",
+		//	      "type": "string"
+		//	    },
+		//	    "KmsKeyArn": {
+		//	      "description": "The Amazon Resource Name (ARN) of the KMS key that encrypts data in the cluster.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"encryption_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EncryptionStatus
+				"encryption_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The status of encryption for the cluster.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EncryptionType
+				"encryption_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The type of encryption that protects data in the cluster.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: KmsKeyArn
+				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) of the KMS key that encrypts data in the cluster.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The encryption configuration details for the cluster.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Identifier
 		// CloudFormation resource type schema:
 		//
@@ -74,6 +120,22 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: KmsEncryptionKey
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The KMS key that encrypts data on the cluster.",
+		//	  "type": "string"
+		//	}
+		"kms_encryption_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The KMS key that encrypts data on the cluster.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// KmsEncryptionKey is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: MultiRegionProperties
 		// CloudFormation resource type schema:
@@ -262,8 +324,13 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"clusters":                    "Clusters",
 		"creation_time":               "CreationTime",
 		"deletion_protection_enabled": "DeletionProtectionEnabled",
+		"encryption_details":          "EncryptionDetails",
+		"encryption_status":           "EncryptionStatus",
+		"encryption_type":             "EncryptionType",
 		"identifier":                  "Identifier",
 		"key":                         "Key",
+		"kms_encryption_key":          "KmsEncryptionKey",
+		"kms_key_arn":                 "KmsKeyArn",
 		"multi_region_properties":     "MultiRegionProperties",
 		"resource_arn":                "ResourceArn",
 		"status":                      "Status",
@@ -273,6 +340,9 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"witness_region":              "WitnessRegion",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/KmsEncryptionKey",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

@@ -156,9 +156,19 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "Indicates whether to enable ApplianceModeSupport Support for Vpc Attachment. Valid Values: true | false",
 		//	      "type": "boolean"
 		//	    },
+		//	    "DnsSupport": {
+		//	      "default": true,
+		//	      "description": "Indicates whether to enable private DNS Support for Vpc Attachment. Valid Values: true | false",
+		//	      "type": "boolean"
+		//	    },
 		//	    "Ipv6Support": {
 		//	      "default": false,
 		//	      "description": "Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable",
+		//	      "type": "boolean"
+		//	    },
+		//	    "SecurityGroupReferencingSupport": {
+		//	      "default": true,
+		//	      "description": "Indicates whether to enable Security Group Referencing Support for Vpc Attachment. Valid Values: true | false",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -176,12 +186,32 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 						boolplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: DnsSupport
+				"dns_support": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether to enable private DNS Support for Vpc Attachment. Valid Values: true | false",
+					Optional:    true,
+					Computed:    true,
+					Default:     booldefault.StaticBool(true),
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: Ipv6Support
 				"ipv_6_support": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable",
 					Optional:    true,
 					Computed:    true,
 					Default:     booldefault.StaticBool(false),
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SecurityGroupReferencingSupport
+				"security_group_referencing_support": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether to enable Security Group Referencing Support for Vpc Attachment. Valid Values: true | false",
+					Optional:    true,
+					Computed:    true,
+					Default:     booldefault.StaticBool(true),
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -606,6 +636,7 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 		"core_network_arn":                       "CoreNetworkArn",
 		"core_network_id":                        "CoreNetworkId",
 		"created_at":                             "CreatedAt",
+		"dns_support":                            "DnsSupport",
 		"edge_location":                          "EdgeLocation",
 		"ipv_6_support":                          "Ipv6Support",
 		"key":                                    "Key",
@@ -615,6 +646,7 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 		"proposed_network_function_group_change": "ProposedNetworkFunctionGroupChange",
 		"proposed_segment_change":                "ProposedSegmentChange",
 		"resource_arn":                           "ResourceArn",
+		"security_group_referencing_support":     "SecurityGroupReferencingSupport",
 		"segment_name":                           "SegmentName",
 		"state":                                  "State",
 		"subnet_arns":                            "SubnetArns",

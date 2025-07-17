@@ -75,6 +75,24 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "Content policy config for a guardrail.",
 		//	  "properties": {
+		//	    "ContentFiltersTierConfig": {
+		//	      "additionalProperties": false,
+		//	      "description": "Guardrail tier config for content policy",
+		//	      "properties": {
+		//	        "TierName": {
+		//	          "description": "Tier name for tier configuration in content filters policy",
+		//	          "enum": [
+		//	            "CLASSIC",
+		//	            "STANDARD"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "TierName"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "FiltersConfig": {
 		//	      "description": "List of content filter configs in content policy.",
 		//	      "items": {
@@ -179,6 +197,33 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"content_policy_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ContentFiltersTierConfig
+				"content_filters_tier_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: TierName
+						"tier_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Tier name for tier configuration in content filters policy",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"CLASSIC",
+									"STANDARD",
+								),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Guardrail tier config for content policy",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: FiltersConfig
 				"filters_config": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -486,6 +531,50 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: CrossRegionConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The system-defined guardrail profile that you?re using with your guardrail",
+		//	  "properties": {
+		//	    "GuardrailProfileArn": {
+		//	      "description": "The Amazon Resource Name (ARN) of the guardrail profile",
+		//	      "maxLength": 2048,
+		//	      "minLength": 15,
+		//	      "pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:guardrail-profile/[a-z0-9-]+[.]{1}guardrail[.]{1}v[0-9:]+$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "GuardrailProfileArn"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"cross_region_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: GuardrailProfileArn
+				"guardrail_profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) of the guardrail profile",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(15, 2048),
+						stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:guardrail-profile/[a-z0-9-]+[.]{1}guardrail[.]{1}v[0-9:]+$"), ""),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The system-defined guardrail profile that you?re using with your guardrail",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Description
@@ -1217,6 +1306,24 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "minItems": 1,
 		//	      "type": "array"
+		//	    },
+		//	    "TopicsTierConfig": {
+		//	      "additionalProperties": false,
+		//	      "description": "Guardrail tier config for topic policy",
+		//	      "properties": {
+		//	        "TierName": {
+		//	          "description": "Tier name for tier configuration in topic policy",
+		//	          "enum": [
+		//	            "CLASSIC",
+		//	            "STANDARD"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "TierName"
+		//	      ],
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "required": [
@@ -1343,6 +1450,33 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: TopicsTierConfig
+				"topics_tier_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: TierName
+						"tier_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Tier name for tier configuration in topic policy",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"CLASSIC",
+									"STANDARD",
+								),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Guardrail tier config for topic policy",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -1655,9 +1789,11 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 		"action":                              "Action",
 		"blocked_input_messaging":             "BlockedInputMessaging",
 		"blocked_outputs_messaging":           "BlockedOutputsMessaging",
+		"content_filters_tier_config":         "ContentFiltersTierConfig",
 		"content_policy_config":               "ContentPolicyConfig",
 		"contextual_grounding_policy_config":  "ContextualGroundingPolicyConfig",
 		"created_at":                          "CreatedAt",
+		"cross_region_config":                 "CrossRegionConfig",
 		"definition":                          "Definition",
 		"description":                         "Description",
 		"enabled":                             "Enabled",
@@ -1666,6 +1802,7 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 		"filters_config":                      "FiltersConfig",
 		"guardrail_arn":                       "GuardrailArn",
 		"guardrail_id":                        "GuardrailId",
+		"guardrail_profile_arn":               "GuardrailProfileArn",
 		"input_action":                        "InputAction",
 		"input_enabled":                       "InputEnabled",
 		"input_modalities":                    "InputModalities",
@@ -1687,8 +1824,10 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 		"tags":                                "Tags",
 		"text":                                "Text",
 		"threshold":                           "Threshold",
+		"tier_name":                           "TierName",
 		"topic_policy_config":                 "TopicPolicyConfig",
 		"topics_config":                       "TopicsConfig",
+		"topics_tier_config":                  "TopicsTierConfig",
 		"type":                                "Type",
 		"updated_at":                          "UpdatedAt",
 		"value":                               "Value",

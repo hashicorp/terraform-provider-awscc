@@ -1449,6 +1449,39 @@ func segmentDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	                      ],
 		//	                      "type": "object"
 		//	                    },
+		//	                    "ProfileType": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "Specifies profile type based criteria for a segment.",
+		//	                      "properties": {
+		//	                        "DimensionType": {
+		//	                          "description": "The type of segment dimension to use for a profile type dimension.",
+		//	                          "enum": [
+		//	                            "INCLUSIVE",
+		//	                            "EXCLUSIVE"
+		//	                          ],
+		//	                          "type": "string"
+		//	                        },
+		//	                        "Values": {
+		//	                          "insertionOrder": false,
+		//	                          "items": {
+		//	                            "description": "The type of profile.",
+		//	                            "enum": [
+		//	                              "ACCOUNT_PROFILE",
+		//	                              "PROFILE"
+		//	                            ],
+		//	                            "type": "string"
+		//	                          },
+		//	                          "maxItems": 1,
+		//	                          "minItems": 1,
+		//	                          "type": "array"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "DimensionType",
+		//	                        "Values"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
 		//	                    "ShippingAddress": {
 		//	                      "additionalProperties": false,
 		//	                      "description": "The address based criteria for the segment.",
@@ -3532,6 +3565,53 @@ func segmentDefinitionResource(ctx context.Context) (resource.Resource, error) {
 														objectplanmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
+												// Property: ProfileType
+												"profile_type": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: DimensionType
+														"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The type of segment dimension to use for a profile type dimension.",
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.OneOf(
+																	"INCLUSIVE",
+																	"EXCLUSIVE",
+																),
+																fwvalidators.NotNullString(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: Values
+														"values": schema.ListAttribute{ /*START ATTRIBUTE*/
+															ElementType: types.StringType,
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.List{ /*START VALIDATORS*/
+																listvalidator.SizeBetween(1, 1),
+																listvalidator.ValueStringsAre(
+																	stringvalidator.OneOf(
+																		"ACCOUNT_PROFILE",
+																		"PROFILE",
+																	),
+																),
+																fwvalidators.NotNullList(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																generic.Multiset(),
+																listplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "Specifies profile type based criteria for a segment.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+														objectplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
 												// Property: ShippingAddress
 												"shipping_address": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -4063,6 +4143,7 @@ func segmentDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		"phone_number":            "PhoneNumber",
 		"postal_code":             "PostalCode",
 		"profile_attributes":      "ProfileAttributes",
+		"profile_type":            "ProfileType",
 		"province":                "Province",
 		"range":                   "Range",
 		"segment_definition_arn":  "SegmentDefinitionArn",

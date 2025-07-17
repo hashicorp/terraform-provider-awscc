@@ -211,7 +211,6 @@ func componentResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
 				mapplanmodifier.UseStateForUnknown(),
-				mapplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Type
@@ -300,13 +299,13 @@ func componentResource(ctx context.Context) (resource.Resource, error) {
 		"version":               "Version",
 	})
 
-	opts = opts.IsImmutableType(true)
-
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Data",
 		"/properties/Uri",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+
+	opts = opts.WithUpdateTimeoutInMinutes(0)
 
 	v, err := generic.NewResource(ctx, opts...)
 

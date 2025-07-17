@@ -840,6 +840,31 @@ func transformerResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "AdvancedOptions": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "X12": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "SplitOptions": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "SplitBy": {
+		//	                  "enum": [
+		//	                    "NONE",
+		//	                    "TRANSACTION"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "FormatOptions": {
 		//	      "properties": {
 		//	        "X12": {
@@ -1223,6 +1248,50 @@ func transformerResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"input_conversion": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AdvancedOptions
+				"advanced_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: X12
+						"x12": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: SplitOptions
+								"split_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: SplitBy
+										"split_by": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"NONE",
+													"TRANSACTION",
+												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: FormatOptions
 				"format_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -2798,6 +2867,7 @@ func transformerResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::B2BI::Transformer").WithTerraformTypeName("awscc_b2bi_transformer")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"advanced_options":  "AdvancedOptions",
 		"bucket_name":       "BucketName",
 		"created_at":        "CreatedAt",
 		"edi_type":          "EdiType",
@@ -2816,6 +2886,8 @@ func transformerResource(ctx context.Context) (resource.Resource, error) {
 		"output_conversion": "OutputConversion",
 		"sample_document":   "SampleDocument",
 		"sample_documents":  "SampleDocuments",
+		"split_by":          "SplitBy",
+		"split_options":     "SplitOptions",
 		"status":            "Status",
 		"tags":              "Tags",
 		"template":          "Template",

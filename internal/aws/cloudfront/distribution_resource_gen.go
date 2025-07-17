@@ -868,6 +868,10 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		//	            },
 		//	            "type": "object"
 		//	          },
+		//	          "ResponseCompletionTimeout": {
+		//	            "description": "",
+		//	            "type": "integer"
+		//	          },
 		//	          "S3OriginConfig": {
 		//	            "additionalProperties": false,
 		//	            "description": "Use this type to specify an origin that is an Amazon S3 bucket that is not configured with static website hosting. To specify any other type of origin, including an Amazon S3 bucket that is configured with static website hosting, use the ``CustomOriginConfig`` type instead.",
@@ -876,6 +880,11 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		//	                "default": "",
 		//	                "description": "If you're using origin access control (OAC) instead of origin access identity, specify an empty ``OriginAccessIdentity`` element. For more information, see [Restricting access to an](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-origin.html) in the *Amazon CloudFront Developer Guide*.\n  The CloudFront origin access identity to associate with the origin. Use an origin access identity to configure the origin so that viewers can *only* access objects in an Amazon S3 bucket through CloudFront. The format of the value is:\n  ``origin-access-identity/cloudfront/ID-of-origin-access-identity`` \n The ``ID-of-origin-access-identity`` is the value that CloudFront returned in the ``ID`` element when you created the origin access identity.\n If you want viewers to be able to access objects using either the CloudFront URL or the Amazon S3 URL, specify an empty ``OriginAccessIdentity`` element.\n To delete the origin access identity from an existing distribution, update the distribution configuration and include an empty ``OriginAccessIdentity`` element.\n To replace the origin access identity, update the distribution configuration and specify the new origin access identity.\n For more information about the origin access identity, see [Serving Private Content through CloudFront](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html) in the *Amazon CloudFront Developer Guide*.",
 		//	                "type": "string"
+		//	              },
+		//	              "OriginReadTimeout": {
+		//	                "default": 30,
+		//	                "description": "",
+		//	                "type": "integer"
 		//	              }
 		//	            },
 		//	            "type": "object"
@@ -2413,6 +2422,15 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									objectplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
+							// Property: ResponseCompletionTimeout
+							"response_completion_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: S3OriginConfig
 							"s3_origin_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -2424,6 +2442,16 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 										Default:     stringdefault.StaticString(""),
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: OriginReadTimeout
+									"origin_read_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "",
+										Optional:    true,
+										Computed:    true,
+										Default:     int64default.StaticInt64(30),
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
@@ -2950,6 +2978,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		"realtime_log_config_arn":         "RealtimeLogConfigArn",
 		"required":                        "Required",
 		"response_code":                   "ResponseCode",
+		"response_completion_timeout":     "ResponseCompletionTimeout",
 		"response_headers_policy_id":      "ResponseHeadersPolicyId",
 		"response_page_path":              "ResponsePagePath",
 		"restriction_type":                "RestrictionType",

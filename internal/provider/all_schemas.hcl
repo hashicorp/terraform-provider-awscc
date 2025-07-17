@@ -6405,7 +6405,7 @@ resource_schema "aws_mpa_approval_team" {
   cloudformation_type_name                 = "AWS::MPA::ApprovalTeam"
   suppression_reason                       = ""
   suppress_plural_data_source_generation   = false
-  suppress_resource_generation             = false
+  suppress_resource_generation             = true
   suppress_singular_data_source_generation = false
 }
 resource_schema "aws_mpa_identity_source" {
@@ -6973,7 +6973,7 @@ resource_schema "aws_opsworkscm_server" {
   cloudformation_type_name                 = "AWS::OpsWorksCM::Server"
   suppression_reason                       = ""
   suppress_plural_data_source_generation   = false
-  suppress_resource_generation             = false
+  suppress_resource_generation             = true
   suppress_singular_data_source_generation = false
 }
 resource_schema "aws_organizations_account" {
@@ -7829,7 +7829,7 @@ resource_schema "aws_route53_record_set" {
   cloudformation_type_name                 = "AWS::Route53::RecordSet"
   suppression_reason                       = ""
   suppress_plural_data_source_generation   = true
-  suppress_resource_generation             = false
+  suppress_resource_generation             = true
   suppress_singular_data_source_generation = false
 }
 resource_schema "aws_route53profiles_profile" {

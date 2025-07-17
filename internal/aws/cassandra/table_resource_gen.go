@@ -465,6 +465,82 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: CdcSpecification
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Represents the CDC configuration for the table",
+		//	  "properties": {
+		//	    "Status": {
+		//	      "description": "Indicates whether CDC is enabled or disabled for the table",
+		//	      "enum": [
+		//	        "ENABLED",
+		//	        "DISABLED"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ViewType": {
+		//	      "default": "NEW_AND_OLD_IMAGES",
+		//	      "description": "Specifies what data should be captured in the change data stream",
+		//	      "enum": [
+		//	        "NEW_IMAGE",
+		//	        "OLD_IMAGE",
+		//	        "KEYS_ONLY",
+		//	        "NEW_AND_OLD_IMAGES"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Status"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"cdc_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Status
+				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether CDC is enabled or disabled for the table",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"ENABLED",
+							"DISABLED",
+						),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ViewType
+				"view_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies what data should be captured in the change data stream",
+					Optional:    true,
+					Computed:    true,
+					Default:     stringdefault.StaticString("NEW_AND_OLD_IMAGES"),
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"NEW_IMAGE",
+							"OLD_IMAGE",
+							"KEYS_ONLY",
+							"NEW_AND_OLD_IMAGES",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Represents the CDC configuration for the table",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ClientSideTimestampsEnabled
 		// CloudFormation resource type schema:
 		//
@@ -1150,6 +1226,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		"auto_scaling_disabled":          "AutoScalingDisabled",
 		"auto_scaling_specifications":    "AutoScalingSpecifications",
 		"billing_mode":                   "BillingMode",
+		"cdc_specification":              "CdcSpecification",
 		"client_side_timestamps_enabled": "ClientSideTimestampsEnabled",
 		"clustering_key_columns":         "ClusteringKeyColumns",
 		"column":                         "Column",
@@ -1177,11 +1254,13 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		"scale_in_cooldown":              "ScaleInCooldown",
 		"scale_out_cooldown":             "ScaleOutCooldown",
 		"scaling_policy":                 "ScalingPolicy",
+		"status":                         "Status",
 		"table_name":                     "TableName",
 		"tags":                           "Tags",
 		"target_tracking_scaling_policy_configuration": "TargetTrackingScalingPolicyConfiguration",
 		"target_value":                "TargetValue",
 		"value":                       "Value",
+		"view_type":                   "ViewType",
 		"write_capacity_auto_scaling": "WriteCapacityAutoScaling",
 		"write_capacity_units":        "WriteCapacityUnits",
 	})
