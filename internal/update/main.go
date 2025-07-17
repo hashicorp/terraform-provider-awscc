@@ -291,7 +291,7 @@ func run() error {
 		return fmt.Errorf("failed to update changelog: %w", err)
 	}
 
-	_, err = submitOnGit(config, &changes, filePaths, AcceptanceTestResults, config.RepoOwner, config.RepoName)
+	_, err = submitOnGit(config, &changes, filePaths, AcceptanceTestResults, config.RepoOwner, config.RepoName, branchName)
 	if err != nil {
 		return fmt.Errorf("failed to submit PR: %w", err)
 	}
@@ -400,13 +400,15 @@ func validateResources(ctx context.Context, currAllSchemas *allschemas.AllSchema
 
 			// Create GitHub issue for tracking if client is available
 			if config != nil && config.Client != nil {
-				_, err := createIssue(ctx, currAllSchemas.Resources[i].CloudFormationTypeName, "Resource is not provisionable", config, filePaths.RepositoryLink)
-				if err != nil {
-					tflog.Warn(ctx, "Failed to create GitHub issue", map[string]interface{}{
-						"resource": currAllSchemas.Resources[i].CloudFormationTypeName,
-						"error":    err.Error(),
-					})
-				}
+				/*
+					_, err := createIssue(ctx, currAllSchemas.Resources[i].CloudFormationTypeName, "Resource is not provisionable", config, filePaths.RepositoryLink)
+					if err != nil {
+						tflog.Warn(ctx, "Failed to create GitHub issue", map[string]interface{}{
+							"resource": currAllSchemas.Resources[i].CloudFormationTypeName,
+							"error":    err.Error(),
+						})
+					}
+				*/
 			} else {
 				tflog.Info(ctx, "Skipping GitHub issue creation (no client)", map[string]interface{}{
 					"resource": currAllSchemas.Resources[i].CloudFormationTypeName,

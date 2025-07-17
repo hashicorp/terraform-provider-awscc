@@ -389,11 +389,14 @@ func suppress(ctx context.Context, cfTypeName, schemaError string, config *GitHu
 
 	// Store the change data as a string for later use
 
-	issueURL, err := createIssue(ctx, cfTypeName, schemaError, config, filePaths.RepositoryLink)
-	if err != nil {
-		log.Printf("Warning: Failed to create GitHub issue: %v", err)
-		issueURL = "" // Use empty string if issue creation fails
-	}
+	/*
+		issueURL, err := createIssue(ctx, cfTypeName, schemaError, config, filePaths.RepositoryLink)
+		if err != nil {
+			log.Printf("Warning: Failed to create GitHub issue: %v", err)
+			issueURL = "" // Use empty string if issue creation fails
+		}
+	*/
+	var issueURL = ""
 
 	// Add to all_schemas.hcl
 	if buildType != BuildTypeSchemas || new {
@@ -445,7 +448,7 @@ func suppress(ctx context.Context, cfTypeName, schemaError string, config *GitHu
 		}
 	}
 
-	err = writeSchemasToHCLFile(allSchemas, filePaths.AllSchemasHCL)
+	err := writeSchemasToHCLFile(allSchemas, filePaths.AllSchemasHCL)
 	if err != nil {
 		return fmt.Errorf("failed to write schemas to HCL file: %w", err)
 	}

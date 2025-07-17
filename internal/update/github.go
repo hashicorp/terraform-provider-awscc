@@ -15,11 +15,6 @@ import (
 	"github.com/google/go-github/v72/github"
 )
 
-const (
-	// branchRandomSuffixModulo limits the random suffix for branch names to avoid excessively long names
-	branchRandomSuffixModulo = 10000
-)
-
 // GitHubConfig encapsulates all GitHub-related configuration and client information.
 // It contains the authenticated client, repository details, and metadata needed
 // for creating pull requests and issues.
@@ -78,26 +73,6 @@ func NewGitHubConfig(ctx context.Context, repositoryLink string, date string) (*
 	config.Repository = config.RepoOwner + "/" + config.RepoName
 
 	return config, nil
-}
-
-// createRemoteBranch creates and pushes a new remote branch with a time-based suffix.
-// The branch name includes the current date and a random component to avoid collisions.
-//
-// Parameters:
-//   - currentData: Date string to include in the branch name
-//
-// Returns the created branch name or an error if the push operation fails.
-func createRemoteBranch(currentData string) (string, error) {
-	// Generate unique branch name with timestamp to avoid conflicts
-	randomSuffix := fmt.Sprintf("%d", time.Now().UnixNano()%branchRandomSuffixModulo)
-	name := fmt.Sprintf("f-%s-schema-updates-%s", currentData, randomSuffix)
-
-	// Push the branch to origin with upstream tracking
-	cmd := exec.Command("git", "push", "-u", "origin", name)
-	if err := cmd.Run(); err != nil {
-		return "", fmt.Errorf("failed to push branch: %w", err)
-	}
-	return name, nil
 }
 
 // createPullRequest creates a new pull request on GitHub with the provided changes and test results.
@@ -359,16 +334,15 @@ func RunAcceptanceTests() (string, error) {
 	return testOutput, err
 }
 
-func submitOnGit(config *GitHubConfig, changes *[]string, filePaths *UpdateFilePaths, execData string, repoOwner string, repoName string) (string, error) {
-	// Create a new branch and push it to remote
-	currentDate := GetCurrentDate()
-	branchName, err := createRemoteBranch(currentDate)
-	if err != nil {
-		return "", fmt.Errorf("failed to create and push remote branch: %w", err)
+func submitOnGit(config *GitHubConfig, changes *[]string, filePaths *UpdateFilePaths, execData string, repoOwner string, repoName string, branchName string) (string, error) {
+	// Push the existing branch to remote
+	cmd := exec.Command("git", "push", "-u", "origin", branchName)
+	if err := cmd.Run(); err != nil {
+		return "", fmt.Errorf("failed to push branch %s: %w", branchName, err)
 	}
 
 	// Update config with current date and repo info if needed
-	config.CurrentDate = currentDate
+	config.CurrentDate = GetCurrentDate()
 	if config.RepoOwner == "" {
 		config.RepoOwner = repoOwner
 	}
