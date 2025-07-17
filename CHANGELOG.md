@@ -1,3 +1,60 @@
+## 1.46.0 (July 17, 2025)
+
+FEATURES:
+
+* **New Resource:** `AWS::AIOps::InvestigationGroup`
+* **New Resource:** `AWS::AIOps::InvestigationGroup`
+* **New Resource:** `AWS::Billing::BillingView`
+* **New Resource:** `AWS::Billing::BillingView`
+* **New Resource:** `AWS::EC2::TrafficMirrorFilter`
+* **New Resource:** `AWS::EC2::TrafficMirrorFilter`
+* **New Resource:** `AWS::EC2::TrafficMirrorFilterRule`
+* **New Resource:** `AWS::EC2::TrafficMirrorFilterRule`
+* **New Resource:** `AWS::EC2::TrafficMirrorTarget`
+* **New Resource:** `AWS::EC2::TrafficMirrorTarget`
+* **New Resource:** `AWS::FSx::S3AccessPointAttachment`
+* **New Resource:** `AWS::FSx::S3AccessPointAttachment`
+* **New Resource:** `AWS::Kinesis::StreamConsumer`
+* **New Resource:** `AWS::Kinesis::StreamConsumer`
+* **New Resource:** `AWS::MPA::ApprovalTeam`
+* **New Resource:** `AWS::MPA::ApprovalTeam`
+* **New Resource:** `AWS::MPA::IdentitySource`
+* **New Resource:** `AWS::MPA::IdentitySource`
+* **New Resource:** `AWS::Neptune::DBInstance`
+* **New Resource:** `AWS::Neptune::DBInstance`
+* **New Resource:** `AWS::ODB::CloudAutonomousVmCluster`
+* **New Resource:** `AWS::ODB::CloudAutonomousVmCluster`
+* **New Resource:** `AWS::ODB::CloudExadataInfrastructure`
+* **New Resource:** `AWS::ODB::CloudExadataInfrastructure`
+* **New Resource:** `AWS::ODB::CloudVmCluster`
+* **New Resource:** `AWS::ODB::CloudVmCluster`
+* **New Resource:** `AWS::ODB::OdbNetwork`
+* **New Resource:** `AWS::ODB::OdbNetwork`
+* **New Resource:** `AWS::RedshiftServerless::Snapshot`
+* **New Resource:** `AWS::RedshiftServerless::Snapshot`
+* **New Resource:** `AWS::S3Tables::Namespace`
+* **New Resource:** `AWS::S3Tables::Namespace`
+* **New Resource:** `AWS::S3Tables::Table`
+* **New Resource:** `AWS::S3Tables::Table`
+* **New Resource:** `AWS::S3Tables::TablePolicy`
+* **New Resource:** `AWS::S3Tables::TablePolicy`
+* **New Resource:** `AWS::SecurityHub::AggregatorV2`
+* **New Resource:** `AWS::SecurityHub::AggregatorV2`
+* **New Resource:** `AWS::SecurityHub::AutomationRuleV2`
+* **New Resource:** `AWS::SecurityHub::AutomationRuleV2`
+* **New Resource:** `AWS::SecurityHub::HubV2`
+* **New Resource:** `AWS::SecurityHub::HubV2`
+* **New Resource:** `AWS::Wisdom::QuickResponse`
+* **New Resource:** `AWS::Wisdom::QuickResponse`
+* **New Resource:** `AWS::WorkspacesInstances::Volume`
+* **New Resource:** `AWS::WorkspacesInstances::Volume`
+* **New Resource:** `AWS::WorkspacesInstances::VolumeAssociation`
+* **New Resource:** `AWS::WorkspacesInstances::VolumeAssociation`
+* **New Resource:** `AWS::WorkspacesInstances::WorkspaceInstance`
+* **New Resource:** `AWS::WorkspacesInstances::WorkspaceInstance`
+* **Suppressed Resource:** `aws_mpa_approval_team`
+* **Suppressed Resource:** `aws_mpa_approval_team`
+
 ## 1.45.0 (June 12, 2025)
 
 FEATURES:

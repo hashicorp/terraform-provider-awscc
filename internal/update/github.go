@@ -310,10 +310,13 @@ func RunAcceptanceTests() (string, error) {
 	var outBuffer bytes.Buffer
 	var errBuffer bytes.Buffer
 
-	// Prepare the command to run acceptance tests
+	// Prepare the command to run acceptance tests with logging disabled
 	cmd := exec.Command("make", MakeTestAccCmd, PKGNameArg, TestArgsArg, AccTestParallelismArg)
 	cmd.Stdout = &outBuffer
 	cmd.Stderr = &errBuffer
+
+	// Set environment variable to disable Terraform debug logging
+	cmd.Env = append(os.Environ(), "TF_LOG=WARN")
 
 	// Display the command being run
 	log.Printf("Running command: %s %s\n", cmd.Path, strings.Join(cmd.Args, " "))
@@ -322,7 +325,7 @@ func RunAcceptanceTests() (string, error) {
 	err := cmd.Run()
 
 	// Combine stdout and stderr for the complete test output
-	testOutput := fmt.Sprintf("%% TF_LOG=ERROR make testacc %s %s %s\n%s",
+	testOutput := fmt.Sprintf("%% TF_LOG=WARN make testacc %s %s %s\n%s",
 		PKGNameArg, TestArgsArg, AccTestParallelismArg,
 		outBuffer.String())
 

@@ -291,6 +291,14 @@ func run() error {
 		return fmt.Errorf("failed to update changelog: %w", err)
 	}
 
+	// Commit the changelog changes
+	if err := execGit("add", "CHANGELOG.md"); err != nil {
+		return fmt.Errorf("failed to git add changelog: %w", err)
+	}
+	if err := execGit("commit", "-m", fmt.Sprintf("Update changelog for %s", currentDate)); err != nil {
+		return fmt.Errorf("failed to commit changelog: %w", err)
+	}
+
 	_, err = submitOnGit(config, &changes, filePaths, AcceptanceTestResults, config.RepoOwner, config.RepoName, branchName)
 	if err != nil {
 		return fmt.Errorf("failed to submit PR: %w", err)
